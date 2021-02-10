@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=GameCenter
+Comment=GameCenter Kirigami Application
+Version=1.0
+Exec=kalendar
+MimeType=application/x-kalendar;
+Icon=applications-development
+Type=Application
+Terminal=false
+Categories=Qt;KDE;
