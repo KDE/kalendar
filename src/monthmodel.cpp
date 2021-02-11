@@ -9,7 +9,7 @@ MonthModel::MonthModel(QObject *parent)
     : QAbstractItemModel(parent)
     , m_calendar()
 {
-    connect(this, &MonthModel::dataChanged, this, &MonthModel::refreshGridPosition);
+    connect(this, &MonthModel::shouldRefresh, this, &MonthModel::refreshGridPosition);
 }
 
 MonthModel::~MonthModel()
@@ -34,21 +34,22 @@ void MonthModel::refreshGridPosition()
         const int index = begin.daysTo(dateStart);
         int position = 0;
         
-        if (m_eventPosition.contains(position)) {
+        if (m_eventPosition.contains(index)) {
             // find the next free slot in the first entry
             while (m_eventPosition[index].contains(position)) {
                 position++;
             }
         }
-        qDebug() << "Putting" << event << "at position" << position << dateStart << dateEnd;
         for (QDate date = dateStart; date.daysTo(dateEnd) != -1; date = date.addDays(1)) {
             const int index = begin.daysTo(date);
             // put the event in the slot
-            m_eventPosition[index] = {};
+            if (!m_eventPosition.contains(index)) {
+                m_eventPosition[index] = {};
+            }
             m_eventPosition[index][position] = event;
         }
     }
-    Q_EMIT eventPositionChanged();
+    Q_EMIT dataChanged(index(0, 0), index(41, 0));
 }
 
 int MonthModel::year() const
@@ -63,7 +64,7 @@ void MonthModel::setYear(int year)
     }
     m_year = year;
     Q_EMIT yearChanged();
-    Q_EMIT dataChanged(index(0, 0), index(41, 0));
+    Q_EMIT shouldRefresh();
 }
 
 int MonthModel::month() const
@@ -79,7 +80,7 @@ void MonthModel::setMonth(int month)
     m_month = month;
     Q_EMIT monthChanged();
     Q_EMIT monthTextChanged();
-    Q_EMIT dataChanged(index(0, 0), index(41, 0));
+    Q_EMIT shouldRefresh();
 }
 
 void MonthModel::setCalendar(Calendar::Ptr calendar)
@@ -89,7 +90,7 @@ void MonthModel::setCalendar(Calendar::Ptr calendar)
     }
     m_coreCalendar = calendar;
     Q_EMIT calendarChanged();
-    Q_EMIT dataChanged(index(0, 0), index(41, 0));
+    Q_EMIT shouldRefresh();
 }
 
 Calendar::Ptr MonthModel::calendar()
@@ -99,7 +100,6 @@ Calendar::Ptr MonthModel::calendar()
 
 QString MonthModel::monthText() const
 {
-    qDebug() << m_calendar.monthName(QLocale(), m_month);
     return m_calendar.monthName(QLocale(), m_month);
 }
 
@@ -178,11 +178,26 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
         }
     } else {
         // Fetch events in specific day.
-        const auto events = data(index.parent(), Roles::Events).value<QVector<Event::Ptr>>();
+        const auto &events = m_eventPosition[index.parent().row()];
         const auto date = data(index.parent(), Roles::EventDate).toDate();
-        
-        const auto event = events[row];
-        qDebug() << "loading child" << event;
+        int counter = 0;
+        int i = 0;
+        int prefix = 0;
+        while (counter <= row) {
+            if (counter < row || !events.contains(i)) {
+                if (!events.contains(i)) {
+                    prefix++;
+                }
+                i++;
+            }
+            if (events.contains(i)) {
+                counter++;
+                if (counter < row) {
+                    prefix = 0;
+                }
+            }
+        }
+        const auto event = events[i];
         switch (role) {
             case Qt::DisplayRole:
             case Roles::Summary:
@@ -193,6 +208,8 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
                 return !event->isMultiDay() || date == event->dtStart().date();
             case Roles::IsEnd:
                 return !event->isMultiDay() || date == event->dtEnd().date();
+            case Roles::Prefix:
+                return prefix;
         }
     }
     return {};
@@ -237,7 +254,8 @@ QHash<int, QByteArray> MonthModel::roleNames() const
         {Roles::Summary, QByteArrayLiteral("summary")},
         {Roles::Location, QByteArrayLiteral("location")},
         {Roles::IsBegin, QByteArrayLiteral("isBegin")},
-        {Roles::IsEnd, QByteArrayLiteral("isEnd")}
+        {Roles::IsEnd, QByteArrayLiteral("isEnd")},
+        {Roles::Prefix, QByteArrayLiteral("prefix")}
     };
 }
 

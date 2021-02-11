@@ -23,7 +23,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     VCalFormat vcalLoader;
     auto calendar = MemoryCalendar::Ptr(new MemoryCalendar(QTimeZone{}));
-    vcalLoader.load(calendar, QStringLiteral("/home/carl/project/kde/kalendar/build/test.vcal"));
+    vcalLoader.load(calendar, QStringLiteral("../test.vcal"));
 
     QQmlApplicationEngine engine;
     auto monthModel = new MonthModel(&engine);

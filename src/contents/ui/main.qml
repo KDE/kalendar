@@ -58,6 +58,7 @@ Kirigami.ApplicationWindow {
                             padding: Kirigami.Units.smallSpacing
                             contentItem: Kirigami.Heading {
                                 text: modelData
+                                level: 2
                                 horizontalAlignment: Text.AlignRight
                             }
                             background: Rectangle {
@@ -94,27 +95,30 @@ Kirigami.ApplicationWindow {
                                     Layout.fillHeight: true
                                     ColumnLayout {
                                         width: scrollEvents.width
+                                        spacing: Kirigami.Units.smallSpacing
                                         Repeater {
+                                            // TODO create a delegate for mobile just showing points for events
                                             model: DelegateModel {
                                                 model: monthModel
                                                 rootIndex: modelIndex(index)
                                                 delegate: Kirigami.ShadowedRectangle {
+                                                    Layout.topMargin: prefix * (implicitHeight + Kirigami.Units.smallSpacing)
                                                     Layout.fillWidth: true
-                                                    color: Qt.rgba(7, 250, 250, 90)
+                                                    color: "red" //Qt.rgba(7, 250, 250, 90)
                                                     corners {
                                                         bottomLeftRadius: isBegin ? 4 : 0
                                                         topLeftRadius: isBegin ? 4 : 0
                                                         bottomRightRadius: isEnd ? 4 : 0
                                                         topRightRadius: isEnd ? 4 : 0
                                                     }
-                                                    opacity: isVisible
                                                     Layout.leftMargin: isBegin ? Kirigami.Units.smallSpacing : 0
                                                     Layout.rightMargin: isEnd ? Kirigami.Units.smallSpacing : 0
-                                                    implicitHeight: Kirigami.Units.gridUnit
+                                                    implicitHeight: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing * 2
                                                     Controls.Label {
                                                         id: eventItem
                                                         opacity: isBegin ? 1 : 0
                                                         text: summary
+                                                        padding: Kirigami.Units.smallSpacing
                                                     }
                                                 }
                                             }

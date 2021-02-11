@@ -38,6 +38,7 @@ public:
         IsEnd,
         IsBegin,
         IsVisible,
+        Prefix
     };
 
 public:
@@ -73,6 +74,7 @@ Q_SIGNALS:
     void calendarChanged();
     void monthTextChanged();
     void eventPositionChanged();
+    void shouldRefresh();
     
 private:
     int m_year;
