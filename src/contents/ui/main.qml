@@ -1,8 +1,9 @@
 import QtQuick 2.1
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15 
 import org.kde.kalendar 1.0
+import QtQml.Models 2.15
 
 Kirigami.ApplicationWindow {
     id: root
@@ -78,23 +79,45 @@ Kirigami.ApplicationWindow {
                                 Kirigami.Theme.colorSet: Kirigami.Theme.View
                                 color: model.sameMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
                             }
-                            padding: Kirigami.Units.smallSpacing
-                            contentItem: Controls.ScrollView {
-                                ColumnLayout {
-                                    width: button.width - Kirigami.Units.largeSpacing
-                                    Kirigami.Heading {
-                                        level: 3
-                                        text: model.dayNumber
-                                        Layout.fillWidth: true
-                                        horizontalAlignment: Text.AlignRight
-                                    }
-                                    Repeater {
-                                        model: EventsModel {
-                                            events: eventList
-                                        }
-                                        Controls.Label {
-                                            text: summary
-                                            Layout.fillWidth: true
+                            padding: 0
+                            contentItem: ColumnLayout {
+                                Kirigami.Heading {
+                                    level: 3
+                                    text: model.dayNumber
+                                    Layout.fillWidth: true
+                                    horizontalAlignment: Text.AlignRight
+                                    padding: Kirigami.Units.smallSpacing
+                                }
+                                Controls.ScrollView {
+                                    id: scrollEvents
+                                    Layout.fillWidth: true
+                                    Layout.fillHeight: true
+                                    ColumnLayout {
+                                        width: scrollEvents.width
+                                        Repeater {
+                                            model: DelegateModel {
+                                                model: monthModel
+                                                rootIndex: modelIndex(index)
+                                                delegate: Kirigami.ShadowedRectangle {
+                                                    Layout.fillWidth: true
+                                                    color: Qt.rgba(7, 250, 250, 90)
+                                                    corners {
+                                                        bottomLeftRadius: isBegin ? 4 : 0
+                                                        topLeftRadius: isBegin ? 4 : 0
+                                                        bottomRightRadius: isEnd ? 4 : 0
+                                                        topRightRadius: isEnd ? 4 : 0
+                                                    }
+                                                    opacity: isVisible
+                                                    Layout.leftMargin: isBegin ? Kirigami.Units.smallSpacing : 0
+                                                    Layout.rightMargin: isEnd ? Kirigami.Units.smallSpacing : 0
+                                                    implicitHeight: Kirigami.Units.gridUnit
+                                                    Controls.Label {
+                                                        id: eventItem
+                                                        opacity: isBegin ? 1 : 0
+                                                        text: summary
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
