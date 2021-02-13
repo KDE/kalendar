@@ -1,11 +1,4 @@
-# Game Center
-
-Collection of arcade/classic games written in QML.
-
-Current games:
-
-* Samegame
-* Connect Four
+# Calendar QML components
 
 ## Screenshots
 
@@ -21,5 +14,5 @@ ninja
 
 ## License
 
-This project is licensed under GPL-3.0-or-later. Some files are licensed under
+This project is licensed under LGPL-2.1-or-later. Some files are licensed under
 more permissive licenses.
