@@ -27,6 +27,7 @@ void MonthModel::refreshGridPosition()
                                              EventSortField::EventSortStartDate,
                                              SortDirection::SortDirectionAscending
                                             ); // get all events
+    QHash<int, int> eventInDays;
     
     for (const auto &event : events) {
         const auto dateEnd = event->dtEnd().date();
@@ -50,6 +51,13 @@ void MonthModel::refreshGridPosition()
         }
     }
     Q_EMIT dataChanged(index(0, 0), index(41, 0));
+    for (int i = 0; i < 41; i++) {
+        beginRemoveRows(index(i, 0), 0, 9999);
+        endRemoveRows();
+        qDebug() << rowCount(index(i, 0));
+        beginInsertRows(index(i, 0), 0, rowCount(index(i, 0)) - 1);
+        endInsertRows();
+    }
 }
 
 int MonthModel::year() const
@@ -126,6 +134,10 @@ void MonthModel::next()
 
 QVariant MonthModel::data(const QModelIndex &index, int role) const
 {
+    if (!index.isValid()) {
+        return {};
+    }
+    
     const int row = index.row();
     
     if (!index.parent().isValid()) {
@@ -138,9 +150,9 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
         
         switch (role) {
             case Qt::DisplayRole:
-            case Roles::DayNumber:
-            case Roles::EventDate:
-            case Roles::Events: {
+            case DayNumber:
+            case EventDate:
+            case Events: {
                 int day = -1;
                 int month = m_month;
                 int year = m_year;
@@ -171,7 +183,7 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
                 const auto events = m_coreCalendar->events(date, date);
                 return QVariant::fromValue(events);
             }
-            case Roles::SameMonth: {
+            case SameMonth: {
                 const int daysInMonth = m_calendar.daysInMonth(m_month, m_year);
                 return row >= prefix && row - prefix < daysInMonth;
             }

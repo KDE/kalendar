@@ -11,6 +11,7 @@
 #include <KCalendarCore/VCalFormat>
 #include <KCalendarCore/MemoryCalendar>
 #include "monthmodel.h"
+#include "weekmodel.h"
 
 using namespace KCalendarCore;
 
@@ -31,6 +32,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     monthModel->setMonth(5);
     monthModel->setCalendar(calendar);
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
+    
+    auto weekmodel = new WeekModel(monthModel);
+    weekmodel->setWeekLength(7);
+    weekmodel->setStart(QDate(2005, 5, 8));
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.rootContext()->setContextProperty(QStringLiteral("monthModel"), monthModel);
