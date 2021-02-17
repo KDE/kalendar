@@ -18,6 +18,7 @@ class MonthModel : public QAbstractItemModel
     Q_PROPERTY(int year READ year WRITE setYear NOTIFY yearChanged)
     Q_PROPERTY(int month READ month WRITE setMonth NOTIFY monthChanged)
     Q_PROPERTY(QString monthText READ monthText NOTIFY monthTextChanged)
+    Q_PROPERTY(QStringList weekDays READ weekDays CONSTANT)
 public:
     enum Roles {
         // Day roles
@@ -48,6 +49,8 @@ public:
     QString monthText() const;
     void setMonth(int month);
     void setCalendar(Calendar *calendar);
+    
+    QStringList weekDays() const;
     
     Q_INVOKABLE void next();
     Q_INVOKABLE void previous();

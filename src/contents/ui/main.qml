@@ -50,7 +50,7 @@ Kirigami.ApplicationWindow {
 
         Kirigami.Page {
             id: monthPage
-            title: new Date(CalendarManager.monthModel.year, CalendarManager.monthModel.month, 1).toLocaleDateString(Qt.locale(), "MMMM yyyy")
+            title: new Date(CalendarManager.monthModel.year, CalendarManager.monthModel.month - 1, 1).toLocaleDateString(Qt.locale(), "MMMM yyyy")
             readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
             actions {
                 left: Kirigami.Action {
@@ -189,7 +189,7 @@ Kirigami.ApplicationWindow {
                     Kirigami.Theme.inherit: false
                     
                     Repeater {
-                        model: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+                        model: CalendarManager.monthModel.weekDays
                         Controls.Control {
                             implicitWidth: monthGrid.width / 7
                             Layout.maximumHeight: Kirigami.Units.gridUnit * 2

@@ -24,7 +24,6 @@ void MonthModel::refreshGridPosition()
         return;
     }
     
-    qDebug() << "refresh";
     m_eventPosition.clear();
     
     const QDate begin = data(index(0, 0), Roles::EventDate).toDate(); 
@@ -107,14 +106,32 @@ void MonthModel::setCalendar(Calendar *calendar)
     Q_EMIT shouldRefresh();
 }
 
+QStringList MonthModel::weekDays() const
+{
+    QLocale locale;
+    QStringList daysName;
+    for (int i = 0; i < 7; i++) {
+        int day = locale.firstDayOfWeek() + i;
+        if (day > 7) {
+            day -= 7;
+        }
+        if (day == 7) {
+            day = 0;
+        }
+        daysName.append(locale.standaloneDayName(day == 0 ? Qt::Sunday : day, QLocale::NarrowFormat));
+    }
+    return daysName;
+}
+
+
 QString MonthModel::monthText() const
 {
-    return m_calendar.monthName(QLocale(), m_month);
+    return m_calendar.monthName(QLocale(), m_month - 1);
 }
 
 void MonthModel::previous()
 {
-    if (m_month == 1) {
+    if (m_month == 2) {
         setYear(m_year - 1);
         setMonth(m_calendar.monthsInYear(m_year));
     } else {
@@ -125,7 +142,7 @@ void MonthModel::previous()
 
 void MonthModel::next()
 {
-    if (m_calendar.monthsInYear(m_year) <= m_month) {
+    if (m_calendar.monthsInYear(m_year) <= m_month + 1) {
         setMonth(1);
         setYear(m_year + 1);
     } else {

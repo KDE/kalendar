@@ -34,12 +34,7 @@ CalendarManager::CalendarManager(QObject *parent)
         return;
     }
 
-    Akonadi::Monitor *monitor = new Akonadi::Monitor(this);
-    monitor->setObjectName(QStringLiteral("CollectionWidgetMonitor"));
-    monitor->fetchCollection(true);
-    monitor->setAllMonitored(true);
-
-    m_calendar = new Akonadi::ETMCalendar(monitor, this);
+    m_calendar = new Akonadi::ETMCalendar(this);
     
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     mCollectionSelectionModelStateSaver = new KViewStateMaintainer<Akonadi::ETMViewStateSaver>(config->group("GlobalCollectionSelection"));
