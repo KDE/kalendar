@@ -5,6 +5,8 @@
 
 #include <QObject>
 #include <KDescendantsProxyModel>
+#include <KViewStateMaintainer>
+#include <ETMViewStateSaver>
 
 namespace Akonadi {
     class ETMCalendar;
@@ -24,6 +26,7 @@ public:
     bool loading() const;
     MonthModel *monthModel() const;
     KDescendantsProxyModel *collections();
+    Q_INVOKABLE void save();
 
 private Q_SLOTS:
     void delayedInit();
@@ -35,4 +38,5 @@ Q_SIGNALS:
 private:
     Akonadi::ETMCalendar *m_calendar;
     MonthModel *m_monthModel;
+    KViewStateMaintainer<Akonadi::ETMViewStateSaver> *mCollectionSelectionModelStateSaver = nullptr;
 };

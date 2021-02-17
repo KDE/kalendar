@@ -34,21 +34,23 @@ CalendarManager::CalendarManager(QObject *parent)
         return;
     }
 
-    Akonadi::Monitor *monitor = new Akonadi::Monitor();
+    Akonadi::Monitor *monitor = new Akonadi::Monitor(this);
     monitor->setObjectName(QStringLiteral("CollectionWidgetMonitor"));
     monitor->fetchCollection(true);
     monitor->setAllMonitored(true);
 
-    m_calendar = new Akonadi::ETMCalendar(monitor);
+    m_calendar = new Akonadi::ETMCalendar(monitor, this);
+    
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    mCollectionSelectionModelStateSaver = new KViewStateMaintainer<Akonadi::ETMViewStateSaver>(config->group("GlobalCollectionSelection"));
+    mCollectionSelectionModelStateSaver->setSelectionModel(m_calendar->checkableProxyModel()->selectionModel());
+    mCollectionSelectionModelStateSaver->restoreState();
+    
     m_monthModel->setCalendar(m_calendar);
+    
     connect(m_calendar, &Akonadi::ETMCalendar::calendarChanged,
             m_monthModel, &MonthModel::refreshGridPosition);
-    connect(m_calendar, &Akonadi::ETMCalendar::calendarChanged,
-            this, [this]() {
-               qDebug() << "changed" << m_calendar->events() << m_calendar->isLoaded(); 
-               qDebug() << m_calendar->checkableProxyModel();
-            });
-    /*KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
+    /* KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
     event->setSummary(QStringLiteral("Hello"));
     event->setDtStart(QDateTime::currentDateTime());
     event->setDtEnd(QDateTime::currentDateTime().addSecs(60 * 60* 3));
@@ -61,6 +63,16 @@ CalendarManager::CalendarManager(QObject *parent)
 CalendarManager::~CalendarManager()
 {
 }
+
+void CalendarManager::save()
+{
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    mCollectionSelectionModelStateSaver->saveState();
+    KConfigGroup selectionGroup = config->group("GlobalCollectionSelection");
+    selectionGroup.sync();
+    config->sync();
+}
+
 
 void CalendarManager::delayedInit()
 {

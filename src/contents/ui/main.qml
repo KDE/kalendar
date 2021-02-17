@@ -23,7 +23,9 @@ Kirigami.ApplicationWindow {
             ListView {
                 model: CalendarManager.collections
                 delegate: Kirigami.BasicListItem {
+                    leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
                     leading: Controls.CheckBox {
+                        visible: checkState != null
                         checked: checkState == 2
                         onClicked: model.checkState = (checked ? 2 : 0)
                     }
@@ -35,6 +37,10 @@ Kirigami.ApplicationWindow {
                         }
                     }
                 }
+                footer: Controls.Button {
+                    text: "save"
+                    onClicked: CalendarManager.save();
+                }
             }
         }
     }
@@ -45,7 +51,7 @@ Kirigami.ApplicationWindow {
         Kirigami.Page {
             id: monthPage
             title: new Date(CalendarManager.monthModel.year, CalendarManager.monthModel.month, 1).toLocaleDateString(Qt.locale(), "MMMM yyyy")
-            readonly property bool isLarge: false //width > Kirigami.Units.gridUnit * 30
+            readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
             actions {
                 left: Kirigami.Action {
                     text: i18n("Previous")
@@ -64,7 +70,7 @@ Kirigami.ApplicationWindow {
             background: Rectangle {
                 Kirigami.Theme.colorSet: monthPage.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
                 Component.onCompleted: console.log(monthPage.isLarge, Kirigami.Theme.colorSet, color)
-                color: Kirigami.Theme.backgroundColor
+                color: monthPage.isLarge ? Kirigami.Theme.alternateBackgroundColor : Kirigami.Theme.backgroundColor
             }
             
             Component {
