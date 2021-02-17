@@ -21,11 +21,10 @@ struct Position
 
 QDebug operator<<(QDebug debug, const Position &pos);
 
-
 /**
  * Model for viewing a week or a single day view.
  */
-class WeekModel : public QAbstractListModel
+class WeekModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int weekLength READ weekLength WRITE setWeekLength NOTIFY weekLengthChanged)
@@ -38,10 +37,12 @@ public:
         Minute, /// anchor margin
         Lenght,
         AllDay,
+        Summary,
+        TableIndex
     };
 
 public:
-    explicit WeekModel(MonthModel *monthModel);
+    explicit WeekModel(MonthModel *monthModel = nullptr);
     ~WeekModel();
     
     int weekLength() const;
@@ -50,8 +51,13 @@ public:
     void setStart(const QDate& start);
 
     // QAbstractListModel overrides
+    QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role) const override;
     int rowCount(const QModelIndex &parent) const override;
+    int columnCount(const QModelIndex &parent) const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex &index) const override;
+    bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
     
 Q_SIGNALS:
     void weekLengthChanged();
@@ -65,4 +71,5 @@ private:
     MonthModel *m_monthModel;
     QVector<Event::Ptr> m_eventsInWeek;
     QHash<QString, Position> m_positions;
+    QList<QList<Event::Ptr>> m_eventBlocks;
 };

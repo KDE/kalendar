@@ -18,9 +18,6 @@ class MonthModel : public QAbstractItemModel
     Q_PROPERTY(int year READ year WRITE setYear NOTIFY yearChanged)
     Q_PROPERTY(int month READ month WRITE setMonth NOTIFY monthChanged)
     Q_PROPERTY(QString monthText READ monthText NOTIFY monthTextChanged)
-    /// The calendar we are displaying, this will extract events and other items from the calendar.
-    Q_PROPERTY(QSharedPointer<Calendar> calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
-
 public:
     enum Roles {
         // Day roles
@@ -50,11 +47,11 @@ public:
     int month() const;
     QString monthText() const;
     void setMonth(int month);
-    Calendar::Ptr calendar();
-    void setCalendar(Calendar::Ptr calendar);
+    void setCalendar(Calendar *calendar);
     
     Q_INVOKABLE void next();
     Q_INVOKABLE void previous();
+    //Q_INVOKABLE WeekModel *week();
     
     // QAbstractItemModel overrides
     QHash<int, QByteArray> roleNames() const override;
@@ -65,7 +62,7 @@ public:
     QModelIndex parent(const QModelIndex &index) const override;
     bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
     
-private Q_SLOTS:
+public Q_SLOTS:
     void refreshGridPosition();
     
 Q_SIGNALS:
@@ -80,6 +77,6 @@ private:
     int m_year;
     int m_month;
     QCalendar m_calendar;
-    Calendar::Ptr m_coreCalendar;
+    Calendar *m_coreCalendar;
     QHash<int, QHash<int, Event::Ptr>> m_eventPosition; // list from days to position to event
 };

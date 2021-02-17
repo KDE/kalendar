@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "monthmodel.h"
+#include "weekmodel.h"
 #include <QDate>
 #include <QDebug>
 
@@ -19,8 +20,13 @@ MonthModel::~MonthModel()
 void MonthModel::refreshGridPosition()
 {
     if (!m_coreCalendar) {
+        qDebug() << "calendar empty";
         return;
     }
+    
+    qDebug() << "refresh";
+    m_eventPosition.clear();
+    
     const QDate begin = data(index(0, 0), Roles::EventDate).toDate(); 
     const QDate end = data(index(41, 0), Roles::EventDate).toDate(); 
     const auto events = Calendar::sortEvents(m_coreCalendar->events(begin, end),
@@ -91,7 +97,7 @@ void MonthModel::setMonth(int month)
     Q_EMIT shouldRefresh();
 }
 
-void MonthModel::setCalendar(Calendar::Ptr calendar)
+void MonthModel::setCalendar(Calendar *calendar)
 {
     if (calendar == m_coreCalendar) {
         return;
@@ -99,11 +105,6 @@ void MonthModel::setCalendar(Calendar::Ptr calendar)
     m_coreCalendar = calendar;
     Q_EMIT calendarChanged();
     Q_EMIT shouldRefresh();
-}
-
-Calendar::Ptr MonthModel::calendar()
-{
-    return m_coreCalendar;
 }
 
 QString MonthModel::monthText() const
@@ -153,6 +154,9 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
             case DayNumber:
             case EventDate:
             case Events: {
+                if (!m_coreCalendar) {
+                    return QVariant::fromValue(QVector<Event::Ptr>());
+                }
                 int day = -1;
                 int month = m_month;
                 int year = m_year;

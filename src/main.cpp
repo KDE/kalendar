@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
@@ -11,7 +10,7 @@
 #include <KCalendarCore/VCalFormat>
 #include <KCalendarCore/MemoryCalendar>
 #include "monthmodel.h"
-#include "weekmodel.h"
+#include "calendarmanager.h"
 
 using namespace KCalendarCore;
 
@@ -22,23 +21,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("GameCenter"));
 
-    VCalFormat vcalLoader;
-    auto calendar = MemoryCalendar::Ptr(new MemoryCalendar(QTimeZone{}));
-    vcalLoader.load(calendar, QStringLiteral("../test.vcal"));
-
     QQmlApplicationEngine engine;
-    auto monthModel = new MonthModel(&engine);
-    monthModel->setYear(2005);
-    monthModel->setMonth(5);
-    monthModel->setCalendar(calendar);
+
+    auto manager = new CalendarManager(&engine);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", manager);
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
-    
-    auto weekmodel = new WeekModel(monthModel);
-    weekmodel->setWeekLength(7);
-    weekmodel->setStart(QDate(2005, 5, 8));
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-    engine.rootContext()->setContextProperty(QStringLiteral("monthModel"), monthModel);
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
     if (engine.rootObjects().isEmpty()) {
