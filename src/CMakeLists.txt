@@ -18,5 +18,7 @@ target_link_libraries(kalendar
     KF5::AkonadiAgentBase
     KF5::AkonadiXml
     KF5::CalendarSupport
+    KF5::ConfigWidgets
+    KF5::AkonadiWidgets
 )
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
