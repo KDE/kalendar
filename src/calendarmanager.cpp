@@ -67,6 +67,7 @@ void CalendarManager::save()
     KConfigGroup selectionGroup = config->group("GlobalCollectionSelection");
     selectionGroup.sync();
     config->sync();
+    m_monthModel->save();
 }
 
 

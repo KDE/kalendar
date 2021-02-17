@@ -103,7 +103,7 @@ Kirigami.ApplicationWindow {
                                         width: Kirigami.Units.smallSpacing
                                         height: width
                                         radius: width / 2
-                                        color: "red"
+                                        color: eventColor
                                     }
                                 }
                             }
@@ -148,7 +148,7 @@ Kirigami.ApplicationWindow {
                                         delegate: Kirigami.ShadowedRectangle {
                                             Layout.topMargin: prefix * (implicitHeight + Kirigami.Units.smallSpacing)
                                             Layout.fillWidth: true
-                                            color: "red" //Qt.rgba(7, 250, 250, 90)
+                                            color: eventColor
                                             corners {
                                                 bottomLeftRadius: isBegin ? 4 : 0
                                                 topLeftRadius: isBegin ? 4 : 0

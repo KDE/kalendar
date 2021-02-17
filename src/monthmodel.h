@@ -7,6 +7,10 @@
 #include <QCalendar>
 #include <KCalendarCore/Calendar>
 
+namespace Akonadi {
+    class ETMCalendar;
+}
+
 using namespace KCalendarCore;
 
 /**
@@ -32,6 +36,7 @@ public:
         
         // Event roles
         Summary,
+        Color,
         Location,
         IsEnd,
         IsBegin,
@@ -48,7 +53,7 @@ public:
     int month() const;
     QString monthText() const;
     void setMonth(int month);
-    void setCalendar(Calendar *calendar);
+    void setCalendar(Akonadi::ETMCalendar *calendar);
     
     QStringList weekDays() const;
     
@@ -67,6 +72,8 @@ public:
     
 public Q_SLOTS:
     void refreshGridPosition();
+    void save();
+    void load();
     
 Q_SIGNALS:
     void yearChanged();
@@ -80,6 +87,7 @@ private:
     int m_year;
     int m_month;
     QCalendar m_calendar;
-    Calendar *m_coreCalendar;
+    Akonadi::ETMCalendar *m_coreCalendar;
     QHash<int, QHash<int, Event::Ptr>> m_eventPosition; // list from days to position to event
+    QHash<QString, QColor> m_colors;
 };

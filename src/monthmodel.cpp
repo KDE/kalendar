@@ -4,12 +4,18 @@
 #include "monthmodel.h"
 #include "weekmodel.h"
 #include <QDate>
+#include <etmcalendar.h>
+#include <AkonadiCore/CollectionColorAttribute>
+#include <QRandomGenerator>
 #include <QDebug>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 MonthModel::MonthModel(QObject *parent)
     : QAbstractItemModel(parent)
     , m_calendar()
 {
+    load();
     connect(this, &MonthModel::shouldRefresh, this, &MonthModel::refreshGridPosition);
 }
 
@@ -20,7 +26,6 @@ MonthModel::~MonthModel()
 void MonthModel::refreshGridPosition()
 {
     if (!m_coreCalendar) {
-        qDebug() << "calendar empty";
         return;
     }
     
@@ -54,6 +59,29 @@ void MonthModel::refreshGridPosition()
             }
             m_eventPosition[index][position] = event;
         }
+        auto item = m_coreCalendar->item(event);
+        if (!item.isValid()) {
+            continue;
+        }
+        auto collection = item.parentCollection();
+        if (!collection.isValid()) {
+            continue;
+        }
+        const QString id = QString::number(collection.id());
+        if (m_colors.contains(id)) {
+            continue;
+        }
+        if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
+            const auto *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
+            if (colorAttr && colorAttr->color().isValid()) {
+                continue;
+            }
+        }
+        QColor color;
+        color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
+        m_colors[id] = color;
+        save();
+
     }
     Q_EMIT dataChanged(index(0, 0), index(41, 0));
     for (int i = 0; i < 41; i++) {
@@ -64,6 +92,29 @@ void MonthModel::refreshGridPosition()
         endInsertRows();
     }
 }
+
+void MonthModel::load()
+{
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    const QStringList colorKeyList = rColorsConfig.keyList();
+
+    for (const QString &key : colorKeyList) {
+        QColor color = rColorsConfig.readEntry(key, QColor("blue"));
+        m_colors[key] = color;
+    }
+}
+
+void MonthModel::save()
+{
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    for (auto it = m_colors.constBegin(); it != m_colors.constEnd(); ++it) {
+        rColorsConfig.writeEntry(it.key(), it.value());
+    }
+    config->sync();
+}
+
 
 int MonthModel::year() const
 {
@@ -96,7 +147,7 @@ void MonthModel::setMonth(int month)
     Q_EMIT shouldRefresh();
 }
 
-void MonthModel::setCalendar(Calendar *calendar)
+void MonthModel::setCalendar(Akonadi::ETMCalendar *calendar)
 {
     if (calendar == m_coreCalendar) {
         return;
@@ -239,6 +290,28 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
                 return event->location();
             case Roles::IsBegin:
                 return !event->isMultiDay() || date == event->dtStart().date();
+            case Roles::Color: {
+                auto item = m_coreCalendar->item(event);
+                if (!item.isValid()) {
+                    return {};
+                }
+                auto collection = item.parentCollection();
+                if (!collection.isValid()) {
+                    return {};
+                }
+                const QString id = QString::number(collection.id());
+                if (m_colors.contains(id)) {
+                    return m_colors[id];
+                }
+                if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
+                    const auto *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
+                    if (colorAttr && colorAttr->color().isValid()) {
+                        return colorAttr->color();
+                    }
+
+                }
+                return {}; // should not happen
+            }
             case Roles::IsEnd:
                 return !event->isMultiDay() || date == event->dtEnd().date();
             case Roles::Prefix:
@@ -288,7 +361,8 @@ QHash<int, QByteArray> MonthModel::roleNames() const
         {Roles::Location, QByteArrayLiteral("location")},
         {Roles::IsBegin, QByteArrayLiteral("isBegin")},
         {Roles::IsEnd, QByteArrayLiteral("isEnd")},
-        {Roles::Prefix, QByteArrayLiteral("prefix")}
+        {Roles::Prefix, QByteArrayLiteral("prefix")},
+        {Roles::Color, QByteArrayLiteral("eventColor")}
     };
 }
 
