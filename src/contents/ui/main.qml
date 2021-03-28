@@ -50,7 +50,7 @@ Kirigami.ApplicationWindow {
 
         Kirigami.Page {
             id: monthPage
-            title: new Date(CalendarManager.monthModel.year, CalendarManager.monthModel.month - 1, 1).toLocaleDateString(Qt.locale(), "MMMM yyyy")
+            title: new Date(CalendarManager.monthModel.year, CalendarManager.monthModel.month - 1, 1).toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
             readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
             actions {
                 left: Kirigami.Action {
