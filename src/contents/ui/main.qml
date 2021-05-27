@@ -33,7 +33,7 @@ Kirigami.ApplicationWindow {
                     icon: decoration
                     Component.onCompleted: {
                         for (let i in model) {
-                            console.log(i, model[i]);
+                            console.log("Iteration: " + i, "Model iteration: " + model[i]);
                         }
                     }
                 }
@@ -62,14 +62,14 @@ Kirigami.ApplicationWindow {
                     onTriggered: CalendarManager.monthModel.next()
                 }
                 main: Kirigami.Action {
-                    text: "show week"
+                    text: "Show week"
                     onTriggered: pageStack.push(weekPageComponent); //, { "weekModel": monthModel.week() });
                 }
             }
             padding: 0
             background: Rectangle {
                 Kirigami.Theme.colorSet: monthPage.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
-                Component.onCompleted: console.log(monthPage.isLarge, Kirigami.Theme.colorSet, color)
+                Component.onCompleted: console.log("isLarge: " + monthPage.isLarge, "Theme colorset: " + Kirigami.Theme.colorSet, "Color: " + color)
                 color: monthPage.isLarge ? Kirigami.Theme.alternateBackgroundColor : Kirigami.Theme.backgroundColor
             }
             
@@ -163,6 +163,7 @@ Kirigami.ApplicationWindow {
                                                 visible: isBegin ? 1 : 0
                                                 text: summary
                                                 padding: Kirigami.Units.smallSpacing
+                                                Component.onCompleted: console.log("Summary: " + summary)
                                             }
                                         }
                                     }
@@ -242,7 +243,7 @@ Kirigami.ApplicationWindow {
                     delegate: Controls.Label {
                         text: summary
                     }
-                    onObjectAdded: console.log(index, object)
+                    onObjectAdded: console.log("Index: " + index, "Object: " + object)
                 }
             }
             

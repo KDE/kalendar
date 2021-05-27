@@ -106,7 +106,7 @@ KDescendantsProxyModel *CalendarManager::collections()
 {
     auto model = new KDescendantsProxyModel(this);
     auto checkableModel = m_calendar->checkableProxyModel();
-    qDebug() << checkableModel->roleNames();
+    qDebug() << "CheckableModel rolenames: " << checkableModel->roleNames();
     model->setSourceModel(checkableModel);
     model->setExpandsByDefault(true);
     return model;
