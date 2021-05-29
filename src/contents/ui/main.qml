@@ -11,6 +11,10 @@ Kirigami.ApplicationWindow {
     title: i18n("Calendar")
 
     pageStack.initialPage: mainPageComponent
+
+    EventEditor {
+		id: eventEditor
+	}
     
     globalDrawer: Kirigami.GlobalDrawer {
         bottomPadding: 0
@@ -55,16 +59,25 @@ Kirigami.ApplicationWindow {
             actions {
                 left: Kirigami.Action {
                     text: i18n("Previous")
+					icon.name: "go-previous-view"
                     onTriggered: CalendarManager.monthModel.previous()
                 }
                 right: Kirigami.Action {
                     text: i18n("Next")
+					icon.name: "go-next-view"
                     onTriggered: CalendarManager.monthModel.next()
                 }
                 main: Kirigami.Action {
+					text: "Add event"
+					icon.name: "list-add"
+					onTriggered: eventEditor.open()
+				}
+
+                /*Kirigami.Action {
                     text: "Show week"
+					icon.name: "view-calendar-week"
                     onTriggered: pageStack.push(weekPageComponent); //, { "weekModel": monthModel.week() });
-                }
+                }*/
             }
             padding: 0
             background: Rectangle {

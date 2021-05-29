@@ -42,6 +42,7 @@ void MonthModel::refreshGridPosition()
 											EventSortField::EventSortStartDate,
 											SortDirection::SortDirectionAscending
 											); // get all events
+	qDebug() << "Events: " << events;
 	QHash<int, int> eventInDays;
 
 	for (const auto &event : events) {
@@ -225,7 +226,6 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
 		// get the number of days in previous month
 		const int daysInPreviousMonth = m_calendar.daysInMonth(m_month > 1 ? m_month - 1 : m_calendar.monthsInYear(m_year - 1),
 																m_month > 1 ? m_year : m_year - 1);
-
 		switch (role) {
 			case Qt::DisplayRole:
 			case DayNumber:
