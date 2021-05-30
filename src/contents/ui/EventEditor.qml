@@ -5,6 +5,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kalendar 1.0
 
 Kirigami.OverlaySheet {
 	id: eventEditorSheet
@@ -14,7 +15,7 @@ Kirigami.OverlaySheet {
     }
 
     footer: QQC2.DialogButtonBox {
-        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+		standardButtons: QQC2.DialogButtonBox.Ok | QQC2.DialogButtonBox.Cancel
         onRejected: eventEditorSheet.close()
     }
 
@@ -23,6 +24,13 @@ Kirigami.OverlaySheet {
 			id: calendarCombo
 			Kirigami.FormData.label: "Calendar:"
 			Layout.fillWidth: true
+			model: CalendarManager.collections
+			delegate: Kirigami.BasicListItem {
+				leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
+				label: display
+				icon: decoration
+			}
+			popup.z: 1000
 		}
 		QQC2.TextField {
 			id: titleField
@@ -36,6 +44,7 @@ Kirigami.OverlaySheet {
 		Kirigami.Separator {}
 
 		QQC2.CheckBox {
+			id: allDayCheckBox
 			Kirigami.FormData.label: "All day event:"
 		}
 		RowLayout {
@@ -43,10 +52,12 @@ Kirigami.OverlaySheet {
 			QQC2.ComboBox {
 				id: eventStartDateCombo
 				editable: true
+				enabled: !allDayCheckBox.checked
 			}
 			QQC2.ComboBox {
 				id: eventStartTimeCombo
 				editable: true
+				enabled: !allDayCheckBox.checked
 			}
 		}
 		RowLayout {
@@ -54,10 +65,12 @@ Kirigami.OverlaySheet {
 			QQC2.ComboBox {
 				id: eventEndDateCombo
 				editable: true
+				enabled: !allDayCheckBox.checked
 			}
 			QQC2.ComboBox {
 				id: eventEndTimeCombo
 				editable: true
+				enabled: !allDayCheckBox.checked
 			}
 		}
 
