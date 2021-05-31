@@ -29,6 +29,7 @@ Kirigami.OverlaySheet {
 				leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
 				label: display
 				icon: decoration
+				onClicked: calendarCombo.displayText = display
 			}
 			popup.z: 1000
 		}
@@ -41,7 +42,9 @@ Kirigami.OverlaySheet {
 			Kirigami.FormData.label: "Location:"
 		}
 
-		Kirigami.Separator {}
+		Kirigami.Separator {
+			Kirigami.FormData.isSection: true
+		}
 
 		QQC2.CheckBox {
 			id: allDayCheckBox
@@ -52,20 +55,35 @@ Kirigami.OverlaySheet {
 			QQC2.ComboBox {
 				id: eventStartDateCombo
 				editable: true
-				enabled: !allDayCheckBox.checked
+				// Make popup a datepicker
+				popup: QQC2.Popup {
+					DatePicker {}
+					width: parent.width*2
+					height: parent.height*10
+					z: 1000
+				}
 			}
 			QQC2.ComboBox {
 				id: eventStartTimeCombo
 				editable: true
 				enabled: !allDayCheckBox.checked
+				visible: !allDayCheckBox.checked
+				// Make a popup a timepicker
 			}
 		}
 		RowLayout {
 			Kirigami.FormData.label: "End:"
+			visible: !allDayCheckBox.checked
 			QQC2.ComboBox {
 				id: eventEndDateCombo
 				editable: true
 				enabled: !allDayCheckBox.checked
+				popup: QQC2.Popup {
+					DatePicker {}
+					width: parent.width*2
+					height: parent.height*10
+					z: 1000
+				}
 			}
 			QQC2.ComboBox {
 				id: eventEndTimeCombo
@@ -73,13 +91,36 @@ Kirigami.OverlaySheet {
 				enabled: !allDayCheckBox.checked
 			}
 		}
+		QQC2.ComboBox {
+			id: repeatComboBox
+			Kirigami.FormData.label: "Repeat:"
+			Layout.fillWidth: true
+			model: ["", "Daily", "Weekly", "Monthly", "Yearly"]
+			delegate: Kirigami.BasicListItem {
+				label: modelData
+			}
+			popup.z: 1000
+		}
 
-		Kirigami.Separator {}
+		Kirigami.Separator {
+			Kirigami.FormData.isSection: true
+		}
 
 		QQC2.TextArea {
-			Kirigami.FormData.label: "Notes:"
+			id: descriptionTextArea
+			Kirigami.FormData.label: "Description:"
 			Layout.fillWidth: true
-			Layout.fillHeight: true
+		}
+		QQC2.ComboBox {
+			id: remindersComboBox
+			Kirigami.FormData.label: "Reminder:"
+			Layout.fillWidth: true
+		}
+		QQC2.Button {
+			id: attendeesButton
+			Kirigami.FormData.label: "Attendees:"
+			text: "Add attendees"
+			Layout.fillWidth: true
 		}
 	}
 }

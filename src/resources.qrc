@@ -3,5 +3,6 @@
     <file alias="main.qml">contents/ui/main.qml</file>
     <file alias="CompactMonthView.qml">contents/ui/CompactMonthView.qml</file>
 	<file alias="EventEditor.qml">contents/ui/EventEditor.qml</file>
+	<file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
   </qresource>
 </RCC>
