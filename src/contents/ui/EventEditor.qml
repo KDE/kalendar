@@ -79,10 +79,10 @@ Kirigami.OverlaySheet {
 				editable: true
 				enabled: !allDayCheckBox.checked
 				popup: QQC2.Popup {
-					DatePicker {}
 					width: parent.width*2
 					height: parent.height*10
 					z: 1000
+					DatePicker {}
 				}
 			}
 			QQC2.ComboBox {
@@ -95,7 +95,7 @@ Kirigami.OverlaySheet {
 			id: repeatComboBox
 			Kirigami.FormData.label: "Repeat:"
 			Layout.fillWidth: true
-			model: ["", "Daily", "Weekly", "Monthly", "Yearly"]
+			model: ["Never", "Daily", "Weekly", "Monthly", "Yearly"]
 			delegate: Kirigami.BasicListItem {
 				label: modelData
 			}
