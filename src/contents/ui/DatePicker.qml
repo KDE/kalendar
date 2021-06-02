@@ -49,7 +49,7 @@ Item {
 
 		RowLayout {
 			id: headingRow
-			width: parent
+			Layout.fillWidth: true
 
 			Kirigami.Heading {
 				id: monthLabel
@@ -60,11 +60,11 @@ Item {
 			QQC2.ToolButton {
 				icon.name: 'go-previous-view'
 				onClicked: {
-					if (monthsViewCheck.checked) {
+					if (pickerView.currentIndex == 1) { // monthGrid index
 						prevYear()
-					} else if (yearsViewCheck.checked) {
+					} else if (pickerView.currentIndex == 2) { // yearGrid index
 						prevDecade()
-					} else {
+					} else { // dayGrid index
 						prevMonth()
 					}
 				}
@@ -76,134 +76,135 @@ Item {
 			QQC2.ToolButton {
 				icon.name: 'go-next-view'
 				onClicked: {
-					if (monthsViewCheck.checked) {
+					if (pickerView.currentIndex == 1) { // monthGrid index
 						nextYear()
-					} else if (yearsViewCheck.checked) {
+					} else if (pickerView.currentIndex == 2) { // yearGrid index
 						nextDecade()
-					} else {
+					} else { // dayGrid index
 						nextMonth()
 					}
 				}
 			}
 		}
 
-		QQC2.ButtonGroup {
-			buttons: rangeBar.children
-		}
-		RowLayout {
+		QQC2.TabBar {
 			id: rangeBar
+			currentIndex: pickerView.currentIndex
 			Layout.fillWidth: true
 
-			QQC2.ToolButton {
+			QQC2.TabButton {
 				id: daysViewCheck
 				Layout.fillWidth: true
-				checkable: true
-				checked: true
 				text: "Days"
+				onClicked: pickerView.currentIndex = 0 // dayGrid is first item in pickerView
 			}
-			QQC2.ToolButton {
+			QQC2.TabButton {
 				id: monthsViewCheck
 				Layout.fillWidth: true
-				checkable: true
 				text: "Months"
+				onClicked: pickerView.currentIndex = 1
 			}
-			QQC2.ToolButton {
+			QQC2.TabButton {
 				id: yearsViewCheck
 				Layout.fillWidth: true
-				checkable: true
 				text: "Years"
+				onClicked: pickerView.currentIndex = 2
 			}
 		}
 
-		QQC2.ButtonGroup {
-			buttons: dayGrid.children
-		}
-		GridLayout {
-			id: dayGrid
-			visible: daysViewCheck.checked
-			columns: 7
-			rows: 6
+		QQC2.SwipeView {
+			id: pickerView
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			Layout.topMargin: Kirigami.Units.smallSpacing
+			clip: true
 
-			Repeater {
-				model: 7
-				delegate: QQC2.Label {
-					Layout.fillWidth: true
-					height: dayGrid / dayGrid.rows
-					horizontalAlignment: Text.AlignHCenter
-					opacity: 0.7
-					text: Qt.locale().dayName(index + Qt.locale().firstDayOfWeek, Locale.ShortFormat) // dayName() loops back over beyond index 6
+			QQC2.ButtonGroup {
+				buttons: dayGrid.children
+			}
+			GridLayout {
+				id: dayGrid
+				columns: 7
+				rows: 6
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				Layout.topMargin: Kirigami.Units.smallSpacing
+
+				Repeater {
+					model: 7
+					delegate: QQC2.Label {
+						Layout.fillWidth: true
+						height: dayGrid / dayGrid.rows
+						horizontalAlignment: Text.AlignHCenter
+						opacity: 0.7
+						text: Qt.locale().dayName(index + Qt.locale().firstDayOfWeek, Locale.ShortFormat) // dayName() loops back over beyond index 6
+					}
+				}
+
+				Repeater {
+					model: dayGrid.columns * dayGrid.rows // 42 cells per month
+
+					delegate: QQC2.Button {
+						// Stop days overflowing from the grid by creating an adjusted offset
+						property int firstDayOfWeekOffset: Qt.locale().firstDayOfWeek >= 4 ? Qt.locale().firstDayOfWeek - 7 : Qt.locale().firstDayOfWeek
+						// .getDay() returns from 0 to 30, add +1 for correct day number, and add locale offset for correct firstDayOfWeek
+						property int dateToUse: index - firstDay + 1 - firstDayOfWeekOffset
+						property date date: new Date(year, month, dateToUse)
+						property bool sameMonth: date.getMonth() == month
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+						flat: true
+						checkable: true
+						checked: date.valueOf() === clickedDate.valueOf()
+						opacity: sameMonth ? 1 : 0.7
+						text: date.getDate()
+						onClicked: datePicked(date), clickedDate = date.setHours(0,0,0,0)
+					}
 				}
 			}
 
-			Repeater {
-				model: dayGrid.columns * dayGrid.rows // 42 cells per month
+			GridLayout {
+				id: monthGrid
+				columns: 3
+				rows: 4
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				Layout.topMargin: Kirigami.Units.smallSpacing
 
-				delegate: QQC2.Button {
-					// Stop days overflowing from the grid by creating an adjusted offset
-					property int firstDayOfWeekOffset: Qt.locale().firstDayOfWeek >= 4 ? Qt.locale().firstDayOfWeek - 7 : Qt.locale().firstDayOfWeek
-					// .getDay() returns from 0 to 30, add +1 for correct day number, and add locale offset for correct firstDayOfWeek
-					property int dateToUse: index - firstDay + 1 - firstDayOfWeekOffset
-					property date date: new Date(year, month, dateToUse)
-					property bool sameMonth: date.getMonth() == month
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					flat: true
-					checkable: true
-					checked: date.valueOf() === clickedDate.valueOf()
-					opacity: sameMonth ? 1 : 0.7
-					text: date.getDate()
-					onClicked: datePicked(date), clickedDate = date.setHours(0,0,0,0)
+				Repeater {
+					model: monthGrid.columns * monthGrid.rows
+					delegate: QQC2.Button {
+						property int monthToUse: index
+						property date date: new Date(year, monthToUse)
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+						flat: true
+						text: Qt.locale().monthName(date.getMonth())
+						onClicked: selectedDate = new Date(date), pickerView.currentIndex = 0
+					}
 				}
 			}
-		}
 
-		GridLayout {
-			id: monthGrid
-			visible: monthsViewCheck.checked
-			columns: 3
-			rows: 4
-			Layout.fillWidth: true
-			Layout.fillHeight: true
-			Layout.topMargin: Kirigami.Units.smallSpacing
+			GridLayout {
+				id: yearGrid
+				columns: 3
+				rows: 4
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				Layout.topMargin: Kirigami.Units.smallSpacing
 
-			Repeater {
-				model: monthGrid.columns * monthGrid.rows
-				delegate: QQC2.Button {
-					property int monthToUse: index
-					property date date: new Date(year, monthToUse)
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					flat: true
-					text: Qt.locale().monthName(date.getMonth())
-					onClicked: selectedDate = new Date(date), daysViewCheck.checked = true
-				}
-			}
-		}
-
-		GridLayout {
-			id: yearGrid
-			visible: yearsViewCheck.checked
-			columns: 3
-			rows: 4
-			Layout.fillWidth: true
-			Layout.fillHeight: true
-			Layout.topMargin: Kirigami.Units.smallSpacing
-
-			Repeater {
-				model: yearGrid.columns * yearGrid.rows
-				delegate: QQC2.Button {
-					property int yearToUse: index - 1 + (Math.floor(year/10)*10) // Display a decade, e.g. 2019 - 2030
-					property date date: new Date(yearToUse, 0)
-					property bool sameDecade: Math.floor(yearToUse / 10) == Math.floor(year / 10)
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					flat: true
-					opacity: sameDecade ? 1 : 0.7
-					text: date.getFullYear()
-					onClicked: selectedDate = new Date(date), monthsViewCheck.checked = true
+				Repeater {
+					model: yearGrid.columns * yearGrid.rows
+					delegate: QQC2.Button {
+						property int yearToUse: index - 1 + (Math.floor(year/10)*10) // Display a decade, e.g. 2019 - 2030
+						property date date: new Date(yearToUse, 0)
+						property bool sameDecade: Math.floor(yearToUse / 10) == Math.floor(year / 10)
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+						flat: true
+						opacity: sameDecade ? 1 : 0.7
+						text: date.getFullYear()
+						onClicked: selectedDate = new Date(date), pickerView.currentIndex = 1
+					}
 				}
 			}
 		}

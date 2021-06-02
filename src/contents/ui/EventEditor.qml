@@ -20,6 +20,9 @@ Kirigami.OverlaySheet {
     }
 
     Kirigami.FormLayout {
+		id: eventForm
+		property date todayDate: new Date()
+
 		QQC2.ComboBox {
 			id: calendarCombo
 			Kirigami.FormData.label: "Calendar:"
@@ -56,22 +59,28 @@ Kirigami.OverlaySheet {
 
 			QQC2.ComboBox {
 				id: eventStartDateCombo
+				Layout.fillWidth: true
 				editable: true
-				displayText: new Date().toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+				editText: eventForm.todayDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
 				// Make popup a datepicker
 				popup: QQC2.Popup {
-					DatePicker {
-						onDatePicked: {
-							eventStartDateCombo.displayText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-						}
-					}
+					id: eventStartDatePopup
 					width: parent.width*2
 					height: Kirigami.Units.gridUnit * 18
 					z: 1000
+
+					DatePicker {
+						id: eventStartDatePicker
+						onDatePicked: {
+							eventStartDateCombo.editText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+							eventStartDatePopup.close()
+						}
+					}
 				}
 			}
 			QQC2.ComboBox {
 				id: eventStartTimeCombo
+				Layout.fillWidth: true
 				editable: true
 				enabled: !allDayCheckBox.checked
 				visible: !allDayCheckBox.checked
@@ -85,22 +94,28 @@ Kirigami.OverlaySheet {
 
 			QQC2.ComboBox {
 				id: eventEndDateCombo
+				Layout.fillWidth: true
 				editable: true
+				editText: eventForm.todayDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
 				enabled: !allDayCheckBox.checked
-				displayText: new Date().toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
 				popup: QQC2.Popup {
+					id: eventEndDatePopup
 					width: parent.width*2
 					height: Kirigami.Units.gridUnit * 18
 					z: 1000
+
 					DatePicker {
+						id: eventEndDatePicker
 						onDatePicked: {
-							eventEndDateCombo.displayText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+							eventEndDateCombo.editText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+							eventEndDatePopup.close()
 						}
 					}
 				}
 			}
 			QQC2.ComboBox {
 				id: eventEndTimeCombo
+				Layout.fillWidth: true
 				editable: true
 				enabled: !allDayCheckBox.checked
 			}
