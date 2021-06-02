@@ -112,7 +112,6 @@ Item {
 				Layout.fillWidth: true
 				checkable: true
 				text: "Years"
-				onClicked: console.log(Qt.locale().firstDayOfWeek)
 			}
 		}
 
@@ -131,13 +130,10 @@ Item {
 			Repeater {
 				model: 7
 				delegate: QQC2.Label {
-					// We have the week days twice so we can account for the locale offset and still use a simple loop
-					property var weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 					Layout.fillWidth: true
 					height: dayGrid / dayGrid.rows
 					horizontalAlignment: Text.AlignHCenter
 					opacity: 0.7
-
 					text: Qt.locale().dayName(index + Qt.locale().firstDayOfWeek, Locale.ShortFormat) // dayName() loops back over beyond index 6
 				}
 			}
@@ -153,7 +149,7 @@ Item {
 					property date date: new Date(year, month, dateToUse)
 					property bool sameMonth: date.getMonth() == month
 					Layout.fillWidth: true
-					height: dayGrid / dayGrid.rows
+					Layout.fillHeight: true
 					flat: true
 					checkable: true
 					checked: date.valueOf() === clickedDate.valueOf()
@@ -195,6 +191,21 @@ Item {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.topMargin: Kirigami.Units.smallSpacing
+
+			Repeater {
+				model: yearGrid.columns * yearGrid.rows
+				delegate: QQC2.Button {
+					property int yearToUse: index - 1 + (Math.floor(year/10)*10) // Display a decade, e.g. 2019 - 2030
+					property date date: new Date(yearToUse, 0)
+					property bool sameDecade: Math.floor(yearToUse / 10) == Math.floor(year / 10)
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					flat: true
+					opacity: sameDecade ? 1 : 0.7
+					text: date.getFullYear()
+					onClicked: selectedDate = new Date(date), monthsViewCheck.checked = true
+				}
+			}
 		}
 	}
 }
