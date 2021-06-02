@@ -80,7 +80,7 @@ Kirigami.OverlaySheet {
 				enabled: !allDayCheckBox.checked
 				popup: QQC2.Popup {
 					width: parent.width*2
-					height: parent.height*10
+					height: Kirigami.Units.gridUnit * 12
 					z: 1000
 					DatePicker {}
 				}
