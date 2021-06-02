@@ -27,6 +27,21 @@ Item {
 		selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, selectedDate.getDate())
 	}
 
+	function prevYear() {
+		selectedDate = new Date(selectedDate.getFullYear() - 1, selectedDate.getMonth(), selectedDate.getDate())
+	}
+
+	function nextYear() {
+		selectedDate = new Date(selectedDate.getFullYear() + 1, selectedDate.getMonth(), selectedDate.getDate())
+	}
+	function prevDecade() {
+		selectedDate = new Date(selectedDate.getFullYear() - 10, selectedDate.getMonth(), selectedDate.getDate())
+	}
+
+	function nextDecade() {
+		selectedDate = new Date(selectedDate.getFullYear() + 10, selectedDate.getMonth(), selectedDate.getDate())
+	}
+
 	anchors.fill: parent
 
 	ColumnLayout {
@@ -44,7 +59,15 @@ Item {
 			}
 			QQC2.ToolButton {
 				icon.name: 'go-previous-view'
-				onClicked: prevMonth()
+				onClicked: {
+					if (monthsViewCheck.checked) {
+						prevYear()
+					} else if (yearsViewCheck.checked) {
+						prevDecade()
+					} else {
+						prevMonth()
+					}
+				}
 			}
 			QQC2.ToolButton {
 				icon.name: 'go-jump-today'
@@ -52,7 +75,15 @@ Item {
 			}
 			QQC2.ToolButton {
 				icon.name: 'go-next-view'
-				onClicked: nextMonth()
+				onClicked: {
+					if (monthsViewCheck.checked) {
+						nextYear()
+					} else if (yearsViewCheck.checked) {
+						nextDecade()
+					} else {
+						nextMonth()
+					}
+				}
 			}
 		}
 
@@ -90,6 +121,7 @@ Item {
 		}
 		GridLayout {
 			id: dayGrid
+			visible: daysViewCheck.checked
 			columns: 7
 			rows: 6
 			Layout.fillWidth: true
@@ -102,16 +134,16 @@ Item {
 					// We have the week days twice so we can account for the locale offset and still use a simple loop
 					property var weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 					Layout.fillWidth: true
-					height: dayGrid / 7
+					height: dayGrid / dayGrid.rows
 					horizontalAlignment: Text.AlignHCenter
 					opacity: 0.7
 
-					text: weekdays[index + Qt.locale().firstDayOfWeek] // Su-Sa
+					text: Qt.locale().dayName(index + Qt.locale().firstDayOfWeek, Locale.ShortFormat) // dayName() loops back over beyond index 6
 				}
 			}
 
 			Repeater {
-				model: (dayGrid.columns * dayGrid.rows) // 42 cells per month
+				model: dayGrid.columns * dayGrid.rows // 42 cells per month
 
 				delegate: QQC2.Button {
 					// Stop days overflowing from the grid by creating an adjusted offset
@@ -121,15 +153,48 @@ Item {
 					property date date: new Date(year, month, dateToUse)
 					property bool sameMonth: date.getMonth() == month
 					Layout.fillWidth: true
-					height: dayGrid / 7
+					height: dayGrid / dayGrid.rows
 					flat: true
 					checkable: true
 					checked: date.valueOf() === clickedDate.valueOf()
 					opacity: sameMonth ? 1 : 0.7
 					text: date.getDate()
-					onClicked: datePicked(date), clickedDate = date
+					onClicked: datePicked(date), clickedDate = date.setHours(0,0,0,0)
 				}
 			}
+		}
+
+		GridLayout {
+			id: monthGrid
+			visible: monthsViewCheck.checked
+			columns: 3
+			rows: 4
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+			Layout.topMargin: Kirigami.Units.smallSpacing
+
+			Repeater {
+				model: monthGrid.columns * monthGrid.rows
+				delegate: QQC2.Button {
+					property int monthToUse: index
+					property date date: new Date(year, monthToUse)
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					flat: true
+					text: Qt.locale().monthName(date.getMonth())
+					onClicked: selectedDate = new Date(date), daysViewCheck.checked = true
+				}
+			}
+		}
+
+		GridLayout {
+			id: yearGrid
+			visible: yearsViewCheck.checked
+			columns: 3
+			rows: 4
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+			Layout.topMargin: Kirigami.Units.smallSpacing
 		}
 	}
 }
