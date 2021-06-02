@@ -52,14 +52,22 @@ Kirigami.OverlaySheet {
 		}
 		RowLayout {
 			Kirigami.FormData.label: "Start:"
+			Layout.fillWidth: true
+
 			QQC2.ComboBox {
 				id: eventStartDateCombo
 				editable: true
+				displayText: new Date().toLocaleDateString()
 				// Make popup a datepicker
 				popup: QQC2.Popup {
-					DatePicker {}
+					DatePicker {
+						onDatePicked: {
+							eventStartDateCombo.displayText = pickedDate.toLocaleDateString();
+							console.log(pickedDate)
+						}
+					}
 					width: parent.width*2
-					height: parent.height*10
+					height: Kirigami.Units.gridUnit * 18
 					z: 1000
 				}
 			}
@@ -73,16 +81,24 @@ Kirigami.OverlaySheet {
 		}
 		RowLayout {
 			Kirigami.FormData.label: "End:"
+			Layout.fillWidth: true
 			visible: !allDayCheckBox.checked
+
 			QQC2.ComboBox {
 				id: eventEndDateCombo
 				editable: true
 				enabled: !allDayCheckBox.checked
+				displayText: new Date().toLocaleDateString()
 				popup: QQC2.Popup {
 					width: parent.width*2
-					height: Kirigami.Units.gridUnit * 12
+					height: Kirigami.Units.gridUnit * 18
 					z: 1000
-					DatePicker {}
+					DatePicker {
+						onDatePicked: {
+							eventEndDateCombo.displayText = pickedDate.toLocaleDateString();
+							console.log(pickedDate);
+						}
+					}
 				}
 			}
 			QQC2.ComboBox {

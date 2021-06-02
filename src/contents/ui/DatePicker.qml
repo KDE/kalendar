@@ -9,8 +9,15 @@ import org.kde.kirigami 2.15 as Kirigami
 Item {
 	id: datepicker
 
+	signal datePicked(date pickedDate)
+
 	property date selectedDate: new Date() // Decides calendar span
-	property date pickedDate: selectedDate
+	property double clickedDate: new Date()
+	property int year: selectedDate.getFullYear()
+	property int month: selectedDate.getMonth()
+	property int firstDay: new Date(year, month, 1).getDay() // 0 Sunday to 6 Saturday
+
+	Component.onCompleted: clickedDate = selectedDate.setHours(0,0,0,0)
 
 	function prevMonth() {
 		selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, selectedDate.getDate())
@@ -19,10 +26,6 @@ Item {
 	function nextMonth() {
 		selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, selectedDate.getDate())
 	}
-
-	property int year: selectedDate.getFullYear()
-	property int month: selectedDate.getMonth()
-	property int firstDay: new Date(year, month, 1).getDay() // 0 Sunday to 6 Saturday
 
 	anchors.fill: parent
 
@@ -33,16 +36,19 @@ Item {
 			id: headingRow
 			width: parent
 
+			Kirigami.Heading {
+				id: monthLabel
+				Layout.fillWidth: true
+				text: selectedDate.toLocaleDateString(Qt.locale(), "MMMM yyyy")
+				level: 1
+			}
 			QQC2.ToolButton {
 				icon.name: 'go-previous-view'
 				onClicked: prevMonth()
 			}
-			Kirigami.Heading {
-				id: monthLabel
-				Layout.fillWidth: true
-				text: selectedDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
-				level: 1
-				horizontalAlignment: Text.AlignHCenter
+			QQC2.ToolButton {
+				icon.name: 'go-jump-today'
+				onClicked: selectedDate = new Date()
 			}
 			QQC2.ToolButton {
 				icon.name: 'go-next-view'
@@ -50,7 +56,7 @@ Item {
 			}
 		}
 
-		/*QQC2.ButtonGroup {
+		QQC2.ButtonGroup {
 			buttons: rangeBar.children
 		}
 		RowLayout {
@@ -77,12 +83,15 @@ Item {
 				text: "Years"
 				onClicked: console.log(Qt.locale().firstDayOfWeek)
 			}
-		}*/
+		}
 
+		QQC2.ButtonGroup {
+			buttons: dayGrid.children
+		}
 		GridLayout {
 			id: dayGrid
 			columns: 7
-			rows: 7
+			rows: 6
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.topMargin: Kirigami.Units.smallSpacing
@@ -93,7 +102,7 @@ Item {
 					// We have the week days twice so we can account for the locale offset and still use a simple loop
 					property var weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 					Layout.fillWidth: true
-					Layout.fillHeight: true
+					height: dayGrid / 7
 					horizontalAlignment: Text.AlignHCenter
 					opacity: 0.7
 
@@ -115,14 +124,10 @@ Item {
 					height: dayGrid / 7
 					flat: true
 					checkable: true
-					checked: date === pickedDate
+					checked: date.valueOf() === clickedDate.valueOf()
 					opacity: sameMonth ? 1 : 0.7
 					text: date.getDate()
-					onClicked: {
-						pickedDate = date;
-						console.log(pickedDate + ", " + date);
-					}
-
+					onClicked: datePicked(date), clickedDate = date
 				}
 			}
 		}
