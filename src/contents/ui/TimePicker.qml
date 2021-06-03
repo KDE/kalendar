@@ -27,6 +27,15 @@ Item {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 
+			// For some weird reason, the first swipeview used refuses to change the current index when swiping it.
+			// This is a janky workaround.
+			QQC2.SwipeView {
+				visible: false
+				Repeater {
+					model: 1
+				}
+			}
+
 			ColumnLayout {
 				Layout.fillWidth: true
 				Layout.fillHeight: true
