@@ -12,12 +12,11 @@ Item {
 	signal datePicked(date pickedDate)
 
 	property date selectedDate: new Date() // Decides calendar span
-	property double clickedDate: new Date()
+	property date clickedDate: new Date()
+	property date today: new Date()
 	property int year: selectedDate.getFullYear()
 	property int month: selectedDate.getMonth()
 	property int firstDay: new Date(year, month, 1).getDay() // 0 Sunday to 6 Saturday
-
-	Component.onCompleted: clickedDate = selectedDate.setHours(0,0,0,0)
 
 	function prevMonth() {
 		selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, selectedDate.getDate())
@@ -34,6 +33,7 @@ Item {
 	function nextYear() {
 		selectedDate = new Date(selectedDate.getFullYear() + 1, selectedDate.getMonth(), selectedDate.getDate())
 	}
+
 	function prevDecade() {
 		selectedDate = new Date(selectedDate.getFullYear() - 10, selectedDate.getMonth(), selectedDate.getDate())
 	}
@@ -42,7 +42,8 @@ Item {
 		selectedDate = new Date(selectedDate.getFullYear() + 10, selectedDate.getMonth(), selectedDate.getDate())
 	}
 
-	anchors.fill: parent
+	Layout.fillWidth: true
+	Layout.fillHeight: true
 
 	ColumnLayout {
 		anchors.fill: parent
@@ -149,15 +150,22 @@ Item {
 						// .getDay() returns from 0 to 30, add +1 for correct day number, and add locale offset for correct firstDayOfWeek
 						property int dateToUse: index - firstDay + 1 - firstDayOfWeekOffset
 						property date date: new Date(year, month, dateToUse)
-						property bool sameMonth: date.getMonth() == month
+						property bool sameMonth: date.getMonth() === month
+						property bool isToday: date.getDate() === datepicker.today.getDate() &&
+							date.getMonth() === datepicker.today.getMonth() &&
+							date.getFullYear() === datepicker.today.getFullYear()
+
 						Layout.fillWidth: true
 						Layout.fillHeight: true
 						flat: true
+						highlighted: this.isToday
 						checkable: true
-						checked: date.valueOf() === clickedDate.valueOf()
+						checked: date.getDate() === clickedDate.getDate() &&
+							date.getMonth() === clickedDate.getMonth() &&
+							date.getFullYear() === clickedDate.getFullYear()
 						opacity: sameMonth ? 1 : 0.7
 						text: date.getDate()
-						onClicked: datePicked(date), clickedDate = date.setHours(0,0,0,0)
+						onClicked: datePicked(date), clickedDate = date
 					}
 				}
 			}

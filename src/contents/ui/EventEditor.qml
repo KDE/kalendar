@@ -79,6 +79,7 @@ Kirigami.OverlaySheet {
 
 					DatePicker {
 						id: eventStartDatePicker
+						anchors.fill: parent
 						onDatePicked: {
 							eventStartDateCombo.editText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
 							eventStartDatePopup.close()
@@ -93,12 +94,13 @@ Kirigami.OverlaySheet {
 				enabled: !allDayCheckBox.checked
 				visible: !allDayCheckBox.checked
 				popup: QQC2.Popup {
+					id: eventStartTimePopup
 					width: parent.width
 					height: parent.width
 					z: 1000
 
 					TimePicker {
-
+						onDone: eventStartTimePopup.close()
 					}
 				}
 			}
@@ -122,6 +124,7 @@ Kirigami.OverlaySheet {
 
 					DatePicker {
 						id: eventEndDatePicker
+						anchors.fill: parent
 						onDatePicked: {
 							eventEndDateCombo.editText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
 							eventEndDatePopup.close()
@@ -135,12 +138,13 @@ Kirigami.OverlaySheet {
 				editable: true
 				enabled: !allDayCheckBox.checked
 				popup: QQC2.Popup {
+					id: eventEndTimePopup
 					width: parent.width
 					height: parent.width
 					z: 1000
 
 					TimePicker {
-
+						onDone: eventEndTimePopup.close()
 					}
 				}
 			}
