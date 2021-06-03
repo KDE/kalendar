@@ -10,6 +10,8 @@ import org.kde.kalendar 1.0
 Kirigami.OverlaySheet {
 	id: eventEditorSheet
 
+	property bool validDates: eventStartDateCombo.validDate && eventEndDateCombo.validDate
+
 	header: Kirigami.Heading {
         text: "Event"
     }
@@ -19,7 +21,7 @@ Kirigami.OverlaySheet {
 
 		QQC2.Button {
 			text: "Add"
-			enabled: titleField.text // Also needs to check for selected calendar and date
+			enabled: titleField.text && eventEditorSheet.validDates // Also needs to check for selected calendar and date
 			QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
 		}
 
@@ -69,8 +71,15 @@ Kirigami.OverlaySheet {
 				id: eventStartDateCombo
 				Layout.fillWidth: true
 				editable: true
-				editText: eventForm.todayDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-				// Make popup a datepicker
+
+				editText: eventStartDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+
+				inputMethodHints: Qt.ImhDate
+
+				property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
+
+				onEditTextChanged: console.log(validDate, eventEditorSheet.validDates)
+
 				popup: QQC2.Popup {
 					id: eventStartDatePopup
 					width: parent.width*2
@@ -80,10 +89,7 @@ Kirigami.OverlaySheet {
 					DatePicker {
 						id: eventStartDatePicker
 						anchors.fill: parent
-						onDatePicked: {
-							eventStartDateCombo.editText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
-							eventStartDatePopup.close()
-						}
+						onDatePicked: eventStartDatePopup.close()
 					}
 				}
 			}
@@ -127,8 +133,13 @@ Kirigami.OverlaySheet {
 				id: eventEndDateCombo
 				Layout.fillWidth: true
 				editable: true
-				editText: eventForm.todayDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+				editText: eventEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+
+				property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
+				onEditTextChanged: console.log(validDate, eventEditorSheet.validDates)
+
 				enabled: !allDayCheckBox.checked
+
 				popup: QQC2.Popup {
 					id: eventEndDatePopup
 					width: parent.width*2
@@ -138,10 +149,7 @@ Kirigami.OverlaySheet {
 					DatePicker {
 						id: eventEndDatePicker
 						anchors.fill: parent
-						onDatePicked: {
-							eventEndDateCombo.editText = pickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-							eventEndDatePopup.close()
-						}
+						onDatePicked: eventEndDatePopup.close()
 					}
 				}
 			}
