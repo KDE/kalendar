@@ -54,7 +54,7 @@ Item {
 					Layout.fillHeight: true
 
 					Repeater {
-						model: 60
+						model: 24
 						delegate: Kirigami.Heading {
 							property int thisIndex: index
 
