@@ -90,9 +90,21 @@ Kirigami.OverlaySheet {
 			QQC2.ComboBox {
 				id: eventStartTimeCombo
 				Layout.fillWidth: true
+				property string displayHour: eventStartTimePicker.hours < 10 ?
+					String(eventStartTimePicker.hours).padStart(2, "0") : eventStartTimePicker.hours
+				property string displayMinutes: eventStartTimePicker.minutes < 10 ?
+					String(eventStartTimePicker.minutes).padStart(2, "0") : eventStartTimePicker.minutes
+
 				editable: true
+				editText: displayHour + ":" + displayMinutes
 				enabled: !allDayCheckBox.checked
 				visible: !allDayCheckBox.checked
+
+				inputMethodHints: Qt.ImhTime
+				validator: RegularExpressionValidator {
+					regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
+				}
+
 				popup: QQC2.Popup {
 					id: eventStartTimePopup
 					width: parent.width
@@ -100,6 +112,7 @@ Kirigami.OverlaySheet {
 					z: 1000
 
 					TimePicker {
+						id: eventStartTimePicker
 						onDone: eventStartTimePopup.close()
 					}
 				}
@@ -135,8 +148,20 @@ Kirigami.OverlaySheet {
 			QQC2.ComboBox {
 				id: eventEndTimeCombo
 				Layout.fillWidth: true
+				property string displayHour: eventEndTimePicker.hours < 10 ?
+					String(eventEndTimePicker.hours).padStart(2, "0") : eventEndTimePicker.hours
+				property string displayMinutes: eventEndTimePicker.minutes < 10 ?
+					String(eventEndTimePicker.minutes).padStart(2, "0") : eventEndTimePicker.minutes
+
 				editable: true
+				editText: displayHour + ":" + displayMinutes
 				enabled: !allDayCheckBox.checked
+
+				inputMethodHints: Qt.ImhTime
+				validator: RegularExpressionValidator {
+					regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
+				}
+
 				popup: QQC2.Popup {
 					id: eventEndTimePopup
 					width: parent.width
@@ -144,6 +169,7 @@ Kirigami.OverlaySheet {
 					z: 1000
 
 					TimePicker {
+						id: eventEndTimePicker
 						onDone: eventEndTimePopup.close()
 					}
 				}

@@ -13,9 +13,9 @@ Item {
 
 	anchors.fill: parent
 
-	property int hours: 0
-	property int minutes: 0
-	property int seconds: 0
+	property int hours: hourView.currentIndex
+	property int minutes: minuteView.currentIndex * minuteMultiples
+	property int seconds: secondsView.currentIndex
 
 	property int minuteMultiples: 5
 	property bool secondsPicker: false
