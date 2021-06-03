@@ -15,7 +15,14 @@ Kirigami.OverlaySheet {
     }
 
     footer: QQC2.DialogButtonBox {
-		standardButtons: QQC2.DialogButtonBox.Ok | QQC2.DialogButtonBox.Cancel
+		standardButtons: QQC2.DialogButtonBox.Cancel
+
+		QQC2.Button {
+			text: "Add"
+			enabled: titleField.text // Also needs to check for selected calendar and date
+			QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+		}
+
         onRejected: eventEditorSheet.close()
     }
 
@@ -39,6 +46,7 @@ Kirigami.OverlaySheet {
 		QQC2.TextField {
 			id: titleField
 			Kirigami.FormData.label: "<b>Title</b>:"
+			placeholderText: "Required"
 		}
 		QQC2.TextField {
 			id: locationField
@@ -84,7 +92,15 @@ Kirigami.OverlaySheet {
 				editable: true
 				enabled: !allDayCheckBox.checked
 				visible: !allDayCheckBox.checked
-				// Make a popup a timepicker
+				popup: QQC2.Popup {
+					width: parent.width
+					height: parent.width
+					z: 1000
+
+					TimePicker {
+
+					}
+				}
 			}
 		}
 		RowLayout {
@@ -118,6 +134,15 @@ Kirigami.OverlaySheet {
 				Layout.fillWidth: true
 				editable: true
 				enabled: !allDayCheckBox.checked
+				popup: QQC2.Popup {
+					width: parent.width
+					height: parent.width
+					z: 1000
+
+					TimePicker {
+
+					}
+				}
 			}
 		}
 		QQC2.ComboBox {
@@ -138,6 +163,7 @@ Kirigami.OverlaySheet {
 		QQC2.TextArea {
 			id: descriptionTextArea
 			Kirigami.FormData.label: "Description:"
+			placeholderText: "Add a description..."
 			Layout.fillWidth: true
 		}
 		QQC2.ComboBox {
