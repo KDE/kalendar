@@ -28,192 +28,202 @@ Kirigami.OverlaySheet {
         onRejected: eventEditorSheet.close()
     }
 
-    Kirigami.FormLayout {
-		id: eventForm
-		property date todayDate: new Date()
+    ColumnLayout {
+		Layout.fillWidth: true
+		Layout.fillHeight: true
 
-		QQC2.ComboBox {
-			id: calendarCombo
-			Kirigami.FormData.label: "Calendar:"
+		Kirigami.InlineMessage {
+			id: invalidDateMessage
 			Layout.fillWidth: true
-			model: CalendarManager.collections
-			delegate: Kirigami.BasicListItem {
-				leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
-				label: display
-				icon: decoration
-				onClicked: calendarCombo.displayText = display
-			}
-			popup.z: 1000
-		}
-		QQC2.TextField {
-			id: titleField
-			Kirigami.FormData.label: "<b>Title</b>:"
-			placeholderText: "Required"
-		}
-		QQC2.TextField {
-			id: locationField
-			Kirigami.FormData.label: "Location:"
+			visible: !eventEditorSheet.validDates
+			type: Kirigami.MessageType.Error
+			text: "Invalid dates provided."
 		}
 
-		Kirigami.Separator {
-			Kirigami.FormData.isSection: true
-		}
-
-		QQC2.CheckBox {
-			id: allDayCheckBox
-			Kirigami.FormData.label: "All day event:"
-		}
-		RowLayout {
-			Kirigami.FormData.label: "Start:"
-			Layout.fillWidth: true
+		Kirigami.FormLayout {
+			id: eventForm
+			property date todayDate: new Date()
 
 			QQC2.ComboBox {
-				id: eventStartDateCombo
+				id: calendarCombo
+				Kirigami.FormData.label: "Calendar:"
 				Layout.fillWidth: true
-				editable: true
+				model: CalendarManager.collections
+				delegate: Kirigami.BasicListItem {
+					leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
+					label: display
+					icon: decoration
+					onClicked: calendarCombo.displayText = display
+				}
+				popup.z: 1000
+			}
+			QQC2.TextField {
+				id: titleField
+				Kirigami.FormData.label: "<b>Title</b>:"
+				placeholderText: "Required"
+			}
+			QQC2.TextField {
+				id: locationField
+				Kirigami.FormData.label: "Location:"
+			}
 
-				editText: eventStartDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+			Kirigami.Separator {
+				Kirigami.FormData.isSection: true
+			}
 
-				inputMethodHints: Qt.ImhDate
+			QQC2.CheckBox {
+				id: allDayCheckBox
+				Kirigami.FormData.label: "All day event:"
+			}
+			RowLayout {
+				Kirigami.FormData.label: "Start:"
+				Layout.fillWidth: true
 
-				property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
+				QQC2.ComboBox {
+					id: eventStartDateCombo
+					Layout.fillWidth: true
+					editable: true
 
-				onEditTextChanged: console.log(validDate, eventEditorSheet.validDates)
+					editText: eventStartDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
 
-				popup: QQC2.Popup {
-					id: eventStartDatePopup
-					width: parent.width*2
-					height: Kirigami.Units.gridUnit * 18
-					z: 1000
+					inputMethodHints: Qt.ImhDate
 
-					DatePicker {
-						id: eventStartDatePicker
-						anchors.fill: parent
-						onDatePicked: eventStartDatePopup.close()
+					property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
+
+					popup: QQC2.Popup {
+						id: eventStartDatePopup
+						width: parent.width*2
+						height: Kirigami.Units.gridUnit * 18
+						z: 1000
+
+						DatePicker {
+							id: eventStartDatePicker
+							anchors.fill: parent
+							onDatePicked: eventStartDatePopup.close()
+						}
+					}
+				}
+				QQC2.ComboBox {
+					id: eventStartTimeCombo
+					Layout.fillWidth: true
+					property string displayHour: eventStartTimePicker.hours < 10 ?
+						String(eventStartTimePicker.hours).padStart(2, "0") : eventStartTimePicker.hours
+					property string displayMinutes: eventStartTimePicker.minutes < 10 ?
+						String(eventStartTimePicker.minutes).padStart(2, "0") : eventStartTimePicker.minutes
+
+					editable: true
+					editText: displayHour + ":" + displayMinutes
+					enabled: !allDayCheckBox.checked
+					visible: !allDayCheckBox.checked
+
+					inputMethodHints: Qt.ImhTime
+					validator: RegularExpressionValidator {
+						regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
+					}
+
+					popup: QQC2.Popup {
+						id: eventStartTimePopup
+						width: parent.width
+						height: parent.width
+						z: 1000
+
+						TimePicker {
+							id: eventStartTimePicker
+							onDone: eventStartTimePopup.close()
+						}
 					}
 				}
 			}
-			QQC2.ComboBox {
-				id: eventStartTimeCombo
+			RowLayout {
+				Kirigami.FormData.label: "End:"
 				Layout.fillWidth: true
-				property string displayHour: eventStartTimePicker.hours < 10 ?
-					String(eventStartTimePicker.hours).padStart(2, "0") : eventStartTimePicker.hours
-				property string displayMinutes: eventStartTimePicker.minutes < 10 ?
-					String(eventStartTimePicker.minutes).padStart(2, "0") : eventStartTimePicker.minutes
-
-				editable: true
-				editText: displayHour + ":" + displayMinutes
-				enabled: !allDayCheckBox.checked
 				visible: !allDayCheckBox.checked
 
-				inputMethodHints: Qt.ImhTime
-				validator: RegularExpressionValidator {
-					regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
+				QQC2.ComboBox {
+					id: eventEndDateCombo
+					Layout.fillWidth: true
+					editable: true
+					editText: eventEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+
+					property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
+
+					enabled: !allDayCheckBox.checked
+
+					popup: QQC2.Popup {
+						id: eventEndDatePopup
+						width: parent.width*2
+						height: Kirigami.Units.gridUnit * 18
+						z: 1000
+
+						DatePicker {
+							id: eventEndDatePicker
+							anchors.fill: parent
+							onDatePicked: eventEndDatePopup.close()
+						}
+					}
 				}
+				QQC2.ComboBox {
+					id: eventEndTimeCombo
+					Layout.fillWidth: true
+					property string displayHour: eventEndTimePicker.hours < 10 ?
+						String(eventEndTimePicker.hours).padStart(2, "0") : eventEndTimePicker.hours
+					property string displayMinutes: eventEndTimePicker.minutes < 10 ?
+						String(eventEndTimePicker.minutes).padStart(2, "0") : eventEndTimePicker.minutes
 
-				popup: QQC2.Popup {
-					id: eventStartTimePopup
-					width: parent.width
-					height: parent.width
-					z: 1000
+					editable: true
+					editText: displayHour + ":" + displayMinutes
+					enabled: !allDayCheckBox.checked
 
-					TimePicker {
-						id: eventStartTimePicker
-						onDone: eventStartTimePopup.close()
+					inputMethodHints: Qt.ImhTime
+					validator: RegularExpressionValidator {
+						regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
+					}
+
+					popup: QQC2.Popup {
+						id: eventEndTimePopup
+						width: parent.width
+						height: parent.width
+						z: 1000
+
+						TimePicker {
+							id: eventEndTimePicker
+							onDone: eventEndTimePopup.close()
+						}
 					}
 				}
 			}
-		}
-		RowLayout {
-			Kirigami.FormData.label: "End:"
-			Layout.fillWidth: true
-			visible: !allDayCheckBox.checked
-
 			QQC2.ComboBox {
-				id: eventEndDateCombo
+				id: repeatComboBox
+				Kirigami.FormData.label: "Repeat:"
 				Layout.fillWidth: true
-				editable: true
-				editText: eventEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-
-				property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
-				onEditTextChanged: console.log(validDate, eventEditorSheet.validDates)
-
-				enabled: !allDayCheckBox.checked
-
-				popup: QQC2.Popup {
-					id: eventEndDatePopup
-					width: parent.width*2
-					height: Kirigami.Units.gridUnit * 18
-					z: 1000
-
-					DatePicker {
-						id: eventEndDatePicker
-						anchors.fill: parent
-						onDatePicked: eventEndDatePopup.close()
-					}
+				model: ["Never", "Daily", "Weekly", "Monthly", "Yearly"]
+				delegate: Kirigami.BasicListItem {
+					label: modelData
 				}
+				popup.z: 1000
+			}
+
+			Kirigami.Separator {
+				Kirigami.FormData.isSection: true
+			}
+
+			QQC2.TextArea {
+				id: descriptionTextArea
+				Kirigami.FormData.label: "Description:"
+				placeholderText: "Add a description..."
+				Layout.fillWidth: true
 			}
 			QQC2.ComboBox {
-				id: eventEndTimeCombo
+				id: remindersComboBox
+				Kirigami.FormData.label: "Reminder:"
 				Layout.fillWidth: true
-				property string displayHour: eventEndTimePicker.hours < 10 ?
-					String(eventEndTimePicker.hours).padStart(2, "0") : eventEndTimePicker.hours
-				property string displayMinutes: eventEndTimePicker.minutes < 10 ?
-					String(eventEndTimePicker.minutes).padStart(2, "0") : eventEndTimePicker.minutes
-
-				editable: true
-				editText: displayHour + ":" + displayMinutes
-				enabled: !allDayCheckBox.checked
-
-				inputMethodHints: Qt.ImhTime
-				validator: RegularExpressionValidator {
-					regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
-				}
-
-				popup: QQC2.Popup {
-					id: eventEndTimePopup
-					width: parent.width
-					height: parent.width
-					z: 1000
-
-					TimePicker {
-						id: eventEndTimePicker
-						onDone: eventEndTimePopup.close()
-					}
-				}
 			}
-		}
-		QQC2.ComboBox {
-			id: repeatComboBox
-			Kirigami.FormData.label: "Repeat:"
-			Layout.fillWidth: true
-			model: ["Never", "Daily", "Weekly", "Monthly", "Yearly"]
-			delegate: Kirigami.BasicListItem {
-				label: modelData
+			QQC2.Button {
+				id: attendeesButton
+				Kirigami.FormData.label: "Attendees:"
+				text: "Add attendees"
+				Layout.fillWidth: true
 			}
-			popup.z: 1000
-		}
-
-		Kirigami.Separator {
-			Kirigami.FormData.isSection: true
-		}
-
-		QQC2.TextArea {
-			id: descriptionTextArea
-			Kirigami.FormData.label: "Description:"
-			placeholderText: "Add a description..."
-			Layout.fillWidth: true
-		}
-		QQC2.ComboBox {
-			id: remindersComboBox
-			Kirigami.FormData.label: "Reminder:"
-			Layout.fillWidth: true
-		}
-		QQC2.Button {
-			id: attendeesButton
-			Kirigami.FormData.label: "Attendees:"
-			text: "Add attendees"
-			Layout.fillWidth: true
 		}
 	}
 }
