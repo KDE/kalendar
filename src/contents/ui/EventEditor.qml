@@ -10,7 +10,7 @@ import org.kde.kalendar 1.0
 Kirigami.OverlaySheet {
 	id: eventEditorSheet
 
-	property bool validDates: eventStartDateCombo.validDate && eventEndDateCombo.validDate
+	property bool validDates: eventStartDateCombo.validDate && (eventEndDateCombo.validDate || allDayCheckBox.checked)
 
 	header: Kirigami.Heading {
         text: "Event"
@@ -121,6 +121,12 @@ Kirigami.OverlaySheet {
 						regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
 					}
 
+					onEditTextChanged: {
+						var timePicker = eventStartTimePicker
+						if (acceptableInput && activeFocus) { // Need to check for activeFocus or on load the text gets reset to 00:00
+							timePicker.setToTimeFromString(editText);
+						}
+					}
 					popup: QQC2.Popup {
 						id: eventStartTimePopup
 						width: parent.width
@@ -177,6 +183,13 @@ Kirigami.OverlaySheet {
 					inputMethodHints: Qt.ImhTime
 					validator: RegularExpressionValidator {
 						regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
+					}
+
+					onEditTextChanged: {
+						var timePicker = eventEndTimePicker
+						if (acceptableInput && activeFocus) {
+							timePicker.setToTimeFromString(editText);
+						}
 					}
 
 					popup: QQC2.Popup {

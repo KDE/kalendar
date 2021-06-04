@@ -17,8 +17,30 @@ Item {
 	property int minutes: minuteView.currentIndex * minuteMultiples
 	property int seconds: secondsView.currentIndex
 
+	Component.onCompleted: {
+		var now = new Date()
+		hourView.currentIndex = now.getHours()
+		minuteView.currentIndex = now.getMinutes() / minuteMultiples
+		secondsView.currentIndex = now.getSeconds()
+	}
+
 	property int minuteMultiples: 5
 	property bool secondsPicker: false
+
+	function setToTimeFromString(timeString) { // Accepts in format HH:MM:SS
+		var splitTimeString = timeString.split(":");
+		console.log(splitTimeString);
+		switch (splitTimeString.length) {
+			case 3:
+				secondsView.currentIndex = Number(splitTimeString[2]);
+			case 2:
+				minuteView.currentIndex = Number(splitTimeString[1]) / minuteMultiples;
+			case 1:
+				hourView.currentIndex = Number(splitTimeString[0]);
+			case 0:
+				return;
+		}
+	}
 
 	ColumnLayout {
 		anchors.fill: parent
