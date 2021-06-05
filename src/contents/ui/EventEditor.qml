@@ -10,22 +10,32 @@ import org.kde.kalendar 1.0
 Kirigami.OverlaySheet {
 	id: eventEditorSheet
 
+	signal added(string name, string desc, date start, date end, int repeat, int reminder, string attendees)
+	signal edited(string name, string desc, date start, date end, int repeat, int reminder, string attendees)
+
+	property bool editMode: false
 	property bool validDates: eventStartDateCombo.validDate && (eventEndDateCombo.validDate || allDayCheckBox.checked)
 
 	header: Kirigami.Heading {
-        text: "Event"
+        text: editMode ? "Edit event" : "Add event"
     }
 
     footer: QQC2.DialogButtonBox {
 		standardButtons: QQC2.DialogButtonBox.Cancel
 
 		QQC2.Button {
-			text: "Add"
+			text: editMode ? "Done" : "Add"
 			enabled: titleField.text && eventEditorSheet.validDates // Also needs to check for selected calendar and date
 			QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
 		}
+		QQC2.Button {
+			text: "Delete"
+			visible: editMode
+			QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.DestructiveRole
+		}
 
         onRejected: eventEditorSheet.close()
+		onDiscarded: eventEditorSheet.close()
     }
 
     ColumnLayout {
