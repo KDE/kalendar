@@ -65,6 +65,7 @@ Kirigami.OverlaySheet {
 			QQC2.TextField {
 				id: locationField
 				Kirigami.FormData.label: "Location:"
+				placeholderText: "Optional"
 			}
 
 			Kirigami.Separator {
@@ -239,13 +240,18 @@ Kirigami.OverlaySheet {
 			QQC2.TextArea {
 				id: descriptionTextArea
 				Kirigami.FormData.label: "Description:"
-				placeholderText: "Add a description..."
+				placeholderText: "Optional"
 				Layout.fillWidth: true
 			}
 			QQC2.ComboBox {
 				id: remindersComboBox
 				Kirigami.FormData.label: "Reminder:"
 				Layout.fillWidth: true
+				model: ["5 minutes", "10 minutes", "15 minutes", "30 minutes", "45 minutes", "1 hour", "2 hours", "1 day", "2 days", "5 days"]
+				delegate: Kirigami.BasicListItem {
+					label: modelData
+				}
+				popup.z: 1000
 			}
 			ColumnLayout {
 				Kirigami.FormData.label: "Attendees:"
@@ -259,7 +265,7 @@ Kirigami.OverlaySheet {
 					property int buttonIndex: 0
 
 					onClicked: {
-						var newObject = Qt.createQmlObject(`import QtQuick 2.15
+						var newAttendee = Qt.createQmlObject(`import QtQuick 2.15
 							import QtQuick.Controls 2.15 as QQC2
 							import QtQuick.Layouts 1.15
 
