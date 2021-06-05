@@ -83,12 +83,20 @@ Kirigami.OverlaySheet {
 					id: eventStartDateCombo
 					Layout.fillWidth: true
 					editable: true
-
 					editText: eventStartDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
 
 					inputMethodHints: Qt.ImhDate
 
-					property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
+					property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
+					property bool validDate: !isNaN(dateFromText.getTime())
+
+					onDateFromTextChanged: {
+						var datePicker = eventStartDatePicker
+						if (validDate && activeFocus) {
+							datePicker.selectedDate = dateFromText
+							datePicker.clickedDate = dateFromText
+						}
+					}
 
 					popup: QQC2.Popup {
 						id: eventStartDatePopup
@@ -150,10 +158,18 @@ Kirigami.OverlaySheet {
 					Layout.fillWidth: true
 					editable: true
 					editText: eventEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-
-					property bool validDate: !isNaN(Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat).getTime())
-
 					enabled: !allDayCheckBox.checked
+
+					property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
+					property bool validDate: !isNaN(dateFromText.getTime())
+
+					onDateFromTextChanged: {
+						var datePicker = eventEndDatePicker
+						if (validDate && activeFocus) {
+							datePicker.selectedDate = dateFromText
+							datePicker.clickedDate = dateFromText
+						}
+					}
 
 					popup: QQC2.Popup {
 						id: eventEndDatePopup

@@ -12,7 +12,7 @@ Item {
 	signal datePicked(date pickedDate)
 
 	property date selectedDate: new Date() // Decides calendar span
-	property date clickedDate: new Date()
+	property date clickedDate: new Date() // User's chosen date
 	property date today: new Date()
 	property int year: selectedDate.getFullYear()
 	property int month: selectedDate.getMonth()
