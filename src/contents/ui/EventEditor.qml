@@ -247,11 +247,38 @@ Kirigami.OverlaySheet {
 				Kirigami.FormData.label: "Reminder:"
 				Layout.fillWidth: true
 			}
-			QQC2.Button {
-				id: attendeesButton
+			ColumnLayout {
 				Kirigami.FormData.label: "Attendees:"
-				text: "Add attendees"
 				Layout.fillWidth: true
+
+				QQC2.Button {
+					id: attendeesButton
+					text: "Add attendee"
+					Layout.fillWidth: true
+
+					property int buttonIndex: 0
+
+					onClicked: {
+						var newObject = Qt.createQmlObject(`import QtQuick 2.15
+							import QtQuick.Controls 2.15 as QQC2
+							import QtQuick.Layouts 1.15
+
+							RowLayout {
+								Layout.fillWidth: true
+
+								QQC2.ComboBox {
+									id: attendeesComboBox${buttonIndex}
+									Layout.fillWidth: true
+									editable: true
+								}
+								QQC2.Button {
+									icon.name: "edit-delete-remove"
+									onClicked: parent.destroy()
+								}
+							}`, this.parent, `attendeesComboBox${buttonIndex}`)
+						buttonIndex += 1
+					}
+				}
 			}
 		}
 	}
