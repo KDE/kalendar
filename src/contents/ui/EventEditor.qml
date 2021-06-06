@@ -28,14 +28,8 @@ Kirigami.OverlaySheet {
 			enabled: titleField.text && eventEditorSheet.validDates // Also needs to check for selected calendar and date
 			QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
 		}
-		QQC2.Button {
-			text: "Delete"
-			visible: editMode
-			QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.DestructiveRole
-		}
 
         onRejected: eventEditorSheet.close()
-		onDiscarded: eventEditorSheet.close()
     }
 
     ColumnLayout {
