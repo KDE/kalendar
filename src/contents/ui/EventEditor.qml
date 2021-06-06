@@ -34,13 +34,13 @@ Kirigami.OverlaySheet {
 			if (editMode) {
 				return
 			} else {
-				added(titleField.text,
-					  descriptionTextArea.text,
-					  eventStartDateCombo.dateFromText,
-					  eventEndDateCombo.dateFromText,
-					  0,
-					  0,
-					  [""]) // These last three are placeholders, and the dates need to include times
+				// setHours method of JS Date objects returns milliseconds since epoch for some ungodly reason.
+				// We need to use this to create a new JS date object.
+				var startDate = new Date(eventStartDateCombo.dateFromText.setHours(eventStartTimePicker.hours, eventStartTimePicker.minutes));
+				var endDate = new Date(eventEndDateCombo.dateFromText.setHours(eventEndTimePicker.hours, eventEndTimePicker.minutes));
+
+				added(titleField.text, descriptionTextArea.text, startDate, endDate, 0, 0, [""])
+				// These last three are placeholders
 			}
 			eventEditorSheet.close()
 		}
