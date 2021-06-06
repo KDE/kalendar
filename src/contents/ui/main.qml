@@ -14,6 +14,7 @@ Kirigami.ApplicationWindow {
 
     EventEditor {
 		id: eventEditor
+		onAdded: CalendarManager.addEvent(name, desc, start, end, repeat, reminder, attendees)
 	}
     
     globalDrawer: Kirigami.GlobalDrawer {

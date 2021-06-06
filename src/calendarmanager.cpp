@@ -123,3 +123,22 @@ MonthModel *CalendarManager::monthModel() const
     return m_monthModel;
 }
 
+void CalendarManager::addEvent(QString name,
+							   QString desc,
+							   QDateTime start,
+							   QDateTime end,
+							   int repeat,
+							   int reminder,
+							   QStringList attendees)
+{
+	KCalendarCore::Event::Ptr event(new Event);
+	event->setSummary(name);
+	event->setDescription(desc);
+	event->setDtStart(start);
+	event->setDtEnd(end);
+	//event->setAttendees(attendees);
+
+	//const KCalendarCore::Incidence::Ptr incidence = CalendarSupport::incidence(item);
+	m_calendar->addEvent(event);
+}
+

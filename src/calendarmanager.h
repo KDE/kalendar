@@ -27,6 +27,7 @@ public:
     MonthModel *monthModel() const;
     KDescendantsProxyModel *collections();
     Q_INVOKABLE void save();
+	Q_INVOKABLE void addEvent(QString name, QString desc, QDateTime start, QDateTime end, int repeat, int reminder, QStringList attendees);
 
 private Q_SLOTS:
     void delayedInit();

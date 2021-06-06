@@ -30,6 +30,20 @@ Kirigami.OverlaySheet {
 		}
 
         onRejected: eventEditorSheet.close()
+		onAccepted: {
+			if (editMode) {
+				return
+			} else {
+				added(titleField.text,
+					  descriptionTextArea.text,
+					  eventStartDateCombo.dateFromText,
+					  eventEndDateCombo.dateFromText,
+					  0,
+					  0,
+					  [""]) // These last three are placeholders, and the dates need to include times
+			}
+			eventEditorSheet.close()
+		}
     }
 
     ColumnLayout {
@@ -52,6 +66,7 @@ Kirigami.OverlaySheet {
 				id: calendarCombo
 				Kirigami.FormData.label: "Calendar:"
 				Layout.fillWidth: true
+				// Should default to default collection(selectCollection(defaultCollection(KCalendarCore::Event::eventMimeType()));)
 				model: CalendarManager.collections
 				delegate: Kirigami.BasicListItem {
 					leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
