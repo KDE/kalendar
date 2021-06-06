@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as Controls
@@ -11,38 +14,15 @@ Kirigami.ApplicationWindow {
     title: i18n("Calendar")
 
     pageStack.initialPage: mainPageComponent
-    
+
     globalDrawer: Kirigami.GlobalDrawer {
-        bottomPadding: 0
-        leftPadding: 0
-        rightPadding: 0
-        topPadding: 0
-        Controls.ScrollView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            ListView {
-                model: CalendarManager.collections
-                delegate: Kirigami.BasicListItem {
-                    leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
-                    leading: Controls.CheckBox {
-                        visible: checkState != null
-                        checked: checkState == 2
-                        onClicked: model.checkState = (checked ? 2 : 0)
-                    }
-                    label: display
-                    icon: decoration
-                    Component.onCompleted: {
-                        for (let i in model) {
-                            console.log(i, model[i]);
-                        }
-                    }
-                }
-                footer: Controls.Button {
-                    text: "save"
-                    onClicked: CalendarManager.save();
-                }
+        isMenu: true
+        actions: [
+            Kirigami.Action {
+                text: i18n("Settings")
+                onTriggered: pageStack.layers.push("qrc:/SettingsPage.qml")
             }
-        }
+        ]
     }
 
     Component {
@@ -69,7 +49,6 @@ Kirigami.ApplicationWindow {
             padding: 0
             background: Rectangle {
                 Kirigami.Theme.colorSet: monthPage.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
-                Component.onCompleted: console.log(monthPage.isLarge, Kirigami.Theme.colorSet, color)
                 color: monthPage.isLarge ? Kirigami.Theme.alternateBackgroundColor : Kirigami.Theme.backgroundColor
             }
             
@@ -148,7 +127,7 @@ Kirigami.ApplicationWindow {
                                         delegate: Kirigami.ShadowedRectangle {
                                             Layout.topMargin: prefix * (implicitHeight + Kirigami.Units.smallSpacing)
                                             Layout.fillWidth: true
-                                            color: eventColor
+                                            color: eventColor ?? "blue"
                                             corners {
                                                 bottomLeftRadius: isBegin ? 4 : 0
                                                 topLeftRadius: isBegin ? 4 : 0
@@ -161,7 +140,7 @@ Kirigami.ApplicationWindow {
                                             Controls.Label {
                                                 id: eventItem
                                                 visible: isBegin ? 1 : 0
-                                                text: summary
+                                                text: summary ?? ""
                                                 padding: Kirigami.Units.smallSpacing
                                             }
                                         }
@@ -242,7 +221,6 @@ Kirigami.ApplicationWindow {
                     delegate: Controls.Label {
                         text: summary
                     }
-                    onObjectAdded: console.log(index, object)
                 }
             }
             

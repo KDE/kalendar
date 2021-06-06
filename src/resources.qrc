@@ -2,5 +2,6 @@
   <qresource prefix="/">
     <file alias="main.qml">contents/ui/main.qml</file>
     <file alias="CompactMonthView.qml">contents/ui/CompactMonthView.qml</file>
+    <file alias="SettingsPage.qml">contents/ui/SettingsPage.qml</file>
   </qresource>
 </RCC>

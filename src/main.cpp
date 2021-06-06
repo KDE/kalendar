@@ -9,8 +9,10 @@
 #include <KLocalizedContext>
 #include <KCalendarCore/VCalFormat>
 #include <KCalendarCore/MemoryCalendar>
+#include <AkonadiCore/AgentFilterProxyModel>
 #include "monthmodel.h"
 #include "calendarmanager.h"
+#include "agentconfiguration.h"
 
 using namespace KCalendarCore;
 
@@ -19,13 +21,16 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
-    QCoreApplication::setApplicationName(QStringLiteral("GameCenter"));
+    QCoreApplication::setApplicationName(QStringLiteral("Kalendar"));
 
     QQmlApplicationEngine engine;
 
     auto manager = new CalendarManager(&engine);
+    AgentConfiguration agentConfiguration;
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", manager);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
+    qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));

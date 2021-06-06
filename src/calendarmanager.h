@@ -4,13 +4,16 @@
 #pragma once
 
 #include <QObject>
-#include <KDescendantsProxyModel>
-#include <KViewStateMaintainer>
 #include <ETMViewStateSaver>
+#include <KDescendantsProxyModel>
+#include <AkonadiCore/AgentFilterProxyModel>
 
 namespace Akonadi {
     class ETMCalendar;
 }
+
+class KCheckableProxyModel;
+class QAbstractProxyModel;
 class MonthModel;
 
 class CalendarManager : public QObject
@@ -18,14 +21,17 @@ class CalendarManager : public QObject
     Q_OBJECT
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
     Q_PROPERTY(MonthModel *monthModel READ monthModel CONSTANT)
-    Q_PROPERTY(KDescendantsProxyModel *collections READ collections CONSTANT)
+    Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
 public:
     CalendarManager(QObject *parent = nullptr);
     ~CalendarManager() override;
 
+    KCheckableProxyModel *collectionSelectionProxyModel() const;
+    void setCollectionSelectionProxyModel(KCheckableProxyModel *);
+
     bool loading() const;
     MonthModel *monthModel() const;
-    KDescendantsProxyModel *collections();
+    QAbstractProxyModel *collections();
     Q_INVOKABLE void save();
 
 private Q_SLOTS:
@@ -37,6 +43,9 @@ Q_SIGNALS:
 
 private:
     Akonadi::ETMCalendar *m_calendar;
+    KDescendantsProxyModel *m_treeModel;
+    QAbstractProxyModel *m_baseModel = nullptr;
+    KCheckableProxyModel *m_selectionProxyModel = nullptr;
     MonthModel *m_monthModel;
-    KViewStateMaintainer<Akonadi::ETMViewStateSaver> *mCollectionSelectionModelStateSaver = nullptr;
+    Akonadi::ETMViewStateSaver *mCollectionSelectionModelStateSaver = nullptr;
 };
