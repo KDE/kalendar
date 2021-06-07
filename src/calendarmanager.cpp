@@ -142,7 +142,6 @@ void CalendarManager::addEvent(qint64 collectionId,
 	event->setDtStart(start);
 	event->setDtEnd(end);
 	//event->setAttendees(attendees);
-	qDebug() << collId;
 	Akonadi::IncidenceChanger *changer = m_calendar->incidenceChanger();
 	changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
 }

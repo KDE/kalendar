@@ -25,7 +25,7 @@ Kirigami.OverlaySheet {
 
 		QQC2.Button {
 			text: editMode ? "Done" : "Add"
-			enabled: titleField.text && eventEditorSheet.validDates // Also needs to check for selected calendar and date
+			enabled: titleField.text && eventEditorSheet.validDates && calendarCombo.selectedCollectionId
 			QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
 		}
 
@@ -67,7 +67,9 @@ Kirigami.OverlaySheet {
 				Kirigami.FormData.label: "Calendar:"
 				Layout.fillWidth: true
 
-				property var selectedCollectionId: null
+				property int selectedCollectionId: null
+
+				displayText: "Please select a calendar..."
 
 				// Should default to default collection
 				model: CalendarManager.collections
