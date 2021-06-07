@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.16)
 
 project(kalendar)
 
@@ -11,6 +11,8 @@ set(KF5_MIN_VERSION "5.70.0")
 set(AKONADI_VERSION "5.15.0")
 set(CALENDARSUPPORT_LIB_VERSION "5.15")
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FeatureSummary)
 
