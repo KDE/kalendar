@@ -14,6 +14,7 @@
 #include <QApplication>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
+#include <Akonadi/Calendar/IncidenceChanger>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include <KCheckableProxyModel>
 #include <QTimer>
@@ -123,7 +124,8 @@ MonthModel *CalendarManager::monthModel() const
     return m_monthModel;
 }
 
-void CalendarManager::addEvent(QString name,
+void CalendarManager::addEvent(qint64 collectionId,
+							   QString name,
 							   QString desc,
 							   QDateTime start,
 							   QDateTime end,
@@ -131,14 +133,17 @@ void CalendarManager::addEvent(QString name,
 							   int reminder,
 							   QStringList attendees)
 {
+	Akonadi::Collection::Id collId = collectionId;
+	Akonadi::Collection collection(collId);
+
 	KCalendarCore::Event::Ptr event(new Event);
 	event->setSummary(name);
 	event->setDescription(desc);
 	event->setDtStart(start);
 	event->setDtEnd(end);
 	//event->setAttendees(attendees);
-
-	//const KCalendarCore::Incidence::Ptr incidence = CalendarSupport::incidence(item);
-	m_calendar->addEvent(event);
+	qDebug() << collId;
+	Akonadi::IncidenceChanger *changer = m_calendar->incidenceChanger();
+	changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
 }
 

@@ -10,8 +10,8 @@ import org.kde.kalendar 1.0
 Kirigami.OverlaySheet {
 	id: eventEditorSheet
 
-	signal added(string name, string desc, date start, date end, int repeat, int reminder, string attendees)
-	signal edited(string name, string desc, date start, date end, int repeat, int reminder, string attendees)
+	signal added(int collectionId, string name, string desc, date start, date end, int repeat, int reminder, string attendees)
+	signal edited(int collectionId, string name, string desc, date start, date end, int repeat, int reminder, string attendees)
 
 	property bool editMode: false
 	property bool validDates: eventStartDateCombo.validDate && (eventEndDateCombo.validDate || allDayCheckBox.checked)
@@ -39,7 +39,7 @@ Kirigami.OverlaySheet {
 				var startDate = new Date(eventStartDateCombo.dateFromText.setHours(eventStartTimePicker.hours, eventStartTimePicker.minutes));
 				var endDate = new Date(eventEndDateCombo.dateFromText.setHours(eventEndTimePicker.hours, eventEndTimePicker.minutes));
 
-				added(titleField.text, descriptionTextArea.text, startDate, endDate, 0, 0, [""])
+				added(calendarCombo.selectedCollectionId, titleField.text, descriptionTextArea.text, startDate, endDate, 0, 0, [""])
 				// These last three are placeholders
 			}
 			eventEditorSheet.close()
@@ -66,13 +66,16 @@ Kirigami.OverlaySheet {
 				id: calendarCombo
 				Kirigami.FormData.label: "Calendar:"
 				Layout.fillWidth: true
-				// Should default to default collection(selectCollection(defaultCollection(KCalendarCore::Event::eventMimeType()));)
+
+				property var selectedCollectionId: null
+
+				// Should default to default collection
 				model: CalendarManager.collections
 				delegate: Kirigami.BasicListItem {
 					leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
 					label: display
 					icon: decoration
-					onClicked: calendarCombo.displayText = display
+					onClicked: calendarCombo.displayText = display, calendarCombo.selectedCollectionId = collectionId
 				}
 				popup.z: 1000
 			}
