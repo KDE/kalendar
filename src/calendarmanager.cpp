@@ -90,8 +90,8 @@ void CalendarManager::delayedInit()
             m_monthModel, &MonthModel::refreshGridPosition);
     connect(m_calendar, &Akonadi::ETMCalendar::calendarChanged,
             this, [this]() {
-               qDebug() << "changed" << m_calendar->events() << m_calendar->isLoaded(); 
-               qDebug() << m_calendar->checkableProxyModel();
+            qDebug() << "changed" << m_calendar->events() << m_calendar->isLoaded();
+            qDebug() << m_calendar->checkableProxyModel();
             });*/
     /*KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
     event->setSummary(QStringLiteral("Hello"));
@@ -125,24 +125,24 @@ MonthModel *CalendarManager::monthModel() const
 }
 
 void CalendarManager::addEvent(qint64 collectionId,
-							   QString name,
-							   QString desc,
-							   QDateTime start,
-							   QDateTime end,
-							   int repeat,
-							   int reminder,
-							   QStringList attendees)
+                               QString name,
+                               QString desc,
+                               QDateTime start,
+                               QDateTime end,
+                               int repeat,
+                               int reminder,
+                               QStringList attendees)
 {
-	Akonadi::Collection::Id collId = collectionId;
-	Akonadi::Collection collection(collId);
+    Akonadi::Collection::Id collId = collectionId;
+    Akonadi::Collection collection(collId);
 
-	KCalendarCore::Event::Ptr event(new Event);
-	event->setSummary(name);
-	event->setDescription(desc);
-	event->setDtStart(start);
-	event->setDtEnd(end);
-	//event->setAttendees(attendees);
-	Akonadi::IncidenceChanger *changer = m_calendar->incidenceChanger();
-	changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
+    KCalendarCore::Event::Ptr event(new Event);
+    event->setSummary(name);
+    event->setDescription(desc);
+    event->setDtStart(start);
+    event->setDtEnd(end);
+    //event->setAttendees(attendees);
+    Akonadi::IncidenceChanger *changer = m_calendar->incidenceChanger();
+    changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
 }
 

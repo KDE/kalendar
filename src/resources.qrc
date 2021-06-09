@@ -1,9 +1,9 @@
 <RCC>
-  <qresource prefix="/">
+<qresource prefix="/">
     <file alias="main.qml">contents/ui/main.qml</file>
     <file alias="CompactMonthView.qml">contents/ui/CompactMonthView.qml</file>
-	<file alias="EventEditor.qml">contents/ui/EventEditor.qml</file>
-	<file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
-	<file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
-  </qresource>
+    <file alias="EventEditor.qml">contents/ui/EventEditor.qml</file>
+    <file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
+    <file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
+</qresource>
 </RCC>
