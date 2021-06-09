@@ -36,8 +36,8 @@ Kirigami.OverlaySheet {
             } else {
                 // setHours method of JS Date objects returns milliseconds since epoch for some ungodly reason.
                 // We need to use this to create a new JS date object.
-                var startDate = new Date(eventStartDateCombo.dateFromText.setHours(eventStartTimePicker.hours, eventStartTimePicker.minutes));
-                var endDate = new Date(eventEndDateCombo.dateFromText.setHours(eventEndTimePicker.hours, eventEndTimePicker.minutes));
+                const startDate = new Date(eventStartDateCombo.dateFromText.setHours(eventStartTimePicker.hours, eventStartTimePicker.minutes));
+                const endDate = new Date(eventEndDateCombo.dateFromText.setHours(eventEndTimePicker.hours, eventEndTimePicker.minutes));
 
                 added(calendarCombo.selectedCollectionId, titleField.text, descriptionTextArea.text, startDate, endDate, 0, 0, [""])
                 // These last three are placeholders
