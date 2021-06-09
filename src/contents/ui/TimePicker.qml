@@ -190,7 +190,7 @@ Item {
 
         QQC2.Button {
             Layout.fillWidth: true
-            text: "Done"
+            text: i18n("Done")
             onClicked: done()
         }
     }

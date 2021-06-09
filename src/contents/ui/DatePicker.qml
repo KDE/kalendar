@@ -96,19 +96,19 @@ Item {
             QQC2.TabButton {
                 id: daysViewCheck
                 Layout.fillWidth: true
-                text: "Days"
+                text: i18n("Days")
                 onClicked: pickerView.currentIndex = 0 // dayGrid is first item in pickerView
             }
             QQC2.TabButton {
                 id: monthsViewCheck
                 Layout.fillWidth: true
-                text: "Months"
+                text: i18n("Months")
                 onClicked: pickerView.currentIndex = 1
             }
             QQC2.TabButton {
                 id: yearsViewCheck
                 Layout.fillWidth: true
-                text: "Years"
+                text: i18n("Years"
                 onClicked: pickerView.currentIndex = 2
             }
         }

@@ -17,14 +17,14 @@ Kirigami.OverlaySheet {
     property bool validDates: eventStartDateCombo.validDate && (eventEndDateCombo.validDate || allDayCheckBox.checked)
 
     header: Kirigami.Heading {
-        text: editMode ? "Edit event" : "Add event"
+        text: editMode ? i18n("Edit event") : i18n("Add event")
     }
 
     footer: QQC2.DialogButtonBox {
         standardButtons: QQC2.DialogButtonBox.Cancel
 
         QQC2.Button {
-            text: editMode ? "Done" : "Add"
+            text: editMode ? i18n("Done") : i18n("Add")
             enabled: titleField.text && eventEditorSheet.validDates && calendarCombo.selectedCollectionId
             QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
         }
@@ -55,7 +55,7 @@ Kirigami.OverlaySheet {
             Layout.fillWidth: true
             visible: !eventEditorSheet.validDates
             type: Kirigami.MessageType.Error
-            text: "Invalid dates provided."
+            text: i18n("Invalid dates provided.")
         }
 
         Kirigami.FormLayout {
@@ -64,12 +64,12 @@ Kirigami.OverlaySheet {
 
             QQC2.ComboBox {
                 id: calendarCombo
-                Kirigami.FormData.label: "Calendar:"
+                Kirigami.FormData.label: i18n("Calendar:")
                 Layout.fillWidth: true
 
                 property int selectedCollectionId: null
 
-                displayText: "Please select a calendar..."
+                displayText: i18n("Please select a calendar...")
 
                 // Should default to default collection
                 model: CalendarManager.collections
@@ -83,13 +83,13 @@ Kirigami.OverlaySheet {
             }
             QQC2.TextField {
                 id: titleField
-                Kirigami.FormData.label: "<b>Title</b>:"
-                placeholderText: "Required"
+                Kirigami.FormData.label: i18n("<b>Title</b>:")
+                placeholderText: i18n("Required")
             }
             QQC2.TextField {
                 id: locationField
-                Kirigami.FormData.label: "Location:"
-                placeholderText: "Optional"
+                Kirigami.FormData.label: i18n("Location:")
+                placeholderText: i18n("Optional")
             }
 
             Kirigami.Separator {
@@ -98,10 +98,10 @@ Kirigami.OverlaySheet {
 
             QQC2.CheckBox {
                 id: allDayCheckBox
-                Kirigami.FormData.label: "All day event:"
+                Kirigami.FormData.label: i18n("All day event:")
             }
             RowLayout {
-                Kirigami.FormData.label: "Start:"
+                Kirigami.FormData.label: i18n("Start:")
                 Layout.fillWidth: true
 
                 QQC2.ComboBox {
@@ -174,7 +174,7 @@ Kirigami.OverlaySheet {
                 }
             }
             RowLayout {
-                Kirigami.FormData.label: "End:"
+                Kirigami.FormData.label: i18n("End:")
                 Layout.fillWidth: true
                 visible: !allDayCheckBox.checked
 
@@ -248,7 +248,7 @@ Kirigami.OverlaySheet {
             }
             QQC2.ComboBox {
                 id: repeatComboBox
-                Kirigami.FormData.label: "Repeat:"
+                Kirigami.FormData.label: i18n("Repeat:")
                 Layout.fillWidth: true
                 model: ["Never", "Daily", "Weekly", "Monthly", "Yearly"]
                 delegate: Kirigami.BasicListItem {
@@ -263,13 +263,13 @@ Kirigami.OverlaySheet {
 
             QQC2.TextArea {
                 id: descriptionTextArea
-                Kirigami.FormData.label: "Description:"
-                placeholderText: "Optional"
+                Kirigami.FormData.label: i18n("Description:")
+                placeholderText: i18n("Optional")
                 Layout.fillWidth: true
             }
             QQC2.ComboBox {
                 id: remindersComboBox
-                Kirigami.FormData.label: "Reminder:"
+                Kirigami.FormData.label: i18n("Reminder:")
                 Layout.fillWidth: true
                 model: ["5 minutes", "10 minutes", "15 minutes", "30 minutes", "45 minutes", "1 hour", "2 hours", "1 day", "2 days", "5 days"]
                 delegate: Kirigami.BasicListItem {
@@ -278,12 +278,12 @@ Kirigami.OverlaySheet {
                 popup.z: 1000
             }
             ColumnLayout {
-                Kirigami.FormData.label: "Attendees:"
+                Kirigami.FormData.label: i18n("Attendees:")
                 Layout.fillWidth: true
 
                 QQC2.Button {
                     id: attendeesButton
-                    text: "Add attendee"
+                    text: i18n("Add attendee")
                     Layout.fillWidth: true
 
                     property int buttonIndex: 0
