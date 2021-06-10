@@ -108,7 +108,7 @@ Item {
             QQC2.TabButton {
                 id: yearsViewCheck
                 Layout.fillWidth: true
-                text: i18n("Years"
+                text: i18n("Years")
                 onClicked: pickerView.currentIndex = 2
             }
         }
