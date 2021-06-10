@@ -49,15 +49,6 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            // For some weird reason, the first swipeview used refuses to change the current index when swiping it.
-            // This is a janky workaround.
-            QQC2.SwipeView {
-                visible: false
-                Repeater {
-                    model: 1
-                }
-            }
-
             ColumnLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -68,14 +59,11 @@ Item {
                     enabled: hourView.currentIndex != 0
                     onClicked: hourView.currentIndex -= 1
                 }
-                QQC2.SwipeView {
+                QQC2.Tumbler {
                     id: hourView
-                    orientation: Qt.Vertical
-                    clip: true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    Repeater {
                         model: 24
                         delegate: Kirigami.Heading {
                             property int thisIndex: index
@@ -85,7 +73,6 @@ Item {
                             opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
                             text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
                         }
-                    }
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true
@@ -112,14 +99,11 @@ Item {
                     enabled: minuteView.currentIndex != 0
                     onClicked: minuteView.currentIndex -= 1
                 }
-                QQC2.SwipeView {
+                QQC2.Tumbler {
                     id: minuteView
-                    orientation: Qt.Vertical
-                    clip: true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    Repeater {
                         model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
                         delegate: Kirigami.Heading {
                             property int thisIndex: index
@@ -130,7 +114,6 @@ Item {
                             opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
                             text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
                         }
-                    }
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true

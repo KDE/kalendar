@@ -163,7 +163,7 @@ Kirigami.OverlaySheet {
                     popup: QQC2.Popup {
                         id: eventStartTimePopup
                         width: parent.width
-                        height: parent.width
+                        height: parent.width * 2
                         z: 1000
 
                         TimePicker {
@@ -236,7 +236,7 @@ Kirigami.OverlaySheet {
                     popup: QQC2.Popup {
                         id: eventEndTimePopup
                         width: parent.width
-                        height: parent.width
+                        height: parent.width * 2
                         z: 1000
 
                         TimePicker {
