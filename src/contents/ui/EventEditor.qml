@@ -39,8 +39,15 @@ Kirigami.OverlaySheet {
                 const startDate = new Date(eventStartDateCombo.dateFromText.setHours(eventStartTimePicker.hours, eventStartTimePicker.minutes));
                 const endDate = new Date(eventEndDateCombo.dateFromText.setHours(eventEndTimePicker.hours, eventEndTimePicker.minutes));
 
-                added(calendarCombo.selectedCollectionId, titleField.text, descriptionTextArea.text, startDate, endDate, 0, 0, [""])
-                // These last three are placeholders
+                added(calendarCombo.selectedCollectionId,
+                      titleField.text,
+                      descriptionTextArea.text,
+                      startDate,
+                      endDate,
+                      0,
+                      remindersComboBox.beforeEventMinutes,
+                      [""])
+                // Arg 6 and 8 are placeholders
             }
             eventEditorSheet.close()
         }
@@ -271,9 +278,29 @@ Kirigami.OverlaySheet {
                 id: remindersComboBox
                 Kirigami.FormData.label: i18n("Reminder:")
                 Layout.fillWidth: true
-                model: ["5 minutes", "10 minutes", "15 minutes", "30 minutes", "45 minutes", "1 hour", "2 hours", "1 day", "2 days", "5 days"]
+
+                function minutesToReminderLabel(minutes) {
+                    if (minutes) {
+                         var numAndUnit = (
+                            minutes >= 2880 ?   `${minutes / 1440} days`    : // 2 days +
+                            minutes == 1440 ?   "1 day"                     :
+                            minutes >= 120  ?   `${minutes / 60} hours`     : // 2 hours +
+                            minutes == 60   ?   "1 hour"                    :
+                                                `${minutes} minutes`)
+                        return numAndUnit + " before";
+                    } else {
+                        return "On event start";
+                    }
+                }
+
+                property var beforeEventMinutes: 0
+
+                displayText: minutesToReminderLabel(Number(currentText))
+
+                model: [0, 5, 10, 15, 30, 45, 60, 120, 1440, 2880, 7200] // Minutes
                 delegate: Kirigami.BasicListItem {
-                    label: modelData
+                    label: remindersComboBox.minutesToReminderLabel(modelData)
+                    onClicked: remindersComboBox.beforeEventMinutes = modelData
                 }
                 popup.z: 1000
             }
