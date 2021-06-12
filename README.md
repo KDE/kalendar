@@ -1,8 +1,8 @@
-# Calendar QML components
+# Kalndar
 
 ## Screenshots
 
-WIP
+![Screenshot of Kalendar](screenshot.png)
 
 ## Build
 

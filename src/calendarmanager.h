@@ -22,6 +22,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
     Q_PROPERTY(MonthModel *monthModel READ monthModel CONSTANT)
     Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
+    Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar CONSTANT)
 public:
     CalendarManager(QObject *parent = nullptr);
     ~CalendarManager() override;
@@ -33,6 +34,7 @@ public:
     MonthModel *monthModel() const;
     QAbstractProxyModel *collections();
     Q_INVOKABLE void save();
+    Akonadi::ETMCalendar *calendar() const;
 
 private Q_SLOTS:
     void delayedInit();
@@ -42,7 +44,7 @@ Q_SIGNALS:
     void entityTreeModelChanged();
 
 private:
-    Akonadi::ETMCalendar *m_calendar;
+    Akonadi::ETMCalendar *m_calendar = nullptr;
     KDescendantsProxyModel *m_treeModel;
     QAbstractProxyModel *m_baseModel = nullptr;
     KCheckableProxyModel *m_selectionProxyModel = nullptr;

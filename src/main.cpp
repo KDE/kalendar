@@ -11,6 +11,8 @@
 #include <KCalendarCore/MemoryCalendar>
 #include <AkonadiCore/AgentFilterProxyModel>
 #include "monthmodel.h"
+#include "multidayeventmodel.h"
+#include "eventoccurrencemodel.h"
 #include "calendarmanager.h"
 #include "agentconfiguration.h"
 
@@ -29,6 +31,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     AgentConfiguration agentConfiguration;
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", manager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
+    qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
+    qmlRegisterType<MultiDayEventModel>("org.kde.kalendar", 1, 0, "MultiDayEventModel");
+    qmlRegisterType<EventOccurrenceModel>("org.kde.kalendar", 1, 0, "EventOccurrenceModel");
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
 

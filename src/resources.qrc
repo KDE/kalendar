@@ -3,5 +3,9 @@
     <file alias="main.qml">contents/ui/main.qml</file>
     <file alias="CompactMonthView.qml">contents/ui/CompactMonthView.qml</file>
     <file alias="SettingsPage.qml">contents/ui/SettingsPage.qml</file>
+    <file alias="MultiDayView.qml">contents/ui/MultiDayView.qml</file>
+    <file alias="MonthView.qml">contents/ui/MonthView.qml</file>
+    <file alias="DayLabels.qml">contents/ui/DayLabels.qml</file>
+    <file alias="dateutils.js">contents/ui/dateutils.js</file>
   </qresource>
 </RCC>

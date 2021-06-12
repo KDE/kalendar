@@ -350,4 +350,9 @@ KCheckableProxyModel *CalendarManager::collectionSelectionProxyModel() const
     return m_selectionProxyModel;
 }
 
+Akonadi::ETMCalendar *CalendarManager::calendar() const
+{
+    return m_calendar;
+}
+
 #include "calendarmanager.moc"
