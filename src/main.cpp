@@ -11,6 +11,7 @@
 #include <KCalendarCore/MemoryCalendar>
 #include "monthmodel.h"
 #include "calendarmanager.h"
+#include "eventcreator.h"
 
 using namespace KCalendarCore;
 
@@ -24,7 +25,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     auto manager = new CalendarManager(&engine);
+    auto eventcreator = new EventCreator(&engine);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", manager);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "EventCreator", eventcreator);
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
