@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 qt5_add_resources(kalendar_SRCS resources.qrc)
-add_executable(kalendar main.cpp monthmodel.cpp calendarmanager.cpp ${kalendar_SRCS})
+add_executable(kalendar main.cpp monthmodel.cpp calendarmanager.cpp eventcreator.cpp ${kalendar_SRCS})
 target_link_libraries(kalendar
     Qt5::Core
     Qt5::Gui
