@@ -6,16 +6,10 @@
 EventCreator::EventCreator(QObject *parent)
     : QObject(parent)
 {
-
+    KCalendarCore::Event::Ptr m_event(new KCalendarCore::Event);
 }
 
 EventCreator::~EventCreator()
 {
 
-}
-
-KCalendarCore::Event::Ptr EventCreator::newEventPtr()
-{
-    KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
-    return event;
 }

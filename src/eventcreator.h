@@ -15,8 +15,6 @@ public:
     EventCreator(QObject *parent = nullptr);
     ~EventCreator() override;
 
-    Q_INVOKABLE KCalendarCore::Event::Ptr newEventPtr();
-
 private:
-
+    KCalendarCore::Event::Ptr m_event;
 };
