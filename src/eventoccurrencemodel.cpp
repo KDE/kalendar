@@ -13,12 +13,16 @@
 #include <etmcalendar.h>
 #include <AkonadiCore/CollectionColorAttribute>
 #include <QRandomGenerator>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 EventOccurrenceModel::EventOccurrenceModel(QObject *parent)
     : QAbstractItemModel(parent)
+    , m_coreCalendar(nullptr)
 {
     mRefreshTimer.setSingleShot(true);
     QObject::connect(&mRefreshTimer, &QTimer::timeout, this, &EventOccurrenceModel::updateFromSource);
+    load();
 }
 
 void EventOccurrenceModel::setStart(const QDate &start)
@@ -138,18 +142,6 @@ void EventOccurrenceModel::updateFromSource()
                 }
             //}
 
-            auto item = m_coreCalendar->item(event);
-            if (!item.isValid()) {
-                continue;
-            }
-            auto collection = item.parentCollection();
-            if (!collection.isValid()) {
-                continue;
-            }
-            const QString id = QString::number(collection.id());
-            if (m_colors.contains(id)) {
-                continue;
-            }
         }
         /*
         // process all recurring events and their exceptions.
@@ -206,7 +198,7 @@ int EventOccurrenceModel::columnCount(const QModelIndex &) const
     return 1;
 }
 
-QColor EventOccurrenceModel::getColor(const KCalendarCore::Event::Ptr &event) const
+QColor EventOccurrenceModel::getColor(const KCalendarCore::Event::Ptr &event)
 {
     auto item = m_coreCalendar->item(event);
     if (!item.isValid()) {
@@ -223,11 +215,17 @@ QColor EventOccurrenceModel::getColor(const KCalendarCore::Event::Ptr &event) co
     if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
         const auto *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
         if (colorAttr && colorAttr->color().isValid()) {
+            m_colors[id] = colorAttr->color();
             return colorAttr->color();
         }
-
     }
-    return {}; // should not happen
+
+    QColor color;
+    color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
+    m_colors[id] = color;
+    save();
+
+    return color;
 }
 
 QVariant EventOccurrenceModel::data(const QModelIndex &idx, int role) const
@@ -257,3 +255,42 @@ QVariant EventOccurrenceModel::data(const QModelIndex &idx, int role) const
             return {};
     }
 }
+
+void EventOccurrenceModel::setCalendar(Akonadi::ETMCalendar *calendar)
+{
+    if (m_coreCalendar == calendar) {
+        return;
+    }
+    m_coreCalendar = calendar;
+    updateQuery();
+    Q_EMIT calendarChanged();
+}
+
+Akonadi::ETMCalendar *EventOccurrenceModel::calendar() const
+{
+    return m_coreCalendar;
+}
+
+
+void EventOccurrenceModel::load()
+{
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    const QStringList colorKeyList = rColorsConfig.keyList();
+
+    for (const QString &key : colorKeyList) {
+        QColor color = rColorsConfig.readEntry(key, QColor("blue"));
+        m_colors[key] = color;
+    }
+}
+
+void EventOccurrenceModel::save() const
+{
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    for (auto it = m_colors.constBegin(); it != m_colors.constEnd(); ++it) {
+        rColorsConfig.writeEntry(it.key(), it.value());
+    }
+    config->sync();
+}
+

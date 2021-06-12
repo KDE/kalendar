@@ -7,13 +7,17 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15 
 import org.kde.kalendar 1.0
 import QtQml.Models 2.15
+import "dateutils.js" as DateUtils
 
 Kirigami.ApplicationWindow {
     id: root
 
+    property date currentDate: new Date()
+    property date selectedDate: currentDate
+
     title: i18n("Calendar")
 
-    pageStack.initialPage: mainPageComponent
+    pageStack.initialPage: mainPageComponent2
 
     globalDrawer: Kirigami.GlobalDrawer {
         isMenu: true
@@ -23,6 +27,17 @@ Kirigami.ApplicationWindow {
                 onTriggered: pageStack.layers.push("qrc:/SettingsPage.qml")
             }
         ]
+    }
+
+    Component {
+        id: mainPageComponent2
+
+        MonthView {
+            title: root.selectedDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
+            currentDate: root.currentDate
+            startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(root.selectedDate))
+            month: root.selectedDate.getMonth()
+        }
     }
 
     Component {

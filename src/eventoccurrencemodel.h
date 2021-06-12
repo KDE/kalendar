@@ -36,6 +36,7 @@ class EventOccurrenceModel : public QAbstractItemModel
     Q_PROPERTY(QDate start READ start WRITE setStart NOTIFY startChanged)
     Q_PROPERTY(int length READ length WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(QVariantMap filter WRITE setFilter NOTIFY filterChanged)
+    Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
 
 public:
     enum Roles {
@@ -62,6 +63,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
 
     void updateQuery(const QDate &start, const QDate &end);
+    Akonadi::ETMCalendar *calendar() const;
     void setCalendar(Akonadi::ETMCalendar *calendar);
 
     void setStart(const QDate &);
@@ -69,6 +71,9 @@ public:
     void setLength(int);
     int length() const;
     void setFilter(const QVariantMap &);
+
+    void load();
+    void save() const;
 
     struct Occurrence {
         QDateTime start;
@@ -82,13 +87,14 @@ Q_SIGNALS:
     void startChanged();
     void lengthChanged();
     void filterChanged();
+    void calendarChanged();
 
 private:
     void updateQuery();
 
     void refreshView();
     void updateFromSource();
-    QColor getColor(const KCalendarCore::Event::Ptr &color) const;
+    QColor getColor(const KCalendarCore::Event::Ptr &color);
 
     QSharedPointer<QAbstractItemModel> mSourceModel;
     QDate mStart;
