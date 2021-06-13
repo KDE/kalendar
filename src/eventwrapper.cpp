@@ -20,6 +20,11 @@ KCalendarCore::Event::Ptr EventWrapper::eventPtr() const
     return m_event;
 }
 
+void EventWrapper::setEventPtr(KCalendarCore::Event::Ptr eventPtr)
+{
+    m_event = eventPtr;
+}
+
 QString EventWrapper::summary() const
 {
     return m_event->summary();

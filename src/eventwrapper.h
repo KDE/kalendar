@@ -19,7 +19,7 @@
 class EventWrapper : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr CONSTANT)
+    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr WRITE setEventPtr NOTIFY eventPtrChanged CONSTANT)
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QDateTime eventStart READ eventStart WRITE setEventStart NOTIFY eventStartChanged)
@@ -33,6 +33,7 @@ public:
     ~EventWrapper() override;
 
     KCalendarCore::Event::Ptr eventPtr() const;
+    void setEventPtr(KCalendarCore::Event::Ptr eventPtr);
     QString summary() const;
     void setSummary(QString summary);
     QString description() const;
@@ -46,6 +47,7 @@ public:
     KCalendarCore::Alarm::List alarms() const;
 
 Q_SIGNALS:
+    void eventPtrChanged();
     void summaryChanged();
     void descriptionChanged();
     void eventStartChanged();
