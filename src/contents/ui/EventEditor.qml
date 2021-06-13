@@ -10,8 +10,14 @@ import org.kde.kalendar 1.0
 Kirigami.OverlaySheet {
     id: eventEditorSheet
 
-    signal added(int collectionId, string name, string desc, date start, date end, int repeat, int reminder, string attendees)
-    signal edited(int collectionId, string name, string desc, date start, date end, int repeat, int reminder, string attendees)
+    Item {
+        EventWrapper {
+            id: event
+        }
+    }
+
+    signal added(int collectionId, EventWrapper event)
+    signal edited(int collectionId, EventWrapper event)
 
     property bool editMode: false
     property bool validDates: eventStartDateCombo.validDate && (eventEndDateCombo.validDate || allDayCheckBox.checked)
@@ -39,15 +45,11 @@ Kirigami.OverlaySheet {
                 const startDate = new Date(eventStartDateCombo.dateFromText.setHours(eventStartTimePicker.hours, eventStartTimePicker.minutes));
                 const endDate = new Date(eventEndDateCombo.dateFromText.setHours(eventEndTimePicker.hours, eventEndTimePicker.minutes));
 
-                added(calendarCombo.selectedCollectionId,
-                      titleField.text,
-                      descriptionTextArea.text,
-                      startDate,
-                      endDate,
-                      0,
-                      remindersComboBox.beforeEventMinutes,
-                      [""])
-                // Arg 6 and 8 are placeholders
+                event.summary = titleField.text;
+                event.description = descriptionTextArea.text;
+                event.eventStart = startDate;
+                event.eventEnd =  endDate;
+                added(calendarCombo.selectedCollectionId, event);
             }
             eventEditorSheet.close()
         }

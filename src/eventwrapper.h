@@ -8,10 +8,18 @@
 #include <CalendarSupport/Utils>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 
+/*
+ * This class is a wrapper for a KCalendarCore::Event::Ptr object.
+ * We can use it to create new events, or create event pointers from
+ * pre-existing events, to more cleanly pass around to our QML code
+ * or to the CalendarManager, which handles the back-end stuff of
+ * adding and editing the event in the collection of our choice.
+ */
 
-class EventCreator : public QObject
+class EventWrapper : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr CONSTANT)
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QDateTime eventStart READ eventStart WRITE setEventStart NOTIFY eventStartChanged)
@@ -21,20 +29,21 @@ class EventCreator : public QObject
     Q_PROPERTY(KCalendarCore::Alarm::List alarms READ alarms)
 
 public:
-    EventCreator(QObject *parent = nullptr);
-    ~EventCreator() override;
+    EventWrapper(QObject *parent = nullptr);
+    ~EventWrapper() override;
 
-    QString summary();
+    KCalendarCore::Event::Ptr eventPtr() const;
+    QString summary() const;
     void setSummary(QString summary);
-    QString description();
+    QString description() const;
     void setDescription(QString description);
-    QDateTime eventStart();
+    QDateTime eventStart() const;
     void setEventStart(QDateTime eventStart);
-    QDateTime eventEnd();
+    QDateTime eventEnd() const;
     void setEventEnd(QDateTime eventEnd);
-    KCalendarCore::Recurrence * recurrence();
-    KCalendarCore::Attendee::List attendees();
-    KCalendarCore::Alarm::List alarms();
+    KCalendarCore::Recurrence * recurrence() const;
+    KCalendarCore::Attendee::List attendees() const;
+    KCalendarCore::Alarm::List alarms() const;
 
 Q_SIGNALS:
     void summaryChanged();

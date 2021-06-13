@@ -7,6 +7,8 @@
 #include <KDescendantsProxyModel>
 #include <KViewStateMaintainer>
 #include <ETMViewStateSaver>
+#include <CalendarSupport/KCalPrefs>
+#include <CalendarSupport/Utils>
 
 namespace Akonadi {
     class ETMCalendar;
@@ -27,7 +29,7 @@ public:
     MonthModel *monthModel() const;
     KDescendantsProxyModel *collections();
     Q_INVOKABLE void save();
-    Q_INVOKABLE void addEvent(qint64 collectionId, QString name, QString desc, QDateTime start, QDateTime end, int repeat, int reminder, QStringList attendees);
+    Q_INVOKABLE void addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event);
 
 private Q_SLOTS:
     void delayedInit();
