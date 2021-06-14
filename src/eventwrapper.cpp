@@ -82,9 +82,15 @@ KCalendarCore::Alarm::List EventWrapper::alarms() const
 }
 
 
+void EventWrapper::addAlarm(int startOffset, KCalendarCore::Alarm::Type alarmType)
+{
+    KCalendarCore::Alarm::Ptr alarm (new KCalendarCore::Alarm(nullptr));
+    // offset can be set in seconds or days, if we want it to be before the event,
+    // it has to be set to a negative value.
+    KCalendarCore::Duration offset(startOffset *= -1);
 
-
-
-
-
+    m_event->addAlarm(alarm);
+    alarm ->setType(alarmType);
+    alarm->setStartOffset(offset);
+}
 

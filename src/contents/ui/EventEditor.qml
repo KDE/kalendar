@@ -48,7 +48,11 @@ Kirigami.OverlaySheet {
                 event.summary = titleField.text;
                 event.description = descriptionTextArea.text;
                 event.eventStart = startDate;
-                event.eventEnd =  endDate;
+                event.eventEnd = endDate;
+
+                // There is also a chance here to add a feature for the user to pick reminder type.
+                if (remindersComboBox.beforeEventSeconds) { event.addAlarm(remindersComboBox.beforeEventSeconds) }
+
                 added(calendarCombo.selectedCollectionId, event);
             }
             eventEditorSheet.close()
@@ -281,28 +285,39 @@ Kirigami.OverlaySheet {
                 Kirigami.FormData.label: i18n("Reminder:")
                 Layout.fillWidth: true
 
-                function minutesToReminderLabel(minutes) {
-                    if (minutes) {
+                function secondsToReminderLabel(seconds) {
+                    if (seconds) {
                          var numAndUnit = (
-                            minutes >= 2880 ?   `${minutes / 1440} days`    : // 2 days +
-                            minutes == 1440 ?   "1 day"                     :
-                            minutes >= 120  ?   `${minutes / 60} hours`     : // 2 hours +
-                            minutes == 60   ?   "1 hour"                    :
-                                                `${minutes} minutes`)
+                            seconds >= 2 * 24 * 60 * 60 ?   `${Math.round(seconds / (24*60*60))} days`  : // 2 days +
+                            seconds == 1 * 24 * 60 * 60 ?   "1 day"                                     :
+                            seconds >= 2 * 60 * 60      ?   `${Math.round(seconds / (60*60))} hours`    : // 2 hours +
+                            seconds == 1 * 60 * 60      ?   "1 hour"                                    :
+                                                            `${Math.round(seconds / 60)} minutes`)
                         return numAndUnit + " before";
                     } else {
                         return "On event start";
                     }
                 }
 
-                property var beforeEventMinutes: 0
+                property var beforeEventSeconds: 0
 
-                displayText: minutesToReminderLabel(Number(currentText))
+                displayText: secondsToReminderLabel(Number(currentText))
 
-                model: [0, 5, 10, 15, 30, 45, 60, 120, 1440, 2880, 7200] // Minutes
+                model: [0,
+                        5 * 60, // 5 minutes
+                        10 * 60,
+                        15 * 60,
+                        30 * 60,
+                        45 * 60,
+                        1 * 60 * 60, // 1 hour
+                        2 * 60 * 60,
+                        1 * 24 * 60 * 60, // 1 day
+                        2 * 24 * 60 * 60,
+                        5 * 24 * 60 * 60]
+                        // All these times are in seconds.
                 delegate: Kirigami.BasicListItem {
-                    label: remindersComboBox.minutesToReminderLabel(modelData)
-                    onClicked: remindersComboBox.beforeEventMinutes = modelData
+                    label: remindersComboBox.secondsToReminderLabel(modelData)
+                    onClicked: remindersComboBox.beforeEventSeconds = modelData
                 }
                 popup.z: 1000
             }
@@ -318,7 +333,8 @@ Kirigami.OverlaySheet {
                     property int buttonIndex: 0
 
                     onClicked: {
-                        var newAttendee = Qt.createQmlObject(`import QtQuick 2.15
+                        var newAttendee = Qt.createQmlObject(`
+                            import QtQuick 2.15
                             import QtQuick.Controls 2.15 as QQC2
                             import QtQuick.Layouts 1.15
 
@@ -334,7 +350,8 @@ Kirigami.OverlaySheet {
                                     icon.name: "edit-delete-remove"
                                     onClicked: parent.destroy()
                                 }
-                            }`, this.parent, `attendeesComboBox${buttonIndex}`)
+                            }
+                            `, this.parent, `attendeesComboBox${buttonIndex}`)
                         buttonIndex += 1
                     }
                 }

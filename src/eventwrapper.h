@@ -46,6 +46,8 @@ public:
     KCalendarCore::Attendee::List attendees() const;
     KCalendarCore::Alarm::List alarms() const;
 
+    Q_INVOKABLE void addAlarm(int startOffset, KCalendarCore::Alarm::Type alarmType = KCalendarCore::Alarm::Type::Display);
+
 Q_SIGNALS:
     void eventPtrChanged();
     void summaryChanged();
