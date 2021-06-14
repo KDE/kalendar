@@ -29,7 +29,6 @@ Item {
 
     function setToTimeFromString(timeString) { // Accepts in format HH:MM:SS
         var splitTimeString = timeString.split(":");
-        console.log(splitTimeString);
         switch (splitTimeString.length) {
             case 3:
                 secondsView.currentIndex = Number(splitTimeString[2]);

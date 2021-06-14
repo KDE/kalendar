@@ -93,6 +93,7 @@ Kirigami.OverlaySheet {
                 displayText: i18n("Please select a calendar...")
 
                 // Should default to default collection
+                // Should also only show *calendars*
                 model: CalendarManager.collections
                 delegate: Kirigami.BasicListItem {
                     leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel

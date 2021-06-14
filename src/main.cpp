@@ -22,9 +22,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kalendar"));
 
-    EventWrapper eventwrapper;
-    qDebug() << eventwrapper.description();
-
     QQmlApplicationEngine engine;
 
     auto manager = new CalendarManager(&engine);
