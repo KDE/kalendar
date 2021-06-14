@@ -92,6 +92,11 @@ KCalendarCore::Alarm::List EventWrapper::alarms() const
     return m_event->alarms();
 }
 
+void EventWrapper::setAllDay(bool allDay)
+{
+    m_event->setAllDay(allDay);
+}
+
 
 void EventWrapper::addAlarm(int startOffset, KCalendarCore::Alarm::Type alarmType)
 {

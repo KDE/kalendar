@@ -49,7 +49,12 @@ Kirigami.OverlaySheet {
                 event.description = descriptionTextArea.text;
                 event.location = locationField.text;
                 event.eventStart = startDate;
-                event.eventEnd = endDate;
+
+                if (allDayCheckBox.checked) {
+                    event.setAllDay(true);
+                } else {
+                    event.eventEnd = endDate;
+                }
 
                 // There is also a chance here to add a feature for the user to pick reminder type.
                 if (remindersComboBox.beforeEventSeconds) { event.addAlarm(remindersComboBox.beforeEventSeconds) }
