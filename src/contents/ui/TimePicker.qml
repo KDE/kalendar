@@ -64,15 +64,15 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                        model: 24
-                        delegate: Kirigami.Heading {
-                            property int thisIndex: index
+                    model: 24
+                    delegate: Kirigami.Heading {
+                        property int thisIndex: index
 
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
-                            text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
-                        }
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
+                        text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
+                    }
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true
@@ -104,16 +104,16 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                        model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
-                        delegate: Kirigami.Heading {
-                            property int thisIndex: index
-                            property int minuteToDisplay: modelData * timePicker.minuteMultiples
+                    model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
+                    delegate: Kirigami.Heading {
+                        property int thisIndex: index
+                        property int minuteToDisplay: modelData * timePicker.minuteMultiples
 
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
-                            text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
-                        }
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
+                        text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
+                    }
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true
