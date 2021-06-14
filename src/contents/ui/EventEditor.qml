@@ -309,45 +309,55 @@ Kirigami.OverlaySheet {
                             import QtQuick.Layouts 1.15
                             import org.kde.kirigami 2.15 as Kirigami
 
-                            QQC2.ComboBox {
-                                id: remindersComboBox${buttonIndex}
+
+                            RowLayout {
                                 Layout.fillWidth: true
 
-                                function secondsToReminderLabel(seconds) {
-                                    if (seconds) {
-                                        var numAndUnit = (
-                                            seconds >= 2 * 24 * 60 * 60 ?   Math.round(seconds / (24*60*60)) + " days"  : // 2 days +
-                                            seconds >= 1 * 24 * 60 * 60 ?   "1 day"                                     :
-                                            seconds >= 2 * 60 * 60      ?   Math.round(seconds / (60*60)) + " hours"    : // 2 hours +
-                                            seconds >= 1 * 60 * 60      ?   "1 hour"                                    :
-                                                                            Math.round(seconds / 60) + " minutes")
-                                        return numAndUnit + " before";
-                                    } else {
-                                        return "On event start";
+                                QQC2.ComboBox {
+                                    id: remindersComboBox${buttonIndex}
+                                    Layout.fillWidth: true
+
+                                    function secondsToReminderLabel(seconds) {
+                                        if (seconds) {
+                                            var numAndUnit = (
+                                                seconds >= 2 * 24 * 60 * 60 ?   Math.round(seconds / (24*60*60)) + " days"  : // 2 days +
+                                                seconds >= 1 * 24 * 60 * 60 ?   "1 day"                                     :
+                                                seconds >= 2 * 60 * 60      ?   Math.round(seconds / (60*60)) + " hours"    : // 2 hours +
+                                                seconds >= 1 * 60 * 60      ?   "1 hour"                                    :
+                                                                                Math.round(seconds / 60) + " minutes")
+                                            return numAndUnit + " before";
+                                        } else {
+                                            return "On event start";
+                                        }
                                     }
+
+                                    property var beforeEventSeconds: 0
+
+                                    displayText: secondsToReminderLabel(Number(currentText))
+
+                                    model: [0,
+                                            5 * 60, // 5 minutes
+                                            10 * 60,
+                                            15 * 60,
+                                            30 * 60,
+                                            45 * 60,
+                                            1 * 60 * 60, // 1 hour
+                                            2 * 60 * 60,
+                                            1 * 24 * 60 * 60, // 1 day
+                                            2 * 24 * 60 * 60,
+                                            5 * 24 * 60 * 60]
+                                            // All these times are in seconds.
+                                    delegate: Kirigami.BasicListItem {
+                                        label: remindersComboBox${buttonIndex}.secondsToReminderLabel(modelData)
+                                        onClicked: remindersComboBox${buttonIndex}.beforeEventSeconds = modelData
+                                    }
+                                    popup.z: 1000
                                 }
 
-                                property var beforeEventSeconds: 0
-
-                                displayText: secondsToReminderLabel(Number(currentText))
-
-                                model: [0,
-                                        5 * 60, // 5 minutes
-                                        10 * 60,
-                                        15 * 60,
-                                        30 * 60,
-                                        45 * 60,
-                                        1 * 60 * 60, // 1 hour
-                                        2 * 60 * 60,
-                                        1 * 24 * 60 * 60, // 1 day
-                                        2 * 24 * 60 * 60,
-                                        5 * 24 * 60 * 60]
-                                        // All these times are in seconds.
-                                delegate: Kirigami.BasicListItem {
-                                    label: remindersComboBox${buttonIndex}.secondsToReminderLabel(modelData)
-                                    onClicked: remindersComboBox${buttonIndex}.beforeEventSeconds = modelData
+                                QQC2.Button {
+                                    icon.name: "edit-delete-remove"
+                                    onClicked: parent.destroy()
                                 }
-                                popup.z: 1000
                             }
                             `, this.parent, `remindersComboBox${buttonIndex}`)
                         remindersColumn.reminderCombos.push(newReminder)

@@ -42,7 +42,11 @@ QString EventWrapper::description() const
 
 void EventWrapper::setDescription(QString description)
 {
+    if (m_event->description() == description) {
+         return;
+    }
     m_event->setDescription(description);
+    Q_EMIT descriptionChanged();
 }
 
 QString EventWrapper::location() const

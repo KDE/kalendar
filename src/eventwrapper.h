@@ -8,7 +8,7 @@
 #include <CalendarSupport/Utils>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 
-/*
+/**
  * This class is a wrapper for a KCalendarCore::Event::Ptr object.
  * We can use it to create new events, or create event pointers from
  * pre-existing events, to more cleanly pass around to our QML code
