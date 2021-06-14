@@ -7,6 +7,8 @@
 #include <ETMViewStateSaver>
 #include <KDescendantsProxyModel>
 #include <AkonadiCore/AgentFilterProxyModel>
+#include <CalendarSupport/KCalPrefs>
+#include <CalendarSupport/Utils>
 
 namespace Akonadi {
     class ETMCalendar;
@@ -35,6 +37,7 @@ public:
     QAbstractProxyModel *collections();
     Q_INVOKABLE void save();
     Akonadi::ETMCalendar *calendar() const;
+    Q_INVOKABLE void addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event);
 
 private Q_SLOTS:
     void delayedInit();

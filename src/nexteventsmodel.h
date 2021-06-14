@@ -17,7 +17,7 @@ public:
     };
 
 public:
-    explicit NextEventsModel(Akonadi::ETMCallendar QObject *parent);
+    explicit NextEventsModel(Akonadi::ETMCalendar QObject *parent);
     ~NextEventsModel();
 
 };

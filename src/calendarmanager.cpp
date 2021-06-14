@@ -23,6 +23,7 @@
 #include <AkonadiCore/EntityDisplayAttribute>
 #include <AkonadiCore/AgentManager>
 #include <AkonadiCore/AgentInstanceModel>
+#include <Akonadi/Calendar/IncidenceChanger>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
@@ -301,8 +302,8 @@ void CalendarManager::delayedInit()
             m_monthModel, &MonthModel::refreshGridPosition);
     connect(m_calendar, &Akonadi::ETMCalendar::calendarChanged,
             this, [this]() {
-               qDebug() << "changed" << m_calendar->events() << m_calendar->isLoaded(); 
-               qDebug() << m_calendar->checkableProxyModel();
+            qDebug() << "changed" << m_calendar->events() << m_calendar->isLoaded();
+            qDebug() << m_calendar->checkableProxyModel();
             });*/
     /*KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
     event->setSummary(QStringLiteral("Hello"));
@@ -353,6 +354,15 @@ KCheckableProxyModel *CalendarManager::collectionSelectionProxyModel() const
 Akonadi::ETMCalendar *CalendarManager::calendar() const
 {
     return m_calendar;
+}
+
+void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event)
+{
+    Akonadi::Collection::Id collId = collectionId;
+    Akonadi::Collection collection(collId);
+
+    Akonadi::IncidenceChanger *changer = m_calendar->incidenceChanger();
+    changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
 }
 
 #include "calendarmanager.moc"

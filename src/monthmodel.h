@@ -15,6 +15,7 @@ using namespace KCalendarCore;
 
 /**
  * Month model for the month view.
+ * Handles setting up the calendar and presenting its events.
  */
 class MonthModel : public QAbstractItemModel
 {

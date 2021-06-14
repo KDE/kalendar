@@ -19,6 +19,11 @@ Kirigami.ApplicationWindow {
 
     pageStack.initialPage: mainPageComponent2
 
+    EventEditor {
+        id: eventEditor
+        onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
+    }
+
     globalDrawer: Kirigami.GlobalDrawer {
         isMenu: true
         actions: [
@@ -50,23 +55,32 @@ Kirigami.ApplicationWindow {
             actions {
                 left: Kirigami.Action {
                     text: i18n("Previous")
+                    icon.name: "go-previous-view"
                     onTriggered: CalendarManager.monthModel.previous()
                 }
                 right: Kirigami.Action {
                     text: i18n("Next")
+                    icon.name: "go-next-view"
                     onTriggered: CalendarManager.monthModel.next()
                 }
                 main: Kirigami.Action {
-                    text: "show week"
-                    onTriggered: pageStack.push(weekPageComponent); //, { "weekModel": monthModel.week() });
+                    text: "Add event"
+                    icon.name: "list-add"
+                    onTriggered: eventEditor.open()
                 }
+
+                /*Kirigami.Action {
+                    text: "Show week"
+                    icon.name: "view-calendar-week"
+                    onTriggered: pageStack.push(weekPageComponent); //, { "weekModel": monthModel.week() });
+                }*/
             }
             padding: 0
             background: Rectangle {
                 Kirigami.Theme.colorSet: monthPage.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
                 color: monthPage.isLarge ? Kirigami.Theme.alternateBackgroundColor : Kirigami.Theme.backgroundColor
             }
-            
+
             Component {
                 id: mobileMonthDelegate
                 Controls.AbstractButton {
@@ -105,7 +119,7 @@ Kirigami.ApplicationWindow {
                     }
                 }
             }
-            
+
             Component {
                 id: desktopMonthDelegate
                 Controls.AbstractButton {
@@ -157,6 +171,7 @@ Kirigami.ApplicationWindow {
                                                 visible: isBegin ? 1 : 0
                                                 text: summary ?? ""
                                                 padding: Kirigami.Units.smallSpacing
+                                                Component.onCompleted: console.log("Summary: " + summary)
                                             }
                                         }
                                     }
@@ -164,9 +179,9 @@ Kirigami.ApplicationWindow {
                             }
                         }
                     }
-                 }
+                }
             }
-            
+
             Controls.Control {
                 id: monthGrid
                 anchors.fill: parent
@@ -181,7 +196,7 @@ Kirigami.ApplicationWindow {
                     columnSpacing: monthPage.isLarge ? 1 : 0
                     rowSpacing: monthPage.isLarge ? 1 : 0
                     Kirigami.Theme.inherit: false
-                    
+
                     Repeater {
                         model: CalendarManager.monthModel.weekDays
                         Controls.Control {
@@ -210,10 +225,10 @@ Kirigami.ApplicationWindow {
             }
         }
     }
-    
+
     Component {
         id: weekPageComponent
-        
+
         Kirigami.ScrollablePage {
             //required property var weekModel
             actions {
@@ -230,15 +245,16 @@ Kirigami.ApplicationWindow {
             background: Rectangle {
                 Kirigami.Theme.colorSet: Kirigami.Theme.Header
                 color: Kirigami.Theme.alternateBackgroundColor
-                
+
                 Instantiator {
                     model: weekModel
                     delegate: Controls.Label {
                         text: summary
                     }
+                    onObjectAdded: console.log("Index: " + index, "Object: " + object)
                 }
             }
-            
+
             /*GridLayout {
                 id: weekGrid
                 width: parent.width
@@ -246,7 +262,7 @@ Kirigami.ApplicationWindow {
                 columnSpacing: 1
                 rowSpacing: 1
                 Kirigami.Theme.inherit: false
-                
+
                 Repeater {
                     model: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
                     Controls.Control {
@@ -266,7 +282,7 @@ Kirigami.ApplicationWindow {
                         }
                     }
                 }
-                
+
                 Repeater {
                     model: 7 * 24
                     Rectangle {
@@ -277,7 +293,7 @@ Kirigami.ApplicationWindow {
                     }
                 }
             }*/
-            
+
             TableView {
                 id: tableView
                 anchors.fill: parent
