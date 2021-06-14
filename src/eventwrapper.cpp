@@ -45,6 +45,17 @@ void EventWrapper::setDescription(QString description)
     m_event->setDescription(description);
 }
 
+QString EventWrapper::location() const
+{
+    return m_event->location();
+}
+
+void EventWrapper::setLocation(QString location)
+{
+    m_event->setLocation(location);
+}
+
+
 QDateTime EventWrapper::eventStart() const
 {
     return m_event->dtStart();

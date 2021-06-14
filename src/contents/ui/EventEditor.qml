@@ -47,6 +47,7 @@ Kirigami.OverlaySheet {
 
                 event.summary = titleField.text;
                 event.description = descriptionTextArea.text;
+                event.location = locationField.text;
                 event.eventStart = startDate;
                 event.eventEnd = endDate;
 
@@ -55,7 +56,7 @@ Kirigami.OverlaySheet {
 
                 added(calendarCombo.selectedCollectionId, event);
             }
-            eventEditorSheet.close()
+            eventEditorSheet.close();
         }
     }
 

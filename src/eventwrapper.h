@@ -19,9 +19,10 @@
 class EventWrapper : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr WRITE setEventPtr NOTIFY eventPtrChanged CONSTANT)
+    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr WRITE setEventPtr NOTIFY eventPtrChanged)
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+    Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
     Q_PROPERTY(QDateTime eventStart READ eventStart WRITE setEventStart NOTIFY eventStartChanged)
     Q_PROPERTY(QDateTime eventEnd READ eventEnd WRITE setEventEnd NOTIFY eventEndChanged)
     Q_PROPERTY(KCalendarCore::Recurrence * recurrence READ recurrence)
@@ -38,6 +39,8 @@ public:
     void setSummary(QString summary);
     QString description() const;
     void setDescription(QString description);
+    QString location() const;
+    void setLocation(QString location);
     QDateTime eventStart() const;
     void setEventStart(QDateTime eventStart);
     QDateTime eventEnd() const;
@@ -52,6 +55,7 @@ Q_SIGNALS:
     void eventPtrChanged();
     void summaryChanged();
     void descriptionChanged();
+    void locationChanged();
     void eventStartChanged();
     void eventEndChanged();
 
