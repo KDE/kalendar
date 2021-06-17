@@ -46,7 +46,7 @@ Kirigami.Page {
                         onTriggered: pageSettingStack.push(calendarsSettingsComponent)
                     },
                     Kirigami.Action {
-                        text: i18n("About NeoChat")
+                        text: i18n("About Kalendar")
                         icon.name: "help-about"
                         onTriggered: pageSettingStack.push(aboutPage)
                     }
@@ -233,6 +233,13 @@ Kirigami.Page {
                     }
                 }
             }
+        }
+    }
+
+    Component {
+        id: aboutPage
+        Kirigami.AboutPage {
+            aboutData: AboutType.aboutData
         }
     }
 }
