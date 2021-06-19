@@ -31,7 +31,7 @@ Kirigami.OverlaySheet {
 
         QQC2.Button {
             text: editMode ? i18n("Done") : i18n("Add")
-            enabled: titleField.text && eventEditorSheet.validDates && calendarCombo.selectedCollectionId
+            enabled: titleField.text && eventEditorSheet.validDates && calendarCombo.currentValue
             QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
         }
 
@@ -56,12 +56,7 @@ Kirigami.OverlaySheet {
                     event.eventEnd = endDate;
                 }
 
-                // There is also a chance here to add a feature for the user to pick reminder type.
-                for (let reminderCombo of remindersColumn.reminderCombos) {
-                    event.addAlarm(reminderCombo.beforeEventSeconds)
-                }
-
-                added(calendarCombo.selectedCollectionId, event);
+                added(calendarCombo.currentValue, event);
             }
             eventEditorSheet.close();
         }
@@ -90,7 +85,8 @@ Kirigami.OverlaySheet {
 
                 property int selectedCollectionId: null
 
-                displayText: i18n("Please select a calendar...")
+                textRole: "display"
+                valueRole: "collectionId"
 
                 // Should default to default collection
                 // Should also only show *calendars*
@@ -99,7 +95,6 @@ Kirigami.OverlaySheet {
                     leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
                     label: display
                     icon: decoration
-                    onClicked: calendarCombo.displayText = display, calendarCombo.selectedCollectionId = collectionId
                 }
                 popup.z: 1000
             }
@@ -268,6 +263,7 @@ Kirigami.OverlaySheet {
                     }
                 }
             }
+
             QQC2.ComboBox {
                 id: repeatComboBox
                 Kirigami.FormData.label: i18n("Repeat:")
@@ -289,10 +285,35 @@ Kirigami.OverlaySheet {
                 placeholderText: i18n("Optional")
                 Layout.fillWidth: true
             }
+
             ColumnLayout {
                 Kirigami.FormData.label: i18n("Reminder:")
                 Layout.fillWidth: true
                 id: remindersColumn
+
+                function secondsToReminderLabel(seconds) { // Gives prettified time
+
+                    function numAndUnit(secs) {
+                        if(secs >= 2 * 24 * 60 * 60)
+                            return Math.round(secs / (24*60*60)) + " days"; // 2 days +
+                        else if (secs >= 1 * 24 * 60 * 60)
+                            return "1 day";
+                        else if (secs >= 2 * 60 * 60)
+                            return Math.round(secs / (60*60)) + " hours"; // 2 hours +
+                        else if (secs >= 1 * 60 * 60)
+                            return "1 hour";
+                        else
+                            return Math.round(secs / 60) + " minutes";
+                    }
+
+                    if (seconds < 0) {
+                        return numAndUnit(seconds * -1) + " before";
+                    } else if (seconds < 0) {
+                        return numAndUnit(seconds) + " after";
+                    } else {
+                        return "On event start";
+                    }
+                }
 
                 property var reminderCombos: []
 
@@ -301,68 +322,56 @@ Kirigami.OverlaySheet {
                     text: i18n("Add reminder")
                     Layout.fillWidth: true
 
-                    property int buttonIndex: 0
+                    onClicked: event.remindersModel.addAlarm();
+                }
 
-                    onClicked: {
-                        var newReminder = Qt.createQmlObject(`
-                            import QtQuick 2.15
-                            import QtQuick.Controls 2.15 as QQC2
-                            import QtQuick.Layouts 1.15
-                            import org.kde.kirigami 2.15 as Kirigami
+                Repeater {
+                    id: remindersRepeater
+                    Layout.fillWidth: true
 
+                    model: event.remindersModel
+                    // All of the alarms are handled within the delegates.
 
-                            RowLayout {
-                                Layout.fillWidth: true
+                    delegate: RowLayout {
+                        Layout.fillWidth: true
 
-                                QQC2.ComboBox {
-                                    id: remindersComboBox${buttonIndex}
-                                    Layout.fillWidth: true
+                        Component.onCompleted: console.log(Object.keys(model))
 
-                                    function secondsToReminderLabel(seconds) {
-                                        if (seconds) {
-                                            var numAndUnit = (
-                                                seconds >= 2 * 24 * 60 * 60 ?   Math.round(seconds / (24*60*60)) + " days"  : // 2 days +
-                                                seconds >= 1 * 24 * 60 * 60 ?   "1 day"                                     :
-                                                seconds >= 2 * 60 * 60      ?   Math.round(seconds / (60*60)) + " hours"    : // 2 hours +
-                                                seconds >= 1 * 60 * 60      ?   "1 hour"                                    :
-                                                                                Math.round(seconds / 60) + " minutes")
-                                            return numAndUnit + " before";
-                                        } else {
-                                            return "On event start";
-                                        }
-                                    }
+                        QQC2.ComboBox {
+                            // There is also a chance here to add a feature for the user to pick reminder type.
+                            Layout.fillWidth: true
 
-                                    property var beforeEventSeconds: 0
+                            property var beforeEventSeconds: 0
 
-                                    displayText: secondsToReminderLabel(Number(currentText))
+                            displayText: remindersColumn.secondsToReminderLabel(startOffset)
+                            //textRole: "DisplayNameRole"
+                            onCurrentValueChanged: event.remindersModel.setData(event.remindersModel.index(index, 0),
+                                                                                currentValue,
+                                                                                event.remindersModel.dataroles["startOffset"])
 
-                                    model: [0,
-                                            5 * 60, // 5 minutes
-                                            10 * 60,
-                                            15 * 60,
-                                            30 * 60,
-                                            45 * 60,
-                                            1 * 60 * 60, // 1 hour
-                                            2 * 60 * 60,
-                                            1 * 24 * 60 * 60, // 1 day
-                                            2 * 24 * 60 * 60,
-                                            5 * 24 * 60 * 60]
-                                            // All these times are in seconds.
-                                    delegate: Kirigami.BasicListItem {
-                                        label: remindersComboBox${buttonIndex}.secondsToReminderLabel(modelData)
-                                        onClicked: remindersComboBox${buttonIndex}.beforeEventSeconds = modelData
-                                    }
-                                    popup.z: 1000
-                                }
-
-                                QQC2.Button {
-                                    icon.name: "edit-delete-remove"
-                                    onClicked: parent.destroy()
-                                }
+                            model: [0, // We times by -1 to make times be before event
+                                    -1 * 5 * 60, // 5 minutes
+                                    -1 * 10 * 60,
+                                    -1 * 15 * 60,
+                                    -1 * 30 * 60,
+                                    -1 * 45 * 60,
+                                    -1 * 1 * 60 * 60, // 1 hour
+                                    -1 * 2 * 60 * 60,
+                                    -1 * 1 * 24 * 60 * 60, // 1 day
+                                    -1 * 2 * 24 * 60 * 60,
+                                    -1 * 5 * 24 * 60 * 60]
+                                    // All these times are in seconds.
+                            delegate: Kirigami.BasicListItem {
+                                text: remindersColumn.secondsToReminderLabel(modelData)
                             }
-                            `, this.parent, `remindersComboBox${buttonIndex}`)
-                        remindersColumn.reminderCombos.push(newReminder)
-                        buttonIndex += 1
+
+                            popup.z: 1000
+                        }
+
+                        QQC2.Button {
+                            icon.name: "edit-delete-remove"
+                            onClicked: event.remindersModel.deleteAlarm(model.index);
+                        }
                     }
                 }
             }
@@ -377,29 +386,79 @@ Kirigami.OverlaySheet {
                     text: i18n("Add attendee")
                     Layout.fillWidth: true
 
-                    property int buttonIndex: 0
+                    onClicked: event.attendeesModel.addAttendee();
+                }
 
-                    onClicked: {
-                        var newAttendee = Qt.createQmlObject(`
-                            import QtQuick 2.15
-                            import QtQuick.Controls 2.15 as QQC2
-                            import QtQuick.Layouts 1.15
+                Repeater {
+                    model: event.attendeesModel
+                    // All of the alarms are handled within the delegates.
 
-                            RowLayout {
+                    delegate: ColumnLayout {
+                        Layout.leftMargin: Kirigami.Units.largeSpacing
+
+                        RowLayout {
+                            QQC2.Label {
                                 Layout.fillWidth: true
-
-                                QQC2.ComboBox {
-                                    id: attendeesComboBox${buttonIndex}
-                                    Layout.fillWidth: true
-                                    editable: true
-                                }
-                                QQC2.Button {
-                                    icon.name: "edit-delete-remove"
-                                    onClicked: parent.destroy()
-                                }
+                                text: i18n("Attendee " + String(index + 1))
                             }
-                            `, this.parent, `attendeesComboBox${buttonIndex}`)
-                        buttonIndex += 1
+                            QQC2.Button {
+                                icon.name: "edit-delete-remove"
+                                onClicked: event.attendeesModel.deleteAttendee(index);
+                            }
+                        }
+
+                        GridLayout {
+                            Layout.fillWidth: true
+                            columns: 5
+
+                            QQC2.Label{
+                                text: i18n("Name:")
+                            }
+                            QQC2.TextField {
+                                Layout.fillWidth: true
+                                Layout.columnSpan: 4
+                                onTextChanged: event.attendeesModel.setData(event.attendeesModel.index(index, 0),
+                                                                            text,
+                                                                            event.attendeesModel.dataroles["name"])
+                                Component.onCompleted: text = model.name
+                            }
+
+                            QQC2.Label {
+                                text: i18n("Email:")
+                            }
+                            QQC2.TextField {
+                                Layout.fillWidth: true
+                                Layout.columnSpan: 4
+                                //editText: Email
+                                onTextChanged: event.attendeesModel.setData(event.attendeesModel.index(index, 0),
+                                                                            text,
+                                                                            event.attendeesModel.dataroles["email"])
+                                Component.onCompleted: text = model.email
+                            }
+                            QQC2.Label {
+                                text: i18n("Status:")
+                            }
+                            QQC2.ComboBox {
+                                Layout.columnSpan: 2
+                                model: event.attendeesModel.attendeeStatusModel
+                                textRole: "display"
+                                valueRole: "value"
+                                currentIndex: status // role of parent
+                                onCurrentValueChanged: event.attendeesModel.setData(event.attendeesModel.index(index, 0),
+                                                                                    currentValue,
+                                                                                    event.attendeesModel.dataroles["status"])
+
+                                popup.z: 1000
+                            }
+                            QQC2.CheckBox {
+                                Layout.columnSpan: 2
+                                text: i18n("Request RSVP")
+                                checked: model.rsvp
+                                onCheckedChanged: event.attendeesModel.setData(event.attendeesModel.index(index, 0),
+                                                                               checked,
+                                                                               event.attendeesModel.dataroles["rsvp"])
+                            }
+                        }
                     }
                 }
             }
