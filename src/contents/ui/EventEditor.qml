@@ -13,6 +13,18 @@ Kirigami.OverlaySheet {
     Item {
         EventWrapper {
             id: event
+
+            Component.onCompleted: {
+                if(editMode) {
+                    titleField.text = event.summary
+                    descriptionTextArea.text = event.description
+                    locationField.text = locationField.text
+                    eventStartDateCombo.editText = event.startDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+                    eventStartTimeCombo.editText = String(event.startDate.getHours()) + ":" + String(event.startDate.getMinutes())
+                    eventEndDateCombo.editText = event.endDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+                    eventEndTimeCombo.editText = String(event.endDate.getHours()) + ":" + String(event.endDate.getMinutes())
+                }
+            }
         }
     }
 
@@ -50,9 +62,7 @@ Kirigami.OverlaySheet {
                 event.location = locationField.text;
                 event.eventStart = startDate;
 
-                if (allDayCheckBox.checked) {
-                    event.setAllDay(true);
-                } else {
+                if (!allDayCheckBox.checked) {
                     event.eventEnd = endDate;
                 }
 
@@ -120,6 +130,7 @@ Kirigami.OverlaySheet {
             QQC2.CheckBox {
                 id: allDayCheckBox
                 Kirigami.FormData.label: i18n("All day event:")
+                onCheckedChanged: event.allDay = checked
             }
             RowLayout {
                 Kirigami.FormData.label: i18n("Start:")

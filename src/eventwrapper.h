@@ -27,6 +27,7 @@ class EventWrapper : public QObject
     Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
     Q_PROPERTY(QDateTime eventStart READ eventStart WRITE setEventStart NOTIFY eventStartChanged)
     Q_PROPERTY(QDateTime eventEnd READ eventEnd WRITE setEventEnd NOTIFY eventEndChanged)
+    Q_PROPERTY(bool allDay READ allDay WRITE setAllDay NOTIFY allDayChanged)
     Q_PROPERTY(KCalendarCore::Recurrence * recurrence READ recurrence)
     Q_PROPERTY(KCalendarCore::Attendee::List attendees READ attendees)
     Q_PROPERTY(RemindersModel * remindersModel READ remindersModel NOTIFY remindersModelChanged)
@@ -57,13 +58,14 @@ public:
     void setEventStart(QDateTime eventStart);
     QDateTime eventEnd() const;
     void setEventEnd(QDateTime eventEnd);
+    bool allDay() const;
+    void setAllDay(bool allDay);
     KCalendarCore::Recurrence * recurrence() const;
     KCalendarCore::Attendee::List attendees() const;
     RemindersModel * remindersModel();
     AttendeesModel * attendeesModel();
     QVariantMap recurrenceIntervals();
 
-    Q_INVOKABLE void setAllDay(bool allDay);
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);
     Q_INVOKABLE void setRegularRecurrence(RecurrenceIntervals interval, int freq = 1);
     Q_INVOKABLE void setWeekdaysRecurrence(const QList<bool> days);
@@ -77,6 +79,7 @@ Q_SIGNALS:
     void locationChanged();
     void eventStartChanged();
     void eventEndChanged();
+    void allDayChanged();
     void remindersModelChanged();
     void attendeesModelChanged();
 

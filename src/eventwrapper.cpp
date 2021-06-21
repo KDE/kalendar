@@ -87,6 +87,16 @@ void EventWrapper::setEventEnd(QDateTime eventEnd)
     m_event->setDtEnd(eventEnd);
 }
 
+bool EventWrapper::allDay() const
+{
+    return m_event->allDay();
+}
+
+void EventWrapper::setAllDay(bool allDay)
+{
+    m_event->setAllDay(allDay);
+}
+
 KCalendarCore::Recurrence * EventWrapper::recurrence() const
 {
     KCalendarCore::Recurrence *recurrence = m_event->recurrence();
@@ -111,12 +121,6 @@ AttendeesModel * EventWrapper::attendeesModel()
 QVariantMap EventWrapper::recurrenceIntervals()
 {
     return m_recurrenceIntervals;
-}
-
-
-void EventWrapper::setAllDay(bool allDay)
-{
-    m_event->setAllDay(allDay);
 }
 
 
