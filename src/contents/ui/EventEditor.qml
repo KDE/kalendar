@@ -283,10 +283,19 @@ Kirigami.OverlaySheet {
             }
 
             GridLayout {
+                id: customRecurrenceLayout
                 Layout.fillWidth: true
                 Layout.leftMargin: Kirigami.Units.largeSpacing
                 columns: 5
                 visible: repeatComboBox.currentIndex == 5 // "Custom" index
+
+                function setOcurrence() {
+                    event.setRegularRecurrence(recurScaleRuleCombobox.currentValue, recurFreqRuleSpinbox.value)
+
+                    if(recurScaleRuleCombobox.currentValue == event.recurrenceIntervals["Weekly"]) {
+                        weekdayCheckboxRepeater.setWeekdaysRepeat()
+                    }
+                }
 
                 QQC2.Label {
                     Layout.columnSpan: 1
@@ -297,7 +306,7 @@ Kirigami.OverlaySheet {
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     value: 1
-                    onValueChanged: event.setRegularRecurrence(recurScaleRuleCombobox.currentValue, value)
+                    onValueChanged: customRecurrenceLayout.setOcurrence()
                 }
                 QQC2.ComboBox {
                     id: recurScaleRuleCombobox
@@ -305,6 +314,7 @@ Kirigami.OverlaySheet {
                     Layout.columnSpan: 2
                     textRole: recurFreqRuleSpinbox.value > 1 ? "displayPlural" : "displaySingular"
                     valueRole: "interval"
+                    onCurrentValueChanged: customRecurrenceLayout.setOcurrence()
 
                     model: [
                         {key: "day", displaySingular: i18n("day"), displayPlural: i18n("days"), interval: event.recurrenceIntervals["Daily"]},
