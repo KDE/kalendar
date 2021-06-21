@@ -295,23 +295,23 @@ Kirigami.OverlaySheet {
 
                     function numAndUnit(secs) {
                         if(secs >= 2 * 24 * 60 * 60)
-                            return Math.round(secs / (24*60*60)) + " days"; // 2 days +
+                            return Math.round(secs / (24*60*60)) + i18n(" days"); // 2 days +
                         else if (secs >= 1 * 24 * 60 * 60)
                             return "1 day";
                         else if (secs >= 2 * 60 * 60)
-                            return Math.round(secs / (60*60)) + " hours"; // 2 hours +
+                            return Math.round(secs / (60*60)) + i18n(" hours"); // 2 hours +
                         else if (secs >= 1 * 60 * 60)
                             return "1 hour";
                         else
-                            return Math.round(secs / 60) + " minutes";
+                            return Math.round(secs / 60) + i18n(" minutes");
                     }
 
                     if (seconds < 0) {
-                        return numAndUnit(seconds * -1) + " before";
+                        return numAndUnit(seconds * -1) + i18n(" before");
                     } else if (seconds < 0) {
-                        return numAndUnit(seconds) + " after";
+                        return numAndUnit(seconds) + i18n(" after");
                     } else {
-                        return "On event start";
+                        return i18n("On event start");
                     }
                 }
 
