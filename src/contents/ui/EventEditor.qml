@@ -551,19 +551,19 @@ Kirigami.OverlaySheet {
                     delegate: RowLayout {
                         Layout.fillWidth: true
 
-                        Component.onCompleted: console.log(Object.keys(model))
-
                         QQC2.ComboBox {
                             // There is also a chance here to add a feature for the user to pick reminder type.
                             Layout.fillWidth: true
 
-                            property var beforeEventSeconds: 0
+                            property var selectedIndex: 0
 
                             displayText: remindersColumn.secondsToReminderLabel(startOffset)
                             //textRole: "DisplayNameRole"
                             onCurrentValueChanged: event.remindersModel.setData(event.remindersModel.index(index, 0),
                                                                                 currentValue,
                                                                                 event.remindersModel.dataroles["startOffset"])
+                            onCountChanged: selectedIndex = currentIndex // Gets called *just* before modelChanged
+                            onModelChanged: currentIndex = selectedIndex, console.log(selectedIndex)
 
                             model: [0, // We times by -1 to make times be before event
                                     -1 * 5 * 60, // 5 minutes
