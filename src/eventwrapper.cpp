@@ -163,3 +163,9 @@ void EventWrapper::setRecurrenceEndDateTime(QDateTime endDateTime)
     qDebug() << endDateTime;
     m_event->recurrence()->setEndDateTime(endDateTime);
 }
+
+void EventWrapper::setRecurrenceOcurrences(int ocurrences)
+{
+    m_event->recurrence()->setDuration(ocurrences);
+}
+

@@ -430,14 +430,16 @@ Kirigami.OverlaySheet {
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     visible: endRecurType.currentIndex == 2
+                    onVisibleChanged: event.setRecurrenceOcurrences(recurOcurrenceEndSpinbox.value)
 
                     QQC2.SpinBox {
-                        id: recurOccurrenceEndSpinbox
+                        id: recurOcurrenceEndSpinbox
                         Layout.fillWidth: true
                         from: 1
+                        onValueChanged: event.setRecurrenceOcurrences(value)
                     }
                     QQC2.Label {
-                        text: recurOccurrenceEndSpinbox.value > 1 ? i18n("ocurrences") : i18n("ocurrence")
+                        text: recurOcurrenceEndSpinbox.value > 1 ? i18n("ocurrences") : i18n("ocurrence")
                     }
                 }
             }
