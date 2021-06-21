@@ -330,18 +330,29 @@ Kirigami.OverlaySheet {
                         }
                     }
 
-                    QQC2.ButtonGroup {
-                        buttons: weekdayCheckboxRepeater.children
-                    }
                     Repeater {
                         id: weekdayCheckboxRepeater
+
+                        property var checkboxes: []
+                        function setWeekdaysRepeat() {
+                            let selectedDays = new Array(7)
+                            for(let checkbox of checkboxes) {
+                                // C++ func takes 7 bit array
+                                selectedDays[checkbox.dayNumber] = checkbox.checked
+                            }
+                            event.setWeekdaysRecurrence(selectedDays);
+                        }
+
                         model: 7
                         delegate: QQC2.CheckBox {
+                            Layout.fillWidth: true
                             Layout.alignment: Qt.AlignHCenter
-                            // We make sure we get dayNumber per the day of the week number used by QML/JS
-                            property int dayNumber: Qt.locale().firstDayOfWeek + index > 6 ?
-                                                    Qt.locale().firstDayOfWeek + index - 7 :
-                                                    Qt.locale().firstDayOfWeek + index
+                            // We make sure we get dayNumber per the day of the week number used by C++ Qt
+                            property int dayNumber: Qt.locale().firstDayOfWeek + index > 7 ?
+                                                    Qt.locale().firstDayOfWeek + index - 1 - 7 :
+                                                    Qt.locale().firstDayOfWeek + index - 1
+                            onClicked: weekdayCheckboxRepeater.setWeekdaysRepeat()
+                            Component.onCompleted: weekdayCheckboxRepeater.checkboxes.push(this)
                         }
                     }
                 }

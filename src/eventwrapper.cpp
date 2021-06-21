@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include <QMetaEnum>
+#include <QBitArray>
 #include <eventwrapper.h>
 
 EventWrapper::EventWrapper(QObject *parent)
@@ -147,4 +148,12 @@ void EventWrapper::setRegularRecurrence(EventWrapper::RecurrenceIntervals interv
     }
 }
 
+void EventWrapper::setWeekdaysRecurrence(const QList<bool> days)
+{
+    QBitArray daysBitArray(7);
 
+    for(int i = 0; i < days.size(); i++) {
+        daysBitArray[i] = days[i];
+    }
+    m_event->recurrence()->addWeeklyDays(daysBitArray);
+}
