@@ -68,6 +68,7 @@ public:
 
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);
     Q_INVOKABLE void setRegularRecurrence(RecurrenceIntervals interval, int freq = 1);
+    Q_INVOKABLE void setMonthlyPosRecurrence(short pos, int day);
     Q_INVOKABLE void setWeekdaysRecurrence(const QList<bool> days);
     Q_INVOKABLE void setRecurrenceEndDateTime(QDateTime endDateTime);
     Q_INVOKABLE void setRecurrenceOcurrences(int ocurrences);

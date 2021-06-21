@@ -344,6 +344,7 @@ Kirigami.OverlaySheet {
                     popup.z: 1000
                 }
 
+                // Custom controls specific to weekly
                 GridLayout {
                     id: recurWeekdayRuleLayout
                     Layout.row: 1
@@ -386,6 +387,41 @@ Kirigami.OverlaySheet {
                         }
                     }
                 }
+
+                // Controls specific to monthly recurrence
+                QQC2.Label {
+                    Layout.columnSpan: 1
+                    visible: recurScaleRuleCombobox.currentIndex == 2 && repeatComboBox.currentIndex == 5 // "month/months" index
+                    text: i18n("On:")
+                }
+
+                QQC2.ButtonGroup {
+                    buttons: monthlyRecurRadioColumn.children
+                }
+
+                ColumnLayout {
+                    id: monthlyRecurRadioColumn
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 4
+                    visible: recurScaleRuleCombobox.currentIndex == 2 && repeatComboBox.currentIndex == 5 // "month/months" index
+
+                    QQC2.RadioButton {
+                        text: i18n(`the ${eventStartDateCombo.dateFromText.getDate()} of each month`)
+                        onClicked: customRecurrenceLayout.setOcurrence()
+                    }
+                    QQC2.RadioButton {
+                        property int dayOfWeek: eventStartDateCombo.dateFromText.getDay() + 1 ?
+                                                eventStartDateCombo.dateFromText.getDay() - 1 :
+                                                7 // C++ Qt day of week index goes Mon-Sun, 0-7
+                        property int weekOfMonth: Math.ceil((eventStartDateCombo.dateFromText.getDate() + 6 - eventStartDateCombo.dateFromText.getDay())/7);
+                        property string dayOfWeekString: Qt.locale().dayName(eventStartDateCombo.dateFromText.getDay())
+
+                        text: i18n(`the ${weekOfMonth} ${dayOfWeekString} of each month`)
+                        onTextChanged: if(checked) { event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek) }
+                        onClicked: event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek)
+                    }
+                }
+
 
                 // Repeat end controls (visible on all recurrences)
                 QQC2.Label {

@@ -152,6 +152,14 @@ void EventWrapper::setRegularRecurrence(EventWrapper::RecurrenceIntervals interv
     }
 }
 
+void EventWrapper::setMonthlyPosRecurrence(short pos, int day)
+{
+    QBitArray daysBitArray(7);
+    daysBitArray[day] = 1;
+    m_event->recurrence()->addMonthlyPos(pos, daysBitArray);
+}
+
+
 void EventWrapper::setWeekdaysRecurrence(const QList<bool> days)
 {
     QBitArray daysBitArray(7);
