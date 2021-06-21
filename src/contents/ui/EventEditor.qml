@@ -268,11 +268,84 @@ Kirigami.OverlaySheet {
                 id: repeatComboBox
                 Kirigami.FormData.label: i18n("Repeat:")
                 Layout.fillWidth: true
-                model: ["Never", "Daily", "Weekly", "Monthly", "Yearly"]
+                model: [i18n("Never"),
+                        i18n("Daily"),
+                        i18n("Weekly"),
+                        i18n("Monthly"),
+                        i18n("Yearly"),
+                        i18n("Custom")]
                 delegate: Kirigami.BasicListItem {
                     label: modelData
                 }
                 popup.z: 1000
+            }
+
+            GridLayout {
+                Layout.fillWidth: true
+                Layout.leftMargin: Kirigami.Units.largeSpacing
+                columns: 5
+                visible: repeatComboBox.currentIndex == 5 // "Custom" index
+
+                QQC2.Label {
+                    Layout.columnSpan: 1
+                    text: i18n("Every:")
+                }
+                QQC2.SpinBox {
+                    id: recurFreqRuleSpinbox
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 2
+                    value: 1
+                }
+                QQC2.ComboBox {
+                    id: recurScaleRuleCombobox
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 2
+
+                    property int savedIndex: 0;
+                    property var modelSingular: [i18n("day"), i18n("week"), i18n("month"), i18n("year")]
+                    property var modelPlural: [i18n("days"), i18n("weeks"), i18n("months"), i18n("years")]
+
+                    onModelChanged: currentIndex = savedIndex
+
+                    model: recurFreqRuleSpinbox.value > 1 ? modelPlural : modelSingular
+                    delegate: Kirigami.BasicListItem {
+                        text: modelData
+                        onClicked: recurScaleRuleCombobox.savedIndex = index;
+                    }
+                    popup.z: 1000
+                }
+
+                GridLayout {
+                    id: recurWeekdayRuleLayout
+                    Layout.columnSpan: 5
+                    columns: 7
+                    visible: recurScaleRuleCombobox.currentIndex == 1 // "week"/"weeks" index
+
+                    Repeater {
+                        model: 7
+                        delegate: QQC2.Label {
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignHCenter
+                            text: Qt.locale().dayName(Qt.locale().firstDayOfWeek + index, Locale.ShortFormat)
+                        }
+                    }
+
+                    QQC2.ButtonGroup {
+                        buttons: weekdayCheckboxRepeater.children
+                    }
+                    Repeater {
+                        id: weekdayCheckboxRepeater
+                        model: 7
+                        delegate: QQC2.CheckBox {
+                            Layout.alignment: Qt.AlignHCenter
+                            // We make sure we get dayNumber per the day of the week number used by QML/JS
+                            property int dayNumber: Qt.locale().firstDayOfWeek + index > 6 ?
+                                                    Qt.locale().firstDayOfWeek + index - 7 :
+                                                    Qt.locale().firstDayOfWeek + index
+                        }
+                    }
+                }
+
             }
 
             Kirigami.Separator {
