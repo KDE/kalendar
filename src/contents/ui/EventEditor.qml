@@ -291,7 +291,7 @@ Kirigami.OverlaySheet {
                 Layout.fillWidth: true
                 Layout.leftMargin: Kirigami.Units.largeSpacing
                 columns: 5
-                visible: repeatComboBox.currentIndex == 5 // "Custom" index
+                visible: repeatComboBox.currentIndex > 0 // Not "Never" index
 
                 function setOcurrence() {
                     event.setRegularRecurrence(recurScaleRuleCombobox.currentValue, recurFreqRuleSpinbox.value)
@@ -301,7 +301,9 @@ Kirigami.OverlaySheet {
                     }
                 }
 
+                // Custom controls
                 QQC2.Label {
+                    visible: repeatComboBox.currentIndex == 5
                     Layout.columnSpan: 1
                     text: i18n("Every:")
                 }
@@ -309,13 +311,15 @@ Kirigami.OverlaySheet {
                     id: recurFreqRuleSpinbox
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
-                    value: 1
+                    visible: repeatComboBox.currentIndex == 5
+                    from: 1
                     onValueChanged: customRecurrenceLayout.setOcurrence()
                 }
                 QQC2.ComboBox {
                     id: recurScaleRuleCombobox
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
+                    visible: repeatComboBox.currentIndex == 5
                     textRole: recurFreqRuleSpinbox.value > 1 ? "displayPlural" : "displaySingular"
                     valueRole: "interval"
                     onCurrentValueChanged: customRecurrenceLayout.setOcurrence()
@@ -331,9 +335,11 @@ Kirigami.OverlaySheet {
 
                 GridLayout {
                     id: recurWeekdayRuleLayout
-                    Layout.columnSpan: 5
+                    Layout.row: 1
+                    Layout.column: 1
+                    Layout.columnSpan: 4
                     columns: 7
-                    visible: recurScaleRuleCombobox.currentIndex == 1 // "week"/"weeks" index
+                    visible: recurScaleRuleCombobox.currentIndex == 1 && repeatComboBox.currentIndex == 5 // "week"/"weeks" index
 
                     Repeater {
                         model: 7
@@ -359,7 +365,6 @@ Kirigami.OverlaySheet {
 
                         model: 7
                         delegate: QQC2.CheckBox {
-                            Layout.fillWidth: true
                             Layout.alignment: Qt.AlignHCenter
                             // We make sure we get dayNumber per the day of the week number used by C++ Qt
                             property int dayNumber: Qt.locale().firstDayOfWeek + index > 7 ?
@@ -370,58 +375,71 @@ Kirigami.OverlaySheet {
                         }
                     }
                 }
-            }
 
-            RowLayout {
-                visible: repeatComboBox.currentIndex > 0
+                // Repeat end controls (visible on all recurrences)
                 QQC2.Label {
-                        Layout.columnSpan: 1
-                        text: i18n("Ends:")
+                    Layout.columnSpan: 1
+                    text: i18n("Ends:")
+                }
+                QQC2.ComboBox {
+                    id: endRecurType
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 2
+                    model: [i18n("Never"), i18n("On"), i18n("After")]
+                    popup.z: 1000
+                }
+                QQC2.ComboBox {
+                    id: recurEndDateCombo
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 2
+                    visible: endRecurType.currentIndex == 1
+                    editable: true
+                    editText: recurEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+
+                    inputMethodHints: Qt.ImhDate
+
+                    property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
+                    property bool validDate: !isNaN(dateFromText.getTime())
+
+                    onDateFromTextChanged: {
+                        var datePicker = recurEndDatePicker
+                        if (validDate && activeFocus) {
+                            datePicker.selectedDate = dateFromText
+                            datePicker.clickedDate = dateFromText
+
+                            if (this.visible) {
+                                event.setRecurrenceEndDateTime(dateFromText)
+                            }
+                        }
                     }
-                    QQC2.ComboBox {
-                        id: endRecurType
-                        Layout.columnSpan: 2
-                        model: [i18n("Never"), i18n("On"), i18n("After")]
-                        popup.z: 1000
+
+                    popup: QQC2.Popup {
+                        id: recurEndDatePopup
+                        width: parent.width*2
+                        height: Kirigami.Units.gridUnit * 18
+                        z: 1000
+
+                        DatePicker {
+                            id: recurEndDatePicker
+                            anchors.fill: parent
+                            onDatePicked: recurEndDatePopup.close()
+                        }
                     }
-                    QQC2.ComboBox {
-                        id: recurEndDateCombo
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 2
+                    visible: endRecurType.currentIndex == 2
+
+                    QQC2.SpinBox {
+                        id: recurOccurrenceEndSpinbox
                         Layout.fillWidth: true
-                        Layout.columnSpan: 2
-                        visible: endRecurType.currentIndex == 1
-                        editable: true
-                        editText: recurEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-
-                        inputMethodHints: Qt.ImhDate
-
-                        property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
-                        property bool validDate: !isNaN(dateFromText.getTime())
-
-                        onDateFromTextChanged: {
-                            var datePicker = recurEndDatePicker
-                            if (validDate && activeFocus) {
-                                datePicker.selectedDate = dateFromText
-                                datePicker.clickedDate = dateFromText
-
-                                if (this.visible) {
-                                    event.setRecurrenceEndDateTime(dateFromText)
-                                }
-                            }
-                        }
-
-                        popup: QQC2.Popup {
-                            id: recurEndDatePopup
-                            width: parent.width*2
-                            height: Kirigami.Units.gridUnit * 18
-                            z: 1000
-
-                            DatePicker {
-                                id: recurEndDatePicker
-                                anchors.fill: parent
-                                onDatePicked: recurEndDatePopup.close()
-                            }
-                        }
+                        from: 1
                     }
+                    QQC2.Label {
+                        text: recurOccurrenceEndSpinbox.value > 1 ? i18n("ocurrences") : i18n("ocurrence")
+                    }
+                }
             }
 
             Kirigami.Separator {
