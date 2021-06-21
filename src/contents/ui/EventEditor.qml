@@ -56,6 +56,10 @@ Kirigami.OverlaySheet {
                     event.eventEnd = endDate;
                 }
 
+                if (endRecurType.currentIndex == 1) { // End recurrence on date
+                    event.setRecurrenceEndDateTime(recurEndDateCombo.dateFromText)
+                }
+
                 added(calendarCombo.currentValue, event);
             }
             eventEditorSheet.close();
@@ -366,7 +370,58 @@ Kirigami.OverlaySheet {
                         }
                     }
                 }
+            }
 
+            RowLayout {
+                visible: repeatComboBox.currentIndex > 0
+                QQC2.Label {
+                        Layout.columnSpan: 1
+                        text: i18n("Ends:")
+                    }
+                    QQC2.ComboBox {
+                        id: endRecurType
+                        Layout.columnSpan: 2
+                        model: [i18n("Never"), i18n("On"), i18n("After")]
+                        popup.z: 1000
+                    }
+                    QQC2.ComboBox {
+                        id: recurEndDateCombo
+                        Layout.fillWidth: true
+                        Layout.columnSpan: 2
+                        visible: endRecurType.currentIndex == 1
+                        editable: true
+                        editText: recurEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+
+                        inputMethodHints: Qt.ImhDate
+
+                        property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
+                        property bool validDate: !isNaN(dateFromText.getTime())
+
+                        onDateFromTextChanged: {
+                            var datePicker = recurEndDatePicker
+                            if (validDate && activeFocus) {
+                                datePicker.selectedDate = dateFromText
+                                datePicker.clickedDate = dateFromText
+
+                                if (this.visible) {
+                                    event.setRecurrenceEndDateTime(dateFromText)
+                                }
+                            }
+                        }
+
+                        popup: QQC2.Popup {
+                            id: recurEndDatePopup
+                            width: parent.width*2
+                            height: Kirigami.Units.gridUnit * 18
+                            z: 1000
+
+                            DatePicker {
+                                id: recurEndDatePicker
+                                anchors.fill: parent
+                                onDatePicked: recurEndDatePopup.close()
+                            }
+                        }
+                    }
             }
 
             Kirigami.Separator {

@@ -157,3 +157,9 @@ void EventWrapper::setWeekdaysRecurrence(const QList<bool> days)
     }
     m_event->recurrence()->addWeeklyDays(daysBitArray);
 }
+
+void EventWrapper::setRecurrenceEndDateTime(QDateTime endDateTime)
+{
+    qDebug() << endDateTime;
+    m_event->recurrence()->setEndDateTime(endDateTime);
+}
