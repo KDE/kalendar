@@ -449,7 +449,7 @@ Kirigami.OverlaySheet {
                     property bool validDate: !isNaN(dateFromText.getTime())
 
                     onDateFromTextChanged: {
-                        var datePicker = recurEndDatePicker
+                        const datePicker = recurEndDatePicker
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText
                             datePicker.clickedDate = dateFromText
