@@ -1,6 +1,15 @@
 [Desktop Entry]
 Name=GameCenter
+Name[es]=GameCenter
+Name[nl]=GameCenter
+Name[pt_BR]=GameCenter
+Name[uk]=Центр ігор
+Name[x-test]=xxGameCenterxx
 Comment=GameCenter Kirigami Application
+Comment[es]=Aplicación de Kirigami GameCenter
+Comment[nl]=Kirigami-toepassing GameCenter
+Comment[uk]=Програма на Kirigami «Центр ігор»
+Comment[x-test]=xxGameCenter Kirigami Applicationxx
 Version=1.0
 Exec=kalendar
 MimeType=application/x-kalendar;
