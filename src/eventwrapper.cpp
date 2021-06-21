@@ -83,7 +83,7 @@ QDateTime EventWrapper::eventEnd() const
 
 void EventWrapper::setEventEnd(QDateTime eventEnd)
 {
-    m_event->setDtStart(eventEnd);
+    m_event->setDtEnd(eventEnd);
 }
 
 KCalendarCore::Recurrence * EventWrapper::recurrence() const

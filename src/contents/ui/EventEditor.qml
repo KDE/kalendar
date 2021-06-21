@@ -270,7 +270,7 @@ Kirigami.OverlaySheet {
                 Layout.fillWidth: true
                 textRole: "display"
                 valueRole: "interval"
-                onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue) }
+                //onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue) }
                 model: [
                         {key: "never", display: i18n("Never"), interval: -1},
                         {key: "daily", display: i18n("Daily"), interval: event.recurrenceIntervals["Daily"]},
