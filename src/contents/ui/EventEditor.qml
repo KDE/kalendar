@@ -476,7 +476,7 @@ Kirigami.OverlaySheet {
                 RowLayout {
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
-                    visible: endRecurType.currentIndex == 2
+                    visible: endRecurType.currentIndex === 2
                     onVisibleChanged: event.setRecurrenceOcurrences(recurOcurrenceEndSpinbox.value)
 
                     QQC2.SpinBox {
