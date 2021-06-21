@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include <QMetaEnum>
 #include <eventwrapper.h>
 
 EventWrapper::EventWrapper(QObject *parent)
@@ -9,6 +10,12 @@ EventWrapper::EventWrapper(QObject *parent)
     , m_remindersModel(parent, m_event)
     , m_attendeesModel(parent, m_event)
 {
+    for(int i = 0; i < QMetaEnum::fromType<EventWrapper::RecurrenceIntervals>().keyCount(); i++) {
+        int value = QMetaEnum::fromType<EventWrapper::RecurrenceIntervals>().value(i);
+        QString key = QLatin1String(QMetaEnum::fromType<EventWrapper::RecurrenceIntervals>().key(i));
+        m_recurrenceIntervals[key] = value;
+    }
+
     // Change event pointer in remindersmodel if changed here
     connect(this, SIGNAL(eventPtrChanged(KCalendarCore::Event::Ptr)),
             &m_remindersModel, SLOT(setEventPtr(KCalendarCore::Event::Ptr)));
@@ -100,6 +107,12 @@ AttendeesModel * EventWrapper::attendeesModel()
     return &m_attendeesModel;
 }
 
+QVariantMap EventWrapper::recurrenceIntervals()
+{
+    return m_recurrenceIntervals;
+}
+
+
 void EventWrapper::setAllDay(bool allDay)
 {
     m_event->setAllDay(allDay);
@@ -112,4 +125,26 @@ void EventWrapper::addAlarms(KCalendarCore::Alarm::List alarms)
         m_event->addAlarm(alarms[i]);
     }
 }
+
+void EventWrapper::setRegularRecurrence(EventWrapper::RecurrenceIntervals interval)
+{
+    switch(interval) {
+        case Daily:
+            m_event->recurrence()->setDaily(1);
+            return;
+        case Weekly:
+            m_event->recurrence()->setWeekly(1);
+            return;
+        case Monthly:
+            m_event->recurrence()->setMonthly(1);
+            return;
+        case Yearly:
+            m_event->recurrence()->setYearly(1);
+            return;
+        default:
+            qWarning() << "Unknown interval for recurrence" << interval;
+            return;
+    }
+}
+
 

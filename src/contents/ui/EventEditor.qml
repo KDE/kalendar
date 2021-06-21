@@ -268,15 +268,17 @@ Kirigami.OverlaySheet {
                 id: repeatComboBox
                 Kirigami.FormData.label: i18n("Repeat:")
                 Layout.fillWidth: true
-                model: [i18n("Never"),
-                        i18n("Daily"),
-                        i18n("Weekly"),
-                        i18n("Monthly"),
-                        i18n("Yearly"),
-                        i18n("Custom")]
-                delegate: Kirigami.BasicListItem {
-                    label: modelData
-                }
+                textRole: "display"
+                valueRole: "interval"
+                onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue) }
+                model: [
+                        {key: "never", display: i18n("Never"), interval: -1},
+                        {key: "daily", display: i18n("Daily"), interval: event.recurrenceIntervals["Daily"]},
+                        {key: "weekly", display: i18n("Weekly"), interval: event.recurrenceIntervals["Weekly"]},
+                        {key: "monthly", display: i18n("Monthly"), interval: event.recurrenceIntervals["Monthly"]},
+                        {key: "yearly", display: i18n("Yearly"), interval: event.recurrenceIntervals["Yearly"]},
+                        {key: "custom", display: i18n("Custom"), interval: -1}
+                ]
                 popup.z: 1000
             }
 

@@ -31,8 +31,17 @@ class EventWrapper : public QObject
     Q_PROPERTY(KCalendarCore::Attendee::List attendees READ attendees)
     Q_PROPERTY(RemindersModel * remindersModel READ remindersModel NOTIFY remindersModelChanged)
     Q_PROPERTY(AttendeesModel * attendeesModel READ attendeesModel NOTIFY attendeesModelChanged)
+    Q_PROPERTY(QVariantMap recurrenceIntervals READ recurrenceIntervals CONSTANT)
 
 public:
+    enum RecurrenceIntervals {
+        Daily,
+        Weekly,
+        Monthly,
+        Yearly
+    };
+    Q_ENUM(RecurrenceIntervals);
+
     EventWrapper(QObject *parent = nullptr);
     ~EventWrapper() = default;
 
@@ -52,9 +61,11 @@ public:
     KCalendarCore::Attendee::List attendees() const;
     RemindersModel * remindersModel();
     AttendeesModel * attendeesModel();
+    QVariantMap recurrenceIntervals();
 
     Q_INVOKABLE void setAllDay(bool allDay);
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);
+    Q_INVOKABLE void setRegularRecurrence(RecurrenceIntervals interval);
 
 Q_SIGNALS:
     void eventPtrChanged(KCalendarCore::Event::Ptr eventPtr);
@@ -70,4 +81,5 @@ private:
     KCalendarCore::Event::Ptr m_event;
     RemindersModel m_remindersModel;
     AttendeesModel m_attendeesModel;
+    QVariantMap m_recurrenceIntervals;
 };
