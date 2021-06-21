@@ -65,7 +65,7 @@ public:
 
     Q_INVOKABLE void setAllDay(bool allDay);
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);
-    Q_INVOKABLE void setRegularRecurrence(RecurrenceIntervals interval);
+    Q_INVOKABLE void setRegularRecurrence(RecurrenceIntervals interval, int freq = 1);
 
 Q_SIGNALS:
     void eventPtrChanged(KCalendarCore::Event::Ptr eventPtr);

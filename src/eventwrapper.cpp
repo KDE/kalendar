@@ -126,20 +126,20 @@ void EventWrapper::addAlarms(KCalendarCore::Alarm::List alarms)
     }
 }
 
-void EventWrapper::setRegularRecurrence(EventWrapper::RecurrenceIntervals interval)
+void EventWrapper::setRegularRecurrence(EventWrapper::RecurrenceIntervals interval, int freq)
 {
     switch(interval) {
         case Daily:
-            m_event->recurrence()->setDaily(1);
+            m_event->recurrence()->setDaily(freq);
             return;
         case Weekly:
-            m_event->recurrence()->setWeekly(1);
+            m_event->recurrence()->setWeekly(freq);
             return;
         case Monthly:
-            m_event->recurrence()->setMonthly(1);
+            m_event->recurrence()->setMonthly(freq);
             return;
         case Yearly:
-            m_event->recurrence()->setYearly(1);
+            m_event->recurrence()->setYearly(freq);
             return;
         default:
             qWarning() << "Unknown interval for recurrence" << interval;

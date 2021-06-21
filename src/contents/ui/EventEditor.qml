@@ -270,14 +270,14 @@ Kirigami.OverlaySheet {
                 Layout.fillWidth: true
                 textRole: "display"
                 valueRole: "interval"
-                //onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue) }
+                onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue) }
                 model: [
-                        {key: "never", display: i18n("Never"), interval: -1},
-                        {key: "daily", display: i18n("Daily"), interval: event.recurrenceIntervals["Daily"]},
-                        {key: "weekly", display: i18n("Weekly"), interval: event.recurrenceIntervals["Weekly"]},
-                        {key: "monthly", display: i18n("Monthly"), interval: event.recurrenceIntervals["Monthly"]},
-                        {key: "yearly", display: i18n("Yearly"), interval: event.recurrenceIntervals["Yearly"]},
-                        {key: "custom", display: i18n("Custom"), interval: -1}
+                    {key: "never", display: i18n("Never"), interval: -1},
+                    {key: "daily", display: i18n("Daily"), interval: event.recurrenceIntervals["Daily"]},
+                    {key: "weekly", display: i18n("Weekly"), interval: event.recurrenceIntervals["Weekly"]},
+                    {key: "monthly", display: i18n("Monthly"), interval: event.recurrenceIntervals["Monthly"]},
+                    {key: "yearly", display: i18n("Yearly"), interval: event.recurrenceIntervals["Yearly"]},
+                    {key: "custom", display: i18n("Custom"), interval: -1}
                 ]
                 popup.z: 1000
             }
@@ -297,23 +297,21 @@ Kirigami.OverlaySheet {
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     value: 1
+                    onValueChanged: event.setRegularRecurrence(recurScaleRuleCombobox.currentValue, value)
                 }
                 QQC2.ComboBox {
                     id: recurScaleRuleCombobox
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
+                    textRole: recurFreqRuleSpinbox.value > 1 ? "displayPlural" : "displaySingular"
+                    valueRole: "interval"
 
-                    property int savedIndex: 0;
-                    property var modelSingular: [i18n("day"), i18n("week"), i18n("month"), i18n("year")]
-                    property var modelPlural: [i18n("days"), i18n("weeks"), i18n("months"), i18n("years")]
-
-                    onModelChanged: currentIndex = savedIndex
-
-                    model: recurFreqRuleSpinbox.value > 1 ? modelPlural : modelSingular
-                    delegate: Kirigami.BasicListItem {
-                        text: modelData
-                        onClicked: recurScaleRuleCombobox.savedIndex = index;
-                    }
+                    model: [
+                        {key: "day", displaySingular: i18n("day"), displayPlural: i18n("days"), interval: event.recurrenceIntervals["Daily"]},
+                        {key: "week", displaySingular: i18n("week"), displayPlural: i18n("weeks"), interval: event.recurrenceIntervals["Weekly"]},
+                        {key: "month", displaySingular: i18n("month"), displayPlural: i18n("months"), interval: event.recurrenceIntervals["Monthly"]},
+                        {key: "year", displaySingular: i18n("year"), displayPlural: i18n("years"), interval: event.recurrenceIntervals["Yearly"]},
+                    ]
                     popup.z: 1000
                 }
 
