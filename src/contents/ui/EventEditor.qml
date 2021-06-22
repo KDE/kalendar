@@ -16,9 +16,6 @@ Kirigami.OverlaySheet {
 
             Component.onCompleted: {
                 if(editMode) {
-                    titleField.text = event.summary
-                    descriptionTextArea.text = event.description
-                    locationField.text = locationField.text
                     eventStartDateCombo.editText = event.startDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
                     eventStartTimeCombo.editText = String(event.startDate.getHours()) + ":" + String(event.startDate.getMinutes())
                     eventEndDateCombo.editText = event.endDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
@@ -116,11 +113,15 @@ Kirigami.OverlaySheet {
                 id: titleField
                 Kirigami.FormData.label: i18n("<b>Title</b>:")
                 placeholderText: i18n("Required")
+                text: event.summary
+                onTextChanged: event.summary = text
             }
             QQC2.TextField {
                 id: locationField
                 Kirigami.FormData.label: i18n("Location:")
                 placeholderText: i18n("Optional")
+                text: event.location
+                onTextChanged: event.location = text
             }
 
             Kirigami.Separator {
@@ -498,8 +499,10 @@ Kirigami.OverlaySheet {
             QQC2.TextArea {
                 id: descriptionTextArea
                 Kirigami.FormData.label: i18n("Description:")
-                placeholderText: i18n("Optional")
                 Layout.fillWidth: true
+                placeholderText: i18n("Optional")
+                text: event.summary
+                onTextChanged: event.summary = text
             }
 
             ColumnLayout {
