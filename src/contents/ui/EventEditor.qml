@@ -13,15 +13,6 @@ Kirigami.OverlaySheet {
     Item {
         EventWrapper {
             id: event
-
-            Component.onCompleted: {
-                if(editMode) {
-                    eventStartDateCombo.editText = event.startDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
-                    eventStartTimeCombo.editText = String(event.startDate.getHours()) + ":" + String(event.startDate.getMinutes())
-                    eventEndDateCombo.editText = event.endDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
-                    eventEndTimeCombo.editText = String(event.endDate.getHours()) + ":" + String(event.endDate.getMinutes())
-                }
-            }
         }
     }
 
@@ -149,10 +140,20 @@ Kirigami.OverlaySheet {
                     property bool validDate: !isNaN(dateFromText.getTime())
 
                     onDateFromTextChanged: {
-                        var datePicker = eventStartDatePicker
+                        let datePicker = eventStartDatePicker
+                        let timePicker = eventStartTimePicker
+
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText
                             datePicker.clickedDate = dateFromText
+                            event.eventStart = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
+                        }
+                    }
+
+                    Connections {
+                        target: event
+                        function onEventStartChanged() {
+                            eventStartDateCombo.editText = event.startDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
                         }
                     }
 
@@ -188,11 +189,22 @@ Kirigami.OverlaySheet {
                     }
 
                     onEditTextChanged: {
-                        var timePicker = eventStartTimePicker
+                        let dateCombo = eventStartDateCombo
+                        let timePicker = eventStartTimePicker
+
                         if (acceptableInput && activeFocus) { // Need to check for activeFocus or on load the text gets reset to 00:00
                             timePicker.setToTimeFromString(editText);
+                            event.eventStart = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
                         }
                     }
+
+                    Connections {
+                        target: event
+                        function onEventStartChanged() {
+                            eventStartTimeCombo.editText = String(event.startDate.getHours()) + ":" + String(event.startDate.getMinutes())
+                        }
+                    }
+
                     popup: QQC2.Popup {
                         id: eventStartTimePopup
                         width: parent.width
@@ -222,10 +234,20 @@ Kirigami.OverlaySheet {
                     property bool validDate: !isNaN(dateFromText.getTime())
 
                     onDateFromTextChanged: {
-                        var datePicker = eventEndDatePicker
+                        let datePicker = eventEndDatePicker
+                        let timePicker = eventEndTimePicker
+
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText
                             datePicker.clickedDate = dateFromText
+                            event.eventEnd = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
+                        }
+                    }
+
+                    Connections {
+                        target: event
+                        function onEventEndChanged() {
+                            eventEndDateCombo.editText = event.endDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
                         }
                     }
 
@@ -260,9 +282,19 @@ Kirigami.OverlaySheet {
                     }
 
                     onEditTextChanged: {
-                        var timePicker = eventEndTimePicker
+                        let dateCombo = eventEndDateCombo
+                        let timePicker = eventEndTimePicker
+
                         if (acceptableInput && activeFocus) {
                             timePicker.setToTimeFromString(editText);
+                            event.eventEnd = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
+                        }
+                    }
+
+                    Connections {
+                        target: event
+                        function onEventEndChanged() {
+                            eventEndTimeCombo.editText = String(event.endDate.getHours()) + ":" + String(event.endDate.getMinutes())
                         }
                     }
 
