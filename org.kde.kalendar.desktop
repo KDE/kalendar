@@ -2,6 +2,7 @@
 Name=GameCenter
 Name[el]=GameCenter
 Name[es]=GameCenter
+Name[it]=GameCenter
 Name[nl]=GameCenter
 Name[pt_BR]=GameCenter
 Name[sk]=GameCenter
@@ -10,6 +11,7 @@ Name[x-test]=xxGameCenterxx
 Comment=GameCenter Kirigami Application
 Comment[el]=GameCenter εφαρμογή kirigami
 Comment[es]=Aplicación de Kirigami GameCenter
+Comment[it]=Applicazione Kirigami GameCenter
 Comment[nl]=Kirigami-toepassing GameCenter
 Comment[sk]=Kirigami aplikácia GameCenter
 Comment[uk]=Програма на Kirigami «Центр ігор»
