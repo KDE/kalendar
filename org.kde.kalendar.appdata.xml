@@ -2,8 +2,10 @@
 <component type="desktop-application">
   <id>org.kde.kalendar</id>
   <name>Kirigami Application</name>
+  <name xml:lang="cs">Aplikace Kirigami</name>
   <name xml:lang="el">Εφαρμογή kirigami</name>
   <name xml:lang="es">Aplicación de Kirigami</name>
+  <name xml:lang="it">Applicazione Kirigami</name>
   <name xml:lang="nl">Kirigami-toepassing</name>
   <name xml:lang="sk">Aplikácia Kirigami</name>
   <name xml:lang="uk">Програма на Kirigami</name>
@@ -11,6 +13,7 @@
   <summary>A short summary describing what this software is about</summary>
   <summary xml:lang="el">Μια σύντομη περίληψη που περιγράφει αυτό το λογισμικό</summary>
   <summary xml:lang="es">Un breve resumen que describe lo que hace este software</summary>
+  <summary xml:lang="it">Un breve riassunto che descrive di cosa tratta questo software</summary>
   <summary xml:lang="nl">Een korte samenvatting die beschrijft waar deze software over gaat</summary>
   <summary xml:lang="uk">Коротке резюме щодо призначення цього програмного забезпечення</summary>
   <summary xml:lang="x-test">xxA short summary describing what this software is aboutxx</summary>
@@ -19,6 +22,7 @@
   <developer_name>The software vendor name, e.g. "ACME Corporation"</developer_name>
   <developer_name xml:lang="el">Το όνομα του προμηθευτή του λογισμικού, π.χ. «ACME Corporation»</developer_name>
   <developer_name xml:lang="es">El nombre del vendedor del software, como «ACME Corporation»</developer_name>
+  <developer_name xml:lang="it">Il nome del fornitore del software, ad es. «ACME Corporation».</developer_name>
   <developer_name xml:lang="nl">De naam van de softwareleverancier, bijv. "ACME Corporation"</developer_name>
   <developer_name xml:lang="uk">Назва виробника програмного забезпечення, наприклад «ACME Corporation»</developer_name>
   <developer_name xml:lang="x-test">xxThe software vendor name, e.g. "ACME Corporation"xx</developer_name>
@@ -26,26 +30,32 @@
     <p>Multiple paragraphs of long description, describing this software component.</p>
     <p xml:lang="el">Πολλές παράγραφοι μακροσκελούς περιγραφής αυοτύ του λογισμικού.</p>
     <p xml:lang="es">Múltiples párrafos de una detallada descripción de este componente de software.</p>
+    <p xml:lang="it">Più paragrafi di descrizione estesa, che descrivono questo componente software.</p>
     <p xml:lang="nl">Meerdere paragrafen met lange beschrijving, die deze softwarecomponent beschrijft.</p>
     <p xml:lang="uk">Декілька абзаців повного опису цього компонента програмного забезпечення.</p>
     <p xml:lang="x-test">xxMultiple paragraphs of long description, describing this software component.xx</p>
     <p>You can also use ordered and unordered lists:</p>
     <p xml:lang="el">Μπορείτε να χρησιμοποιήσετε ταξινομημένες και αταξινόμητες λίστες:</p>
     <p xml:lang="es">También puede usar listas ordenadas y sin ordenar:</p>
+    <p xml:lang="it">Puoi anche utilizzare elenchi ordinati e non ordinati:</p>
     <p xml:lang="nl">U kunt ook geordende en ongeordende lijsten gebruiken:</p>
     <p xml:lang="uk">Ви можете використовувати упорядковані і неупорядковані списки:</p>
     <p xml:lang="x-test">xxYou can also use ordered and unordered lists:xx</p>
     <ul>
       <li>Feature 1</li>
+      <li xml:lang="cs">Vlastnost 1</li>
       <li xml:lang="el">Χαρακτηριστικό 1</li>
       <li xml:lang="es">Funcionalidad 1</li>
+      <li xml:lang="it">Funzionalità 1</li>
       <li xml:lang="nl">Functie 1</li>
       <li xml:lang="sk">Funkcia 1</li>
       <li xml:lang="uk">Можливість 1</li>
       <li xml:lang="x-test">xxFeature 1xx</li>
       <li>Feature 2</li>
+      <li xml:lang="cs">Vlastnost 2</li>
       <li xml:lang="el">Χαρακτηριστικό 2</li>
       <li xml:lang="es">Funcionalidad 2</li>
+      <li xml:lang="it">Funzionalità 2</li>
       <li xml:lang="nl">Functie 2</li>
       <li xml:lang="sk">Funkcia 2</li>
       <li xml:lang="uk">Можливість 2</li>
@@ -54,6 +64,7 @@
     <p>Keep in mind to XML-escape characters, and that this is not HTML markup.</p>
     <p xml:lang="el">Δώστε προσοχή στους χαρακτήρες XML-escape και ότι αυτό δεν είναι HTML markup.</p>
     <p xml:lang="es">Recuerde usar secuencias de escape con los caracteres XML y que esto no es lenguaje de marcado HTML.</p>
+    <p xml:lang="it">Tieni presente i caratteri di escape XML e che questo non sono contrassegni HTML.</p>
     <p xml:lang="nl">Bedenk dat XML-tekens een escape moeten hebben en dat dit geen HTML-markering is.</p>
     <p xml:lang="uk">Слід пам'ятати, що символи XML слід екранувати, і що це не зовсім розмітка HTML.</p>
     <p xml:lang="x-test">xxKeep in mind to XML-escape characters, and that this is not HTML markup.xx</p>
