@@ -424,7 +424,7 @@ Kirigami.OverlaySheet {
                 // Controls specific to monthly recurrence
                 QQC2.Label {
                     Layout.columnSpan: 1
-                    visible: recurScaleRuleCombobox.currentIndex == 2 && repeatComboBox.currentIndex == 5 // "month/months" index
+                    visible: recurScaleRuleCombobox.currentIndex === 2 && repeatComboBox.currentIndex === 5 // "month/months" index
                     text: i18n("On:")
                 }
 
