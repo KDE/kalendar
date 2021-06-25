@@ -439,7 +439,7 @@ Kirigami.OverlaySheet {
                     visible: recurScaleRuleCombobox.currentIndex === 2 && repeatComboBox.currentIndex === 5 // "month/months" index
 
                     QQC2.RadioButton {
-                        text: i18n(`the ${eventStartDateCombo.dateFromText.getDate()} of each month`)
+                        text: i18nc("%1 is the day number of month", "the %1 of each month`)
                         onClicked: customRecurrenceLayout.setOcurrence()
                     }
                     QQC2.RadioButton {
