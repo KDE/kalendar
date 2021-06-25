@@ -436,7 +436,7 @@ Kirigami.OverlaySheet {
                     id: monthlyRecurRadioColumn
                     Layout.fillWidth: true
                     Layout.columnSpan: 4
-                    visible: recurScaleRuleCombobox.currentIndex == 2 && repeatComboBox.currentIndex == 5 // "month/months" index
+                    visible: recurScaleRuleCombobox.currentIndex === 2 && repeatComboBox.currentIndex === 5 // "month/months" index
 
                     QQC2.RadioButton {
                         text: i18n(`the ${eventStartDateCombo.dateFromText.getDate()} of each month`)
