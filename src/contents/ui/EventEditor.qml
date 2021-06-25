@@ -449,7 +449,7 @@ Kirigami.OverlaySheet {
                         property int weekOfMonth: Math.ceil((eventStartDateCombo.dateFromText.getDate() + 6 - eventStartDateCombo.dateFromText.getDay())/7);
                         property string dayOfWeekString: Qt.locale().dayName(eventStartDateCombo.dateFromText.getDay())
 
-                        text: i18n(`the ${weekOfMonth} ${dayOfWeekString} of each month`)
+                        text: i18nc("`the ${weekOfMonth} ${dayOfWeekString} of each month", "the %1 %2 of each month", weekOfMonth, dayOfWeekString)
                         onTextChanged: if(checked) { event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek) }
                         onClicked: event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek)
                     }
