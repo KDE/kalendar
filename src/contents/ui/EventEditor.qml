@@ -433,13 +433,34 @@ Kirigami.OverlaySheet {
                 }
 
                 ColumnLayout {
+                    function numberToString(number) {
+                        // The code in here was adapted from an article by Johnathan Wood, see:
+                        // http://www.blackbeltcoder.com/Articles/strings/converting-numbers-to-ordinal-strings
+
+                        let numSuffixes = [ "th",
+                                            "st",
+                                            "nd",
+                                            "rd",
+                                            "th",
+                                            "th",
+                                            "th",
+                                            "th",
+                                            "th",
+                                            "th" ];
+
+                        let i = (number % 100);
+                        let j = (i > 10 && i < 20) ? 0 : (number % 10);
+                        return i18n(number + numSuffixes[j]);
+                    }
+
                     id: monthlyRecurRadioColumn
                     Layout.fillWidth: true
                     Layout.columnSpan: 4
                     visible: recurScaleRuleCombobox.currentIndex === 2 && repeatComboBox.currentIndex === 5 // "month/months" index
 
                     QQC2.RadioButton {
-                        text: i18nc("%1 is the day number of month", "the %1 of each month", eventStartDateCombo.dateFromText.getDate())
+                        property int dateOfMonth: eventStartDateCombo.dateFromText.getDate()
+                        text: i18nc("%1 is the day number of month", "the %1 of each month", parent.numberToString(dateOfMonth))
                         onClicked: customRecurrenceLayout.setOcurrence()
                     }
                     QQC2.RadioButton {
@@ -449,7 +470,7 @@ Kirigami.OverlaySheet {
                         property int weekOfMonth: Math.ceil((eventStartDateCombo.dateFromText.getDate() + 6 - eventStartDateCombo.dateFromText.getDay())/7);
                         property string dayOfWeekString: Qt.locale().dayName(eventStartDateCombo.dateFromText.getDay())
 
-                        text: i18nc("the weekOfMonth dayOfWeekString of each month", "the %1 %2 of each month", weekOfMonth, dayOfWeekString)
+                        text: i18nc("the weekOfMonth dayOfWeekString of each month", "the %1 %2 of each month", parent.numberToString(weekOfMonth), dayOfWeekString)
                         onTextChanged: if(checked) { event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek) }
                         onClicked: event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek)
                     }
