@@ -17,20 +17,36 @@ Item {
     property int minutes: minuteView.currentIndex * minuteMultiples
     property int seconds: secondsView.currentIndex
 
-    Component.onCompleted: {
-        var now = new Date()
-        hourView.currentIndex = now.getHours()
-        minuteView.currentIndex = now.getMinutes() / minuteMultiples
-        secondsView.currentIndex = now.getSeconds()
-    }
-
     property int minuteMultiples: 5
     property bool secondsPicker: false
 
+    onHoursChanged: {
+        hours = hours % 24;
+        hourView.currentIndex = hours;
+    }
+    onMinutesChanged: {
+        minutes = minutes % 60;
+        if (minutes % minuteMultiples) {
+            minuteMultiples = 1;
+        }
+        minuteView.currentIndex = minutes * minuteMultiples;
+    }
+    onSecondsChanged: {
+        seconds = seconds % 60;
+        secondsView.currentIndex = seconds;
+    }
+
+    Component.onCompleted: {
+        var now = new Date();
+        hourView.currentIndex = now.getHours();
+        minuteView.currentIndex = now.getMinutes() / minuteMultiples;
+        secondsView.currentIndex = now.getSeconds();
+    }
+
     function setToTimeFromDate(date) {
-        hourView.currentIndex = date.getHours()
-        minuteView.currentIndex = date.getMinutes() / minuteMultiples
-        secondsView.currentIndex = date.getSeconds()
+        hourView.currentIndex = date.getHours();
+        minuteView.currentIndex = date.getMinutes() / minuteMultiples;
+        secondsView.currentIndex = date.getSeconds();
     }
 
     function setToTimeFromString(timeString) { // Accepts in format HH:MM:SS

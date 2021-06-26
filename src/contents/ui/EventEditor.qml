@@ -136,7 +136,9 @@ Kirigami.OverlaySheet {
                     property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
                     property bool validDate: !isNaN(dateFromText.getTime())
 
-                    onDateFromTextChanged: {
+                    onEditTextChanged: {
+                        // Set date from text here because it otherwise updates after this handler
+                        dateFromText = Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
                         let datePicker = eventStartDatePicker
 
                         if (validDate && activeFocus) {
@@ -197,6 +199,10 @@ Kirigami.OverlaySheet {
 
                         TimePicker {
                             id: eventStartTimePicker
+
+                            hours: event.eventStart.getHours()
+                            minutes: event.eventStart.getMinutes()
+
                             onDone: {
                                 eventStartTimePopup.close();
                                 eventStartLayout.setEventStart();
@@ -231,9 +237,10 @@ Kirigami.OverlaySheet {
                     editText: event.eventEnd.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
                     enabled: !allDayCheckBox.checked
 
-                    onDateFromTextChanged: {
+                    onEditTextChanged: {
+                        // Set date from text here because it otherwise updates after this handler
+                        dateFromText = Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
                         let datePicker = eventEndDatePicker
-                        let timePicker = eventEndTimePicker
 
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText
@@ -292,6 +299,9 @@ Kirigami.OverlaySheet {
 
                         TimePicker {
                             id: eventEndTimePicker
+
+                            hours: event.eventEnd.getHours()
+                            minutes: event.eventEnd.getMinutes()
 
                             onDone: {
                                 eventEndTimePopup.close();
