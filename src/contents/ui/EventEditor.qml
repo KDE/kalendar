@@ -204,10 +204,17 @@ Kirigami.OverlaySheet {
                         TimePicker {
                             id: eventStartTimePicker
 
+                            onTimeChanged: console.log(event.eventStart.getMinutes(), minutes)
+
                             onDone: {
                                 eventStartTimePopup.close();
                                 event.eventStart = new Date(event.eventStart.setHours(hours, minutes));
                                 eventStartTimeCombo.editText = event.eventStart.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
+                            }
+
+                            Component.onCompleted: {
+                                hours = event.eventStart.getHours()
+                                minutes = event.eventStart.getMinutes()
                             }
                         }
                     }
@@ -302,11 +309,15 @@ Kirigami.OverlaySheet {
                         TimePicker {
                             id: eventEndTimePicker
 
-                            onTimeChanged: console.log(hours)
                             onDone: {
                                 eventEndTimePopup.close();
                                 event.eventEnd = new Date(event.eventEnd.setHours(hours, minutes));
                                 eventEndTimeCombo.editText = event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
+                            }
+
+                            Component.onCompleted: {
+                                hours = event.eventEnd.getHours()
+                                minutes = event.eventEnd.getMinutes()
                             }
                         }
                     }

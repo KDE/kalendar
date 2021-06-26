@@ -10,7 +10,7 @@ Item {
     id: timePicker
 
     signal done()
-    signal timeChanged()
+    signal timeChanged(int hours, int minutes, int seconds)
 
     anchors.fill: parent
 
@@ -22,22 +22,20 @@ Item {
     property bool secondsPicker: false
 
     onHoursChanged: {
+        console.log (hours)
         hours = hours % 24;
         hourView.currentIndex = hours;
-        timeChanged();
+        timeChanged(hours, minutes, seconds);
     }
     onMinutesChanged: {
         minutes = minutes % 60;
-        if (minutes % minuteMultiples) {
-            minuteMultiples = 1;
-        }
-        minuteView.currentIndex = minutes * minuteMultiples;
-        timeChanged();
+        minuteView.currentIndex = minutes / minuteMultiples;
+        timeChanged(hours, minutes, seconds);
     }
     onSecondsChanged: {
         seconds = seconds % 60;
         secondsView.currentIndex = seconds;
-        timeChanged();
+        timeChanged(hours, minutes, seconds);
     }
 
     Component.onCompleted: {
