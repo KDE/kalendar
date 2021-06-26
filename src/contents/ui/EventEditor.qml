@@ -144,7 +144,7 @@ Kirigami.OverlaySheet {
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText
                             datePicker.clickedDate = dateFromText
-                            eventStartLayout.setEventStart();
+                            event.eventEnd = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
                         }
                     }
 
@@ -161,7 +161,11 @@ Kirigami.OverlaySheet {
                             anchors.fill: parent
                             onDatePicked: {
                                 eventStartDatePopup.close()
-                                eventStartLayout.setEventStart();
+                                let hours = event.eventStart.getHours();
+                                let minutes = event.eventStart.getMinutes();
+                                event.eventStart = new Date(pickedDate.setHours(hours, minutes));
+                                // For some reason, the editText needs to be manually updated.
+                                eventStartDateCombo.editText = event.eventStart.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
                             }
                         }
                     }
@@ -182,12 +186,12 @@ Kirigami.OverlaySheet {
                     }
 
                     onEditTextChanged: {
-                        let dateCombo = eventStartDateCombo
                         let timePicker = eventStartTimePicker
 
                         if (acceptableInput && activeFocus) { // Need to check for activeFocus or on load the text gets reset to 00:00
                             timePicker.setToTimeFromString(editText);
-                            eventStartLayout.setEventStart();
+                            event.eventStart = new Date(event.eventStart.setHours(timePicker.hours, timePicker.minutes));
+                            editText = event.eventStart.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
                         }
                     }
 
@@ -200,12 +204,10 @@ Kirigami.OverlaySheet {
                         TimePicker {
                             id: eventStartTimePicker
 
-                            hours: event.eventStart.getHours()
-                            minutes: event.eventStart.getMinutes()
-
                             onDone: {
                                 eventStartTimePopup.close();
-                                eventStartLayout.setEventStart();
+                                event.eventStart = new Date(event.eventStart.setHours(hours, minutes));
+                                eventStartTimeCombo.editText = event.eventStart.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
                             }
                         }
                     }
@@ -217,13 +219,6 @@ Kirigami.OverlaySheet {
                 Kirigami.FormData.label: i18n("End:")
                 Layout.fillWidth: true
                 visible: !allDayCheckBox.checked
-
-                function setEventEnd() {
-                    let dateCombo = eventEndDateCombo;
-                    let timePicker = eventEndTimePicker;
-
-                    event.eventEnd = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                }
 
                 QQC2.ComboBox {
                     id: eventEndDateCombo
@@ -243,9 +238,12 @@ Kirigami.OverlaySheet {
                         let datePicker = eventEndDatePicker
 
                         if (validDate && activeFocus) {
-                            datePicker.selectedDate = dateFromText
-                            datePicker.clickedDate = dateFromText
-                            eventEndLayout.setEventEnd();
+                            datePicker.selectedDate = dateFromText;
+                            datePicker.clickedDate = dateFromText;
+                            let hours = event.eventEnd.getHours();
+                            let minutes = event.eventEnd.getMinutes();
+                            event.eventEnd = new Date(dateFromText.setHours(hours, minutes));
+                            event.eventEnd.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
                         }
                     }
 
@@ -261,7 +259,11 @@ Kirigami.OverlaySheet {
                             anchors.fill: parent
                             onDatePicked: {
                                 eventEndDatePopup.close();
-                                eventEndLayout.setEventEnd();
+                                let hours = event.eventEnd.getHours();
+                                let minutes = event.eventEnd.getMinutes();
+                                event.eventEnd = new Date(pickedDate.setHours(hours, minutes));
+                                // For some reason, the editText needs to be manually updated.
+                                eventEndDateCombo.editText = event.eventEnd.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
                             }
                         }
                     }
@@ -281,12 +283,12 @@ Kirigami.OverlaySheet {
                     }
 
                     onEditTextChanged: {
-                        let dateCombo = eventEndDateCombo
                         let timePicker = eventEndTimePicker
 
                         if (acceptableInput && activeFocus) {
                             timePicker.setToTimeFromString(editText);
-                            eventEndLayout.setEventEnd();
+                            event.eventEnd = new Date(event.eventEnd.setHours(timePicker.hours, timePicker.minutes));
+                            editText = event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
                         }
                     }
 
@@ -300,12 +302,11 @@ Kirigami.OverlaySheet {
                         TimePicker {
                             id: eventEndTimePicker
 
-                            hours: event.eventEnd.getHours()
-                            minutes: event.eventEnd.getMinutes()
-
+                            onTimeChanged: console.log(hours)
                             onDone: {
                                 eventEndTimePopup.close();
-                                eventEndLayout.setEventEnd();
+                                event.eventEnd = new Date(event.eventEnd.setHours(hours, minutes));
+                                eventEndTimeCombo.editText = event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
                             }
                         }
                     }

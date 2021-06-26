@@ -10,6 +10,7 @@ Item {
     id: timePicker
 
     signal done()
+    signal timeChanged()
 
     anchors.fill: parent
 
@@ -23,6 +24,7 @@ Item {
     onHoursChanged: {
         hours = hours % 24;
         hourView.currentIndex = hours;
+        timeChanged();
     }
     onMinutesChanged: {
         minutes = minutes % 60;
@@ -30,10 +32,12 @@ Item {
             minuteMultiples = 1;
         }
         minuteView.currentIndex = minutes * minuteMultiples;
+        timeChanged();
     }
     onSecondsChanged: {
         seconds = seconds % 60;
         secondsView.currentIndex = seconds;
+        timeChanged();
     }
 
     Component.onCompleted: {
@@ -66,11 +70,16 @@ Item {
     ColumnLayout {
         anchors.fill: parent
 
-        QQC2.SpinBox {
-            Layout.fillWidth: true
-            from: 1
-            value: minuteMultiples
-            onValueChanged: minuteMultiples = value
+        RowLayout {
+            QQC2.Label {
+                text: i18n("Min. interval:")
+            }
+            QQC2.SpinBox {
+                Layout.fillWidth: true
+                from: 1
+                value: minuteMultiples
+                onValueChanged: minuteMultiples = value
+            }
         }
 
         RowLayout {
@@ -93,6 +102,9 @@ Item {
                     Layout.fillHeight: true
 
                     model: 24
+
+                    onCurrentIndexChanged: timePicker.hours = currentIndex
+
                     delegate: Kirigami.Heading {
                         property int thisIndex: index
 
@@ -131,6 +143,8 @@ Item {
                     id: minuteView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
+                    onCurrentIndexChanged: timePicker.minutes = currentIndex * minuteMultiples
 
                     model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
                     delegate: Kirigami.Heading {
@@ -178,8 +192,11 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    Repeater {
+                    QQC2.Tumbler {
                         model: 60
+
+                        onCurrentIndexChanged: timePicker.hours = currentIndex
+
                         delegate: Kirigami.Heading {
                             property int thisIndex: index
 
