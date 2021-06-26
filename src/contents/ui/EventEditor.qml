@@ -129,7 +129,7 @@ Kirigami.OverlaySheet {
                     Layout.fillWidth: true
 
                     editable: true
-                    editText: eventStartDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+                    editText: event.eventStart.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
 
                     inputMethodHints: Qt.ImhDate
 
@@ -169,15 +169,8 @@ Kirigami.OverlaySheet {
 
                     Layout.fillWidth: true
 
-                    property string displayHour: eventStartTimePicker.hours < 10 ?
-                        String(eventStartTimePicker.hours).padStart(2, "0") : eventStartTimePicker.hours
-                    property string displayMinutes: eventStartTimePicker.minutes < 10 ?
-                        String(eventStartTimePicker.minutes).padStart(2, "0") : eventStartTimePicker.minutes
-
                     editable: true
-                    editText: eventEditorSheet.editMode && !event.startDate ?
-                              String(event.startDate.getHours()) + ":" + String(event.startDate.getMinutes()) :
-                              displayHour + ":" + displayMinutes
+                    editText: String(event.eventStart.getHours()) + ":" + String(event.eventStart.getMinutes())
                     enabled: !allDayCheckBox.checked
                     visible: !allDayCheckBox.checked
 
@@ -235,9 +228,7 @@ Kirigami.OverlaySheet {
                     property bool validDate: !isNaN(dateFromText.getTime())
 
                     editable: true
-                    editText: eventEditorSheet.editMode && !event.endDate ?
-                              event.endDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat) :
-                              eventEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+                    editText: event.eventEnd.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
                     enabled: !allDayCheckBox.checked
 
                     onDateFromTextChanged: {
@@ -273,15 +264,8 @@ Kirigami.OverlaySheet {
 
                     Layout.fillWidth: true
 
-                    property string displayHour: eventEndTimePicker.hours < 10 ?
-                        String(eventEndTimePicker.hours).padStart(2, "0") : eventEndTimePicker.hours
-                    property string displayMinutes: eventEndTimePicker.minutes < 10 ?
-                        String(eventEndTimePicker.minutes).padStart(2, "0") : eventEndTimePicker.minutes
-
                     editable: true
-                    editText: eventEditorSheet.editMode && !event.endDate ?
-                              String(event.endDate.getHours()) + ":" + String(event.endDate.getMinutes()) :
-                              displayHour + ":" + displayMinutes
+                    editText: String(event.eventEnd.getHours()) + ":" + String(event.eventEnd.getMinutes())
                     enabled: !allDayCheckBox.checked
 
                     inputMethodHints: Qt.ImhTime

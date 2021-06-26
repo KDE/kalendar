@@ -27,6 +27,12 @@ Item {
     property int minuteMultiples: 5
     property bool secondsPicker: false
 
+    function setToTimeFromDate(date) {
+        hourView.currentIndex = date.getHours()
+        minuteView.currentIndex = date.getMinutes() / minuteMultiples
+        secondsView.currentIndex = date.getSeconds()
+    }
+
     function setToTimeFromString(timeString) { // Accepts in format HH:MM:SS
         var splitTimeString = timeString.split(":");
         switch (splitTimeString.length) {
