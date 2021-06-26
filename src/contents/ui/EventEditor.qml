@@ -40,24 +40,6 @@ Kirigami.OverlaySheet {
             if (editMode) {
                 return
             } else {
-                // setHours method of JS Date objects returns milliseconds since epoch for some ungodly reason.
-                // We need to use this to create a new JS date object.
-                const startDate = new Date(eventStartDateCombo.dateFromText.setHours(eventStartTimePicker.hours, eventStartTimePicker.minutes));
-                const endDate = new Date(eventEndDateCombo.dateFromText.setHours(eventEndTimePicker.hours, eventEndTimePicker.minutes));
-
-                event.summary = titleField.text;
-                event.description = descriptionTextArea.text;
-                event.location = locationField.text;
-                event.eventStart = startDate;
-
-                if (!allDayCheckBox.checked) {
-                    event.eventEnd = endDate;
-                }
-
-                if (endRecurType.currentIndex == 1) { // End recurrence on date
-                    event.setRecurrenceEndDateTime(recurEndDateCombo.dateFromText)
-                }
-
                 added(calendarCombo.currentValue, event);
             }
             eventEditorSheet.close();
@@ -70,6 +52,7 @@ Kirigami.OverlaySheet {
 
         Kirigami.InlineMessage {
             id: invalidDateMessage
+
             Layout.fillWidth: true
             visible: !eventEditorSheet.validDates
             type: Kirigami.MessageType.Error
@@ -78,10 +61,12 @@ Kirigami.OverlaySheet {
 
         Kirigami.FormLayout {
             id: eventForm
+
             property date todayDate: new Date()
 
             QQC2.ComboBox {
                 id: calendarCombo
+
                 Kirigami.FormData.label: i18n("Calendar:")
                 Layout.fillWidth: true
 
@@ -102,6 +87,7 @@ Kirigami.OverlaySheet {
             }
             QQC2.TextField {
                 id: titleField
+
                 Kirigami.FormData.label: i18n("<b>Title</b>:")
                 placeholderText: i18n("Required")
                 text: event.summary
@@ -109,6 +95,7 @@ Kirigami.OverlaySheet {
             }
             QQC2.TextField {
                 id: locationField
+
                 Kirigami.FormData.label: i18n("Location:")
                 placeholderText: i18n("Optional")
                 text: event.location
@@ -121,16 +108,26 @@ Kirigami.OverlaySheet {
 
             QQC2.CheckBox {
                 id: allDayCheckBox
+
                 Kirigami.FormData.label: i18n("All day event:")
                 onCheckedChanged: event.allDay = checked
             }
             RowLayout {
+                id: eventStartLayout
+
                 Kirigami.FormData.label: i18n("Start:")
                 Layout.fillWidth: true
+
+                function setEventStart() {
+                    let dateCombo = eventStartDateCombo;
+                    let timePicker = eventStartTimePicker;
+                    event.eventStart = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
+                }
 
                 QQC2.ComboBox {
                     id: eventStartDateCombo
                     Layout.fillWidth: true
+
                     editable: true
                     editText: eventStartDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
 
@@ -141,45 +138,46 @@ Kirigami.OverlaySheet {
 
                     onDateFromTextChanged: {
                         let datePicker = eventStartDatePicker
-                        let timePicker = eventStartTimePicker
 
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText
                             datePicker.clickedDate = dateFromText
-                            event.eventStart = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                        }
-                    }
-
-                    Connections {
-                        target: event
-                        function onEventStartChanged() {
-                            eventStartDateCombo.editText = event.startDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+                            eventStartLayout.setEventStart();
                         }
                     }
 
                     popup: QQC2.Popup {
                         id: eventStartDatePopup
+
                         width: parent.width*2
                         height: Kirigami.Units.gridUnit * 18
                         z: 1000
 
                         DatePicker {
                             id: eventStartDatePicker
+
                             anchors.fill: parent
-                            onDatePicked: eventStartDatePopup.close()
+                            onDatePicked: {
+                                eventStartDatePopup.close()
+                                eventStartLayout.setEventStart();
+                            }
                         }
                     }
                 }
                 QQC2.ComboBox {
                     id: eventStartTimeCombo
+
                     Layout.fillWidth: true
+
                     property string displayHour: eventStartTimePicker.hours < 10 ?
                         String(eventStartTimePicker.hours).padStart(2, "0") : eventStartTimePicker.hours
                     property string displayMinutes: eventStartTimePicker.minutes < 10 ?
                         String(eventStartTimePicker.minutes).padStart(2, "0") : eventStartTimePicker.minutes
 
                     editable: true
-                    editText: displayHour + ":" + displayMinutes
+                    editText: eventEditorSheet.editMode && !event.startDate ?
+                              String(event.startDate.getHours()) + ":" + String(event.startDate.getMinutes()) :
+                              displayHour + ":" + displayMinutes
                     enabled: !allDayCheckBox.checked
                     visible: !allDayCheckBox.checked
 
@@ -194,14 +192,7 @@ Kirigami.OverlaySheet {
 
                         if (acceptableInput && activeFocus) { // Need to check for activeFocus or on load the text gets reset to 00:00
                             timePicker.setToTimeFromString(editText);
-                            event.eventStart = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                        }
-                    }
-
-                    Connections {
-                        target: event
-                        function onEventStartChanged() {
-                            eventStartTimeCombo.editText = String(event.startDate.getHours()) + ":" + String(event.startDate.getMinutes())
+                            eventStartLayout.setEventStart();
                         }
                     }
 
@@ -213,25 +204,41 @@ Kirigami.OverlaySheet {
 
                         TimePicker {
                             id: eventStartTimePicker
-                            onDone: eventStartTimePopup.close()
+                            onDone: {
+                                eventStartTimePopup.close();
+                                eventStartLayout.setEventStart();
+                            }
                         }
                     }
                 }
             }
             RowLayout {
+                id: eventEndLayout
+
                 Kirigami.FormData.label: i18n("End:")
                 Layout.fillWidth: true
                 visible: !allDayCheckBox.checked
 
+                function setEventEnd() {
+                    let dateCombo = eventEndDateCombo;
+                    let timePicker = eventEndTimePicker;
+
+                    event.eventEnd = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
+                }
+
                 QQC2.ComboBox {
                     id: eventEndDateCombo
+
                     Layout.fillWidth: true
-                    editable: true
-                    editText: eventEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-                    enabled: !allDayCheckBox.checked
 
                     property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
                     property bool validDate: !isNaN(dateFromText.getTime())
+
+                    editable: true
+                    editText: eventEditorSheet.editMode && !event.endDate ?
+                              event.endDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat) :
+                              eventEndDatePicker.clickedDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
+                    enabled: !allDayCheckBox.checked
 
                     onDateFromTextChanged: {
                         let datePicker = eventEndDatePicker
@@ -240,19 +247,13 @@ Kirigami.OverlaySheet {
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText
                             datePicker.clickedDate = dateFromText
-                            event.eventEnd = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                        }
-                    }
-
-                    Connections {
-                        target: event
-                        function onEventEndChanged() {
-                            eventEndDateCombo.editText = event.endDate.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+                            eventEndLayout.setEventEnd();
                         }
                     }
 
                     popup: QQC2.Popup {
                         id: eventEndDatePopup
+
                         width: parent.width*2
                         height: Kirigami.Units.gridUnit * 18
                         z: 1000
@@ -260,20 +261,27 @@ Kirigami.OverlaySheet {
                         DatePicker {
                             id: eventEndDatePicker
                             anchors.fill: parent
-                            onDatePicked: eventEndDatePopup.close()
+                            onDatePicked: {
+                                eventEndDatePopup.close();
+                                eventEndLayout.setEventEnd();
+                            }
                         }
                     }
                 }
                 QQC2.ComboBox {
                     id: eventEndTimeCombo
+
                     Layout.fillWidth: true
+
                     property string displayHour: eventEndTimePicker.hours < 10 ?
                         String(eventEndTimePicker.hours).padStart(2, "0") : eventEndTimePicker.hours
                     property string displayMinutes: eventEndTimePicker.minutes < 10 ?
                         String(eventEndTimePicker.minutes).padStart(2, "0") : eventEndTimePicker.minutes
 
                     editable: true
-                    editText: displayHour + ":" + displayMinutes
+                    editText: eventEditorSheet.editMode && !event.endDate ?
+                              String(event.endDate.getHours()) + ":" + String(event.endDate.getMinutes()) :
+                              displayHour + ":" + displayMinutes
                     enabled: !allDayCheckBox.checked
 
                     inputMethodHints: Qt.ImhTime
@@ -287,26 +295,24 @@ Kirigami.OverlaySheet {
 
                         if (acceptableInput && activeFocus) {
                             timePicker.setToTimeFromString(editText);
-                            event.eventEnd = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                        }
-                    }
-
-                    Connections {
-                        target: event
-                        function onEventEndChanged() {
-                            eventEndTimeCombo.editText = String(event.endDate.getHours()) + ":" + String(event.endDate.getMinutes())
+                            eventEndLayout.setEventEnd();
                         }
                     }
 
                     popup: QQC2.Popup {
                         id: eventEndTimePopup
+
                         width: parent.width
                         height: parent.width * 2
                         z: 1000
 
                         TimePicker {
                             id: eventEndTimePicker
-                            onDone: eventEndTimePopup.close()
+
+                            onDone: {
+                                eventEndTimePopup.close();
+                                eventEndLayout.setEventEnd();
+                            }
                         }
                     }
                 }
@@ -314,6 +320,7 @@ Kirigami.OverlaySheet {
 
             QQC2.ComboBox {
                 id: repeatComboBox
+
                 Kirigami.FormData.label: i18n("Repeat:")
                 Layout.fillWidth: true
                 textRole: "display"
@@ -332,6 +339,7 @@ Kirigami.OverlaySheet {
 
             GridLayout {
                 id: customRecurrenceLayout
+
                 Layout.fillWidth: true
                 Layout.leftMargin: Kirigami.Units.largeSpacing
                 columns: 5
@@ -353,20 +361,22 @@ Kirigami.OverlaySheet {
                 }
                 QQC2.SpinBox {
                     id: recurFreqRuleSpinbox
+
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     visible: repeatComboBox.currentIndex == 5
                     from: 1
-                    onValueChanged: customRecurrenceLayout.setOcurrence()
+                    onValueChanged: if(visible) { customRecurrenceLayout.setOcurrence() }
                 }
                 QQC2.ComboBox {
                     id: recurScaleRuleCombobox
+
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     visible: repeatComboBox.currentIndex == 5
                     textRole: recurFreqRuleSpinbox.value > 1 ? "displayPlural" : "displaySingular"
                     valueRole: "interval"
-                    onCurrentValueChanged: customRecurrenceLayout.setOcurrence()
+                    onCurrentValueChanged: if(visible) { customRecurrenceLayout.setOcurrence() }
 
                     model: [
                         {key: "day", displaySingular: i18n("day"), displayPlural: i18n("days"), interval: event.recurrenceIntervals["Daily"]},
@@ -380,6 +390,7 @@ Kirigami.OverlaySheet {
                 // Custom controls specific to weekly
                 GridLayout {
                     id: recurWeekdayRuleLayout
+
                     Layout.row: 1
                     Layout.column: 1
                     Layout.columnSpan: 4
@@ -433,6 +444,12 @@ Kirigami.OverlaySheet {
                 }
 
                 ColumnLayout {
+                    id: monthlyRecurRadioColumn
+
+                    Layout.fillWidth: true
+                    Layout.columnSpan: 4
+                    visible: recurScaleRuleCombobox.currentIndex === 2 && repeatComboBox.currentIndex === 5 // "month/months" index
+
                     function numberToString(number) {
                         // The code in here was adapted from an article by Johnathan Wood, see:
                         // http://www.blackbeltcoder.com/Articles/strings/converting-numbers-to-ordinal-strings
@@ -452,11 +469,6 @@ Kirigami.OverlaySheet {
                         let j = (i > 10 && i < 20) ? 0 : (number % 10);
                         return i18n(number + numSuffixes[j]);
                     }
-
-                    id: monthlyRecurRadioColumn
-                    Layout.fillWidth: true
-                    Layout.columnSpan: 4
-                    visible: recurScaleRuleCombobox.currentIndex === 2 && repeatComboBox.currentIndex === 5 // "month/months" index
 
                     QQC2.RadioButton {
                         property int dateOfMonth: eventStartDateCombo.dateFromText.getDate()
@@ -484,6 +496,7 @@ Kirigami.OverlaySheet {
                 }
                 QQC2.ComboBox {
                     id: endRecurType
+
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     model: [i18n("Never"), i18n("On"), i18n("After")]
@@ -491,6 +504,7 @@ Kirigami.OverlaySheet {
                 }
                 QQC2.ComboBox {
                     id: recurEndDateCombo
+
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     visible: endRecurType.currentIndex == 1
@@ -508,7 +522,7 @@ Kirigami.OverlaySheet {
                             datePicker.selectedDate = dateFromText
                             datePicker.clickedDate = dateFromText
 
-                            if (this.visible) {
+                            if (visible) {
                                 event.setRecurrenceEndDateTime(dateFromText)
                             }
                         }
@@ -516,6 +530,7 @@ Kirigami.OverlaySheet {
 
                     popup: QQC2.Popup {
                         id: recurEndDatePopup
+
                         width: parent.width*2
                         height: Kirigami.Units.gridUnit * 18
                         z: 1000
@@ -551,6 +566,7 @@ Kirigami.OverlaySheet {
 
             QQC2.TextArea {
                 id: descriptionTextArea
+
                 Kirigami.FormData.label: i18n("Description:")
                 Layout.fillWidth: true
                 placeholderText: i18n("Optional")
@@ -559,9 +575,10 @@ Kirigami.OverlaySheet {
             }
 
             ColumnLayout {
+                id: remindersColumn
+
                 Kirigami.FormData.label: i18n("Reminder:")
                 Layout.fillWidth: true
-                id: remindersColumn
 
                 function secondsToReminderLabel(seconds) { // Gives prettified time
 
@@ -591,6 +608,7 @@ Kirigami.OverlaySheet {
 
                 QQC2.Button {
                     id: remindersButton
+
                     text: i18n("Add reminder")
                     Layout.fillWidth: true
 
@@ -599,6 +617,7 @@ Kirigami.OverlaySheet {
 
                 Repeater {
                     id: remindersRepeater
+
                     Layout.fillWidth: true
 
                     model: event.remindersModel
@@ -649,9 +668,10 @@ Kirigami.OverlaySheet {
             }
 
             ColumnLayout {
+                id: attendeesColumn
+
                 Kirigami.FormData.label: i18n("Attendees:")
                 Layout.fillWidth: true
-                id: attendeesColumn
 
                 QQC2.Button {
                     id: attendeesButton
