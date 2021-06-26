@@ -50,6 +50,13 @@ Item {
     ColumnLayout {
         anchors.fill: parent
 
+        QQC2.SpinBox {
+            Layout.fillWidth: true
+            from: 1
+            value: minuteMultiples
+            onValueChanged: minuteMultiples = value
+        }
+
         RowLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true

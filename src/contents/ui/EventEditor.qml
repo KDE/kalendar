@@ -170,7 +170,7 @@ Kirigami.OverlaySheet {
                     Layout.fillWidth: true
 
                     editable: true
-                    editText: String(event.eventStart.getHours()) + ":" + String(event.eventStart.getMinutes())
+                    editText: event.eventStart.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
                     enabled: !allDayCheckBox.checked
                     visible: !allDayCheckBox.checked
 
@@ -265,7 +265,7 @@ Kirigami.OverlaySheet {
                     Layout.fillWidth: true
 
                     editable: true
-                    editText: String(event.eventEnd.getHours()) + ":" + String(event.eventEnd.getMinutes())
+                    editText: event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
                     enabled: !allDayCheckBox.checked
 
                     inputMethodHints: Qt.ImhTime
