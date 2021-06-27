@@ -77,9 +77,8 @@ Kirigami.OverlaySheet {
 
                 // Should default to default collection
                 // Should also only show *calendars*
-                model: CalendarManager.collections
+                model: CalendarManager.selectableCalendars
                 delegate: Kirigami.BasicListItem {
-                    leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
                     label: display
                     icon: decoration
                 }

@@ -23,7 +23,6 @@ Item {
     property bool secondsPicker: false
 
     onHoursChanged: {
-        console.log (hours)
         hours = hours % 24;
         hourView.currentIndex = hours;
         timeChanged(hours, minutes, seconds);
@@ -157,7 +156,7 @@ Item {
                         target: timePicker
                         onMinuteMultiplesAboutToChange: minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples
                     }
-                    onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples, console.log(currentIndex)
+                    onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples
                     onCurrentIndexChanged: timePicker.minutes = currentIndex * timePicker.minuteMultiples
 
                     model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)

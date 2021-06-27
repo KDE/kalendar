@@ -242,6 +242,28 @@ CalendarManager::CalendarManager(QObject *parent)
     mCollectionSelectionModelStateSaver->setSelectionModel(m_calendar->checkableProxyModel()->selectionModel());
     mCollectionSelectionModelStateSaver->restoreState(selectionGroup);
 
+
+    // Flatten the tree, e.g.
+    // Kolab
+    // Kolab / Inbox
+    // Kolab / Inbox / Calendar
+    auto proxyModel = new KDescendantsProxyModel(this);
+    proxyModel->setDisplayAncestorData(true);
+    proxyModel->setSourceModel(collectionFilter);
+
+    // Filter it by mimetype again, to only keep
+    // Kolab / Inbox / Calendar
+    /*m_mimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_mimeTypeFilterModel->setSourceModel(proxyModel);
+    m_mimeTypeFilterModel->clearFilters();
+    qDebug() << m_mimeTypeFilterModel->mimeTypeFilters ( );*/
+
+    // Filter by access rights
+    m_rightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
+    m_rightsFilterModel->setAccessRights( Collection::CanCreateItem );
+    //m_rightsFilterModel->setSourceModel(m_mimeTypeFilterModel);
+    m_rightsFilterModel->setSourceModel(proxyModel);
+
     Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
 }
@@ -306,6 +328,12 @@ Akonadi::ETMCalendar *CalendarManager::calendar() const
 {
     return m_calendar;
 }
+
+Akonadi::EntityRightsFilterModel * CalendarManager::selectableCalendars() const
+{
+    return m_rightsFilterModel;
+}
+
 
 void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event)
 {
