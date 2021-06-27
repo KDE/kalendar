@@ -183,7 +183,6 @@ Kirigami.OverlaySheet {
                         if (acceptableInput && activeFocus) { // Need to check for activeFocus or on load the text gets reset to 00:00
                             timePicker.setToTimeFromString(editText);
                             event.eventStart = new Date(event.eventStart.setHours(timePicker.hours, timePicker.minutes));
-                            editText = event.eventStart.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
                         }
                     }
 
@@ -195,6 +194,15 @@ Kirigami.OverlaySheet {
 
                         TimePicker {
                             id: eventStartTimePicker
+
+                            Connections {
+                                target: event
+                                function onEventStartChanged() {
+                                    console.log("WEEEEEEEEEEEEEEEEEE")
+                                    eventEndTimePicker.hours = event.eventStart.getHours();
+                                    eventEndTimePicker.minutes = event.eventStart.getMinutes();
+                                }
+                            }
 
                             onDone: {
                                 eventStartTimePopup.close();
@@ -282,7 +290,6 @@ Kirigami.OverlaySheet {
                         if (acceptableInput && activeFocus) {
                             timePicker.setToTimeFromString(editText);
                             event.eventEnd = new Date(event.eventEnd.setHours(timePicker.hours, timePicker.minutes));
-                            editText = event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
                         }
                     }
 
@@ -296,10 +303,17 @@ Kirigami.OverlaySheet {
                         TimePicker {
                             id: eventEndTimePicker
 
+                            Connections {
+                                target: event
+                                function onEventEndChanged() {
+                                    eventEndTimePicker.hours = event.eventEnd.getHours();
+                                    eventEndTimePicker.minutes = event.eventEnd.getMinutes();
+                                }
+                            }
+
                             onDone: {
                                 eventEndTimePopup.close();
                                 event.eventEnd = new Date(event.eventEnd.setHours(hours, minutes));
-                                eventEndTimeCombo.editText = event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
                             }
 
                             Component.onCompleted: {
