@@ -70,10 +70,11 @@ Kirigami.OverlaySheet {
                 Kirigami.FormData.label: i18n("Calendar:")
                 Layout.fillWidth: true
 
-                property int selectedCollectionId: null
-
                 textRole: "display"
                 valueRole: "collectionId"
+                currentIndex: !event.collectionId || !eventEditorSheet.editMode ?
+                              CalendarManager.defaultCalendarSelectableIndex :
+                              CalendarManager.getCalendarSelectableIndex(event.collectionId)
 
                 // Should default to default collection
                 // Should also only show *calendars*

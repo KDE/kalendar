@@ -263,6 +263,10 @@ CalendarManager::CalendarManager(QObject *parent)
     m_rightsFilterModel->setAccessRights( Collection::CanCreateItem );
     //m_rightsFilterModel->setSourceModel(m_mimeTypeFilterModel);
     m_rightsFilterModel->setSourceModel(proxyModel);
+    m_rightsFilterModel->sort(0);
+
+    connect(m_rightsFilterModel, &Akonadi::EntityRightsFilterModel::rowsInserted,
+            this, &CalendarManager::updateDefaultCalendarSelectableIndex);
 
     Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
@@ -334,6 +338,37 @@ Akonadi::EntityRightsFilterModel * CalendarManager::selectableCalendars() const
     return m_rightsFilterModel;
 }
 
+qint64 CalendarManager::defaultCalendarId()
+{
+    return CalendarSupport::KCalPrefs::instance()->defaultCalendarId();
+}
+
+int CalendarManager::getCalendarSelectableIndex(qint64 collectionId)
+{
+    //auto index = m_rightsFilterModel->match(m_rightsFilterModel->index(0,0), Akonadi::EntityTreeModel::Roles::CollectionRole, cal, -1, Qt::MatchRecursive);
+
+    for(int i = 0; i < m_rightsFilterModel->rowCount(); i++)
+    {
+        QModelIndex idx = m_rightsFilterModel->index(i, 0);
+        QVariant data = idx.data(Akonadi::EntityTreeModel::Roles::CollectionIdRole);
+
+        if(data == collectionId)
+            return i;
+    }
+    return -1;
+}
+
+int CalendarManager::defaultCalendarSelectableIndex()
+{
+    return m_defaultCalendarSelectableIndex;
+}
+
+void CalendarManager::updateDefaultCalendarSelectableIndex()
+{
+    qint64 calId = defaultCalendarId();
+    m_defaultCalendarSelectableIndex = getCalendarSelectableIndex(calId);
+    Q_EMIT defaultCalendarSelectableIndexChanged();
+}
 
 void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event)
 {

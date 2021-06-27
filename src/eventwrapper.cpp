@@ -19,8 +19,6 @@ EventWrapper::EventWrapper(QObject *parent)
 
     m_event->setDtStart(QDateTime::currentDateTime());
     m_event->setDtEnd(QDateTime::currentDateTime().addSecs(60 * 60));
-    qDebug() << m_event->dtStart();
-    qDebug() << m_event->dtEnd();
 
     // Change event pointer in remindersmodel if changed here
     connect(this, SIGNAL(eventPtrChanged(KCalendarCore::Event::Ptr)),
