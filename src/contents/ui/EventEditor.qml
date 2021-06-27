@@ -136,8 +136,8 @@ Kirigami.OverlaySheet {
                         let datePicker = eventStartDatePicker
 
                         if (validDate && activeFocus) {
-                            datePicker.selectedDate = dateFromText
-                            datePicker.clickedDate = dateFromText
+                            datePicker.selectedDate = dateFromText;
+                            datePicker.clickedDate = dateFromText;
                             event.eventEnd = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
                         }
                     }
@@ -154,7 +154,7 @@ Kirigami.OverlaySheet {
 
                             anchors.fill: parent
                             onDatePicked: {
-                                eventStartDatePopup.close()
+                                eventStartDatePopup.close();
                                 let hours = event.eventStart.getHours();
                                 let minutes = event.eventStart.getMinutes();
                                 event.eventStart = new Date(pickedDate.setHours(hours, minutes));
@@ -203,8 +203,8 @@ Kirigami.OverlaySheet {
                             }
 
                             Component.onCompleted: {
-                                hours = event.eventStart.getHours()
-                                minutes = event.eventStart.getMinutes()
+                                hours = event.eventStart.getHours();
+                                minutes = event.eventStart.getMinutes();
                             }
                         }
                     }
@@ -231,8 +231,8 @@ Kirigami.OverlaySheet {
 
                     onEditTextChanged: {
                         // Set date from text here because it otherwise updates after this handler
-                        dateFromText = Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
-                        let datePicker = eventEndDatePicker
+                        dateFromText = Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat);
+                        let datePicker = eventEndDatePicker;
 
                         if (validDate && activeFocus) {
                             datePicker.selectedDate = dateFromText;
@@ -282,7 +282,7 @@ Kirigami.OverlaySheet {
                         if (acceptableInput && activeFocus) {
                             timePicker.setToTimeFromString(editText);
                             event.eventEnd = new Date(event.eventEnd.setHours(timePicker.hours, timePicker.minutes));
-                            editText = event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                            editText = event.eventEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
                         }
                     }
 
@@ -303,8 +303,8 @@ Kirigami.OverlaySheet {
                             }
 
                             Component.onCompleted: {
-                                hours = event.eventEnd.getHours()
-                                minutes = event.eventEnd.getMinutes()
+                                hours = event.eventEnd.getHours();
+                                minutes = event.eventEnd.getMinutes();
                             }
                         }
                     }
@@ -318,7 +318,7 @@ Kirigami.OverlaySheet {
                 Layout.fillWidth: true
                 textRole: "display"
                 valueRole: "interval"
-                onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue) }
+                onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue); }
                 model: [
                     {key: "never", display: i18n("Never"), interval: -1},
                     {key: "daily", display: i18n("Daily"), interval: event.recurrenceIntervals["Daily"]},
@@ -339,16 +339,16 @@ Kirigami.OverlaySheet {
                 visible: repeatComboBox.currentIndex > 0 // Not "Never" index
 
                 function setOcurrence() {
-                    event.setRegularRecurrence(recurScaleRuleCombobox.currentValue, recurFreqRuleSpinbox.value)
+                    event.setRegularRecurrence(recurScaleRuleCombobox.currentValue, recurFreqRuleSpinbox.value);
 
-                    if(recurScaleRuleCombobox.currentValue == event.recurrenceIntervals["Weekly"]) {
-                        weekdayCheckboxRepeater.setWeekdaysRepeat()
+                    if(recurScaleRuleCombobox.currentValue === event.recurrenceIntervals["Weekly"]) {
+                        weekdayCheckboxRepeater.setWeekdaysRepeat();
                     }
                 }
 
                 // Custom controls
                 QQC2.Label {
-                    visible: repeatComboBox.currentIndex == 5
+                    visible: repeatComboBox.currentIndex === 5
                     Layout.columnSpan: 1
                     text: i18n("Every:")
                 }
@@ -357,19 +357,19 @@ Kirigami.OverlaySheet {
 
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
-                    visible: repeatComboBox.currentIndex == 5
+                    visible: repeatComboBox.currentIndex === 5
                     from: 1
-                    onValueChanged: if(visible) { customRecurrenceLayout.setOcurrence() }
+                    onValueChanged: if(visible) { customRecurrenceLayout.setOcurrence(); }
                 }
                 QQC2.ComboBox {
                     id: recurScaleRuleCombobox
 
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
-                    visible: repeatComboBox.currentIndex == 5
+                    visible: repeatComboBox.currentIndex === 5
                     textRole: recurFreqRuleSpinbox.value > 1 ? "displayPlural" : "displaySingular"
                     valueRole: "interval"
-                    onCurrentValueChanged: if(visible) { customRecurrenceLayout.setOcurrence() }
+                    onCurrentValueChanged: if(visible) { customRecurrenceLayout.setOcurrence(); }
 
                     model: [
                         {key: "day", displaySingular: i18n("day"), displayPlural: i18n("days"), interval: event.recurrenceIntervals["Daily"]},
@@ -388,7 +388,7 @@ Kirigami.OverlaySheet {
                     Layout.column: 1
                     Layout.columnSpan: 4
                     columns: 7
-                    visible: recurScaleRuleCombobox.currentIndex == 1 && repeatComboBox.currentIndex == 5 // "week"/"weeks" index
+                    visible: recurScaleRuleCombobox.currentIndex === 1 && repeatComboBox.currentIndex === 5 // "week"/"weeks" index
 
                     Repeater {
                         model: 7
@@ -476,7 +476,7 @@ Kirigami.OverlaySheet {
                         property string dayOfWeekString: Qt.locale().dayName(eventStartDateCombo.dateFromText.getDay())
 
                         text: i18nc("the weekOfMonth dayOfWeekString of each month", "the %1 %2 of each month", parent.numberToString(weekOfMonth), dayOfWeekString)
-                        onTextChanged: if(checked) { event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek) }
+                        onTextChanged: if(checked) { event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek); }
                         onClicked: event.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek)
                     }
                 }
@@ -512,11 +512,11 @@ Kirigami.OverlaySheet {
                     onDateFromTextChanged: {
                         const datePicker = recurEndDatePicker
                         if (validDate && activeFocus) {
-                            datePicker.selectedDate = dateFromText
-                            datePicker.clickedDate = dateFromText
+                            datePicker.selectedDate = dateFromText;
+                            datePicker.clickedDate = dateFromText;
 
                             if (visible) {
-                                event.setRecurrenceEndDateTime(dateFromText)
+                                event.setRecurrenceEndDateTime(dateFromText);
                             }
                         }
                     }
@@ -563,8 +563,8 @@ Kirigami.OverlaySheet {
                 Kirigami.FormData.label: i18n("Description:")
                 Layout.fillWidth: true
                 placeholderText: i18n("Optional")
-                text: event.summary
-                onTextChanged: event.summary = text
+                text: event.description
+                onTextChanged: event.description = text
             }
 
             ColumnLayout {
