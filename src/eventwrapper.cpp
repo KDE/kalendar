@@ -35,6 +35,7 @@ KCalendarCore::Event::Ptr EventWrapper::eventPtr() const
 void EventWrapper::setEventPtr(KCalendarCore::Event::Ptr eventPtr)
 {
     m_event = eventPtr;
+    Q_EMIT eventPtrChanged(m_event);
 }
 
 QString EventWrapper::summary() const
@@ -45,6 +46,7 @@ QString EventWrapper::summary() const
 void EventWrapper::setSummary(QString summary)
 {
     m_event->setSummary(summary);
+    Q_EMIT summaryChanged();
 }
 
 QString EventWrapper::description() const
@@ -69,6 +71,7 @@ QString EventWrapper::location() const
 void EventWrapper::setLocation(QString location)
 {
     m_event->setLocation(location);
+    Q_EMIT locationChanged();
 }
 
 
@@ -80,6 +83,7 @@ QDateTime EventWrapper::eventStart() const
 void EventWrapper::setEventStart(QDateTime eventStart)
 {
     m_event->setDtStart(eventStart);
+    Q_EMIT eventStartChanged();
 }
 
 QDateTime EventWrapper::eventEnd() const
@@ -90,6 +94,7 @@ QDateTime EventWrapper::eventEnd() const
 void EventWrapper::setEventEnd(QDateTime eventEnd)
 {
     m_event->setDtEnd(eventEnd);
+    Q_EMIT eventEndChanged();
 }
 
 bool EventWrapper::allDay() const
@@ -100,6 +105,7 @@ bool EventWrapper::allDay() const
 void EventWrapper::setAllDay(bool allDay)
 {
     m_event->setAllDay(allDay);
+    Q_EMIT allDayChanged();
 }
 
 KCalendarCore::Recurrence * EventWrapper::recurrence() const

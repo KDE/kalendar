@@ -118,12 +118,6 @@ Kirigami.OverlaySheet {
                 Kirigami.FormData.label: i18n("Start:")
                 Layout.fillWidth: true
 
-                function setEventStart() {
-                    let dateCombo = eventStartDateCombo;
-                    let timePicker = eventStartTimePicker;
-                    event.eventStart = new Date(dateCombo.dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                }
-
                 QQC2.ComboBox {
                     id: eventStartDateCombo
                     Layout.fillWidth: true
@@ -164,8 +158,6 @@ Kirigami.OverlaySheet {
                                 let hours = event.eventStart.getHours();
                                 let minutes = event.eventStart.getMinutes();
                                 event.eventStart = new Date(pickedDate.setHours(hours, minutes));
-                                // For some reason, the editText needs to be manually updated.
-                                eventStartDateCombo.editText = event.eventStart.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
                             }
                         }
                     }
@@ -207,7 +199,7 @@ Kirigami.OverlaySheet {
                             onDone: {
                                 eventStartTimePopup.close();
                                 event.eventStart = new Date(event.eventStart.setHours(hours, minutes));
-                                eventStartTimeCombo.editText = event.eventStart.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
+
                             }
 
                             Component.onCompleted: {
@@ -248,7 +240,6 @@ Kirigami.OverlaySheet {
                             let hours = event.eventEnd.getHours();
                             let minutes = event.eventEnd.getMinutes();
                             event.eventEnd = new Date(dateFromText.setHours(hours, minutes));
-                            event.eventEnd.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
                         }
                     }
 
@@ -267,8 +258,6 @@ Kirigami.OverlaySheet {
                                 let hours = event.eventEnd.getHours();
                                 let minutes = event.eventEnd.getMinutes();
                                 event.eventEnd = new Date(pickedDate.setHours(hours, minutes));
-                                // For some reason, the editText needs to be manually updated.
-                                eventEndDateCombo.editText = event.eventEnd.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
                             }
                         }
                     }
