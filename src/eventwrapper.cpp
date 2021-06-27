@@ -23,6 +23,8 @@ EventWrapper::EventWrapper(QObject *parent)
     // Change event pointer in remindersmodel if changed here
     connect(this, &EventWrapper::eventPtrChanged,
             &m_remindersModel, [=](KCalendarCore::Event::Ptr eventPtr){ m_remindersModel.setEventPtr(eventPtr); });
+    connect(this, &EventWrapper::eventPtrChanged,
+            &m_attendeesModel, [=](KCalendarCore::Event::Ptr eventPtr){ m_attendeesModel.setEventPtr(eventPtr); });
 }
 
 KCalendarCore::Event::Ptr EventWrapper::eventPtr() const

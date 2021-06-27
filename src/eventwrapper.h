@@ -89,5 +89,4 @@ private:
     RemindersModel m_remindersModel;
     AttendeesModel m_attendeesModel;
     QVariantMap m_recurrenceIntervals;
-    qint64 collectionId;
 };
