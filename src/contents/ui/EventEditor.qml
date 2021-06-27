@@ -204,8 +204,6 @@ Kirigami.OverlaySheet {
                         TimePicker {
                             id: eventStartTimePicker
 
-                            onTimeChanged: console.log(event.eventStart.getMinutes(), minutes)
-
                             onDone: {
                                 eventStartTimePopup.close();
                                 event.eventStart = new Date(event.eventStart.setHours(hours, minutes));
@@ -644,7 +642,7 @@ Kirigami.OverlaySheet {
                                                                                 currentValue,
                                                                                 event.remindersModel.dataroles["startOffset"])
                             onCountChanged: selectedIndex = currentIndex // Gets called *just* before modelChanged
-                            onModelChanged: currentIndex = selectedIndex, console.log(selectedIndex)
+                            onModelChanged: currentIndex = selectedIndex
 
                             model: [0, // We times by -1 to make times be before event
                                     -1 * 5 * 60, // 5 minutes

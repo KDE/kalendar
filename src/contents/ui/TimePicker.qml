@@ -11,6 +11,7 @@ Item {
 
     signal done()
     signal timeChanged(int hours, int minutes, int seconds)
+    signal minuteMultiplesAboutToChange(int minuteMultiples)
 
     anchors.fill: parent
 
@@ -29,7 +30,11 @@ Item {
     }
     onMinutesChanged: {
         minutes = minutes % 60;
-        minuteView.currentIndex = minutes / minuteMultiples;
+        if (minutes % minuteMultiples != 0) {
+            minuteMultiplesAboutToChange(minuteMultiples);
+            minuteMultiples = 1;
+        }
+        minuteView.currentIndex = minutes * minuteMultiples;
         timeChanged(hours, minutes, seconds);
     }
     onSecondsChanged: {
@@ -76,7 +81,10 @@ Item {
                 Layout.fillWidth: true
                 from: 1
                 value: minuteMultiples
-                onValueChanged: minuteMultiples = value
+                onValueChanged: {
+                    minuteMultiplesAboutToChange(minuteMultiples);
+                    minuteMultiples = value;
+                }
             }
         }
 
@@ -142,7 +150,15 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    onCurrentIndexChanged: timePicker.minutes = currentIndex * minuteMultiples
+                    property int selectedIndex: 0
+
+                    // We don't want our selected time to get reset when we update minuteMultiples, on which the model depends
+                    Connections { // Gets called before model regen
+                        target: timePicker
+                        onMinuteMultiplesAboutToChange: minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples
+                    }
+                    onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples, console.log(currentIndex)
+                    onCurrentIndexChanged: timePicker.minutes = currentIndex * timePicker.minuteMultiples
 
                     model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
                     delegate: Kirigami.Heading {
