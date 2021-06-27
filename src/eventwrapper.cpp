@@ -21,8 +21,8 @@ EventWrapper::EventWrapper(QObject *parent)
     m_event->setDtEnd(QDateTime::currentDateTime().addSecs(60 * 60));
 
     // Change event pointer in remindersmodel if changed here
-    connect(this, SIGNAL(eventPtrChanged(KCalendarCore::Event::Ptr)),
-            &m_remindersModel, SLOT(setEventPtr(KCalendarCore::Event::Ptr)));
+    connect(this, &EventWrapper::eventPtrChanged,
+            &m_remindersModel, [=](KCalendarCore::Event::Ptr eventPtr){ m_remindersModel.setEventPtr(eventPtr); });
 }
 
 KCalendarCore::Event::Ptr EventWrapper::eventPtr() const
