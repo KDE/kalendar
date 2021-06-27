@@ -15,55 +15,43 @@ Item {
 
     anchors.fill: parent
 
-    property int hours: hourView.currentIndex
-    property int minutes: minuteView.currentIndex * minuteMultiples
-    property int seconds: secondsView.currentIndex
+    property date dateTime: new Date()
+
+    property int hours: dateTime.getHours()
+    property int minutes: dateTime.getMinutes()
+    property int seconds: dateTime.getSeconds()
 
     property int minuteMultiples: 5
     property bool secondsPicker: false
 
-    onHoursChanged: {
-        hours = hours % 24;
-        hourView.currentIndex = hours;
-        timeChanged(hours, minutes, seconds);
+    onDateTimeChanged: {
+        hourView.currentIndex = dateTime.getHours();
+        minuteView.currentIndex = dateTime.getMinutes() / minuteMultiples;
+        secondsView.currentIndex = dateTime.getSeconds();
     }
+
     onMinutesChanged: {
-        minutes = minutes % 60;
         if (minutes % minuteMultiples != 0) {
             minuteMultiplesAboutToChange(minuteMultiples);
             minuteMultiples = 1;
         }
-        minuteView.currentIndex = minutes * minuteMultiples;
-        timeChanged(hours, minutes, seconds);
-    }
-    onSecondsChanged: {
-        seconds = seconds % 60;
-        secondsView.currentIndex = seconds;
-        timeChanged(hours, minutes, seconds);
-    }
-
-    Component.onCompleted: {
-        var now = new Date();
-        hourView.currentIndex = now.getHours();
-        minuteView.currentIndex = now.getMinutes() / minuteMultiples;
-        secondsView.currentIndex = now.getSeconds();
-    }
-
-    function setToTimeFromDate(date) {
-        hourView.currentIndex = date.getHours();
-        minuteView.currentIndex = date.getMinutes() / minuteMultiples;
-        secondsView.currentIndex = date.getSeconds();
     }
 
     function setToTimeFromString(timeString) { // Accepts in format HH:MM:SS
         var splitTimeString = timeString.split(":");
         switch (splitTimeString.length) {
             case 3:
-                secondsView.currentIndex = Number(splitTimeString[2]);
+                dateTime = new Date (dateTime.setHours(Number(splitTimeString[2]),
+                                                       Number(splitTimeString[1]),
+                                                       Number(splitTimeString[0])));
+                break;
             case 2:
-                minuteView.currentIndex = Number(splitTimeString[1]) / minuteMultiples;
+                dateTime = new Date (dateTime.setHours(Number(splitTimeString[2]),
+                                                       Number(splitTimeString[1])));
+                break;
             case 1:
-                hourView.currentIndex = Number(splitTimeString[0]);
+                dateTime = new Date (dateTime.setHours(Number(splitTimeString[2])));
+                break;
             case 0:
                 return;
         }
@@ -108,7 +96,7 @@ Item {
 
                     model: 24
 
-                    onCurrentIndexChanged: timePicker.hours = currentIndex
+                    onCurrentIndexChanged: timePicker.dateTime = new Date (timePicker.dateTime.setHours(currentIndex))
 
                     delegate: Kirigami.Heading {
                         property int thisIndex: index
@@ -157,7 +145,8 @@ Item {
                         onMinuteMultiplesAboutToChange: minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples
                     }
                     onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples
-                    onCurrentIndexChanged: timePicker.minutes = currentIndex * timePicker.minuteMultiples
+                    onCurrentIndexChanged: timePicker.dateTime = new Date (timePicker.dateTime.setHours(timePicker.dateTime.getHours(),
+                                                                                                        currentIndex * timePicker.minuteMultiples))
 
                     model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
                     delegate: Kirigami.Heading {
@@ -208,7 +197,9 @@ Item {
                     QQC2.Tumbler {
                         model: 60
 
-                        onCurrentIndexChanged: timePicker.hours = currentIndex
+                        onCurrentIndexChanged: timePicker.dateTime = new Date (timePicker.dateTime.setHours(timePicker.dateTime.getHours(),
+                                                                                                            timePicker.dateTime.getMinutes(),
+                                                                                                            currentIndex))
 
                         delegate: Kirigami.Heading {
                             property int thisIndex: index

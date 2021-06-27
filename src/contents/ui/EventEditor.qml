@@ -198,21 +198,16 @@ Kirigami.OverlaySheet {
                             Connections {
                                 target: event
                                 function onEventStartChanged() {
-                                    console.log("WEEEEEEEEEEEEEEEEEE")
-                                    eventEndTimePicker.hours = event.eventStart.getHours();
-                                    eventEndTimePicker.minutes = event.eventStart.getMinutes();
+                                    eventStartTimePicker.dateTime = event.eventStart
                                 }
                             }
+
+                            dateTime: event.eventStart
 
                             onDone: {
                                 eventStartTimePopup.close();
                                 event.eventStart = new Date(event.eventStart.setHours(hours, minutes));
 
-                            }
-
-                            Component.onCompleted: {
-                                hours = event.eventStart.getHours();
-                                minutes = event.eventStart.getMinutes();
                             }
                         }
                     }
@@ -306,19 +301,15 @@ Kirigami.OverlaySheet {
                             Connections {
                                 target: event
                                 function onEventEndChanged() {
-                                    eventEndTimePicker.hours = event.eventEnd.getHours();
-                                    eventEndTimePicker.minutes = event.eventEnd.getMinutes();
+                                    eventEndTimePicker.dateTime = event.eventEnd
                                 }
                             }
+
+                            dateTime: event.eventEnd
 
                             onDone: {
                                 eventEndTimePopup.close();
                                 event.eventEnd = new Date(event.eventEnd.setHours(hours, minutes));
-                            }
-
-                            Component.onCompleted: {
-                                hours = event.eventEnd.getHours();
-                                minutes = event.eventEnd.getMinutes();
                             }
                         }
                     }
