@@ -596,7 +596,7 @@ Kirigami.OverlaySheet {
                     }
 
                     if (seconds < 0) {
-                        return numAndUnit(seconds * -1) + i18n(" before");
+                        return i18n("%1 before", numAndUnit(seconds * -1));
                     } else if (seconds < 0) {
                         return i18n("%1 after", numAndUnit(seconds));
                     } else {
