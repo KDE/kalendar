@@ -31,7 +31,7 @@ Item {
     }
 
     onMinutesChanged: {
-        if (minutes % minuteMultiples != 0) {
+        if (minutes % minuteMultiples !== 0) {
             minuteMultiplesAboutToChange(minuteMultiples);
             minuteMultiples = 1;
         }
