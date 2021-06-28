@@ -598,7 +598,7 @@ Kirigami.OverlaySheet {
                     if (seconds < 0) {
                         return numAndUnit(seconds * -1) + i18n(" before");
                     } else if (seconds < 0) {
-                        return numAndUnit(seconds) + i18n(" after");
+                        return i18n("%1 after", numAndUnit(seconds));
                     } else {
                         return i18n("On event start");
                     }
