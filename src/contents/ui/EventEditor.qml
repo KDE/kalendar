@@ -110,7 +110,7 @@ Kirigami.OverlaySheet {
             QQC2.CheckBox {
                 id: allDayCheckBox
 
-                Kirigami.FormData.label: i18n("All day event:")
+                text: i18n("All day event")
                 onCheckedChanged: event.allDay = checked
             }
             RowLayout {
