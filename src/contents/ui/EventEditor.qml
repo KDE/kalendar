@@ -40,6 +40,7 @@ Kirigami.OverlaySheet {
             if (editMode) {
                 return
             } else {
+                console.log(calendarCombo.currentValue)
                 added(calendarCombo.currentValue, event);
             }
             eventEditorSheet.close();
@@ -323,6 +324,7 @@ Kirigami.OverlaySheet {
                 Layout.fillWidth: true
                 textRole: "display"
                 valueRole: "interval"
+                onCurrentIndexChanged: if(currentIndex == 0) { event.clearRecurrences(); } // "Never"
                 onCurrentValueChanged: if(currentValue >= 0) { event.setRegularRecurrence(currentValue); }
                 model: [
                     {key: "never", display: i18n("Never"), interval: -1},

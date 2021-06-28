@@ -72,6 +72,7 @@ public:
     Q_INVOKABLE void setWeekdaysRecurrence(const QList<bool> days);
     Q_INVOKABLE void setRecurrenceEndDateTime(QDateTime endDateTime);
     Q_INVOKABLE void setRecurrenceOcurrences(int ocurrences);
+    Q_INVOKABLE void clearRecurrences();
 
 Q_SIGNALS:
     void eventPtrChanged(KCalendarCore::Event::Ptr eventPtr);

@@ -144,6 +144,7 @@ void EventWrapper::addAlarms(KCalendarCore::Alarm::List alarms)
 
 void EventWrapper::setRegularRecurrence(EventWrapper::RecurrenceIntervals interval, int freq)
 {
+    qDebug() << interval;
     switch(interval) {
         case Daily:
             m_event->recurrence()->setDaily(freq);
@@ -190,5 +191,10 @@ void EventWrapper::setRecurrenceEndDateTime(QDateTime endDateTime)
 void EventWrapper::setRecurrenceOcurrences(int ocurrences)
 {
     m_event->recurrence()->setDuration(ocurrences);
+}
+
+void EventWrapper::clearRecurrences()
+{
+    m_event->recurrence()->clear();
 }
 
