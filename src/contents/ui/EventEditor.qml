@@ -584,7 +584,7 @@ Kirigami.OverlaySheet {
 
                     function numAndUnit(secs) {
                         if(secs >= 2 * 24 * 60 * 60)
-                            return Math.round(secs / (24*60*60)) + i18n(" days"); // 2 days +
+                            return i18nc("%1 is 2 or more", "%1 days", Math.round(secs / (24*60*60))); // 2 days +
                         else if (secs >= 1 * 24 * 60 * 60)
                             return "1 day";
                         else if (secs >= 2 * 60 * 60)
