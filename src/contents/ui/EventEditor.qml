@@ -590,7 +590,7 @@ Kirigami.OverlaySheet {
                         else if (secs >= 2 * 60 * 60)
                             return i18nc("%1 is 2 or mores", "%1 hours", Math.round(secs / (60*60))); // 2 hours +
                         else if (secs >= 1 * 60 * 60)
-                            return "1 hour";
+                            return i18n("1 hour");
                         else
                             return i18n("%1 minutes", Math.round(secs / 60));
                     }
