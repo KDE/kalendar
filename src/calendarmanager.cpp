@@ -242,6 +242,7 @@ CalendarManager::CalendarManager(QObject *parent)
     mCollectionSelectionModelStateSaver->setSelectionModel(m_calendar->checkableProxyModel()->selectionModel());
     mCollectionSelectionModelStateSaver->restoreState(selectionGroup);
 
+    // Below reimplements Akonadi::CollectionComboBox
 
     // Flatten the tree, e.g.
     // Kolab
@@ -253,16 +254,14 @@ CalendarManager::CalendarManager(QObject *parent)
 
     // Filter it by mimetype again, to only keep
     // Kolab / Inbox / Calendar
-    /*m_mimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_mimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
     m_mimeTypeFilterModel->setSourceModel(proxyModel);
-    m_mimeTypeFilterModel->clearFilters();
-    qDebug() << m_mimeTypeFilterModel->mimeTypeFilters ( );*/
+    m_mimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("text/calendar"));
 
     // Filter by access rights
     m_rightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
     m_rightsFilterModel->setAccessRights( Collection::CanCreateItem );
-    //m_rightsFilterModel->setSourceModel(m_mimeTypeFilterModel);
-    m_rightsFilterModel->setSourceModel(proxyModel);
+    m_rightsFilterModel->setSourceModel(m_mimeTypeFilterModel);
     m_rightsFilterModel->sort(0);
 
     connect(m_rightsFilterModel, &Akonadi::EntityRightsFilterModel::rowsInserted,
