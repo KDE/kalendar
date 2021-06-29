@@ -9,6 +9,7 @@
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include "remindersmodel.h"
 #include "attendeesmodel.h"
+#include "recurrenceexceptionsmodel.h"
 
 /**
  * This class is a wrapper for a KCalendarCore::Event::Ptr object.
@@ -22,6 +23,7 @@ class EventWrapper : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr WRITE setEventPtr NOTIFY eventPtrChanged)
+    Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
@@ -29,9 +31,15 @@ class EventWrapper : public QObject
     Q_PROPERTY(QDateTime eventEnd READ eventEnd WRITE setEventEnd NOTIFY eventEndChanged)
     Q_PROPERTY(bool allDay READ allDay WRITE setAllDay NOTIFY allDayChanged)
     Q_PROPERTY(KCalendarCore::Recurrence * recurrence READ recurrence)
+    Q_PROPERTY(QVector<bool> recurrenceWeekDays READ recurrenceWeekDays WRITE setRecurrenceWeekDays NOTIFY recurrenceWeekDaysChanged)
+    Q_PROPERTY(int recurrenceDuration READ recurrenceDuration WRITE setRecurrenceDuration NOTIFY recurrenceDurationChanged)
+    Q_PROPERTY(int recurrenceFrequency READ recurrenceFrequency WRITE setRecurrenceFrequency NOTIFY recurrenceFrequencyChanged)
+    Q_PROPERTY(QDateTime recurrenceEndDateTime READ recurrenceEndDateTime WRITE setRecurrenceEndDateTime NOTIFY recurrenceEndDateTimeChanged)
+    Q_PROPERTY(ushort recurrenceType READ recurrenceType NOTIFY recurrenceTypeChanged)
     Q_PROPERTY(KCalendarCore::Attendee::List attendees READ attendees)
     Q_PROPERTY(RemindersModel * remindersModel READ remindersModel NOTIFY remindersModelChanged)
     Q_PROPERTY(AttendeesModel * attendeesModel READ attendeesModel NOTIFY attendeesModelChanged)
+    Q_PROPERTY(RecurrenceExceptionsModel * recurrenceExceptionsModel READ recurrenceExceptionsModel NOTIFY recurrenceExceptionsModelChanged)
     Q_PROPERTY(QVariantMap recurrenceIntervals READ recurrenceIntervals CONSTANT)
 
 public:
@@ -48,6 +56,8 @@ public:
 
     KCalendarCore::Event::Ptr eventPtr() const;
     void setEventPtr(KCalendarCore::Event::Ptr eventPtr);
+    qint64 collectionId();
+    void setCollectionId(qint64 collectionId);
     QString summary() const;
     void setSummary(QString summary);
     QString description() const;
@@ -60,22 +70,33 @@ public:
     void setEventEnd(QDateTime eventEnd);
     bool allDay() const;
     void setAllDay(bool allDay);
+
     KCalendarCore::Recurrence * recurrence() const;
+    QVector<bool> recurrenceWeekDays();
+    void setRecurrenceWeekDays(const QVector<bool> recurrenceWeekDays);
+    int recurrenceDuration();
+    void setRecurrenceDuration(int recurrenceDuration);
+    int recurrenceFrequency();
+    void setRecurrenceFrequency(int recurrenceFrequency);
+    QDateTime recurrenceEndDateTime();
+    void setRecurrenceEndDateTime(QDateTime recurrenceEndDateTime);
+    ushort recurrenceType();
+
     KCalendarCore::Attendee::List attendees() const;
     RemindersModel * remindersModel();
     AttendeesModel * attendeesModel();
+    RecurrenceExceptionsModel * recurrenceExceptionsModel();
     QVariantMap recurrenceIntervals();
 
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);
     Q_INVOKABLE void setRegularRecurrence(RecurrenceIntervals interval, int freq = 1);
     Q_INVOKABLE void setMonthlyPosRecurrence(short pos, int day);
-    Q_INVOKABLE void setWeekdaysRecurrence(const QList<bool> days);
-    Q_INVOKABLE void setRecurrenceEndDateTime(QDateTime endDateTime);
     Q_INVOKABLE void setRecurrenceOcurrences(int ocurrences);
     Q_INVOKABLE void clearRecurrences();
 
 Q_SIGNALS:
     void eventPtrChanged(KCalendarCore::Event::Ptr eventPtr);
+    void collectionIdChanged();
     void summaryChanged();
     void descriptionChanged();
     void locationChanged();
@@ -83,11 +104,19 @@ Q_SIGNALS:
     void eventEndChanged();
     void allDayChanged();
     void remindersModelChanged();
+    void recurrenceWeekDaysChanged();
+    void recurrenceDurationChanged();
+    void recurrenceFrequencyChanged();
+    void recurrenceEndDateTimeChanged();
+    void recurrenceTypeChanged();
     void attendeesModelChanged();
+    void recurrenceExceptionsModelChanged();
 
 private:
     KCalendarCore::Event::Ptr m_event;
+    qint64 m_collectionId;
     RemindersModel m_remindersModel;
     AttendeesModel m_attendeesModel;
+    RecurrenceExceptionsModel m_recurrenceExceptionsModel;
     QVariantMap m_recurrenceIntervals;
 };

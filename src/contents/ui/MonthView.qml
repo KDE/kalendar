@@ -1,5 +1,6 @@
 // Copyright (C) 2018 Michael Bohlender, <bohlender@kolabsys.com>
 // Copyright (C) 2018 Christian Mollekopf, <mollekopf@kolabsys.com>
+// SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.4
@@ -11,6 +12,10 @@ import "dateutils.js" as DateUtils
 
 Kirigami.Page {
     id: monthPage
+
+    // More elegant way of sending this up to main.qml?
+    signal editEventReceived(var receivedEventPtr, var receivedCollectionId)
+    signal deleteEventReceived(var receivedEventPtr, date receivedDeleteDate)
 
     property alias startDate: dayView.startDate
     property alias currentDate: dayView.currentDate
@@ -27,11 +32,40 @@ Kirigami.Page {
     actions {
         left: Kirigami.Action {
             text: i18n("Previous")
-            onTriggered: monthPage.startDate = DateUtils.previousMonth(monthPage.startDate)
+            onTriggered: {
+                dayView.month - 1 < 0 ? dayView.month = 11 : dayView.month -= 1
+                let newDate = DateUtils.getFirstDayOfWeek(DateUtils.previousMonth(startDate))
+
+                // Handling adding and subtracting months in Javascript can get *really* messy.
+                newDate = DateUtils.addDaysToDate(newDate, 7)
+
+                if (newDate.getMonth() === dayView.month) {
+                    newDate = DateUtils.addDaysToDate(newDate, - 7)
+                }
+                if (newDate.getDate() < 14) {
+                    newDate = DateUtils.addDaysToDate(newDate, - 7)
+                }
+
+                console.log(dayView.month)
+                startDate = newDate
+            }
         }
         right: Kirigami.Action {
             text: i18n("Next")
-            onTriggered: monthPage.startDate = DateUtils.nextMonth(monthPage.startDate)
+            onTriggered: {
+                dayView.month = (dayView.month + 1) % 12
+                let newDate = DateUtils.getFirstDayOfWeek(DateUtils.nextMonth(startDate))
+                newDate = DateUtils.addDaysToDate(newDate, 7)
+
+                if (newDate.getMonth() === dayView.month) {
+                    newDate = DateUtils.addDaysToDate(newDate, - 7)
+                }
+                if (newDate.getDate() < 14) {
+                    newDate = DateUtils.addDaysToDate(newDate, - 7)
+                }
+
+                startDate = newDate
+            }
         }
     }
 
@@ -62,6 +96,10 @@ Kirigami.Page {
             horizontalAlignment: Qt.AlignHCenter
             text: DateUtils.getWeek(startDate, Qt.locale().firstDayOfWeek)
         }
+
+        onEditEvent: editEventReceived(eventPtr, collectionId)
+        onDeleteEvent: deleteEventReceived(eventPtr, deleteDate)
+
     }
 }
 

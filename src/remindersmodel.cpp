@@ -27,6 +27,8 @@ void RemindersModel::setEventPtr(KCalendarCore::Event::Ptr event)
     }
     m_event = event;
     Q_EMIT eventPtrChanged();
+    Q_EMIT alarmsChanged();
+    Q_EMIT layoutChanged();
 }
 
 KCalendarCore::Alarm::List RemindersModel::alarms()

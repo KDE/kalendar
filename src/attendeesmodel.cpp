@@ -92,6 +92,9 @@ void AttendeesModel::setEventPtr(KCalendarCore::Event::Ptr event)
     }
     m_event = event;
     Q_EMIT eventPtrChanged();
+    Q_EMIT attendeesChanged();
+    Q_EMIT attendeeStatusModelChanged();
+    Q_EMIT layoutChanged();
 }
 
 KCalendarCore::Attendee::List AttendeesModel::attendees()

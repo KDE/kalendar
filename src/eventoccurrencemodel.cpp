@@ -124,29 +124,30 @@ void EventOccurrenceModel::updateFromSource()
             //}
             //
             // Collect recurring events and add the rest immediately
-            //if (event->recurs()) {
-            //    recurringEvents.insert(event->uid().toLatin1(), event);
-            //    events.insert(event->instanceIdentifier().toLatin1(), event);
-            //} else if(event->recurrenceId().isValid()) {
-            //    exceptions.insert(event->uid().toLatin1(), event);
-            //    events.insert(event->instanceIdentifier().toLatin1(), event);
-            //} else {
+            if (event->recurs()) {
+                recurringEvents.insert(event->uid().toLatin1(), event);
+                events.insert(event->instanceIdentifier().toLatin1(), event);
+            } else if(event->recurrenceId().isValid()) {
+                exceptions.insert(event->uid().toLatin1(), event);
+                events.insert(event->instanceIdentifier().toLatin1(), event);
+            } else {
                 if (event->dtStart().date() < mEnd && event->dtEnd().date() >= mStart) {
                     m_events.append(Occurrence {
                         event->dtStart(),
                         event->dtEnd(),
                         event,
                         getColor(event),
+                        getCollectionId(event),
                         event->allDay()
                     });
                 }
-            //}
+            }
 
         }
-        /*
+
         // process all recurring events and their exceptions.
         for (const auto &uid : recurringEvents.keys()) {
-            KCalendarCore::MemoryCalendar calendar{QTimeZone::systemTimeZone()};
+            KCalendarCore::MemoryCalendar calendar{ QTimeZone::systemTimeZone() };
             calendar.addIncidence(recurringEvents.value(uid));
             for (const auto &event : exceptions.values(uid)) {
                 calendar.addIncidence(event);
@@ -159,10 +160,10 @@ void EventOccurrenceModel::updateFromSource()
                 const auto start = occurrenceIterator.occurrenceStartDate();
                 const auto end = incidence->endDateForStart(start);
                 if (start.date() < mEnd && end.date() >= mStart) {
-                    m_events.append(Occurrence {start, end, incidence, getColor(event), event->allDay() });
+                    m_events.append(Occurrence {start, end, event, getColor(event), getCollectionId(event), event->allDay() });
                 }
             }
-        }*/
+        }
     }
 
     endResetModel();
@@ -196,6 +197,19 @@ int EventOccurrenceModel::rowCount(const QModelIndex &parent) const
 int EventOccurrenceModel::columnCount(const QModelIndex &) const
 {
     return 1;
+}
+
+qint64 EventOccurrenceModel::getCollectionId(const KCalendarCore::Event::Ptr &event)
+{
+    auto item = m_coreCalendar->item(event);
+    if (!item.isValid()) {
+        return {};
+    }
+    auto collection = item.parentCollection();
+    if (!collection.isValid()) {
+        return {};
+    }
+    return collection.id();
 }
 
 QColor EventOccurrenceModel::getColor(const KCalendarCore::Event::Ptr &event)
@@ -246,8 +260,12 @@ QVariant EventOccurrenceModel::data(const QModelIndex &idx, int role) const
             return event.end;
         case Color:
             return event.color;
+        case CollectionId:
+            return event.collectionId;
         case AllDay:
             return event.allDay;
+        case EventPtr:
+            return QVariant::fromValue(event.event);
         case EventOccurrence:
             return QVariant::fromValue(event);
         default:
@@ -293,4 +311,3 @@ void EventOccurrenceModel::save() const
     }
     config->sync();
 }
-

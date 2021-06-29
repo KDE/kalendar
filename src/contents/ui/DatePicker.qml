@@ -146,10 +146,14 @@ Item {
 
                     delegate: QQC2.Button {
                         // Stop days overflowing from the grid by creating an adjusted offset
-                        property int firstDayOfWeekOffset: Qt.locale().firstDayOfWeek >= 4 ? Qt.locale().firstDayOfWeek - 7 : Qt.locale().firstDayOfWeek
-                        // .getDay() returns from 0 to 30, add +1 for correct day number, and add locale offset for correct firstDayOfWeek
-                        property int dateToUse: index + 1 - firstDayOfWeekOffset
-                        property date date: new Date(year, month, dateToUse)
+                        property int firstDayOfWeekOffset: Qt.locale().firstDayOfWeek >= 4 ?
+                                                           Qt.locale().firstDayOfWeek - 7 + 1 :
+                                                           Qt.locale().firstDayOfWeek + 1
+                        // add locale offset for correct firstDayOfWeek
+                        property int dateToUse: index + firstDayOfWeekOffset - (datepicker.firstDay <= 1 ?
+                                                                                datepicker.firstDay + 7:
+                                                                                datepicker.firstDay)
+                        property date date: new Date(datepicker.year, datepicker.month, dateToUse)
                         property bool sameMonth: date.getMonth() === month
                         property bool isToday: date.getDate() === datepicker.today.getDate() &&
                             date.getMonth() === datepicker.today.getMonth() &&

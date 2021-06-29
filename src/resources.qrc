@@ -7,6 +7,7 @@
     <file alias="DayLabels.qml">contents/ui/DayLabels.qml</file>
     <file alias="dateutils.js">contents/ui/dateutils.js</file>
     <file alias="EventEditor.qml">contents/ui/EventEditor.qml</file>
+    <file alias="DeleteEventSheet.qml">contents/ui/DeleteEventSheet.qml</file>
     <file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
   </qresource>

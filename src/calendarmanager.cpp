@@ -148,9 +148,11 @@ protected:
     };
 };
 
+/// Despite the name, this handles the presentation of collections including display text and icons, not just colors.
 class ColorProxyModel : public QSortFilterProxyModel
 {
 public:
+
     explicit ColorProxyModel(QObject *parent = nullptr)
         : QSortFilterProxyModel(parent)
         , mInitDefaultCalendar(false)
@@ -213,7 +215,7 @@ CalendarManager::CalendarManager(QObject *parent)
     : QObject(parent)
     , m_calendar(nullptr)
 {
-    auto currentDate = QDate::currentDate();
+    //auto currentDate = QDate::currentDate();
     if (!Akonadi::Control::start() ) {
         qApp->exit(-1);
         return;
@@ -248,14 +250,14 @@ CalendarManager::CalendarManager(QObject *parent)
     // Kolab
     // Kolab / Inbox
     // Kolab / Inbox / Calendar
-    auto proxyModel = new KDescendantsProxyModel(this);
-    proxyModel->setDisplayAncestorData(true);
-    proxyModel->setSourceModel(collectionFilter);
+    m_allCalendars = new KDescendantsProxyModel(this);
+    m_allCalendars->setDisplayAncestorData(true);
+    m_allCalendars->setSourceModel(collectionFilter);
 
     // Filter it by mimetype again, to only keep
     // Kolab / Inbox / Calendar
     m_mimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
-    m_mimeTypeFilterModel->setSourceModel(proxyModel);
+    m_mimeTypeFilterModel->setSourceModel(m_allCalendars);
     m_mimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
     // text/calendar mimetype includes todo cals
 
@@ -333,6 +335,11 @@ Akonadi::ETMCalendar *CalendarManager::calendar() const
     return m_calendar;
 }
 
+KDescendantsProxyModel * CalendarManager::allCalendars()
+{
+    return m_allCalendars;
+}
+
 Akonadi::EntityRightsFilterModel * CalendarManager::selectableCalendars() const
 {
     return m_rightsFilterModel;
@@ -372,11 +379,35 @@ void CalendarManager::updateDefaultCalendarSelectableIndex()
 
 void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event)
 {
-    Akonadi::Collection::Id collId = collectionId;
-    Akonadi::Collection collection(collId);
+    Akonadi::Collection collection(collectionId);
 
     Akonadi::IncidenceChanger *changer = m_calendar->incidenceChanger();
     qDebug() << changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
 }
+
+// Replicates IncidenceDialogPrivate::save
+void CalendarManager::editEvent(KCalendarCore::Event::Ptr editedEvent)
+{
+    m_calendar->modifyIncidence(editedEvent);
+}
+
+void CalendarManager::deleteEvent(KCalendarCore::Event::Ptr event)
+{
+    m_calendar->deleteEvent(event);
+}
+
+QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
+{
+    QVariantMap collectionDetails;
+    Akonadi::Collection collection = m_calendar->collection(collectionId);
+
+    collectionDetails[QLatin1String("id")] = collection.id();
+    collectionDetails[QLatin1String("name")] = collection.name();
+    collectionDetails[QLatin1String("displayName")] = collection.displayName();
+    collectionDetails[QLatin1String("readOnly")] = collection.rights().testFlag(Collection::ReadOnly);
+
+    return collectionDetails;
+}
+
 
 #include "calendarmanager.moc"

@@ -45,8 +45,10 @@ public:
         StartTime,
         EndTime,
         Color,
+        CollectionId,
         AllDay,
         Event,
+        EventPtr,
         EventOccurrence,
         LastRole
     };
@@ -80,6 +82,7 @@ public:
         QDateTime end;
         QSharedPointer<KCalendarCore::Event> event;
         QColor color;
+        qint64 collectionId;
         bool allDay;
     };
 
@@ -94,7 +97,8 @@ private:
 
     void refreshView();
     void updateFromSource();
-    QColor getColor(const KCalendarCore::Event::Ptr &color);
+    QColor getColor(const KCalendarCore::Event::Ptr &event);
+    qint64 getCollectionId(const KCalendarCore::Event::Ptr &event);
 
     QSharedPointer<QAbstractItemModel> mSourceModel;
     QDate mStart;

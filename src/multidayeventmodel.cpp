@@ -127,9 +127,14 @@ QVariantList MultiDayEventModel::layoutLines(const QDate &rowStart) const
             currentLine.append(QVariantMap{
                 {QStringLiteral("text"), idx.data(EventOccurrenceModel::Summary)},
                 {QStringLiteral("description"), idx.data(EventOccurrenceModel::Description)},
+                {QStringLiteral("startTime"), idx.data(EventOccurrenceModel::StartTime)},
+                {QStringLiteral("endTime"), idx.data(EventOccurrenceModel::EndTime)},
+                {QStringLiteral("allDay"), idx.data(EventOccurrenceModel::AllDay)},
                 {QStringLiteral("starts"), start},
                 {QStringLiteral("duration"), duration},
                 {QStringLiteral("color"), idx.data(EventOccurrenceModel::Color)},
+                {QStringLiteral("collectionId"), idx.data(EventOccurrenceModel::CollectionId)},
+                {QStringLiteral("eventPtr"), idx.data(EventOccurrenceModel::EventPtr)},
                 {QStringLiteral("eventOccurrence"), idx.data(EventOccurrenceModel::EventOccurrence)}
             });
         };

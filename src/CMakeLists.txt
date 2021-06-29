@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp eventoccurrencemodel.cpp calendarmanager.cpp multidayeventmodel.cpp eventwrapper.cpp remindersmodel.cpp attendeesmodel.cpp resources.qrc)
+add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp eventoccurrencemodel.cpp calendarmanager.cpp multidayeventmodel.cpp eventwrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp resources.qrc)
 
 target_link_libraries(kalendar
     Qt5::Core

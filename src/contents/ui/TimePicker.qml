@@ -41,16 +41,16 @@ Item {
         var splitTimeString = timeString.split(":");
         switch (splitTimeString.length) {
             case 3:
-                dateTime = new Date (dateTime.setHours(Number(splitTimeString[2]),
+                dateTime = new Date (dateTime.setHours(Number(splitTimeString[0]),
                                                        Number(splitTimeString[1]),
-                                                       Number(splitTimeString[0])));
+                                                       Number(splitTimeString[2])));
                 break;
             case 2:
-                dateTime = new Date (dateTime.setHours(Number(splitTimeString[2]),
+                dateTime = new Date (dateTime.setHours(Number(splitTimeString[0]),
                                                        Number(splitTimeString[1])));
                 break;
             case 1:
-                dateTime = new Date (dateTime.setHours(Number(splitTimeString[2])));
+                dateTime = new Date (dateTime.setHours(Number(splitTimeString[0])));
                 break;
             case 0:
                 return;
