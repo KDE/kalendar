@@ -242,7 +242,7 @@ CalendarManager::CalendarManager(QObject *parent)
     mCollectionSelectionModelStateSaver->setSelectionModel(m_calendar->checkableProxyModel()->selectionModel());
     mCollectionSelectionModelStateSaver->restoreState(selectionGroup);
 
-    // Below reimplements Akonadi::CollectionComboBox
+    // Below reimplements part of Akonadi::CollectionComboBox
 
     // Flatten the tree, e.g.
     // Kolab
@@ -256,7 +256,8 @@ CalendarManager::CalendarManager(QObject *parent)
     // Kolab / Inbox / Calendar
     m_mimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
     m_mimeTypeFilterModel->setSourceModel(proxyModel);
-    m_mimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("text/calendar"));
+    m_mimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
+    // text/calendar mimetype includes todo cals
 
     // Filter by access rights
     m_rightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
