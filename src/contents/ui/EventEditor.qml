@@ -555,7 +555,7 @@ Kirigami.OverlaySheet {
                         onValueChanged: event.setRecurrenceOcurrences(value)
                     }
                     QQC2.Label {
-                        text: i18np("ocurrence", "ocurrences", recurOcurrenceEndSpinbox.value)
+                        text: i18np("occurrence", "occurrences", recurOcurrenceEndSpinbox.value)
                     }
                 }
             }
