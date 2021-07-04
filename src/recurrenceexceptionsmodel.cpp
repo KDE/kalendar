@@ -76,7 +76,7 @@ QVariant RecurrenceExceptionsModel::data(const QModelIndex &idx, int role) const
 
 QHash<int, QByteArray> RecurrenceExceptionsModel::roleNames() const
 {
-	return {
+    return {
         { DateRole, QByteArrayLiteral("date") }
     };
 }

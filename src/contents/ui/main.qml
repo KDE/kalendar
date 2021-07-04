@@ -5,7 +5,7 @@
 
 import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
-import QtQuick.Controls 2.15 as Controls
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15 
 import org.kde.kalendar 1.0
 import QtQml.Models 2.15
@@ -21,11 +21,42 @@ Kirigami.ApplicationWindow {
 
     pageStack.initialPage: monthViewComponent
 
+    globalDrawer: Kirigami.GlobalDrawer {
+        isMenu: true
+        actions: [
+            Kirigami.Action {
+                text: i18n("Settings")
+                onTriggered: pageStack.layers.push("qrc:/SettingsPage.qml")
+            }
+        ]
+    }
+
+    contextDrawer: EventInfo {
+        id: eventInfo
+
+        contentItem.implicitWidth: Kirigami.Units.gridUnit * 25
+        modal: !root.wideScreen || !enabled
+        onEnabledChanged: drawerOpen = enabled && !modal
+        onModalChanged: drawerOpen = !modal
+        enabled: eventData != undefined && pageStack.layers.depth < 2 && pageStack.depth < 3
+        handleVisible: enabled && pageStack.layers.depth < 2 && pageStack.depth < 3
+        interactive: Kirigami.Settings.isMobile
+
+        onEditEvent: {
+            setUpEdit(eventPtr, collectionId);
+            if (modal) { eventInfo.close() }
+        }
+        onDeleteEvent: {
+            setUpDelete(eventPtr, deleteDate)
+            if (modal) { eventInfo.close() }
+        }
+    }
+
     EventEditor {
         id: eventEditor
         onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
         onEdited: CalendarManager.editEvent(event.eventPtr)
-        onCancel: pageStack.pop(root)
+        onCancel: pageStack.pop(monthViewComponent)
     }
 
     Loader {
@@ -55,13 +86,49 @@ Kirigami.ApplicationWindow {
     }
 
     function editorToUse() {
-        if (applicationWindow().wideScreen) {
+        // Should ideally check if PlaMo or chonk Plasma
+        if (!Kirigami.Settings.isMobile) {
             editorWindowedLoader.active = true
             return editorWindowedLoader.item.eventEditor
         } else {
             pageStack.push(eventEditor);
             return eventEditor;
         }
+    }
+
+    function setUpAdd() {
+        let editorToUse = root.editorToUse();
+        if (editorToUse.editMode || !editorToUse.eventWrapper) {
+            editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
+                                                          editorToUse,
+                                                          "event");
+        }
+        editorToUse.editMode = false;
+    }
+
+    function setUpView(modelData, collectionData) {
+        eventInfo.eventData = modelData
+        eventInfo.collectionData = collectionData
+        eventInfo.open()
+    }
+
+    function setUpEdit(eventPtr, collectionId) {
+        let editorToUse = root.editorToUse();
+        editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
+                                                      editorToUse,
+                                                      "event");
+        editorToUse.eventWrapper.eventPtr = eventPtr;
+        editorToUse.eventWrapper.collectionId = collectionId;
+        editorToUse.editMode = true;
+    }
+
+    function setUpDelete(eventPtr, deleteDate) {
+        deleteEventSheet.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
+                                                           deleteEventSheet,
+                                                           "event");
+        deleteEventSheet.eventWrapper.eventPtr = eventPtr
+        deleteEventSheet.deleteDate = deleteDate
+        deleteEventSheet.open()
     }
 
     DeleteEventSheet {
@@ -80,6 +147,10 @@ Kirigami.ApplicationWindow {
             CalendarManager.deleteEvent(eventPtr);
             deleteEventSheet.close();
         }
+    }
+
+    EventInfoPage {
+        id: eventInfo
     }
 
     globalDrawer: Kirigami.GlobalDrawer {
@@ -103,37 +174,17 @@ Kirigami.ApplicationWindow {
             startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(root.selectedDate))
             month: root.selectedDate.getMonth()
 
-            onEditEventReceived: {
-                let editorToUse = root.editorToUse();
-                editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                              editorToUse,
-                                                              "event");
-                editorToUse.eventWrapper.eventPtr = receivedEventPtr;
-                editorToUse.eventWrapper.collectionId = receivedCollectionId;
-                editorToUse.editMode = true;
-            }
-            onDeleteEventReceived: {
-                deleteEventSheet.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                                    deleteEventSheet,
-                                                                    "event");
-                deleteEventSheet.eventWrapper.eventPtr = receivedEventPtr
-                deleteEventSheet.deleteDate = receivedDeleteDate
-                deleteEventSheet.open()
-            }
+            Layout.minimumWidth: applicationWindow().width * 0.66
+
+            onViewEventReceived: root.setUpView(receivedModelData, receivedCollectionData)
+            onEditEventReceived: root.setUpEdit(receivedEventPtr, receivedCollectionData)
+            onDeleteEventReceived: root.setUpDelete(receivedEventPtr, receivedDeleteDate)
 
             actions.contextualActions: [
                 Kirigami.Action {
                     text: i18n("Add event")
                     icon.name: "list-add"
-                    onTriggered: {
-                        let editorToUse = root.editorToUse();
-                        if (editorToUse.editMode || !editorToUse.eventWrapper) {
-                            editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                                          editorToUse,
-                                                                          "event");
-                        }
-                        editorToUse.editMode = false;
-                    }
+                    onTriggered: root.setUpAdd();
                 }
             ]
         }

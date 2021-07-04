@@ -10,6 +10,7 @@
 
 #include <KCalendarCore/OccurrenceIterator>
 #include <KCalendarCore/MemoryCalendar>
+#include <KFormat>
 #include <etmcalendar.h>
 #include <AkonadiCore/CollectionColorAttribute>
 #include <QRandomGenerator>
@@ -249,6 +250,8 @@ QVariant EventOccurrenceModel::data(const QModelIndex &idx, int role) const
     }
     auto event = m_events.at(idx.row());
     auto icalEvent = event.event;
+    KCalendarCore::Duration duration(event.start, event.end);
+
     switch (role) {
         case Summary:
             return icalEvent->summary();
@@ -258,6 +261,19 @@ QVariant EventOccurrenceModel::data(const QModelIndex &idx, int role) const
             return event.start;
         case EndTime:
             return event.end;
+        case Duration:
+            return QVariant::fromValue(duration);
+        case DurationString:
+        {
+            KFormat format;
+            if (event.event->allDay()) {
+                return format.formatSpelloutDuration(24*60*60*1000); // format milliseconds in 1 day
+            } else if (duration.asSeconds() == 0) {
+                return QLatin1String("");
+            } else {
+                return format.formatSpelloutDuration(duration.asSeconds() * 1000);
+            }
+        }
         case Color:
             return event.color;
         case CollectionId:

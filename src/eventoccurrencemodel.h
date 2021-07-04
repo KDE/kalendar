@@ -44,6 +44,8 @@ public:
         Description,
         StartTime,
         EndTime,
+        Duration,
+        DurationString,
         Color,
         CollectionId,
         AllDay,

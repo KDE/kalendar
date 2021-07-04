@@ -215,7 +215,6 @@ CalendarManager::CalendarManager(QObject *parent)
     : QObject(parent)
     , m_calendar(nullptr)
 {
-    //auto currentDate = QDate::currentDate();
     if (!Akonadi::Control::start() ) {
         qApp->exit(-1);
         return;

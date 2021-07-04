@@ -132,6 +132,7 @@ QVariantList MultiDayEventModel::layoutLines(const QDate &rowStart) const
                 {QStringLiteral("allDay"), idx.data(EventOccurrenceModel::AllDay)},
                 {QStringLiteral("starts"), start},
                 {QStringLiteral("duration"), duration},
+                {QStringLiteral("durationString"), idx.data(EventOccurrenceModel::DurationString)},
                 {QStringLiteral("color"), idx.data(EventOccurrenceModel::Color)},
                 {QStringLiteral("collectionId"), idx.data(EventOccurrenceModel::CollectionId)},
                 {QStringLiteral("eventPtr"), idx.data(EventOccurrenceModel::EventPtr)},

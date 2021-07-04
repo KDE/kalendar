@@ -23,7 +23,7 @@ Kirigami.ScrollablePage {
                               eventWrapper.eventStart < eventWrapper.eventEnd
 
     Component.onCompleted: eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                            eventWrapper,
+                                                            eventEditorSheet,
                                                             "event");
 
 
@@ -836,8 +836,8 @@ Kirigami.ScrollablePage {
                                 Layout.columnSpan: 4
                                 text: model.name
                                 onTextChanged: eventEditorSheet.eventWrapper.attendeesModel.setData(eventEditorSheet.eventWrapper.attendeesModel.index(index, 0),
-                                                                                                    text,
-                                                                                                    eventEditorSheet.eventWrapper.attendeesModel.dataroles["name"])
+                                                                                     text,
+                                                                                     eventEditorSheet.eventWrapper.attendeesModel.dataroles["name"])
                             }
 
                             QQC2.Label {
@@ -848,8 +848,8 @@ Kirigami.ScrollablePage {
                                 Layout.columnSpan: 4
                                 text: model.email
                                 onTextChanged: eventEditorSheet.eventWrapper.attendeesModel.setData(eventEditorSheet.eventWrapper.attendeesModel.index(index, 0),
-                                                                                                    text,
-                                                                                                    eventEditorSheet.eventWrapper.attendeesModel.dataroles["email"])
+                                                                                     text,
+                                                                                     eventEditorSheet.eventWrapper.attendeesModel.dataroles["email"])
                             }
                             QQC2.Label {
                                 text: i18n("Status:")
@@ -861,8 +861,8 @@ Kirigami.ScrollablePage {
                                 valueRole: "value"
                                 currentIndex: status // role of parent
                                 onCurrentValueChanged: eventEditorSheet.eventWrapper.attendeesModel.setData(eventEditorSheet.eventWrapper.attendeesModel.index(index, 0),
-                                                                                                            currentValue,
-                                                                                                            eventEditorSheet.eventWrapper.attendeesModel.dataroles["status"])
+                                                                                     currentValue,
+                                                                                     eventEditorSheet.eventWrapper.attendeesModel.dataroles["status"])
 
                                 popup.z: 1000
                             }
@@ -871,8 +871,8 @@ Kirigami.ScrollablePage {
                                 text: i18n("Request RSVP")
                                 checked: model.rsvp
                                 onCheckedChanged: eventEditorSheet.eventWrapper.attendeesModel.setData(eventEditorSheet.eventWrapper.attendeesModel.index(index, 0),
-                                                                                                       checked,
-                                                                                                       eventEditorSheet.eventWrapper.attendeesModel.dataroles["rsvp"])
+                                                                                     checked,
+                                                                                     eventEditorSheet.eventWrapper.attendeesModel.dataroles["rsvp"])
                             }
                         }
                     }

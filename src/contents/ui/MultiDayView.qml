@@ -14,6 +14,7 @@ import "dateutils.js" as DateUtils
 Item {
     id: root
 
+    signal viewEvent(var modelData, var collectionData)
     signal editEvent(var eventPtr, var collectionId)
     signal deleteEvent(var eventPtr, date deleteDate)
 
@@ -188,98 +189,9 @@ Item {
                                                 onPressed: {
                                                     clickX = mouseX
                                                     if(pressedButtons & Qt.LeftButton) {
-                                                        eventDetails.createObject(mouseArea, {}).open()
+                                                        viewEvent(modelData, collectionDetails)
                                                     } else if (pressedButtons & Qt.RightButton) {
                                                         eventActions.createObject(mouseArea, {}).open()
-                                                    }
-                                                }
-                                                Component {
-                                                    id: eventDetails
-                                                    QQC2.Popup {
-                                                        id: detailsPopup
-                                                        width: Kirigami.Units.gridUnit * 18
-                                                        height: Kirigami.Units.gridUnit * 9
-                                                        x: (parent.x + parent.width / 2) - width / 2
-                                                        y: parent.y + parent.height
-                                                        padding: Kirigami.Units.largeSpacing
-
-                                                        QQC2.ScrollView {
-                                                            anchors.fill: parent
-
-                                                            // The sizing for these elements is questionable, but preventing horizontal overflow
-                                                            // on a scrollview is an absolute pain in the neck.
-                                                            ColumnLayout {
-                                                                id: detailsColumn
-                                                                Layout.maximumWidth: detailsPopup.width - (detailsPopup.padding * 2)
-                                                                Kirigami.Heading {
-                                                                    Layout.maximumWidth: detailsPopup.width - (detailsPopup.padding * 2)
-                                                                    text: "<b>" + modelData.text + "</b>"
-                                                                    level: 3
-                                                                    wrapMode: Text.Wrap
-                                                                }
-                                                                GridLayout {
-                                                                    Layout.maximumWidth: detailsPopup.width - (detailsPopup.padding * 6)
-
-                                                                    columns:2
-
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        text: i18n("<b>Calendar:</b>")
-                                                                    }
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        Layout.fillWidth: true
-                                                                        text: mouseArea.collectionDetails["displayName"]
-                                                                        wrapMode: Text.Wrap
-                                                                    }
-
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        text: i18n("<b>Date:</b>")
-                                                                    }
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        Layout.fillWidth: true
-                                                                        text: modelData.startTime.toDateString() == modelData.endTime.toDateString() ?
-                                                                              modelData.startTime.toLocaleDateString(Qt.locale()) :
-                                                                              modelData.startTime.toLocaleDateString(Qt.locale()) + " - " + modelData.endTime.toLocaleDateString(Qt.locale())
-                                                                        wrapMode: Text.Wrap
-                                                                    }
-
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        text: i18n("<b>Time: </b>")
-                                                                        visible: !modelData.allDay &&
-                                                                                 modelData.startTime.toDateString() == modelData.endTime.toDateString()
-                                                                    }
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        Layout.fillWidth: true
-                                                                        text: {
-                                                                            if(modelData.startTime.toTimeString() != modelData.endTime.toTimeString()) {
-                                                                                modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + " - " + modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
-                                                                            }
-                                                                        }
-                                                                        wrapMode: Text.Wrap
-                                                                        visible: !modelData.allDay &&
-                                                                                 modelData.startTime.toDateString() == modelData.endTime.toDateString()
-                                                                    }
-
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        text: i18n("<b>Description: </b>")
-                                                                        visible: modelData.description
-                                                                    }
-                                                                    QQC2.Label {
-                                                                        Layout.alignment: Qt.AlignTop
-                                                                        Layout.fillWidth: true
-                                                                        text: modelData.description
-                                                                        wrapMode: Text.Wrap
-                                                                        visible: modelData.description
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
                                                     }
                                                 }
 
