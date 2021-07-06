@@ -25,6 +25,43 @@ Kirigami.ApplicationWindow {
         id: eventEditor
         onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
         onEdited: CalendarManager.editEvent(event.eventPtr)
+        onCancel: pageStack.pop(root)
+    }
+
+    Loader {
+        id: editorWindowedLoader
+        active: false
+        sourceComponent: Kirigami.ApplicationWindow {
+            id: root
+
+            width: Kirigami.Units.gridUnit * 40
+            height: Kirigami.Units.gridUnit * 30
+
+            // Probably a more elegant way of accessing the editor from outside than this.
+            property var eventEditor: eventEditorInLoader
+
+            pageStack.initialPage: eventEditorInLoader
+
+            EventEditor {
+                id: eventEditorInLoader
+                onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
+                onEdited: CalendarManager.editEvent(event.eventPtr)
+                onCancel: root.close()
+            }
+
+            visible: true
+            onClosing: editorWindowedLoader.active = false
+        }
+    }
+
+    function editorToUse() {
+        if (applicationWindow().wideScreen) {
+            editorWindowedLoader.active = true
+            return editorWindowedLoader.item.eventEditor
+        } else {
+            pageStack.push(eventEditor);
+            return eventEditor;
+        }
     }
 
     DeleteEventSheet {
@@ -67,13 +104,13 @@ Kirigami.ApplicationWindow {
             month: root.selectedDate.getMonth()
 
             onEditEventReceived: {
-                eventEditor.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                              eventEditor,
+                let editorToUse = root.editorToUse();
+                editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
+                                                              editorToUse,
                                                               "event");
-                eventEditor.eventWrapper.eventPtr = receivedEventPtr;
-                eventEditor.eventWrapper.collectionId = receivedCollectionId;
-                eventEditor.editMode = true;
-                eventEditor.open();
+                editorToUse.eventWrapper.eventPtr = receivedEventPtr;
+                editorToUse.eventWrapper.collectionId = receivedCollectionId;
+                editorToUse.editMode = true;
             }
             onDeleteEventReceived: {
                 deleteEventSheet.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
@@ -89,13 +126,13 @@ Kirigami.ApplicationWindow {
                     text: i18n("Add event")
                     icon.name: "list-add"
                     onTriggered: {
-                        if (eventEditor.editMode || !eventEditor.eventWrapper) {
-                            eventEditor.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                                          eventEditor,
+                        let editorToUse = root.editorToUse();
+                        if (editorToUse.editMode || !editorToUse.eventWrapper) {
+                            editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
+                                                                          editorToUse,
                                                                           "event");
                         }
-                        eventEditor.editMode = false;
-                        eventEditor.open();
+                        editorToUse.editMode = false;
                     }
                 }
             ]

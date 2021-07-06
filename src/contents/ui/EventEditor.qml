@@ -7,11 +7,12 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 
-Kirigami.OverlaySheet {
+Kirigami.ScrollablePage {
     id: eventEditorSheet
 
     signal added(int collectionId, EventWrapper event)
     signal edited(EventWrapper event)
+    signal cancel
 
     // Setting the eventWrapper here and now causes some *really* weird behaviour.
     // Set it after this component has already been instantiated.
@@ -26,9 +27,7 @@ Kirigami.OverlaySheet {
                                                             "event");
 
 
-    header: Kirigami.Heading {
-        text: editMode ? i18n("Edit event") : i18n("Add event")
-    }
+    title: editMode ? i18n("Edit event") : i18n("Add event")
 
     footer: QQC2.DialogButtonBox {
         standardButtons: QQC2.DialogButtonBox.Cancel
@@ -40,14 +39,14 @@ Kirigami.OverlaySheet {
             QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
         }
 
-        onRejected: eventEditorSheet.close()
+        onRejected: cancel()
         onAccepted: {
             if (editMode) {
                 edited(eventWrapper);
             } else {
                 added(calendarCombo.currentValue, eventWrapper);
             }
-            eventEditorSheet.close();
+            cancel();
         }
     }
 
