@@ -29,6 +29,7 @@ Kirigami.ApplicationWindow {
         actions: [
             Kirigami.Action {
                 text: i18n("Settings")
+                icon.name: "settings-configure"
                 onTriggered: pageStack.layers.push("qrc:/SettingsPage.qml")
             }
         ]

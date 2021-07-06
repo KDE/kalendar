@@ -73,6 +73,7 @@ Kirigami.Page {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     ListView {
+                        clip: true
                         model: AgentConfiguration.runningAgents // CalendarManager.collections
                         delegate: Kirigami.SwipeListItem {
                             leftPadding: Kirigami.Units.largeSpacing * 2
@@ -129,6 +130,9 @@ Kirigami.Page {
                                         font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.75)
                                         text: model.display
                                         Layout.fillWidth: true
+                                        elide: Text.ElideRight
+                                        maximumLineCount: 2
+                                        wrapMode: Text.WordWrap
                                     }
 
                                     Controls.Label {
