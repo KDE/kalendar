@@ -149,10 +149,6 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    EventInfoPage {
-        id: eventInfo
-    }
-
     Component {
         id: monthViewComponent
 
