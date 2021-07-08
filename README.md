@@ -1,4 +1,8 @@
-# Kalndar
+# Kalendar
+
+Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you add, edit and delete events from local and remote accounts of your choice, while keeping changes syncronised across your Plasma desktop or phone.
+
+Kalendar is still under heavy development, but welcomes suggestions!
 
 ## Screenshots
 
