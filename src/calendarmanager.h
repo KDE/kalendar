@@ -19,6 +19,7 @@ namespace Akonadi {
 
 class KCheckableProxyModel;
 class QAbstractProxyModel;
+class EventWrapper;
 
 class CalendarManager : public QObject
 {
@@ -52,6 +53,8 @@ public:
     Q_INVOKABLE void editEvent(KCalendarCore::Event::Ptr editedEvent);
     Q_INVOKABLE void deleteEvent(KCalendarCore::Event::Ptr event);
     Q_INVOKABLE QVariantMap getCollectionDetails(qint64 collectionId);
+    Q_INVOKABLE EventWrapper *createNewEvent();
+    Q_INVOKABLE EventWrapper *createNewEventWrapperFrom(KCalendarCore::Event::Ptr event, qint64 collectionId);
 
 private Q_SLOTS:
     void delayedInit();

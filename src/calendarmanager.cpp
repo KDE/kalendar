@@ -28,6 +28,7 @@
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
 #include <QTimer>
+#include "eventwrapper.h"
 
 using namespace Akonadi;
 
@@ -408,5 +409,16 @@ QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
     return collectionDetails;
 }
 
+EventWrapper *CalendarManager::createNewEvent()
+{
+    return new EventWrapper(); // ownership transfered to the QMl engine
+}
+EventWrapper *CalendarManager::createNewEventWrapperFrom(KCalendarCore::Event::Ptr event, qint64 collectionId)
+{
+    const auto eventWrapper = new EventWrapper(); // ownership transfered to the QMl engine
+    eventWrapper->setEventPtr(event);
+    eventWrapper->setCollectionId(collectionId);
+    return eventWrapper;
+}
 
 #include "calendarmanager.moc"

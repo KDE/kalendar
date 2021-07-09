@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import QtQuick 2.15
-import org.kde.kirigami 2.14 as Kirigami
+import org.kde.kirigami 2.15 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15 
 import org.kde.kalendar 1.0
@@ -43,7 +43,10 @@ Kirigami.ApplicationWindow {
         interactive: Kirigami.Settings.isMobile
 
         onEditEvent: {
-            setUpEdit(eventPtr, collectionId);
+            root.pageStack.pushDialogLayer("qrc:/EventEditor.qml", {
+                eventWrapper: CalendarManager.createNewEventWrapperFrom(eventPtr, collectionId),
+                editMode: true,
+            });
             if (modal) { eventInfo.close() }
         }
         onDeleteEvent: {
@@ -52,74 +55,10 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    EventEditor {
-        id: eventEditor
-        onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
-        onEdited: CalendarManager.editEvent(event.eventPtr)
-        onCancel: pageStack.pop(monthViewComponent)
-    }
-
-    Loader {
-        id: editorWindowedLoader
-        active: false
-        sourceComponent: Kirigami.ApplicationWindow {
-            id: root
-
-            width: Kirigami.Units.gridUnit * 40
-            height: Kirigami.Units.gridUnit * 30
-
-            // Probably a more elegant way of accessing the editor from outside than this.
-            property var eventEditor: eventEditorInLoader
-
-            pageStack.initialPage: eventEditorInLoader
-
-            EventEditor {
-                id: eventEditorInLoader
-                onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
-                onEdited: CalendarManager.editEvent(event.eventPtr)
-                onCancel: root.close()
-            }
-
-            visible: true
-            onClosing: editorWindowedLoader.active = false
-        }
-    }
-
-    function editorToUse() {
-        // Should ideally check if PlaMo or chonk Plasma
-        if (!Kirigami.Settings.isMobile) {
-            editorWindowedLoader.active = true
-            return editorWindowedLoader.item.eventEditor
-        } else {
-            pageStack.push(eventEditor);
-            return eventEditor;
-        }
-    }
-
-    function setUpAdd() {
-        let editorToUse = root.editorToUse();
-        if (editorToUse.editMode || !editorToUse.eventWrapper) {
-            editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                          editorToUse,
-                                                          "event");
-        }
-        editorToUse.editMode = false;
-    }
-
     function setUpView(modelData, collectionData) {
         eventInfo.eventData = modelData
         eventInfo.collectionData = collectionData
         eventInfo.open()
-    }
-
-    function setUpEdit(eventPtr, collectionId) {
-        let editorToUse = root.editorToUse();
-        editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                      editorToUse,
-                                                      "event");
-        editorToUse.eventWrapper.eventPtr = eventPtr;
-        editorToUse.eventWrapper.collectionId = collectionId;
-        editorToUse.editMode = true;
     }
 
     function setUpDelete(eventPtr, deleteDate) {
@@ -169,7 +108,12 @@ Kirigami.ApplicationWindow {
                 Kirigami.Action {
                     text: i18n("Add event")
                     icon.name: "list-add"
-                    onTriggered: root.setUpAdd();
+                    onTriggered: {
+                        root.pageStack.pushDialogLayer("qrc:/EventEditor.qml", {
+                            eventWrapper: CalendarManager.createNewEvent(),
+                            editMode: false,
+                        });
+                    }
                 }
             ]
         }

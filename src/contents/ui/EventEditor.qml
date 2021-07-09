@@ -10,10 +10,6 @@ import org.kde.kalendar 1.0
 Kirigami.ScrollablePage {
     id: eventEditorSheet
 
-    signal added(int collectionId, EventWrapper event)
-    signal edited(EventWrapper event)
-    signal cancel
-
     // Setting the eventWrapper here and now causes some *really* weird behaviour.
     // Set it after this component has already been instantiated.
     property var eventWrapper
@@ -21,11 +17,6 @@ Kirigami.ScrollablePage {
     property bool validDates: eventStartDateCombo.validDate &&
                               (eventEndDateCombo.validDate || allDayCheckBox.checked) &&
                               eventWrapper.eventStart < eventWrapper.eventEnd
-
-    Component.onCompleted: eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
-                                                            eventEditorSheet,
-                                                            "event");
-
 
     title: editMode ? i18n("Edit event") : i18n("Add event")
 
@@ -39,14 +30,14 @@ Kirigami.ScrollablePage {
             QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
         }
 
-        onRejected: cancel()
+        onRejected: eventEditorSheet.closeDialog();
         onAccepted: {
             if (editMode) {
-                edited(eventWrapper);
+                CalendarManager.editEvent(eventWrapper.eventPtr);
             } else {
-                added(calendarCombo.currentValue, eventWrapper);
+                CalendarManager.addEvent(calendarCombo.currentValue, eventWrapper.eventPtr)
             }
-            cancel();
+            eventEditorSheet.closeDialog();
         }
     }
 
