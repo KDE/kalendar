@@ -66,7 +66,7 @@ Kirigami.ApplicationWindow {
         onModalChanged: drawerOpen = !modal
         enabled: eventData != undefined && pageStack.layers.depth < 2 && pageStack.depth < 3
         handleVisible: enabled && pageStack.layers.depth < 2 && pageStack.depth < 3
-        interactive: Kirigami.Settings.isMobile
+        interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
         onEditEvent: {
             setUpEdit(eventPtr, collectionId);

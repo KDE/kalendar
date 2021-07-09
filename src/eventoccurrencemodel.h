@@ -42,6 +42,7 @@ public:
     enum Roles {
         Summary = Qt::UserRole + 1,
         Description,
+        Location,
         StartTime,
         EndTime,
         Duration,
@@ -49,7 +50,6 @@ public:
         Color,
         CollectionId,
         AllDay,
-        Event,
         EventPtr,
         EventOccurrence,
         LastRole

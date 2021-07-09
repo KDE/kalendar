@@ -127,6 +127,7 @@ QVariantList MultiDayEventModel::layoutLines(const QDate &rowStart) const
             currentLine.append(QVariantMap{
                 {QStringLiteral("text"), idx.data(EventOccurrenceModel::Summary)},
                 {QStringLiteral("description"), idx.data(EventOccurrenceModel::Description)},
+                {QStringLiteral("location"), idx.data(EventOccurrenceModel::Location)},
                 {QStringLiteral("startTime"), idx.data(EventOccurrenceModel::StartTime)},
                 {QStringLiteral("endTime"), idx.data(EventOccurrenceModel::EndTime)},
                 {QStringLiteral("allDay"), idx.data(EventOccurrenceModel::AllDay)},

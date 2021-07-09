@@ -257,6 +257,8 @@ QVariant EventOccurrenceModel::data(const QModelIndex &idx, int role) const
             return icalEvent->summary();
         case Description:
             return icalEvent->description();
+        case Location:
+            return icalEvent->location();
         case StartTime:
             return event.start;
         case EndTime:

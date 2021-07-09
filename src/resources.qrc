@@ -11,5 +11,6 @@
     <file alias="EventInfo.qml">contents/ui/EventInfo.qml</file>
     <file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
+    <file alias="labelutils.js">contents/ui/labelutils.js</file>
   </qresource>
 </RCC>
