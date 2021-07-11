@@ -26,6 +26,7 @@
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <Akonadi/Calendar/History>
 #include <AkonadiCore/CollectionIdentificationAttribute>
+#include <AkonadiCore/ItemMoveJob>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
 #include <QTimer>
@@ -271,9 +272,6 @@ CalendarManager::CalendarManager(QObject *parent)
     m_rightsFilterModel->setSourceModel(m_mimeTypeFilterModel);
     m_rightsFilterModel->sort(0);
 
-    connect(m_rightsFilterModel, &Akonadi::EntityRightsFilterModel::rowsInserted,
-            this, &CalendarManager::updateDefaultCalendarSelectableIndex);
-
     Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
 }
@@ -369,18 +367,6 @@ int CalendarManager::getCalendarSelectableIndex(qint64 collectionId)
     return -1;
 }
 
-int CalendarManager::defaultCalendarSelectableIndex()
-{
-    return m_defaultCalendarSelectableIndex;
-}
-
-void CalendarManager::updateDefaultCalendarSelectableIndex()
-{
-    qint64 calId = defaultCalendarId();
-    m_defaultCalendarSelectableIndex = getCalendarSelectableIndex(calId);
-    Q_EMIT defaultCalendarSelectableIndexChanged();
-}
-
 QVariantMap CalendarManager::undoRedoData()
 {
     return QVariantMap {
@@ -391,7 +377,6 @@ QVariantMap CalendarManager::undoRedoData()
     };
 }
 
-
 void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event)
 {
     Akonadi::Collection collection(collectionId);
@@ -399,7 +384,7 @@ void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr ev
 }
 
 // Replicates IncidenceDialogPrivate::save
-void CalendarManager::editEvent(KCalendarCore::Event::Ptr originalEvent, KCalendarCore::Event::Ptr editedEvent)
+void CalendarManager::editEvent(qint64 collectionId, KCalendarCore::Event::Ptr originalEvent, KCalendarCore::Event::Ptr editedEvent)
 {
     // We need to use the incidenceChanger manually to get the change recorded in the history
     // For undo/redo to work properly we need to change the ownership of the event pointers
@@ -410,6 +395,16 @@ void CalendarManager::editEvent(KCalendarCore::Event::Ptr originalEvent, KCalend
     modifiedItem.setPayload<KCalendarCore::Incidence::Ptr>(changedEvent);
 
     m_changer->modifyIncidence(modifiedItem, originalPayload);
+
+    if (modifiedItem.parentCollection().id() == collectionId) {
+        return;
+    }
+
+    Akonadi::Collection newCollection(collectionId);
+    modifiedItem.setParentCollection(newCollection);
+    Akonadi::ItemMoveJob *job = new Akonadi::ItemMoveJob(modifiedItem, newCollection);
+    // Add some type of check here?
+    connect(job, &KJob::result, job, [=]() {qDebug() << job->error();});
 }
 
 void CalendarManager::deleteEvent(KCalendarCore::Event::Ptr event)

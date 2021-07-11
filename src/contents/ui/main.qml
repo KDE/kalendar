@@ -81,7 +81,7 @@ Kirigami.ApplicationWindow {
     EventEditor {
         id: eventEditor
         onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
-        onEdited: CalendarManager.editEvent(event.originalPtr, event.eventPtr)
+        onEdited: CalendarManager.editEvent(collectionId, event.originalPtr, event.eventPtr)
         onCancel: pageStack.pop(monthViewComponent)
     }
 
@@ -102,7 +102,7 @@ Kirigami.ApplicationWindow {
             EventEditor {
                 id: eventEditorInLoader
                 onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
-                onEdited: CalendarManager.editEvent(event.originalEventPtr, event.eventPtr)
+                onEdited: CalendarManager.editEvent(collectionId, event.originalEventPtr, event.eventPtr)
                 onCancel: root.close()
             }
 
@@ -188,7 +188,7 @@ Kirigami.ApplicationWindow {
             Layout.minimumWidth: applicationWindow().width * 0.66
 
             onViewEventReceived: root.setUpView(receivedModelData, receivedCollectionData)
-            onEditEventReceived: root.setUpEdit(receivedEventPtr, receivedCollectionData)
+            onEditEventReceived: root.setUpEdit(receivedEventPtr, receivedCollectionId)
             onDeleteEventReceived: root.setUpDelete(receivedEventPtr, receivedDeleteDate)
 
             actions.contextualActions: [

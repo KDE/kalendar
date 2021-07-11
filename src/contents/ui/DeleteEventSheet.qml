@@ -16,76 +16,83 @@ Kirigami.OverlaySheet {
 
     property var eventWrapper
     property date deleteDate
-    property bool recurringEvent: eventWrapper.recurrenceType > 0
 
     header: Kirigami.Heading {
         text: i18n("Delete event")
     }
 
-    footer: QQC2.DialogButtonBox {
+    footer: Loader {
+        active: eventWrapper !== undefined
+        sourceComponent: QQC2.DialogButtonBox {
 
-        QQC2.Button {
-            icon.name: "deletecell"
-            text: i18n("Only delete current")
-            visible: recurringEvent
-            onClicked: addException(deleteDate, eventWrapper)
-            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
-        }
-
-        QQC2.Button {
-            icon.name: "edit-table-delete-row"
-            text: i18n("Also delete future")
-            visible: recurringEvent
-            onClicked: {
-                // We want to include the delete date in the deletion
-                // Setting the last recurrence day is not inclusive
-                // (i.e. occurrence on that day is not deleted)
-                let dateBeforeDeleteDate = new Date(deleteDate);
-                dateBeforeDeleteDate.setDate(deleteDate.getDate() - 1);
-                addRecurrenceEndDate(dateBeforeDeleteDate, eventWrapper)
+            QQC2.Button {
+                icon.name: "deletecell"
+                text: i18n("Only delete current")
+                visible: eventWrapper.recurrenceData.type > 0
+                onClicked: addException(deleteDate, eventWrapper)
+                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
             }
-            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
-        }
 
-        QQC2.Button {
-            icon.name: "delete"
-            text: recurringEvent ? i18n("Delete all") : i18n("Delete")
-            onClicked: deleteEvent(eventWrapper.eventPtr)
-            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
-        }
+            QQC2.Button {
+                icon.name: "edit-table-delete-row"
+                text: i18n("Also delete future")
+                visible: eventWrapper.recurrenceData.type > 0
+                onClicked: {
+                    // We want to include the delete date in the deletion
+                    // Setting the last recurrence day is not inclusive
+                    // (i.e. occurrence on that day is not deleted)
+                    let dateBeforeDeleteDate = new Date(deleteDate);
+                    dateBeforeDeleteDate.setDate(deleteDate.getDate() - 1);
+                    addRecurrenceEndDate(dateBeforeDeleteDate, eventWrapper)
+                }
+                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+            }
 
-        QQC2.Button {
-            icon.name: "dialog-cancel"
-            text: i18n("Cancel")
-            onClicked: deleteEventSheet.close()
-            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.DestructiveRole
-        }
+            QQC2.Button {
+                icon.name: "delete"
+                text: eventWrapper.recurrenceData.type > 0 ? i18n("Delete all") : i18n("Delete")
+                onClicked: deleteEvent(eventWrapper.eventPtr)
+                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+            }
 
-        onRejected: deleteEventSheet.close()
+            QQC2.Button {
+                icon.name: "dialog-cancel"
+                text: i18n("Cancel")
+                onClicked: deleteEventSheet.close()
+                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.DestructiveRole
+            }
+
+            onRejected: deleteEventSheet.close()
+        }
     }
 
-    RowLayout {
+    Loader {
         Layout.maximumWidth: Kirigami.Units.gridUnit * 30
 
-        Kirigami.Icon {
-            Layout.fillHeight: true
-            Layout.minimumHeight: Kirigami.Units.gridUnit * 4
-            Layout.minimumWidth: height
-            source: "dialog-warning"
-        }
+        active: eventWrapper !== undefined
+        sourceComponent: RowLayout {
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
 
-        QQC2.Label {
-            Layout.fillWidth: true
-            text: i18n("Do you really want to delete item: ") + `"${eventWrapper.summary}"?`
-            visible: eventWrapper.recurrenceData.type === 0
-            wrapMode: Text.WordWrap
-        }
+            Kirigami.Icon {
+                Layout.fillHeight: true
+                Layout.minimumHeight: Kirigami.Units.gridUnit * 4
+                Layout.minimumWidth: height
+                source: "dialog-warning"
+            }
 
-        QQC2.Label {
-            Layout.fillWidth: true
-            text: i18n("The calendar item "%1" recurs over multiple dates. Do you want to delete the current one on %2, also future occurrences, or all its occurrences?", eventWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
-            visible: eventWrapper.recurrenceData.type > 0
-            wrapMode: Text.WordWrap
+            QQC2.Label {
+                Layout.fillWidth: true
+                text: i18n("Do you really want to delete item: \"%1\"?", eventWrapper.summary)
+                visible: eventWrapper.recurrenceData.type === 0
+                wrapMode: Text.WordWrap
+            }
+
+            QQC2.Label {
+                Layout.fillWidth: true
+                text: i18n("The calendar item \"%1\" recurs over multiple dates. Do you want to delete the selected ocurrence on %2, also future occurrences, or all of its occurrences?", eventWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
+                visible: eventWrapper.recurrenceData.type > 0
+                wrapMode: Text.WordWrap
+            }
         }
     }
 }

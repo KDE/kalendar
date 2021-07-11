@@ -72,7 +72,7 @@ QHash<int, QByteArray> AttachmentsModel::roleNames() const
 {
     return {
         { AttachmentRole, QByteArrayLiteral("attachment") },
-        { LabelRole, QByteArrayLiteral("label") },
+        { LabelRole, QByteArrayLiteral("attachmentLabel") },
         { MimeTypeRole, QByteArrayLiteral("mimetype") },
         { DataRole, QByteArrayLiteral("data") },
         { SizeRole, QByteArrayLiteral("size") },

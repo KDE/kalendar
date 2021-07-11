@@ -29,7 +29,6 @@ class CalendarManager : public QObject
     Q_PROPERTY(KDescendantsProxyModel *allCalendars READ allCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableCalendars READ selectableCalendars CONSTANT)
     Q_PROPERTY(qint64 defaultCalendarId READ defaultCalendarId CONSTANT)
-    Q_PROPERTY(int defaultCalendarSelectableIndex READ defaultCalendarSelectableIndex NOTIFY defaultCalendarSelectableIndexChanged)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar CONSTANT)
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
 
@@ -48,12 +47,10 @@ public:
     Akonadi::EntityRightsFilterModel *selectableCalendars() const;
     qint64 defaultCalendarId();
     Q_INVOKABLE int getCalendarSelectableIndex(qint64 collectionId);
-    int defaultCalendarSelectableIndex();
-    void updateDefaultCalendarSelectableIndex();
     QVariantMap undoRedoData();
 
     Q_INVOKABLE void addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event);
-    Q_INVOKABLE void editEvent(KCalendarCore::Event::Ptr originalEvent, KCalendarCore::Event::Ptr editedEvent);
+    Q_INVOKABLE void editEvent(qint64 collectionId, KCalendarCore::Event::Ptr originalEvent, KCalendarCore::Event::Ptr editedEvent);
     Q_INVOKABLE void deleteEvent(KCalendarCore::Event::Ptr event);
     Q_INVOKABLE QVariantMap getCollectionDetails(qint64 collectionId);
     Q_INVOKABLE void undoAction();
@@ -65,7 +62,6 @@ private Q_SLOTS:
 Q_SIGNALS:
     void loadingChanged();
     void entityTreeModelChanged();
-    void defaultCalendarSelectableIndexChanged();
     void undoRedoDataChanged();
 
 private:
@@ -78,5 +74,4 @@ private:
     KDescendantsProxyModel *m_allCalendars = nullptr;
     Akonadi::CollectionFilterProxyModel *m_mimeTypeFilterModel = nullptr;
     Akonadi::EntityRightsFilterModel *m_rightsFilterModel = nullptr;
-    int m_defaultCalendarSelectableIndex;
 };

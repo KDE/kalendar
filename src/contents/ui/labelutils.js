@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+// This regex detects URLs in the description text, so we can turn them into links
+const urlRegexp = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/ig
+
 function numberToString(number) {
     // The code in here was adapted from an article by Johnathan Wood, see:
     // http://www.blackbeltcoder.com/Articles/strings/converting-numbers-to-ordinal-strings
@@ -24,22 +27,22 @@ function numberToString(number) {
 function secondsToReminderLabel(seconds) { // Gives prettified time
 
     function numAndUnit(secs) {
-        if(secs >= 2 * 24 * 60 * 60)
+        if(secs >= (2 * 24 * 60 * 60))
             return i18nc("%1 is 2 or more", "%1 days", Math.round(secs / (24*60*60))); // 2 days +
-            else if (secs >= 1 * 24 * 60 * 60)
-                return "1 day";
-            else if (secs >= 2 * 60 * 60)
+            else if (secs >= (1 * 24 * 60 * 60))
+                return i18n("1 day");
+            else if (secs >= (2 * 60 * 60))
                 return i18nc("%1 is 2 or mores", "%1 hours", Math.round(secs / (60*60))); // 2 hours +
-                else if (secs >= 1 * 60 * 60)
+                else if (secs >= (1 * 60 * 60))
                     return i18n("1 hour");
                 else
                     return i18n("%1 minutes", Math.round(secs / 60));
     }
 
     if (seconds < 0) {
-        return i18n("%1 before", numAndUnit(seconds * -1));
+        return i18n("%1 before start of event", numAndUnit(seconds * -1));
     } else if (seconds < 0) {
-        return i18n("%1 after", numAndUnit(seconds));
+        return i18n("%1 after start of event", numAndUnit(seconds));
     } else {
         return i18n("On event start");
     }
@@ -49,10 +52,9 @@ function weeklyRecurrenceToString(recurrenceData) {
     let returnString = i18np("Every week", "Every %1 weeks", recurrenceData.frequency);
 
     if (recurrenceData.weekdays.filter(x => x === true).length > 0) {
-        returnString += i18n(" on");
+        returnString = i18np("Every week on", "Every %1 weeks on", recurrenceData.frequency);
 
         for(let i = 0; i < recurrenceData.weekdays.length; i++) {
-            console.log(Qt.locale().dayName(i + Qt.locale().firstDayOfWeek, Locale.ShortFormat))
 
             if(recurrenceData.weekdays[i]) {
                 returnString += ` ${Qt.locale().dayName(i + 1, Locale.ShortFormat)},`; // C++ Qt weekdays go Mon->Sun, JS goes Sun->Sat
@@ -71,7 +73,6 @@ function monthPositionsToString(recurrenceData) {
     for(let position of recurrenceData.monthPositions) {
         returnString += `${numberToString(position.pos)} ${Qt.locale().dayName(position.day)}, `
     }
-    console.log(returnString)
 
     return returnString.slice(0, -2);
 }
