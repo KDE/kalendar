@@ -159,8 +159,72 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         id: descriptionLabel
                         Layout.alignment: Qt.AlignTop
-                        text: i18n("<b>Description: </b>")
-                        visible: eventInfo.eventData.description
+
+                        text: i18n("<b>Description:</b>")
+                        visible: eventInfo.eventWrapper.description
+                    }
+                    QQC2.Label {
+                        id: descriptionText
+                        Layout.alignment: Qt.AlignTop
+                        Layout.fillWidth: true
+
+                        textFormat: Text.MarkdownText
+                        text: {
+                            var regexp = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/ig
+                            eventInfo.eventWrapper.description.replace(regexp, (match) => {
+                                return `[${match}](${match})`;
+                            })
+                        }
+                        onLinkActivated: Qt.openUrlExternally(link)
+                        wrapMode: Text.Wrap
+                        visible: eventInfo.eventWrapper.description
+                    }
+
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignTop
+                        text: i18np("<b>Attachment:</b>", "<b>Attachments:</b>", eventInfo.eventWrapper.attachmentsModel.rowCount())
+                        visible: eventInfo.eventWrapper.attachmentsModel.rowCount() > 0
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        Repeater {
+                            Layout.fillWidth: true
+                            visible: eventInfo.eventWrapper.attachmentsModel.rowCount() > 0
+
+                            model: eventInfo.eventWrapper.attachmentsModel
+
+                            delegate: QQC2.Label {
+                                Layout.fillWidth: true
+                                // This didn't work in Markdown format
+                                text: `<a href="${uri}">${label}</a>`
+                                onLinkActivated: Qt.openUrlExternally(link)
+                                wrapMode: Text.Wrap
+                            }
+                        }
+                    }
+
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignTop
+                        text: i18n("<b>Reminders:</b>")
+                        visible: eventInfo.eventWrapper.remindersModel.rowCount() > 0
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        Repeater {
+                            Layout.fillWidth: true
+                            visible: eventInfo.eventWrapper.remindersModel.rowCount() > 0
+
+                            model: eventInfo.eventWrapper.remindersModel
+
+                            delegate: QQC2.Label {
+                                Layout.fillWidth: true
+                                text: LabelUtils.secondsToReminderLabel(startOffset) + i18n(" start of event")
+                                wrapMode: Text.Wrap
+                            }
+                        }
+>>>>>>> c6c751d (Event info drawer can now show attachments)
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop

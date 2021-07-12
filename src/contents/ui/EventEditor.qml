@@ -4,6 +4,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
+import QtQuick.Dialogs 1.0
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 
@@ -873,6 +874,43 @@ Kirigami.ScrollablePage {
                                 onCheckedChanged: eventEditorSheet.eventWrapper.attendeesModel.setData(eventEditorSheet.eventWrapper.attendeesModel.index(index, 0),
                                                                                      checked,
                                                                                      eventEditorSheet.eventWrapper.attendeesModel.dataroles["rsvp"])
+                            }
+                        }
+                    }
+                }
+
+                ColumnLayout {
+                    id: attachmentsColumn
+
+                    Kirigami.FormData.label: i18n("Attachments:")
+                    Layout.fillWidth: true
+
+                    QQC2.Button {
+                        id: attachmentsButton
+                        text: i18n("Add attachment")
+                        Layout.fillWidth: true
+                        onClicked: attachmentFileDialog.open();
+
+                        FileDialog {
+                            id: attachmentFileDialog
+
+                            title: "Add an attachment"
+                            folder: shortcuts.home
+                            onAccepted: eventEditorSheet.eventWrapper.attachmentsModel.addAttachment(this.fileUrls)
+                        }
+                    }
+
+                    Repeater {
+                        id: attachmentsRepeater
+                        model: eventEditorSheet.eventWrapper.attachmentsModel
+                        delegate: RowLayout {
+                            QQC2.Label {
+                                Layout.fillWidth: true
+                                text: label
+                            }
+                            QQC2.Button {
+                                icon.name: "edit-delete-remove"
+                                onClicked: eventEditorSheet.eventWrapper.attachmentsModel.deleteAttachment(uri)
                             }
                         }
                     }
