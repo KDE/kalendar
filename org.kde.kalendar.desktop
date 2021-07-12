@@ -1,6 +1,9 @@
 [Desktop Entry]
 Name=GameCenter
+Name[ca]=GameCenter
+Name[ca@valencia]=GameCenter
 Name[el]=GameCenter
+Name[en_GB]=GameCenter
 Name[es]=GameCenter
 Name[it]=GameCenter
 Name[nl]=GameCenter
@@ -12,7 +15,10 @@ Name[sv]=Spelcenter
 Name[uk]=Центр ігор
 Name[x-test]=xxGameCenterxx
 Comment=GameCenter Kirigami Application
+Comment[ca]=GameCenter, una aplicació de Kirigami
+Comment[ca@valencia]=GameCenter, una aplicació de Kirigami
 Comment[el]=GameCenter εφαρμογή kirigami
+Comment[en_GB]=GameCenter Kirigami Application
 Comment[es]=Aplicación de Kirigami GameCenter
 Comment[it]=Applicazione Kirigami GameCenter
 Comment[nl]=Kirigami-toepassing GameCenter
