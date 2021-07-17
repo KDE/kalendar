@@ -25,8 +25,34 @@ Kirigami.ApplicationWindow {
         isMenu: true
         actions: [
             Kirigami.Action {
+                icon.name: "edit-undo"
+                text: CalendarManager.undoRedoData.undoAvailable ?
+                      i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription :
+                      i18n("Undo")
+                shortcut: StandardKey.Undo
+                enabled: CalendarManager.undoRedoData.undoAvailable
+                onTriggered: CalendarManager.undoAction();
+            },
+            Kirigami.Action {
+                icon.name: "edit-redo"
+                text: CalendarManager.undoRedoData.redoAvailable ?
+                      i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription :
+                      i18n("Redo")
+                shortcut: StandardKey.Redo
+                enabled: CalendarManager.undoRedoData.redoAvailable
+                onTriggered: CalendarManager.redoAction();
+            },
+            Kirigami.Action {
+                icon.name: "settings-configure"
                 text: i18n("Settings")
                 onTriggered: pageStack.layers.push("qrc:/SettingsPage.qml")
+            },
+            Kirigami.Action {
+                icon.name: "application-exit"
+                text: i18n("Quit")
+                shortcut: StandardKey.Quit
+                onTriggered: Qt.quit()
+                visible: !Kirigami.Settings.isMobile
             }
         ]
     }
@@ -55,7 +81,7 @@ Kirigami.ApplicationWindow {
     EventEditor {
         id: eventEditor
         onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
-        onEdited: CalendarManager.editEvent(event.eventPtr)
+        onEdited: CalendarManager.editEvent(event.originalPtr, event.eventPtr)
         onCancel: pageStack.pop(monthViewComponent)
     }
 
@@ -76,7 +102,7 @@ Kirigami.ApplicationWindow {
             EventEditor {
                 id: eventEditorInLoader
                 onAdded: CalendarManager.addEvent(collectionId, event.eventPtr)
-                onEdited: CalendarManager.editEvent(event.eventPtr)
+                onEdited: CalendarManager.editEvent(event.originalEventPtr, event.eventPtr)
                 onCancel: root.close()
             }
 

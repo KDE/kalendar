@@ -24,6 +24,7 @@
 #include <AkonadiCore/AgentManager>
 #include <AkonadiCore/AgentInstanceModel>
 #include <Akonadi/Calendar/IncidenceChanger>
+#include <Akonadi/Calendar/History>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
@@ -236,6 +237,10 @@ CalendarManager::CalendarManager(QObject *parent)
     m_calendar = new Akonadi::ETMCalendar(this);
     setCollectionSelectionProxyModel(m_calendar->checkableProxyModel());
 
+    m_changer = m_calendar->incidenceChanger();
+    m_changer->setHistoryEnabled(true);
+    connect(m_changer->history(), &Akonadi::History::changed, this, &CalendarManager::undoRedoDataChanged);
+
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     mCollectionSelectionModelStateSaver = new Akonadi::ETMViewStateSaver(); // not a leak
     KConfigGroup selectionGroup = config->group("GlobalCollectionSelection");
@@ -376,18 +381,35 @@ void CalendarManager::updateDefaultCalendarSelectableIndex()
     Q_EMIT defaultCalendarSelectableIndexChanged();
 }
 
+QVariantMap CalendarManager::undoRedoData()
+{
+    return QVariantMap {
+        {QStringLiteral("undoAvailable"), m_changer->history()->undoAvailable()},
+        {QStringLiteral("redoAvailable"), m_changer->history()->redoAvailable()},
+        {QStringLiteral("nextUndoDescription"), m_changer->history()->nextUndoDescription()},
+        {QStringLiteral("nextRedoDescription"), m_changer->history()->nextRedoDescription()}
+    };
+}
+
+
 void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event)
 {
     Akonadi::Collection collection(collectionId);
-
-    Akonadi::IncidenceChanger *changer = m_calendar->incidenceChanger();
-    qDebug() << changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
+    m_changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
 }
 
 // Replicates IncidenceDialogPrivate::save
-void CalendarManager::editEvent(KCalendarCore::Event::Ptr editedEvent)
+void CalendarManager::editEvent(KCalendarCore::Event::Ptr originalEvent, KCalendarCore::Event::Ptr editedEvent)
 {
-    m_calendar->modifyIncidence(editedEvent);
+    // We need to use the incidenceChanger manually to get the change recorded in the history
+    // For undo/redo to work properly we need to change the ownership of the event pointers
+    KCalendarCore::Event::Ptr changedEvent(editedEvent->clone());
+    KCalendarCore::Event::Ptr originalPayload(originalEvent->clone());
+
+    Akonadi::Item modifiedItem = m_calendar->item(changedEvent->instanceIdentifier());
+    modifiedItem.setPayload<KCalendarCore::Incidence::Ptr>(changedEvent);
+
+    m_changer->modifyIncidence(modifiedItem, originalPayload);
 }
 
 void CalendarManager::deleteEvent(KCalendarCore::Event::Ptr event)
@@ -406,6 +428,16 @@ QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
     collectionDetails[QLatin1String("readOnly")] = collection.rights().testFlag(Collection::ReadOnly);
 
     return collectionDetails;
+}
+
+void CalendarManager::undoAction()
+{
+    m_changer->history()->undo();
+}
+
+void CalendarManager::redoAction()
+{
+    m_changer->history()->redo();
 }
 
 
