@@ -331,9 +331,9 @@ void EventWrapper::setMonthlyPosRecurrence(short pos, int day)
     m_event->recurrence()->addMonthlyPos(pos, daysBitArray);
 }
 
-void EventWrapper::setRecurrenceOcurrences(int ocurrences)
+void EventWrapper::setRecurrenceOccurrences(int occurrences)
 {
-    m_event->recurrence()->setDuration(ocurrences);
+    m_event->recurrence()->setDuration(occurrences);
     Q_EMIT recurrenceDataChanged();
 }
 

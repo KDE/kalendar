@@ -89,7 +89,7 @@ Kirigami.OverlaySheet {
 
             QQC2.Label {
                 Layout.fillWidth: true
-                text: i18n("The calendar item \"%1\" recurs over multiple dates. Do you want to delete the selected ocurrence on %2, also future occurrences, or all of its occurrences?", eventWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
+                text: i18n("The calendar item \"%1\" recurs over multiple dates. Do you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?", eventWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
                 visible: eventWrapper.recurrenceData.type > 0
                 wrapMode: Text.WordWrap
             }

@@ -384,7 +384,7 @@ Kirigami.ScrollablePage {
                     columns: 5
                     visible: repeatComboBox.currentIndex > 0 // Not "Never" index
 
-                    function setOcurrence() {
+                    function setOccurrence() {
                         eventEditorSheet.eventWrapper.setRegularRecurrence(recurScaleRuleCombobox.currentValue, recurFreqRuleSpinbox.value);
 
                         if(recurScaleRuleCombobox.currentValue === eventEditorSheet.eventWrapper.recurrenceIntervals.Weekly) {
@@ -416,7 +416,7 @@ Kirigami.ScrollablePage {
                         visible: repeatComboBox.currentIndex === 5
                         textRole: recurFreqRuleSpinbox.value > 1 ? "displayPlural" : "displaySingular"
                         valueRole: "interval"
-                        onCurrentValueChanged: if(visible) { customRecurrenceLayout.setOcurrence(); }
+                        onCurrentValueChanged: if(visible) { customRecurrenceLayout.setOccurrence(); }
                         currentIndex: {
                             if(eventEditorSheet.eventWrapper.recurrenceData.type === undefined) {
                                 return -1;
@@ -520,7 +520,7 @@ Kirigami.ScrollablePage {
 
                             text: i18nc("%1 is the day number of month", "the %1 of each month", LabelUtils.numberToString(dateOfMonth))
                             checked: eventEditorSheet.eventWrapper.recurrenceData.type == 6 // Monthly on day (1st of month)
-                            onClicked: customRecurrenceLayout.setOcurrence()
+                            onClicked: customRecurrenceLayout.setOccurrence()
                         }
                         QQC2.RadioButton {
                             property int dayOfWeek: eventStartDateCombo.dateFromText.getDay() > 0 ?
@@ -612,17 +612,17 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         Layout.columnSpan: 2
                         visible: endRecurType.currentIndex === 2
-                        onVisibleChanged: if (visible) { eventEditorSheet.eventWrapper.setRecurrenceOcurrences(recurOcurrenceEndSpinbox.value) }
+                        onVisibleChanged: if (visible) { eventEditorSheet.eventWrapper.setRecurrenceOccurrences(recurOccurrenceEndSpinbox.value) }
 
                         QQC2.SpinBox {
-                            id: recurOcurrenceEndSpinbox
+                            id: recurOccurrenceEndSpinbox
                             Layout.fillWidth: true
                             from: 1
                             value: eventEditorSheet.eventWrapper.recurrenceData.duration
-                            onValueChanged: eventEditorSheet.eventWrapper.setRecurrenceOcurrences(value)
+                            onValueChanged: eventEditorSheet.eventWrapper.setRecurrenceOccurrences(value)
                         }
                         QQC2.Label {
-                            text: i18np("occurrence", "occurrences", recurOcurrenceEndSpinbox.value)
+                            text: i18np("occurrence", "occurrences", recurOccurrenceEndSpinbox.value)
                         }
                     }
 
