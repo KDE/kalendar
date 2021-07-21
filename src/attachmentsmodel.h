@@ -4,6 +4,7 @@
 #pragma once
 
 #include <QAbstractItemModel>
+#include <QMimeDatabase>
 #include <QCalendar>
 #include <KCalendarCore/Calendar>
 #include <QDebug>
@@ -21,6 +22,7 @@ public:
         AttachmentRole = Qt::UserRole + 1,
         LabelRole,
         MimeTypeRole,
+        IconNameRole,
         DataRole,
         SizeRole,
         URIRole
@@ -49,5 +51,6 @@ Q_SIGNALS:
 private:
     KCalendarCore::Event::Ptr m_event;
     QVariantMap m_dataRoles;
+    QMimeDatabase m_mimeDb;
 };
 

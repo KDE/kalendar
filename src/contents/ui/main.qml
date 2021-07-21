@@ -92,7 +92,7 @@ Kirigami.ApplicationWindow {
             id: root
 
             width: Kirigami.Units.gridUnit * 40
-            height: Kirigami.Units.gridUnit * 30
+            height: Kirigami.Units.gridUnit * 32
 
             // Probably a more elegant way of accessing the editor from outside than this.
             property var eventEditor: eventEditorInLoader

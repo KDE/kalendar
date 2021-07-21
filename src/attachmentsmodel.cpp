@@ -56,6 +56,11 @@ QVariant AttachmentsModel::data(const QModelIndex &idx, int role) const
             return attachment.label();
         case MimeTypeRole:
             return attachment.mimeType();
+        case IconNameRole:
+        {
+            QMimeType type = m_mimeDb.mimeTypeForUrl(QUrl(attachment.uri()));
+            return type.iconName();
+        }
         case DataRole:
             return attachment.data(); // This is in bytes
         case SizeRole:
@@ -74,6 +79,7 @@ QHash<int, QByteArray> AttachmentsModel::roleNames() const
         { AttachmentRole, QByteArrayLiteral("attachment") },
         { LabelRole, QByteArrayLiteral("attachmentLabel") },
         { MimeTypeRole, QByteArrayLiteral("mimetype") },
+        { IconNameRole, QByteArrayLiteral("iconName") },
         { DataRole, QByteArrayLiteral("data") },
         { SizeRole, QByteArrayLiteral("size") },
         { URIRole, QByteArrayLiteral("uri") }
@@ -87,8 +93,11 @@ int AttachmentsModel::rowCount(const QModelIndex &) const
 
 void AttachmentsModel::addAttachment(QString uri)
 {
+    QMimeType type = m_mimeDb.mimeTypeForUrl(QUrl(uri));
+
     KCalendarCore::Attachment attachment(uri);
     attachment.setLabel(QUrl(uri).fileName());
+    attachment.setMimeType(type.name());
     m_event->addAttachment(attachment);
 
     Q_EMIT attachmentsChanged();
