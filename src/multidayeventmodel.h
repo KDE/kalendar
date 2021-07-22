@@ -2,6 +2,7 @@
 // Copyright (c) 2018 Christian Mollekopf <mollekopf@kolabsys.com>
 // Copyright (c) 2018 Rémi Nicole <minijackson@riseup.net>
 // Copyright (c) 2021 Carl Schwan <carlschwan@kde.org>
+// SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #pragma once
@@ -28,6 +29,7 @@ class MultiDayEventModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(EventOccurrenceModel* model WRITE setModel)
+    Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
 public:
     MultiDayEventModel(QObject *parent = nullptr);
     ~MultiDayEventModel() = default;
@@ -43,10 +45,16 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     void setModel(EventOccurrenceModel *model);
+    int periodLength();
+    void setPeriodLength(int periodLength);
+
+Q_SIGNALS:
+    void periodLengthChanged();
+
 private:
     QList<QModelIndex> sortedEventsFromSourceModel(const QDate &rowStart) const;
-    QVariantList layoutLines(const QDate &rowStart) const;
     EventOccurrenceModel *mSourceModel{nullptr};
     int mPeriodLength{7};
+    QVariantList layoutLines(const QDate &rowStart) const;
 };
 

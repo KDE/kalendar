@@ -16,14 +16,26 @@ Kirigami.ApplicationWindow {
 
     property date currentDate: new Date()
     property date selectedDate: currentDate
+    property int month: currentDate.getMonth()
+    property int year: currentDate.getFullYear()
 
     title: i18n("Calendar")
 
-    pageStack.initialPage: monthViewComponent
+    pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
 
     globalDrawer: Kirigami.GlobalDrawer {
         isMenu: true
         actions: [
+            Kirigami.Action {
+                text: i18n("Add...")
+                icon.name: "list-add"
+
+                Kirigami.Action {
+                    text: i18n("New event")
+                    icon.name: "tag-events"
+                    onTriggered: root.setUpAdd();
+                }
+            },
             Kirigami.Action {
                 icon.name: "edit-undo"
                 text: CalendarManager.undoRedoData.undoAvailable ?
@@ -41,6 +53,16 @@ Kirigami.ApplicationWindow {
                 shortcut: StandardKey.Redo
                 enabled: CalendarManager.undoRedoData.redoAvailable
                 onTriggered: CalendarManager.redoAction();
+            },
+            Kirigami.Action {
+                icon.name: "view-calendar"
+                text: i18n("Month view")
+                onTriggered: pageStack.layers.replace(monthViewComponent);
+            },
+            Kirigami.Action {
+                icon.name: "view-calendar-list"
+                text: i18n("Schedule view")
+                onTriggered: pageStack.layers.replace(scheduleViewComponent)
             },
             Kirigami.Action {
                 icon.name: "settings-configure"
@@ -112,7 +134,6 @@ Kirigami.ApplicationWindow {
     }
 
     function editorToUse() {
-        // Should ideally check if PlaMo or chonk Plasma
         if (!Kirigami.Settings.isMobile) {
             editorWindowedLoader.active = true
             return editorWindowedLoader.item.eventEditor
@@ -122,7 +143,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function setUpAdd() {
+    function setUpAdd(addDate) {
         let editorToUse = root.editorToUse();
         if (editorToUse.editMode || !editorToUse.eventWrapper) {
             editorToUse.eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}',
@@ -130,6 +151,11 @@ Kirigami.ApplicationWindow {
                                                           "event");
         }
         editorToUse.editMode = false;
+        if(typeof(addDate) !== undefined && !isNaN(addDate.getTime())) {
+            let existingStart = editorToUse.eventWrapper.eventStart;
+            editorToUse.eventWrapper.eventStart = new Date(addDate.setHours(existingStart.getHours(), existingStart.getMinutes()));
+            editorToUse.eventWrapper.eventEnd = new Date(addDate.setHours(existingStart.getHours() + 1, existingStart.getMinutes()));
+        }
     }
 
     function setUpView(modelData, collectionData) {
@@ -179,17 +205,51 @@ Kirigami.ApplicationWindow {
         id: monthViewComponent
 
         MonthView {
+            id: monthView
+
             // Make sure we get day from correct date, that is in the month we want
             title: DateUtils.addDaysToDate(startDate, 7).toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
             currentDate: root.currentDate
-            startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(root.selectedDate))
-            month: root.selectedDate.getMonth()
+            startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(new Date(root.year, root.month)))
+            month: root.month
 
             Layout.minimumWidth: applicationWindow().width * 0.66
 
+            onAddEventReceived: root.setUpAdd(receivedAddDate)
             onViewEventReceived: root.setUpView(receivedModelData, receivedCollectionData)
             onEditEventReceived: root.setUpEdit(receivedEventPtr, receivedCollectionId)
             onDeleteEventReceived: root.setUpDelete(receivedEventPtr, receivedDeleteDate)
+
+            onMonthChanged: root.month = month
+            onYearChanged: root.year = year
+
+            actions.contextualActions: [
+                Kirigami.Action {
+                    text: i18n("Add event")
+                    icon.name: "list-add"
+                    onTriggered: root.setUpAdd();
+                }
+            ]
+        }
+    }
+
+    Component {
+        id: scheduleViewComponent
+
+        ScheduleView {
+            id: scheduleView
+
+            title: startDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
+            selectedDate: root.currentDate.getMonth() === root.month ? root.currentDate : new Date(root.year, root.month)
+            startDate: new Date(root.year, root.month)
+
+            onMonthChanged: root.month = month
+            onYearChanged: root.year = year
+
+            onAddEvent: setUpAdd(addDate)
+            onViewEvent: setUpView(modelData, collectionData)
+            onEditEvent: setUpEdit(eventPtr, collectionData)
+            onDeleteEvent: setUpDelete(eventPtr, deleteDate)
 
             actions.contextualActions: [
                 Kirigami.Action {

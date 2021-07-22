@@ -14,6 +14,7 @@ import "dateutils.js" as DateUtils
 Item {
     id: root
 
+    signal addEvent(date addDate)
     signal viewEvent(var modelData, var collectionData)
     signal editEvent(var eventPtr, var collectionId)
     signal deleteEvent(var eventPtr, date deleteDate)
@@ -60,6 +61,8 @@ Item {
         //Weeks
         Repeater {
             model: Kalendar.MultiDayEventModel {
+                periodLength: 7
+
                 model: Kalendar.EventOccurrenceModel {
                     id: occurrenceModel
                     objectName: "eventOccurrenceModel"
@@ -82,7 +85,7 @@ Item {
                     Loader {
                         id: weekHeader
                         sourceComponent: root.weekHeaderDelegate
-                        property var startDate: weekStartDate
+                        property var startDate: periodStartDate
                         Layout.preferredWidth: weekHeaderWidth
                         Layout.fillHeight: true
                     }
@@ -90,7 +93,7 @@ Item {
                         id: dayDelegate
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        property var startDate: weekStartDate
+                        property var startDate: periodStartDate
                         //Grid
                         Row {
                             spacing: 1
@@ -124,6 +127,12 @@ Item {
                                         padding: Kirigami.Units.smallSpacing
                                         visible: root.showDayIndicator
                                         color: gridItem.isToday ? Kirigami.Theme.highlightColor : (!gridItem.isCurrentMonth ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor)
+                                    }
+
+                                    DayMouseArea {
+                                        anchors.fill: parent
+                                        addDate: gridItem.date
+                                        onAddNewEvent: addEvent(addDate)
                                     }
                                 }
                             }
@@ -177,45 +186,13 @@ Item {
                                                 elide: Text.ElideRight
                                             }
 
-                                            MouseArea {
-                                                id: mouseArea
+                                            IncidenceMouseArea {
+                                                eventData: modelData
+                                                collectionDetails: Kalendar.CalendarManager.getCollectionDetails(modelData.collectionId)
 
-                                                property double clickX
-                                                property var collectionDetails: Kalendar.CalendarManager.getCollectionDetails(modelData.collectionId)
-
-                                                anchors.fill: parent
-                                                hoverEnabled: true
-                                                acceptedButtons: Qt.LeftButton | Qt.RightButton
-                                                onPressed: {
-                                                    clickX = mouseX
-                                                    if(pressedButtons & Qt.LeftButton) {
-                                                        viewEvent(modelData, collectionDetails)
-                                                    } else if (pressedButtons & Qt.RightButton) {
-                                                        eventActions.createObject(mouseArea, {}).open()
-                                                    }
-                                                }
-
-                                                Component {
-                                                    id: eventActions
-                                                    QQC2.Menu {
-                                                        id: actionsPopup
-                                                        y: parent.y + parent.height
-                                                        x: parent.x + mouseArea.clickX
-
-                                                        QQC2.MenuItem {
-                                                            icon.name: "edit-entry"
-                                                            text:i18n("Edit")
-                                                            enabled: !mouseArea.collectionDetails["readOnly"]
-                                                            onClicked: editEvent(modelData.eventPtr, modelData.collectionId)
-                                                        }
-                                                        QQC2.MenuItem {
-                                                            icon.name: "edit-delete"
-                                                            text:i18n("Delete")
-                                                            enabled: !mouseArea.collectionDetails["readOnly"]
-                                                            onClicked: deleteEvent(modelData.eventPtr, modelData.startTime)
-                                                        }
-                                                    }
-                                                }
+                                                onViewClicked: viewEvent(modelData, collectionData)
+                                                onEditClicked: editEvent(eventPtr, collectionId)
+                                                onDeleteClicked: deleteEvent(eventPtr, deleteDate)
                                             }
                                         }
                                     }
