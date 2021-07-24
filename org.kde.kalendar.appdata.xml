@@ -2,14 +2,53 @@
 <component type="desktop-application">
   <id>org.kde.kalendar</id>
   <name>Kalendar</name>
+  <name xml:lang="ca">Kalendar</name>
+  <name xml:lang="cs">Kalendar</name>
+  <name xml:lang="es">Kalendar</name>
+  <name xml:lang="nl">Kalendar</name>
+  <name xml:lang="sl">Kalendar</name>
+  <name xml:lang="sv">Kalendar</name>
+  <name xml:lang="uk">Kalendar</name>
+  <name xml:lang="x-test">xxKalendarxx</name>
   <summary>Calendar application</summary>
+  <summary xml:lang="ca">Aplicació de calendari</summary>
+  <summary xml:lang="cs">Aplikace kalendáře</summary>
+  <summary xml:lang="es">Aplicación de calendarios</summary>
+  <summary xml:lang="nl">Agendatoepassing</summary>
+  <summary xml:lang="sl">Aplikacija Koledar</summary>
+  <summary xml:lang="sv">Kalenderprogram</summary>
+  <summary xml:lang="uk">Програма-календар</summary>
+  <summary xml:lang="x-test">xxCalendar applicationxx</summary>
   <metadata_license>CC-0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <developer_name>KDE Community, Clau Cambra and Carl Schwan</developer_name>
+  <developer_name xml:lang="ca">Comunitat KDE, Clau Cambra i Carl Schwan</developer_name>
+  <developer_name xml:lang="cs">Komunita KDE, Clau Cambra a Carl Schwan</developer_name>
+  <developer_name xml:lang="es">La Comunidad de KDE, Clau Cambra y Carl Schwan</developer_name>
+  <developer_name xml:lang="nl">KDE-gemeenschap, Clau Cambra en Carl Schwan</developer_name>
+  <developer_name xml:lang="sl">Skupnost KDE, , Clau Cambra in Carl Schwan</developer_name>
+  <developer_name xml:lang="sv">KDE-gemenskapen, Clau Cambra och Carl Schwan</developer_name>
+  <developer_name xml:lang="uk">Спільнота KDE, Clau Cambra і Carl Schwan</developer_name>
+  <developer_name xml:lang="x-test">xxKDE Community, Clau Cambra and Carl Schwanxx</developer_name>
   <description>
     <p>A calendar application allowing you to manage your events.</p>
+    <p xml:lang="ca">Una aplicació de calendari que us permetrà gestionar els vostres esdeveniments.</p>
+    <p xml:lang="cs">Aplikace kalendáře pro správu vašich událostí.</p>
+    <p xml:lang="es">Aplicación de calendarios que le permite la gestión de eventos.</p>
+    <p xml:lang="nl">Een agendatoepassing waarmee u uw afspraken beheert.</p>
+    <p xml:lang="sl">Aplikacija koledarja, ki vam omogoča upravljanje vaših dogodkov.</p>
+    <p xml:lang="sv">Ett kalenderprogram som låter dig hantera dina händelser.</p>
+    <p xml:lang="uk">Програма-календар, за допомогою якої ви можете керувати вашими записами подій.</p>
+    <p xml:lang="x-test">xxA calendar application allowing you to manage your events.xx</p>
     <ul>
       <li>Online calendar support. Bring your calendar from Nextcloud and other online services in Kalendar</li>
+      <li xml:lang="ca">Admet els calendaris en línia. Porteu el calendari de NextCloud i altres serveis en línia al Kalendar</li>
+      <li xml:lang="es">Uso de calendarios en línea. Use su calendario de Nextcloud y otros servicios en línea en Kalendar.</li>
+      <li xml:lang="nl">Ondersteuning van online agenda. Breng uw agenda uit Nextcloud en andere online-services in Kalendar</li>
+      <li xml:lang="sl">Podpora spletnega koledarja. Prenesite vaš koledar iz Nextclouda in drugih spletnih storitev v Kalendar</li>
+      <li xml:lang="sv">Stöd för nätkalendrar. Hämta din kalender från Nextcloud och andra nättjänster till Kalendar.</li>
+      <li xml:lang="uk">Підтримка інтернет-календарів. Отримайте ваші дані календаря з Nextcloud або інших інтернет-служб у Kalendar</li>
+      <li xml:lang="x-test">xxOnline calendar support. Bring your calendar from Nextcloud and other online services in Kalendarxx</li>
     </ul>
   </description>
 </component>
