@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Kalendar
 Name[ca]=Kalendar
+Name[ca@valencia]=Kalendar
 Name[cs]=Kalendar
 Name[el]=Kalendar
 Name[en_GB]=Kalendar
@@ -14,6 +15,7 @@ Name[uk]=Kalendar
 Name[x-test]=xxKalendarxx
 Comment=A calendar application
 Comment[ca]=Una aplicació de calendari
+Comment[ca@valencia]=Una aplicació de calendari
 Comment[cs]=Aplikace kalendáře
 Comment[el]=Μια εφαρμογή ημερολογίου
 Comment[en_GB]=A calendar application
