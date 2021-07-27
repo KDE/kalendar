@@ -3,6 +3,7 @@
   <id>org.kde.kalendar</id>
   <name>Kalendar</name>
   <name xml:lang="ca">Kalendar</name>
+  <name xml:lang="ca-valencia">Kalendar</name>
   <name xml:lang="cs">Kalendar</name>
   <name xml:lang="el">Kalendar</name>
   <name xml:lang="en-GB">Kalendar</name>
@@ -16,6 +17,7 @@
   <name xml:lang="x-test">xxKalendarxx</name>
   <summary>Calendar application</summary>
   <summary xml:lang="ca">Aplicació de calendari</summary>
+  <summary xml:lang="ca-valencia">Aplicació de calendari</summary>
   <summary xml:lang="cs">Aplikace kalendáře</summary>
   <summary xml:lang="el">Εφαρμογή ημερολογίου</summary>
   <summary xml:lang="en-GB">Calendar application</summary>
@@ -31,6 +33,7 @@
   <project_license>GPL-3.0-or-later</project_license>
   <developer_name>KDE Community, Clau Cambra and Carl Schwan</developer_name>
   <developer_name xml:lang="ca">Comunitat KDE, Clau Cambra i Carl Schwan</developer_name>
+  <developer_name xml:lang="ca-valencia">Comunitat KDE, Clau Cambra i Carl Schwan</developer_name>
   <developer_name xml:lang="cs">Komunita KDE, Clau Cambra a Carl Schwan</developer_name>
   <developer_name xml:lang="el">Η Κοινότητα του KDE, Clau Cambra και Carl Schwan</developer_name>
   <developer_name xml:lang="en-GB">KDE Community, Clau Cambra and Carl Schwan</developer_name>
@@ -45,6 +48,7 @@
   <description>
     <p>A calendar application allowing you to manage your events.</p>
     <p xml:lang="ca">Una aplicació de calendari que us permetrà gestionar els vostres esdeveniments.</p>
+    <p xml:lang="ca-valencia">Una aplicació de calendari que vos permetrà gestionar els vostres esdeveniments.</p>
     <p xml:lang="cs">Aplikace kalendáře pro správu vašich událostí.</p>
     <p xml:lang="el">Μια εφαρμογή ημερολογίου με την οποία διαχειρίζεστε γεγονότα.</p>
     <p xml:lang="en-GB">A calendar application allowing you to manage your events.</p>
@@ -59,6 +63,7 @@
     <ul>
       <li>Online calendar support. Bring your calendar from Nextcloud and other online services in Kalendar</li>
       <li xml:lang="ca">Admet els calendaris en línia. Porteu el calendari de NextCloud i altres serveis en línia al Kalendar</li>
+      <li xml:lang="ca-valencia">Admet els calendaris en línia. Porteu el calendari de NextCloud i altres serveis en línia al Kalendar</li>
       <li xml:lang="el">Επιγραμμική υποστήριξη ημερολογίου. Μεταφέρετε το ημερολόγιό σας από το Nextcloud και από άλλες επιγραμμικές υπηρεσίες στο Kalendar</li>
       <li xml:lang="en-GB">Online calendar support. Bring your calendar from Nextcloud and other online services in Kalendar</li>
       <li xml:lang="es">Uso de calendarios en línea. Use su calendario de Nextcloud y otros servicios en línea en Kalendar.</li>
