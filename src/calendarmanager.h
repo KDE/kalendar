@@ -13,6 +13,7 @@
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
+#include <incidencewrapper.h>
 
 namespace Akonadi {
     class ETMCalendar;
@@ -27,8 +28,8 @@ class CalendarManager : public QObject
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
     Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
     Q_PROPERTY(KDescendantsProxyModel *allCalendars READ allCalendars CONSTANT)
-    Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableCalendars READ selectableCalendars CONSTANT)
-    Q_PROPERTY(qint64 defaultCalendarId READ defaultCalendarId CONSTANT)
+    Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableEventCalendars READ selectableEventCalendars CONSTANT)
+    Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableTodoCalendars READ selectableTodoCalendars CONSTANT)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar CONSTANT)
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
 
@@ -44,15 +45,17 @@ public:
     Q_INVOKABLE void save();
     Akonadi::ETMCalendar *calendar() const;
     KDescendantsProxyModel *allCalendars();
-    Akonadi::EntityRightsFilterModel *selectableCalendars() const;
-    qint64 defaultCalendarId();
-    Q_INVOKABLE int getCalendarSelectableIndex(qint64 collectionId);
+    Akonadi::EntityRightsFilterModel *selectableEventCalendars() const;
+    Akonadi::EntityRightsFilterModel *selectableTodoCalendars() const;
+    Q_INVOKABLE qint64 defaultCalendarId(IncidenceWrapper *incidenceWrapper);
+    Q_INVOKABLE int getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper);
     QVariantMap undoRedoData();
 
-    Q_INVOKABLE void addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event);
-    Q_INVOKABLE void editEvent(qint64 collectionId, KCalendarCore::Event::Ptr originalEvent, KCalendarCore::Event::Ptr editedEvent);
-    Q_INVOKABLE void deleteEvent(KCalendarCore::Event::Ptr event);
+    Q_INVOKABLE void addIncidence(IncidenceWrapper *incidenceWrapper);
+    Q_INVOKABLE void editIncidence(IncidenceWrapper *incidenceWrapper);
+    Q_INVOKABLE void deleteIncidence(KCalendarCore::Incidence::Ptr incidence);
     Q_INVOKABLE QVariantMap getCollectionDetails(qint64 collectionId);
+    Q_INVOKABLE QVariant getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr);
     Q_INVOKABLE void undoAction();
     Q_INVOKABLE void redoAction();
 
@@ -72,6 +75,8 @@ private:
     KCheckableProxyModel *m_selectionProxyModel = nullptr;
     Akonadi::ETMViewStateSaver *mCollectionSelectionModelStateSaver = nullptr;
     KDescendantsProxyModel *m_allCalendars = nullptr;
-    Akonadi::CollectionFilterProxyModel *m_mimeTypeFilterModel = nullptr;
-    Akonadi::EntityRightsFilterModel *m_rightsFilterModel = nullptr;
+    Akonadi::CollectionFilterProxyModel *m_eventMimeTypeFilterModel = nullptr;
+    Akonadi::CollectionFilterProxyModel *m_todoMimeTypeFilterModel = nullptr;
+    Akonadi::EntityRightsFilterModel *m_eventRightsFilterModel = nullptr;
+    Akonadi::EntityRightsFilterModel *m_todoRightsFilterModel = nullptr;
 };

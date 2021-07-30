@@ -42,7 +42,7 @@ QVariant AttendeeStatusModel::data(const QModelIndex &idx, int role) const
         case ValueRole:
             return value;
         default:
-            qWarning() << "Unknown role for event:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qWarning() << "Unknown role for attendee:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return {};
     }
 }
@@ -68,9 +68,9 @@ int AttendeeStatusModel::rowCount(const QModelIndex &) const
 
 
 
-AttendeesModel::AttendeesModel(QObject* parent, KCalendarCore::Event::Ptr eventPtr)
+AttendeesModel::AttendeesModel(QObject* parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)
-    , m_event(eventPtr)
+    , m_incidence(incidencePtr)
     , m_attendeeStatusModel(parent)
 {
     for(int i = 0; i < QMetaEnum::fromType<AttendeesModel::Roles>().keyCount(); i++) {
@@ -80,18 +80,18 @@ AttendeesModel::AttendeesModel(QObject* parent, KCalendarCore::Event::Ptr eventP
     }
 }
 
-KCalendarCore::Event::Ptr AttendeesModel::eventPtr()
+KCalendarCore::Incidence::Ptr AttendeesModel::incidencePtr()
 {
-    return m_event;
+    return m_incidence;
 }
 
-void AttendeesModel::setEventPtr(KCalendarCore::Event::Ptr event)
+void AttendeesModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
 {
-    if (m_event == event) {
+    if (m_incidence == incidence) {
         return;
     }
-    m_event = event;
-    Q_EMIT eventPtrChanged();
+    m_incidence = incidence;
+    Q_EMIT incidencePtrChanged();
     Q_EMIT attendeesChanged();
     Q_EMIT attendeeStatusModelChanged();
     Q_EMIT layoutChanged();
@@ -99,7 +99,7 @@ void AttendeesModel::setEventPtr(KCalendarCore::Event::Ptr event)
 
 KCalendarCore::Attendee::List AttendeesModel::attendees()
 {
-    return m_event->attendees();
+    return m_incidence->attendees();
 }
 
 AttendeeStatusModel * AttendeesModel::attendeeStatusModel()
@@ -117,7 +117,7 @@ QVariant AttendeesModel::data(const QModelIndex &idx, int role) const
     if (!hasIndex(idx.row(), idx.column())) {
         return {};
     }
-    auto attendee = m_event->attendees()[idx.row()];
+    auto attendee = m_incidence->attendees()[idx.row()];
     switch (role) {
         case CuTypeRole:
             return attendee.cuType();
@@ -142,7 +142,7 @@ QVariant AttendeesModel::data(const QModelIndex &idx, int role) const
         case UidRole:
             return attendee.uid();
         default:
-            qWarning() << "Unknown role for event:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qWarning() << "Unknown role for attendee:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return {};
     }
 }
@@ -153,8 +153,8 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
         return false;
     }
 
-    // When modifying attendees, remember you cannot change them directly from m_event->attendees (is a const).
-    KCalendarCore::Attendee::List currentAttendees(m_event->attendees());
+    // When modifying attendees, remember you cannot change them directly from m_incidence->attendees (is a const).
+    KCalendarCore::Attendee::List currentAttendees(m_incidence->attendees());
 
     switch (role) {
         case CuTypeRole:
@@ -222,10 +222,10 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
             break;
         }
         default:
-            qWarning() << "Unknown role for event:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return false;
     }
-    m_event->setAttendees(currentAttendees);
+    m_incidence->setAttendees(currentAttendees);
     emit dataChanged(idx, idx);
     return true;
 }
@@ -249,7 +249,7 @@ QHash<int, QByteArray> AttendeesModel::roleNames() const
 
 int AttendeesModel::rowCount(const QModelIndex &) const
 {
-    return m_event->attendeeCount();
+    return m_incidence->attendeeCount();
 }
 
 void AttendeesModel::addAttendee()
@@ -257,7 +257,7 @@ void AttendeesModel::addAttendee()
     // QLatin1String is a workaround for QT_NO_CAST_FROM_ASCII
     KCalendarCore::Attendee attendee(QLatin1String(""), QLatin1String(""));
     // addAttendee won't actually add any attendees without a set name
-    m_event->addAttendee(attendee);
+    m_incidence->addAttendee(attendee);
     Q_EMIT attendeesChanged();
     Q_EMIT layoutChanged();
 }
@@ -267,9 +267,9 @@ void AttendeesModel::deleteAttendee(int row)
     if (!hasIndex(row, 0)) {
         return;
     }
-    KCalendarCore::Attendee::List currentAttendees(m_event->attendees());
+    KCalendarCore::Attendee::List currentAttendees(m_incidence->attendees());
     currentAttendees.removeAt(row);
-    m_event->setAttendees(currentAttendees);
+    m_incidence->setAttendees(currentAttendees);
     rowCount();
     Q_EMIT attendeesChanged();
     Q_EMIT layoutChanged();

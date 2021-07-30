@@ -4,9 +4,9 @@
 #include <QMetaEnum>
 #include <remindersmodel.h>
 
-RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Event::Ptr eventPtr)
+RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)
-    , m_event(eventPtr)
+    , m_incidence(incidencePtr)
 {
     for(int i = 0; i < QMetaEnum::fromType<RemindersModel::Roles>().keyCount(); i++) {
         int value = QMetaEnum::fromType<RemindersModel::Roles>().value(i);
@@ -15,25 +15,25 @@ RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Event::Ptr eventP
     }
 }
 
-KCalendarCore::Event::Ptr RemindersModel::eventPtr()
+KCalendarCore::Incidence::Ptr RemindersModel::incidencePtr()
 {
-    return m_event;
+    return m_incidence;
 }
 
-void RemindersModel::setEventPtr(KCalendarCore::Event::Ptr event)
+void RemindersModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
 {
-    if (m_event == event) {
+    if (m_incidence == incidence) {
         return;
     }
-    m_event = event;
-    Q_EMIT eventPtrChanged();
+    m_incidence = incidence;
+    Q_EMIT incidencePtrChanged();
     Q_EMIT alarmsChanged();
     Q_EMIT layoutChanged();
 }
 
 KCalendarCore::Alarm::List RemindersModel::alarms()
 {
-    return m_event->alarms();
+    return m_incidence->alarms();
 }
 
 QVariantMap RemindersModel::dataroles()
@@ -46,7 +46,7 @@ QVariant RemindersModel::data(const QModelIndex &idx, int role) const
     if (!hasIndex(idx.row(), idx.column())) {
         return {};
     }
-    auto alarm = m_event->alarms()[idx.row()];
+    auto alarm = m_incidence->alarms()[idx.row()];
     switch (role) {
         case TypeRole:
             return alarm->type();
@@ -57,7 +57,7 @@ QVariant RemindersModel::data(const QModelIndex &idx, int role) const
         case EndOffsetRole:
             return alarm->endOffset().asSeconds();
         default:
-            qWarning() << "Unknown role for event:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return {};
     }
 }
@@ -72,31 +72,31 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
         case TypeRole:
         {
             KCalendarCore::Alarm::Type type = static_cast<KCalendarCore::Alarm::Type>(value.toInt());
-            m_event->alarms()[idx.row()]->setType(type);
+            m_incidence->alarms()[idx.row()]->setType(type);
             break;
         }
         case TimeRole:
         {
             QDateTime time = value.toDateTime();
-            m_event->alarms()[idx.row()]->setTime(time);
+            m_incidence->alarms()[idx.row()]->setTime(time);
             break;
         }
         case StartOffsetRole:
         {
-            // offset can be set in seconds or days, if we want it to be before the event,
+            // offset can be set in seconds or days, if we want it to be before the incidence,
             // it has to be set to a negative value.
             KCalendarCore::Duration offset(value.toInt());
-            m_event->alarms()[idx.row()]->setStartOffset(offset);
+            m_incidence->alarms()[idx.row()]->setStartOffset(offset);
             break;
         }
         case EndOffsetRole:
         {
             KCalendarCore::Duration offset(value.toInt());
-            m_event->alarms()[idx.row()]->setEndOffset(offset);
+            m_incidence->alarms()[idx.row()]->setEndOffset(offset);
             break;
         }
         default:
-            qWarning() << "Unknown role for event:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return false;
     }
     emit dataChanged(idx, idx);
@@ -115,13 +115,13 @@ QHash<int, QByteArray> RemindersModel::roleNames() const
 
 int RemindersModel::rowCount(const QModelIndex &) const
 {
-    return m_event->alarms().size();
+    return m_incidence->alarms().size();
 }
 
 void RemindersModel::addAlarm()
 {
     KCalendarCore::Alarm::Ptr alarm (new KCalendarCore::Alarm(nullptr));
-    m_event->addAlarm(alarm);
+    m_incidence->addAlarm(alarm);
     Q_EMIT alarmsChanged();
     Q_EMIT layoutChanged();
 }
@@ -132,7 +132,7 @@ void RemindersModel::deleteAlarm(int row)
         return;
     }
 
-    m_event->removeAlarm(m_event->alarms()[row]);
+    m_incidence->removeAlarm(m_incidence->alarms()[row]);
     Q_EMIT alarmsChanged();
     Q_EMIT layoutChanged();
 }

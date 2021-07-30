@@ -2,6 +2,7 @@
 // Copyright (c) 2018 Christian Mollekopf <mollekopf@kolabsys.com>
 // Copyright (c) 2018 Rémi Nicole <minijackson@riseup.net>
 // Copyright (c) 2021 Carl Schwan <carlschwan@kde.org>
+// Copyright (c) 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #pragma once
@@ -17,7 +18,7 @@
 
 namespace KCalendarCore {
     class MemoryCalendar;
-    class Event;
+    class Incidence;
 }
 namespace Akonadi {
     class ETMCalendar;
@@ -30,7 +31,7 @@ using namespace KCalendarCore;
  *
  * Recurrences are expanded
  */
-class EventOccurrenceModel : public QAbstractItemModel
+class IncidenceOccurrenceModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(QDate start READ start WRITE setStart NOTIFY startChanged)
@@ -50,13 +51,17 @@ public:
         Color,
         CollectionId,
         AllDay,
-        EventPtr,
-        EventOccurrence,
+        TodoCompleted,
+        IncidenceType,
+        IncidenceTypeStr,
+        IncidenceTypeIcon,
+        IncidencePtr,
+        IncidenceOccurrence,
         LastRole
     };
     Q_ENUM(Roles);
-    EventOccurrenceModel(QObject *parent = nullptr);
-    ~EventOccurrenceModel() = default;
+    IncidenceOccurrenceModel(QObject *parent = nullptr);
+    ~IncidenceOccurrenceModel() = default;
 
     QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
     QModelIndex parent(const QModelIndex &index) const override;
@@ -82,7 +87,7 @@ public:
     struct Occurrence {
         QDateTime start;
         QDateTime end;
-        QSharedPointer<KCalendarCore::Event> event;
+        QSharedPointer<KCalendarCore::Incidence> incidence;
         QColor color;
         qint64 collectionId;
         bool allDay;
@@ -99,8 +104,8 @@ private:
 
     void refreshView();
     void updateFromSource();
-    QColor getColor(const KCalendarCore::Event::Ptr &event);
-    qint64 getCollectionId(const KCalendarCore::Event::Ptr &event);
+    QColor getColor(const KCalendarCore::Incidence::Ptr &incidence);
+    qint64 getCollectionId(const KCalendarCore::Incidence::Ptr &incidence);
 
     QSharedPointer<QAbstractItemModel> mSourceModel;
     QDate mStart;
@@ -110,10 +115,11 @@ private:
 
     QTimer mRefreshTimer;
 
-    QList<Occurrence> m_events;
+    QList<Occurrence> m_incidences;
     QHash<QString, QColor> m_colors;
     QVariantMap mFilter;
 };
 
-Q_DECLARE_METATYPE(EventOccurrenceModel::Occurrence);
+Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence);
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
 

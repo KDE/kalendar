@@ -14,10 +14,11 @@ import "dateutils.js" as DateUtils
 Item {
     id: root
 
-    signal addEvent(date addDate)
-    signal viewEvent(var modelData, var collectionData)
-    signal editEvent(var eventPtr, var collectionId)
-    signal deleteEvent(var eventPtr, date deleteDate)
+    signal addIncidence(int type, date addDate)
+    signal viewIncidence(var modelData, var collectionData)
+    signal editIncidence(var incidencePtr, var collectionId)
+    signal deleteIncidence(var incidencePtr, date deleteDate)
+    signal completeTodo(var incidencePtr)
 
     property int daysToShow
     property int daysPerRow: daysToShow
@@ -60,12 +61,11 @@ Item {
 
         //Weeks
         Repeater {
-            model: Kalendar.MultiDayEventModel {
+            model: Kalendar.MultiDayIncidenceModel {
                 periodLength: 7
-
-                model: Kalendar.EventOccurrenceModel {
+                model: Kalendar.IncidenceOccurrenceModel {
                     id: occurrenceModel
-                    objectName: "eventOccurrenceModel"
+                    objectName: "incidenceOccurrenceModel"
                     start: root.startDate
                     length: root.daysToShow
                     filter: root.filter ? root.filter : {}
@@ -94,6 +94,7 @@ Item {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         property var startDate: periodStartDate
+
                         //Grid
                         Row {
                             spacing: 1
@@ -113,6 +114,12 @@ Item {
                                     background: Rectangle {
                                         Kirigami.Theme.colorSet: Kirigami.Theme.View
                                         color: model.sameMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
+
+                                        DayMouseArea {
+                                            anchors.fill: parent
+                                            addDate: DateUtils.addDaysToDate(periodStartDate, modelData)
+                                            onAddNewIncidence: addIncidence(type, addDate)
+                                        }
                                     }
 
                                     padding: 0
@@ -128,36 +135,35 @@ Item {
                                         visible: root.showDayIndicator
                                         color: gridItem.isToday ? Kirigami.Theme.highlightColor : (!gridItem.isCurrentMonth ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor)
                                     }
-
-                                    DayMouseArea {
-                                        anchors.fill: parent
-                                        addDate: gridItem.date
-                                        onAddNewEvent: addEvent(addDate)
-                                    }
                                 }
                             }
                         }
 
-                        Column {
+                        QQC2.ScrollView {
+
                             anchors {
                                 fill: parent
                                 // Offset for date
                                 topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing : 0
                             }
-                            Repeater {
+
+                            ListView {
+                                Layout.fillWidth: true
                                 id: linesRepeater
-                                model: events
+
+                                model: incidences
                                 onCountChanged: {
                                     root.numberOfLinesShown = count
                                 }
-                                Item {
+
+                                delegate: Item {
                                     id: line
                                     height: Kirigami.Units.gridUnit
                                     width: parent.width
 
-                                    //Events
+                                    //Incidences
                                     Repeater {
-                                        id: eventsRepeater
+                                        id: incidencesRepeater
                                         model: modelData
                                         Rectangle {
                                             x: (root.dayWidth + 1) * modelData.starts // +1 because of the spacing
@@ -176,23 +182,35 @@ Item {
                                                 opacity: 0.6
                                             }
 
-                                            QQC2.Label {
+                                            RowLayout {
                                                 anchors {
                                                     fill: parent
                                                     leftMargin: Kirigami.Units.smallSpacing
                                                     rightMargin: Kirigami.Units.smallSpacing
                                                 }
-                                                text: modelData.text
-                                                elide: Text.ElideRight
+
+                                                Kirigami.Icon {
+                                                    Layout.maximumHeight: parent.height
+                                                    Layout.maximumWidth: height
+
+                                                    source: modelData.incidenceTypeIcon
+                                                }
+
+                                                QQC2.Label {
+                                                    Layout.fillWidth: true
+                                                    text: modelData.text
+                                                    elide: Text.ElideRight
+                                                }
                                             }
 
                                             IncidenceMouseArea {
-                                                eventData: modelData
+                                                incidenceData: modelData
                                                 collectionDetails: Kalendar.CalendarManager.getCollectionDetails(modelData.collectionId)
 
-                                                onViewClicked: viewEvent(modelData, collectionData)
-                                                onEditClicked: editEvent(eventPtr, collectionId)
-                                                onDeleteClicked: deleteEvent(eventPtr, deleteDate)
+                                                onViewClicked: viewIncidence(modelData, collectionData)
+                                                onEditClicked: editIncidence(incidencePtr, collectionId)
+                                                onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
+                                                onTodoCompletedClicked: completeTodo(incidencePtr)
                                             }
                                         }
                                     }

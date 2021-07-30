@@ -14,10 +14,11 @@ Kirigami.Page {
     id: monthPage
 
     // More elegant way of sending this up to main.qml?
-    signal addEventReceived(date receivedAddDate)
-    signal viewEventReceived(var receivedModelData, var receivedCollectionData)
-    signal editEventReceived(var receivedEventPtr, var receivedCollectionId)
-    signal deleteEventReceived(var receivedEventPtr, date receivedDeleteDate)
+    signal addIncidenceReceived(int receivedType, date receivedAddDate)
+    signal viewIncidenceReceived(var receivedModelData, var receivedCollectionData)
+    signal editIncidenceReceived(var receivedIncidencePtr, var receivedCollectionId)
+    signal deleteIncidenceReceived(var receivedIncidencePtr, date receivedDeleteDate)
+    signal completeTodoReceived(var receivedIncidencePtr)
 
     property alias startDate: dayView.startDate
     property alias currentDate: dayView.currentDate
@@ -46,7 +47,11 @@ Kirigami.Page {
         startDate = newDate;
     }
 
-    padding: 0
+    topPadding: 0
+    rightPadding: Kirigami.Units.smallSpacing
+    bottomPadding: Kirigami.Units.largeSpacing
+    leftPadding: 0
+
     background: Rectangle {
         Kirigami.Theme.colorSet: monthPage.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
         color: Kirigami.Theme.backgroundColor
@@ -93,11 +98,11 @@ Kirigami.Page {
             text: DateUtils.getWeek(startDate, Qt.locale().firstDayOfWeek)
         }
 
-        onAddEvent: addEventReceived(addDate)
-        onViewEvent: viewEventReceived(modelData, collectionData)
-        onEditEvent: editEventReceived(eventPtr, collectionId)
-        onDeleteEvent: deleteEventReceived(eventPtr, deleteDate)
-
+        onAddIncidence: addIncidenceReceived(type, addDate)
+        onViewIncidence: viewIncidenceReceived(modelData, collectionData)
+        onEditIncidence: editIncidenceReceived(incidencePtr, collectionId)
+        onDeleteIncidence: deleteIncidenceReceived(incidencePtr, deleteDate)
+        onCompleteTodo: completeTodoReceived(incidencePtr)
     }
 }
 

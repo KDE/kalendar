@@ -40,7 +40,7 @@ private:
 class AttendeesModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr WRITE setEventPtr NOTIFY eventPtrChanged)
+    Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
     Q_PROPERTY(KCalendarCore::Attendee::List attendees READ attendees NOTIFY attendeesChanged)
     Q_PROPERTY(AttendeeStatusModel * attendeeStatusModel READ attendeeStatusModel NOTIFY attendeeStatusModelChanged)
     Q_PROPERTY(QVariantMap dataroles READ dataroles CONSTANT)
@@ -61,11 +61,11 @@ public:
     };
     Q_ENUM(Roles);
 
-    explicit AttendeesModel(QObject *parent = nullptr, KCalendarCore::Event::Ptr eventPtr = nullptr);
+    explicit AttendeesModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~AttendeesModel() = default;
 
-    KCalendarCore::Event::Ptr eventPtr();
-    void setEventPtr(KCalendarCore::Event::Ptr event);
+    KCalendarCore::Incidence::Ptr incidencePtr();
+    void setIncidencePtr(KCalendarCore::Incidence::Ptr incidence);
     KCalendarCore::Attendee::List attendees();
     AttendeeStatusModel * attendeeStatusModel();
     QVariantMap dataroles();
@@ -79,12 +79,12 @@ public:
     Q_INVOKABLE void deleteAttendee(int row);
 
 Q_SIGNALS:
-    void eventPtrChanged();
+    void incidencePtrChanged();
     void attendeesChanged();
     void attendeeStatusModelChanged();
 
 private:
-    KCalendarCore::Event::Ptr m_event;
+    KCalendarCore::Incidence::Ptr m_incidence;
     AttendeeStatusModel m_attendeeStatusModel;
     QVariantMap m_dataRoles;
 };

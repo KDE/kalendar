@@ -4,9 +4,9 @@
 #include <QMetaEnum>
 #include "recurrenceexceptionsmodel.h"
 
-RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject* parent, KCalendarCore::Event::Ptr eventPtr)
+RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject* parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)
-    , m_event(eventPtr)
+    , m_incidence(incidencePtr)
 {
     for(int i = 0; i < QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().keyCount(); i++) {
         int value = QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().value(i);
@@ -14,21 +14,21 @@ RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject* parent, KCalendarC
         m_dataRoles[key] = value;
     }
 
-    connect(this, &RecurrenceExceptionsModel::eventPtrChanged, this, &RecurrenceExceptionsModel::updateExceptions);
+    connect(this, &RecurrenceExceptionsModel::incidencePtrChanged, this, &RecurrenceExceptionsModel::updateExceptions);
 }
 
-KCalendarCore::Event::Ptr RecurrenceExceptionsModel::eventPtr()
+KCalendarCore::Incidence::Ptr RecurrenceExceptionsModel::incidencePtr()
 {
-    return m_event;
+    return m_incidence;
 }
 
-void RecurrenceExceptionsModel::setEventPtr(KCalendarCore::Event::Ptr event)
+void RecurrenceExceptionsModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
 {
-    if (m_event == event) {
+    if (m_incidence == incidence) {
         return;
     }
-    m_event = event;
-    Q_EMIT eventPtrChanged();
+    m_incidence = incidence;
+    Q_EMIT incidencePtrChanged();
     Q_EMIT exceptionsChanged();
     Q_EMIT layoutChanged();
 }
@@ -42,11 +42,11 @@ void RecurrenceExceptionsModel::updateExceptions()
 {
     m_exceptions.clear();
 
-    for(const QDateTime &dt : m_event->recurrence()->exDateTimes()) {
+    for(const QDateTime &dt : m_incidence->recurrence()->exDateTimes()) {
         m_exceptions.append(dt.date());
     }
 
-    for(const QDate &dt : m_event->recurrence()->exDates()) {
+    for(const QDate &dt : m_incidence->recurrence()->exDates()) {
         m_exceptions.append(dt);
     }
     Q_EMIT exceptionsChanged();
@@ -69,7 +69,7 @@ QVariant RecurrenceExceptionsModel::data(const QModelIndex &idx, int role) const
         case DateRole:
             return exception;
         default:
-            qWarning() << "Unknown role for event:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return {};
     }
 }
@@ -93,10 +93,10 @@ void RecurrenceExceptionsModel::addExceptionDateTime(QDateTime date)
     }
 
     // I don't know why, but different types take different date formats
-    if (m_event->recurrence()->allDay()) {
-        m_event->recurrence()->addExDateTime(date);
+    if (m_incidence->recurrence()->allDay()) {
+        m_incidence->recurrence()->addExDateTime(date);
     } else {
-        m_event->recurrence()->addExDate(date.date());
+        m_incidence->recurrence()->addExDate(date.date());
     }
 
     updateExceptions();
@@ -109,29 +109,29 @@ void RecurrenceExceptionsModel::deleteExceptionDateTime(QDateTime date)
     }
 
 
-    if (m_event->recurrence()->allDay()) {
-        auto dateTimes = m_event->recurrence()->exDateTimes();
+    if (m_incidence->recurrence()->allDay()) {
+        auto dateTimes = m_incidence->recurrence()->exDateTimes();
         dateTimes.removeAt(dateTimes.indexOf(date));
-        m_event->recurrence()->setExDateTimes(dateTimes);
+        m_incidence->recurrence()->setExDateTimes(dateTimes);
     } else {
-        auto dates = m_event->recurrence()->exDates();
+        auto dates = m_incidence->recurrence()->exDates();
         int removeIndex = dates.indexOf(date.date());
 
         if (removeIndex >= 0) {
             dates.removeAt(dates.indexOf(date.date()));
-            m_event->recurrence()->setExDates(dates);
+            m_incidence->recurrence()->setExDates(dates);
             updateExceptions();
             return;
         }
 
-        auto dateTimes = m_event->recurrence()->exDateTimes();
+        auto dateTimes = m_incidence->recurrence()->exDateTimes();
 
         for(int i = 0; i < dateTimes.size(); i++) {
             if (dateTimes[i].date() == date.date()) {
                 dateTimes.removeAt(i);
             }
         }
-        m_event->recurrence()->setExDateTimes(dateTimes);
+        m_incidence->recurrence()->setExDateTimes(dateTimes);
     }
 
     updateExceptions();

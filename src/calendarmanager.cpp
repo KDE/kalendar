@@ -261,16 +261,24 @@ CalendarManager::CalendarManager(QObject *parent)
 
     // Filter it by mimetype again, to only keep
     // Kolab / Inbox / Calendar
-    m_mimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
-    m_mimeTypeFilterModel->setSourceModel(m_allCalendars);
-    m_mimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
+    m_eventMimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_eventMimeTypeFilterModel->setSourceModel(m_allCalendars);
+    m_eventMimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
     // text/calendar mimetype includes todo cals
+    m_todoMimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_todoMimeTypeFilterModel->setSourceModel(m_allCalendars);
+    m_todoMimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
 
     // Filter by access rights
-    m_rightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
-    m_rightsFilterModel->setAccessRights( Collection::CanCreateItem );
-    m_rightsFilterModel->setSourceModel(m_mimeTypeFilterModel);
-    m_rightsFilterModel->sort(0);
+    m_eventRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
+    m_eventRightsFilterModel->setAccessRights( Collection::CanCreateItem );
+    m_eventRightsFilterModel->setSourceModel(m_eventMimeTypeFilterModel);
+    m_eventRightsFilterModel->sort(0);
+
+    m_todoRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
+    m_todoRightsFilterModel->setAccessRights( Collection::CanCreateItem );
+    m_todoRightsFilterModel->setSourceModel(m_todoMimeTypeFilterModel);
+    m_todoRightsFilterModel->sort(0);
 
     Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
@@ -279,7 +287,7 @@ CalendarManager::CalendarManager(QObject *parent)
 CalendarManager::~CalendarManager()
 {
     save();
-    delete mCollectionSelectionModelStateSaver;
+    //delete mCollectionSelectionModelStateSaver;
 }
 
 void CalendarManager::save()
@@ -342,29 +350,91 @@ KDescendantsProxyModel * CalendarManager::allCalendars()
     return m_allCalendars;
 }
 
-Akonadi::EntityRightsFilterModel * CalendarManager::selectableCalendars() const
+Akonadi::EntityRightsFilterModel * CalendarManager::selectableEventCalendars() const
 {
-    return m_rightsFilterModel;
+    return m_eventRightsFilterModel;
 }
 
-qint64 CalendarManager::defaultCalendarId()
+Akonadi::EntityRightsFilterModel * CalendarManager::selectableTodoCalendars() const
 {
-    return CalendarSupport::KCalPrefs::instance()->defaultCalendarId();
+    return m_todoRightsFilterModel;
 }
 
-int CalendarManager::getCalendarSelectableIndex(qint64 collectionId)
+qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
+{
+    auto mimeType = incidenceWrapper->incidencePtr()->mimeType();
+    Akonadi::Collection collection = m_calendar->collection(CalendarSupport::KCalPrefs::instance()->defaultCalendarId());
+    bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
+    bool hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
+    if (collection.isValid() && supportsMimeType && hasRights) {
+        qDebug() << collection.id();
+        return collection.id();
+    }
+
+    // Should add last used collection by mimetype somewhere.
+
+    for (int i = 0; i < m_allCalendars->rowCount(); i++) {
+        QModelIndex idx = m_allCalendars->index(i, 0);
+        collection = idx.data(Akonadi::EntityTreeModel::Roles::CollectionRole).value<Akonadi::Collection>();
+        supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
+        hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
+        if (collection.isValid() && supportsMimeType && hasRights) {
+            return collection.id();
+        }
+    }
+
+    return -1;
+}
+
+int CalendarManager::getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper)
 {
     //auto index = m_rightsFilterModel->match(m_rightsFilterModel->index(0,0), Akonadi::EntityTreeModel::Roles::CollectionRole, cal, -1, Qt::MatchRecursive);
 
-    for(int i = 0; i < m_rightsFilterModel->rowCount(); i++)
+    Akonadi::EntityRightsFilterModel *model;
+
+    switch(incidenceWrapper->incidencePtr()->type()) {
+        default:
+        case(KCalendarCore::IncidenceBase::TypeEvent):
+        {
+            model = m_eventRightsFilterModel;
+            break;
+        }
+        case(KCalendarCore::IncidenceBase::TypeTodo):
+        {
+            model = m_todoRightsFilterModel;
+            break;
+        }
+    }
+
+    for(int i = 0; i < model->rowCount(); i++)
     {
-        QModelIndex idx = m_rightsFilterModel->index(i, 0);
+        QModelIndex idx = model->index(i, 0);
         QVariant data = idx.data(Akonadi::EntityTreeModel::Roles::CollectionIdRole);
 
-        if(data == collectionId)
+        if(data == incidenceWrapper->collectionId())
             return i;
     }
-    return -1;
+
+    return 0;
+}
+
+QVariant CalendarManager::getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr)
+{
+    switch(incidencePtr->type()) {
+        case(KCalendarCore::IncidenceBase::TypeEvent):
+            return QVariant::fromValue(m_calendar->event(incidencePtr->instanceIdentifier()));
+            break;
+        case(KCalendarCore::IncidenceBase::TypeTodo):
+            return QVariant::fromValue(m_calendar->todo(incidencePtr->instanceIdentifier()));
+            break;
+        case(KCalendarCore::IncidenceBase::TypeJournal):
+            return QVariant::fromValue(m_calendar->todo(incidencePtr->instanceIdentifier()));
+            break;
+        default:
+            return QVariant::fromValue(incidencePtr);
+            break;
+    }
+
 }
 
 QVariantMap CalendarManager::undoRedoData()
@@ -377,39 +447,57 @@ QVariantMap CalendarManager::undoRedoData()
     };
 }
 
-void CalendarManager::addEvent(qint64 collectionId, KCalendarCore::Event::Ptr event)
+void CalendarManager::addIncidence(IncidenceWrapper *incidenceWrapper)
 {
-    Akonadi::Collection collection(collectionId);
-    m_changer->createIncidence(event, collection); // This will fritz if you don't choose a valid *calendar*
+    Akonadi::Collection collection(incidenceWrapper->collectionId());
+
+    switch(incidenceWrapper->incidencePtr()->type()) {
+        case(KCalendarCore::IncidenceBase::TypeEvent):
+        {
+            KCalendarCore::Event::Ptr event = incidenceWrapper->incidencePtr().staticCast<KCalendarCore::Event>();
+            m_changer->createIncidence(event, collection);
+            break;
+        }
+        case(KCalendarCore::IncidenceBase::TypeTodo):
+        {
+            KCalendarCore::Todo::Ptr todo = incidenceWrapper->incidencePtr().staticCast<KCalendarCore::Todo>();
+            m_changer->createIncidence(todo, collection);
+            break;
+        }
+        default:
+            m_changer->createIncidence(KCalendarCore::Incidence::Ptr(incidenceWrapper->incidencePtr()->clone()), collection);
+            break;
+    }
+    // This will fritz if you don't choose a valid *calendar*
 }
 
 // Replicates IncidenceDialogPrivate::save
-void CalendarManager::editEvent(qint64 collectionId, KCalendarCore::Event::Ptr originalEvent, KCalendarCore::Event::Ptr editedEvent)
+void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
 {
     // We need to use the incidenceChanger manually to get the change recorded in the history
-    // For undo/redo to work properly we need to change the ownership of the event pointers
-    KCalendarCore::Event::Ptr changedEvent(editedEvent->clone());
-    KCalendarCore::Event::Ptr originalPayload(originalEvent->clone());
+    // For undo/redo to work properly we need to change the ownership of the incidence pointers
+    KCalendarCore::Incidence::Ptr changedIncidence(incidenceWrapper->incidencePtr()->clone());
+    KCalendarCore::Incidence::Ptr originalPayload(incidenceWrapper->originalIncidencePtr()->clone());
 
-    Akonadi::Item modifiedItem = m_calendar->item(changedEvent->instanceIdentifier());
-    modifiedItem.setPayload<KCalendarCore::Incidence::Ptr>(changedEvent);
+    Akonadi::Item modifiedItem = m_calendar->item(changedIncidence->instanceIdentifier());
+    modifiedItem.setPayload<KCalendarCore::Incidence::Ptr>(changedIncidence);
 
     m_changer->modifyIncidence(modifiedItem, originalPayload);
 
-    if (modifiedItem.parentCollection().id() == collectionId) {
+    if (modifiedItem.parentCollection().id() == incidenceWrapper->collectionId()) {
         return;
     }
 
-    Akonadi::Collection newCollection(collectionId);
+    Akonadi::Collection newCollection(incidenceWrapper->collectionId());
     modifiedItem.setParentCollection(newCollection);
     Akonadi::ItemMoveJob *job = new Akonadi::ItemMoveJob(modifiedItem, newCollection);
     // Add some type of check here?
     connect(job, &KJob::result, job, [=]() {qDebug() << job->error();});
 }
 
-void CalendarManager::deleteEvent(KCalendarCore::Event::Ptr event)
+void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence)
 {
-    m_calendar->deleteEvent(event);
+    m_calendar->deleteIncidence(incidence);
 }
 
 QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
@@ -435,5 +523,6 @@ void CalendarManager::redoAction()
     m_changer->history()->redo();
 }
 
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
 
 #include "calendarmanager.moc"

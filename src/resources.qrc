@@ -6,9 +6,9 @@
     <file alias="MonthView.qml">contents/ui/MonthView.qml</file>
     <file alias="DayLabels.qml">contents/ui/DayLabels.qml</file>
     <file alias="dateutils.js">contents/ui/dateutils.js</file>
-    <file alias="EventEditor.qml">contents/ui/EventEditor.qml</file>
-    <file alias="DeleteEventSheet.qml">contents/ui/DeleteEventSheet.qml</file>
-    <file alias="EventInfo.qml">contents/ui/EventInfo.qml</file>
+    <file alias="IncidenceEditor.qml">contents/ui/IncidenceEditor.qml</file>
+    <file alias="DeleteIncidenceSheet.qml">contents/ui/DeleteIncidenceSheet.qml</file>
+    <file alias="IncidenceInfo.qml">contents/ui/IncidenceInfo.qml</file>
     <file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
     <file alias="labelutils.js">contents/ui/labelutils.js</file>

@@ -12,10 +12,11 @@ import "dateutils.js" as DateUtils
 Kirigami.ScrollablePage {
     id: root
 
-    signal addEvent(date addDate)
-    signal viewEvent(var modelData, var collectionData)
-    signal editEvent(var eventPtr, var collectionId)
-    signal deleteEvent(var eventPtr, date deleteDate)
+    signal addIncidence(int type, date addDate)
+    signal viewIncidence(var modelData, var collectionData)
+    signal editIncidence(var incidencePtr, var collectionId)
+    signal deleteIncidence(var incidencePtr, date deleteDate)
+    signal completeTodo(var incidencePtr)
 
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
@@ -85,12 +86,12 @@ Kirigami.ScrollablePage {
             title: Qt.locale().monthName(root.month)
         }
 
-        model: Kalendar.MultiDayEventModel {
+        model: Kalendar.MultiDayIncidenceModel {
             periodLength: 1
 
-            model: Kalendar.EventOccurrenceModel {
+            model: Kalendar.IncidenceOccurrenceModel {
                 id: occurrenceModel
-                objectName: "eventOccurrenceModel"
+                objectName: "incidenceOccurrenceModel"
                 start: root.startDate
                 length: root.daysInMonth
                 filter: root.filter ? root.filter : {}
@@ -105,7 +106,7 @@ Kirigami.ScrollablePage {
             height: dayColumn.height
 
             addDate: periodStartDate
-            onAddNewEvent: addEvent(addDate)
+            onAddNewIncidence: addIncidence(type, addDate)
 
             ColumnLayout {
                 // Tip: do NOT hide an entire delegate.
@@ -138,7 +139,7 @@ Kirigami.ScrollablePage {
                     Layout.bottomMargin: scheduleListView.spacing - Kirigami.Units.smallSpacing
                 }
 
-                // Day + events
+                // Day + incidences
                 GridLayout {
                     id: dayGrid
 
@@ -192,14 +193,14 @@ Kirigami.ScrollablePage {
                         wrapMode: Text.Wrap
                         color: dayGrid.isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
                         text: periodStartDate.toLocaleDateString(Qt.locale(), "ddd\n<b>dd</b>")
-                        visible: events.length || dayGrid.isToday
+                        visible: incidences.length || dayGrid.isToday
                     }
 
                     ColumnLayout {
                         id: cardsColumn
 
                         Layout.fillWidth: true
-                        visible: events.length || dayGrid.isToday
+                        visible: incidences.length || dayGrid.isToday
 
                         Kirigami.AbstractCard {
                             id: suggestCard
@@ -207,7 +208,7 @@ Kirigami.ScrollablePage {
                             Layout.fillWidth: true
 
                             showClickFeedback: true
-                            visible: !events.length && dayGrid.isToday
+                            visible: !incidences.length && dayGrid.isToday
 
                             contentItem: QQC2.Label {
                                 property string selectMethod: Kirigami.Settings.isMobile ? i18n("Tap") : i18n("Click")
@@ -215,17 +216,17 @@ Kirigami.ScrollablePage {
                                 wrapMode: Text.Wrap
                             }
 
-                            onClicked: root.addEvent()
+                            onClicked: root.addIncidence(IncidenceWrapper.TypeEvent)
                         }
 
                         Repeater {
-                            model: events
+                            model: incidences
                             Repeater {
-                                id: eventsRepeater
+                                id: incidencesRepeater
                                 model: modelData
 
                                 Kirigami.AbstractCard {
-                                    id: eventCard
+                                    id: incidenceCard
 
                                     Layout.fillWidth: true
 
@@ -241,14 +242,14 @@ Kirigami.ScrollablePage {
 
                                     showClickFeedback: true
 
-                                    property var eventWrapper: new EventWrapper()
+                                    property var incidenceWrapper: new IncidenceWrapper()
                                     property bool multiday: modelData.startTime.getDate() !== modelData.endTime.getDate()
-                                    property int eventDays: DateUtils.fullDaysBetweenDates(modelData.startTime, modelData.endTime)
-                                    property int dayOfMultidayEvent: DateUtils.fullDaysBetweenDates(modelData.startTime, periodStartDate)
+                                    property int incidenceDays: DateUtils.fullDaysBetweenDates(modelData.startTime, modelData.endTime)
+                                    property int dayOfMultidayIncidence: DateUtils.fullDaysBetweenDates(modelData.startTime, periodStartDate)
 
                                     Component.onCompleted: {
-                                        eventWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; EventWrapper {id: event}', eventInfo, "event");
-                                        eventWrapper.eventPtr = modelData.eventPtr
+                                        incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceInfo, "incidence");
+                                        incidenceWrapper.incidencePtr = modelData.incidencePtr
                                     }
 
                                     contentItem: GridLayout {
@@ -262,9 +263,8 @@ Kirigami.ScrollablePage {
                                         RowLayout {
                                             Kirigami.Icon {
                                                 Layout.fillHeight: true
-                                                source: "tag-events"
+                                                source: incidenceCard.incidenceWrapper.incidenceIconName
                                                 color: cardContents.textColor
-                                                // TODO: This will need dynamic changing with implementation of to-dos/journals
                                             }
 
                                             QQC2.Label {
@@ -276,8 +276,8 @@ Kirigami.ScrollablePage {
 
                                                 color: cardContents.textColor
                                                 text: {
-                                                    if(eventCard.multiday) {
-                                                        return i18n("%1 (Day %2 of %3)", modelData.text, eventCard.dayOfMultidayEvent, eventCard.eventDays);
+                                                    if(incidenceCard.multiday) {
+                                                        return i18n("%1 (Day %2 of %3)", modelData.text, incidenceCard.dayOfMultidayIncidence, incidenceCard.incidenceDays);
                                                     } else {
                                                         return modelData.text;
                                                     }
@@ -292,7 +292,7 @@ Kirigami.ScrollablePage {
                                             Layout.column: 1
                                             Layout.row: 0
 
-                                            visible: eventCard.eventWrapper.remindersModel.rowCount() > 0 //&& eventCard.eventWrapper.recurrenceData.type
+                                            visible: incidenceCard.incidenceWrapper.remindersModel.rowCount() > 0 //&& incidenceCard.incidenceWrapper.recurrenceData.type
 
                                             // TODO: Re-enable this when MR !8 is merged
                                             /*Kirigami.Icon {
@@ -300,14 +300,14 @@ Kirigami.ScrollablePage {
                                                 Layout.fillHeight: true
                                                 source: "appointment-recurring"
                                                 color: cardContents.textColor
-                                                visible: eventCard.eventWrapper.recurrenceData.type
+                                                visible: incidenceCard.incidenceWrapper.recurrenceData.type
                                             }*/
                                             Kirigami.Icon {
                                                 id: reminderIcon
                                                 Layout.fillHeight: true
                                                 source: "appointment-reminder"
                                                 color: cardContents.textColor
-                                                visible: eventCard.eventWrapper.remindersModel.rowCount() > 0
+                                                visible: incidenceCard.incidenceWrapper.remindersModel.rowCount() > 0
                                             }
                                         }
 
@@ -326,12 +326,12 @@ Kirigami.ScrollablePage {
                                                     i18n("Runs all day")
                                                 } else if (modelData.startTime.getTime() === modelData.endTime.getTime()) {
                                                     modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
-                                                } else if (!eventCard.multiday) {
+                                                } else if (!incidenceCard.multiday) {
                                                     i18nc("Displays times between incidence start and end", "%1 - %2",
                                                     modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat), modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat));
-                                                } else if (eventCard.dayOfMultidayEvent === 1) {
+                                                } else if (incidenceCard.dayOfMultidayIncidence === 1) {
                                                     i18n("Starts at %1", modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat));
-                                                } else if (eventCard.dayOfMultidayEvent === eventCard.eventDays) {
+                                                } else if (incidenceCard.dayOfMultidayIncidence === incidenceCard.incidenceDays) {
                                                     i18n("Ends at %1", modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat));
                                                 } else { // In between multiday start/finish
                                                     i18n("Runs all day")
@@ -341,14 +341,15 @@ Kirigami.ScrollablePage {
                                     }
 
                                     IncidenceMouseArea {
-                                        id: eventMouseArea
+                                        id: incidenceMouseArea
 
-                                        eventData: modelData
-                                        collectionDetails: events.length && Kalendar.CalendarManager.getCollectionDetails(modelData.collectionId)
+                                        incidenceData: modelData
+                                        collectionDetails: incidences.length && Kalendar.CalendarManager.getCollectionDetails(modelData.collectionId)
 
-                                        onViewClicked: root.viewEvent(modelData, collectionData)
-                                        onEditClicked: root.editEvent(eventPtr, collectionId)
-                                        onDeleteClicked: root.deleteEvent(eventPtr, deleteDate)
+                                        onViewClicked: root.viewIncidence(modelData, collectionData)
+                                        onEditClicked: root.editIncidence(incidencePtr, collectionId)
+                                        onDeleteClicked: root.deleteIncidence(incidencePtr, deleteDate)
+                                        onTodoCompletedClicked: completeTodo(incidencePtr)
                                     }
                                 }
                             }

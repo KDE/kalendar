@@ -11,11 +11,11 @@
 #include <KCalendarCore/VCalFormat>
 #include <KCalendarCore/MemoryCalendar>
 #include <AkonadiCore/AgentFilterProxyModel>
-#include "multidayeventmodel.h"
-#include "eventoccurrencemodel.h"
+#include "multidayincidencemodel.h"
+#include "incidenceoccurrencemodel.h"
 #include "calendarmanager.h"
 #include "agentconfiguration.h"
-#include "eventwrapper.h"
+#include "incidencewrapper.h"
 #include "about.h"
 #include "config-kalendar.h"
 
@@ -51,9 +51,9 @@ int main(int argc, char *argv[])
     AgentConfiguration agentConfiguration;
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", manager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
-    qmlRegisterType<EventWrapper>("org.kde.kalendar", 1, 0, "EventWrapper");
-    qmlRegisterType<MultiDayEventModel>("org.kde.kalendar", 1, 0, "MultiDayEventModel");
-    qmlRegisterType<EventOccurrenceModel>("org.kde.kalendar", 1, 0, "EventOccurrenceModel");
+    qmlRegisterType<IncidenceWrapper>("org.kde.kalendar", 1, 0, "IncidenceWrapper");
+    qmlRegisterType<MultiDayIncidenceModel>("org.kde.kalendar", 1, 0, "MultiDayIncidenceModel");
+    qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
 
     qmlRegisterSingletonType<AboutType>("org.kde.kalendar", 1, 0, "AboutType", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {

@@ -12,7 +12,7 @@
 class RecurrenceExceptionsModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr WRITE setEventPtr NOTIFY eventPtrChanged)
+    Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
     Q_PROPERTY(QList<QDate> exceptions READ exceptions NOTIFY exceptionsChanged)
     Q_PROPERTY(QVariantMap dataroles READ dataroles CONSTANT)
 
@@ -22,11 +22,11 @@ public:
     };
     Q_ENUM(Roles);
 
-    explicit RecurrenceExceptionsModel(QObject *parent = nullptr, KCalendarCore::Event::Ptr eventPtr = nullptr);
+    explicit RecurrenceExceptionsModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~RecurrenceExceptionsModel() = default;
 
-    KCalendarCore::Event::Ptr eventPtr();
-    void setEventPtr(KCalendarCore::Event::Ptr event);
+    KCalendarCore::Incidence::Ptr incidencePtr();
+    void setIncidencePtr(KCalendarCore::Incidence::Ptr incidence);
     QList<QDate> exceptions();
     void updateExceptions();
     QVariantMap dataroles();
@@ -39,11 +39,11 @@ public:
     Q_INVOKABLE void deleteExceptionDateTime(QDateTime date);
 
 Q_SIGNALS:
-    void eventPtrChanged();
+    void incidencePtrChanged();
     void exceptionsChanged();
 
 private:
-    KCalendarCore::Event::Ptr m_event;
+    KCalendarCore::Incidence::Ptr m_incidence;
     QList<QDate> m_exceptions;
     QVariantMap m_dataRoles;
 };

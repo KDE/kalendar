@@ -4,9 +4,9 @@
 #include <QMetaEnum>
 #include "attachmentsmodel.h"
 
-AttachmentsModel::AttachmentsModel(QObject* parent, KCalendarCore::Event::Ptr eventPtr)
+AttachmentsModel::AttachmentsModel(QObject* parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)
-    , m_event(eventPtr)
+    , m_incidence(incidencePtr)
 {
     for(int i = 0; i < QMetaEnum::fromType<AttachmentsModel::Roles>().keyCount(); i++) {
         int value = QMetaEnum::fromType<AttachmentsModel::Roles>().value(i);
@@ -16,25 +16,25 @@ AttachmentsModel::AttachmentsModel(QObject* parent, KCalendarCore::Event::Ptr ev
 
 }
 
-KCalendarCore::Event::Ptr AttachmentsModel::eventPtr()
+KCalendarCore::Incidence::Ptr AttachmentsModel::incidencePtr()
 {
-    return m_event;
+    return m_incidence;
 }
 
-void AttachmentsModel::setEventPtr(KCalendarCore::Event::Ptr event)
+void AttachmentsModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
 {
-    if (m_event == event) {
+    if (m_incidence == incidence) {
         return;
     }
-    m_event = event;
-    Q_EMIT eventPtrChanged();
+    m_incidence = incidence;
+    Q_EMIT incidencePtrChanged();
     Q_EMIT attachmentsChanged();
     Q_EMIT layoutChanged();
 }
 
 KCalendarCore::Attachment::List AttachmentsModel::attachments()
 {
-    return m_event->attachments();
+    return m_incidence->attachments();
 }
 
 QVariantMap AttachmentsModel::dataroles()
@@ -48,7 +48,7 @@ QVariant AttachmentsModel::data(const QModelIndex &idx, int role) const
         return {};
     }
 
-    KCalendarCore::Attachment attachment = m_event->attachments()[idx.row()];
+    KCalendarCore::Attachment attachment = m_incidence->attachments()[idx.row()];
     switch (role) {
         case AttachmentRole:
             return QVariant::fromValue(attachment);
@@ -68,7 +68,7 @@ QVariant AttachmentsModel::data(const QModelIndex &idx, int role) const
         case URIRole:
             return attachment.uri();
         default:
-            qWarning() << "Unknown role for event:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qWarning() << "Unknown role for attachment:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return {};
     }
 }
@@ -88,7 +88,7 @@ QHash<int, QByteArray> AttachmentsModel::roleNames() const
 
 int AttachmentsModel::rowCount(const QModelIndex &) const
 {
-    return m_event->attachments().size();
+    return m_incidence->attachments().size();
 }
 
 void AttachmentsModel::addAttachment(QString uri)
@@ -98,7 +98,7 @@ void AttachmentsModel::addAttachment(QString uri)
     KCalendarCore::Attachment attachment(uri);
     attachment.setLabel(QUrl(uri).fileName());
     attachment.setMimeType(type.name());
-    m_event->addAttachment(attachment);
+    m_incidence->addAttachment(attachment);
 
     Q_EMIT attachmentsChanged();
     Q_EMIT layoutChanged();
@@ -106,7 +106,7 @@ void AttachmentsModel::addAttachment(QString uri)
 
 void AttachmentsModel::deleteAttachment(QString uri)
 {
-    KCalendarCore::Attachment::List attachments = m_event->attachments();
+    KCalendarCore::Attachment::List attachments = m_incidence->attachments();
 
     for(auto attachment : attachments) {
         if(attachment.uri() == uri) {
@@ -115,10 +115,10 @@ void AttachmentsModel::deleteAttachment(QString uri)
         }
     }
 
-    m_event->clearAttachments();
+    m_incidence->clearAttachments();
 
     for(auto attachment : attachments) {
-        m_event->addAttachment(attachment);
+        m_incidence->addAttachment(attachment);
     }
 
     Q_EMIT attachmentsChanged();

@@ -10,12 +10,12 @@
 #include <QDebug>
 
 /**
- * This class provides a QAbstractItemModel for an events' reminders/alarms.
- * This can be useful for letting users add, modify, or delete events on new or pre-existing events.
- * It treats the event's list of alarms as the signle source of truth (and it should be kept this way!)
+ * This class provides a QAbstractItemModel for an incidences' reminders/alarms.
+ * This can be useful for letting users add, modify, or delete incidences on new or pre-existing incidences.
+ * It treats the incidence's list of alarms as the signle source of truth (and it should be kept this way!)
  *
- * The data for the model comes from m_event, which is set in the constructor. This is a pointer to the
- * event this model is getting the alarm info from. All alarm pointers are then added to m_alarms, which
+ * The data for the model comes from m_incidence, which is set in the constructor. This is a pointer to the
+ * incidence this model is getting the alarm info from. All alarm pointers are then added to m_alarms, which
  * is a list. Elements in this model are therefore accessed through row numbers, as the list is a one-
  * dimensional data structure.
  */
@@ -23,7 +23,7 @@
 class RemindersModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(KCalendarCore::Event::Ptr eventPtr READ eventPtr WRITE setEventPtr NOTIFY eventPtrChanged)
+    Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
     Q_PROPERTY(KCalendarCore::Alarm::List alarms READ alarms NOTIFY alarmsChanged)
     Q_PROPERTY(QVariantMap dataroles READ dataroles CONSTANT)
 
@@ -36,11 +36,11 @@ public:
     };
     Q_ENUM(Roles);
 
-    explicit RemindersModel(QObject *parent = nullptr, KCalendarCore::Event::Ptr eventPtr = nullptr);
+    explicit RemindersModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~RemindersModel() = default;
 
-    KCalendarCore::Event::Ptr eventPtr();
-    void setEventPtr(KCalendarCore::Event::Ptr event);
+    KCalendarCore::Incidence::Ptr incidencePtr();
+    void setIncidencePtr(KCalendarCore::Incidence::Ptr incidence);
     KCalendarCore::Alarm::List alarms();
     QVariantMap dataroles();
 
@@ -53,10 +53,10 @@ public:
     Q_INVOKABLE void deleteAlarm(int row);
 
 Q_SIGNALS:
-    void eventPtrChanged();
+    void incidencePtrChanged();
     void alarmsChanged();
 
 private:
-    KCalendarCore::Event::Ptr m_event;
+    KCalendarCore::Incidence::Ptr m_incidence;
     QVariantMap m_dataRoles;
 };
