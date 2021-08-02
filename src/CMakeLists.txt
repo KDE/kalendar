@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp resources.qrc)
+add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp resources.qrc)
 
 target_link_libraries(kalendar
     Qt5::Core
@@ -16,11 +16,14 @@ target_link_libraries(kalendar
     KF5::CoreAddons
     KF5::CalendarCore
     KF5::AkonadiCore
+    KF5::AkonadiContact
     KF5::AkonadiAgentBase
     KF5::AkonadiXml
     KF5::CalendarSupport
     KF5::WindowSystem
     KF5::ConfigWidgets
     KF5::AkonadiWidgets
+    KF5::People
+    KF5::Contacts
 )
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

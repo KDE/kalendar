@@ -16,6 +16,22 @@ Kirigami.ScrollablePage {
     signal edited(IncidenceWrapper incidenceWrapper)
     signal cancel
 
+    Component {
+        id: contactsPage
+        ContactsPage {
+            attendeeAkonadiIds: root.incidenceWrapper.attendeesModel.attendeesAkonadiIds
+
+            onAddAttendee: {
+                root.incidenceWrapper.attendeesModel.addAttendee(itemId, email);
+                root.flickable.contentY = editorLoader.item.attendeesColumnY;
+            }
+            onRemoveAttendee: {
+                root.incidenceWrapper.attendeesModel.deleteAttendeeFromAkonadiId(itemId)
+                root.flickable.contentY = editorLoader.item.attendeesColumnY;
+            }
+        }
+    }
+
     // Setting the incidenceWrapper here and now causes some *really* weird behaviour.
     // Set it after this component has already been instantiated.
     property var incidenceWrapper
@@ -76,6 +92,8 @@ Kirigami.ScrollablePage {
                 incidenceEndDateCombo.validDate || !incidenceEndCheckBox.checked :
                 incidenceEndDateCombo.validDate
             property bool validFormDates: validStartDate && (validEndDate || incidenceWrapper.allDay)
+
+            property alias attendeesColumnY: attendeesColumn.y
 
             Kirigami.InlineMessage {
                 id: invalidDateMessage
@@ -934,6 +952,7 @@ Kirigami.ScrollablePage {
                                         Layout.row: 0
                                         Layout.column: 1
                                         Layout.columnSpan: 4
+                                        placeholderText: i18n("Optional")
                                         text: model.name
                                         onTextChanged: root.incidenceWrapper.attendeesModel.setData(root.incidenceWrapper.attendeesModel.index(index, 0),
                                                                                                     text,
@@ -958,6 +977,7 @@ Kirigami.ScrollablePage {
                                         Layout.row: 1
                                         Layout.column: 1
                                         Layout.columnSpan: 4
+                                        placeholderText: i18n("Required")
                                         text: model.email
                                         onTextChanged: root.incidenceWrapper.attendeesModel.setData(root.incidenceWrapper.attendeesModel.index(index, 0),
                                                                                                     text,
@@ -974,7 +994,7 @@ Kirigami.ScrollablePage {
                                         Layout.row: 2
                                         Layout.column: 1
                                         Layout.columnSpan: 2
-                                        model: root.eventWrapper.attendeesModel.attendeeStatusModel
+                                        model: root.incidenceWrapper.attendeesModel.attendeeStatusModel
                                         textRole: "display"
                                         valueRole: "value"
                                         currentIndex: status // role of parent
@@ -1007,7 +1027,22 @@ Kirigami.ScrollablePage {
                         text: i18n("Add attendee")
                         Layout.fillWidth: true
 
-                        onClicked: root.incidenceWrapper.attendeesModel.addAttendee();
+                        onClicked: attendeeAddChoices.open()
+
+                        QQC2.Menu {
+                            id: attendeeAddChoices
+                            width: attendeesButton.width
+                            y: parent.height // Y is relative to parent
+
+                            QQC2.MenuItem {
+                                text: i18n("Choose from contacts")
+                                onClicked: pageStack.push(contactsPage)
+                            }
+                            QQC2.MenuItem {
+                                text: i18n("Fill in manually")
+                                onClicked: root.incidenceWrapper.attendeesModel.addAttendee();
+                            }
+                        }
                     }
                 }
 

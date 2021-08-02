@@ -5,6 +5,12 @@
 #include <QRegularExpression>
 #include <KLocalizedString>
 #include "attendeesmodel.h"
+#include <KContacts/Addressee>
+#include <AkonadiCore/Item>
+#include <AkonadiCore/ItemFetchJob>
+#include <AkonadiCore/ItemFetchScope>
+#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Contact/ContactSearchJob>
 
 AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -73,11 +79,7 @@ AttendeesModel::AttendeesModel(QObject* parent, KCalendarCore::Incidence::Ptr in
     , m_incidence(incidencePtr)
     , m_attendeeStatusModel(parent)
 {
-    for(int i = 0; i < QMetaEnum::fromType<AttendeesModel::Roles>().keyCount(); i++) {
-        int value = QMetaEnum::fromType<AttendeesModel::Roles>().value(i);
-        QString key = QLatin1String(roleNames()[value]);
-        m_dataRoles[key] = value;
-    }
+    connect(this, &AttendeesModel::attendeesChanged, this, &AttendeesModel::updateAkonadiContactIds);
 }
 
 KCalendarCore::Incidence::Ptr AttendeesModel::incidencePtr()
@@ -91,6 +93,7 @@ void AttendeesModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
         return;
     }
     m_incidence = incidence;
+
     Q_EMIT incidencePtrChanged();
     Q_EMIT attendeesChanged();
     Q_EMIT attendeeStatusModelChanged();
@@ -102,14 +105,38 @@ KCalendarCore::Attendee::List AttendeesModel::attendees()
     return m_incidence->attendees();
 }
 
+void AttendeesModel::updateAkonadiContactIds()
+{
+    m_attendeesAkonadiIds.clear();
+
+    if (m_incidence->attendees().length()) {
+        for (const auto &attendee : m_incidence->attendees()) {
+            Akonadi::ContactSearchJob *job = new Akonadi::ContactSearchJob();
+            job->setQuery(Akonadi::ContactSearchJob::Email, attendee.email());
+
+            connect(job, &Akonadi::ContactSearchJob::result, this, [this](KJob *job) {
+                Akonadi::ContactSearchJob *searchJob = qobject_cast<Akonadi::ContactSearchJob*>(job);
+
+                for(const auto &item : searchJob->items()) {
+                    m_attendeesAkonadiIds.append(item.id());
+                }
+
+                Q_EMIT attendeesAkonadiIdsChanged();
+            });
+        }
+    }
+
+    Q_EMIT attendeesAkonadiIdsChanged();
+}
+
 AttendeeStatusModel * AttendeesModel::attendeeStatusModel()
 {
     return &m_attendeeStatusModel;
 }
 
-QVariantMap AttendeesModel::dataroles()
+QList<qint64> AttendeesModel::attendeesAkonadiIds()
 {
-    return m_dataRoles;
+    return m_attendeesAkonadiIds;
 }
 
 QVariant AttendeesModel::data(const QModelIndex &idx, int role) const
@@ -252,12 +279,48 @@ int AttendeesModel::rowCount(const QModelIndex &) const
     return m_incidence->attendeeCount();
 }
 
-void AttendeesModel::addAttendee()
+void AttendeesModel::addAttendee(qint64 itemId, const QString &email)
 {
-    // QLatin1String is a workaround for QT_NO_CAST_FROM_ASCII
-    KCalendarCore::Attendee attendee(QLatin1String(""), QLatin1String(""));
-    // addAttendee won't actually add any attendees without a set name
-    m_incidence->addAttendee(attendee);
+    if(itemId) {
+        Akonadi::Item item(itemId);
+
+        Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(item);
+        job->fetchScope().fetchFullPayload();
+
+        connect(job, &Akonadi::ItemFetchJob::result, this, [this, email](KJob *job) {
+
+            Akonadi::ItemFetchJob *fetchJob = qobject_cast<Akonadi::ItemFetchJob*>(job);
+            auto item = fetchJob->items().at(0);
+            auto payload = item.payload<KContacts::Addressee>();
+
+            KCalendarCore::Attendee attendee(payload.name(),
+                                             payload.preferredEmail(),
+                                             true,
+                                             KCalendarCore::Attendee::NeedsAction,
+                                             KCalendarCore::Attendee::ReqParticipant);
+
+            if(!email.isNull()) {
+                attendee.setEmail(email);
+            }
+
+            m_incidence->addAttendee(attendee);
+            // Otherwise won't update
+            Q_EMIT attendeesChanged();
+            Q_EMIT layoutChanged();
+        });
+    } else {
+        // QLatin1String is a workaround for QT_NO_CAST_FROM_ASCII
+        // addAttendee method does not work with null strings, so we use empty strings
+        KCalendarCore::Attendee attendee(QLatin1String(""),
+                                         QLatin1String(""),
+                                         true,
+                                         KCalendarCore::Attendee::NeedsAction,
+                                         KCalendarCore::Attendee::ReqParticipant);
+
+        // addAttendee won't actually add any attendees without a set name
+        m_incidence->addAttendee(attendee);
+    }
+
     Q_EMIT attendeesChanged();
     Q_EMIT layoutChanged();
 }
@@ -267,10 +330,37 @@ void AttendeesModel::deleteAttendee(int row)
     if (!hasIndex(row, 0)) {
         return;
     }
+
     KCalendarCore::Attendee::List currentAttendees(m_incidence->attendees());
     currentAttendees.removeAt(row);
     m_incidence->setAttendees(currentAttendees);
-    rowCount();
+
     Q_EMIT attendeesChanged();
     Q_EMIT layoutChanged();
 }
+
+void AttendeesModel::deleteAttendeeFromAkonadiId(qint64 itemId)
+{
+    Akonadi::Item item(itemId);
+
+    Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(item);
+    job->fetchScope().fetchFullPayload();
+
+    connect(job, &Akonadi::ItemFetchJob::result, this, [this](KJob *job) {
+        Akonadi::ItemFetchJob *fetchJob = qobject_cast<Akonadi::ItemFetchJob*>(job);
+
+        auto item = fetchJob->items().at(0);
+        auto payload = item.payload<KContacts::Addressee>();
+
+        for(int i = 0; i < m_incidence->attendeeCount(); i++) {
+
+            for(const auto &email : payload.emails()) {
+                if(m_incidence->attendees()[i].email() == email) {
+                    deleteAttendee(i);
+                    break;
+                }
+            }
+        }
+    });
+}
+
