@@ -18,5 +18,6 @@ ninja
 
 ## License
 
-This project is licensed under LGPL-2.1-or-later. Some files are licensed under
-more permissive licenses.
+This project is licensed under GPL-3.0-or-later. Some files are licensed under
+more permissive licenses. New contributions are expected to be under the
+LGPL-2.1-or-later license.
