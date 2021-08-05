@@ -8,6 +8,7 @@ import org.kde.kirigami 2.14 as Kirigami
 
 import org.kde.kalendar 1.0 as Kalendar
 import "dateutils.js" as DateUtils
+import "labelutils.js" as LabelUtils
 
 Kirigami.ScrollablePage {
     id: root
@@ -41,12 +42,6 @@ Kirigami.ScrollablePage {
         month = startDate.getMonth();
     }
 
-    function isDarkColor(background) {
-        var temp = Qt.darker(background, 1);
-        var a = 1 - ( 0.299 * temp.r + 0.587 * temp.g + 0.114 * temp.b);
-        return temp.a > 0 && a >= 0.5;
-    }
-
     background: Rectangle {
         Kirigami.Theme.colorSet: root.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
         color: Kirigami.Theme.backgroundColor
@@ -63,6 +58,11 @@ Kirigami.ScrollablePage {
             text: i18n("Next month")
             onTriggered: setToDate(DateUtils.nextMonth(startDate))
         }
+        main: Kirigami.Action {
+            icon.name: "go-jump-today"
+            text: i18n("Today")
+            onTriggered: setToDate(new Date())
+        }
     }
 
     padding: 0
@@ -75,7 +75,7 @@ Kirigami.ScrollablePage {
         /* Spacing in this view works thus:
          * 1. scheduleListView's spacing adds space between each day delegate component (including separators)
          * 2. Weekly listSectionHeader has spacing of the day delegate column removed from bottom margin
-         * 3. Delegate's Separator's spacing gives same sapce (minus some adjustment) between it and dayGrid
+         * 3. Delegate's Separator's spacing gives same space (minus some adjustment) between it and dayGrid
          */
         Layout.bottomMargin: Kirigami.Units.largeSpacing * 5
         highlightRangeMode: ListView.ApplyRange
@@ -108,6 +108,15 @@ Kirigami.ScrollablePage {
             addDate: periodStartDate
             onAddNewIncidence: addIncidence(type, addDate)
 
+            Rectangle {
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.left: parent.left
+                height: parent.height + Kirigami.Units.largeSpacing
+                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                color: dayGrid.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+            }
+
             ColumnLayout {
                 // Tip: do NOT hide an entire delegate.
                 // This will very much screw up use of positionViewAtIndex.
@@ -135,6 +144,7 @@ Kirigami.ScrollablePage {
                 }
 
                 Kirigami.Separator {
+                    id: topSeparator
                     Layout.fillWidth: true
                     Layout.bottomMargin: scheduleListView.spacing - Kirigami.Units.smallSpacing
                 }
@@ -149,7 +159,7 @@ Kirigami.ScrollablePage {
                     Layout.leftMargin: Kirigami.Units.largeSpacing
                     Layout.rightMargin: Kirigami.Units.largeSpacing
 
-                    property real dayLabelWidth: Kirigami.Units.gridUnit * 3
+                    property real dayLabelWidth: Kirigami.Units.gridUnit * 4
                     property bool isToday: new Date(periodStartDate).setHours(0,0,0,0) === new Date().setHours(0,0,0,0)
 
                     QQC2.Label {
@@ -192,7 +202,7 @@ Kirigami.ScrollablePage {
                         textFormat: Text.StyledText
                         wrapMode: Text.Wrap
                         color: dayGrid.isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-                        text: periodStartDate.toLocaleDateString(Qt.locale(), "ddd\n<b>dd</b>")
+                        text: periodStartDate.toLocaleDateString(Qt.locale(), "ddd<br><b>dd</b>")
                         visible: incidences.length || dayGrid.isToday
                     }
 
@@ -232,7 +242,7 @@ Kirigami.ScrollablePage {
 
                                     Kirigami.Theme.inherit: false
                                     Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                    Kirigami.Theme.backgroundColor: Qt.rgba(modelData.color.r, modelData.color.g, modelData.color.b, 0.8)
+                                    Kirigami.Theme.backgroundColor: Qt.rgba(modelData.color.r, modelData.color.g, modelData.color.b, 1)
                                     Kirigami.Theme.highlightColor: Qt.darker(modelData.color, 2.5)
 
                                     property real paddingSize: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
@@ -258,7 +268,7 @@ Kirigami.ScrollablePage {
                                         columns: root.isLarge ? 3 : 2
                                         rows: root.isLarge ? 1 : 2
 
-                                        property color textColor: root.isDarkColor(Kirigami.Theme.backgroundColor) ? "white" : "black"
+                                        property color textColor: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor) ? "white" : "black"
 
                                         RowLayout {
                                             Kirigami.Icon {
@@ -292,16 +302,15 @@ Kirigami.ScrollablePage {
                                             Layout.column: 1
                                             Layout.row: 0
 
-                                            visible: incidenceCard.incidenceWrapper.remindersModel.rowCount() > 0 //&& incidenceCard.incidenceWrapper.recurrenceData.type
+                                            visible: incidenceCard.incidenceWrapper.remindersModel.rowCount() > 0 || incidenceCard.incidenceWrapper.recurrenceData.type
 
-                                            // TODO: Re-enable this when MR !8 is merged
-                                            /*Kirigami.Icon {
+                                            Kirigami.Icon {
                                                 id: recurringIcon
                                                 Layout.fillHeight: true
                                                 source: "appointment-recurring"
                                                 color: cardContents.textColor
                                                 visible: incidenceCard.incidenceWrapper.recurrenceData.type
-                                            }*/
+                                            }
                                             Kirigami.Icon {
                                                 id: reminderIcon
                                                 Layout.fillHeight: true
@@ -314,8 +323,9 @@ Kirigami.ScrollablePage {
 
                                         QQC2.Label {
                                             Layout.fillHeight: true
-                                            Layout.maximumWidth: Kirigami.Units.gridUnit * 6
-                                            Layout.minimumWidth: Kirigami.Units.gridUnit * 6
+                                            // This way all the icons are aligned
+                                            Layout.maximumWidth: Kirigami.Units.gridUnit * 7
+                                            Layout.minimumWidth: Kirigami.Units.gridUnit * 7
                                             Layout.column: root.isLarge ? 2 : 0
                                             Layout.row: root.isLarge ? 0 : 1
 

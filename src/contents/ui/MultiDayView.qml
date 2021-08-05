@@ -10,6 +10,7 @@ import org.kde.kirigami 2.14 as Kirigami
 
 import org.kde.kalendar 1.0 as Kalendar
 import "dateutils.js" as DateUtils
+import "labelutils.js" as LabelUtils
 
 Item {
     id: root
@@ -44,7 +45,7 @@ Item {
     height: implicitHeight
 
     Column {
-        spacing: 1
+        spacing: 0
         anchors {
             fill: parent
         }
@@ -71,7 +72,6 @@ Item {
                     filter: root.filter ? root.filter : {}
                     calendar: Kalendar.CalendarManager.calendar
                 }
-                // daysPerRow: root.daysPerRow //Hardcoded to 7
             }
             //One row => one week
             Item {
@@ -97,7 +97,7 @@ Item {
 
                         //Grid
                         Row {
-                            spacing: 1
+                            spacing: 0
                             height: parent.height
                             Repeater {
                                 id: gridRepeater
@@ -106,6 +106,7 @@ Item {
                                     id: gridItem
                                     height: parent.height
                                     width: root.dayWidth
+                                    property date gridSquareDate: date
                                     property var date: DateUtils.addDaysToDate(dayDelegate.startDate, modelData)
                                     property bool isInPast: DateUtils.roundToDay(date) < DateUtils.roundToDay(root.currentDate)
                                     property bool isToday: DateUtils.sameDay(root.currentDate, date)
@@ -113,7 +114,12 @@ Item {
 
                                     background: Rectangle {
                                         Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                        color: model.sameMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
+                                        color: gridItem.isToday ? Kirigami.Theme.activeBackgroundColor :
+                                            gridItem.isCurrentMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
+
+                                        // Matches Kirigami Separator color
+                                        border.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.15)
+                                        border.width: 1
 
                                         DayMouseArea {
                                             anchors.fill: parent
@@ -126,14 +132,26 @@ Item {
                                     topPadding: 0
 
                                     // Day number
-                                    contentItem: Kirigami.Heading {
-                                        level: 4
-                                        text: gridItem.date.toLocaleDateString(Qt.locale(), gridItem.date.getDate() == 1 ? "d MMM" : "d")
-                                        horizontalAlignment: Text.AlignRight
-                                        verticalAlignment: Text.AlignTop
-                                        padding: Kirigami.Units.smallSpacing
+                                    contentItem: RowLayout {
                                         visible: root.showDayIndicator
-                                        color: gridItem.isToday ? Kirigami.Theme.highlightColor : (!gridItem.isCurrentMonth ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor)
+
+                                        Kirigami.Heading {
+                                            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                                            padding: Kirigami.Units.smallSpacing
+                                            level: 4
+                                            text: i18n("<b>Today</b>")
+                                            color: Kirigami.Theme.highlightColor
+                                            visible: gridItem.isToday
+                                        }
+                                        Kirigami.Heading {
+                                            Layout.alignment: Qt.AlignRight | Qt.AlignTop
+                                            level: 4
+                                            text: gridItem.date.toLocaleDateString(Qt.locale(), gridItem.isToday && gridItem.date.getDate() == 1 ?
+                                                "<b>d MMM</b>" : (gridItem.isToday ? "<b>d</b>" : (gridItem.date.getDate() == 1 ? "d MMM" : "d")))
+                                            padding: Kirigami.Units.smallSpacing
+                                            visible: root.showDayIndicator
+                                            color: gridItem.isToday ? Kirigami.Theme.highlightColor : (!gridItem.isCurrentMonth ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor)
+                                        }
                                     }
                                 }
                             }
@@ -151,6 +169,27 @@ Item {
                                 Layout.fillWidth: true
                                 id: linesRepeater
 
+                                DayMouseArea {
+                                    id: listViewMenu
+                                    anchors.fill: parent
+                                    z: -1
+
+                                    function useGridSquareDate(type, root, globalPos) {
+                                        for(var i in root.children) {
+                                            var child = root.children[i];
+                                            var localpos = child.mapFromGlobal(globalPos.x, globalPos.y);
+
+                                            if(child.contains(localpos) && child.gridSquareDate) {
+                                                addIncidence(type, child.gridSquareDate);
+                                            } else {
+                                                useGridSquareDate(type, child, globalPos);
+                                            }
+                                        }
+                                    }
+
+                                    onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
+                                }
+
                                 model: incidences
                                 onCountChanged: {
                                     root.numberOfLinesShown = count
@@ -158,7 +197,7 @@ Item {
 
                                 delegate: Item {
                                     id: line
-                                    height: Kirigami.Units.gridUnit
+                                    height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
                                     width: parent.width
 
                                     //Incidences
@@ -166,20 +205,22 @@ Item {
                                         id: incidencesRepeater
                                         model: modelData
                                         Rectangle {
-                                            x: (root.dayWidth + 1) * modelData.starts // +1 because of the spacing
+                                            x: (root.dayWidth /*+ 1*/) * modelData.starts // +1 because of the spacing
                                             y: 0
                                             width: root.dayWidth * modelData.duration
                                             height: parent.height
+                                            opacity: modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month ?
+                                                    1.0 : 0.5
+                                            radius: rectRadius
 
-                                            radius: 2
+                                            property int rectRadius: 5
 
                                             Rectangle {
                                                 anchors.fill: parent
                                                 color: modelData.color
-                                                radius: 2
+                                                radius: parent.rectRadius
                                                 border.width: 1
                                                 border.color: Kirigami.Theme.alternateBackgroundColor
-                                                opacity: 0.6
                                             }
 
                                             RowLayout {
@@ -194,12 +235,14 @@ Item {
                                                     Layout.maximumWidth: height
 
                                                     source: modelData.incidenceTypeIcon
+                                                    color: LabelUtils.isDarkColor(modelData.color) ? "white" : "black"
                                                 }
 
                                                 QQC2.Label {
                                                     Layout.fillWidth: true
                                                     text: modelData.text
                                                     elide: Text.ElideRight
+                                                    color: LabelUtils.isDarkColor(modelData.color) ? "white" : "black"
                                                 }
                                             }
 

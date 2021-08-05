@@ -24,11 +24,11 @@ MouseArea {
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     onPressed: {
-        clickX = mouseX
-        clickY = mouseY
         if (pressedButtons & Qt.LeftButton) {
             viewClicked(incidenceData, collectionDetails);
         } else if (pressedButtons & Qt.RightButton) {
+            clickX = mouseX;
+            clickY = mouseY;
             incidenceActions.createObject(mouseArea, {}).open();
         }
     }

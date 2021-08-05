@@ -68,6 +68,11 @@ Kirigami.Page {
             text: i18n("Next month")
             onTriggered: setToDate(new Date(startDate.getFullYear(), startDate.getMonth() + 2)) // Yes. I don't know.
         }
+        main: Kirigami.Action {
+            icon.name: "go-jump-today"
+            text: i18n("Today")
+            onTriggered: setToDate(new Date())
+        }
     }
 
     MultiDayView {

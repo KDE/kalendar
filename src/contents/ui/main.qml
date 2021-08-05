@@ -224,7 +224,7 @@ Kirigami.ApplicationWindow {
             deleteIncidenceSheet.close();
         }
         onAddRecurrenceEndDate: {
-            incidenceWrapper.recurrenceEndDateTime = endDate;
+            incidenceWrapper.setRecurrenceDataItem("endDateTime", endDate);
             CalendarManager.editIncidence(incidenceWrapper);
             deleteIncidenceSheet.close();
         }

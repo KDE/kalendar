@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
                          // Copyright Statement.
                          i18n("(c) KDE Community 2021"));
     aboutData.addAuthor(i18nc("@info:credit", "Carl Schwan"), i18nc("@info:credit", "Maintainer"), QStringLiteral("carl@carlschwan.eu"), QStringLiteral("https://carlschwan.eu"));
-    aboutData.addAuthor(i18nc("@info:credit", "Clau Cambra"), i18nc("@info:credit", "Developer"));
+    aboutData.addAuthor(i18nc("@info:credit", "Clau Cambra"), i18nc("@info:credit", "Maintainer"), QStringLiteral("claudio.cambra@gmail.com"), QStringLiteral("https://claudiocambra.com"));
     KAboutData::setApplicationData(aboutData);
 
 

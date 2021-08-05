@@ -120,15 +120,10 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
     auto result = QVariantList{};
     while (!sorted.isEmpty()) {
         const auto srcIdx = sorted.takeFirst();
-        const auto startDate = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime();
-        const auto start = getStart(startDate.date());
-        const auto duration = qMin(getDuration(startDate.date(), srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
-
-        /*if(!startDate.isValid()) {
-            const auto endDate = srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime();
-            start = getStart(endDate.date());
-            duration = qMin(getDuration(endDate.date(), srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
-        }*/
+        const auto startDate = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart ?
+                rowStart : srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
+        const auto start = getStart(srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
+        const auto duration = qMin(getDuration(startDate, srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
 
         // qWarning() << "First of line " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         auto currentLine = QVariantList{};
@@ -174,8 +169,10 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
 
         for (auto it = sorted.begin(); it != sorted.end();) {
             const auto idx = *it;
+            const auto startDate = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart ?
+                rowStart : idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
             const auto start = getStart(idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
-            const auto duration = qMin(getDuration(idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
+            const auto duration = qMin(getDuration(startDate, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
             const auto end = start + duration;
 
             // qWarning() << "Checking " << idx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration << idx.data(IncidenceOccurrenceModel::Summary).toString();
