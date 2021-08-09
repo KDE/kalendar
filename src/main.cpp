@@ -19,6 +19,7 @@
 #include "about.h"
 #include "config-kalendar.h"
 #include "contactsmanager.h"
+#include "kalendarconfig.h"
 
 using namespace KCalendarCore;
 
@@ -48,10 +49,12 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    auto config = KalendarConfig::self();
     auto manager = new CalendarManager(&engine);
     AgentConfiguration agentConfiguration;
     auto contactsManager = new ContactsManager(&engine);
 
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", manager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "ContactsManager", contactsManager);

@@ -226,7 +226,7 @@ Kirigami.ScrollablePage {
                                 wrapMode: Text.Wrap
                             }
 
-                            onClicked: root.addIncidence(IncidenceWrapper.TypeEvent)
+                            onClicked: root.addIncidence(Kalendar.IncidenceWrapper.TypeEvent, periodStartDate)
                         }
 
                         Repeater {

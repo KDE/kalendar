@@ -9,6 +9,7 @@
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 #include <QBuffer>
+#include <QImage>
 #include "contactsmanager.h"
 
 class ContactsModel : public QSortFilterProxyModel

@@ -1,0 +1,11 @@
+#SPDX-FileCopyrightText: (C) 2021 Claudio Cambra <claudio.cambra@gmail.com>
+#SPDX-LicenseRef: GPL-3.0-or-later
+
+File=kalendarconfig.kcfg
+ClassName=KalendarConfig
+Mutators=true
+DefaultValueGetters=true
+GenerateProperties=true
+ParentInConstructor=true
+Singleton=true
+

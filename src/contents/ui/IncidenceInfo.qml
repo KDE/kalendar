@@ -2,6 +2,7 @@ import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
+import QtLocation 5.15
 import "labelutils.js" as LabelUtils
 
 import org.kde.kalendar 1.0
@@ -343,14 +344,86 @@ Kirigami.OverlayDrawer {
                         visible: incidenceInfo.incidenceWrapper.location
                     }
                     QQC2.Label {
+                        id: locationLabel
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
+                        property bool isLink: false
+
                         textFormat: Text.MarkdownText
                         text: incidenceInfo.incidenceWrapper.location.replace(LabelUtils.urlRegexp, (match) => `[${match}](${match})`)
+                        onTextChanged: isLink = LabelUtils.urlRegexp.test(incidenceInfo.incidenceWrapper.location);
                         onLinkActivated: Qt.openUrlExternally(link)
                         wrapMode: Text.Wrap
                         visible: incidenceInfo.incidenceWrapper.location
+
+                        MouseArea {
+                            TextEdit {  // HACK: TextEdit has copy to clipboard capabilities
+                                id: textEdit
+                                visible: false
+                            }
+
+                            anchors.fill: parent
+                            onClicked: {
+                                textEdit.text = locationLabel.text;
+                                textEdit.selectAll();
+                                textEdit.copy();
+                                showPassiveNotification(i18n("Location copied to clipboard"));
+                            }
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.columnSpan: 2
+                        Layout.fillWidth: true
+                        visible: Config.enableMaps && incidenceInfo.incidenceWrapper.location
+
+                        QQC2.BusyIndicator {
+                            id: mapLoadingIndicator
+                            Layout.fillWidth: true
+
+                            property bool showCondition: mapLoader.status === Loader.Loading ||
+                                mapLoader.item.queryStatus === GeocodeModel.Loading
+
+                            running: showCondition
+                            visible: showCondition
+                        }
+
+                        Kirigami.InlineMessage {
+                            id: noLocationsMessage
+
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+
+                            visible: mapLoader.status === Loader.Ready &&
+                                mapLoader.item.queryStatus === GeocodeModel.Ready &&
+                                !mapLoader.item.queryHasResults
+                            type: Kirigami.MessageType.Warning
+                            text: i18n("Unable to find location.")
+                        }
+
+                        Loader {
+                            id: mapLoader
+
+                            Layout.fillWidth: true
+                            height: Kirigami.Units.gridUnit * 16
+                            asynchronous: true
+                            active: Config.enableMaps &&
+                                incidenceInfo.visible &&
+                                incidenceInfo.incidenceWrapper.location &&
+                                !locationLabel.isLink
+                            visible: active && item.queryHasResults
+
+                            sourceComponent: LocationMap {
+                                id: map
+                                query: incidenceInfo.incidenceWrapper.location
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: Qt.openUrlExternally("https://www.openstreetmap.org/search?query=" + incidenceInfo.incidenceWrapper.location)
+                                }
+                            }
+                        }
                     }
 
                     QQC2.Label {

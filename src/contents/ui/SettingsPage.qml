@@ -205,9 +205,22 @@ Kirigami.Page {
         Kirigami.Page {
             title: i18n("General")
 
-            Kirigami.PlaceholderMessage {
-                text: "Empty for now"
-                anchors.centerIn: parent
+            Kirigami.FormLayout {
+                RowLayout {
+                    Kirigami.FormData.label: i18n("Enable maps:")
+
+                    Controls.CheckBox {
+                        checked: Config.enableMaps
+                        onClicked: {
+                            Config.enableMaps = !Config.enableMaps;
+                            Config.save();
+                        }
+                    }
+                    Controls.Label {
+                        font: Kirigami.Theme.smallFont
+                        text: i18n("May cause crashing on some systems.")
+                    }
+                }
             }
         }
     }

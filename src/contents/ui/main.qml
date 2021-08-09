@@ -246,8 +246,6 @@ Kirigami.ApplicationWindow {
             startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(new Date(root.year, root.month)))
             month: root.month
 
-            Layout.minimumWidth: applicationWindow().width * 0.66
-
             onAddIncidenceReceived: root.setUpAdd(receivedType, receivedAddDate)
             onViewIncidenceReceived: root.setUpView(receivedModelData, receivedCollectionData)
             onEditIncidenceReceived: root.setUpEdit(receivedIncidencePtr, receivedCollectionId)

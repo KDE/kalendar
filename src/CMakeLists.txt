@@ -11,6 +11,7 @@ target_link_libraries(kalendar
     Qt5::Quick
     Qt5::QuickControls2
     Qt5::Svg
+    Qt5::Location
     KF5::I18n
     KF5::Package
     KF5::CoreAddons
@@ -25,5 +26,7 @@ target_link_libraries(kalendar
     KF5::AkonadiWidgets
     KF5::People
     KF5::Contacts
+    KF5::ItemModels
 )
+kconfig_add_kcfg_files(kalendar GENERATE_MOC kalendarconfig.kcfgc)
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
