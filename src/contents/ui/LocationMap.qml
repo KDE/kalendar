@@ -15,6 +15,9 @@ Map {
 
     property alias pluginComponent: mapPlugin
     property var query
+    property real selectedLatitude: NaN
+    property real selectedLongitude: NaN
+    readonly property bool hasCoordinate: !isNaN(selectedLatitude) && !isNaN(selectedLongitude)
     property bool queryHasResults: geocodeModel.count > 0
     property int queryStatus: geocodeModel.status
     property bool containsLocation: queryHasResults ? visibleRegion.contains(geocodeModel.get(0).coordinate) : false
@@ -71,7 +74,7 @@ Map {
         model: GeocodeModel {
             id: geocodeModel
             plugin: map.pluginComponent
-            query: map.query
+            query: hasCoordinate ? undefined : map.query
             autoUpdate: true
             limit: 1
             onLocationsChanged: {
@@ -90,6 +93,13 @@ Map {
             smooth: true
             opacity: 0.25
             center: locationData.coordinate
+        }
+    }
+
+    Component.onCompleted: {
+        if (hasCoordinate) {
+            map.center = QtPositioning.coordinate(selectedLatitude, selectedLongitude);
+            map.zoomLevel = 17.0;
         }
     }
 }

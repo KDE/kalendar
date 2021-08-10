@@ -33,6 +33,9 @@ class IncidenceWrapper : public QObject
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
+    Q_PROPERTY(bool hasGeo READ hasGeo CONSTANT)
+    Q_PROPERTY(float geoLatitude READ geoLatitude CONSTANT)
+    Q_PROPERTY(float geoLongitude READ geoLongitude CONSTANT)
     Q_PROPERTY(QDateTime incidenceStart READ incidenceStart WRITE setIncidenceStart NOTIFY incidenceStartChanged)
     Q_PROPERTY(QDateTime incidenceEnd READ incidenceEnd WRITE setIncidenceEnd NOTIFY incidenceEndChanged)
     Q_PROPERTY(bool allDay READ allDay WRITE setAllDay NOTIFY allDayChanged)
@@ -86,6 +89,9 @@ public:
     void setDescription(const QString &description);
     QString location() const;
     void setLocation(const QString &location);
+    bool hasGeo() const;
+    float geoLatitude() const;
+    float geoLongitude() const;
     QDateTime incidenceStart() const;
     void setIncidenceStart(const QDateTime &incidenceStart);
     QDateTime incidenceEnd() const;

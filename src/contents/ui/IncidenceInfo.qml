@@ -376,7 +376,7 @@ Kirigami.OverlayDrawer {
                     ColumnLayout {
                         Layout.columnSpan: 2
                         Layout.fillWidth: true
-                        visible: Config.enableMaps && incidenceInfo.incidenceWrapper.location
+                        visible: Config.enableMaps && (incidenceInfo.incidenceWrapper.location || incidenceInfo.incidenceWrapper.hasGeo)
 
                         QQC2.BusyIndicator {
                             id: mapLoadingIndicator
@@ -410,17 +410,24 @@ Kirigami.OverlayDrawer {
                             asynchronous: true
                             active: Config.enableMaps &&
                                 incidenceInfo.visible &&
-                                incidenceInfo.incidenceWrapper.location &&
+                                (incidenceInfo.incidenceWrapper.location || incidenceInfo.incidenceWrapper.hasGeo) &&
                                 !locationLabel.isLink
-                            visible: active && item.queryHasResults
+                            visible: active && (item.queryHasResults || item.hasCoordinate)
 
                             sourceComponent: LocationMap {
                                 id: map
                                 query: incidenceInfo.incidenceWrapper.location
+                                selectedLatitude: incidenceInfo.incidenceWrapper.hasGeo ? incidenceInfo.incidenceWrapper.geoLatitude : NaN
+                                selectedLongitude: incidenceInfo.incidenceWrapper.hasGeo ? incidenceInfo.incidenceWrapper.geoLongitude : NaN
 
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: Qt.openUrlExternally("https://www.openstreetmap.org/search?query=" + incidenceInfo.incidenceWrapper.location)
+                                    onClicked: {
+                                        if (incidenceInfo.incidenceWrapper.hasGeo)
+                                            Qt.openUrlExternally("https://www.openstreetmap.org/#map=17/" + incidenceInfo.incidenceWrapper.geoLatitude + "/" + incidenceInfo.incidenceWrapper.geoLongitude)
+                                        else
+                                            Qt.openUrlExternally("https://www.openstreetmap.org/search?query=" + incidenceInfo.incidenceWrapper.location)
+                                    }
                                 }
                             }
                         }

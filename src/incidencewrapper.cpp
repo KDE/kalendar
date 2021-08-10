@@ -130,6 +130,20 @@ void IncidenceWrapper::setLocation(const QString &location)
     Q_EMIT locationChanged();
 }
 
+bool IncidenceWrapper::hasGeo() const
+{
+    return m_incidence->hasGeo();
+}
+
+float IncidenceWrapper::geoLatitude() const
+{
+    return m_incidence->geoLatitude();
+}
+
+float IncidenceWrapper::geoLongitude() const
+{
+    return m_incidence->geoLongitude();
+}
 
 QDateTime IncidenceWrapper::incidenceStart() const
 {
