@@ -244,6 +244,14 @@ Kirigami.Page {
                                 checked: model.checkState == 2
                                 onClicked: model.checkState = (checked ? 2 : 0)
                             }
+                            trailing: Rectangle {
+                                Layout.fillHeight: true
+                                width: height
+                                radius: 5
+                                color: collectionColor
+                                visible: collectionColor !== undefined
+                                Component.onCompleted: console.log(collectionColor)
+                            }
                             label: display
                             icon: decoration
                         }

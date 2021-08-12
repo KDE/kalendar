@@ -27,6 +27,7 @@ target_link_libraries(kalendar
     KF5::People
     KF5::Contacts
     KF5::ItemModels
+    KF5::EventViews # for reading KOrganizer calendar colors
 )
 kconfig_add_kcfg_files(kalendar GENERATE_MOC kalendarconfig.kcfgc)
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "multidayincidencemodel.h"
+#include <QBitArray>
 
 enum Roles {
     Incidences = IncidenceOccurrenceModel::LastRole,
@@ -62,6 +63,7 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
     const auto rowEnd = rowStart.addDays(mPeriodLength > 1 ? mPeriodLength : 0);
     QList<QModelIndex> sorted;
     sorted.reserve(mSourceModel->rowCount());
+    // Get incidences from source model
     for (int row = 0; row < mSourceModel->rowCount(); row++) {
         const auto srcIdx = mSourceModel->index(row, 0, {});
         const auto start = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
@@ -75,10 +77,19 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
         // qWarning() << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         sorted.append(srcIdx);
     }
+
+    // Sort incidences by date
     std::sort(sorted.begin(), sorted.end(), [&] (const QModelIndex &left, const QModelIndex &right) {
         //All-day first, sorted by duration (in the hope that we can fit multiple on the same line)
         const auto leftAllDay = left.data(IncidenceOccurrenceModel::AllDay).toBool();
         const auto rightAllDay = right.data(IncidenceOccurrenceModel::AllDay).toBool();
+
+        const auto leftDuration = getDuration(left.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), left.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
+        const auto rightDuration = getDuration(right.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), right.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
+
+        const auto leftDt = left.data(IncidenceOccurrenceModel::StartTime).toDateTime();
+        const auto rightDt = right.data(IncidenceOccurrenceModel::StartTime).toDateTime();
+
         if (leftAllDay && !rightAllDay) {
             return true;
         }
@@ -86,13 +97,13 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
             return false;
         }
         if (leftAllDay && rightAllDay) {
-            const auto leftDuration = getDuration(left.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), left.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
-            const auto rightDuration = getDuration(right.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), right.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
             return leftDuration < rightDuration;
         }
-        //The rest sored by start date
-        return left.data(IncidenceOccurrenceModel::StartTime).toDateTime() < right.data(IncidenceOccurrenceModel::StartTime).toDateTime();
+
+        //The rest sorted by start date
+        return leftDt < rightDt && leftDuration <= rightDuration;
     });
+
     return sorted;
 }
 
@@ -150,19 +161,33 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
             });
         };
 
+        if(start >= mPeriodLength) {
+            //qWarning() << "Skipping " << srcIdx.data(IncidenceOccurrenceModel::Summary);
+            continue;
+        }
+
         //Add first incidence of line
         addToLine(srcIdx, start, duration);
-        const bool allDayLine = srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
+        //const bool allDayLine = srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
 
         //Fill line with incidences that fit
-        int lastStart = start;
-        int lastDuration = duration;
+        QBitArray takenSpaces(mPeriodLength);
+        // Set this incidence's space as taken
+        for(int i = start; i < start + duration; i++) {
+            takenSpaces[i] = true;
+        }
+
         auto doesIntersect = [&] (int start, int end) {
-            const auto lastEnd = lastStart + lastDuration;
-            if (((start <= lastStart) && (end >= lastStart)) ||
-                ((start < lastEnd) && (end > lastStart))) {
-                // qWarning() << "Found intersection " << start << end;
-                return true;
+            for(int i = start; i < end; i++) {
+                if(takenSpaces[i]) {
+                    //qWarning() << "Found intersection " << start << end;
+                    return true;
+                }
+            }
+
+            // If incidence fits on line, set its space as taken
+            for(int i = start; i < end; i++) {
+                takenSpaces[i] = true;
             }
             return false;
         };
@@ -175,18 +200,15 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
             const auto duration = qMin(getDuration(startDate, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
             const auto end = start + duration;
 
-            // qWarning() << "Checking " << idx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration << idx.data(IncidenceOccurrenceModel::Summary).toString();
-            //Avoid mixing all-day and other incidences
-            if (allDayLine && !idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
-                break;
-            }
+            // This leaves a space in rows with all day events, making this y area of the row exclusively for all day events
+            /*if (allDayLine && !idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
+                continue;
+            }*/
 
             if (doesIntersect(start, end)) {
                 it++;
             } else {
                 addToLine(idx, start, duration);
-                lastStart = start;
-                lastDuration = duration;
                 it = sorted.erase(it);
             }
         }
@@ -207,7 +229,7 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
     const auto rowStart = mSourceModel->start().addDays(idx.row() * mPeriodLength);
     switch (role) {
         case PeriodStartDate:
-            return rowStart;
+            return rowStart.startOfDay();
         case Incidences:
             return layoutLines(rowStart);
         default:

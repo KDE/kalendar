@@ -50,16 +50,17 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     auto config = KalendarConfig::self();
-    auto manager = new CalendarManager(&engine);
+    CalendarManager manager;
     AgentConfiguration agentConfiguration;
     auto contactsManager = new ContactsManager(&engine);
 
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", manager);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", &manager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "ContactsManager", contactsManager);
 
     qmlRegisterType<IncidenceWrapper>("org.kde.kalendar", 1, 0, "IncidenceWrapper");
+    qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");
     qmlRegisterType<MultiDayIncidenceModel>("org.kde.kalendar", 1, 0, "MultiDayIncidenceModel");
     qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
 

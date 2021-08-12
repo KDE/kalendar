@@ -153,9 +153,48 @@ function recurrenceEndToString(recurrenceData) {
     }
 }
 
-function isDarkColor(background) {
+function getDarkness(background) {
+    // Thanks to Gojir4 from the Qt forum
+    // https://forum.qt.io/topic/106362/best-way-to-set-text-color-for-maximum-contrast-on-background-color/
     var temp = Qt.darker(background, 1);
     var a = 1 - ( 0.299 * temp.r + 0.587 * temp.g + 0.114 * temp.b);
-    return temp.a > 0 && a >= 0.4;
+    return a;
 }
 
+function isDarkColor(background) {
+    var temp = Qt.darker(background, 1);
+    return temp.a > 0 && getDarkness(background) >= 0.4;
+}
+
+function getIncidenceBackgroundColor(color, darkMode) {
+    let bgColor = getDarkness(color) > 0.9 ? Qt.lighter(color, 1.5) : color;
+    if(darkMode) {
+        if(LabelUtils.getDarkness(color) >= 0.5) {
+            bgColor.a = 0.6;
+        } else {
+            bgColor.a = 0.4;
+        }
+    } else {
+        bgColor.a = 0.7;
+    }
+    return bgColor;
+}
+
+function getIncidenceLabelColor(background, darkMode) {
+
+    if(LabelUtils.getDarkness(background) >= 0.9) {
+        return "white";
+    } else if(darkMode) {
+        if(LabelUtils.getDarkness(background) >= 0.5) {
+            return Qt.lighter(background, 2.1);
+        } else {
+            return Qt.lighter(background, 1.5);
+        }
+    }
+    else if(LabelUtils.getDarkness(background) >= 0.68) {
+        return Qt.lighter(background, 2.4);
+    } else {
+        return Qt.darker(background, 2.1);
+    }
+
+}

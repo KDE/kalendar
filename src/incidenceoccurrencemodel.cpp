@@ -13,8 +13,6 @@
 #include <KCalendarCore/MemoryCalendar>
 #include <KFormat>
 #include <etmcalendar.h>
-#include <AkonadiCore/CollectionColorAttribute>
-#include <QRandomGenerator>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -25,6 +23,14 @@ IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
 {
     mRefreshTimer.setSingleShot(true);
     QObject::connect(&mRefreshTimer, &QTimer::timeout, this, &IncidenceOccurrenceModel::updateFromSource);
+
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    colorWatcher = KConfigWatcher::create(config);
+
+    // This is quite slow; would be nice to find a quicker way
+    QObject::connect(colorWatcher.data(), &KConfigWatcher::configChanged, this, &IncidenceOccurrenceModel::updateFromSource);
+
     load();
 }
 
@@ -101,6 +107,8 @@ void IncidenceOccurrenceModel::updateFromSource()
 
     m_incidences.clear();
 
+    load();
+
     if (m_coreCalendar) {
         QMap<QByteArray, KCalendarCore::Incidence::Ptr> recurringIncidences;
         QMultiMap<QByteArray, KCalendarCore::Incidence::Ptr> exceptions;
@@ -113,7 +121,7 @@ void IncidenceOccurrenceModel::updateFromSource()
 
         const auto allTodos = Calendar::sortTodos(
             m_coreCalendar->todos(mStart, mEnd),
-            TodoSortField::TodoSortStartDate,
+            TodoSortField::TodoSortDueDate, // Todos tend to not have a set start date
             SortDirection::SortDirectionAscending
         );
 
@@ -264,23 +272,14 @@ QColor IncidenceOccurrenceModel::getColor(const KCalendarCore::Incidence::Ptr &i
         return {};
     }
     const QString id = QString::number(collection.id());
+    //qDebug() << "Collection id: " << collection.id();
+
     if (m_colors.contains(id)) {
+        //qDebug() << collection.id() << "Found in m_colors";
         return m_colors[id];
     }
-    if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
-        const auto *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
-        if (colorAttr && colorAttr->color().isValid()) {
-            m_colors[id] = colorAttr->color();
-            return colorAttr->color();
-        }
-    }
 
-    QColor color;
-    color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
-    m_colors[id] = color;
-    save();
-
-    return color;
+    return {};
 }
 
 QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
@@ -373,14 +372,4 @@ void IncidenceOccurrenceModel::load()
         QColor color = rColorsConfig.readEntry(key, QColor("blue"));
         m_colors[key] = color;
     }
-}
-
-void IncidenceOccurrenceModel::save() const
-{
-    KSharedConfig::Ptr config = KSharedConfig::openConfig();
-    KConfigGroup rColorsConfig(config, "Resources Colors");
-    for (auto it = m_colors.constBegin(); it != m_colors.constEnd(); ++it) {
-        rColorsConfig.writeEntry(it.key(), it.value());
-    }
-    config->sync();
 }

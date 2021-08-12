@@ -27,6 +27,10 @@
 #include <Akonadi/Calendar/History>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include <AkonadiCore/ItemMoveJob>
+#include <AkonadiCore/AttributeFactory>
+#include <AkonadiCore/CollectionColorAttribute>
+#include <QRandomGenerator>
+#include <EventViews/Prefs>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
 #include <QTimer>
@@ -159,6 +163,16 @@ public:
         : QSortFilterProxyModel(parent)
         , mInitDefaultCalendar(false)
     {
+        // Needed to read colorattribute of collections for incidence colors
+        Akonadi::AttributeFactory::registerAttribute<Akonadi::CollectionColorAttribute>();
+
+        // Used to get color settings from KOrganizer as fallback
+        const auto korganizerrc = KSharedConfig::openConfig(QStringLiteral("korganizerrc"));
+        const auto skel = new KCoreConfigSkeleton(korganizerrc);
+        mEventViewsPrefs = EventViews::PrefsPtr(new EventViews::Prefs(skel));
+        mEventViewsPrefs->readConfig();
+
+        load();
     }
 
     QVariant data(const QModelIndex &index, int role) const override
@@ -197,6 +211,14 @@ public:
             if (colId == CalendarSupport::KCalPrefs::instance()->defaultCalendarId()) {
                 return i18nc("@item this is the default calendar", "%1 (Default)", collection.displayName());
             }
+        } else if (role == Qt::BackgroundRole) {
+            auto color = getCollectionColor(CalendarSupport::collectionFromIndex(index));
+            // Otherwise QML will get black
+            if (color.isValid()) {
+                return color;
+            } else {
+                return {};
+            }
         }
 
         return QSortFilterProxyModel::data(index, role);
@@ -207,8 +229,78 @@ public:
         return Qt::ItemIsSelectable | QSortFilterProxyModel::flags(index);
     }
 
+    QHash<int, QByteArray> roleNames() const override {
+        QHash<int, QByteArray> roleNames = QSortFilterProxyModel::roleNames();
+        roleNames[Qt::CheckStateRole] = "checkState";
+        roleNames[Qt::BackgroundRole] = "collectionColor";
+        return roleNames;
+    }
+
+    QColor getCollectionColor(Akonadi::Collection collection) const {
+        const QString id = QString::number(collection.id());
+        auto supportsMimeType = collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.event")) ||
+        collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.todo")) ||
+        collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.journal"));
+        //qDebug() << "Collection id: " << collection.id();
+
+        if (!supportsMimeType) {
+            return {};
+        }
+
+        if (m_colors.contains(id)) {
+            return m_colors[id];
+        }
+
+        if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
+            const auto *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
+            if (colorAttr && colorAttr->color().isValid()) {
+                m_colors[id] = colorAttr->color();
+                save();
+                return colorAttr->color();
+            }
+        }
+
+        QColor korgColor = mEventViewsPrefs->resourceColorKnown(id);
+        if(korgColor.isValid()) {
+            m_colors[id] = korgColor;
+            save();
+            return korgColor;
+        }
+
+        QColor color;
+        color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
+        m_colors[id] = color;
+        save();
+
+        return color;
+    }
+
+    void load()
+    {
+        KSharedConfig::Ptr config = KSharedConfig::openConfig();
+        KConfigGroup rColorsConfig(config, "Resources Colors");
+        const QStringList colorKeyList = rColorsConfig.keyList();
+
+        for (const QString &key : colorKeyList) {
+            QColor color = rColorsConfig.readEntry(key, QColor("blue"));
+            m_colors[key] = color;
+        }
+    }
+
+    void save() const
+    {
+        KSharedConfig::Ptr config = KSharedConfig::openConfig();
+        KConfigGroup rColorsConfig(config, "Resources Colors");
+        for (auto it = m_colors.constBegin(); it != m_colors.constEnd(); ++it) {
+            rColorsConfig.writeEntry(it.key(), it.value(), KConfigBase::Notify | KConfigBase::Normal);
+        }
+        config->sync();
+    }
+
 private:
     mutable bool mInitDefaultCalendar;
+    mutable QHash<QString, QColor> m_colors;
+    EventViews::PrefsPtr mEventViewsPrefs;
 };
 
 
@@ -234,6 +326,14 @@ CalendarManager::CalendarManager(QObject *parent)
     m_treeModel = new KDescendantsProxyModel(this);
     m_treeModel->setSourceModel(collectionFilter);
     m_treeModel->setExpandsByDefault(true);
+
+    auto refreshColors = [=] () {
+        for(auto i = 0; i < m_treeModel->rowCount(); i++) {
+            auto idx = m_treeModel->index(i, 0, {});
+            colorProxy->getCollectionColor(CalendarSupport::collectionFromIndex(idx));
+        }
+    };
+    connect(m_treeModel, &QSortFilterProxyModel::rowsInserted, this, refreshColors);
 
     m_calendar = new Akonadi::ETMCalendar(this);
     setCollectionSelectionProxyModel(m_calendar->checkableProxyModel());
@@ -362,6 +462,7 @@ Akonadi::EntityRightsFilterModel * CalendarManager::selectableTodoCalendars() co
 
 qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 {
+    // Checks if default collection accepts this type of incidence
     auto mimeType = incidenceWrapper->incidencePtr()->mimeType();
     Akonadi::Collection collection = m_calendar->collection(CalendarSupport::KCalPrefs::instance()->defaultCalendarId());
     bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
@@ -373,6 +474,7 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 
     // Should add last used collection by mimetype somewhere.
 
+    // Searches for first collection that will accept this incidence
     for (int i = 0; i < m_allCalendars->rowCount(); i++) {
         QModelIndex idx = m_allCalendars->index(i, 0);
         collection = idx.data(Akonadi::EntityTreeModel::Roles::CollectionRole).value<Akonadi::Collection>();
@@ -388,8 +490,6 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 
 int CalendarManager::getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper)
 {
-    //auto index = m_rightsFilterModel->match(m_rightsFilterModel->index(0,0), Akonadi::EntityTreeModel::Roles::CollectionRole, cal, -1, Qt::MatchRecursive);
-
     Akonadi::EntityRightsFilterModel *model;
 
     switch(incidenceWrapper->incidencePtr()->type()) {
@@ -428,7 +528,7 @@ QVariant CalendarManager::getIncidenceSubclassed(KCalendarCore::Incidence::Ptr i
             return QVariant::fromValue(m_calendar->todo(incidencePtr->instanceIdentifier()));
             break;
         case(KCalendarCore::IncidenceBase::TypeJournal):
-            return QVariant::fromValue(m_calendar->todo(incidencePtr->instanceIdentifier()));
+            return QVariant::fromValue(m_calendar->journal(incidencePtr->instanceIdentifier()));
             break;
         default:
             return QVariant::fromValue(incidencePtr);

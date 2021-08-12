@@ -25,6 +25,7 @@ Kirigami.ScrollablePage {
     property int year: startDate.getFullYear()
     property int daysInMonth: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDate()
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
+    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     onSelectedDateChanged: moveToSelected()
 
@@ -242,8 +243,8 @@ Kirigami.ScrollablePage {
 
                                     Kirigami.Theme.inherit: false
                                     Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                    Kirigami.Theme.backgroundColor: Qt.rgba(modelData.color.r, modelData.color.g, modelData.color.b, 1)
-                                    Kirigami.Theme.highlightColor: Qt.darker(modelData.color, 2.5)
+                                    Kirigami.Theme.backgroundColor: LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
+                                    Kirigami.Theme.highlightColor: Qt.darker(Kirigami.Theme.backgroundColor, 3)
 
                                     property real paddingSize: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
 
@@ -268,7 +269,7 @@ Kirigami.ScrollablePage {
                                         columns: root.isLarge ? 3 : 2
                                         rows: root.isLarge ? 1 : 2
 
-                                        property color textColor: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor) ? "white" : "black"
+                                        property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
 
                                         RowLayout {
                                             Kirigami.Icon {
@@ -293,6 +294,7 @@ Kirigami.ScrollablePage {
                                                     }
                                                 }
                                                 elide: Text.ElideRight
+                                                font.weight: Font.Medium
                                             }
                                         }
 

@@ -40,6 +40,8 @@ Item {
     property int numberOfRows: (daysToShow / daysPerRow)
     property var dayHeight: (height - dayLabels.height) / numberOfRows
 
+    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+
     implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows: numberOfLinesShown * Kirigami.Units.gridUnit) + dayLabels.height
 
     height: implicitHeight
@@ -85,7 +87,7 @@ Item {
                     Loader {
                         id: weekHeader
                         sourceComponent: root.weekHeaderDelegate
-                        property var startDate: periodStartDate
+                        property date startDate: periodStartDate
                         Layout.preferredWidth: weekHeaderWidth
                         Layout.fillHeight: true
                     }
@@ -93,7 +95,7 @@ Item {
                         id: dayDelegate
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        property var startDate: periodStartDate
+                        property date startDate: periodStartDate
 
                         //Grid
                         Row {
@@ -107,7 +109,7 @@ Item {
                                     height: parent.height
                                     width: root.dayWidth
                                     property date gridSquareDate: date
-                                    property var date: DateUtils.addDaysToDate(dayDelegate.startDate, modelData)
+                                    property date date: DateUtils.addDaysToDate(dayDelegate.startDate, modelData)
                                     property bool isInPast: DateUtils.roundToDay(date) < DateUtils.roundToDay(root.currentDate)
                                     property bool isToday: DateUtils.sameDay(root.currentDate, date)
                                     property bool isCurrentMonth: date.getMonth() == root.month
@@ -158,7 +160,6 @@ Item {
                         }
 
                         QQC2.ScrollView {
-
                             anchors {
                                 fill: parent
                                 // Offset for date
@@ -170,6 +171,8 @@ Item {
                             ListView {
                                 Layout.fillWidth: true
                                 id: linesRepeater
+
+                                spacing: Kirigami.Units.smallSpacing
 
                                 DayMouseArea {
                                     id: listViewMenu
@@ -207,25 +210,41 @@ Item {
                                         id: incidencesRepeater
                                         model: modelData
                                         Rectangle {
-                                            x: (root.dayWidth /*+ 1*/) * modelData.starts // +1 because of the spacing
+                                            x: ((root.dayWidth /*+ 1*/) * modelData.starts) + horizontalSpacing // +1 because of the spacing between each day
                                             y: 0
-                                            width: root.dayWidth * modelData.duration
+                                            width: (root.dayWidth * modelData.duration) - (horizontalSpacing * 2) // Account for spacing added to x and for spacing at end of line
                                             height: parent.height
                                             opacity: modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month ?
                                                     1.0 : 0.5
                                             radius: rectRadius
+                                            color: Qt.rgba(0,0,0,0)
 
                                             property int rectRadius: 5
+                                            property int horizontalSpacing: Kirigami.Units.smallSpacing
 
                                             Rectangle {
+                                                id: incidenceBackground
                                                 anchors.fill: parent
-                                                color: modelData.color
+                                                color: LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
+                                                visible: modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month
                                                 radius: parent.rectRadius
-                                                border.width: 1
-                                                border.color: Kirigami.Theme.alternateBackgroundColor
                                             }
 
                                             RowLayout {
+                                                id: incidenceContents
+
+                                                property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
+
+                                                function otherMonthTextColor(color) {
+                                                    if(root.isDark) {
+                                                        if(LabelUtils.getDarkness(color) >= 0.5) {
+                                                            return Qt.lighter(color, 2);
+                                                        }
+                                                        return Qt.lighter(color, 1.5);
+                                                    }
+                                                    return Qt.darker(color, 3);
+                                                }
+
                                                 anchors {
                                                     fill: parent
                                                     leftMargin: Kirigami.Units.smallSpacing
@@ -237,14 +256,17 @@ Item {
                                                     Layout.maximumWidth: height
 
                                                     source: modelData.incidenceTypeIcon
-                                                    color: LabelUtils.isDarkColor(modelData.color) ? "white" : "black"
+                                                    color: incidenceBackground.visible ? incidenceContents.textColor :
+                                                        incidenceContents.otherMonthTextColor(modelData.color)
                                                 }
 
                                                 QQC2.Label {
                                                     Layout.fillWidth: true
                                                     text: modelData.text
                                                     elide: Text.ElideRight
-                                                    color: LabelUtils.isDarkColor(modelData.color) ? "white" : "black"
+                                                    font.weight: Font.Medium
+                                                    color: incidenceBackground.visible ? incidenceContents.textColor :
+                                                        incidenceContents.otherMonthTextColor(modelData.color)
                                                 }
                                             }
 

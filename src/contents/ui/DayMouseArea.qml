@@ -12,7 +12,7 @@ MouseArea {
 
     signal addNewIncidence(int type, date addDate)
 
-    property string type: Kalendar.IncidenceWrapper.TypeEvent
+    property string defaultType: Kalendar.IncidenceWrapper.TypeEvent
     property date addDate
     property double clickX
     property double clickY
@@ -22,7 +22,9 @@ MouseArea {
 
     onDoubleClicked: {
         if (pressedButtons & Qt.LeftButton) {
-            addNewIncidence(type, addDate);
+            clickX = mouseX;
+            clickY = mouseY;
+            addNewIncidence(defaultType, addDate);
         }
     }
     onPressed: {
