@@ -17,6 +17,7 @@
   <name xml:lang="sv">Kalendar</name>
   <name xml:lang="uk">Kalendar</name>
   <name xml:lang="x-test">xxKalendarxx</name>
+  <name xml:lang="zh-CN">Kalendar</name>
   <summary>Calendar application</summary>
   <summary xml:lang="ca">Aplicació de calendari</summary>
   <summary xml:lang="ca-valencia">Aplicació de calendari</summary>
@@ -33,6 +34,7 @@
   <summary xml:lang="sv">Kalenderprogram</summary>
   <summary xml:lang="uk">Програма-календар</summary>
   <summary xml:lang="x-test">xxCalendar applicationxx</summary>
+  <summary xml:lang="zh-CN">日历应用程序</summary>
   <metadata_license>CC-0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <developer_name>KDE Community, Clau Cambra and Carl Schwan</developer_name>
@@ -51,6 +53,7 @@
   <developer_name xml:lang="sv">KDE-gemenskapen, Clau Cambra och Carl Schwan</developer_name>
   <developer_name xml:lang="uk">Спільнота KDE, Clau Cambra і Carl Schwan</developer_name>
   <developer_name xml:lang="x-test">xxKDE Community, Clau Cambra and Carl Schwanxx</developer_name>
+  <developer_name xml:lang="zh-CN">KDE 社区，Clau Cambra 和 Carl Schwan</developer_name>
   <description>
     <p>A calendar application allowing you to manage your events.</p>
     <p xml:lang="ca">Una aplicació de calendari que us permetrà gestionar els vostres esdeveniments.</p>
@@ -68,6 +71,7 @@
     <p xml:lang="sv">Ett kalenderprogram som låter dig hantera dina händelser.</p>
     <p xml:lang="uk">Програма-календар, за допомогою якої ви можете керувати вашими записами подій.</p>
     <p xml:lang="x-test">xxA calendar application allowing you to manage your events.xx</p>
+    <p xml:lang="zh-CN">可以让您管理事件的日历应用程序。</p>
     <ul>
       <li>Online calendar support. Bring your calendar from Nextcloud and other online services in Kalendar</li>
       <li xml:lang="ca">Admet els calendaris en línia. Porteu el calendari de NextCloud i altres serveis en línia al Kalendar</li>
@@ -84,6 +88,7 @@
       <li xml:lang="sv">Stöd för nätkalendrar. Hämta din kalender från Nextcloud och andra nättjänster till Kalendar.</li>
       <li xml:lang="uk">Підтримка інтернет-календарів. Отримайте ваші дані календаря з Nextcloud або інших інтернет-служб у Kalendar</li>
       <li xml:lang="x-test">xxOnline calendar support. Bring your calendar from Nextcloud and other online services in Kalendarxx</li>
+      <li xml:lang="zh-CN">支持在线日历平台。将您的日程从 Nextcloud 和其他在线服务转入 Kalendar。</li>
     </ul>
   </description>
 </component>
