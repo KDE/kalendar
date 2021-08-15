@@ -43,7 +43,7 @@ Kirigami.ScrollablePage {
             editorLoader.active && editorLoader.item.validEndDate
         } else {
             editorLoader.active && editorLoader.item.validFormDates &&
-            incidenceWrapper.incidenceStart < incidenceWrapper.incidenceEnd
+            incidenceWrapper.incidenceStart <= incidenceWrapper.incidenceEnd
         }
     }
 
@@ -297,6 +297,7 @@ Kirigami.ScrollablePage {
                     id: allDayCheckBox
 
                     text: i18n("All day")
+                    checked: root.incidenceWrapper.allDay
                     onCheckedChanged: root.incidenceWrapper.allDay = checked
                 }
                 RowLayout {
