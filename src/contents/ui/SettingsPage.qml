@@ -5,6 +5,7 @@ import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15 
+import QtQuick.Dialogs 1.0
 import org.kde.kalendar 1.0
 
 Kirigami.Page {
@@ -36,12 +37,17 @@ Kirigami.Page {
                         onTriggered: pageSettingStack.push(generalSettingPage)
                     },
                     Kirigami.Action {
-                        text: i18n("Accounts")
-                        icon.name: "preferences-system-users"
-                        onTriggered: pageSettingStack.push(accountsSettingsComponent)
+                        text: i18n("Views")
+                        icon.name: "view-choose"
+                        onTriggered: pageSettingStack.push(viewsSettingPage)
                     },
                     Kirigami.Action {
-                        text: i18n("Calendar")
+                        text: i18n("Calendar sources")
+                        icon.name: "preferences-system-users"
+                        onTriggered: pageSettingStack.push(sourcesSettingsComponent)
+                    },
+                    Kirigami.Action {
+                        text: i18n("Calendars")
                         icon.name: "korganizer"
                         onTriggered: pageSettingStack.push(calendarsSettingsComponent)
                     },
@@ -52,7 +58,7 @@ Kirigami.Page {
                     }
                 ]
                 model: actions
-                Component.onCompleted: actions[0].trigger();
+                Component.onCompleted: if(!Kirigami.Settings.isMobile) { actions[0].trigger(); }
                 delegate: Kirigami.BasicListItem {
                     action: modelData
                 }
@@ -61,45 +67,27 @@ Kirigami.Page {
     }
 
     Component {
-        id: accountsSettingsComponent
+        id: sourcesSettingsComponent
         Kirigami.Page {
-            id: calendarsSettingsPage
-            title: i18n("Calendars")
+            id: sourcesSettingsPage
+            title: i18n("Calendar sources")
 
             ColumnLayout {
                 anchors.fill: parent
+
                 Controls.ScrollView {
                     Component.onCompleted: background.visible = true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     ListView {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
                         clip: true
                         model: AgentConfiguration.runningAgents // CalendarManager.collections
-                        delegate: Kirigami.SwipeListItem {
+                        delegate: Kirigami.BasicListItem { // Originally swipelistitem, caused issues in mobile mode
                             leftPadding: Kirigami.Units.largeSpacing * 2
                             topPadding: Kirigami.Units.largeSpacing
                             bottomPadding: Kirigami.Units.largeSpacing
-
-                            actions: [
-                                Kirigami.Action {
-                                    iconName: "view-refresh"
-                                    text: i18n("Restart")
-                                    onTriggered: AgentConfiguration.restart(index);
-                                },
-                                Kirigami.Action {
-                                    iconName: "entry-edit"
-                                    text: i18n("Edit")
-                                    onTriggered: AgentConfiguration.edit(index);
-                                },
-                                Kirigami.Action {
-                                    iconName: "delete"
-                                    text: i18n("Remove")
-                                    onTriggered: {
-                                        // TODO add confirmation dialog
-                                        AgentConfiguration.remove(index);
-                                    }
-                                }
-                            ]
 
                             contentItem: Item {
                                 implicitWidth: delegateLayout.implicitWidth
@@ -116,7 +104,7 @@ Kirigami.Page {
                                     rowSpacing: Kirigami.Units.smallSpacing
                                     columnSpacing: Kirigami.Units.smallSpacing
                                     columns: 2
-                                    rows: 2
+                                    rows: 3
 
                                     Kirigami.Icon {
                                         source: model.decoration
@@ -153,6 +141,30 @@ Kirigami.Page {
                                         }
                                         text: model.statusMessage
                                     }
+
+                                    RowLayout {
+                                        Layout.row: 2
+                                        Layout.columnSpan : 2
+                                        Layout.alignment: Qt.AlignRight
+                                        Controls.ToolButton {
+                                            icon.name: "view-refresh"
+                                            text: i18n("Restart")
+                                            onClicked: AgentConfiguration.restart(index);
+                                        }
+                                        Controls.ToolButton {
+                                            icon.name: "entry-edit"
+                                            text: i18n("Edit")
+                                            onClicked: AgentConfiguration.edit(index);
+                                        }
+                                        Controls.ToolButton {
+                                            icon.name: "delete"
+                                            text: i18n("Remove")
+                                            onClicked: {
+                                                // TODO add confirmation dialog
+                                                AgentConfiguration.remove(index);
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -162,10 +174,10 @@ Kirigami.Page {
                     id: addCalendarOverlay
                     Kirigami.OverlaySheet {
                         id: overlay
-                        parent: calendarsSettingsPage.Controls.Overlay.overlay
+                        parent: sourcesSettingsPage.Controls.Overlay.overlay
                         header: Kirigami.Heading {
                             level: 2
-                            text: i18n("Add new calendar")
+                            text: i18n("Add new calendar source")
                         }
                         ListView {
                             implicitWidth: Kirigami.Units.gridUnit * 20
@@ -188,10 +200,10 @@ Kirigami.Page {
                     Layout.fillWidth: true
                     Controls.Button {
                         Layout.alignment: Qt.AlignRight
-                        text: i18n("Add new Calendar")
+                        text: i18n("Add new calendar source")
                         icon.name: "list-add"
                         onClicked: {
-                            const item = addCalendarOverlay.createObject(addCalendarOverlay, calendarsSettingsPage.Controls.Overlay.overlay)
+                            const item = addCalendarOverlay.createObject(addCalendarOverlay, sourcesSettingsPage.Controls.Overlay.overlay)
                             item.open();
                         }
                     }
@@ -206,11 +218,17 @@ Kirigami.Page {
             title: i18n("General")
 
             Kirigami.FormLayout {
+                anchors.fill: parent
+                Item {
+                    Kirigami.FormData.isSection: true
+                    Kirigami.FormData.label: i18n("Maps")
+                }
                 RowLayout {
                     Kirigami.FormData.label: i18n("Enable maps:")
 
                     Controls.CheckBox {
                         checked: Config.enableMaps
+                        enabled: !Config.isEnableMapsImmutable
                         onClicked: {
                             Config.enableMaps = !Config.enableMaps;
                             Config.save();
@@ -221,6 +239,182 @@ Kirigami.Page {
                         text: i18n("May cause crashing on some systems.")
                     }
                 }
+                Controls.ButtonGroup {
+                    buttons: locationMarkerButtonColumn.children
+                    exclusive: true
+                    onClicked: {
+                        Config.locationMarker = button.value;
+                        Config.save();
+                    }
+                }
+                Column {
+                    id: locationMarkerButtonColumn
+                    Kirigami.FormData.label: i18n("Location marker:")
+                    Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+                    Controls.RadioButton {
+                        property int value: 0 // HACK: Ideally should use config enum
+                        text: i18n("Circle (shows area of location)")
+                        enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
+                        checked: Config.locationMarker === value
+                    }
+                    Controls.RadioButton {
+                        property int value: 1 // HACK: Ideally should use config enum
+                        text: i18n("Pin (shows exact location)")
+                        enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
+                        checked: Config.locationMarker === value
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: viewsSettingPage
+
+        Kirigami.Page {
+            title: i18n("Views")
+
+            header: Controls.TabBar {
+                id: viewTabBar
+                currentIndex: swipeView.currentIndex
+
+                background: Rectangle { // HACK: Adds separator line that doesn't go over the active tabbutton
+                    anchors.fill: parent
+                    color: Kirigami.Theme.backgroundColor
+                    Kirigami.Separator {
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            top: parent.bottom
+                            topMargin: -1
+                        }
+                    }
+                }
+
+                Controls.TabButton {
+                    text: i18n("Month view")
+                }
+                Controls.TabButton {
+                    text: i18n("Schedule view")
+                }
+            }
+
+            Controls.SwipeView {
+                id: swipeView
+                anchors.fill: parent
+                currentIndex: viewTabBar.currentIndex
+                clip: true
+
+                Kirigami.FormLayout {
+                    id: monthViewForm
+                    Item {
+                        Kirigami.FormData.isSection: true
+                        Kirigami.FormData.label: "Month view settings"
+                    }
+                    Controls.ButtonGroup {
+                        buttons: weekdayLabelAlignmentButtonColumn.children
+                        exclusive: true
+                        onClicked: {
+                            Config.weekdayLabelAlignment = button.value;
+                            Config.save();
+                        }
+                    }
+                    Column {
+                        id: weekdayLabelAlignmentButtonColumn
+                        Kirigami.FormData.label: i18n("Weekday label alignment:")
+                        Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+                        Controls.RadioButton {
+                            property int value: 0 // HACK: Ideally should use config enum
+                            text: i18n("Left")
+                            enabled: !Config.isWeekdayLabelAlignmentImmutable
+                            checked: Config.weekdayLabelAlignment === value
+                        }
+                        Controls.RadioButton {
+                            property int value: 1
+                            text: i18n("Center")
+                            enabled: !Config.isWeekdayLabelAlignmentImmutable
+                            checked: Config.weekdayLabelAlignment === value
+                        }
+                        Controls.RadioButton {
+                            property int value: 2
+                            text: i18n("Right")
+                            enabled: !Config.isWeekdayLabelAlignmentImmutable
+                            checked: Config.weekdayLabelAlignment === value
+                        }
+                    }
+
+                    Controls.ButtonGroup {
+                        buttons: weekdayLabelLengthButtonColumn.children
+                        exclusive: true
+                        onClicked: {
+                            Config.weekdayLabelLength = button.value;
+                            Config.save();
+                        }
+                    }
+                    Column {
+                        id: weekdayLabelLengthButtonColumn
+                        Kirigami.FormData.label: i18n("Weekday label length:")
+                        Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+                        Controls.RadioButton {
+                            property int value: 0 // HACK: Ideally should use config enum
+                            text: i18n("Full name (Monday)")
+                            enabled: !Config.isWeekdayLabelLengthImmutable
+                            checked: Config.weekdayLabelLength === value
+                        }
+                        Controls.RadioButton {
+                            property int value: 1
+                            text: i18n("Abbreviated (Mon)")
+                            enabled: !Config.isWeekdayLabelLengthImmutable
+                            checked: Config.weekdayLabelLength === value
+                        }
+                        Controls.RadioButton {
+                            property int value: 2
+                            text: i18n("Letter only (M)")
+                            enabled: !Config.isWeekdayLabelLengthImmutable
+                            checked: Config.weekdayLabelLength === value
+                        }
+                    }
+
+                    Controls.CheckBox {
+                        text: i18n("Show week numbers")
+                        checked: Config.showWeekNumbers
+                        enabled: !Config.isShowWeekNumbersImmutable
+                        onClicked: {
+                            Config.showWeekNumbers = !Config.showWeekNumbers;
+                            Config.save();
+                        }
+                    }
+                }
+
+                Kirigami.FormLayout {
+                    id: scheduleViewForm
+                    Item {
+                        Kirigami.FormData.isSection: true
+                        Kirigami.FormData.label: "Schedule view settings"
+                    }
+                    Controls.CheckBox {
+                        text: i18n("Show month header")
+                        checked: Config.showMonthHeader
+                        enabled: !Config.isShowMonthHeaderImmutable
+                        onClicked: {
+                            Config.showMonthHeader = !Config.showMonthHeader;
+                            Config.save();
+                        }
+                    }
+
+                    Controls.CheckBox {
+                        text: i18n("Show week headers")
+                        checked: Config.showWeekHeaders
+                        enabled: !Config.isShowWeekHeadersImmutable
+                        onClicked: {
+                            Config.showWeekHeaders = !Config.showWeekHeaders;
+                            Config.save();
+                        }
+                    }
+                }
             }
         }
     }
@@ -228,7 +422,7 @@ Kirigami.Page {
     Component {
         id: calendarsSettingsComponent
         Kirigami.Page {
-            title: i18n("Calendar")
+            title: i18n("Calendars")
             ColumnLayout {
                 anchors.fill: parent
                 Controls.ScrollView {
@@ -236,9 +430,12 @@ Kirigami.Page {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     ListView {
+                        id: collectionsList
+
                         model: CalendarManager.collections
                         delegate: Kirigami.BasicListItem {
-                            leftPadding: Kirigami.Units.largeSpacing * kDescendantLevel
+                            property int itemCollectionId: collectionId
+                            leftPadding: ((Kirigami.Units.gridUnit * 2) * (kDescendantLevel - 1)) + Kirigami.Units.largeSpacing
                             leading: Controls.CheckBox {
                                 visible: model.checkState != null
                                 checked: model.checkState == 2
@@ -250,10 +447,33 @@ Kirigami.Page {
                                 radius: 5
                                 color: collectionColor
                                 visible: collectionColor !== undefined
-                                Component.onCompleted: console.log(collectionColor)
                             }
                             label: display
                             icon: decoration
+                        }
+                    }
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    Controls.Button {
+                        Layout.alignment: Qt.AlignRight
+                        text: i18n("Change calendar color")
+                        icon.name: "edit-entry"
+                        enabled: collectionsList.currentItem && collectionsList.currentItem.trailing.visible
+                        onClicked: {
+                            colorDialog.color = collectionsList.currentItem.trailing.color;
+                            colorDialog.open();
+                        }
+
+                        ColorDialog {
+                            id: colorDialog
+                            title: i18n("Choose calendar color")
+                            onAccepted: {
+                                CalendarManager.setCollectionColor(collectionsList.currentItem.itemCollectionId, color)
+                            }
+                            onRejected: {
+                                close();
+                            }
                         }
                     }
                 }

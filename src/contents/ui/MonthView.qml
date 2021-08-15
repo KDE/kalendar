@@ -7,6 +7,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
+import org.kde.kalendar 1.0 as Kalendar
 
 import "dateutils.js" as DateUtils
 
@@ -20,12 +21,14 @@ Kirigami.Page {
     signal deleteIncidenceReceived(var receivedIncidencePtr, date receivedDeleteDate)
     signal completeTodoReceived(var receivedIncidencePtr)
 
+    property var openOccurrence
     property alias startDate: dayView.startDate
     property alias currentDate: dayView.currentDate
     property alias calendarFilter: dayView.calendarFilter
     property alias month: dayView.month
     property int year: dayView.currentDate.getFullYear()
-    readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
+    readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
+    readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
 
     function setToDate(date) {
         let newDate = new Date(date)
@@ -47,10 +50,7 @@ Kirigami.Page {
         startDate = newDate;
     }
 
-    topPadding: 0
-    rightPadding: Kirigami.Units.smallSpacing
-    bottomPadding: Kirigami.Units.largeSpacing
-    leftPadding: 0
+    padding: 0
 
     background: Rectangle {
         Kirigami.Theme.colorSet: monthPage.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
@@ -62,11 +62,13 @@ Kirigami.Page {
             icon.name: "go-previous"
             text: i18n("Previous month")
             onTriggered: setToDate(new Date(startDate.getFullYear(), startDate.getMonth()))
+            displayHint: Kirigami.DisplayHint.IconOnly
         }
         right: Kirigami.Action {
             icon.name: "go-next"
             text: i18n("Next month")
             onTriggered: setToDate(new Date(startDate.getFullYear(), startDate.getMonth() + 2)) // Yes. I don't know.
+            displayHint: Kirigami.DisplayHint.IconOnly
         }
         main: Kirigami.Action {
             icon.name: "go-jump-today"
@@ -86,9 +88,36 @@ Kirigami.Page {
         dayHeaderDelegate: QQC2.Control {
             Layout.maximumHeight: Kirigami.Units.gridUnit * 2
             contentItem: Kirigami.Heading {
-                text: day.toLocaleString(Qt.locale(), monthPage.isLarge ? "dddd" : "ddd")
+                text: {
+                    let longText = day.toLocaleString(Qt.locale(), "dddd");
+                    let midText = day.toLocaleString(Qt.locale(), "ddd");
+                    let shortText = midText.slice(0,1);
+                    switch(Kalendar.Config.weekdayLabelLength) { // HACK: Ideally should use config enum
+                        case 0: // Full
+                            let chosenFormat = "dddd"
+                            return monthPage.isLarge ? longText : monthPage.isTiny ? shortText : midText;
+                        case 1: // Abbr
+                            return monthPage.isTiny ? shortText : midText;
+                        case 2: // Letter
+                        default:
+                            return shortText;
+                    }
+                }
                 level: 2
-                horizontalAlignment: monthPage.isLarge ? Text.AlignRight : Text.AlignHCenter
+                leftPadding: Kirigami.Units.smallSpacing
+                rightPadding: Kirigami.Units.smallSpacing
+                horizontalAlignment: {
+                    switch(Kalendar.Config.weekdayLabelAlignment) { // HACK: Ideally should use config enum
+                        case 0: // Left
+                            return Text.AlignLeft;
+                        case 1: // Center
+                            return Text.AlignHCenter;
+                        case 2: // Right
+                            return Text.AlignRight;
+                        default:
+                            return Text.AlignHCenter;
+                    }
+                }
             }
             background: Rectangle {
                 Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -102,6 +131,8 @@ Kirigami.Page {
             horizontalAlignment: Qt.AlignHCenter
             text: DateUtils.getWeek(startDate, Qt.locale().firstDayOfWeek)
         }
+
+        openOccurrence: monthPage.openOccurrence
 
         onAddIncidence: addIncidenceReceived(type, addDate)
         onViewIncidence: viewIncidenceReceived(modelData, collectionData)

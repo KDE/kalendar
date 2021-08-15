@@ -28,8 +28,7 @@ Kirigami.OverlayDrawer {
 
     onIncidenceDataChanged: {
         incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-                                          incidenceInfo,
-                                          "incidence");
+            incidenceInfo, "incidence");
         incidenceWrapper.incidencePtr = incidenceData.incidencePtr;
     }
 

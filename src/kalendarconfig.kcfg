@@ -10,6 +10,68 @@
             <label>Enable maps. NOTE: may cause crashing on some systems.</label>
             <default>false</default>
         </entry>
+        <entry name="locationMarker" type="Enum">
+            <label>Type of marker for showing a place's location.</label>
+            <choices>
+                <choice name="Circle">
+                    <label>Left</label>
+                </choice>
+                <choice name="Pin">
+                    <label>Center</label>
+                </choice>
+            </choices>
+            <default>Pin</default>
+        </entry>
+    </group>
+
+    <group name="MonthView">
+        <entry name="weekdayLabelAlignment" type="Enum">
+            <label>Alignment of week day header in month view.</label>
+            <choices>
+                <choice name="Left">
+                    <label>Left</label>
+                </choice>
+                <choice name="Center">
+                    <label>Center</label>
+                </choice>
+                <choice name="Right">
+                    <label>Right</label>
+                </choice>
+            </choices>
+            <default>Right</default>
+        </entry>
+
+        <entry name="weekdayLabelLength" type="Enum">
+        <label>Format of weekday name.</label>
+            <choices>
+                <choice name="Full">
+                    <label>Full</label>
+                </choice>
+                <choice name="Abbreviated">
+                    <label>Abbreviated</label>
+                </choice>
+                <choice name="Letter">
+                    <label>Letter</label>
+                </choice>
+            </choices>
+            <default>Full</default>
+        </entry>
+
+        <entry name="showWeekNumbers" type="Bool">
+            <label>Show week numbers to the side of the month grid.</label>
+            <default>true</default>
+        </entry>
+    </group>
+
+    <group name="ScheduleView">
+        <entry name="showMonthHeader" type="Bool">
+            <label>Show month header in schedule view.</label>
+            <default>true</default>
+        </entry>
+        <entry name="showWeekHeaders" type="Bool">
+            <label>Show week headers in schedule view.</label>
+            <default>true</default>
+        </entry>
     </group>
 
 </kcfg>

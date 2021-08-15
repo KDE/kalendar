@@ -19,6 +19,7 @@ Kirigami.ScrollablePage {
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
 
+    property var openOccurrence
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
     property int month: startDate.getMonth()
@@ -53,11 +54,13 @@ Kirigami.ScrollablePage {
             icon.name: "go-previous"
             text: i18n("Previous month")
             onTriggered: setToDate(DateUtils.previousMonth(startDate))
+            displayHint: Kirigami.DisplayHint.IconOnly
         }
         right: Kirigami.Action {
             icon.name: "go-next"
             text: i18n("Next month")
             onTriggered: setToDate(DateUtils.nextMonth(startDate))
+            displayHint: Kirigami.DisplayHint.IconOnly
         }
         main: Kirigami.Action {
             icon.name: "go-jump-today"
@@ -82,10 +85,16 @@ Kirigami.ScrollablePage {
         highlightRangeMode: ListView.ApplyRange
         onCountChanged: root.moveToSelected()
 
-        header: Kirigami.ItemViewHeader {
-            //backgroundImage.source: "../banner.jpg"
-            title: Qt.locale().monthName(root.month)
+        Component {
+            id: monthHeaderComponent
+            Kirigami.ItemViewHeader {
+                //backgroundImage.source: "../banner.jpg"
+                title: Qt.locale().monthName(root.month)
+                visible: Kalendar.Config.showMonthHeader
+            }
         }
+
+        header: Kalendar.Config.showMonthHeader ? monthHeaderComponent : null
 
         model: Kalendar.MultiDayIncidenceModel {
             periodLength: 1
@@ -113,9 +122,12 @@ Kirigami.ScrollablePage {
                 anchors.top: parent.top
                 anchors.right: parent.right
                 anchors.left: parent.left
-                height: parent.height + Kirigami.Units.largeSpacing
+                height: Kirigami.Settings.isMobile ? // Mobile adds extra padding
+                    parent.height + Kirigami.Units.largeSpacing * 2 : parent.height + Kirigami.Units.largeSpacing
                 Kirigami.Theme.colorSet: Kirigami.Theme.View
-                color: dayGrid.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+                color: Kirigami.Theme.activeBackgroundColor
+                visible: dayGrid.isToday
+                z: 0
             }
 
             ColumnLayout {
@@ -140,14 +152,16 @@ Kirigami.ScrollablePage {
 
                         return periodStartDate.toLocaleDateString(Qt.locale(), "dddd <b>dd</b>") + " - " + nextDay.toLocaleDateString(Qt.locale(), "dddd <b>dd</b> MMMM");
                     }
-                    visible: periodStartDate !== undefined &&
-                    (periodStartDate.getDay() === Qt.locale().firstDayOfWeek || index === 0)
+                    visible: Kalendar.Config.showWeekHeaders &&
+                        periodStartDate !== undefined &&
+                        (periodStartDate.getDay() === Qt.locale().firstDayOfWeek || index === 0)
                 }
 
                 Kirigami.Separator {
                     id: topSeparator
                     Layout.fillWidth: true
                     Layout.bottomMargin: scheduleListView.spacing - Kirigami.Units.smallSpacing
+                    z: 1
                 }
 
                 // Day + incidences
@@ -243,7 +257,8 @@ Kirigami.ScrollablePage {
 
                                     Kirigami.Theme.inherit: false
                                     Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                    Kirigami.Theme.backgroundColor: LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
+                                    Kirigami.Theme.backgroundColor: isOpenOccurrence ? modelData.color :
+                                        LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
                                     Kirigami.Theme.highlightColor: Qt.darker(Kirigami.Theme.backgroundColor, 3)
 
                                     property real paddingSize: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
@@ -253,6 +268,8 @@ Kirigami.ScrollablePage {
 
                                     showClickFeedback: true
 
+                                    property bool isOpenOccurrence: root.openOccurrence ?
+                                        root.openOccurrence.incidenceId === modelData.incidenceId : false
                                     property var incidenceWrapper: new IncidenceWrapper()
                                     property bool multiday: modelData.startTime.getDate() !== modelData.endTime.getDate()
                                     property int incidenceDays: DateUtils.fullDaysBetweenDates(modelData.startTime, modelData.endTime)
@@ -285,7 +302,8 @@ Kirigami.ScrollablePage {
                                                 Layout.row: 0
                                                 Layout.columnSpan: root.isLarge ? 2 : 1
 
-                                                color: cardContents.textColor
+                                                color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                    cardContents.textColor
                                                 text: {
                                                     if(incidenceCard.multiday) {
                                                         return i18n("%1 (Day %2 of %3)", modelData.text, incidenceCard.dayOfMultidayIncidence, incidenceCard.incidenceDays);
@@ -310,14 +328,16 @@ Kirigami.ScrollablePage {
                                                 id: recurringIcon
                                                 Layout.fillHeight: true
                                                 source: "appointment-recurring"
-                                                color: cardContents.textColor
+                                                color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                    cardContents.textColor
                                                 visible: incidenceCard.incidenceWrapper.recurrenceData.type
                                             }
                                             Kirigami.Icon {
                                                 id: reminderIcon
                                                 Layout.fillHeight: true
                                                 source: "appointment-reminder"
-                                                color: cardContents.textColor
+                                                color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                    cardContents.textColor
                                                 visible: incidenceCard.incidenceWrapper.remindersModel.rowCount() > 0
                                             }
                                         }
@@ -332,7 +352,8 @@ Kirigami.ScrollablePage {
                                             Layout.row: root.isLarge ? 0 : 1
 
                                             horizontalAlignment: root.isLarge ? Text.AlignRight : Text.AlignLeft
-                                            color: cardContents.textColor
+                                            color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                cardContents.textColor
                                             text: {
                                                 if (modelData.allDay) {
                                                     i18n("Runs all day")

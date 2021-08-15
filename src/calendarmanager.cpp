@@ -27,6 +27,8 @@
 #include <Akonadi/Calendar/History>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include <AkonadiCore/ItemMoveJob>
+#include <AkonadiCore/ItemModifyJob>
+#include <AkonadiCore/CollectionModifyJob>
 #include <AkonadiCore/AttributeFactory>
 #include <AkonadiCore/CollectionColorAttribute>
 #include <QRandomGenerator>
@@ -247,14 +249,14 @@ public:
             return {};
         }
 
-        if (m_colors.contains(id)) {
-            return m_colors[id];
+        if (colorCache.contains(id)) {
+            return colorCache[id];
         }
 
         if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
             const auto *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
             if (colorAttr && colorAttr->color().isValid()) {
-                m_colors[id] = colorAttr->color();
+                colorCache[id] = colorAttr->color();
                 save();
                 return colorAttr->color();
             }
@@ -262,14 +264,14 @@ public:
 
         QColor korgColor = mEventViewsPrefs->resourceColorKnown(id);
         if(korgColor.isValid()) {
-            m_colors[id] = korgColor;
+            colorCache[id] = korgColor;
             save();
             return korgColor;
         }
 
         QColor color;
         color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
-        m_colors[id] = color;
+        colorCache[id] = color;
         save();
 
         return color;
@@ -283,7 +285,7 @@ public:
 
         for (const QString &key : colorKeyList) {
             QColor color = rColorsConfig.readEntry(key, QColor("blue"));
-            m_colors[key] = color;
+            colorCache[key] = color;
         }
     }
 
@@ -291,15 +293,16 @@ public:
     {
         KSharedConfig::Ptr config = KSharedConfig::openConfig();
         KConfigGroup rColorsConfig(config, "Resources Colors");
-        for (auto it = m_colors.constBegin(); it != m_colors.constEnd(); ++it) {
+        for (auto it = colorCache.constBegin(); it != colorCache.constEnd(); ++it) {
             rColorsConfig.writeEntry(it.key(), it.value(), KConfigBase::Notify | KConfigBase::Normal);
         }
         config->sync();
     }
 
+    mutable QHash<QString, QColor> colorCache;
+
 private:
     mutable bool mInitDefaultCalendar;
-    mutable QHash<QString, QColor> m_colors;
     EventViews::PrefsPtr mEventViewsPrefs;
 };
 
@@ -611,6 +614,23 @@ QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
     collectionDetails[QLatin1String("readOnly")] = collection.rights().testFlag(Collection::ReadOnly);
 
     return collectionDetails;
+}
+
+void CalendarManager::setCollectionColor(qint64 collectionId, QColor color)
+{
+    auto collection = m_calendar->collection(collectionId);
+    Akonadi::CollectionColorAttribute *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);
+    colorAttr->setColor(color);
+
+    Akonadi::CollectionModifyJob *modifyJob = new Akonadi::CollectionModifyJob(collection);
+    connect(modifyJob, &Akonadi::CollectionModifyJob::result, [this, collectionId, color](KJob* job) {
+        if ( job->error() ) {
+            qWarning() << "Error occurred modifying collection color: " << job->errorString();
+        } else {
+             m_baseModel->colorCache[QString::number(collectionId)] = color;
+             m_baseModel->save();
+        }
+    });
 }
 
 void CalendarManager::undoAction()

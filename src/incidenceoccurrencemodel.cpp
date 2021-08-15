@@ -330,6 +330,8 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
             auto todo = incidence.incidence.staticCast<KCalendarCore::Todo>();
             return todo->isCompleted();
         }
+        case IncidenceId:
+            return incidence.incidence->uid();
         case IncidenceType:
             return incidence.incidence->type();
         case IncidenceTypeStr:

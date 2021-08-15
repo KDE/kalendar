@@ -21,10 +21,12 @@ Item {
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
 
+    property var openOccurrence
+
     property int daysToShow
     property int daysPerRow: daysToShow
-    property double weekHeaderWidth: Kirigami.Units.gridUnit * 1.5
-    property double dayWidth: (width - weekHeaderWidth - daysPerRow) / daysPerRow
+    property double weekHeaderWidth: Kalendar.Config.showWeekNumbers ? Kirigami.Units.gridUnit * 1.5 : 0
+    property double dayWidth: (width - weekHeaderWidth) / daysPerRow
     property date currentDate
     property date startDate
     property var calendarFilter
@@ -42,8 +44,7 @@ Item {
 
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
-    implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows: numberOfLinesShown * Kirigami.Units.gridUnit) + dayLabels.height
-
+    implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows : numberOfLinesShown * Kirigami.Units.gridUnit) + dayLabels.height
     height: implicitHeight
 
     Column {
@@ -90,6 +91,7 @@ Item {
                         property date startDate: periodStartDate
                         Layout.preferredWidth: weekHeaderWidth
                         Layout.fillHeight: true
+                        visible: Kalendar.Config.showWeekNumbers
                     }
                     Item {
                         id: dayDelegate
@@ -143,7 +145,7 @@ Item {
                                             level: 4
                                             text: i18n("<b>Today</b>")
                                             color: Kirigami.Theme.highlightColor
-                                            visible: gridItem.isToday
+                                            visible: gridItem.isToday && gridItem.width > Kirigami.Units.gridUnit * 5
                                         }
                                         Kirigami.Heading {
                                             Layout.alignment: Qt.AlignRight | Qt.AlignTop
@@ -172,6 +174,7 @@ Item {
                                 Layout.fillWidth: true
                                 id: linesRepeater
 
+                                clip: true
                                 spacing: Kirigami.Units.smallSpacing
 
                                 DayMouseArea {
@@ -214,19 +217,27 @@ Item {
                                             y: 0
                                             width: (root.dayWidth * modelData.duration) - (horizontalSpacing * 2) // Account for spacing added to x and for spacing at end of line
                                             height: parent.height
-                                            opacity: modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month ?
-                                                    1.0 : 0.5
+                                            opacity: isOpenOccurrence ||
+                                                modelData.endTime.getMonth() == root.month ||
+                                                modelData.startTime.getMonth() == root.month ?
+                                                1.0 : 0.5
                                             radius: rectRadius
                                             color: Qt.rgba(0,0,0,0)
 
                                             property int rectRadius: 5
                                             property int horizontalSpacing: Kirigami.Units.smallSpacing
 
+                                            property bool isOpenOccurrence: root.openOccurrence ?
+                                                root.openOccurrence.incidenceId === modelData.incidenceId : false
+
                                             Rectangle {
                                                 id: incidenceBackground
                                                 anchors.fill: parent
-                                                color: LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
-                                                visible: modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month
+                                                color: isOpenOccurrence ? modelData.color :
+                                                    LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
+                                                visible: isOpenOccurrence ||
+                                                    modelData.endTime.getMonth() == root.month ||
+                                                    modelData.startTime.getMonth() == root.month
                                                 radius: parent.rectRadius
                                             }
 
@@ -256,7 +267,8 @@ Item {
                                                     Layout.maximumWidth: height
 
                                                     source: modelData.incidenceTypeIcon
-                                                    color: incidenceBackground.visible ? incidenceContents.textColor :
+                                                    color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                        incidenceBackground.visible ? incidenceContents.textColor :
                                                         incidenceContents.otherMonthTextColor(modelData.color)
                                                 }
 
@@ -265,7 +277,8 @@ Item {
                                                     text: modelData.text
                                                     elide: Text.ElideRight
                                                     font.weight: Font.Medium
-                                                    color: incidenceBackground.visible ? incidenceContents.textColor :
+                                                    color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                        incidenceBackground.visible ? incidenceContents.textColor :
                                                         incidenceContents.otherMonthTextColor(modelData.color)
                                                 }
                                             }

@@ -53,6 +53,7 @@ public:
         CollectionId,
         AllDay,
         TodoCompleted,
+        IncidenceId,
         IncidenceType,
         IncidenceTypeStr,
         IncidenceTypeIcon,

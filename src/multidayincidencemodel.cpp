@@ -153,11 +153,12 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
                 {QStringLiteral("durationString"), idx.data(IncidenceOccurrenceModel::DurationString)},
                 {QStringLiteral("color"), idx.data(IncidenceOccurrenceModel::Color)},
                 {QStringLiteral("collectionId"), idx.data(IncidenceOccurrenceModel::CollectionId)},
+                {QStringLiteral("incidenceId"), idx.data(IncidenceOccurrenceModel::IncidenceId)},
                 {QStringLiteral("incidenceType"), idx.data(IncidenceOccurrenceModel::IncidenceType)},
                 {QStringLiteral("incidenceTypeStr"), idx.data(IncidenceOccurrenceModel::IncidenceTypeStr)},
                 {QStringLiteral("incidenceTypeIcon"), idx.data(IncidenceOccurrenceModel::IncidenceTypeIcon)},
                 {QStringLiteral("incidencePtr"), idx.data(IncidenceOccurrenceModel::IncidencePtr)},
-                {QStringLiteral("incidenceOccurrence"), idx.data(IncidenceOccurrenceModel::IncidenceOccurrence)}
+                {QStringLiteral("incidenceOccurrence"), idx.data(IncidenceOccurrenceModel::IncidenceOccurrence)},
             });
         };
 

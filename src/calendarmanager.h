@@ -21,6 +21,7 @@ namespace Akonadi {
 
 class KCheckableProxyModel;
 class QAbstractProxyModel;
+class ColorProxyModel;
 
 class CalendarManager : public QObject
 {
@@ -55,6 +56,7 @@ public:
     Q_INVOKABLE void editIncidence(IncidenceWrapper *incidenceWrapper);
     Q_INVOKABLE void deleteIncidence(KCalendarCore::Incidence::Ptr incidence);
     Q_INVOKABLE QVariantMap getCollectionDetails(qint64 collectionId);
+    Q_INVOKABLE void setCollectionColor(qint64 collectionId, QColor color);
     Q_INVOKABLE QVariant getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr);
     Q_INVOKABLE void undoAction();
     Q_INVOKABLE void redoAction();
@@ -71,7 +73,7 @@ private:
     Akonadi::ETMCalendar *m_calendar = nullptr;
     Akonadi::IncidenceChanger *m_changer;
     KDescendantsProxyModel *m_treeModel;
-    QAbstractProxyModel *m_baseModel = nullptr;
+    ColorProxyModel *m_baseModel = nullptr;
     KCheckableProxyModel *m_selectionProxyModel = nullptr;
     Akonadi::ETMViewStateSaver *mCollectionSelectionModelStateSaver = nullptr;
     KDescendantsProxyModel *m_allCalendars = nullptr;

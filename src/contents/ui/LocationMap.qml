@@ -6,6 +6,7 @@ import QtQuick.Controls 2.15
 import QtLocation 5.15
 import QtPositioning 5.15
 import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kalendar 1.0 as Kalendar
 
 Map {
     id: map
@@ -84,8 +85,8 @@ Map {
             }
         }
 
-        delegate: MapCircle {
-            id: point
+        property Component circle: MapCircle {
+            id: mapCircle
             radius: locationData.boundingBox.center.distanceTo(locationData.boundingBox.topRight)
             color: Kirigami.Theme.highlightColor
             border.color: Kirigami.Theme.linkColor
@@ -93,6 +94,27 @@ Map {
             smooth: true
             opacity: 0.25
             center: locationData.coordinate
+        }
+
+        property Component pin: MapQuickItem {
+            id: mapPin
+            coordinate: locationData.coordinate
+            anchorPoint.x: iconMarker.width/2
+            anchorPoint.y: iconMarker.height
+
+            sourceItem: Kirigami.Icon {
+                id: iconMarker
+                color: Kirigami.Theme.negativeTextColor // Easier to see
+                source: "mark-location"
+            }
+        }
+
+        delegate: switch(Kalendar.Config.locationMarker) { // HACK: Ideally should use config enum
+            case 0:
+                return circle;
+            case 1:
+            default:
+                return pin;
         }
     }
 

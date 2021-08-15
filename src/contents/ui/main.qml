@@ -6,7 +6,7 @@
 import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.15 
+import QtQuick.Layouts 1.15
 import org.kde.kalendar 1.0
 import QtQml.Models 2.15
 import "dateutils.js" as DateUtils
@@ -18,6 +18,23 @@ Kirigami.ApplicationWindow {
     property date selectedDate: currentDate
     property int month: currentDate.getMonth()
     property int year: currentDate.getFullYear()
+
+    property var openOccurrence
+    property Kirigami.Action addAction: Kirigami.Action {
+        text: i18n("Add")
+        icon.name: "list-add"
+
+        Kirigami.Action {
+            text: i18n("New event")
+            icon.name: "resource-calendar-insert"
+            onTriggered: root.setUpAdd(IncidenceWrapper.TypeEvent);
+        }
+        Kirigami.Action {
+            text: i18n("New todo")
+            icon.name: "view-task-add"
+            onTriggered: root.setUpAdd(IncidenceWrapper.TypeTodo);
+        }
+    }
 
     title: i18n("Calendar")
 
@@ -95,6 +112,15 @@ Kirigami.ApplicationWindow {
         handleVisible: enabled && pageStack.layers.depth < 2 && pageStack.depth < 3
         interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
+        onIncidenceDataChanged: root.openOccurrence = incidenceData;
+        onVisibleChanged: {
+            if(visible) {
+                root.openOccurrence = incidenceData;
+            } else {
+                root.openOccurrence = null;
+            }
+        }
+
         onEditIncidence: {
             setUpEdit(incidencePtr, collectionId);
             if (modal) { incidenceInfo.close() }
@@ -152,8 +178,7 @@ Kirigami.ApplicationWindow {
         let editorToUse = root.editorToUse();
         if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
             editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-                                                              editorToUse,
-                                                              "incidence");
+                editorToUse, "incidence");
         }
         editorToUse.editMode = false;
 
@@ -187,8 +212,7 @@ Kirigami.ApplicationWindow {
     function setUpEdit(incidencePtr, collectionId) {
         let editorToUse = root.editorToUse();
         editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-                                                          editorToUse,
-                                                          "incidence");
+            editorToUse, "incidence");
         editorToUse.incidenceWrapper.incidencePtr = incidencePtr;
         editorToUse.incidenceWrapper.collectionId = collectionId;
         editorToUse.editMode = true;
@@ -205,8 +229,7 @@ Kirigami.ApplicationWindow {
 
     function completeTodo(incidencePtr) {
         let todo = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-                                      this,
-                                      "incidence");
+            this, "incidence");
 
         todo.incidencePtr = incidencePtr;
 
@@ -245,6 +268,7 @@ Kirigami.ApplicationWindow {
             currentDate: root.currentDate
             startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(new Date(root.year, root.month)))
             month: root.month
+            openOccurrence: root.openOccurrence
 
             onAddIncidenceReceived: root.setUpAdd(receivedType, receivedAddDate)
             onViewIncidenceReceived: root.setUpView(receivedModelData, receivedCollectionData)
@@ -255,23 +279,7 @@ Kirigami.ApplicationWindow {
             onMonthChanged: root.month = month
             onYearChanged: root.year = year
 
-            actions.contextualActions: [
-                Kirigami.Action {
-                    text: i18n("Add")
-                    icon.name: "list-add"
-
-                    Kirigami.Action {
-                        text: i18n("New event")
-                        icon.name: "resource-calendar-insert"
-                        onTriggered: root.setUpAdd(IncidenceWrapper.TypeEvent);
-                    }
-                    Kirigami.Action {
-                        text: i18n("New todo")
-                        icon.name: "view-task-add"
-                        onTriggered: root.setUpAdd(IncidenceWrapper.TypeTodo);
-                    }
-                }
-            ]
+            actions.contextualActions: addAction
         }
     }
 
@@ -284,6 +292,7 @@ Kirigami.ApplicationWindow {
             title: startDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
             selectedDate: root.currentDate.getMonth() === root.month ? root.currentDate : new Date(root.year, root.month)
             startDate: new Date(root.year, root.month)
+            openOccurrence: root.openOccurrence
 
             onMonthChanged: root.month = month
             onYearChanged: root.year = year
@@ -294,23 +303,7 @@ Kirigami.ApplicationWindow {
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
 
-            actions.contextualActions: [
-                Kirigami.Action {
-                    text: i18n("Add")
-                    icon.name: "list-add"
-
-                    Kirigami.Action {
-                        text: i18n("New event")
-                        icon.name: "resource-calendar-insert"
-                        onTriggered: root.setUpAdd(IncidenceWrapper.TypeEvent);
-                    }
-                    Kirigami.Action {
-                        text: i18n("New todo")
-                        icon.name: "view-task-add"
-                        onTriggered: root.setUpAdd(IncidenceWrapper.TypeTodo);
-                    }
-                }
-            ]
+            actions.contextualActions: addAction
         }
     }
 }
