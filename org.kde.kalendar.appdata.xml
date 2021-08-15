@@ -8,6 +8,7 @@
   <name xml:lang="el">Kalendar</name>
   <name xml:lang="en-GB">Kalendar</name>
   <name xml:lang="es">Kalendar</name>
+  <name xml:lang="fi">Kalendar</name>
   <name xml:lang="fr">Kalendar</name>
   <name xml:lang="it">Kalendar</name>
   <name xml:lang="ko">Kalendar</name>
@@ -25,6 +26,7 @@
   <summary xml:lang="el">Εφαρμογή ημερολογίου</summary>
   <summary xml:lang="en-GB">Calendar application</summary>
   <summary xml:lang="es">Aplicación de calendarios</summary>
+  <summary xml:lang="fi">Kalenterisovellus</summary>
   <summary xml:lang="fr">Application d'agenda</summary>
   <summary xml:lang="it">Applicazione di calendario</summary>
   <summary xml:lang="ko">캘린더 프로그램</summary>
@@ -44,6 +46,7 @@
   <developer_name xml:lang="el">Η Κοινότητα του KDE, Clau Cambra και Carl Schwan</developer_name>
   <developer_name xml:lang="en-GB">KDE Community, Clau Cambra and Carl Schwan</developer_name>
   <developer_name xml:lang="es">La Comunidad de KDE, Clau Cambra y Carl Schwan</developer_name>
+  <developer_name xml:lang="fi">KDE-yhteisö, Clau Cambra ja Carl Schwan</developer_name>
   <developer_name xml:lang="fr">Communauté KDE, Clau Cambra et Carl Schwan</developer_name>
   <developer_name xml:lang="it">Comunità KDE, Clau Cambra e Carl Schwan</developer_name>
   <developer_name xml:lang="ko">KDE 커뮤니티, Clau Cambra, Carl Schwan</developer_name>
@@ -62,6 +65,7 @@
     <p xml:lang="el">Μια εφαρμογή ημερολογίου με την οποία διαχειρίζεστε γεγονότα.</p>
     <p xml:lang="en-GB">A calendar application allowing you to manage your events.</p>
     <p xml:lang="es">Aplicación de calendarios que le permite la gestión de eventos.</p>
+    <p xml:lang="fi">Kalenterisovellus, jolla hallita tapahtumiasi.</p>
     <p xml:lang="fr">Une application d'agenda vous permettant de gérer vos évènements.</p>
     <p xml:lang="it">Un'applicazione di calendario che ti consente di gestire i tuoi eventi.</p>
     <p xml:lang="ko">이벤트를 관리할 수 있는 캘린더 프로그램입니다.</p>
@@ -79,6 +83,7 @@
       <li xml:lang="el">Επιγραμμική υποστήριξη ημερολογίου. Μεταφέρετε το ημερολόγιό σας από το Nextcloud και από άλλες επιγραμμικές υπηρεσίες στο Kalendar</li>
       <li xml:lang="en-GB">Online calendar support. Bring your calendar from Nextcloud and other online services in Kalendar</li>
       <li xml:lang="es">Uso de calendarios en línea. Use su calendario de Nextcloud y otros servicios en línea en Kalendar.</li>
+      <li xml:lang="fi">Verkkokalenterituki. Tuo kalenterisi Kalendariin Nextcloudista ja muista vekrkopalveluista</li>
       <li xml:lang="fr">Prise en charge des agendas en ligne. Importer votre agenda de NextCloud et des autres services en ligne vers Kalendar.</li>
       <li xml:lang="it">Supporto calendari in linea. Porta il tuo calendario da Nextcloud e altri servizi in linea in Kalendar</li>
       <li xml:lang="ko">온라인 캘린더를 지원합니다. Kalendar에서 Nextcloud와 다른 온라인 서비스의 캘린더를 사용할 수 있습니다</li>
