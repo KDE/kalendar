@@ -325,104 +325,19 @@ Kirigami.ScrollablePage {
                     }
 
 
-                    QQC2.ComboBox {
+                    DateCombo {
                         id: incidenceStartDateCombo
                         Layout.fillWidth: true
-
-                        enabled: !incidenceForm.isTodo || incidenceStartCheckBox.checked
-                        editable: true
-                        editText: root.incidenceWrapper.incidenceStart.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
-
-                        inputMethodHints: Qt.ImhDate
-
-                        property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
-                        property bool validDate: !isNaN(dateFromText.getTime())
-
-                        onEditTextChanged: {
-                            // Set date from text here because it otherwise updates after this handler
-                            dateFromText = Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
-                            let datePicker = incidenceStartDatePicker
-
-                            if (validDate && activeFocus) {
-                                var timePicker = incidenceStartTimePicker
-                                datePicker.selectedDate = dateFromText;
-                                datePicker.clickedDate = dateFromText;
-                                root.incidenceWrapper.incidenceStart = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                            }
-                        }
-
-                        popup: QQC2.Popup {
-                            id: incidenceStartDatePopup
-
-                            width: Kirigami.Units.gridUnit * 18
-                            height: Kirigami.Units.gridUnit * 18
-                            y: parent.y + parent.height
-                            z: 1000
-
-                            DatePicker {
-                                id: incidenceStartDatePicker
-
-                                anchors.fill: parent
-                                onDatePicked: {
-                                    incidenceStartDatePopup.close();
-                                    let hours = root.incidenceWrapper.incidenceStart.getHours();
-                                    let minutes = root.incidenceWrapper.incidenceStart.getMinutes();
-                                    root.incidenceWrapper.incidenceStart = new Date(pickedDate.setHours(hours, minutes));
-                                }
-                            }
-                        }
+                        timePicker: incidenceStartTimeCombo.timePicker
+                        dateTime: root.incidenceWrapper.incidenceStart
+                        onNewDateChosen: root.incidenceWrapper.incidenceStart = newDate
                     }
-                    QQC2.ComboBox {
+                    TimeCombo {
                         id: incidenceStartTimeCombo
-
-                        Layout.fillWidth: true
-
-                        editable: true
-                        editText: root.incidenceWrapper.incidenceStart.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                        dateTime: root.incidenceWrapper.incidenceStart
+                        onNewTimeChosen: root.incidenceWrapper.incidenceStart = newTime
                         enabled: !allDayCheckBox.checked && (!incidenceForm.isTodo || incidenceStartCheckBox.checked)
                         visible: !allDayCheckBox.checked
-
-                        inputMethodHints: Qt.ImhTime
-                        validator: RegularExpressionValidator {
-                            regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
-                        }
-
-                        onEditTextChanged: {
-                            let timePicker = incidenceStartTimePicker
-
-                            if (acceptableInput && activeFocus) { // Need to check for activeFocus or on load the text gets reset to 00:00
-                                timePicker.setToTimeFromString(editText);
-                                root.incidenceWrapper.incidenceStart = new Date(root.incidenceWrapper.incidenceStart.setHours(timePicker.hours, timePicker.minutes));
-                            }
-                        }
-
-                        popup: QQC2.Popup {
-                            id: incidenceStartTimePopup
-                            width: parent.width
-                            height: parent.width * 2
-                            y: parent.y + parent.height
-                            z: 1000
-
-                            TimePicker {
-                                id: incidenceStartTimePicker
-
-                                Component.onCompleted: minuteMultiples = 15
-                                Connections {
-                                    target: root.incidenceWrapper
-                                    function onIncidenceStartChanged() {
-                                        incidenceStartTimePicker.dateTime = root.incidenceWrapper.incidenceStart
-                                    }
-                                }
-
-                                dateTime: root.incidenceWrapper.incidenceStart
-
-                                onDone: {
-                                    incidenceStartTimePopup.close();
-                                    root.incidenceWrapper.incidenceStart = new Date(root.incidenceWrapper.incidenceStart.setHours(hours, minutes));
-
-                                }
-                            }
-                        }
                     }
                 }
                 RowLayout {
@@ -449,102 +364,20 @@ Kirigami.ScrollablePage {
                         visible: incidenceForm.isTodo
                     }
 
-                    QQC2.ComboBox {
+                    DateCombo {
                         id: incidenceEndDateCombo
-
                         Layout.fillWidth: true
-
-                        property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
-                        property bool validDate: !isNaN(dateFromText.getTime())
-
-                        editable: true
-                        editText: root.incidenceWrapper.incidenceEnd.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
-                        enabled: !allDayCheckBox.checked && (!incidenceForm.isTodo || incidenceEndCheckBox.checked)
-
-                        onEditTextChanged: {
-                            // Set date from text here because it otherwise updates after this handler
-                            dateFromText = Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat);
-                            let datePicker = incidenceEndDatePicker;
-
-                            if (validDate && activeFocus) {
-                                var timePicker = incidenceEndTimePicker
-                                datePicker.selectedDate = dateFromText;
-                                datePicker.clickedDate = dateFromText;
-                                root.incidenceWrapper.incidenceEnd = new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes));
-                            }
-                        }
-
-                        popup: QQC2.Popup {
-                            id: incidenceEndDatePopup
-
-                            width: Kirigami.Units.gridUnit * 18
-                            height: Kirigami.Units.gridUnit * 18
-                            y: parent.y + parent.height
-                            z: 1000
-
-                            DatePicker {
-                                id: incidenceEndDatePicker
-                                anchors.fill: parent
-                                onDatePicked: {
-                                    incidenceEndDatePopup.close();
-                                    let hours = root.incidenceWrapper.incidenceEnd.getHours();
-                                    let minutes = root.incidenceWrapper.incidenceEnd.getMinutes();
-                                    root.incidenceWrapper.incidenceEnd = new Date(pickedDate.setHours(hours, minutes));
-                                }
-                            }
-                        }
+                        timePicker: incidenceEndTimeCombo.timePicker
+                        dateTime: root.incidenceWrapper.incidenceEnd
+                        onNewDateChosen: root.incidenceWrapper.incidenceEnd = newDate
+                        enabled: (!incidenceForm.isTodo && !allDayCheckBox.checked) || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                     }
-                    QQC2.ComboBox {
+                    TimeCombo {
                         id: incidenceEndTimeCombo
-
-                        Layout.fillWidth: true
-
-                        editable: true
-                        editText: root.incidenceWrapper.incidenceEnd.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
-                        enabled: !allDayCheckBox.checked && (!incidenceForm.isTodo || incidenceEndCheckBox.checked)
+                        dateTime: root.incidenceWrapper.incidenceEnd
+                        onNewTimeChosen: root.incidenceWrapper.incidenceEnd = newTime
+                        enabled: (!incidenceForm.isTodo && !allDayCheckBox.checked) || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                         visible: !allDayCheckBox.checked
-
-                        inputMethodHints: Qt.ImhTime
-                        validator: RegularExpressionValidator {
-                            regularExpression: /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/
-                        }
-
-                        onEditTextChanged: {
-                            let timePicker = incidenceEndTimePicker
-
-                            if (acceptableInput && activeFocus) {
-                                timePicker.setToTimeFromString(editText);
-                                root.incidenceWrapper.incidenceEnd = new Date(root.incidenceWrapper.incidenceEnd.setHours(timePicker.hours, timePicker.minutes));
-                            }
-                        }
-
-                        popup: QQC2.Popup {
-                            id: incidenceEndTimePopup
-
-                            width: parent.width
-                            height: parent.width * 2
-                            y: parent.y + parent.height
-                            z: 1000
-
-                            TimePicker {
-                                id: incidenceEndTimePicker
-
-                                Component.onCompleted: minuteMultiples = 15
-                                Connections {
-                                    target: root.incidenceWrapper
-                                    function onIncidenceEndChanged() {
-                                        incidenceEndTimePicker.dateTime = root.incidenceWrapper.incidenceEnd
-                                    }
-                                }
-
-                                dateTime: root.incidenceWrapper.incidenceEnd
-
-                                onDone: {
-                                    incidenceEndTimePopup.close();
-                                    root.incidenceWrapper.incidenceEnd = new Date(root.incidenceWrapper.incidenceEnd.setHours(hours, minutes));
-                                }
-                            }
-                        }
                     }
                 }
 
