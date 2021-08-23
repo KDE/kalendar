@@ -103,7 +103,14 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "settings-configure"
                 text: i18n("Settings")
-                onTriggered: pageStack.layers.push("qrc:/SettingsPage.qml")
+                shortcut: StandardKey.Preferences
+                onTriggered: pageStack.pushDialogLayer("qrc:/SettingsPage.qml", {
+                    width: root.width
+                }, {
+                    title: i18n("Settings"),
+                    width: root.width - (Kirigami.Units.gridUnit * 4),
+                    height: root.height - (Kirigami.Units.gridUnit * 3)
+                })
             },
             Kirigami.Action {
                 icon.name: "application-exit"
