@@ -79,12 +79,26 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "view-calendar"
                 text: i18n("Month view")
-                onTriggered: pageStack.layers.replace(monthViewComponent);
+                onTriggered: {
+                    pageStack.pop(null);
+                    pageStack.replace(monthViewComponent);
+                }
             },
             Kirigami.Action {
                 icon.name: "view-calendar-list"
                 text: i18n("Schedule view")
-                onTriggered: pageStack.layers.replace(scheduleViewComponent)
+                onTriggered: {
+                    pageStack.pop(null);
+                    pageStack.replace(scheduleViewComponent);
+                }
+            },
+            Kirigami.Action {
+                icon.name: "view-calendar-list"
+                text: i18n("Todo view")
+                onTriggered: {
+                    pageStack.pop(null);
+                    pageStack.replace(todoCollectionPageComponent);
+                }
             },
             Kirigami.Action {
                 icon.name: "settings-configure"
@@ -299,11 +313,23 @@ Kirigami.ApplicationWindow {
 
             onAddIncidence: root.setUpAdd(type, addDate)
             onViewIncidence: root.setUpView(modelData, collectionData)
-            onEditIncidence: root.setUpEdit(incidencePtr, collectionData)
+            onEditIncidence: root.setUpEdit(incidencePtr, collectionId)
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
 
             actions.contextualActions: addAction
+        }
+    }
+
+    Component {
+        id: todoCollectionPageComponent
+
+        TodoCollectionPage {
+            onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date())
+            onViewTodo: root.setUpView(todoData, collectionData)
+            onEditTodo: root.setUpEdit(todoPtr, collectionId)
+            onDeleteTodo: root.setUpDelete(todoPtr, deleteDate)
+            onCompleteTodo: root.completeTodo(todoPtr)
         }
     }
 }

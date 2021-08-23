@@ -14,6 +14,7 @@
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
 #include <incidencewrapper.h>
+#include <todosortfilterproxymodel.h>
 
 namespace Akonadi {
     class ETMCalendar;
@@ -28,10 +29,12 @@ class CalendarManager : public QObject
     Q_OBJECT
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
     Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
+    Q_PROPERTY(KDescendantsProxyModel *todoCollections READ todoCollections CONSTANT)
     Q_PROPERTY(KDescendantsProxyModel *allCalendars READ allCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableEventCalendars READ selectableEventCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableTodoCalendars READ selectableTodoCalendars CONSTANT)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar CONSTANT)
+    Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger READ incidenceChanger CONSTANT)
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
 
 public:
@@ -43,8 +46,10 @@ public:
 
     bool loading() const;
     QAbstractProxyModel *collections();
+    KDescendantsProxyModel *todoCollections();
     Q_INVOKABLE void save();
     Akonadi::ETMCalendar *calendar() const;
+    Akonadi::IncidenceChanger *incidenceChanger() const;
     KDescendantsProxyModel *allCalendars();
     Akonadi::EntityRightsFilterModel *selectableEventCalendars() const;
     Akonadi::EntityRightsFilterModel *selectableTodoCalendars() const;
@@ -70,9 +75,9 @@ Q_SIGNALS:
     void undoRedoDataChanged();
 
 private:
-    Akonadi::ETMCalendar *m_calendar = nullptr;
+    Akonadi::ETMCalendar::Ptr m_calendar = nullptr;
     Akonadi::IncidenceChanger *m_changer;
-    KDescendantsProxyModel *m_treeModel;
+    KDescendantsProxyModel *m_flatCollectionTreeModel;
     ColorProxyModel *m_baseModel = nullptr;
     KCheckableProxyModel *m_selectionProxyModel = nullptr;
     Akonadi::ETMViewStateSaver *mCollectionSelectionModelStateSaver = nullptr;
@@ -81,4 +86,5 @@ private:
     Akonadi::CollectionFilterProxyModel *m_todoMimeTypeFilterModel = nullptr;
     Akonadi::EntityRightsFilterModel *m_eventRightsFilterModel = nullptr;
     Akonadi::EntityRightsFilterModel *m_todoRightsFilterModel = nullptr;
+    KDescendantsProxyModel *m_todoViewCollectionModel = nullptr;
 };

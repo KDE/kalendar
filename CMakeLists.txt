@@ -43,7 +43,7 @@ find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
 find_package(KF5Contacts ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiContact ${AKONADI_CONTACT_VERSION} CONFIG REQUIRED)
 find_package(KF5CalendarSupport ${CALENDARSUPPORT_LIB_VERSION} CONFIG REQUIRED)
-find_package(KF5EventViews ${EVENTVIEW_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5EventViews ${CALENDARSUPPORT_LIB_VERSION} CONFIG REQUIRED)
 
 
 ################# build and install #################

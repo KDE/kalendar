@@ -37,8 +37,8 @@ MouseArea {
         id: incidenceActions
         QQC2.Menu {
             id: actionsPopup
-            y: parent.y + mouseArea.clickY
-            x: parent.x + mouseArea.clickX
+            y: mouseArea.clickY
+            x: mouseArea.clickX
 
             QQC2.MenuItem {
                 icon.name: "dialog-icon-preview"

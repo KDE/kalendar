@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");
     qmlRegisterType<MultiDayIncidenceModel>("org.kde.kalendar", 1, 0, "MultiDayIncidenceModel");
     qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
+    qmlRegisterType<TodoSortFilterProxyModel>("org.kde.kalendar", 1, 0, "TodoSortFilterProxyModel");
 
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
 

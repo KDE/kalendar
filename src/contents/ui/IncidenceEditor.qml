@@ -367,6 +367,7 @@ Kirigami.ScrollablePage {
                     DateCombo {
                         id: incidenceEndDateCombo
                         Layout.fillWidth: true
+
                         timePicker: incidenceEndTimeCombo.timePicker
                         dateTime: root.incidenceWrapper.incidenceEnd
                         onNewDateChosen: root.incidenceWrapper.incidenceEnd = newDate
@@ -374,6 +375,8 @@ Kirigami.ScrollablePage {
                     }
                     TimeCombo {
                         id: incidenceEndTimeCombo
+
+                        Layout.fillWidth: true
                         dateTime: root.incidenceWrapper.incidenceEnd
                         onNewTimeChosen: root.incidenceWrapper.incidenceEnd = newTime
                         enabled: (!incidenceForm.isTodo && !allDayCheckBox.checked) || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
