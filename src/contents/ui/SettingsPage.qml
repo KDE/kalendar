@@ -272,129 +272,96 @@ Kirigami.Page {
     Component {
         id: viewsSettingPage
 
-        Kirigami.Page {
+        Kirigami.ScrollablePage {
             title: i18n("Views")
+            Kirigami.FormLayout {
+                Kirigami.Heading {
+                    level: 3
+                    Kirigami.FormData.isSection: true
+                    text: i18n("Month view settings")
+                }
+                Controls.ButtonGroup {
+                    buttons: weekdayLabelAlignmentButtonColumn.children
+                    exclusive: true
+                    onClicked: {
+                        Config.weekdayLabelAlignment = button.value;
+                        Config.save();
+                    }
+                }
+                Column {
+                    id: weekdayLabelAlignmentButtonColumn
+                    Kirigami.FormData.label: i18n("Weekday label alignment:")
+                    Kirigami.FormData.labelAlignment: Qt.AlignTop
 
-            header: Controls.TabBar {
-                id: viewTabBar
-                currentIndex: swipeView.currentIndex
+                    Controls.RadioButton {
+                        property int value: 0 // HACK: Ideally should use config enum
+                        text: i18n("Left")
+                        enabled: !Config.isWeekdayLabelAlignmentImmutable
+                        checked: Config.weekdayLabelAlignment === value
+                    }
+                    Controls.RadioButton {
+                        property int value: 1
+                        text: i18n("Center")
+                        enabled: !Config.isWeekdayLabelAlignmentImmutable
+                        checked: Config.weekdayLabelAlignment === value
+                    }
+                    Controls.RadioButton {
+                        property int value: 2
+                        text: i18n("Right")
+                        enabled: !Config.isWeekdayLabelAlignmentImmutable
+                        checked: Config.weekdayLabelAlignment === value
+                    }
+                }
+                Controls.ButtonGroup {
+                    buttons: weekdayLabelLengthButtonColumn.children
+                    exclusive: true
+                    onClicked: {
+                        Config.weekdayLabelLength = button.value;
+                        Config.save();
+                    }
+                }
+                Column {
+                    id: weekdayLabelLengthButtonColumn
+                    Kirigami.FormData.label: i18n("Weekday label length:")
+                    Kirigami.FormData.labelAlignment: Qt.AlignTop
 
-                background: Rectangle { // HACK: Adds separator line that doesn't go over the active tabbutton
-                    anchors.fill: parent
-                    color: Kirigami.Theme.backgroundColor
-                    Kirigami.Separator {
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            top: parent.bottom
-                            topMargin: -1
-                        }
+                    Controls.RadioButton {
+                        property int value: 0 // HACK: Ideally should use config enum
+                        text: i18n("Full name (Monday)")
+                        enabled: !Config.isWeekdayLabelLengthImmutable
+                        checked: Config.weekdayLabelLength === value
+                    }
+                    Controls.RadioButton {
+                        property int value: 1
+                        text: i18n("Abbreviated (Mon)")
+                        enabled: !Config.isWeekdayLabelLengthImmutable
+                        checked: Config.weekdayLabelLength === value
+                    }
+                    Controls.RadioButton {
+                        property int value: 2
+                        text: i18n("Letter only (M)")
+                        enabled: !Config.isWeekdayLabelLengthImmutable
+                        checked: Config.weekdayLabelLength === value
+                    }
+                }
+                Controls.CheckBox {
+                    text: i18n("Show week numbers")
+                    checked: Config.showWeekNumbers
+                    enabled: !Config.isShowWeekNumbersImmutable
+                    onClicked: {
+                        Config.showWeekNumbers = !Config.showWeekNumbers;
+                        Config.save();
                     }
                 }
 
-                Controls.TabButton {
-                    text: i18n("Month view")
+                Kirigami.Separator {
+                    Kirigami.FormData.isSection: true
+                    Kirigami.FormData.label: i18n("Schedule view settings")
                 }
-                Controls.TabButton {
-                    text: i18n("Schedule view")
-                }
-            }
+                Column {
+                    Kirigami.FormData.label: i18n("Headers:")
+                    Kirigami.FormData.labelAlignment: Qt.AlignTop
 
-            Controls.SwipeView {
-                id: swipeView
-                anchors.fill: parent
-                currentIndex: viewTabBar.currentIndex
-                clip: true
-
-                Kirigami.FormLayout {
-                    id: monthViewForm
-                    Item {
-                        Kirigami.FormData.isSection: true
-                        Kirigami.FormData.label: "Month view settings"
-                    }
-                    Controls.ButtonGroup {
-                        buttons: weekdayLabelAlignmentButtonColumn.children
-                        exclusive: true
-                        onClicked: {
-                            Config.weekdayLabelAlignment = button.value;
-                            Config.save();
-                        }
-                    }
-                    Column {
-                        id: weekdayLabelAlignmentButtonColumn
-                        Kirigami.FormData.label: i18n("Weekday label alignment:")
-                        Kirigami.FormData.labelAlignment: Qt.AlignTop
-
-                        Controls.RadioButton {
-                            property int value: 0 // HACK: Ideally should use config enum
-                            text: i18n("Left")
-                            enabled: !Config.isWeekdayLabelAlignmentImmutable
-                            checked: Config.weekdayLabelAlignment === value
-                        }
-                        Controls.RadioButton {
-                            property int value: 1
-                            text: i18n("Center")
-                            enabled: !Config.isWeekdayLabelAlignmentImmutable
-                            checked: Config.weekdayLabelAlignment === value
-                        }
-                        Controls.RadioButton {
-                            property int value: 2
-                            text: i18n("Right")
-                            enabled: !Config.isWeekdayLabelAlignmentImmutable
-                            checked: Config.weekdayLabelAlignment === value
-                        }
-                    }
-
-                    Controls.ButtonGroup {
-                        buttons: weekdayLabelLengthButtonColumn.children
-                        exclusive: true
-                        onClicked: {
-                            Config.weekdayLabelLength = button.value;
-                            Config.save();
-                        }
-                    }
-                    Column {
-                        id: weekdayLabelLengthButtonColumn
-                        Kirigami.FormData.label: i18n("Weekday label length:")
-                        Kirigami.FormData.labelAlignment: Qt.AlignTop
-
-                        Controls.RadioButton {
-                            property int value: 0 // HACK: Ideally should use config enum
-                            text: i18n("Full name (Monday)")
-                            enabled: !Config.isWeekdayLabelLengthImmutable
-                            checked: Config.weekdayLabelLength === value
-                        }
-                        Controls.RadioButton {
-                            property int value: 1
-                            text: i18n("Abbreviated (Mon)")
-                            enabled: !Config.isWeekdayLabelLengthImmutable
-                            checked: Config.weekdayLabelLength === value
-                        }
-                        Controls.RadioButton {
-                            property int value: 2
-                            text: i18n("Letter only (M)")
-                            enabled: !Config.isWeekdayLabelLengthImmutable
-                            checked: Config.weekdayLabelLength === value
-                        }
-                    }
-
-                    Controls.CheckBox {
-                        text: i18n("Show week numbers")
-                        checked: Config.showWeekNumbers
-                        enabled: !Config.isShowWeekNumbersImmutable
-                        onClicked: {
-                            Config.showWeekNumbers = !Config.showWeekNumbers;
-                            Config.save();
-                        }
-                    }
-                }
-
-                Kirigami.FormLayout {
-                    id: scheduleViewForm
-                    Item {
-                        Kirigami.FormData.isSection: true
-                        Kirigami.FormData.label: "Schedule view settings"
-                    }
                     Controls.CheckBox {
                         text: i18n("Show month header")
                         checked: Config.showMonthHeader
@@ -404,7 +371,6 @@ Kirigami.Page {
                             Config.save();
                         }
                     }
-
                     Controls.CheckBox {
                         text: i18n("Show week headers")
                         checked: Config.showWeekHeaders
