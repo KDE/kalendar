@@ -24,14 +24,19 @@ MouseArea {
     anchors.fill: parent
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.RightButton
-    onPressed: {
-        if (pressedButtons & Qt.LeftButton) {
+    onClicked: {
+        if (mouse.button == Qt.LeftButton) {
             viewClicked(incidenceData, collectionDetails);
-        } else if (pressedButtons & Qt.RightButton) {
+        } else if (mouse.button == Qt.RightButton) {
             clickX = mouseX;
             clickY = mouseY;
             incidenceActions.createObject(mouseArea, {}).open();
         }
+    }
+    onPressAndHold: if(Kirigami.Settings.isMobile) {
+        clickX = mouseX;
+        clickY = mouseY;
+        incidenceActions.createObject(mouseArea, {}).open();
     }
 
     Component {
@@ -73,7 +78,7 @@ MouseArea {
                 text: i18n("Add sub-todo")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: {
-                    const parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                    let parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
                     parentWrapper.incidencePtr = mouseArea.incidenceData.incidencePtr;
                     parentWrapper.collectionId = mouseArea.collectionDetails.id;
                     addSubTodoClicked(parentWrapper);
