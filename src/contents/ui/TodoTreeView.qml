@@ -19,6 +19,7 @@ KirigamiAddonsTreeView.TreeListView {
     signal editTodo(var todoPtr, var collectionId)
     signal deleteTodo(var todoPtr, date deleteDate)
     signal completeTodo(var todoPtr)
+    signal addSubTodo(var parentWrapper)
 
     property date currentDate: new Date()
     property int filterCollectionId
@@ -63,6 +64,7 @@ KirigamiAddonsTreeView.TreeListView {
             onEditClicked: root.editTodo(model.incidencePtr, model.collectionId)
             onDeleteClicked: root.deleteTodo(model.incidencePtr, model.endTime ? model.endTime : model.startTime ? model.startTime : null)
             onTodoCompletedClicked: model.checked = model.checked === 0 ? 2 : 0
+            onAddSubTodoClicked: root.addSubTodo(parentWrapper)
 
             GridLayout {
                 id: todoItemContents

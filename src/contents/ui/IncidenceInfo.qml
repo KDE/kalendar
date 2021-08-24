@@ -10,6 +10,7 @@ import org.kde.kalendar 1.0
 Kirigami.OverlayDrawer {
     id: incidenceInfo
 
+    signal addSubTodo(var parentWrapper)
     signal editIncidence(var incidencePtr, var collectionId)
     signal deleteIncidence(var incidencePtr, date deleteDate)
 
@@ -67,39 +68,56 @@ Kirigami.OverlayDrawer {
                     rightPadding: Kirigami.Units.smallSpacing
                     leftPadding: Kirigami.Units.smallSpacing
 
-
                     RowLayout {
                         anchors.fill: parent
-                        spacing: 0
-
                         Kirigami.Heading {
-                            Layout.fillWidth: true
+                            id: infoHeader
+                            Layout.fillHeight: true
                             text: i18n(incidenceInfo.incidenceWrapper.incidenceTypeStr)
                         }
 
-                        QQC2.ToolButton {
+                        Kirigami.ActionToolBar {
+                            id: actionToolbar
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            alignment: Qt.AlignRight
+
                             // If accessing directly, updated incidenceWrapper data not grabbed (???)
                             property string incidenceType: incidenceInfo.incidenceWrapper.incidenceTypeStr
-                            property bool todoCompleted: incidenceInfo.incidenceWrapper.todoCompleted
-                            icon.name: todoCompleted ? "edit-undo" : "checkmark"
-                            text: todoCompleted ? i18n("Mark incomplete") : i18n("Mark complete")
-                            visible: incidenceType === "Todo"
-                            onClicked: {
-                                incidenceInfo.incidenceWrapper.todoCompleted = !incidenceInfo.incidenceWrapper.todoCompleted;
-                                CalendarManager.editIncidence(incidenceInfo.incidenceWrapper);
-                            }
-                        }
-                        QQC2.ToolButton {
-                            icon.name: "edit-entry"
-                            text: i18n("Edit")
-                            enabled: !incidenceInfo.collectionData.readOnly
-                            onClicked: editIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.collectionId)
-                        }
-                        QQC2.ToolButton {
-                            icon.name: "edit-delete"
-                            text: i18n("Delete")
-                            enabled: !incidenceInfo.collectionData.readOnly
-                            onClicked: deleteIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime)
+
+                            actions: [
+                                Kirigami.Action {
+                                    icon.name: "list-add"
+                                    text: i18n("Add sub-todo")
+                                    visible: actionToolbar.incidenceType === "Todo"
+                                    onTriggered: {
+                                        incidenceInfo.incidenceWrapper.collectionId = collectionData.id;
+                                        addSubTodo(incidenceInfo.incidenceWrapper);
+                                    }
+                                },
+                                Kirigami.Action {
+                                    property bool todoCompleted: incidenceInfo.incidenceWrapper.todoCompleted
+                                    icon.name: todoCompleted ? "edit-undo" : "checkmark"
+                                    text: todoCompleted ? i18n("Mark incomplete") : i18n("Mark complete")
+                                    visible: actionToolbar.incidenceType === "Todo"
+                                    onTriggered: {
+                                        incidenceInfo.incidenceWrapper.todoCompleted = !incidenceInfo.incidenceWrapper.todoCompleted;
+                                        CalendarManager.editIncidence(incidenceInfo.incidenceWrapper);
+                                    }
+                                },
+                                Kirigami.Action {
+                                    icon.name: "edit-entry"
+                                    text: i18n("Edit")
+                                    enabled: !incidenceInfo.collectionData.readOnly
+                                    onTriggered: editIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.collectionId)
+                                },
+                                Kirigami.Action {
+                                    icon.name: "edit-delete"
+                                    text: i18n("Delete")
+                                    enabled: !incidenceInfo.collectionData.readOnly
+                                    onTriggered: deleteIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime)
+                                }
+                            ]
                         }
                     }
                 }

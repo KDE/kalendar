@@ -14,6 +14,7 @@ MouseArea {
     signal editClicked(var incidencePtr, var collectionId)
     signal deleteClicked(var incidencePtr, date deleteDate)
     signal todoCompletedClicked(var incidencePtr)
+    signal addSubTodoClicked(var parentWrapper)
 
     property double clickX
     property double clickY
@@ -65,6 +66,18 @@ MouseArea {
                 text: incidenceData.todoCompleted ? i18n("Mark Todo as Incomplete") : i18n("Mark Todo as Complete")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: todoCompletedClicked(incidenceData.incidencePtr)
+                visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+            }
+            QQC2.MenuItem {
+                icon.name: "list-add"
+                text: i18n("Add sub-todo")
+                enabled: !mouseArea.collectionDetails["readOnly"]
+                onClicked: {
+                    const parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                    parentWrapper.incidencePtr = mouseArea.incidenceData.incidencePtr;
+                    parentWrapper.collectionId = mouseArea.collectionDetails.id;
+                    addSubTodoClicked(parentWrapper);
+                }
                 visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
             }
         }

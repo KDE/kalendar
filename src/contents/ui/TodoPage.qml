@@ -17,11 +17,12 @@ Kirigami.Page {
     id: root
     title: i18n("Todos")
 
-    signal addTodo()
+    signal addTodo(int collectionId)
     signal viewTodo(var todoData, var collectionData)
-    signal editTodo(var todoPtr, var collectionId)
+    signal editTodo(var todoPtr, int collectionId)
     signal deleteTodo(var todoPtr, date deleteDate)
     signal completeTodo(var todoPtr)
+    signal addSubTodo(var parentWrapper)
 
     property int filterCollectionId
     property var filterCollectionDetails: filterCollectionId ? Kalendar.CalendarManager.getCollectionDetails(filterCollectionId) : null
@@ -38,7 +39,7 @@ Kirigami.Page {
         main: Kirigami.Action {
             text: i18n("Add todo")
             icon.name: "list-add"
-            onTriggered: root.addTodo();
+            onTriggered: root.addTodo(filterCollectionId);
         }
         left: Kirigami.Action {
             text: i18n("Sort...")
@@ -112,6 +113,7 @@ Kirigami.Page {
                         completedDrawer.close();
                     }
                     onCompleteTodo: root.completeTodo(todoPtr);
+                    onAddSubTodo: root.addSubTodo(parentWrapper)
                 }
             }
         }
@@ -167,6 +169,76 @@ Kirigami.Page {
             onEditTodo: root.editTodo(todoPtr, collectionId)
             onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
             onCompleteTodo: root.completeTodo(todoPtr);
+            onAddSubTodo: root.addSubTodo(parentWrapper)
         }
+    }
+
+    Kirigami.OverlaySheet {
+        id: collectionPickerSheet
+        title: i18n("Choose a todo calendar")
+
+        property var incidenceWrapper: new IncidenceWrapper()
+
+        ListView {
+            implicitWidth: Kirigami.Units.gridUnit * 30
+            currentIndex: -1
+            header: ColumnLayout {
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+            }
+
+            model: Kalendar.CalendarManager.todoCollections
+            delegate: Kirigami.BasicListItem {
+                leftPadding: ((Kirigami.Units.gridUnit * 2) * (kDescendantLevel - 1)) + Kirigami.Units.largeSpacing
+                enabled: model.checkState != null
+                trailing: Rectangle {
+                    height: parent.height * 0.8
+                    width: height
+                    radius: 3
+                    color: model.collectionColor
+                    visible: model.checkState != null
+                }
+
+                label: display
+
+                onClicked: {
+                    collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
+                    Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
+                    collectionPickerSheet.close();
+                    addField.clear();
+                }
+            }
+        }
+    }
+
+    footer: Kirigami.ActionTextField {
+        id: addField
+        Layout.fillWidth: true
+        placeholderText: i18n("Create a new todo...")
+
+        function addTodo() {
+            if(addField.text) {
+                let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                incidenceWrapper.setNewTodo();
+                incidenceWrapper.summary = addField.text;
+
+                if(root.filterCollectionId && root.filterCollectionId >= 0) {
+                    incidenceWrapper.collectionId = root.filterCollectionId;
+                    Kalendar.CalendarManager.addIncidence(incidenceWrapper);
+                    addField.clear();
+                } else {
+                    collectionPickerSheet.incidenceWrapper = incidenceWrapper;
+                    collectionPickerSheet.open();
+                }
+            }
+        }
+
+        rightActions: Kirigami.Action {
+            icon.name: "list-add"
+            tooltip: i18n("Quickly add a new todo.")
+            onTriggered: addField.addTodo()
+        }
+        onAccepted: addField.addTodo()
     }
 }

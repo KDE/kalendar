@@ -20,6 +20,7 @@ Item {
     signal editIncidence(var incidencePtr, var collectionId)
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
+    signal addSubTodo(var parentWrapper)
 
     property var openOccurrence
 
@@ -291,6 +292,7 @@ Item {
                                                 onEditClicked: editIncidence(incidencePtr, collectionId)
                                                 onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
                                                 onTodoCompletedClicked: completeTodo(incidencePtr)
+                                                onAddSubTodoClicked: root.addSubTodo(parentWrapper)
                                             }
                                         }
                                     }

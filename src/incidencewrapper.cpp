@@ -83,6 +83,11 @@ QString IncidenceWrapper::incidenceIconName() const
     return m_incidence->iconName();
 }
 
+QString IncidenceWrapper::uid() const
+{
+    return m_incidence->uid();
+}
+
 qint64 IncidenceWrapper::collectionId() const
 {
     return m_collectionId;
@@ -92,6 +97,17 @@ void IncidenceWrapper::setCollectionId(qint64 collectionId)
 {
     m_collectionId = collectionId;
     Q_EMIT collectionIdChanged();
+}
+
+QString IncidenceWrapper::parent() const
+{
+    return m_incidence->relatedTo();
+}
+
+void IncidenceWrapper::setParent(QString parent)
+{
+    m_incidence->setRelatedTo(parent);
+    Q_EMIT parentChanged();
 }
 
 QString IncidenceWrapper::summary() const
@@ -439,7 +455,6 @@ void IncidenceWrapper::setNewEvent()
 void IncidenceWrapper::setNewTodo()
 {
     auto todo = KCalendarCore::Todo::Ptr(new KCalendarCore::Todo);
-    todo->setDtDue(QDateTime::currentDateTime().addSecs(30 * 60));
     setIncidencePtr(todo);
 }
 

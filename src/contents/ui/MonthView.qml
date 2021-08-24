@@ -14,12 +14,12 @@ import "dateutils.js" as DateUtils
 Kirigami.Page {
     id: monthPage
 
-    // More elegant way of sending this up to main.qml?
-    signal addIncidenceReceived(int receivedType, date receivedAddDate)
-    signal viewIncidenceReceived(var receivedModelData, var receivedCollectionData)
-    signal editIncidenceReceived(var receivedIncidencePtr, var receivedCollectionId)
-    signal deleteIncidenceReceived(var receivedIncidencePtr, date receivedDeleteDate)
-    signal completeTodoReceived(var receivedIncidencePtr)
+    signal addIncidence(int type, date addDate)
+    signal viewIncidence(var modelData, var collectionData)
+    signal editIncidence(var incidencePtr, var collectionId)
+    signal deleteIncidence(var incidencePtr, date deleteDate)
+    signal completeTodo(var incidencePtr)
+    signal addSubTodo(var parentWrapper)
 
     property var openOccurrence
     property alias startDate: dayView.startDate
@@ -134,11 +134,12 @@ Kirigami.Page {
 
         openOccurrence: monthPage.openOccurrence
 
-        onAddIncidence: addIncidenceReceived(type, addDate)
-        onViewIncidence: viewIncidenceReceived(modelData, collectionData)
-        onEditIncidence: editIncidenceReceived(incidencePtr, collectionId)
-        onDeleteIncidence: deleteIncidenceReceived(incidencePtr, deleteDate)
-        onCompleteTodo: completeTodoReceived(incidencePtr)
+        onAddIncidence: monthPage.addIncidence(type, addDate)
+        onViewIncidence: monthPage.viewIncidence(modelData, collectionData)
+        onEditIncidence: monthPage.editIncidence(incidencePtr, collectionId)
+        onDeleteIncidence: monthPage.deleteIncidence(incidencePtr, deleteDate)
+        onCompleteTodo: monthPage.completeTodo(incidencePtr)
+        onAddSubTodo: monthPage.addSubTodo(parentWrapper)
     }
 }
 

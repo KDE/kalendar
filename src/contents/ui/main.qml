@@ -142,6 +142,10 @@ Kirigami.ApplicationWindow {
             }
         }
 
+        onAddSubTodo: {
+            setUpAddSubTodo(parentWrapper);
+            if (modal) { incidenceInfo.close() }
+        }
         onEditIncidence: {
             setUpEdit(incidencePtr, collectionId);
             if (modal) { incidenceInfo.close() }
@@ -195,7 +199,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function setUpAdd(type, addDate) {
+    function setUpAdd(type, addDate, collectionId) {
         let editorToUse = root.editorToUse();
         if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
             editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
@@ -209,8 +213,6 @@ Kirigami.ApplicationWindow {
             editorToUse.incidenceWrapper.setNewTodo();
         }
 
-        editorToUse.incidenceWrapper.collectionId = CalendarManager.defaultCalendarId(editorToUse.incidenceWrapper)
-
         if(addDate !== undefined && !isNaN(addDate.getTime())) {
             let existingStart = editorToUse.incidenceWrapper.incidenceStart;
             let existingEnd = editorToUse.incidenceWrapper.incidenceEnd;
@@ -222,6 +224,26 @@ Kirigami.ApplicationWindow {
                 editorToUse.incidenceWrapper.incidenceEnd = new Date(addDate.setHours(existingEnd.getHours() + 1, existingEnd.getMinutes()));
             }
         }
+
+        if(collectionId && collectionId >= 0) {
+            editorToUse.incidenceWrapper.collectionId = collectionId;
+        } else {
+            editorToUse.incidenceWrapper.collectionId = CalendarManager.defaultCalendarId(editorToUse.incidenceWrapper);
+        }
+    }
+
+    function setUpAddSubTodo(parentWrapper) {
+        let editorToUse = root.editorToUse();
+        if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
+            editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
+                editorToUse, "incidence");
+        }
+        editorToUse.editMode = false;
+        editorToUse.incidenceWrapper.setNewTodo();
+        editorToUse.incidenceWrapper.parent = parentWrapper.uid;
+        editorToUse.incidenceWrapper.collectionId = parentWrapper.collectionId;
+        editorToUse.incidenceWrapper.incidenceStart = parentWrapper.incidenceStart;
+        editorToUse.incidenceWrapper.incidenceEnd = parentWrapper.incidenceEnd;
     }
 
     function setUpView(modelData, collectionData) {
@@ -291,11 +313,12 @@ Kirigami.ApplicationWindow {
             month: root.month
             openOccurrence: root.openOccurrence
 
-            onAddIncidenceReceived: root.setUpAdd(receivedType, receivedAddDate)
-            onViewIncidenceReceived: root.setUpView(receivedModelData, receivedCollectionData)
-            onEditIncidenceReceived: root.setUpEdit(receivedIncidencePtr, receivedCollectionId)
-            onDeleteIncidenceReceived: root.setUpDelete(receivedIncidencePtr, receivedDeleteDate)
-            onCompleteTodoReceived: root.completeTodo(receivedIncidencePtr)
+            onAddIncidence: root.setUpAdd(type, addDate)
+            onViewIncidence: root.setUpView(modelData, collectionData)
+            onEditIncidence: root.setUpEdit(incidencePtr, collectionId)
+            onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
+            onCompleteTodo: root.completeTodo(incidencePtr)
+            onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
 
             onMonthChanged: root.month = month
             onYearChanged: root.year = year
@@ -323,6 +346,7 @@ Kirigami.ApplicationWindow {
             onEditIncidence: root.setUpEdit(incidencePtr, collectionId)
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
+            onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
 
             actions.contextualActions: addAction
         }
@@ -332,11 +356,12 @@ Kirigami.ApplicationWindow {
         id: todoCollectionPageComponent
 
         TodoCollectionPage {
-            onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date())
+            onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
             onViewTodo: root.setUpView(todoData, collectionData)
             onEditTodo: root.setUpEdit(todoPtr, collectionId)
             onDeleteTodo: root.setUpDelete(todoPtr, deleteDate)
             onCompleteTodo: root.completeTodo(todoPtr)
+            onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
         }
     }
 }

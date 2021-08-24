@@ -28,8 +28,10 @@ class IncidenceWrapper : public QObject
     Q_PROPERTY(int incidenceType READ incidenceType NOTIFY incidenceTypeChanged)
     Q_PROPERTY(QString incidenceTypeStr READ incidenceTypeStr NOTIFY incidenceTypeStrChanged)
     Q_PROPERTY(QString incidenceIconName READ incidenceIconName NOTIFY incidenceIconNameChanged)
+    Q_PROPERTY(QString uid READ uid CONSTANT);
 
     Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
+    Q_PROPERTY(QString parent READ parent WRITE setParent NOTIFY parentChanged)
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
@@ -81,8 +83,11 @@ public:
     int incidenceType() const;
     QString incidenceTypeStr() const;
     QString incidenceIconName() const;
+    QString uid() const;
     qint64 collectionId() const;
     void setCollectionId(qint64 collectionId);
+    QString parent() const;
+    void setParent(QString parent);
     QString summary() const;
     void setSummary(const QString &summary);
     QString description() const;
@@ -134,6 +139,7 @@ Q_SIGNALS:
     void incidenceTypeStrChanged();
     void incidenceIconNameChanged();
     void collectionIdChanged();
+    void parentChanged();
     void summaryChanged();
     void descriptionChanged();
     void locationChanged();
