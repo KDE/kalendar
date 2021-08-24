@@ -38,7 +38,7 @@ ecm_setup_version(${PROJECT_VERSION}
 
 ################# Find dependencies #################
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg Location)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 I18n Package CalendarCore ConfigWidgets WindowSystem CoreAddons People Contacts ItemModels)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 I18n Package CalendarCore ConfigWidgets WindowSystem CoreAddons People Contacts ItemModels XmlGui)
 find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
 find_package(KF5Contacts ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiContact ${AKONADI_CONTACT_VERSION} CONFIG REQUIRED)

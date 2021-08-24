@@ -20,6 +20,7 @@
 #include "config-kalendar.h"
 #include "contactsmanager.h"
 #include "kalendarconfig.h"
+#include "kalendarapplication.h"
 
 using namespace KCalendarCore;
 
@@ -66,6 +67,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<TodoSortFilterProxyModel>("org.kde.kalendar", 1, 0, "TodoSortFilterProxyModel");
 
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
+    qRegisterMetaType<QAction*>();
 
     qmlRegisterSingletonType<AboutType>("org.kde.kalendar", 1, 0, "AboutType", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
@@ -73,6 +75,16 @@ int main(int argc, char *argv[])
 
         return new AboutType();
     });
+
+    qmlRegisterSingletonType<KalendarApplication>("org.kde.kalendar", 1, 0, "KalendarApplication",
+                                                       [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+        Q_UNUSED(scriptEngine)
+
+        auto newApplication = new KalendarApplication();
+
+        return newApplication;
+    });
+
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));

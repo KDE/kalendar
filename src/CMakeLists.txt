@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp todomodel.cpp incidencetreemodel.cpp todosortfilterproxymodel.cpp resources.qrc)
+add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp todomodel.cpp incidencetreemodel.cpp todosortfilterproxymodel.cpp kalendarapplication.cpp resources.qrc)
 
 target_link_libraries(kalendar
     Qt5::Core
@@ -27,6 +27,7 @@ target_link_libraries(kalendar
     KF5::People
     KF5::Contacts
     KF5::ItemModels
+    KF5::XmlGui
     KF5::EventViews # for reading KOrganizer calendar colors
 
 )

@@ -20,19 +20,78 @@ Kirigami.ApplicationWindow {
     property int year: currentDate.getFullYear()
 
     property var openOccurrence
+
+    readonly property var monthViewAction: KalendarApplication.action("open_month_view")
+    readonly property var scheduleViewAction: KalendarApplication.action("open_schedule_view")
+    readonly property var todoViewAction: KalendarApplication.action("open_todo_view")
+    readonly property var createEventAction: KalendarApplication.action("create_event")
+    readonly property var createTodoAction: KalendarApplication.action("create_todo")
+    readonly property var configureAction: KalendarApplication.action("options_configure")
+    readonly property var quitAction: KalendarApplication.action("file_quit")
+    readonly property var undoAction: KalendarApplication.action("edit_undo")
+    readonly property var redoAction: KalendarApplication.action("edit_redo")
+
+    Component.onCompleted: if (Kirigami.Settings.isMobile) {
+        scheduleViewAction.setChecked(true);
+    } else {
+        monthViewAction.setChecked(true);
+    }
+
+    Connections {
+        target: KalendarApplication
+        function onOpenMonthView() {
+            pageStack.pop(null);
+            pageStack.replace(monthViewComponent);
+        }
+
+        function onOpenScheduleView() {
+            pageStack.pop(null);
+            pageStack.replace(scheduleViewComponent);
+        }
+
+        function onOpenTodoView() {
+            pageStack.pop(null);
+            pageStack.replace(todoCollectionPageComponent);
+        }
+
+        function onCreateNewEvent() {
+            root.setUpAdd(IncidenceWrapper.TypeEvent);
+        }
+
+        function onCreateNewTodo() {
+            root.setUpAdd(IncidenceWrapper.TypeTodo);
+        }
+
+        function onQuit() {
+             Qt.quit();
+        }
+
+        function onOpenSettings() {
+            pageStack.pushDialogLayer("qrc:/SettingsPage.qml", {
+                width: root.width
+            }, {
+                title: i18n("Settings"),
+                width: root.width - (Kirigami.Units.gridUnit * 4),
+                height: root.height - (Kirigami.Units.gridUnit * 3)
+            })
+        }
+    }
+
     property Kirigami.Action addAction: Kirigami.Action {
         text: i18n("Add")
         icon.name: "list-add"
 
         Kirigami.Action {
+            id: newEventAction
             text: i18n("New event")
             icon.name: "resource-calendar-insert"
-            onTriggered: root.setUpAdd(IncidenceWrapper.TypeEvent);
+            onTriggered: createEventAction.trigger()
         }
         Kirigami.Action {
+            id: newTodoAction
             text: i18n("New todo")
             icon.name: "view-task-add"
-            onTriggered: root.setUpAdd(IncidenceWrapper.TypeTodo);
+            onTriggered: createTodoAction.trigger()
         }
     }
 
@@ -47,76 +106,56 @@ Kirigami.ApplicationWindow {
                 text: i18n("Add")
                 icon.name: "list-add"
 
-                Kirigami.Action {
-                    text: i18n("New event")
-                    icon.name: "resource-calendar-insert"
-                    onTriggered: root.setUpAdd(IncidenceWrapper.TypeEvent);
-                }
-                Kirigami.Action {
-                    text: i18n("New todo")
-                    icon.name: "view-task-add"
-                    onTriggered: root.setUpAdd(IncidenceWrapper.TypeTodo);
-                }
+                children: [newEventAction, newTodoAction]
             },
             Kirigami.Action {
                 icon.name: "edit-undo"
                 text: CalendarManager.undoRedoData.undoAvailable ?
                       i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription :
-                      i18n("Undo")
-                shortcut: StandardKey.Undo
-                enabled: CalendarManager.undoRedoData.undoAvailable
+                      undoAction.text
+                shortcut: undoAction.shortcut
+                enabled: CalendarManager.undoRedoData.undoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
                 onTriggered: CalendarManager.undoAction();
             },
             Kirigami.Action {
-                icon.name: "edit-redo"
+                icon.name: KalendarApplication.iconName(redoAction.icon)
                 text: CalendarManager.undoRedoData.redoAvailable ?
                       i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription :
-                      i18n("Redo")
-                shortcut: StandardKey.Redo
-                enabled: CalendarManager.undoRedoData.redoAvailable
+                      redoAction.text
+                shortcut: redoAction.shortcut
+                enabled: CalendarManager.undoRedoData.redoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
+
                 onTriggered: CalendarManager.redoAction();
             },
             Kirigami.Action {
-                icon.name: "view-calendar"
-                text: i18n("Month view")
-                onTriggered: {
-                    pageStack.pop(null);
-                    pageStack.replace(monthViewComponent);
-                }
+                icon.name: KalendarApplication.iconName(monthViewAction.icon)
+                text: monthViewAction.text
+                shortcut: monthViewAction.shortcut
+                onTriggered: monthViewAction.trigger()
             },
             Kirigami.Action {
-                icon.name: "view-calendar-list"
-                text: i18n("Schedule view")
-                onTriggered: {
-                    pageStack.pop(null);
-                    pageStack.replace(scheduleViewComponent);
-                }
+                icon.name: KalendarApplication.iconName(scheduleViewAction.icon)
+                text: scheduleViewAction.text
+                shortcut: scheduleViewAction.shortcut
+                onTriggered: scheduleViewAction.trigger()
             },
             Kirigami.Action {
-                icon.name: "view-calendar-list"
-                text: i18n("Todo view")
-                onTriggered: {
-                    pageStack.pop(null);
-                    pageStack.replace(todoCollectionPageComponent);
-                }
+                icon.name: KalendarApplication.iconName(todoViewAction.icon)
+                text: todoViewAction.text
+                shortcut: todoViewAction.shortcut
+                onTriggered: todoViewAction.trigger()
             },
             Kirigami.Action {
-                icon.name: "settings-configure"
-                text: i18n("Settings")
-                shortcut: StandardKey.Preferences
-                onTriggered: pageStack.pushDialogLayer("qrc:/SettingsPage.qml", {
-                    width: root.width
-                }, {
-                    title: i18n("Settings"),
-                    width: root.width - (Kirigami.Units.gridUnit * 4),
-                    height: root.height - (Kirigami.Units.gridUnit * 3)
-                })
+                icon.name: KalendarApplication.iconName(configureAction.icon)
+                text: configureAction.text
+                onTriggered: configureAction.trigger()
+                shortcut: configureAction.shortcut
             },
             Kirigami.Action {
-                icon.name: "application-exit"
-                text: i18n("Quit")
-                shortcut: StandardKey.Quit
-                onTriggered: Qt.quit()
+                icon.name: KalendarApplication.iconName(quitAction.icon)
+                text: quitAction.text
+                shortcut: quitAction.shortcut
+                onTriggered: quitAction.trigger()
                 visible: !Kirigami.Settings.isMobile
             }
         ]
@@ -164,6 +203,12 @@ Kirigami.ApplicationWindow {
     }
 
     Loader {
+        active: !Kirigami.Settings.isMobile
+        source: Qt.resolvedUrl("qrc:/GlobalMenu.qml")
+        onLoaded: item.parentWindow = root;
+    }
+
+    Loader {
         id: editorWindowedLoader
         active: false
         sourceComponent: Kirigami.ApplicationWindow {
@@ -172,10 +217,18 @@ Kirigami.ApplicationWindow {
             width: Kirigami.Units.gridUnit * 40
             height: Kirigami.Units.gridUnit * 32
 
+            flags: Qt.Dialog | Qt.WindowCloseButtonHint
+
             // Probably a more elegant way of accessing the editor from outside than this.
             property var incidenceEditor: incidenceEditorInLoader
 
             pageStack.initialPage: incidenceEditorInLoader
+
+            Loader {
+                active: !Kirigami.Settings.isMobile
+                source: Qt.resolvedUrl("qrc:/GlobalMenu.qml")
+                onLoaded: item.parentWindow = root
+            }
 
             IncidenceEditor {
                 id: incidenceEditorInLoader

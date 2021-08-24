@@ -22,12 +22,15 @@
     <file alias="TodoTreeView.qml">contents/ui/TodoTreeView.qml</file>
     <file alias="TodoPage.qml">contents/ui/TodoPage.qml</file>
     <file alias="TodoCollectionPage.qml">contents/ui/TodoCollectionPage.qml</file>
-
     <file alias="SettingsPage.qml">contents/ui/SettingsPage.qml</file>
     <file alias="AboutPage.qml">contents/ui/Settings/AboutPage.qml</file>
     <file alias="GeneralSettingsPage.qml">contents/ui/Settings/GeneralSettingsPage.qml</file>
     <file alias="ViewSettingsPage.qml">contents/ui/Settings/ViewSettingsPage.qml</file>
     <file alias="SourceSettingsPage.qml">contents/ui/Settings/SourceSettingsPage.qml</file>
     <file alias="CalendarSettingsPage.qml">contents/ui/Settings/CalendarSettingsPage.qml</file>
+    <file alias="GlobalMenu.qml">contents/ui/GlobalMenu.qml</file>
+    <file alias="EditMenu.qml">contents/ui/EditMenu.qml</file>
+    <file alias="TextContextMenu.qml">contents/ui/TextContextMenu.qml</file>
+    <file alias="NativeMenuItemFromAction.qml">contents/ui/NativeMenuItemFromAction.qml</file>
   </qresource>
 </RCC>
