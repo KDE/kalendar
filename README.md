@@ -6,7 +6,6 @@ Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you
 
 ## Screenshots
 
-<<<<<<< HEAD
 ![Screenshot of Kalendar's month view](sceenshot1.png)
 ![Screenshot of Kalendar's todo view](screenshot2.png)
 ![Screenshot of Kalendar's schedule view on mobile](screenshot3.png)
