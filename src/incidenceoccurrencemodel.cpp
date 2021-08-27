@@ -110,96 +110,31 @@ void IncidenceOccurrenceModel::updateFromSource()
     load();
 
     if (m_coreCalendar) {
-        QMap<QByteArray, KCalendarCore::Incidence::Ptr> recurringIncidences;
-        QMultiMap<QByteArray, KCalendarCore::Incidence::Ptr> exceptions;
-
-        const auto allEvents = Calendar::sortEvents(
-            m_coreCalendar->events(mStart, mEnd),
-            EventSortField::EventSortStartDate,
-            SortDirection::SortDirectionAscending
-        ); // get all events
-
-        const auto allTodos = Calendar::sortTodos(
-            m_coreCalendar->todos(mStart, mEnd),
-            TodoSortField::TodoSortDueDate, // Todos tend to not have a set start date
-            SortDirection::SortDirectionAscending
-        );
+        const auto allEvents = m_coreCalendar->events(mStart, mEnd); // get all events
+        const auto allTodos = m_coreCalendar->todos(mStart, mEnd);
 
         Incidence::List allIncidences = Calendar::mergeIncidenceList(allEvents, allTodos, {});
 
-        QMap<QByteArray, KCalendarCore::Incidence::Ptr> incidences;
-        for (int i = 0; i < allIncidences.count(); ++i) {
-            KCalendarCore::Incidence::Ptr &incidence = allIncidences[i];
-            //const bool skip = [&] {
-            //    for (auto it = mFilter.constBegin(); it!= mFilter.constEnd(); it++) {
-            //        if (event->getProperty(it.key().toLatin1()) != it.value()) {
-            //            return true;
-            //        }
-            //    }
-            //    return false;
-            //}();
-            //if (skip) {
-            //    continue;
-            //}
-            //
-            // Collect recurring events and add the rest immediately
-            if (incidence->recurs()) {
-                recurringIncidences.insert(incidence->uid().toLatin1(), incidence);
-                incidences.insert(incidence->instanceIdentifier().toLatin1(), incidence);
-            } else if(incidence->recurrenceId().isValid()) {
-                exceptions.insert(incidence->uid().toLatin1(), incidence);
-                incidences.insert(incidence->instanceIdentifier().toLatin1(), incidence);
-            } else {
-                if(incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeEvent) {
-                    KCalendarCore::Event::Ptr event = m_coreCalendar->event(incidence->uid());
-
-                    if (event->dtStart().date() < mEnd && event->dtEnd().date() >= mStart) {
-                        m_incidences.append(Occurrence {
-                            event->dtStart(),
-                            event->dtEnd(),
-                            event,
-                            getColor(event),
-                            getCollectionId(event),
-                            event->allDay()
-                        });
-                    }
-                } else if(incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
-                    KCalendarCore::Todo::Ptr todo = m_coreCalendar->todo(incidence->uid());
-                    QDateTime todoStart = todo->dtStart();
-
-                    if(!todoStart.isValid()) { // Todos are very likely not to have a set start date
-                        todoStart = todo->dtDue();
-                    }
-
-                    if (todoStart.date() < mEnd && todo->dtDue().date() >= mStart) {
-                        m_incidences.append(Occurrence {
-                            todoStart,
-                            todo->dtDue(),
-                            todo,
-                            getColor(todo),
-                            getCollectionId(todo),
-                            todo->allDay()
-                        });
-                    }
-                }
-            }
-
-        }
-
         // process all recurring events and their exceptions.
-        for (const auto &uid : recurringIncidences.keys()) {
+        for (const auto &incidence : allIncidences) {
             KCalendarCore::MemoryCalendar calendar{ QTimeZone::systemTimeZone() };
-            calendar.addIncidence(recurringIncidences.value(uid));
-            for (const auto &incidence : exceptions.values(uid)) {
-                calendar.addIncidence(incidence);
-            }
+            calendar.addIncidence(incidence);
+
             KCalendarCore::OccurrenceIterator occurrenceIterator{calendar, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
 
             while (occurrenceIterator.hasNext()) {
                 occurrenceIterator.next();
                 const auto incidence = occurrenceIterator.incidence();
-                const auto start = occurrenceIterator.occurrenceStartDate();
-                const auto end = incidence->endDateForStart(start);
+                auto start = occurrenceIterator.occurrenceStartDate();
+                auto end = incidence->endDateForStart(start);
+
+                if(incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
+                    KCalendarCore::Todo::Ptr todo = m_coreCalendar->todo(incidence->uid());
+
+                    if(!start.isValid()) { // Todos are very likely not to have a set start date
+                        start = todo->dtDue();
+                    }
+                }
 
                 if (start.date() < mEnd && end.date() >= mStart) {
                     m_incidences.append(Occurrence {
