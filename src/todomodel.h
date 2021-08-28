@@ -8,7 +8,7 @@
 #pragma once
 
 #include "eventviews_export.h"
-#include "prefs.h"
+#include <EventViews/Prefs>
 
 #include <Akonadi/Calendar/ETMCalendar>
 #include <Akonadi/Calendar/IncidenceChanger>
