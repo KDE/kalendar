@@ -35,6 +35,12 @@ Kirigami.Page {
 
     //padding: Kirigami.Units.largeSpacing
 
+    background: Rectangle {
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        color: Kirigami.Theme.backgroundColor
+    }
+
     actions {
         main: Kirigami.Action {
             text: i18n("Add todo")
@@ -127,7 +133,8 @@ Kirigami.Page {
 
             Kirigami.Heading {
                 Layout.fillWidth: true
-                text: root.filterCollectionDetails ? root.filterCollectionDetails.displayName : i18n("All todos")
+                text: root.filterCollectionDetails && root.filterCollectionId > -1 ?
+                    root.filterCollectionDetails.displayName : i18n("All todos")
                 font.weight: Font.Bold
                 color: root.filterCollectionDetails ?
                     LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor

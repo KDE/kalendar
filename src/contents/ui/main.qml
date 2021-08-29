@@ -14,6 +14,8 @@ import "dateutils.js" as DateUtils
 Kirigami.ApplicationWindow {
     id: root
 
+    width: Kirigami.Units.gridUnit * 65
+
     property date currentDate: new Date()
     property date selectedDate: currentDate
     property int month: currentDate.getMonth()
@@ -51,7 +53,7 @@ Kirigami.ApplicationWindow {
 
         function onOpenTodoView() {
             pageStack.pop(null);
-            pageStack.replace(todoCollectionPageComponent);
+            pageStack.replace(todoPageComponent);
         }
 
         function onCreateNewEvent() {
@@ -99,66 +101,10 @@ Kirigami.ApplicationWindow {
 
     pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
 
-    globalDrawer: Kirigami.GlobalDrawer {
-        isMenu: true
-        actions: [
-            Kirigami.Action {
-                text: i18n("Add")
-                icon.name: "list-add"
-
-                children: [newEventAction, newTodoAction]
-            },
-            Kirigami.Action {
-                icon.name: "edit-undo"
-                text: CalendarManager.undoRedoData.undoAvailable ?
-                      i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription :
-                      undoAction.text
-                shortcut: undoAction.shortcut
-                enabled: CalendarManager.undoRedoData.undoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
-                onTriggered: CalendarManager.undoAction();
-            },
-            Kirigami.Action {
-                icon.name: KalendarApplication.iconName(redoAction.icon)
-                text: CalendarManager.undoRedoData.redoAvailable ?
-                      i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription :
-                      redoAction.text
-                shortcut: redoAction.shortcut
-                enabled: CalendarManager.undoRedoData.redoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
-
-                onTriggered: CalendarManager.redoAction();
-            },
-            Kirigami.Action {
-                icon.name: KalendarApplication.iconName(monthViewAction.icon)
-                text: monthViewAction.text
-                shortcut: monthViewAction.shortcut
-                onTriggered: monthViewAction.trigger()
-            },
-            Kirigami.Action {
-                icon.name: KalendarApplication.iconName(scheduleViewAction.icon)
-                text: scheduleViewAction.text
-                shortcut: scheduleViewAction.shortcut
-                onTriggered: scheduleViewAction.trigger()
-            },
-            Kirigami.Action {
-                icon.name: KalendarApplication.iconName(todoViewAction.icon)
-                text: todoViewAction.text
-                shortcut: todoViewAction.shortcut
-                onTriggered: todoViewAction.trigger()
-            },
-            Kirigami.Action {
-                icon.name: KalendarApplication.iconName(configureAction.icon)
-                text: configureAction.text
-                onTriggered: configureAction.trigger()
-                shortcut: configureAction.shortcut
-            },
-            Kirigami.Action {
-                icon.name: KalendarApplication.iconName(quitAction.icon)
-                text: quitAction.text
-                shortcut: quitAction.shortcut
-                onTriggered: quitAction.trigger()
-                visible: !Kirigami.Settings.isMobile
-            }
-        ]
+    globalDrawer: Sidebar {
+        todoMode: pageStack.currentItem.filterCollectionId !== undefined
+        onCalendarClicked: if(todoMode) pageStack.currentItem.filterCollectionId = collectionId
+        onViewAllTodosClicked: if(todoMode) pageStack.currentItem.filterCollectionId = -1
     }
 
     contextDrawer: IncidenceInfo {
@@ -406,9 +352,11 @@ Kirigami.ApplicationWindow {
     }
 
     Component {
-        id: todoCollectionPageComponent
+        id: todoPageComponent
 
-        TodoCollectionPage {
+        TodoPage {
+            id: todoPage
+
             onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
             onViewTodo: root.setUpView(todoData, collectionData)
             onEditTodo: root.setUpEdit(todoPtr, collectionId)

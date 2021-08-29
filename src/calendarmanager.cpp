@@ -391,10 +391,23 @@ CalendarManager::CalendarManager(QObject *parent)
     todoCollectionModel->setSourceModel(collectionFilter);
     todoCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
     todoCollectionModel->setExcludeVirtualCollections(true);
+    todoCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     todoCollectionModel->sort(0, Qt::AscendingOrder);
 
     m_todoViewCollectionModel = new KDescendantsProxyModel(this);
     m_todoViewCollectionModel->setSourceModel(todoCollectionModel);
+
+    // Model for the sidebar
+    auto viewCollectionModel = new Akonadi::CollectionFilterProxyModel(this);
+    viewCollectionModel->setSourceModel(collectionFilter);
+    viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
+    viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
+    viewCollectionModel->setExcludeVirtualCollections(true);
+    viewCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    viewCollectionModel->sort(0, Qt::AscendingOrder);
+
+    m_viewCollectionModel = new KDescendantsProxyModel(this);
+    m_viewCollectionModel->setSourceModel(viewCollectionModel);
 
     Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
@@ -433,6 +446,11 @@ QAbstractProxyModel *CalendarManager::collections()
 KDescendantsProxyModel * CalendarManager::todoCollections()
 {
     return m_todoViewCollectionModel;
+}
+
+KDescendantsProxyModel * CalendarManager::viewCollections()
+{
+    return m_viewCollectionModel;
 }
 
 bool CalendarManager::loading() const

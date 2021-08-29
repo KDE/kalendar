@@ -30,6 +30,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
     Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
     Q_PROPERTY(KDescendantsProxyModel *todoCollections READ todoCollections CONSTANT)
+    Q_PROPERTY(KDescendantsProxyModel *viewCollections READ viewCollections CONSTANT)
     Q_PROPERTY(KDescendantsProxyModel *allCalendars READ allCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableEventCalendars READ selectableEventCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableTodoCalendars READ selectableTodoCalendars CONSTANT)
@@ -47,6 +48,7 @@ public:
     bool loading() const;
     QAbstractProxyModel *collections();
     KDescendantsProxyModel *todoCollections();
+    KDescendantsProxyModel *viewCollections();
     Q_INVOKABLE void save();
     Akonadi::ETMCalendar *calendar() const;
     Akonadi::IncidenceChanger *incidenceChanger() const;
@@ -87,4 +89,5 @@ private:
     Akonadi::EntityRightsFilterModel *m_eventRightsFilterModel = nullptr;
     Akonadi::EntityRightsFilterModel *m_todoRightsFilterModel = nullptr;
     KDescendantsProxyModel *m_todoViewCollectionModel = nullptr;
+    KDescendantsProxyModel *m_viewCollectionModel = nullptr;
 };

@@ -118,6 +118,7 @@ Item {
                                     property bool isCurrentMonth: date.getMonth() == root.month
 
                                     background: Rectangle {
+                                        Kirigami.Theme.inherit: false
                                         Kirigami.Theme.colorSet: Kirigami.Theme.View
                                         color: gridItem.isToday ? Kirigami.Theme.activeBackgroundColor :
                                             gridItem.isCurrentMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor

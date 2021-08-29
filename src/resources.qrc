@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="/">
     <file alias="main.qml">contents/ui/main.qml</file>
+    <file alias="Sidebar.qml">contents/ui/Sidebar.qml</file>
     <file alias="MultiDayView.qml">contents/ui/MultiDayView.qml</file>
     <file alias="MonthView.qml">contents/ui/MonthView.qml</file>
     <file alias="DayLabels.qml">contents/ui/DayLabels.qml</file>
@@ -21,7 +22,6 @@
     <file alias="DateCombo.qml">contents/ui/DateCombo.qml</file>
     <file alias="TodoTreeView.qml">contents/ui/TodoTreeView.qml</file>
     <file alias="TodoPage.qml">contents/ui/TodoPage.qml</file>
-    <file alias="TodoCollectionPage.qml">contents/ui/TodoCollectionPage.qml</file>
     <file alias="SettingsPage.qml">contents/ui/SettingsPage.qml</file>
     <file alias="AboutPage.qml">contents/ui/Settings/AboutPage.qml</file>
     <file alias="GeneralSettingsPage.qml">contents/ui/Settings/GeneralSettingsPage.qml</file>

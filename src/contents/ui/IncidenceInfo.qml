@@ -41,7 +41,7 @@ Kirigami.OverlayDrawer {
     leftPadding: 0
     rightPadding: 0
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
     contentItem: Loader {
         Layout.fillWidth: true

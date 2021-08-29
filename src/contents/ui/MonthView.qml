@@ -53,7 +53,8 @@ Kirigami.Page {
     padding: 0
 
     background: Rectangle {
-        Kirigami.Theme.colorSet: monthPage.isLarge ? Kirigami.Theme.Header : Kirigami.Theme.View
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
         color: Kirigami.Theme.backgroundColor
     }
 
@@ -118,10 +119,6 @@ Kirigami.Page {
                             return Text.AlignHCenter;
                     }
                 }
-            }
-            background: Rectangle {
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                color: Kirigami.Theme.backgroundColor
             }
         }
 
