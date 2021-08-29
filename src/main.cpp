@@ -13,6 +13,7 @@
 #include <AkonadiCore/AgentFilterProxyModel>
 #include "multidayincidencemodel.h"
 #include "incidenceoccurrencemodel.h"
+#include "monthviewmodel.h"
 #include "calendarmanager.h"
 #include "agentconfiguration.h"
 #include "incidencewrapper.h"
@@ -65,6 +66,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MultiDayIncidenceModel>("org.kde.kalendar", 1, 0, "MultiDayIncidenceModel");
     qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
     qmlRegisterType<TodoSortFilterProxyModel>("org.kde.kalendar", 1, 0, "TodoSortFilterProxyModel");
+    qmlRegisterType<MonthViewModel>("org.kde.kalendar", 1, 0, "MonthViewModel");
 
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
     qRegisterMetaType<QAction*>();

@@ -77,6 +77,12 @@ function previousWeek(date) {
     return d
 }
 
+function addMonthsToDate(date, months) {
+    const d = date
+    d.setMonth(date.getMonth() + months);
+    return d
+}
+
 function nextMonth(date) {
     let d = date
     //FIXME, if you add a month to the 31.3 you will end up on the 5.1 because April has only 30 days. Wtf javascript

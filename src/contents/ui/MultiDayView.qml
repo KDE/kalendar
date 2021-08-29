@@ -43,10 +43,29 @@ Item {
     property int numberOfRows: (daysToShow / daysPerRow)
     property var dayHeight: (height - dayLabels.height) / numberOfRows
 
+    required property bool loadModel
+
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows : numberOfLinesShown * Kirigami.Units.gridUnit) + dayLabels.height
     height: implicitHeight
+
+    Loader {
+        id: modelLoader
+        active: root.loadModel
+        asynchronous: true
+        sourceComponent: Kalendar.MultiDayIncidenceModel {
+            periodLength: 7
+            model: Kalendar.IncidenceOccurrenceModel {
+                id: occurrenceModel
+                objectName: "incidenceOccurrenceModel"
+                start: root.startDate
+                length: root.daysToShow
+                filter: root.filter ? root.filter : {}
+                calendar: Kalendar.CalendarManager.calendar
+            }
+        }
+    }
 
     Column {
         spacing: 0
@@ -64,19 +83,9 @@ Item {
             anchors.right: parent.right
         }
 
-        //Weeks
         Repeater {
-            model: Kalendar.MultiDayIncidenceModel {
-                periodLength: 7
-                model: Kalendar.IncidenceOccurrenceModel {
-                    id: occurrenceModel
-                    objectName: "incidenceOccurrenceModel"
-                    start: root.startDate
-                    length: root.daysToShow
-                    filter: root.filter ? root.filter : {}
-                    calendar: Kalendar.CalendarManager.calendar
-                }
-            }
+            model: root.numberOfRows
+
             //One row => one week
             Item {
                 width: parent.width
@@ -89,7 +98,7 @@ Item {
                     Loader {
                         id: weekHeader
                         sourceComponent: root.weekHeaderDelegate
-                        property date startDate: periodStartDate
+                        property date startDate: DateUtils.addDaysToDate(root.startDate, index * 7)
                         Layout.preferredWidth: weekHeaderWidth
                         Layout.fillHeight: true
                         visible: Kalendar.Config.showWeekNumbers
@@ -98,7 +107,7 @@ Item {
                         id: dayDelegate
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        property date startDate: periodStartDate
+                        property date startDate: DateUtils.addDaysToDate(root.startDate, index * 7)
 
                         //Grid
                         Row {
@@ -129,7 +138,7 @@ Item {
 
                                         DayMouseArea {
                                             anchors.fill: parent
-                                            addDate: DateUtils.addDaysToDate(periodStartDate, modelData)
+                                            addDate: DateUtils.addDaysToDate(dayDelegate.startDate, modelData)
                                             onAddNewIncidence: addIncidence(type, addDate)
                                         }
                                     }
@@ -162,6 +171,37 @@ Item {
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    Column {
+        spacing: 0
+        anchors {
+            fill: parent
+            topMargin: dayLabels.height
+            leftMargin: weekHeaderWidth
+        }
+
+        //Weeks
+        Repeater {
+            model: modelLoader.item
+            //One row => one week
+            Item {
+                width: parent.width
+                height: root.dayHeight
+                clip: true
+                RowLayout {
+                    width: parent.width
+                    height: parent.height
+                    spacing: 0
+                    Item {
+                        id: dayDelegate
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        property date startDate: periodStartDate
 
                         QQC2.ScrollView {
                             anchors {

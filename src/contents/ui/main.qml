@@ -305,11 +305,8 @@ Kirigami.ApplicationWindow {
         MonthView {
             id: monthView
 
-            // Make sure we get day from correct date, that is in the month we want
-            title: DateUtils.addDaysToDate(startDate, 7).toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
+            title: firstDayOfMonth.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
             currentDate: root.currentDate
-            startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(new Date(root.year, root.month)))
-            month: root.month
             openOccurrence: root.openOccurrence
 
             onAddIncidence: root.setUpAdd(type, addDate)
@@ -319,8 +316,10 @@ Kirigami.ApplicationWindow {
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
 
-            onMonthChanged: root.month = month
-            onYearChanged: root.year = year
+            onMonthChanged: if(month !== currentDate.getMonth()) root.month = month
+            onYearChanged: if(year !== currentDate.getFullYear()) root.year = year
+
+            Component.onCompleted: setToDate(new Date(root.year, root.month))
 
             actions.contextualActions: addAction
         }

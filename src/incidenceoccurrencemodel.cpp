@@ -97,7 +97,7 @@ void IncidenceOccurrenceModel::refreshView()
     if (!mRefreshTimer.isActive()) {
         // Instant update, but then only refresh every 50ms max.
         updateFromSource();
-        mRefreshTimer.start(50);
+        mRefreshTimer.start(300);
     }
 }
 
