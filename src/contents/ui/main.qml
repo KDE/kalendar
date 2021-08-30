@@ -97,7 +97,21 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    title: i18n("Calendar")
+    title: {
+        switch (pageStack.currentItem.objectName) {
+            case "monthView":
+                return i18n("Month View");
+                break;
+            case "scheduleView":
+                return i18n("Schedule View");
+                break;
+            case "todoView":
+                return i18n("Todo View");
+                break;
+            default:
+                return i18n("Calendar");
+        }
+    }
 
     pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
 
@@ -304,6 +318,7 @@ Kirigami.ApplicationWindow {
 
         MonthView {
             id: monthView
+            objectName: "monthView"
 
             title: firstDayOfMonth.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
             currentDate: root.currentDate
@@ -330,6 +345,7 @@ Kirigami.ApplicationWindow {
 
         ScheduleView {
             id: scheduleView
+            objectName: "scheduleView"
 
             title: startDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
             selectedDate: root.currentDate.getMonth() === root.month ? root.currentDate : new Date(root.year, root.month)
@@ -355,6 +371,7 @@ Kirigami.ApplicationWindow {
 
         TodoPage {
             id: todoPage
+            objectName: "todoView"
 
             onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
             onViewTodo: root.setUpView(todoData, collectionData)
