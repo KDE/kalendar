@@ -61,7 +61,6 @@ Kirigami.OverlayDrawer {
                 Kirigami.Heading {
                     Layout.fillWidth: true
                     text: i18n("Kalendar")
-                    type: Kirigami.Heading.Type.Primary
                 }
 
                 Kirigami.ActionToolBar {
@@ -170,24 +169,12 @@ Kirigami.OverlayDrawer {
             }
         }
 
-        Kirigami.Heading {
-            Layout.fillWidth: true
-            topPadding: Kirigami.Units.largeSpacing * 2
-            bottomPadding: Kirigami.Units.largeSpacing
-            leftPadding: Kirigami.Units.largeSpacing
-            text: i18n("Calendars")
-            level: 6
-            type: Kirigami.Heading.Type.Primary
-            opacity: 0.7
-        }
-
         QQC2.ScrollView {
             id: calendarView
             implicitWidth: Kirigami.Units.gridUnit * 16
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.topMargin: -Kirigami.Units.smallSpacing - 1
-            Layout.bottomMargin: -Kirigami.Units.smallSpacing
+            Layout.topMargin: Kirigami.Units.largeSpacing * 2
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
             contentWidth: availableWidth
 
@@ -199,6 +186,19 @@ Kirigami.OverlayDrawer {
                 Layout.fillWidth: true
                 Layout.topMargin: Kirigami.Units.largeSpacing
 
+                header: Kirigami.Heading {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    leftPadding: Kirigami.Units.largeSpacing
+                    text: i18n("Calendars")
+                    color: Kirigami.Theme.disabledTextColor
+                    font.weight: Font.Bold
+                    level: 5
+                    z: 10
+                    background: Rectangle {color: Kirigami.Theme.backgroundColor}
+                }
+                headerPositioning: ListView.OverlayHeader
+
                 currentIndex: -1
 
                 model: sidebar.todoMode ? CalendarManager.todoCollections : CalendarManager.viewCollections
@@ -208,30 +208,20 @@ Kirigami.OverlayDrawer {
                     enabled: model.checkState != null
                     label: display
                     labelItem.color: Kirigami.Theme.textColor
+                    labelItem.font.weight: model.checkState != null ? Font.Normal : Font.Medium
+
+                    topPadding: if(model.checkState == null) Kirigami.Units.largeSpacing
+                    leftPadding: model.checkState != null && kDescendantLevel > 1 ?
+                        (Kirigami.Units.largeSpacing * 2) * kDescendantLevel : Kirigami.Units.largeSpacing
 
                     hoverEnabled: sidebar.todoMode
 
                     separatorVisible: false
-                    trailing: QQC2.CheckBox {
+                    trailing: ColoredCheckbox {
                         id: calendarCheckbox
 
-                        indicator: Rectangle {
-                            height: parent.height * 0.8
-                            width: height
-                            x: calendarCheckbox.leftPadding
-                            y: parent.height / 2 - height / 2
-                            radius: 3
-                            border.color: model.collectionColor
-                            color: Qt.rgba(0,0,0,0)
-
-                            Rectangle {
-                                anchors.margins: parent.height * 0.2
-                                anchors.fill: parent
-                                radius: 1
-                                color: model.collectionColor
-                                visible: model.checkState === 2
-                            }
-                        }
+                        visible: model.checkState != null
+                        color: model.collectionColor
                         checked: model.checkState === 2
                         onClicked: model.checkState = model.checkState === 0 ? 2 : 0
                     }

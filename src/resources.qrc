@@ -32,5 +32,6 @@
     <file alias="EditMenu.qml">contents/ui/EditMenu.qml</file>
     <file alias="TextContextMenu.qml">contents/ui/TextContextMenu.qml</file>
     <file alias="NativeMenuItemFromAction.qml">contents/ui/NativeMenuItemFromAction.qml</file>
+    <file alias="ColoredCheckbox.qml">contents/ui/ColoredCheckbox.qml</file>
   </qresource>
 </RCC>

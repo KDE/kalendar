@@ -74,31 +74,16 @@ KirigamiAddonsTreeView.TreeListView {
 
                 columns: 3
                 rows: 2
-                columnSpacing: Kirigami.Units.largeSpacing
+                columnSpacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
-                QQC2.CheckBox {
+                ColoredCheckbox {
                     id: todoCheckbox
 
                     Layout.row: 0
                     Layout.column: 0
 
-                    indicator: Rectangle {
-                        implicitWidth: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 0.75
-                        implicitHeight: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 0.75
-                        x: todoCheckbox.leftPadding
-                        y: parent.height / 2 - height / 2
-                        radius: 100
-                        border.color: model.color
-                        color: Qt.rgba(0,0,0,0)
-
-                        Rectangle {
-                            anchors.margins: parent.height * 0.2
-                            anchors.fill: parent
-                            radius: 100
-                            color: model.color
-                            visible: todoCheckbox.checked
-                        }
-                    }
+                    color: model.color
+                    radius: 100
                     checked: model.todoCompleted
                     onClicked: completeTodo(model.incidencePtr)
                 }
