@@ -329,18 +329,6 @@ CalendarManager::CalendarManager(QObject *parent)
     auto collectionFilter = new CollectionFilter(this);
     collectionFilter->setSourceModel(colorProxy);
 
-    m_flatCollectionTreeModel = new KDescendantsProxyModel(this);
-    m_flatCollectionTreeModel->setSourceModel(collectionFilter);
-    m_flatCollectionTreeModel->setExpandsByDefault(true);
-
-    auto refreshColors = [=] () {
-        for(auto i = 0; i < m_flatCollectionTreeModel->rowCount(); i++) {
-            auto idx = m_flatCollectionTreeModel->index(i, 0, {});
-            colorProxy->getCollectionColor(CalendarSupport::collectionFromIndex(idx));
-        }
-    };
-    connect(m_flatCollectionTreeModel, &QSortFilterProxyModel::rowsInserted, this, refreshColors);
-
     m_calendar = QSharedPointer<Akonadi::ETMCalendar>::create(); // QSharedPointer
     setCollectionSelectionProxyModel(m_calendar->checkableProxyModel());
 
@@ -387,27 +375,33 @@ CalendarManager::CalendarManager(QObject *parent)
     m_todoRightsFilterModel->sort(0);
 
     // Model for todo vie collection picker
-    auto todoCollectionModel = new Akonadi::CollectionFilterProxyModel(this);
-    todoCollectionModel->setSourceModel(collectionFilter);
-    todoCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
-    todoCollectionModel->setExcludeVirtualCollections(true);
-    todoCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-    todoCollectionModel->sort(0, Qt::AscendingOrder);
-
-    m_todoViewCollectionModel = new KDescendantsProxyModel(this);
-    m_todoViewCollectionModel->setSourceModel(todoCollectionModel);
+    m_todoViewCollectionModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_todoViewCollectionModel->setSourceModel(collectionFilter);
+    m_todoViewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
+    m_todoViewCollectionModel->setExcludeVirtualCollections(true);
+    m_todoViewCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    m_todoViewCollectionModel->sort(0, Qt::AscendingOrder);
 
     // Model for the sidebar
-    auto viewCollectionModel = new Akonadi::CollectionFilterProxyModel(this);
-    viewCollectionModel->setSourceModel(collectionFilter);
-    viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
-    viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
-    viewCollectionModel->setExcludeVirtualCollections(true);
-    viewCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-    viewCollectionModel->sort(0, Qt::AscendingOrder);
+    m_viewCollectionModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_viewCollectionModel->setSourceModel(collectionFilter);
+    m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
+    m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
+    m_viewCollectionModel->setExcludeVirtualCollections(true);
+    m_viewCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    m_viewCollectionModel->sort(0, Qt::AscendingOrder);
 
-    m_viewCollectionModel = new KDescendantsProxyModel(this);
-    m_viewCollectionModel->setSourceModel(viewCollectionModel);
+    m_flatCollectionTreeModel = new KDescendantsProxyModel(this);
+    m_flatCollectionTreeModel->setSourceModel(m_viewCollectionModel);
+    m_flatCollectionTreeModel->setExpandsByDefault(true);
+
+    auto refreshColors = [=] () {
+        for(auto i = 0; i < m_flatCollectionTreeModel->rowCount(); i++) {
+            auto idx = m_flatCollectionTreeModel->index(i, 0, {});
+            colorProxy->getCollectionColor(CalendarSupport::collectionFromIndex(idx));
+        }
+    };
+    connect(m_flatCollectionTreeModel, &QSortFilterProxyModel::rowsInserted, this, refreshColors);
 
     Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
@@ -440,15 +434,15 @@ void CalendarManager::delayedInit()
 
 QAbstractProxyModel *CalendarManager::collections()
 {
-    return m_flatCollectionTreeModel;
+    return static_cast<QAbstractProxyModel *>(m_flatCollectionTreeModel->sourceModel());
 }
 
-KDescendantsProxyModel * CalendarManager::todoCollections()
+QAbstractItemModel * CalendarManager::todoCollections()
 {
     return m_todoViewCollectionModel;
 }
 
-KDescendantsProxyModel * CalendarManager::viewCollections()
+QAbstractItemModel * CalendarManager::viewCollections()
 {
     return m_viewCollectionModel;
 }

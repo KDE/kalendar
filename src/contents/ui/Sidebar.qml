@@ -6,6 +6,8 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
+import Qt.labs.qmlmodels 1.0
+import org.kde.kitemmodels 1.0
 
 Kirigami.OverlayDrawer {
     id: sidebar
@@ -203,33 +205,61 @@ Kirigami.OverlayDrawer {
 
                 currentIndex: -1
 
-                model: sidebar.todoMode ? CalendarManager.todoCollections : CalendarManager.viewCollections
+                model: KDescendantsProxyModel {
+                    model: sidebar.todoMode ? CalendarManager.todoCollections : CalendarManager.viewCollections
+                }
+
                 onModelChanged: currentIndex = -1
 
-                delegate: Kirigami.BasicListItem {
-                    enabled: model.checkState != null
-                    label: display
-                    labelItem.color: Kirigami.Theme.textColor
-                    labelItem.font.weight: model.checkState != null ? Font.Normal : Font.Medium
+                delegate: DelegateChooser {
+                    role: 'kDescendantExpandable'
+                    DelegateChoice {
+                        roleValue: true
 
-                    topPadding: if(model.checkState == null) Kirigami.Units.largeSpacing
-                    leftPadding: model.checkState != null && kDescendantLevel > 1 ?
-                        (Kirigami.Units.largeSpacing * 2) * kDescendantLevel : Kirigami.Units.largeSpacing
+                        Kirigami.BasicListItem {
+                            label: display
+                            labelItem.color: Kirigami.Theme.disabledTextColor
+                            labelItem.font.weight: Font.DemiBold
+                            topPadding: 2 * Kirigami.Units.largeSpacing
+                            hoverEnabled: false
+                            background: Item {}
 
-                    hoverEnabled: sidebar.todoMode
+                            separatorVisible: false
 
-                    separatorVisible: false
-                    trailing: ColoredCheckbox {
-                        id: calendarCheckbox
+                            trailing: Kirigami.Icon {
+                                width: Kirigami.Units.iconSizes.small
+                                height: Kirigami.Units.iconSizes.small
+                                source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                            }
 
-                        visible: model.checkState != null
-                        color: model.collectionColor
-                        checked: model.checkState === 2
-                        onClicked: model.checkState = model.checkState === 0 ? 2 : 0
+                            onClicked: calendarList.model.toggleChildren(index)
+                        }
                     }
-                    onClicked: {
-                        calendarClicked(collectionId)
-                        if(sidebar.modal && sidebar.todoMode) sidebar.close()
+
+                    DelegateChoice {
+                        roleValue: false
+                        Kirigami.BasicListItem {
+                            label: display
+                            labelItem.color: Kirigami.Theme.textColor
+
+                            hoverEnabled: sidebar.todoMode
+
+                            separatorVisible: false
+
+                            trailing: ColoredCheckbox {
+                                id: calendarCheckbox
+
+                                visible: model.checkState != null
+                                color: model.collectionColor
+                                checked: model.checkState === 2
+                                onClicked: model.checkState = model.checkState === 0 ? 2 : 0
+                            }
+
+                            onClicked: {
+                                calendarClicked(collectionId)
+                                if(sidebar.modal && sidebar.todoMode) sidebar.close()
+                            }
+                        }
                     }
                 }
             }

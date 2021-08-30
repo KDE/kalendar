@@ -7,6 +7,9 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs 1.0
 import org.kde.kalendar 1.0
+import Qt.labs.qmlmodels 1.0
+import org.kde.kitemmodels 1.0
+import org.kde.kirigamiaddons.treeview 1.0 as TreeView
 
 Kirigami.Page {
     title: i18n("Calendars")
@@ -16,27 +19,56 @@ Kirigami.Page {
             Component.onCompleted: background.visible = true
             Layout.fillWidth: true
             Layout.fillHeight: true
+
             ListView {
                 id: collectionsList
 
-                model: CalendarManager.collections
-                delegate: Kirigami.BasicListItem {
-                    property int itemCollectionId: collectionId
-                    leftPadding: ((Kirigami.Units.gridUnit * 2) * (kDescendantLevel - 1)) + Kirigami.Units.largeSpacing
-                    leading: Controls.CheckBox {
-                        visible: model.checkState != null
-                        checked: model.checkState == 2
-                        onClicked: model.checkState = (checked ? 2 : 0)
+                model: KDescendantsProxyModel {
+                    model: CalendarManager.collections
+                }
+                delegate: DelegateChooser {
+                    role: 'kDescendantExpandable'
+                    DelegateChoice {
+                        roleValue: true
+
+                        Kirigami.BasicListItem {
+                            label: display
+                            labelItem.color: Kirigami.Theme.disabledTextColor
+                            labelItem.font.weight: Font.DemiBold
+                            topPadding: 2 * Kirigami.Units.largeSpacing
+                            hoverEnabled: false
+                            background: Item {}
+
+                            separatorVisible: false
+
+                            trailing: Kirigami.Icon {
+                                width: Kirigami.Units.iconSizes.small
+                                height: Kirigami.Units.iconSizes.small
+                                source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                                x: -4
+                            }
+
+                            onClicked: collectionsList.model.toggleChildren(index)
+                        }
                     }
-                    trailing: Rectangle {
-                        Layout.fillHeight: true
-                        width: height
-                        radius: 5
-                        color: collectionColor
-                        visible: collectionColor !== undefined
+
+                    DelegateChoice {
+                        roleValue: false
+                        Kirigami.BasicListItem {
+                            label: display
+                            labelItem.color: Kirigami.Theme.textColor
+
+                            hoverEnabled: false
+
+                            separatorVisible: false
+
+                            trailing: ColoredCheckbox {
+                                color: model.collectionColor
+                                checked: model.checkState === 2
+                                onClicked: model.checkState = model.checkState === 0 ? 2 : 0
+                            }
+                        }
                     }
-                    label: display
-                    icon: decoration
                 }
             }
         }
