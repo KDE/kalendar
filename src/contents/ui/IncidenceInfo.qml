@@ -29,13 +29,17 @@ Kirigami.OverlayDrawer {
 
     onIncidenceDataChanged: {
         incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-            incidenceInfo, "incidence");
+                                              incidenceInfo, "incidence");
         incidenceWrapper.incidencePtr = incidenceData.incidencePtr;
     }
 
     enabled: true
     interactive: enabled
-    edge: Qt.application.layoutDirection == Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
+    edge: Kirigami.Settings.isMobile ? Qt.BottomEdge :
+        Qt.application.layoutDirection == Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
+
+    Layout.bottomMargin: Kirigami.Units.largeSpacing
+    height: applicationWindow().height * 0.6
 
     topPadding: 0
     leftPadding: 0
@@ -48,95 +52,90 @@ Kirigami.OverlayDrawer {
         Layout.fillHeight: true
 
         active: incidenceInfo.drawerOpen
-        sourceComponent: QQC2.ScrollView {
-            id: contentsView
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.rightMargin: Kirigami.Units.largeSpacing *5
-            contentWidth: this.availableWidth
-
-            ColumnLayout {
-                id: detailsColumn
+        sourceComponent: ColumnLayout {
+            Kirigami.AbstractApplicationHeader {
                 Layout.fillWidth: true
-                Layout.maximumWidth: contentsView.availableWidth
-                Layout.minimumWidth: contentsView.availableWidth
+                topPadding: Kirigami.Units.smallSpacing / 2;
+                bottomPadding: Kirigami.Units.smallSpacing / 2;
+                rightPadding: Kirigami.Units.smallSpacing
+                leftPadding: Kirigami.Units.smallSpacing
 
-                Kirigami.AbstractApplicationHeader {
-                    Layout.fillWidth: true
-                    topPadding: Kirigami.Units.smallSpacing / 2;
-                    bottomPadding: Kirigami.Units.smallSpacing / 2;
-                    rightPadding: Kirigami.Units.smallSpacing
-                    leftPadding: Kirigami.Units.smallSpacing
-
-                    RowLayout {
-                        anchors.fill: parent
-                        Kirigami.Heading {
-                            id: infoHeader
-                            Layout.fillHeight: true
-                            text: i18n(incidenceInfo.incidenceWrapper.incidenceTypeStr)
-                        }
-
-                        Kirigami.ActionToolBar {
-                            id: actionToolbar
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            alignment: Qt.AlignRight
-
-                            // If accessing directly, updated incidenceWrapper data not grabbed (???)
-                            property string incidenceType: incidenceInfo.incidenceWrapper.incidenceTypeStr
-
-                            actions: [
-                                Kirigami.Action {
-                                    icon.name: "list-add"
-                                    text: i18n("Add sub-todo")
-                                    visible: actionToolbar.incidenceType === "Todo"
-                                    onTriggered: {
-                                        incidenceInfo.incidenceWrapper.collectionId = collectionData.id;
-                                        addSubTodo(incidenceInfo.incidenceWrapper);
-                                    }
-                                },
-                                Kirigami.Action {
-                                    property bool todoCompleted: incidenceInfo.incidenceWrapper.todoCompleted
-                                    icon.name: todoCompleted ? "edit-undo" : "checkmark"
-                                    text: todoCompleted ? i18n("Mark incomplete") : i18n("Mark complete")
-                                    visible: actionToolbar.incidenceType === "Todo"
-                                    onTriggered: {
-                                        incidenceInfo.incidenceWrapper.todoCompleted = !incidenceInfo.incidenceWrapper.todoCompleted;
-                                        CalendarManager.editIncidence(incidenceInfo.incidenceWrapper);
-                                    }
-                                },
-                                Kirigami.Action {
-                                    icon.name: "edit-entry"
-                                    text: i18n("Edit")
-                                    enabled: !incidenceInfo.collectionData.readOnly
-                                    onTriggered: editIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.collectionId)
-                                },
-                                Kirigami.Action {
-                                    icon.name: "edit-delete"
-                                    text: i18n("Delete")
-                                    enabled: !incidenceInfo.collectionData.readOnly
-                                    onTriggered: deleteIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime)
-                                }
-                            ]
-                        }
+                RowLayout {
+                    anchors.fill: parent
+                    Kirigami.Heading {
+                        id: infoHeader
+                        Layout.fillHeight: true
+                        text: i18n(incidenceInfo.incidenceWrapper.incidenceTypeStr)
                     }
+
+                    Kirigami.ActionToolBar {
+                        id: actionToolbar
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        alignment: Qt.AlignRight
+
+                        // If accessing directly, updated incidenceWrapper data not grabbed (???)
+                        property string incidenceType: incidenceInfo.incidenceWrapper.incidenceTypeStr
+
+                        actions: [
+                            Kirigami.Action {
+                                icon.name: "list-add"
+                                text: i18n("Add sub-todo")
+                                visible: actionToolbar.incidenceType === "Todo"
+                                onTriggered: {
+                                    incidenceInfo.incidenceWrapper.collectionId = collectionData.id;
+                                    addSubTodo(incidenceInfo.incidenceWrapper);
+                                }
+                            },
+                            Kirigami.Action {
+                                property bool todoCompleted: incidenceInfo.incidenceWrapper.todoCompleted
+                                icon.name: todoCompleted ? "edit-undo" : "checkmark"
+                                text: todoCompleted ? i18n("Mark incomplete") : i18n("Mark complete")
+                                visible: actionToolbar.incidenceType === "Todo"
+                                onTriggered: {
+                                    incidenceInfo.incidenceWrapper.todoCompleted = !incidenceInfo.incidenceWrapper.todoCompleted;
+                                    CalendarManager.editIncidence(incidenceInfo.incidenceWrapper);
+                                }
+                            },
+                            Kirigami.Action {
+                                icon.name: "edit-entry"
+                                text: i18n("Edit")
+                                enabled: !incidenceInfo.collectionData.readOnly
+                                onTriggered: editIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.collectionId)
+                            },
+                            Kirigami.Action {
+                                icon.name: "edit-delete"
+                                text: i18n("Delete")
+                                enabled: !incidenceInfo.collectionData.readOnly
+                                onTriggered: deleteIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime)
+                            }
+                        ]
+                    }
+                }
+            }
+            QQC2.ScrollView {
+                id: contentsView
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                contentWidth: this.availableWidth
+                clip: true
+
+                property real yScrollPos: QQC2.ScrollBar.vertical.position
+                onYScrollPosChanged: {
+                    console.log(yScrollPos, incidenceInfo.enabled && yScrollPos <= 0)
+                    if(Kirigami.Settings.isMobile) incidenceInfo.interactive = incidenceInfo.enabled && yScrollPos <= 0
                 }
 
                 GridLayout {
                     id: infoBody
 
-                    Layout.margins: Kirigami.Units.largeSpacing
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: contentsView.availableWidth - (Kirigami.Units.largeSpacing * 2)
-                    Layout.minimumWidth: contentsView.availableWidth - (Kirigami.Units.largeSpacing * 2)
-
-                    columns:2
+                    anchors.fill: parent
+                    anchors.margins: Kirigami.Units.largeSpacing
+                    columns: 2
 
                     RowLayout {
                         Layout.columnSpan: 2
                         Layout.fillWidth: true
-                        Layout.maximumWidth: contentsView.availableWidth - (Kirigami.Units.largeSpacing * 2)
-                        Layout.minimumWidth: contentsView.availableWidth - (Kirigami.Units.largeSpacing * 2)
 
                         Kirigami.Heading {
                             Layout.fillWidth: true
@@ -387,8 +386,8 @@ Kirigami.OverlayDrawer {
                             id: mapLoadingIndicator
                             Layout.fillWidth: true
 
-                            property bool showCondition: mapLoader.status === Loader.Loading ||
-                                mapLoader.item.queryStatus === GeocodeModel.Loading
+                            property bool showCondition: !locationLabel.isLink &&
+                                (mapLoader.status === Loader.Loading || mapLoader.item.queryStatus === GeocodeModel.Loading)
 
                             running: showCondition
                             visible: showCondition
@@ -411,7 +410,7 @@ Kirigami.OverlayDrawer {
                             id: mapLoader
 
                             Layout.fillWidth: true
-                            height: Kirigami.Units.gridUnit * 16
+                            height: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 12 : Kirigami.Units.gridUnit * 16
                             asynchronous: true
                             active: Config.enableMaps &&
                                 incidenceInfo.visible &&
@@ -521,8 +520,8 @@ Kirigami.OverlayDrawer {
 
                         textFormat: Text.MarkdownText
                         text: organizer.name ?
-                              `[${organizer.name}](mailto:${organizer.email})` :
-                              `[${organizer.email}](mailto:${organizer.email})`
+                            `[${organizer.name}](mailto:${organizer.email})` :
+                            `[${organizer.email}](mailto:${organizer.email})`
                         onLinkActivated: Qt.openUrlExternally(link)
                         wrapMode: Text.Wrap
                         visible: incidenceInfo.incidenceWrapper.organizer.fullName

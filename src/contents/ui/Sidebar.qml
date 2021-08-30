@@ -127,24 +127,36 @@ Kirigami.OverlayDrawer {
                         icon.name: KalendarApplication.iconName(monthViewAction.icon)
                         text: monthViewAction.text
                         shortcut: monthViewAction.shortcut
-                        onTriggered: monthViewAction.trigger()
+                        onTriggered: {
+                            monthViewAction.trigger()
+                            if(sidebar.modal) sidebar.close()
+                        }
                     },
                     Kirigami.Action {
                         icon.name: KalendarApplication.iconName(scheduleViewAction.icon)
                         text: scheduleViewAction.text
                         shortcut: scheduleViewAction.shortcut
-                        onTriggered: scheduleViewAction.trigger()
+                        onTriggered: {
+                            scheduleViewAction.trigger()
+                            if(sidebar.modal) sidebar.close()
+                        }
                     },
                     Kirigami.Action {
                         icon.name: KalendarApplication.iconName(todoViewAction.icon)
                         text: todoViewAction.text
                         shortcut: todoViewAction.shortcut
-                        onTriggered: todoViewAction.trigger()
+                        onTriggered: {
+                            todoViewAction.trigger()
+                            if(sidebar.modal) sidebar.close()
+                        }
                     },
                     Kirigami.Action {
                         text: i18n("Settings")
                         icon.name: KalendarApplication.iconName(configureAction.icon)
-                        onTriggered: configureAction.trigger()
+                        onTriggered: {
+                            configureAction.trigger()
+                            if(sidebar.modal) sidebar.close()
+                        }
                         shortcut: configureAction.shortcut
                     }
                 ]
@@ -223,7 +235,10 @@ Kirigami.OverlayDrawer {
                         checked: model.checkState === 2
                         onClicked: model.checkState = model.checkState === 0 ? 2 : 0
                     }
-                    onClicked: calendarClicked(collectionId)
+                    onClicked: {
+                        calendarClicked(collectionId)
+                        if(sidebar.modal && sidebar.todoMode) sidebar.close()
+                    }
                 }
             }
         }
@@ -241,6 +256,7 @@ Kirigami.OverlayDrawer {
             onClicked: {
                 viewAllTodosClicked();
                 calendarList.currentIndex = -1;
+                if(sidebar.modal && sidebar.todoMode) sidebar.close()
             }
         }
     }

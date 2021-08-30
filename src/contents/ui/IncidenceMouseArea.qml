@@ -45,6 +45,7 @@ MouseArea {
             id: actionsPopup
             y: mouseArea.clickY
             x: mouseArea.clickX
+            z: 1000
 
             QQC2.MenuItem {
                 icon.name: "dialog-icon-preview"

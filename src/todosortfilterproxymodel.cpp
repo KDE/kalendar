@@ -312,9 +312,11 @@ qint64 TodoSortFilterProxyModel::filterCollectionId()
 
 void TodoSortFilterProxyModel::setFilterCollectionId(qint64 filterCollectionId)
 {
+    Q_EMIT layoutAboutToBeChanged();
     m_filterCollectionId = filterCollectionId;
     invalidateFilter();
     Q_EMIT filterCollectionIdChanged();
+    Q_EMIT layoutChanged();
 }
 
 int TodoSortFilterProxyModel::showCompleted()

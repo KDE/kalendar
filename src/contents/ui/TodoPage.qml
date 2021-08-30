@@ -67,38 +67,31 @@ Kirigami.Page {
         right: Kirigami.Action {
             text: i18n("Show completed")
             icon.name: "task-complete"
-            onTriggered: completedDrawer.open()
+            onTriggered: completedSheet.open()
         }
 
     }
 
-    Kirigami.OverlayDrawer {
-        id: completedDrawer
-        edge: Qt.BottomEdge
+    Kirigami.OverlaySheet {
+        id: completedSheet
 
-        height: applicationWindow().height * 0.75
+        title: root.filterCollectionDetails && root.filterCollectionId > -1 ?
+            i18n("Completed todos in %1", root.filterCollectionDetails.displayName) : i18n("Completed todos")
+        showCloseButton: true
 
-        ColumnLayout {
-            anchors.fill: parent
-            RowLayout {
-                Kirigami.Heading {
-                    Layout.fillWidth: true
-                    text: root.filterCollectionDetails ?
-                        i18n("Completed todos in %1", root.filterCollectionDetails.displayName) : i18n("Completed todos")
-                    color: root.filterCollectionDetails ?
-                        LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
-                }
-                QQC2.ToolButton {
-                    icon.name: "dialog-close"
-                    onClicked: completedDrawer.close()
-                }
-            }
-            Loader {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                active: completedDrawer.visible
-                asynchronous: true
-                sourceComponent: TodoTreeView {
+        property var retainedTodoData
+        property var retainedCollectionData
+
+        contentItem: Loader {
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
+            height: applicationWindow().height * 0.8
+            active: completedSheet.sheetOpen
+            sourceComponent: QQC2.ScrollView {
+                anchors.fill: parent
+                contentWidth: availableWidth
+                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
+                TodoTreeView {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
@@ -107,21 +100,31 @@ Kirigami.Page {
                     sortBy: root.sortBy
                     ascendingOrder: root.ascendingOrder
                     onViewTodo: {
-                        root.viewTodo(todoData, collectionData);
-                        completedDrawer.close();
+                        completedSheet.retainedTodoData = {
+                            incidencePtr: todoData.incidencePtr,
+                            text: todoData.text,
+                            color: todoData.color,
+                            startTime: todoData.startTime,
+                            endTime: todoData.endTime,
+                            durationString: todoData.durationString
+                        };
+                        completedSheet.retainedCollectionData = Kalendar.CalendarManager.getCollectionDetails(collectionData.id);
+                        root.viewTodo(completedSheet.retainedTodoData, completedSheet.retainedCollectionData);
+                        completedSheet.close();
                     }
                     onEditTodo: {
                         root.editTodo(todoPtr, collectionId);
-                        completedDrawer.close();
+                        completedSheet.close();
                     }
                     onDeleteTodo: {
                         root.deleteTodo(todoPtr, deleteDate);
-                        completedDrawer.close();
+                        completedSheet.close();
                     }
                     onCompleteTodo: root.completeTodo(todoPtr);
                     onAddSubTodo: root.addSubTodo(parentWrapper)
                 }
             }
+
         }
     }
 
