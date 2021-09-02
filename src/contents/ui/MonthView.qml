@@ -28,6 +28,7 @@ Kirigami.Page {
     property var calendarFilter
     property int month
     property int year
+    property bool initialMonth: true
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
     readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
 
@@ -43,11 +44,17 @@ Kirigami.Page {
             firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.MonthViewModel.FirstDayOfMonthRole);
             newIndex = 0;
         }
+        if(firstItemDate < date && newIndex === 0) {
+            newIndex = date.getMonth() - firstItemDate.getMonth() + (12 * (date.getFullYear() - firstItemDate.getFullYear())) + 1;
+        }
+
         while(lastItemDate <= date) {
             pathView.model.addDates(true)
             lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.MonthViewModel.FirstDayOfMonthRole);
         }
         pathView.currentIndex = newIndex;
+        date.getDate() === new Date().getDate() && date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear() ?
+            initialMonth = true : initialMonth = false;
     }
 
     padding: 0
@@ -62,19 +69,25 @@ Kirigami.Page {
         left: Kirigami.Action {
             icon.name: "go-previous"
             text: i18n("Previous month")
-            onTriggered: pathView.decrementCurrentIndex()
+            onTriggered: {
+                pathView.decrementCurrentIndex();
+                monthPage.initialMonth = false;
+            }
             displayHint: Kirigami.DisplayHint.IconOnly
         }
         right: Kirigami.Action {
             icon.name: "go-next"
             text: i18n("Next month")
-            onTriggered: pathView.incrementCurrentIndex()
+            onTriggered: {
+                pathView.incrementCurrentIndex();
+                monthPage.initialMonth = false;
+            }
             displayHint: Kirigami.DisplayHint.IconOnly
         }
         main: Kirigami.Action {
             icon.name: "go-jump-today"
             text: i18n("Today")
-            onTriggered: pathView.positionViewAtIndex(pathView.startIndex, PathView.SnapPosition)
+            onTriggered: setToDate(new Date())
         }
     }
 
@@ -111,7 +124,6 @@ Kirigami.Page {
             monthPage.firstDayOfMonth = currentItem.firstDayOfMonth;
             monthPage.month = currentItem.month;
             monthPage.year = currentItem.year;
-            monthPage.calendarFilter = pathView.currentItem.item.calendarFilter
 
             if(currentIndex >= count - 2) {
                 model.addDates(true);
