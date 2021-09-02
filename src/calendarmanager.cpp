@@ -159,6 +159,29 @@ protected:
     };
 };
 
+class KalendarCollectionFilterProxyModel : public Akonadi::CollectionFilterProxyModel
+{
+public:
+    explicit KalendarCollectionFilterProxyModel(QObject *parent = nullptr)
+        : Akonadi::CollectionFilterProxyModel(parent)
+    {
+    }
+
+protected:
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override
+    {
+        const auto leftHasChildren = sourceModel()->hasChildren(source_left);
+        const auto rightHasChildren = sourceModel()->hasChildren(source_right);
+        if (leftHasChildren && !rightHasChildren) {
+            return false;
+        } else if (!leftHasChildren && rightHasChildren) {
+            return true;
+        }
+
+        return Akonadi::CollectionFilterProxyModel::lessThan(source_left, source_right);
+    }
+};
+
 /// Despite the name, this handles the presentation of collections including display text and icons, not just colors.
 class ColorProxyModel : public QSortFilterProxyModel
 {
@@ -375,7 +398,7 @@ CalendarManager::CalendarManager(QObject *parent)
     m_todoRightsFilterModel->sort(0);
 
     // Model for todo vie collection picker
-    m_todoViewCollectionModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_todoViewCollectionModel = new KalendarCollectionFilterProxyModel(this);
     m_todoViewCollectionModel->setSourceModel(collectionFilter);
     m_todoViewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
     m_todoViewCollectionModel->setExcludeVirtualCollections(true);
@@ -383,7 +406,7 @@ CalendarManager::CalendarManager(QObject *parent)
     m_todoViewCollectionModel->sort(0, Qt::AscendingOrder);
 
     // Model for the sidebar
-    m_viewCollectionModel = new Akonadi::CollectionFilterProxyModel(this);
+    m_viewCollectionModel = new KalendarCollectionFilterProxyModel(this);
     m_viewCollectionModel->setSourceModel(collectionFilter);
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
