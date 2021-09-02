@@ -101,8 +101,11 @@ Kirigami.Page {
 
         model: Kalendar.MonthViewModel {}
 
-        property int startIndex: count / 2
-        Component.onCompleted: currentIndex = startIndex
+        property int startIndex
+        Component.onCompleted: {
+            startIndex = count / 2;
+            currentIndex = startIndex;
+        }
         onCurrentIndexChanged: {
             monthPage.startDate = currentItem.startDate;
             monthPage.firstDayOfMonth = currentItem.firstDayOfMonth;
@@ -114,6 +117,7 @@ Kirigami.Page {
                 model.addDates(true);
             } else if (currentIndex <= 1) {
                 model.addDates(false);
+                startIndex += model.datesToAdd;
             }
         }
 
@@ -145,7 +149,7 @@ Kirigami.Page {
 
                 startDate: model.startDate
                 currentDate: monthPage.currentDate
-                month: DateUtils.addDaysToDate(startDate, 10).getMonth()
+                month: model.firstDay.getMonth()
 
                 dayHeaderDelegate: QQC2.Control {
                     Layout.maximumHeight: Kirigami.Units.gridUnit * 2
