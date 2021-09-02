@@ -33,6 +33,13 @@ Kirigami.ApplicationWindow {
     readonly property var undoAction: KalendarApplication.action("edit_undo")
     readonly property var redoAction: KalendarApplication.action("edit_redo")
 
+    readonly property var todoViewSortAlphabeticallyAction: KalendarApplication.action("todoview_sort_alphabetically")
+    readonly property var todoViewSortByDueDateAction: KalendarApplication.action("todoview_sort_by_due_date")
+    readonly property var todoViewSortByPriorityAction: KalendarApplication.action("todoview_sort_by_priority")
+    readonly property var todoViewOrderAscendingAction: KalendarApplication.action("todoview_order_ascending")
+    readonly property var todoViewOrderDescendingAction: KalendarApplication.action("todoview_order_descending")
+    readonly property var todoViewShowCompletedAction: KalendarApplication.action("todoview_show_completed")
+
     Component.onCompleted: if (Kirigami.Settings.isMobile) {
         scheduleViewAction.setChecked(true);
     } else {
@@ -64,6 +71,38 @@ Kirigami.ApplicationWindow {
             root.setUpAdd(IncidenceWrapper.TypeTodo);
         }
 
+        function onUndo() {
+            CalendarManager.undoAction();
+        }
+
+        function onRedo() {
+            CalendarManager.redoAction();
+        }
+
+        function onTodoViewSortAlphabetically() {
+            pageStack.currentItem.sortBy = TodoSortFilterProxyModel.SummaryColumn;
+        }
+
+        function onTodoViewSortByDueDate() {
+            pageStack.currentItem.sortBy = TodoSortFilterProxyModel.EndTimeColumn;
+        }
+
+        function onTodoViewSortByPriority() {
+            pageStack.currentItem.sortBy = TodoSortFilterProxyModel.PriorityIntColumn;
+        }
+
+        function onTodoViewOrderAscending() {
+            pageStack.currentItem.ascendingOrder = true;
+        }
+
+        function onTodoViewOrderDescending() {
+            pageStack.currentItem.ascendingOrder = false;
+        }
+
+        function onTodoViewShowCompleted() {
+            pageStack.currentItem.completedSheet.open();
+        }
+
         function onQuit() {
              Qt.quit();
         }
@@ -79,8 +118,17 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    property Kirigami.Action addAction: Kirigami.Action {
-        text: i18n("Add")
+    Connections {
+        target: CalendarManager
+
+        function onUndoRedoDataChanged() {
+            undoAction.enabled = CalendarManager.undoRedoData.undoAvailable;
+            redoAction.enabled = CalendarManager.undoRedoData.redoAvailable;
+        }
+    }
+
+    property Kirigami.Action createAction: Kirigami.Action {
+        text: i18n("Create")
         icon.name: "list-add"
 
         Kirigami.Action {
@@ -115,8 +163,22 @@ Kirigami.ApplicationWindow {
 
     pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
 
+    menuBar: Loader {
+        id: menuLoader
+        active: Kirigami.Settings.hasPlatformMenuBar != undefined ?
+                !Kirigami.Settings.hasPlatformMenuBar && !Kirigami.Settings.isMobile :
+                !Kirigami.Settings.isMobile
+
+        sourceComponent: WindowMenu {
+            parentWindow: root
+            todoMode: pageStack.currentItem.objectName == "todoView"
+            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+        }
+    }
+
     globalDrawer: Sidebar {
-        todoMode: pageStack.currentItem.filterCollectionId !== undefined
+        bottomPadding: menuLoader.active ? menuLoader.height : 0
+        todoMode: pageStack.currentItem.objectName == "todoView"
         onCalendarClicked: if(todoMode) pageStack.currentItem.filterCollectionId = collectionId
         onViewAllTodosClicked: if(todoMode) pageStack.currentItem.filterCollectionId = -1
     }
@@ -124,6 +186,7 @@ Kirigami.ApplicationWindow {
     contextDrawer: IncidenceInfo {
         id: incidenceInfo
 
+        bottomPadding: menuLoader.active ? menuLoader.height : 0
         contentItem.implicitWidth: Kirigami.Units.gridUnit * 25
         modal: !root.wideScreen || !enabled
         onEnabledChanged: drawerOpen = enabled && !modal
@@ -164,7 +227,9 @@ Kirigami.ApplicationWindow {
 
     Loader {
         active: !Kirigami.Settings.isMobile
-        source: Qt.resolvedUrl("qrc:/GlobalMenu.qml")
+        sourceComponent: GlobalMenu {
+            todoMode: pageStack.currentItem.filterCollectionId !== undefined
+        }
         onLoaded: item.parentWindow = root;
     }
 
@@ -336,7 +401,7 @@ Kirigami.ApplicationWindow {
 
             Component.onCompleted: setToDate(new Date(root.year, root.month))
 
-            actions.contextualActions: addAction
+            actions.contextualActions: createAction
         }
     }
 
@@ -362,7 +427,7 @@ Kirigami.ApplicationWindow {
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
 
-            actions.contextualActions: addAction
+            actions.contextualActions: createAction
         }
     }
 

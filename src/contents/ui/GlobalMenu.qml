@@ -4,14 +4,16 @@
 import Qt.labs.platform 1.1 as Labs
 
 import QtQuick 2.15
-import QtQuick.Window 2.15
 import QtQuick.Controls 2.12 as QQC2
 import QtQuick.Layouts 1.10
 import org.kde.kirigami 2.15 as Kirigami
 import QtQuick.Window 2.15
 
 Labs.MenuBar {
+    id: bar
     property var parentWindow: null
+    property bool todoMode: false
+
     Labs.Menu {
         title: i18nc("@action:menu", "File")
 
@@ -54,9 +56,45 @@ Labs.MenuBar {
         NativeMenuItemFromAction {
             kalendarAction: 'open_todo_view'
         }
+
+        Labs.MenuSeparator {
+        }
+
+        Labs.Menu {
+            title: i18nc("@action:menu", "Sort todos")
+            enabled: bar.todoMode
+
+            NativeMenuItemFromAction {
+                kalendarAction: 'todoview_sort_by_due_date'
+            }
+
+            NativeMenuItemFromAction {
+                kalendarAction: 'todoview_sort_by_priority'
+            }
+
+            NativeMenuItemFromAction {
+                kalendarAction: 'todoview_sort_alphabetically'
+            }
+
+            Labs.MenuSeparator {
+            }
+
+            NativeMenuItemFromAction {
+                kalendarAction: 'todoview_order_ascending'
+            }
+
+            NativeMenuItemFromAction {
+                kalendarAction: 'todoview_order_descending'
+            }
+        }
+
+        NativeMenuItemFromAction {
+            kalendarAction: 'todoview_show_completed'
+            enabled: bar.todoMode
+        }
     }
     Labs.Menu {
-        title: i18nc("@action:menu", "Actions")
+        title: i18nc("@action:menu", "Create")
 
         NativeMenuItemFromAction {
             kalendarAction: 'create_event'

@@ -60,7 +60,7 @@ KirigamiAddonsTreeView.TreeListView {
             incidenceData: model
             collectionDetails: Kalendar.CalendarManager.getCollectionDetails(model.collectionId)
 
-            onViewClicked: root.viewTodo(model, Kalendar.CalendarManager.getCollectionDetails(model.collectionId))
+            onViewClicked: root.viewTodo(model, collectionDetails)
             onEditClicked: root.editTodo(model.incidencePtr, model.collectionId)
             onDeleteClicked: root.deleteTodo(model.incidencePtr, model.endTime ? model.endTime : model.startTime ? model.startTime : null)
             onTodoCompletedClicked: model.checked = model.checked === 0 ? 2 : 0

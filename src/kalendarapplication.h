@@ -36,9 +36,17 @@ Q_SIGNALS:
     void quit();
     void undo();
     void redo();
+    void todoViewSortAlphabetically();
+    void todoViewSortByDueDate();
+    void todoViewSortByPriority();
+    void todoViewOrderAscending();
+    void todoViewOrderDescending();
+    void todoViewShowCompleted();
 
 private:
     KActionCollection mCollection;
     QWindow *m_window = nullptr;
     QActionGroup *m_viewGroup = nullptr;
+    QActionGroup *m_todoViewOrderGroup = nullptr;
+    QActionGroup *m_todoViewSortGroup = nullptr;
 };

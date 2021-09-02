@@ -14,6 +14,7 @@ Kirigami.OverlayDrawer {
     signal viewAllTodosClicked
 
     property bool todoMode: false
+    property alias toolbar: toolbar
 
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
     modal: !wideScreen
@@ -35,6 +36,7 @@ Kirigami.OverlayDrawer {
         id: container
 
         QQC2.ToolBar {
+            id: toolbar
             Layout.fillWidth: true
             Layout.preferredHeight: pageStack.globalToolBar.preferredHeight
 
@@ -66,6 +68,7 @@ Kirigami.OverlayDrawer {
                 Kirigami.ActionToolBar {
                     id: menu
                     anchors.fill: parent
+                    visible: Kirigami.Settings.isMobile
                     overflowIconName: "application-menu"
 
                     actions: [
@@ -111,8 +114,7 @@ Kirigami.OverlayDrawer {
             id: generalView
             implicitWidth: Kirigami.Units.gridUnit * 16
             Layout.fillWidth: true
-            Layout.topMargin: -Kirigami.Units.smallSpacing - 1
-            Layout.bottomMargin: -Kirigami.Units.smallSpacing
+            Layout.topMargin: toolbar.visible ? -Kirigami.Units.smallSpacing - 1 : 0
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
             contentWidth: availableWidth
 

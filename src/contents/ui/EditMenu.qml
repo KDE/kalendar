@@ -14,16 +14,29 @@ Labs.Menu {
 
     NativeMenuItemFromAction {
         kalendarAction: 'edit_undo'
+    }
+
+    NativeMenuItemFromAction {
+        kalendarAction: 'edit_redo'
+    }
+
+    Labs.MenuSeparator {
+    }
+
+    Labs.MenuItem {
         enabled: editMenu.field !== null && editMenu.field.canUndo
+        text: i18nc("text editing menu action", "Undo")
+        shortcut: StandardKey.Undo
         onTriggered: {
             editMenu.field.undo()
             editMenu.close()
         }
     }
 
-    NativeMenuItemFromAction {
-        kalendarAction: 'edit_redo'
+    Labs.MenuItem {
         enabled: editMenu.field !== null && editMenu.field.canRedo
+        text: i18nc("text editing menu action", "Redo")
+        shortcut: StandardKey.Redo
         onTriggered: {
             editMenu.field.undo()
             editMenu.close()

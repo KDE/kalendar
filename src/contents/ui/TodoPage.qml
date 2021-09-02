@@ -30,6 +30,7 @@ Kirigami.Page {
     property bool ascendingOrder: false
     readonly property color standardTextColor: Kirigami.Theme.textColor
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+    readonly property alias completedSheet: completedSheet
 
     Component.onCompleted: sortBy = Kalendar.TodoSortFilterProxyModel.EndTimeColumn // Otherwise crashes...
 
@@ -43,31 +44,45 @@ Kirigami.Page {
 
     actions {
         main: Kirigami.Action {
-            text: i18n("Add todo")
+            text: i18n("Create")
             icon.name: "list-add"
             onTriggered: root.addTodo(filterCollectionId);
         }
         left: Kirigami.Action {
-            text: i18n("Sort...")
+            text: i18n("Sort")
             icon.name: "view-sort"
 
-            Kirigami.Action {
-                text: i18n("By due date")
-                onTriggered: root.sortBy = Kalendar.TodoSortFilterProxyModel.EndTimeColumn
+            KActionFromAction {
+                kalendarAction: "todoview_sort_by_due_date"
+                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.EndTimeColumn
+                onCheckedChanged: __action.checked = checked // Needed for the actions in the menu bars to be checked on load
             }
-            Kirigami.Action {
-                text: i18n("By priority")
-                onTriggered: root.sortBy = Kalendar.TodoSortFilterProxyModel.PriorityIntColumn
+            KActionFromAction {
+                kalendarAction: "todoview_sort_by_priority"
+                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.PriorityIntColumn
+                onCheckedChanged: __action.checked = checked
             }
-            Kirigami.Action {
-                text: i18n("Alphabetically")
-                onTriggered: root.sortBy = Kalendar.TodoSortFilterProxyModel.SummaryColumn
+            KActionFromAction {
+                kalendarAction: "todoview_sort_alphabetically"
+                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.SummaryColumn
+                onCheckedChanged: __action.checked = checked
+            }
+
+            Kirigami.Action { separator: true }
+
+            KActionFromAction {
+                kalendarAction: "todoview_order_ascending"
+                checked: root.ascendingOrder
+                onCheckedChanged: __action.checked = checked
+            }
+            KActionFromAction {
+                kalendarAction: "todoview_order_descending"
+                checked: !root.ascendingOrder
+                onCheckedChanged: __action.checked = checked
             }
         }
-        right: Kirigami.Action {
-            text: i18n("Show completed")
-            icon.name: "task-complete"
-            onTriggered: completedSheet.open()
+        right: KActionFromAction {
+            kalendarAction: "todoview_show_completed"
         }
 
     }
@@ -131,10 +146,14 @@ Kirigami.Page {
     ColumnLayout {
         anchors.fill: parent
 
-        RowLayout {
+        GridLayout {
             id: headerLayout
+            columns: root.width > Kirigami.Units.gridUnit * 30 ? 2 : 1
+            rows: root.width > Kirigami.Units.gridUnit * 30 ? 1 : 2
 
             Kirigami.Heading {
+                Layout.row: 0
+                Layout.column: 0
                 Layout.fillWidth: true
                 text: root.filterCollectionDetails && root.filterCollectionId > -1 ?
                     root.filterCollectionDetails.displayName : i18n("All todos")
@@ -142,28 +161,13 @@ Kirigami.Page {
                 color: root.filterCollectionDetails ?
                     LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
             }
-            QQC2.ToolButton {
-                property string sortTypeString: {
-                    let directionString = root.ascendingOrder ? i18n("(ascending)") : i18n("(descending)");
-                    switch(root.sortBy) {
-                        case Kalendar.TodoSortFilterProxyModel.EndTimeColumn:
-                            return i18n("by due date %1", directionString);
-                        case Kalendar.TodoSortFilterProxyModel.PriorityIntColumn:
-                            return i18n("by priority %1", directionString);
-                        case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
-                            return i18n("alphabetically %1", directionString);
-                    }
-                }
-                icon.name: root.ascendingOrder ? "view-sort-ascending" : "view-sort-descending"
-                text: i18n("Sorted %1", sortTypeString)
-                onClicked: root.ascendingOrder = !root.ascendingOrder
+            Kirigami.SearchField {
+                id: searchField
+                Layout.column: root.width > Kirigami.Units.gridUnit * 30 ? 1 : 0
+                Layout.row: root.width > Kirigami.Units.gridUnit * 30 ? 0 : 1
+                Layout.fillWidth: Layout.row === 1
+                onTextChanged: incompleteView.model.filterTodoName(text);
             }
-        }
-
-        Kirigami.SearchField {
-            id: searchField
-            Layout.fillWidth: true
-            onTextChanged: incompleteView.model.filterTodoName(text);
         }
 
         TodoTreeView {
