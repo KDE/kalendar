@@ -66,11 +66,11 @@ void MonthViewModel::addDates(bool atEnd, QDate startFrom)
             atEnd ? m_firstDayOfMonthDates[rowCount() - 1].addMonths(1) : m_firstDayOfMonthDates[0].addMonths(-1);
         QDate startDate = firstDay;
 
-        if(startDate.dayOfWeek() == m_locale.firstDayOfWeek()) {
-            startDate = startDate.addDays(-7); // We want to slightly center the month in the grid
-        } else {
-            startDate = startDate.addDays(-startDate.dayOfWeek() + m_locale.firstDayOfWeek());
+        startDate = startDate.addDays(-startDate.dayOfWeek() + m_locale.firstDayOfWeek());
+        if (startDate >= firstDay) {
+            startDate = startDate.addDays(-7);
         }
+
 
         if(atEnd) {
             m_firstDayOfMonthDates.append(firstDay);
