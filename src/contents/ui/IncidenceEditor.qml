@@ -43,7 +43,7 @@ Kirigami.ScrollablePage {
             editorLoader.active && editorLoader.item.validEndDate
         } else {
             editorLoader.active && editorLoader.item.validFormDates &&
-            incidenceWrapper.incidenceStart <= incidenceWrapper.incidenceEnd
+            (root.incidenceWrapper.allDay || incidenceWrapper.incidenceStart <= incidenceWrapper.incidenceEnd)
         }
     }
 
