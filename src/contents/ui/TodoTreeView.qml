@@ -15,6 +15,7 @@ import "labelutils.js" as LabelUtils
 KirigamiAddonsTreeView.TreeListView {
     id: root
 
+    signal addTodo(int collectionId)
     signal viewTodo(var todoData, var collectionData)
     signal editTodo(var todoPtr, var collectionId)
     signal deleteTodo(var todoPtr, date deleteDate)
@@ -23,6 +24,7 @@ KirigamiAddonsTreeView.TreeListView {
 
     property date currentDate: new Date()
     property int filterCollectionId
+    property var filterCollectionDetails
     property int showCompleted: Kalendar.TodoSortFilterProxyModel.ShowAll
     property int sortBy: Kalendar.TodoSortFilterProxyModel.EndTimeColumn
     onSortByChanged: todoModel.sortTodoModel(sortBy, ascendingOrder)
@@ -33,6 +35,30 @@ KirigamiAddonsTreeView.TreeListView {
 
     currentIndex: -1
     clip: true
+
+    Kirigami.PlaceholderMessage {
+        anchors.centerIn: parent
+        visible: root.filterCollectionId && root.filterCollectionId >= 0 && root.filterCollectionDetails.isFiltered && parent.count === 0
+        text: i18n("Calendar is not enabled")
+        helpfulAction: Kirigami.Action {
+            icon.name: "gtk-yes"
+            text: i18n("Enable")
+            onTriggered: Kalendar.CalendarManager.allCalendars.setData(Kalendar.CalendarManager.allCalendars.index(root.filterCollectionDetails.allCalendarsRow, 0), 2, 10)
+            // HACK: Last two numbers are Qt.Checked and Qt.CheckStateRole
+        }
+    }
+
+    Kirigami.PlaceholderMessage {
+        anchors.centerIn: parent
+        visible: parent.count === 0 && !root.filterCollectionDetails.isFiltered
+        text: root.showCompleted === Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly ?
+            i18n("No todos completed") : i18n("No todos left to complete")
+        helpfulAction: Kirigami.Action {
+            text: i18n("Create")
+            icon.name: "list-add"
+            onTriggered: root.addTodo(filterCollectionId);
+        }
+    }
 
     sourceModel: Kalendar.TodoSortFilterProxyModel {
         id: todoModel
@@ -58,7 +84,7 @@ KirigamiAddonsTreeView.TreeListView {
             implicitWidth: todoItemContents.implicitWidth
             implicitHeight: todoItemContents.implicitHeight
             incidenceData: model
-            collectionDetails: Kalendar.CalendarManager.getCollectionDetails(model.collectionId)
+            collectionId: model.collectionId
 
             onViewClicked: root.viewTodo(model, collectionDetails)
             onEditClicked: root.editTodo(model.incidencePtr, model.collectionId)

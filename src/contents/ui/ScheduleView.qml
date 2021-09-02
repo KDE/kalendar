@@ -464,7 +464,7 @@ Kirigami.Page {
                                                     id: incidenceMouseArea
 
                                                     incidenceData: modelData
-                                                    collectionDetails: incidences.length && Kalendar.CalendarManager.getCollectionDetails(modelData.collectionId)
+                                                    collectionId: incidences.length && modelData.collectionId
 
                                                     onViewClicked: root.viewIncidence(modelData, collectionData)
                                                     onEditClicked: root.editIncidence(incidencePtr, collectionId)

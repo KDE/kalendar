@@ -665,6 +665,16 @@ QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
 {
     QVariantMap collectionDetails;
     Akonadi::Collection collection = m_calendar->collection(collectionId);
+    bool isFiltered;
+    int allCalendarsRow;
+
+    for(int i = 0; i < m_allCalendars->rowCount(); i++) {
+        if(m_allCalendars->data(m_allCalendars->index(i, 0), Akonadi::EntityTreeModel::CollectionIdRole).toInt() == collectionId) {
+            isFiltered = !m_allCalendars->data(m_allCalendars->index(i, 0), Qt::CheckStateRole).toBool();
+            allCalendarsRow = i;
+            break;
+        }
+    }
 
     collectionDetails[QLatin1String("id")] = collection.id();
     collectionDetails[QLatin1String("name")] = collection.name();
@@ -672,6 +682,8 @@ QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
     collectionDetails[QLatin1String("color")] = m_baseModel->colorCache[QString::number(collection.id())];
     collectionDetails[QLatin1String("isResource")] = Akonadi::CollectionUtils::isResource(collection);
     collectionDetails[QLatin1String("readOnly")] = collection.rights().testFlag(Collection::ReadOnly);
+    collectionDetails[QLatin1String("isFiltered")] = isFiltered;
+    collectionDetails[QLatin1String("allCalendarsRow")] = allCalendarsRow;
 
     return collectionDetails;
 }

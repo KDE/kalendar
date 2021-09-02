@@ -327,7 +327,7 @@ Item {
 
                                             IncidenceMouseArea {
                                                 incidenceData: modelData
-                                                collectionDetails: Kalendar.CalendarManager.getCollectionDetails(modelData.collectionId)
+                                                collectionId: modelData.collectionId
 
                                                 onViewClicked: viewIncidence(modelData, collectionData)
                                                 onEditClicked: editIncidence(incidencePtr, collectionId)

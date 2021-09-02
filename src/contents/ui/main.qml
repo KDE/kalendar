@@ -179,7 +179,14 @@ Kirigami.ApplicationWindow {
     globalDrawer: Sidebar {
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         todoMode: pageStack.currentItem.objectName == "todoView"
-        onCalendarClicked: if(todoMode) pageStack.currentItem.filterCollectionId = collectionId
+        onCalendarClicked: if(todoMode) {
+            pageStack.currentItem.filterCollectionId = collectionId;
+            pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
+        }
+        onCalendarCheckChanged: if(todoMode && collectionId === pageStack.currentItem.filterCollectionId) {
+            pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
+            // HACK: The Todo View should be able to detect change in collection filtering independently
+        }
         onViewAllTodosClicked: if(todoMode) pageStack.currentItem.filterCollectionId = -1
     }
 

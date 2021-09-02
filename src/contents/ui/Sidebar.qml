@@ -13,6 +13,7 @@ Kirigami.OverlayDrawer {
     id: sidebar
 
     signal calendarClicked(int collectionId)
+    signal calendarCheckChanged(int collectionId, bool checked)
     signal viewAllTodosClicked
 
     property bool todoMode: false
@@ -262,7 +263,11 @@ Kirigami.OverlayDrawer {
                                 visible: model.checkState != null
                                 color: model.collectionColor
                                 checked: model.checkState === 2
-                                onClicked: model.checkState = model.checkState === 0 ? 2 : 0
+                                onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                onClicked: {
+                                    model.checkState = model.checkState === 0 ? 2 : 0
+                                    calendarCheckChanged(collectionId, checked)
+                                }
                             }
 
                             onClicked: {
