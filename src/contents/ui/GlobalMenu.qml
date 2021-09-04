@@ -24,7 +24,7 @@ Labs.MenuBar {
 
         Labs.MenuItem {
             text: i18nc("@action:menu", "Quit Kalendar")
-
+            icon.name: "application-exit"
             shortcut: StandardKey.Quit
             onTriggered: Qt.quit()
         }
@@ -109,6 +109,7 @@ Labs.MenuBar {
 
         Labs.MenuItem {
             text: root.visibility === Window.FullScreen ? i18nc("@action:menu", "Exit Full Screen") : i18nc("@action:menu", "Enter Full Screen")
+            icon.name: "view-fullscreen"
             onTriggered: root.visibility === Window.FullScreen ? root.showNormal() : root.showFullScreen()
         }
     }

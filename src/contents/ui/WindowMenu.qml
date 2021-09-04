@@ -23,6 +23,7 @@ QQC2.MenuBar {
 
         QQC2.MenuItem {
             text: i18nc("@action:menu", "Quit Kalendar")
+            icon.name: "application-exit"
             onTriggered: Qt.quit()
         }
     }
@@ -183,6 +184,7 @@ QQC2.MenuBar {
 
         QQC2.MenuItem {
             text: root.visibility === Window.FullScreen ? i18nc("@action:menu", "Exit Full Screen") : i18nc("@action:menu", "Enter Full Screen")
+            icon.name: "view-fullscreen"
             onTriggered: root.visibility === Window.FullScreen ? root.showNormal() : root.showFullScreen()
         }
     }
