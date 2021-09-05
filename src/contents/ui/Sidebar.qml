@@ -124,7 +124,18 @@ Kirigami.OverlayDrawer {
 
             ListView {
                 id: generalList
-                currentIndex: 0
+                currentIndex: {
+                    switch (pageStack.currentItem.objectName) {
+                        case "monthView":
+                            return 0;
+                        case "scheduleView":
+                            return 1;
+                        case "todoView":
+                            return 2;
+                        default:
+                            return 0;
+                    }
+                }
                 property list<Kirigami.Action> actions: [
                     Kirigami.Action {
                         icon.name: KalendarApplication.iconName(monthViewAction.icon)
