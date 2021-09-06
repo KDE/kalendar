@@ -90,7 +90,7 @@ Map {
             radius: locationData.boundingBox.center.distanceTo(locationData.boundingBox.topRight)
             color: Kirigami.Theme.highlightColor
             border.color: Kirigami.Theme.linkColor
-            border.width: Kirigami.Units.devicePixelRatio * 2
+            border.width: 2
             smooth: true
             opacity: 0.25
             center: locationData.coordinate
