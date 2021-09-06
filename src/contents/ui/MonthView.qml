@@ -217,5 +217,7 @@ Kirigami.Page {
             }
         }
     }
+
+    NavigationMouseArea {}
 }
 

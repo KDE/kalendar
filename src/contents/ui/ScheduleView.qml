@@ -483,4 +483,6 @@ Kirigami.Page {
             }
         }
     }
+
+    NavigationMouseArea {}
 }

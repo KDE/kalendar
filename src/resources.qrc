@@ -14,6 +14,7 @@
     <file alias="labelutils.js">contents/ui/labelutils.js</file>
     <file alias="ScheduleView.qml">contents/ui/ScheduleView.qml</file>
     <file alias="IncidenceMouseArea.qml">contents/ui/IncidenceMouseArea.qml</file>
+    <file alias="NavigationMouseArea.qml">contents/ui/NavigationMouseArea.qml</file>
     <file alias="DayMouseArea.qml">contents/ui/DayMouseArea.qml</file>
     <file alias="ContactsPage.qml">contents/ui/ContactsPage.qml</file>
     <file alias="ContactListItem.qml">contents/ui/ContactListItem.qml</file>
