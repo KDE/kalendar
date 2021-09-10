@@ -48,7 +48,7 @@ Map {
 
     Button {
         anchors.right: parent.right
-        text: i18n("Return to location")
+        text: i18n("Return to Location")
         visible: !map.containsLocation && map.query
         onClicked: map.goToLocation()
         z: 10

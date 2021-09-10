@@ -17,7 +17,7 @@ QQC2.MenuBar {
         title: i18nc("@action:menu", "File")
 
         QQC2.MenuItem {
-            text: i18nc("@action:menu", "Import calendar") // todo
+            text: i18nc("@action:menu", "Import Calendar") // todo
             visible: false
         }
 
@@ -55,7 +55,7 @@ QQC2.MenuBar {
 
         QQC2.MenuItem {
             enabled: editMenu.field !== null && editMenu.field.canUndo
-            text: i18nc("text editing menu action", "Undo text")
+            text: i18nc("text editing menu action", "Undo Text")
             onTriggered: {
                 editMenu.field.undo()
                 editMenu.close()
@@ -64,7 +64,7 @@ QQC2.MenuBar {
 
         QQC2.MenuItem {
             enabled: editMenu.field !== null && editMenu.field.canRedo
-            text: i18nc("text editing menu action", "Redo text")
+            text: i18nc("text editing menu action", "Redo Text")
             onTriggered: {
                 editMenu.field.undo()
                 editMenu.close()
@@ -139,7 +139,7 @@ QQC2.MenuBar {
         }
 
         QQC2.Menu {
-            title: i18n("Sort todos")
+            title: i18n("Sort Todos")
             enabled: bar.todoMode
 
             KActionFromAction {

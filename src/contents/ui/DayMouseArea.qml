@@ -44,12 +44,12 @@ MouseArea {
 
             // TODO: Add journals
             QQC2.MenuItem {
-                text: i18n("New event")
+                text: i18n("New Event…")
                 icon.name: "resource-calendar-insert"
                 onClicked: addNewIncidence(Kalendar.IncidenceWrapper.TypeEvent, dayMouseArea.addDate)
             }
             QQC2.MenuItem {
-                text: i18n("New todo")
+                text: i18n("New Todo…")
                 icon.name: "view-task-add"
                 onClicked: addNewIncidence(Kalendar.IncidenceWrapper.TypeTodo, dayMouseArea.addDate)
             }

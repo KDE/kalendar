@@ -41,7 +41,7 @@ Kirigami.ScrollablePage {
         id: emailPickerSheet
 
         header: Kirigami.Heading {
-            text: i18n("Select email address")
+            text: i18n("Select Email Address")
         }
 
         ListView {

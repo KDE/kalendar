@@ -18,7 +18,7 @@ Labs.MenuBar {
         title: i18nc("@action:menu", "File")
 
         Labs.MenuItem {
-            text: i18nc("@action:menu", "Import calendar") // todo
+            text: i18nc("@action:menu", "Import Calendar") // todo
             visible: false
         }
 
@@ -61,7 +61,7 @@ Labs.MenuBar {
         }
 
         Labs.Menu {
-            title: i18nc("@action:menu", "Sort todos")
+            title: i18nc("@action:menu", "Sort Todos")
             enabled: bar.todoMode
 
             NativeMenuItemFromAction {

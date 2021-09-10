@@ -9,7 +9,7 @@ import org.kde.kalendar 1.0
 
 Kirigami.Page {
     id: sourcesSettingsPage
-    title: i18n("Calendar sources")
+    title: i18n("Calendar Sources")
 
     ColumnLayout {
         anchors.fill: parent
@@ -116,7 +116,7 @@ Kirigami.Page {
                 parent: sourcesSettingsPage.Controls.Overlay.overlay
                 header: Kirigami.Heading {
                     level: 2
-                    text: i18n("Add new calendar source")
+                    text: i18n("Add New Calendar Source")
                 }
                 ListView {
                     implicitWidth: Kirigami.Units.gridUnit * 20
@@ -139,7 +139,7 @@ Kirigami.Page {
             Layout.fillWidth: true
             Controls.Button {
                 Layout.alignment: Qt.AlignRight
-                text: i18n("Add new calendar source")
+                text: i18n("Add New Calendar Source…")
                 icon.name: "list-add"
                 onClicked: {
                     const item = addCalendarOverlay.createObject(addCalendarOverlay, sourcesSettingsPage.Controls.Overlay.overlay)

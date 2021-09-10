@@ -67,7 +67,7 @@ Item {
             Layout.column: 0
             Layout.columnSpan: timePicker.secondsPicker ? 5 : 3
             QQC2.Label {
-                text: i18n("Min. interval:")
+                text: i18n("Min. Interval:")
             }
             QQC2.SpinBox {
                 Layout.fillWidth: true

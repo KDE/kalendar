@@ -68,7 +68,7 @@ Kirigami.Page {
     actions {
         left: Kirigami.Action {
             icon.name: "go-previous"
-            text: i18n("Previous month")
+            text: i18n("Previous Month")
             onTriggered: {
                 pathView.decrementCurrentIndex();
                 monthPage.initialMonth = false;
@@ -77,7 +77,7 @@ Kirigami.Page {
         }
         right: Kirigami.Action {
             icon.name: "go-next"
-            text: i18n("Next month")
+            text: i18n("Next Month")
             onTriggered: {
                 pathView.incrementCurrentIndex();
                 monthPage.initialMonth = false;

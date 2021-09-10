@@ -79,7 +79,7 @@ MouseArea {
             }
             QQC2.MenuItem {
                 icon.name: "list-add"
-                text: i18n("Add sub-todo")
+                text: i18n("Add Sub-Todo")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: {
                     let parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");

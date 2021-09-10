@@ -90,7 +90,7 @@ Kirigami.Page {
         id: completedSheet
 
         title: root.filterCollectionDetails && root.filterCollectionId > -1 ?
-            i18n("Completed todos in %1", root.filterCollectionDetails.displayName) : i18n("Completed todos")
+            i18n("Completed Todos in %1", root.filterCollectionDetails.displayName) : i18n("Completed Todos")
         showCloseButton: true
 
         property var retainedTodoData
@@ -160,7 +160,7 @@ Kirigami.Page {
                 Layout.column: 0
                 Layout.fillWidth: true
                 text: root.filterCollectionDetails && root.filterCollectionId > -1 ?
-                    root.filterCollectionDetails.displayName : i18n("All todos")
+                    root.filterCollectionDetails.displayName : i18n("All Todos")
                 font.weight: Font.Bold
                 color: root.filterCollectionDetails && root.filterCollectionId > -1 ?
                     LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
@@ -195,7 +195,7 @@ Kirigami.Page {
 
     Kirigami.OverlaySheet {
         id: collectionPickerSheet
-        title: i18n("Choose a todo calendar")
+        title: i18n("Choose a Todo Calendar")
 
         property var incidenceWrapper: new IncidenceWrapper()
 
@@ -235,7 +235,7 @@ Kirigami.Page {
     footer: Kirigami.ActionTextField {
         id: addField
         Layout.fillWidth: true
-        placeholderText: i18n("Create a new todo...")
+        placeholderText: i18n("Create a New Todo…")
 
         function addTodo() {
             if(addField.text) {
@@ -256,7 +256,7 @@ Kirigami.Page {
 
         rightActions: Kirigami.Action {
             icon.name: "list-add"
-            tooltip: i18n("Quickly add a new todo.")
+            tooltip: i18n("Quickly Add a New Todo.")
             onTriggered: addField.addTodo()
         }
         onAccepted: addField.addTodo()

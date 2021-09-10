@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
                          i18nc("@title", "Kalendar"),
                          QStringLiteral(KALENDAR_VERSION_STRING),
                          // Short description of what the app does.
-                         i18n("Calendar application"),
+                         i18n("Calendar Application"),
                          // The license this code is released under.
                          KAboutLicense::GPL,
                          // Copyright Statement.

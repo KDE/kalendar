@@ -27,7 +27,7 @@ Kirigami.OverlaySheet {
 
             QQC2.Button {
                 icon.name: "deletecell"
-                text: i18n("Only delete current")
+                text: i18n("Only Delete Current")
                 visible: incidenceWrapper.recurrenceData.type > 0
                 onClicked: addException(deleteDate, incidenceWrapper)
                 QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
@@ -35,7 +35,7 @@ Kirigami.OverlaySheet {
 
             QQC2.Button {
                 icon.name: "edit-table-delete-row"
-                text: i18n("Also delete future")
+                text: i18n("Also Delete Future")
                 visible: incidenceWrapper.recurrenceData.type > 0
                 onClicked: {
                     // We want to include the delete date in the deletion
@@ -50,7 +50,7 @@ Kirigami.OverlaySheet {
 
             QQC2.Button {
                 icon.name: "delete"
-                text: incidenceWrapper.recurrenceData.type > 0 ? i18n("Delete all") : i18n("Delete")
+                text: incidenceWrapper.recurrenceData.type > 0 ? i18n("Delete All") : i18n("Delete")
                 onClicked: deleteIncidence(incidenceWrapper.incidencePtr)
                 QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
             }

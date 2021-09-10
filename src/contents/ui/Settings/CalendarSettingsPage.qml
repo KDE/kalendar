@@ -76,7 +76,7 @@ Kirigami.Page {
             Layout.fillWidth: true
             Controls.Button {
                 Layout.alignment: Qt.AlignRight
-                text: i18n("Change calendar color")
+                text: i18n("Change Calendar Color…")
                 icon.name: "edit-entry"
                 enabled: collectionsList.currentItem && collectionsList.currentItem.trailing.visible
                 onClicked: {
@@ -86,7 +86,7 @@ Kirigami.Page {
 
                 ColorDialog {
                     id: colorDialog
-                    title: i18n("Choose calendar color")
+                    title: i18n("Choose Calendar Color")
                     onAccepted: {
                         CalendarManager.setCollectionColor(collectionsList.currentItem.itemCollectionId, color)
                     }

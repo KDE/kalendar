@@ -74,13 +74,13 @@ Kirigami.Page {
     actions {
         left: Kirigami.Action {
             icon.name: "go-previous"
-            text: i18n("Previous month")
+            text: i18n("Previous Month")
             onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, -1))
             displayHint: Kirigami.DisplayHint.IconOnly
         }
         right: Kirigami.Action {
             icon.name: "go-next"
-            text: i18n("Next month")
+            text: i18n("Next Month")
             onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, 1))
             displayHint: Kirigami.DisplayHint.IconOnly
         }
@@ -454,7 +454,7 @@ Kirigami.Page {
                                                             } else if (incidenceCard.dayOfMultidayIncidence === incidenceCard.incidenceDays) {
                                                                 i18n("Ends at %1", modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat));
                                                             } else { // In between multiday start/finish
-                                                                i18n("Runs all day")
+                                                                i18n("Runs All Day")
                                                             }
                                                         }
                                                     }

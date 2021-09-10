@@ -81,7 +81,7 @@ Kirigami.OverlayDrawer {
                         actions: [
                             Kirigami.Action {
                                 icon.name: "list-add"
-                                text: i18n("Add sub-todo")
+                                text: i18n("Add Sub-Todo")
                                 visible: actionToolbar.incidenceType === "Todo"
                                 onTriggered: {
                                     incidenceInfo.incidenceWrapper.collectionId = collectionData.id;
@@ -91,7 +91,7 @@ Kirigami.OverlayDrawer {
                             Kirigami.Action {
                                 property bool todoCompleted: incidenceInfo.incidenceWrapper.todoCompleted
                                 icon.name: todoCompleted ? "edit-undo" : "checkmark"
-                                text: todoCompleted ? i18n("Mark incomplete") : i18n("Mark complete")
+                                text: todoCompleted ? i18n("Mark Incomplete") : i18n("Mark Complete")
                                 visible: actionToolbar.incidenceType === "Todo"
                                 onTriggered: {
                                     incidenceInfo.incidenceWrapper.todoCompleted = !incidenceInfo.incidenceWrapper.todoCompleted;
@@ -174,7 +174,7 @@ Kirigami.OverlayDrawer {
                             Layout.alignment: Qt.AlignTop
                             Layout.fillWidth: true
                             level: 2
-                            text: i18nc("%1 is a percentage number", "<b>%1\%</b> complete", String(incidenceInfo.incidenceWrapper.todoPercentComplete))
+                            text: i18nc("%1 is a percentage number", "<b>%1\%</b> Complete", String(incidenceInfo.incidenceWrapper.todoPercentComplete))
                         }
                         QQC2.Slider {
                             Layout.fillWidth: true

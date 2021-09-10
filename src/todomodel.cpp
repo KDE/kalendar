@@ -704,7 +704,7 @@ bool TodoModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int r
                 if (tmp->uid() == todo->uid()) { // correct, don't use instanceIdentifier() here
                     KMessageBox::information(nullptr,
                                              i18n("Cannot move to-do to itself or a child of itself."),
-                                             i18n("Drop To-do"),
+                                             i18n("Drop To-Do"),
                                              QStringLiteral("NoDropTodoOntoItself"));
                     return false;
                 }

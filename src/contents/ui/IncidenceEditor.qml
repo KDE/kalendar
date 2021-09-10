@@ -275,15 +275,15 @@ Kirigami.ScrollablePage {
                     valueRole: "value"
                     model: [
                         {display: i18n("Unassigned"), value: 0},
-                        {display: i18n("1 (Highest priority)"), value: 1},
+                        {display: i18n("1 (Highest Priority)"), value: 1},
                         {display: i18n("2"), value: 2},
                         {display: i18n("3"), value: 3},
                         {display: i18n("4"), value: 4},
-                        {display: i18n("5 (Medium priority)"), value: 5},
+                        {display: i18n("5 (Medium Priority)"), value: 5},
                         {display: i18n("6"), value: 6},
                         {display: i18n("7"), value: 7},
                         {display: i18n("8"), value: 8},
-                        {display: i18n("9 (Lowest priority)"), value: 9}
+                        {display: i18n("9 (Lowest Priority)"), value: 9}
                     ]
                     visible: incidenceForm.isTodo
                 }
@@ -579,7 +579,7 @@ Kirigami.ScrollablePage {
                         QQC2.RadioButton {
                             property int dateOfMonth: incidenceStartDateCombo.dateFromText.getDate()
 
-                            text: i18nc("%1 is the day number of month", "the %1 of each month", LabelUtils.numberToString(dateOfMonth))
+                            text: i18nc("%1 is the day number of month", "The %1 of each month", LabelUtils.numberToString(dateOfMonth))
 
                             checked: root.incidenceWrapper.recurrenceData.type === 6 // Monthly on day (1st of month)
                             onClicked: customRecurrenceLayout.setOcurrence()
@@ -591,7 +591,7 @@ Kirigami.ScrollablePage {
                             property int weekOfMonth: Math.ceil((incidenceStartDateCombo.dateFromText.getDate() + 6 - incidenceStartDateCombo.dateFromText.getDay())/7);
                             property string dayOfWeekString: Qt.locale().dayName(incidenceStartDateCombo.dateFromText.getDay())
 
-                            text: i18nc("the weekOfMonth dayOfWeekString of each month", "the %1 %2 of each month", LabelUtils.numberToString(weekOfMonth), dayOfWeekString)
+                            text: i18nc("the weekOfMonth dayOfWeekString of each month", "The %1 %2 of each month", LabelUtils.numberToString(weekOfMonth), dayOfWeekString)
                             checked: root.incidenceWrapper.recurrenceData.type === 5 // Monthly on position
                             onTextChanged: if(checked) { root.incidenceWrapper.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek); }
                             onClicked: root.incidenceWrapper.setMonthlyPosRecurrence(weekOfMonth, dayOfWeek)
@@ -697,7 +697,7 @@ Kirigami.ScrollablePage {
                         QQC2.ComboBox {
                             id: exceptionAddButton
                             Layout.fillWidth: true
-                            displayText: i18n("Add recurrence exception")
+                            displayText: i18n("Add Recurrence Exception")
 
                             popup: QQC2.Popup {
                                 id: recurExceptionPopup
@@ -801,7 +801,7 @@ Kirigami.ScrollablePage {
                     QQC2.Button {
                         id: remindersButton
 
-                        text: i18n("Add reminder")
+                        text: i18n("Add Reminder")
                         Layout.fillWidth: true
 
                         onClicked: root.incidenceWrapper.remindersModel.addAlarm();
@@ -929,7 +929,7 @@ Kirigami.ScrollablePage {
 
                     QQC2.Button {
                         id: attendeesButton
-                        text: i18n("Add attendee")
+                        text: i18n("Add Attendee")
                         Layout.fillWidth: true
 
                         onClicked: attendeeAddChoices.open()
@@ -940,11 +940,11 @@ Kirigami.ScrollablePage {
                             y: parent.height // Y is relative to parent
 
                             QQC2.MenuItem {
-                                text: i18n("Choose from contacts")
+                                text: i18n("Choose from Contacts")
                                 onClicked: pageStack.push(contactsPage)
                             }
                             QQC2.MenuItem {
-                                text: i18n("Fill in manually")
+                                text: i18n("Fill in Manually")
                                 onClicked: root.incidenceWrapper.attendeesModel.addAttendee();
                             }
                         }
@@ -981,7 +981,7 @@ Kirigami.ScrollablePage {
 
                     QQC2.Button {
                         id: attachmentsButton
-                        text: i18n("Add attachment")
+                        text: i18n("Add Attachment")
                         Layout.fillWidth: true
                         onClicked: attachmentFileDialog.open();
 

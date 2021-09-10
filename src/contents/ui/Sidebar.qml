@@ -281,7 +281,7 @@ Kirigami.OverlayDrawer {
         Kirigami.BasicListItem {
             Layout.topMargin: -Kirigami.Units.smallSpacing
             icon: "show-all-effects"
-            label: i18n("View all todos")
+            label: i18n("View All Todos")
             labelItem.color: Kirigami.Theme.textColor
             visible: sidebar.todoMode
             separatorVisible: false

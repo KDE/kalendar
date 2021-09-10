@@ -66,13 +66,13 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("create_event") && KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::createNewEvent);
-        action->setText(i18n("New Event"));
+        action->setText(i18n("New Event…"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("resource-calendar-insert")));
     }
 
     if (actionName == QLatin1String("create_todo") && KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::createNewTodo);
-        action->setText(i18n("New Todo"));
+        action->setText(i18n("New Todo…"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("view-task-add")));
     }
 
@@ -114,7 +114,7 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("todoview_sort_by_due_date") && KAuthorized::authorizeAction(actionName)) {
         auto sortTodoViewByDueDateAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewSortByDueDate);
-        sortTodoViewByDueDateAction->setText(i18n("By due date"));
+        sortTodoViewByDueDateAction->setText(i18n("By Due Date"));
         sortTodoViewByDueDateAction->setIcon(QIcon::fromTheme(QStringLiteral("change-date-symbolic")));
         sortTodoViewByDueDateAction->setCheckable(true);
         sortTodoViewByDueDateAction->setActionGroup(m_todoViewSortGroup);
@@ -123,7 +123,7 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("todoview_sort_by_priority") && KAuthorized::authorizeAction(actionName)) {
         auto sortTodoViewByPriorityAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewSortByPriority);
-        sortTodoViewByPriorityAction->setText(i18n("By priority level"));
+        sortTodoViewByPriorityAction->setText(i18n("By Priority Level"));
         sortTodoViewByPriorityAction->setIcon(QIcon::fromTheme(QStringLiteral("emblem-important-symbolic")));
         sortTodoViewByPriorityAction->setCheckable(true);
         sortTodoViewByPriorityAction->setActionGroup(m_todoViewSortGroup);
@@ -141,7 +141,7 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("todoview_order_descending") && KAuthorized::authorizeAction(actionName)) {
         auto orderTodoViewDescendingAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewOrderDescending);
-        orderTodoViewDescendingAction->setText(i18n("Descending order"));
+        orderTodoViewDescendingAction->setText(i18n("Descending Order"));
         orderTodoViewDescendingAction->setIcon(QIcon::fromTheme(QStringLiteral("view-sort-descending")));
         orderTodoViewDescendingAction->setCheckable(true);
         orderTodoViewDescendingAction->setActionGroup(m_todoViewOrderGroup);
@@ -150,7 +150,7 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("todoview_show_completed") && KAuthorized::authorizeAction(actionName)) {
         auto todoViewShowCompletedAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewShowCompleted);
-        todoViewShowCompletedAction->setText(i18n("Show completed todos"));
+        todoViewShowCompletedAction->setText(i18n("Show Completed Todos"));
         todoViewShowCompletedAction->setIcon(QIcon::fromTheme(QStringLiteral("task-complete")));
         mCollection.addAction(todoViewShowCompletedAction->objectName(), todoViewShowCompletedAction);
     }
