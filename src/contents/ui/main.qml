@@ -133,13 +133,13 @@ Kirigami.ApplicationWindow {
 
         Kirigami.Action {
             id: newEventAction
-            text: i18n("New event")
+            text: i18n("New Event")
             icon.name: "resource-calendar-insert"
             onTriggered: createEventAction.trigger()
         }
         Kirigami.Action {
             id: newTodoAction
-            text: i18n("New todo")
+            text: i18n("New Todo")
             icon.name: "view-task-add"
             onTriggered: createTodoAction.trigger()
         }
