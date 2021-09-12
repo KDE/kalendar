@@ -25,6 +25,8 @@ KirigamiAddonsTreeView.TreeListView {
     property date currentDate: new Date()
     property int filterCollectionId
     property var filterCollectionDetails
+    property string filterCategoryString
+
     property int showCompleted: Kalendar.TodoSortFilterProxyModel.ShowAll
     property int sortBy: Kalendar.TodoSortFilterProxyModel.EndTimeColumn
     onSortByChanged: todoModel.sortTodoModel(sortBy, ascendingOrder)
@@ -65,6 +67,7 @@ KirigamiAddonsTreeView.TreeListView {
         calendar: Kalendar.CalendarManager.calendar
         incidenceChanger: Kalendar.CalendarManager.incidenceChanger
         filterCollectionId: root.filterCollectionId ? root.filterCollectionId : -1
+        filterCategoryString: root.filterCategoryString ? root.filterCategoryString : ""
         showCompleted: root.showCompleted
     }
     delegate: KirigamiAddonsTreeView.BasicTreeItem {
@@ -98,7 +101,7 @@ KirigamiAddonsTreeView.TreeListView {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width
 
-                columns: 3
+                columns: 4
                 rows: 2
                 columnSpacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
@@ -115,18 +118,35 @@ KirigamiAddonsTreeView.TreeListView {
                 }
 
                 QQC2.Label {
+                    id: nameLabel
                     Layout.row: 0
                     Layout.column: 1
+                    Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 28 && (recurIcon.visible || dateLabel.visible) ? 2 : 1
                     Layout.fillWidth: true
                     text: model.text
                     font.strikeout: model.todoCompleted
+                    font.weight: Font.Medium
                     wrapMode: Text.Wrap
+                }
+
+                QQC2.Label {
+                    id: tagLabel
+                    Layout.fillWidth: true
+                    Layout.row: root.width < Kirigami.Units.gridUnit * 28 && (recurIcon.visible || dateLabel.visible) ? 1 : 0
+                    Layout.column: 2
+                    Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 ? 1 : 2
+                    Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 28 ? 2 : 1
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    horizontalAlignment: Text.AlignRight
+                    text: model.categoriesDisplay
+                    elide: Text.ElideRight
                 }
 
                 RowLayout {
                     Layout.row: 0
-                    Layout.column: 2
-                    Layout.rowSpan: 2
+                    Layout.column: 3
+                    Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 ? 1 : 2
                     Layout.alignment: Qt.AlignRight
                     Layout.rightMargin: Kirigami.Units.largeSpacing
                     spacing: 0
@@ -143,6 +163,7 @@ KirigamiAddonsTreeView.TreeListView {
                 }
 
                 RowLayout {
+                    id: occurrenceLayout
                     Layout.row: 1
                     Layout.column: 1
                     Layout.fillWidth: true
@@ -155,6 +176,7 @@ KirigamiAddonsTreeView.TreeListView {
                         visible: !isNaN(model.endTime.getTime())
                     }
                     Kirigami.Icon {
+                        id: recurIcon
                         source: "task-recurring"
                         visible: model.recurs
                         Layout.maximumHeight: parent.height

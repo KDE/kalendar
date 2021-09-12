@@ -23,6 +23,7 @@ class TodoSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger WRITE setIncidenceChanger NOTIFY incidenceChangerChanged)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar WRITE setCalendar NOTIFY calendarChanged)
     Q_PROPERTY(qint64 filterCollectionId READ filterCollectionId WRITE setFilterCollectionId NOTIFY filterCollectionIdChanged)
+    Q_PROPERTY(QString filterCategoryString READ filterCategoryString WRITE setFilterCategoryString NOTIFY filterCategoryStringChanged)
     Q_PROPERTY(int showCompleted READ showCompleted WRITE setShowCompleted NOTIFY showCompletedChanged)
 
 public:
@@ -65,6 +66,8 @@ public:
 
     qint64 filterCollectionId();
     void setFilterCollectionId(qint64 filterCollectionId);
+    QString filterCategoryString();
+    void setFilterCategoryString(QString filterCategoryString);
     int showCompleted();
     void setShowCompleted(int showCompleted);
 
@@ -75,11 +78,13 @@ Q_SIGNALS:
     void incidenceChangerChanged();
     void calendarChanged();
     void filterCollectionIdChanged();
+    void filterCategoryStringChanged();
     void showCompletedChanged();
 
 private:
     ExtraTodoModel *m_extraTodoModel = nullptr;
     qint64 m_filterCollectionId;
+    QString m_filterCategoryString;
     int m_showCompleted = ShowComplete::ShowAll;
     int m_showCompletedStore; // For when searches happen
 };

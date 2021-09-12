@@ -13,7 +13,7 @@ QQC2.CheckBox {
     indicator: Rectangle {
         height: parent.height * 0.8
         width: height
-        x: calendarCheckbox.leftPadding
+        x: checkbox.leftPadding
         y: parent.height / 2 - height / 2
         radius: checkbox.radius
         border.color: checkbox.color

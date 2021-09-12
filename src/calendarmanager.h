@@ -10,6 +10,7 @@
 #include <AkonadiCore/AgentFilterProxyModel>
 #include <AkonadiCore/CollectionFilterProxyModel>
 #include <AkonadiCore/EntityRightsFilterModel>
+#include <AkonadiCore/TagModel>
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
@@ -24,6 +25,7 @@ class KCheckableProxyModel;
 class QAbstractProxyModel;
 class QAbstractItemModel;
 class ColorProxyModel;
+class CalendarCategoriesModel;
 
 class CalendarManager : public QObject
 {
@@ -32,6 +34,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
     Q_PROPERTY(QAbstractItemModel *todoCollections READ todoCollections CONSTANT)
     Q_PROPERTY(QAbstractItemModel *viewCollections READ viewCollections CONSTANT)
+    Q_PROPERTY(Akonadi::TagModel *tagModel READ tagModel CONSTANT)
     Q_PROPERTY(KDescendantsProxyModel *allCalendars READ allCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableEventCalendars READ selectableEventCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableTodoCalendars READ selectableTodoCalendars CONSTANT)
@@ -50,6 +53,7 @@ public:
     QAbstractProxyModel *collections();
     QAbstractItemModel *todoCollections();
     QAbstractItemModel *viewCollections();
+    Akonadi::TagModel *tagModel();
     Q_INVOKABLE void save();
     Akonadi::ETMCalendar *calendar() const;
     Akonadi::IncidenceChanger *incidenceChanger() const;
@@ -91,4 +95,5 @@ private:
     Akonadi::EntityRightsFilterModel *m_todoRightsFilterModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_todoViewCollectionModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_viewCollectionModel = nullptr;
+    Akonadi::TagModel *m_tagModel = nullptr;
 };

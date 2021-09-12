@@ -32,6 +32,10 @@ public:
         IncidenceTypeStrRole,
         IncidenceTypeIconRole,
         IncidencePtrRole,
+        TagsRole,
+        ItemRole,
+        CategoriesRole,
+        CategoriesDisplayRole,
         TreeDepthRole
     };
     Q_ENUM(Roles);
@@ -125,6 +129,14 @@ public:
             return todoPtr->iconName();
         } else if(role == Roles::IncidencePtrRole) {
             return QVariant::fromValue(CalendarSupport::incidence(todoItem));
+        } else if(role == Roles::TagsRole) {
+            return QVariant::fromValue(todoItem.tags());
+        } else if(role == Roles::ItemRole) {
+            return QVariant::fromValue(todoItem);
+        } else if(role == Roles::CategoriesRole) {
+            return todoPtr->categories();
+        } else if(role == Roles::CategoriesDisplayRole) {
+            return todoPtr->categories().join(i18nc("List separator", ", "));
         } else if(role == Roles::TreeDepthRole) {
             int depth = 0;
             auto idx = index;
@@ -157,6 +169,10 @@ public:
         roleNames[Roles::IncidenceTypeStrRole] = "incidenceTypeStr";
         roleNames[Roles::IncidenceTypeIconRole] = "incidenceTypeIcon";
         roleNames[Roles::IncidencePtrRole] = "incidencePtr";
+        roleNames[Roles::TagsRole] = "tags";
+        roleNames[Roles::ItemRole] = "item";
+        roleNames[Roles::CategoriesRole] = "categories";
+        roleNames[Roles::CategoriesDisplayRole] = "categoriesDisplay";
         roleNames[Roles::TreeDepthRole] = "treeDepth";
 
         return roleNames;
@@ -262,6 +278,10 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex&
             break;
     }
 
+    if(!m_filterCategoryString.isEmpty()) {
+        acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CategoriesRole).toStringList().contains(m_filterCategoryString);
+    }
+
     return acceptRow ? QSortFilterProxyModel::filterAcceptsRow(row, sourceParent) : acceptRow;
 }
 
@@ -316,6 +336,20 @@ void TodoSortFilterProxyModel::setFilterCollectionId(qint64 filterCollectionId)
     m_filterCollectionId = filterCollectionId;
     invalidateFilter();
     Q_EMIT filterCollectionIdChanged();
+    Q_EMIT layoutChanged();
+}
+
+QString TodoSortFilterProxyModel::filterCategoryString()
+{
+    return m_filterCategoryString;
+}
+
+void TodoSortFilterProxyModel::setFilterCategoryString(QString filterCategoryString)
+{
+    Q_EMIT layoutAboutToBeChanged();
+    m_filterCategoryString = filterCategoryString;
+    Q_EMIT filterCategoryStringChanged();
+    invalidateFilter();
     Q_EMIT layoutChanged();
 }
 

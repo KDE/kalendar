@@ -39,6 +39,7 @@
 #include <KDescendantsProxyModel>
 #include <QTimer>
 #include <KFormat>
+#include <QMetaEnum>
 
 using namespace Akonadi;
 
@@ -426,6 +427,11 @@ CalendarManager::CalendarManager(QObject *parent)
     };
     connect(m_flatCollectionTreeModel, &QSortFilterProxyModel::rowsInserted, this, refreshColors);
 
+    Akonadi::Monitor *monitor = new Akonadi::Monitor(this);
+    monitor->setObjectName(QStringLiteral("TagModelMonitor"));
+    monitor->setTypeMonitored(Akonadi::Monitor::Tags);
+    m_tagModel = new Akonadi::TagModel(monitor);
+
     Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
 }
@@ -468,6 +474,11 @@ QAbstractItemModel * CalendarManager::todoCollections()
 QAbstractItemModel * CalendarManager::viewCollections()
 {
     return m_viewCollectionModel;
+}
+
+Akonadi::TagModel *CalendarManager::tagModel()
+{
+    return m_tagModel;
 }
 
 bool CalendarManager::loading() const

@@ -145,7 +145,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    title: {
+    title: if(pageStack.currentItem) {
         switch (pageStack.currentItem.objectName) {
             case "monthView":
                 return i18n("Month View");
@@ -178,7 +178,7 @@ Kirigami.ApplicationWindow {
 
     globalDrawer: Sidebar {
         bottomPadding: menuLoader.active ? menuLoader.height : 0
-        todoMode: pageStack.currentItem.objectName == "todoView"
+        todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
         onCalendarClicked: if(todoMode) {
             pageStack.currentItem.filterCollectionId = collectionId;
             pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
@@ -187,6 +187,7 @@ Kirigami.ApplicationWindow {
             pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
             // HACK: The Todo View should be able to detect change in collection filtering independently
         }
+        onTagClicked: if(todoMode) pageStack.currentItem.filterCategoryString = tagName
         onViewAllTodosClicked: if(todoMode) pageStack.currentItem.filterCollectionId = -1
     }
 

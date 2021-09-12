@@ -26,7 +26,9 @@ Kirigami.Page {
 
     property int filterCollectionId
     property var filterCollectionDetails: filterCollectionId && filterCollectionId >= 0 ?
-        Kalendar.CalendarManager.getCollectionDetails(filterCollectionId) : filterCollectionDetails = null
+        Kalendar.CalendarManager.getCollectionDetails(filterCollectionId) : null
+    property string filterCategoryString
+
     property int sortBy
     property bool ascendingOrder: false
     readonly property color standardTextColor: Kirigami.Theme.textColor
@@ -82,6 +84,7 @@ Kirigami.Page {
         }
         right: KActionFromAction {
             kalendarAction: "todoview_show_completed"
+            text: i18n("Show Completed")
         }
 
     }
@@ -111,6 +114,8 @@ Kirigami.Page {
 
                     filterCollectionId: root.filterCollectionId
                     filterCollectionDetails: root.filterCollectionDetails
+                    filterCategoryString: root.filterCategoryString
+
                     showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
                     sortBy: root.sortBy
                     ascendingOrder: root.ascendingOrder
@@ -152,23 +157,47 @@ Kirigami.Page {
 
         GridLayout {
             id: headerLayout
-            columns: root.width > Kirigami.Units.gridUnit * 30 ? 2 : 1
-            rows: root.width > Kirigami.Units.gridUnit * 30 ? 1 : 2
+            columns: 2
+            rows: 2
 
             Kirigami.Heading {
                 Layout.row: 0
                 Layout.column: 0
+                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 1 : 2
                 Layout.fillWidth: true
                 text: root.filterCollectionDetails && root.filterCollectionId > -1 ?
                     root.filterCollectionDetails.displayName : i18n("All Todos")
                 font.weight: Font.Bold
                 color: root.filterCollectionDetails && root.filterCollectionId > -1 ?
                     LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
+                elide: Text.ElideRight
             }
+
+            RowLayout {
+                id: tagLayout
+                Layout.row: 0
+                Layout.column: 1
+                Layout.alignment: Qt.AlignRight
+                visible: root.filterCategoryString
+
+                Kirigami.Heading {
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    text: root.filterCategoryString
+                    color: root.filterCollectionDetails ?
+                        LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
+                }
+
+                QQC2.ToolButton {
+                    icon.name: "edit-clear"
+                    onClicked: root.filterCategoryString = ""
+                }
+            }
+
             Kirigami.SearchField {
                 id: searchField
-                Layout.column: root.width > Kirigami.Units.gridUnit * 30 ? 1 : 0
-                Layout.row: root.width > Kirigami.Units.gridUnit * 30 ? 0 : 1
+                Layout.column: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 0 : 1
+                Layout.row: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 1 : 0
+                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 2 : 1
                 Layout.fillWidth: Layout.row === 1
                 onTextChanged: incompleteView.model.filterTodoName(text);
             }
@@ -181,6 +210,8 @@ Kirigami.Page {
 
             filterCollectionId: root.filterCollectionId
             filterCollectionDetails: root.filterCollectionDetails
+            filterCategoryString: root.filterCategoryString
+
             showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
             sortBy: root.sortBy
             ascendingOrder: root.ascendingOrder
@@ -197,7 +228,7 @@ Kirigami.Page {
         id: collectionPickerSheet
         title: i18n("Choose a Todo Calendar")
 
-        property var incidenceWrapper: new IncidenceWrapper()
+        property var incidenceWrapper
 
         ListView {
             implicitWidth: Kirigami.Units.gridUnit * 30
@@ -210,13 +241,13 @@ Kirigami.Page {
 
             model: Kalendar.CalendarManager.todoCollections
             delegate: Kirigami.BasicListItem {
-                leftPadding: ((Kirigami.Units.gridUnit * 2) * (kDescendantLevel - 1)) + Kirigami.Units.largeSpacing
+                leftPadding: model.kDescendantLevel ? ((Kirigami.Units.gridUnit * 2) * (kDescendantLevel - 1)) + Kirigami.Units.largeSpacing : 0
                 enabled: model.checkState != null
                 trailing: Rectangle {
                     height: parent.height * 0.8
                     width: height
                     radius: 3
-                    color: model.collectionColor
+                    color: model.collectionColor ? model.collectionColor : Kirigami.Theme.textColor
                     visible: model.checkState != null
                 }
 

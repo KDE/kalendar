@@ -22,6 +22,7 @@
 #include "contactsmanager.h"
 #include "kalendarconfig.h"
 #include "kalendarapplication.h"
+#include "itemtagsmodel.h"
 
 using namespace KCalendarCore;
 
@@ -67,6 +68,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
     qmlRegisterType<TodoSortFilterProxyModel>("org.kde.kalendar", 1, 0, "TodoSortFilterProxyModel");
     qmlRegisterType<MonthViewModel>("org.kde.kalendar", 1, 0, "MonthViewModel");
+    qmlRegisterType<ItemTagsModel>("org.kde.kalendar", 1, 0, "ItemTagsModel");
 
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
     qRegisterMetaType<QAction*>();
