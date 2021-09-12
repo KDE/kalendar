@@ -13,6 +13,7 @@
   <name xml:lang="it">Kalendar</name>
   <name xml:lang="ko">Kalendar</name>
   <name xml:lang="nl">Kalendar</name>
+  <name xml:lang="pl">Kalendarz</name>
   <name xml:lang="pt">Kalendar</name>
   <name xml:lang="pt-BR">Kalendar</name>
   <name xml:lang="sl">Kalendar</name>
@@ -32,6 +33,7 @@
   <summary xml:lang="it">Applicazione di calendario</summary>
   <summary xml:lang="ko">캘린더 프로그램</summary>
   <summary xml:lang="nl">Agendatoepassing</summary>
+  <summary xml:lang="pl">Aplikacja kalendarza</summary>
   <summary xml:lang="pt">Aplicação de calendário</summary>
   <summary xml:lang="pt-BR">Aplicativo de calendário</summary>
   <summary xml:lang="sl">Aplikacija Koledar</summary>
@@ -53,6 +55,7 @@
   <developer_name xml:lang="it">Comunità KDE, Clau Cambra e Carl Schwan</developer_name>
   <developer_name xml:lang="ko">KDE 커뮤니티, Clau Cambra, Carl Schwan</developer_name>
   <developer_name xml:lang="nl">KDE-gemeenschap, Clau Cambra en Carl Schwan</developer_name>
+  <developer_name xml:lang="pl">Społeczność KDE, Clau Cambra oraz Carl Schwan</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE, Clau Cambra e Carl Schwan</developer_name>
   <developer_name xml:lang="pt-BR">Comunidade KDE, Clau Cambra e Carl Schwan</developer_name>
   <developer_name xml:lang="sl">Skupnost KDE, , Clau Cambra in Carl Schwan</developer_name>
@@ -73,6 +76,7 @@
     <p xml:lang="it">Un'applicazione di calendario che ti consente di gestire i tuoi eventi.</p>
     <p xml:lang="ko">이벤트를 관리할 수 있는 캘린더 프로그램입니다.</p>
     <p xml:lang="nl">Een agendatoepassing waarmee u uw afspraken beheert.</p>
+    <p xml:lang="pl">Aplikacja kalendarza umożliwiająca ci zarządzanie twoimi wydarzeniami.</p>
     <p xml:lang="pt">Uma aplicação de calendários que lhe permite gerir eventos.</p>
     <p xml:lang="pt-BR">Um aplicativo de calendário que lhe permite gerenciar seus eventos.</p>
     <p xml:lang="sl">Aplikacija koledarja, ki vam omogoča upravljanje vaših dogodkov.</p>
@@ -92,6 +96,7 @@
       <li xml:lang="it">Supporto calendari in linea. Porta il tuo calendario da Nextcloud e altri servizi in linea in Kalendar</li>
       <li xml:lang="ko">온라인 캘린더를 지원합니다. Kalendar에서 Nextcloud와 다른 온라인 서비스의 캘린더를 사용할 수 있습니다</li>
       <li xml:lang="nl">Ondersteuning van online agenda. Breng uw agenda uit Nextcloud en andere online-services in Kalendar</li>
+      <li xml:lang="pl">Obsługa kalendarza sieciowego. Przeniesienie kalendarza z Nextcloud i innych usług sieciowych do Kalendarza.</li>
       <li xml:lang="pt">Suporte para calendários 'online'. Traga o seu calendário da Nextcloud e de outros serviços para o Kalendar</li>
       <li xml:lang="pt-BR">Suporte a calendários online. Traga seu calendário do Nextcloud e outros serviços online no Kalendar</li>
       <li xml:lang="sl">Podpora spletnega koledarja. Prenesite vaš koledar iz Nextclouda in drugih spletnih storitev v Kalendar</li>
