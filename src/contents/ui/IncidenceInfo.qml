@@ -65,6 +65,7 @@ Kirigami.OverlayDrawer {
                     Kirigami.Heading {
                         id: infoHeader
                         Layout.fillHeight: true
+                        Layout.leftMargin: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
                         text: i18n(incidenceInfo.incidenceWrapper.incidenceTypeStr)
                     }
 

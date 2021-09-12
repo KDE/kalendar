@@ -50,13 +50,7 @@ Kirigami.OverlayDrawer {
 
             RowLayout {
                 id: searchContainer
-                anchors {
-                    left: parent.left
-                    leftMargin: Kirigami.Units.smallSpacing
-                    right: parent.right
-                    rightMargin: Kirigami.Units.smallSpacing
-                    verticalCenter: parent.verticalCenter
-                }
+                anchors.fill: parent
 
                 /*Kirigami.SearchField { // TODO: Make this open a new search results page
                     id: searchItem
@@ -65,6 +59,7 @@ Kirigami.OverlayDrawer {
 
                 Kirigami.Heading {
                     Layout.fillWidth: true
+                    Layout.leftMargin: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
                     text: i18n("Kalendar")
                 }
 
