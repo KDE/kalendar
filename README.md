@@ -10,6 +10,14 @@ Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you
 ![Screenshot of Kalendar's todo view](screenshot2.png)
 ![Screenshot of Kalendar's schedule view on mobile](screenshot3.png)
 
+## Get it
+
+Kalendar is available in the Arch AUR and with openSUSE tumbleweed using
+the following two OBS repositories: https://build.opensuse.org/project/show/home:KaratekHD:kirigami
+and https://build.opensuse.org/project/show/home:andresbs:plasma-mobile
+
+Please note that this is pre-release software and that you may encounter bugs, crashes, or errors.
+
 ## Build
 
 **Kalendar requires the kirigami-addons library to be installed, as well as KFrameworks 5.86 to be installed.** These packages may not be available in your distibution of choice, and Kalendar might not work. Additionally, **we recommend you install KOrganizer**, which will handle some aspects of the initial setup of Akonadi which Kalendar does not yet do.
