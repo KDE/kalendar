@@ -33,6 +33,7 @@ class IncidenceWrapper : public QObject
     Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
     Q_PROPERTY(QString parent READ parent WRITE setParent NOTIFY parentChanged)
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
+    Q_PROPERTY(QStringList categories READ categories WRITE setCategories NOTIFY categoriesChanged)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
     Q_PROPERTY(bool hasGeo READ hasGeo CONSTANT)
@@ -90,6 +91,8 @@ public:
     void setParent(QString parent);
     QString summary() const;
     void setSummary(const QString &summary);
+    QStringList categories();
+    void setCategories(QStringList categories);
     QString description() const;
     void setDescription(const QString &description);
     QString location() const;
@@ -141,6 +144,7 @@ Q_SIGNALS:
     void collectionIdChanged();
     void parentChanged();
     void summaryChanged();
+    void categoriesChanged();
     void descriptionChanged();
     void locationChanged();
     void incidenceStartChanged();

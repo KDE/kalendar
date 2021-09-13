@@ -212,6 +212,20 @@ Kirigami.OverlayDrawer {
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
+                        text: i18n("<b>Tags:</b>")
+                        visible: incidenceInfo.incidenceWrapper.categories.length > 0
+                    }
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.fillWidth: true
+
+                        visible: incidenceInfo.incidenceWrapper.categories.length > 0
+                        text: incidenceInfo.incidenceWrapper.categories.join(i18nc("List separator", ", "))
+                        wrapMode: Text.Wrap
+                    }
+
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Date:</b>")
                     }
                     QQC2.Label {

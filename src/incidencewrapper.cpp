@@ -46,6 +46,7 @@ void IncidenceWrapper::setIncidencePtr(const KCalendarCore::Incidence::Ptr incid
     Q_EMIT incidenceIconNameChanged();
     Q_EMIT collectionIdChanged();
     Q_EMIT summaryChanged();
+    Q_EMIT categoriesChanged();
     Q_EMIT descriptionChanged();
     Q_EMIT locationChanged();
     Q_EMIT incidenceStartChanged();
@@ -119,6 +120,17 @@ void IncidenceWrapper::setSummary(const QString &summary)
 {
     m_incidence->setSummary(summary);
     Q_EMIT summaryChanged();
+}
+
+QStringList IncidenceWrapper::categories()
+{
+    return m_incidence->categories();
+}
+
+void IncidenceWrapper::setCategories(QStringList categories)
+{
+    m_incidence->setCategories(categories);
+    Q_EMIT categoriesChanged();
 }
 
 QString IncidenceWrapper::description() const
