@@ -22,6 +22,15 @@
             </choices>
             <default>Pin</default>
         </entry>
+        <entry name="lastOpenedView" type="Enum">
+            <label>Remember the last opened view.</label>
+            <choices>
+                <choice name="monthView"/>
+                <choice name="scheduleView"/>
+                <choice name="todoView"/>
+            </choices>
+            <default>scheduleView</default>
+        </entry>
     </group>
 
     <group name="MonthView">

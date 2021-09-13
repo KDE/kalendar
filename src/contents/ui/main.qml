@@ -40,10 +40,40 @@ Kirigami.ApplicationWindow {
     readonly property var todoViewOrderDescendingAction: KalendarApplication.action("todoview_order_descending")
     readonly property var todoViewShowCompletedAction: KalendarApplication.action("todoview_show_completed")
 
-    Component.onCompleted: if (Kirigami.Settings.isMobile) {
-        scheduleViewAction.setChecked(true);
-    } else {
-        monthViewAction.setChecked(true);
+    onClosing: {
+        rememberLastOpenedView();
+    }
+
+    function rememberLastOpenedView() {
+        switch (pageStack.currentItem.objectName) {
+            case "monthView":
+                Config.lastOpenedView = 0;
+                break;
+            case "scheduleView":
+                Config.lastOpenedView = 1;
+                break;
+            case "todoView":
+                Config.lastOpenedView = 2;
+                break;
+        }
+        Config.save();
+    }
+
+    Component.onCompleted: {
+        switch (Config.lastOpenedView) {
+            case 0:
+                monthViewAction.trigger();
+                break;
+            case 1:
+                scheduleViewAction.trigger();
+                break;
+            case 2:
+                todoViewAction.trigger();
+                break;
+            default:
+                monthViewAction.trigger();
+                break;
+        }
     }
 
     Connections {
