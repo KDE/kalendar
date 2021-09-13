@@ -227,22 +227,31 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Date:</b>")
+                        visible: !isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime())
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
-                        text: incidenceInfo.incidenceData.startTime.toDateString() == incidenceInfo.incidenceData.endTime.toDateString() ?
-                        incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale()) :
-                        incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale()) + " - " + incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
+                        text: if(incidenceInfo.incidenceData.startTime.toDateString() === incidenceInfo.incidenceData.endTime.toDateString()) {
+                            return incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale());
+                        } else if (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) && !isNaN(incidenceInfo.incidenceData.endTime.getTime())) {
+                            incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale()) + " - " + incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
+                        } else if (isNaN(incidenceInfo.incidenceData.startTime.getTime()) && !isNaN(incidenceInfo.incidenceData.endTime.getTime())) {
+                            return incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
+                        } else if (isNaN(incidenceInfo.incidenceData.endTime.getTime()) && !isNaN(incidenceInfo.incidenceData.startTime.getTime())) {
+                            return incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale())
+                        }
                         wrapMode: Text.Wrap
+                        visible: !isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime())
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Time:</b>")
                         visible: !incidenceInfo.incidenceData.allDay &&
-                        incidenceInfo.incidenceData.startTime.toDateString() == incidenceInfo.incidenceData.endTime.toDateString()
+                            incidenceInfo.incidenceData.startTime.toDateString() == incidenceInfo.incidenceData.endTime.toDateString() &&
+                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
@@ -257,20 +266,23 @@ Kirigami.OverlayDrawer {
                         }
                         wrapMode: Text.Wrap
                         visible: !incidenceInfo.incidenceData.allDay &&
-                        incidenceInfo.incidenceData.startTime.toDateString() == incidenceInfo.incidenceData.endTime.toDateString()
+                            incidenceInfo.incidenceData.startTime.toDateString() == incidenceInfo.incidenceData.endTime.toDateString() &&
+                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Duration:</b>")
-                        visible: incidenceInfo.incidenceData.durationString
+                        visible: incidenceInfo.incidenceData.durationString &&
+                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
                         text: incidenceInfo.incidenceData.durationString
-                        visible: incidenceInfo.incidenceData.durationString
+                        visible: incidenceInfo.incidenceData.durationString &&
+                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
                         wrapMode: Text.Wrap
                     }
 
