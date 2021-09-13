@@ -75,12 +75,14 @@ Kirigami.Page {
         left: Kirigami.Action {
             icon.name: "go-previous"
             text: i18n("Previous Month")
+            shortcut: "Left"
             onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, -1))
             displayHint: Kirigami.DisplayHint.IconOnly
         }
         right: Kirigami.Action {
             icon.name: "go-next"
             text: i18n("Next Month")
+            shortcut: "Right"
             onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, 1))
             displayHint: Kirigami.DisplayHint.IconOnly
         }
