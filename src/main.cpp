@@ -23,6 +23,7 @@
 #include "kalendarconfig.h"
 #include "kalendarapplication.h"
 #include "itemtagsmodel.h"
+#include "tagmanager.h"
 
 using namespace KCalendarCore;
 
@@ -56,11 +57,13 @@ int main(int argc, char *argv[])
     CalendarManager manager;
     AgentConfiguration agentConfiguration;
     auto contactsManager = new ContactsManager(&engine);
+    auto tagManager = new TagManager(&engine);
 
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", &manager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "ContactsManager", contactsManager);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
 
     qmlRegisterType<IncidenceWrapper>("org.kde.kalendar", 1, 0, "IncidenceWrapper");
     qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");
