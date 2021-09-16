@@ -40,7 +40,7 @@ void KalendarApplication::setupActions(const QString &actionName)
     if (actionName == QLatin1String("open_todo_view") && KAuthorized::authorizeAction(actionName)) {
         auto openTodoAction = mCollection.addAction(actionName, this, &KalendarApplication::openTodoView);
         openTodoAction->setText(i18n("Todo View"));
-        openTodoAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-list")));
+        openTodoAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-tasks")));
         openTodoAction->setCheckable(true);
         openTodoAction->setActionGroup(m_viewGroup);
         mCollection.setDefaultShortcut(openTodoAction, QKeySequence(i18n("Ctrl+3")));

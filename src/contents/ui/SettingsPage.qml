@@ -7,6 +7,7 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 
 Kirigami.CategorizedSettings {
+    objectName: "settingsPage"
     actions: [
         Kirigami.SettingAction {
             text: i18n("General")

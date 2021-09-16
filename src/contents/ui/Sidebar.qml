@@ -26,7 +26,7 @@ Kirigami.OverlayDrawer {
     handleVisible: !wideScreen
     handleClosedIcon.source: null
     handleOpenIcon.source: null
-    drawerOpen: !Settings.isMobile
+    drawerOpen: !Kirigami.Settings.isMobile
     width: Kirigami.Units.gridUnit * 16
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
@@ -66,8 +66,9 @@ Kirigami.OverlayDrawer {
 
                 Kirigami.ActionToolBar {
                     id: menu
-                    anchors.fill: parent
-                    visible: Kirigami.Settings.isMobile
+                    visible: false // only make it visible when menubar is hidden, progress in another MR: https://invent.kde.org/pim/kalendar/-/merge_requests/41
+                    Layout.preferredWidth: parent.width
+                    Layout.preferredHeight: parent.height
                     overflowIconName: "application-menu"
 
                     actions: [
@@ -87,7 +88,6 @@ Kirigami.OverlayDrawer {
                             redoAction.text
                             shortcut: redoAction.shortcut
                             enabled: CalendarManager.undoRedoData.redoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
-
                             onTriggered: CalendarManager.redoAction();
                         },
                         Kirigami.Action {
@@ -122,15 +122,19 @@ Kirigami.OverlayDrawer {
             ListView {
                 id: generalList
                 currentIndex: {
-                    switch (pageStack.currentItem.objectName) {
-                        case "monthView":
-                            return 0;
-                        case "scheduleView":
-                            return 1;
-                        case "todoView":
-                            return 2;
-                        default:
-                            return 0;
+                    if (!Kirigami.Settings.isMobile) {
+                        switch (pageStack.currentItem.objectName) {
+                            case "monthView":
+                                return 0;
+                            case "scheduleView":
+                                return 1;
+                            case "todoView":
+                                return 2;
+                            default:
+                                return 0;
+                        }
+                    } else {
+                        return -1;
                     }
                 }
                 property list<Kirigami.Action> actions: [
@@ -171,7 +175,33 @@ Kirigami.OverlayDrawer {
                         shortcut: configureAction.shortcut
                     }
                 ]
-                model: actions
+                property list<Kirigami.Action> mobileActions: [
+                    Kirigami.Action {
+                        icon.name: "edit-undo"
+                        text: CalendarManager.undoRedoData.undoAvailable ?
+                            i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription :
+                            i18n("Undo")
+                        enabled: CalendarManager.undoRedoData.undoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
+                        onTriggered: CalendarManager.undoAction();
+                    },
+                    Kirigami.Action {
+                        icon.name: KalendarApplication.iconName(redoAction.icon)
+                        text: CalendarManager.undoRedoData.redoAvailable ?
+                            i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription :
+                            i18n("Redo")
+                        enabled: CalendarManager.undoRedoData.redoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
+                        onTriggered: CalendarManager.redoAction();
+                    },
+                    Kirigami.Action {
+                        text: i18n("Settings")
+                        icon.name: KalendarApplication.iconName(configureAction.icon)
+                        onTriggered: {
+                            configureAction.trigger()
+                            if(sidebar.modal) sidebar.close()
+                        }
+                    }
+                ]
+                model: !Kirigami.Settings.isMobile ? actions : mobileActions
                 delegate: Kirigami.BasicListItem {
                     text: modelData.text
                     icon: modelData.icon.name

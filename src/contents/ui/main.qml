@@ -7,9 +7,10 @@ import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
-import org.kde.kalendar 1.0
 import QtQml.Models 2.15
+
 import "dateutils.js" as DateUtils
+import org.kde.kalendar 1.0
 
 Kirigami.ApplicationWindow {
     id: root
@@ -204,6 +205,14 @@ Kirigami.ApplicationWindow {
             todoMode: pageStack.currentItem.objectName == "todoView"
             Kirigami.Theme.colorSet: Kirigami.Theme.Header
         }
+    }
+
+    footer: Loader {
+        id: bottomLoader
+        active: Kirigami.Settings.isMobile
+        visible: pageStack.layers.currentItem.objectName != "settingsPage"
+
+        source: Qt.resolvedUrl("qrc:/BottomToolBar.qml")
     }
 
     globalDrawer: Sidebar {
