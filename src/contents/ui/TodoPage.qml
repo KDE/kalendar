@@ -203,24 +203,31 @@ Kirigami.Page {
             }
         }
 
-        TodoTreeView {
-            id: incompleteView
+        QQC2.ScrollView {
             Layout.fillWidth: true
             Layout.fillHeight: true
+            contentWidth: availableWidth
+            QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-            filterCollectionId: root.filterCollectionId
-            filterCollectionDetails: root.filterCollectionDetails
-            filterCategoryString: root.filterCategoryString
+            TodoTreeView {
+                id: incompleteView
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
-            showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
-            sortBy: root.sortBy
-            ascendingOrder: root.ascendingOrder
-            onAddTodo: root.addTodo(collectionId)
-            onViewTodo: root.viewTodo(todoData, collectionData)
-            onEditTodo: root.editTodo(todoPtr, collectionId)
-            onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
-            onCompleteTodo: root.completeTodo(todoPtr);
-            onAddSubTodo: root.addSubTodo(parentWrapper)
+                filterCollectionId: root.filterCollectionId
+                filterCollectionDetails: root.filterCollectionDetails
+                filterCategoryString: root.filterCategoryString
+
+                showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
+                sortBy: root.sortBy
+                ascendingOrder: root.ascendingOrder
+                onAddTodo: root.addTodo(collectionId)
+                onViewTodo: root.viewTodo(todoData, collectionData)
+                onEditTodo: root.editTodo(todoPtr, collectionId)
+                onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
+                onCompleteTodo: root.completeTodo(todoPtr);
+                onAddSubTodo: root.addSubTodo(parentWrapper)
+            }
         }
     }
 
