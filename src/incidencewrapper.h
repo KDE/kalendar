@@ -20,7 +20,7 @@
  * adding and editing the incidence in the collection of our choice.
  */
 
-class IncidenceWrapper : public QObject
+class IncidenceWrapper : public QObject, public KCalendarCore::IncidenceBase::IncidenceObserver
 {
     Q_OBJECT
     Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
@@ -76,7 +76,11 @@ public:
     Q_ENUM(IncidenceTypes)
 
     IncidenceWrapper(QObject *parent = nullptr);
-    ~IncidenceWrapper() = default;
+    ~IncidenceWrapper();
+
+    void incidenceUpdate(const QString &uid, const QDateTime &recurrenceId) override;
+    void incidenceUpdated(const QString &uid, const QDateTime &recurrenceId) override;
+    void notifyDataChanged();
 
     KCalendarCore::Incidence::Ptr incidencePtr() const;
     void setIncidencePtr(KCalendarCore::Incidence::Ptr incidencePtr);
@@ -136,6 +140,8 @@ public:
     Q_INVOKABLE void clearRecurrences();
 
 Q_SIGNALS:
+    void incidenceChanged();
+    void incidenceAboutToChange();
     void incidencePtrChanged(KCalendarCore::Incidence::Ptr incidencePtr);
     void originalIncidencePtrChanged();
     void incidenceTypeChanged();

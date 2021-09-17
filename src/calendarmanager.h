@@ -77,6 +77,7 @@ Q_SIGNALS:
     void loadingChanged();
     void entityTreeModelChanged();
     void undoRedoDataChanged();
+    void incidenceChanged();
 
 private:
     Akonadi::ETMCalendar::Ptr m_calendar = nullptr;

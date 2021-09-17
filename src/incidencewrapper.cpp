@@ -9,13 +9,14 @@
 
 IncidenceWrapper::IncidenceWrapper(QObject *parent)
     : QObject(parent)
+    , KCalendarCore::IncidenceBase::IncidenceObserver()
     , m_incidence(new KCalendarCore::Event)
     , m_remindersModel(parent, m_incidence)
     , m_attendeesModel(parent, m_incidence)
     , m_recurrenceExceptionsModel(parent, m_incidence)
     , m_attachmentsModel(parent, m_incidence)
 {
-
+    m_incidence->registerObserver(this);
     // Change incidence pointer in remindersmodel if changed here
     connect(this, &IncidenceWrapper::incidencePtrChanged,
             &m_remindersModel, [=](KCalendarCore::Incidence::Ptr incidencePtr){ m_remindersModel.setIncidencePtr(incidencePtr); });
@@ -28,19 +29,27 @@ IncidenceWrapper::IncidenceWrapper(QObject *parent)
 
 }
 
-KCalendarCore::Incidence::Ptr IncidenceWrapper::incidencePtr() const
+IncidenceWrapper::~IncidenceWrapper()
 {
-    return m_incidence;
+    m_incidence->unRegisterObserver(this);
 }
 
-void IncidenceWrapper::setIncidencePtr(const KCalendarCore::Incidence::Ptr incidencePtr)
+void IncidenceWrapper::incidenceUpdate(const QString& uid, const QDateTime&)
 {
-    m_incidence = incidencePtr;
-    KCalendarCore::Incidence::Ptr originalIncidence(incidencePtr->clone());
-    m_originalIncidence = originalIncidence;
+    if(uid == m_incidence->uid()) {
+        Q_EMIT incidenceAboutToChange();
+    }
+}
 
-    Q_EMIT incidencePtrChanged(incidencePtr);
-    Q_EMIT originalIncidencePtrChanged();
+void IncidenceWrapper::incidenceUpdated(const QString& uid, const QDateTime&)
+{
+    if(uid == m_incidence->uid()) {
+        notifyDataChanged();
+    }
+}
+
+void IncidenceWrapper::notifyDataChanged()
+{
     Q_EMIT incidenceTypeChanged();
     Q_EMIT incidenceTypeStrChanged();
     Q_EMIT incidenceIconNameChanged();
@@ -62,6 +71,25 @@ void IncidenceWrapper::setIncidencePtr(const KCalendarCore::Incidence::Ptr incid
     Q_EMIT todoCompletedChanged();
     Q_EMIT todoCompletionDtChanged();
     Q_EMIT todoPercentCompleteChanged();
+}
+
+KCalendarCore::Incidence::Ptr IncidenceWrapper::incidencePtr() const
+{
+    return m_incidence;
+}
+
+void IncidenceWrapper::setIncidencePtr(const KCalendarCore::Incidence::Ptr incidencePtr)
+{
+    m_incidence->unRegisterObserver(this);
+    m_incidence = incidencePtr;
+    m_incidence->registerObserver(this);
+
+    KCalendarCore::Incidence::Ptr originalIncidence(incidencePtr->clone());
+    m_originalIncidence = originalIncidence;
+
+    Q_EMIT incidencePtrChanged(incidencePtr);
+    Q_EMIT originalIncidencePtrChanged();
+    notifyDataChanged();
 }
 
 KCalendarCore::Incidence::Ptr IncidenceWrapper::originalIncidencePtr()
