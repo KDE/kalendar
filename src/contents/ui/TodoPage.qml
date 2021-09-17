@@ -163,7 +163,7 @@ Kirigami.Page {
             Kirigami.Heading {
                 Layout.row: 0
                 Layout.column: 0
-                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 1 : 2
+                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 1 : 2
                 Layout.fillWidth: true
                 text: root.filterCollectionDetails && root.filterCollectionId > -1 ?
                     root.filterCollectionDetails.displayName : i18n("All Todos")
@@ -173,31 +173,31 @@ Kirigami.Page {
                 elide: Text.ElideRight
             }
 
-            RowLayout {
-                id: tagLayout
+            Tag {
+                id: filterTag
                 Layout.row: 0
                 Layout.column: 1
                 Layout.alignment: Qt.AlignRight
                 visible: root.filterCategoryString
+                text: root.filterCategoryString
 
-                Kirigami.Heading {
-                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                    text: root.filterCategoryString
-                    color: root.filterCollectionDetails ?
-                        LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
-                }
+                implicitWidth: itemLayout.implicitWidth > headerLayout.width - Kirigami.Units.gridUnit * 6 ?
+                    headerLayout.width - Kirigami.Units.gridUnit * 6 : itemLayout.implicitWidth
+                isHeading: true
+                headingItem.color: root.filterCollectionDetails ?
+                    LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
+                headingItem.font.weight: Font.Bold
 
-                QQC2.ToolButton {
-                    icon.name: "edit-clear"
-                    onClicked: root.filterCategoryString = ""
-                }
+                icon.name: "edit-delete-remove"
+                onClicked: root.filterCategoryString = ""
+                actionText: i18n("Remove filtering tag")
             }
 
             Kirigami.SearchField {
                 id: searchField
-                Layout.column: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 0 : 1
-                Layout.row: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 1 : 0
-                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || tagLayout.visible ? 2 : 1
+                Layout.column: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 0 : 1
+                Layout.row: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 1 : 0
+                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 2 : 1
                 Layout.fillWidth: Layout.row === 1
                 onTextChanged: incompleteView.model.filterTodoName(text);
             }

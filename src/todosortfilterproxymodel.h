@@ -3,19 +3,14 @@
 
 #pragma once
 #include <QSortFilterProxyModel>
-#include <QAbstractProxyModel>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
-#include <KCheckableProxyModel>
-#include <KDescendantsProxyModel>
-#include <KExtraColumnsProxyModel>
-#include <KFormat>
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <Akonadi/Calendar/ETMCalendar>
 #include <todomodel.h>
+#include <extratodomodel.h>
 #include <incidencetreemodel.h>
 
-class ExtraTodoModel;
 
 class TodoSortFilterProxyModel : public QSortFilterProxyModel
 {

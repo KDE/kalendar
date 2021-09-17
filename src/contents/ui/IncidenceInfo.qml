@@ -215,13 +215,19 @@ Kirigami.OverlayDrawer {
                         text: i18n("<b>Tags:</b>")
                         visible: incidenceInfo.incidenceWrapper.categories.length > 0
                     }
-                    QQC2.Label {
-                        Layout.alignment: Qt.AlignTop
+                    Flow {
                         Layout.fillWidth: true
-
                         visible: incidenceInfo.incidenceWrapper.categories.length > 0
-                        text: incidenceInfo.incidenceWrapper.categories.join(i18nc("List separator", ", "))
-                        wrapMode: Text.Wrap
+                        spacing: Kirigami.Units.largeSpacing
+                        Repeater {
+                            model: incidenceInfo.incidenceWrapper.categories
+                            Tag {
+                                text: modelData
+                                icon.name: "edit-delete-remove"
+                                actionText: i18n("Remove %1 tag", modelData)
+                                showAction: false
+                            }
+                        }
                     }
 
                     QQC2.Label {

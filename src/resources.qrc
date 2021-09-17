@@ -36,5 +36,6 @@
     <file alias="NativeMenuItemFromAction.qml">contents/ui/NativeMenuItemFromAction.qml</file>
     <file alias="KActionFromAction.qml">contents/ui/KActionFromAction.qml</file>
     <file alias="ColoredCheckbox.qml">contents/ui/ColoredCheckbox.qml</file>
+    <file alias="Tag.qml">contents/ui/Tag.qml</file>
   </qresource>
 </RCC>

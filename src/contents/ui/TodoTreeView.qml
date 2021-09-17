@@ -52,7 +52,7 @@ KirigamiAddonsTreeView.TreeListView {
 
     Kirigami.PlaceholderMessage {
         anchors.centerIn: parent
-        visible: parent.count === 0 && !root.filterCollectionDetails.isFiltered
+        visible: parent.count === 0 && root.filterCollectionDetails && !root.filterCollectionDetails.isFiltered
         text: root.showCompleted === Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly ?
             i18n("No todos completed") : i18n("No todos left to complete")
         helpfulAction: Kirigami.Action {
@@ -110,6 +110,7 @@ KirigamiAddonsTreeView.TreeListView {
 
                     Layout.row: 0
                     Layout.column: 0
+                    Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 || recurIcon.visible || dateLabel.visible ? 1 : 2
 
                     color: model.color
                     radius: 100
@@ -122,6 +123,7 @@ KirigamiAddonsTreeView.TreeListView {
                     Layout.row: 0
                     Layout.column: 1
                     Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 28 && (recurIcon.visible || dateLabel.visible) ? 2 : 1
+                    Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 || recurIcon.visible || dateLabel.visible ? 1 : 2
                     Layout.fillWidth: true
                     text: model.text
                     font.strikeout: model.todoCompleted
@@ -129,21 +131,32 @@ KirigamiAddonsTreeView.TreeListView {
                     wrapMode: Text.Wrap
                 }
 
-                QQC2.Label {
-                    id: tagLabel
+                Flow {
+                    id: tagFlow
                     Layout.fillWidth: true
-                    Layout.row: root.width < Kirigami.Units.gridUnit * 28 && (recurIcon.visible || dateLabel.visible) ? 1 : 0
+                    Layout.row: root.width < Kirigami.Units.gridUnit * 28 && (recurIcon.visible || dateLabel.visible || priorityLayout.visible) ? 1 : 0
                     Layout.column: 2
                     Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 ? 1 : 2
                     Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 28 ? 2 : 1
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                     Layout.rightMargin: Kirigami.Units.largeSpacing
-                    horizontalAlignment: Text.AlignRight
-                    text: model.categoriesDisplay
-                    elide: Text.ElideRight
+
+                    layoutDirection: Qt.RightToLeft
+                    spacing: Kirigami.Units.largeSpacing
+
+                    Repeater {
+                        id: tagsRepeater
+                        model: todoModel.data(todoModel.index(index, 0), Kalendar.ExtraTodoModel.CategoriesRole) // Getting categories from the model is *very* faulty
+
+                        Tag {
+                            implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
+                            text: modelData
+                            showAction: false
+                        }
+                    }
                 }
 
                 RowLayout {
+                    id: priorityLayout
                     Layout.row: 0
                     Layout.column: 3
                     Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 ? 1 : 2

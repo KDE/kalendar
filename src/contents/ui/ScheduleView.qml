@@ -365,7 +365,7 @@ Kirigami.Page {
                                                 property int dayOfMultidayIncidence: DateUtils.fullDaysBetweenDates(modelData.startTime, periodStartDate)
 
                                                 Component.onCompleted: {
-                                                    incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceInfo, "incidence");
+                                                    incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceCard, "incidence");
                                                     incidenceWrapper.incidencePtr = modelData.incidencePtr
                                                 }
 
