@@ -75,19 +75,17 @@ Kirigami.OverlayDrawer {
                         Kirigami.Action {
                             icon.name: "edit-undo"
                             text: CalendarManager.undoRedoData.undoAvailable ?
-                            i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription :
-                            undoAction.text
+                                i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : undoAction.text
                             shortcut: undoAction.shortcut
-                            enabled: CalendarManager.undoRedoData.undoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
+                            enabled: CalendarManager.undoRedoData.undoAvailable
                             onTriggered: CalendarManager.undoAction();
                         },
                         Kirigami.Action {
                             icon.name: KalendarApplication.iconName(redoAction.icon)
                             text: CalendarManager.undoRedoData.redoAvailable ?
-                            i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription :
-                            redoAction.text
+                                i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : redoAction.text
                             shortcut: redoAction.shortcut
-                            enabled: CalendarManager.undoRedoData.redoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
+                            enabled: CalendarManager.undoRedoData.redoAvailable
                             onTriggered: CalendarManager.redoAction();
                         },
                         Kirigami.Action {
@@ -179,17 +177,15 @@ Kirigami.OverlayDrawer {
                     Kirigami.Action {
                         icon.name: "edit-undo"
                         text: CalendarManager.undoRedoData.undoAvailable ?
-                            i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription :
-                            i18n("Undo")
-                        enabled: CalendarManager.undoRedoData.undoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
+                            i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : i18n("Undo")
+                        enabled: CalendarManager.undoRedoData.undoAvailable
                         onTriggered: CalendarManager.undoAction();
                     },
                     Kirigami.Action {
                         icon.name: KalendarApplication.iconName(redoAction.icon)
                         text: CalendarManager.undoRedoData.redoAvailable ?
-                            i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription :
-                            i18n("Redo")
-                        enabled: CalendarManager.undoRedoData.redoAvailable && !(root.activeFocusItem instanceof TextEdit || root.activeFocusItem instanceof TextInput)
+                            i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : i18n("Redo")
+                        enabled: CalendarManager.undoRedoData.redoAvailable
                         onTriggered: CalendarManager.redoAction();
                     },
                     Kirigami.Action {
@@ -225,20 +221,30 @@ Kirigami.OverlayDrawer {
                 anchors.fill: parent
                 spacing: 0
 
-                Kirigami.Heading {
-                    id: tagsHeading
-                    Layout.fillWidth: true
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    leftPadding: Kirigami.Units.largeSpacing
-                    text: i18n("Tags")
-                    color: Kirigami.Theme.disabledTextColor
-
-                    font.weight: Font.Bold
-                    level: 5
+                RowLayout {
+                    id: tagsHeadingLayout
+                    Layout.leftMargin: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                     visible: tagList.count > 0
-                    z: 10
-                    background: Rectangle {color: Kirigami.Theme.backgroundColor}
+
+                    Kirigami.Icon {
+                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                        color: Kirigami.Theme.disabledTextColor
+                        isMask: true
+                        source: "action-rss_tag"
+                    }
+                    Kirigami.Heading {
+                        id: tagsHeading
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignVCenter
+                        text: i18n("Tags")
+                        color: Kirigami.Theme.disabledTextColor
+
+                        level: 4
+                        z: 10
+                        background: Rectangle {color: Kirigami.Theme.backgroundColor}
+                    }
                 }
 
                 Repeater {
@@ -249,8 +255,10 @@ Kirigami.OverlayDrawer {
 
                     delegate: Kirigami.BasicListItem {
                         Layout.fillWidth: true
+
                         label: display
                         labelItem.color: Kirigami.Theme.textColor
+                        reserveSpaceForIcon: true
 
                         hoverEnabled: sidebar.todoMode
                         separatorVisible: false
@@ -259,18 +267,29 @@ Kirigami.OverlayDrawer {
                     }
                 }
 
-                Kirigami.Heading {
-                    id: calendarsHeading
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                RowLayout {
                     Layout.topMargin: tagsHeading.visible ? Kirigami.Units.largeSpacing * 2 : 0
-                    leftPadding: Kirigami.Units.largeSpacing
-                    text: i18n("Calendars")
-                    color: Kirigami.Theme.disabledTextColor
-                    font.weight: Font.Bold
-                    level: 5
-                    z: 10
-                    background: Rectangle {color: Kirigami.Theme.backgroundColor}
+                    Layout.leftMargin: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+
+                    Kirigami.Icon {
+                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                        color: Kirigami.Theme.disabledTextColor
+                        isMask: true
+                        source: "view-calendar"
+                    }
+                    Kirigami.Heading {
+                        id: calendarsHeading
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.fillWidth: true
+                        text: i18n("Calendars")
+                        color: Kirigami.Theme.disabledTextColor
+
+                        level: 4
+                        z: 10
+                        background: Rectangle {color: Kirigami.Theme.backgroundColor}
+                    }
                 }
 
                 Repeater {
@@ -291,14 +310,24 @@ Kirigami.OverlayDrawer {
                                 labelItem.color: Kirigami.Theme.disabledTextColor
                                 labelItem.font.weight: Font.DemiBold
                                 topPadding: 2 * Kirigami.Units.largeSpacing
+                                leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                                 hoverEnabled: false
                                 background: Item {}
 
                                 separatorVisible: false
 
+                                leading: Kirigami.Icon {
+                                    implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                    implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                    color: Kirigami.Theme.disabledTextColor
+                                    isMask: true
+                                    source: model.decoration
+                                }
+                                leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+
                                 trailing: Kirigami.Icon {
-                                    width: Kirigami.Units.iconSizes.small
-                                    height: Kirigami.Units.iconSizes.small
+                                    implicitWidth: Kirigami.Units.iconSizes.small
+                                    implicitHeight: Kirigami.Units.iconSizes.small
                                     source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
                                 }
 
@@ -311,23 +340,23 @@ Kirigami.OverlayDrawer {
                             Kirigami.BasicListItem {
                                 label: display
                                 labelItem.color: Kirigami.Theme.textColor
-
+                                leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                                 hoverEnabled: sidebar.todoMode
-
                                 separatorVisible: false
+                                reserveSpaceForIcon: true
 
                                 trailing: ColoredCheckbox {
                                     id: calendarCheckbox
 
-                                visible: model.checkState != null
-                                color: model.collectionColor
-                                checked: model.checkState === 2
-                                onCheckedChanged: calendarCheckChanged(collectionId, checked)
-                                onClicked: {
-                                    model.checkState = model.checkState === 0 ? 2 : 0
-                                    calendarCheckChanged(collectionId, checked)
+                                    visible: model.checkState != null
+                                    color: model.collectionColor
+                                    checked: model.checkState === 2
+                                    onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                    onClicked: {
+                                        model.checkState = model.checkState === 0 ? 2 : 0
+                                        calendarCheckChanged(collectionId, checked)
+                                    }
                                 }
-                            }
 
                                 onClicked: {
                                     calendarClicked(collectionId)
@@ -357,6 +386,4 @@ Kirigami.OverlayDrawer {
             if(sidebar.modal && sidebar.todoMode) sidebar.close()
         }
     }
-
-
 }

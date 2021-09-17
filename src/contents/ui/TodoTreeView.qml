@@ -85,7 +85,8 @@ KirigamiAddonsTreeView.TreeListView {
 
         contentItem: IncidenceMouseArea {
             implicitWidth: todoItemContents.implicitWidth
-            implicitHeight: todoItemContents.implicitHeight
+            implicitHeight: Kirigami.Settings.isMobile ?
+                todoItemContents.implicitHeight + Kirigami.Units.largeSpacing : todoItemContents.implicitHeight + Kirigami.Units.smallSpacing
             incidenceData: model
             collectionId: model.collectionId
 
@@ -99,7 +100,9 @@ KirigamiAddonsTreeView.TreeListView {
                 id: todoItemContents
 
                 anchors.verticalCenter: parent.verticalCenter
-                width: parent.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: Kirigami.Settings.isMobile ?
+                    parent.width - (Kirigami.Units.largeSpacing * 2) : parent.width - (Kirigami.Units.smallSpacing * 2)
 
                 columns: 4
                 rows: 2

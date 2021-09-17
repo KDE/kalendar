@@ -11,6 +11,8 @@ QQC2.CheckBox {
     property real radius: 3
 
     indicator: Rectangle {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
         height: parent.height * 0.8
         width: height
         x: checkbox.leftPadding
