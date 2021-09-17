@@ -254,7 +254,7 @@ Kirigami.ScrollablePage {
 
                     Kirigami.FormData.label: incidenceForm.isTodo ? i18n("Due:") : i18n("End:")
                     Layout.fillWidth: true
-                    visible: (!allDayCheckBox.checked && !incidenceForm.isJournal) || incidenceForm.isTodo
+                    visible: !incidenceForm.isJournal || incidenceForm.isTodo
 
                     QQC2.CheckBox {
                         id: incidenceEndCheckBox
@@ -280,7 +280,7 @@ Kirigami.ScrollablePage {
                         timePicker: incidenceEndTimeCombo.timePicker
                         dateTime: root.incidenceWrapper.incidenceEnd
                         onNewDateChosen: root.incidenceWrapper.incidenceEnd = newDate
-                        enabled: (!incidenceForm.isTodo && !allDayCheckBox.checked) || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
+                        enabled: !incidenceForm.isTodo || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                     }
                     TimeCombo {
                         id: incidenceEndTimeCombo
