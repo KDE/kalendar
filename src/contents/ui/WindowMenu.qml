@@ -191,6 +191,10 @@ QQC2.MenuBar {
     }
     QQC2.Menu {
         title: i18nc("@action:menu", "Settings")
+
+        KActionFromAction {
+            kalendarAction: 'options_configure_keybinding'
+        }
         KActionFromAction {
             kalendarAction: "options_configure"
         }
