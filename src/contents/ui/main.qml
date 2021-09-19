@@ -95,11 +95,11 @@ Kirigami.ApplicationWindow {
         }
 
         function onCreateNewEvent() {
-            root.setUpAdd(IncidenceWrapper.TypeEvent);
+            root.setUpAdd(IncidenceWrapper.TypeEvent, DateUtils.addDaysToDate(MultiDayIncidenceModel.periodStartDate, 42));
         }
 
         function onCreateNewTodo() {
-            root.setUpAdd(IncidenceWrapper.TypeTodo);
+            root.setUpAdd(IncidenceWrapper.TypeTodo, DateUtils.addDaysToDate(MultiDayIncidenceModel.periodStartDate, 42));
         }
 
         function onUndo() {

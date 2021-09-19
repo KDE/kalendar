@@ -1,4 +1,5 @@
 build/
+.cache/
 *.kate-swp
 *.kdev4
 CMakeLists.txt.user
