@@ -18,6 +18,9 @@ public:
     ~TagManager() = default;
 
     QSortFilterProxyModel *tagModel();
+    Q_INVOKABLE void createTag(const QString &name);
+    Q_INVOKABLE void renameTag(Akonadi::Tag tag, const QString &newName);
+    Q_INVOKABLE void deleteTag(Akonadi::Tag tag);
 
 private:
     QSortFilterProxyModel *m_tagModel = nullptr;

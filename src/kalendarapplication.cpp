@@ -81,6 +81,12 @@ void KalendarApplication::setupActions(const QString &actionName)
         mCollection.addAction(action->objectName(), action);
     }
 
+    if (actionName == QLatin1String("open_tag_manager") && KAuthorized::authorizeAction(actionName)) {
+        auto openTagManagerAction = mCollection.addAction(actionName, this, &KalendarApplication::openTagManager);
+        openTagManagerAction->setText(i18n("Manage Tags…"));
+        openTagManagerAction->setIcon(QIcon::fromTheme(QStringLiteral("action-rss_tag")));
+    }
+
     if (actionName == QLatin1String("switch_application_language") && KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::switchApplicationLanguage(this, &KalendarApplication::openLanguageSwitcher, this);
         mCollection.addAction(action->objectName(), action);

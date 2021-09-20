@@ -33,6 +33,7 @@ Q_SIGNALS:
     void windowChanged();
     void openSettings();
     void openLanguageSwitcher();
+    void openTagManager();
     void quit();
     void undo();
     void redo();

@@ -37,5 +37,6 @@
     <file alias="KActionFromAction.qml">contents/ui/KActionFromAction.qml</file>
     <file alias="ColoredCheckbox.qml">contents/ui/ColoredCheckbox.qml</file>
     <file alias="Tag.qml">contents/ui/Tag.qml</file>
+    <file alias="TagManagerPage.qml">contents/ui/TagManagerPage.qml</file>
   </qresource>
 </RCC>

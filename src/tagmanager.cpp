@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include <AkonadiCore/TagCreateJob>
+#include <AkonadiCore/TagDeleteJob>
+#include <AkonadiCore/TagModifyJob>
 #include <tagmanager.h>
 
 class FlatTagModel : public QSortFilterProxyModel
@@ -20,6 +23,18 @@ public:
         setDynamicSortFilter(true);
         sort(0);
     };
+
+    QHash<int, QByteArray> roleNames() const override {
+        auto rolenames = QSortFilterProxyModel::roleNames();
+        rolenames[Akonadi::TagModel::Roles::NameRole] = QByteArrayLiteral("name");
+        rolenames[Akonadi::TagModel::Roles::IdRole] = QByteArrayLiteral("id");
+        rolenames[Akonadi::TagModel::Roles::GIDRole] = QByteArrayLiteral("gid");
+        rolenames[Akonadi::TagModel::Roles::TypeRole] = QByteArrayLiteral("type");
+        rolenames[Akonadi::TagModel::Roles::ParentRole] = QByteArrayLiteral("parent");
+        rolenames[Akonadi::TagModel::Roles::TagRole] = QByteArrayLiteral("tag");
+
+        return rolenames;
+    }
 
 protected:
     bool filterAcceptsRow(int row, const QModelIndex &sourceParent) const override
@@ -45,4 +60,31 @@ QSortFilterProxyModel * TagManager::tagModel()
     return m_tagModel;
 }
 
+void TagManager::createTag(const QString &name)
+{
+    Akonadi::Tag tag(name);
+    Akonadi::TagCreateJob *job = new Akonadi::TagCreateJob(tag, this);
+    connect(job, &Akonadi::TagCreateJob::finished, this, [=](KJob *job) {
+        if (job->error())
+            qDebug() << "Error occurred creating tag";
+    });
+}
 
+void TagManager::deleteTag(Akonadi::Tag tag)
+{
+    Akonadi::TagDeleteJob *job = new Akonadi::TagDeleteJob(tag);
+    connect(job, &Akonadi::TagDeleteJob::result, this, [=](KJob *job) {
+        if (job->error())
+            qDebug() << "Error occurred renaming tag";
+    });
+}
+
+void TagManager::renameTag(Akonadi::Tag tag, const QString &newName)
+{
+    tag.setName(newName);
+    Akonadi::TagModifyJob *job = new Akonadi::TagModifyJob(tag);
+    connect(job, &Akonadi::TagModifyJob::result, this, [=](KJob *job) {
+        if (job->error())
+            qDebug() << "Error occurred renaming tag";
+    });
+}

@@ -117,6 +117,11 @@ Labs.MenuBar {
     Labs.Menu {
         title: i18nc("@action:menu", "Settings")
         NativeMenuItemFromAction {
+            kalendarAction: 'open_tag_manager'
+        }
+        Labs.MenuSeparator {
+        }
+        NativeMenuItemFromAction {
             kalendarAction: 'options_configure_keybinding'
         }
         NativeMenuItemFromAction {

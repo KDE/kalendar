@@ -193,6 +193,13 @@ QQC2.MenuBar {
         title: i18nc("@action:menu", "Settings")
 
         KActionFromAction {
+            kalendarAction: "open_tag_manager"
+        }
+
+        QQC2.MenuSeparator {
+        }
+
+        KActionFromAction {
             kalendarAction: 'options_configure_keybinding'
         }
         KActionFromAction {

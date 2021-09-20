@@ -741,27 +741,35 @@ Kirigami.ScrollablePage {
                     }
                 }
 
-                QQC2.ComboBox {
+                RowLayout {
                     Kirigami.FormData.label: i18n("Tags:")
                     Layout.fillWidth: true
 
-                    model: TagManager.tagModel
-                    displayText: root.incidenceWrapper.categories.length > 0 ?
-                        root.incidenceWrapper.categories.join(i18nc("List separator", ", ")) :
-                        Kirigami.Settings.tabletMode ? i18n("Tap to set tags...") : i18n("Click to set tags...")
+                    QQC2.ComboBox {
+                        Layout.fillWidth: true
 
-                    delegate: Kirigami.CheckableListItem {
-                        label: model.display
-                        reserveSpaceForIcon: false
-                        checked: root.incidenceWrapper.categories.includes(model.display)
-                        action: QQC2.Action {
-                            onTriggered: {
-                                checked = !checked;
-                                root.incidenceWrapper.categories.includes(model.display) ?
-                                    root.incidenceWrapper.categories = root.incidenceWrapper.categories.filter(tag => tag !== model.display) :
-                                    root.incidenceWrapper.categories = [...root.incidenceWrapper.categories, model.display]
+                        model: TagManager.tagModel
+                        displayText: root.incidenceWrapper.categories.length > 0 ?
+                            root.incidenceWrapper.categories.join(i18nc("List separator", ", ")) :
+                            Kirigami.Settings.tabletMode ? i18n("Tap to set tags...") : i18n("Click to set tags...")
+
+                        delegate: Kirigami.CheckableListItem {
+                            label: model.display
+                            reserveSpaceForIcon: false
+                            checked: root.incidenceWrapper.categories.includes(model.display)
+                            action: QQC2.Action {
+                                onTriggered: {
+                                    checked = !checked;
+                                    root.incidenceWrapper.categories.includes(model.display) ?
+                                        root.incidenceWrapper.categories = root.incidenceWrapper.categories.filter(tag => tag !== model.display) :
+                                        root.incidenceWrapper.categories = [...root.incidenceWrapper.categories, model.display]
+                                }
                             }
                         }
+                    }
+                    QQC2.Button {
+                        text: i18n("Manage tags...")
+                        onClicked: KalendarApplication.action("open_tag_manager").trigger()
                     }
                 }
 

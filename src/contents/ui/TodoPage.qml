@@ -275,6 +275,19 @@ Kirigami.Page {
         Layout.fillWidth: true
         placeholderText: i18n("Create a New Todo…")
 
+        background: Rectangle {
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Window
+            color: Kirigami.Theme.backgroundColor
+            Kirigami.Separator {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                }
+            }
+        }
+
         function addTodo() {
             if(addField.text) {
                 let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");

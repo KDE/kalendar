@@ -147,6 +147,15 @@ Kirigami.ApplicationWindow {
                 height: root.height - (Kirigami.Units.gridUnit * 3)
             })
         }
+
+        function onOpenTagManager() {
+            pageStack.pushDialogLayer("qrc:/TagManagerPage.qml", {
+                width: root.width
+            }, {
+                width: Kirigami.Units.gridUnit * 30,
+                height: Kirigami.Units.gridUnit * 30
+            })
+        }
     }
 
     Connections {
