@@ -30,7 +30,7 @@ Row {
 
     height: childrenRect.height
 
-    spacing: 1
+    spacing: 0
     Repeater {
         model: root.daysToShow
         delegate: Loader {

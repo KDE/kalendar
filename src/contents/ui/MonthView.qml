@@ -155,10 +155,6 @@ Kirigami.Page {
                 objectName: "monthView"
                 width: pathView.width
                 height: pathView.height
-                daysToShow: daysPerRow * 6
-                daysPerRow: 7
-                paintGrid: true
-                showDayIndicator: true
                 loadModel: viewLoader.isNextItem
 
                 startDate: model.startDate
@@ -206,6 +202,11 @@ Kirigami.Page {
                     verticalAlignment: Qt.AlignTop
                     horizontalAlignment: Qt.AlignHCenter
                     text: DateUtils.getWeek(startDate, Qt.locale().firstDayOfWeek)
+                    background: Rectangle {
+                        Kirigami.Theme.inherit: false
+                        Kirigami.Theme.colorSet: Kirigami.Theme.View
+                        color: Kirigami.Theme.backgroundColor
+                    }
                 }
 
                 openOccurrence: monthPage.openOccurrence

@@ -70,6 +70,11 @@
             <label>Show week numbers to the side of the month grid.</label>
             <default>true</default>
         </entry>
+
+        <entry name="monthGridBorderWidth" type="Int">
+            <label>Set the width of the month grid's borders in pixels.</label>
+            <default>1</default>
+        </entry>
     </group>
 
     <group name="ScheduleView">

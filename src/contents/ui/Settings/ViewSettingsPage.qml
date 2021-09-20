@@ -4,6 +4,7 @@
 import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as Controls
+import QtQuick.Layouts 1.15
 import org.kde.kalendar 1.0
 
 Kirigami.ScrollablePage {
@@ -85,6 +86,24 @@ Kirigami.ScrollablePage {
             onClicked: {
                 Config.showWeekNumbers = !Config.showWeekNumbers;
                 Config.save();
+            }
+        }
+        RowLayout {
+            Kirigami.FormData.label: i18n("Grid border width (pixels):")
+            Layout.fillWidth: true
+            Controls.SpinBox {
+                Layout.fillWidth: true
+                value: Config.monthGridBorderWidth
+                onValueChanged: Config.monthGridBorderWidth = value
+                from: 0
+                to: 50
+            }
+            Rectangle {
+                Layout.alignment: Qt.AlignVCenter
+                width: Kirigami.Units.gridUnit * 4
+                implicitHeight: height
+                height: Config.monthGridBorderWidth
+                color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.15)
             }
         }
 

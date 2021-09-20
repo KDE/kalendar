@@ -24,15 +24,17 @@ Item {
 
     property var openOccurrence
 
-    property int daysToShow
-    property int daysPerRow: daysToShow
+    property int daysToShow: daysPerRow * 6
+    property int daysPerRow: 7
     property double weekHeaderWidth: Kalendar.Config.showWeekNumbers ? Kirigami.Units.gridUnit * 1.5 : 0
-    property double dayWidth: (width - weekHeaderWidth) / daysPerRow
+    property double dayWidth: Kalendar.Config.showWeekNumbers ?
+        ((width - weekHeaderWidth) / daysPerRow) - spacing : // No spacing on right, spacing in between weekheader and monthgrid
+        (width - weekHeaderWidth - (spacing * (daysPerRow - 1))) / daysPerRow // No spacing on left or right of month grid when no week header
     property date currentDate
     property date startDate
     property var calendarFilter
-    property bool paintGrid: false
-    property bool showDayIndicator: false
+    property bool paintGrid: true
+    property bool showDayIndicator: true
     property var filter
     property alias dayHeaderDelegate: dayLabels.delegate
     property Component weekHeaderDelegate
@@ -41,10 +43,9 @@ Item {
     //Internal
     property int numberOfLinesShown: 0
     property int numberOfRows: (daysToShow / daysPerRow)
-    property var dayHeight: (height - dayLabels.height) / numberOfRows
-
+    property var dayHeight: ((height - dayLabels.height) / numberOfRows) - spacing
+    property real spacing: Kalendar.Config.monthGridBorderWidth
     required property bool loadModel
-
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows : numberOfLinesShown * Kirigami.Units.gridUnit) + dayLabels.height
@@ -67,18 +68,26 @@ Item {
         }
     }
 
-    Column {
-        spacing: 0
+    Kirigami.Separator {
+        id: gridBackground
         anchors {
             fill: parent
+            topMargin: dayLabels.height
         }
+    }
+
+    Column {
+        id: rootBackgroundColumn
+        spacing: root.spacing
+        anchors.fill: parent
 
         DayLabels {
             id: dayLabels
             startDate: root.startDate
             dayWidth: root.dayWidth
             daysToShow: root.daysPerRow
-            anchors.leftMargin: weekHeaderWidth
+            spacing: root.spacing
+            anchors.leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
             anchors.left: parent.left
             anchors.right: parent.right
         }
@@ -94,14 +103,16 @@ Item {
                 RowLayout {
                     width: parent.width
                     height: parent.height
-                    spacing: 0
+                    spacing: root.spacing
                     Loader {
                         id: weekHeader
                         sourceComponent: root.weekHeaderDelegate
                         property date startDate: DateUtils.addDaysToDate(root.startDate, index * 7)
                         Layout.preferredWidth: weekHeaderWidth
                         Layout.fillHeight: true
+                        active: Kalendar.Config.showWeekNumbers
                         visible: Kalendar.Config.showWeekNumbers
+
                     }
                     Item {
                         id: dayDelegate
@@ -111,7 +122,7 @@ Item {
 
                         //Grid
                         Row {
-                            spacing: 0
+                            spacing: root.spacing
                             height: parent.height
                             Repeater {
                                 id: gridRepeater
@@ -131,10 +142,6 @@ Item {
                                         Kirigami.Theme.colorSet: Kirigami.Theme.View
                                         color: gridItem.isToday ? Kirigami.Theme.activeBackgroundColor :
                                             gridItem.isCurrentMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
-
-                                        // Matches Kirigami Separator color
-                                        border.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.15)
-                                        border.width: 1
 
                                         DayMouseArea {
                                             anchors.fill: parent
@@ -178,11 +185,12 @@ Item {
     }
 
     Column {
-        spacing: 0
+        id: rootForegroundColumn
+        spacing: root.spacing
         anchors {
             fill: parent
-            topMargin: dayLabels.height
-            leftMargin: weekHeaderWidth
+            topMargin: dayLabels.height + root.spacing
+            leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
         }
 
         //Weeks
@@ -196,7 +204,7 @@ Item {
                 RowLayout {
                     width: parent.width
                     height: parent.height
-                    spacing: 0
+                    spacing: root.spacing
                     Item {
                         id: dayDelegate
                         Layout.fillWidth: true
@@ -213,8 +221,10 @@ Item {
                             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
                             ListView {
-                                Layout.fillWidth: true
                                 id: linesRepeater
+                                Layout.fillWidth: true
+                                Layout.rightMargin: parent.contentHeight > parent.availableHeight ?
+                                    spacing : spacing
 
                                 clip: true
                                 spacing: Kirigami.Units.smallSpacing
@@ -248,16 +258,15 @@ Item {
                                 delegate: Item {
                                     id: line
                                     height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
-                                    width: parent.width
 
                                     //Incidences
                                     Repeater {
                                         id: incidencesRepeater
                                         model: modelData
                                         Rectangle {
-                                            x: ((root.dayWidth /*+ 1*/) * modelData.starts) + horizontalSpacing // +1 because of the spacing between each day
+                                            x: ((root.dayWidth + root.spacing) * modelData.starts) + horizontalSpacing
                                             y: 0
-                                            width: (root.dayWidth * modelData.duration) - (horizontalSpacing * 2) // Account for spacing added to x and for spacing at end of line
+                                            width: ((root.dayWidth + root.spacing) * modelData.duration) - (horizontalSpacing * 2) - root.spacing // Account for spacing added to x and for spacing at end of line
                                             height: parent.height
                                             opacity: isOpenOccurrence ||
                                                 modelData.endTime.getMonth() == root.month ||
@@ -267,7 +276,7 @@ Item {
                                             color: Qt.rgba(0,0,0,0)
 
                                             property int rectRadius: 5
-                                            property int horizontalSpacing: Kirigami.Units.smallSpacing
+                                            property int horizontalSpacing: linesRepeater.spacing
 
                                             property bool isOpenOccurrence: root.openOccurrence ?
                                                 root.openOccurrence.incidenceId === modelData.incidenceId : false
