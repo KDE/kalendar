@@ -21,9 +21,10 @@ QQC2.MenuBar {
             visible: false
         }
 
-        QQC2.MenuItem {
+        Kirigami.Action {
             text: i18nc("@action:menu", "Quit Kalendar")
             icon.name: "application-exit"
+            shortcut: StandardKey.Quit
             onTriggered: Qt.quit()
         }
     }
