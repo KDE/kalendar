@@ -101,6 +101,7 @@ QQC2.ToolBar {
                     property color color: modelData.name == pageStack.currentItem.objectName ? Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.highlightColor, Kirigami.Theme.textColor, 0.4) : Kirigami.Theme.textColor
 
                     Kirigami.Icon {
+                        isMask: true
                         color: parent.color
                         source: model.icon.name
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom

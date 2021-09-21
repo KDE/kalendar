@@ -417,6 +417,7 @@ Kirigami.Page {
                                                             id: recurringIcon
                                                             Layout.fillHeight: true
                                                             source: "appointment-recurring"
+                                                            isMask: true
                                                             color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                             cardContents.textColor
                                                             visible: incidenceCard.incidenceWrapper.recurrenceData.type
@@ -425,6 +426,7 @@ Kirigami.Page {
                                                             id: reminderIcon
                                                             Layout.fillHeight: true
                                                             source: "appointment-reminder"
+                                                            isMask: true
                                                             color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                             cardContents.textColor
                                                             visible: incidenceCard.incidenceWrapper.remindersModel.rowCount() > 0
