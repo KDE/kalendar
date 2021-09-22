@@ -242,9 +242,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
         case DurationString:
         {
             KFormat format;
-            if (incidence.incidence->allDay()) {
-                return format.formatSpelloutDuration(24*60*60*1000); // format milliseconds in 1 day
-            } else if (duration.asSeconds() == 0) {
+            if (duration.asSeconds() == 0) {
                 return QLatin1String("");
             } else {
                 return format.formatSpelloutDuration(duration.asSeconds() * 1000);
