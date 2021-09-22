@@ -59,7 +59,7 @@ function weeklyRecurrenceToString(recurrenceData) {
         for(let i = 0; i < recurrenceData.weekdays.length; i++) {
 
             if(recurrenceData.weekdays[i]) {
-                returnString += ` ${Qt.locale().dayName(i + 1, Locale.ShortFormat)},`; // C++ Qt weekdays go Mon->Sun, JS goes Sun->Sat
+                returnString += ` ${Qt.locale().dayName(i + 1, 0)},`; // C++ Qt weekdays go Mon->Sun, JS goes Sun->Sat, 0 is HACK for locale enum
             }
         }
         // Delete last comma
