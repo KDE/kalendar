@@ -401,8 +401,10 @@ Kirigami.OverlayDrawer {
                             }
 
                             anchors.fill: parent
+                            enabled: !locationLabel.isLink
+                            propagateComposedEvents: true
                             onClicked: {
-                                textEdit.text = locationLabel.text;
+                                textEdit.text = incidenceInfo.incidenceWrapper.location;
                                 textEdit.selectAll();
                                 textEdit.copy();
                                 showPassiveNotification(i18n("Location copied to clipboard"));
