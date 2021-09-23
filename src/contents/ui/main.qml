@@ -41,6 +41,8 @@ Kirigami.ApplicationWindow {
     readonly property var todoViewOrderDescendingAction: KalendarApplication.action("todoview_order_descending")
     readonly property var todoViewShowCompletedAction: KalendarApplication.action("todoview_show_completed")
 
+    pageStack.globalToolBar.canContainHandles: true
+
     onClosing: {
         rememberLastOpenedView();
     }
