@@ -23,8 +23,9 @@ Kirigami.Page {
     property var openOccurrence
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
-    property int month: startDate.getMonth()
-    property int year: startDate.getFullYear()
+    property int day: selectedDate.getDate()
+    property int month: selectedDate.getMonth()
+    property int year: selectedDate.getFullYear()
     property bool initialMonth: true
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
@@ -45,7 +46,8 @@ Kirigami.Page {
         }
     }
 
-    function setToDate(date) {
+    function setToDate(date, isInitialMonth = false) {
+        root.initialMonth = isInitialMonth;
         let monthDiff = date.getMonth() - pathView.currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - pathView.currentItem.firstDayOfMonth.getFullYear()))
         let newIndex = pathView.currentIndex + monthDiff;
 
@@ -67,8 +69,6 @@ Kirigami.Page {
         }
         pathView.currentIndex = newIndex;
         selectedDate = date;
-        date.getDate() === currentDate.getDate() && date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear() ?
-            initialMonth = true : initialMonth = false;
     }
 
     actions {
@@ -224,7 +224,6 @@ Kirigami.Page {
                             // This will very much screw up use of positionViewAtIndex.
 
                             id: dayColumn
-
                             width: scheduleListView.width
 
                             Kirigami.ListSectionHeader {

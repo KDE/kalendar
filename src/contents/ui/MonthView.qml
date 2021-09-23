@@ -32,7 +32,8 @@ Kirigami.Page {
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
     readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
 
-    function setToDate(date) {
+    function setToDate(date, isInitialMonth = false) {
+        monthPage.initialMonth = isInitialMonth;
         let monthDiff = date.getMonth() - pathView.currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - pathView.currentItem.firstDayOfMonth.getFullYear()))
         let newIndex = pathView.currentIndex + monthDiff;
 
@@ -53,8 +54,6 @@ Kirigami.Page {
             lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.MonthViewModel.FirstDayOfMonthRole);
         }
         pathView.currentIndex = newIndex;
-        date.getDate() === new Date().getDate() && date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear() ?
-            initialMonth = true : initialMonth = false;
     }
 
     padding: 0
@@ -70,20 +69,14 @@ Kirigami.Page {
             icon.name: "go-previous"
             text: i18n("Previous Month")
             shortcut: "Left"
-            onTriggered: {
-                pathView.decrementCurrentIndex();
-                monthPage.initialMonth = false;
-            }
+            onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, -1))
             displayHint: Kirigami.DisplayHint.IconOnly
         }
         right: Kirigami.Action {
             icon.name: "go-next"
             text: i18n("Next Month")
             shortcut: "Right"
-            onTriggered: {
-                pathView.incrementCurrentIndex();
-                monthPage.initialMonth = false;
-            }
+            onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, 1))
             displayHint: Kirigami.DisplayHint.IconOnly
         }
         main: Kirigami.Action {

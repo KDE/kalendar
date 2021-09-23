@@ -17,6 +17,8 @@ Item {
     property int year: selectedDate.getFullYear()
     property int month: selectedDate.getMonth()
     property int firstDay: new Date(year, month, 1).getDay() // 0 Sunday to 6 Saturday
+    property bool showDays: true
+    onShowDaysChanged: if (!showDays) pickerView.currentIndex = 1;
 
     function prevMonth() {
         selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, selectedDate.getDate())
@@ -98,6 +100,8 @@ Item {
                 Layout.fillWidth: true
                 text: i18n("Days")
                 onClicked: pickerView.currentIndex = 0 // dayGrid is first item in pickerView
+                visible: datepicker.showDays
+                width: visible ? implicitWidth : 0
             }
             QQC2.TabButton {
                 id: monthsViewCheck
@@ -129,6 +133,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.topMargin: Kirigami.Units.smallSpacing
+                visible: datepicker.showDays
 
                 Repeater {
                     model: 7
@@ -191,7 +196,11 @@ Item {
                         Layout.fillHeight: true
                         flat: true
                         text: Qt.locale().monthName(date.getMonth())
-                        onClicked: selectedDate = new Date(date), pickerView.currentIndex = 0
+                        onClicked: {
+                            selectedDate = new Date(date);
+                            datepicker.datePicked(date);
+                            if(datepicker.showDays) pickerView.currentIndex = 0;
+                        }
                     }
                 }
             }
@@ -215,7 +224,11 @@ Item {
                         flat: true
                         opacity: sameDecade ? 1 : 0.7
                         text: date.getFullYear()
-                        onClicked: selectedDate = new Date(date), pickerView.currentIndex = 1
+                        onClicked: {
+                            selectedDate = new Date(date);
+                            datepicker.datePicked(date);
+                            pickerView.currentIndex = 1;
+                        }
                     }
                 }
             }

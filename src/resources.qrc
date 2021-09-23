@@ -13,6 +13,8 @@
     <file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
     <file alias="labelutils.js">contents/ui/labelutils.js</file>
+    <file alias="TitleDateButton.qml">contents/ui/TitleDateButton.qml</file>
+    <file alias="DateChanger.qml">contents/ui/DateChanger.qml</file>
     <file alias="ScheduleView.qml">contents/ui/ScheduleView.qml</file>
     <file alias="IncidenceMouseArea.qml">contents/ui/IncidenceMouseArea.qml</file>
     <file alias="NavigationMouseArea.qml">contents/ui/NavigationMouseArea.qml</file>

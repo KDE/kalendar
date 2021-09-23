@@ -19,8 +19,6 @@ Kirigami.ApplicationWindow {
 
     property date currentDate: new Date()
     property date selectedDate: currentDate
-    property int month: currentDate.getMonth()
-    property int year: currentDate.getFullYear()
 
     property var openOccurrence
 
@@ -42,6 +40,7 @@ Kirigami.ApplicationWindow {
     readonly property var todoViewShowCompletedAction: KalendarApplication.action("todoview_show_completed")
 
     pageStack.globalToolBar.canContainHandles: true
+    pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
 
     onClosing: {
         rememberLastOpenedView();
@@ -276,6 +275,14 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    DateChanger {
+        id: dateChangeDrawer
+        y: pageStack.globalToolBar.height - 1
+        showDays: pageStack.currentItem.objectName !== "monthView"
+        date: root.selectedDate
+        onDateSelected: if(visible) pageStack.currentItem.setToDate(date)
+    }
+
     IncidenceEditor {
         id: incidenceEditor
         onAdded: CalendarManager.addIncidence(incidenceWrapper)
@@ -443,7 +450,10 @@ Kirigami.ApplicationWindow {
             id: monthView
             objectName: "monthView"
 
-            title: firstDayOfMonth.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
+            titleDelegate: TitleDateButton {
+                date: monthView.firstDayOfMonth
+                onClicked: dateChangeDrawer.open()
+            }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
 
@@ -454,10 +464,10 @@ Kirigami.ApplicationWindow {
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
 
-            onMonthChanged: if(month !== root.month && !initialMonth) root.month = month
-            onYearChanged: if(year !== root.year && !initialMonth) root.year = year
+            onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
+            onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
 
-            Component.onCompleted: setToDate(new Date(root.year, root.month))
+            Component.onCompleted: setToDate(root.selectedDate)
 
             actions.contextualActions: createAction
         }
@@ -470,15 +480,18 @@ Kirigami.ApplicationWindow {
             id: scheduleView
             objectName: "scheduleView"
 
-            title: startDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
-            selectedDate: root.currentDate
+            titleDelegate: TitleDateButton {
+                date: scheduleView.startDate
+                onClicked: dateChangeDrawer.open()
+            }
+            selectedDate: root.selectedDate
             openOccurrence: root.openOccurrence
 
-            onMonthChanged: if(month !== root.month && !initialMonth) root.month = month
-            onYearChanged: if(year !== root.year && !initialMonth) root.year = year
+            onDayChanged: if(day !== root.selectedDate.getDate() && !initialMonth) root.selectedDate = new Date (year, month, day)
+            onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
+            onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, day)
 
-            Component.onCompleted: month === root.month && year === root.year ?
-                setToDate(root.currentDate) : setToDate(new Date(root.year, root.month))
+            Component.onCompleted: setToDate(root.selectedDate)
 
             onAddIncidence: root.setUpAdd(type, addDate)
             onViewIncidence: root.setUpView(modelData, collectionData)
