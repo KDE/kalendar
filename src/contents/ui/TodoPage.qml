@@ -15,7 +15,7 @@ import "labelutils.js" as LabelUtils
 
 Kirigami.Page {
     id: root
-    title: i18n("Todos")
+    title: i18n("Tasks")
 
     signal addTodo(int collectionId)
     signal viewTodo(var todoData, var collectionData)
@@ -93,7 +93,7 @@ Kirigami.Page {
         id: completedSheet
 
         title: root.filterCollectionDetails && root.filterCollectionId > -1 ?
-            i18n("Completed Todos in %1", root.filterCollectionDetails.displayName) : i18n("Completed Todos")
+            i18n("Completed Tasks in %1", root.filterCollectionDetails.displayName) : i18n("Completed Tasks")
         showCloseButton: true
 
         property var retainedTodoData
@@ -166,7 +166,7 @@ Kirigami.Page {
                 Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 1 : 2
                 Layout.fillWidth: true
                 text: root.filterCollectionDetails && root.filterCollectionId > -1 ?
-                    root.filterCollectionDetails.displayName : i18n("All Todos")
+                    root.filterCollectionDetails.displayName : i18n("All Tasks")
                 font.weight: Font.Bold
                 color: root.filterCollectionDetails && root.filterCollectionId > -1 ?
                     LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
@@ -233,7 +233,7 @@ Kirigami.Page {
 
     Kirigami.OverlaySheet {
         id: collectionPickerSheet
-        title: i18n("Choose a Todo Calendar")
+        title: i18n("Choose a Task Calendar")
 
         property var incidenceWrapper
 
@@ -273,7 +273,7 @@ Kirigami.Page {
     footer: Kirigami.ActionTextField {
         id: addField
         Layout.fillWidth: true
-        placeholderText: i18n("Create a New Todo…")
+        placeholderText: i18n("Create a New Task…")
 
         background: Rectangle {
             Kirigami.Theme.inherit: false
@@ -307,7 +307,7 @@ Kirigami.Page {
 
         rightActions: Kirigami.Action {
             icon.name: "list-add"
-            tooltip: i18n("Quickly Add a New Todo.")
+            tooltip: i18n("Quickly Add a New Task.")
             onTriggered: addField.addTodo()
         }
         onAccepted: addField.addTodo()

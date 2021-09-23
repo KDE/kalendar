@@ -281,7 +281,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
         case IncidenceType:
             return incidence.incidence->type();
         case IncidenceTypeStr:
-            return i18n(incidence.incidence->typeStr());
+            return incidence.incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(incidence.incidence->typeStr());
         case IncidenceTypeIcon:
             return incidence.incidence->iconName();
         case IncidencePtr:

@@ -39,7 +39,7 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("open_todo_view") && KAuthorized::authorizeAction(actionName)) {
         auto openTodoAction = mCollection.addAction(actionName, this, &KalendarApplication::openTodoView);
-        openTodoAction->setText(i18n("Todo View"));
+        openTodoAction->setText(i18n("Tasks View"));
         openTodoAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-tasks")));
         openTodoAction->setCheckable(true);
         openTodoAction->setActionGroup(m_viewGroup);
@@ -72,7 +72,7 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("create_todo") && KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::createNewTodo);
-        action->setText(i18n("New Todo…"));
+        action->setText(i18n("New Task…"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("view-task-add")));
     }
 
@@ -156,7 +156,7 @@ void KalendarApplication::setupActions(const QString &actionName)
 
     if (actionName == QLatin1String("todoview_show_completed") && KAuthorized::authorizeAction(actionName)) {
         auto todoViewShowCompletedAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewShowCompleted);
-        todoViewShowCompletedAction->setText(i18n("Show Completed Todos"));
+        todoViewShowCompletedAction->setText(i18n("Show Completed Tasks"));
         todoViewShowCompletedAction->setIcon(QIcon::fromTheme(QStringLiteral("task-complete")));
         mCollection.addAction(todoViewShowCompletedAction->objectName(), todoViewShowCompletedAction);
     }

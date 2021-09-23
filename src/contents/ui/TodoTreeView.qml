@@ -54,7 +54,7 @@ KirigamiAddonsTreeView.TreeListView {
         anchors.centerIn: parent
         visible: parent.count === 0 && root.filterCollectionDetails && !root.filterCollectionDetails.isFiltered
         text: root.showCompleted === Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly ?
-            i18n("No todos completed") : i18n("No todos left to complete")
+            i18n("No tasks completed") : i18n("No tasks left to complete")
         helpfulAction: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"

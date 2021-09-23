@@ -49,7 +49,7 @@ MouseArea {
                 onClicked: addNewIncidence(Kalendar.IncidenceWrapper.TypeEvent, dayMouseArea.addDate)
             }
             QQC2.MenuItem {
-                text: i18n("New Todo…")
+                text: i18n("New Task…")
                 icon.name: "view-task-add"
                 onClicked: addNewIncidence(Kalendar.IncidenceWrapper.TypeTodo, dayMouseArea.addDate)
             }

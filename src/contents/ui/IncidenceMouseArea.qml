@@ -72,14 +72,14 @@ MouseArea {
             }
             QQC2.MenuItem {
                 icon.name: "task-complete"
-                text: incidenceData.todoCompleted ? i18n("Mark Todo as Incomplete") : i18n("Mark Todo as Complete")
+                text: incidenceData.todoCompleted ? i18n("Mark Task as Incomplete") : i18n("Mark Task as Complete")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: todoCompletedClicked(incidenceData.incidencePtr)
                 visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
             }
             QQC2.MenuItem {
                 icon.name: "list-add"
-                text: i18n("Add Sub-Todo")
+                text: i18n("Add Sub-Task")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: {
                     let parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");

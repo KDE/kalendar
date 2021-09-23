@@ -61,7 +61,7 @@ Labs.MenuBar {
         }
 
         Labs.Menu {
-            title: i18nc("@action:menu", "Sort Todos")
+            title: i18nc("@action:menu", "Sort Tasks")
             enabled: bar.todoMode
 
             NativeMenuItemFromAction {

@@ -140,7 +140,7 @@ QQC2.MenuBar {
         }
 
         QQC2.Menu {
-            title: i18n("Sort Todos")
+            title: i18n("Sort Tasks")
             enabled: bar.todoMode
 
             KActionFromAction {

@@ -180,7 +180,7 @@ Kirigami.ApplicationWindow {
         }
         Kirigami.Action {
             id: newTodoAction
-            text: i18n("New Todo…")
+            text: i18n("New Task…")
             icon.name: "view-task-add"
             onTriggered: createTodoAction.trigger()
         }
@@ -195,7 +195,7 @@ Kirigami.ApplicationWindow {
                 return i18n("Schedule View");
                 break;
             case "todoView":
-                return i18n("Todo View");
+                return i18n("Tasks View");
                 break;
             default:
                 return i18n("Calendar");
