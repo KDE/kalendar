@@ -53,6 +53,7 @@ Q_SIGNALS:
     void periodLengthChanged();
 
 private:
+    QTimer mRefreshTimer;
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
     QVariantList layoutLines(const QDate &rowStart) const;
     IncidenceOccurrenceModel *mSourceModel{nullptr};

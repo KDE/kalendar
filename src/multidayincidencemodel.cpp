@@ -16,6 +16,7 @@ enum Roles {
 MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
+    mRefreshTimer.setSingleShot(true);
 }
 
 QModelIndex MultiDayIncidenceModel::index(int row, int column, const QModelIndex &parent) const
@@ -153,6 +154,7 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
                 {QStringLiteral("duration"), duration},
                 {QStringLiteral("durationString"), idx.data(IncidenceOccurrenceModel::DurationString)},
                 {QStringLiteral("recurs"), idx.data(IncidenceOccurrenceModel::Recurs)},
+                {QStringLiteral("hasReminders"), idx.data(IncidenceOccurrenceModel::HasReminders)},
                 {QStringLiteral("isOverdue"), idx.data(IncidenceOccurrenceModel::IsOverdue)},
                 {QStringLiteral("color"), idx.data(IncidenceOccurrenceModel::Color)},
                 {QStringLiteral("collectionId"), idx.data(IncidenceOccurrenceModel::CollectionId)},
@@ -247,8 +249,11 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
     beginResetModel();
     mSourceModel = model;
     auto resetModel = [this] {
-        beginResetModel();
-        endResetModel();
+        if (!mRefreshTimer.isActive()) {
+            beginResetModel();
+            endResetModel();
+            mRefreshTimer.start(50);
+        }
     };
     QObject::connect(model, &QAbstractItemModel::dataChanged, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);

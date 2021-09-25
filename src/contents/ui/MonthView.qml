@@ -96,13 +96,12 @@ Kirigami.Page {
         snapMode: PathView.SnapToItem
         focus: true
         interactive: Kirigami.Settings.tabletMode
-        pathItemCount: 2
 
         path: Path {
-            startX: - pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
+            startX: - pathView.width * pathView.count / 2 + pathView.width / 2
             startY: pathView.height / 2
             PathLine {
-                x: pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
+                x: pathView.width * pathView.count / 2 + pathView.width / 2
                 y: pathView.height / 2
             }
         }
@@ -136,19 +135,16 @@ Kirigami.Page {
             property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
             property int year: model.selectedYear
 
-            property bool isCurrentItem: PathView.isCurrentItem
-            property bool isNextItem: (index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1) ||
-                (index == pathView.count - 1 && pathView.currentIndex == 0) ||
-                (index == 0 && pathView.currentIndex == pathView.count - 1)
+            property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
 
-            active: isCurrentItem || (isNextItem && pathView.moving)
+            active: isNextOrCurrentItem
             //asynchronous: true
             sourceComponent: MultiDayView {
                 id: dayView
                 objectName: "monthView"
                 width: pathView.width
                 height: pathView.height
-                loadModel: viewLoader.isNextItem
+                loadModel: viewLoader.isNextOrCurrentItem
 
                 startDate: model.startDate
                 currentDate: monthPage.currentDate

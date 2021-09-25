@@ -50,6 +50,7 @@ public:
         Duration,
         DurationString,
         Recurs,
+        HasReminders,
         Priority,
         Color,
         CollectionId,
