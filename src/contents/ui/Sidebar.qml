@@ -36,6 +36,19 @@ Kirigami.OverlayDrawer {
     topPadding: 0
     bottomPadding: 0
 
+    function getCurrentView() {
+        switch (pageStack.currentItem.objectName) {
+            case "monthView":
+                return 0;
+            case "scheduleView":
+                return 1;
+            case "todoView":
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
     contentItem: ColumnLayout {
         id: container
 
@@ -119,18 +132,10 @@ Kirigami.OverlayDrawer {
 
             ListView {
                 id: generalList
+
                 currentIndex: {
                     if (!Kirigami.Settings.isMobile) {
-                        switch (pageStack.currentItem.objectName) {
-                            case "monthView":
-                                return 0;
-                            case "scheduleView":
-                                return 1;
-                            case "todoView":
-                                return 2;
-                            default:
-                                return 0;
-                        }
+                        getCurrentView();
                     } else {
                         return -1;
                     }
@@ -169,6 +174,7 @@ Kirigami.OverlayDrawer {
                         onTriggered: {
                             configureAction.trigger()
                             if(sidebar.modal) sidebar.close()
+                            generalList.currentIndex = getCurrentView();
                         }
                         shortcut: configureAction.shortcut
                     }
@@ -197,6 +203,7 @@ Kirigami.OverlayDrawer {
                         onTriggered: {
                             configureAction.trigger()
                             if(sidebar.modal) sidebar.close()
+                            generalList.currentIndex = -1;
                         }
                     }
                 ]
