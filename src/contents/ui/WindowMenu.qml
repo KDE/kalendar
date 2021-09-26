@@ -210,6 +210,11 @@ QQC2.MenuBar {
     QQC2.Menu {
         title: i18nc("@action:menu", "Help")
 
+        KActionFromAction {
+            kalendarAction: "open_about_page"
+            enabled: pageStack.layers.currentItem.objectName != "aboutPage"
+        }
+
         QQC2.MenuItem {
             text: i18nc("@action:menu", "Kalendar Handbook") // todo
             visible: false

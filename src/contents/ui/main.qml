@@ -25,6 +25,7 @@ Kirigami.ApplicationWindow {
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
     readonly property var scheduleViewAction: KalendarApplication.action("open_schedule_view")
     readonly property var todoViewAction: KalendarApplication.action("open_todo_view")
+    readonly property var aboutPageAction: KalendarApplication.action("open_about_page")
     readonly property var createEventAction: KalendarApplication.action("create_event")
     readonly property var createTodoAction: KalendarApplication.action("create_todo")
     readonly property var configureAction: KalendarApplication.action("options_configure")
@@ -93,6 +94,10 @@ Kirigami.ApplicationWindow {
         function onOpenTodoView() {
             pageStack.pop(null);
             pageStack.replace(todoPageComponent);
+        }
+
+        function onOpenAboutPage() {
+            pageStack.layers.push("AboutPage.qml")
         }
 
         function onCreateNewEvent() {

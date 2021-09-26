@@ -28,6 +28,7 @@ Q_SIGNALS:
     void openMonthView();
     void openScheduleView();
     void openTodoView();
+    void openAboutPage();
     void createNewEvent();
     void createNewTodo();
     void windowChanged();

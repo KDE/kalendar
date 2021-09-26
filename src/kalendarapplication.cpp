@@ -64,6 +64,12 @@ void KalendarApplication::setupActions(const QString &actionName)
         mCollection.setDefaultShortcut(openMonthAction, QKeySequence(i18n("Ctrl+1")));
     }
 
+    if (actionName == QLatin1String("open_about_page") && KAuthorized::authorizeAction(actionName)) {
+        auto action = mCollection.addAction(actionName, this, &KalendarApplication::openAboutPage);
+        action->setText(i18n("About Kalendar"));
+        action->setIcon(QIcon::fromTheme(QStringLiteral("help-about")));
+    }
+
     if (actionName == QLatin1String("create_event") && KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::createNewEvent);
         action->setText(i18n("New Event…"));
