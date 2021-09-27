@@ -69,7 +69,6 @@ Kirigami.Page {
         }
         pathView.currentIndex = newIndex;
         selectedDate = date;
-        console.log(selectedDate);
     }
 
     actions {
