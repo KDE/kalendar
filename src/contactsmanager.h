@@ -7,7 +7,12 @@
 #include <QSortFilterProxyModel>
 #include <Akonadi/Contact/ContactsTreeModel>
 #include <Akonadi/Contact/ContactsFilterProxyModel>
+#include <akonadi_version.h>
+#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
+#include <Akonadi/EntityMimeTypeFilterModel>
+#else
 #include <AkonadiCore/EntityMimeTypeFilterModel>
+#endif
 #include <KItemModels/KDescendantsProxyModel>
 
 class QSortFilterProxyModel;

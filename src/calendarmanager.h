@@ -5,12 +5,20 @@
 #pragma once
 
 #include <QObject>
-#include <ETMViewStateSaver>
-#include <KDescendantsProxyModel>
+#include <akonadi_version.h>
+#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
+#include <Akonadi/ETMViewStateSaver>
+#include <Akonadi/AgentFilterProxyModel>
+#include <Akonadi/CollectionFilterProxyModel>
+#include <Akonadi/EntityRightsFilterModel>
+#else
 #include <AkonadiCore/AgentFilterProxyModel>
 #include <AkonadiCore/CollectionFilterProxyModel>
 #include <AkonadiCore/EntityRightsFilterModel>
+#include <ETMViewStateSaver>
+#endif
 #include <Akonadi/Calendar/IncidenceChanger>
+#include <KDescendantsProxyModel>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
 #include <incidencewrapper.h>

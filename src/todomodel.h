@@ -11,9 +11,15 @@
 
 #include <Akonadi/Calendar/ETMCalendar>
 #include <Akonadi/Calendar/IncidenceChanger>
+#include <akonadi_version.h>
+#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
+#include <Akonadi/Item>
+#include <Akonadi/EntityTreeModel>
+#else
 #include <Item>
-
 #include <EntityTreeModel>
+#endif
+
 #include <KCalendarCore/Todo>
 #include <QAbstractItemModel>
 #include <QAbstractProxyModel>

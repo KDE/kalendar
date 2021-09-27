@@ -12,20 +12,30 @@
 #include "calendarmanager.h"
 
 // Akonadi
+#include <akonadi_version.h>
+#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
+#include <Akonadi/Control>
+#include <Akonadi/CollectionFilterProxyModel>
+#include <Akonadi/Monitor>
+#include <Akonadi/EntityTreeModel>
+#include <Akonadi/EntityDisplayAttribute>
+#include <Akonadi/AgentManager>
+#include <Akonadi/AgentInstanceModel>
+#include <Akonadi/CollectionIdentificationAttribute>
+#include <Akonadi/ItemMoveJob>
+#include <Akonadi/ItemModifyJob>
+#include <Akonadi/CollectionModifyJob>
+#include <Akonadi/AttributeFactory>
+#include <Akonadi/CollectionColorAttribute>
+#include <Akonadi/CollectionUtils>
+#else
 #include <control.h>
-#include <etmcalendar.h>
 #include <CollectionFilterProxyModel>
 #include <Monitor>
-#include <KLocalizedString>
 #include <EntityTreeModel>
-#include <QApplication>
-#include <CalendarSupport/KCalPrefs>
-#include <CalendarSupport/Utils>
 #include <AkonadiCore/EntityDisplayAttribute>
 #include <AkonadiCore/AgentManager>
 #include <AkonadiCore/AgentInstanceModel>
-#include <Akonadi/Calendar/IncidenceChanger>
-#include <Akonadi/Calendar/History>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include <AkonadiCore/ItemMoveJob>
 #include <AkonadiCore/ItemModifyJob>
@@ -33,6 +43,14 @@
 #include <AkonadiCore/AttributeFactory>
 #include <AkonadiCore/CollectionColorAttribute>
 #include <AkonadiCore/CollectionUtils>
+#endif
+#include <etmcalendar.h>
+#include <KLocalizedString>
+#include <QApplication>
+#include <CalendarSupport/KCalPrefs>
+#include <CalendarSupport/Utils>
+#include <Akonadi/Calendar/IncidenceChanger>
+#include <Akonadi/Calendar/History>
 #include <QRandomGenerator>
 #include <EventViews/Prefs>
 #include <KCheckableProxyModel>

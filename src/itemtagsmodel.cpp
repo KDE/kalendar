@@ -2,8 +2,15 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include <QMetaEnum>
+
+#include <akonadi_version.h>
+#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
+#include <Akonadi/ItemFetchJob>
+#include <Akonadi/ItemFetchScope>
+#else
 #include <AkonadiCore/ItemFetchJob>
 #include <AkonadiCore/ItemFetchScope>
+#endif
 #include <KCalendarCore/Incidence>
 #include <itemtagsmodel.h>
 

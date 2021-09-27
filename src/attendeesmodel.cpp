@@ -6,10 +6,19 @@
 #include <KLocalizedString>
 #include "attendeesmodel.h"
 #include <KContacts/Addressee>
+
+#include <akonadi_version.h>
+#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
+#include <Akonadi/Item>
+#include <Akonadi/ItemFetchJob>
+#include <Akonadi/ItemFetchScope>
+#include <Akonadi/SearchQuery>
+#else
 #include <AkonadiCore/Item>
 #include <AkonadiCore/ItemFetchJob>
 #include <AkonadiCore/ItemFetchScope>
 #include <AkonadiCore/SearchQuery>
+#endif
 #include <Akonadi/Contact/ContactSearchJob>
 
 AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
