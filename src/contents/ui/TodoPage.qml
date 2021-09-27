@@ -8,6 +8,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.4 as QQC1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
+import org.kde.kitemmodels 1.0
 
 import org.kde.kalendar 1.0 as Kalendar
 import "dateutils.js" as DateUtils
@@ -246,7 +247,9 @@ Kirigami.Page {
 
             }
 
-            model: Kalendar.CalendarManager.todoCollections
+            model: KDescendantsProxyModel {
+                model: Kalendar.CalendarManager.todoCollections
+            }
             delegate: Kirigami.BasicListItem {
                 leftPadding: model.kDescendantLevel ? ((Kirigami.Units.gridUnit * 2) * (kDescendantLevel - 1)) + Kirigami.Units.largeSpacing : 0
                 enabled: model.checkState != null
