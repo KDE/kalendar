@@ -472,7 +472,7 @@ Kirigami.ApplicationWindow {
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
 
-            Component.onCompleted: setToDate(root.selectedDate)
+            Component.onCompleted: setToDate(root.selectedDate, true)
 
             actions.contextualActions: createAction
         }
@@ -496,7 +496,7 @@ Kirigami.ApplicationWindow {
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, day)
 
-            Component.onCompleted: setToDate(root.selectedDate)
+            Component.onCompleted: setToDate(root.selectedDate, true)
 
             onAddIncidence: root.setUpAdd(type, addDate)
             onViewIncidence: root.setUpView(modelData, collectionData)

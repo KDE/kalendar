@@ -69,6 +69,7 @@ Kirigami.Page {
         }
         pathView.currentIndex = newIndex;
         selectedDate = date;
+        console.log(selectedDate);
     }
 
     actions {
@@ -128,7 +129,6 @@ Kirigami.Page {
             root.startDate = currentItem.firstDayOfMonth;
             root.month = currentItem.month;
             root.year = currentItem.year;
-            root.initialMonth = false;
 
             if(currentIndex >= count - 2) {
                 model.addDates(true);
