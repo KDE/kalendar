@@ -9,6 +9,7 @@ import Qt.labs.platform 1.1
 import org.kde.kalendar 1.0
 
 MenuItem {
+    id: menuItem
     property string kalendarAction: ""
     property var __action: KalendarApplication.action(kalendarAction)
 
@@ -19,6 +20,6 @@ MenuItem {
     visible: __action.text !== ""
     checkable: __action.checkable
     checked: __action.checked
-    enabled: __action.enabled
+    enabled: __action.enabled && parent.enabled
 }
 

@@ -39,6 +39,9 @@ Kirigami.Page {
     }
 
     function moveToSelected() {
+        if (!pathView.currentItem || !pathView.currentItem.item) {
+            return;
+        }
         if (selectedDate.getDate() > 1) {
             pathView.currentItem.item.scheduleListView.positionViewAtIndex(selectedDate.getDate() - 1, ListView.Beginning);
         } else {

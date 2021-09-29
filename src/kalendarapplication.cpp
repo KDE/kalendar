@@ -5,40 +5,65 @@
 
 #include "kalendarapplication.h"
 
+#include "commandbarfiltermodel.h"
 #include <KXmlGui/KShortcutsDialog>
 #include <KAuthorized>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KConfigGroup>
 #include <QWindow>
+#include <QMenu>
 #include <vector>
+#include <QSortFilterProxyModel>
 
 KalendarApplication::KalendarApplication(QObject *parent)
     : QObject(parent)
     , mCollection(parent)
+    , mSortCollection(parent, i18n("Sort"))
     , m_viewGroup(new QActionGroup(this))
 {
+    mSortCollection.setComponentDisplayName(i18n("Sort"));
+    setupActions();
+}
+
+KalendarApplication::~KalendarApplication()
+{
+    if (m_actionModel) {
+        auto lastUsedActions = m_actionModel->lastUsedActions();
+        auto cfg = KSharedConfig::openConfig();
+        KConfigGroup cg(cfg, "General");
+        cg.writeEntry("CommandBarLastUsedActions", lastUsedActions);
+    }
 }
 
 QAction *KalendarApplication::action(const QString& name)
 {
     auto resultAction = mCollection.action(name);
 
-    if (!resultAction) {
-        setupActions(name);
-        resultAction = mCollection.action(name);
+    if (resultAction) {
+        return resultAction;
     }
 
-    return resultAction;
+    resultAction = mSortCollection.action(name);
+
+    if (resultAction) {
+        return resultAction;
+    }
+    return nullptr;
 }
 
-void KalendarApplication::setupActions(const QString &actionName)
+void KalendarApplication::setupActions()
 {
-    if (actionName == QLatin1String("options_configure_keybinding") && KAuthorized::authorizeAction(actionName)) {
+    auto actionName = QLatin1String("options_configure_keybinding");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto keyBindingsAction = KStandardAction::keyBindings(this, &KalendarApplication::configureShortcuts, this);
         mCollection.addAction(keyBindingsAction->objectName(), keyBindingsAction);
     }
 
-    if (actionName == QLatin1String("open_todo_view") && KAuthorized::authorizeAction(actionName)) {
-        auto openTodoAction = mCollection.addAction(actionName, this, &KalendarApplication::openTodoView);
+    actionName = QLatin1String("open_todo_view");
+    QAction *openTodoAction = nullptr;
+    if (KAuthorized::authorizeAction(actionName)) {
+        openTodoAction = mCollection.addAction(actionName, this, &KalendarApplication::openTodoView);
         openTodoAction->setText(i18n("Tasks View"));
         openTodoAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-tasks")));
         openTodoAction->setCheckable(true);
@@ -46,7 +71,8 @@ void KalendarApplication::setupActions(const QString &actionName)
         mCollection.setDefaultShortcut(openTodoAction, QKeySequence(i18n("Ctrl+3")));
     }
 
-    if (actionName == QLatin1String("open_schedule_view") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("open_schedule_view");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto openScheduleAction = mCollection.addAction(actionName, this, &KalendarApplication::openScheduleView);
         openScheduleAction->setText(i18n("Schedule View"));
         openScheduleAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-list")));
@@ -55,7 +81,8 @@ void KalendarApplication::setupActions(const QString &actionName)
         mCollection.setDefaultShortcut(openScheduleAction, QKeySequence(i18n("Ctrl+2")));
     }
 
-    if (actionName == QLatin1String("open_month_view") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("open_month_view");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto openMonthAction = mCollection.addAction(actionName, this, &KalendarApplication::openMonthView);
         openMonthAction->setText(i18n("Month View"));
         openMonthAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar")));
@@ -64,109 +91,175 @@ void KalendarApplication::setupActions(const QString &actionName)
         mCollection.setDefaultShortcut(openMonthAction, QKeySequence(i18n("Ctrl+1")));
     }
 
-    if (actionName == QLatin1String("open_about_page") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("open_about_page");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::openAboutPage);
         action->setText(i18n("About Kalendar"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("help-about")));
     }
 
-    if (actionName == QLatin1String("create_event") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("create_event");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::createNewEvent);
         action->setText(i18n("New Event…"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("resource-calendar-insert")));
     }
 
-    if (actionName == QLatin1String("create_todo") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("create_todo");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::createNewTodo);
         action->setText(i18n("New Task…"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("view-task-add")));
     }
 
-    if (actionName == QLatin1String("options_configure") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("options_configure");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::preferences(this, &KalendarApplication::openSettings, this);
         mCollection.addAction(action->objectName(), action);
     }
 
-    if (actionName == QLatin1String("open_tag_manager") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("open_tag_manager");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto openTagManagerAction = mCollection.addAction(actionName, this, &KalendarApplication::openTagManager);
         openTagManagerAction->setText(i18n("Manage Tags…"));
         openTagManagerAction->setIcon(QIcon::fromTheme(QStringLiteral("action-rss_tag")));
     }
 
-    if (actionName == QLatin1String("switch_application_language") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("switch_application_language");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::switchApplicationLanguage(this, &KalendarApplication::openLanguageSwitcher, this);
         mCollection.addAction(action->objectName(), action);
     }
 
-    if (actionName == QLatin1String("file_quit") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("file_quit");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::quit(this, &KalendarApplication::quit, this);
         mCollection.addAction(action->objectName(), action);
     }
 
-    if (actionName == QLatin1String("edit_undo") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("edit_undo");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::undo(this, &KalendarApplication::undo, this);
         action->setEnabled(false);
         mCollection.addAction(action->objectName(), action);
     }
-
-    if (actionName == QLatin1String("edit_redo") && KAuthorized::authorizeAction(actionName)) {
+    actionName = QLatin1String("edit_redo");
+    if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::redo(this, &KalendarApplication::redo, this);
         action->setEnabled(false);
         mCollection.addAction(action->objectName(), action);
     }
 
-    if (actionName == QLatin1String("todoview_sort_alphabetically") && KAuthorized::authorizeAction(actionName)) {
-        auto sortTodoViewAlphabeticallyAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewSortAlphabetically);
+    actionName = QLatin1String("todoview_sort_alphabetically");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto sortTodoViewAlphabeticallyAction = mSortCollection.addAction(actionName, this, &KalendarApplication::todoViewSortAlphabetically);
         sortTodoViewAlphabeticallyAction->setText(i18n("Alphabetically"));
         sortTodoViewAlphabeticallyAction->setIcon(QIcon::fromTheme(QStringLiteral("font")));
         sortTodoViewAlphabeticallyAction->setCheckable(true);
         sortTodoViewAlphabeticallyAction->setActionGroup(m_todoViewSortGroup);
-        mCollection.addAction(sortTodoViewAlphabeticallyAction->objectName(), sortTodoViewAlphabeticallyAction);
+        mSortCollection.addAction(sortTodoViewAlphabeticallyAction->objectName(), sortTodoViewAlphabeticallyAction);
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed,
+                    this, [sortTodoViewAlphabeticallyAction, openTodoAction]() {
+                        sortTodoViewAlphabeticallyAction->setEnabled(openTodoAction->isChecked());
+                    });
+            sortTodoViewAlphabeticallyAction->setEnabled(openTodoAction->isChecked());
+        }
     }
 
-    if (actionName == QLatin1String("todoview_sort_by_due_date") && KAuthorized::authorizeAction(actionName)) {
-        auto sortTodoViewByDueDateAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewSortByDueDate);
+    actionName = QLatin1String("todoview_sort_by_due_date");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto sortTodoViewByDueDateAction = mSortCollection.addAction(actionName, this, &KalendarApplication::todoViewSortByDueDate);
         sortTodoViewByDueDateAction->setText(i18n("By Due Date"));
         sortTodoViewByDueDateAction->setIcon(QIcon::fromTheme(QStringLiteral("change-date-symbolic")));
         sortTodoViewByDueDateAction->setCheckable(true);
         sortTodoViewByDueDateAction->setActionGroup(m_todoViewSortGroup);
-        mCollection.addAction(sortTodoViewByDueDateAction->objectName(), sortTodoViewByDueDateAction);
+        mSortCollection.addAction(sortTodoViewByDueDateAction->objectName(), sortTodoViewByDueDateAction);
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed,
+                    this, [sortTodoViewByDueDateAction, openTodoAction]() {
+                        sortTodoViewByDueDateAction->setEnabled(openTodoAction->isChecked());
+                    });
+            sortTodoViewByDueDateAction->setEnabled(openTodoAction->isChecked());
+        }
     }
 
-    if (actionName == QLatin1String("todoview_sort_by_priority") && KAuthorized::authorizeAction(actionName)) {
-        auto sortTodoViewByPriorityAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewSortByPriority);
+    actionName = QLatin1String("todoview_sort_by_priority");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto sortTodoViewByPriorityAction = mSortCollection.addAction(actionName, this, &KalendarApplication::todoViewSortByPriority);
         sortTodoViewByPriorityAction->setText(i18n("By Priority Level"));
         sortTodoViewByPriorityAction->setIcon(QIcon::fromTheme(QStringLiteral("emblem-important-symbolic")));
         sortTodoViewByPriorityAction->setCheckable(true);
         sortTodoViewByPriorityAction->setActionGroup(m_todoViewSortGroup);
-        mCollection.addAction(sortTodoViewByPriorityAction->objectName(), sortTodoViewByPriorityAction);
+        mSortCollection.addAction(sortTodoViewByPriorityAction->objectName(), sortTodoViewByPriorityAction);
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed,
+                    this, [sortTodoViewByPriorityAction, openTodoAction]() {
+                        sortTodoViewByPriorityAction->setEnabled(openTodoAction->isChecked());
+                    });
+            sortTodoViewByPriorityAction->setEnabled(openTodoAction->isChecked());
+        }
     }
 
-    if (actionName == QLatin1String("todoview_order_ascending") && KAuthorized::authorizeAction(actionName)) {
-        auto orderTodoViewAscendingAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewOrderAscending);
+    actionName = QLatin1String("todoview_order_ascending");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto orderTodoViewAscendingAction = mSortCollection.addAction(actionName, this, &KalendarApplication::todoViewOrderAscending);
         orderTodoViewAscendingAction->setText(i18n("Ascending order"));
         orderTodoViewAscendingAction->setIcon(QIcon::fromTheme(QStringLiteral("view-sort-ascending")));
         orderTodoViewAscendingAction->setCheckable(true);
         orderTodoViewAscendingAction->setActionGroup(m_todoViewOrderGroup);
-        mCollection.addAction(orderTodoViewAscendingAction->objectName(), orderTodoViewAscendingAction);
+        mSortCollection.addAction(orderTodoViewAscendingAction->objectName(), orderTodoViewAscendingAction);
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed,
+                    this, [orderTodoViewAscendingAction, openTodoAction]() {
+                        orderTodoViewAscendingAction->setEnabled(openTodoAction->isChecked());
+                    });
+            orderTodoViewAscendingAction->setEnabled(openTodoAction->isChecked());
+        }
     }
 
-    if (actionName == QLatin1String("todoview_order_descending") && KAuthorized::authorizeAction(actionName)) {
-        auto orderTodoViewDescendingAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewOrderDescending);
+    actionName = QLatin1String("todoview_order_descending");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto orderTodoViewDescendingAction = mSortCollection.addAction(actionName, this, &KalendarApplication::todoViewOrderDescending);
         orderTodoViewDescendingAction->setText(i18n("Descending Order"));
         orderTodoViewDescendingAction->setIcon(QIcon::fromTheme(QStringLiteral("view-sort-descending")));
         orderTodoViewDescendingAction->setCheckable(true);
         orderTodoViewDescendingAction->setActionGroup(m_todoViewOrderGroup);
-        mCollection.addAction(orderTodoViewDescendingAction->objectName(), orderTodoViewDescendingAction);
+        mSortCollection.addAction(orderTodoViewDescendingAction->objectName(), orderTodoViewDescendingAction);
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed,
+                    this, [orderTodoViewDescendingAction, openTodoAction]() {
+                        orderTodoViewDescendingAction->setEnabled(openTodoAction->isChecked());
+                    });
+            orderTodoViewDescendingAction->setEnabled(openTodoAction->isChecked());
+        }
     }
 
-    if (actionName == QLatin1String("todoview_show_completed") && KAuthorized::authorizeAction(actionName)) {
-        auto todoViewShowCompletedAction = mCollection.addAction(actionName, this, &KalendarApplication::todoViewShowCompleted);
+    actionName = QLatin1String("todoview_show_completed");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto todoViewShowCompletedAction = mSortCollection.addAction(actionName, this, &KalendarApplication::todoViewShowCompleted);
         todoViewShowCompletedAction->setText(i18n("Show Completed Tasks"));
         todoViewShowCompletedAction->setIcon(QIcon::fromTheme(QStringLiteral("task-complete")));
-        mCollection.addAction(todoViewShowCompletedAction->objectName(), todoViewShowCompletedAction);
+        mSortCollection.addAction(todoViewShowCompletedAction->objectName(), todoViewShowCompletedAction);
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed,
+                    this, [todoViewShowCompletedAction, openTodoAction]() {
+                        todoViewShowCompletedAction->setEnabled(openTodoAction->isChecked());
+                    });
+            todoViewShowCompletedAction->setEnabled(openTodoAction->isChecked());
+        }
     }
 
+    actionName = QLatin1String("open_kcommand_bar");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto openKCommandBarAction = mCollection.addAction(actionName, this, &KalendarApplication::openKCommandBarAction);
+        openKCommandBarAction->setText(i18n("Open Command Bar"));
+        openKCommandBarAction->setIcon(QIcon::fromTheme(QStringLiteral("new-command-alarm")));
+
+        mCollection.addAction(openKCommandBarAction->objectName(), openKCommandBarAction);
+        mCollection.setDefaultShortcut(openKCommandBarAction, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_I));
+    }
+    mSortCollection.readSettings();
     mCollection.readSettings();
 }
 
@@ -196,4 +289,83 @@ QWindow *KalendarApplication::window() const
 QString KalendarApplication::iconName(const QIcon &icon) const
 {
     return icon.name();
+}
+
+//---- KCommandBar QML licensed LGPL
+
+/**
+ * A helper function that takes a list of KActionCollection* and converts it
+ * to KCommandBar::ActionGroup
+ */
+static QVector<KalCommandBarModel::ActionGroup> actionCollectionToActionGroup(const std::vector<KActionCollection *> &actionCollections)
+{
+    using ActionGroup = KalCommandBarModel::ActionGroup;
+
+    QVector<ActionGroup> actionList;
+    actionList.reserve(actionCollections.size());
+
+    for (const auto collection : actionCollections) {
+        const QList<QAction *> collectionActions = collection->actions();
+        const QString componentName = collection->componentDisplayName();
+
+        ActionGroup ag;
+        ag.name = componentName;
+        ag.actions.reserve(collection->count());
+        for (const auto action : collectionActions) {
+            /**
+             * If this action is a menu, fetch all its child actions
+             * and skip the menu action itself
+             */
+            if (QMenu *menu = action->menu()) {
+                const QList<QAction *> menuActions = menu->actions();
+
+                ActionGroup menuActionGroup;
+                menuActionGroup.name = KLocalizedString::removeAcceleratorMarker(action->text());
+                menuActionGroup.actions.reserve(menuActions.size());
+                for (const auto mAct : menuActions) {
+                    if (mAct) {
+                        menuActionGroup.actions.append(mAct);
+                    }
+                }
+
+                /**
+                 * If there were no actions in the menu, we
+                 * add the menu to the list instead because it could
+                 * be that the actions are created on demand i.e., aboutToShow()
+                 */
+                if (!menuActions.isEmpty()) {
+                    actionList.append(menuActionGroup);
+                    continue;
+                }
+            }
+
+            if (action && !action->text().isEmpty()) {
+                ag.actions.append(action);
+            }
+        }
+        actionList.append(ag);
+    }
+    return actionList;
+}
+
+QSortFilterProxyModel *KalendarApplication::actionsModel()
+{
+    if (!m_proxyModel) {
+        m_actionModel = new KalCommandBarModel(this);
+        m_proxyModel = new CommandBarFilterModel(this);
+        m_proxyModel->setSortRole(KalCommandBarModel::Score);
+        m_proxyModel->setFilterRole(Qt::DisplayRole);
+        m_proxyModel->setSourceModel(m_actionModel);
+    }
+
+    // setLastUsedActions
+    auto cfg = KSharedConfig::openConfig();
+    KConfigGroup cg(cfg, "General");
+
+    QStringList actionNames = cg.readEntry(QStringLiteral("CommandBarLastUsedActions"), QStringList());
+
+    m_actionModel->setLastUsedActions(actionNames);
+    std::vector<KActionCollection *> actionCollections = {&mCollection, &mSortCollection};
+    m_actionModel->refresh(actionCollectionToActionGroup(actionCollections));
+    return m_proxyModel;
 }

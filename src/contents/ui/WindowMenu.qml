@@ -135,13 +135,15 @@ QQC2.MenuBar {
         KActionFromAction {
             kalendarAction: "open_todo_view"
         }
+        KActionFromAction {
+            kalendarAction: 'open_kcommand_bar'
+        }
 
         QQC2.MenuSeparator {
         }
 
         QQC2.Menu {
             title: i18n("Sort Tasks")
-            enabled: bar.todoMode
 
             KActionFromAction {
                 kalendarAction: "todoview_sort_by_due_date"
@@ -166,7 +168,6 @@ QQC2.MenuBar {
 
         KActionFromAction {
             kalendarAction: "todoview_show_completed"
-            enabled: bar.todoMode
         }
 
     }

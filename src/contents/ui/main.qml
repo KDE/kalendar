@@ -39,6 +39,7 @@ Kirigami.ApplicationWindow {
     readonly property var todoViewOrderAscendingAction: KalendarApplication.action("todoview_order_ascending")
     readonly property var todoViewOrderDescendingAction: KalendarApplication.action("todoview_order_descending")
     readonly property var todoViewShowCompletedAction: KalendarApplication.action("todoview_show_completed")
+    readonly property var openKCommandBarAction: KalendarApplication.action("open_kcommand_bar")
 
     pageStack.globalToolBar.canContainHandles: true
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
@@ -161,6 +162,19 @@ Kirigami.ApplicationWindow {
                 width: Kirigami.Units.gridUnit * 30,
                 height: Kirigami.Units.gridUnit * 30
             })
+        }
+
+        function onOpenKCommandBarAction() {
+            kcommandbarLoader.active = true;
+        }
+    }
+
+    Loader {
+        id: kcommandbarLoader
+        active: false
+        source: 'qrc:/KQuickCommandbar.qml'
+        onActiveChanged: if (active) {
+            item.open()
         }
     }
 
