@@ -240,11 +240,11 @@ Item {
                             ListView {
                                 id: linesRepeater
                                 Layout.fillWidth: true
-                                Layout.rightMargin: parent.contentHeight > parent.availableHeight ?
-                                    spacing : spacing
+                                Layout.rightMargin: spacing
 
                                 clip: true
-                                spacing: Kirigami.Units.smallSpacing
+                                spacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
+                                    Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
 
                                 DayMouseArea {
                                     id: listViewMenu
@@ -311,6 +311,8 @@ Item {
 
                                             RowLayout {
                                                 id: incidenceContents
+                                                clip: true
+                                                property bool spaceRestricted: parent.width < Kirigami.Units.gridUnit * 5
 
                                                 property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
 
@@ -326,8 +328,8 @@ Item {
 
                                                 anchors {
                                                     fill: parent
-                                                    leftMargin: Kirigami.Units.smallSpacing
-                                                    rightMargin: Kirigami.Units.smallSpacing
+                                                    leftMargin: spaceRestricted ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
+                                                    rightMargin: spaceRestricted ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
                                                 }
 
                                                 Kirigami.Icon {
@@ -339,13 +341,16 @@ Item {
                                                     color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                         incidenceBackground.visible ? incidenceContents.textColor :
                                                         incidenceContents.otherMonthTextColor(modelData.color)
+                                                    visible: !parent.spaceRestricted
                                                 }
 
                                                 QQC2.Label {
                                                     Layout.fillWidth: true
                                                     text: modelData.text
-                                                    elide: Text.ElideRight
+                                                    elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
                                                     font.weight: Font.Medium
+                                                    font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
+                                                        Kirigami.Theme.defaultFont.pointSize
                                                     color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                         incidenceBackground.visible ? incidenceContents.textColor :
                                                         incidenceContents.otherMonthTextColor(modelData.color)

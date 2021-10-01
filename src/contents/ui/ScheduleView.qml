@@ -379,6 +379,7 @@ Kirigami.Page {
                                                         Kirigami.Icon {
                                                             Layout.fillHeight: true
                                                             source: modelData.incidenceTypeIcon
+                                                            isMask: true
                                                             color: cardContents.textColor
                                                         }
 
