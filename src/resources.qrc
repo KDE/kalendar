@@ -3,6 +3,7 @@
     <file alias="main.qml">contents/ui/main.qml</file>
     <file alias="Sidebar.qml">contents/ui/Sidebar.qml</file>
     <file alias="BottomToolBar.qml">contents/ui/BottomToolBar.qml</file>
+    <file alias="MultiDayViewIncidenceDelegate.qml">contents/ui/MultiDayViewIncidenceDelegate.qml</file>
     <file alias="MultiDayView.qml">contents/ui/MultiDayView.qml</file>
     <file alias="MonthView.qml">contents/ui/MonthView.qml</file>
     <file alias="DayLabels.qml">contents/ui/DayLabels.qml</file>

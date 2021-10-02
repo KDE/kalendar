@@ -340,8 +340,7 @@ Kirigami.Page {
                                                 ListView {
                                                     id: linesRepeater
                                                     Layout.fillWidth: true
-                                                    Layout.rightMargin: parent.contentHeight > parent.availableHeight ?
-                                                        spacing : spacing
+                                                    Layout.rightMargin: spacing
 
                                                     clip: true
                                                     spacing: root.incidenceSpacing
@@ -392,68 +391,13 @@ Kirigami.Page {
                                                         Repeater {
                                                             id: incidencesRepeater
                                                             model: modelData
-                                                            Rectangle {
-                                                                x: ((root.dayWidth + root.gridLineWidth) * modelData.starts) + horizontalSpacing
-                                                                y: horizontalSpacing
-                                                                width: ((root.dayWidth + root.gridLineWidth) * modelData.duration) - (horizontalSpacing * 2) - root.gridLineWidth // Account for spacing added to x and for spacing at end of line
-                                                                height: parent.height
-                                                                radius: Kirigami.Units.smallSpacing
-                                                                color: Qt.rgba(0,0,0,0)
-
-                                                                property int horizontalSpacing: linesRepeater.spacing
-
-                                                                property bool isOpenOccurrence: root.openOccurrence ?
-                                                                    root.openOccurrence.incidenceId === modelData.incidenceId : false
-
-                                                                Rectangle {
-                                                                    id: incidenceBackground
-                                                                    anchors.fill: parent
-                                                                    color: isOpenOccurrence ? modelData.color :
-                                                                        LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
-                                                                    radius: parent.radius
-                                                                }
-
-                                                                RowLayout {
-                                                                    id: incidenceContents
-
-                                                                    readonly property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
-
-                                                                    anchors {
-                                                                        fill: parent
-                                                                        leftMargin: Kirigami.Units.smallSpacing
-                                                                        rightMargin: Kirigami.Units.smallSpacing
-                                                                    }
-
-                                                                    Kirigami.Icon {
-                                                                        Layout.maximumHeight: parent.height
-                                                                        Layout.maximumWidth: height
-
-                                                                        source: modelData.incidenceTypeIcon
-                                                                        isMask: true
-                                                                        color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                                            incidenceContents.textColor
-                                                                    }
-
-                                                                    QQC2.Label {
-                                                                        Layout.fillWidth: true
-                                                                        text: modelData.text
-                                                                        elide: Text.ElideRight
-                                                                        font.weight: Font.Medium
-                                                                        color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                                            incidenceContents.textColor
-                                                                    }
-                                                                }
-
-                                                                IncidenceMouseArea {
-                                                                    incidenceData: modelData
-                                                                    collectionId: modelData.collectionId
-
-                                                                    onViewClicked: viewIncidence(modelData, collectionData)
-                                                                    onEditClicked: editIncidence(incidencePtr, collectionId)
-                                                                    onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
-                                                                    onTodoCompletedClicked: completeTodo(incidencePtr)
-                                                                    onAddSubTodoClicked: root.addSubTodo(parentWrapper)
-                                                                }
+                                                            MultiDayViewIncidenceDelegate {
+                                                                dayWidth: root.dayWidth
+                                                                parentViewSpacing: root.gridLineWidth
+                                                                horizontalSpacing: linesRepeater.spacing
+                                                                openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
+                                                                isDark: root.isDark
+                                                                reactToCurrentMonth: false
                                                             }
                                                         }
                                                     }
@@ -615,7 +559,7 @@ Kirigami.Page {
                                                 id: incidenceBackground
                                                 anchors.fill: parent
                                                 color: isOpenOccurrence ? modelData.color :
-                                                LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
+                                                    LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
                                                 radius: parent.radius
 
                                                 shadow.size: Kirigami.Units.largeSpacing
