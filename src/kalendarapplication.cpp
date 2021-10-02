@@ -68,7 +68,17 @@ void KalendarApplication::setupActions()
         openTodoAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-tasks")));
         openTodoAction->setCheckable(true);
         openTodoAction->setActionGroup(m_viewGroup);
-        mCollection.setDefaultShortcut(openTodoAction, QKeySequence(i18n("Ctrl+3")));
+        mCollection.setDefaultShortcut(openTodoAction, QKeySequence(i18n("Ctrl+4")));
+    }
+
+    actionName = QLatin1String("open_week_view");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto openWeekAction = mCollection.addAction(actionName, this, &KalendarApplication::openWeekView);
+        openWeekAction->setText(i18n("Week View"));
+        openWeekAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-week")));
+        openWeekAction->setCheckable(true);
+        openWeekAction->setActionGroup(m_viewGroup);
+        mCollection.setDefaultShortcut(openWeekAction, QKeySequence(i18n("Ctrl+2")));
     }
 
     actionName = QLatin1String("open_schedule_view");
@@ -78,7 +88,7 @@ void KalendarApplication::setupActions()
         openScheduleAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-list")));
         openScheduleAction->setCheckable(true);
         openScheduleAction->setActionGroup(m_viewGroup);
-        mCollection.setDefaultShortcut(openScheduleAction, QKeySequence(i18n("Ctrl+2")));
+        mCollection.setDefaultShortcut(openScheduleAction, QKeySequence(i18n("Ctrl+3")));
     }
 
     actionName = QLatin1String("open_month_view");

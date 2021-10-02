@@ -41,5 +41,6 @@
     <file alias="Tag.qml">contents/ui/Tag.qml</file>
     <file alias="TagManagerPage.qml">contents/ui/TagManagerPage.qml</file>
     <file alias="KQuickCommandbar.qml">contents/ui/KQuickCommandBar.qml</file>
+    <file alias="WeekView.qml">contents/ui/WeekView.qml</file>
   </qresource>
 </RCC>

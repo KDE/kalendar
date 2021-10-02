@@ -8,7 +8,9 @@ QQC2.ToolButton {
     implicitHeight: titleText.implicitHeight
     implicitWidth: titleText.implicitWidth
 
+    property bool range: false
     property date date
+    property date lastDate
 
     contentItem: Kirigami.Heading {
         id: titleText
@@ -18,6 +20,16 @@ QQC2.ToolButton {
         rightPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
         horizontalAlignment: Text.AlignHCenter
-        text: root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy")
+        text: if(!root.range) {
+            return root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
+        } else {
+            if(root.date.getFullYear() !== root.lastDate.getFullYear()) {
+                return root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy") + " - " + root.lastDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
+            } else if(root.date.getMonth() !== root.lastDate.getMonth()) {
+                root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b>") + " - " + root.lastDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
+            } else {
+                return root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
+            }
+        }
     }
 }

@@ -126,9 +126,16 @@ function fullDaysBetweenDates(date1, date2) {
     let days = 1;
     let date1Mn = new Date(date1.setHours(0,0,0,0));
     let date2Mn = new Date(date2.setHours(0,0,0,0));
-    while(date1Mn.getTime() < date2Mn.getTime()) {
-        date1Mn = addDaysToDate(date1Mn, 1);
-        days += 1;
+    if(date1Mn.getTime() < date2Mn.getTime()) {
+        while(date1Mn.getTime() < date2Mn.getTime()) {
+            date1Mn = addDaysToDate(date1Mn, 1);
+            days += 1;
+        }
+    } else {
+        while (date1Mn.getTime() > date2Mn.getTime()) {
+            date1Mn = addDaysToDate(date1Mn, -1);
+            days -= 1;
+        }
     }
     return days;
 }

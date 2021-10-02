@@ -29,6 +29,8 @@
 #include "kalendarapplication.h"
 #include "itemtagsmodel.h"
 #include "tagmanager.h"
+#include "hourlyincidencemodel.h"
+#include "weekviewmodel.h"
 
 using namespace KCalendarCore;
 
@@ -78,6 +80,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<TodoSortFilterProxyModel>("org.kde.kalendar", 1, 0, "TodoSortFilterProxyModel");
     qmlRegisterType<MonthViewModel>("org.kde.kalendar", 1, 0, "MonthViewModel");
     qmlRegisterType<ItemTagsModel>("org.kde.kalendar", 1, 0, "ItemTagsModel");
+    qmlRegisterType<HourlyIncidenceModel>("org.kde.kalendar", 1, 0, "HourlyIncidenceModel");
+    qmlRegisterType<WeekViewModel>("org.kde.kalendar", 1, 0, "WeekViewModel");
 
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
     qRegisterMetaType<QAction*>();

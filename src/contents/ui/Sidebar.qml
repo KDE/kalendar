@@ -40,10 +40,12 @@ Kirigami.OverlayDrawer {
         switch (pageStack.currentItem.objectName) {
             case "monthView":
                 return 0;
-            case "scheduleView":
+            case "weekView":
                 return 1;
-            case "todoView":
+            case "scheduleView":
                 return 2;
+            case "todoView":
+                return 3;
             default:
                 return 0;
         }
@@ -147,6 +149,15 @@ Kirigami.OverlayDrawer {
                         shortcut: monthViewAction.shortcut
                         onTriggered: {
                             monthViewAction.trigger()
+                            if(sidebar.modal) sidebar.close()
+                        }
+                    },
+                    Kirigami.Action {
+                        icon.name: KalendarApplication.iconName(weekViewAction.icon)
+                        text: weekViewAction.text
+                        shortcut: weekViewAction.shortcut
+                        onTriggered: {
+                            weekViewAction.trigger()
                             if(sidebar.modal) sidebar.close()
                         }
                     },

@@ -50,6 +50,10 @@ Labs.MenuBar {
         }
 
         NativeMenuItemFromAction {
+            kalendarAction: 'open_week_view'
+        }
+
+        NativeMenuItemFromAction {
             kalendarAction: 'open_schedule_view'
         }
 

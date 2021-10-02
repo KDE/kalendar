@@ -1,7 +1,3 @@
-// Copyright (c) 2018 Michael Bohlender <michael.bohlender@kdemail.net>
-// Copyright (c) 2018 Christian Mollekopf <mollekopf@kolabsys.com>
-// Copyright (c) 2018 Rémi Nicole <minijackson@riseup.net>
-// Copyright (c) 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
@@ -21,30 +17,28 @@ namespace KCalendarCore {
 }
 
 /**
- * Each toplevel index represents a week.
+ * Each toplevel index represents a day.
  * The "incidences" roles provides a list of lists, where each list represents a visual line,
  * containing a number of events to display.
  */
-class MultiDayIncidenceModel : public QAbstractItemModel
+class HourlyIncidenceModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
-    Q_PROPERTY(MultiDayIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
-    Q_PROPERTY(int incidenceCount READ incidenceCount NOTIFY incidenceCountChanged)
+    Q_PROPERTY(HourlyIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
     Q_PROPERTY(IncidenceOccurrenceModel* model WRITE setModel)
 
 public:
     enum Filter {
-        AllDayOnly = 0x1,
-        NoStartDateOnly = 0x2,
-        MultiDayOnly = 0x3
+        NoAllDay = 0x1,
+        NoMultiDay = 0x2
     };
     Q_DECLARE_FLAGS(Filters, Filter)
     Q_FLAGS(Filters)
     Q_ENUMS(Filter)
 
-    MultiDayIncidenceModel(QObject *parent = nullptr);
-    ~MultiDayIncidenceModel() = default;
+    HourlyIncidenceModel(QObject *parent = nullptr);
+    ~HourlyIncidenceModel() = default;
 
     QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
     QModelIndex parent(const QModelIndex &index) const override;
@@ -59,26 +53,20 @@ public:
     void setModel(IncidenceOccurrenceModel *model);
     int periodLength();
     void setPeriodLength(int periodLength);
-    MultiDayIncidenceModel::Filters filters();
-    void setFilters(MultiDayIncidenceModel::Filters filters);
-    bool incidencePassesFilter(const QModelIndex &idx) const;
-    Q_INVOKABLE int incidenceCount();
+    HourlyIncidenceModel::Filters filters();
+    void setFilters(HourlyIncidenceModel::Filters filters);
 
 Q_SIGNALS:
     void periodLengthChanged();
     void filtersChanged();
-    void incidenceCountChanged();
-
-protected:
-    void setIncidenceCount(int incidenceCount);
 
 private:
     QTimer mRefreshTimer;
-    QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
-    QVariantList layoutLines(const QDate &rowStart) const;
+    QList<QModelIndex> sortedIncidencesFromSourceModel(const QDateTime &rowStart) const;
+    QVariantList layoutLines(const QDateTime &rowStart) const;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
-    int mPeriodLength{7};
-    MultiDayIncidenceModel::Filters m_filters;
+    int mPeriodLength{15};
+    HourlyIncidenceModel::Filters m_filters;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(MultiDayIncidenceModel::Filters)
+Q_DECLARE_OPERATORS_FOR_FLAGS(HourlyIncidenceModel::Filters)

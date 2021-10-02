@@ -75,6 +75,11 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
             // qWarning() << "Skipping because not part of this week";
             continue;
         }
+
+        if(!incidencePassesFilter(srcIdx)) {
+            continue;
+        }
+
         // qWarning() << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         sorted.append(srcIdx);
     }
@@ -247,11 +252,13 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
 void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 {
     beginResetModel();
+
     mSourceModel = model;
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
             beginResetModel();
             endResetModel();
+            Q_EMIT incidenceCountChanged();
             mRefreshTimer.start(50);
         }
     };
@@ -272,6 +279,72 @@ int MultiDayIncidenceModel::periodLength()
 void MultiDayIncidenceModel::setPeriodLength(int periodLength)
 {
     mPeriodLength = periodLength;
+}
+
+MultiDayIncidenceModel::Filters MultiDayIncidenceModel::filters()
+{
+    return m_filters;
+}
+
+void MultiDayIncidenceModel::setFilters(MultiDayIncidenceModel::Filters filters)
+{
+    beginResetModel();
+    m_filters = filters;
+    Q_EMIT filtersChanged();
+    endResetModel();
+}
+
+bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
+{
+    if(!m_filters) {
+        return true;
+    }
+    bool include = false;
+    const auto start = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
+
+    if(m_filters.testFlag(AllDayOnly) && idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
+        include = true;
+    }
+
+    if(m_filters.testFlag(NoStartDateOnly) && !start.isValid()) {
+        include = true;
+    }
+    if(m_filters.testFlag(MultiDayOnly) && idx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
+        include = true;
+    }
+
+    return include;
+
+}
+
+int MultiDayIncidenceModel::incidenceCount()
+{
+    int count = 0;
+
+    for (int i = 0; i < rowCount({}); i++) {
+        const auto rowStart = mSourceModel->start().addDays(i * mPeriodLength);
+        const auto rowEnd = rowStart.addDays(mPeriodLength > 1 ? mPeriodLength : 0);
+
+        for (int row = 0; row < mSourceModel->rowCount(); row++) {
+            const auto srcIdx = mSourceModel->index(row, 0, {});
+            const auto start = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
+            const auto end = srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date();
+
+            //Skip incidences not part of the week
+            if (end < rowStart || start > rowEnd) {
+                // qWarning() << "Skipping because not part of this week";
+                continue;
+            }
+
+            if(!incidencePassesFilter(srcIdx)) {
+                continue;
+            }
+
+            count++;
+        }
+    }
+
+    return count;
 }
 
 QHash<int, QByteArray> MultiDayIncidenceModel::roleNames() const
