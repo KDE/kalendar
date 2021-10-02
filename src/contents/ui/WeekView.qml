@@ -603,6 +603,7 @@ Kirigami.Page {
                                             y: (modelData.starts * Kirigami.Units.gridUnit) + root.incidenceSpacing + gridLineYCompensation
                                             width: (root.dayWidth * modelData.widthShare) - (root.incidenceSpacing * 2)
                                             height: (modelData.duration * Kirigami.Units.gridUnit) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
+                                            radius: Kirigami.Units.smallSpacing
                                             color: Qt.rgba(0,0,0,0)
                                             visible: !modelData.allDay
 
