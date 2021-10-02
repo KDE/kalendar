@@ -355,6 +355,7 @@ Kirigami.Page {
 
                                                         Kirigami.Separator {
                                                             anchors.fill: parent
+                                                            anchors.rightMargin: root.scrollbarWidth
                                                             z: -1
                                                         }
 
