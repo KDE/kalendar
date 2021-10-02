@@ -489,7 +489,6 @@ Kirigami.Page {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     contentWidth: availableWidth
-                    contentHeight: dayHeight
                     z: -2
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
@@ -502,14 +501,15 @@ Kirigami.Page {
                     Connections {
                         target: hourlyView.QQC2.ScrollBar.vertical
                         function onWidthChanged() {
-                            root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width;
+                            if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width;
                         }
                     }
-                    Component.onCompleted: root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width;
+                    Component.onCompleted: if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width
 
                     Item {
                         id: hourlyViewContents
-                        anchors.fill: parent
+                        width: parent.width
+                        implicitHeight: hourlyView.dayHeight
 
                         clip: true
 
@@ -521,6 +521,7 @@ Kirigami.Page {
                             anchors.topMargin: (fontMetrics.height / 2) + (root.gridLineWidth / 2)
                             spacing: root.gridLineWidth
                             width: root.hourLabelWidth
+                            boundsBehavior: Flickable.StopAtBounds
 
                             FontMetrics {
                                 id: fontMetrics
@@ -547,6 +548,7 @@ Kirigami.Page {
                                 right: parent.right
                             }
                             clip: true
+                            DragHandler { }
 
                             Kirigami.Separator {
                                 anchors.fill: parent
@@ -576,6 +578,7 @@ Kirigami.Page {
                                     ListView {
                                         anchors.fill: parent
                                         spacing: root.gridLineWidth
+                                        boundsBehavior: Flickable.StopAtBounds
 
                                         model: 24
                                         delegate: Rectangle {
