@@ -21,10 +21,9 @@ Kirigami.ShadowedRectangle {
     visible: isOpenOccurrence || isInCurrentMonth
     radius: Kirigami.Units.smallSpacing
 
-    shadow.size: isDark && isOpenOccurrence ? Kirigami.Units.largeSpacing * 1.5 : Kirigami.Units.largeSpacing
-    shadow.color: !isDark ? Qt.rgba(0.0, 0.0, 0.0, 0.2) :
-        isOpenOccurrence ? modelData.color : LabelUtils.getIncidenceBackgroundColor(modelData.color, true)
-    shadow.yOffset: !isDark ? 2 : 0
+    shadow.size: Kirigami.Units.largeSpacing
+    shadow.color: Qt.rgba(0.0, 0.0, 0.0, 0.2)
+    shadow.yOffset: 2
 
     border.width: 1
     border.color: Kirigami.ColorUtils.tintWithAlpha(color, Kirigami.Theme.textColor, 0.2)
