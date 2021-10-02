@@ -232,7 +232,7 @@ Item {
                             anchors {
                                 fill: parent
                                 // Offset for date
-                                topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing : 0
+                                topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 : 0
                             }
 
                             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff

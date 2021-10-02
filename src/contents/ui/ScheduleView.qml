@@ -346,26 +346,24 @@ Kirigami.Page {
                                             Kirigami.AbstractCard {
                                                 id: incidenceCard
 
-                                                Layout.fillWidth: true
-
-                                                Kirigami.Theme.inherit: false
-                                                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                                Kirigami.Theme.backgroundColor: isOpenOccurrence ? modelData.color :
-                                                    LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
-                                                Kirigami.Theme.highlightColor: Qt.darker(Kirigami.Theme.backgroundColor, 3)
-
-                                                property real paddingSize: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
-
-                                                topPadding: paddingSize
-                                                bottomPadding: paddingSize
-
-                                                showClickFeedback: true
-
+                                                property real paddingSize: Kirigami.Settings.isMobile ?
+                                                    Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
                                                 property bool isOpenOccurrence: root.openOccurrence ?
                                                     root.openOccurrence.incidenceId === modelData.incidenceId : false
                                                 property bool multiday: modelData.startTime.getDate() !== modelData.endTime.getDate()
                                                 property int incidenceDays: DateUtils.fullDaysBetweenDates(modelData.startTime, modelData.endTime)
                                                 property int dayOfMultidayIncidence: DateUtils.fullDaysBetweenDates(modelData.startTime, periodStartDate)
+
+                                                Layout.fillWidth: true
+                                                topPadding: paddingSize
+                                                bottomPadding: paddingSize
+
+                                                showClickFeedback: true
+                                                background: IncidenceBackground {
+                                                    id: incidenceBackground
+                                                    isOpenOccurrence: parent.isOpenOccurrence
+                                                    isDark: root.isDark
+                                                }
 
                                                 contentItem: GridLayout {
                                                     id: cardContents
@@ -380,7 +378,9 @@ Kirigami.Page {
                                                             Layout.fillHeight: true
                                                             source: modelData.incidenceTypeIcon
                                                             isMask: true
-                                                            color: cardContents.textColor
+                                                            color: incidenceCard.isOpenOccurrence ?
+                                                                (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                                cardContents.textColor
                                                         }
 
                                                         QQC2.Label {
@@ -390,8 +390,9 @@ Kirigami.Page {
                                                             Layout.row: 0
                                                             Layout.columnSpan: root.isLarge ? 2 : 1
 
-                                                            color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                            cardContents.textColor
+                                                            color: incidenceCard.isOpenOccurrence ?
+                                                                (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                                cardContents.textColor
                                                             text: {
                                                                 if(incidenceCard.multiday) {
                                                                     return i18n("%1 (Day %2 of %3)", modelData.text, incidenceCard.dayOfMultidayIncidence, incidenceCard.incidenceDays);
