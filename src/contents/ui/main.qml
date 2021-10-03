@@ -277,9 +277,12 @@ Kirigami.ApplicationWindow {
             pageStack.currentItem.filterCollectionId = collectionId;
             pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
         }
-        onCalendarCheckChanged: if(todoMode && collectionId === pageStack.currentItem.filterCollectionId) {
-            pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
-            // HACK: The Todo View should be able to detect change in collection filtering independently
+        onCalendarCheckChanged: {
+            CalendarManager.save();
+            if(todoMode && collectionId === pageStack.currentItem.filterCollectionId) {
+                pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
+                // HACK: The Todo View should be able to detect change in collection filtering independently
+            }
         }
         onTagClicked: if(todoMode) pageStack.currentItem.filterCategoryString = tagName
         onViewAllTodosClicked: if(todoMode) pageStack.currentItem.filterCollectionId = -1
