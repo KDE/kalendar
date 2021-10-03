@@ -42,17 +42,21 @@ Kirigami.Page {
 
                             rowSpacing: Kirigami.Units.smallSpacing
                             columnSpacing: Kirigami.Units.smallSpacing
-                            columns: 2
+                            columns: 4
                             rows: 3
 
                             Kirigami.Icon {
                                 source: model.decoration
+                                Layout.row: 0
+                                Layout.column: 0
                                 Layout.rowSpan: 2
                                 Layout.preferredWidth: Kirigami.Units.gridUnit * 3
                                 Layout.preferredHeight: Kirigami.Units.gridUnit * 3
                             }
 
                             Controls.Label {
+                                Layout.row: 0
+                                Layout.column: 1
                                 font.weight: Font.Light
                                 font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.75)
                                 text: model.display
@@ -64,6 +68,8 @@ Kirigami.Page {
 
                             Controls.Label {
                                 id: alarmName
+                                Layout.row: 1
+                                Layout.column: 1
                                 visible: text !== ""
                                 font.weight: Font.Bold
                                 color: {
@@ -82,7 +88,9 @@ Kirigami.Page {
                             }
 
                             RowLayout {
-                                Layout.row: 2
+                                readonly property bool smallScreen: sourcesSettingsPage.width < Kirigami.Units.gridUnit * 30
+                                Layout.row: smallScreen ? 3 : 0
+                                Layout.column: smallScreen ? 4 : 2
                                 Layout.columnSpan : 2
                                 Layout.alignment: Qt.AlignRight
                                 Controls.ToolButton {
