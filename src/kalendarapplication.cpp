@@ -289,6 +289,7 @@ void KalendarApplication::configureShortcuts()
     KShortcutsDialog dlg(KShortcutsEditor::ApplicationAction, KShortcutsEditor::LetterShortcutsAllowed, nullptr);
     dlg.setModal(true);
     dlg.addCollection(&mCollection);
+    dlg.addCollection(&mSortCollection);
     dlg.configure();
 }
 
