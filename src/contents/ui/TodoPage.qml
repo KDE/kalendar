@@ -8,6 +8,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.4 as QQC1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
+import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
 
 import org.kde.kalendar 1.0 as Kalendar
@@ -239,6 +240,7 @@ Kirigami.Page {
         property var incidenceWrapper
 
         ListView {
+            id: collectionsList
             implicitWidth: Kirigami.Units.gridUnit * 30
             currentIndex: -1
             header: ColumnLayout {
@@ -250,24 +252,57 @@ Kirigami.Page {
             model: KDescendantsProxyModel {
                 model: Kalendar.CalendarManager.todoCollections
             }
-            delegate: Kirigami.BasicListItem {
-                leftPadding: model.kDescendantLevel ? ((Kirigami.Units.gridUnit * 2) * (kDescendantLevel - 1)) + Kirigami.Units.largeSpacing : 0
-                enabled: model.checkState != null
-                trailing: Rectangle {
-                    height: parent.height * 0.8
-                    width: height
-                    radius: 3
-                    color: model.collectionColor ? model.collectionColor : Kirigami.Theme.textColor
-                    visible: model.checkState != null
+
+            delegate: DelegateChooser {
+                role: 'kDescendantExpandable'
+                DelegateChoice {
+                    roleValue: true
+
+                    Kirigami.BasicListItem {
+                        label: display
+                        labelItem.color: Kirigami.Theme.disabledTextColor
+                        labelItem.font.weight: Font.DemiBold
+                        topPadding: 2 * Kirigami.Units.largeSpacing
+                        hoverEnabled: false
+                        background: Item {}
+
+                        separatorVisible: false
+
+                        trailing: Kirigami.Icon {
+                            width: Kirigami.Units.iconSizes.small
+                            height: Kirigami.Units.iconSizes.small
+                            source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                            x: -4
+                        }
+
+                        onClicked: collectionsList.model.toggleChildren(index)
+                    }
                 }
 
-                label: display
+                DelegateChoice {
+                    roleValue: false
+                    Kirigami.BasicListItem {
+                        label: display
+                        labelItem.color: Kirigami.Theme.textColor
 
-                onClicked: {
-                    collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
-                    Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
-                    collectionPickerSheet.close();
-                    addField.clear();
+                        hoverEnabled: false
+
+                        separatorVisible: false
+
+                        onClicked: {
+                            collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
+                            Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
+                            collectionPickerSheet.close();
+                            addField.clear();
+                        }
+
+                        trailing: Rectangle {
+                            color: model.collectionColor
+                            radius: Kirigami.Units.smallSpacing
+                            width: height
+                            height: Kirigami.Units.iconSizes.small
+                        }
+                    }
                 }
             }
         }
@@ -275,7 +310,6 @@ Kirigami.Page {
 
     footer: Kirigami.ActionTextField {
         id: addField
-        Layout.fillWidth: true
         placeholderText: i18n("Create a New Task…")
 
         background: Rectangle {
@@ -310,6 +344,7 @@ Kirigami.Page {
 
         rightActions: Kirigami.Action {
             icon.name: "list-add"
+            text: i18n("Quickly Add a New Task.")
             tooltip: i18n("Quickly Add a New Task.")
             onTriggered: addField.addTodo()
         }
