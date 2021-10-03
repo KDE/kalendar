@@ -29,11 +29,12 @@
         <entry name="lastOpenedView" type="Enum">
             <label>Remember the last opened view.</label>
             <choices>
-                <choice name="monthView"/>
-                <choice name="scheduleView"/>
-                <choice name="todoView"/>
+                <choice name="MonthView"/>
+                <choice name="ScheduleView"/>
+                <choice name="TodoView"/>
+                <choice name="WeekView"/>
             </choices>
-            <default>scheduleView</default>
+            <default>ScheduleView</default>
         </entry>
     </group>
 

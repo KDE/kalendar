@@ -6,6 +6,7 @@
 #include "kalendarapplication.h"
 
 #include "commandbarfiltermodel.h"
+#include "kalendarconfig.h"
 #include <KXmlGui/KShortcutsDialog>
 #include <KAuthorized>
 #include <KLocalizedString>
@@ -68,6 +69,12 @@ void KalendarApplication::setupActions()
         openTodoAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-tasks")));
         openTodoAction->setCheckable(true);
         openTodoAction->setActionGroup(m_viewGroup);
+        connect(openTodoAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::TodoView);
+                KalendarConfig::self()->save();
+            }
+        });
         mCollection.setDefaultShortcut(openTodoAction, QKeySequence(i18n("Ctrl+4")));
     }
 
@@ -78,6 +85,12 @@ void KalendarApplication::setupActions()
         openWeekAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-week")));
         openWeekAction->setCheckable(true);
         openWeekAction->setActionGroup(m_viewGroup);
+        connect(openWeekAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::WeekView);
+                KalendarConfig::self()->save();
+            }
+        });
         mCollection.setDefaultShortcut(openWeekAction, QKeySequence(i18n("Ctrl+2")));
     }
 
@@ -88,6 +101,12 @@ void KalendarApplication::setupActions()
         openScheduleAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-list")));
         openScheduleAction->setCheckable(true);
         openScheduleAction->setActionGroup(m_viewGroup);
+        connect(openScheduleAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::ScheduleView);
+                KalendarConfig::self()->save();
+            }
+        });
         mCollection.setDefaultShortcut(openScheduleAction, QKeySequence(i18n("Ctrl+3")));
     }
 
@@ -98,6 +117,12 @@ void KalendarApplication::setupActions()
         openMonthAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar")));
         openMonthAction->setCheckable(true);
         openMonthAction->setActionGroup(m_viewGroup);
+        connect(openMonthAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::MonthView);
+                KalendarConfig::self()->save();
+            }
+        });
         mCollection.setDefaultShortcut(openMonthAction, QKeySequence(i18n("Ctrl+1")));
     }
 

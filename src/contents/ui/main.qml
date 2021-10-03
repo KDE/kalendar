@@ -52,40 +52,18 @@ Kirigami.ApplicationWindow {
     pageStack.globalToolBar.canContainHandles: true
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
 
-    onClosing: {
-        rememberLastOpenedView();
-    }
-
-    function rememberLastOpenedView() {
-        switch (pageStack.currentItem.objectName) {
-            case "monthView":
-                Config.lastOpenedView = 0;
-                break;
-            case "weekView":
-                Config.lastOpenedView = 1;
-                break;
-            case "scheduleView":
-                Config.lastOpenedView = 2;
-                break;
-            case "todoView":
-                Config.lastOpenedView = 3;
-                break;
-        }
-        Config.save();
-    }
-
     Component.onCompleted: {
         switch (Config.lastOpenedView) {
-            case 0:
+            case Config.MonthView:
                 monthViewAction.trigger();
                 break;
-            case 1:
+            case Config.WeekView:
                 weekViewAction.trigger();
                 break;
-            case 2:
+            case Config.ScheduleView:
                 scheduleViewAction.trigger();
                 break;
-            case 3:
+            case Config.TodoView:
                 todoViewAction.trigger();
                 break;
             default:

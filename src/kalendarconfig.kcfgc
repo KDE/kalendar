@@ -8,4 +8,6 @@ DefaultValueGetters=true
 GenerateProperties=true
 ParentInConstructor=true
 Singleton=true
+UseEnumTypes=true
+GlobalEnums=true
 
