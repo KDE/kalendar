@@ -34,12 +34,46 @@ Kirigami.Page {
         Kalendar.CalendarManager.getCollectionDetails(root.filter.collectionId) : null
 
     property int sortBy
-    property bool ascendingOrder: false
+    onSortByChanged: {
+        switch (sortBy) {
+        case Kalendar.TodoSortFilterProxyModel.EndTimeColumn:
+            Kalendar.Config.sort = Kalendar.Config.DueTime;
+            break;
+        case Kalendar.TodoSortFilterProxyModel.PriorityIntColumn:
+            Kalendar.Config.sort = Kalendar.Config.Priority;
+            break;
+        case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
+            Kalendar.Config.sort = Kalendar.Config.Alphabetically;
+            break;
+        }
+        Kalendar.Config.save();
+    }
+
+    property bool ascendingOrder: Kalendar.Config.showComplete
+    onAscendingOrderChanged: {
+        Kalendar.Config.showComplete = ascendingOrder;
+        Kalendar.Config.save();
+    }
+
     readonly property color standardTextColor: Kirigami.Theme.textColor
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
     readonly property alias completedSheet: completedSheet
 
-    Component.onCompleted: sortBy = Kalendar.TodoSortFilterProxyModel.EndTimeColumn // Otherwise crashes...
+    Component.onCompleted: {
+        // Assign here, otherwise crashes...
+        switch (Config.sort) {
+        case Config.DueTime:
+            sortBy = Kalendar.TodoSortFilterProxyModel.EndTimeColumn;
+            return;
+        case Config.Priority:
+            sortBy = Kalendar.TodoSortFilterProxyModel.PriorityIntColumn;
+            return;
+        case Config.Alphabetically:
+            sortBy = Kalendar.TodoSortFilterProxyModel.SummaryColumn;
+            return;
+        }
+    }
+
 
     padding: 0
     leftPadding: Kirigami.Units.largeSpacing

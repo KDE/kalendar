@@ -56,7 +56,7 @@
         </entry>
 
         <entry name="weekdayLabelLength" type="Enum">
-        <label>Format of weekday name.</label>
+            <label>Format of weekday name.</label>
             <choices>
                 <choice name="Full">
                     <label>Full</label>
@@ -93,5 +93,26 @@
         </entry>
     </group>
 
+    <group name="TaskView">
+        <entry name="sort" type="Enum">
+            <label>Sorting of the taskview.</label>
+            <choices>
+                <choice name="DueTime">
+                    <label>Sort by due time</label>
+                </choice>
+                <choice name="Alphabetically">
+                    <label>Sort alphabetically</label>
+                </choice>
+                <choice name="Priority">
+                    <label>Sort by priority</label>
+                </choice>
+            </choices>
+            <default>DueTime</default>
+        </entry>
+        <entry name="ascendingOrder" type="Bool">
+            <label>Sort order</label>
+            <default>false</default>
+        </entry>
+    </group>
 </kcfg>
 
