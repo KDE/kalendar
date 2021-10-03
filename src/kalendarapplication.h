@@ -1,10 +1,12 @@
 // SPDX-FileCopyrightText: 2012 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+#pragma once
 #include <QObject>
 #include <QActionGroup>
 #include <KXmlGui/KActionCollection>
 #include "actionsmodel.h"
+#include "kalendarconfig.h"
 
 class QWindow;
 class QSortFilterProxyModel;

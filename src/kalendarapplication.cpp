@@ -111,11 +111,11 @@ void KalendarApplication::setupActions()
     actionName = QLatin1String("toggle_menubar");
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::toggleMenubar);
-        toggleMenubarAction->setText(i18n("Show Menubar"));
-        toggleMenubarAction->setIcon(QIcon::fromTheme(QStringLiteral("show-menu")));
-        toggleMenubarAction->setCheckable(true);
-        toggleMenubarAction->setChecked(m_config->showMenubar());
-        mCollection.setDefaultShortcut(toggleMenubarAction, QKeySequence(i18n("Ctrl+M")));
+        action->setText(i18n("Show Menubar"));
+        action->setIcon(QIcon::fromTheme(QStringLiteral("show-menu")));
+        action->setCheckable(true);
+        action->setChecked(m_config->showMenubar());
+        mCollection.setDefaultShortcut(action, QKeySequence(i18n("Ctrl+M")));
     }
 
     actionName = QLatin1String("create_event");
