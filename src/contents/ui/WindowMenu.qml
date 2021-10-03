@@ -205,8 +205,13 @@ QQC2.MenuBar {
         }
 
         KActionFromAction {
+            kalendarAction: "toggle_menubar"
+        }
+
+        KActionFromAction {
             kalendarAction: 'options_configure_keybinding'
         }
+
         KActionFromAction {
             kalendarAction: "options_configure"
         }

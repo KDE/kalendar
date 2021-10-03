@@ -122,6 +122,11 @@ Labs.MenuBar {
     }
     Labs.Menu {
         title: i18nc("@action:menu", "Settings")
+
+        NativeMenuItemFromAction {
+            kalendarAction: 'toggle_menubar'
+            visible: !globalMenuLoader.active
+        }
         NativeMenuItemFromAction {
             kalendarAction: 'open_tag_manager'
         }

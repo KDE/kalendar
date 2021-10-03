@@ -36,6 +36,7 @@ Q_SIGNALS:
     void openScheduleView();
     void openTodoView();
     void openAboutPage();
+    void toggleMenubar();
     void createNewEvent();
     void createNewTodo();
     void windowChanged();
@@ -62,4 +63,5 @@ private:
     QActionGroup *m_todoViewSortGroup = nullptr;
     KalCommandBarModel *m_actionModel = nullptr;
     QSortFilterProxyModel *m_proxyModel = nullptr;
+    KalendarConfig *m_config = nullptr;
 };

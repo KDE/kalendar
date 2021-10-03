@@ -81,9 +81,14 @@ Kirigami.OverlayDrawer {
 
                 Kirigami.ActionToolBar {
                     id: menu
-                    visible: false // only make it visible when menubar is hidden, progress in another MR: https://invent.kde.org/pim/kalendar/-/merge_requests/41
-                    Layout.preferredWidth: parent.width
-                    Layout.preferredHeight: parent.height
+
+                    Connections {
+                        target: Config
+                        onShowMenubarChanged: menu.visible = !Config.showMenubar
+                    }
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
                     overflowIconName: "application-menu"
 
                     actions: [
@@ -103,6 +108,9 @@ Kirigami.OverlayDrawer {
                             enabled: CalendarManager.undoRedoData.redoAvailable
                             onTriggered: CalendarManager.redoAction();
                         },
+                        KActionFromAction {
+                            kalendarAction: "toggle_menubar"
+                        },
                         Kirigami.Action {
                             icon.name: KalendarApplication.iconName(quitAction.icon)
                             text: quitAction.text
@@ -117,6 +125,8 @@ Kirigami.OverlayDrawer {
                             let action = actions[i]
                             action.displayHint = Kirigami.DisplayHint.AlwaysHide
                         }
+                        visible = !Config.showMenubar
+                        //HACK: Otherwise if menubar is open and then hidden hamburger refuses to appear (?)
                     }
                 }
             }

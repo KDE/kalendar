@@ -6,6 +6,10 @@
     <kcfgfile name="kalendarrc" />
 
     <group name="General">
+        <entry name="showMenubar" type="Bool">
+            <label>Show the Menubar.</label>
+            <default>false</default>
+        </entry>
         <entry name="enableMaps" type="Bool">
             <label>Enable maps. NOTE: may cause crashing on some systems.</label>
             <default>false</default>
