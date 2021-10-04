@@ -15,6 +15,8 @@ import org.kde.kalendar 1.0
 Kirigami.ApplicationWindow {
     id: root
 
+    minimumWidth: Kirigami.Units.gridUnit * 30
+    minimumHeight: Kirigami.Units.gridUnit * 30
     width: Kirigami.Units.gridUnit * 65
 
     property date currentDate: new Date()
@@ -331,6 +333,8 @@ Kirigami.ApplicationWindow {
         sourceComponent: Kirigami.ApplicationWindow {
             id: root
 
+            minimumWidth: Kirigami.Units.gridUnit * 20
+            minimumHeight: Kirigami.Units.gridUnit * 20
             width: Kirigami.Units.gridUnit * 40
             height: Kirigami.Units.gridUnit * 32
 
