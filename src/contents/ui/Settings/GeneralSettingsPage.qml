@@ -46,13 +46,13 @@ Kirigami.Page {
             Kirigami.FormData.labelAlignment: Qt.AlignTop
 
             Controls.RadioButton {
-                property int value: 0 // HACK: Ideally should use config enum
+                property int value: Config.Circle
                 text: i18n("Circle (shows area of location)")
                 enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
                 checked: Config.locationMarker === value
             }
             Controls.RadioButton {
-                property int value: 1 // HACK: Ideally should use config enum
+                property int value: Config.Pin
                 text: i18n("Pin (shows exact location)")
                 enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
                 checked: Config.locationMarker === value

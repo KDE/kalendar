@@ -29,19 +29,19 @@ Kirigami.ScrollablePage {
             Kirigami.FormData.labelAlignment: Qt.AlignTop
 
             Controls.RadioButton {
-                property int value: 0 // HACK: Ideally should use config enum
+                property int value: Config.Left
                 text: i18n("Left")
                 enabled: !Config.isWeekdayLabelAlignmentImmutable
                 checked: Config.weekdayLabelAlignment === value
             }
             Controls.RadioButton {
-                property int value: 1
+                property int value: Config.Center
                 text: i18n("Center")
                 enabled: !Config.isWeekdayLabelAlignmentImmutable
                 checked: Config.weekdayLabelAlignment === value
             }
             Controls.RadioButton {
-                property int value: 2
+                property int value: Config.Right
                 text: i18n("Right")
                 enabled: !Config.isWeekdayLabelAlignmentImmutable
                 checked: Config.weekdayLabelAlignment === value
@@ -61,19 +61,19 @@ Kirigami.ScrollablePage {
             Kirigami.FormData.labelAlignment: Qt.AlignTop
 
             Controls.RadioButton {
-                property int value: 0 // HACK: Ideally should use config enum
+                property int value: Config.Full
                 text: i18n("Full name (Monday)")
                 enabled: !Config.isWeekdayLabelLengthImmutable
                 checked: Config.weekdayLabelLength === value
             }
             Controls.RadioButton {
-                property int value: 1
+                property int value: Config.Abbreviated
                 text: i18n("Abbreviated (Mon)")
                 enabled: !Config.isWeekdayLabelLengthImmutable
                 checked: Config.weekdayLabelLength === value
             }
             Controls.RadioButton {
-                property int value: 2
+                property int value: Config.Letter
                 text: i18n("Letter only (M)")
                 enabled: !Config.isWeekdayLabelLengthImmutable
                 checked: Config.weekdayLabelLength === value
