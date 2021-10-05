@@ -8,6 +8,7 @@ import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
+import QtGraphicalEffects 1.12
 
 Kirigami.OverlayDrawer {
     id: sidebar
@@ -53,6 +54,8 @@ Kirigami.OverlayDrawer {
 
     contentItem: ColumnLayout {
         id: container
+        spacing: 0
+        clip: true
 
         QQC2.ToolBar {
             id: toolbar
@@ -136,7 +139,6 @@ Kirigami.OverlayDrawer {
             id: generalView
             implicitWidth: Kirigami.Units.gridUnit * 16
             Layout.fillWidth: true
-            Layout.topMargin: toolbar.visible ? -Kirigami.Units.smallSpacing - 1 : 0
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
             contentWidth: availableWidth
 
@@ -144,6 +146,13 @@ Kirigami.OverlayDrawer {
 
             ListView {
                 id: generalList
+
+                Rectangle {
+                    anchors.fill: parent
+                    anchors.topMargin: toolbar.visible ? -Kirigami.Units.smallSpacing - 1 : 0
+                    color: Kirigami.Theme.backgroundColor
+                    z: -1
+                }
 
                 currentIndex: {
                     if (!Kirigami.Settings.isMobile) {
@@ -188,16 +197,6 @@ Kirigami.OverlayDrawer {
                             todoViewAction.trigger()
                             if(sidebar.modal) sidebar.close()
                         }
-                    },
-                    Kirigami.Action {
-                        text: i18n("Settings")
-                        icon.name: KalendarApplication.iconName(configureAction.icon)
-                        onTriggered: {
-                            configureAction.trigger()
-                            if(sidebar.modal) sidebar.close()
-                            generalList.currentIndex = getCurrentView();
-                        }
-                        shortcut: configureAction.shortcut
                     }
                 ]
                 property list<Kirigami.Action> mobileActions: [
@@ -238,15 +237,31 @@ Kirigami.OverlayDrawer {
             }
         }
 
+        Kirigami.Separator {
+            id: headerTopSeparator
+            Layout.fillWidth: true
+            height: 1
+            z: -2
+
+            RectangularGlow {
+                anchors.fill: parent
+                z: -1
+                glowRadius: 5
+                spread: 0.3
+                color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
+                visible: !allDayViewLoader.active
+            }
+        }
+
         QQC2.ScrollView {
             id: calendarView
             implicitWidth: Kirigami.Units.gridUnit * 16
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.topMargin: Kirigami.Units.largeSpacing * 2
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
             contentWidth: availableWidth
             clip: true
+            z: -2
 
             ColumnLayout {
                 anchors.fill: parent
@@ -254,6 +269,7 @@ Kirigami.OverlayDrawer {
 
                 RowLayout {
                     id: tagsHeadingLayout
+                    Layout.topMargin: Kirigami.Units.largeSpacing
                     Layout.leftMargin: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                     spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                     visible: tagList.count > 0
@@ -274,7 +290,6 @@ Kirigami.OverlayDrawer {
 
                         level: 4
                         z: 10
-                        background: Rectangle {color: Kirigami.Theme.backgroundColor}
                     }
                 }
 
@@ -319,7 +334,6 @@ Kirigami.OverlayDrawer {
 
                         level: 4
                         z: 10
-                        background: Rectangle {color: Kirigami.Theme.backgroundColor}
                     }
                 }
 
@@ -405,7 +419,12 @@ Kirigami.OverlayDrawer {
         Layout.fillWidth: true
     }
     Kirigami.BasicListItem {
-        Layout.topMargin: -Kirigami.Units.smallSpacing - 1
+
+        FontMetrics {
+            id: textMetrics
+        }
+
+        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing
         icon: "show-all-effects"
         label: i18n("View all tasks")
         labelItem.color: Kirigami.Theme.textColor

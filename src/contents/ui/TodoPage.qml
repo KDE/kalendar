@@ -311,6 +311,11 @@ Kirigami.Page {
     footer: Kirigami.ActionTextField {
         id: addField
         placeholderText: i18n("Create a New Task…")
+        FontMetrics {
+            id: textMetrics
+        }
+
+        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing + 1 // To align with 'Show all' button in sidebar
 
         background: Rectangle {
             Kirigami.Theme.inherit: false
