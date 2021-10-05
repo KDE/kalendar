@@ -107,7 +107,7 @@ Kirigami.ScrollablePage {
     footer: Kirigami.ActionTextField {
         id: newTagField
         Layout.fillWidth: true
-        placeholderText: i18n("Create a New Tag...")
+        placeholderText: i18n("Create a New Tag…")
         background: Rectangle {
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Window

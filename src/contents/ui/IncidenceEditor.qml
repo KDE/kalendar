@@ -751,7 +751,7 @@ Kirigami.ScrollablePage {
                         model: TagManager.tagModel
                         displayText: root.incidenceWrapper.categories.length > 0 ?
                             root.incidenceWrapper.categories.join(i18nc("List separator", ", ")) :
-                            Kirigami.Settings.tabletMode ? i18n("Tap to set tags...") : i18n("Click to set tags...")
+                            Kirigami.Settings.tabletMode ? i18n("Tap to set tags…") : i18n("Click to set tags…")
 
                         delegate: Kirigami.CheckableListItem {
                             label: model.display
@@ -768,7 +768,7 @@ Kirigami.ScrollablePage {
                         }
                     }
                     QQC2.Button {
-                        text: i18n("Manage tags...")
+                        text: i18n("Manage tags…")
                         onClicked: KalendarApplication.action("open_tag_manager").trigger()
                     }
                 }
