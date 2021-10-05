@@ -112,6 +112,9 @@ Kirigami.OverlayDrawer {
                             onTriggered: CalendarManager.redoAction();
                         },
                         KActionFromAction {
+                            kalendarAction: "options_configure"
+                        },
+                        KActionFromAction {
                             kalendarAction: "toggle_menubar"
                         },
                         Kirigami.Action {
