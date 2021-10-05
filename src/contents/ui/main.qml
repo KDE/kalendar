@@ -48,6 +48,7 @@ Kirigami.ApplicationWindow {
     readonly property var todoViewOrderDescendingAction: KalendarApplication.action("todoview_order_descending")
     readonly property var todoViewShowCompletedAction: KalendarApplication.action("todoview_show_completed")
     readonly property var openKCommandBarAction: KalendarApplication.action("open_kcommand_bar")
+    readonly property var tagManagerAction: KalendarApplication.action("open_tag_manager")
 
     pageStack.globalToolBar.canContainHandles: true
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar

@@ -144,95 +144,87 @@ Kirigami.OverlayDrawer {
 
             clip: true
 
-            ListView {
-                id: generalList
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 0
+
+                Repeater {
+                    id: generalActions
+                    property list<Kirigami.Action> actions: [
+                        KActionFromAction {
+                            kalendarAction: "open_month_view"
+                            checkable: false
+                            onTriggered: {
+                                monthViewAction.trigger()
+                                if (sidebar.modal) sidebar.close()
+                            }
+                        },
+                        KActionFromAction {
+                            kalendarAction: "open_week_view"
+                            checkable: false
+                            onTriggered: {
+                                weekViewAction.trigger()
+                                if (sidebar.modal) sidebar.close()
+                            }
+                        },
+                        KActionFromAction {
+                            kalendarAction: "open_schedule_view"
+                            checkable: false
+                            onTriggered: {
+                                scheduleViewAction.trigger()
+                                if (sidebar.modal) sidebar.close()
+                            }
+                        },
+                        KActionFromAction {
+                            kalendarAction: "open_todo_view"
+                            checkable: false
+                            onTriggered: {
+                                todoViewAction.trigger()
+                                if (sidebar.modal) sidebar.close()
+                            }
+                        }
+                    ]
+                    property list<Kirigami.Action> mobileActions: [
+                        KActionFromAction {
+                            text: CalendarManager.undoRedoData.undoAvailable ?
+                                i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : i18n("Undo")
+                            kalendarAction: "edit_undo"
+                        },
+                        KActionFromAction {
+                            text: CalendarManager.undoRedoData.redoAvailable ?
+                                i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : i18n("Redo")
+                            kalendarAction: "edit_redo"
+                        },
+                        KActionFromAction {
+                            kalendarAction: "open_tag_manager"
+                            onTriggered: {
+                                tagManagerAction.trigger()
+                                if (sidebar.modal) sidebar.close()
+                            }
+                        },
+                        KActionFromAction {
+                            text: i18n("Settings")
+                            kalendarAction: "options_configure"
+                            onTriggered: {
+                                configureAction.trigger()
+                                if (sidebar.modal) sidebar.close()
+                            }
+                        }
+                    ]
+                    model: !Kirigami.Settings.isMobile ? actions : mobileActions
+                    delegate: Kirigami.BasicListItem {
+                        label: modelData.text
+                        icon: modelData.icon.name
+                        separatorVisible: false
+                        action: modelData
+                    }
+                }
 
                 Rectangle {
                     anchors.fill: parent
                     anchors.topMargin: toolbar.visible ? -Kirigami.Units.smallSpacing - 1 : 0
                     color: Kirigami.Theme.backgroundColor
                     z: -1
-                }
-
-                currentIndex: {
-                    if (!Kirigami.Settings.isMobile) {
-                        getCurrentView();
-                    } else {
-                        return -1;
-                    }
-                }
-                property list<Kirigami.Action> actions: [
-                    Kirigami.Action {
-                        icon.name: KalendarApplication.iconName(monthViewAction.icon)
-                        text: monthViewAction.text
-                        shortcut: monthViewAction.shortcut
-                        onTriggered: {
-                            monthViewAction.trigger()
-                            if(sidebar.modal) sidebar.close()
-                        }
-                    },
-                    Kirigami.Action {
-                        icon.name: KalendarApplication.iconName(weekViewAction.icon)
-                        text: weekViewAction.text
-                        shortcut: weekViewAction.shortcut
-                        onTriggered: {
-                            weekViewAction.trigger()
-                            if(sidebar.modal) sidebar.close()
-                        }
-                    },
-                    Kirigami.Action {
-                        icon.name: KalendarApplication.iconName(scheduleViewAction.icon)
-                        text: scheduleViewAction.text
-                        shortcut: scheduleViewAction.shortcut
-                        onTriggered: {
-                            scheduleViewAction.trigger()
-                            if(sidebar.modal) sidebar.close()
-                        }
-                    },
-                    Kirigami.Action {
-                        icon.name: KalendarApplication.iconName(todoViewAction.icon)
-                        text: todoViewAction.text
-                        shortcut: todoViewAction.shortcut
-                        onTriggered: {
-                            todoViewAction.trigger()
-                            if(sidebar.modal) sidebar.close()
-                        }
-                    }
-                ]
-                property list<Kirigami.Action> mobileActions: [
-                    Kirigami.Action {
-                        icon.name: "edit-undo"
-                        text: CalendarManager.undoRedoData.undoAvailable ?
-                            i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : i18n("Undo")
-                        enabled: CalendarManager.undoRedoData.undoAvailable
-                        onTriggered: CalendarManager.undoAction();
-                    },
-                    Kirigami.Action {
-                        icon.name: KalendarApplication.iconName(redoAction.icon)
-                        text: CalendarManager.undoRedoData.redoAvailable ?
-                            i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : i18n("Redo")
-                        enabled: CalendarManager.undoRedoData.redoAvailable
-                        onTriggered: CalendarManager.redoAction();
-                    },
-                    KActionFromAction {
-                        kalendarAction: "open_tag_manager"
-                    },
-                    Kirigami.Action {
-                        text: i18n("Settings")
-                        icon.name: KalendarApplication.iconName(configureAction.icon)
-                        onTriggered: {
-                            configureAction.trigger()
-                            if(sidebar.modal) sidebar.close()
-                            generalList.currentIndex = -1;
-                        }
-                    }
-                ]
-                model: !Kirigami.Settings.isMobile ? actions : mobileActions
-                delegate: Kirigami.BasicListItem {
-                    text: modelData.text
-                    icon: modelData.icon.name
-                    separatorVisible: false
-                    action: modelData
                 }
             }
         }
@@ -314,7 +306,7 @@ Kirigami.OverlayDrawer {
                 }
 
                 RowLayout {
-                    Layout.topMargin: tagsHeading.visible ? Kirigami.Units.largeSpacing * 2 : 0
+                    Layout.topMargin: tagsHeading.visible ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                     Layout.leftMargin: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                     spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
