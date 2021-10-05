@@ -157,8 +157,8 @@ Kirigami.ApplicationWindow {
                 width: root.width
             }, {
                 title: i18n("Settings"),
-                width: root.width - (Kirigami.Units.gridUnit * 4),
-                height: root.height - (Kirigami.Units.gridUnit * 3)
+                width: Kirigami.Units.gridUnit * 45,
+                height: Kirigami.Units.gridUnit * 35
             })
         }
 
