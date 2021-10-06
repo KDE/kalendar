@@ -157,13 +157,13 @@ Kirigami.Page {
                             let longText = day.toLocaleString(Qt.locale(), "dddd");
                             let midText = day.toLocaleString(Qt.locale(), "ddd");
                             let shortText = midText.slice(0,1);
-                            switch(Kalendar.Config.weekdayLabelLength) { // HACK: Ideally should use config enum
-                                case 0: // Full
+                            switch(Kalendar.Config.weekdayLabelLength) {
+                                case Kalendar.Config.Full:
                                     let chosenFormat = "dddd"
                                     return monthPage.isLarge ? longText : monthPage.isTiny ? shortText : midText;
-                                case 1: // Abbr
+                                case Kalendar.Config.Abbreviated:
                                     return monthPage.isTiny ? shortText : midText;
-                                case 2: // Letter
+                                case Kalendar.Config.Letter:
                                 default:
                                     return shortText;
                             }
@@ -172,12 +172,12 @@ Kirigami.Page {
                         leftPadding: Kirigami.Units.smallSpacing
                         rightPadding: Kirigami.Units.smallSpacing
                         horizontalAlignment: {
-                            switch(Kalendar.Config.weekdayLabelAlignment) { // HACK: Ideally should use config enum
-                                case 0: // Left
+                            switch(Kalendar.Config.weekdayLabelAlignment) {
+                                case Kalendar.Config.Left:
                                     return Text.AlignLeft;
-                                case 1: // Center
+                                case Kalendar.Config.Center:
                                     return Text.AlignHCenter;
-                                case 2: // Right
+                                case Kalendar.Config.Right:
                                     return Text.AlignRight;
                                 default:
                                     return Text.AlignHCenter;

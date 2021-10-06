@@ -110,10 +110,10 @@ Map {
             }
         }
 
-        delegate: switch(Kalendar.Config.locationMarker) { // HACK: Ideally should use config enum
-            case 0:
+        delegate: switch(Kalendar.Config.locationMarker) {
+            case Kalendar.Config.Circle:
                 return circle;
-            case 1:
+            case Kalendar.Config.Pin:
             default:
                 return pin;
         }
