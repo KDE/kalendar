@@ -94,7 +94,10 @@ Kirigami.ScrollablePage {
             Controls.SpinBox {
                 Layout.fillWidth: true
                 value: Config.monthGridBorderWidth
-                onValueChanged: Config.monthGridBorderWidth = value
+                onValueModified: {
+                    Config.monthGridBorderWidth = value;
+                    Config.save();
+                }
                 from: 0
                 to: 50
             }
