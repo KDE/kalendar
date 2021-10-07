@@ -156,7 +156,7 @@ Kirigami.ApplicationWindow {
             pageStack.pushDialogLayer("qrc:/SettingsPage.qml", {
                 width: root.width
             }, {
-                title: i18n("Settings"),
+                title: i18n("Configure"),
                 width: Kirigami.Units.gridUnit * 45,
                 height: Kirigami.Units.gridUnit * 35
             })
