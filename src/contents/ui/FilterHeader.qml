@@ -45,7 +45,7 @@ GridLayout {
         text: !headerLayout.todoMode ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
             headerLayout.filterCollectionDetails.displayName : i18n("All Tasks")
         font.weight: !headerLayout.todoMode ? Font.Normal : Font.Bold
-        color: headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+        color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
             LabelUtils.getIncidenceLabelColor(headerLayout.filterCollectionDetails.color, headerLayout.isDark) : Kirigami.Theme.textColor
         elide: Text.ElideRight
         level: headerLayout.todoMode ? 1 : 2
@@ -75,7 +75,7 @@ GridLayout {
                 implicitWidth: itemLayout.implicitWidth > tagFlow.width ?
                     tagFlow.width : itemLayout.implicitWidth
                 isHeading: true
-                headingItem.color: headerLayout.filterCollectionDetails ?
+                headingItem.color: headerLayout.todoMode && headerLayout.filterCollectionDetails ?
                     LabelUtils.getIncidenceLabelColor(headerLayout.filterCollectionDetails.color, headerLayout.isDark) : Kirigami.Theme.textColor
 
                 icon.name: "edit-delete-remove"

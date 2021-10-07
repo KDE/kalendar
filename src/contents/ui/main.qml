@@ -75,28 +75,34 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    function switchView(newViewComponent) {
+        let filterCache = pageStack.currentItem.filter;
+        pageStack.pop(null);
+        pageStack.replace(newViewComponent);
+        pageStack.currentItem.filter = filterCache;
+
+        if(filterHeader.active) {
+            pageStack.currentItem.header = filterHeader.item;
+        }
+    }
+
     Connections {
         target: KalendarApplication
         function onOpenMonthView() {
-            pageStack.pop(null);
-            pageStack.replace(monthViewComponent);
+            root.switchView(monthViewComponent);
         }
 
         function onOpenWeekView() {
-            pageStack.pop(null);
-            pageStack.replace(weekViewComponent);
+            root.switchView(weekViewComponent);
         }
 
         function onOpenScheduleView() {
-            pageStack.pop(null);
-            pageStack.replace(scheduleViewComponent);
+            root.switchView(scheduleViewComponent);
         }
 
         function onOpenTodoView() {
-            pageStack.pop(null);
-            pageStack.replace(todoPageComponent);
             filterHeader.active = true;
-            pageStack.currentItem.header = filterHeader.item;
+            root.switchView(todoPageComponent);
         }
 
         function onOpenAboutPage() {

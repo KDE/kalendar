@@ -25,7 +25,9 @@ Kirigami.Page {
     property date startDate
     property date currentDate
     property date firstDayOfMonth
-    property var filter
+    property var filter: {
+        "tags": []
+    }
     property int month
     property int year
     property bool initialMonth: true
