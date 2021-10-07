@@ -244,7 +244,6 @@ Kirigami.OverlayDrawer {
                 glowRadius: 5
                 spread: 0.3
                 color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
-                visible: !allDayViewLoader.active
             }
         }
 
@@ -292,7 +291,6 @@ Kirigami.OverlayDrawer {
                     id: tagList
 
                     model: TagManager.tagModel
-                    onModelChanged: currentIndex = -1
 
                     delegate: Kirigami.BasicListItem {
                         Layout.fillWidth: true
@@ -301,7 +299,6 @@ Kirigami.OverlayDrawer {
                         labelItem.color: Kirigami.Theme.textColor
                         reserveSpaceForIcon: true
 
-                        hoverEnabled: sidebar.todoMode
                         separatorVisible: false
 
                         onClicked: tagClicked(display)
@@ -338,7 +335,6 @@ Kirigami.OverlayDrawer {
                     model: KDescendantsProxyModel {
                         model: sidebar.todoMode ? CalendarManager.todoCollections : CalendarManager.viewCollections
                     }
-                    onModelChanged: currentIndex = -1
 
                     delegate: DelegateChooser {
                         role: 'kDescendantExpandable'
@@ -381,7 +377,6 @@ Kirigami.OverlayDrawer {
                                 label: display
                                 labelItem.color: Kirigami.Theme.textColor
                                 leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
-                                hoverEnabled: sidebar.todoMode
                                 separatorVisible: false
                                 reserveSpaceForIcon: true
 
@@ -400,7 +395,7 @@ Kirigami.OverlayDrawer {
 
                                 onClicked: {
                                     calendarClicked(collectionId)
-                                    if(sidebar.modal && sidebar.todoMode) sidebar.close()
+                                    if(sidebar.modal) sidebar.close()
                                 }
                             }
                         }
@@ -427,7 +422,6 @@ Kirigami.OverlayDrawer {
         separatorVisible: false
         onClicked: {
             viewAllTodosClicked();
-            calendarList.currentIndex = -1;
             if(sidebar.modal && sidebar.todoMode) sidebar.close()
         }
     }

@@ -40,10 +40,14 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex&
     const QModelIndex sourceIndex = sourceModel()->index(row, 0, sourceParent);
     Q_ASSERT(sourceIndex.isValid());
 
+    if(m_filter.empty()) {
+        return QSortFilterProxyModel::filterAcceptsRow(row, sourceParent);
+    }
+
     bool acceptRow = true;
 
-    if(m_filterCollectionId > -1) {
-        acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CollectionIdRole).toInt() == m_filterCollectionId;
+    if(m_filter.contains(QLatin1String("collectionId")) && m_filter[QLatin1String("collectionId")].toInt() > -1) {
+        acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CollectionIdRole).toInt() == m_filter[QLatin1String("collectionId")].toInt();
     }
 
     switch(m_showCompleted) {
@@ -57,8 +61,16 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex&
             break;
     }
 
-    if(!m_filterCategoryString.isEmpty()) {
-        acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CategoriesRole).toStringList().contains(m_filterCategoryString);
+    if(m_filter.contains(QLatin1String("tags")) && !m_filter[QLatin1String("tags")].toStringList().isEmpty()) {
+        auto tags = m_filter[QLatin1String("tags")].toStringList();
+        bool containsTag = false;
+        for(auto tag : tags) {
+            if(sourceIndex.data(ExtraTodoModel::CategoriesRole).toStringList().contains(tag)) {
+                containsTag = true;
+                break;
+            }
+        }
+        acceptRow = acceptRow && containsTag;
     }
 
     return acceptRow ? QSortFilterProxyModel::filterAcceptsRow(row, sourceParent) : acceptRow;
@@ -104,34 +116,6 @@ void TodoSortFilterProxyModel::setColorCache(QHash<QString, QColor> colorCache)
     m_extraTodoModel->setColorCache(colorCache);
 }
 
-qint64 TodoSortFilterProxyModel::filterCollectionId()
-{
-    return m_filterCollectionId;
-}
-
-void TodoSortFilterProxyModel::setFilterCollectionId(qint64 filterCollectionId)
-{
-    Q_EMIT layoutAboutToBeChanged();
-    m_filterCollectionId = filterCollectionId;
-    invalidateFilter();
-    Q_EMIT filterCollectionIdChanged();
-    Q_EMIT layoutChanged();
-}
-
-QString TodoSortFilterProxyModel::filterCategoryString()
-{
-    return m_filterCategoryString;
-}
-
-void TodoSortFilterProxyModel::setFilterCategoryString(QString filterCategoryString)
-{
-    Q_EMIT layoutAboutToBeChanged();
-    m_filterCategoryString = filterCategoryString;
-    Q_EMIT filterCategoryStringChanged();
-    invalidateFilter();
-    Q_EMIT layoutChanged();
-}
-
 int TodoSortFilterProxyModel::showCompleted()
 {
     return m_showCompleted;
@@ -143,6 +127,31 @@ void TodoSortFilterProxyModel::setShowCompleted(int showCompleted)
     m_showCompletedStore = showCompleted; // For when we search
     invalidateFilter();
     Q_EMIT showCompletedChanged();
+}
+
+QVariantMap TodoSortFilterProxyModel::filter()
+{
+    return m_filter;
+}
+
+void TodoSortFilterProxyModel::setFilter(const QVariantMap& filter)
+{
+    Q_EMIT layoutAboutToBeChanged();
+
+    m_filter = filter;
+
+    invalidateFilter();
+
+    Q_EMIT filterChanged();
+    Q_EMIT layoutChanged();
+
+    if(m_filter.contains(QLatin1String("name"))) {
+        Q_EMIT layoutAboutToBeChanged();
+        auto name = m_filter[QLatin1String("name")].toString();
+        setFilterFixedString(name);
+        invalidateFilter();
+        Q_EMIT layoutChanged();
+    }
 }
 
 void TodoSortFilterProxyModel::sortTodoModel(int column, bool ascending)

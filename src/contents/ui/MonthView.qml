@@ -25,7 +25,7 @@ Kirigami.Page {
     property date startDate
     property date currentDate
     property date firstDayOfMonth
-    property var calendarFilter
+    property var filter
     property int month
     property int year
     property bool initialMonth: true
@@ -145,6 +145,7 @@ Kirigami.Page {
                 width: pathView.width
                 height: pathView.height
                 loadModel: viewLoader.isNextOrCurrentItem
+                filter: monthPage.filter
 
                 startDate: model.startDate
                 currentDate: monthPage.currentDate

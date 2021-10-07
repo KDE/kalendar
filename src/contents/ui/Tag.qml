@@ -96,6 +96,7 @@ Item {
             Layout.leftMargin: borderCover.anchors.leftMargin
             Layout.topMargin: Kirigami.Units.smallSpacing
             Layout.bottomMargin: Kirigami.Units.smallSpacing
+            level: 2
             text: tagRoot.text
             elide: Text.ElideRight
             visible: tagRoot.isHeading

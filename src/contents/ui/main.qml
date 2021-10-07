@@ -8,8 +8,10 @@ import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import QtQml.Models 2.15
+import QtGraphicalEffects 1.12
 
 import "dateutils.js" as DateUtils
+import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
 
 Kirigami.ApplicationWindow {
@@ -25,8 +27,8 @@ Kirigami.ApplicationWindow {
         onTriggered: currentDate = new Date()
     }
     property date selectedDate: currentDate
-
-    property var openOccurrence
+    property var openOccurrence: {}
+    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
     readonly property var weekViewAction: KalendarApplication.action("open_week_view")
@@ -93,6 +95,8 @@ Kirigami.ApplicationWindow {
         function onOpenTodoView() {
             pageStack.pop(null);
             pageStack.replace(todoPageComponent);
+            filterHeader.active = true;
+            pageStack.currentItem.header = filterHeader.item;
         }
 
         function onOpenAboutPage() {
@@ -253,8 +257,11 @@ Kirigami.ApplicationWindow {
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
         onCalendarClicked: if(todoMode) {
-            pageStack.currentItem.filterCollectionId = collectionId;
-            pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
+            pageStack.currentItem.filter ?
+                pageStack.currentItem.filter.collectionId = collectionId :
+                pageStack.currentItem.filter = {"collectionId" : collectionId};
+            pageStack.currentItem.filterChanged();
+            pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(collectionId);
         }
         onCalendarCheckChanged: {
             CalendarManager.save();
@@ -263,8 +270,20 @@ Kirigami.ApplicationWindow {
                 // HACK: The Todo View should be able to detect change in collection filtering independently
             }
         }
-        onTagClicked: if(todoMode) pageStack.currentItem.filterCategoryString = tagName
-        onViewAllTodosClicked: if(todoMode) pageStack.currentItem.filterCollectionId = -1
+        onTagClicked: if(!pageStack.currentItem.filter || !pageStack.currentItem.filter.tags || !pageStack.currentItem.filter.tags.includes(tagName)) {
+            pageStack.currentItem.filter ? pageStack.currentItem.filter.tags ?
+                pageStack.currentItem.filter.tags.push(tagName) :
+                pageStack.currentItem.filter.tags = [tagName] :
+                pageStack.currentItem.filter = {"tags" : [tagName]};
+            pageStack.currentItem.filterChanged();
+            filterHeader.active = true;
+            pageStack.currentItem.header = filterHeader.item;
+        }
+        onViewAllTodosClicked: if(todoMode) {
+            pageStack.currentItem.filter.collectionId = -1;
+            pageStack.currentItem.filter.name = "";
+            pageStack.currentItem.filterChanged();
+        }
     }
 
     contextDrawer: IncidenceInfo {
@@ -357,6 +376,61 @@ Kirigami.ApplicationWindow {
 
             visible: true
             onClosing: editorWindowedLoader.active = false
+        }
+    }
+
+    Loader {
+        id: filterHeader
+        active: false
+        sourceComponent: Item {
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+            height: visible ? header.implicitHeight + headerSeparator.height : 0
+            visible: header.todoMode || header.filter.tags.length > 0 || header.visible
+
+            Rectangle {
+                width: header.width
+                height: header.height
+                Kirigami.Theme.inherit: false
+                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                color: Kirigami.Theme.backgroundColor
+            }
+
+            FilterHeader {
+                id: header
+                anchors.fill: parent
+                todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
+                filter: pageStack.currentItem && pageStack.currentItem.filter ?
+                    pageStack.currentItem.filter : {"tags": [], "collectionId": -1}
+                isDark: root.isDark
+
+                onRemoveFilterTag: {
+                    pageStack.currentItem.filter.tags.splice(pageStack.currentItem.filter.tags.indexOf(tagName), 1);
+                    pageStack.currentItem.filterChanged();
+                }
+                onSearchTextChanged: if(todoMode) {
+                    pageStack.currentItem.filter.name = text;
+                    pageStack.currentItem.filterChanged();
+                }
+            }
+            Kirigami.Separator {
+                id: headerSeparator
+                anchors.top: header.bottom
+                width: parent.width
+                height: 1
+                z: -2
+
+                RectangularGlow {
+                    anchors.fill: parent
+                    z: -1
+                    glowRadius: 5
+                    spread: 0.3
+                    color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
+                }
+            }
         }
     }
 

@@ -22,6 +22,7 @@ Kirigami.Page {
     signal addSubTodo(var parentWrapper)
 
     property var openOccurrence: {}
+    property var filter
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
     property date currentDate: new Date() // Needs to get updated for marker to move, done from main.qml

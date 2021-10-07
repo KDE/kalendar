@@ -5,7 +5,6 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.4 as QQC1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import Qt.labs.qmlmodels 1.0
@@ -26,10 +25,13 @@ Kirigami.Page {
     signal completeTodo(var todoPtr)
     signal addSubTodo(var parentWrapper)
 
-    property int filterCollectionId
-    property var filterCollectionDetails: filterCollectionId && filterCollectionId >= 0 ?
-        Kalendar.CalendarManager.getCollectionDetails(filterCollectionId) : null
-    property string filterCategoryString
+    property var filter: {
+        "collectionId": -1,
+        "tags": [],
+        "name": ""
+    }
+    property var filterCollectionDetails: root.filter && root.filter.collectionId >= 0 ?
+        Kalendar.CalendarManager.getCollectionDetails(root.filter.collectionId) : null
 
     property int sortBy
     property bool ascendingOrder: false
@@ -38,6 +40,9 @@ Kirigami.Page {
     readonly property alias completedSheet: completedSheet
 
     Component.onCompleted: sortBy = Kalendar.TodoSortFilterProxyModel.EndTimeColumn // Otherwise crashes...
+
+    padding: 0
+    leftPadding: Kirigami.Units.largeSpacing
 
     background: Rectangle {
         Kirigami.Theme.inherit: false
@@ -49,7 +54,7 @@ Kirigami.Page {
         main: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: root.addTodo(filterCollectionId);
+            onTriggered: root.addTodo(root.filter.collectionId);
         }
         left: Kirigami.Action {
             text: i18n("Sort")
@@ -94,7 +99,7 @@ Kirigami.Page {
     Kirigami.OverlaySheet {
         id: completedSheet
 
-        title: root.filterCollectionDetails && root.filterCollectionId > -1 ?
+        title: root.filterCollectionDetails && root.filter && root.filter.collectionId > -1 ?
             i18n("Completed Tasks in %1", root.filterCollectionDetails.displayName) : i18n("Completed Tasks")
         showCloseButton: true
 
@@ -111,15 +116,21 @@ Kirigami.Page {
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
                 TodoTreeView {
+                    id: completeView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    filterCollectionId: root.filterCollectionId
+                    filter: root.filter
                     filterCollectionDetails: root.filterCollectionDetails
-                    filterCategoryString: root.filterCategoryString
+
+                    Binding { // Can't set property directly or crashes on load
+                        target: completeView
+                        property: "sortBy"
+                        value: root.sortBy
+                        when: completeView.status = Component.Ready
+                    }
 
                     showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
-                    sortBy: root.sortBy
                     ascendingOrder: root.ascendingOrder
                     onAddTodo: {
                         root.addTodo(collectionId)
@@ -150,86 +161,32 @@ Kirigami.Page {
                     onAddSubTodo: root.addSubTodo(parentWrapper)
                 }
             }
-
         }
     }
 
-    ColumnLayout {
+
+    QQC2.ScrollView {
         anchors.fill: parent
+        contentWidth: availableWidth
+        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-        GridLayout {
-            id: headerLayout
-            columns: 2
-            rows: 2
-
-            Kirigami.Heading {
-                Layout.row: 0
-                Layout.column: 0
-                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 1 : 2
-                Layout.fillWidth: true
-                text: root.filterCollectionDetails && root.filterCollectionId > -1 ?
-                    root.filterCollectionDetails.displayName : i18n("All Tasks")
-                font.weight: Font.Bold
-                color: root.filterCollectionDetails && root.filterCollectionId > -1 ?
-                    LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
-                elide: Text.ElideRight
-            }
-
-            Tag {
-                id: filterTag
-                Layout.row: 0
-                Layout.column: 1
-                Layout.alignment: Qt.AlignRight
-                visible: root.filterCategoryString
-                text: root.filterCategoryString
-
-                implicitWidth: itemLayout.implicitWidth > headerLayout.width - Kirigami.Units.gridUnit * 6 ?
-                    headerLayout.width - Kirigami.Units.gridUnit * 6 : itemLayout.implicitWidth
-                isHeading: true
-                headingItem.color: root.filterCollectionDetails ?
-                    LabelUtils.getIncidenceLabelColor(root.filterCollectionDetails.color, root.isDark) : Kirigami.Theme.textColor
-                headingItem.font.weight: Font.Bold
-
-                icon.name: "edit-delete-remove"
-                onClicked: root.filterCategoryString = ""
-                actionText: i18n("Remove filtering tag")
-            }
-
-            Kirigami.SearchField {
-                id: searchField
-                Layout.column: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 0 : 1
-                Layout.row: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 1 : 0
-                Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 30 || filterTag.visible ? 2 : 1
-                Layout.fillWidth: Layout.row === 1
-                onTextChanged: incompleteView.model.filterTodoName(text);
-            }
-        }
-
-        QQC2.ScrollView {
+        TodoTreeView {
+            id: incompleteView
             Layout.fillWidth: true
             Layout.fillHeight: true
-            contentWidth: availableWidth
-            QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-            TodoTreeView {
-                id: incompleteView
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+            filter: root.filter
+            filterCollectionDetails: root.filterCollectionDetails
 
-                filterCollectionId: root.filterCollectionId
-                filterCollectionDetails: root.filterCollectionDetails
-                filterCategoryString: root.filterCategoryString
-
-                showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
-                sortBy: root.sortBy
-                ascendingOrder: root.ascendingOrder
-                onAddTodo: root.addTodo(collectionId)
-                onViewTodo: root.viewTodo(todoData, collectionData)
-                onEditTodo: root.editTodo(todoPtr, collectionId)
-                onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
-                onCompleteTodo: root.completeTodo(todoPtr);
-                onAddSubTodo: root.addSubTodo(parentWrapper)
-            }
+            showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
+            sortBy: root.sortBy
+            ascendingOrder: root.ascendingOrder
+            onAddTodo: root.addTodo(collectionId)
+            onViewTodo: root.viewTodo(todoData, collectionData)
+            onEditTodo: root.editTodo(todoPtr, collectionId)
+            onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
+            onCompleteTodo: root.completeTodo(todoPtr);
+            onAddSubTodo: root.addSubTodo(parentWrapper)
         }
     }
 
@@ -336,8 +293,8 @@ Kirigami.Page {
                 incidenceWrapper.setNewTodo();
                 incidenceWrapper.summary = addField.text;
 
-                if(root.filterCollectionId && root.filterCollectionId >= 0) {
-                    incidenceWrapper.collectionId = root.filterCollectionId;
+                if(root.filter && root.filter.collectionId >= 0) {
+                    incidenceWrapper.collectionId = root.filter.collectionId;
                     Kalendar.CalendarManager.addIncidence(incidenceWrapper);
                     addField.clear();
                 } else {

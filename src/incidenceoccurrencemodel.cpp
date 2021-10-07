@@ -127,6 +127,22 @@ void IncidenceOccurrenceModel::updateFromSource()
             while (occurrenceIterator.hasNext()) {
                 occurrenceIterator.next();
                 const auto incidence = occurrenceIterator.incidence();
+
+                if(mFilter.contains(QLatin1String("tags")) && mFilter[QLatin1String("tags")].toStringList().length() > 0) {
+                    bool match = false;
+                    QStringList tags = mFilter[QLatin1String("tags")].toStringList();
+                    for(auto tag : tags) {
+                        if(incidence->categories().contains(tag)) {
+                            match = true;
+                            break;
+                        }
+                    }
+
+                    if(!match) {
+                        continue;
+                    }
+                }
+
                 auto start = occurrenceIterator.occurrenceStartDate();
                 auto end = incidence->endDateForStart(start);
 

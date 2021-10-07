@@ -680,10 +680,10 @@ void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence)
     m_calendar->deleteIncidence(incidence);
 }
 
-QVariantMap CalendarManager::getCollectionDetails(qint64 collectionId)
+QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
 {
     QVariantMap collectionDetails;
-    Akonadi::Collection collection = m_calendar->collection(collectionId);
+    Akonadi::Collection collection = m_calendar->collection(collectionId.toInt());
     bool isFiltered;
     int allCalendarsRow;
 

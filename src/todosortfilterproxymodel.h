@@ -17,8 +17,7 @@ class TodoSortFilterProxyModel : public QSortFilterProxyModel
     Q_OBJECT
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger WRITE setIncidenceChanger NOTIFY incidenceChangerChanged)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar WRITE setCalendar NOTIFY calendarChanged)
-    Q_PROPERTY(qint64 filterCollectionId READ filterCollectionId WRITE setFilterCollectionId NOTIFY filterCollectionIdChanged)
-    Q_PROPERTY(QString filterCategoryString READ filterCategoryString WRITE setFilterCategoryString NOTIFY filterCategoryStringChanged)
+    Q_PROPERTY(QVariantMap filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(int showCompleted READ showCompleted WRITE setShowCompleted NOTIFY showCompletedChanged)
 
 public:
@@ -59,27 +58,24 @@ public:
     void setIncidenceChanger(Akonadi::IncidenceChanger *changer);
     void setColorCache(QHash<QString, QColor> colorCache);
 
-    qint64 filterCollectionId();
-    void setFilterCollectionId(qint64 filterCollectionId);
-    QString filterCategoryString();
-    void setFilterCategoryString(QString filterCategoryString);
     int showCompleted();
     void setShowCompleted(int showCompleted);
+    QVariantMap filter();
+    void setFilter(const QVariantMap &filter);
 
     Q_INVOKABLE void sortTodoModel(int sort, bool ascending);
     Q_INVOKABLE void filterTodoName(QString name, int showCompleted = ShowAll);
 
+
 Q_SIGNALS:
     void incidenceChangerChanged();
     void calendarChanged();
-    void filterCollectionIdChanged();
-    void filterCategoryStringChanged();
+    void filterChanged();
     void showCompletedChanged();
 
 private:
     ExtraTodoModel *m_extraTodoModel = nullptr;
-    qint64 m_filterCollectionId;
-    QString m_filterCategoryString;
     int m_showCompleted = ShowComplete::ShowAll;
     int m_showCompletedStore; // For when searches happen
+    QVariantMap m_filter;
 };

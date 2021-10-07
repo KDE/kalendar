@@ -36,10 +36,9 @@ Item {
     property int currentMonth: currentDate ? currentDate.getMonth() : null
     property int currentYear: currentDate ? currentDate.getFullYear() : null
     property date startDate
-    property var calendarFilter
+    property var filter
     property bool paintGrid: true
     property bool showDayIndicator: true
-    property var filter
     property Component dayHeaderDelegate
     property Component weekHeaderDelegate
     property int month

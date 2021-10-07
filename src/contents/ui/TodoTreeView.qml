@@ -23,12 +23,11 @@ KirigamiAddonsTreeView.TreeListView {
     signal addSubTodo(var parentWrapper)
 
     property date currentDate: new Date()
-    property int filterCollectionId
+    property var filter
     property var filterCollectionDetails
-    property string filterCategoryString
 
     property int showCompleted: Kalendar.TodoSortFilterProxyModel.ShowAll
-    property int sortBy: Kalendar.TodoSortFilterProxyModel.EndTimeColumn
+    property int sortBy: Kalendar.TodoSortFilterProxyModel.SummaryColumn
     onSortByChanged: todoModel.sortTodoModel(sortBy, ascendingOrder)
     property bool ascendingOrder: false
     onAscendingOrderChanged: todoModel.sortTodoModel(sortBy, ascendingOrder)
@@ -40,7 +39,7 @@ KirigamiAddonsTreeView.TreeListView {
 
     Kirigami.PlaceholderMessage {
         anchors.centerIn: parent
-        visible: root.filterCollectionId && root.filterCollectionId >= 0 && root.filterCollectionDetails.isFiltered && parent.count === 0
+        visible: root.filter && root.filter.collectionId >= 0 && root.filterCollectionDetails.isFiltered && parent.count === 0
         text: i18n("Calendar is not enabled")
         helpfulAction: Kirigami.Action {
             icon.name: "gtk-yes"
@@ -66,8 +65,7 @@ KirigamiAddonsTreeView.TreeListView {
         id: todoModel
         calendar: Kalendar.CalendarManager.calendar
         incidenceChanger: Kalendar.CalendarManager.incidenceChanger
-        filterCollectionId: root.filterCollectionId ? root.filterCollectionId : -1
-        filterCategoryString: root.filterCategoryString ? root.filterCategoryString : ""
+        filter: root.filter
         showCompleted: root.showCompleted
     }
     delegate: KirigamiAddonsTreeView.BasicTreeItem {

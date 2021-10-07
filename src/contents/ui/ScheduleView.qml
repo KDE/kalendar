@@ -21,6 +21,7 @@ Kirigami.Page {
     signal addSubTodo(var parentWrapper)
 
     property var openOccurrence
+    property var filter
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
     property int day: selectedDate.getDate()
