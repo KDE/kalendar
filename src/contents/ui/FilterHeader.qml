@@ -77,7 +77,6 @@ GridLayout {
                 isHeading: true
                 headingItem.color: headerLayout.filterCollectionDetails ?
                     LabelUtils.getIncidenceLabelColor(headerLayout.filterCollectionDetails.color, headerLayout.isDark) : Kirigami.Theme.textColor
-                headingItem.font.weight: Font.Bold
 
                 icon.name: "edit-delete-remove"
                 onClicked: headerLayout.removeFilterTag(modelData)
