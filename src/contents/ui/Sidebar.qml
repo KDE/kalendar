@@ -394,7 +394,7 @@ Kirigami.OverlayDrawer {
                                 }
 
                                 onClicked: {
-                                    calendarClicked(collectionId)
+                                    calendarClicked(collectionId);
                                     if(sidebar.modal) sidebar.close()
                                 }
                             }

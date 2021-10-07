@@ -1,7 +1,7 @@
 /*
   SPDX-FileCopyrightText: 2012 Sérgio Martins <iamsergio@gmail.com>
 
-  SPDX-License-Identifier: GPL-2.0-or-later WITH Qt-Commercial-exception-1.0
+  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
 */
 
 #pragma once
