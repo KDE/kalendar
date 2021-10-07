@@ -25,6 +25,24 @@ Kirigami.Page {
     signal completeTodo(var todoPtr)
     signal addSubTodo(var parentWrapper)
 
+    // We need to store a copy of opened incidence data or we will lose it as we scroll the listviews.
+    function retainTodoData(todoData, collectionData) {
+        retainedTodoData = {
+            incidencePtr: todoData.incidencePtr,
+            incidenceId: todoData.incidenceId,
+            text: todoData.text,
+            color: todoData.color,
+            startTime: todoData.startTime,
+            endTime: todoData.endTime,
+            durationString: todoData.durationString
+        };
+        retainedCollectionData = Kalendar.CalendarManager.getCollectionDetails(collectionData.id);
+        viewTodo(retainedTodoData, retainedCollectionData);
+    }
+
+    property var retainedTodoData: {}
+    property var retainedCollectionData: {}
+
     property var filter: {
         "collectionId": -1,
         "tags": [],
@@ -137,9 +155,6 @@ Kirigami.Page {
             i18n("Completed Tasks in %1", root.filterCollectionDetails.displayName) : i18n("Completed Tasks")
         showCloseButton: true
 
-        property var retainedTodoData
-        property var retainedCollectionData
-
         contentItem: Loader {
             Layout.maximumWidth: Kirigami.Units.gridUnit * 30
             height: applicationWindow().height * 0.8
@@ -171,16 +186,7 @@ Kirigami.Page {
                         completedSheet.close();
                     }
                     onViewTodo: {
-                        completedSheet.retainedTodoData = {
-                            incidencePtr: todoData.incidencePtr,
-                            text: todoData.text,
-                            color: todoData.color,
-                            startTime: todoData.startTime,
-                            endTime: todoData.endTime,
-                            durationString: todoData.durationString
-                        };
-                        completedSheet.retainedCollectionData = Kalendar.CalendarManager.getCollectionDetails(collectionData.id);
-                        root.viewTodo(completedSheet.retainedTodoData, completedSheet.retainedCollectionData);
+                        root.retainTodoData(todoData, collectionData);
                         completedSheet.close();
                     }
                     onEditTodo: {
@@ -216,7 +222,7 @@ Kirigami.Page {
             sortBy: root.sortBy
             ascendingOrder: root.ascendingOrder
             onAddTodo: root.addTodo(collectionId)
-            onViewTodo: root.viewTodo(todoData, collectionData)
+            onViewTodo: root.retainTodoData(todoData, collectionData)
             onEditTodo: root.editTodo(todoPtr, collectionId)
             onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
             onCompleteTodo: root.completeTodo(todoPtr);
