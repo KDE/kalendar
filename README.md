@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 Carl Schwan <carl@carlschwan.eu>
+SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # Kalendar
 
 Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you add, edit and delete events from local and remote accounts of your choice, while keeping changes syncronised across your Plasma desktop or phone.
