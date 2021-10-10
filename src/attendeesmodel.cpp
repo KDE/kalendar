@@ -47,13 +47,11 @@ QVariant AttendeeStatusModel::data(const QModelIndex &idx, int role) const
         return {};
     }
 
-    int value = QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().value(idx.row());
+    const int value = QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().value(idx.row());
 
     switch (role) {
         case DisplayNameRole:
-        {
             return m_status[value];
-        }
         case ValueRole:
             return value;
         default:
@@ -77,12 +75,6 @@ int AttendeeStatusModel::rowCount(const QModelIndex &) const
 }
 
 
-
-
-
-
-
-
 AttendeesModel::AttendeesModel(QObject* parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)
     , m_incidence(incidencePtr)
@@ -91,7 +83,7 @@ AttendeesModel::AttendeesModel(QObject* parent, KCalendarCore::Incidence::Ptr in
     connect(this, &AttendeesModel::attendeesChanged, this, &AttendeesModel::updateAkonadiContactIds);
 }
 
-KCalendarCore::Incidence::Ptr AttendeesModel::incidencePtr()
+KCalendarCore::Incidence::Ptr AttendeesModel::incidencePtr() const
 {
     return m_incidence;
 }
@@ -109,7 +101,7 @@ void AttendeesModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
     Q_EMIT layoutChanged();
 }
 
-KCalendarCore::Attendee::List AttendeesModel::attendees()
+KCalendarCore::Attendee::List AttendeesModel::attendees() const
 {
     return m_incidence->attendees();
 }
@@ -118,32 +110,32 @@ void AttendeesModel::updateAkonadiContactIds()
 {
     m_attendeesAkonadiIds.clear();
 
-    if (m_incidence->attendees().length()) {
-        for (const auto &attendee : m_incidence->attendees()) {
-            Akonadi::ContactSearchJob *job = new Akonadi::ContactSearchJob();
-            job->setQuery(Akonadi::ContactSearchJob::Email, attendee.email());
+    const auto attendees = m_incidence->attendees();
+    for (const auto &attendee : attendees) {
+        Akonadi::ContactSearchJob *job = new Akonadi::ContactSearchJob();
+        job->setQuery(Akonadi::ContactSearchJob::Email, attendee.email());
 
-            connect(job, &Akonadi::ContactSearchJob::result, this, [this](KJob *job) {
-                Akonadi::ContactSearchJob *searchJob = qobject_cast<Akonadi::ContactSearchJob*>(job);
+        connect(job, &Akonadi::ContactSearchJob::result, this, [this](KJob *job) {
+            Akonadi::ContactSearchJob *searchJob = qobject_cast<Akonadi::ContactSearchJob*>(job);
 
-                for(const auto &item : searchJob->items()) {
-                    m_attendeesAkonadiIds.append(item.id());
-                }
+            const auto items = searchJob->items();
+            for(const auto &item : items) {
+                m_attendeesAkonadiIds.append(item.id());
+            }
 
-                Q_EMIT attendeesAkonadiIdsChanged();
-            });
-        }
+            Q_EMIT attendeesAkonadiIdsChanged();
+        });
     }
 
     Q_EMIT attendeesAkonadiIdsChanged();
 }
 
-AttendeeStatusModel * AttendeesModel::attendeeStatusModel()
+AttendeeStatusModel *AttendeesModel::attendeeStatusModel()
 {
     return &m_attendeeStatusModel;
 }
 
-QList<qint64> AttendeesModel::attendeesAkonadiIds()
+QList<qint64> AttendeesModel::attendeesAkonadiIds() const
 {
     return m_attendeesAkonadiIds;
 }
@@ -153,7 +145,7 @@ QVariant AttendeesModel::data(const QModelIndex &idx, int role) const
     if (!hasIndex(idx.row(), idx.column())) {
         return {};
     }
-    auto attendee = m_incidence->attendees()[idx.row()];
+    const auto attendee = m_incidence->attendees().at(idx.row());
     switch (role) {
         case CuTypeRole:
             return attendee.cuType();
@@ -195,25 +187,25 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
     switch (role) {
         case CuTypeRole:
         {
-            KCalendarCore::Attendee::CuType cuType = static_cast<KCalendarCore::Attendee::CuType>(value.toInt());
+            const KCalendarCore::Attendee::CuType cuType = static_cast<KCalendarCore::Attendee::CuType>(value.toInt());
             currentAttendees[idx.row()].setCuType(cuType);
             break;
         }
         case DelegateRole:
         {
-            QString delegate = value.toString();
+            const QString delegate = value.toString();
             currentAttendees[idx.row()].setDelegate(delegate);
             break;
         }
         case DelegatorRole:
         {
-            QString delegator = value.toString();
+            const QString delegator = value.toString();
             currentAttendees[idx.row()].setDelegator(delegator);
             break;
         }
         case EmailRole:
         {
-            QString email = value.toString();
+            const QString email = value.toString();
             currentAttendees[idx.row()].setEmail(email);
             break;
         }
@@ -229,31 +221,31 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
         }
         case NameRole:
         {
-            QString name = value.toString();
+            const QString name = value.toString();
             currentAttendees[idx.row()].setName(name);
             break;
         }
         case RoleRole:
         {
-            KCalendarCore::Attendee::Role role = static_cast<KCalendarCore::Attendee::Role>(value.toInt());
+            const KCalendarCore::Attendee::Role role = static_cast<KCalendarCore::Attendee::Role>(value.toInt());
             currentAttendees[idx.row()].setRole(role);
             break;
         }
         case RSVPRole:
         {
-            bool rsvp = value.toBool();
+            const bool rsvp = value.toBool();
             currentAttendees[idx.row()].setRSVP(rsvp);
             break;
         }
         case StatusRole:
         {
-            KCalendarCore::Attendee::PartStat status = static_cast<KCalendarCore::Attendee::PartStat>(value.toInt());
+            const KCalendarCore::Attendee::PartStat status = static_cast<KCalendarCore::Attendee::PartStat>(value.toInt());
             currentAttendees[idx.row()].setStatus(status);
             break;
         }
         case UidRole:
         {
-            QString uid = value.toString();
+            const QString uid = value.toString();
             currentAttendees[idx.row()].setUid(uid);
             break;
         }
@@ -262,13 +254,13 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
             return false;
     }
     m_incidence->setAttendees(currentAttendees);
-    emit dataChanged(idx, idx);
+    Q_EMIT dataChanged(idx, idx);
     return true;
 }
 
 QHash<int, QByteArray> AttendeesModel::roleNames() const
 {
-	return {
+    return {
         { CuTypeRole, QByteArrayLiteral("cuType") },
         { DelegateRole, QByteArrayLiteral("delegate") },
         { DelegatorRole, QByteArrayLiteral("delegator") },
@@ -298,9 +290,9 @@ void AttendeesModel::addAttendee(qint64 itemId, const QString &email)
 
         connect(job, &Akonadi::ItemFetchJob::result, this, [this, email](KJob *job) {
 
-            Akonadi::ItemFetchJob *fetchJob = qobject_cast<Akonadi::ItemFetchJob*>(job);
-            auto item = fetchJob->items().at(0);
-            auto payload = item.payload<KContacts::Addressee>();
+            const Akonadi::ItemFetchJob *fetchJob = qobject_cast<Akonadi::ItemFetchJob*>(job);
+            const auto item = fetchJob->items().at(0);
+            const auto payload = item.payload<KContacts::Addressee>();
 
             KCalendarCore::Attendee attendee(payload.name(),
                                              payload.preferredEmail(),
@@ -362,8 +354,8 @@ void AttendeesModel::deleteAttendeeFromAkonadiId(qint64 itemId)
         auto payload = item.payload<KContacts::Addressee>();
 
         for(int i = 0; i < m_incidence->attendeeCount(); i++) {
-
-            for(const auto &email : payload.emails()) {
+            const auto emails = payload.emails();
+            for(const auto &email : emails) {
                 if(m_incidence->attendees()[i].email() == email) {
                     deleteAttendee(i);
                     break;

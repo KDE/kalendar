@@ -58,7 +58,7 @@ class IncidenceWrapper : public QObject, public KCalendarCore::IncidenceBase::In
 
     Q_PROPERTY(AttendeesModel * attendeesModel READ attendeesModel NOTIFY attendeesModelChanged)
     Q_PROPERTY(QVariantMap organizer READ organizer NOTIFY organizerChanged)
-    Q_PROPERTY(KCalendarCore::Attendee::List attendees READ attendees)
+    Q_PROPERTY(KCalendarCore::Attendee::List attendees READ attendees NOTIFY attendeesChanged)
 
     Q_PROPERTY(RemindersModel * remindersModel READ remindersModel NOTIFY remindersModelChanged)
     Q_PROPERTY(AttachmentsModel * attachmentsModel READ attachmentsModel NOTIFY attachmentsModelChanged)
@@ -179,6 +179,7 @@ Q_SIGNALS:
     void todoCompletedChanged();
     void todoCompletionDtChanged();
     void todoPercentCompleteChanged();
+    void attendeesChanged();
 
 private:
     KCalendarCore::Incidence::Ptr m_incidence;

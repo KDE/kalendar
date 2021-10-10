@@ -64,12 +64,12 @@ public:
     explicit AttendeesModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~AttendeesModel() = default;
 
-    KCalendarCore::Incidence::Ptr incidencePtr();
+    KCalendarCore::Incidence::Ptr incidencePtr() const;
     void setIncidencePtr(const KCalendarCore::Incidence::Ptr incidence);
-    KCalendarCore::Attendee::List attendees();
+    KCalendarCore::Attendee::List attendees() const;
     void updateAkonadiContactIds();
     AttendeeStatusModel * attendeeStatusModel();
-    QList<qint64> attendeesAkonadiIds();
+    QList<qint64> attendeesAkonadiIds() const;
 
     QVariant data(const QModelIndex &idx, int role) const override;
     bool setData(const QModelIndex &idx, const QVariant &value, int role) override;

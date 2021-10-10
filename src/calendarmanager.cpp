@@ -444,9 +444,6 @@ CalendarManager::CalendarManager(QObject *parent)
         }
     };
     connect(m_flatCollectionTreeModel, &QSortFilterProxyModel::rowsInserted, this, refreshColors);
-
-    Q_EMIT entityTreeModelChanged();
-    Q_EMIT loadingChanged();
 }
 
 CalendarManager::~CalendarManager()
@@ -714,7 +711,7 @@ void CalendarManager::setCollectionColor(qint64 collectionId, QColor color)
     colorAttr->setColor(color);
 
     Akonadi::CollectionModifyJob *modifyJob = new Akonadi::CollectionModifyJob(collection);
-    connect(modifyJob, &Akonadi::CollectionModifyJob::result, [this, collectionId, color](KJob* job) {
+    connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob* job) {
         if ( job->error() ) {
             qWarning() << "Error occurred modifying collection color: " << job->errorString();
         } else {
