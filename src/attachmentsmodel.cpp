@@ -9,8 +9,8 @@ AttachmentsModel::AttachmentsModel(QObject* parent, KCalendarCore::Incidence::Pt
     , m_incidence(incidencePtr)
 {
     for(int i = 0; i < QMetaEnum::fromType<AttachmentsModel::Roles>().keyCount(); i++) {
-        int value = QMetaEnum::fromType<AttachmentsModel::Roles>().value(i);
-        QString key = QLatin1String(roleNames()[value]);
+        const int value = QMetaEnum::fromType<AttachmentsModel::Roles>().value(i);
+        const QString key = QLatin1String(roleNames().value(value));
         m_dataRoles[key] = value;
     }
 
@@ -108,7 +108,7 @@ void AttachmentsModel::deleteAttachment(QString uri)
 {
     KCalendarCore::Attachment::List attachments = m_incidence->attachments();
 
-    for(auto attachment : attachments) {
+    for(const auto &attachment : attachments) {
         if(attachment.uri() == uri) {
             attachments.removeAll(attachment);
             break;
@@ -117,7 +117,7 @@ void AttachmentsModel::deleteAttachment(QString uri)
 
     m_incidence->clearAttachments();
 
-    for(auto attachment : attachments) {
+    for(const auto &attachment : attachments) {
         m_incidence->addAttachment(attachment);
     }
 

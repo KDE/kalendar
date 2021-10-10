@@ -428,8 +428,8 @@ void IncidenceWrapper::setRecurrenceDataItem(const QString &key, const QVariant 
         } else if (key == QStringLiteral("monthPositions") && value.canConvert<QList<QVariantMap>>()) {
 
             QList<KCalendarCore::RecurrenceRule::WDayPos> newMonthPositions;
-
-            for(auto pos : value.value<QList<QVariantMap>>()) {
+            const auto values = value.value<QList<QVariantMap>>();
+            for(const auto &pos : values) {
                 KCalendarCore::RecurrenceRule::WDayPos newPos;
                 newPos.setDay(pos[QStringLiteral("day")].toInt());
                 newPos.setPos(pos[QStringLiteral("pos")].toInt());

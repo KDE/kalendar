@@ -9,8 +9,8 @@ RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject* parent, KCalendarC
     , m_incidence(incidencePtr)
 {
     for(int i = 0; i < QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().keyCount(); i++) {
-        int value = QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().value(i);
-        QString key = QLatin1String(roleNames()[value]);
+        const int value = QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().value(i);
+        const QString key = QLatin1String(roleNames().value(value));
         m_dataRoles[key] = value;
     }
 
@@ -42,12 +42,14 @@ void RecurrenceExceptionsModel::updateExceptions()
 {
     m_exceptions.clear();
 
-    for(const QDateTime &dt : m_incidence->recurrence()->exDateTimes()) {
-        m_exceptions.append(dt.date());
+    const auto dateTimes = m_incidence->recurrence()->exDateTimes();
+    for(const QDateTime &dateTime : dateTimes) {
+        m_exceptions.append(dateTime.date());
     }
 
-    for(const QDate &dt : m_incidence->recurrence()->exDates()) {
-        m_exceptions.append(dt);
+    const auto dates = m_incidence->recurrence()->exDates();
+    for(const QDate &date : dates) {
+        m_exceptions.append(date);
     }
     Q_EMIT exceptionsChanged();
     Q_EMIT layoutChanged();

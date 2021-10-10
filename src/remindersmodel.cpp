@@ -10,7 +10,7 @@ RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Incidence::Ptr in
 {
     for(int i = 0; i < QMetaEnum::fromType<RemindersModel::Roles>().keyCount(); i++) {
         int value = QMetaEnum::fromType<RemindersModel::Roles>().value(i);
-        QString key = QLatin1String(roleNames()[value]);
+        QString key = QLatin1String(roleNames().value(value));
         m_dataRoles[key] = value;
     }
 }
