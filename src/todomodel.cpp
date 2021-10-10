@@ -165,7 +165,7 @@ void TodoModel::Private::onLayoutAboutToBeChanged()
     Q_ASSERT(m_layoutChangePersistentIndexes.isEmpty());
     Q_ASSERT(m_columns.isEmpty());
     const QModelIndexList persistentIndexes = q->persistentIndexList();
-    for (const QPersistentModelIndex &persistentIndex : persistentIndexes) {
+    for (const QModelIndex &persistentIndex : persistentIndexes) {
         m_persistentIndexes << persistentIndex; // Stuff we have to update onLayoutChanged
         Q_ASSERT(persistentIndex.isValid());
         QModelIndex index_col0 = q->createIndex(persistentIndex.row(), 0, persistentIndex.internalPointer());
