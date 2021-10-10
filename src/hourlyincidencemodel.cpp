@@ -179,7 +179,6 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         // Need to convert ints into doubles to get more accurate starting positions
         const auto start = ((startDT.time().hour() * 1.0) * (60.0 / mPeriodLength)) + ((startDT.time().minute() * 1.0) / mPeriodLength);
         const auto duration = qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 1.0);
-        const auto end = qMin(start + duration, (24.0 * 60.0) / mPeriodLength);
 
         const auto startMinutesFromDayStart = (startDT.time().hour() * 60) + startDT.time().minute();
         const auto endMinutesFromDayStart = qMin((endDT.time().hour() * 60) + endDT.time().minute(), 24 * 60 * 60);

@@ -92,6 +92,7 @@ int IncidenceTreeModel::Private::rowForNode(const Node::Ptr &node) const
 
 void IncidenceTreeModel::Private::assert_and_dump(bool condition, const QString &message)
 {
+    Q_UNUSED(message)
     if (!condition) {
         //qCCritical(CALENDARVIEW_LOG) << "This should never happen: " << message;
         dumpTree();
@@ -101,9 +102,9 @@ void IncidenceTreeModel::Private::assert_and_dump(bool condition, const QString 
 
 void IncidenceTreeModel::Private::dumpTree()
 {
-    for (const Node::Ptr &node : std::as_const(m_toplevelNodeList)) {
-        //qCDebug(CALENDARVIEW_LOG) << node;
-    }
+    //for (const Node::Ptr &node : std::as_const(m_toplevelNodeList)) {
+    //    qCDebug(CALENDARVIEW_LOG) << node;
+    //}
 }
 
 QModelIndex IncidenceTreeModel::Private::indexForNode(const Node::Ptr &node) const

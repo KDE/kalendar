@@ -39,6 +39,7 @@ QVariant WeekViewModel::data(const QModelIndex& idx, int role) const
 
 int WeekViewModel::rowCount(const QModelIndex& parent) const
 {
+    Q_UNUSED(parent)
     return m_startDates.length();
 }
 

@@ -40,8 +40,9 @@ QVariant MonthViewModel::data(const QModelIndex& idx, int role) const
     }
 }
 
-int MonthViewModel::rowCount(const QModelIndex& parent) const
+int MonthViewModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent)
     return m_startDates.length();
 }
 
