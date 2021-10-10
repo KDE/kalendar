@@ -55,11 +55,11 @@ Kirigami.Page {
                     DelegateChoice {
                         roleValue: false
                         Kirigami.BasicListItem {
+                            property int itemCollectionId: model.collectionId
+
                             label: display
                             labelItem.color: Kirigami.Theme.textColor
-
                             hoverEnabled: false
-
                             separatorVisible: false
 
                             trailing: ColoredCheckbox {
