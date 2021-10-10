@@ -35,7 +35,11 @@ class MultiDayIncidenceModel : public QAbstractItemModel
     Q_PROPERTY(IncidenceOccurrenceModel *model WRITE setModel)
 
 public:
-    enum Filter { AllDayOnly = 0x1, NoStartDateOnly = 0x2, MultiDayOnly = 0x3 };
+    enum Filter {
+        AllDayOnly = 0x1,
+        NoStartDateOnly = 0x2,
+        MultiDayOnly = 0x3,
+    };
     Q_DECLARE_FLAGS(Filters, Filter)
     Q_FLAGS(Filters)
     Q_ENUM(Filter)

@@ -101,10 +101,12 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
 
 QHash<int, QByteArray> RemindersModel::roleNames() const
 {
-    return {{TypeRole, QByteArrayLiteral("type")},
-            {TimeRole, QByteArrayLiteral("time")},
-            {StartOffsetRole, QByteArrayLiteral("startOffset")},
-            {EndOffsetRole, QByteArrayLiteral("endOffset")}};
+    return {
+        {TypeRole, QByteArrayLiteral("type")},
+        {TimeRole, QByteArrayLiteral("time")},
+        {StartOffsetRole, QByteArrayLiteral("startOffset")},
+        {EndOffsetRole, QByteArrayLiteral("endOffset")},
+    };
 }
 
 int RemindersModel::rowCount(const QModelIndex &) const

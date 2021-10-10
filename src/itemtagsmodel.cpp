@@ -62,5 +62,8 @@ QVariant ItemTagsModel::data(const QModelIndex &idx, int role) const
 
 QHash<int, QByteArray> ItemTagsModel::roleNames() const
 {
-    return {{NameRole, QByteArrayLiteral("name")}, {IdRole, QByteArrayLiteral("id")}};
+    return {
+        {NameRole, QByteArrayLiteral("name")},
+        {IdRole, QByteArrayLiteral("id")},
+    };
 }

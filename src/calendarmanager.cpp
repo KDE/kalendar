@@ -605,10 +605,12 @@ QVariant CalendarManager::getIncidenceSubclassed(KCalendarCore::Incidence::Ptr i
 
 QVariantMap CalendarManager::undoRedoData()
 {
-    return QVariantMap{{QStringLiteral("undoAvailable"), m_changer->history()->undoAvailable()},
-                       {QStringLiteral("redoAvailable"), m_changer->history()->redoAvailable()},
-                       {QStringLiteral("nextUndoDescription"), m_changer->history()->nextUndoDescription()},
-                       {QStringLiteral("nextRedoDescription"), m_changer->history()->nextRedoDescription()}};
+    return QVariantMap{
+        {QStringLiteral("undoAvailable"), m_changer->history()->undoAvailable()},
+        {QStringLiteral("redoAvailable"), m_changer->history()->redoAvailable()},
+        {QStringLiteral("nextUndoDescription"), m_changer->history()->nextUndoDescription()},
+        {QStringLiteral("nextRedoDescription"), m_changer->history()->nextRedoDescription()},
+    };
 }
 
 void CalendarManager::addIncidence(IncidenceWrapper *incidenceWrapper)

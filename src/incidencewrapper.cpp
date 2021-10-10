@@ -345,18 +345,20 @@ QVariantMap IncidenceWrapper::recurrenceData()
     }
 
     // FYI: yearPositions() just calls monthPositions(), so we're cutting out the middleman
-    return QVariantMap{{QStringLiteral("weekdays"), QVariant::fromValue(weekDaysBools)},
-                       {QStringLiteral("duration"), m_incidence->recurrence()->duration()},
-                       {QStringLiteral("frequency"), m_incidence->recurrence()->frequency()},
-                       {QStringLiteral("startDateTime"), m_incidence->recurrence()->startDateTime()},
-                       {QStringLiteral("endDateTime"), m_incidence->recurrence()->endDateTime()},
-                       {QStringLiteral("allDay"), m_incidence->recurrence()->allDay()},
-                       {QStringLiteral("type"), m_incidence->recurrence()->recurrenceType()},
-                       {QStringLiteral("monthDays"), QVariant::fromValue(m_incidence->recurrence()->monthDays())},
-                       {QStringLiteral("monthPositions"), monthPositions},
-                       {QStringLiteral("yearDays"), QVariant::fromValue(m_incidence->recurrence()->yearDays())},
-                       {QStringLiteral("yearDates"), QVariant::fromValue(m_incidence->recurrence()->yearDates())},
-                       {QStringLiteral("yearMonths"), QVariant::fromValue(m_incidence->recurrence()->yearMonths())}};
+    return QVariantMap{
+        {QStringLiteral("weekdays"), QVariant::fromValue(weekDaysBools)},
+        {QStringLiteral("duration"), m_incidence->recurrence()->duration()},
+        {QStringLiteral("frequency"), m_incidence->recurrence()->frequency()},
+        {QStringLiteral("startDateTime"), m_incidence->recurrence()->startDateTime()},
+        {QStringLiteral("endDateTime"), m_incidence->recurrence()->endDateTime()},
+        {QStringLiteral("allDay"), m_incidence->recurrence()->allDay()},
+        {QStringLiteral("type"), m_incidence->recurrence()->recurrenceType()},
+        {QStringLiteral("monthDays"), QVariant::fromValue(m_incidence->recurrence()->monthDays())},
+        {QStringLiteral("monthPositions"), monthPositions},
+        {QStringLiteral("yearDays"), QVariant::fromValue(m_incidence->recurrence()->yearDays())},
+        {QStringLiteral("yearDates"), QVariant::fromValue(m_incidence->recurrence()->yearDates())},
+        {QStringLiteral("yearMonths"), QVariant::fromValue(m_incidence->recurrence()->yearMonths())},
+    };
 }
 
 void IncidenceWrapper::setRecurrenceDataItem(const QString &key, const QVariant &value)

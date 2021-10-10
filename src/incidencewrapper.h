@@ -68,13 +68,18 @@ class IncidenceWrapper : public QObject, public KCalendarCore::IncidenceBase::In
     Q_PROPERTY(int todoPercentComplete READ todoPercentComplete WRITE setTodoPercentComplete NOTIFY todoPercentCompleteChanged)
 
 public:
-    enum RecurrenceIntervals { Daily, Weekly, Monthly, Yearly };
+    enum RecurrenceIntervals {
+        Daily,
+        Weekly,
+        Monthly,
+        Yearly,
+    };
     Q_ENUM(RecurrenceIntervals);
 
     enum IncidenceTypes {
         TypeEvent = KCalendarCore::IncidenceBase::TypeEvent,
         TypeTodo = KCalendarCore::IncidenceBase::TypeTodo,
-        TypeJournal = KCalendarCore::IncidenceBase::TypeJournal
+        TypeJournal = KCalendarCore::IncidenceBase::TypeJournal,
     };
     Q_ENUM(IncidenceTypes)
 

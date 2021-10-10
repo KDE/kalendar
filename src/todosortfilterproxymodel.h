@@ -32,10 +32,18 @@ public:
     };
     Q_ENUM(BaseTodoModelColumns);
 
-    enum ExtraTodoModelColumns { StartTimeColumn = TodoModel::ColumnCount, EndTimeColumn, PriorityIntColumn };
+    enum ExtraTodoModelColumns {
+        StartTimeColumn = TodoModel::ColumnCount,
+        EndTimeColumn,
+        PriorityIntColumn,
+    };
     Q_ENUM(ExtraTodoModelColumns);
 
-    enum ShowComplete { ShowAll = 0, ShowCompleteOnly, ShowIncompleteOnly };
+    enum ShowComplete {
+        ShowAll = 0,
+        ShowCompleteOnly,
+        ShowIncompleteOnly,
+    };
     Q_ENUM(ShowComplete);
 
     TodoSortFilterProxyModel(QObject *parent = nullptr);

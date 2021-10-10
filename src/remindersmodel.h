@@ -28,7 +28,12 @@ class RemindersModel : public QAbstractListModel
     Q_PROPERTY(QVariantMap dataroles READ dataroles CONSTANT)
 
 public:
-    enum Roles { TypeRole = Qt::UserRole + 1, TimeRole, StartOffsetRole, EndOffsetRole };
+    enum Roles {
+        TypeRole = Qt::UserRole + 1,
+        TimeRole,
+        StartOffsetRole,
+        EndOffsetRole,
+    };
     Q_ENUM(Roles);
 
     explicit RemindersModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);

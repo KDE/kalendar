@@ -15,7 +15,11 @@ class ExtraTodoModel : public KExtraColumnsProxyModel
     Q_OBJECT
 
 public:
-    enum Columns { StartTimeColumn = 0, EndTimeColumn, PriorityIntColumn };
+    enum Columns {
+        StartTimeColumn = 0,
+        EndTimeColumn,
+        PriorityIntColumn,
+    };
     Q_ENUM(Columns);
 
     enum Roles { // Remember to update roles in todosortfilterproxymodel

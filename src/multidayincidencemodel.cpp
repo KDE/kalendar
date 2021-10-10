@@ -8,7 +8,10 @@
 #include "multidayincidencemodel.h"
 #include <QBitArray>
 
-enum Roles { Incidences = IncidenceOccurrenceModel::LastRole, PeriodStartDate };
+enum Roles {
+    Incidences = IncidenceOccurrenceModel::LastRole,
+    PeriodStartDate,
+};
 
 MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -350,5 +353,8 @@ int MultiDayIncidenceModel::incidenceCount()
 
 QHash<int, QByteArray> MultiDayIncidenceModel::roleNames() const
 {
-    return {{Incidences, "incidences"}, {PeriodStartDate, "periodStartDate"}};
+    return {
+        {Incidences, "incidences"},
+        {PeriodStartDate, "periodStartDate"},
+    };
 }

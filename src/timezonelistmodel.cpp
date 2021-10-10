@@ -43,7 +43,10 @@ QVariant TimeZoneListModel::data(const QModelIndex &idx, int role) const
 
 QHash<int, QByteArray> TimeZoneListModel::roleNames() const
 {
-    return {{Qt::DisplayRole, QByteArrayLiteral("display")}, {IdRole, QByteArrayLiteral("id")}};
+    return {
+        {Qt::DisplayRole, QByteArrayLiteral("display")},
+        {IdRole, QByteArrayLiteral("id")},
+    };
 }
 
 int TimeZoneListModel::rowCount(const QModelIndex &) const

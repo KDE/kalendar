@@ -885,14 +885,16 @@ QModelIndex TodoModel::buddy(const QModelIndex &index) const
 
 QHash<int, QByteArray> TodoModel::roleNames() const
 {
-    return {{SummaryRole, QByteArrayLiteral("summary")},
-            {RecurRole, QByteArrayLiteral("recur")},
-            {PriorityRole, QByteArrayLiteral("priority")},
-            {PercentRole, QByteArrayLiteral("percent")},
-            {StartDateRole, QByteArrayLiteral("startDate")},
-            {DueDateRole, QByteArrayLiteral("dueDate")},
-            {CategoriesRole, QByteArrayLiteral("categories")},
-            {DescriptionRole, QByteArrayLiteral("description")},
-            {CalendarRole, QByteArrayLiteral("calendar")},
-            {Qt::CheckStateRole, QByteArrayLiteral("checked")}};
+    return {
+        {SummaryRole, QByteArrayLiteral("summary")},
+        {RecurRole, QByteArrayLiteral("recur")},
+        {PriorityRole, QByteArrayLiteral("priority")},
+        {PercentRole, QByteArrayLiteral("percent")},
+        {StartDateRole, QByteArrayLiteral("startDate")},
+        {DueDateRole, QByteArrayLiteral("dueDate")},
+        {CategoriesRole, QByteArrayLiteral("categories")},
+        {DescriptionRole, QByteArrayLiteral("description")},
+        {CalendarRole, QByteArrayLiteral("calendar")},
+        {Qt::CheckStateRole, QByteArrayLiteral("checked")},
+    };
 }

@@ -5,7 +5,10 @@
 #include <QBitArray>
 #include <QTimeZone>
 
-enum Roles { Incidences = IncidenceOccurrenceModel::LastRole, PeriodStartDateTime };
+enum Roles {
+    Incidences = IncidenceOccurrenceModel::LastRole,
+    PeriodStartDateTime,
+};
 
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -347,5 +350,8 @@ void HourlyIncidenceModel::setFilters(HourlyIncidenceModel::Filters filters)
 
 QHash<int, QByteArray> HourlyIncidenceModel::roleNames() const
 {
-    return {{Incidences, "incidences"}, {PeriodStartDateTime, "periodStartDateTime"}};
+    return {
+        {Incidences, "incidences"},
+        {PeriodStartDateTime, "periodStartDateTime"},
+    };
 }

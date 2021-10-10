@@ -15,7 +15,12 @@ class WeekViewModel : public QAbstractListModel
     Q_PROPERTY(int weeksToAdd READ weeksToAdd WRITE setWeeksToAdd NOTIFY weeksToAddChanged)
 
 public:
-    enum Roles { StartDateRole = Qt::UserRole + 1, FirstDayOfMonthRole, SelectedMonthRole, SelectedYearRole };
+    enum Roles {
+        StartDateRole = Qt::UserRole + 1,
+        FirstDayOfMonthRole,
+        SelectedMonthRole,
+        SelectedYearRole,
+    };
     Q_ENUM(Roles);
 
     explicit WeekViewModel(QObject *parent = nullptr);

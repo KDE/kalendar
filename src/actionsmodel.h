@@ -30,7 +30,10 @@ public:
 
     KalCommandBarModel(QObject *parent = nullptr);
 
-    enum Role { Score = Qt::UserRole + 1, ShortcutRole };
+    enum Role {
+        Score = Qt::UserRole + 1,
+        ShortcutRole,
+    };
 
     /**
      * Resets the model

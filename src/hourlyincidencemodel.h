@@ -30,7 +30,10 @@ class HourlyIncidenceModel : public QAbstractItemModel
     Q_PROPERTY(IncidenceOccurrenceModel *model WRITE setModel)
 
 public:
-    enum Filter { NoAllDay = 0x1, NoMultiDay = 0x2 };
+    enum Filter {
+        NoAllDay = 0x1,
+        NoMultiDay = 0x2,
+    };
     Q_DECLARE_FLAGS(Filters, Filter)
     Q_FLAGS(Filters)
     Q_ENUM(Filter)

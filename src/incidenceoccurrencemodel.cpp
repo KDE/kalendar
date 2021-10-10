@@ -155,7 +155,14 @@ void IncidenceOccurrenceModel::updateFromSource()
                 }
 
                 if (start.date() < mEnd && end.date() >= mStart) {
-                    m_incidences.append(Occurrence{start, end, incidence, getColor(incidence), getCollectionId(incidence), incidence->allDay()});
+                    m_incidences.append(Occurrence{
+                        start,
+                        end,
+                        incidence,
+                        getColor(incidence),
+                        getCollectionId(incidence),
+                        incidence->allDay(),
+                    });
                 }
             }
         }

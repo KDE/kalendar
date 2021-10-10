@@ -45,9 +45,11 @@ int WeekViewModel::rowCount(const QModelIndex &parent) const
 
 QHash<int, QByteArray> WeekViewModel::roleNames() const
 {
-    return {{StartDateRole, QByteArrayLiteral("startDate")},
-            {SelectedMonthRole, QByteArrayLiteral("selectedMonth")},
-            {SelectedYearRole, QByteArrayLiteral("selectedYear")}};
+    return {
+        {StartDateRole, QByteArrayLiteral("startDate")},
+        {SelectedMonthRole, QByteArrayLiteral("selectedMonth")},
+        {SelectedYearRole, QByteArrayLiteral("selectedYear")},
+    };
 }
 
 void WeekViewModel::addDates(bool atEnd, const QDate &startFrom)

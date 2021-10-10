@@ -61,7 +61,10 @@ QVariant AttendeeStatusModel::data(const QModelIndex &idx, int role) const
 
 QHash<int, QByteArray> AttendeeStatusModel::roleNames() const
 {
-    return {{DisplayNameRole, QByteArrayLiteral("display")}, {ValueRole, QByteArrayLiteral("value")}};
+    return {
+        {DisplayNameRole, QByteArrayLiteral("display")},
+        {ValueRole, QByteArrayLiteral("value")},
+    };
 }
 
 int AttendeeStatusModel::rowCount(const QModelIndex &) const
@@ -243,17 +246,19 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
 
 QHash<int, QByteArray> AttendeesModel::roleNames() const
 {
-    return {{CuTypeRole, QByteArrayLiteral("cuType")},
-            {DelegateRole, QByteArrayLiteral("delegate")},
-            {DelegatorRole, QByteArrayLiteral("delegator")},
-            {EmailRole, QByteArrayLiteral("email")},
-            {FullNameRole, QByteArrayLiteral("fullName")},
-            {IsNullRole, QByteArrayLiteral("isNull")},
-            {NameRole, QByteArrayLiteral("name")},
-            {RoleRole, QByteArrayLiteral("role")},
-            {RSVPRole, QByteArrayLiteral("rsvp")},
-            {StatusRole, QByteArrayLiteral("status")},
-            {UidRole, QByteArrayLiteral("uid")}};
+    return {
+        {CuTypeRole, QByteArrayLiteral("cuType")},
+        {DelegateRole, QByteArrayLiteral("delegate")},
+        {DelegatorRole, QByteArrayLiteral("delegator")},
+        {EmailRole, QByteArrayLiteral("email")},
+        {FullNameRole, QByteArrayLiteral("fullName")},
+        {IsNullRole, QByteArrayLiteral("isNull")},
+        {NameRole, QByteArrayLiteral("name")},
+        {RoleRole, QByteArrayLiteral("role")},
+        {RSVPRole, QByteArrayLiteral("rsvp")},
+        {StatusRole, QByteArrayLiteral("status")},
+        {UidRole, QByteArrayLiteral("uid")},
+    };
 }
 
 int AttendeesModel::rowCount(const QModelIndex &) const

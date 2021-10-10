@@ -48,10 +48,12 @@ int MonthViewModel::rowCount(const QModelIndex &parent) const
 
 QHash<int, QByteArray> MonthViewModel::roleNames() const
 {
-    return {{StartDateRole, QByteArrayLiteral("startDate")},
-            {FirstDayOfMonthRole, QByteArrayLiteral("firstDay")},
-            {SelectedMonthRole, QByteArrayLiteral("selectedMonth")},
-            {SelectedYearRole, QByteArrayLiteral("selectedYear")}};
+    return {
+        {StartDateRole, QByteArrayLiteral("startDate")},
+        {FirstDayOfMonthRole, QByteArrayLiteral("firstDay")},
+        {SelectedMonthRole, QByteArrayLiteral("selectedMonth")},
+        {SelectedYearRole, QByteArrayLiteral("selectedYear")},
+    };
 }
 
 void MonthViewModel::addDates(bool atEnd, QDate startFrom)

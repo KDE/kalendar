@@ -17,7 +17,15 @@ class AttachmentsModel : public QAbstractListModel
     Q_PROPERTY(QVariantMap dataroles READ dataroles CONSTANT)
 
 public:
-    enum Roles { AttachmentRole = Qt::UserRole + 1, LabelRole, MimeTypeRole, IconNameRole, DataRole, SizeRole, URIRole };
+    enum Roles {
+        AttachmentRole = Qt::UserRole + 1,
+        LabelRole,
+        MimeTypeRole,
+        IconNameRole,
+        DataRole,
+        SizeRole,
+        URIRole,
+    };
     Q_ENUM(Roles);
 
     explicit AttachmentsModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);

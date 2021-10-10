@@ -73,13 +73,15 @@ QVariant AttachmentsModel::data(const QModelIndex &idx, int role) const
 
 QHash<int, QByteArray> AttachmentsModel::roleNames() const
 {
-    return {{AttachmentRole, QByteArrayLiteral("attachment")},
-            {LabelRole, QByteArrayLiteral("attachmentLabel")},
-            {MimeTypeRole, QByteArrayLiteral("mimetype")},
-            {IconNameRole, QByteArrayLiteral("iconName")},
-            {DataRole, QByteArrayLiteral("data")},
-            {SizeRole, QByteArrayLiteral("size")},
-            {URIRole, QByteArrayLiteral("uri")}};
+    return {
+        {AttachmentRole, QByteArrayLiteral("attachment")},
+        {LabelRole, QByteArrayLiteral("attachmentLabel")},
+        {MimeTypeRole, QByteArrayLiteral("mimetype")},
+        {IconNameRole, QByteArrayLiteral("iconName")},
+        {DataRole, QByteArrayLiteral("data")},
+        {SizeRole, QByteArrayLiteral("size")},
+        {URIRole, QByteArrayLiteral("uri")},
+    };
 }
 
 int AttachmentsModel::rowCount(const QModelIndex &) const

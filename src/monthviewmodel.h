@@ -15,7 +15,12 @@ class MonthViewModel : public QAbstractListModel
     Q_PROPERTY(int datesToAdd READ datesToAdd WRITE setDatesToAdd NOTIFY datesToAddChanged)
 
 public:
-    enum Roles { StartDateRole = Qt::UserRole + 1, FirstDayOfMonthRole, SelectedMonthRole, SelectedYearRole };
+    enum Roles {
+        StartDateRole = Qt::UserRole + 1,
+        FirstDayOfMonthRole,
+        SelectedMonthRole,
+        SelectedYearRole,
+    };
     Q_ENUM(Roles);
 
     explicit MonthViewModel(QObject *parent = nullptr);
