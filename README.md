@@ -12,9 +12,11 @@ Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you
 
 ## Screenshots
 
-![Screenshot of Kalendar's month view](sceenshot1.png)
-![Screenshot of Kalendar's todo view](screenshot2.png)
-![Screenshot of Kalendar's schedule view on mobile](screenshot3.png)
+![Screenshot of Kalendar's month view](https://cdn.kde.org/screenshots/kalendar/month_view.png)
+![Screenshot of Kalendar's task view](https://cdn.kde.org/screenshots/kalendar/task_view.png)
+![Screenshot of Kalendar's week view](https://cdn.kde.org/screenshots/kalendar/week_view.png)
+![Screenshot of Kalendar's schedule view](https://cdn.kde.org/screenshots/kalendar/schedule_view.png)
+![Screenshot of Kalendar's schedule view on mobile](https://cdn.kde.org/screenshots/kalendar/mobile_view.png)
 
 ## Get it
 
