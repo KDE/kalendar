@@ -4,7 +4,12 @@
     xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
     http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <kcfgfile name="kalendarrc" />
-
+<!--
+SPDX-FileCopyrightText: 2021 Carl Schwan <carl@carlschwan.eu>
+SPDX-FileCopyrightText: 2021 Felipe Kinoshita <kinofhek@gmail.com>
+SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+SPDX-License-Identifier: LGPL-2.0-or-later
+-->
     <group name="General">
         <entry name="showMenubar" type="Bool">
             <label>Show the Menubar.</label>

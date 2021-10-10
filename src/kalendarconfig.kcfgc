@@ -1,5 +1,5 @@
-#SPDX-FileCopyrightText: (C) 2021 Claudio Cambra <claudio.cambra@gmail.com>
-#SPDX-LicenseRef: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 File=kalendarconfig.kcfg
 ClassName=KalendarConfig

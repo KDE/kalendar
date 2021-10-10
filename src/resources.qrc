@@ -1,4 +1,8 @@
 <RCC>
+<!--
+SPDX-FileCopyrightText: None
+SPDX-License-Identifier: CC0-1.0
+-->
   <qresource prefix="/">
     <file alias="main.qml">contents/ui/main.qml</file>
     <file alias="Sidebar.qml">contents/ui/Sidebar.qml</file>
