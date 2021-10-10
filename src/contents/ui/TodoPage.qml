@@ -30,6 +30,7 @@ Kirigami.Page {
         retainedTodoData = {
             incidencePtr: todoData.incidencePtr,
             incidenceId: todoData.incidenceId,
+            collectionId: collectionData.id,
             text: todoData.text,
             color: todoData.color,
             startTime: todoData.startTime,
