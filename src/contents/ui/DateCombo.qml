@@ -5,12 +5,18 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
+import "dateutils.js" as DateUtils
+
+/* Like the time combo, we need to play around with the date objects we present to the user to show the time in the date's set TZ.
+ * The time picker is not aware of these differences and only has the hours and minutes in the date's set TZ.
+ */
 
 QQC2.ComboBox {
     id: root
 
     signal newDateChosen(date newDate)
 
+    property int timeZoneOffset: 0
     property date dateTime
     property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
     property bool validDate: !isNaN(dateFromText.getTime())
@@ -21,7 +27,7 @@ QQC2.ComboBox {
     }
 
     editable: true
-    editText: activeFocus ? editText : dateTime.toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+    editText: activeFocus ? editText : DateUtils.adjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset).toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
 
     onEditTextChanged: {
         // Set date from text here because it otherwise updates after this handler
@@ -49,7 +55,7 @@ QQC2.ComboBox {
                 datePopup.close();
                 let hours = root.dateTime.getHours();
                 let minutes = root.dateTime.getMinutes();
-                newDateChosen(new Date(pickedDate.setHours(hours, minutes)));
+                newDateChosen(DateUtils.adjustDateTimeToLocalTimeZone(new Date(pickedDate.setHours(hours, minutes)), root.timeZoneOffset));
             }
         }
     }

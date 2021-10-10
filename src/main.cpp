@@ -32,6 +32,7 @@
 #include "tagmanager.h"
 #include "hourlyincidencemodel.h"
 #include "weekviewmodel.h"
+#include "timezonelistmodel.h"
 
 using namespace KCalendarCore;
 
@@ -89,6 +90,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ItemTagsModel>("org.kde.kalendar", 1, 0, "ItemTagsModel");
     qmlRegisterType<HourlyIncidenceModel>("org.kde.kalendar", 1, 0, "HourlyIncidenceModel");
     qmlRegisterType<WeekViewModel>("org.kde.kalendar", 1, 0, "WeekViewModel");
+    qmlRegisterType<TimeZoneListModel>("org.kde.kalendar", 1, 0, "TimeZoneListModel");
 
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
     qRegisterMetaType<QAction*>();

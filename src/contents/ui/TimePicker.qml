@@ -5,6 +5,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
+import "dateutils.js" as DateUtils
 
 Item {
     id: timePicker
@@ -15,6 +16,7 @@ Item {
 
     anchors.fill: parent
 
+    property int timeZoneOffset: 0
     property date dateTime: new Date()
 
     property int hours: dateTime.getHours()

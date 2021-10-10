@@ -238,11 +238,13 @@ Kirigami.ScrollablePage {
                         id: incidenceStartDateCombo
                         Layout.fillWidth: true
                         timePicker: incidenceStartTimeCombo.timePicker
+                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceStart
                         onNewDateChosen: root.incidenceWrapper.incidenceStart = newDate
                     }
                     TimeCombo {
                         id: incidenceStartTimeCombo
+                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceStart
                         onNewTimeChosen: root.incidenceWrapper.incidenceStart = newTime
                         enabled: !allDayCheckBox.checked && (!incidenceForm.isTodo || incidenceStartCheckBox.checked)
@@ -278,6 +280,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
 
                         timePicker: incidenceEndTimeCombo.timePicker
+                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceEnd
                         onNewDateChosen: root.incidenceWrapper.incidenceEnd = newDate
                         enabled: !incidenceForm.isTodo || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
@@ -286,11 +289,31 @@ Kirigami.ScrollablePage {
                         id: incidenceEndTimeCombo
 
                         Layout.fillWidth: true
+                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceEnd
-                        onNewTimeChosen: root.incidenceWrapper.incidenceEnd = newTime
+                        onNewTimeChosen: root.incidenceWrapper.incidenceEnd = newTime;
                         enabled: (!incidenceForm.isTodo && !allDayCheckBox.checked) || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                         visible: !allDayCheckBox.checked
                     }
+                }
+
+                QQC2.ComboBox {
+                    id: timeZoneComboBox
+                    Kirigami.FormData.label: i18n("Timezone:")
+                    Layout.fillWidth: true
+
+                    model: TimeZoneListModel {
+                        id: timeZonesModel
+                    }
+
+                    textRole: "display"
+                    valueRole: "id"
+                    currentIndex: model ? timeZonesModel.getTimeZoneRow(root.incidenceWrapper.timeZone) : -1
+                    delegate: Kirigami.BasicListItem {
+                        label: model.display
+                        onClicked: root.incidenceWrapper.timeZone = model.id
+                    }
+                    enabled: !incidenceForm.isTodo || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                 }
 
                 QQC2.ComboBox {

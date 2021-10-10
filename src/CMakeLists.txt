@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp monthviewmodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp todomodel.cpp incidencetreemodel.cpp todosortfilterproxymodel.cpp kalendarapplication.cpp itemtagsmodel.cpp tagmanager.cpp extratodomodel.cpp actionsmodel.cpp commandbarfiltermodel.cpp hourlyincidencemodel.cpp weekviewmodel.cpp resources.qrc)
+add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp monthviewmodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp todomodel.cpp incidencetreemodel.cpp todosortfilterproxymodel.cpp kalendarapplication.cpp itemtagsmodel.cpp tagmanager.cpp extratodomodel.cpp actionsmodel.cpp commandbarfiltermodel.cpp hourlyincidencemodel.cpp weekviewmodel.cpp timezonelistmodel.cpp resources.qrc)
 
 target_link_libraries(kalendar
     Qt5::Core

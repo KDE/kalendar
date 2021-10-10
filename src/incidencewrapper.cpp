@@ -60,6 +60,8 @@ void IncidenceWrapper::notifyDataChanged()
     Q_EMIT locationChanged();
     Q_EMIT incidenceStartChanged();
     Q_EMIT incidenceEndChanged();
+    Q_EMIT timeZoneChanged();
+    Q_EMIT timeZoneUTCOffsetMinsChanged();
     Q_EMIT allDayChanged();
     Q_EMIT priorityChanged();
     Q_EMIT remindersModelChanged();
@@ -206,10 +208,25 @@ QDateTime IncidenceWrapper::incidenceStart() const
     return m_incidence->dtStart();
 }
 
-void IncidenceWrapper::setIncidenceStart(const QDateTime &incidenceStart)
+void IncidenceWrapper::setIncidenceStart(const QDateTime &incidenceStart, bool respectTimeZone)
 {
-    qDebug() << incidenceStart;
-    m_incidence->setDtStart(incidenceStart);
+    // When we receive dates from QML, these are all set to the local system timezone but
+    // have the dates and times we want. We need to preserve date and time but set the new
+    // QDateTime to have the correct timezone.
+
+    // When we set the timeZone property, however, we invariably also set the incidence start and end.
+    // This object needs no change. We therefore need to make sure to preserve the entire QDateTime object here.
+    if(respectTimeZone) {
+        m_incidence->setDtStart(incidenceStart);
+    } else {
+        const auto date = incidenceStart.date();
+        const auto time = incidenceStart.time();
+        QDateTime start;
+        start.setTimeZone(QTimeZone(timeZone()));
+        start.setDate(date);
+        start.setTime(time);
+        m_incidence->setDtStart(start);
+    }
     Q_EMIT incidenceStartChanged();
 }
 
@@ -225,18 +242,56 @@ QDateTime IncidenceWrapper::incidenceEnd() const
     return {};
 }
 
-void IncidenceWrapper::setIncidenceEnd(const QDateTime &incidenceEnd)
+void IncidenceWrapper::setIncidenceEnd(const QDateTime &incidenceEnd, bool respectTimeZone)
 {
+    QDateTime end;
+    if(respectTimeZone) {
+        end = incidenceEnd;
+    } else {
+        const auto date = incidenceEnd.date();
+        const auto time = incidenceEnd.time();
+        end.setTimeZone(QTimeZone(timeZone()));
+        end.setDate(date);
+        end.setTime(time);
+    }
+
     if(m_incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeEvent) {
         KCalendarCore::Event::Ptr event = m_incidence.staticCast<KCalendarCore::Event>();
-        event->setDtEnd(incidenceEnd);
+        event->setDtEnd(end);
     } else if(m_incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
         KCalendarCore::Todo::Ptr todo = m_incidence.staticCast<KCalendarCore::Todo>();
-        todo->setDtDue(incidenceEnd);
+        todo->setDtDue(end);
     } else {
         qWarning() << "Unknown incidence type";
     }
     Q_EMIT incidenceEndChanged();
+}
+
+QByteArray IncidenceWrapper::timeZone() const
+{
+    return incidenceEnd().timeZone().id();
+}
+
+void IncidenceWrapper::setTimeZone(const QByteArray &timeZone)
+{
+    QDateTime start(incidenceStart());
+    if(start.isValid()) {
+        start.setTimeZone(QTimeZone(timeZone));
+        setIncidenceStart(start, true);
+    }
+
+    QDateTime end(incidenceEnd());
+    if(end.isValid()) {
+        end.setTimeZone(QTimeZone(timeZone));
+        setIncidenceEnd(end, true);
+    }
+
+    Q_EMIT timeZoneChanged();
+    Q_EMIT timeZoneUTCOffsetMinsChanged();
+}
+
+int IncidenceWrapper::timeZoneUTCOffsetMins() {
+    return QTimeZone(timeZone()).offsetFromUtc(incidenceEnd());
 }
 
 bool IncidenceWrapper::allDay() const
