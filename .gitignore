@@ -6,3 +6,4 @@ build/
 *.kate-swp
 *.kdev4
 CMakeLists.txt.user
+.clang-format
