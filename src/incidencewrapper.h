@@ -52,7 +52,7 @@ class IncidenceWrapper : public QObject, public KCalendarCore::IncidenceBase::In
     Q_PROPERTY(bool allDay READ allDay WRITE setAllDay NOTIFY allDayChanged)
     Q_PROPERTY(int priority READ priority WRITE setPriority NOTIFY priorityChanged)
 
-    Q_PROPERTY(KCalendarCore::Recurrence * recurrence READ recurrence)
+    Q_PROPERTY(KCalendarCore::Recurrence * recurrence READ recurrence NOTIFY incidencePtrChanged)
     Q_PROPERTY(QVariantMap recurrenceData READ recurrenceData NOTIFY recurrenceDataChanged)
     Q_PROPERTY(RecurrenceExceptionsModel * recurrenceExceptionsModel READ recurrenceExceptionsModel NOTIFY recurrenceExceptionsModelChanged)
 
@@ -145,7 +145,7 @@ public:
     Q_INVOKABLE void setNewEvent();
     Q_INVOKABLE void setNewTodo();
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);
-    Q_INVOKABLE void setRegularRecurrence(RecurrenceIntervals interval, int freq = 1);
+    Q_INVOKABLE void setRegularRecurrence(IncidenceWrapper::RecurrenceIntervals interval, int freq = 1);
     Q_INVOKABLE void setMonthlyPosRecurrence(short pos, int day);
     Q_INVOKABLE void setRecurrenceOccurrences(int occurrences);
     Q_INVOKABLE void clearRecurrences();

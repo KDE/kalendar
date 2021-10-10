@@ -131,7 +131,7 @@ void IncidenceOccurrenceModel::updateFromSource()
                 if(mFilter.contains(QLatin1String("tags")) && mFilter[QLatin1String("tags")].toStringList().length() > 0) {
                     bool match = false;
                     QStringList tags = mFilter[QLatin1String("tags")].toStringList();
-                    for(auto tag : tags) {
+                    for(const auto &tag : tags) {
                         if(incidence->categories().contains(tag)) {
                             match = true;
                             break;

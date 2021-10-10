@@ -61,6 +61,7 @@ private Q_SLOTS:
     void onLayoutChanged();
 
 private:
+    friend TodoModel;
     TodoModel *const q;
 };
 

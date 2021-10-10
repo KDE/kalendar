@@ -47,7 +47,7 @@ QVariant ItemTagsModel::data(const QModelIndex& idx, int role) const
         return {};
     }
 
-    auto tag = m_item.tags()[idx.row()];
+    const auto tag = m_item.tags().at(idx.row());
 
     switch(role) {
         case NameRole:

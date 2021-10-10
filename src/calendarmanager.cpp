@@ -684,8 +684,8 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
 {
     QVariantMap collectionDetails;
     Akonadi::Collection collection = m_calendar->collection(collectionId.toInt());
-    bool isFiltered;
-    int allCalendarsRow;
+    bool isFiltered = false;
+    int allCalendarsRow = 0;
 
     for(int i = 0; i < m_allCalendars->rowCount(); i++) {
         if(m_allCalendars->data(m_allCalendars->index(i, 0), Akonadi::EntityTreeModel::CollectionIdRole).toInt() == collectionId) {

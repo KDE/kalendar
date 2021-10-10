@@ -269,7 +269,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         result[i] = incidence;
     }
 
-    for(auto potentialMover : potentialMovers) {
+    for(auto &potentialMover : potentialMovers) {
 
         double maxTakenWidth = 0;
         for(int i = potentialMover.startMinutesFromDayStart; i < potentialMover.endMinutesFromDayStart; i++) {

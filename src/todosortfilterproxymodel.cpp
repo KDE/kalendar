@@ -64,7 +64,7 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex&
     if(m_filter.contains(QLatin1String("tags")) && !m_filter[QLatin1String("tags")].toStringList().isEmpty()) {
         auto tags = m_filter[QLatin1String("tags")].toStringList();
         bool containsTag = false;
-        for(auto tag : tags) {
+        for(const auto &tag : tags) {
             if(sourceIndex.data(ExtraTodoModel::CategoriesRole).toStringList().contains(tag)) {
                 containsTag = true;
                 break;

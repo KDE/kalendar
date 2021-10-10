@@ -41,7 +41,7 @@ public:
     };
     Q_DECLARE_FLAGS(Filters, Filter)
     Q_FLAGS(Filters)
-    Q_ENUMS(Filter)
+    Q_ENUM(Filter)
 
     MultiDayIncidenceModel(QObject *parent = nullptr);
     ~MultiDayIncidenceModel() = default;

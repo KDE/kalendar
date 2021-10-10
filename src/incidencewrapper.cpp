@@ -332,7 +332,8 @@ QVariantMap IncidenceWrapper::recurrenceData()
     }
 
     QVariantList monthPositions;
-    for(auto pos : m_incidence->recurrence()->monthPositions()) {
+    const auto monthPositionsToConvert = m_incidence->recurrence()->monthPositions();
+    for(const auto &pos : monthPositionsToConvert) {
         QVariantMap positionToAdd;
         positionToAdd[QStringLiteral("day")] = pos.day();
         positionToAdd[QStringLiteral("pos")] = pos.pos();
@@ -456,17 +457,17 @@ KCalendarCore::Attendee::List IncidenceWrapper::attendees() const
     return m_incidence->attendees();
 }
 
-RemindersModel * IncidenceWrapper::remindersModel()
+RemindersModel *IncidenceWrapper::remindersModel()
 {
     return &m_remindersModel;
 }
 
-AttendeesModel * IncidenceWrapper::attendeesModel()
+AttendeesModel *IncidenceWrapper::attendeesModel()
 {
     return &m_attendeesModel;
 }
 
-RecurrenceExceptionsModel * IncidenceWrapper::recurrenceExceptionsModel()
+RecurrenceExceptionsModel *IncidenceWrapper::recurrenceExceptionsModel()
 {
     return &m_recurrenceExceptionsModel;
 }

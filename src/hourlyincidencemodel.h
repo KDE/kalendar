@@ -26,7 +26,7 @@ class HourlyIncidenceModel : public QAbstractItemModel
     Q_OBJECT
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
     Q_PROPERTY(HourlyIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
-    Q_PROPERTY(IncidenceOccurrenceModel* model WRITE setModel)
+    Q_PROPERTY(IncidenceOccurrenceModel* model WRITE setModel CONSTANT)
 
 public:
     enum Filter {
@@ -35,7 +35,7 @@ public:
     };
     Q_DECLARE_FLAGS(Filters, Filter)
     Q_FLAGS(Filters)
-    Q_ENUMS(Filter)
+    Q_ENUM(Filter)
 
     HourlyIncidenceModel(QObject *parent = nullptr);
     ~HourlyIncidenceModel() = default;
