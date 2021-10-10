@@ -8,7 +8,7 @@ RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Incidence::Ptr in
     : QAbstractListModel(parent)
     , m_incidence(incidencePtr)
 {
-    for(int i = 0; i < QMetaEnum::fromType<RemindersModel::Roles>().keyCount(); i++) {
+    for (int i = 0; i < QMetaEnum::fromType<RemindersModel::Roles>().keyCount(); i++) {
         int value = QMetaEnum::fromType<RemindersModel::Roles>().value(i);
         QString key = QLatin1String(roleNames().value(value));
         m_dataRoles[key] = value;
@@ -48,17 +48,17 @@ QVariant RemindersModel::data(const QModelIndex &idx, int role) const
     }
     auto alarm = m_incidence->alarms()[idx.row()];
     switch (role) {
-        case TypeRole:
-            return alarm->type();
-        case TimeRole:
-            return alarm->time();
-        case StartOffsetRole:
-            return alarm->startOffset().asSeconds();
-        case EndOffsetRole:
-            return alarm->endOffset().asSeconds();
-        default:
-            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
-            return {};
+    case TypeRole:
+        return alarm->type();
+    case TimeRole:
+        return alarm->time();
+    case StartOffsetRole:
+        return alarm->startOffset().asSeconds();
+    case EndOffsetRole:
+        return alarm->endOffset().asSeconds();
+    default:
+        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        return {};
     }
 }
 
@@ -69,35 +69,31 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
     }
 
     switch (role) {
-        case TypeRole:
-        {
-            KCalendarCore::Alarm::Type type = static_cast<KCalendarCore::Alarm::Type>(value.toInt());
-            m_incidence->alarms()[idx.row()]->setType(type);
-            break;
-        }
-        case TimeRole:
-        {
-            QDateTime time = value.toDateTime();
-            m_incidence->alarms()[idx.row()]->setTime(time);
-            break;
-        }
-        case StartOffsetRole:
-        {
-            // offset can be set in seconds or days, if we want it to be before the incidence,
-            // it has to be set to a negative value.
-            KCalendarCore::Duration offset(value.toInt());
-            m_incidence->alarms()[idx.row()]->setStartOffset(offset);
-            break;
-        }
-        case EndOffsetRole:
-        {
-            KCalendarCore::Duration offset(value.toInt());
-            m_incidence->alarms()[idx.row()]->setEndOffset(offset);
-            break;
-        }
-        default:
-            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
-            return false;
+    case TypeRole: {
+        KCalendarCore::Alarm::Type type = static_cast<KCalendarCore::Alarm::Type>(value.toInt());
+        m_incidence->alarms()[idx.row()]->setType(type);
+        break;
+    }
+    case TimeRole: {
+        QDateTime time = value.toDateTime();
+        m_incidence->alarms()[idx.row()]->setTime(time);
+        break;
+    }
+    case StartOffsetRole: {
+        // offset can be set in seconds or days, if we want it to be before the incidence,
+        // it has to be set to a negative value.
+        KCalendarCore::Duration offset(value.toInt());
+        m_incidence->alarms()[idx.row()]->setStartOffset(offset);
+        break;
+    }
+    case EndOffsetRole: {
+        KCalendarCore::Duration offset(value.toInt());
+        m_incidence->alarms()[idx.row()]->setEndOffset(offset);
+        break;
+    }
+    default:
+        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        return false;
     }
     emit dataChanged(idx, idx);
     return true;
@@ -105,12 +101,10 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
 
 QHash<int, QByteArray> RemindersModel::roleNames() const
 {
-    return {
-        { TypeRole, QByteArrayLiteral("type") },
-        { TimeRole, QByteArrayLiteral("time") },
-        { StartOffsetRole, QByteArrayLiteral("startOffset") },
-        { EndOffsetRole, QByteArrayLiteral("endOffset") }
-    };
+    return {{TypeRole, QByteArrayLiteral("type")},
+            {TimeRole, QByteArrayLiteral("time")},
+            {StartOffsetRole, QByteArrayLiteral("startOffset")},
+            {EndOffsetRole, QByteArrayLiteral("endOffset")}};
 }
 
 int RemindersModel::rowCount(const QModelIndex &) const
@@ -120,7 +114,7 @@ int RemindersModel::rowCount(const QModelIndex &) const
 
 void RemindersModel::addAlarm()
 {
-    KCalendarCore::Alarm::Ptr alarm (new KCalendarCore::Alarm(nullptr));
+    KCalendarCore::Alarm::Ptr alarm(new KCalendarCore::Alarm(nullptr));
     m_incidence->addAlarm(alarm);
     Q_EMIT alarmsChanged();
     Q_EMIT layoutChanged();

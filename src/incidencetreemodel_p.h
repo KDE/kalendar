@@ -98,4 +98,3 @@ private Q_SLOTS:
 private:
     IncidenceTreeModel *const q;
 };
-

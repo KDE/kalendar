@@ -14,7 +14,7 @@
 #include <KCalendarCore/Incidence>
 #include <itemtagsmodel.h>
 
-ItemTagsModel::ItemTagsModel(QObject* parent)
+ItemTagsModel::ItemTagsModel(QObject *parent)
     : QAbstractListModel(parent)
 {
 }
@@ -32,16 +32,16 @@ void ItemTagsModel::setItem(Akonadi::Item item)
     Q_EMIT layoutChanged();
 }
 
-int ItemTagsModel::rowCount(const QModelIndex& parent) const
+int ItemTagsModel::rowCount(const QModelIndex &parent) const
 {
-    if(parent.isValid()) {
+    if (parent.isValid()) {
         return 0;
     }
 
     return m_item.tags().count();
 }
 
-QVariant ItemTagsModel::data(const QModelIndex& idx, int role) const
+QVariant ItemTagsModel::data(const QModelIndex &idx, int role) const
 {
     if (!hasIndex(idx.row(), idx.column())) {
         return {};
@@ -49,22 +49,18 @@ QVariant ItemTagsModel::data(const QModelIndex& idx, int role) const
 
     const auto tag = m_item.tags().at(idx.row());
 
-    switch(role) {
-        case NameRole:
-            return tag.name();
-        case IdRole:
-            return tag.id();
-        default:
-            qWarning() << "Unknown role for item tag:" << QMetaEnum::fromType<Roles>().valueToKey(role);
-            return {};
+    switch (role) {
+    case NameRole:
+        return tag.name();
+    case IdRole:
+        return tag.id();
+    default:
+        qWarning() << "Unknown role for item tag:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        return {};
     }
-
 }
 
 QHash<int, QByteArray> ItemTagsModel::roleNames() const
 {
-    return {
-        { NameRole, QByteArrayLiteral("name") },
-        { IdRole, QByteArrayLiteral("id") }
-    };
+    return {{NameRole, QByteArrayLiteral("name")}, {IdRole, QByteArrayLiteral("id")}};
 }

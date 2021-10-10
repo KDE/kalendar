@@ -3,10 +3,10 @@
 
 #pragma once
 
+#include <Akonadi/Contact/ContactsFilterProxyModel>
+#include <Akonadi/Contact/ContactsTreeModel>
 #include <QObject>
 #include <QSortFilterProxyModel>
-#include <Akonadi/Contact/ContactsTreeModel>
-#include <Akonadi/Contact/ContactsFilterProxyModel>
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/EntityMimeTypeFilterModel>
@@ -20,7 +20,7 @@ class QSortFilterProxyModel;
 class ContactsManager : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QSortFilterProxyModel * contactsModel READ contactsModel CONSTANT)
+    Q_PROPERTY(QSortFilterProxyModel *contactsModel READ contactsModel CONSTANT)
 
 public:
     ContactsManager(QObject *parent = nullptr);

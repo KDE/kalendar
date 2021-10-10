@@ -3,11 +3,10 @@
 
 #pragma once
 
+#include <KCalendarCore/Calendar>
 #include <QAbstractItemModel>
 #include <QCalendar>
-#include <KCalendarCore/Calendar>
 #include <QDebug>
-
 
 class RecurrenceExceptionsModel : public QAbstractListModel
 {

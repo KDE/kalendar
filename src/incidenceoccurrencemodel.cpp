@@ -14,13 +14,13 @@
 #else
 #include <AkonadiCore/EntityTreeModel>
 #endif
-#include <KCalendarCore/OccurrenceIterator>
 #include <KCalendarCore/MemoryCalendar>
-#include <KFormat>
-#include <etmcalendar.h>
-#include <KSharedConfig>
+#include <KCalendarCore/OccurrenceIterator>
 #include <KConfigGroup>
+#include <KFormat>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <etmcalendar.h>
 
 IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -119,7 +119,7 @@ void IncidenceOccurrenceModel::updateFromSource()
 
         // process all recurring events and their exceptions.
         for (const auto &incidence : allIncidences) {
-            KCalendarCore::MemoryCalendar calendar{ QTimeZone::systemTimeZone() };
+            KCalendarCore::MemoryCalendar calendar{QTimeZone::systemTimeZone()};
             calendar.addIncidence(incidence);
 
             KCalendarCore::OccurrenceIterator occurrenceIterator{calendar, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
@@ -128,17 +128,17 @@ void IncidenceOccurrenceModel::updateFromSource()
                 occurrenceIterator.next();
                 const auto incidence = occurrenceIterator.incidence();
 
-                if(mFilter.contains(QLatin1String("tags")) && mFilter[QLatin1String("tags")].toStringList().length() > 0) {
+                if (mFilter.contains(QLatin1String("tags")) && mFilter[QLatin1String("tags")].toStringList().length() > 0) {
                     bool match = false;
                     QStringList tags = mFilter[QLatin1String("tags")].toStringList();
-                    for(const auto &tag : tags) {
-                        if(incidence->categories().contains(tag)) {
+                    for (const auto &tag : tags) {
+                        if (incidence->categories().contains(tag)) {
                             match = true;
                             break;
                         }
                     }
 
-                    if(!match) {
+                    if (!match) {
                         continue;
                     }
                 }
@@ -146,23 +146,16 @@ void IncidenceOccurrenceModel::updateFromSource()
                 auto start = occurrenceIterator.occurrenceStartDate();
                 auto end = incidence->endDateForStart(start);
 
-                if(incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
+                if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
                     KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
 
-                    if(!start.isValid()) { // Todos are very likely not to have a set start date
+                    if (!start.isValid()) { // Todos are very likely not to have a set start date
                         start = todo->dtDue();
                     }
                 }
 
                 if (start.date() < mEnd && end.date() >= mStart) {
-                    m_incidences.append(Occurrence {
-                        start,
-                        end,
-                        incidence,
-                        getColor(incidence),
-                        getCollectionId(incidence),
-                        incidence->allDay()
-                    });
+                    m_incidences.append(Occurrence{start, end, incidence, getColor(incidence), getCollectionId(incidence), incidence->allDay()});
                 }
             }
         }
@@ -225,10 +218,10 @@ QColor IncidenceOccurrenceModel::getColor(const KCalendarCore::Incidence::Ptr &i
         return {};
     }
     const QString id = QString::number(collection.id());
-    //qDebug() << "Collection id: " << collection.id();
+    // qDebug() << "Collection id: " << collection.id();
 
     if (m_colors.contains(id)) {
-        //qDebug() << collection.id() << "Found in m_colors";
+        // qDebug() << collection.id() << "Found in m_colors";
         return m_colors[id];
     }
 
@@ -245,72 +238,69 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     KCalendarCore::Duration duration(incidence.start, incidence.end);
 
     switch (role) {
-        case Summary:
-            return icalIncidence->summary();
-        case Description:
-            return icalIncidence->description();
-        case Location:
-            return icalIncidence->location();
-        case StartTime:
-            return incidence.start;
-        case EndTime:
-            return incidence.end;
-        case Duration:
-            return QVariant::fromValue(duration);
-        case DurationString:
-        {
-            KFormat format;
-            if (duration.asSeconds() == 0) {
-                return QLatin1String("");
-            } else {
-                return format.formatSpelloutDuration(duration.asSeconds() * 1000);
-            }
+    case Summary:
+        return icalIncidence->summary();
+    case Description:
+        return icalIncidence->description();
+    case Location:
+        return icalIncidence->location();
+    case StartTime:
+        return incidence.start;
+    case EndTime:
+        return incidence.end;
+    case Duration:
+        return QVariant::fromValue(duration);
+    case DurationString: {
+        KFormat format;
+        if (duration.asSeconds() == 0) {
+            return QLatin1String("");
+        } else {
+            return format.formatSpelloutDuration(duration.asSeconds() * 1000);
         }
-        case Recurs:
-            return incidence.incidence->recurs();
-        case HasReminders:
-            return incidence.incidence->alarms().length() > 0;
-        case Priority:
-            return incidence.incidence->priority();
-        case Color:
-            return incidence.color;
-        case CollectionId:
-            return incidence.collectionId;
-        case AllDay:
-            return incidence.allDay;
-        case TodoCompleted:
-        {
-            if(incidence.incidence->type() != KCalendarCore::IncidenceBase::TypeTodo) {
-                return false;
-            }
+    }
+    case Recurs:
+        return incidence.incidence->recurs();
+    case HasReminders:
+        return incidence.incidence->alarms().length() > 0;
+    case Priority:
+        return incidence.incidence->priority();
+    case Color:
+        return incidence.color;
+    case CollectionId:
+        return incidence.collectionId;
+    case AllDay:
+        return incidence.allDay;
+    case TodoCompleted: {
+        if (incidence.incidence->type() != KCalendarCore::IncidenceBase::TypeTodo) {
+            return false;
+        }
 
-            auto todo = incidence.incidence.staticCast<KCalendarCore::Todo>();
-            return todo->isCompleted();
+        auto todo = incidence.incidence.staticCast<KCalendarCore::Todo>();
+        return todo->isCompleted();
+    }
+    case IsOverdue: {
+        if (incidence.incidence->type() != KCalendarCore::IncidenceBase::TypeTodo) {
+            return false;
         }
-        case IsOverdue:
-        {
-            if(incidence.incidence->type() != KCalendarCore::IncidenceBase::TypeTodo) {
-                return false;
-            }
 
-            auto todo = incidence.incidence.staticCast<KCalendarCore::Todo>();
-            return todo->isOverdue();
-        }
-        case IncidenceId:
-            return incidence.incidence->uid();
-        case IncidenceType:
-            return incidence.incidence->type();
-        case IncidenceTypeStr:
-            return incidence.incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(incidence.incidence->typeStr());
-        case IncidenceTypeIcon:
-            return incidence.incidence->iconName();
-        case IncidencePtr:
-            return QVariant::fromValue(incidence.incidence);
-        case IncidenceOccurrence:
-            return QVariant::fromValue(incidence);
-        default:
-            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
-            return {};
+        auto todo = incidence.incidence.staticCast<KCalendarCore::Todo>();
+        return todo->isOverdue();
+    }
+    case IncidenceId:
+        return incidence.incidence->uid();
+    case IncidenceType:
+        return incidence.incidence->type();
+    case IncidenceTypeStr:
+        return incidence.incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(incidence.incidence->typeStr());
+    case IncidenceTypeIcon:
+        return incidence.incidence->iconName();
+    case IncidencePtr:
+        return QVariant::fromValue(incidence.incidence);
+    case IncidenceOccurrence:
+        return QVariant::fromValue(incidence);
+    default:
+        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        return {};
     }
 }
 
@@ -328,7 +318,6 @@ Akonadi::ETMCalendar *IncidenceOccurrenceModel::calendar() const
 {
     return m_coreCalendar;
 }
-
 
 void IncidenceOccurrenceModel::load()
 {

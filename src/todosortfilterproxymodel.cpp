@@ -3,7 +3,7 @@
 
 #include <todosortfilterproxymodel.h>
 
-TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject* parent)
+TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
     m_extraTodoModel = new ExtraTodoModel;
@@ -15,7 +15,7 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject* parent)
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const
 {
-    if(filterAcceptsRowCheck(row, sourceParent)) {
+    if (filterAcceptsRowCheck(row, sourceParent)) {
         return true;
     }
 
@@ -35,37 +35,37 @@ bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sour
     return false;
 }
 
-bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex& sourceParent) const
+bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex &sourceParent) const
 {
     const QModelIndex sourceIndex = sourceModel()->index(row, 0, sourceParent);
     Q_ASSERT(sourceIndex.isValid());
 
-    if(m_filter.empty()) {
+    if (m_filter.empty()) {
         return QSortFilterProxyModel::filterAcceptsRow(row, sourceParent);
     }
 
     bool acceptRow = true;
 
-    if(m_filter.contains(QLatin1String("collectionId")) && m_filter[QLatin1String("collectionId")].toInt() > -1) {
+    if (m_filter.contains(QLatin1String("collectionId")) && m_filter[QLatin1String("collectionId")].toInt() > -1) {
         acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CollectionIdRole).toInt() == m_filter[QLatin1String("collectionId")].toInt();
     }
 
-    switch(m_showCompleted) {
-        case ShowComplete::ShowCompleteOnly:
-            acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CompletedRole).toBool();
-            break;
-        case ShowComplete::ShowIncompleteOnly:
-            acceptRow = acceptRow && !sourceIndex.data(ExtraTodoModel::CompletedRole).toBool();
-        case ShowComplete::ShowAll:
-        default:
-            break;
+    switch (m_showCompleted) {
+    case ShowComplete::ShowCompleteOnly:
+        acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CompletedRole).toBool();
+        break;
+    case ShowComplete::ShowIncompleteOnly:
+        acceptRow = acceptRow && !sourceIndex.data(ExtraTodoModel::CompletedRole).toBool();
+    case ShowComplete::ShowAll:
+    default:
+        break;
     }
 
-    if(m_filter.contains(QLatin1String("tags")) && !m_filter[QLatin1String("tags")].toStringList().isEmpty()) {
+    if (m_filter.contains(QLatin1String("tags")) && !m_filter[QLatin1String("tags")].toStringList().isEmpty()) {
         auto tags = m_filter[QLatin1String("tags")].toStringList();
         bool containsTag = false;
-        for(const auto &tag : tags) {
-            if(sourceIndex.data(ExtraTodoModel::CategoriesRole).toStringList().contains(tag)) {
+        for (const auto &tag : tags) {
+            if (sourceIndex.data(ExtraTodoModel::CategoriesRole).toStringList().contains(tag)) {
                 containsTag = true;
                 break;
             }
@@ -76,7 +76,7 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex&
     return acceptRow ? QSortFilterProxyModel::filterAcceptsRow(row, sourceParent) : acceptRow;
 }
 
-bool TodoSortFilterProxyModel::hasAcceptedChildren(int row, const QModelIndex& sourceParent) const
+bool TodoSortFilterProxyModel::hasAcceptedChildren(int row, const QModelIndex &sourceParent) const
 {
     QModelIndex index = sourceModel()->index(row, 0, sourceParent);
     if (!index.isValid()) {
@@ -105,7 +105,7 @@ void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar *calendar)
     Q_EMIT calendarChanged();
 }
 
-void TodoSortFilterProxyModel::setIncidenceChanger(Akonadi::IncidenceChanger* changer)
+void TodoSortFilterProxyModel::setIncidenceChanger(Akonadi::IncidenceChanger *changer)
 {
     m_extraTodoModel->setIncidenceChanger(changer);
     Q_EMIT incidenceChangerChanged();
@@ -134,7 +134,7 @@ QVariantMap TodoSortFilterProxyModel::filter()
     return m_filter;
 }
 
-void TodoSortFilterProxyModel::setFilter(const QVariantMap& filter)
+void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 {
     Q_EMIT layoutAboutToBeChanged();
 
@@ -145,7 +145,7 @@ void TodoSortFilterProxyModel::setFilter(const QVariantMap& filter)
     Q_EMIT filterChanged();
     Q_EMIT layoutChanged();
 
-    if(m_filter.contains(QLatin1String("name"))) {
+    if (m_filter.contains(QLatin1String("name"))) {
         Q_EMIT layoutAboutToBeChanged();
         auto name = m_filter[QLatin1String("name")].toString();
         setFilterFixedString(name);
@@ -164,7 +164,7 @@ void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
 {
     Q_EMIT layoutAboutToBeChanged();
     setFilterFixedString(name);
-    if(name.length() > 0) {
+    if (name.length() > 0) {
         m_showCompleted = showCompleted;
     } else {
         setShowCompleted(m_showCompletedStore);

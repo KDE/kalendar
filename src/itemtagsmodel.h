@@ -17,10 +17,7 @@ class ItemTagsModel : public QAbstractListModel
     Q_PROPERTY(Akonadi::Item item READ item WRITE setItem NOTIFY itemChanged)
 
 public:
-    enum Roles {
-        NameRole = Qt::UserRole + 1,
-        IdRole
-    };
+    enum Roles { NameRole = Qt::UserRole + 1, IdRole };
     Q_ENUM(Roles);
 
     ItemTagsModel(QObject *parent = nullptr);

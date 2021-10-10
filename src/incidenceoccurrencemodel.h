@@ -7,22 +7,24 @@
 
 #pragma once
 
+#include <KConfigWatcher>
 #include <QAbstractItemModel>
+#include <QColor>
+#include <QDateTime>
 #include <QList>
 #include <QSet>
 #include <QSharedPointer>
 #include <QTimer>
-#include <QColor>
-#include <QDateTime>
-#include <KConfigWatcher>
 #include <etmcalendar.h>
 
-namespace KCalendarCore {
-    class MemoryCalendar;
-    class Incidence;
+namespace KCalendarCore
+{
+class MemoryCalendar;
+class Incidence;
 }
-namespace Akonadi {
-    class ETMCalendar;
+namespace Akonadi
+{
+class ETMCalendar;
 }
 
 using namespace KCalendarCore;
@@ -128,4 +130,3 @@ private:
 
 Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence);
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
-

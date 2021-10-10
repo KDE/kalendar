@@ -7,15 +7,15 @@
 
 #include "commandbarfiltermodel.h"
 #include "kalendarconfig.h"
-#include <KXmlGui/KShortcutsDialog>
 #include <KAuthorized>
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <KConfigGroup>
-#include <QWindow>
+#include <KXmlGui/KShortcutsDialog>
 #include <QMenu>
-#include <vector>
 #include <QSortFilterProxyModel>
+#include <QWindow>
+#include <vector>
 
 KalendarApplication::KalendarApplication(QObject *parent)
     : QObject(parent)
@@ -37,7 +37,7 @@ KalendarApplication::~KalendarApplication()
     }
 }
 
-QAction *KalendarApplication::action(const QString& name)
+QAction *KalendarApplication::action(const QString &name)
 {
     auto resultAction = mCollection.action(name);
 
@@ -204,10 +204,9 @@ void KalendarApplication::setupActions()
         sortTodoViewAlphabeticallyAction->setActionGroup(m_todoViewSortGroup);
         mSortCollection.addAction(sortTodoViewAlphabeticallyAction->objectName(), sortTodoViewAlphabeticallyAction);
         if (openTodoAction) {
-            connect(openTodoAction, &QAction::changed,
-                    this, [sortTodoViewAlphabeticallyAction, openTodoAction]() {
-                        sortTodoViewAlphabeticallyAction->setEnabled(openTodoAction->isChecked());
-                    });
+            connect(openTodoAction, &QAction::changed, this, [sortTodoViewAlphabeticallyAction, openTodoAction]() {
+                sortTodoViewAlphabeticallyAction->setEnabled(openTodoAction->isChecked());
+            });
             sortTodoViewAlphabeticallyAction->setEnabled(openTodoAction->isChecked());
         }
     }
@@ -221,10 +220,9 @@ void KalendarApplication::setupActions()
         sortTodoViewByDueDateAction->setActionGroup(m_todoViewSortGroup);
         mSortCollection.addAction(sortTodoViewByDueDateAction->objectName(), sortTodoViewByDueDateAction);
         if (openTodoAction) {
-            connect(openTodoAction, &QAction::changed,
-                    this, [sortTodoViewByDueDateAction, openTodoAction]() {
-                        sortTodoViewByDueDateAction->setEnabled(openTodoAction->isChecked());
-                    });
+            connect(openTodoAction, &QAction::changed, this, [sortTodoViewByDueDateAction, openTodoAction]() {
+                sortTodoViewByDueDateAction->setEnabled(openTodoAction->isChecked());
+            });
             sortTodoViewByDueDateAction->setEnabled(openTodoAction->isChecked());
         }
     }
@@ -238,10 +236,9 @@ void KalendarApplication::setupActions()
         sortTodoViewByPriorityAction->setActionGroup(m_todoViewSortGroup);
         mSortCollection.addAction(sortTodoViewByPriorityAction->objectName(), sortTodoViewByPriorityAction);
         if (openTodoAction) {
-            connect(openTodoAction, &QAction::changed,
-                    this, [sortTodoViewByPriorityAction, openTodoAction]() {
-                        sortTodoViewByPriorityAction->setEnabled(openTodoAction->isChecked());
-                    });
+            connect(openTodoAction, &QAction::changed, this, [sortTodoViewByPriorityAction, openTodoAction]() {
+                sortTodoViewByPriorityAction->setEnabled(openTodoAction->isChecked());
+            });
             sortTodoViewByPriorityAction->setEnabled(openTodoAction->isChecked());
         }
     }
@@ -255,10 +252,9 @@ void KalendarApplication::setupActions()
         orderTodoViewAscendingAction->setActionGroup(m_todoViewOrderGroup);
         mSortCollection.addAction(orderTodoViewAscendingAction->objectName(), orderTodoViewAscendingAction);
         if (openTodoAction) {
-            connect(openTodoAction, &QAction::changed,
-                    this, [orderTodoViewAscendingAction, openTodoAction]() {
-                        orderTodoViewAscendingAction->setEnabled(openTodoAction->isChecked());
-                    });
+            connect(openTodoAction, &QAction::changed, this, [orderTodoViewAscendingAction, openTodoAction]() {
+                orderTodoViewAscendingAction->setEnabled(openTodoAction->isChecked());
+            });
             orderTodoViewAscendingAction->setEnabled(openTodoAction->isChecked());
         }
     }
@@ -272,10 +268,9 @@ void KalendarApplication::setupActions()
         orderTodoViewDescendingAction->setActionGroup(m_todoViewOrderGroup);
         mSortCollection.addAction(orderTodoViewDescendingAction->objectName(), orderTodoViewDescendingAction);
         if (openTodoAction) {
-            connect(openTodoAction, &QAction::changed,
-                    this, [orderTodoViewDescendingAction, openTodoAction]() {
-                        orderTodoViewDescendingAction->setEnabled(openTodoAction->isChecked());
-                    });
+            connect(openTodoAction, &QAction::changed, this, [orderTodoViewDescendingAction, openTodoAction]() {
+                orderTodoViewDescendingAction->setEnabled(openTodoAction->isChecked());
+            });
             orderTodoViewDescendingAction->setEnabled(openTodoAction->isChecked());
         }
     }
@@ -287,10 +282,9 @@ void KalendarApplication::setupActions()
         todoViewShowCompletedAction->setIcon(QIcon::fromTheme(QStringLiteral("task-complete")));
         mSortCollection.addAction(todoViewShowCompletedAction->objectName(), todoViewShowCompletedAction);
         if (openTodoAction) {
-            connect(openTodoAction, &QAction::changed,
-                    this, [todoViewShowCompletedAction, openTodoAction]() {
-                        todoViewShowCompletedAction->setEnabled(openTodoAction->isChecked());
-                    });
+            connect(openTodoAction, &QAction::changed, this, [todoViewShowCompletedAction, openTodoAction]() {
+                todoViewShowCompletedAction->setEnabled(openTodoAction->isChecked());
+            });
             todoViewShowCompletedAction->setEnabled(openTodoAction->isChecked());
         }
     }

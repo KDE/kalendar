@@ -1,19 +1,18 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-#include <QMetaEnum>
 #include "attachmentsmodel.h"
+#include <QMetaEnum>
 
-AttachmentsModel::AttachmentsModel(QObject* parent, KCalendarCore::Incidence::Ptr incidencePtr)
+AttachmentsModel::AttachmentsModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)
     , m_incidence(incidencePtr)
 {
-    for(int i = 0; i < QMetaEnum::fromType<AttachmentsModel::Roles>().keyCount(); i++) {
+    for (int i = 0; i < QMetaEnum::fromType<AttachmentsModel::Roles>().keyCount(); i++) {
         const int value = QMetaEnum::fromType<AttachmentsModel::Roles>().value(i);
         const QString key = QLatin1String(roleNames().value(value));
         m_dataRoles[key] = value;
     }
-
 }
 
 KCalendarCore::Incidence::Ptr AttachmentsModel::incidencePtr()
@@ -50,40 +49,37 @@ QVariant AttachmentsModel::data(const QModelIndex &idx, int role) const
 
     KCalendarCore::Attachment attachment = m_incidence->attachments()[idx.row()];
     switch (role) {
-        case AttachmentRole:
-            return QVariant::fromValue(attachment);
-        case LabelRole:
-            return attachment.label();
-        case MimeTypeRole:
-            return attachment.mimeType();
-        case IconNameRole:
-        {
-            QMimeType type = m_mimeDb.mimeTypeForUrl(QUrl(attachment.uri()));
-            return type.iconName();
-        }
-        case DataRole:
-            return attachment.data(); // This is in bytes
-        case SizeRole:
-            return attachment.size();
-        case URIRole:
-            return attachment.uri();
-        default:
-            qWarning() << "Unknown role for attachment:" << QMetaEnum::fromType<Roles>().valueToKey(role);
-            return {};
+    case AttachmentRole:
+        return QVariant::fromValue(attachment);
+    case LabelRole:
+        return attachment.label();
+    case MimeTypeRole:
+        return attachment.mimeType();
+    case IconNameRole: {
+        QMimeType type = m_mimeDb.mimeTypeForUrl(QUrl(attachment.uri()));
+        return type.iconName();
+    }
+    case DataRole:
+        return attachment.data(); // This is in bytes
+    case SizeRole:
+        return attachment.size();
+    case URIRole:
+        return attachment.uri();
+    default:
+        qWarning() << "Unknown role for attachment:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        return {};
     }
 }
 
 QHash<int, QByteArray> AttachmentsModel::roleNames() const
 {
-    return {
-        { AttachmentRole, QByteArrayLiteral("attachment") },
-        { LabelRole, QByteArrayLiteral("attachmentLabel") },
-        { MimeTypeRole, QByteArrayLiteral("mimetype") },
-        { IconNameRole, QByteArrayLiteral("iconName") },
-        { DataRole, QByteArrayLiteral("data") },
-        { SizeRole, QByteArrayLiteral("size") },
-        { URIRole, QByteArrayLiteral("uri") }
-    };
+    return {{AttachmentRole, QByteArrayLiteral("attachment")},
+            {LabelRole, QByteArrayLiteral("attachmentLabel")},
+            {MimeTypeRole, QByteArrayLiteral("mimetype")},
+            {IconNameRole, QByteArrayLiteral("iconName")},
+            {DataRole, QByteArrayLiteral("data")},
+            {SizeRole, QByteArrayLiteral("size")},
+            {URIRole, QByteArrayLiteral("uri")}};
 }
 
 int AttachmentsModel::rowCount(const QModelIndex &) const
@@ -108,8 +104,8 @@ void AttachmentsModel::deleteAttachment(QString uri)
 {
     KCalendarCore::Attachment::List attachments = m_incidence->attachments();
 
-    for(const auto &attachment : attachments) {
-        if(attachment.uri() == uri) {
+    for (const auto &attachment : attachments) {
+        if (attachment.uri() == uri) {
             attachments.removeAll(attachment);
             break;
         }
@@ -117,7 +113,7 @@ void AttachmentsModel::deleteAttachment(QString uri)
 
     m_incidence->clearAttachments();
 
-    for(const auto &attachment : attachments) {
+    for (const auto &attachment : attachments) {
         m_incidence->addAttachment(attachment);
     }
 

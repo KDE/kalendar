@@ -64,4 +64,3 @@ private:
     friend TodoModel;
     TodoModel *const q;
 };
-

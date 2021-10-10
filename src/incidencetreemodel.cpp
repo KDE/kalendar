@@ -94,7 +94,7 @@ void IncidenceTreeModel::Private::assert_and_dump(bool condition, const QString 
 {
     Q_UNUSED(message)
     if (!condition) {
-        //qCCritical(CALENDARVIEW_LOG) << "This should never happen: " << message;
+        // qCCritical(CALENDARVIEW_LOG) << "This should never happen: " << message;
         dumpTree();
         Q_ASSERT(false);
     }
@@ -102,7 +102,7 @@ void IncidenceTreeModel::Private::assert_and_dump(bool condition, const QString 
 
 void IncidenceTreeModel::Private::dumpTree()
 {
-    //for (const Node::Ptr &node : std::as_const(m_toplevelNodeList)) {
+    // for (const Node::Ptr &node : std::as_const(m_toplevelNodeList)) {
     //    qCDebug(CALENDARVIEW_LOG) << node;
     //}
 }
@@ -177,14 +177,14 @@ void IncidenceTreeModel::Private::onDataChanged(const QModelIndex &begin, const 
             KCalendarCore::Incidence::Ptr incidence =
                 !item.hasPayload<KCalendarCore::Incidence::Ptr>() ? KCalendarCore::Incidence::Ptr() : item.payload<KCalendarCore::Incidence::Ptr>();
             if (!incidence) {
-                //qCCritical(CALENDARVIEW_LOG) << "Incidence shouldn't be invalid." << item.hasPayload() << item.id();
+                // qCCritical(CALENDARVIEW_LOG) << "Incidence shouldn't be invalid." << item.hasPayload() << item.id();
                 Q_ASSERT(false);
                 return;
             }
 
             // An UID could have changed, update hashes!
             if (node->uid != incidence->instanceIdentifier()) {
-                //qCDebug(CALENDARVIEW_LOG) << "Incidence UID has changed" << node->uid << incidence->instanceIdentifier();
+                // qCDebug(CALENDARVIEW_LOG) << "Incidence UID has changed" << node->uid << incidence->instanceIdentifier();
                 m_itemByUid.remove(node->uid);
                 m_uidMap.remove(node->uid);
                 node->uid = incidence->instanceIdentifier();
@@ -329,12 +329,12 @@ void IncidenceTreeModel::Private::insertNode(const PreNode::Ptr &prenode, bool s
     // qCDebug(CALENDARVIEW_LOG) << "New node " << node.data() << node->uid << node->id;
     node->parentUid = incidence->relatedTo();
     if (node->uid == node->parentUid) {
-        //qCWarning(CALENDARVIEW_LOG) << "Incidence with itself as parent!" << node->uid << "Akonadi item" << item.id() << "remoteId=" << item.remoteId();
+        // qCWarning(CALENDARVIEW_LOG) << "Incidence with itself as parent!" << node->uid << "Akonadi item" << item.id() << "remoteId=" << item.remoteId();
         node->parentUid.clear();
     }
 
     if (m_uidMap.contains(node->uid)) {
-        //qCWarning(CALENDARVIEW_LOG) << "Duplicate incidence detected:"
+        // qCWarning(CALENDARVIEW_LOG) << "Duplicate incidence detected:"
         //                            << "uid=" << node->uid << ". File a bug against the resource. collection=" << item.storageCollectionId();
         return;
     }
@@ -696,7 +696,7 @@ void IncidenceTreeModel::setSourceModel(QAbstractItemModel *model)
 QModelIndex IncidenceTreeModel::mapFromSource(const QModelIndex &sourceIndex) const
 {
     if (!sourceIndex.isValid()) {
-        //qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::mapFromSource() source index is invalid";
+        // qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::mapFromSource() source index is invalid";
         // Q_ASSERT( false );
         return {};
     }
@@ -744,7 +744,7 @@ QModelIndex IncidenceTreeModel::mapToSource(const QModelIndex &proxyIndex) const
     QModelIndex index = indexes.first();*/
     QModelIndex index = node->sourceIndex;
     if (!index.isValid()) {
-        //qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::mapToSource(): sourceModelIndex is invalid";
+        // qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::mapToSource(): sourceModelIndex is invalid";
         Q_ASSERT(false);
         return QModelIndex();
     }
@@ -756,7 +756,7 @@ QModelIndex IncidenceTreeModel::mapToSource(const QModelIndex &proxyIndex) const
 QModelIndex IncidenceTreeModel::parent(const QModelIndex &child) const
 {
     if (!child.isValid()) {
-        //qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::parent(): child is invalid";
+        // qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::parent(): child is invalid";
         Q_ASSERT(false);
         return {};
     }
@@ -765,7 +765,7 @@ QModelIndex IncidenceTreeModel::parent(const QModelIndex &child) const
     Q_ASSERT(child.internalPointer());
     Node *childNode = reinterpret_cast<Node *>(child.internalPointer());
     if (d->m_removedNodes.contains(childNode)) {
-        //qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::parent() Node already removed.";
+        // qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::parent() Node already removed.";
         return QModelIndex();
     }
 
@@ -776,7 +776,7 @@ QModelIndex IncidenceTreeModel::parent(const QModelIndex &child) const
     const QModelIndex parentIndex = d->indexForNode(childNode->parentNode);
 
     if (!parentIndex.isValid()) {
-        //qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::parent(): proxyModelIndex is invalid.";
+        // qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::parent(): proxyModelIndex is invalid.";
         Q_ASSERT(false);
         return QModelIndex();
     }
@@ -808,7 +808,7 @@ QModelIndex IncidenceTreeModel::index(int row, int column, const QModelIndex &pa
         Node *parentNode = reinterpret_cast<Node *>(parent.internalPointer());
 
         if (row >= parentNode->directChilds.count()) {
-            //qCCritical(CALENDARVIEW_LOG) << "IncidenceTreeModel::index() row=" << row << "; column=" << column;
+            // qCCritical(CALENDARVIEW_LOG) << "IncidenceTreeModel::index() row=" << row << "; column=" << column;
             Q_ASSERT(false);
             return QModelIndex();
         }
@@ -842,12 +842,12 @@ Akonadi::Item IncidenceTreeModel::item(const QString &uid) const
 {
     Akonadi::Item item;
     if (uid.isEmpty()) {
-        //qCWarning(CALENDARVIEW_LOG) << "Called with an empty uid";
+        // qCWarning(CALENDARVIEW_LOG) << "Called with an empty uid";
     } else {
         if (d->m_itemByUid.contains(uid)) {
             item = d->m_itemByUid.value(uid);
         } else {
-            //qCWarning(CALENDARVIEW_LOG) << "There's no incidence with uid " << uid;
+            // qCWarning(CALENDARVIEW_LOG) << "There's no incidence with uid " << uid;
         }
     }
 

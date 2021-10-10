@@ -3,18 +3,17 @@
 
 #pragma once
 
+#include <KCalendarCore/Calendar>
 #include <QAbstractItemModel>
 #include <QCalendar>
-#include <KCalendarCore/Calendar>
-#include <QDebugStateSaver> 
 #include <QDebug>
+#include <QDebugStateSaver>
 
 class MonthModel;
 
 using namespace KCalendarCore;
 
-struct Position
-{
+struct Position {
     int pos;
     int size;
 };
@@ -44,11 +43,11 @@ public:
 public:
     explicit WeekModel(MonthModel *monthModel = nullptr);
     ~WeekModel();
-    
+
     int weekLength() const;
     void setWeekLength(int weekLength);
     QDate start() const;
-    void setStart(const QDate& start);
+    void setStart(const QDate &start);
 
     // QAbstractListModel overrides
     QHash<int, QByteArray> roleNames() const override;
@@ -58,14 +57,14 @@ public:
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     QModelIndex parent(const QModelIndex &index) const override;
     bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
-    
+
 Q_SIGNALS:
     void weekLengthChanged();
     void startChanged();
 
 private:
     void fetchEvents();
-    
+
     int m_weekLength;
     QDate m_start;
     MonthModel *m_monthModel;

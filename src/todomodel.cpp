@@ -219,17 +219,17 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
     Q_ASSERT(sourceIndex.isValid());
     const auto item = sourceIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
     if (!item.isValid()) {
-        //qCWarning(CALENDARVIEW_LOG) << "Invalid index: " << sourceIndex;
+        // qCWarning(CALENDARVIEW_LOG) << "Invalid index: " << sourceIndex;
         // Q_ASSERT( false );
         return QVariant();
     }
     const KCalendarCore::Todo::Ptr todo = CalendarSupport::todo(item);
     if (!todo) {
-        //qCCritical(CALENDARVIEW_LOG) << "item.hasPayload()" << item.hasPayload();
+        // qCCritical(CALENDARVIEW_LOG) << "item.hasPayload()" << item.hasPayload();
         if (item.hasPayload<KCalendarCore::Incidence::Ptr>()) {
             auto incidence = item.payload<KCalendarCore::Incidence::Ptr>();
             if (incidence) {
-                //qCCritical(CALENDARVIEW_LOG) << "It's actually " << incidence->type();
+                // qCCritical(CALENDARVIEW_LOG) << "It's actually " << incidence->type();
             }
         }
 
@@ -436,7 +436,7 @@ bool TodoModel::setData(const QModelIndex &index, const QVariant &value, int rol
     const KCalendarCore::Todo::Ptr todo = CalendarSupport::todo(item);
 
     if (!item.isValid() || !todo) {
-        //qCWarning(CALENDARVIEW_LOG) << "TodoModel::setData() called, bug item is invalid or doesn't have payload";
+        // qCWarning(CALENDARVIEW_LOG) << "TodoModel::setData() called, bug item is invalid or doesn't have payload";
         Q_ASSERT(false);
         return false;
     }
@@ -499,7 +499,7 @@ bool TodoModel::setData(const QModelIndex &index, const QVariant &value, int rol
     } else {
         if (!(role == Qt::CheckStateRole && index.column() == 0)) {
             // KOHelper::showSaveIncidenceErrorMsg( 0, todo ); //TODO pass parent
-            //qCCritical(CALENDARVIEW_LOG) << "Unable to modify incidence";
+            // qCCritical(CALENDARVIEW_LOG) << "Unable to modify incidence";
         }
         return false;
     }
@@ -569,10 +569,7 @@ void TodoModel::setSourceModel(QAbstractItemModel *model)
 
         connect(sourceModel(), &QAbstractItemModel::rowsRemoved, d, &TodoModel::Private::onRowsRemoved);
 
-        connect(sourceModel(),
-                &QAbstractItemModel::rowsAboutToBeMoved,
-                d,
-                &TodoModel::Private::onRowsAboutToBeMoved);
+        connect(sourceModel(), &QAbstractItemModel::rowsAboutToBeMoved, d, &TodoModel::Private::onRowsAboutToBeMoved);
 
         connect(sourceModel(), &QAbstractItemModel::rowsMoved, d, &TodoModel::Private::onRowsMoved);
 
@@ -677,7 +674,7 @@ bool TodoModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int r
     Q_UNUSED(column)
 
     if (action != Qt::MoveAction) {
-        //qCWarning(CALENDARVIEW_LOG) << "No action other than MoveAction currently supported!"; // TODO
+        // qCWarning(CALENDARVIEW_LOG) << "No action other than MoveAction currently supported!"; // TODO
         return false;
     }
 
@@ -721,7 +718,7 @@ bool TodoModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int r
                 // again, no need to Q_EMIT dataChanged, that's done by processChange
                 return true;
             } else {
-                //qCDebug(CALENDARVIEW_LOG) << "Todo's with recurring id can't have child todos yet.";
+                // qCDebug(CALENDARVIEW_LOG) << "Todo's with recurring id can't have child todos yet.";
                 return false;
             }
         } else if (e) {
@@ -729,7 +726,7 @@ bool TodoModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int r
         } else {
             if (!parent.isValid()) {
                 // TODO we should create a new todo with the data in the drop object
-                //qCDebug(CALENDARVIEW_LOG) << "TODO: Create a new todo with the given data";
+                // qCDebug(CALENDARVIEW_LOG) << "TODO: Create a new todo with the given data";
                 return false;
             }
 
@@ -773,7 +770,7 @@ Qt::ItemFlags TodoModel::flags(const QModelIndex &index) const
 
     if (!item.isValid()) {
         Q_ASSERT(mapToSource(index).isValid());
-        //qCWarning(CALENDARVIEW_LOG) << "Item is invalid " << index;
+        // qCWarning(CALENDARVIEW_LOG) << "Item is invalid " << index;
         Q_ASSERT(false);
         return Qt::NoItemFlags;
     }
@@ -828,7 +825,7 @@ QModelIndex TodoModel::mapToSource(const QModelIndex &proxyIndex) const
     }
 
     if (proxyIndex.column() != 0) {
-        //qCCritical(CALENDARVIEW_LOG) << "Map to source called with column>0, but source model only has 1 column";
+        // qCCritical(CALENDARVIEW_LOG) << "Map to source called with column>0, but source model only has 1 column";
         Q_ASSERT(false);
     }
 

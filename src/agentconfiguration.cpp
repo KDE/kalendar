@@ -4,17 +4,17 @@
 #include "agentconfiguration.h"
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
-#include <Akonadi/AgentManager>
+#include <Akonadi/AgentConfigurationDialog>
 #include <Akonadi/AgentInstanceCreateJob>
 #include <Akonadi/AgentInstanceModel>
+#include <Akonadi/AgentManager>
 #include <Akonadi/AgentTypeModel>
-#include <Akonadi/AgentConfigurationDialog>
 #else
-#include <AkonadiCore/AgentManager>
+#include <AgentConfigurationDialog>
 #include <AkonadiCore/AgentInstanceCreateJob>
 #include <AkonadiCore/AgentInstanceModel>
+#include <AkonadiCore/AgentManager>
 #include <AkonadiCore/AgentTypeModel>
-#include <AgentConfigurationDialog>
 #endif
 #include <KWindowSystem>
 #include <QPointer>
@@ -39,12 +39,11 @@ Akonadi::AgentFilterProxyModel *AgentConfiguration::availableAgents()
     }
 
     auto agentInstanceModel = new AgentTypeModel(this);
-    m_availableAgents= new AgentFilterProxyModel(this);
+    m_availableAgents = new AgentFilterProxyModel(this);
     m_availableAgents->addMimeTypeFilter(QStringLiteral("text/calendar"));
     m_availableAgents->setSourceModel(agentInstanceModel);
     m_availableAgents->addCapabilityFilter(QStringLiteral("Resource")); // show only resources, no agents
     return m_availableAgents;
-
 }
 
 Akonadi::AgentFilterProxyModel *AgentConfiguration::runningAgents()

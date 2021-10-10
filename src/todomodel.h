@@ -13,11 +13,11 @@
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
-#include <Akonadi/Item>
 #include <Akonadi/EntityTreeModel>
+#include <Akonadi/Item>
 #else
-#include <Item>
 #include <EntityTreeModel>
+#include <Item>
 #endif
 
 #include <KCalendarCore/Todo>
@@ -106,4 +106,3 @@ private:
     class Private;
     Private *const d;
 };
-

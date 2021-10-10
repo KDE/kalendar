@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-#include <QMetaEnum>
 #include "recurrenceexceptionsmodel.h"
+#include <QMetaEnum>
 
-RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject* parent, KCalendarCore::Incidence::Ptr incidencePtr)
+RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)
     , m_incidence(incidencePtr)
 {
-    for(int i = 0; i < QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().keyCount(); i++) {
+    for (int i = 0; i < QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().keyCount(); i++) {
         const int value = QMetaEnum::fromType<RecurrenceExceptionsModel::Roles>().value(i);
         const QString key = QLatin1String(roleNames().value(value));
         m_dataRoles[key] = value;
@@ -43,18 +43,17 @@ void RecurrenceExceptionsModel::updateExceptions()
     m_exceptions.clear();
 
     const auto dateTimes = m_incidence->recurrence()->exDateTimes();
-    for(const QDateTime &dateTime : dateTimes) {
+    for (const QDateTime &dateTime : dateTimes) {
         m_exceptions.append(dateTime.date());
     }
 
     const auto dates = m_incidence->recurrence()->exDates();
-    for(const QDate &date : dates) {
+    for (const QDate &date : dates) {
         m_exceptions.append(date);
     }
     Q_EMIT exceptionsChanged();
     Q_EMIT layoutChanged();
 }
-
 
 QVariantMap RecurrenceExceptionsModel::dataroles()
 {
@@ -68,19 +67,17 @@ QVariant RecurrenceExceptionsModel::data(const QModelIndex &idx, int role) const
     }
     QDate exception = m_exceptions[idx.row()];
     switch (role) {
-        case DateRole:
-            return exception;
-        default:
-            qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
-            return {};
+    case DateRole:
+        return exception;
+    default:
+        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        return {};
     }
 }
 
 QHash<int, QByteArray> RecurrenceExceptionsModel::roleNames() const
 {
-    return {
-        { DateRole, QByteArrayLiteral("date") }
-    };
+    return {{DateRole, QByteArrayLiteral("date")}};
 }
 
 int RecurrenceExceptionsModel::rowCount(const QModelIndex &) const
@@ -90,7 +87,7 @@ int RecurrenceExceptionsModel::rowCount(const QModelIndex &) const
 
 void RecurrenceExceptionsModel::addExceptionDateTime(QDateTime date)
 {
-    if(!date.isValid()) {
+    if (!date.isValid()) {
         return;
     }
 
@@ -106,10 +103,9 @@ void RecurrenceExceptionsModel::addExceptionDateTime(QDateTime date)
 
 void RecurrenceExceptionsModel::deleteExceptionDateTime(QDateTime date)
 {
-    if(!date.isValid()) {
+    if (!date.isValid()) {
         return;
     }
-
 
     if (m_incidence->recurrence()->allDay()) {
         auto dateTimes = m_incidence->recurrence()->exDateTimes();
@@ -128,7 +124,7 @@ void RecurrenceExceptionsModel::deleteExceptionDateTime(QDateTime date)
 
         auto dateTimes = m_incidence->recurrence()->exDateTimes();
 
-        for(int i = 0; i < dateTimes.size(); i++) {
+        for (int i = 0; i < dateTimes.size(); i++) {
             if (dateTimes[i].date() == date.date()) {
                 dateTimes.removeAt(i);
             }

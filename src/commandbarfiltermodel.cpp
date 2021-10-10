@@ -4,12 +4,13 @@
 
 #include "commandbarfiltermodel.h"
 #include "actionsmodel.h"
-#include <QAction>
 #include <KFuzzyMatcher>
+#include <QAction>
 
 CommandBarFilterModel::CommandBarFilterModel(QObject *parent)
     : QSortFilterProxyModel(parent)
-{}
+{
+}
 
 QString CommandBarFilterModel::filterString() const
 {

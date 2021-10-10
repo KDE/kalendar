@@ -4,7 +4,8 @@
 #include <extratodomodel.h>
 
 ExtraTodoModel::ExtraTodoModel(QObject *parent)
-: KExtraColumnsProxyModel(parent) {
+    : KExtraColumnsProxyModel(parent)
+{
     const QString todoMimeType = QStringLiteral("application/x-vnd.akonadi.calendar.todo");
     m_todoTreeModel = new IncidenceTreeModel(QStringList() << todoMimeType, this);
     const auto pref = EventViews::PrefsPtr();
@@ -25,7 +26,8 @@ ExtraTodoModel::ExtraTodoModel(QObject *parent)
     loadColors();
 }
 
-QVariant ExtraTodoModel::extraColumnData(const QModelIndex &parent, int row, int extraColumn, int role) const {
+QVariant ExtraTodoModel::extraColumnData(const QModelIndex &parent, int row, int extraColumn, int role) const
+{
     if (role != Qt::DisplayRole && role != Qt::EditRole) {
         return QVariant();
     }
@@ -34,18 +36,19 @@ QVariant ExtraTodoModel::extraColumnData(const QModelIndex &parent, int row, int
     const auto todoPtr = CalendarSupport::todo(todoItem);
 
     switch (extraColumn) {
-        case StartTimeColumn:
-            return todoPtr->dtStart();
-        case EndTimeColumn:
-            return todoPtr->dtDue();
-        case PriorityIntColumn:
-            return todoPtr->priority();
-        default:
-            return QVariant();
+    case StartTimeColumn:
+        return todoPtr->dtStart();
+    case EndTimeColumn:
+        return todoPtr->dtDue();
+    case PriorityIntColumn:
+        return todoPtr->priority();
+    default:
+        return QVariant();
     }
 }
 
-QVariant ExtraTodoModel::data (const QModelIndex &index, int role) const {
+QVariant ExtraTodoModel::data(const QModelIndex &index, int role) const
+{
     if (!index.isValid()) {
         return QVariant();
     }
@@ -55,55 +58,55 @@ QVariant ExtraTodoModel::data (const QModelIndex &index, int role) const {
     auto collectionId = todoItem.parentCollection().id();
     auto todoPtr = CalendarSupport::todo(todoItem);
 
-    if(role == Roles::StartTimeRole) {
+    if (role == Roles::StartTimeRole) {
         return todoPtr->dtStart();
     } else if (role == Roles::EndTimeRole) {
         return todoPtr->dtDue();
-    } else if(role == Roles::LocationRole) {
+    } else if (role == Roles::LocationRole) {
         return todoPtr->location();
-    } else if(role == Roles::AllDayRole) {
+    } else if (role == Roles::AllDayRole) {
         return todoPtr->allDay();
-    } else if(role == Roles::ColorRole) {
+    } else if (role == Roles::ColorRole) {
         QColor nullcolor;
         return m_colors.contains(QString::number(collectionId)) ? m_colors[QString::number(collectionId)] : nullcolor;
-    } else if(role == Roles::CompletedRole) {
+    } else if (role == Roles::CompletedRole) {
         return todoPtr->isCompleted();
-    } else if(role == Roles::PriorityRole) {
+    } else if (role == Roles::PriorityRole) {
         return todoPtr->priority();
-    } else if(role == Roles::CollectionIdRole) {
+    } else if (role == Roles::CollectionIdRole) {
         return collectionId;
     } else if (role == DurationStringRole) {
         KFormat format;
         if (todoPtr->allDay()) {
-            return format.formatSpelloutDuration(24*60*60*1000); // format milliseconds in 1 day
+            return format.formatSpelloutDuration(24 * 60 * 60 * 1000); // format milliseconds in 1 day
         }
         return format.formatSpelloutDuration(todoPtr->duration().asSeconds() * 1000);
     } else if (role == Roles::RecursRole) {
         return todoPtr->recurs();
     } else if (role == Roles::IsOverdueRole) {
         return todoPtr->isOverdue();
-    } else if(role == Roles::IncidenceIdRole) {
+    } else if (role == Roles::IncidenceIdRole) {
         return todoPtr->uid();
-    } else if(role == Roles::IncidenceTypeRole) {
+    } else if (role == Roles::IncidenceTypeRole) {
         return todoPtr->type();
-    } else if(role == Roles::IncidenceTypeStrRole) {
+    } else if (role == Roles::IncidenceTypeStrRole) {
         return todoPtr->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(todoPtr->typeStr());
-    } else if(role == Roles::IncidenceTypeIconRole) {
+    } else if (role == Roles::IncidenceTypeIconRole) {
         return todoPtr->iconName();
-    } else if(role == Roles::IncidencePtrRole) {
+    } else if (role == Roles::IncidencePtrRole) {
         return QVariant::fromValue(CalendarSupport::incidence(todoItem));
-    } else if(role == Roles::TagsRole) {
+    } else if (role == Roles::TagsRole) {
         return QVariant::fromValue(todoItem.tags());
-    } else if(role == Roles::ItemRole) {
+    } else if (role == Roles::ItemRole) {
         return QVariant::fromValue(todoItem);
-    } else if(role == Roles::CategoriesRole) {
+    } else if (role == Roles::CategoriesRole) {
         return todoPtr->categories();
-    } else if(role == Roles::CategoriesDisplayRole) {
+    } else if (role == Roles::CategoriesDisplayRole) {
         return todoPtr->categories().join(i18nc("List separator", ", "));
-    } else if(role == Roles::TreeDepthRole) {
+    } else if (role == Roles::TreeDepthRole) {
         int depth = 0;
         auto idx = index;
-        while(idx.parent().isValid()) {
+        while (idx.parent().isValid()) {
             idx = idx.parent();
             depth++;
         }
@@ -113,7 +116,8 @@ QVariant ExtraTodoModel::data (const QModelIndex &index, int role) const {
     return KExtraColumnsProxyModel::data(index, role);
 }
 
-QHash<int, QByteArray> ExtraTodoModel::roleNames() const {
+QHash<int, QByteArray> ExtraTodoModel::roleNames() const
+{
     QHash<int, QByteArray> roleNames = KExtraColumnsProxyModel::roleNames();
     roleNames[TodoModel::SummaryRole] = "text";
     roleNames[Roles::StartTimeRole] = "startTime";
@@ -141,29 +145,35 @@ QHash<int, QByteArray> ExtraTodoModel::roleNames() const {
     return roleNames;
 }
 
-Akonadi::ETMCalendar::Ptr ExtraTodoModel::calendar() {
+Akonadi::ETMCalendar::Ptr ExtraTodoModel::calendar()
+{
     return m_calendar;
 }
 
-void ExtraTodoModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar) {
+void ExtraTodoModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
+{
     m_calendar = calendar;
     m_todoTreeModel->setSourceModel(calendar->model());
     m_baseTodoModel->setCalendar(calendar);
 }
 
-void ExtraTodoModel::setIncidenceChanger(Akonadi::IncidenceChanger* changer) {
+void ExtraTodoModel::setIncidenceChanger(Akonadi::IncidenceChanger *changer)
+{
     m_baseTodoModel->setIncidenceChanger(changer);
 }
 
-QHash<QString, QColor> ExtraTodoModel::colorCache() {
+QHash<QString, QColor> ExtraTodoModel::colorCache()
+{
     return m_colors;
 }
 
-void ExtraTodoModel::setColorCache(QHash<QString, QColor> colorCache) {
+void ExtraTodoModel::setColorCache(QHash<QString, QColor> colorCache)
+{
     m_colors = colorCache;
 }
 
-void ExtraTodoModel::loadColors() {
+void ExtraTodoModel::loadColors()
+{
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup rColorsConfig(config, "Resources Colors");
     const QStringList colorKeyList = rColorsConfig.keyList();

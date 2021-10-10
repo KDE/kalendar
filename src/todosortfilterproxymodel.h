@@ -2,15 +2,14 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #pragma once
-#include <QSortFilterProxyModel>
+#include <Akonadi/Calendar/ETMCalendar>
+#include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
-#include <Akonadi/Calendar/IncidenceChanger>
-#include <Akonadi/Calendar/ETMCalendar>
-#include <todomodel.h>
+#include <QSortFilterProxyModel>
 #include <extratodomodel.h>
 #include <incidencetreemodel.h>
-
+#include <todomodel.h>
 
 class TodoSortFilterProxyModel : public QSortFilterProxyModel
 {
@@ -33,18 +32,10 @@ public:
     };
     Q_ENUM(BaseTodoModelColumns);
 
-    enum ExtraTodoModelColumns {
-        StartTimeColumn = TodoModel::ColumnCount,
-        EndTimeColumn,
-        PriorityIntColumn
-    };
+    enum ExtraTodoModelColumns { StartTimeColumn = TodoModel::ColumnCount, EndTimeColumn, PriorityIntColumn };
     Q_ENUM(ExtraTodoModelColumns);
 
-    enum ShowComplete {
-        ShowAll = 0,
-        ShowCompleteOnly,
-        ShowIncompleteOnly
-    };
+    enum ShowComplete { ShowAll = 0, ShowCompleteOnly, ShowIncompleteOnly };
     Q_ENUM(ShowComplete);
 
     TodoSortFilterProxyModel(QObject *parent = nullptr);
@@ -65,7 +56,6 @@ public:
 
     Q_INVOKABLE void sortTodoModel(int sort, bool ascending);
     Q_INVOKABLE void filterTodoName(QString name, int showCompleted = ShowAll);
-
 
 Q_SIGNALS:
     void incidenceChangerChanged();

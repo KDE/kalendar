@@ -8,56 +8,55 @@
 //
 //  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
 
-
 #include "calendarmanager.h"
 
 // Akonadi
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
-#include <Akonadi/Control>
-#include <Akonadi/CollectionFilterProxyModel>
-#include <Akonadi/Monitor>
-#include <Akonadi/EntityTreeModel>
-#include <Akonadi/EntityDisplayAttribute>
-#include <Akonadi/AgentManager>
 #include <Akonadi/AgentInstanceModel>
-#include <Akonadi/CollectionIdentificationAttribute>
-#include <Akonadi/ItemMoveJob>
-#include <Akonadi/ItemModifyJob>
-#include <Akonadi/CollectionModifyJob>
+#include <Akonadi/AgentManager>
 #include <Akonadi/AttributeFactory>
 #include <Akonadi/CollectionColorAttribute>
+#include <Akonadi/CollectionFilterProxyModel>
+#include <Akonadi/CollectionIdentificationAttribute>
+#include <Akonadi/CollectionModifyJob>
 #include <Akonadi/CollectionUtils>
+#include <Akonadi/Control>
+#include <Akonadi/EntityDisplayAttribute>
+#include <Akonadi/EntityTreeModel>
+#include <Akonadi/ItemModifyJob>
+#include <Akonadi/ItemMoveJob>
+#include <Akonadi/Monitor>
 #else
-#include <control.h>
-#include <CollectionFilterProxyModel>
-#include <Monitor>
-#include <EntityTreeModel>
-#include <AkonadiCore/EntityDisplayAttribute>
-#include <AkonadiCore/AgentManager>
 #include <AkonadiCore/AgentInstanceModel>
-#include <AkonadiCore/CollectionIdentificationAttribute>
-#include <AkonadiCore/ItemMoveJob>
-#include <AkonadiCore/ItemModifyJob>
-#include <AkonadiCore/CollectionModifyJob>
+#include <AkonadiCore/AgentManager>
 #include <AkonadiCore/AttributeFactory>
 #include <AkonadiCore/CollectionColorAttribute>
+#include <AkonadiCore/CollectionIdentificationAttribute>
+#include <AkonadiCore/CollectionModifyJob>
 #include <AkonadiCore/CollectionUtils>
+#include <AkonadiCore/EntityDisplayAttribute>
+#include <AkonadiCore/ItemModifyJob>
+#include <AkonadiCore/ItemMoveJob>
+#include <CollectionFilterProxyModel>
+#include <EntityTreeModel>
+#include <Monitor>
+#include <control.h>
 #endif
-#include <etmcalendar.h>
-#include <KLocalizedString>
-#include <QApplication>
+#include <Akonadi/Calendar/History>
+#include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
-#include <Akonadi/Calendar/IncidenceChanger>
-#include <Akonadi/Calendar/History>
-#include <QRandomGenerator>
 #include <EventViews/Prefs>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
-#include <QTimer>
 #include <KFormat>
+#include <KLocalizedString>
+#include <QApplication>
 #include <QMetaEnum>
+#include <QRandomGenerator>
+#include <QTimer>
+#include <etmcalendar.h>
 
 using namespace Akonadi;
 
@@ -75,12 +74,10 @@ static Akonadi::EntityTreeModel *findEtm(QAbstractItemModel *model)
     return qobject_cast<Akonadi::EntityTreeModel *>(model);
 }
 
-
 bool isStandardCalendar(Akonadi::Collection::Id id)
 {
     return id == CalendarSupport::KCalPrefs::instance()->defaultCalendarId();
 }
-
 
 static bool hasCompatibleMimeTypes(const Akonadi::Collection &collection)
 {
@@ -124,7 +121,7 @@ private Q_SLOTS:
             return;
         }
         for (int i = start; i <= end; ++i) {
-            //qCDebug(KORGANIZER_LOG) << "checking " << i << parent << mCheckableProxy->index(i, 0, parent).data().toString();
+            // qCDebug(KORGANIZER_LOG) << "checking " << i << parent << mCheckableProxy->index(i, 0, parent).data().toString();
             const QModelIndex index = mCheckableProxy->index(i, 0, parent);
             QMetaObject::invokeMethod(this, "setCheckState", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(QPersistentModelIndex, index));
         }
@@ -205,7 +202,6 @@ protected:
 class ColorProxyModel : public QSortFilterProxyModel
 {
 public:
-
     explicit ColorProxyModel(QObject *parent = nullptr)
         : QSortFilterProxyModel(parent)
         , mInitDefaultCalendar(false)
@@ -238,8 +234,7 @@ public:
             }
         } else if (role == Qt::FontRole) {
             const Akonadi::Collection collection = CalendarSupport::collectionFromIndex(index);
-            if (!collection.contentMimeTypes().isEmpty() && isStandardCalendar(collection.id())
-                && collection.rights() & Akonadi::Collection::CanCreateItem) {
+            if (!collection.contentMimeTypes().isEmpty() && isStandardCalendar(collection.id()) && collection.rights() & Akonadi::Collection::CanCreateItem) {
                 auto font = qvariant_cast<QFont>(QSortFilterProxyModel::data(index, Qt::FontRole));
                 font.setBold(true);
                 if (!mInitDefaultCalendar) {
@@ -276,19 +271,21 @@ public:
         return Qt::ItemIsSelectable | QSortFilterProxyModel::flags(index);
     }
 
-    QHash<int, QByteArray> roleNames() const override {
+    QHash<int, QByteArray> roleNames() const override
+    {
         QHash<int, QByteArray> roleNames = QSortFilterProxyModel::roleNames();
         roleNames[Qt::CheckStateRole] = "checkState";
         roleNames[Qt::BackgroundRole] = "collectionColor";
         return roleNames;
     }
 
-    QColor getCollectionColor(Akonadi::Collection collection) const {
+    QColor getCollectionColor(Akonadi::Collection collection) const
+    {
         const QString id = QString::number(collection.id());
-        auto supportsMimeType = collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.event")) ||
-        collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.todo")) ||
-        collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.journal"));
-        //qDebug() << "Collection id: " << collection.id();
+        auto supportsMimeType = collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.event"))
+            || collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.todo"))
+            || collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.journal"));
+        // qDebug() << "Collection id: " << collection.id();
 
         if (!supportsMimeType) {
             return {};
@@ -308,7 +305,7 @@ public:
         }
 
         QColor korgColor = mEventViewsPrefs->resourceColorKnown(id);
-        if(korgColor.isValid()) {
+        if (korgColor.isValid()) {
             colorCache[id] = korgColor;
             save();
             return korgColor;
@@ -351,13 +348,11 @@ private:
     EventViews::PrefsPtr mEventViewsPrefs;
 };
 
-
-
 CalendarManager::CalendarManager(QObject *parent)
     : QObject(parent)
     , m_calendar(nullptr)
 {
-    if (!Akonadi::Control::start() ) {
+    if (!Akonadi::Control::start()) {
         qApp->exit(-1);
         return;
     }
@@ -407,12 +402,12 @@ CalendarManager::CalendarManager(QObject *parent)
 
     // Filter by access rights
     m_eventRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
-    m_eventRightsFilterModel->setAccessRights( Collection::CanCreateItem );
+    m_eventRightsFilterModel->setAccessRights(Collection::CanCreateItem);
     m_eventRightsFilterModel->setSourceModel(m_eventMimeTypeFilterModel);
     m_eventRightsFilterModel->sort(0);
 
     m_todoRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
-    m_todoRightsFilterModel->setAccessRights( Collection::CanCreateItem );
+    m_todoRightsFilterModel->setAccessRights(Collection::CanCreateItem);
     m_todoRightsFilterModel->setSourceModel(m_todoMimeTypeFilterModel);
     m_todoRightsFilterModel->sort(0);
 
@@ -437,8 +432,8 @@ CalendarManager::CalendarManager(QObject *parent)
     m_flatCollectionTreeModel->setSourceModel(m_viewCollectionModel);
     m_flatCollectionTreeModel->setExpandsByDefault(true);
 
-    auto refreshColors = [=] () {
-        for(auto i = 0; i < m_flatCollectionTreeModel->rowCount(); i++) {
+    auto refreshColors = [=]() {
+        for (auto i = 0; i < m_flatCollectionTreeModel->rowCount(); i++) {
             auto idx = m_flatCollectionTreeModel->index(i, 0, {});
             colorProxy->getCollectionColor(CalendarSupport::collectionFromIndex(idx));
         }
@@ -449,7 +444,7 @@ CalendarManager::CalendarManager(QObject *parent)
 CalendarManager::~CalendarManager()
 {
     save();
-    //delete mCollectionSelectionModelStateSaver;
+    // delete mCollectionSelectionModelStateSaver;
 }
 
 void CalendarManager::save()
@@ -464,7 +459,6 @@ void CalendarManager::save()
     config->sync();
 }
 
-
 void CalendarManager::delayedInit()
 {
     Q_EMIT entityTreeModelChanged();
@@ -476,12 +470,12 @@ QAbstractProxyModel *CalendarManager::collections()
     return static_cast<QAbstractProxyModel *>(m_flatCollectionTreeModel->sourceModel());
 }
 
-QAbstractItemModel * CalendarManager::todoCollections()
+QAbstractItemModel *CalendarManager::todoCollections()
 {
     return m_todoViewCollectionModel;
 }
 
-QAbstractItemModel * CalendarManager::viewCollections()
+QAbstractItemModel *CalendarManager::viewCollections()
 {
     return m_viewCollectionModel;
 }
@@ -516,23 +510,22 @@ Akonadi::ETMCalendar *CalendarManager::calendar() const
     return m_calendar.get();
 }
 
-Akonadi::IncidenceChanger * CalendarManager::incidenceChanger() const
+Akonadi::IncidenceChanger *CalendarManager::incidenceChanger() const
 {
     return m_changer;
 }
 
-
-KDescendantsProxyModel * CalendarManager::allCalendars()
+KDescendantsProxyModel *CalendarManager::allCalendars()
 {
     return m_allCalendars;
 }
 
-Akonadi::EntityRightsFilterModel * CalendarManager::selectableEventCalendars() const
+Akonadi::EntityRightsFilterModel *CalendarManager::selectableEventCalendars() const
 {
     return m_eventRightsFilterModel;
 }
 
-Akonadi::EntityRightsFilterModel * CalendarManager::selectableTodoCalendars() const
+Akonadi::EntityRightsFilterModel *CalendarManager::selectableTodoCalendars() const
 {
     return m_todoRightsFilterModel;
 }
@@ -569,26 +562,23 @@ int CalendarManager::getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapp
 {
     Akonadi::EntityRightsFilterModel *model;
 
-    switch(incidenceWrapper->incidencePtr()->type()) {
-        default:
-        case(KCalendarCore::IncidenceBase::TypeEvent):
-        {
-            model = m_eventRightsFilterModel;
-            break;
-        }
-        case(KCalendarCore::IncidenceBase::TypeTodo):
-        {
-            model = m_todoRightsFilterModel;
-            break;
-        }
+    switch (incidenceWrapper->incidencePtr()->type()) {
+    default:
+    case (KCalendarCore::IncidenceBase::TypeEvent): {
+        model = m_eventRightsFilterModel;
+        break;
+    }
+    case (KCalendarCore::IncidenceBase::TypeTodo): {
+        model = m_todoRightsFilterModel;
+        break;
+    }
     }
 
-    for(int i = 0; i < model->rowCount(); i++)
-    {
+    for (int i = 0; i < model->rowCount(); i++) {
         QModelIndex idx = model->index(i, 0);
         QVariant data = idx.data(Akonadi::EntityTreeModel::Roles::CollectionIdRole);
 
-        if(data == incidenceWrapper->collectionId())
+        if (data == incidenceWrapper->collectionId())
             return i;
     }
 
@@ -597,53 +587,48 @@ int CalendarManager::getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapp
 
 QVariant CalendarManager::getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr)
 {
-    switch(incidencePtr->type()) {
-        case(KCalendarCore::IncidenceBase::TypeEvent):
-            return QVariant::fromValue(m_calendar->event(incidencePtr->instanceIdentifier()));
-            break;
-        case(KCalendarCore::IncidenceBase::TypeTodo):
-            return QVariant::fromValue(m_calendar->todo(incidencePtr->instanceIdentifier()));
-            break;
-        case(KCalendarCore::IncidenceBase::TypeJournal):
-            return QVariant::fromValue(m_calendar->journal(incidencePtr->instanceIdentifier()));
-            break;
-        default:
-            return QVariant::fromValue(incidencePtr);
-            break;
+    switch (incidencePtr->type()) {
+    case (KCalendarCore::IncidenceBase::TypeEvent):
+        return QVariant::fromValue(m_calendar->event(incidencePtr->instanceIdentifier()));
+        break;
+    case (KCalendarCore::IncidenceBase::TypeTodo):
+        return QVariant::fromValue(m_calendar->todo(incidencePtr->instanceIdentifier()));
+        break;
+    case (KCalendarCore::IncidenceBase::TypeJournal):
+        return QVariant::fromValue(m_calendar->journal(incidencePtr->instanceIdentifier()));
+        break;
+    default:
+        return QVariant::fromValue(incidencePtr);
+        break;
     }
-
 }
 
 QVariantMap CalendarManager::undoRedoData()
 {
-    return QVariantMap {
-        {QStringLiteral("undoAvailable"), m_changer->history()->undoAvailable()},
-        {QStringLiteral("redoAvailable"), m_changer->history()->redoAvailable()},
-        {QStringLiteral("nextUndoDescription"), m_changer->history()->nextUndoDescription()},
-        {QStringLiteral("nextRedoDescription"), m_changer->history()->nextRedoDescription()}
-    };
+    return QVariantMap{{QStringLiteral("undoAvailable"), m_changer->history()->undoAvailable()},
+                       {QStringLiteral("redoAvailable"), m_changer->history()->redoAvailable()},
+                       {QStringLiteral("nextUndoDescription"), m_changer->history()->nextUndoDescription()},
+                       {QStringLiteral("nextRedoDescription"), m_changer->history()->nextRedoDescription()}};
 }
 
 void CalendarManager::addIncidence(IncidenceWrapper *incidenceWrapper)
 {
     Akonadi::Collection collection(incidenceWrapper->collectionId());
 
-    switch(incidenceWrapper->incidencePtr()->type()) {
-        case(KCalendarCore::IncidenceBase::TypeEvent):
-        {
-            KCalendarCore::Event::Ptr event = incidenceWrapper->incidencePtr().staticCast<KCalendarCore::Event>();
-            m_changer->createIncidence(event, collection);
-            break;
-        }
-        case(KCalendarCore::IncidenceBase::TypeTodo):
-        {
-            KCalendarCore::Todo::Ptr todo = incidenceWrapper->incidencePtr().staticCast<KCalendarCore::Todo>();
-            m_changer->createIncidence(todo, collection);
-            break;
-        }
-        default:
-            m_changer->createIncidence(KCalendarCore::Incidence::Ptr(incidenceWrapper->incidencePtr()->clone()), collection);
-            break;
+    switch (incidenceWrapper->incidencePtr()->type()) {
+    case (KCalendarCore::IncidenceBase::TypeEvent): {
+        KCalendarCore::Event::Ptr event = incidenceWrapper->incidencePtr().staticCast<KCalendarCore::Event>();
+        m_changer->createIncidence(event, collection);
+        break;
+    }
+    case (KCalendarCore::IncidenceBase::TypeTodo): {
+        KCalendarCore::Todo::Ptr todo = incidenceWrapper->incidencePtr().staticCast<KCalendarCore::Todo>();
+        m_changer->createIncidence(todo, collection);
+        break;
+    }
+    default:
+        m_changer->createIncidence(KCalendarCore::Incidence::Ptr(incidenceWrapper->incidencePtr()->clone()), collection);
+        break;
     }
     // This will fritz if you don't choose a valid *calendar*
 }
@@ -669,7 +654,9 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
     modifiedItem.setParentCollection(newCollection);
     Akonadi::ItemMoveJob *job = new Akonadi::ItemMoveJob(modifiedItem, newCollection);
     // Add some type of check here?
-    connect(job, &KJob::result, job, [=]() {qDebug() << job->error();});
+    connect(job, &KJob::result, job, [=]() {
+        qDebug() << job->error();
+    });
 }
 
 void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence)
@@ -684,8 +671,8 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     bool isFiltered = false;
     int allCalendarsRow = 0;
 
-    for(int i = 0; i < m_allCalendars->rowCount(); i++) {
-        if(m_allCalendars->data(m_allCalendars->index(i, 0), Akonadi::EntityTreeModel::CollectionIdRole).toInt() == collectionId) {
+    for (int i = 0; i < m_allCalendars->rowCount(); i++) {
+        if (m_allCalendars->data(m_allCalendars->index(i, 0), Akonadi::EntityTreeModel::CollectionIdRole).toInt() == collectionId) {
             isFiltered = !m_allCalendars->data(m_allCalendars->index(i, 0), Qt::CheckStateRole).toBool();
             allCalendarsRow = i;
             break;
@@ -711,12 +698,12 @@ void CalendarManager::setCollectionColor(qint64 collectionId, QColor color)
     colorAttr->setColor(color);
 
     Akonadi::CollectionModifyJob *modifyJob = new Akonadi::CollectionModifyJob(collection);
-    connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob* job) {
-        if ( job->error() ) {
+    connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob *job) {
+        if (job->error()) {
             qWarning() << "Error occurred modifying collection color: " << job->errorString();
         } else {
-             m_baseModel->colorCache[QString::number(collectionId)] = color;
-             m_baseModel->save();
+            m_baseModel->colorCache[QString::number(collectionId)] = color;
+            m_baseModel->save();
         }
     });
 }

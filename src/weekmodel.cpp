@@ -3,8 +3,8 @@
 
 #include "weekmodel.h"
 #include "monthmodel.h"
-#include <qmath.h>
 #include <QDebug>
+#include <qmath.h>
 
 QDebug operator<<(QDebug debug, const Position &pos)
 {
@@ -12,7 +12,6 @@ QDebug operator<<(QDebug debug, const Position &pos)
     debug.nospace() << "Position(" << pos.pos << ", " << pos.size << ")";
     return debug;
 }
-
 
 WeekModel::WeekModel(MonthModel *monthModel)
     : QAbstractItemModel(monthModel)
@@ -32,12 +31,10 @@ void WeekModel::fetchEvents()
     if (m_eventsInWeek.empty() && m_monthModel->calendar()) {
         // fetch events for the given week
         const QDate end = m_start.addDays(m_weekLength);
-        m_eventsInWeek = Calendar::sortEvents(m_monthModel->calendar()->events(m_start, end),
-                                              EventSortField::EventSortStartDate,
-                                              SortDirection::SortDirectionAscending
-                                             );
+        m_eventsInWeek =
+            Calendar::sortEvents(m_monthModel->calendar()->events(m_start, end), EventSortField::EventSortStartDate, SortDirection::SortDirectionAscending);
         qDebug() << m_monthModel->calendar()->events() << m_start;
-        
+
         // Contains all the event in the specific 'blockSize' hour block;
         for (int i = 0; i < 24 * m_weekLength / (int)blockSize; i++) {
             // fill it
@@ -56,20 +53,20 @@ void WeekModel::fetchEvents()
                 m_eventBlocks[position].append(event);
             }
         }
-        
+
         // Get the position of each event
         QList<QSet<QString>> groups;
-        
+
         for (const auto &block : qAsConst(m_eventBlocks)) {
             for (const auto &event : qAsConst(block)) {
                 if (event->allDay()) {
                     continue;
                 }
-                
+
                 if (m_positions.contains(event->uid())) {
                     continue;
                 }
-                
+
                 bool collided = false;
                 for (const auto &otherEvent : qAsConst(block)) {
                     if (event == otherEvent) {
@@ -91,7 +88,7 @@ void WeekModel::fetchEvents()
                                 }
                             }
                             if (!groupFound) {
-                                groups.append({ event->uid() });
+                                groups.append({event->uid()});
                             }
                             collided = true;
                             break;
@@ -103,11 +100,11 @@ void WeekModel::fetchEvents()
                     pos.pos = 0;
                     pos.size = 0;
                     m_positions[event->uid()] = pos;
-                    groups.append({ event->uid() });
+                    groups.append({event->uid()});
                 }
             }
         }
-        
+
         // Update size now
         for (const auto &group : qAsConst(groups)) {
             for (const auto &event : group) {
@@ -115,7 +112,7 @@ void WeekModel::fetchEvents()
                 m_positions[event].size = group.count();
             }
         }
-        
+
         for (int i = 0; i < (24 / blockSize) * m_weekLength; i++) {
             const auto row = i % (24 / blockSize);
             const auto column = i / (24 / blockSize);
@@ -127,11 +124,9 @@ void WeekModel::fetchEvents()
                 qDebug() << "summary" << data(index(row, column), Roles::Summary) << this;
             }
         }
-        
     }
-    
+
     qDebug() << m_eventsInWeek << m_positions;
-    
 }
 
 QVariant WeekModel::data(const QModelIndex &index, int role) const
@@ -142,17 +137,17 @@ QVariant WeekModel::data(const QModelIndex &index, int role) const
     if (!index.parent().isValid()) {
         // Show grid of blockSize
         switch (role) {
-            case TableIndex:
-                return index;
-            default:
-                qDebug() << m_eventBlocks << index.column() * (24 / blockSize) + index.row();
-                return m_eventBlocks[index.column() * (24 / blockSize) + index.row()].count();
+        case TableIndex:
+            return index;
+        default:
+            qDebug() << m_eventBlocks << index.column() * (24 / blockSize) + index.row();
+            return m_eventBlocks[index.column() * (24 / blockSize) + index.row()].count();
         }
     } else {
         // Show events in block
         const auto parentRow = index.parent().row();
         const auto parentColumn = index.parent().column();
-        
+
         qDebug() << parentRow << parentColumn << index.row() << m_eventBlocks << parentColumn * (24 / blockSize) + parentRow;
         const auto &events = m_eventBlocks[parentColumn * (24 / blockSize) + parentRow];
         if (events.count() <= index.row()) {
@@ -162,18 +157,18 @@ QVariant WeekModel::data(const QModelIndex &index, int role) const
         qDebug() << rowCount(index);
         const auto event = events[index.row()];
         const auto secSinceStart = parentColumn * 24 * 60 * 60 + parentRow * 60 * 60 / blockSize;
-        
+
         const auto blockStart = m_start.startOfDay().addSecs(secSinceStart);
-        
+
         switch (role) {
-            case Summary:
-                return event->summary();
-            case Minute: 
-                return (double)qMax(0ll, blockStart.secsTo(event->dtStart())) / 60.0 / 60.0 / (double)blockSize;
-            case Lenght:
-                return event->dtStart().secsTo(event->dtEnd()) / 60.0 / 60.0 / blockSize;
-            case AllDay:
-                return event->allDay();
+        case Summary:
+            return event->summary();
+        case Minute:
+            return (double)qMax(0ll, blockStart.secsTo(event->dtStart())) / 60.0 / 60.0 / (double)blockSize;
+        case Lenght:
+            return event->dtStart().secsTo(event->dtEnd()) / 60.0 / 60.0 / blockSize;
+        case AllDay:
+            return event->allDay();
             // TODO handling of event at the same time
         }
     }
@@ -217,7 +212,7 @@ QDate WeekModel::start() const
     return m_start;
 }
 
-void WeekModel::setStart(const QDate& start)
+void WeekModel::setStart(const QDate &start)
 {
     if (m_start == start) {
         return;

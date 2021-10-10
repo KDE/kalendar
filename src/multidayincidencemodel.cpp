@@ -8,10 +8,7 @@
 #include "multidayincidencemodel.h"
 #include <QBitArray>
 
-enum Roles {
-    Incidences = IncidenceOccurrenceModel::LastRole,
-    PeriodStartDate
-};
+enum Roles { Incidences = IncidenceOccurrenceModel::LastRole, PeriodStartDate };
 
 MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -38,7 +35,7 @@ QModelIndex MultiDayIncidenceModel::parent(const QModelIndex &) const
 
 int MultiDayIncidenceModel::rowCount(const QModelIndex &parent) const
 {
-    //Number of weeks
+    // Number of weeks
     if (!parent.isValid() && mSourceModel) {
         return qMax(mSourceModel->length() / mPeriodLength, 1);
     }
@@ -49,7 +46,6 @@ int MultiDayIncidenceModel::columnCount(const QModelIndex &) const
 {
     return 1;
 }
-
 
 static long long getDuration(const QDate &start, const QDate &end)
 {
@@ -70,13 +66,13 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
         const auto start = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
         const auto end = srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date();
 
-        //Skip incidences not part of the week
+        // Skip incidences not part of the week
         if (end < rowStart || start > rowEnd) {
             // qWarning() << "Skipping because not part of this week";
             continue;
         }
 
-        if(!incidencePassesFilter(srcIdx)) {
+        if (!incidencePassesFilter(srcIdx)) {
             continue;
         }
 
@@ -85,13 +81,15 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
     }
 
     // Sort incidences by date
-    std::sort(sorted.begin(), sorted.end(), [&] (const QModelIndex &left, const QModelIndex &right) {
-        //All-day first, sorted by duration (in the hope that we can fit multiple on the same line)
+    std::sort(sorted.begin(), sorted.end(), [&](const QModelIndex &left, const QModelIndex &right) {
+        // All-day first, sorted by duration (in the hope that we can fit multiple on the same line)
         const auto leftAllDay = left.data(IncidenceOccurrenceModel::AllDay).toBool();
         const auto rightAllDay = right.data(IncidenceOccurrenceModel::AllDay).toBool();
 
-        const auto leftDuration = getDuration(left.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), left.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
-        const auto rightDuration = getDuration(right.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), right.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
+        const auto leftDuration =
+            getDuration(left.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), left.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
+        const auto rightDuration =
+            getDuration(right.data(IncidenceOccurrenceModel::StartTime).toDateTime().date(), right.data(IncidenceOccurrenceModel::EndTime).toDateTime().date());
 
         const auto leftDt = left.data(IncidenceOccurrenceModel::StartTime).toDateTime();
         const auto rightDt = right.data(IncidenceOccurrenceModel::StartTime).toDateTime();
@@ -106,7 +104,7 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
             return leftDuration < rightDuration;
         }
 
-        //The rest sorted by start date
+        // The rest sorted by start date
         return leftDt < rightDt && leftDuration <= rightDuration;
     });
 
@@ -114,38 +112,41 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
 }
 
 /*
-* Layout the lines:
-*
-* The line grouping algorithm then always picks the first incidence,
-* and tries to add more to the same line.
-*
-* We never mix all-day and non-all day, and otherwise try to fit as much as possible
-* on the same line. Same day time-order should be preserved because of the sorting.
-*/
+ * Layout the lines:
+ *
+ * The line grouping algorithm then always picks the first incidence,
+ * and tries to add more to the same line.
+ *
+ * We never mix all-day and non-all day, and otherwise try to fit as much as possible
+ * on the same line. Same day time-order should be preserved because of the sorting.
+ */
 QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
 {
-    auto getStart = [&rowStart] (const QDate &start) {
+    auto getStart = [&rowStart](const QDate &start) {
         return qMax(rowStart.daysTo(start), 0ll);
     };
 
     QList<QModelIndex> sorted = sortedIncidencesFromSourceModel(rowStart);
 
     // for (const auto &srcIdx : sorted) {
-    //     qWarning() << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString() << srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
+    //     qWarning() << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString()
+    //     << srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
     // }
 
     auto result = QVariantList{};
     while (!sorted.isEmpty()) {
         const auto srcIdx = sorted.takeFirst();
-        const auto startDate = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart ?
-                rowStart : srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
+        const auto startDate = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart
+            ? rowStart
+            : srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
         const auto start = getStart(srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
         const auto duration = qMin(getDuration(startDate, srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
 
-        // qWarning() << "First of line " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
+        // qWarning() << "First of line " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration <<
+        // srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         auto currentLine = QVariantList{};
 
-        auto addToLine = [&currentLine] (const QModelIndex &idx, int start, int duration) {
+        auto addToLine = [&currentLine](const QModelIndex &idx, int start, int duration) {
             currentLine.append(QVariantMap{
                 {QStringLiteral("text"), idx.data(IncidenceOccurrenceModel::Summary)},
                 {QStringLiteral("description"), idx.data(IncidenceOccurrenceModel::Description)},
@@ -172,32 +173,32 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
             });
         };
 
-        if(start >= mPeriodLength) {
-            //qWarning() << "Skipping " << srcIdx.data(IncidenceOccurrenceModel::Summary);
+        if (start >= mPeriodLength) {
+            // qWarning() << "Skipping " << srcIdx.data(IncidenceOccurrenceModel::Summary);
             continue;
         }
 
-        //Add first incidence of line
+        // Add first incidence of line
         addToLine(srcIdx, start, duration);
-        //const bool allDayLine = srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
+        // const bool allDayLine = srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
 
-        //Fill line with incidences that fit
+        // Fill line with incidences that fit
         QBitArray takenSpaces(mPeriodLength);
         // Set this incidence's space as taken
-        for(int i = start; i < start + duration; i++) {
+        for (int i = start; i < start + duration; i++) {
             takenSpaces[i] = true;
         }
 
-        auto doesIntersect = [&] (int start, int end) {
-            for(int i = start; i < end; i++) {
-                if(takenSpaces[i]) {
-                    //qWarning() << "Found intersection " << start << end;
+        auto doesIntersect = [&](int start, int end) {
+            for (int i = start; i < end; i++) {
+                if (takenSpaces[i]) {
+                    // qWarning() << "Found intersection " << start << end;
                     return true;
                 }
             }
 
             // If incidence fits on line, set its space as taken
-            for(int i = start; i < end; i++) {
+            for (int i = start; i < end; i++) {
                 takenSpaces[i] = true;
             }
             return false;
@@ -205,8 +206,9 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
 
         for (auto it = sorted.begin(); it != sorted.end();) {
             const auto idx = *it;
-            const auto startDate = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart ?
-                rowStart : idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
+            const auto startDate = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart
+                ? rowStart
+                : idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
             const auto start = getStart(idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
             const auto duration = qMin(getDuration(startDate, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
             const auto end = start + duration;
@@ -239,13 +241,13 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
     }
     const auto rowStart = mSourceModel->start().addDays(idx.row() * mPeriodLength);
     switch (role) {
-        case PeriodStartDate:
-            return rowStart.startOfDay();
-        case Incidences:
-            return layoutLines(rowStart);
-        default:
-            Q_ASSERT(false);
-            return {};
+    case PeriodStartDate:
+        return rowStart.startOfDay();
+    case Incidences:
+        return layoutLines(rowStart);
+    default:
+        Q_ASSERT(false);
+        return {};
     }
 }
 
@@ -296,25 +298,24 @@ void MultiDayIncidenceModel::setFilters(MultiDayIncidenceModel::Filters filters)
 
 bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
 {
-    if(!m_filters) {
+    if (!m_filters) {
         return true;
     }
     bool include = false;
     const auto start = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
 
-    if(m_filters.testFlag(AllDayOnly) && idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
+    if (m_filters.testFlag(AllDayOnly) && idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
         include = true;
     }
 
-    if(m_filters.testFlag(NoStartDateOnly) && !start.isValid()) {
+    if (m_filters.testFlag(NoStartDateOnly) && !start.isValid()) {
         include = true;
     }
-    if(m_filters.testFlag(MultiDayOnly) && idx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
+    if (m_filters.testFlag(MultiDayOnly) && idx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
         include = true;
     }
 
     return include;
-
 }
 
 int MultiDayIncidenceModel::incidenceCount()
@@ -330,13 +331,13 @@ int MultiDayIncidenceModel::incidenceCount()
             const auto start = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
             const auto end = srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date();
 
-            //Skip incidences not part of the week
+            // Skip incidences not part of the week
             if (end < rowStart || start > rowEnd) {
                 // qWarning() << "Skipping because not part of this week";
                 continue;
             }
 
-            if(!incidencePassesFilter(srcIdx)) {
+            if (!incidencePassesFilter(srcIdx)) {
                 continue;
             }
 
@@ -349,8 +350,5 @@ int MultiDayIncidenceModel::incidenceCount()
 
 QHash<int, QByteArray> MultiDayIncidenceModel::roleNames() const
 {
-    return {
-        {Incidences, "incidences"},
-        {PeriodStartDate, "periodStartDate"}
-    };
+    return {{Incidences, "incidences"}, {PeriodStartDate, "periodStartDate"}};
 }

@@ -3,11 +3,11 @@
 
 #pragma once
 
+#include <KCalendarCore/Calendar>
 #include <QAbstractItemModel>
 #include <QCalendar>
-#include <KCalendarCore/Calendar>
-#include <QDebugStateSaver>
 #include <QDebug>
+#include <QDebugStateSaver>
 
 /**
  *
@@ -17,10 +17,7 @@ class AttendeeStatusModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    enum Roles {
-        DisplayNameRole = Qt::UserRole + 1,
-        ValueRole
-    };
+    enum Roles { DisplayNameRole = Qt::UserRole + 1, ValueRole };
     Q_ENUM(Roles);
 
     AttendeeStatusModel(QObject *parent = nullptr);
@@ -34,15 +31,12 @@ private:
     QHash<int, QString> m_status;
 };
 
-
-
-
 class AttendeesModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
     Q_PROPERTY(KCalendarCore::Attendee::List attendees READ attendees NOTIFY attendeesChanged)
-    Q_PROPERTY(AttendeeStatusModel * attendeeStatusModel READ attendeeStatusModel NOTIFY attendeeStatusModelChanged)
+    Q_PROPERTY(AttendeeStatusModel *attendeeStatusModel READ attendeeStatusModel NOTIFY attendeeStatusModelChanged)
     Q_PROPERTY(QList<qint64> attendeesAkonadiIds READ attendeesAkonadiIds NOTIFY attendeesAkonadiIdsChanged)
 
 public:
@@ -68,7 +62,7 @@ public:
     void setIncidencePtr(const KCalendarCore::Incidence::Ptr incidence);
     KCalendarCore::Attendee::List attendees() const;
     void updateAkonadiContactIds();
-    AttendeeStatusModel * attendeeStatusModel();
+    AttendeeStatusModel *attendeeStatusModel();
     QList<qint64> attendeesAkonadiIds() const;
 
     QVariant data(const QModelIndex &idx, int role) const override;

@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 #pragma once
-#include <QObject>
-#include <QActionGroup>
-#include <KXmlGui/KActionCollection>
 #include "actionsmodel.h"
 #include "kalendarconfig.h"
+#include <KXmlGui/KActionCollection>
+#include <QActionGroup>
+#include <QObject>
 
 class QWindow;
 class QSortFilterProxyModel;
@@ -20,9 +20,9 @@ class KalendarApplication : public QObject
 public:
     explicit KalendarApplication(QObject *parent = nullptr);
     ~KalendarApplication();
-    Q_INVOKABLE QAction* action(const QString& name);
+    Q_INVOKABLE QAction *action(const QString &name);
 
-    Q_INVOKABLE QString iconName(const QIcon& icon) const;
+    Q_INVOKABLE QString iconName(const QIcon &icon) const;
     void setupActions();
     QWindow *window() const;
     void setWindow(QWindow *window);

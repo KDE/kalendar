@@ -31,7 +31,8 @@ public:
         sort(0);
     };
 
-    QHash<int, QByteArray> roleNames() const override {
+    QHash<int, QByteArray> roleNames() const override
+    {
         auto rolenames = QSortFilterProxyModel::roleNames();
         rolenames[Akonadi::TagModel::Roles::NameRole] = QByteArrayLiteral("name");
         rolenames[Akonadi::TagModel::Roles::IdRole] = QByteArrayLiteral("id");
@@ -51,19 +52,19 @@ protected:
         Q_ASSERT(sourceIndex.isValid());
 
         auto data = sourceIndex.data(Akonadi::TagModel::NameRole);
-        auto matches = match(index(0,0), Akonadi::TagModel::NameRole, data, 2, Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive);
+        auto matches = match(index(0, 0), Akonadi::TagModel::NameRole, data, 2, Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive);
 
         return matches.length() < 2;
     }
 };
 
-TagManager::TagManager(QObject* parent)
+TagManager::TagManager(QObject *parent)
     : QObject(parent)
 {
     m_tagModel = new FlatTagModel(this);
 }
 
-QSortFilterProxyModel * TagManager::tagModel()
+QSortFilterProxyModel *TagManager::tagModel()
 {
     return m_tagModel;
 }

@@ -7,17 +7,18 @@
 
 #pragma once
 
+#include "incidenceoccurrencemodel.h"
 #include <QAbstractItemModel>
+#include <QDateTime>
 #include <QList>
 #include <QSet>
 #include <QSharedPointer>
 #include <QTimer>
-#include <QDateTime>
-#include "incidenceoccurrencemodel.h"
 
-namespace KCalendarCore {
-    class MemoryCalendar;
-    class Incidence;
+namespace KCalendarCore
+{
+class MemoryCalendar;
+class Incidence;
 }
 
 /**
@@ -31,14 +32,10 @@ class MultiDayIncidenceModel : public QAbstractItemModel
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
     Q_PROPERTY(MultiDayIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
     Q_PROPERTY(int incidenceCount READ incidenceCount NOTIFY incidenceCountChanged)
-    Q_PROPERTY(IncidenceOccurrenceModel* model WRITE setModel)
+    Q_PROPERTY(IncidenceOccurrenceModel *model WRITE setModel)
 
 public:
-    enum Filter {
-        AllDayOnly = 0x1,
-        NoStartDateOnly = 0x2,
-        MultiDayOnly = 0x3
-    };
+    enum Filter { AllDayOnly = 0x1, NoStartDateOnly = 0x2, MultiDayOnly = 0x3 };
     Q_DECLARE_FLAGS(Filters, Filter)
     Q_FLAGS(Filters)
     Q_ENUM(Filter)

@@ -85,4 +85,3 @@ private:
     class Private;
     Private *const d;
 };
-

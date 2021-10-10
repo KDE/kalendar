@@ -1,38 +1,38 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include <KAboutData>
+#include <KCalendarCore/MemoryCalendar>
+#include <KCalendarCore/VCalFormat>
+#include <KLocalizedContext>
+#include <KLocalizedString>
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QQmlApplicationEngine>
-#include <QtQml>
 #include <QUrl>
-#include <KAboutData>
-#include <KLocalizedContext>
-#include <KLocalizedString>
-#include <KCalendarCore/VCalFormat>
-#include <KCalendarCore/MemoryCalendar>
+#include <QtQml>
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/AgentFilterProxyModel>
 #else
 #include <AkonadiCore/AgentFilterProxyModel>
 #endif
-#include "multidayincidencemodel.h"
-#include "incidenceoccurrencemodel.h"
-#include "monthviewmodel.h"
-#include "calendarmanager.h"
-#include "agentconfiguration.h"
-#include "incidencewrapper.h"
 #include "about.h"
+#include "agentconfiguration.h"
+#include "calendarmanager.h"
 #include "config-kalendar.h"
 #include "contactsmanager.h"
-#include "kalendarconfig.h"
-#include "kalendarapplication.h"
-#include "itemtagsmodel.h"
-#include "tagmanager.h"
 #include "hourlyincidencemodel.h"
-#include "weekviewmodel.h"
+#include "incidenceoccurrencemodel.h"
+#include "incidencewrapper.h"
+#include "itemtagsmodel.h"
+#include "kalendarapplication.h"
+#include "kalendarconfig.h"
+#include "monthviewmodel.h"
+#include "multidayincidencemodel.h"
+#include "tagmanager.h"
 #include "timezonelistmodel.h"
+#include "weekviewmodel.h"
 
 using namespace KCalendarCore;
 
@@ -44,19 +44,25 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(QStringLiteral("Kalendar"));
 
     KAboutData aboutData(
-                         // The program name used internally.
-                         QStringLiteral("kalendar"),
-                         // A displayable program name string.
-                         i18nc("@title", "Kalendar"),
-                         QStringLiteral(KALENDAR_VERSION_STRING),
-                         // Short description of what the app does.
-                         i18n("Calendar Application"),
-                         // The license this code is released under.
-                         KAboutLicense::GPL,
-                         // Copyright Statement.
-                         i18n("(c) KDE Community 2021"));
-    aboutData.addAuthor(i18nc("@info:credit", "Carl Schwan"), i18nc("@info:credit", "Maintainer"), QStringLiteral("carl@carlschwan.eu"), QStringLiteral("https://carlschwan.eu"));
-    aboutData.addAuthor(i18nc("@info:credit", "Clau Cambra"), i18nc("@info:credit", "Maintainer"), QStringLiteral("claudio.cambra@gmail.com"), QStringLiteral("https://claudiocambra.com"));
+        // The program name used internally.
+        QStringLiteral("kalendar"),
+        // A displayable program name string.
+        i18nc("@title", "Kalendar"),
+        QStringLiteral(KALENDAR_VERSION_STRING),
+        // Short description of what the app does.
+        i18n("Calendar Application"),
+        // The license this code is released under.
+        KAboutLicense::GPL,
+        // Copyright Statement.
+        i18n("(c) KDE Community 2021"));
+    aboutData.addAuthor(i18nc("@info:credit", "Carl Schwan"),
+                        i18nc("@info:credit", "Maintainer"),
+                        QStringLiteral("carl@carlschwan.eu"),
+                        QStringLiteral("https://carlschwan.eu"));
+    aboutData.addAuthor(i18nc("@info:credit", "Clau Cambra"),
+                        i18nc("@info:credit", "Maintainer"),
+                        QStringLiteral("claudio.cambra@gmail.com"),
+                        QStringLiteral("https://claudiocambra.com"));
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
@@ -93,7 +99,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<TimeZoneListModel>("org.kde.kalendar", 1, 0, "TimeZoneListModel");
 
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
-    qRegisterMetaType<QAction*>();
+    qRegisterMetaType<QAction *>();
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
