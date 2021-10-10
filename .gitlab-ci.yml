@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2020-2021 Laurent Montel <montel@kde.org>
+# SPDX-License-Identifier: CC0-1.0
+
+include:
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-before.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-applications-linux.yml
+
+build_clazy_clang_tidy:
+  stage: build
+  image: kdeorg/ci-suse-qt515
+  extends: .linux
+  #only:
+  #  - merge_requests
+  before_script:
+    - zypper install -y clazy
+    - git clone --depth=1 https://invent.kde.org/sysadmin/ci-tooling.git $CI_TOOLING
+    - git clone --depth=1 https://invent.kde.org/sysadmin/repo-metadata.git $CI_TOOLING/repo-metadata
+    - git clone --depth=1 https://invent.kde.org/sysadmin/kde-build-metadata.git $CI_TOOLING/kde-build-metadata
+    - git clone --depth=1 https://invent.kde.org/sdk/kde-dev-scripts.git $CI_TOOLING/kde-dev-scripts
+
+  script:
+    - export CXX=clazy
+    - export CC=clang
+    - export CXXFLAGS="-Wno-deprecated-declarations"
+    - export CLAZY_HEADER_FILTER='^(?!ui_)\w+.h\$'
+    - export CLAZY_CHECKS="level0,level1,detaching-member,ifndef-define-typo,isempty-vs-count,qrequiredresult-candidates,reserve-candidates,signal-with-return-value,unneeded-cast,function-args-by-ref,function-args-by-value,returning-void-expression,no-ctor-missing-parent-argument,isempty-vs-count,qhash-with-char-pointer-key,raw-environment-function,qproperty-type-mismatch,old-style-connect,qstring-allocations,container-inside-loop,heap-allocated-small-trivial-type,inefficient-qlist,qstring-varargs"
+    - python3 -u $CI_TOOLING/helpers/prepare-dependencies.py --product $PRODUCT --project $PROJECT --branchGroup $BRANCH_GROUP --environment production --platform $PLATFORM --installTo $INSTALL_PREFIX
+    - python3 -u $CI_TOOLING/helpers/configure-build.py --product $PRODUCT --project $PROJECT --branchGroup $BRANCH_GROUP --platform $PLATFORM --installTo $INSTALL_PREFIX
+    - python3 -u $CI_TOOLING/helpers/compile-build.py --product $PRODUCT --project $PROJECT --branchGroup $BRANCH_GROUP --platform $PLATFORM --usingInstall $INSTALL_PREFIX
+    - cd build && run-clang-tidy
+  variables:
+    PLATFORM: SUSEQt5.15
+    BRANCH_GROUP: kf5-qt5
+

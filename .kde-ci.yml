@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
+Dependencies:
+- 'on': ['@linux']
+  'require':
+    'frameworks/extra-cmake-modules': '@latest'
+    'frameworks/kcalendarcore' : '@latest'
+    'frameworks/kconfigwidgets' : '@latest'
+    'frameworks/kwindowsystem' : '@latest'
+    'frameworks/kxmlgui' : '@latest'
+    'frameworks/kpeople' : '@latest'
+    'frameworks/kcontacts' : '@latest'
+    'kde/pim/akonadi' : '@same'
+    'kde/pim/akonadi-calendar' : '@same'
+    'kde/pim/calendarsupport' : '@same'
+    'kde/pim/kcalutils' : '@same'
+    'kde/pim/kmime' : '@same'
+    'kde/pim/libkdepim' : '@same'
+
