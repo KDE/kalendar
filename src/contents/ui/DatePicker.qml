@@ -57,7 +57,7 @@ Item {
             Kirigami.Heading {
                 id: monthLabel
                 Layout.fillWidth: true
-                text: selectedDate.toLocaleDateString(Qt.locale(), "MMMM yyyy")
+                text: i18nc("%1 is month name, %2 is year", "%1 %2", Qt.locale().standaloneMonthName(selectedDate.getMonth()), String(selectedDate.getFullYear()))
                 level: 1
             }
             QQC2.ToolButton {
