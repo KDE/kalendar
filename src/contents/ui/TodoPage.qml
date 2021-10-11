@@ -80,14 +80,14 @@ Kirigami.Page {
 
     Component.onCompleted: {
         // Assign here, otherwise crashes...
-        switch (Config.sort) {
-        case Config.DueTime:
+        switch (Kalendar.Config.sort) {
+        case Kalendar.Config.DueTime:
             sortBy = Kalendar.TodoSortFilterProxyModel.EndTimeColumn;
             return;
-        case Config.Priority:
+        case Kalendar.Config.Priority:
             sortBy = Kalendar.TodoSortFilterProxyModel.PriorityIntColumn;
             return;
-        case Config.Alphabetically:
+        case Kalendar.Config.Alphabetically:
             sortBy = Kalendar.TodoSortFilterProxyModel.SummaryColumn;
             return;
         }
