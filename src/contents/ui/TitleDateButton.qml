@@ -22,15 +22,20 @@ QQC2.ToolButton {
         rightPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
         horizontalAlignment: Text.AlignHCenter
-        text: if(!root.range) {
-            return root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
-        } else {
-            if(root.date.getFullYear() !== root.lastDate.getFullYear()) {
-                return root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy") + " - " + root.lastDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
-            } else if(root.date.getMonth() !== root.lastDate.getMonth()) {
-                root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b>") + " - " + root.lastDate.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
+        text: {
+            let locale = Qt.locale();
+            let monthYearString = i18nc("%1 is month name, %2 is year", "<b>%1</b> %2", locale.standaloneMonthName(root.date.getMonth()), String(root.date.getFullYear()));
+            let endRangeMonthYearString = i18nc("%1 is month name, %2 is year", "<b>%1</b> %2", locale.standaloneMonthName(root.lastDate.getMonth()), String(root.lastDate.getFullYear()));
+            if(!root.range) {
+                return monthYearString;
             } else {
-                return root.date.toLocaleDateString(Qt.locale(), "<b>MMMM</b> yyyy");
+                if(root.date.getFullYear() !== root.lastDate.getFullYear()) {
+                    return i18nc("%1 is the month and year of the range start, %2 is the same for range end", "%1 - %2", monthYearString, endrangeMonthYearString);
+                } else if(root.date.getMonth() !== root.lastDate.getMonth()) {
+                    return i18nc("%1 is month of range start, %2 is month + year of range end", "<b>%1</b> - %2", locale.standaloneMonthName(root.date.getMonth()), endRangeMonthYearString);
+                } else {
+                    return monthYearString;
+                }
             }
         }
     }
