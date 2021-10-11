@@ -149,7 +149,7 @@ function recurrenceEndToString(recurrenceData) {
         case -1:
             return i18n("Never ends");
         case 0:
-            return i18n("Ends on %1", recurrenceData.endDateTime.toLocaleDateString(Qt.locale()))
+            return !isNaN(recurrenceData.endDateTime) ? i18n("Ends on %1", recurrenceData.endDateTime.toLocaleDateString()) : "";
         default:
             return i18n("Ends after %1 occurrences", recurrenceData.duration);
     }
