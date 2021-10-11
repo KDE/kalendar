@@ -24,6 +24,10 @@
 AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+    QRegularExpression roleExp (QStringLiteral("Role$"));
+    QRegularExpression lowerToCapitalSep (QStringLiteral("([a-z])([A-Z])"));
+    QRegularExpression capitalToCapitalSep (QStringLiteral("([A-Z])([A-Z])"));
+
     for (int i = 0; i < QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().keyCount(); i++) {
         int value = QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().value(i);
 
@@ -31,10 +35,10 @@ AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
         // Regular expression adds space between every lowercase and Capitalised character then does the same
         // for capitalised letters together, e.g. ThisIsATest. Not a problem right now, but best to be safe.
         QString enumName = QLatin1String(QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().key(i));
-        QString displayName = enumName.replace(QRegularExpression(QLatin1String("Role$")), QLatin1String(""));
-        displayName.replace(QRegularExpression(QLatin1String("([a-z])([A-Z])")), QLatin1String("\\1 \\2"));
-        displayName.replace(QRegularExpression(QLatin1String("([A-Z])([A-Z])")), QLatin1String("\\1 \\2"));
-        displayName.replace(QRegularExpression(QLatin1String("([a-z])([A-Z])")), QLatin1String("\\1 \\2"));
+        QString displayName = enumName.replace(roleExp, QStringLiteral(""));
+        displayName.replace(lowerToCapitalSep, QStringLiteral("\\1 \\2"));
+        displayName.replace(capitalToCapitalSep, QStringLiteral("\\1 \\2"));
+        displayName.replace(lowerToCapitalSep, QStringLiteral("\\1 \\2"));
 
         m_status[value] = i18n(displayName.toStdString().c_str());
     }
