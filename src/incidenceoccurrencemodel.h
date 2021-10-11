@@ -39,7 +39,7 @@ class IncidenceOccurrenceModel : public QAbstractItemModel
     Q_OBJECT
     Q_PROPERTY(QDate start READ start WRITE setStart NOTIFY startChanged)
     Q_PROPERTY(int length READ length WRITE setLength NOTIFY lengthChanged)
-    Q_PROPERTY(QVariantMap filter WRITE setFilter NOTIFY filterChanged)
+    Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
 
 public:
@@ -83,11 +83,12 @@ public:
     Akonadi::ETMCalendar *calendar() const;
     void setCalendar(Akonadi::ETMCalendar *calendar);
 
-    void setStart(const QDate &);
+    void setStart(const QDate &start);
     QDate start() const;
-    void setLength(int);
+    void setLength(int length);
     int length() const;
-    void setFilter(const QVariantMap &);
+    QVariantMap filter() const;
+    void setFilter(const QVariantMap &filter);
 
     void load();
 

@@ -254,11 +254,17 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
     }
 }
 
+IncidenceOccurrenceModel *MultiDayIncidenceModel::model()
+{
+    return mSourceModel;
+}
+
 void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 {
     beginResetModel();
 
     mSourceModel = model;
+    Q_EMIT modelChanged();
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
             beginResetModel();

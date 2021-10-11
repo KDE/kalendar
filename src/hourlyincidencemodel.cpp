@@ -305,6 +305,11 @@ QVariant HourlyIncidenceModel::data(const QModelIndex &idx, int role) const
     }
 }
 
+IncidenceOccurrenceModel *HourlyIncidenceModel::model()
+{
+    return mSourceModel;
+}
+
 void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 {
     beginResetModel();

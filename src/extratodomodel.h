@@ -56,6 +56,7 @@ public:
 
     Akonadi::ETMCalendar::Ptr calendar();
     void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
+    Akonadi::IncidenceChanger *incidenceChanger();
     void setIncidenceChanger(Akonadi::IncidenceChanger *changer);
 
     QHash<QString, QColor> colorCache();
@@ -66,6 +67,7 @@ private:
     Akonadi::ETMCalendar::Ptr m_calendar;
     IncidenceTreeModel *m_todoTreeModel = nullptr;
     TodoModel *m_baseTodoModel = nullptr;
+    Akonadi::IncidenceChanger *m_lastSetChanger = nullptr;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
 };

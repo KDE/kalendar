@@ -32,7 +32,7 @@ class MultiDayIncidenceModel : public QAbstractItemModel
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
     Q_PROPERTY(MultiDayIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
     Q_PROPERTY(int incidenceCount READ incidenceCount NOTIFY incidenceCountChanged)
-    Q_PROPERTY(IncidenceOccurrenceModel *model WRITE setModel)
+    Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
 
 public:
     enum Filter {
@@ -57,6 +57,7 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
+    IncidenceOccurrenceModel *model();
     void setModel(IncidenceOccurrenceModel *model);
     int periodLength();
     void setPeriodLength(int periodLength);
@@ -69,6 +70,7 @@ Q_SIGNALS:
     void periodLengthChanged();
     void filtersChanged();
     void incidenceCountChanged();
+    void modelChanged();
 
 protected:
     void setIncidenceCount(int incidenceCount);

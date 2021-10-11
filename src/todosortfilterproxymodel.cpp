@@ -98,11 +98,21 @@ bool TodoSortFilterProxyModel::hasAcceptedChildren(int row, const QModelIndex &s
     return false;
 }
 
+Akonadi::ETMCalendar *TodoSortFilterProxyModel::calendar()
+{
+    return m_extraTodoModel->calendar().get();
+}
+
 void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar *calendar)
 {
     Akonadi::ETMCalendar::Ptr calendarPtr(calendar);
     m_extraTodoModel->setCalendar(calendarPtr);
     Q_EMIT calendarChanged();
+}
+
+Akonadi::IncidenceChanger *TodoSortFilterProxyModel::incidenceChanger()
+{
+    return m_extraTodoModel->incidenceChanger();
 }
 
 void TodoSortFilterProxyModel::setIncidenceChanger(Akonadi::IncidenceChanger *changer)

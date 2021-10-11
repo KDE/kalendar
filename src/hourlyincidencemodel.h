@@ -27,7 +27,7 @@ class HourlyIncidenceModel : public QAbstractItemModel
     Q_OBJECT
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
     Q_PROPERTY(HourlyIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
-    Q_PROPERTY(IncidenceOccurrenceModel *model WRITE setModel)
+    Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
 
 public:
     enum Filter {
@@ -51,6 +51,7 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
+    IncidenceOccurrenceModel *model();
     void setModel(IncidenceOccurrenceModel *model);
     int periodLength();
     void setPeriodLength(int periodLength);
@@ -60,6 +61,7 @@ public:
 Q_SIGNALS:
     void periodLengthChanged();
     void filtersChanged();
+    void modelChanged();
 
 private:
     QTimer mRefreshTimer;

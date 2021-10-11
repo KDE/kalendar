@@ -68,6 +68,11 @@ int IncidenceOccurrenceModel::length() const
     return mLength;
 }
 
+QVariantMap IncidenceOccurrenceModel::filter() const
+{
+    return mFilter;
+}
+
 void IncidenceOccurrenceModel::setFilter(const QVariantMap &filter)
 {
     mFilter = filter;

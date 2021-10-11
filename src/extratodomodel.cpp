@@ -157,9 +157,15 @@ void ExtraTodoModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
     m_baseTodoModel->setCalendar(calendar);
 }
 
+Akonadi::IncidenceChanger *ExtraTodoModel::incidenceChanger()
+{
+    return m_lastSetChanger;
+}
+
 void ExtraTodoModel::setIncidenceChanger(Akonadi::IncidenceChanger *changer)
 {
     m_baseTodoModel->setIncidenceChanger(changer);
+    m_lastSetChanger = changer; // Ideally we contribute a getter func upstream.
 }
 
 QHash<QString, QColor> ExtraTodoModel::colorCache()
