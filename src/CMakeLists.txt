@@ -13,7 +13,6 @@ target_link_libraries(kalendar
     Qt5::Svg
     Qt5::Location
     KF5::I18n
-    KF5::Package
     KF5::CoreAddons
     KF5::CalendarCore
     KF5::AkonadiCore
