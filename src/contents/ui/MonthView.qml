@@ -66,21 +66,23 @@ Kirigami.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
+    readonly property Kirigami.Action previousAction: Kirigami.Action {
+        icon.name: "go-previous"
+        text: i18n("Previous Month")
+        shortcut: "Left"
+        onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, -1))
+        displayHint: Kirigami.DisplayHint.IconOnly
+    }
+    readonly property Kirigami.Action nextAction: Kirigami.Action {
+        icon.name: "go-next"
+        text: i18n("Next Month")
+        shortcut: "Right"
+        onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, 1))
+        displayHint: Kirigami.DisplayHint.IconOnly
+    }
     actions {
-        left: Kirigami.Action {
-            icon.name: "go-previous"
-            text: i18n("Previous Month")
-            shortcut: "Left"
-            onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, -1))
-            displayHint: Kirigami.DisplayHint.IconOnly
-        }
-        right: Kirigami.Action {
-            icon.name: "go-next"
-            text: i18n("Next Month")
-            shortcut: "Right"
-            onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, 1))
-            displayHint: Kirigami.DisplayHint.IconOnly
-        }
+        left: Qt.application.layoutDirection === Qt.RightToLeft ? nextAction : previousAction
+        right: Qt.application.layoutDirection === Qt.RightToLeft ? previousAction : nextAction
         main: Kirigami.Action {
             icon.name: "go-jump-today"
             text: i18n("Today")
