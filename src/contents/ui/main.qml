@@ -296,7 +296,7 @@ Kirigami.ApplicationWindow {
         id: incidenceInfo
 
         bottomPadding: menuLoader.active ? menuLoader.height : 0
-        contentItem.implicitWidth: Kirigami.Units.gridUnit * 25
+        width: actualWidth
         modal: !root.wideScreen || !enabled
         onEnabledChanged: drawerOpen = enabled && !modal
         onModalChanged: drawerOpen = !modal
@@ -324,6 +324,46 @@ Kirigami.ApplicationWindow {
         onDeleteIncidence: {
             setUpDelete(incidencePtr, deleteDate)
             if (modal) { incidenceInfo.close() }
+        }
+
+        readonly property int minWidth: Kirigami.Units.gridUnit * 15
+        readonly property int maxWidth: Kirigami.Units.gridUnit * 25
+        readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
+        property int actualWidth: {
+            if (Config.incidenceInfoDrawerWidth === -1) {
+                return Kirigami.Units.gridUnit * 20;
+            } else {
+                return Config.incidenceInfoDrawerWidth;
+            }
+        }
+
+        MouseArea {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.right: undefined
+            width: 2
+            z: 500
+            cursorShape: !Kirigami.Settings.isMobile ? Qt.SplitHCursor : undefined
+            enabled: true
+            visible: true
+            onPressed: _lastX = mapToGlobal(mouseX, mouseY).x
+            onReleased: {
+                Config.incidenceInfoDrawerWidth = incidenceInfo.actualWidth;
+                Config.save();
+            }
+            property real _lastX: -1
+
+            onPositionChanged: {
+                if (_lastX === -1) {
+                    return;
+                }
+                if (Qt.application.layoutDirection === Qt.RightToLeft) {
+                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth - _lastX + mapToGlobal(mouseX, mouseY).x))
+                } else {
+                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth + _lastX - mapToGlobal(mouseX, mouseY).x))
+                }
+            }
         }
     }
 

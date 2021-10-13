@@ -41,6 +41,10 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             </choices>
             <default>ScheduleView</default>
         </entry>
+        <entry name="incidenceInfoDrawerWidth" type="Int">
+            <label>Width of the incidence drawer</label>
+            <default>-1</default>
+        </entry>
     </group>
 
     <group name="MonthView">
