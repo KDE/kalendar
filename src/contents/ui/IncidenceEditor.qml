@@ -1033,7 +1033,7 @@ Kirigami.ScrollablePage {
                             }
                             QQC2.Button {
                                 icon.name: "edit-delete-remove"
-                                onClicked: root.eventWrapper.attachmentsModel.deleteAttachment(uri)
+                                onClicked: root.incidenceWrapper.attachmentsModel.deleteAttachment(uri)
                             }
                         }
                     }
