@@ -73,6 +73,9 @@ Q_SIGNALS:
     void filterChanged();
     void showCompletedChanged();
 
+protected:
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
+
 private:
     ExtraTodoModel *m_extraTodoModel = nullptr;
     int m_showCompleted = ShowComplete::ShowAll;

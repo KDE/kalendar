@@ -166,7 +166,12 @@ void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 
 void TodoSortFilterProxyModel::sortTodoModel(int column, bool ascending)
 {
-    auto order = ascending ? Qt::AscendingOrder : Qt::DescendingOrder;
+    Qt::SortOrder order;
+    if (column == PriorityIntColumn) { // Priorities go 1 (most) to 9 (least) so reverse order
+        order = ascending ? Qt::DescendingOrder : Qt::AscendingOrder;
+    } else {
+        order = ascending ? Qt::AscendingOrder : Qt::DescendingOrder;
+    }
     this->sort(column, order);
 }
 
@@ -181,4 +186,17 @@ void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
     }
     invalidateFilter();
     Q_EMIT layoutChanged();
+}
+
+bool TodoSortFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
+{
+    if (source_left.column() == PriorityIntColumn && source_left.data().toInt() == 0) {
+        return !(sortOrder() == Qt::AscendingOrder);
+    }
+
+    if (source_left.column() == EndTimeColumn && !source_left.data().toDateTime().isValid()) {
+        return !(sortOrder() == Qt::AscendingOrder);
+    }
+
+    return QSortFilterProxyModel::lessThan(source_left, source_right);
 }

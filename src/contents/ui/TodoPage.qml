@@ -68,9 +68,9 @@ Kirigami.Page {
         Kalendar.Config.save();
     }
 
-    property bool ascendingOrder: Kalendar.Config.showComplete
+    property bool ascendingOrder: Kalendar.Config.ascendingOrder
     onAscendingOrderChanged: {
-        Kalendar.Config.showComplete = ascendingOrder;
+        Kalendar.Config.ascendingOrder = ascendingOrder;
         Kalendar.Config.save();
     }
 
