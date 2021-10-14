@@ -413,6 +413,12 @@ Kirigami.OverlayDrawer {
                                 showPassiveNotification(i18n("Location copied to clipboard"));
                             }
                         }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
+                        }
                     }
 
                     ColumnLayout {
@@ -493,6 +499,12 @@ Kirigami.OverlayDrawer {
                         onLinkActivated: Qt.openUrlExternally(link)
                         wrapMode: Text.Wrap
                         visible: incidenceInfo.incidenceWrapper.description
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
+                        }
                     }
 
                     QQC2.Label {
@@ -518,6 +530,12 @@ Kirigami.OverlayDrawer {
                                 text: `<a href="${uri}">${attachmentLabel}</a>`
                                 onLinkActivated: Qt.openUrlExternally(link)
                                 wrapMode: Text.Wrap
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                    acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
+                                }
                             }
                         }
                     }
@@ -564,6 +582,12 @@ Kirigami.OverlayDrawer {
                         onLinkActivated: Qt.openUrlExternally(link)
                         wrapMode: Text.Wrap
                         visible: incidenceInfo.incidenceWrapper.organizer.fullName
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
+                        }
                     }
 
                     QQC2.Label {
@@ -588,6 +612,12 @@ Kirigami.OverlayDrawer {
                                 text: name ? `[${name}](mailto:${email})` : `[${email}](mailto:${email})`
                                 onLinkActivated: Qt.openUrlExternally(link)
                                 wrapMode: Text.Wrap
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                    acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
+                                }
                             }
                         }
                     }
