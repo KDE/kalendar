@@ -146,28 +146,9 @@ Kirigami.Page {
                     filter: root.filter
                     filterCollectionDetails: root.filterCollectionDetails
 
-                    Binding { // Can't set property directly or crashes on load
-                        id: cVSortByBinding
-                        target: completeView
-                        property: "sortBy"
-                        value: root.sortBy
-                        when: false
-                    }
-
-                    Binding { // Can't set property directly or crashes on load
-                        id: cVAscendingOrderBinding
-                        target: completeView
-                        property: "ascendingOrder"
-                        value: root.ascendingOrder
-                        when: false
-                    }
-
-                    Component.onCompleted: {
-                        cVSortByBinding.when = true;
-                        cVAscendingOrderBinding.when = true;
-                    }
-
                     showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
+                    sortBy: root.sortBy
+                    ascendingOrder: root.ascendingOrder
                     onAddTodo: {
                         root.addTodo(collectionId)
                         completedSheet.close();
@@ -202,31 +183,12 @@ Kirigami.Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            Binding { // Can't set property directly or crashes on load
-                id: iVSortByBinding
-                target: incompleteView
-                property: "sortBy"
-                value: root.sortBy
-                when: false
-            }
-
-            Binding { // Can't set property directly or crashes on load
-                id: iVAscendingOrderBinding
-                target: incompleteView
-                property: "ascendingOrder"
-                value: root.ascendingOrder
-                when: false
-            }
-
-            Component.onCompleted: {
-                iVSortByBinding.when = true;
-                iVAscendingOrderBinding.when = true;
-            }
-
             filter: root.filter
             filterCollectionDetails: root.filterCollectionDetails
 
             showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
+            sortBy: root.sortBy
+            ascendingOrder: root.ascendingOrder
             onAddTodo: root.addTodo(collectionId)
             onViewTodo: root.retainTodoData(todoData, collectionData)
             onEditTodo: root.editTodo(todoPtr, collectionId)

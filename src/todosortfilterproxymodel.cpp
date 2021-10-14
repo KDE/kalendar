@@ -11,6 +11,21 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     setDynamicSortFilter(true);
     setSortCaseSensitivity(Qt::CaseInsensitive);
     setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+    mRefreshTimer.setSingleShot(true);
+
+    auto resetModel = [this] {
+        if (!mRefreshTimer.isActive()) {
+            mRefreshTimer.start(50);
+        }
+    };
+
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsInserted, this, resetModel);
+    connect(&mRefreshTimer, &QTimer::timeout, this, [&]() {
+        beginResetModel();
+        endResetModel();
+        sortTodoModel(m_sortColumn, m_sortAscending);
+    });
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const
@@ -199,4 +214,28 @@ bool TodoSortFilterProxyModel::lessThan(const QModelIndex &source_left, const QM
     }
 
     return QSortFilterProxyModel::lessThan(source_left, source_right);
+}
+
+int TodoSortFilterProxyModel::sortBy()
+{
+    return m_sortColumn;
+}
+
+void TodoSortFilterProxyModel::setSortBy(int sortBy)
+{
+    m_sortColumn = sortBy;
+    Q_EMIT sortByChanged();
+    sortTodoModel(m_sortColumn, m_sortAscending);
+}
+
+bool TodoSortFilterProxyModel::sortAscending()
+{
+    return m_sortAscending;
+}
+
+void TodoSortFilterProxyModel::setSortAscending(bool sortAscending)
+{
+    m_sortAscending = sortAscending;
+    Q_EMIT sortAscendingChanged();
+    sortTodoModel(m_sortColumn, m_sortAscending);
 }

@@ -28,9 +28,7 @@ KirigamiAddonsTreeView.TreeListView {
 
     property int showCompleted: Kalendar.TodoSortFilterProxyModel.ShowAll
     property int sortBy: Kalendar.TodoSortFilterProxyModel.SummaryColumn
-    onSortByChanged: todoModel.sortTodoModel(sortBy, ascendingOrder)
     property bool ascendingOrder: false
-    onAscendingOrderChanged: todoModel.sortTodoModel(sortBy, ascendingOrder)
 
     property alias model: todoModel
 
@@ -67,7 +65,8 @@ KirigamiAddonsTreeView.TreeListView {
         incidenceChanger: Kalendar.CalendarManager.incidenceChanger
         filter: root.filter
         showCompleted: root.showCompleted
-        Component.onCompleted: sortTodoModel(sortBy, ascendingOrder)
+        sortBy: root.sortBy
+        sortAscending: root.ascendingOrder
     }
     delegate: KirigamiAddonsTreeView.BasicTreeItem {
         id: listItem
