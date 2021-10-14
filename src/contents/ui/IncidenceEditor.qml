@@ -39,11 +39,13 @@ Kirigami.ScrollablePage {
 
     property bool editMode: false
     property bool validDates: {
-        if(incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
-            editorLoader.active && editorLoader.item.validEndDate
+        if(incidenceWrapper && incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
+            return editorLoader.active && editorLoader.item.validEndDate
+        } else if (incidenceWrapper) {
+            return editorLoader.active && editorLoader.item.validFormDates &&
+                (incidenceWrapper.allDay || incidenceWrapper.incidenceStart <= incidenceWrapper.incidenceEnd)
         } else {
-            editorLoader.active && editorLoader.item.validFormDates &&
-            (root.incidenceWrapper.allDay || incidenceWrapper.incidenceStart <= incidenceWrapper.incidenceEnd)
+            return false;
         }
     }
 

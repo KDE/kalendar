@@ -104,13 +104,13 @@ Kirigami.OverlayDrawer {
                             Kirigami.Action {
                                 icon.name: "edit-entry"
                                 text: i18n("Edit")
-                                enabled: !incidenceInfo.collectionData.readOnly
+                                enabled: incidenceInfo.collectionData && !incidenceInfo.collectionData.readOnly
                                 onTriggered: editIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.collectionId)
                             },
                             Kirigami.Action {
                                 icon.name: "edit-delete"
                                 text: i18n("Delete")
-                                enabled: !incidenceInfo.collectionData.readOnly
+                                enabled: incidenceInfo.collectionData && !incidenceInfo.collectionData.readOnly
                                 onTriggered: deleteIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime)
                             }
                         ]
@@ -209,7 +209,7 @@ Kirigami.OverlayDrawer {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
-                        text: incidenceInfo.collectionData.displayName
+                        text: if(incidenceInfo.collectionData) incidenceInfo.collectionData.displayName
                         wrapMode: Text.Wrap
                     }
 
