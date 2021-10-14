@@ -67,6 +67,7 @@ KirigamiAddonsTreeView.TreeListView {
         incidenceChanger: Kalendar.CalendarManager.incidenceChanger
         filter: root.filter
         showCompleted: root.showCompleted
+        Component.onCompleted: sortTodoModel(sortBy, ascendingOrder)
     }
     delegate: KirigamiAddonsTreeView.BasicTreeItem {
         id: listItem

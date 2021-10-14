@@ -131,23 +131,28 @@ Kirigami.ApplicationWindow {
         }
 
         function onTodoViewSortAlphabetically() {
-            pageStack.currentItem.sortBy = TodoSortFilterProxyModel.SummaryColumn;
+            Config.sort = Config.Alphabetically;
+            Config.save();
         }
 
         function onTodoViewSortByDueDate() {
-            pageStack.currentItem.sortBy = TodoSortFilterProxyModel.EndTimeColumn;
+            Config.sort = Config.DueTime;
+            Config.save();
         }
 
         function onTodoViewSortByPriority() {
-            pageStack.currentItem.sortBy = TodoSortFilterProxyModel.PriorityIntColumn;
+            Config.sort = Config.Priority;
+            Config.save();
         }
 
         function onTodoViewOrderAscending() {
-            pageStack.currentItem.ascendingOrder = true;
+            Config.ascendingOrder = true;
+            Config.save();
         }
 
         function onTodoViewOrderDescending() {
-            pageStack.currentItem.ascendingOrder = false;
+            Config.ascendingOrder = false;
+            Config.save();
         }
 
         function onTodoViewShowCompleted() {

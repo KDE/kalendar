@@ -166,13 +166,13 @@ void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 
 void TodoSortFilterProxyModel::sortTodoModel(int column, bool ascending)
 {
-    Qt::SortOrder order;
+    auto order = ascending ? Qt::AscendingOrder : Qt::DescendingOrder;
+    this->sort(column, order);
+
     if (column == PriorityIntColumn) { // Priorities go 1 (most) to 9 (least) so reverse order
         order = ascending ? Qt::DescendingOrder : Qt::AscendingOrder;
-    } else {
-        order = ascending ? Qt::AscendingOrder : Qt::DescendingOrder;
+        this->sort(column, order); // HACK: For some reason, only calling once does not sort (!!!)
     }
-    this->sort(column, order);
 }
 
 void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
