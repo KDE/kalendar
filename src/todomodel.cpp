@@ -86,7 +86,6 @@ Akonadi::Item TodoModel::Private::findItemByUid(const QString &uid, const QModel
 
 void TodoModel::Private::onDataChanged(const QModelIndex &begin, const QModelIndex &end)
 {
-    qDebug() << "DATA CHANGED";
     Q_ASSERT(begin.isValid());
     Q_ASSERT(end.isValid());
     const QModelIndex proxyBegin = q->mapFromSource(begin);
@@ -102,7 +101,6 @@ void TodoModel::Private::onHeaderDataChanged(Qt::Orientation orientation, int fi
 
 void TodoModel::Private::onRowsAboutToBeInserted(const QModelIndex &parent, int begin, int end)
 {
-    qDebug() << "ROWS ABOUT TO BE INSERTEED";
     const QModelIndex index = q->mapFromSource(parent);
     Q_ASSERT(!(parent.isValid() ^ index.isValid())); // Both must be valid, or both invalid
     Q_ASSERT(!(index.isValid() && index.model() != q));
@@ -112,13 +110,11 @@ void TodoModel::Private::onRowsAboutToBeInserted(const QModelIndex &parent, int 
 
 void TodoModel::Private::onRowsInserted(const QModelIndex &, int, int)
 {
-    qDebug() << "ROWS INSERTED";
     q->endInsertRows();
 }
 
 void TodoModel::Private::onRowsAboutToBeRemoved(const QModelIndex &parent, int begin, int end)
 {
-    qDebug() << "ROWS ABOUT TO BE REMOVED";
     const QModelIndex index = q->mapFromSource(parent);
     Q_ASSERT(!(parent.isValid() ^ index.isValid())); // Both must be valid, or both invalid
     Q_ASSERT(!(index.isValid() && index.model() != q));
@@ -128,7 +124,6 @@ void TodoModel::Private::onRowsAboutToBeRemoved(const QModelIndex &parent, int b
 
 void TodoModel::Private::onRowsRemoved(const QModelIndex &, int, int)
 {
-    qDebug() << "ROWS REMOVED";
     q->endRemoveRows();
 }
 
@@ -138,7 +133,6 @@ void TodoModel::Private::onRowsAboutToBeMoved(const QModelIndex &sourceParent,
                                               const QModelIndex &destinationParent,
                                               int destinationRow)
 {
-    qDebug() << "ROWS ABOUT TO BE MOVED";
     Q_UNUSED(sourceParent)
     Q_UNUSED(sourceStart)
     Q_UNUSED(sourceEnd)
@@ -152,25 +146,21 @@ void TodoModel::Private::onRowsAboutToBeMoved(const QModelIndex &sourceParent,
 
 void TodoModel::Private::onRowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)
 {
-    qDebug() << "ROWS MOVED";
     /*q->endMoveRows();*/
 }
 
 void TodoModel::Private::onModelAboutToBeReset()
 {
-    qDebug() << "MODEL ABOUT TO BE RESET";
     q->beginResetModel();
 }
 
 void TodoModel::Private::onModelReset()
 {
-    qDebug() << "MODEL RESET";
     q->endResetModel();
 }
 
 void TodoModel::Private::onLayoutAboutToBeChanged()
 {
-    qDebug() << "LAYOUT ABOUT TO BE CHANGED";
     Q_ASSERT(m_persistentIndexes.isEmpty());
     Q_ASSERT(m_layoutChangePersistentIndexes.isEmpty());
     Q_ASSERT(m_columns.isEmpty());
@@ -189,7 +179,6 @@ void TodoModel::Private::onLayoutAboutToBeChanged()
 
 void TodoModel::Private::onLayoutChanged()
 {
-    qDebug() << "LAYOUT CHANGED";
     for (int i = 0; i < m_persistentIndexes.size(); ++i) {
         QModelIndex newIndex_col0 = q->mapFromSource(m_layoutChangePersistentIndexes.at(i));
         Q_ASSERT(newIndex_col0.isValid());

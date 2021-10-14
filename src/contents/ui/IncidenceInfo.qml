@@ -209,7 +209,7 @@ Kirigami.OverlayDrawer {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
-                        text: if(incidenceInfo.collectionData) incidenceInfo.collectionData.displayName
+                        text: incidenceInfo.collectionData ? incidenceInfo.collectionData.displayName : ""
                         wrapMode: Text.Wrap
                     }
 
@@ -425,7 +425,7 @@ Kirigami.OverlayDrawer {
                             Layout.fillWidth: true
 
                             property bool showCondition: !locationLabel.isLink &&
-                                (mapLoader.status === Loader.Loading || mapLoader.item.queryStatus === GeocodeModel.Loading)
+                                (mapLoader.status === Loader.Loading || (mapLoader.item && mapLoader.item.queryStatus === GeocodeModel.Loading))
 
                             running: showCondition
                             visible: showCondition
@@ -437,7 +437,8 @@ Kirigami.OverlayDrawer {
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
-                            visible: mapLoader.status === Loader.Ready &&
+                            visible: mapLoader.item &&
+                                mapLoader.status === Loader.Ready &&
                                 mapLoader.item.queryStatus === GeocodeModel.Ready &&
                                 !mapLoader.item.queryHasResults
                             type: Kirigami.MessageType.Warning

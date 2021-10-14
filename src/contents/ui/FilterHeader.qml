@@ -91,7 +91,7 @@ GridLayout {
         Layout.margins: Kirigami.Units.largeSpacing
         Layout.bottomMargin: Kirigami.Units.largeSpacing - 1
         Layout.columnSpan: headerLayout.rows > 1 ? 2 : 1
-        text: headerLayout.filter.name
+        text: headerLayout.filter.name ? headerLayout.filter.name : ""
         onTextChanged: headerLayout.searchTextChanged(text);
         visible: headerLayout.todoMode
     }

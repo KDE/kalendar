@@ -77,7 +77,6 @@ Kirigami.ApplicationWindow {
 
     function switchView(newViewComponent) {
         let filterCache = pageStack.currentItem.filter;
-        pageStack.pop(null);
         pageStack.replace(newViewComponent);
         pageStack.currentItem.filter = filterCache;
 
@@ -237,6 +236,8 @@ Kirigami.ApplicationWindow {
             default:
                 return i18n("Calendar");
         }
+    } else {
+        return i18n("Calendar");
     }
 
     pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
@@ -375,7 +376,7 @@ Kirigami.ApplicationWindow {
     DateChanger {
         id: dateChangeDrawer
         y: pageStack.globalToolBar.height - 1
-        showDays: pageStack.currentItem.objectName !== "monthView"
+        showDays: pageStack.currentItem && pageStack.currentItem.objectName !== "monthView"
         date: root.selectedDate
         onDateSelected: if(visible) pageStack.currentItem.setToDate(date)
     }
@@ -391,7 +392,7 @@ Kirigami.ApplicationWindow {
         id: globalMenuLoader
         active: !Kirigami.Settings.isMobile
         sourceComponent: GlobalMenu {
-            todoMode: pageStack.currentItem.filterCollectionId !== undefined
+            todoMode: pageStack.currentItem && pageStack.currentItem.filterCollectionId !== undefined
         }
         onLoaded: item.parentWindow = root;
     }

@@ -202,26 +202,30 @@ function getIncidenceLabelColor(background, darkMode) {
 }
 
 function todoDateTimeLabel(datetime, allDay, completed) {
-    let now = new Date();
-    let dateFormat = datetime.getFullYear() == now.getFullYear() ? "dddd dd MMMM" : "dddd dd MMMM yyyy";
-    let dateString = datetime.toLocaleDateString(Qt.locale(), dateFormat);
-    let timeString = allDay === true ?
-        " " :
-        i18nc("%1 is the time, spaces included to allow use of 'empty' string when an event is allday and has no time", " at %1 ", datetime.toLocaleTimeString(Qt.locale(), 1));
+    if(!isNaN(datetime.getTime())) {
+        let now = new Date();
+        let dateFormat = datetime.getFullYear() == now.getFullYear() ? "dddd dd MMMM" : "dddd dd MMMM yyyy";
+        let dateString = datetime.toLocaleDateString(Qt.locale(), dateFormat);
+        let timeString = allDay === true ?
+            " " :
+            i18nc("%1 is the time, spaces included to allow use of 'empty' string when an event is allday and has no time", " at %1 ", datetime.toLocaleTimeString(Qt.locale(), 1));
 
-    if(DateUtils.sameDay(datetime, now)) {
-        return datetime > now && !completed ?
-            i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Today%1", timeString) :
-            i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Today%1(overdue)", timeString);
-    } else if(DateUtils.sameDay(DateUtils.addDaysToDate(datetime, - 1), now)) { // Tomorrow
-        return i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Tomorrow%1", timeString);
-    } else if(DateUtils.sameDay(DateUtils.addDaysToDate(datetime, 1), now)) { // Yesterday
-        return !completed ?
-            i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Yesterday%1(overdue)", timeString) :
-            i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Yesterday");
+        if(DateUtils.sameDay(datetime, now)) {
+            return datetime > now && !completed ?
+                i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Today%1", timeString) :
+                i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Today%1(overdue)", timeString);
+        } else if(DateUtils.sameDay(DateUtils.addDaysToDate(datetime, - 1), now)) { // Tomorrow
+            return i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Tomorrow%1", timeString);
+        } else if(DateUtils.sameDay(DateUtils.addDaysToDate(datetime, 1), now)) { // Yesterday
+            return !completed ?
+                i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Yesterday%1(overdue)", timeString) :
+                i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Yesterday");
+        }
+
+        return datetime < now && !completed ? dateString + timeString + i18n("(overdue)") : dateString + timeString;
+    } else {
+        return "";
     }
-
-    return datetime < now && !completed ? dateString + timeString + i18n("(overdue)") : dateString + timeString;
 }
 
 function priorityString(priority) {
