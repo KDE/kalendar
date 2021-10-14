@@ -49,5 +49,8 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="KQuickCommandbar.qml">contents/ui/KQuickCommandBar.qml</file>
     <file alias="WeekView.qml">contents/ui/WeekView.qml</file>
     <file alias="FilterHeader.qml">contents/ui/FilterHeader.qml</file>
+    <file alias="InternalTreeListView.qml">contents/ui/TreeView/InternalTreeListView.qml</file>
+    <file alias="TreeListView.qml">contents/ui/TreeView/TreeListView.qml</file>
+    <file alias="BasicTreeItem.qml">contents/ui/TreeView/BasicTreeItem.qml</file>
   </qresource>
 </RCC>

@@ -9,7 +9,6 @@ import QtQuick.Dialogs 1.0
 import org.kde.kalendar 1.0
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
-import org.kde.kirigamiaddons.treeview 1.0 as TreeView
 
 Kirigami.Page {
     title: i18n("Calendars")
