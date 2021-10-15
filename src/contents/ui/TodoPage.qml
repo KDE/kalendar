@@ -14,7 +14,7 @@ import org.kde.kalendar 1.0 as Kalendar
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
-Kirigami.Page {
+Kirigami.ScrollablePage {
     id: root
     title: i18n("Tasks")
 
@@ -122,9 +122,9 @@ Kirigami.Page {
 
     }
 
-    Kirigami.OverlaySheet {
+    // TODO lazy load it
+    readonly property Kirigami.OverlaySheet completedSheet: Kirigami.OverlaySheet {
         id: completedSheet
-
         title: root.filterCollectionDetails && root.filter && root.filter.collectionId > -1 ?
             i18n("Completed Tasks in %1", root.filterCollectionDetails.displayName) : i18n("Completed Tasks")
         showCloseButton: true
@@ -173,32 +173,28 @@ Kirigami.Page {
     }
 
 
-    QQC2.ScrollView {
-        anchors.fill: parent
-        contentWidth: availableWidth
-        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+    TodoTreeView {
+        id: incompleteView
+        z: 5
+        Layout.fillWidth: true
+        Layout.fillHeight: true
 
-        TodoTreeView {
-            id: incompleteView
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+        filter: root.filter
+        filterCollectionDetails: root.filterCollectionDetails
 
-            filter: root.filter
-            filterCollectionDetails: root.filterCollectionDetails
-
-            showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
-            sortBy: root.sortBy
-            ascendingOrder: root.ascendingOrder
-            onAddTodo: root.addTodo(collectionId)
-            onViewTodo: root.retainTodoData(todoData, collectionData)
-            onEditTodo: root.editTodo(todoPtr, collectionId)
-            onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
-            onCompleteTodo: root.completeTodo(todoPtr);
-            onAddSubTodo: root.addSubTodo(parentWrapper)
-        }
+        showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
+        sortBy: root.sortBy
+        ascendingOrder: root.ascendingOrder
+        onAddTodo: root.addTodo(collectionId)
+        onViewTodo: root.retainTodoData(todoData, collectionData)
+        onEditTodo: root.editTodo(todoPtr, collectionId)
+        onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
+        onCompleteTodo: root.completeTodo(todoPtr);
+        onAddSubTodo: root.addSubTodo(parentWrapper)
     }
 
-    Kirigami.OverlaySheet {
+    // TODO lazy load it
+    readonly property Kirigami.OverlaySheet collectionPickerSheet: Kirigami.OverlaySheet {
         id: collectionPickerSheet
         title: i18n("Choose a Task Calendar")
 

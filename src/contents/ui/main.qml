@@ -613,7 +613,7 @@ Kirigami.ApplicationWindow {
     MouseArea {
         id: incidenceDeselectorMouseArea
         anchors.fill: parent
-        parent: pageStack.currentItem
+        parent: todoViewAction.checked ? pageStack.currentItem.background : pageStack.currentItem
         onClicked: {
             incidenceInfo.close()
             mouse.accepted = false
