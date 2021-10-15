@@ -762,6 +762,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         placeholderText: i18n("Optional")
                         text: root.incidenceWrapper.description
+                        wrapMode: Text.Wrap
                         onTextChanged: root.incidenceWrapper.description = text
                     }
                 }
