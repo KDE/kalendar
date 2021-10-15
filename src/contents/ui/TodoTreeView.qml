@@ -124,7 +124,7 @@ TreeListView {
                     Layout.row: 0
                     Layout.column: 1
                     Layout.columnSpan: root.width < Kirigami.Units.gridUnit * 28 && (recurIcon.visible || dateLabel.visible) ? 2 : 1
-                    Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 || recurIcon.visible || dateLabel.visible ? 1 : 2
+                    Layout.rowSpan: 1
                     Layout.fillWidth: true
                     text: model.text
                     font.strikeout: model.todoCompleted
