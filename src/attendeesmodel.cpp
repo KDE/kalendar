@@ -24,9 +24,9 @@
 AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    QRegularExpression roleExp (QStringLiteral("Role$"));
-    QRegularExpression lowerToCapitalSep (QStringLiteral("([a-z])([A-Z])"));
-    QRegularExpression capitalToCapitalSep (QStringLiteral("([A-Z])([A-Z])"));
+    QRegularExpression roleExp(QStringLiteral("Role$"));
+    QRegularExpression lowerToCapitalSep(QStringLiteral("([a-z])([A-Z])"));
+    QRegularExpression capitalToCapitalSep(QStringLiteral("([A-Z])([A-Z])"));
 
     for (int i = 0; i < QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().keyCount(); i++) {
         int value = QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().value(i);

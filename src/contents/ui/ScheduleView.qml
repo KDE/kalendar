@@ -57,12 +57,12 @@ Kirigami.Page {
         let monthDiff = date.getMonth() - pathView.currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - pathView.currentItem.firstDayOfMonth.getFullYear()))
         let newIndex = pathView.currentIndex + monthDiff;
 
-        let firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.MonthViewModel.FirstDayOfMonthRole);
-        let lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.MonthViewModel.FirstDayOfMonthRole);
+        let firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+        let lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
 
         while(firstItemDate >= date) {
             pathView.model.addDates(false)
-            firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.MonthViewModel.FirstDayOfMonthRole);
+            firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
             newIndex = 0;
         }
         if(firstItemDate < date && newIndex === 0) {
@@ -71,7 +71,7 @@ Kirigami.Page {
 
         while(lastItemDate <= date) {
             pathView.model.addDates(true)
-            lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.MonthViewModel.FirstDayOfMonthRole);
+            lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
         }
         pathView.currentIndex = newIndex;
         selectedDate = date;
@@ -124,7 +124,9 @@ Kirigami.Page {
             }
         }
 
-        model: Kalendar.MonthViewModel {}
+        model: Kalendar.InfiniteCalendarViewModel {
+            scale: Kalendar.InfiniteCalendarViewModel.MonthScale
+        }
 
         property date dateToUse
         property int startIndex

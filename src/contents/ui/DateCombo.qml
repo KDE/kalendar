@@ -17,10 +17,15 @@ QQC2.ComboBox {
     signal newDateChosen(date newDate)
 
     property int timeZoneOffset: 0
-    property date dateTime
+    property date dateTime: new Date()
     property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
     property bool validDate: !isNaN(dateFromText.getTime())
     property TimePicker timePicker
+
+    onDateTimeChanged: {
+        datePicker.selectedDate = dateTime;
+        datePicker.clickedDate = dateTime;
+    }
 
     validator: RegularExpressionValidator {
         regularExpression: /[0-9]{0,2}[/|.|-][0-9]{0,2}[/|.|-][0-9]*/
@@ -51,6 +56,9 @@ QQC2.ComboBox {
         DatePicker {
             id: datePicker
             anchors.fill: parent
+
+            clickedDate: root.dateTime
+            selectedDate: root.dateTime
             onDatePicked: {
                 datePopup.close();
                 let hours = root.dateTime.getHours();
