@@ -21,6 +21,7 @@
   <name xml:lang="pl">Kalendarz</name>
   <name xml:lang="pt">Kalendar</name>
   <name xml:lang="pt-BR">Kalendar</name>
+  <name xml:lang="sk">Kalendar</name>
   <name xml:lang="sl">Kalendar</name>
   <name xml:lang="sv">Kalendar</name>
   <name xml:lang="uk">Kalendar</name>
@@ -120,6 +121,7 @@
       <caption xml:lang="fr">Affichage en mois</caption>
       <caption xml:lang="nl">Maandweergave</caption>
       <caption xml:lang="pt">Vista Mensal</caption>
+      <caption xml:lang="sk">Mesačný pohľad</caption>
       <caption xml:lang="sv">Månadsvy</caption>
       <caption xml:lang="uk">Перегляд місяця</caption>
       <caption xml:lang="x-test">xxMonth Viewxx</caption>
@@ -163,6 +165,7 @@
       <caption xml:lang="fr">Affichage en tâches</caption>
       <caption xml:lang="nl">Taakweergave</caption>
       <caption xml:lang="pt">Vista das Tarefas</caption>
+      <caption xml:lang="sk">Pohľad úloh</caption>
       <caption xml:lang="sv">Uppgiftsvy</caption>
       <caption xml:lang="uk">Перегляд завдання</caption>
       <caption xml:lang="x-test">xxTask Viewxx</caption>
@@ -178,6 +181,7 @@
       <caption xml:lang="fr">Mobile</caption>
       <caption xml:lang="nl">Mobiel</caption>
       <caption xml:lang="pt">Telemóvel</caption>
+      <caption xml:lang="sk">Mobil</caption>
       <caption xml:lang="sv">Mobil</caption>
       <caption xml:lang="uk">Мобільний</caption>
       <caption xml:lang="x-test">xxMobilexx</caption>
