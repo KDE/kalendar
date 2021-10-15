@@ -12,6 +12,7 @@ import "labelutils.js" as LabelUtils
 
 Rectangle {
     x: ((dayWidth + parentViewSpacing) * modelData.starts) + horizontalSpacing
+    z: 10
     width: ((dayWidth + parentViewSpacing) * modelData.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
     height: parent.height
     opacity: isOpenOccurrence || isInCurrentMonth ?
