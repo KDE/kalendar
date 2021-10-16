@@ -28,7 +28,7 @@ Please note that this is pre-release software and that you may encounter bugs, c
 
 ## Build
 
-**Kalendar requires the kirigami-addons library to be installed, as well as KFrameworks 5.86 to be installed.** These packages may not be available in your distibution of choice, and Kalendar might not work. Additionally, **we recommend you install KOrganizer**, which will handle some aspects of the initial setup of Akonadi which Kalendar does not yet do.
+**Kalendar requires KFrameworks 5.86 to be installed.** This package version is fairly recent and may not yet be available in your distibution of choice, meaning Kalendar might not work.
 
 KDE Neon dependencies:
 ```
