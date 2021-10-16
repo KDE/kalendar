@@ -8,11 +8,6 @@
 #include "multidayincidencemodel.h"
 #include <QBitArray>
 
-enum Roles {
-    Incidences = IncidenceOccurrenceModel::LastRole,
-    PeriodStartDate,
-};
-
 MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
 {

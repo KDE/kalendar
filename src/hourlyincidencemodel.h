@@ -38,6 +38,11 @@ public:
     Q_FLAGS(Filters)
     Q_ENUM(Filter)
 
+    enum Roles {
+        Incidences = IncidenceOccurrenceModel::LastRole,
+        PeriodStartDateTime,
+    };
+
     HourlyIncidenceModel(QObject *parent = nullptr);
     ~HourlyIncidenceModel() = default;
 

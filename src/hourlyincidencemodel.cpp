@@ -5,11 +5,6 @@
 #include <QBitArray>
 #include <QTimeZone>
 
-enum Roles {
-    Incidences = IncidenceOccurrenceModel::LastRole,
-    PeriodStartDateTime,
-};
-
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
