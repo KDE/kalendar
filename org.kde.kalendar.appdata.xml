@@ -31,6 +31,7 @@
   <summary xml:lang="ca">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
   <summary xml:lang="ca-valencia">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
   <summary xml:lang="el">Διαχειριστείτε εργασίες και γεγονότα με ταχύτητα και ευκολία</summary>
+  <summary xml:lang="en-GB">Manage your tasks and events with speed and ease</summary>
   <summary xml:lang="es">Gestione tareas y eventos con rapidez y facilidad</summary>
   <summary xml:lang="fr">Gérer vos tâches et vos évènements avec efficacité et facilité</summary>
   <summary xml:lang="nl">Uw taken en afspraken beheren met snelheid en gemak</summary>
@@ -64,6 +65,7 @@
     <p xml:lang="ca">El Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, així com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
     <p xml:lang="ca-valencia">El Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, així com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
     <p xml:lang="el">Το Kalendar είναι μια εφαρμογή ημερολογίου που σας επιτρέπει να διαχειρίζεστε εργασίες και γεγονότα. Το Kalendar υποστηρίζει τοπικά ημερολόγια καθώς επίσης και μαι πληθώρα επιγραμμικών (online) ημερολογίων: Nextcloud, Google® Calendar, Outlook®, Caldav, και πολλά άλλα.</p>
+    <p xml:lang="en-GB">Kalendar is a calendar application that allows you to manage your tasks and events. Kalendar supports both local calendars as well as a multitude of online calendars: Nextcloud, Google® Calendar, Outlook®, Caldav, and many more.</p>
     <p xml:lang="es">Kalendar es una aplicación de calendarios que permite la gestión de tareas y eventos. Kalendar puede usar calendarios locales y muchos tipos de calendarios en línea: Nextcloud, Google® Calendar, Outlook® y Caldav, entre otros.</p>
     <p xml:lang="fr">Kalendar est une application d'agendas, vous permettant de gérer vos tâches et vos événements. Kalendar prend en charge les calendriers locaux ainsi qu'une multitude de calendriers en ligne comme Nextcloud, Google® Calendar, Outlook®, Caldav, et bien d'autres.</p>
     <p xml:lang="nl">Kalendar is een agenda-toepassing die u uw taken en afspraken laat beheren. Kalendar ondersteunt zowel lokale agenda's alsook een veelheid aan online agenda's: Nextcloud, Google® Calendar, Outlook®, Caldav en vele anderen.</p>
@@ -74,6 +76,7 @@
     <p xml:lang="ca">El Kalendar ofereix moltes maneres d'interactuar amb els esdeveniments. La vista mensual proporciona una visió general de tot el mes. La vista setmanal presenta una visió general detallada de la vostra setmana. I la vista de llista enumera tots els propers esdeveniments de manera que pugueu planificar amb facilitat i rapidesa.</p>
     <p xml:lang="ca-valencia">El Kalendar ofereix moltes maneres d'interactuar amb els esdeveniments. La vista mensual proporciona una visió general de tot el mes. La vista setmanal presenta una visió general detallada de la vostra setmana. I la vista de llista enumera tots els propers esdeveniments de manera que pugueu planificar amb facilitat i rapidesa.</p>
     <p xml:lang="el">Το Kalendar δίνει πολλούς τρόπους αλληλεπίδρασης με γεγονότα. Η προβολή του μήνα παρέχει μια επισκόπηση όλου του μήνα. Η προβολή της εβδομάδας παρουσιάζει μια λεπτομερή ανά ώρα επισκόπηση της εβδομάδας. Και η προβολή χρονοπρογραμματισμού εμφανίζει όλα τα επερχόμενα γεγονότα έτσι ώστε εύκολα και γρήγορα να οργανώνετε το χρόνο σας.</p>
+    <p xml:lang="en-GB">Kalendar gives you many ways to interact with your events. The month view provides an overview of the entire month; the week view presents a detailed hour-by-hour overview of your week; and the schedule view lists all of your upcoming events so that you can easily and quickly plan ahead.</p>
     <p xml:lang="es">Kalendar le proporciona muchos modos de interactuar con los eventos. La vista mensual muestra un resumen de todo el mes; la vista semanal presenta un detallado resumen de la semana por horas; y la vista de planificación lista todos los eventos futuros para que pueda programarlos con antelación de una forma fácil y rápida.</p>
     <p xml:lang="fr">Kalendar vous offre de nombreuses façons d'interagir avec vos évènements. L'affichage par mois vous donne un aperçu de l'ensemble du mois. L'affichage par semaines vous présente un aperçu détaillé heure par heure de votre semaine. L'affichage en calendrier vous présente une liste de tous vos événements à venir afin que vous puissiez facilement et rapidement les planifier.</p>
     <p xml:lang="nl">Kalendar geeft u veel manieren om te interageren met uw afspraken. De maandweergave biedt een overzicht over de gehele maand; de weekweergave presenteert een gedetailleerde uur-voor-uur overzicht van uw week; en de planningweergavelijsten al uw komende afspraken zodat u gemakkelijk en snel vooruit kunt plannen.</p>
@@ -84,6 +87,7 @@
     <p xml:lang="ca">També hi ha disponible una vista de tasques, la qual permet gestionar les tasques i subtasques amb la potent vista en arbre del Kalendar i les seves capacitats personalitzables de filtratge.</p>
     <p xml:lang="ca-valencia">També hi ha disponible una vista de tasques, la qual permet gestionar les tasques i subtasques amb la potent vista en arbre del Kalendar i les seues capacitats personalitzables de filtratge.</p>
     <p xml:lang="el">Μια προβολή εργασιών είναι επίσης διαθέσιμη, ώστε να να διαχειρίζεστε εργασίες και υπο-εργασίες με την ισχυρή δενδρική προβολή του Kalendar και τις προσαρμόσιμες δυνατότητες φιλτραρίσματος που διαθέτει.</p>
+    <p xml:lang="en-GB">A tasks view is also available, making it possible for you to manage your tasks and subtasks with Kalendar's powerful tree view and its customisable filtering capabilities.</p>
     <p xml:lang="es">También dispone de una vista de tareas, haciendo posible la gestión de tareas y subtareas con la potente vista de árbol de Kalendar y sus personalizables capacidades de filtrado.</p>
     <p xml:lang="fr">Un affichage par tâches est aussi disponible. Il vous permet ainsi de gérer vos tâches et sous-tâches avec l'affichage très efficace en arborescence et des capacités de filtrage personnalisé.</p>
     <p xml:lang="nl">Een takenweergave is ook beschikbaar, waarmee u uw taken en subtaken met de krachtige boomstructuur weergave van Kalendar en zijn aanpasbare mogelijkheden voor filtering kunt beheren.</p>
@@ -94,6 +98,7 @@
     <p xml:lang="ca">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
     <p xml:lang="ca-valencia">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
     <p xml:lang="el">το Kalendar κατασκευάστηκε με την ιδέα της χρηστικότητας στην επιφάνεια εργασίας, στο κινητό και σε οτιδήποτε ενδιάμεσα.</p>
+    <p xml:lang="en-GB">Kalendar was built with the idea to be usable on desktop, on mobile and everything in between.</p>
     <p xml:lang="es">Kalendar se ha creado con la idea de que se pueda usar en el escritorio, en el móvil y en cualquier dispositivo entre ambos.</p>
     <p xml:lang="fr">Kalendar a été conçu avec l'idée d'être utilisable sur un ordinateur de bureau, sur un téléphone portable et dans tous les périphériques intermédiaires.</p>
     <p xml:lang="nl">Kalendar is gebouwd met het idee om bruikbaar te zijn op een bureaublad, op een mobiel en alles er tussenin.</p>
@@ -117,6 +122,7 @@
       <caption xml:lang="ca-valencia">Vista mensual</caption>
       <caption xml:lang="cs">Pohled na měsíc</caption>
       <caption xml:lang="el">Προβολή μήνα</caption>
+      <caption xml:lang="en-GB">Month View</caption>
       <caption xml:lang="es">Vista mensual</caption>
       <caption xml:lang="fr">Affichage en mois</caption>
       <caption xml:lang="nl">Maandweergave</caption>
@@ -132,6 +138,7 @@
       <caption xml:lang="ca">Vista setmanal</caption>
       <caption xml:lang="ca-valencia">Vista setmanal</caption>
       <caption xml:lang="el">Προβολή εβδομάδας</caption>
+      <caption xml:lang="en-GB">Week View</caption>
       <caption xml:lang="es">Vista semanal</caption>
       <caption xml:lang="fr">Affichage en semaines</caption>
       <caption xml:lang="nl">Weekweergave</caption>
@@ -146,6 +153,7 @@
       <caption xml:lang="ca">Vista de la Planificació</caption>
       <caption xml:lang="ca-valencia">Vista de la Planificació</caption>
       <caption xml:lang="el">Προβολή χρονοπρογραμματισμού</caption>
+      <caption xml:lang="en-GB">Schedule View</caption>
       <caption xml:lang="es">Vista de planificación</caption>
       <caption xml:lang="fr">Affichage en calendrier</caption>
       <caption xml:lang="nl">Periodieke transactie venster</caption>
@@ -161,6 +169,7 @@
       <caption xml:lang="ca-valencia">Vista de tasca</caption>
       <caption xml:lang="cs">Pohled na úlohy</caption>
       <caption xml:lang="el">Προβολή εργασιών</caption>
+      <caption xml:lang="en-GB">Task View</caption>
       <caption xml:lang="es">Vista de tareas</caption>
       <caption xml:lang="fr">Affichage en tâches</caption>
       <caption xml:lang="nl">Taakweergave</caption>
@@ -177,6 +186,7 @@
       <caption xml:lang="ca-valencia">Mòbil</caption>
       <caption xml:lang="cs">Mobilní</caption>
       <caption xml:lang="el">Κινητό</caption>
+      <caption xml:lang="en-GB">Mobile</caption>
       <caption xml:lang="es">Móvil</caption>
       <caption xml:lang="fr">Mobile</caption>
       <caption xml:lang="nl">Mobiel</caption>
