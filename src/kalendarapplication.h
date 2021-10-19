@@ -38,6 +38,10 @@ Q_SIGNALS:
     void openScheduleView();
     void openTodoView();
     void openAboutPage();
+    void moveViewForwards();
+    void moveViewBackwards();
+    void moveViewToToday();
+    void openDateChanger();
     void toggleMenubar();
     void createNewEvent();
     void createNewTodo();

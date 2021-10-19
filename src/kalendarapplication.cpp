@@ -133,6 +133,58 @@ void KalendarApplication::setupActions()
         action->setIcon(QIcon::fromTheme(QStringLiteral("help-about")));
     }
 
+    actionName = QLatin1String("move_view_backwards");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto moveViewBackwardsAction = mCollection.addAction(actionName, this, &KalendarApplication::moveViewBackwards);
+        moveViewBackwardsAction->setText(i18n("Backwards"));
+        moveViewBackwardsAction->setIcon(QIcon::fromTheme(QStringLiteral("go-previous")));
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed, this, [moveViewBackwardsAction, openTodoAction]() {
+                moveViewBackwardsAction->setEnabled(!openTodoAction->isChecked());
+            });
+            moveViewBackwardsAction->setEnabled(!openTodoAction->isChecked());
+        }
+    }
+
+    actionName = QLatin1String("move_view_forwards");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto moveViewForwardsAction = mCollection.addAction(actionName, this, &KalendarApplication::moveViewForwards);
+        moveViewForwardsAction->setText(i18n("Forwards"));
+        moveViewForwardsAction->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed, this, [moveViewForwardsAction, openTodoAction]() {
+                moveViewForwardsAction->setEnabled(!openTodoAction->isChecked());
+            });
+            moveViewForwardsAction->setEnabled(!openTodoAction->isChecked());
+        }
+    }
+
+    actionName = QLatin1String("move_view_to_today");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto moveViewToTodayAction = mCollection.addAction(actionName, this, &KalendarApplication::moveViewToToday);
+        moveViewToTodayAction->setText(i18n("To Today"));
+        moveViewToTodayAction->setIcon(QIcon::fromTheme(QStringLiteral("go-jump-today")));
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed, this, [moveViewToTodayAction, openTodoAction]() {
+                moveViewToTodayAction->setEnabled(!openTodoAction->isChecked());
+            });
+            moveViewToTodayAction->setEnabled(!openTodoAction->isChecked());
+        }
+    }
+
+    actionName = QLatin1String("open_date_changer");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto openDateChangerAction = mCollection.addAction(actionName, this, &KalendarApplication::openDateChanger);
+        openDateChangerAction->setText(i18n("To Date…"));
+        openDateChangerAction->setIcon(QIcon::fromTheme(QStringLiteral("change-date-symbolic")));
+        if (openTodoAction) {
+            connect(openTodoAction, &QAction::changed, this, [openDateChangerAction, openTodoAction]() {
+                openDateChangerAction->setEnabled(!openTodoAction->isChecked());
+            });
+            openDateChangerAction->setEnabled(!openTodoAction->isChecked());
+        }
+    }
+
     actionName = QLatin1String("toggle_menubar");
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection.addAction(actionName, this, &KalendarApplication::toggleMenubar);

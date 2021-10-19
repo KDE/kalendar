@@ -34,6 +34,10 @@ Kirigami.ApplicationWindow {
     readonly property var weekViewAction: KalendarApplication.action("open_week_view")
     readonly property var scheduleViewAction: KalendarApplication.action("open_schedule_view")
     readonly property var todoViewAction: KalendarApplication.action("open_todo_view")
+    readonly property var moveViewForwardsAction: KalendarApplication.action("move_view_forwards")
+    readonly property var moveViewBackwardsAction: KalendarApplication.action("move_view_backwards")
+    readonly property var moveViewToTodayAction: KalendarApplication.action("move_view_to_today")
+    readonly property var openDateChangerAction: KalendarApplication.action("open_date_changer")
     readonly property var aboutPageAction: KalendarApplication.action("open_about_page")
     readonly property var toggleMenubarAction: KalendarApplication.action("toggle_menubar")
     readonly property var createEventAction: KalendarApplication.action("create_event")
@@ -102,6 +106,22 @@ Kirigami.ApplicationWindow {
         function onOpenTodoView() {
             filterHeader.active = true;
             root.switchView(todoPageComponent);
+        }
+
+        function onMoveViewForwards() {
+            pageStack.currentItem.nextAction.trigger();
+        }
+
+        function onMoveViewBackwards() {
+            pageStack.currentItem.previousAction.trigger();
+        }
+
+        function onMoveViewToToday() {
+            pageStack.currentItem.todayAction.trigger();
+        }
+
+        function onOpenDateChanger() {
+            dateChangeDrawer.open()
         }
 
         function onOpenAboutPage() {

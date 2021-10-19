@@ -80,14 +80,15 @@ Kirigami.Page {
         onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, 1))
         displayHint: Kirigami.DisplayHint.IconOnly
     }
+    readonly property Kirigami.Action todayAction: Kirigami.Action {
+        icon.name: "go-jump-today"
+        text: i18n("Today")
+        onTriggered: setToDate(new Date())
+    }
     actions {
         left: Qt.application.layoutDirection === Qt.RightToLeft ? nextAction : previousAction
         right: Qt.application.layoutDirection === Qt.RightToLeft ? previousAction : nextAction
-        main: Kirigami.Action {
-            icon.name: "go-jump-today"
-            text: i18n("Today")
-            onTriggered: setToDate(new Date())
-        }
+        main: todayAction
     }
 
     PathView {

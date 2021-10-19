@@ -99,6 +99,27 @@ Labs.MenuBar {
             kalendarAction: 'todoview_show_completed'
         }
     }
+
+    Labs.Menu {
+        title: i18nc("@action:menu", "Go")
+
+        NativeMenuItemFromAction {
+            kalendarAction: "move_view_backwards"
+        }
+        NativeMenuItemFromAction {
+            kalendarAction: "move_view_forwards"
+        }
+
+        Labs.MenuSeparator {}
+
+        NativeMenuItemFromAction {
+            kalendarAction: "move_view_to_today"
+        }
+        NativeMenuItemFromAction {
+            kalendarAction: "open_date_changer"
+        }
+    }
+
     Labs.Menu {
         title: i18nc("@action:menu", "Create")
 

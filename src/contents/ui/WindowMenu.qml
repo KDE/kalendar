@@ -174,6 +174,27 @@ QQC2.MenuBar {
         }
 
     }
+
+    QQC2.Menu {
+        title: i18nc("@action:menu", "Go")
+
+        KActionFromAction {
+            kalendarAction: "move_view_backwards"
+        }
+        KActionFromAction {
+            kalendarAction: "move_view_forwards"
+        }
+
+        QQC2.MenuSeparator {}
+
+        KActionFromAction {
+            kalendarAction: "move_view_to_today"
+        }
+        KActionFromAction {
+            kalendarAction: "open_date_changer"
+        }
+    }
+
     QQC2.Menu {
         title: i18nc("@action:menu", "Create")
 
