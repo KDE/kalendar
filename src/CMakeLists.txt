@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: (C) 2020 Carl Schwan <carl@carlschwan.eu>
 #
 # SPDX-License-Identifier: BSD-2-Clause
+add_subdirectory(kontactplugin)
 
 add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp todomodel.cpp incidencetreemodel.cpp todosortfilterproxymodel.cpp kalendarapplication.cpp itemtagsmodel.cpp tagmanager.cpp extratodomodel.cpp actionsmodel.cpp commandbarfiltermodel.cpp hourlyincidencemodel.cpp timezonelistmodel.cpp monthmodel.cpp infinitecalendarviewmodel.cpp resources.qrc)
 
@@ -28,7 +29,9 @@ target_link_libraries(kalendar
     KF5::ItemModels
     KF5::XmlGui
     KF5::EventViews # for reading KOrganizer calendar colors
-
+    KF5::KontactInterface
 )
 kconfig_add_kcfg_files(kalendar GENERATE_MOC kalendarconfig.kcfgc)
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(FILES data/org.kde.kalendar.part.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})

@@ -11,6 +11,7 @@ set(KF5_MIN_VERSION "5.86.0")
 set(AKONADI_VERSION "5.15.0")
 set(CALENDARSUPPORT_LIB_VERSION "5.15")
 set(EVENTVIEW_LIB_VERSION "5.15.0")
+set(KONTACTINTERFACE_LIB_VERSION "5.15.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.84")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -48,6 +49,7 @@ find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiContact ${AKONADI_CONTACT_VERSION} CONFIG REQUIRED)
 find_package(KF5CalendarSupport ${CALENDARSUPPORT_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5EventViews ${EVENTVIEW_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5KontactInterface ${KONTACTINTERFACE_LIB_VERSION} CONFIG REQUIRED)
 
 
 ################# build and install #################
@@ -58,6 +60,7 @@ add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
 
 add_subdirectory(src)
+include_directories(${kalendar_SOURCE_DIR})
 
 install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.kalendar.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})

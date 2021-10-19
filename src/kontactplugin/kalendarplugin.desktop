@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Service
+Icon=view-pim-calendar
+X-KDE-ServiceTypes=Kontact/Plugin,KPluginInfo
+
+X-KDE-Library=kontact5/kontact_kalendarplugin
+X-KDE-KontactPluginVersion=10
+X-KDE-KontactPartLibraryName=kalendarpart
+X-KDE-KontactPartExecutableName=kalendar
+X-KDE-KontactPluginHasSummary=true
+
+X-KDE-PluginInfo-Name=kontact_kalendarplugin
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-Weight=400
+
+Comment=Kontact Kalendar Plugin
+Name=Kalendar
+
