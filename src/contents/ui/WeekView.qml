@@ -562,6 +562,7 @@ Kirigami.Page {
                                             height: (modelData.duration * Kirigami.Units.gridUnit) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
                                             radius: Kirigami.Units.smallSpacing
                                             color: Qt.rgba(0,0,0,0)
+                                            clip: true
                                             visible: !modelData.allDay
 
                                             IncidenceBackground {
@@ -574,13 +575,14 @@ Kirigami.Page {
                                                 id: incidenceContents
 
                                                 readonly property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
+                                                readonly property bool isTinyHeight: height <= Kirigami.Units.gridUnit
 
                                                 anchors {
                                                     fill: parent
                                                     leftMargin: Kirigami.Units.smallSpacing
                                                     rightMargin: Kirigami.Units.smallSpacing
-                                                    topMargin: Kirigami.Units.smallSpacing
-                                                    bottomMargin: Kirigami.Units.smallSpacing
+                                                    topMargin: !isTinyHeight ? Kirigami.Units.smallSpacing : 0
+                                                    bottomMargin: !isTinyHeight ? Kirigami.Units.smallSpacing : 0
                                                 }
 
                                                 QQC2.Label {
@@ -591,6 +593,8 @@ Kirigami.Page {
                                                     verticalAlignment: Text.AlignTop
                                                     wrapMode: Text.Wrap
                                                     elide: Text.ElideRight
+                                                    font.pointSize: parent.isTinyHeight ? Kirigami.Theme.smallFont.pointSize :
+                                                        Kirigami.Theme.defaultFont.pointSize
                                                     font.weight: Font.Medium
                                                     color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                     incidenceContents.textColor
