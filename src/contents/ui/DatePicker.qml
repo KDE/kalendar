@@ -254,12 +254,12 @@ Item {
                     sourceComponent: GridLayout {
                         id: dayGrid
                         columns: 7
-                        rows: 6
+                        rows: 7
                         width: monthPathView.width
                         height: monthPathView.height
                         Layout.topMargin: Kirigami.Units.smallSpacing
 
-                        property var model: Loader {
+                        property var modelLoader: Loader {
                             asynchronous: true
                             sourceComponent: Kalendar.MonthModel {
                                 year: firstDay.getFullYear()
@@ -272,10 +272,10 @@ Item {
                         }
 
                         Repeater {
-                            model: dayGrid.model.weekDays
+                            model: dayGrid.modelLoader.item.weekDays
                             delegate: QQC2.Label {
                                 Layout.fillWidth: true
-                                height: dayGrid / dayGrid.rows
+                                Layout.fillHeight: true
                                 horizontalAlignment: Text.AlignHCenter
                                 opacity: 0.7
                                 text: modelData
@@ -283,7 +283,7 @@ Item {
                         }
 
                         Repeater {
-                            model: dayGrid.model.item
+                            model: dayGrid.modelLoader.item
 
                             delegate: QQC2.Button {
                                 Layout.fillWidth: true
