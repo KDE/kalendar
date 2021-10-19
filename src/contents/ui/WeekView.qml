@@ -46,9 +46,11 @@ Kirigami.Page {
 
     property var hourStrings: []
     Component.onCompleted: {
-        const date = new Date(0, 0, 0, 0, 0, 0, 0);
+        // Start at 01:00 and add hours up to 23:00
+        const date = new Date(0, 0, 0, 0, 0, 0, 1);
         for(let i = 0; i < 23; i++) {
             date.setHours(i);
+            console.log(i, date.getHours());
             hourStrings.push(date.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat));
             hourStringsChanged();
         }
