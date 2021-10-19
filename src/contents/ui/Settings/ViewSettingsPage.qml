@@ -13,7 +13,7 @@ Kirigami.ScrollablePage {
         Kirigami.Heading {
             level: 3
             Kirigami.FormData.isSection: true
-            text: i18n("Month view settings")
+            text: i18n("Month View settings")
         }
         Controls.ButtonGroup {
             buttons: weekdayLabelAlignmentButtonColumn.children
@@ -112,7 +112,7 @@ Kirigami.ScrollablePage {
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
-            Kirigami.FormData.label: i18n("Schedule view settings")
+            Kirigami.FormData.label: i18n("Schedule View settings")
         }
         Column {
             Kirigami.FormData.label: i18n("Headers:")
