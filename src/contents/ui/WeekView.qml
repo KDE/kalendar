@@ -502,7 +502,6 @@ Kirigami.Page {
                                 right: parent.right
                             }
                             clip: true
-                            DragHandler { }
 
                             Kirigami.Separator {
                                 anchors.fill: parent
