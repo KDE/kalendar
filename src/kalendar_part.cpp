@@ -4,7 +4,6 @@
 #include <KLocalizedString>
 #include <QDBusConnection>
 #include <kalendar_part.h>
-#include <partadaptor.h>
 
 K_PLUGIN_FACTORY(KalendarPartFactory, registerPlugin<KalendarPart>();) // produce a factory
 
@@ -12,14 +11,13 @@ KalendarPart::KalendarPart(QWidget *parentWidget, QObject *parent, const QVarian
     : KParts::Part(parent)
 {
     setComponentName(QStringLiteral("kalendar"), i18n("Kalendar"));
-    setXMLFile(QStringLiteral("kalendar_part.rc"), true);
-    // we need an instance
-    (void)new PartAdaptor(this);
-    QDBusConnection::sessionBus().registerObject(QStringLiteral("/Kalendar"), this);
+    // setXMLFile(QStringLiteral("kalendar_part.rc"), true);
+    //(void)new PartAdaptor(this);
 
     m_widget = new QQuickWidget;
     m_widget->setSource(QUrl(QStringLiteral("qrc:///main.qml")));
     m_widget->show();
+
     setWidget(m_widget);
 }
 

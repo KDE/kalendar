@@ -7,7 +7,7 @@ X-KDE-Library=kontact5/kontact_kalendarplugin
 X-KDE-KontactPluginVersion=10
 X-KDE-KontactPartLibraryName=kalendarpart
 X-KDE-KontactPartExecutableName=kalendar
-X-KDE-KontactPluginHasSummary=true
+X-KDE-KontactPluginHasSummary=false
 
 X-KDE-PluginInfo-Name=kontact_kalendarplugin
 X-KDE-PluginInfo-Version=0.1

@@ -6,6 +6,6 @@ Icon=kalendar
 Type=Service
 Name=Kalendar
 
-X-KDE-ServiceTypes=Browser/View
-X-KDE-Library=korganizerpart
+X-KDE-ServiceTypes=KParts/Part
+X-KDE-Library=kalendarpart
 

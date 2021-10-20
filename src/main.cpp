@@ -37,51 +37,10 @@
 
 using namespace KCalendarCore;
 
-class Application : public KontactInterface::PimUniqueApplication
-{
-public:
-    Application(int &argc, char **argv[])
-        : KontactInterface::PimUniqueApplication(argc, argv)
-    {
-    }
-
-    ~Application() override
-    {
-    }
-
-    int activate(const QStringList &args, const QString &workingDir) override;
-
-    /*private:
-        Akregator::MainWindow *mMainWindow = nullptr;*/
-};
-
-int Application::activate(const QStringList &args, const QString &workingDir)
-{
-    /*if (!isSessionRestored()) {
-        QDBusInterface akr(QStringLiteral("org.kde.akregator"), QStringLiteral("/Akregator"), QStringLiteral("org.kde.akregator.part"));
-
-        QCommandLineParser *parser = cmdArgs();
-        parser->process(args);
-
-        if (!mMainWindow) {
-            mMainWindow = new Akregator::MainWindow();
-            mMainWindow->loadPart();
-            mMainWindow->setupProgressWidgets();
-            if (!parser->isSet(QStringLiteral("hide-mainwindow"))) {
-                mMainWindow->show();
-            }
-            akr.call(QStringLiteral("openStandardFeedList"));
-        }
-
-        akr.call(QStringLiteral("handleCommandLine"), args);
-    }*/
-    return PimUniqueApplication::activate(args, workingDir);
-}
-
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication app(argc, argv);
+    KontactInterface::PimUniqueApplication app(argc, &argv);
     KLocalizedString::setApplicationDomain("kalendar");
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kalendar"));
