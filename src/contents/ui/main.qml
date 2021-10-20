@@ -315,6 +315,7 @@ Kirigami.ApplicationWindow {
     }
 
     globalDrawer: Sidebar {
+        id: sidebar
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
         onCalendarClicked: if(todoMode) {
@@ -679,9 +680,9 @@ Kirigami.ApplicationWindow {
             id: monthView
             objectName: "monthView"
 
-            titleDelegate: TitleDateButton {
-                date: monthView.firstDayOfMonth
-                onClicked: dateChangeDrawer.open()
+            titleDelegate: ViewTitleDelegate {
+                titleDateButton.date: monthView.firstDayOfMonth
+                titleDateButton.onClicked: dateChangeDrawer.open()
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
@@ -709,9 +710,9 @@ Kirigami.ApplicationWindow {
             id: scheduleView
             objectName: "scheduleView"
 
-            titleDelegate: TitleDateButton {
-                date: scheduleView.startDate
-                onClicked: dateChangeDrawer.open()
+            titleDelegate: ViewTitleDelegate {
+                titleDateButton.date: scheduleView.startDate
+                titleDateButton.onClicked: dateChangeDrawer.open()
             }
             selectedDate: root.selectedDate
             openOccurrence: root.openOccurrence
@@ -740,13 +741,12 @@ Kirigami.ApplicationWindow {
             id: weekView
             objectName: "weekView"
 
-            titleDelegate: TitleDateButton {
-                range: true
-                date: weekView.startDate
-                lastDate: DateUtils.addDaysToDate(weekView.startDate, 6)
-                onClicked: dateChangeDrawer.open()
+            titleDelegate: ViewTitleDelegate {
+                titleDateButton.range: true
+                titleDateButton.date: weekView.startDate
+                titleDateButton.lastDate: DateUtils.addDaysToDate(weekView.startDate, 6)
+                titleDateButton.onClicked: dateChangeDrawer.open()
             }
-
             selectedDate: root.selectedDate
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
@@ -774,6 +774,25 @@ Kirigami.ApplicationWindow {
         TodoPage {
             id: todoPage
             objectName: "todoView"
+
+            titleDelegate: RowLayout {
+                spacing: 0
+                QQC2.ToolButton {
+                    visible: !Kirigami.Settings.isMobile
+                    icon.name: sidebar.collapsed ? "sidebar-expand" : "sidebar-collapse"
+                    onClicked: sidebar.collapsed = !sidebar.collapsed
+
+                    QQC2.ToolTip.text: sidebar.collapsed ? i18n("Expand Sidebar") : i18n("Collapse Sidebar")
+                    QQC2.ToolTip.visible: hovered
+                    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                }
+                Kirigami.Heading {
+                    anchors.left: parent.left
+                    anchors.leftMargin: !Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: i18n("Tasks")
+                }
+            }
 
             onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
             onViewTodo: root.setUpView(todoData, collectionData)

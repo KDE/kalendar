@@ -16,7 +16,6 @@ import "labelutils.js" as LabelUtils
 
 Kirigami.ScrollablePage {
     id: root
-    title: i18n("Tasks")
 
     signal addTodo(int collectionId)
     signal viewTodo(var todoData, var collectionData)
