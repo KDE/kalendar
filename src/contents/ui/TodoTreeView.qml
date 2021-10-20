@@ -97,10 +97,12 @@ TreeListView {
             GridLayout {
                 id: todoItemContents
 
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: Kirigami.Settings.isMobile ?
-                    parent.width - (Kirigami.Units.largeSpacing * 2) : parent.width - (Kirigami.Units.smallSpacing * 2)
+                anchors {
+                    left: parent.left
+                    leftMargin: Kirigami.Units.smallSpacing
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
 
                 columns: 4
                 rows: 2
