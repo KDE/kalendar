@@ -1,0 +1,11 @@
+[Desktop Entry]
+MimeType=text/calendar;
+Comment=Calendar and Scheduling Program
+
+Icon=kalendar
+Type=Service
+Name=Kalendar
+
+X-KDE-ServiceTypes=Browser/View
+X-KDE-Library=korganizerpart
+

@@ -1,9 +1,36 @@
 # SPDX-FileCopyrightText: (C) 2020 Carl Schwan <carl@carlschwan.eu>
 #
 # SPDX-License-Identifier: BSD-2-Clause
-add_subdirectory(kontactplugin)
 
-add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp todomodel.cpp incidencetreemodel.cpp todosortfilterproxymodel.cpp kalendarapplication.cpp itemtagsmodel.cpp tagmanager.cpp extratodomodel.cpp actionsmodel.cpp commandbarfiltermodel.cpp hourlyincidencemodel.cpp timezonelistmodel.cpp monthmodel.cpp infinitecalendarviewmodel.cpp resources.qrc)
+set(kalendar_SRCS
+    about.cpp
+    main.cpp
+    agentconfiguration.cpp
+    incidenceoccurrencemodel.cpp
+    calendarmanager.cpp
+    multidayincidencemodel.cpp
+    incidencewrapper.cpp
+    remindersmodel.cpp
+    attendeesmodel.cpp
+    recurrenceexceptionsmodel.cpp
+    attachmentsmodel.cpp
+    contactsmanager.cpp
+    todomodel.cpp
+    incidencetreemodel.cpp
+    todosortfilterproxymodel.cpp
+    kalendarapplication.cpp
+    itemtagsmodel.cpp
+    tagmanager.cpp
+    extratodomodel.cpp
+    actionsmodel.cpp
+    commandbarfiltermodel.cpp
+    hourlyincidencemodel.cpp
+    timezonelistmodel.cpp
+    monthmodel.cpp
+    infinitecalendarviewmodel.cpp
+    resources.qrc)
+
+add_executable(kalendar ${kalendar_SRCS})
 
 target_link_libraries(kalendar
     Qt5::Core
@@ -34,4 +61,35 @@ target_link_libraries(kalendar
 kconfig_add_kcfg_files(kalendar GENERATE_MOC kalendarconfig.kcfgc)
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(FILES data/org.kde.kalendar.part.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
+
+
+
+set(kalendar_PART_SRCS kalendar_part.cpp ${kalendar_SRCS})
+qt_generate_dbus_interface(kalendar_part.h org.kde.kalendar.part.xml OPTIONS -a)
+qt_add_dbus_adaptor(kalendarpart_PART_SRCS
+    ${kalendar_SOURCE_DIR}/src/org.kde.kalendar.part.xml kalendar_part.h KalendarPart
+)
+qt_add_dbus_interfaces(kalendarpart_PART_SRCS ${kalendar_SOURCE_DIR}/src/org.kde.kalendar.part.xml)
+add_library(kalendarpart MODULE ${kalendarpart_PART_SRCS})
+
+target_link_libraries(kalendarpart
+    KF5::I18n
+    KF5::Parts
+    Qt5::QuickWidgets
+)
+
+install(TARGETS
+    kalendarpart
+    DESTINATION ${KDE_INSTALL_PLUGINDIR}
+)
+
+install(FILES
+    kalendar_part.desktop
+    DESTINATION ${KDE_INSTALL_KSERVICES5DIR}
+    )
+
+
+install(FILES ${kalendar_SOURCE_DIR}/src/org.kde.kalendar.part.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
+
+add_subdirectory(kontactplugin)
+
