@@ -576,7 +576,7 @@ Kirigami.Page {
                                                 id: incidenceContents
 
                                                 readonly property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
-                                                readonly property bool isTinyHeight: height <= Kirigami.Units.gridUnit
+                                                readonly property bool isTinyHeight: parent.height <= Kirigami.Units.gridUnit
 
                                                 anchors {
                                                     fill: parent
