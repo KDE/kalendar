@@ -9,6 +9,7 @@
 
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KPluginFactory>
 #include <QAction>
 #include <QIcon>
 
@@ -43,7 +44,8 @@ KalendarPlugin::~KalendarPlugin()
 
 KParts::Part *KalendarPlugin::createPart()
 {
-    KParts::Part *part = loadPart();
+    KPluginMetaData data(QStringLiteral("kf5/parts/kalendarpart"));
+    KParts::Part *part = KPluginFactory::instantiatePlugin<KParts::Part>(data, this).plugin;
 
     if (!part) {
         return nullptr;

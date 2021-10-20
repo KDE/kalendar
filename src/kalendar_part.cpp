@@ -5,7 +5,7 @@
 #include <QDBusConnection>
 #include <kalendar_part.h>
 
-K_PLUGIN_FACTORY(KalendarPartFactory, registerPlugin<KalendarPart>();) // produce a factory
+K_PLUGIN_CLASS_WITH_JSON(KalendarPart, "kalendar_part.json")
 
 KalendarPart::KalendarPart(QWidget *parentWidget, QObject *parent, const QVariantList &)
     : KParts::Part(parent)

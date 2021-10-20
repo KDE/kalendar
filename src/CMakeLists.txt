@@ -65,7 +65,7 @@ install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 
-set(kalendar_PART_SRCS kalendar_part.cpp ${kalendar_SRCS})
+set(kalendarpart_PART_SRCS kalendar_part.cpp ${kalendar_SRCS})
 qt_generate_dbus_interface(kalendar_part.h org.kde.kalendar.part.xml OPTIONS -a)
 qt_add_dbus_adaptor(kalendarpart_PART_SRCS
     ${kalendar_SOURCE_DIR}/src/org.kde.kalendar.part.xml kalendar_part.h KalendarPart
@@ -73,21 +73,40 @@ qt_add_dbus_adaptor(kalendarpart_PART_SRCS
 qt_add_dbus_interfaces(kalendarpart_PART_SRCS ${kalendar_SOURCE_DIR}/src/org.kde.kalendar.part.xml)
 add_library(kalendarpart MODULE ${kalendarpart_PART_SRCS})
 
+kconfig_add_kcfg_files(kalendarpart GENERATE_MOC kalendarconfig.kcfgc)
 kcoreaddons_desktop_to_json(kalendarpart ${kalendar_SOURCE_DIR}/src/kalendar_part.desktop)
 
 target_link_libraries(kalendarpart
-    KF5::CoreAddons
-    KF5::I18n
-    KF5::Parts
-    Qt5::QuickWidgets
-    Qt5::DBus
     Qt5::Core
     Qt5::Gui
+    Qt5::Qml
+    Qt5::Quick
+    Qt5::QuickControls2
+    Qt5::QuickWidgets
+    Qt5::Svg
+    Qt5::Location
+    KF5::I18n
+    KF5::CoreAddons
+    KF5::CalendarCore
+    KF5::AkonadiCore
+    KF5::AkonadiContact
+    KF5::AkonadiAgentBase
+    KF5::AkonadiXml
+    KF5::CalendarSupport
+    KF5::WindowSystem
+    KF5::ConfigWidgets
+    KF5::AkonadiWidgets
+    KF5::People
+    KF5::Contacts
+    KF5::ItemModels
+    KF5::XmlGui
+    KF5::EventViews # for reading KOrganizer calendar colors
+    KF5::KontactInterface
 )
 
 install(TARGETS
     kalendarpart
-    DESTINATION ${KDE_INSTALL_PLUGINDIR}
+    DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts/
 )
 
 install(FILES
