@@ -30,6 +30,26 @@ Kirigami.OverlayDrawer {
     property var incidenceWrapper
     property var collectionData
 
+    component HoverLabel: QQC2.Label {
+        Layout.fillWidth: true
+        textFormat: Text.MarkdownText
+        text: name ? `[${name}](mailto:${email})` : `[${email}](mailto:${email})`
+        onLinkActivated: Qt.openUrlExternally(link)
+        wrapMode: Text.Wrap
+        onHoveredLinkChanged: if (hoveredLink.length > 0) {
+            applicationWindow().hoverLinkIndicator.text = hoveredLink;
+        } else {
+            applicationWindow().hoverLinkIndicator.text = "";
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+            acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
+        }
+    }
+
+
     onIncidenceDataChanged: {
         incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
                                               incidenceInfo, "incidence");
@@ -383,41 +403,30 @@ Kirigami.OverlayDrawer {
                         text: i18n("<b>Location:</b>")
                         visible: incidenceInfo.incidenceWrapper.location
                     }
-                    QQC2.Label {
+                    TextEdit {
                         id: locationLabel
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
                         property bool isLink: false
 
-                        textFormat: Text.MarkdownText
-                        text: incidenceInfo.incidenceWrapper.location.replace(LabelUtils.urlRegexp, (match) => `[${match}](${match})`)
+                        font: Kirigami.Theme.defaultFont
+                        selectByMouse: !Kirigami.Settings.isMobile
+                        readOnly: true
+                        wrapMode: Text.Wrap
+                        textFormat: Text.RichText
+                        color: Kirigami.Theme.textColor
+                        text: incidenceInfo.incidenceWrapper.location.replace(LabelUtils.urlRegexp, (match) => `<a style="color: "${Kirigami.Theme.linkColor}"; text-decoration: none;" href="${match}">${match}</a>`)
                         onTextChanged: isLink = LabelUtils.urlRegexp.test(incidenceInfo.incidenceWrapper.location);
                         onLinkActivated: Qt.openUrlExternally(link)
-                        wrapMode: Text.Wrap
                         visible: incidenceInfo.incidenceWrapper.location
-
-                        MouseArea {
-                            TextEdit {  // HACK: TextEdit has copy to clipboard capabilities
-                                id: textEdit
-                                visible: false
-                            }
-
-                            anchors.fill: parent
-                            enabled: !locationLabel.isLink
-                            propagateComposedEvents: true
-                            onClicked: {
-                                textEdit.text = incidenceInfo.incidenceWrapper.location;
-                                textEdit.selectAll();
-                                textEdit.copy();
-                                showPassiveNotification(i18n("Location copied to clipboard"));
-                            }
+                        onHoveredLinkChanged: if (hoveredLink.length > 0) {
+                            applicationWindow().hoverLinkIndicator.text = hoveredLink;
+                        } else {
+                            applicationWindow().hoverLinkIndicator.text = "";
                         }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                            acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
+                        HoverHandler {
+                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor
                         }
                     }
 
@@ -489,7 +498,7 @@ Kirigami.OverlayDrawer {
                         text: i18n("<b>Description:</b>")
                         visible: incidenceInfo.incidenceWrapper.description
                     }
-                    QQC2.Label {
+                    HoverLabel {
                         id: descriptionText
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
@@ -497,14 +506,7 @@ Kirigami.OverlayDrawer {
                         textFormat: Text.MarkdownText
                         text: incidenceInfo.incidenceWrapper.description.replace(LabelUtils.urlRegexp, (match) => `[${match}](${match})`)
                         onLinkActivated: Qt.openUrlExternally(link)
-                        wrapMode: Text.Wrap
                         visible: incidenceInfo.incidenceWrapper.description
-
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                            acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
-                        }
                     }
 
                     QQC2.Label {
@@ -524,18 +526,10 @@ Kirigami.OverlayDrawer {
 
                             model: incidenceInfo.incidenceWrapper.attachmentsModel
 
-                            delegate: QQC2.Label {
+                            delegate: HoverLabel {
                                 Layout.fillWidth: true
                                 // This didn't work in Markdown format
                                 text: `<a href="${uri}">${attachmentLabel}</a>`
-                                onLinkActivated: Qt.openUrlExternally(link)
-                                wrapMode: Text.Wrap
-
-                                MouseArea {
-                                    anchors.fill: parent
-                                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                    acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
-                                }
                             }
                         }
                     }
@@ -570,24 +564,16 @@ Kirigami.OverlayDrawer {
                         text: i18n("<b>Organizer:</b>")
                         visible: incidenceInfo.incidenceWrapper.organizer.fullName
                     }
-                    QQC2.Label {
+
+                    HoverLabel {
                         Layout.fillWidth: true
 
                         property var organizer: incidenceInfo.incidenceWrapper.organizer
+                        visible: incidenceInfo.incidenceWrapper.organizer.fullName
 
-                        textFormat: Text.MarkdownText
                         text: organizer.name ?
                             `[${organizer.name}](mailto:${organizer.email})` :
                             `[${organizer.email}](mailto:${organizer.email})`
-                        onLinkActivated: Qt.openUrlExternally(link)
-                        wrapMode: Text.Wrap
-                        visible: incidenceInfo.incidenceWrapper.organizer.fullName
-
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                            acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
-                        }
                     }
 
                     QQC2.Label {
@@ -595,6 +581,7 @@ Kirigami.OverlayDrawer {
                         text: i18n("<b>Guests:</b>")
                         visible: incidenceInfo.incidenceWrapper.attendeesModel.rowCount() > 0
                     }
+
                     ColumnLayout {
                         id: attendeesColumn
 
@@ -606,19 +593,7 @@ Kirigami.OverlayDrawer {
 
                             model: incidenceInfo.incidenceWrapper.attendeesModel
 
-                            delegate: QQC2.Label {
-                                Layout.fillWidth: true
-                                textFormat: Text.MarkdownText
-                                text: name ? `[${name}](mailto:${email})` : `[${email}](mailto:${email})`
-                                onLinkActivated: Qt.openUrlExternally(link)
-                                wrapMode: Text.Wrap
-
-                                MouseArea {
-                                    anchors.fill: parent
-                                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                    acceptedButtons: Qt.NoButton // Not actually accepting clicks, just changing the cursor
-                                }
-                            }
+                            delegate: HoverLabel {}
                         }
                     }
                 }
