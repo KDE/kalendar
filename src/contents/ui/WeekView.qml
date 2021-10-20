@@ -50,7 +50,6 @@ Kirigami.Page {
         const date = new Date(0, 0, 0, 0, 0, 0, 1);
         for(let i = 0; i < 23; i++) {
             date.setHours(i);
-            console.log(i, date.getHours());
             hourStrings.push(date.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat));
             hourStringsChanged();
         }
