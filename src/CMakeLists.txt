@@ -38,6 +38,7 @@ target_link_libraries(kalendar
     Qt5::Qml
     Qt5::Quick
     Qt5::QuickControls2
+    Qt5::QuickWidgets
     Qt5::Svg
     Qt5::Location
     KF5::I18n
@@ -72,10 +73,16 @@ qt_add_dbus_adaptor(kalendarpart_PART_SRCS
 qt_add_dbus_interfaces(kalendarpart_PART_SRCS ${kalendar_SOURCE_DIR}/src/org.kde.kalendar.part.xml)
 add_library(kalendarpart MODULE ${kalendarpart_PART_SRCS})
 
+kcoreaddons_desktop_to_json(kalendarpart ${kalendar_SOURCE_DIR}/src/kalendar_part.desktop)
+
 target_link_libraries(kalendarpart
+    KF5::CoreAddons
     KF5::I18n
     KF5::Parts
     Qt5::QuickWidgets
+    Qt5::DBus
+    Qt5::Core
+    Qt5::Gui
 )
 
 install(TARGETS
