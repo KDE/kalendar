@@ -14,7 +14,7 @@ import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
 
-Kirigami.ApplicationWindow {
+Kirigami.ApplicationItem {
     id: root
 
     width: Kirigami.Units.gridUnit * 65
@@ -242,23 +242,23 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    title: if(pageStack.currentItem) {
-        switch (pageStack.currentItem.objectName) {
-            case "monthView":
-                return i18n("Month View");
-                break;
-            case "scheduleView":
-                return i18n("Schedule View");
-                break;
-            case "todoView":
-                return i18n("Tasks View");
-                break;
-            default:
-                return i18n("Calendar");
-        }
-    } else {
-        return i18n("Calendar");
-    }
+    //title: if(pageStack.currentItem) {
+    //    switch (pageStack.currentItem.objectName) {
+    //        case "monthView":
+    //            return i18n("Month View");
+    //            break;
+    //        case "scheduleView":
+    //            return i18n("Schedule View");
+    //            break;
+    //        case "todoView":
+    //            return i18n("Tasks View");
+    //            break;
+    //        default:
+    //            return i18n("Calendar");
+    //    }
+    //} else {
+    //    return i18n("Calendar");
+    //}
 
     pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
 

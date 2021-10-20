@@ -77,7 +77,7 @@ KalendarPart::KalendarPart(QWidget *parentWidget, QObject *parent, const QVarian
 
     m_widget = new QQuickWidget;
     m_widget->rootContext()->setContextObject(new KLocalizedContext(m_widget->engine()));
-    m_widget->setSource(QUrl(QStringLiteral("qrc:///MonthView.qml")));
+    m_widget->setSource(QUrl(QStringLiteral("qrc:///main.qml")));
     m_widget->show();
 
     setWidget(m_widget);
