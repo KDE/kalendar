@@ -1,4 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Felipe Kinoshita <kinofhek@gmail.com>
+// SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+// SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick 2.15
@@ -23,10 +25,10 @@ Kirigami.OverlayDrawer {
 
     Connections {
         target: applicationWindow()
-        function onWideScreenChanged() {
+        function onWidthChanged() {
             if(!Kirigami.Settings.isMobile && !Config.forceCollapsedSidebar) {
-                sidebar.collapsed = !wideScreen
-            }
+                sidebar.collapsed = applicationWindow().width < Kirigami.Units.gridUnit * 50
+            } // HACK: Workaround for incredibly glitchy behaviour caused by using wideScreen property
         }
     }
 
@@ -38,7 +40,7 @@ Kirigami.OverlayDrawer {
     }
 
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
-    modal: !wideScreen && !collapsed // Only modal when not collapsed, otherwise collapsed won't show.
+    modal: applicationWindow().width < Kirigami.Units.gridUnit * 50 && !collapsed // Only modal when not collapsed, otherwise collapsed won't show.
     // Changing the modality automatically opens the drawer, so making the sidebar collapsed opens the
     // drawer. This is more intuitive than having two buttons each of which handle different aspects of
     // the drawer.
