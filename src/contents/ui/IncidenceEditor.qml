@@ -82,6 +82,12 @@ Kirigami.ScrollablePage {
                 edited(incidenceWrapper);
             } else {
                 added(incidenceWrapper);
+                if(root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
+                    Config.lastUsedTodoCollection = root.incidenceWrapper.collectionId;
+                } else {
+                    Config.lastUsedEventCollection = root.incidenceWrapper.collectionId;
+                }
+                Config.save();
             }
             cancel();
         }
@@ -139,7 +145,6 @@ Kirigami.ScrollablePage {
                     valueRole: "collectionId"
                     currentIndex: model && collectionId !== -1 ? CalendarManager.getCalendarSelectableIndex(root.incidenceWrapper) : -1
 
-                    // Should default to default collection
                     model: {
                         if(root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeEvent) {
                             return CalendarManager.selectableEventCalendars;
@@ -335,7 +340,7 @@ Kirigami.ScrollablePage {
 
                     textRole: "display"
                     valueRole: "interval"
-                    onCurrentIndexChanged: if(currentIndex == 0) { root.incidenceWrapper.clearRecurrences() }
+                    onCurrentIndexChanged: if(currentIndex === 0) { root.incidenceWrapper.clearRecurrences() }
                     currentIndex: {
                         switch(root.incidenceWrapper.recurrenceData.type) {
                             case 0:
@@ -574,7 +579,7 @@ Kirigami.ScrollablePage {
                             id: recurEndDateCombo
 
                             Layout.fillWidth: true
-                            visible: endRecurType.currentIndex == 1
+                            visible: endRecurType.currentIndex === 1
                             onVisibleChanged: if (visible && isNaN(root.incidenceWrapper.recurrenceData.endDateTime.getTime())) { root.incidenceWrapper.setRecurrenceDataItem("endDateTime", new Date()); }
                             editable: true
                             editText: root.incidenceWrapper.recurrenceData.endDateTime.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);

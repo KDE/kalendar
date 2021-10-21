@@ -576,8 +576,6 @@ Kirigami.ApplicationWindow {
                 newEnd = new Date(addDate.setHours(existingStart.getHours() + 1, existingStart.getMinutes()));
             }
 
-            console.log(includeTime, newStart, newEnd)
-
             if(type === IncidenceWrapper.TypeEvent) {
                 editorToUse.incidenceWrapper.incidenceStart = newStart;
                 editorToUse.incidenceWrapper.incidenceEnd = newEnd;
@@ -588,6 +586,10 @@ Kirigami.ApplicationWindow {
 
         if(collectionId && collectionId >= 0) {
             editorToUse.incidenceWrapper.collectionId = collectionId;
+        } else if(type === IncidenceWrapper.TypeEvent && Config.lastUsedEventCollection > -1) {
+            editorToUse.incidenceWrapper.collectionId = Config.lastUsedEventCollection;
+        } else if (type === IncidenceWrapper.TypeTodo && Config.lastUsedTodoCollection > -1) {
+            editorToUse.incidenceWrapper.collectionId = Config.lastUsedTodoCollection;
         } else {
             editorToUse.incidenceWrapper.collectionId = CalendarManager.defaultCalendarId(editorToUse.incidenceWrapper);
         }

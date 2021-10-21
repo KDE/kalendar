@@ -51,6 +51,17 @@ SPDX-License-Identifier: LGPL-2.0-or-later
         </entry>
     </group>
 
+    <group name="Editor">
+        <entry name="lastUsedEventCollection" type="Int">
+            <label>The last used event collection used when creating a event.</label>
+            <default>-1</default>
+        </entry>
+        <entry name="lastUsedTodoCollection" type="Int">
+            <label>The last used todo collection used when creating a todo.</label>
+            <default>-1</default>
+        </entry>
+    </group>
+
     <group name="MonthView">
         <entry name="weekdayLabelAlignment" type="Enum">
             <label>Alignment of week day header in month view.</label>
