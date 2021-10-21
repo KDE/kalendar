@@ -56,6 +56,16 @@ Kirigami.ScrollablePage {
         "";
     }
 
+    function setNewStart(newStart) {
+        if(!isNaN(newStart.getTime()) && incidenceWrapper) {
+            const currentStartEndDiff = incidenceWrapper.incidenceEnd.getTime() - incidenceWrapper.incidenceStart.getTime();
+            const newEnd = new Date(newStart.getTime() + currentStartEndDiff);
+
+            incidenceWrapper.incidenceStart = newStart;
+            incidenceWrapper.incidenceEnd = newEnd;
+        }
+    }
+
     footer: QQC2.DialogButtonBox {
         standardButtons: QQC2.DialogButtonBox.Cancel
 
@@ -242,13 +252,13 @@ Kirigami.ScrollablePage {
                         timePicker: incidenceStartTimeCombo.timePicker
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceStart
-                        onNewDateChosen: root.incidenceWrapper.incidenceStart = newDate
+                        onNewDateChosen: root.setNewStart(newDate)
                     }
                     TimeCombo {
                         id: incidenceStartTimeCombo
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceStart
-                        onNewTimeChosen: root.incidenceWrapper.incidenceStart = newTime
+                        onNewTimeChosen: root.setNewStart(newTime)
                         enabled: !allDayCheckBox.checked && (!incidenceForm.isTodo || incidenceStartCheckBox.checked)
                         visible: !allDayCheckBox.checked
                     }
