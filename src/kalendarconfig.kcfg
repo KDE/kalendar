@@ -15,6 +15,10 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             <label>Show the Menubar.</label>
             <default>false</default>
         </entry>
+        <entry name="forceCollapsedSidebar" type="Bool">
+            <label>Always have sidebar collapsed.</label>
+            <default>false</default>
+        </entry>
         <entry name="enableMaps" type="Bool">
             <label>Enable maps. NOTE: may cause crashing on some systems.</label>
             <default>false</default>

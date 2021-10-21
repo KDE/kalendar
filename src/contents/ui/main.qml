@@ -780,7 +780,10 @@ Kirigami.ApplicationWindow {
                 QQC2.ToolButton {
                     visible: !Kirigami.Settings.isMobile
                     icon.name: sidebar.collapsed ? "sidebar-expand" : "sidebar-collapse"
-                    onClicked: sidebar.collapsed = !sidebar.collapsed
+                    onClicked: {
+                        Config.forceCollapsedSidebar = !Config.forceCollapsedSidebar;
+                        Config.save()
+                    }
 
                     QQC2.ToolTip.text: sidebar.collapsed ? i18n("Expand Sidebar") : i18n("Collapse Sidebar")
                     QQC2.ToolTip.visible: hovered

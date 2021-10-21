@@ -24,19 +24,33 @@ Kirigami.OverlayDrawer {
     Connections {
         target: applicationWindow()
         function onWideScreenChanged() {
-            if(!Kirigami.Settings.isMobile) {
+            if(!Kirigami.Settings.isMobile && !Config.forceCollapsedSidebar) {
                 sidebar.collapsed = !wideScreen
             }
         }
     }
 
+    Connections {
+        target: Config
+        function onForceCollapsedSidebarChanged() {
+            sidebar.collapsed = Config.forceCollapsedSidebar;
+        }
+    }
+
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
-    modal: !wideScreen && !collapsed
-    handleVisible: !wideScreen && !collapsed
+    modal: !wideScreen && !collapsed // Only modal when not collapsed, otherwise collapsed won't show.
+    // Changing the modality automatically opens the drawer, so making the sidebar collapsed opens the
+    // drawer. This is more intuitive than having two buttons each of which handle different aspects of
+    // the drawer.
+    collapsed: Config.forceCollapsedSidebar
+    handleVisible: modal
     handleClosedIcon.source: null
     handleOpenIcon.source: null
     drawerOpen: !Kirigami.Settings.isMobile
-    onDrawerOpenChanged: if(!Kirigami.Settings.isMobile && !wideScreen && !collapsed) collapsed = true, drawerOpen = true, collapsedChanged()
+    // We want the modal drawer to close into a collapsed non-modal drawer, not to close the drawer altogether.
+    // Otherwise the collapsed drawer would not be visible (and without the handle we'd have no way to open it).
+    // We also have to re-notify because of some dumb glitch, idk.
+    onDrawerOpenChanged: if(!Kirigami.Settings.isMobile && modal) collapsed = true, drawerOpen = true, collapsedChanged()
     width: sidebar.collapsed ? menu.Layout.minimumWidth + Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit * 16
     Behavior on width { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
 
