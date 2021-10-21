@@ -21,13 +21,22 @@ Kirigami.OverlayDrawer {
     property bool todoMode: false
     property alias toolbar: toolbar
 
+    Connections {
+        target: applicationWindow()
+        function onWideScreenChanged() {
+            if(!Kirigami.Settings.isMobile) {
+                sidebar.collapsed = !wideScreen
+            }
+        }
+    }
+
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
-    modal: !wideScreen
-    onModalChanged: drawerOpen = !modal
-    handleVisible: !wideScreen
+    modal: !wideScreen && !collapsed
+    handleVisible: !wideScreen && !collapsed
     handleClosedIcon.source: null
     handleOpenIcon.source: null
     drawerOpen: !Kirigami.Settings.isMobile
+    onDrawerOpenChanged: if(!Kirigami.Settings.isMobile && !wideScreen && !collapsed) collapsed = true, drawerOpen = true, collapsedChanged()
     width: sidebar.collapsed ? menu.Layout.minimumWidth + Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit * 16
     Behavior on width { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
 
