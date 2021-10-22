@@ -198,7 +198,7 @@ Kirigami.ApplicationWindow {
         }
 
         function onTodoViewShowCompleted() {
-            pageStack.currentItem.completedSheet.open();
+            pageStack.pushDialogLayer(pageStack.currentItem.completedSheetComponent)
         }
 
         function onQuit() {
@@ -792,9 +792,6 @@ Kirigami.ApplicationWindow {
                     QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 }
                 Kirigami.Heading {
-                    anchors.left: parent.left
-                    anchors.leftMargin: !Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-                    anchors.verticalCenter: parent.verticalCenter
                     text: i18n("Tasks")
                 }
             }

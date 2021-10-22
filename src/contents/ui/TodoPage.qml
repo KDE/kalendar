@@ -64,7 +64,6 @@ Kirigami.ScrollablePage {
 
     readonly property color standardTextColor: Kirigami.Theme.textColor
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
-    readonly property alias completedSheet: completedSheet
 
     padding: 0
     leftPadding: Kirigami.Units.largeSpacing
@@ -121,56 +120,120 @@ Kirigami.ScrollablePage {
 
     }
 
-    // TODO lazy load it
-    readonly property Kirigami.OverlaySheet completedSheet: Kirigami.OverlaySheet {
+    property Component completedSheetComponent: Kirigami.ScrollablePage {
         id: completedSheet
         title: root.filterCollectionDetails && root.filter && root.filter.collectionId > -1 ?
             i18n("Completed Tasks in %1", root.filterCollectionDetails.displayName) : i18n("Completed Tasks")
-        showCloseButton: true
 
-        contentItem: Loader {
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
-            height: applicationWindow().height * 0.8
-            active: completedSheet.sheetOpen
-            sourceComponent: QQC2.ScrollView {
-                anchors.fill: parent
-                contentWidth: availableWidth
-                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+        TodoTreeView {
+            id: completeView
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
-                TodoTreeView {
-                    id: completeView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+            filter: root.filter
+            filterCollectionDetails: root.filterCollectionDetails
 
-                    filter: root.filter
-                    filterCollectionDetails: root.filterCollectionDetails
+            showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
+            sortBy: root.sortBy
+            ascendingOrder: root.ascendingOrder
+            onAddTodo: {
+                root.addTodo(collectionId)
+                completedSheet.closeDialog();
+            }
+            onViewTodo: {
+                root.retainTodoData(todoData, collectionData);
+                completedSheet.closeDialog();
+            }
+            onEditTodo: {
+                root.editTodo(todoPtr, collectionId);
+                completedSheet.closeDialog();
+            }
+            onDeleteTodo: {
+                root.deleteTodo(todoPtr, deleteDate);
+                completedSheet.closeDialog();
+            }
+            onCompleteTodo: root.completeTodo(todoPtr);
+            onAddSubTodo: root.addSubTodo(parentWrapper)
+        }
+    }
 
-                    showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
-                    sortBy: root.sortBy
-                    ascendingOrder: root.ascendingOrder
-                    onAddTodo: {
-                        root.addTodo(collectionId)
-                        completedSheet.close();
+    Component {
+        id: collectionPickerSheetComponent
+        Kirigami.ScrollablePage {
+            id: collectionPickerSheet
+            title: i18n("Choose a Task Calendar")
+
+            property var incidenceWrapper
+
+            ListView {
+                id: collectionsList
+                implicitWidth: Kirigami.Units.gridUnit * 30
+                currentIndex: -1
+                header: ColumnLayout {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+
+                }
+
+                model: KDescendantsProxyModel {
+                    model: Kalendar.CalendarManager.todoCollections
+                }
+
+                delegate: DelegateChooser {
+                    role: 'kDescendantExpandable'
+                    DelegateChoice {
+                        roleValue: true
+
+                        Kirigami.BasicListItem {
+                            label: display
+                            labelItem.color: Kirigami.Theme.disabledTextColor
+                            labelItem.font.weight: Font.DemiBold
+                            topPadding: 2 * Kirigami.Units.largeSpacing
+                            hoverEnabled: false
+                            background: Item {}
+
+                            separatorVisible: false
+
+                            trailing: Kirigami.Icon {
+                                width: Kirigami.Units.iconSizes.small
+                                height: Kirigami.Units.iconSizes.small
+                                source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                                x: -4
+                            }
+
+                            onClicked: collectionsList.model.toggleChildren(index)
+                        }
                     }
-                    onViewTodo: {
-                        root.retainTodoData(todoData, collectionData);
-                        completedSheet.close();
+
+                    DelegateChoice {
+                        roleValue: false
+                        Kirigami.BasicListItem {
+                            label: display
+                            labelItem.color: Kirigami.Theme.textColor
+
+                            hoverEnabled: false
+
+                            separatorVisible: false
+
+                            onClicked: {
+                                collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
+                                Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
+                                collectionPickerSheet.closeDialog();
+                                addField.clear();
+                            }
+
+                            trailing: Rectangle {
+                                color: model.collectionColor
+                                radius: Kirigami.Units.smallSpacing
+                                width: height
+                                height: Kirigami.Units.iconSizes.small
+                            }
+                        }
                     }
-                    onEditTodo: {
-                        root.editTodo(todoPtr, collectionId);
-                        completedSheet.close();
-                    }
-                    onDeleteTodo: {
-                        root.deleteTodo(todoPtr, deleteDate);
-                        completedSheet.close();
-                    }
-                    onCompleteTodo: root.completeTodo(todoPtr);
-                    onAddSubTodo: root.addSubTodo(parentWrapper)
                 }
             }
         }
     }
-
 
     TodoTreeView {
         id: incompleteView
@@ -192,81 +255,6 @@ Kirigami.ScrollablePage {
         onAddSubTodo: root.addSubTodo(parentWrapper)
     }
 
-    // TODO lazy load it
-    readonly property Kirigami.OverlaySheet collectionPickerSheet: Kirigami.OverlaySheet {
-        id: collectionPickerSheet
-        title: i18n("Choose a Task Calendar")
-
-        property var incidenceWrapper
-
-        ListView {
-            id: collectionsList
-            implicitWidth: Kirigami.Units.gridUnit * 30
-            currentIndex: -1
-            header: ColumnLayout {
-                anchors.left: parent.left
-                anchors.right: parent.right
-
-            }
-
-            model: KDescendantsProxyModel {
-                model: Kalendar.CalendarManager.todoCollections
-            }
-
-            delegate: DelegateChooser {
-                role: 'kDescendantExpandable'
-                DelegateChoice {
-                    roleValue: true
-
-                    Kirigami.BasicListItem {
-                        label: display
-                        labelItem.color: Kirigami.Theme.disabledTextColor
-                        labelItem.font.weight: Font.DemiBold
-                        topPadding: 2 * Kirigami.Units.largeSpacing
-                        hoverEnabled: false
-                        background: Item {}
-
-                        separatorVisible: false
-
-                        trailing: Kirigami.Icon {
-                            width: Kirigami.Units.iconSizes.small
-                            height: Kirigami.Units.iconSizes.small
-                            source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                            x: -4
-                        }
-
-                        onClicked: collectionsList.model.toggleChildren(index)
-                    }
-                }
-
-                DelegateChoice {
-                    roleValue: false
-                    Kirigami.BasicListItem {
-                        label: display
-                        labelItem.color: Kirigami.Theme.textColor
-
-                        hoverEnabled: false
-
-                        separatorVisible: false
-
-                        onClicked: {
-                            collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
-                            Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
-                            collectionPickerSheet.close();
-                            addField.clear();
-                        }
-
-                        trailing: Rectangle {
-                            color: model.collectionColor
-                            radius: Kirigami.Units.smallSpacing
-                            width: height
-                            height: Kirigami.Units.iconSizes.small
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     footer: Kirigami.ActionTextField {
         id: addField
@@ -301,8 +289,9 @@ Kirigami.ScrollablePage {
                     Kalendar.CalendarManager.addIncidence(incidenceWrapper);
                     addField.clear();
                 } else {
-                    collectionPickerSheet.incidenceWrapper = incidenceWrapper;
-                    collectionPickerSheet.open();
+                    QQC2.ApplicationWindow.window.pageStack.pushDialogLayer(collectionPickerSheetComponent, {
+                        incidenceWrapper: incidenceWrapper
+                    });
                 }
             }
         }
