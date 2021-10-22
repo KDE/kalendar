@@ -63,21 +63,6 @@ Kirigami.OverlayDrawer {
     topPadding: 0
     bottomPadding: 0
 
-    function getCurrentView() {
-        switch (pageStack.currentItem.objectName) {
-            case "monthView":
-                return 0;
-            case "weekView":
-                return 1;
-            case "scheduleView":
-                return 2;
-            case "todoView":
-                return 3;
-            default:
-                return 0;
-        }
-    }
-
     contentItem: ColumnLayout {
         id: container
         spacing: 0
