@@ -10,10 +10,9 @@ import org.kde.kalendar 1.0
 Kirigami.ScrollablePage {
     title: i18n("Views")
     Kirigami.FormLayout {
-        Kirigami.Heading {
-            level: 3
+        Item {
             Kirigami.FormData.isSection: true
-            text: i18n("Month View settings")
+            Kirigami.FormData.label: i18n("Month View settings")
         }
         Controls.ButtonGroup {
             buttons: weekdayLabelAlignmentButtonColumn.children
