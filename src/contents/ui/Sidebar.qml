@@ -40,7 +40,7 @@ Kirigami.OverlayDrawer {
     }
 
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
-    modal: applicationWindow().width < Kirigami.Units.gridUnit * 50 && !collapsed // Only modal when not collapsed, otherwise collapsed won't show.
+    modal: Kirigami.Settings.isMobile || (applicationWindow().width < Kirigami.Units.gridUnit * 50 && !collapsed) // Only modal when not collapsed, otherwise collapsed won't show.
     // Changing the modality automatically opens the drawer, so making the sidebar collapsed opens the
     // drawer. This is more intuitive than having two buttons each of which handle different aspects of
     // the drawer.
