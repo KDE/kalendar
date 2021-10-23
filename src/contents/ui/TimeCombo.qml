@@ -33,7 +33,7 @@ QQC2.ComboBox {
     property alias timePicker: popupTimePicker
 
     editable: true
-    editText: activeFocus ? editText : DateUtils.adjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset).toLocaleTimeString(Qt.locale(), "HH:mm")
+    editText: activeFocus && !popupTimePicker.visible ? editText : DateUtils.adjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset).toLocaleTimeString(Qt.locale(), "HH:mm")
 
     inputMethodHints: Qt.ImhTime
     validator: activeFocus ? inputValidator : timeValidator
@@ -42,7 +42,7 @@ QQC2.ComboBox {
         if(!isNaN(dateTime.getTime())) {
             popupTimePicker.setToTimeFromString(editText)
         }
-        if (acceptableInput && activeFocus) { // Need to check for activeFocus or on load the text gets reset to 00:00
+        if (acceptableInput && activeFocus && !popupTimePicker.visible) { // Need to check for activeFocus or on load the text gets reset to 00:00
             newTimeChosen(new Date(DateUtils.adjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset).setHours(popupTimePicker.hours, popupTimePicker.minutes)));
         }
     }
@@ -50,7 +50,7 @@ QQC2.ComboBox {
     popup: QQC2.Popup {
         id: timePopup
         width: parent.width
-        height: parent.width * 2
+        height: parent.width * 1.5
         y: parent.y + parent.height
         z: 1000
 
@@ -61,7 +61,8 @@ QQC2.ComboBox {
             Connections {
                 target: root
                 function onDateTimeChanged() {
-                    popupTimePicker.setToTimeFromString(root.editText);
+                    if(!popupTimePicker.visible)
+                        popupTimePicker.setToTimeFromString(root.editText);
                 }
             }
 

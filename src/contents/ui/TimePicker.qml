@@ -59,6 +59,16 @@ Item {
         }
     }
 
+    function wheelHandler(parent, wheel) {
+        if(parent.currentIndex == parent.count - 1) {
+            wheel.angleDelta.y < 0 ? parent.currentIndex = 0 : parent.currentIndex -= 1;
+        } else if(parent.currentIndex == 0) {
+            wheel.angleDelta.y < 0 ? parent.currentIndex += 1 : parent.currentIndex = parent.count - 1;
+        } else {
+            wheel.angleDelta.y < 0 ? parent.currentIndex += 1 : parent.currentIndex -= 1;
+        }
+    }
+
     GridLayout {
         anchors.fill: parent
         columns: timePicker.secondsPicker ? 5 : 3
@@ -111,8 +121,10 @@ Item {
         QQC2.Tumbler {
             id: hourView
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.row: 2
             Layout.column: 0
+            wrap: true
 
             model: 24
 
@@ -125,6 +137,11 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
                 text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onWheel: timePicker.wheelHandler(parent, wheel)
             }
         }
 
@@ -139,6 +156,7 @@ Item {
         QQC2.Tumbler {
             id: minuteView
             Layout.fillWidth: true
+            Layout.fillHeight: true
             wrap: true
 
             property int selectedIndex: 0
@@ -161,6 +179,11 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
                 text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onWheel: timePicker.wheelHandler(parent, wheel)
             }
         }
 
@@ -194,6 +217,11 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 opacity: secondsView.currentIndex == thisIndex ? 1 : 0.7
                 text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onWheel: timePicker.wheelHandler(parent, wheel)
             }
         }
 
