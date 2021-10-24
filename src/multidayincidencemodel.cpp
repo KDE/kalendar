@@ -50,7 +50,7 @@ static long long getDuration(const QDate &start, const QDate &end)
     return qMax(start.daysTo(end) + 1, 1ll);
 }
 
-// We first sort all occurences so we get all-day first (sorted by duration),
+// We first sort all occurrences so we get all-day first (sorted by duration),
 // and then the rest sorted by start-date.
 QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const QDate &rowStart) const
 {

@@ -411,7 +411,7 @@ CalendarManager::CalendarManager(QObject *parent)
     m_todoRightsFilterModel->setSourceModel(m_todoMimeTypeFilterModel);
     m_todoRightsFilterModel->sort(0);
 
-    // Model for todo vie collection picker
+    // Model for todo via collection picker
     m_todoViewCollectionModel = new KalendarCollectionFilterProxyModel(this);
     m_todoViewCollectionModel->setSourceModel(collectionFilter);
     m_todoViewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));

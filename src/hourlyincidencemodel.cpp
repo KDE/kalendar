@@ -47,7 +47,7 @@ static double getDuration(const QDateTime &start, const QDateTime &end, int peri
     return ((start.secsTo(end) * 1.0) / 60.0) / periodLength;
 }
 
-// We first sort all occurences so we get all-day first (sorted by duration),
+// We first sort all occurrences so we get all-day first (sorted by duration),
 // and then the rest sorted by start-date.
 QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const QDateTime &rowStart) const
 {

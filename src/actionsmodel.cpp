@@ -18,7 +18,7 @@ KalCommandBarModel::KalCommandBarModel(QObject *parent)
 void fillRows(QVector<KalCommandBarModel::Item> &rows, const QString &title, const QList<QAction *> &actions, std::unordered_set<QAction *> &uniqueActions)
 {
     for (const auto &action : actions) {
-        // We don't want diabled actions
+        // We don't want disabled actions
         if (!action->isEnabled()) {
             continue;
         }

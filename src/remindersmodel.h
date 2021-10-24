@@ -12,7 +12,7 @@
 /**
  * This class provides a QAbstractItemModel for an incidences' reminders/alarms.
  * This can be useful for letting users add, modify, or delete incidences on new or pre-existing incidences.
- * It treats the incidence's list of alarms as the signle source of truth (and it should be kept this way!)
+ * It treats the incidence's list of alarms as the single source of truth (and it should be kept this way!)
  *
  * The data for the model comes from m_incidence, which is set in the constructor. This is a pointer to the
  * incidence this model is getting the alarm info from. All alarm pointers are then added to m_alarms, which

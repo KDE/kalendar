@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC0-1.0
 
 # Kalendar
 
-Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you add, edit and delete events from local and remote accounts of your choice, while keeping changes syncronised across your Plasma desktop or phone.
+Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you add, edit and delete events from local and remote accounts of your choice, while keeping changes synchronised across your Plasma desktop or phone.
 
 **Kalendar is still under heavy development, and has no stable releases yet.** We do, however, welcome suggestions! Get involved and join our Matrix channel: #kalendar:kde.org
 
@@ -28,7 +28,7 @@ Please note that this is pre-release software and that you may encounter bugs, c
 
 ## Build
 
-**Kalendar requires KFrameworks 5.86 to be installed.** This package version is fairly recent and may not yet be available in your distibution of choice, meaning Kalendar might not work.
+**Kalendar requires KFrameworks 5.86 to be installed.** This package version is fairly recent and may not yet be available in your distribution of choice, meaning Kalendar might not work.
 
 **We also strongly recommend you install the `kdepim-runtime` package before starting Kalendar** -- this will provide you with the ability to add calendars from online resources. Having this package will also let Kalendar's backend automatically create a default local calendar. 
 
