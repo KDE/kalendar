@@ -21,6 +21,7 @@ TreeListView {
     signal deleteTodo(var todoPtr, date deleteDate)
     signal completeTodo(var todoPtr)
     signal addSubTodo(var parentWrapper)
+    signal deselect()
 
     property date currentDate: new Date()
     property var filter
@@ -34,6 +35,15 @@ TreeListView {
 
     currentIndex: -1
     clip: true
+
+    MouseArea {
+        id: incidenceDeselectorMouseArea
+        anchors.fill: parent
+        enabled: !Kirigami.Settings.isMobile
+        parent: background
+        onClicked: deselect()
+        propagateComposedEvents: true
+    }
 
     Kirigami.PlaceholderMessage {
         anchors.centerIn: parent

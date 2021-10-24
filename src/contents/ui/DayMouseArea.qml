@@ -11,6 +11,7 @@ MouseArea {
     id: dayMouseArea
 
     signal addNewIncidence(int type, date addDate)
+    signal deselect
 
     property string defaultType: Kalendar.IncidenceWrapper.TypeEvent
     property date addDate
@@ -19,6 +20,8 @@ MouseArea {
 
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.RightButton
+
+    onClicked: deselect()
 
     onDoubleClicked: {
         if (pressedButtons & Qt.LeftButton) {

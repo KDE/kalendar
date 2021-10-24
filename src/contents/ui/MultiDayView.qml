@@ -21,6 +21,7 @@ Item {
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
     signal addSubTodo(var parentWrapper)
+    signal deselect()
 
     property var openOccurrence
 
@@ -163,6 +164,7 @@ Item {
                                                 anchors.fill: parent
                                                 addDate: gridItem.date
                                                 onAddNewIncidence: addIncidence(type, addDate)
+                                                onDeselect: root.deselect()
                                             }
                                         }
 
@@ -264,6 +266,7 @@ Item {
                                     }
 
                                     onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
+                                    onDeselect: root.deselect()
                                 }
 
                                 model: incidences

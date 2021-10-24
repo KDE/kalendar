@@ -19,6 +19,7 @@ Kirigami.Page {
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
     signal addSubTodo(var parentWrapper)
+    signal deselect()
 
     property var openOccurrence
     property var filter: {
@@ -220,6 +221,7 @@ Kirigami.Page {
 
                         addDate: periodStartDate
                         onAddNewIncidence: addIncidence(type, addDate)
+                        onDeselect: root.deselect()
 
                         Rectangle {
                             anchors.top: parent.top

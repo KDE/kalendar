@@ -106,6 +106,13 @@ SPDX-License-Identifier: LGPL-2.0-or-later
         </entry>
     </group>
 
+    <group name="WeekView">
+        <entry name="weekViewAllDayHeaderHeight" type="Int">
+            <label>Set the height of the all-day header at the top of the week view."</label>
+            <default>-1</default>
+        </entry>
+    </group>
+
     <group name="ScheduleView">
         <entry name="showMonthHeader" type="Bool">
             <label>Show month header in schedule view.</label>

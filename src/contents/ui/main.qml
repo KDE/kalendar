@@ -387,7 +387,7 @@ Kirigami.ApplicationWindow {
         readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
         property int actualWidth: {
             if (Config.incidenceInfoDrawerWidth === -1) {
-                return Kirigami.Units.gridUnit * 20;
+                return defaultWidth;
             } else {
                 return Config.incidenceInfoDrawerWidth;
             }
@@ -663,18 +663,6 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    MouseArea {
-        id: incidenceDeselectorMouseArea
-        anchors.fill: parent
-        enabled: !Kirigami.Settings.isMobile
-        parent: todoViewAction.checked ? pageStack.currentItem.background : pageStack.currentItem
-        onClicked: {
-            incidenceInfo.close()
-            mouse.accepted = false
-        }
-        propagateComposedEvents: true
-    }
-
     Component {
         id: monthViewComponent
 
@@ -695,6 +683,7 @@ Kirigami.ApplicationWindow {
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onDeselect: incidenceInfo.close()
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
@@ -731,6 +720,7 @@ Kirigami.ApplicationWindow {
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onDeselect: incidenceInfo.close()
 
             actions.contextualActions: createAction
         }
@@ -765,6 +755,7 @@ Kirigami.ApplicationWindow {
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onDeselect: incidenceInfo.close()
 
             actions.contextualActions: createAction
         }
@@ -802,6 +793,7 @@ Kirigami.ApplicationWindow {
             onDeleteTodo: root.setUpDelete(todoPtr, deleteDate)
             onCompleteTodo: root.completeTodo(todoPtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onDeselect: incidenceInfo.close()
         }
     }
 
