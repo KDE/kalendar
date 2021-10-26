@@ -19,7 +19,7 @@ class KalendarApplication : public QObject
     Q_PROPERTY(QSortFilterProxyModel *actionsModel READ actionsModel CONSTANT)
 public:
     explicit KalendarApplication(QObject *parent = nullptr);
-    ~KalendarApplication();
+    ~KalendarApplication() override;
     Q_INVOKABLE QAction *action(const QString &name);
 
     Q_INVOKABLE QString iconName(const QIcon &icon) const;

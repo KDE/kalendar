@@ -32,7 +32,7 @@ public:
 
 public:
     explicit MonthModel(QObject *parent = nullptr);
-    ~MonthModel();
+    ~MonthModel() override;
 
     int year() const;
     void setYear(int year);

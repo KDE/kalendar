@@ -22,7 +22,7 @@ public:
     Q_ENUM(Roles);
 
     explicit RecurrenceExceptionsModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
-    ~RecurrenceExceptionsModel() = default;
+    ~RecurrenceExceptionsModel() override = default;
 
     KCalendarCore::Incidence::Ptr incidencePtr();
     void setIncidencePtr(KCalendarCore::Incidence::Ptr incidence);

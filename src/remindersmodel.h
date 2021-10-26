@@ -37,7 +37,7 @@ public:
     Q_ENUM(Roles);
 
     explicit RemindersModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
-    ~RemindersModel() = default;
+    ~RemindersModel() override = default;
 
     KCalendarCore::Incidence::Ptr incidencePtr();
     void setIncidencePtr(KCalendarCore::Incidence::Ptr incidence);

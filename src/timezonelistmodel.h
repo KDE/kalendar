@@ -16,7 +16,7 @@ public:
     Q_ENUM(Roles);
 
     TimeZoneListModel(QObject *parent = nullptr);
-    ~TimeZoneListModel() = default;
+    ~TimeZoneListModel() override = default;
 
     QVariant data(const QModelIndex &idx, int role) const override;
     QHash<int, QByteArray> roleNames() const override;

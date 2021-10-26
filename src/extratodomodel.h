@@ -48,7 +48,7 @@ public:
     Q_ENUM(Roles);
 
     ExtraTodoModel(QObject *parent = nullptr);
-    ~ExtraTodoModel() = default;
+    ~ExtraTodoModel() override = default;
 
     QVariant extraColumnData(const QModelIndex &parent, int row, int extraColumn, int role = Qt::DisplayRole) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

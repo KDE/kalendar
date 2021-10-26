@@ -29,7 +29,7 @@ public:
     Q_ENUM(Roles);
 
     explicit InfiniteCalendarViewModel(QObject *parent = nullptr);
-    ~InfiniteCalendarViewModel() = default;
+    ~InfiniteCalendarViewModel() override = default;
 
     void setup();
     QVariant data(const QModelIndex &idx, int role) const override;

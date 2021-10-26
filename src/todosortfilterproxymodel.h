@@ -50,7 +50,7 @@ public:
     Q_ENUM(ShowComplete);
 
     TodoSortFilterProxyModel(QObject *parent = nullptr);
-    ~TodoSortFilterProxyModel() = default;
+    ~TodoSortFilterProxyModel() override = default;
 
     bool filterAcceptsRow(int row, const QModelIndex &sourceParent) const override;
     bool filterAcceptsRowCheck(int row, const QModelIndex &sourceParent) const;

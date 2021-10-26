@@ -24,7 +24,7 @@ class ContactsManager : public QObject
 
 public:
     ContactsManager(QObject *parent = nullptr);
-    ~ContactsManager() = default;
+    ~ContactsManager() override = default;
 
     QSortFilterProxyModel *contactsModel();
     Q_INVOKABLE void contactEmails(qint64 itemId);

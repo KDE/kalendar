@@ -24,7 +24,7 @@ public:
     Q_ENUM(Roles);
 
     AttendeeStatusModel(QObject *parent = nullptr);
-    ~AttendeeStatusModel() = default;
+    ~AttendeeStatusModel() override = default;
 
     QVariant data(const QModelIndex &idx, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
@@ -59,7 +59,7 @@ public:
     Q_ENUM(Roles);
 
     explicit AttendeesModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
-    ~AttendeesModel() = default;
+    ~AttendeesModel() override = default;
 
     KCalendarCore::Incidence::Ptr incidencePtr() const;
     void setIncidencePtr(const KCalendarCore::Incidence::Ptr incidence);

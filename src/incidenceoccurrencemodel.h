@@ -69,7 +69,7 @@ public:
     };
     Q_ENUM(Roles);
     IncidenceOccurrenceModel(QObject *parent = nullptr);
-    ~IncidenceOccurrenceModel() = default;
+    ~IncidenceOccurrenceModel() override = default;
 
     QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
     QModelIndex parent(const QModelIndex &index) const override;

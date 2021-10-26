@@ -24,7 +24,7 @@ public:
     Q_ENUM(Roles);
 
     ItemTagsModel(QObject *parent = nullptr);
-    ~ItemTagsModel() = default;
+    ~ItemTagsModel() override = default;
 
     QVariant data(const QModelIndex &idx, int role) const override;
     QHash<int, QByteArray> roleNames() const override;

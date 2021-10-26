@@ -84,7 +84,7 @@ public:
     Q_ENUM(IncidenceTypes)
 
     IncidenceWrapper(QObject *parent = nullptr);
-    ~IncidenceWrapper();
+    ~IncidenceWrapper() override;
 
     void incidenceUpdate(const QString &uid, const QDateTime &recurrenceId) override;
     void incidenceUpdated(const QString &uid, const QDateTime &recurrenceId) override;

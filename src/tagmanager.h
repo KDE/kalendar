@@ -21,7 +21,7 @@ class TagManager : public QObject
 
 public:
     TagManager(QObject *parent = nullptr);
-    ~TagManager() = default;
+    ~TagManager() override = default;
 
     QSortFilterProxyModel *tagModel();
     Q_INVOKABLE void createTag(const QString &name);

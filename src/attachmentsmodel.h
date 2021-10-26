@@ -29,7 +29,7 @@ public:
     Q_ENUM(Roles);
 
     explicit AttachmentsModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
-    ~AttachmentsModel() = default;
+    ~AttachmentsModel() override = default;
 
     KCalendarCore::Incidence::Ptr incidencePtr();
     void setIncidencePtr(KCalendarCore::Incidence::Ptr incidence);

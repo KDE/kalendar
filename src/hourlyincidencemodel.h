@@ -44,7 +44,7 @@ public:
     };
 
     HourlyIncidenceModel(QObject *parent = nullptr);
-    ~HourlyIncidenceModel() = default;
+    ~HourlyIncidenceModel() override = default;
 
     QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
     QModelIndex parent(const QModelIndex &index) const override;
