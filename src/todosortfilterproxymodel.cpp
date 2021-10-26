@@ -20,12 +20,18 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
         }
     };
 
-    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsInserted, this, resetModel);
     connect(&mRefreshTimer, &QTimer::timeout, this, [&]() {
         beginResetModel();
         endResetModel();
         sortTodoModel(m_sortColumn, m_sortAscending);
     });
+
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::dataChanged, this, resetModel);
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::layoutChanged, this, resetModel);
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::modelReset, this, resetModel);
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsInserted, this, resetModel);
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsMoved, this, resetModel);
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsRemoved, this, resetModel);
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const
