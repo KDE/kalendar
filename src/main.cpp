@@ -64,6 +64,10 @@ int main(int argc, char *argv[])
                         i18nc("@info:credit", "Maintainer"),
                         QStringLiteral("claudio.cambra@gmail.com"),
                         QStringLiteral("https://claudiocambra.com"));
+    aboutData.addAuthor(i18nc("@info:credit", "Felipe Kinoshita"),
+                        i18nc("@info:credit", "Developer"),
+                        QStringLiteral("kinofhek@gmail.com"),
+                        QStringLiteral("https://fhek.gitlab.io"));
     KAboutData::setApplicationData(aboutData);
     QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar")));
 
