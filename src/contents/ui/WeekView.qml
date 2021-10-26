@@ -48,8 +48,14 @@ Kirigami.Page {
     property var hourStrings: []
     Component.onCompleted: {
         // Start at 01:00 and add hours up to 23:00
-        const date = new Date(0, 0, 0, 0, 0, 0, 1);
-        for(let i = 0; i < 23; i++) {
+        const date = new Date(1, 1, 1, 1, 0, 0, 0);
+        let i = Number(date.toLocaleTimeString(Qt.locale(), "H")[0]);
+
+        if(i > 1) { // Work around Javascript's absolutely stupid, insane and infuriating summertime hour handling
+            i -= i;
+        }
+
+        for(i; i < 24; i++) {
             date.setHours(i);
             hourStrings.push(date.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat));
             hourStringsChanged();
