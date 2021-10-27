@@ -9,8 +9,6 @@ import QtQuick.Layouts 1.4
 import QtQuick.Controls 2.2 as QQC2
 import org.kde.kirigami 2.13 as Kirigami
 import org.kde.kitemmodels 1.0
-import org.kde.kirigamiaddons.treeview 1.0 as TreeView
-
 
 ListView {
     id: root

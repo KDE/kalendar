@@ -53,5 +53,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="InternalTreeListView.qml">contents/ui/TreeView/InternalTreeListView.qml</file>
     <file alias="TreeListView.qml">contents/ui/TreeView/TreeListView.qml</file>
     <file alias="BasicTreeItem.qml">contents/ui/TreeView/BasicTreeItem.qml</file>
+    <file alias="AbstractTreeItem.qml">contents/ui/TreeView/AbstractTreeItem.qml</file>
+    <file alias="TreeViewDecoration.qml">contents/ui/TreeView/TreeViewDecoration.qml</file>
   </qresource>
 </RCC>

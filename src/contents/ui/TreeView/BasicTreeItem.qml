@@ -8,7 +8,6 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
 import org.kde.kirigami 2.14
-import org.kde.kirigamiaddons.treeview 1.0 as TreeView
 
 /**
  * An item delegate for the TreeListView and TreeTableView components.
@@ -17,7 +16,7 @@ import org.kde.kirigamiaddons.treeview 1.0 as TreeView
  * It has a default icon and a label
  *
  */
-TreeView.AbstractTreeItem {
+AbstractTreeItem {
     id: listItem
 
     /**
