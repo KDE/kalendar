@@ -253,6 +253,7 @@ Kirigami.ScrollablePage {
 
                     DateCombo {
                         id: incidenceStartDateCombo
+
                         Layout.fillWidth: true
                         timePicker: incidenceStartTimeCombo.timePicker
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
@@ -261,6 +262,8 @@ Kirigami.ScrollablePage {
                     }
                     TimeCombo {
                         id: incidenceStartTimeCombo
+
+                        Layout.fillWidth: true
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceStart
                         onNewTimeChosen: root.setNewStart(newTime)
@@ -294,8 +297,8 @@ Kirigami.ScrollablePage {
 
                     DateCombo {
                         id: incidenceEndDateCombo
-                        Layout.fillWidth: true
 
+                        Layout.fillWidth: true
                         timePicker: incidenceEndTimeCombo.timePicker
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceEnd
