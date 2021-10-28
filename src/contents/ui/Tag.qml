@@ -77,9 +77,10 @@ Item {
         anchors.fill: parent
         QQC2.Label {
             id: label
-            horizontalAlignment: Qt.AlignLeft
-            verticalAlignment: Qt.AlignVCenter
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
             Layout.fillWidth: true
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 1.5
             Layout.leftMargin: borderCover.anchors.leftMargin
             Layout.rightMargin: tagRoot.showAction ? 0 : Kirigami.Units.smallSpacing
             Layout.topMargin: tagRoot.showAction ? 0 : Kirigami.Units.smallSpacing
@@ -90,8 +91,9 @@ Item {
         }
         Kirigami.Heading {
             id: heading
-            horizontalAlignment: Qt.AlignLeft
-            verticalAlignment: Qt.AlignVCenter
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 1.5
             Layout.fillWidth: true
             Layout.leftMargin: borderCover.anchors.leftMargin
             Layout.topMargin: Kirigami.Units.smallSpacing
