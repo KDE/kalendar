@@ -5,7 +5,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
-import "dateutils.js" as DateUtils
 
 Item {
     id: timePicker
@@ -16,46 +15,17 @@ Item {
 
     anchors.fill: parent
 
-    property int timeZoneOffset: 0
-    property date dateTime: new Date()
-
-    property int hours: dateTime.getHours()
-    property int minutes: dateTime.getMinutes()
-    property int seconds: dateTime.getSeconds()
+    property int hours
+    property int minutes
+    property int seconds
 
     property int minuteMultiples: 5
     property bool secondsPicker: false
-
-    onDateTimeChanged: {
-        hourView.currentIndex = dateTime.getHours();
-        minuteView.currentIndex = dateTime.getMinutes() / minuteMultiples;
-        secondsView.currentIndex = dateTime.getSeconds();
-    }
 
     onMinutesChanged: {
         if (minutes % minuteMultiples !== 0) {
             minuteMultiplesAboutToChange(minuteMultiples);
             minuteMultiples = 1;
-        }
-    }
-
-    function setToTimeFromString(timeString) { // Accepts in format HH:MM:SS
-        var splitTimeString = timeString.split(":");
-        switch (splitTimeString.length) {
-            case 3:
-                dateTime = new Date (dateTime.setHours(Number(splitTimeString[0]),
-                                                       Number(splitTimeString[1]),
-                                                       Number(splitTimeString[2])));
-                break;
-            case 2:
-                dateTime = new Date (dateTime.setHours(Number(splitTimeString[0]),
-                                                       Number(splitTimeString[1])));
-                break;
-            case 1:
-                dateTime = new Date (dateTime.setHours(Number(splitTimeString[0])));
-                break;
-            case 0:
-                return;
         }
     }
 
@@ -72,7 +42,7 @@ Item {
     GridLayout {
         anchors.fill: parent
         columns: timePicker.secondsPicker ? 5 : 3
-        rows: 5
+        rows: 4
 
         RowLayout {
             Layout.row: 0
@@ -127,8 +97,8 @@ Item {
             wrap: true
 
             model: 24
-
-            onCurrentIndexChanged: timePicker.dateTime = new Date (timePicker.dateTime.setHours(currentIndex))
+            currentIndex: timePicker.hours
+            onCurrentIndexChanged: timePicker.hours = currentIndex
 
             delegate: Kirigami.Heading {
                 property int thisIndex: index
@@ -165,10 +135,11 @@ Item {
             Connections { // Gets called before model regen
                 target: timePicker
                 onMinuteMultiplesAboutToChange: minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples
+                onMinutesChanged: minuteView.currentIndex = minutes / timePicker.minuteMultiples
             }
             onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples
-            onCurrentIndexChanged: timePicker.dateTime = new Date (timePicker.dateTime.setHours(timePicker.dateTime.getHours(),
-                                                                                                currentIndex * timePicker.minuteMultiples))
+            currentIndex: timePicker.minutes
+            onCurrentIndexChanged: timePicker.minutes = currentIndex * timePicker.minuteMultiples
 
             model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
             delegate: Kirigami.Heading {
@@ -206,9 +177,8 @@ Item {
             visible: timePicker.secondsPicker
             model: 60
 
-            onCurrentIndexChanged: timePicker.dateTime = new Date (timePicker.dateTime.setHours(timePicker.dateTime.getHours(),
-                                                                                                timePicker.dateTime.getMinutes(),
-                                                                                                currentIndex))
+            currentIndex: timePicker.seconds
+            onCurrentIndexChanged: timePicker.seconds = currentIndex
 
             delegate: Kirigami.Heading {
                 property int thisIndex: index
@@ -249,14 +219,6 @@ Item {
             enabled: secondsView.currentIndex < secondsView.count - 1
             onClicked: secondsView.currentIndex += 1
             visible: timePicker.secondsPicker
-        }
-
-        QQC2.Button {
-            Layout.row: 4
-            Layout.columnSpan: timePicker.secondsPicker ? 5 : 3
-            Layout.fillWidth: true
-            text: i18n("Done")
-            onClicked: done()
         }
     }
 }

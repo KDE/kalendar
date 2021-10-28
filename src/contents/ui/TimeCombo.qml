@@ -39,11 +39,12 @@ QQC2.ComboBox {
     validator: activeFocus ? inputValidator : timeValidator
 
     onEditTextChanged: {
-        if(!isNaN(dateTime.getTime())) {
-            popupTimePicker.setToTimeFromString(editText)
-        }
+
         if (acceptableInput && activeFocus && !popupTimePicker.visible) { // Need to check for activeFocus or on load the text gets reset to 00:00
-            newTimeChosen(new Date(DateUtils.adjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset).setHours(popupTimePicker.hours, popupTimePicker.minutes)));
+            const dateFromTime = Date.fromLocaleTimeString(Qt.locale(), editText, "HH:mm");
+            if(!isNaN(dateFromTime.getTime())) {
+                newTimeChosen(new Date(DateUtils.adjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset).setHours(dateFromTime.getHours(), dateFromTime.getMinutes())));
+            }
         }
     }
 
@@ -60,17 +61,34 @@ QQC2.ComboBox {
             Component.onCompleted: minuteMultiples = 5
             Connections {
                 target: root
+
+                function timeChangeHandler() {
+                    if(!popupTimePicker.visible) {
+                        const adjusted = DateUtils.adjustDateTimeToLocalTimeZone(root.dateTime, root.timeZoneOffset)
+                        popupTimePicker.hours = adjusted.getHours();
+                        popupTimePicker.minutes = adjusted.getMinutes();
+                        console.log(dateTime, adjusted, root.timeZoneOffset, popupTimePicker.hours, popupTimePicker.minutes);
+                    }
+                }
+
                 function onDateTimeChanged() {
-                    if(!popupTimePicker.visible)
-                        popupTimePicker.setToTimeFromString(root.editText);
+                    timeChangeHandler();
+                }
+
+                function onTimeZoneOffsetChanged() {
+                    timeChangeHandler();
                 }
             }
 
-            onDateTimeChanged: if(visible) {
-                const newDt = new Date(DateUtils.adjustDateTimeToLocalTimeZone(root.dateTime, root.timeZoneOffset).setHours(dateTime.getHours(), dateTime.getMinutes()));
-                root.newTimeChosen(newDt);
+            function valuesChangedHandler() {
+                if(visible) {
+                    const newDt = new Date(DateUtils.adjustDateTimeToLocalTimeZone(root.dateTime, root.timeZoneOffset).setHours(hours, minutes));
+                    root.newTimeChosen(newDt);
+                }
             }
-            onDone: timePopup.close();
+
+            onHoursChanged: valuesChangedHandler()
+            onMinutesChanged: valuesChangedHandler()
         }
     }
 }
