@@ -125,7 +125,7 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
 
     if (!index.parent().isValid()) {
         // Fetch days in month
-        int prefix = d->calendar.dayOfWeek(QDate(d->year, d->month, 1)) - 1;
+        int prefix = d->calendar.dayOfWeek(QDate(d->year, d->month, 1)) - m_locale.firstDayOfWeek();
 
         if (prefix <= 1) {
             prefix += 7;

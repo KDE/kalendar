@@ -6,6 +6,7 @@
 #include <QAbstractListModel>
 #include <QCalendar>
 #include <QDate>
+#include <QLocale>
 #include <memory>
 
 /// Month model exposing month days and events to a QML view.
@@ -62,5 +63,6 @@ Q_SIGNALS:
 
 private:
     class Private;
+    QLocale m_locale;
     std::unique_ptr<Private> d;
 };
