@@ -145,10 +145,7 @@ Kirigami.OverlayDrawer {
                 clip: true
 
                 property real yScrollPos: QQC2.ScrollBar.vertical.position
-                onYScrollPosChanged: {
-                    console.log(yScrollPos, incidenceInfo.enabled && yScrollPos <= 0)
-                    if(Kirigami.Settings.isMobile) incidenceInfo.interactive = incidenceInfo.enabled && yScrollPos <= 0
-                }
+                onYScrollPosChanged: if(Kirigami.Settings.isMobile) incidenceInfo.interactive = incidenceInfo.enabled && yScrollPos <= 0
 
                 GridLayout {
                     id: infoBody

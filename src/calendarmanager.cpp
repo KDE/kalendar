@@ -538,7 +538,6 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
     bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
     bool hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
     if (collection.isValid() && supportsMimeType && hasRights) {
-        qDebug() << collection.id();
         return collection.id();
     }
 

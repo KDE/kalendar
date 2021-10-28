@@ -67,7 +67,6 @@ QQC2.ComboBox {
                         const adjusted = DateUtils.adjustDateTimeToLocalTimeZone(root.dateTime, root.timeZoneOffset)
                         popupTimePicker.hours = adjusted.getHours();
                         popupTimePicker.minutes = adjusted.getMinutes();
-                        console.log(dateTime, adjusted, root.timeZoneOffset, popupTimePicker.hours, popupTimePicker.minutes);
                     }
                 }
 
