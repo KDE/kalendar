@@ -223,6 +223,8 @@ Kirigami.ScrollablePage {
                     id: allDayCheckBox
 
                     text: i18n("All day")
+                    enabled: !incidenceForm.isTodo || incidenceStartCheckBox.checked || incidenceEndCheckBox.checked
+                    onEnabledChanged: if (!enabled) root.incidenceWrapper.allDay = false
                     checked: root.incidenceWrapper.allDay
                     onCheckedChanged: root.incidenceWrapper.allDay = checked
                 }
@@ -239,11 +241,11 @@ Kirigami.ScrollablePage {
                         property date oldDate: new Date()
 
                         checked: !isNaN(root.incidenceWrapper.incidenceStart.getTime())
-                        onClicked: {
-                            if(!checked) {
+                        onCheckedChanged: {
+                            if (!checked && incidenceForm.isTodo) {
                                 oldDate = new Date(root.incidenceWrapper.incidenceStart)
                                 root.incidenceWrapper.incidenceStart = new Date(undefined)
-                            } else {
+//                             } else if(incidenceForm.isTodo) {
                                 root.incidenceWrapper.incidenceStart = oldDate
                             }
                         }
@@ -258,7 +260,7 @@ Kirigami.ScrollablePage {
                         timePicker: incidenceStartTimeCombo.timePicker
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceStart
-                        onNewDateChosen: root.setNewStart(newDate)
+                        onNewDateChosen: root.setNewStart(newDate), dateTimeChanged()
                     }
                     TimeCombo {
                         id: incidenceStartTimeCombo
@@ -266,7 +268,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceStart
-                        onNewTimeChosen: root.setNewStart(newTime)
+                        onNewTimeChosen: root.setNewStart(newTime), dateTimeChanged()
                         enabled: !allDayCheckBox.checked && (!incidenceForm.isTodo || incidenceStartCheckBox.checked)
                         visible: !allDayCheckBox.checked
                     }
@@ -284,11 +286,11 @@ Kirigami.ScrollablePage {
                         property date oldDate: new Date()
 
                         checked: !isNaN(root.incidenceWrapper.incidenceEnd.getTime())
-                        onClicked: {
-                            if(!checked) {
+                        onCheckedChanged: {
+                            if(!checked && incidenceForm.isTodo) {
                                 oldDate = new Date(root.incidenceWrapper.incidenceEnd)
                                 root.incidenceWrapper.incidenceEnd = new Date(undefined)
-                            } else {
+                            } else if(incidenceForm.isTodo) {
                                 root.incidenceWrapper.incidenceEnd = oldDate
                             }
                         }
@@ -302,7 +304,7 @@ Kirigami.ScrollablePage {
                         timePicker: incidenceEndTimeCombo.timePicker
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceEnd
-                        onNewDateChosen: root.incidenceWrapper.incidenceEnd = newDate
+                        onNewDateChosen: root.incidenceWrapper.incidenceEnd = newDate, dateTimeChanged()
                         enabled: !incidenceForm.isTodo || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                     }
                     TimeCombo {
@@ -311,7 +313,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
                         dateTime: root.incidenceWrapper.incidenceEnd
-                        onNewTimeChosen: root.incidenceWrapper.incidenceEnd = newTime;
+                        onNewTimeChosen: root.incidenceWrapper.incidenceEnd = newTime, dateTimeChanged()
                         enabled: (!incidenceForm.isTodo && !allDayCheckBox.checked) || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                         visible: !allDayCheckBox.checked
                     }
