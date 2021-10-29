@@ -232,13 +232,13 @@ Kirigami.ScrollablePage {
                 Connections {
                     target: root.incidenceWrapper
                     function onIncidenceStartChanged() {
-                        incidenceStartDateCombo.dateTime = incidenceStart;
-                        incidenceStartTimeCombo.dateTime = incidenceStart;
+                        incidenceStartDateCombo.dateTime = root.incidenceWrapper.incidenceStart;
+                        incidenceStartTimeCombo.dateTime = root.incidenceWrapper.incidenceStart;
                     }
 
                     function onIncidenceEndChanged() {
-                        incidenceEndDateCombo.dateTime = incidenceEnd;
-                        incidenceEndTimeCombo.dateTime = incidenceEnd;
+                        incidenceEndDateCombo.dateTime = root.incidenceWrapper.incidenceEnd;
+                        incidenceEndTimeCombo.dateTime = root.incidenceWrapper.incidenceEnd;
                     }
                 }
 
