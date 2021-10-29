@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.6
 import QtQuick.Layouts 1.4
 import QtQuick.Controls 2.2 as QQC2
@@ -18,12 +17,6 @@ import org.kde.kirigami 2.14 as Kirigami
  * depending on the level of the tree the item is in
  */
 RowLayout {
-    /**
-     * parentDelegate: ItemDelegate
-     * The delegate this decoration will live in.
-     * It needs to be assigned explicitly by the developer.
-     */
-    property T2.ItemDelegate parentDelegate
 
     /**
      * model: KDescendantsProxyModel
@@ -31,78 +24,93 @@ RowLayout {
      * It needs to be assigned explicitly by the developer.
      */
     property KDescendantsProxyModel model
+    /**
+     * parentDelegate: ItemDelegate
+     * The delegate this decoration will live in.
+     * It needs to be assigned explicitly by the developer.
+     */
+    property T2.ItemDelegate parentDelegate
 
-    Layout.topMargin: -parentDelegate.topPadding
     Layout.bottomMargin: -parentDelegate.bottomPadding
+    Layout.topMargin: -parentDelegate.topPadding
+
     Repeater {
-        model: kDescendantLevel-1
+        model: kDescendantLevel - 1
+
         delegate: Item {
-            Layout.preferredWidth: controlRoot.width
             Layout.fillHeight: true
+            Layout.preferredWidth: controlRoot.width
 
             Rectangle {
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-                visible: kDescendantHasSiblings[modelData]
                 color: Kirigami.Theme.textColor
                 opacity: 0.5
+                visible: kDescendantHasSiblings[modelData]
                 width: 1
+
+                anchors {
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.top
+                }
             }
         }
     }
     T2.Button {
         id: controlRoot
-        Layout.preferredWidth: Kirigami.Units.gridUnit
         Layout.fillHeight: true
+        Layout.preferredWidth: Kirigami.Units.gridUnit
         enabled: kDescendantExpandable
+
         onClicked: model.toggleChildren(index)
+
+        background: Item {
+        }
         contentItem: Item {
             id: styleitem
             implicitWidth: Kirigami.Units.gridUnit
+
             Rectangle {
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    top: parent.top
-                    bottom: expander.visible ? expander.top : parent.verticalCenter
-                }
                 color: Kirigami.Theme.textColor
                 opacity: 0.5
                 width: 1
+
+                anchors {
+                    bottom: expander.visible ? expander.top : parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.top
+                }
             }
             Kirigami.Icon {
                 id: expander
                 anchors.centerIn: parent
-                width: Kirigami.Units.iconSizes.small
                 height: width
                 source: kDescendantExpanded ? "go-down-symbolic" : "go-next-symbolic"
                 visible: kDescendantExpandable
+                width: Kirigami.Units.iconSizes.small
             }
             Rectangle {
+                color: Kirigami.Theme.textColor
+                opacity: 0.5
+                visible: kDescendantHasSiblings[kDescendantHasSiblings.length - 1]
+                width: 1
+
                 anchors {
+                    bottom: parent.bottom
                     horizontalCenter: parent.horizontalCenter
                     top: expander.visible ? expander.bottom : parent.verticalCenter
-                    bottom: parent.bottom
                 }
-                visible: kDescendantHasSiblings[kDescendantHasSiblings.length - 1]
-                color: Kirigami.Theme.textColor
-                opacity: 0.5
-                width: 1
             }
             Rectangle {
+                color: Kirigami.Theme.textColor
+                height: 1
+                opacity: 0.5
+
                 anchors {
-                    verticalCenter: parent.verticalCenter
                     left: expander.visible ? expander.right : parent.horizontalCenter
                     right: parent.right
+                    verticalCenter: parent.verticalCenter
                 }
-                color: Kirigami.Theme.textColor
-                opacity: 0.5
-                height: 1
             }
         }
-        background: Item {}
     }
 }
-

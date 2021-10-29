@@ -1,6 +1,5 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
-
 import QtQuick 2.4
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
@@ -9,25 +8,25 @@ import org.kde.kalendar 1.0 as Kalendar
 
 MouseArea {
     id: mouseArea
-
-    signal viewClicked(var incidenceData, var collectionData)
-    signal editClicked(var incidencePtr, var collectionId)
-    signal deleteClicked(var incidencePtr, date deleteDate)
-    signal todoCompletedClicked(var incidencePtr)
-    signal addSubTodoClicked(var parentWrapper)
-
     property double clickX
     property double clickY
-    property var incidenceData
-    property var collectionId
     property var collectionDetails
+    property var collectionId
+    property var incidenceData
 
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
     anchors.fill: parent
     hoverEnabled: true
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
+
+    signal addSubTodoClicked(var parentWrapper)
+    signal deleteClicked(var incidencePtr, date deleteDate)
+    signal editClicked(var incidencePtr, var collectionId)
+    signal todoCompletedClicked(var incidencePtr)
+    signal viewClicked(var incidenceData, var collectionData)
+
     onClicked: {
         if (mouse.button == Qt.LeftButton) {
-            collectionDetails = Kalendar.CalendarManager.getCollectionDetails(collectionId)
+            collectionDetails = Kalendar.CalendarManager.getCollectionDetails(collectionId);
             viewClicked(incidenceData, collectionDetails);
         } else if (mouse.button == Qt.RightButton) {
             clickX = mouseX;
@@ -35,7 +34,7 @@ MouseArea {
             incidenceActions.createObject(mouseArea, {}).open();
         }
     }
-    onPressAndHold: if(Kirigami.Settings.isMobile) {
+    onPressAndHold: if (Kirigami.Settings.isMobile) {
         clickX = mouseX;
         clickY = mouseY;
         incidenceActions.createObject(mouseArea, {}).open();
@@ -45,49 +44,56 @@ MouseArea {
         id: incidenceActions
         QQC2.Menu {
             id: actionsPopup
-            y: mouseArea.clickY
             x: mouseArea.clickX
+            y: mouseArea.clickY
             z: 1000
-            Component.onCompleted: if(mouseArea.collectionId && !mouseArea.collectionDetails) mouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+
+            Component.onCompleted: if (mouseArea.collectionId && !mouseArea.collectionDetails)
+                mouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
 
             QQC2.MenuItem {
                 icon.name: "dialog-icon-preview"
-                text:i18n("View")
-                onClicked: viewClicked(incidenceData, collectionDetails);
+                text: i18n("View")
+
+                onClicked: viewClicked(incidenceData, collectionDetails)
             }
             QQC2.MenuItem {
-                icon.name: "edit-entry"
-                text:i18n("Edit")
                 enabled: !mouseArea.collectionDetails["readOnly"]
+                icon.name: "edit-entry"
+                text: i18n("Edit")
+
                 onClicked: editClicked(incidenceData.incidencePtr, incidenceData.collectionId)
             }
             QQC2.MenuItem {
-                icon.name: "edit-delete"
-                text:i18n("Delete")
                 enabled: !mouseArea.collectionDetails["readOnly"]
+                icon.name: "edit-delete"
+                text: i18n("Delete")
+
                 onClicked: deleteClicked(incidenceData.incidencePtr, incidenceData.startTime)
             }
             QQC2.MenuSeparator {
                 visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
             }
             QQC2.MenuItem {
+                enabled: !mouseArea.collectionDetails["readOnly"]
                 icon.name: "task-complete"
                 text: incidenceData.todoCompleted ? i18n("Mark Task as Incomplete") : i18n("Mark Task as Complete")
-                enabled: !mouseArea.collectionDetails["readOnly"]
-                onClicked: todoCompletedClicked(incidenceData.incidencePtr)
                 visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+
+                onClicked: todoCompletedClicked(incidenceData.incidencePtr)
             }
             QQC2.MenuItem {
+                enabled: !mouseArea.collectionDetails["readOnly"]
                 icon.name: "list-add"
                 text: i18n("Add Sub-Task")
-                enabled: !mouseArea.collectionDetails["readOnly"]
+                visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+
                 onClicked: {
                     let parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
                     parentWrapper.incidencePtr = mouseArea.incidenceData.incidencePtr;
                     parentWrapper.collectionId = mouseArea.collectionDetails.id;
                     addSubTodoClicked(parentWrapper);
                 }
-                visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
             }
         }
     }

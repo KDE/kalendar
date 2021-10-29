@@ -17,7 +17,7 @@ QQC2.MenuBar {
         title: i18nc("@action:menu", "File")
 
         QQC2.MenuItem {
-            text: i18nc("@action:menu", "Import Calendar") // todo
+            text: i18nc("@action:menu", "Import Calendar")
             visible: false
         }
 
@@ -28,8 +28,10 @@ QQC2.MenuBar {
             onTriggered: Qt.quit()
         }
     }
+
     QQC2.Menu {
         id: editMenu
+
         title: i18nc("@action:menu", "Edit")
         Connections {
             target: parentWindow

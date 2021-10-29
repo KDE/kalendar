@@ -1,6 +1,5 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
-
 import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as Controls
@@ -12,6 +11,7 @@ Kirigami.Page {
 
     Kirigami.FormLayout {
         anchors.fill: parent
+
         Item {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Maps")
@@ -22,6 +22,7 @@ Kirigami.Page {
             Controls.CheckBox {
                 checked: Config.enableMaps
                 enabled: !Config.isEnableMapsImmutable
+
                 onClicked: {
                     Config.enableMaps = !Config.enableMaps;
                     Config.save();
@@ -35,6 +36,7 @@ Kirigami.Page {
         Controls.ButtonGroup {
             buttons: locationMarkerButtonColumn.children
             exclusive: true
+
             onClicked: {
                 Config.locationMarker = button.value;
                 Config.save();
@@ -47,15 +49,17 @@ Kirigami.Page {
 
             Controls.RadioButton {
                 property int value: Config.Circle
-                text: i18n("Circle (shows area of location)")
-                enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
+
                 checked: Config.locationMarker === value
+                enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
+                text: i18n("Circle (shows area of location)")
             }
             Controls.RadioButton {
                 property int value: Config.Pin
-                text: i18n("Pin (shows exact location)")
-                enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
+
                 checked: Config.locationMarker === value
+                enabled: Config.enableMaps && !Config.isLocationMarkerImmutable
+                text: i18n("Pin (shows exact location)")
             }
         }
     }

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0 as QQC2
@@ -18,20 +17,7 @@ import org.kde.kirigami 2.14
  */
 AbstractTreeItem {
     id: listItem
-
-    /**
-     * string: bool
-     * A single text label the list item will contain
-     */
-    property alias label: listItem.text
-
-    /**
-     * A subtitle that goes below the main label
-     * Optional; if not defined, the list item will only have a main label
-     * @since 5.70
-     * @since org.kde.kirigami 2.12
-     */
-    property alias subtitle: subtitleItem.text
+    default property alias _basicDefault: layout.data
 
     /**
      * bold: bool
@@ -48,14 +34,7 @@ AbstractTreeItem {
      * The icon can also be either a QIcon, a string name of a fdo compatible name,
      * or any url accepted by the Image element.
      */
-    property var icon
-
-    /**
-     * iconSize: int
-     * The preferred size for the icon
-     * @since 2.5
-     */
-    property alias iconSize: iconItem.size
+    property var icon: action ? action.icon.name || action.icon.source : undefined
 
     /**
      * iconColor: color
@@ -65,6 +44,19 @@ AbstractTreeItem {
      * @since 2.7
      */
     property alias iconColor: iconItem.color
+
+    /**
+     * iconSize: int
+     * The preferred size for the icon
+     * @since 2.5
+     */
+    property alias iconSize: iconItem.size
+
+    /**
+     * string: bool
+     * A single text label the list item will contain
+     */
+    property alias label: listItem.text
 
     /**
      * reserveSpaceForIcon: bool
@@ -81,17 +73,30 @@ AbstractTreeItem {
      */
     property alias reserveSpaceForLabel: labelItem.visible
 
-    default property alias _basicDefault: layout.data
+    /**
+     * A subtitle that goes below the main label
+     * Optional; if not defined, the list item will only have a main label
+     * @since 5.70
+     * @since org.kde.kirigami 2.12
+     */
+    property alias subtitle: subtitleItem.text
 
-    icon: action ? action.icon.name || action.icon.source : undefined
     contentItem: RowLayout {
         id: layout
         spacing: LayoutMirroring.enabled ? listItem.rightPadding : listItem.leftPadding
+
         Icon {
             id: iconItem
+            property int size: Units.iconSizes.smallMedium
+
+            Layout.maximumHeight: size
+            Layout.minimumHeight: size
+            Layout.minimumWidth: size
+            opacity: 1
+            selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents))
             source: {
                 if (!listItem.icon) {
-                    return undefined
+                    return undefined;
                 }
                 if (listItem.icon.hasOwnProperty) {
                     if (listItem.icon.hasOwnProperty("name") && listItem.icon.name !== "")
@@ -101,26 +106,21 @@ AbstractTreeItem {
                 }
                 return listItem.icon;
             }
-            property int size: Units.iconSizes.smallMedium
-            Layout.minimumHeight: size
-            Layout.maximumHeight: size
-            Layout.minimumWidth: size
-            selected: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents))
-            opacity: 1
             visible: source != undefined
         }
         ColumnLayout {
-            spacing: 0
-            Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
+            Layout.fillWidth: true
+            spacing: 0
+
             QQC2.Label {
                 id: labelItem
-                text: listItem.text
                 Layout.fillWidth: true
                 color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                 elide: Text.ElideRight
                 font.weight: listItem.bold ? Font.Bold : Font.Normal
                 opacity: 1
+                text: listItem.text
             }
             QQC2.Label {
                 id: subtitleItem
@@ -134,4 +134,3 @@ AbstractTreeItem {
         }
     }
 }
-

@@ -3,7 +3,6 @@
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
-
 import QtQuick 2.12
 
 /**
@@ -20,4 +19,3 @@ InternalTreeListView {
     id: root
     property alias model: root.sourceModel
 }
-
