@@ -45,10 +45,16 @@ class IncidenceWrapper : public QObject, public KCalendarCore::IncidenceBase::In
     Q_PROPERTY(bool hasGeo READ hasGeo CONSTANT)
     Q_PROPERTY(float geoLatitude READ geoLatitude CONSTANT)
     Q_PROPERTY(float geoLongitude READ geoLongitude CONSTANT)
+
     Q_PROPERTY(QDateTime incidenceStart READ incidenceStart WRITE setIncidenceStart NOTIFY incidenceStartChanged)
+    Q_PROPERTY(QString incidenceStartDateDisplay READ incidenceStartDateDisplay NOTIFY incidenceStartDateDisplayChanged)
+    Q_PROPERTY(QString incidenceStartTimeDisplay READ incidenceStartTimeDisplay NOTIFY incidenceStartTimeDisplayChanged)
     Q_PROPERTY(QDateTime incidenceEnd READ incidenceEnd WRITE setIncidenceEnd NOTIFY incidenceEndChanged)
+    Q_PROPERTY(QString incidenceEndDateDisplay READ incidenceEndDateDisplay NOTIFY incidenceEndDateDisplayChanged)
+    Q_PROPERTY(QString incidenceEndTimeDisplay READ incidenceEndTimeDisplay NOTIFY incidenceEndTimeDisplayChanged)
     Q_PROPERTY(QByteArray timeZone READ timeZone WRITE setTimeZone NOTIFY timeZoneChanged)
-    Q_PROPERTY(int timeZoneUTCOffsetMins READ timeZoneUTCOffsetMins NOTIFY timeZoneUTCOffsetMinsChanged)
+    Q_PROPERTY(int startTimeZoneUTCOffsetMins READ startTimeZoneUTCOffsetMins NOTIFY startTimeZoneUTCOffsetMinsChanged)
+    Q_PROPERTY(int endTimeZoneUTCOffsetMins READ endTimeZoneUTCOffsetMins NOTIFY endTimeZoneUTCOffsetMinsChanged)
     Q_PROPERTY(bool allDay READ allDay WRITE setAllDay NOTIFY allDayChanged)
     Q_PROPERTY(int priority READ priority WRITE setPriority NOTIFY priorityChanged)
 
@@ -112,13 +118,23 @@ public:
     bool hasGeo() const;
     float geoLatitude() const;
     float geoLongitude() const;
+
     QDateTime incidenceStart() const;
     void setIncidenceStart(const QDateTime &incidenceStart, bool respectTimeZone = false);
+    Q_INVOKABLE void setIncidenceStartDate(int day, int month, int year);
+    Q_INVOKABLE void setIncidenceStartTime(int hours, int minutes);
+    QString incidenceStartDateDisplay() const;
+    QString incidenceStartTimeDisplay() const;
     QDateTime incidenceEnd() const;
     void setIncidenceEnd(const QDateTime &incidenceEnd, bool respectTimeZone = false);
+    Q_INVOKABLE void setIncidenceEndDate(int day, int month, int year);
+    Q_INVOKABLE void setIncidenceEndTime(int hours, int minutes);
+    QString incidenceEndDateDisplay() const;
+    QString incidenceEndTimeDisplay() const;
     QByteArray timeZone() const;
     void setTimeZone(const QByteArray &timeZone);
-    int timeZoneUTCOffsetMins();
+    int startTimeZoneUTCOffsetMins();
+    int endTimeZoneUTCOffsetMins();
     bool allDay() const;
     void setAllDay(bool allDay);
     int priority() const;
@@ -165,9 +181,14 @@ Q_SIGNALS:
     void descriptionChanged();
     void locationChanged();
     void incidenceStartChanged();
+    void incidenceStartDateDisplayChanged();
+    void incidenceStartTimeDisplayChanged();
     void incidenceEndChanged();
+    void incidenceEndDateDisplayChanged();
+    void incidenceEndTimeDisplayChanged();
     void timeZoneChanged();
-    void timeZoneUTCOffsetMinsChanged();
+    void startTimeZoneUTCOffsetMinsChanged();
+    void endTimeZoneUTCOffsetMinsChanged();
     void allDayChanged();
     void priorityChanged();
     void remindersModelChanged();

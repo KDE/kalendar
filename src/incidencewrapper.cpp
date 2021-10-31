@@ -62,9 +62,14 @@ void IncidenceWrapper::notifyDataChanged()
     Q_EMIT descriptionChanged();
     Q_EMIT locationChanged();
     Q_EMIT incidenceStartChanged();
+    Q_EMIT incidenceStartDateDisplayChanged();
+    Q_EMIT incidenceStartTimeDisplayChanged();
     Q_EMIT incidenceEndChanged();
+    Q_EMIT incidenceEndDateDisplayChanged();
+    Q_EMIT incidenceEndTimeDisplayChanged();
     Q_EMIT timeZoneChanged();
-    Q_EMIT timeZoneUTCOffsetMinsChanged();
+    Q_EMIT startTimeZoneUTCOffsetMinsChanged();
+    Q_EMIT endTimeZoneUTCOffsetMinsChanged();
     Q_EMIT allDayChanged();
     Q_EMIT priorityChanged();
     Q_EMIT remindersModelChanged();
@@ -219,6 +224,8 @@ void IncidenceWrapper::setIncidenceStart(const QDateTime &incidenceStart, bool r
 
     // When we set the timeZone property, however, we invariably also set the incidence start and end.
     // This object needs no change. We therefore need to make sure to preserve the entire QDateTime object here.
+    auto oldStart = this->incidenceStart();
+
     if (respectTimeZone) {
         m_incidence->setDtStart(incidenceStart);
     } else {
@@ -230,7 +237,46 @@ void IncidenceWrapper::setIncidenceStart(const QDateTime &incidenceStart, bool r
         start.setTime(time);
         m_incidence->setDtStart(start);
     }
+
+    auto oldStartEndDifference = oldStart.secsTo(incidenceEnd());
+    auto newEnd = this->incidenceStart().addSecs(oldStartEndDifference);
+    setIncidenceEnd(newEnd);
+
     Q_EMIT incidenceStartChanged();
+    Q_EMIT incidenceStartDateDisplayChanged();
+    Q_EMIT incidenceStartTimeDisplayChanged();
+}
+
+void IncidenceWrapper::setIncidenceStartDate(int day, int month, int year)
+{
+    QDate date;
+    date.setDate(year, month, day);
+
+    auto newStart = incidenceStart();
+    newStart.setDate(date);
+
+    setIncidenceStart(newStart, true);
+}
+
+void IncidenceWrapper::setIncidenceStartTime(int hours, int minutes)
+{
+    QTime time;
+    time.setHMS(hours, minutes, 0);
+
+    auto newStart = incidenceStart();
+    newStart.setTime(time);
+
+    setIncidenceStart(newStart, true);
+}
+
+QString IncidenceWrapper::incidenceStartDateDisplay() const
+{
+    return QLocale::system().toString(incidenceStart().date(), QLocale::NarrowFormat);
+}
+
+QString IncidenceWrapper::incidenceStartTimeDisplay() const
+{
+    return QLocale::system().toString(incidenceStart().time(), QLocale::NarrowFormat);
 }
 
 QDateTime IncidenceWrapper::incidenceEnd() const
@@ -268,6 +314,40 @@ void IncidenceWrapper::setIncidenceEnd(const QDateTime &incidenceEnd, bool respe
         qWarning() << "Unknown incidence type";
     }
     Q_EMIT incidenceEndChanged();
+    Q_EMIT incidenceEndDateDisplayChanged();
+    Q_EMIT incidenceEndTimeDisplayChanged();
+}
+
+void IncidenceWrapper::setIncidenceEndDate(int day, int month, int year)
+{
+    QDate date;
+    date.setDate(year, month, day);
+
+    auto newEnd = incidenceEnd();
+    newEnd.setDate(date);
+
+    setIncidenceEnd(newEnd, true);
+}
+
+void IncidenceWrapper::setIncidenceEndTime(int hours, int minutes)
+{
+    QTime time;
+    time.setHMS(hours, minutes, 0);
+
+    auto newEnd = incidenceEnd();
+    newEnd.setTime(time);
+
+    setIncidenceEnd(newEnd, true);
+}
+
+QString IncidenceWrapper::incidenceEndDateDisplay() const
+{
+    return QLocale::system().toString(incidenceEnd().date(), QLocale::NarrowFormat);
+}
+
+QString IncidenceWrapper::incidenceEndTimeDisplay() const
+{
+    return QLocale::system().toString(incidenceEnd().time(), QLocale::NarrowFormat);
 }
 
 QByteArray IncidenceWrapper::timeZone() const
@@ -290,10 +370,16 @@ void IncidenceWrapper::setTimeZone(const QByteArray &timeZone)
     }
 
     Q_EMIT timeZoneChanged();
-    Q_EMIT timeZoneUTCOffsetMinsChanged();
+    Q_EMIT startTimeZoneUTCOffsetMinsChanged();
+    Q_EMIT endTimeZoneUTCOffsetMinsChanged();
 }
 
-int IncidenceWrapper::timeZoneUTCOffsetMins()
+int IncidenceWrapper::startTimeZoneUTCOffsetMins()
+{
+    return QTimeZone(timeZone()).offsetFromUtc(incidenceStart());
+}
+
+int IncidenceWrapper::endTimeZoneUTCOffsetMins()
 {
     return QTimeZone(timeZone()).offsetFromUtc(incidenceEnd());
 }

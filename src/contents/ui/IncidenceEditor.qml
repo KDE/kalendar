@@ -56,16 +56,6 @@ Kirigami.ScrollablePage {
         "";
     }
 
-    function setNewStart(newStart) {
-        if(!isNaN(newStart.getTime()) && incidenceWrapper) {
-            const currentStartEndDiff = incidenceWrapper.incidenceEnd.getTime() - incidenceWrapper.incidenceStart.getTime();
-            const newEnd = new Date(newStart.getTime() + currentStartEndDiff);
-
-            incidenceWrapper.incidenceStart = newStart;
-            incidenceWrapper.incidenceEnd = newEnd;
-        }
-    }
-
     footer: QQC2.DialogButtonBox {
         standardButtons: QQC2.DialogButtonBox.Cancel
 
@@ -234,11 +224,15 @@ Kirigami.ScrollablePage {
                     function onIncidenceStartChanged() {
                         incidenceStartDateCombo.dateTime = root.incidenceWrapper.incidenceStart;
                         incidenceStartTimeCombo.dateTime = root.incidenceWrapper.incidenceStart;
+                        incidenceStartDateCombo.display = root.incidenceWrapper.incidenceStartDateDisplay;
+                        incidenceStartTimeCombo.display = root.incidenceWrapper.incidenceStartTimeDisplay;
                     }
 
                     function onIncidenceEndChanged() {
                         incidenceEndDateCombo.dateTime = root.incidenceWrapper.incidenceEnd;
                         incidenceEndTimeCombo.dateTime = root.incidenceWrapper.incidenceEnd;
+                        incidenceEndDateCombo.display = root.incidenceWrapper.incidenceEndDateDisplay;
+                        incidenceEndTimeCombo.display = root.incidenceWrapper.incidenceEndTimeDisplay;
                     }
                 }
 
@@ -271,18 +265,18 @@ Kirigami.ScrollablePage {
                         id: incidenceStartDateCombo
 
                         Layout.fillWidth: true
-                        timePicker: incidenceStartTimeCombo.timePicker
-                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
+                        display: root.incidenceWrapper.incidenceStartDateDisplay
                         dateTime: root.incidenceWrapper.incidenceStart
-                        onNewDateChosen: root.setNewStart(newDate)
+                        onNewDateChosen: root.incidenceWrapper.setIncidenceStartDate(day, month, year)
                     }
                     TimeCombo {
                         id: incidenceStartTimeCombo
 
                         Layout.fillWidth: true
-                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
+                        timeZoneOffset: root.incidenceWrapper.startTimeZoneUTCOffsetMins
+                        display: root.incidenceWrapper.incidenceEndTimeDisplay
                         dateTime: root.incidenceWrapper.incidenceStart
-                        onNewTimeChosen: root.setNewStart(newTime)
+                        onNewTimeChosen: root.incidenceWrapper.setIncidenceStartTime(hours, minutes)
                         enabled: !allDayCheckBox.checked && (!incidenceForm.isTodo || incidenceStartCheckBox.checked)
                         visible: !allDayCheckBox.checked
                     }
@@ -315,19 +309,19 @@ Kirigami.ScrollablePage {
                         id: incidenceEndDateCombo
 
                         Layout.fillWidth: true
-                        timePicker: incidenceEndTimeCombo.timePicker
-                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
+                        display: root.incidenceWrapper.incidenceEndDateDisplay
                         dateTime: root.incidenceWrapper.incidenceEnd
-                        onNewDateChosen: root.incidenceWrapper.incidenceEnd = newDate
+                        onNewDateChosen: root.incidenceWrapper.setIncidenceEndDate(day, month, year)
                         enabled: !incidenceForm.isTodo || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                     }
                     TimeCombo {
                         id: incidenceEndTimeCombo
 
                         Layout.fillWidth: true
-                        timeZoneOffset: root.incidenceWrapper.timeZoneUTCOffsetMins
+                        timeZoneOffset: root.incidenceWrapper.endTimeZoneUTCOffsetMins
+                        display: root.incidenceWrapper.incidenceEndTimeDisplay
                         dateTime: root.incidenceWrapper.incidenceEnd
-                        onNewTimeChosen: root.incidenceWrapper.incidenceEnd = newTime
+                        onNewTimeChosen: root.incidenceWrapper.setIncidenceEndTime(hours, minutes)
                         enabled: (!incidenceForm.isTodo && !allDayCheckBox.checked) || (incidenceForm.isTodo && incidenceEndCheckBox.checked)
                         visible: !allDayCheckBox.checked
                     }
@@ -521,7 +515,7 @@ Kirigami.ScrollablePage {
                                                         Qt.locale().firstDayOfWeek + index - 1 - 7 :
                                                         Qt.locale().firstDayOfWeek + index - 1
 
-                                checked: root.incidenceWrapper.recurrenceData.weekdays[dayNumber]
+                                checked: if(root.incidenceWrapper.recurrenceData) root.incidenceWrapper.recurrenceData.weekdays[dayNumber]
                                 onClicked: {
                                     let newWeekdays = [...root.incidenceWrapper.recurrenceData.weekdays];
                                     newWeekdays[dayNumber] = !root.incidenceWrapper.recurrenceData.weekdays[dayNumber];

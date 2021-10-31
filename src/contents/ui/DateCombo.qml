@@ -7,32 +7,24 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
 import "dateutils.js" as DateUtils
 
-/* Like the time combo, we need to play around with the date objects we present to the user to show the time in the date's set TZ.
- * The time picker is not aware of these differences and only has the hours and minutes in the date's set TZ.
- */
-
 QQC2.ComboBox {
     id: root
 
-    signal newDateChosen(date newDate)
+    signal newDateChosen(int day, int month, int year)
 
     property int timeZoneOffset: 0
+    property string display
     property date dateTime: new Date()
     property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
     property bool validDate: !isNaN(dateFromText.getTime())
-    property TimePicker timePicker
 
     onDateTimeChanged: {
         datePicker.selectedDate = dateTime;
         datePicker.clickedDate = dateTime;
     }
 
-    validator: RegularExpressionValidator {
-        regularExpression: /[0-9]{0,2}[/|.|-][0-9]{0,2}[/|.|-][0-9]*/
-    }
-
     editable: true
-    editText: activeFocus ? editText : DateUtils.adjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset).toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+    editText: activeFocus ? editText : display
 
     onEditTextChanged: {
         // Set date from text here because it otherwise updates after this handler
@@ -41,7 +33,7 @@ QQC2.ComboBox {
         if (validDate && activeFocus) {
             datePicker.selectedDate = dateFromText;
             datePicker.clickedDate = dateFromText;
-            newDateChosen(new Date(dateFromText.setHours(timePicker.hours, timePicker.minutes)));
+            newDateChosen(dateFromText.getDate(), dateFromText.getMonth() + 1, dateFromText.getFullYear());
         }
     }
 
@@ -61,9 +53,7 @@ QQC2.ComboBox {
             selectedDate: root.dateTime
             onDatePicked: {
                 datePopup.close();
-                let hours = root.dateTime.getHours();
-                let minutes = root.dateTime.getMinutes();
-                newDateChosen(DateUtils.adjustDateTimeToLocalTimeZone(new Date(pickedDate.setHours(hours, minutes)), root.timeZoneOffset));
+                newDateChosen(pickedDate.getDate(), pickedDate.getMonth() + 1, pickedDate.getFullYear());
             }
         }
     }
