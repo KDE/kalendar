@@ -15,6 +15,15 @@ InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
 void InfiniteCalendarViewModel::setup()
 {
     const QDate today = QDate::currentDate();
+    QTime time;
+
+    if (!m_weekViewLocalisedHourLabels.length()) {
+        m_weekViewLocalisedHourLabels.clear();
+        for (int i = 1; i < 24; i++) {
+            time.setHMS(i, 0, 0);
+            m_weekViewLocalisedHourLabels.append(QLocale::system().toString(time, QLocale::NarrowFormat));
+        }
+    }
 
     switch (m_scale) {
     case WeekScale: {

@@ -46,21 +46,6 @@ Kirigami.Page {
     readonly property real hourLabelWidth: Kirigami.Units.gridUnit * 3.5
 
     property var hourStrings: []
-    Component.onCompleted: {
-        // Start at 01:00 and add hours up to 23:00
-        const date = new Date(1, 1, 1, 1, 0, 0, 0);
-        let i = Number(date.toLocaleTimeString(Qt.locale(), "H")[0]);
-
-        if(i !== 1) { // Work around Javascript's absolutely stupid, insane and infuriating summertime hour handling
-            i -= i;
-        }
-
-        for(i; i < 24; i++) {
-            date.setHours(i, 0, 0, 0);
-            hourStrings.push(date.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat));
-            hourStringsChanged();
-        }
-    }
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -571,7 +556,7 @@ Kirigami.Page {
                                 id: fontMetrics
                             }
 
-                            model: root.hourStrings
+                            model: pathView.model.weekViewLocalisedHourLabels // Not a model role but instead one of the model object's properties
                             delegate: QQC2.Label {
                                 height: (Kirigami.Units.gridUnit * hourlyView.periodsPerHour)
                                 width: root.hourLabelWidth
