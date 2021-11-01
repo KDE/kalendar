@@ -293,6 +293,7 @@ QDateTime IncidenceWrapper::incidenceEnd() const
 
 void IncidenceWrapper::setIncidenceEnd(const QDateTime &incidenceEnd, bool respectTimeZone)
 {
+    qDebug() << "setEnd";
     QDateTime end;
     if (respectTimeZone) {
         end = incidenceEnd;

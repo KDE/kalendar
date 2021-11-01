@@ -213,10 +213,10 @@ Kirigami.ScrollablePage {
                     id: allDayCheckBox
 
                     text: i18n("All day")
-                    enabled: !incidenceForm.isTodo || incidenceStartCheckBox.checked || incidenceEndCheckBox.checked
+                    enabled: !incidenceForm.isTodo || !isNaN(root.incidenceWrapper.incidenceStart.getTime()) || !isNaN(root.incidenceWrapper.incidenceEnd.getTime())
                     onEnabledChanged: if (!enabled) root.incidenceWrapper.allDay = false
                     checked: root.incidenceWrapper.allDay
-                    onCheckedChanged: root.incidenceWrapper.allDay = checked
+                    onClicked: root.incidenceWrapper.allDay = checked
                 }
 
                 Connections {
@@ -246,15 +246,17 @@ Kirigami.ScrollablePage {
                     QQC2.CheckBox {
                         id: incidenceStartCheckBox
 
-                        property date oldDate: new Date()
+                        property var oldDate
 
                         checked: !isNaN(root.incidenceWrapper.incidenceStart.getTime())
-                        onCheckedChanged: {
+                        onClicked: {
                             if (!checked && incidenceForm.isTodo) {
-                                oldDate = new Date(root.incidenceWrapper.incidenceStart)
+                                oldDate = root.incidenceWrapper.incidenceStart
                                 root.incidenceWrapper.incidenceStart = new Date(undefined)
-                            } else if(incidenceForm.isTodo) {
+                            } else if(incidenceForm.isTodo && oldDate) {
                                 root.incidenceWrapper.incidenceStart = oldDate
+                            } else if(incidenceForm.isTodo) {
+                                root.incidenceWrapper.incidenceEnd = new Date()
                             }
                         }
                         visible: incidenceForm.isTodo
@@ -291,15 +293,17 @@ Kirigami.ScrollablePage {
                     QQC2.CheckBox {
                         id: incidenceEndCheckBox
 
-                        property date oldDate: new Date()
+                        property var oldDate
 
                         checked: !isNaN(root.incidenceWrapper.incidenceEnd.getTime())
-                        onCheckedChanged: {
+                        onClicked: { // If we use onCheckedChanged this will change the date during init
                             if(!checked && incidenceForm.isTodo) {
-                                oldDate = new Date(root.incidenceWrapper.incidenceEnd)
+                                oldDate = root.incidenceWrapper.incidenceEnd
                                 root.incidenceWrapper.incidenceEnd = new Date(undefined)
-                            } else if(incidenceForm.isTodo) {
+                            } else if(incidenceForm.isTodo && oldDate) {
                                 root.incidenceWrapper.incidenceEnd = oldDate
+                            } else if(incidenceForm.isTodo) {
+                                root.incidenceWrapper.incidenceEnd = new Date()
                             }
                         }
                         visible: incidenceForm.isTodo
