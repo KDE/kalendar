@@ -661,6 +661,10 @@ Kirigami.ApplicationWindow {
             CalendarManager.deleteIncidence(incidencePtr);
             deleteIncidenceSheet.close();
         }
+        onDeleteIncidenceWithChildren: {
+            CalendarManager.deleteIncidence(incidencePtr, true);
+            deleteIncidenceSheet.close();
+        }
     }
 
     Component {

@@ -660,8 +660,54 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
     });
 }
 
-void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence)
+bool CalendarManager::hasChildren(KCalendarCore::Incidence::Ptr incidence)
 {
+    return !m_calendar->childIncidences(incidence->uid()).isEmpty();
+}
+
+void CalendarManager::deleteAllChildren(KCalendarCore::Incidence::Ptr incidence)
+{
+    auto allChildren = m_calendar->childIncidences(incidence->uid());
+
+    for (auto child : allChildren) {
+        if (!m_calendar->childIncidences(child->uid()).isEmpty()) {
+            deleteAllChildren(child);
+        }
+    }
+
+    for (auto child : allChildren) {
+        m_calendar->deleteIncidence(child);
+    }
+}
+
+void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence, bool deleteChildren)
+{
+    auto directChildren = m_calendar->childIncidences(incidence->uid());
+
+    if (!directChildren.isEmpty()) {
+        if (deleteChildren) {
+            m_changer->startAtomicOperation(i18n("Delete task and its sub-tasks"));
+            deleteAllChildren(incidence);
+        } else {
+            m_changer->startAtomicOperation(i18n("Delete task and make sub-tasks independent"));
+            for (auto child : directChildren) {
+                for (auto instance : m_calendar->instances(child)) {
+                    KCalendarCore::Incidence::Ptr oldInstance(instance->clone());
+                    instance->setRelatedTo(QString());
+                    m_changer->modifyIncidence(m_calendar->item(instance), oldInstance);
+                }
+
+                KCalendarCore::Incidence::Ptr oldInc(child->clone());
+                child->setRelatedTo(QString());
+                m_changer->modifyIncidence(m_calendar->item(child), oldInc);
+            }
+        }
+
+        m_calendar->deleteIncidence(incidence);
+        m_changer->endAtomicOperation();
+        return;
+    }
+
     m_calendar->deleteIncidence(incidence);
 }
 
