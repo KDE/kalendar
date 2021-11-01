@@ -17,7 +17,7 @@ ListView {
     property alias descendantsModel: descendantsModel
     property alias expandsByDefault: descendantsModel.expandsByDefault
 
-    add: Transition {
+    /*add: Transition {
         // NumberAnimation behaves better than animators here
         NumberAnimation {
             property: "opacity"
@@ -26,7 +26,7 @@ ListView {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
-    }
+    }*/
     addDisplaced: Transition {
         NumberAnimation {
             property: "y"
