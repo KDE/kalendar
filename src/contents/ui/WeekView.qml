@@ -249,6 +249,11 @@ Kirigami.Page {
                             }
                         }
                     }
+                    Rectangle { // Cover up the shadow of headerTopSeparator above the scrollbar
+                        color: Kirigami.Theme.backgroundColor
+                        height: parent.height
+                        width: root.scrollbarWidth
+                    }
                 }
 
                 Kirigami.Separator {
