@@ -17,22 +17,6 @@ Kirigami.ScrollablePage {
     signal edited(IncidenceWrapper incidenceWrapper)
     signal cancel
 
-    Component {
-        id: contactsPage
-        ContactsPage {
-            attendeeAkonadiIds: root.incidenceWrapper.attendeesModel.attendeesAkonadiIds
-
-            onAddAttendee: {
-                root.incidenceWrapper.attendeesModel.addAttendee(itemId, email);
-                root.flickable.contentY = editorLoader.item.attendeesColumnY;
-            }
-            onRemoveAttendee: {
-                root.incidenceWrapper.attendeesModel.deleteAttendeeFromAkonadiId(itemId)
-                root.flickable.contentY = editorLoader.item.attendeesColumnY;
-            }
-        }
-    }
-
     // Setting the incidenceWrapper here and now causes some *really* weird behaviour.
     // Set it after this component has already been instantiated.
     property var incidenceWrapper
@@ -67,10 +51,17 @@ Kirigami.ScrollablePage {
         }
 
         onRejected: cancel()
-        onAccepted: {
-            if (editMode) {
+        onAccepted: submitAction.trigger()
+    }
+
+    QQC2.Action {
+        id: submitAction
+        shortcut: "Return"
+        onTriggered: {
+            if (editMode && root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId) {
                 edited(incidenceWrapper);
-            } else {
+                cancel(); // Easy way to close the editor
+            } else if (root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId) {
                 added(incidenceWrapper);
                 if(root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
                     Config.lastUsedTodoCollection = root.incidenceWrapper.collectionId;
@@ -78,8 +69,24 @@ Kirigami.ScrollablePage {
                     Config.lastUsedEventCollection = root.incidenceWrapper.collectionId;
                 }
                 Config.save();
+                cancel();
             }
-            cancel();
+        }
+    }
+
+    Component {
+        id: contactsPage
+        ContactsPage {
+            attendeeAkonadiIds: root.incidenceWrapper.attendeesModel.attendeesAkonadiIds
+
+            onAddAttendee: {
+                root.incidenceWrapper.attendeesModel.addAttendee(itemId, email);
+                root.flickable.contentY = editorLoader.item.attendeesColumnY;
+            }
+            onRemoveAttendee: {
+                root.incidenceWrapper.attendeesModel.deleteAttendeeFromAkonadiId(itemId)
+                root.flickable.contentY = editorLoader.item.attendeesColumnY;
+            }
         }
     }
 
