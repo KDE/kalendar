@@ -32,6 +32,7 @@ TreeListView {
     property bool ascendingOrder: false
 
     property alias model: todoModel
+    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     currentIndex: -1
     clip: true
@@ -90,6 +91,8 @@ TreeListView {
 
         background.anchors.right: this.right
         separatorVisible: true
+        activeBackgroundColor: LabelUtils.getIncidenceBackgroundColor(model.color, root.isDark)
+        onActiveBackgroundColorChanged: activeBackgroundColor.a = 0.15
 
         contentItem: IncidenceMouseArea {
             implicitWidth: todoItemContents.implicitWidth
@@ -97,8 +100,9 @@ TreeListView {
                 todoItemContents.implicitHeight + Kirigami.Units.largeSpacing : todoItemContents.implicitHeight + Kirigami.Units.smallSpacing
             incidenceData: model
             collectionId: model.collectionId
+            propagateComposedEvents: true
 
-            onViewClicked: root.viewTodo(model, collectionDetails)
+            onViewClicked: root.viewTodo(model, collectionDetails), listItem.clicked()
             onEditClicked: root.editTodo(model.incidencePtr, model.collectionId)
             onDeleteClicked: root.deleteTodo(model.incidencePtr, model.endTime ? model.endTime : model.startTime ? model.startTime : null)
             onTodoCompletedClicked: model.checked = model.checked === 0 ? 2 : 0
