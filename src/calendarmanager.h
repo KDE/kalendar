@@ -42,6 +42,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
     Q_PROPERTY(QAbstractItemModel *todoCollections READ todoCollections CONSTANT)
     Q_PROPERTY(QAbstractItemModel *viewCollections READ viewCollections CONSTANT)
+    Q_PROPERTY(QVector<qint64> enabledTodoCollections READ enabledTodoCollections NOTIFY enabledTodoCollectionsChanged)
     Q_PROPERTY(KDescendantsProxyModel *allCalendars READ allCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableEventCalendars READ selectableEventCalendars CONSTANT)
     Q_PROPERTY(Akonadi::EntityRightsFilterModel *selectableTodoCalendars READ selectableTodoCalendars CONSTANT)
@@ -60,6 +61,9 @@ public:
     QAbstractProxyModel *collections();
     QAbstractItemModel *todoCollections();
     QAbstractItemModel *viewCollections();
+    QVector<qint64> enabledTodoCollections();
+    void refreshEnabledTodoCollections();
+
     Q_INVOKABLE void save();
     Akonadi::ETMCalendar *calendar() const;
     Akonadi::IncidenceChanger *incidenceChanger() const;
@@ -89,6 +93,7 @@ Q_SIGNALS:
     void entityTreeModelChanged();
     void undoRedoDataChanged();
     void incidenceChanged();
+    void enabledTodoCollectionsChanged();
 
 private:
     Akonadi::ETMCalendar::Ptr m_calendar = nullptr;
@@ -104,4 +109,5 @@ private:
     Akonadi::EntityRightsFilterModel *m_todoRightsFilterModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_todoViewCollectionModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_viewCollectionModel = nullptr;
+    QVector<qint64> m_enabledTodoCollections;
 };

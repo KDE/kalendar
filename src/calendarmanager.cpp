@@ -368,6 +368,7 @@ CalendarManager::CalendarManager(QObject *parent)
 
     m_calendar = QSharedPointer<Akonadi::ETMCalendar>::create(); // QSharedPointer
     setCollectionSelectionProxyModel(m_calendar->checkableProxyModel());
+    connect(m_calendar->checkableProxyModel(), &KCheckableProxyModel::dataChanged, this, &CalendarManager::refreshEnabledTodoCollections);
 
     m_changer = m_calendar->incidenceChanger();
     m_changer->setHistoryEnabled(true);
@@ -478,6 +479,24 @@ QAbstractItemModel *CalendarManager::todoCollections()
 QAbstractItemModel *CalendarManager::viewCollections()
 {
     return m_viewCollectionModel;
+}
+
+QVector<qint64> CalendarManager::enabledTodoCollections()
+{
+    return m_enabledTodoCollections;
+}
+
+void CalendarManager::refreshEnabledTodoCollections()
+{
+    m_enabledTodoCollections.clear();
+    for (auto selectedIndex : m_calendar->checkableProxyModel()->selectionModel()->selectedIndexes()) {
+        auto collection = selectedIndex.data(Akonadi::EntityTreeModel::CollectionRole).value<Akonadi::Collection>();
+        if (collection.contentMimeTypes().contains(QStringLiteral("application/x-vnd.akonadi.calendar.todo"))) {
+            m_enabledTodoCollections.append(collection.id());
+        }
+    }
+
+    Q_EMIT enabledTodoCollectionsChanged();
 }
 
 bool CalendarManager::loading() const

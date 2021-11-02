@@ -47,8 +47,23 @@ TreeListView {
     }
 
     Kirigami.PlaceholderMessage {
+        id: allTasksPlaceholderMessage
         anchors.centerIn: parent
-        visible: root.filter && root.filter.collectionId >= 0 && root.filterCollectionDetails.isFiltered && parent.count === 0
+        visible: (!root.filter || !root.filter.collectionId || root.filter.collectionId < 0) && Kalendar.CalendarManager.enabledTodoCollections.length === 0 && parent.count === 0
+        onVisibleChanged: console.log(root.filter, root.filter.collectionId)
+        text: i18n("No task calendars enabled.")
+        helpfulAction: Kirigami.Action {
+            icon.name: "gtk-yes"
+            text: i18n("Enable all")
+            onTriggered: Kalendar.CalendarManager.allCalendars.setData(Kalendar.CalendarManager.allCalendars.index(root.filterCollectionDetails.allCalendarsRow, 0), 2, 10)
+            // HACK: Last two numbers are Qt.Checked and Qt.CheckStateRole
+        }
+    }
+
+    Kirigami.PlaceholderMessage {
+        id: collectionPlaceholderMessage
+        anchors.centerIn: parent
+        visible: root.filter && root.filter.collectionId >= 0 && !Kalendar.CalendarManager.enabledTodoCollections.includes(root.filter.collectionId) && parent.count === 0
         text: i18n("Calendar is not enabled")
         helpfulAction: Kirigami.Action {
             icon.name: "gtk-yes"
@@ -60,7 +75,7 @@ TreeListView {
 
     Kirigami.PlaceholderMessage {
         anchors.centerIn: parent
-        visible: parent.count === 0 && root.filterCollectionDetails && !root.filterCollectionDetails.isFiltered
+        visible: parent.count === 0 && !allTasksPlaceholderMessage.visible && !collectionPlaceholderMessage.visible
         text: root.showCompleted === Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly ?
             i18n("No tasks completed") : i18n("No tasks left to complete")
         helpfulAction: Kirigami.Action {
