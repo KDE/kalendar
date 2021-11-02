@@ -138,7 +138,7 @@ QHash<int, QByteArray> ExtraTodoModel::roleNames() const
     roleNames[Roles::IncidencePtrRole] = "incidencePtr";
     roleNames[Roles::TagsRole] = "tags";
     roleNames[Roles::ItemRole] = "item";
-    roleNames[Roles::CategoriesRole] = "categories";
+    roleNames[Roles::CategoriesRole] = "todoCategories"; // Simply 'categories' causes issues
     roleNames[Roles::CategoriesDisplayRole] = "categoriesDisplay";
     roleNames[Roles::TreeDepthRole] = "treeDepth";
 

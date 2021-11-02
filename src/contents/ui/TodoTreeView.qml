@@ -172,7 +172,7 @@ TreeListView {
 
                     Repeater {
                         id: tagsRepeater
-                        model: todoModel.data(todoModel.index(index, 0), Kalendar.ExtraTodoModel.CategoriesRole) // Getting categories from the model is *very* faulty
+                        model: todoCategories // From todoModel
 
                         Tag {
                             implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
