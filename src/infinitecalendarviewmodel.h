@@ -14,7 +14,7 @@ class InfiniteCalendarViewModel : public QAbstractListModel
     // Amount of dates to add each time the model adds more dates
     Q_PROPERTY(int datesToAdd READ datesToAdd WRITE setDatesToAdd NOTIFY datesToAddChanged)
     Q_PROPERTY(int scale READ scale WRITE setScale NOTIFY scaleChanged)
-    Q_PROPERTY(QStringList weekViewLocalisedHourLabels MEMBER m_weekViewLocalisedHourLabels)
+    Q_PROPERTY(QStringList weekViewLocalisedHourLabels MEMBER m_weekViewLocalisedHourLabels CONSTANT)
 
 public:
     // The decade scale is designed to be used in a 4x3 grid, so shows 12 years at a time
