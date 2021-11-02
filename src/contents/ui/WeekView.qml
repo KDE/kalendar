@@ -677,8 +677,9 @@ Kirigami.Page {
                                                     font.pointSize: parent.isTinyHeight ? Kirigami.Theme.smallFont.pointSize :
                                                         Kirigami.Theme.defaultFont.pointSize
                                                     font.weight: Font.Medium
+                                                    renderType: Text.QtRendering
                                                     color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                    incidenceContents.textColor
+                                                        incidenceContents.textColor
                                                 }
 
                                                 RowLayout {
@@ -700,6 +701,7 @@ Kirigami.Page {
                                                         horizontalAlignment: Text.AlignRight
                                                         text: modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) + " - " + modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
                                                         wrapMode: Text.Wrap
+                                                        renderType: Text.QtRendering
                                                         color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                             incidenceContents.textColor
                                                         visible: parent.width > Kirigami.Units.gridUnit * 3

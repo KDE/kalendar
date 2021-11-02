@@ -81,7 +81,8 @@ Rectangle {
             elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
             font.weight: Font.Medium
             font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
-            Kirigami.Theme.defaultFont.pointSize
+                Kirigami.Theme.defaultFont.pointSize
+            renderType: Text.QtRendering
             color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                 isInCurrentMonth ? incidenceContents.textColor :
                 incidenceContents.otherMonthTextColor(modelData.color)
