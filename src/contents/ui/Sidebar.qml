@@ -334,6 +334,7 @@ Kirigami.OverlayDrawer {
 
                     delegate: Kirigami.BasicListItem {
                         Layout.fillWidth: true
+                        enabled: !sidebar.collapsed
 
                         label: display
                         labelItem.color: Kirigami.Theme.textColor
@@ -388,6 +389,7 @@ Kirigami.OverlayDrawer {
                                 topPadding: 2 * Kirigami.Units.largeSpacing
                                 leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                                 hoverEnabled: false
+                                enabled: !sidebar.collapsed
                                 background: Item {}
 
                                 separatorVisible: false
@@ -419,6 +421,7 @@ Kirigami.OverlayDrawer {
                                 leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                                 separatorVisible: false
                                 reserveSpaceForIcon: true
+                                enabled: !sidebar.collapsed
 
                                 trailing: ColoredCheckbox {
                                     id: calendarCheckbox
