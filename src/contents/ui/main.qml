@@ -620,6 +620,7 @@ Kirigami.ApplicationWindow {
         editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
             editorToUse, "incidence");
         editorToUse.incidenceWrapper.incidencePtr = incidencePtr;
+        editorToUse.incidenceWrapper.triggerEditMode();
         editorToUse.incidenceWrapper.collectionId = collectionId;
         editorToUse.editMode = true;
     }

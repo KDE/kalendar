@@ -158,6 +158,7 @@ public:
     int todoPercentComplete();
     void setTodoPercentComplete(int todoPercentComplete);
 
+    Q_INVOKABLE void triggerEditMode();
     Q_INVOKABLE void setNewEvent();
     Q_INVOKABLE void setNewTodo();
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);

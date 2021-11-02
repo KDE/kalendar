@@ -617,6 +617,12 @@ void IncidenceWrapper::setTodoPercentComplete(int todoPercentComplete)
     Q_EMIT todoCompletedChanged();
 }
 
+void IncidenceWrapper::triggerEditMode() // You edit a clone so that the original ptr isn't messed with
+{
+    KCalendarCore::Incidence::Ptr clonedPtr(m_incidence->clone());
+    setIncidencePtr(clonedPtr);
+}
+
 void IncidenceWrapper::setNewEvent()
 {
     auto event = KCalendarCore::Event::Ptr(new KCalendarCore::Event);
