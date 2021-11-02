@@ -56,12 +56,12 @@ Kirigami.ScrollablePage {
 
     QQC2.Action {
         id: submitAction
+        enabled: root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId
         shortcut: "Return"
         onTriggered: {
-            if (editMode && root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId) {
+            if (editMode) {
                 edited(incidenceWrapper);
-                cancel(); // Easy way to close the editor
-            } else if (root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId) {
+            } else if (root.validDates) {
                 added(incidenceWrapper);
                 if(root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
                     Config.lastUsedTodoCollection = root.incidenceWrapper.collectionId;
@@ -69,8 +69,8 @@ Kirigami.ScrollablePage {
                     Config.lastUsedEventCollection = root.incidenceWrapper.collectionId;
                 }
                 Config.save();
-                cancel();
             }
+            cancel(); // Easy way to close the editor
         }
     }
 

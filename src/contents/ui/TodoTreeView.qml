@@ -50,7 +50,6 @@ TreeListView {
         id: allTasksPlaceholderMessage
         anchors.centerIn: parent
         visible: (!root.filter || !root.filter.collectionId || root.filter.collectionId < 0) && Kalendar.CalendarManager.enabledTodoCollections.length === 0 && parent.count === 0
-        onVisibleChanged: console.log(root.filter, root.filter.collectionId)
         text: i18n("No task calendars enabled.")
     }
 
