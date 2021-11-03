@@ -564,7 +564,7 @@ Kirigami.Page {
                                 horizontalAlignment: Text.AlignRight
                                 rightPadding: Kirigami.Units.smallSpacing
                                 x: 0
-                                y: Math.max(0, (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (implicitHeight / 2))
+                                y: Math.max(0, (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (implicitHeight / 2)) - (root.gridLineWidth / 2)
                                 z: 100
 
                                 text: root.currentDate.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
@@ -572,29 +572,50 @@ Kirigami.Page {
                             }
                         }
 
-                        ListView {
+                        Item {
                             id: hourLabelsColumn
+
+                            property real currentTimeLabelTop: currentTimeLabelLoader.item.mapToGlobal(currentTimeLabelLoader.item.x, currentTimeLabelLoader.item.y).y
+                            property real currentTimeLabelBottom: currentTimeLabelLoader.item.mapToGlobal(currentTimeLabelLoader.item.x, currentTimeLabelLoader.item.y).y
+                                + currentTimeLabelLoader.item.implicitHeight
+                            onCurrentTimeLabelBottomChanged: console.log(currentTimeLabelBottom)
+
                             anchors.left: parent.left
                             anchors.top: parent.top
                             anchors.bottom: parent.bottom
-                            anchors.topMargin: (fontMetrics.height / 2) + (root.gridLineWidth / 2)
-                            spacing: root.gridLineWidth
+                            //spacing: root.gridLineWidth
                             width: root.hourLabelWidth
-                            boundsBehavior: Flickable.StopAtBounds
 
                             FontMetrics {
                                 id: fontMetrics
                             }
 
-                            model: pathView.model.weekViewLocalisedHourLabels // Not a model role but instead one of the model object's properties
-                            delegate: QQC2.Label {
-                                height: (Kirigami.Units.gridUnit * hourlyView.periodsPerHour)
-                                width: root.hourLabelWidth
-                                rightPadding: Kirigami.Units.smallSpacing
-                                verticalAlignment: Text.AlignBottom
-                                horizontalAlignment: Text.AlignRight
-                                text: modelData
-                                color: Kirigami.Theme.disabledTextColor
+                            Repeater {
+                                model: pathView.model.weekViewLocalisedHourLabels // Not a model role but instead one of the model object's properties
+                                delegate: QQC2.Label {
+                                    property real textYTop: this.mapToGlobal(x, y).y + height - fontMetrics.height
+                                    property real textYBottom: this.mapToGlobal(x, y).y + height
+                                    property bool overlapWithCurrentTimeLabel: currentTimeLabelLoader.active &&
+                                        (hourLabelsColumn.currentTimeLabelTop <= textYBottom && // Since we have the label aligned at bottom
+                                        hourLabelsColumn.currentTimeLabelBottom >= textYTop)
+
+                                    y: ((Kirigami.Units.gridUnit * hourlyView.periodsPerHour) * (index + 1)) + (root.gridLineWidth * (index + 1)) -
+                                        (fontMetrics.height / 2) - (root.gridLineWidth / 2)
+                                    width: root.hourLabelWidth
+                                    rightPadding: Kirigami.Units.smallSpacing
+                                    verticalAlignment: Text.AlignBottom
+                                    horizontalAlignment: Text.AlignRight
+                                    text: modelData
+                                    color: Kirigami.Theme.disabledTextColor
+                                    opacity: overlapWithCurrentTimeLabel ? 0 : 1
+
+                                    Behavior on opacity {
+                                        OpacityAnimator {
+                                            duration: Kirigami.Units.longDuration
+                                            easing.type: Easing.InOutQuad
+                                        }
+                                    }
+                                }
                             }
                         }
 
@@ -760,7 +781,8 @@ Kirigami.Page {
                                     height: root.gridLineWidth * 2
                                     color: Kirigami.Theme.highlightColor
                                     x: (viewLoader.daysFromWeekStart * root.dayWidth) + (viewLoader.daysFromWeekStart * root.gridLineWidth)
-                                    y: (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (height / 2)
+                                    y: (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) -
+                                        (height / 2) - (root.gridLineWidth / 2)
                                     z: 100
 
                                     Rectangle {
