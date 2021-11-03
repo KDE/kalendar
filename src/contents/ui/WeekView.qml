@@ -167,6 +167,7 @@ Kirigami.Page {
             property int multiDayLinesShown: 0
 
             readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1
+            // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
 
             Loader {
                 id: modelLoader
@@ -559,11 +560,11 @@ Kirigami.Page {
 
                                 width: root.hourLabelWidth
                                 color: Kirigami.Theme.highlightColor
-                                font.weight: Font.Medium
+                                font.weight: Font.DemiBold
                                 horizontalAlignment: Text.AlignRight
                                 rightPadding: Kirigami.Units.smallSpacing
                                 x: 0
-                                y: (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (implicitHeight / 2)
+                                y: Math.max(0, (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (implicitHeight / 2))
                                 z: 100
 
                                 text: root.currentDate.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
