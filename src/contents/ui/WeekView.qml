@@ -551,53 +551,55 @@ Kirigami.Page {
 
                         clip: true
 
-                        Loader {
-                            id: currentTimeLabelLoader
-
-                            active: root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow
-                            sourceComponent: QQC2.Label {
-                                id: currentTimeLabel
-
-                                width: root.hourLabelWidth
-                                color: Kirigami.Theme.highlightColor
-                                font.weight: Font.DemiBold
-                                horizontalAlignment: Text.AlignRight
-                                rightPadding: Kirigami.Units.smallSpacing
-                                x: 0
-                                y: Math.max(0, (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (implicitHeight / 2)) - (root.gridLineWidth / 2)
-                                z: 100
-
-                                text: root.currentDate.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
-
-                            }
-                        }
-
                         Item {
                             id: hourLabelsColumn
 
-                            property real currentTimeLabelTop: currentTimeLabelLoader.item.mapToGlobal(currentTimeLabelLoader.item.x, currentTimeLabelLoader.item.y).y
-                            property real currentTimeLabelBottom: currentTimeLabelLoader.item.mapToGlobal(currentTimeLabelLoader.item.x, currentTimeLabelLoader.item.y).y
-                                + currentTimeLabelLoader.item.implicitHeight
-                            onCurrentTimeLabelBottomChanged: console.log(currentTimeLabelBottom)
+                            property real currentTimeLabelTop: currentTimeLabelLoader.active ?
+                                currentTimeLabelLoader.item.y
+                                : 0
+                            property real currentTimeLabelBottom: currentTimeLabelLoader.active ?
+                                currentTimeLabelLoader.item.y + fontMetrics.height
+                                : 0
 
                             anchors.left: parent.left
                             anchors.top: parent.top
                             anchors.bottom: parent.bottom
-                            //spacing: root.gridLineWidth
                             width: root.hourLabelWidth
 
                             FontMetrics {
                                 id: fontMetrics
                             }
 
+                            Loader {
+                                id: currentTimeLabelLoader
+
+                                active: root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow
+                                sourceComponent: QQC2.Label {
+                                    id: currentTimeLabel
+
+                                    width: root.hourLabelWidth
+                                    color: Kirigami.Theme.highlightColor
+                                    font.weight: Font.DemiBold
+                                    horizontalAlignment: Text.AlignRight
+                                    rightPadding: Kirigami.Units.smallSpacing
+                                    y: Math.max(0, (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (implicitHeight / 2)) - (root.gridLineWidth / 2)
+                                    z: 100
+
+                                    text: root.currentDate.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
+
+                                }
+                            }
+
                             Repeater {
                                 model: pathView.model.weekViewLocalisedHourLabels // Not a model role but instead one of the model object's properties
+
                                 delegate: QQC2.Label {
-                                    property real textYTop: this.mapToGlobal(x, y).y + height - fontMetrics.height
-                                    property real textYBottom: this.mapToGlobal(x, y).y + height
+                                    property real textYTop: y
+                                    property real textYBottom: y + fontMetrics.height
                                     property bool overlapWithCurrentTimeLabel: currentTimeLabelLoader.active &&
-                                        (hourLabelsColumn.currentTimeLabelTop <= textYBottom && // Since we have the label aligned at bottom
-                                        hourLabelsColumn.currentTimeLabelBottom >= textYTop)
+                                        ((hourLabelsColumn.currentTimeLabelTop <= textYTop && hourLabelsColumn.currentTimeLabelBottom >= textYTop) ||
+                                        (hourLabelsColumn.currentTimeLabelTop < textYBottom && hourLabelsColumn.currentTimeLabelBottom > textYBottom) ||
+                                        (hourLabelsColumn.currentTimeLabelTop >= textYTop && hourLabelsColumn.currentTimeLabelBottom <= textYBottom))
 
                                     y: ((Kirigami.Units.gridUnit * hourlyView.periodsPerHour) * (index + 1)) + (root.gridLineWidth * (index + 1)) -
                                         (fontMetrics.height / 2) - (root.gridLineWidth / 2)
@@ -607,14 +609,7 @@ Kirigami.Page {
                                     horizontalAlignment: Text.AlignRight
                                     text: modelData
                                     color: Kirigami.Theme.disabledTextColor
-                                    opacity: overlapWithCurrentTimeLabel ? 0 : 1
-
-                                    Behavior on opacity {
-                                        OpacityAnimator {
-                                            duration: Kirigami.Units.longDuration
-                                            easing.type: Easing.InOutQuad
-                                        }
-                                    }
+                                    visible: !overlapWithCurrentTimeLabel
                                 }
                             }
                         }
