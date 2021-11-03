@@ -37,6 +37,7 @@ Kirigami.Page {
     property int year: selectedDate.getFullYear()
     property bool initialWeek: true
     property int daysToShow: 7
+    readonly property int minutesFromStartOfDay: (root.currentDate.getHours() * 60) + root.currentDate.getMinutes()
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     property real scrollbarWidth: 0
@@ -156,14 +157,16 @@ Kirigami.Page {
         delegate: Loader {
             id: viewLoader
 
-            property date startDate: model.startDate
-            property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
-            property int year: model.selectedYear
+            readonly property date startDate: model.startDate
+            readonly property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
+            readonly property int year: model.selectedYear
 
-            property int index: model.index
-            property bool isCurrentItem: PathView.isCurrentItem
-            property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
+            readonly property int index: model.index
+            readonly property bool isCurrentItem: PathView.isCurrentItem
+            readonly property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
             property int multiDayLinesShown: 0
+
+            readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1
 
             Loader {
                 id: modelLoader
@@ -547,6 +550,27 @@ Kirigami.Page {
 
                         clip: true
 
+                        Loader {
+                            id: currentTimeLabelLoader
+
+                            active: root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow
+                            sourceComponent: QQC2.Label {
+                                id: currentTimeLabel
+
+                                width: root.hourLabelWidth
+                                color: Kirigami.Theme.highlightColor
+                                font.weight: Font.Medium
+                                horizontalAlignment: Text.AlignRight
+                                rightPadding: Kirigami.Units.smallSpacing
+                                x: 0
+                                y: (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (implicitHeight / 2)
+                                z: 100
+
+                                text: root.currentDate.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
+
+                            }
+                        }
+
                         ListView {
                             id: hourLabelsColumn
                             anchors.left: parent.left
@@ -724,28 +748,29 @@ Kirigami.Page {
                                 }
                             }
 
-                            Rectangle {
-                                id: currentTimeMarker
-                                property date currentDateTime: root.currentDate
-                                readonly property int minutesFromStart: (currentDateTime.getHours() * 60) + currentDateTime.getMinutes()
-                                readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(viewLoader.startDate, currentDateTime) - 1
+                            Loader {
+                                id: currentTimeMarkerLoader
 
-                                width: root.dayWidth
-                                height: root.gridLineWidth * 2
-                                color: Kirigami.Theme.highlightColor
-                                x: (daysFromWeekStart * root.dayWidth) + (daysFromWeekStart * root.gridLineWidth)
-                                y: (currentDateTime.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * minutesFromStart) - (height / 2)
-                                z: 100
-                                visible: currentDateTime >= viewLoader.startDate && daysFromWeekStart < root.daysToShow
+                                active: root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow
+                                sourceComponent: Rectangle {
+                                    id: currentTimeMarker
 
-                                Rectangle {
-                                    anchors.left: parent.left
-                                    anchors.top: parent.top
-                                    anchors.topMargin: -(height / 2) + (parent.height / 2)
-                                    width: height
-                                    height: parent.height * 5
-                                    radius: 100
+                                    width: root.dayWidth
+                                    height: root.gridLineWidth * 2
                                     color: Kirigami.Theme.highlightColor
+                                    x: (viewLoader.daysFromWeekStart * root.dayWidth) + (viewLoader.daysFromWeekStart * root.gridLineWidth)
+                                    y: (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (height / 2)
+                                    z: 100
+
+                                    Rectangle {
+                                        anchors.left: parent.left
+                                        anchors.top: parent.top
+                                        anchors.topMargin: -(height / 2) + (parent.height / 2)
+                                        width: height
+                                        height: parent.height * 5
+                                        radius: 100
+                                        color: Kirigami.Theme.highlightColor
+                                    }
                                 }
                             }
                         }

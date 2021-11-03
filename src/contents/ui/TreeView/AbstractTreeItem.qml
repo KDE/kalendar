@@ -22,6 +22,8 @@ Kirigami.AbstractListItem {
     id: delegate
     separatorVisible: false
 
+    property alias decoration: decoration
+
     data: [
         TreeViewDecoration {
             id: decoration

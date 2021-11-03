@@ -99,6 +99,7 @@ TreeListView {
 
         background.anchors.right: this.right
         separatorVisible: true
+        decoration.decorationHighlightColor: model.color
         activeBackgroundColor: LabelUtils.getIncidenceBackgroundColor(model.color, root.isDark)
         onActiveBackgroundColorChanged: activeBackgroundColor.a = 0.15
 

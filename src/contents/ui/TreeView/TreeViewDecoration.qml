@@ -18,6 +18,7 @@ import org.kde.kirigami 2.14 as Kirigami
  * depending on the level of the tree the item is in
  */
 RowLayout {
+    id: decorationLayout
     /**
      * parentDelegate: ItemDelegate
      * The delegate this decoration will live in.
@@ -31,6 +32,8 @@ RowLayout {
      * It needs to be assigned explicitly by the developer.
      */
     property KDescendantsProxyModel model
+
+    property color decorationHighlightColor
 
     Layout.topMargin: -parentDelegate.topPadding
     Layout.bottomMargin: -parentDelegate.bottomPadding
@@ -58,6 +61,7 @@ RowLayout {
         Layout.preferredWidth: Kirigami.Units.gridUnit
         Layout.fillHeight: true
         enabled: kDescendantExpandable
+        hoverEnabled: enabled
         onClicked: model.toggleChildren(index)
         contentItem: Item {
             id: styleitem
@@ -78,6 +82,10 @@ RowLayout {
                 width: Kirigami.Units.iconSizes.small
                 height: width
                 source: kDescendantExpanded ? "go-down-symbolic" : "go-next-symbolic"
+                isMask: true
+                color: controlRoot.hovered ? decorationLayout.decorationHighlightColor ? decorationLayout.decorationHighlightColor :
+                Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.InOutQuad } }
                 visible: kDescendantExpandable
             }
             Rectangle {
