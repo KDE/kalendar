@@ -83,6 +83,8 @@ int main(int argc, char *argv[])
     AgentConfiguration agentConfiguration;
     auto contactsManager = new ContactsManager(&engine);
     auto tagManager = new TagManager(&engine);
+    auto kalendarApplication = new KalendarApplication;
+    kalendarApplication->setCalendar(manager.calendar());
 
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", &manager);
@@ -90,7 +92,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "ContactsManager", contactsManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", new KalendarApplication());
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", kalendarApplication);
 
     qmlRegisterType<IncidenceWrapper>("org.kde.kalendar", 1, 0, "IncidenceWrapper");
     qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");

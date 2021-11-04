@@ -1,9 +1,13 @@
 // SPDX-FileCopyrightText: 2012 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
+// SPDX-FileCopyrightText: 2021 Carl Schwan <carl@carlschwan.eu>
+// SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 #pragma once
 #include "actionsmodel.h"
 #include "kalendarconfig.h"
+#include <Akonadi/Calendar/ETMCalendar>
+#include <Akonadi/Calendar/ICalImporter>
 #include <KXmlGui/KActionCollection>
 #include <QActionGroup>
 #include <QObject>
@@ -28,6 +32,8 @@ public:
     void setWindow(QWindow *window);
 
     QSortFilterProxyModel *actionsModel();
+    void setCalendar(Akonadi::ETMCalendar *calendar);
+    Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId = -1);
 
 public Q_SLOTS:
     void configureShortcuts();
@@ -49,6 +55,7 @@ Q_SIGNALS:
     void openSettings();
     void openLanguageSwitcher();
     void openTagManager();
+    void importCalendar();
     void quit();
     void undo();
     void redo();
@@ -59,6 +66,8 @@ Q_SIGNALS:
     void todoViewOrderDescending();
     void todoViewShowCompleted();
     void openKCommandBarAction();
+    void importStarted();
+    void importFinished();
 
 private:
     KActionCollection mCollection;
@@ -70,4 +79,5 @@ private:
     KalCommandBarModel *m_actionModel = nullptr;
     QSortFilterProxyModel *m_proxyModel = nullptr;
     KalendarConfig *m_config = nullptr;
+    Akonadi::ETMCalendar *m_calendar;
 };

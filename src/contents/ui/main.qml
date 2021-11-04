@@ -208,6 +208,10 @@ Kirigami.ApplicationWindow {
             pageStack.pushDialogLayer(pageStack.currentItem.completedSheetComponent)
         }
 
+        function onImportCalendar() {
+             Qt.quit();
+        }
+
         function onQuit() {
              Qt.quit();
         }
@@ -567,6 +571,50 @@ Kirigami.ApplicationWindow {
                     color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
                 }
             }
+        }
+    }
+
+    FileDialog {
+        id: importFileDialog
+
+        property string selectedUrl: ""
+
+        title: "Import a calendar"
+        folder: shortcuts.home
+        onAccepted: {
+            selectedUrl = fileUrl;
+            const openDialogWindow = pageStack.pushDialogLayer(importChoicePageComponent, {
+                width: root.width
+            }, {
+                width: Kirigami.Units.gridUnit * 30,
+                height: Kirigami.Units.gridUnit * 30
+            });
+    }
+
+    Component {
+        id: importChoicePageComponent
+        Kirigami.Page {
+            Row {
+                QQC2.Button {
+                    text: i18n("Merge with existing calendar")
+                    onClicked: {
+                        KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true);
+                    }
+                }
+                QQC2.Button {
+                    text: i18n("Create new calendar from file")
+                    onClicked: {
+                        KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, false);
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: importMergeCollectionPickerComponent
+        CollectionPickerPage {
+            onCollectionPicked: KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true, collectionId);
         }
     }
 

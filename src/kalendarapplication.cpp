@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carl@carlschwan.eu>
+// SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-FileCopyrightText: 2017 Matthieu Gallien <matthieu_gallien@yahoo.fr>
 // SPDX-FileCopyrightText: 2012 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
 // SPDX-License-Identifier: LGPL-3.0-or-later
@@ -7,6 +8,7 @@
 
 #include "commandbarfiltermodel.h"
 #include "kalendarconfig.h"
+#include <CalendarSupport/Utils>
 #include <KAuthorized>
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -226,6 +228,19 @@ void KalendarApplication::setupActions()
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::switchApplicationLanguage(this, &KalendarApplication::openLanguageSwitcher, this);
         mCollection.addAction(action->objectName(), action);
+    }
+
+    actionName = QLatin1String("import_calendar");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto importIcalAction = mCollection.addAction(actionName, this, &KalendarApplication::importCalendar);
+        importIcalAction->setText(i18n("Import Calendar…"));
+        importIcalAction->setIcon(QIcon::fromTheme(QStringLiteral("document-import-ocal")));
+        connect(this, &KalendarApplication::importStarted, this, [importIcalAction]() {
+            importIcalAction->setEnabled(false);
+        });
+        connect(this, &KalendarApplication::importFinished, this, [importIcalAction]() {
+            importIcalAction->setEnabled(true);
+        });
     }
 
     actionName = QLatin1String("file_quit");
@@ -460,4 +475,37 @@ QSortFilterProxyModel *KalendarApplication::actionsModel()
     std::vector<KActionCollection *> actionCollections = {&mCollection, &mSortCollection};
     m_actionModel->refresh(actionCollectionToActionGroup(actionCollections));
     return m_proxyModel;
+}
+
+void KalendarApplication::setCalendar(Akonadi::ETMCalendar *calendar)
+{
+    m_calendar = calendar;
+}
+
+void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId)
+{
+    if (!m_calendar) {
+        return;
+    }
+
+    auto importer = new Akonadi::ICalImporter(m_calendar->incidenceChanger());
+    bool jobStarted;
+
+    if (merge) {
+        connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &KalendarApplication::importFinished);
+        auto collection = m_calendar->collection(collectionId);
+        jobStarted = importer->importIntoExistingResource(url, collection);
+    } else {
+        connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &KalendarApplication::importFinished);
+        jobStarted = importer->importIntoNewResource(url.path());
+    }
+
+    if (jobStarted) {
+        Q_EMIT importStarted();
+    } else {
+        // empty error message means user canceled.
+        if (!importer->errorMessage().isEmpty()) {
+            qDebug() << i18n("An error occurred: %1", importer->errorMessage());
+        }
+    }
 }

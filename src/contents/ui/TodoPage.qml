@@ -161,78 +161,16 @@ Kirigami.ScrollablePage {
 
     Component {
         id: collectionPickerSheetComponent
-        Kirigami.ScrollablePage {
+        CollectionPickerPage {
             id: collectionPickerSheet
-            title: i18n("Choose a Task Calendar")
-
             property var incidenceWrapper
 
-            ListView {
-                id: collectionsList
-                implicitWidth: Kirigami.Units.gridUnit * 30
-                currentIndex: -1
-                header: ColumnLayout {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-
-                }
-
-                model: KDescendantsProxyModel {
-                    model: Kalendar.CalendarManager.todoCollections
-                }
-
-                delegate: DelegateChooser {
-                    role: 'kDescendantExpandable'
-                    DelegateChoice {
-                        roleValue: true
-
-                        Kirigami.BasicListItem {
-                            label: display
-                            labelItem.color: Kirigami.Theme.disabledTextColor
-                            labelItem.font.weight: Font.DemiBold
-                            topPadding: 2 * Kirigami.Units.largeSpacing
-                            hoverEnabled: false
-                            background: Item {}
-
-                            separatorVisible: false
-
-                            trailing: Kirigami.Icon {
-                                width: Kirigami.Units.iconSizes.small
-                                height: Kirigami.Units.iconSizes.small
-                                source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                x: -4
-                            }
-
-                            onClicked: collectionsList.model.toggleChildren(index)
-                        }
-                    }
-
-                    DelegateChoice {
-                        roleValue: false
-                        Kirigami.BasicListItem {
-                            label: display
-                            labelItem.color: Kirigami.Theme.textColor
-
-                            hoverEnabled: false
-
-                            separatorVisible: false
-
-                            onClicked: {
-                                collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
-                                Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
-                                collectionPickerSheet.closeDialog();
-                                addField.clear();
-                            }
-
-                            trailing: Rectangle {
-                                color: model.collectionColor
-                                radius: Kirigami.Units.smallSpacing
-                                width: height
-                                height: Kirigami.Units.iconSizes.small
-                            }
-                        }
-                    }
-                }
+            todoMode: true
+            onCollectionPicked: {
+                collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
+                Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
+                collectionPickerSheet.closeDialog();
+                addField.clear();
             }
         }
     }
