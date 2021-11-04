@@ -22,9 +22,7 @@ Kirigami.Page {
     signal deselect()
 
     property var openOccurrence
-    property var filter: {
-        "tags": []
-    }
+    property var model
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
     property int day: selectedDate.getDate()
@@ -127,9 +125,7 @@ Kirigami.Page {
             }
         }
 
-        model: Kalendar.InfiniteCalendarViewModel {
-            scale: Kalendar.InfiniteCalendarViewModel.MonthScale
-        }
+        model: root.model
 
         property date dateToUse
         property int startIndex
@@ -163,7 +159,8 @@ Kirigami.Page {
             property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
 
             active: isNextOrCurrentItem
-            //asynchronous: true
+            asynchronous: !isCurrentItem
+            visible: status === Loader.Ready
             sourceComponent: QQC2.ScrollView {
                 width: pathView.width
                 height: pathView.height
@@ -195,23 +192,7 @@ Kirigami.Page {
 
                     header: Kalendar.Config.showMonthHeader ? monthHeaderComponent : null
 
-                    Loader {
-                        id: modelLoader
-                        asynchronous: true
-                        sourceComponent: Kalendar.MultiDayIncidenceModel {
-                            periodLength: 1
-                            model: Kalendar.IncidenceOccurrenceModel {
-                                id: occurrenceModel
-                                objectName: "incidenceOccurrenceModel"
-                                start: viewLoader.firstDayOfMonth
-                                length: new Date(start.getFullYear(), start.getMonth(), 0).getDate()
-                                filter: root.filter ? root.filter : {}
-                                calendar: Kalendar.CalendarManager.calendar
-                            }
-                        }
-                    }
-
-                    model: modelLoader.item
+                    model: scheduleViewModel
 
                     delegate: DayMouseArea {
                         id: dayMouseArea

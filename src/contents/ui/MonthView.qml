@@ -23,12 +23,10 @@ Kirigami.Page {
     signal deselect()
 
     property var openOccurrence
+    property var model
     property date startDate
     property date currentDate
     property date firstDayOfMonth
-    property var filter: {
-        "tags": []
-    }
     property int month
     property int year
     property bool initialMonth: true
@@ -112,9 +110,7 @@ Kirigami.Page {
             }
         }
 
-        model: Kalendar.InfiniteCalendarViewModel {
-            scale: Kalendar.InfiniteCalendarViewModel.MonthScale
-        }
+        model: monthPage.model
 
         property int startIndex
         Component.onCompleted: {
@@ -144,20 +140,21 @@ Kirigami.Page {
             property int year: model.selectedYear
 
             property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
+            property bool isCurrentItem: PathView.isCurrentItem
 
             active: isNextOrCurrentItem
-            //asynchronous: true
+            asynchronous: !isCurrentItem
+            visible: status === Loader.Ready
             sourceComponent: MultiDayView {
                 id: dayView
                 objectName: "monthView"
                 width: pathView.width
                 height: pathView.height
-                loadModel: viewLoader.isNextOrCurrentItem
-                filter: monthPage.filter
+                model: monthViewModel // from monthPage model
 
-                startDate: model.startDate
+                startDate: viewLoader.startDate
                 currentDate: monthPage.currentDate
-                month: model.firstDay.getMonth()
+                month: viewLoader.month
 
                 dayHeaderDelegate: QQC2.Control {
                     Layout.maximumHeight: Kirigami.Units.gridUnit * 2

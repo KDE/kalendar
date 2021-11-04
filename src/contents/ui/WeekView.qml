@@ -23,9 +23,8 @@ Kirigami.Page {
     signal deselect()
 
     property var openOccurrence: {}
-    property var filter: {
-        "tags": []
-    }
+    property var model
+
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
     property date currentDate: new Date() // Needs to get updated for marker to move, done from main.qml
@@ -45,8 +44,7 @@ Kirigami.Page {
     readonly property real incidenceSpacing: Kirigami.Units.smallSpacing / 2
     readonly property real gridLineWidth: 1.0
     readonly property real hourLabelWidth: Kirigami.Units.gridUnit * 3.5
-
-    property var hourStrings: []
+    readonly property real periodHeight: Kirigami.Units.gridUnit / 2
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -130,9 +128,7 @@ Kirigami.Page {
             }
         }
 
-        model: Kalendar.InfiniteCalendarViewModel {
-            scale: Kalendar.InfiniteCalendarViewModel.WeekScale
-        }
+        model: root.model
 
         property date dateToUse
         property int startIndex
@@ -169,26 +165,9 @@ Kirigami.Page {
             readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1
             // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
 
-            Loader {
-                id: modelLoader
-                active: viewLoader.isNextOrCurrentItem
-                asynchronous: true
-                sourceComponent: Kalendar.HourlyIncidenceModel {
-                    id: hourlyModel
-                    filters: Kalendar.HourlyIncidenceModel.NoAllDay | Kalendar.HourlyIncidenceModel.NoMultiDay
-                    model: Kalendar.IncidenceOccurrenceModel {
-                        id: occurrenceModel
-                        objectName: "incidenceOccurrenceModel"
-                        start: viewLoader.startDate
-                        length: root.daysToShow
-                        filter: root.filter ? root.filter : {}
-                        calendar: Kalendar.CalendarManager.calendar
-                    }
-                }
-            }
-
             active: isNextOrCurrentItem
-            //asynchronous: true
+            asynchronous: !isCurrentItem
+            visible: status === Loader.Ready
             sourceComponent: Column {
                 id: viewColumn
                 width: pathView.width
@@ -217,7 +196,7 @@ Kirigami.Page {
                     Repeater {
                         id: dayHeadings
 
-                        model: modelLoader.item.rowCount()
+                        model: weekViewModel.rowCount()
                         delegate: Kirigami.Heading {
                             id: dayHeading
 
@@ -273,23 +252,6 @@ Kirigami.Page {
                         spread: 0.3
                         color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
                         visible: !allDayViewLoader.active
-                    }
-                }
-
-                Loader {
-                    id: allDayIncidenceModelLoader
-                    asynchronous: true
-                    sourceComponent: Kalendar.MultiDayIncidenceModel {
-                        periodLength: root.daysToShow
-                        filters: Kalendar.MultiDayIncidenceModel.AllDayOnly | Kalendar.MultiDayIncidenceModel.MultiDayOnly
-                        model: Kalendar.IncidenceOccurrenceModel {
-                            id: occurrenceModel
-                            objectName: "incidenceOccurrenceModel"
-                            start: viewLoader.startDate
-                            length: root.daysToShow
-                            filter: root.filter ? root.filter : {}
-                            calendar: Kalendar.CalendarManager.calendar
-                        }
                     }
                 }
 
@@ -385,14 +347,14 @@ Kirigami.Page {
                         id: allDayViewLoader
                         anchors.fill: parent
                         anchors.leftMargin: root.hourLabelWidth
-                        active: allDayIncidenceModelLoader.item.incidenceCount > 0
+                        active: weekViewMultiDayViewModel.incidenceCount > 0
                         sourceComponent: Item {
                             id: allDayViewItem
                             implicitHeight: allDayHeader.actualHeight
                             clip: true
 
                             Repeater {
-                                model: allDayIncidenceModelLoader.item
+                                model: weekViewMultiDayViewModel // from root.model
                                 Layout.topMargin: Kirigami.Units.largeSpacing
                                 //One row => one week
                                 Item {
@@ -552,10 +514,10 @@ Kirigami.Page {
                     z: -2
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-                    readonly property real periodsPerHour: 60 / modelLoader.item.periodLength
-                    readonly property real daySections: (60 * 24) / modelLoader.item.periodLength
-                    readonly property real dayHeight: (daySections * Kirigami.Units.gridUnit) + (root.gridLineWidth * 23)
-                    readonly property real hourHeight: periodsPerHour * Kirigami.Units.gridUnit
+                    readonly property real periodsPerHour: 60 / weekViewModel.periodLength
+                    readonly property real daySections: (60 * 24) / weekViewModel.periodLength
+                    readonly property real dayHeight: (daySections * root.periodHeight) + (root.gridLineWidth * 23)
+                    readonly property real hourHeight: periodsPerHour * root.periodHeight
                     readonly property real minuteHeight: hourHeight / 60
 
                     Connections {
@@ -564,7 +526,9 @@ Kirigami.Page {
                             if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width;
                         }
                     }
-                    Component.onCompleted: if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width
+                    Component.onCompleted: {
+                        if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width
+                    }
 
                     Item {
                         id: hourlyViewContents
@@ -623,7 +587,7 @@ Kirigami.Page {
                                         (hourLabelsColumn.currentTimeLabelTop < textYBottom && hourLabelsColumn.currentTimeLabelBottom > textYBottom) ||
                                         (hourLabelsColumn.currentTimeLabelTop >= textYTop && hourLabelsColumn.currentTimeLabelBottom <= textYBottom))
 
-                                    y: ((Kirigami.Units.gridUnit * hourlyView.periodsPerHour) * (index + 1)) + (root.gridLineWidth * (index + 1)) -
+                                    y: ((root.periodHeight * hourlyView.periodsPerHour) * (index + 1)) + (root.gridLineWidth * (index + 1)) -
                                         (fontMetrics.height / 2) - (root.gridLineWidth / 2)
                                     width: root.hourLabelWidth
                                     rightPadding: Kirigami.Units.smallSpacing
@@ -654,7 +618,7 @@ Kirigami.Page {
                                 anchors.fill: parent
                                 spacing: root.gridLineWidth
                                 orientation: Qt.Horizontal
-                                model: modelLoader.item
+                                model: weekViewModel // From root.model
 
                                 boundsBehavior: Flickable.StopAtBounds
 
@@ -701,9 +665,9 @@ Kirigami.Page {
                                                 root.openOccurrence.incidenceId === modelData.incidenceId : false
 
                                             x: root.incidenceSpacing + (modelData.priorTakenWidthShare * root.dayWidth)
-                                            y: (modelData.starts * Kirigami.Units.gridUnit) + root.incidenceSpacing + gridLineYCompensation
+                                            y: (modelData.starts * root.periodHeight) + root.incidenceSpacing + gridLineYCompensation
                                             width: (root.dayWidth * modelData.widthShare) - (root.incidenceSpacing * 2)
-                                            height: (modelData.duration * Kirigami.Units.gridUnit) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
+                                            height: (modelData.duration * root.periodHeight) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
                                             radius: Kirigami.Units.smallSpacing
                                             color: Qt.rgba(0,0,0,0)
                                             clip: true

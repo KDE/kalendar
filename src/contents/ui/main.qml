@@ -28,6 +28,12 @@ Kirigami.ApplicationWindow {
     }
     property date selectedDate: new Date()
     property var openOccurrence: {}
+    property var filter: {
+        "collectionId": -1,
+        "tags": [],
+        "name": ""
+    }
+    onFilterChanged: if(pageStack.currentItem.objectName === "todoView") pageStack.currentItem.filter = filter
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
@@ -60,25 +66,6 @@ Kirigami.ApplicationWindow {
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
     pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
 
-    QQC2.Action {
-        id: closeOverlayAction
-        shortcut: "Escape"
-        onTriggered: {
-            if(applicationWindow().overlay.children[0].visible) {
-                applicationWindow().overlay.children[0].visible = false;
-                return;
-            }
-            if(pageStack.layers.depth > 1) {
-                pageStack.layers.pop();
-                return;
-            }
-            if(contextDrawer.visible) {
-                contextDrawer.close();
-                return;
-            }
-        }
-    }
-
     Component.onCompleted: {
         switch (Config.lastOpenedView) {
             case Config.MonthView:
@@ -99,13 +86,30 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    QQC2.Action {
+        id: closeOverlayAction
+        shortcut: "Escape"
+        onTriggered: {
+            if(applicationWindow().overlay.children[0].visible) {
+                applicationWindow().overlay.children[0].visible = false;
+                return;
+            }
+            if(pageStack.layers.depth > 1) {
+                pageStack.layers.pop();
+                return;
+            }
+            if(contextDrawer.visible) {
+                contextDrawer.close();
+                return;
+            }
+        }
+    }
+
     function switchView(newViewComponent) {
         if(pageStack.layers.depth > 1) {
             pageStack.layers.pop(pageStack.layers.initialItem);
         }
-        let filterCache = pageStack.currentItem.filter;
         pageStack.replace(newViewComponent);
-        pageStack.currentItem.filter = filterCache;
 
         if(filterHeader.active) {
             pageStack.currentItem.header = filterHeader.item;
@@ -115,14 +119,17 @@ Kirigami.ApplicationWindow {
     Connections {
         target: KalendarApplication
         function onOpenMonthView() {
+            monthScaleModelLoader.active = true;
             root.switchView(monthViewComponent);
         }
 
         function onOpenWeekView() {
+            weekScaleModelLoader.active = true;
             root.switchView(weekViewComponent);
         }
 
         function onOpenScheduleView() {
+            monthScaleModelLoader.active = true;
             root.switchView(scheduleViewComponent);
         }
 
@@ -318,21 +325,21 @@ Kirigami.ApplicationWindow {
         id: sidebar
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
-        activeTags: pageStack.currentItem && pageStack.currentItem.filter && pageStack.currentItem.filter.tags ?
-                    pageStack.currentItem.filter.tags : []
+        activeTags: root.filter && root.filter.tags ?
+                    root.filter.tags : []
         onSearchTextChanged: {
-            if(pageStack.currentItem.filter) {
-                pageStack.currentItem.filter.name = searchText;
+            if(root.filter) {
+                root.filter.name = searchText;
             } else {
-                pageStack.currentItem.filter = {name: searchText};
+                root.filter = {name: searchText};
             }
-            pageStack.currentItem.filterChanged();
+            root.filterChanged();
         }
         onCalendarClicked: if(todoMode) {
-            pageStack.currentItem.filter ?
-                pageStack.currentItem.filter.collectionId = collectionId :
-                pageStack.currentItem.filter = {"collectionId" : collectionId};
-            pageStack.currentItem.filterChanged();
+            root.filter ?
+                root.filter.collectionId = collectionId :
+                root.filter = {"collectionId" : collectionId};
+            root.filterChanged();
             pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(collectionId);
         }
         onCalendarCheckChanged: {
@@ -342,22 +349,23 @@ Kirigami.ApplicationWindow {
                 // HACK: The Todo View should be able to detect change in collection filtering independently
             }
         }
-        onTagClicked: if(!pageStack.currentItem.filter || !pageStack.currentItem.filter.tags || !pageStack.currentItem.filter.tags.includes(tagName)) {
-            pageStack.currentItem.filter ? pageStack.currentItem.filter.tags ?
-                pageStack.currentItem.filter.tags.push(tagName) :
-                pageStack.currentItem.filter.tags = [tagName] :
-                pageStack.currentItem.filter = {"tags" : [tagName]};
-            pageStack.currentItem.filterChanged();
+        onTagClicked: if(!root.filter || !root.filter.tags || !root.filter.tags.includes(tagName)) {
+            root.filter ? root.filter.tags ?
+                root.filter.tags.push(tagName) :
+                root.filter.tags = [tagName] :
+                root.filter = {"tags" : [tagName]};
+            root.filterChanged();
             filterHeader.active = true;
             pageStack.currentItem.header = filterHeader.item;
-        } else if (pageStack.currentItem.filter.tags.includes(tagName)) {
-            pageStack.currentItem.filter.tags = pageStack.currentItem.filter.tags.filter((tag) => tag !== tagName);
-            pageStack.currentItem.filterChanged();
+        } else if (root.filter.tags.includes(tagName)) {
+            root.filter.tags = root.filter.tags.filter((tag) => tag !== tagName);
+            root.filterChanged();
         }
         onViewAllTodosClicked: if(todoMode) {
-            pageStack.currentItem.filter.collectionId = -1;
-            pageStack.currentItem.filter.name = "";
-            pageStack.currentItem.filterChanged();
+            root.filter.collectionId = -1;
+            root.filter.tags = [];
+            root.filter.name = "";
+            root.filterChanged();
         }
     }
 
@@ -458,7 +466,7 @@ Kirigami.ApplicationWindow {
         id: globalMenuLoader
         active: !Kirigami.Settings.isMobile
         sourceComponent: GlobalMenu {
-            todoMode: pageStack.currentItem && pageStack.currentItem.filterCollectionId !== undefined
+            todoMode: pageStack.currentItem && pageStack.currentItem.objectName === "todoView"
         }
         onLoaded: item.parentWindow = root;
     }
@@ -530,18 +538,18 @@ Kirigami.ApplicationWindow {
                 id: header
                 anchors.fill: parent
                 todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
-                filter: pageStack.currentItem && pageStack.currentItem.filter ?
-                    pageStack.currentItem.filter : {"tags": [], "collectionId": -1}
+                filter: root.filter ?
+                    root.filter : {"tags": [], "collectionId": -1}
                 isDark: root.isDark
                 clip: true
 
                 onRemoveFilterTag: {
-                    pageStack.currentItem.filter.tags.splice(pageStack.currentItem.filter.tags.indexOf(tagName), 1);
-                    pageStack.currentItem.filterChanged();
+                    root.filter.tags.splice(root.filter.tags.indexOf(tagName), 1);
+                    root.filterChanged();
                 }
                 onResetFilterCollection: {
-                    pageStack.currentItem.filter.collectionId = -1;
-                    pageStack.currentItem.filterChanged();
+                    root.filter.collectionId = -1;
+                    root.filterChanged();
                 }
             }
             Kirigami.Separator {
@@ -690,6 +698,28 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    Loader {
+        id: monthScaleModelLoader
+        active: Config.lastOpenedView === Config.MonthView || Config.lastOpenedView === Config.ScheduleView
+        onStatusChanged: if(status === Loader.Ready) asynchronous = true
+        sourceComponent: InfiniteCalendarViewModel {
+            scale: InfiniteCalendarViewModel.MonthScale
+            calendar: CalendarManager.calendar
+            filter: root.filter
+        }
+    }
+
+    Loader {
+        id: weekScaleModelLoader
+        active: Config.lastOpenedView === Config.WeekView
+        onStatusChanged: if(status === Loader.Ready) asynchronous = true
+        sourceComponent: InfiniteCalendarViewModel {
+            scale: InfiniteCalendarViewModel.WeekScale
+            calendar: CalendarManager.calendar
+            filter: root.filter
+        }
+    }
+
     Component {
         id: monthViewComponent
 
@@ -703,6 +733,7 @@ Kirigami.ApplicationWindow {
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
+            model: monthScaleModelLoader.item
 
             onAddIncidence: root.setUpAdd(type, addDate)
             onViewIncidence: root.setUpView(modelData, collectionData)
@@ -734,6 +765,7 @@ Kirigami.ApplicationWindow {
             }
             selectedDate: root.selectedDate
             openOccurrence: root.openOccurrence
+            model: monthScaleModelLoader.item
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
@@ -769,6 +801,7 @@ Kirigami.ApplicationWindow {
             selectedDate: root.selectedDate
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
+            model: weekScaleModelLoader.item
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
@@ -813,6 +846,8 @@ Kirigami.ApplicationWindow {
                     text: i18n("Tasks")
                 }
             }
+
+            filter: if(root.filter) root.filter
 
             onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
             onViewTodo: root.setUpView(todoData, collectionData)

@@ -41,6 +41,7 @@ class IncidenceOccurrenceModel : public QAbstractItemModel
     Q_PROPERTY(int length READ length WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
+    Q_PROPERTY(bool handleOwnRefresh READ handleOwnRefresh WRITE setHandleOwnRefresh NOTIFY handleOwnRefreshChanged)
 
 public:
     enum Roles {
@@ -79,7 +80,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role) const override;
 
-    void updateQuery(const QDate &start, const QDate &end);
+    void updateQuery();
     Akonadi::ETMCalendar *calendar() const;
     void setCalendar(Akonadi::ETMCalendar *calendar);
 
@@ -89,6 +90,9 @@ public:
     int length() const;
     QVariantMap filter() const;
     void setFilter(const QVariantMap &filter);
+
+    bool handleOwnRefresh();
+    void setHandleOwnRefresh(bool handleOwnRefresh);
 
     void load();
 
@@ -106,10 +110,9 @@ Q_SIGNALS:
     void lengthChanged();
     void filterChanged();
     void calendarChanged();
+    void handleOwnRefreshChanged();
 
 private:
-    void updateQuery();
-
     void refreshView();
     void updateFromSource();
     QColor getColor(const KCalendarCore::Incidence::Ptr &incidence);
@@ -127,6 +130,8 @@ private:
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
     QVariantMap mFilter;
+    bool m_handleOwnRefresh = true;
+    bool m_isDirty;
 };
 
 Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence);

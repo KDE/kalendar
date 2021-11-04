@@ -92,12 +92,14 @@ void IncidenceOccurrenceModel::updateQuery()
     }
     mEnd = mStart.addDays(mLength);
 
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::layoutChanged, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsMoved, this, &IncidenceOccurrenceModel::refreshView);
+    if (m_handleOwnRefresh) {
+        // We track certain changes in the calendar to know if we need to update our incidence records
+        QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::refreshView);
+        QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::refreshView);
+    }
+
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::refreshView);
+    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
 
     refreshView();
 }
@@ -341,4 +343,15 @@ void IncidenceOccurrenceModel::load()
         QColor color = rColorsConfig.readEntry(key, QColor("blue"));
         m_colors[key] = color;
     }
+}
+
+bool IncidenceOccurrenceModel::handleOwnRefresh()
+{
+    return m_handleOwnRefresh;
+}
+
+void IncidenceOccurrenceModel::setHandleOwnRefresh(bool handleOwnRefresh)
+{
+    m_handleOwnRefresh = handleOwnRefresh;
+    Q_EMIT handleOwnRefreshChanged();
 }
