@@ -98,14 +98,11 @@ Kirigami.OverlayDrawer {
                         Layout.fillHeight: true
                         alignment: Qt.AlignRight
 
-                        // If accessing directly, updated incidenceWrapper data not grabbed (???)
-                        property string incidenceType: incidenceInfo.incidenceWrapper.incidenceType
-
                         actions: [
                             Kirigami.Action {
                                 icon.name: "list-add"
                                 text: i18n("Add Sub-Task")
-                                visible: actionToolbar.incidenceType === IncidenceWrapper.TypeTodo
+                                visible: incidenceInfo.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
                                 onTriggered: {
                                     incidenceInfo.incidenceWrapper.collectionId = collectionData.id;
                                     addSubTodo(incidenceInfo.incidenceWrapper);
@@ -115,7 +112,7 @@ Kirigami.OverlayDrawer {
                                 property bool todoCompleted: incidenceInfo.incidenceWrapper.todoCompleted
                                 icon.name: todoCompleted ? "edit-undo" : "checkmark"
                                 text: todoCompleted ? i18n("Mark Incomplete") : i18n("Mark Complete")
-                                visible: actionToolbar.incidenceType === IncidenceWrapper.TypeTodo
+                                visible: incidenceInfo.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
                                 onTriggered: {
                                     incidenceInfo.incidenceWrapper.todoCompleted = !incidenceInfo.incidenceWrapper.todoCompleted;
                                     CalendarManager.editIncidence(incidenceInfo.incidenceWrapper);
