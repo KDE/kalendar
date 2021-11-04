@@ -601,13 +601,20 @@ Kirigami.ApplicationWindow {
                 QQC2.Button {
                     text: i18n("Merge with existing calendar")
                     onClicked: {
-                        KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true);
+                        closeDialog();
+                        const openDialogWindow = pageStack.pushDialogLayer(importMergeCollectionPickerComponent, {
+                            width: root.width
+                        }, {
+                            width: Kirigami.Units.gridUnit * 30,
+                            height: Kirigami.Units.gridUnit * 30
+                        });
                     }
                 }
                 QQC2.Button {
                     text: i18n("Create new calendar from file")
                     onClicked: {
                         KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, false);
+                        closeDialog();
                     }
                 }
             }
@@ -617,7 +624,10 @@ Kirigami.ApplicationWindow {
     Component {
         id: importMergeCollectionPickerComponent
         CollectionPickerPage {
-            onCollectionPicked: KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true, collectionId);
+            onCollectionPicked: {
+                KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true, collectionId);
+                closeDialog();
+            }
         }
     }
 
