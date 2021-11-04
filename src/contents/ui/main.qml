@@ -530,6 +530,10 @@ Kirigami.ApplicationWindow {
                     pageStack.currentItem.filter.tags.splice(pageStack.currentItem.filter.tags.indexOf(tagName), 1);
                     pageStack.currentItem.filterChanged();
                 }
+                onResetFilterCollection: {
+                    pageStack.currentItem.filter.collectionId = -1;
+                    pageStack.currentItem.filterChanged();
+                }
             }
             Kirigami.Separator {
                 id: headerSeparator

@@ -12,6 +12,7 @@ import "labelutils.js" as LabelUtils
 RowLayout {
     id: headerLayout
 
+    signal resetFilterCollection()
     signal removeFilterTag(string tagName)
     signal searchTextChanged(string text)
 
@@ -29,21 +30,28 @@ RowLayout {
 
     spacing: Kirigami.Units.smallSpacing
 
-    Kirigami.Heading {
-        id: heading
-
-        width: implicitWidth
-        Layout.fillWidth: headerLayout.todoMode
+    RowLayout {
         Layout.margins: Kirigami.Units.largeSpacing
-        Layout.bottomMargin: headerLayout.rows > 1 ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing
+        Kirigami.Heading {
+            id: heading
 
-        text: !headerLayout.todoMode ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
-            headerLayout.filterCollectionDetails.displayName : i18n("All Tasks")
-        font.weight: !headerLayout.todoMode ? Font.Normal : Font.Bold
-        color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
-            LabelUtils.getIncidenceLabelColor(headerLayout.filterCollectionDetails.color, headerLayout.isDark) : Kirigami.Theme.textColor
-        elide: Text.ElideRight
-        level: headerLayout.todoMode ? 1 : 2
+            Layout.alignment: Qt.AlignVCenter
+            width: implicitWidth
+
+            text: !headerLayout.todoMode ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+                headerLayout.filterCollectionDetails.displayName : i18n("All Tasks")
+            font.weight: !headerLayout.todoMode ? Font.Normal : Font.Bold
+            color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+                LabelUtils.getIncidenceLabelColor(headerLayout.filterCollectionDetails.color, headerLayout.isDark) : Kirigami.Theme.textColor
+            elide: Text.ElideRight
+            level: headerLayout.todoMode ? 1 : 2
+        }
+        QQC2.ToolButton {
+            Layout.alignment: Qt.AlignVCenter
+            icon.name: "edit-reset"
+            visible: headerLayout.todoMode && headerLayout.filter.collectionId > -1
+            onClicked: headerLayout.resetFilterCollection()
+        }
     }
 
     Flow {
