@@ -18,7 +18,10 @@ Kirigami.ShadowedRectangle {
     anchors.fill: parent
     color: isOpenOccurrence ? modelData.color :
         LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
-    visible: isOpenOccurrence || isInCurrentMonth
+    Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+    opacity: isOpenOccurrence || isInCurrentMonth ? 1.0 : 0
+    Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+
     radius: Kirigami.Units.smallSpacing
 
     shadow.size: Kirigami.Units.largeSpacing

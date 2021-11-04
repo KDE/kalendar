@@ -94,7 +94,7 @@ Kirigami.ApplicationWindow {
                 todoViewAction.trigger();
                 break;
             default:
-                monthViewAction.trigger();
+                Kirigami.Settings.isMobile ? scheduleViewAction.trigger() : monthViewAction.trigger();
                 break;
         }
     }
@@ -301,7 +301,7 @@ Kirigami.ApplicationWindow {
 
         sourceComponent: WindowMenu {
             parentWindow: root
-            todoMode: pageStack.currentItem.objectName == "todoView"
+            todoMode: pageStack.currentItem.objectName === "todoView"
             Kirigami.Theme.colorSet: Kirigami.Theme.Header
         }
     }
@@ -309,7 +309,7 @@ Kirigami.ApplicationWindow {
     footer: Loader {
         id: bottomLoader
         active: Kirigami.Settings.isMobile
-        visible: pageStack.layers.currentItem.objectName != "settingsPage"
+        visible: pageStack.currentItem.objectName !== "settingsPage"
 
         source: Qt.resolvedUrl("qrc:/BottomToolBar.qml")
     }
@@ -507,8 +507,16 @@ Kirigami.ApplicationWindow {
                 left: parent.left
                 right: parent.right
             }
-            height: visible ? header.implicitHeight + headerSeparator.height : 0
-            visible: header.todoMode || header.filter.tags.length > 0 || header.visible
+
+            property bool show: header.todoMode || header.filter.tags.length > 0
+
+            height: show ? header.implicitHeight + headerSeparator.height : 0
+            clip: height === 0
+
+            Behavior on height { NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            } }
 
             Rectangle {
                 width: header.width
@@ -525,6 +533,7 @@ Kirigami.ApplicationWindow {
                 filter: pageStack.currentItem && pageStack.currentItem.filter ?
                     pageStack.currentItem.filter : {"tags": [], "collectionId": -1}
                 isDark: root.isDark
+                clip: true
 
                 onRemoveFilterTag: {
                     pageStack.currentItem.filter.tags.splice(pageStack.currentItem.filter.tags.indexOf(tagName), 1);

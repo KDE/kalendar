@@ -228,7 +228,7 @@ Kirigami.Page {
                             anchors.right: parent.right
                             anchors.left: parent.left
                             height: Kirigami.Settings.isMobile ? // Mobile adds extra padding
-                            parent.height + Kirigami.Units.largeSpacing * 2 : parent.height + Kirigami.Units.largeSpacing
+                                parent.height + Kirigami.Units.largeSpacing * 2 : parent.height + Kirigami.Units.largeSpacing
                             Kirigami.Theme.colorSet: Kirigami.Theme.View
                             color: Kirigami.Theme.activeBackgroundColor
                             visible: dayGrid.isToday
@@ -257,8 +257,8 @@ Kirigami.Page {
                                     return periodStartDate.toLocaleDateString(Qt.locale(), "dddd <b>dd</b>") + " - " + nextDay.toLocaleDateString(Qt.locale(), "dddd <b>dd</b> MMMM");
                                 }
                                 visible: Kalendar.Config.showWeekHeaders &&
-                                periodStartDate !== undefined &&
-                                (periodStartDate.getDay() === Qt.locale().firstDayOfWeek || index === 0)
+                                    periodStartDate !== undefined &&
+                                    (periodStartDate.getDay() === Qt.locale().firstDayOfWeek || index === 0)
                             }
 
                             Kirigami.Separator {
@@ -392,6 +392,7 @@ Kirigami.Page {
                                                             color: incidenceCard.isOpenOccurrence ?
                                                                 (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                                 cardContents.textColor
+                                                            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                         }
 
                                                         QQC2.Label {
@@ -404,6 +405,7 @@ Kirigami.Page {
                                                             color: incidenceCard.isOpenOccurrence ?
                                                                 (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                                 cardContents.textColor
+                                                            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                             text: {
                                                                 if(incidenceCard.multiday) {
                                                                     return i18n("%1 (Day %2 of %3)", modelData.text, incidenceCard.dayOfMultidayIncidence, incidenceCard.incidenceDays);
@@ -430,7 +432,8 @@ Kirigami.Page {
                                                             source: "appointment-recurring"
                                                             isMask: true
                                                             color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                            cardContents.textColor
+                                                                cardContents.textColor
+                                                            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                             visible: modelData.recurs
                                                         }
                                                         Kirigami.Icon {
@@ -439,7 +442,8 @@ Kirigami.Page {
                                                             source: "appointment-reminder"
                                                             isMask: true
                                                             color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                            cardContents.textColor
+                                                                cardContents.textColor
+                                                            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                             visible: modelData.hasReminders
                                                         }
                                                     }
@@ -455,7 +459,8 @@ Kirigami.Page {
 
                                                         horizontalAlignment: root.isLarge ? Text.AlignRight : Text.AlignLeft
                                                         color: incidenceCard.isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                        cardContents.textColor
+                                                            cardContents.textColor
+                                                        Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                         text: {
                                                             if (modelData.allDay) {
                                                                 i18n("Runs all day")

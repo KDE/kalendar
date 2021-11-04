@@ -66,6 +66,14 @@ RowLayout {
         clip: true
         visible: headerLayout.filter.tags.length > 0
 
+        move: Transition {
+            NumberAnimation {
+                properties: "x, y"
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+
         Repeater {
             id: tagRepeater
             model: headerLayout.filter ? headerLayout.filter.tags : {}

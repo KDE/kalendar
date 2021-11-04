@@ -311,6 +311,20 @@ Kirigami.Page {
                         }
                     }
 
+                    NumberAnimation {
+                        id: resetAnimation
+                        target: allDayHeader
+                        property: "height"
+                        to: allDayHeader.defaultHeight
+                        duration: Kirigami.Units.longDuration
+                        easing.type: Easing.InOutQuad
+                        onFinished: {
+                            Kalendar.Config.weekViewAllDayHeaderHeight = -1;
+                            Kalendar.Config.save();
+                            allDayHeader.actualHeight = allDayHeader.defaultHeight;
+                        }
+                    }
+
                     Rectangle {
                         id: headerBackground
                         anchors.fill: parent
@@ -321,7 +335,9 @@ Kirigami.Page {
                         anchors.left: parent.left
                         anchors.top: parent.bottom
                         width: root.hourLabelWidth
-                        height: resetHeaderHeightButton.height
+                        height: Kalendar.Config.weekViewAllDayHeaderHeight !== -1 ?
+                            resetHeaderHeightButton.height :
+                            0
                         z: -1
                         corners.bottomRightRadius: Kirigami.Units.smallSpacing
                         shadow.size: Kirigami.Units.largeSpacing
@@ -331,16 +347,22 @@ Kirigami.Page {
                         color: Kirigami.Theme.backgroundColor
                         border.width: root.gridLineWidth
                         border.color: headerBottomSeparator.color
-                        visible: allDayHeader.actualHeight !== allDayHeader.defaultHeight
 
-                        QQC2.ToolButton {
-                            id: resetHeaderHeightButton
+                        Behavior on height { NumberAnimation {
+                            duration: Kirigami.Units.shortDuration
+                            easing.type: Easing.InOutQuad
+                        } }
+
+                        Item {
                             width: root.hourLabelWidth
-                            text: i18nc("@action:button", "Reset")
-                            onClicked: {
-                                Kalendar.Config.weekViewAllDayHeaderHeight = -1;
-                                Kalendar.Config.save();
-                                allDayHeader.actualHeight = allDayHeader.defaultHeight;
+                            height: parent.height
+                            clip: true
+
+                            QQC2.ToolButton {
+                                id: resetHeaderHeightButton
+                                width: root.hourLabelWidth
+                                text: i18nc("@action:button", "Reset")
+                                onClicked: resetAnimation.start()
                             }
                         }
                     }
@@ -721,6 +743,7 @@ Kirigami.Page {
                                                     renderType: Text.QtRendering
                                                     color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                         incidenceContents.textColor
+                                                    Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                 }
 
                                                 RowLayout {
@@ -734,6 +757,7 @@ Kirigami.Page {
                                                         isMask: true
                                                         color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                             incidenceContents.textColor
+                                                        Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                         visible: parent.width > Kirigami.Units.gridUnit * 4
                                                     }
                                                     QQC2.Label {
@@ -745,6 +769,7 @@ Kirigami.Page {
                                                         renderType: Text.QtRendering
                                                         color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                             incidenceContents.textColor
+                                                        Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                         visible: parent.width > Kirigami.Units.gridUnit * 3
                                                     }
                                                 }
