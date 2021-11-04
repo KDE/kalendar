@@ -6,6 +6,8 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs 1.0
 import QtLocation 5.15
+import Qt.labs.qmlmodels 1.0
+import org.kde.kitemmodels 1.0
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 import "labelutils.js" as LabelUtils
@@ -142,18 +144,35 @@ Kirigami.ScrollablePage {
                     valueRole: "collectionId"
                     currentIndex: model && collectionId !== -1 ? CalendarManager.getCalendarSelectableIndex(root.incidenceWrapper) : -1
 
-                    model: {
-                        if(root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeEvent) {
-                            return CalendarManager.selectableEventCalendars;
-                        } else if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
-                            return CalendarManager.selectableTodoCalendars;
+                    model: KDescendantsProxyModel {
+                        displayAncestorData: true
+                        model: {
+                            if(root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeEvent) {
+                                return CalendarManager.selectableEventCalendars;
+                            } else if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
+                                return CalendarManager.selectableTodoCalendars;
+                            }
                         }
                     }
-                    delegate: Kirigami.BasicListItem {
-                        label: display
-                        icon: decoration
-                        onClicked: root.incidenceWrapper.collectionId = collectionId
+                    delegate: DelegateChooser {
+                        role: 'kDescendantExpandable'
+
+                        DelegateChoice {
+                            roleValue: true
+                            Item {}
+                        }
+
+                        DelegateChoice {
+                            roleValue: false
+
+                            Kirigami.BasicListItem {
+                                label: display
+                                icon: decoration
+                                onClicked: root.incidenceWrapper.collectionId = collectionId
+                            }
+                        }
                     }
+
                     popup.z: 1000
                 }
                 QQC2.TextField {

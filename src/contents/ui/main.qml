@@ -583,6 +583,7 @@ Kirigami.ApplicationWindow {
 
         title: "Import a calendar"
         folder: shortcuts.home
+        nameFilters: ["Calendar files (*.ics *.vcs)"]
         onAccepted: {
             selectedUrl = fileUrl;
             const openDialogWindow = pageStack.pushDialogLayer(importChoicePageComponent, {

@@ -30,7 +30,7 @@ Kirigami.ScrollablePage {
         }
 
         model: KDescendantsProxyModel {
-            model: collectionPickerSheet.todoMode ? Kalendar.CalendarManager.selectableTodoCalendars : Kalendar.CalendarManager.selectableEventCalendars
+            model: collectionPickerSheet.todoMode ? Kalendar.CalendarManager.selectableTodoCalendars : Kalendar.CalendarManager.selectableCalendars
         }
 
         delegate: DelegateChooser {
