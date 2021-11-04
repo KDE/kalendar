@@ -33,8 +33,9 @@ QQC2.ComboBox {
 
     popup: QQC2.Popup {
         id: timePopup
-        width: parent.width
-        height: parent.width * 1.5
+        width: Kirigami.Units.gridUnit * 10
+        height: Kirigami.Units.gridUnit * 14
+        x: parent.width - width
         y: parent.y + parent.height
         z: 1000
 
