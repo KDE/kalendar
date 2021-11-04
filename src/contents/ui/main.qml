@@ -590,7 +590,7 @@ Kirigami.ApplicationWindow {
                 width: root.width
             }, {
                 width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 30
+                height: Kirigami.Units.gridUnit * 8
             });
         }
     }
@@ -598,24 +598,45 @@ Kirigami.ApplicationWindow {
     Component {
         id: importChoicePageComponent
         Kirigami.Page {
-            Row {
-                QQC2.Button {
-                    text: i18n("Merge with existing calendar")
-                    onClicked: {
-                        closeDialog();
-                        const openDialogWindow = pageStack.pushDialogLayer(importMergeCollectionPickerComponent, {
-                            width: root.width
-                        }, {
-                            width: Kirigami.Units.gridUnit * 30,
-                            height: Kirigami.Units.gridUnit * 30
-                        });
-                    }
+            title: i18n("Import Calendar")
+
+            ColumnLayout {
+                anchors.fill: parent
+                QQC2.Label {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    text: i18n("Would you like to merge this calendar file's events and tasks into one of your existing calendars, or would prefer to create a new calendar from this file?\n ")
+                    wrapMode: Text.WordWrap
                 }
-                QQC2.Button {
-                    text: i18n("Create new calendar from file")
-                    onClicked: {
-                        KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, false);
-                        closeDialog();
+
+                RowLayout {
+                    QQC2.Button {
+                        Layout.fillWidth: true
+                        icon.name: "document-import"
+                        text: i18n("Merge with existing calendar")
+                        onClicked: {
+                            closeDialog();
+                            const openDialogWindow = pageStack.pushDialogLayer(importMergeCollectionPickerComponent, {
+                                width: root.width
+                            }, {
+                                width: Kirigami.Units.gridUnit * 30,
+                                height: Kirigami.Units.gridUnit * 30
+                            });
+                        }
+                    }
+                    QQC2.Button {
+                        Layout.fillWidth: true
+                        icon.name: "document-new"
+                        text: i18n("Create new calendar")
+                        onClicked: {
+                            KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, false);
+                            closeDialog();
+                        }
+                    }
+                    QQC2.Button {
+                        icon.name: "gtk-cancel"
+                        text: i18n("Cancel")
+                        onClicked: closeDialog();
                     }
                 }
             }
