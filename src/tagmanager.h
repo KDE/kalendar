@@ -17,7 +17,7 @@
 class TagManager : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QSortFilterProxyModel *tagModel READ tagModel CONSTANT)
+    Q_PROPERTY(QSortFilterProxyModel *tagModel READ tagModel NOTIFY tagModelChanged)
 
 public:
     TagManager(QObject *parent = nullptr);
@@ -27,6 +27,9 @@ public:
     Q_INVOKABLE void createTag(const QString &name);
     Q_INVOKABLE void renameTag(Akonadi::Tag tag, const QString &newName);
     Q_INVOKABLE void deleteTag(Akonadi::Tag tag);
+
+Q_SIGNALS:
+    void tagModelChanged();
 
 private:
     QSortFilterProxyModel *m_tagModel = nullptr;

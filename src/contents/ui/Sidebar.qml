@@ -22,6 +22,8 @@ Kirigami.OverlayDrawer {
 
     property bool todoMode: false
     property alias toolbar: toolbar
+    property var activeTags : []
+    property alias searchText: searchField.text
 
     Connections {
         target: applicationWindow()
@@ -78,86 +80,99 @@ Kirigami.OverlayDrawer {
             topPadding: 0
             bottomPadding: 0
 
-            //Kirigami.SearchField { // TODO: Make this open a new search results page
-                //id: searchItem
-                //Layout.fillWidth: true
-            //}
-
-            Kirigami.Heading {
-                anchors.left: parent.left
-                anchors.leftMargin: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-                anchors.verticalCenter: parent.verticalCenter
-                text: i18n("Kalendar")
-
-                opacity: sidebar.collapsed ? 0 : 1
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: Kirigami.Units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-
-            Kirigami.ActionToolBar {
-                id: menu
-
-                Connections {
-                    target: Config
-                    onShowMenubarChanged: if(!Kirigami.Settings.isMobile && !Kirigami.Settings.hasPlatformMenuBar) menu.visible = !Config.showMenubar
-                }
-
+            RowLayout {
                 anchors.fill: parent
-                overflowIconName: "application-menu"
 
-                actions: [
-                    Kirigami.Action {
-                        icon.name: "edit-undo"
-                        text: CalendarManager.undoRedoData.undoAvailable ?
-                            i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : undoAction.text
-                        shortcut: undoAction.shortcut
-                        enabled: CalendarManager.undoRedoData.undoAvailable
-                        onTriggered: CalendarManager.undoAction();
-                    },
-                    Kirigami.Action {
-                        icon.name: KalendarApplication.iconName(redoAction.icon)
-                        text: CalendarManager.undoRedoData.redoAvailable ?
-                            i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : redoAction.text
-                        shortcut: redoAction.shortcut
-                        enabled: CalendarManager.undoRedoData.redoAvailable
-                        onTriggered: CalendarManager.redoAction();
-                    },
-                    KActionFromAction {
-                        kalendarAction: "toggle_menubar"
-                    },
-                    Kirigami.Action {
-                        text: i18n("Configure")
-                        icon.name: "settings-configure"
-                        KActionFromAction {
-                            kalendarAction: "open_tag_manager"
-                        }
-                        KActionFromAction {
-                            kalendarAction: 'options_configure_keybinding'
-                        }
-                        KActionFromAction {
-                            kalendarAction: "options_configure"
-                        }
-                    },
-                    Kirigami.Action {
-                        icon.name: KalendarApplication.iconName(quitAction.icon)
-                        text: quitAction.text
-                        shortcut: quitAction.shortcut
-                        onTriggered: quitAction.trigger()
-                        visible: !Kirigami.Settings.isMobile
-                    }
-                ]
+                Kirigami.Heading { // TODO: Remove once search results page complete
+                    Layout.leftMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing
+                    text: i18n("Kalendar")
 
-                Component.onCompleted: {
-                    for (let i in actions) {
-                        let action = actions[i]
-                        action.displayHint = Kirigami.DisplayHint.AlwaysHide
+                    visible: !sidebar.todoMode
+                    opacity: sidebar.collapsed ? 0 : 1
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: Kirigami.Units.longDuration
+                            easing.type: Easing.InOutQuad
+                        }
                     }
-                    visible = !Kirigami.Settings.isMobile && !Config.showMenubar && !Kirigami.Settings.hasPlatformMenuBar
-                    //HACK: Otherwise if menubar is open and then hidden hamburger refuses to appear (?)
+                }
+
+                Kirigami.SearchField { // TODO: Make this open a new search results page
+                    id: searchField
+                    Layout.fillWidth: true
+                    placeholderText: i18n("Kalendar")
+
+                    visible: sidebar.todoMode
+                    opacity: sidebar.collapsed ? 0 : 1
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: Kirigami.Units.longDuration
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                }
+
+                Kirigami.ActionToolBar {
+                    id: menu
+
+                    Connections {
+                        target: Config
+                        onShowMenubarChanged: if(!Kirigami.Settings.isMobile && !Kirigami.Settings.hasPlatformMenuBar) menu.visible = !Config.showMenubar
+                    }
+
+                    Layout.fillHeight: true
+                    overflowIconName: "application-menu"
+
+                    actions: [
+                        Kirigami.Action {
+                            icon.name: "edit-undo"
+                            text: CalendarManager.undoRedoData.undoAvailable ?
+                                i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : undoAction.text
+                            shortcut: undoAction.shortcut
+                            enabled: CalendarManager.undoRedoData.undoAvailable
+                            onTriggered: CalendarManager.undoAction();
+                        },
+                        Kirigami.Action {
+                            icon.name: KalendarApplication.iconName(redoAction.icon)
+                            text: CalendarManager.undoRedoData.redoAvailable ?
+                                i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : redoAction.text
+                            shortcut: redoAction.shortcut
+                            enabled: CalendarManager.undoRedoData.redoAvailable
+                            onTriggered: CalendarManager.redoAction();
+                        },
+                        KActionFromAction {
+                            kalendarAction: "toggle_menubar"
+                        },
+                        Kirigami.Action {
+                            text: i18n("Configure")
+                            icon.name: "settings-configure"
+                            KActionFromAction {
+                                kalendarAction: "open_tag_manager"
+                            }
+                            KActionFromAction {
+                                kalendarAction: 'options_configure_keybinding'
+                            }
+                            KActionFromAction {
+                                kalendarAction: "options_configure"
+                            }
+                        },
+                        Kirigami.Action {
+                            icon.name: KalendarApplication.iconName(quitAction.icon)
+                            text: quitAction.text
+                            shortcut: quitAction.shortcut
+                            onTriggered: quitAction.trigger()
+                            visible: !Kirigami.Settings.isMobile
+                        }
+                    ]
+
+                    Component.onCompleted: {
+                        for (let i in actions) {
+                            let action = actions[i]
+                            action.displayHint = Kirigami.DisplayHint.AlwaysHide
+                        }
+                        visible = !Kirigami.Settings.isMobile && !Config.showMenubar && !Kirigami.Settings.hasPlatformMenuBar
+                        //HACK: Otherwise if menubar is open and then hidden hamburger refuses to appear (?)
+                    }
                 }
             }
         }
@@ -301,81 +316,107 @@ Kirigami.OverlayDrawer {
                 anchors.fill: parent
                 spacing: 0
 
-                RowLayout {
-                    id: tagsHeadingLayout
-                    Layout.topMargin: Kirigami.Units.largeSpacing
-                    Layout.leftMargin: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
-                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
-                    visible: tagList.count > 0
+                Kirigami.BasicListItem {
+                    id: tagsHeadingItem
 
-                    Kirigami.Icon {
+                    property bool expanded: Config.tagsSectionExpanded
+
+                    Layout.topMargin: Kirigami.Units.largeSpacing
+                    separatorVisible: false
+                    hoverEnabled: false
+                    visible: TagManager.tagModel.rowCount() > 0
+
+                    Kirigami.Heading { id: headingSizeCalculator }
+
+                    leading: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.smallMedium
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         color: Kirigami.Theme.disabledTextColor
                         isMask: true
                         source: "action-rss_tag"
                     }
-                    Kirigami.Heading {
-                        id: tagsHeading
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignVCenter
-                        text: i18n("Tags")
-                        color: Kirigami.Theme.disabledTextColor
-
-                        level: 4
-                        z: 10
+                    text: i18n("Tags")
+                    labelItem.color: Kirigami.Theme.disabledTextColor
+                    labelItem.font.pointSize: headingSizeCalculator.headerPointSize(4)
+                    trailing: Kirigami.Icon {
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        source: tagsHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
+                    }
+                    onClicked: {
+                        Config.tagsSectionExpanded = !Config.tagsSectionExpanded;
+                        Config.save();
                     }
                 }
 
-                Repeater {
-                    id: tagList
+                Flow {
+                    id: tagFlow
+                    Layout.fillWidth: true
+                    Layout.leftMargin: Kirigami.Settings.isMobile ?
+                        Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 3 :
+                        Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 2
+                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    Layout.bottomMargin: Kirigami.Units.largeSpacing
+                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
+                    visible: TagManager.tagModel.rowCount() > 0 && tagsHeadingItem.expanded
 
-                    model: TagManager.tagModel
+                    Repeater {
+                        id: tagList
 
-                    delegate: Kirigami.BasicListItem {
-                        Layout.fillWidth: true
-                        enabled: !sidebar.collapsed
+                        model: parent.visible ? TagManager.tagModel : []
 
-                        label: display
-                        labelItem.color: Kirigami.Theme.textColor
-                        reserveSpaceForIcon: true
+                        delegate: Tag {
+                            implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
+                            text: display
+                            showAction: false
+                            backgroundColor: sidebar.activeTags.includes(display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
 
-                        separatorVisible: false
-
-                        onClicked: tagClicked(display)
+                            MouseArea {
+                                anchors.fill: parent
+                                enabled: !sidebar.collapsed
+                                onClicked: tagClicked(display)
+                            }
+                        }
                     }
                 }
 
-                RowLayout {
-                    Layout.topMargin: tagsHeading.visible ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
-                    Layout.leftMargin: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
-                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+                Kirigami.BasicListItem {
+                    id: calendarHeadingItem
+                    property bool expanded: Config.calendarsSectionExpanded
 
-                    Kirigami.Icon {
+                    separatorVisible: false
+                    hoverEnabled: false
+                    Layout.topMargin: Kirigami.Units.largeSpacing
+
+                    leading: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.smallMedium
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         color: Kirigami.Theme.disabledTextColor
                         isMask: true
                         source: "view-calendar"
                     }
-                    Kirigami.Heading {
-                        id: calendarsHeading
-                        Layout.alignment: Qt.AlignVCenter
-                        Layout.fillWidth: true
-                        text: i18n("Calendars")
-                        color: Kirigami.Theme.disabledTextColor
-
-                        level: 4
-                        z: 10
+                    text: i18n("Calendars")
+                    labelItem.color: Kirigami.Theme.disabledTextColor
+                    labelItem.font.pointSize: headingSizeCalculator.headerPointSize(4)
+                    trailing: Kirigami.Icon {
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        source: calendarHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
+                    }
+                    onClicked: {
+                        Config.calendarsSectionExpanded = !Config.calendarsSectionExpanded;
+                        Config.save();
                     }
                 }
 
                 Repeater {
                     id: calendarList
 
-                    model: KDescendantsProxyModel {
+                    property var calendarModel: KDescendantsProxyModel {
                         model: sidebar.todoMode ? CalendarManager.todoCollections : CalendarManager.viewCollections
                     }
+
+                    model: calendarHeadingItem.expanded ? calendarModel : []
 
                     delegate: DelegateChooser {
                         role: 'kDescendantExpandable'

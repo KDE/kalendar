@@ -19,6 +19,7 @@ Item {
     property alias itemLayout: layout
     property alias labelItem: label
     property alias headingItem: heading
+    property color backgroundColor: Kirigami.Theme.backgroundColor
     signal clicked()
 
     implicitWidth: layout.implicitWidth
@@ -32,7 +33,7 @@ Item {
         anchors.fill: parent
         anchors.leftMargin: pointyBit.anchors.leftMargin + pointyBit.width / 2 - radius / 2
         radius: 3
-        color: Kirigami.Theme.backgroundColor
+        color: tagRoot.backgroundColor
         border.color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor,
                                                         Kirigami.Theme.textColor,
                                                         0.3)

@@ -9,7 +9,7 @@ import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kalendar 1.0 as Kalendar
 import "labelutils.js" as LabelUtils
 
-GridLayout {
+RowLayout {
     id: headerLayout
 
     signal removeFilterTag(string tagName)
@@ -27,12 +27,7 @@ GridLayout {
     visible: todoMode || filter.tags.length > 0 || filter.collectionId > -1
     height: visible ? implicitHeight : 0
 
-    columnSpacing: 0
-    rowSpacing: Kirigami.Units.smallSpacing
-
-    columns: width > Kirigami.Units.gridUnit * 30 && filter.tags.length > 0 ? 3 :
-        width > Kirigami.Units.gridUnit * 30 ? 2 : 1
-    rows: width > Kirigami.Units.gridUnit * 30 ? 1 : 2
+    spacing: Kirigami.Units.smallSpacing
 
     Kirigami.Heading {
         id: heading
@@ -83,16 +78,5 @@ GridLayout {
                 actionText: i18n("Remove filtering tag")
             }
         }
-    }
-
-    Kirigami.SearchField {
-        id: searchField
-        Layout.fillWidth: headerLayout.rows > 1
-        Layout.margins: Kirigami.Units.largeSpacing
-        Layout.bottomMargin: Kirigami.Units.largeSpacing - 1
-        Layout.columnSpan: headerLayout.rows > 1 ? 2 : 1
-        text: headerLayout.filter.name ? headerLayout.filter.name : ""
-        onTextChanged: headerLayout.searchTextChanged(text);
-        visible: headerLayout.todoMode
     }
 }

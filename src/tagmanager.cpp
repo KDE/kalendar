@@ -62,6 +62,13 @@ TagManager::TagManager(QObject *parent)
     : QObject(parent)
 {
     m_tagModel = new FlatTagModel(this);
+
+    QObject::connect(m_tagModel, &QSortFilterProxyModel::dataChanged, this, &TagManager::tagModelChanged);
+    QObject::connect(m_tagModel, &QSortFilterProxyModel::layoutChanged, this, &TagManager::tagModelChanged);
+    QObject::connect(m_tagModel, &QSortFilterProxyModel::modelReset, this, &TagManager::tagModelChanged);
+    QObject::connect(m_tagModel, &QSortFilterProxyModel::rowsInserted, this, &TagManager::tagModelChanged);
+    QObject::connect(m_tagModel, &QSortFilterProxyModel::rowsMoved, this, &TagManager::tagModelChanged);
+    QObject::connect(m_tagModel, &QSortFilterProxyModel::rowsRemoved, this, &TagManager::tagModelChanged);
 }
 
 QSortFilterProxyModel *TagManager::tagModel()

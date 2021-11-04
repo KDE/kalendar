@@ -318,6 +318,16 @@ Kirigami.ApplicationWindow {
         id: sidebar
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
+        activeTags: pageStack.currentItem && pageStack.currentItem.filter && pageStack.currentItem.filter.tags ?
+                    pageStack.currentItem.filter.tags : []
+        onSearchTextChanged: {
+            if(pageStack.currentItem.filter) {
+                pageStack.currentItem.filter.name = searchText;
+            } else {
+                pageStack.currentItem.filter = {name: searchText};
+            }
+            pageStack.currentItem.filterChanged();
+        }
         onCalendarClicked: if(todoMode) {
             pageStack.currentItem.filter ?
                 pageStack.currentItem.filter.collectionId = collectionId :
@@ -340,6 +350,9 @@ Kirigami.ApplicationWindow {
             pageStack.currentItem.filterChanged();
             filterHeader.active = true;
             pageStack.currentItem.header = filterHeader.item;
+        } else if (pageStack.currentItem.filter.tags.includes(tagName)) {
+            pageStack.currentItem.filter.tags = pageStack.currentItem.filter.tags.filter((tag) => tag !== tagName);
+            pageStack.currentItem.filterChanged();
         }
         onViewAllTodosClicked: if(todoMode) {
             pageStack.currentItem.filter.collectionId = -1;
@@ -515,10 +528,6 @@ Kirigami.ApplicationWindow {
 
                 onRemoveFilterTag: {
                     pageStack.currentItem.filter.tags.splice(pageStack.currentItem.filter.tags.indexOf(tagName), 1);
-                    pageStack.currentItem.filterChanged();
-                }
-                onSearchTextChanged: if(todoMode) {
-                    pageStack.currentItem.filter.name = text;
                     pageStack.currentItem.filterChanged();
                 }
             }
