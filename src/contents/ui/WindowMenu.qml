@@ -16,9 +16,8 @@ QQC2.MenuBar {
     QQC2.Menu {
         title: i18nc("@action:menu", "File")
 
-        QQC2.MenuItem {
-            text: i18nc("@action:menu", "Import Calendar") // todo
-            visible: false
+        KActionFromAction {
+            kalendarAction: "import_calendar"
         }
 
         Kirigami.Action {
