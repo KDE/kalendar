@@ -55,6 +55,7 @@ Kirigami.Page {
 
     function setToDate(date, isInitialWeek = false) {
         root.initialWeek = isInitialWeek;
+
         date = DateUtils.getFirstDayOfWeek(date);
         const weekDiff = Math.round((date - pathView.currentItem.startDate) / (root.daysToShow * 24 * 60 * 60 * 1000));
 
@@ -79,6 +80,10 @@ Kirigami.Page {
         }
         pathView.currentIndex = newIndex;
         selectedDate = date;
+
+        if(isInitialWeek) {
+            pathView.currentItem.item.hourScrollView.setToCurrentTime();
+        }
     }
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
@@ -97,7 +102,10 @@ Kirigami.Page {
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
         text: i18n("Today")
-        onTriggered: setToDate(new Date())
+        onTriggered: {
+            setToDate(new Date());
+            pathView.currentItem.item.hourScrollView.setToCurrentTime();
+        }
     }
 
     actions {
@@ -172,6 +180,8 @@ Kirigami.Page {
                 width: pathView.width
                 height: pathView.height
                 spacing: 0
+
+                readonly property alias hourScrollView: hourlyView
 
                 Row {
                     id: headingRow
@@ -520,6 +530,19 @@ Kirigami.Page {
                     readonly property real minuteHeight: hourHeight / 60
                     readonly property Item vScrollBar: QQC2.ScrollBar.vertical
 
+                    function setToCurrentTime() {
+                        if(currentTimeMarkerLoader.active) {
+                            const viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit);
+                            // Since we position with anchors, height is 0 -- must calc manually
+
+                            let yPos = (currentTimeMarkerLoader.item.y / dayHeight) - ((viewHeight / 2) / dayHeight)
+                            yPos = Math.max(0.0, yPos);
+                            yPos = Math.min(1.0, yPos);
+
+                            vScrollBar.position = yPos;
+                        }
+                    }
+
                     Connections {
                         target: hourlyView.QQC2.ScrollBar.vertical
                         function onWidthChanged() {
@@ -528,10 +551,8 @@ Kirigami.Page {
                     }
                     Component.onCompleted: {
                         if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width;
-                        if(root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow && root.initialWeek) {
-                            let viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit)
-                            // Since we position with anchors, height is 0 -- must calc manually
-                            vScrollBar.position = (currentTimeMarkerLoader.item.y / dayHeight) - ((viewHeight / 2) / dayHeight)
+                        if(currentTimeMarkerLoader.active && root.initialWeek) {
+                            setToCurrentTime();
                         }
                     }
 
@@ -564,7 +585,7 @@ Kirigami.Page {
                             Loader {
                                 id: currentTimeLabelLoader
 
-                                active: root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow
+                                active: currentTimeMarkerLoader.active
                                 sourceComponent: QQC2.Label {
                                     id: currentTimeLabel
 
