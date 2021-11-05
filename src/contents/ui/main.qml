@@ -699,6 +699,7 @@ Kirigami.ApplicationWindow {
                 KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true, collectionId);
                 closeDialog();
             }
+            onCancel: closeDialog()
         }
     }
 

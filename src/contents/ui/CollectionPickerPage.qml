@@ -16,6 +16,7 @@ Kirigami.ScrollablePage {
     id: collectionPickerSheet
     title: todoMode ? i18n("Choose a Task Calendar") : i18n("Choose a Calendar")
 
+    signal cancel
     signal collectionPicked(int collectionId)
 
     property bool todoMode: false;
@@ -80,5 +81,11 @@ Kirigami.ScrollablePage {
                 }
             }
         }
+    }
+
+    footer: QQC2.DialogButtonBox {
+        standardButtons: QQC2.DialogButtonBox.Cancel
+
+        onRejected: cancel()
     }
 }

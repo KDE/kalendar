@@ -172,6 +172,7 @@ Kirigami.ScrollablePage {
                 collectionPickerSheet.closeDialog();
                 addField.clear();
             }
+            onCancel: closeDialog()
         }
     }
 
