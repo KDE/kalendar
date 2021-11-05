@@ -513,3 +513,8 @@ void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qin
         }
     }
 }
+
+QString KalendarApplication::importErrorMessage()
+{
+    return m_importErrorMessage;
+}

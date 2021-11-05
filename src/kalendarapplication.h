@@ -21,7 +21,7 @@ class KalendarApplication : public QObject
 
     Q_PROPERTY(QWindow *window READ window WRITE setWindow NOTIFY windowChanged)
     Q_PROPERTY(QSortFilterProxyModel *actionsModel READ actionsModel CONSTANT)
-    Q_PROPERTY(QString importErrorMessage MEMBER m_importErrorMessage NOTIFY importErrorMessageChanged)
+    Q_PROPERTY(QString importErrorMessage READ importErrorMessage NOTIFY importErrorMessageChanged)
 
 public:
     explicit KalendarApplication(QObject *parent = nullptr);
@@ -36,6 +36,7 @@ public:
     QSortFilterProxyModel *actionsModel();
     void setCalendar(Akonadi::ETMCalendar *calendar);
     Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId = -1);
+    QString importErrorMessage();
 
 public Q_SLOTS:
     void configureShortcuts();
