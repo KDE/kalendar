@@ -52,7 +52,6 @@ Comment[sl]=Upravljajte vaše naloge in dogodke s programom Kalendar
 Comment[sv]=Hantera dina uppgifter och händelser med Kalendar
 Comment[uk]=Керуйте вашими записами завдань і подій за допомогою Kalendar
 Comment[x-test]=xxManage your tasks and events with Kalendarxx
-Version=1.0
 Exec=kalendar
 Categories=Qt;KDE;Office;Calendar;
 Icon=org.kde.kalendar
