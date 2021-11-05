@@ -140,7 +140,6 @@ Kirigami.Page {
             root.startDate = currentItem.startDate;
             root.month = currentItem.month;
             root.year = currentItem.year;
-            root.initialWeek = false;
 
             if(currentIndex >= count - 2) {
                 model.addDates(true);
@@ -508,8 +507,8 @@ Kirigami.Page {
 
                 QQC2.ScrollView {
                     id: hourlyView
-                    width: pathView.width
-                    height: pathView.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height
+                    width: viewColumn.width
+                    height: viewColumn.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height
                     contentWidth: availableWidth
                     z: -2
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
@@ -519,6 +518,7 @@ Kirigami.Page {
                     readonly property real dayHeight: (daySections * root.periodHeight) + (root.gridLineWidth * 23)
                     readonly property real hourHeight: periodsPerHour * root.periodHeight
                     readonly property real minuteHeight: hourHeight / 60
+                    readonly property Item vScrollBar: QQC2.ScrollBar.vertical
 
                     Connections {
                         target: hourlyView.QQC2.ScrollBar.vertical
@@ -527,7 +527,12 @@ Kirigami.Page {
                         }
                     }
                     Component.onCompleted: {
-                        if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width
+                        if(!Kirigami.Settings.isMobile) root.scrollbarWidth = hourlyView.QQC2.ScrollBar.vertical.width;
+                        if(root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow && root.initialWeek) {
+                            let viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit)
+                            // Since we position with anchors, height is 0 -- must calc manually
+                            vScrollBar.position = (currentTimeMarkerLoader.item.y / dayHeight) - ((viewHeight / 2) / dayHeight)
+                        }
                     }
 
                     Item {

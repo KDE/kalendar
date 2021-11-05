@@ -807,7 +807,7 @@ Kirigami.ApplicationWindow {
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialWeek) root.selectedDate = new Date (year, month, day)
 
-            Component.onCompleted: setToDate(root.selectedDate)
+            Component.onCompleted: setToDate(root.selectedDate, true)
 
             onAddIncidence: root.setUpAdd(type, addDate, null, includeTime)
             onViewIncidence: root.setUpView(modelData, collectionData)
