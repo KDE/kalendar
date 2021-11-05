@@ -493,10 +493,12 @@ void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qin
 
     if (merge) {
         connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &KalendarApplication::importFinished);
+        connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &KalendarApplication::importIntoExistingFinished);
         auto collection = m_calendar->collection(collectionId);
         jobStarted = importer->importIntoExistingResource(url, collection);
     } else {
         connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &KalendarApplication::importFinished);
+        connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &KalendarApplication::importIntoNewFinished);
         jobStarted = importer->importIntoNewResource(url.path());
     }
 
@@ -506,6 +508,8 @@ void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qin
         // empty error message means user canceled.
         if (!importer->errorMessage().isEmpty()) {
             qDebug() << i18n("An error occurred: %1", importer->errorMessage());
+            m_importErrorMessage = importer->errorMessage();
+            Q_EMIT importErrorMessageChanged();
         }
     }
 }

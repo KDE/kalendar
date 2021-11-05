@@ -21,6 +21,8 @@ class KalendarApplication : public QObject
 
     Q_PROPERTY(QWindow *window READ window WRITE setWindow NOTIFY windowChanged)
     Q_PROPERTY(QSortFilterProxyModel *actionsModel READ actionsModel CONSTANT)
+    Q_PROPERTY(QString importErrorMessage MEMBER m_importErrorMessage NOTIFY importErrorMessageChanged)
+
 public:
     explicit KalendarApplication(QObject *parent = nullptr);
     ~KalendarApplication() override;
@@ -68,6 +70,9 @@ Q_SIGNALS:
     void openKCommandBarAction();
     void importStarted();
     void importFinished();
+    void importIntoExistingFinished(bool success, int total);
+    void importIntoNewFinished(bool success);
+    void importErrorMessageChanged();
 
 private:
     KActionCollection mCollection;
@@ -80,4 +85,5 @@ private:
     QSortFilterProxyModel *m_proxyModel = nullptr;
     KalendarConfig *m_config = nullptr;
     Akonadi::ETMCalendar *m_calendar;
+    QString m_importErrorMessage;
 };

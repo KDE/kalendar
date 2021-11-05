@@ -211,7 +211,38 @@ Kirigami.ApplicationWindow {
         }
 
         function onImportCalendar() {
-             importFileDialog.open();
+            filterHeader.active = true;
+            importFileDialog.open();
+        }
+
+        function onImportIntoExistingFinished(success, total) {
+            filterHeader.active = true;
+            pageStack.currentItem.header = filterHeader.item;
+
+            if(success) {
+                filterHeader.item.messageItem.type = Kirigami.MessageType.Positive;
+                filterHeader.item.messageItem.text = i18nc("%1 is a number", "%1 incidences were imported successfully.", total);
+            } else {
+                filterHeader.item.messageItem.type = Kirigami.MessageType.Error;
+                filterHeader.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", KalendarApplication.importErrorMessage);
+            }
+
+            filterHeader.item.messageItem.visible = true;
+        }
+
+        function onImportIntoNewFinished(success) {
+            filterHeader.active = true;
+            pageStack.currentItem.header = filterHeader.item;
+
+            if(success) {
+                filterHeader.item.messageItem.type = Kirigami.MessageType.Positive;
+                filterHeader.item.messageItem.text = i18n("New calendar  created from imported file successfully.");
+            } else {
+                filterHeader.item.messageItem.type = Kirigami.MessageType.Error;
+                filterHeader.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", KalendarApplication.importErrorMessage);
+            }
+
+            filterHeader.item.messageItem.visible = true;
         }
 
         function onQuit() {
@@ -522,9 +553,11 @@ Kirigami.ApplicationWindow {
                 right: parent.right
             }
 
-            property bool show: header.todoMode || header.filter.tags.length > 0
+            readonly property bool show: header.todoMode || header.filter.tags.length > 0 || notifyMessage.visible
+            readonly property alias messageItem: notifyMessage
 
-            height: show ? header.implicitHeight + headerSeparator.height : 0
+            height: show ? headerLayout.implicitHeight + headerSeparator.height : 0
+            // Adjust for margins
             clip: height === 0
 
             Behavior on height { NumberAnimation {
@@ -533,34 +566,50 @@ Kirigami.ApplicationWindow {
             } }
 
             Rectangle {
-                width: header.width
-                height: header.height
+                width: headerLayout.width
+                height: headerLayout.height
                 Kirigami.Theme.inherit: false
                 Kirigami.Theme.colorSet: Kirigami.Theme.View
                 color: Kirigami.Theme.backgroundColor
             }
 
-            FilterHeader {
-                id: header
+            ColumnLayout {
+                id: headerLayout
                 anchors.fill: parent
-                todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
-                filter: root.filter ?
-                    root.filter : {"tags": [], "collectionId": -1}
-                isDark: root.isDark
                 clip: true
 
-                onRemoveFilterTag: {
-                    root.filter.tags.splice(root.filter.tags.indexOf(tagName), 1);
-                    root.filterChanged();
+                Kirigami.InlineMessage {
+                    id: notifyMessage
+                    Layout.fillWidth: true
+                    Layout.margins: Kirigami.Units.smallSpacing
+                    showCloseButton: true
+                    visible: false
                 }
-                onResetFilterCollection: {
-                    root.filter.collectionId = -1;
-                    root.filterChanged();
+
+                FilterHeader {
+                    id: header
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
+                    filter: root.filter ?
+                        root.filter : {"tags": [], "collectionId": -1}
+                    isDark: root.isDark
+                    visible: todoMode || filter.tags.length > 0
+                    clip: true
+
+                    onRemoveFilterTag: {
+                        root.filter.tags.splice(root.filter.tags.indexOf(tagName), 1);
+                        root.filterChanged();
+                    }
+                    onResetFilterCollection: {
+                        root.filter.collectionId = -1;
+                        root.filterChanged();
+                    }
                 }
             }
             Kirigami.Separator {
                 id: headerSeparator
-                anchors.top: header.bottom
+                anchors.top: headerLayout.bottom
                 width: parent.width
                 height: 1
                 z: -2
