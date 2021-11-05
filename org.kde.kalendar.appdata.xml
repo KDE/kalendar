@@ -229,4 +229,12 @@
   </provides>
   <url type="homepage">https://apps.kde.org/kalendar/</url>
   <url type="bugtracker">https://invent.kde.org/pim/kalendar/-/issues</url>
+  <releases>
+    <release type="development" version="0.1.0" date="2021-11-06">
+      <description>
+        <p>First beta release of Kalendar</p>
+        <url>https://claudiocambra.com/?p=1296</url>
+      </description>
+    </release>
+  </releases>
 </component>
