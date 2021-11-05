@@ -17,9 +17,8 @@ Labs.MenuBar {
     Labs.Menu {
         title: i18nc("@action:menu", "File")
 
-        Labs.MenuItem {
-            text: i18nc("@action:menu", "Import Calendar") // todo
-            visible: false
+        NativeMenuItemFromAction {
+            kalendarAction: 'import_calendar'
         }
 
         Labs.MenuItem {

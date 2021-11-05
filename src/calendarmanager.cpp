@@ -381,36 +381,53 @@ CalendarManager::CalendarManager(QObject *parent)
     mCollectionSelectionModelStateSaver->setSelectionModel(m_calendar->checkableProxyModel()->selectionModel());
     mCollectionSelectionModelStateSaver->restoreState(selectionGroup);
 
-    // Below reimplements part of Akonadi::CollectionComboBox
-    // Flatten the tree, e.g.
-    // Kolab
-    // Kolab / Inbox
-    // Kolab / Inbox / Calendar
-    m_allCalendars = new KDescendantsProxyModel(this);
-    m_allCalendars->setDisplayAncestorData(true);
+    m_allCalendars = new Akonadi::CollectionFilterProxyModel(this);
     m_allCalendars->setSourceModel(collectionFilter);
+    m_allCalendars->setExcludeVirtualCollections(true);
 
     // Filter it by mimetype again, to only keep
     // Kolab / Inbox / Calendar
     m_eventMimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
-    m_eventMimeTypeFilterModel->setSourceModel(m_allCalendars);
+    m_eventMimeTypeFilterModel->setSourceModel(collectionFilter);
     m_eventMimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
     // text/calendar mimetype includes todo cals
     m_todoMimeTypeFilterModel = new Akonadi::CollectionFilterProxyModel(this);
-    m_todoMimeTypeFilterModel->setSourceModel(m_allCalendars);
+    m_todoMimeTypeFilterModel->setSourceModel(collectionFilter);
     m_todoMimeTypeFilterModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
     m_todoMimeTypeFilterModel->setExcludeVirtualCollections(true);
 
     // Filter by access rights
+    m_allCollectionsRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
+    m_allCollectionsRightsFilterModel->setAccessRights(Collection::CanCreateItem);
+    m_allCollectionsRightsFilterModel->setSourceModel(collectionFilter);
+
     m_eventRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
     m_eventRightsFilterModel->setAccessRights(Collection::CanCreateItem);
     m_eventRightsFilterModel->setSourceModel(m_eventMimeTypeFilterModel);
-    m_eventRightsFilterModel->sort(0);
 
     m_todoRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
     m_todoRightsFilterModel->setAccessRights(Collection::CanCreateItem);
     m_todoRightsFilterModel->setSourceModel(m_todoMimeTypeFilterModel);
-    m_todoRightsFilterModel->sort(0);
+
+    // Use our custom class to order them properly
+    m_selectableCollectionsModel = new KalendarCollectionFilterProxyModel(this);
+    m_selectableCollectionsModel->setSourceModel(m_allCollectionsRightsFilterModel);
+    m_selectableCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
+    m_selectableCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
+    m_selectableCollectionsModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    m_selectableCollectionsModel->sort(0, Qt::AscendingOrder);
+
+    m_selectableEventCollectionsModel = new KalendarCollectionFilterProxyModel(this);
+    m_selectableEventCollectionsModel->setSourceModel(m_eventRightsFilterModel);
+    m_selectableEventCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
+    m_selectableEventCollectionsModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    m_selectableEventCollectionsModel->sort(0, Qt::AscendingOrder);
+
+    m_selectableTodoCollectionsModel = new KalendarCollectionFilterProxyModel(this);
+    m_selectableTodoCollectionsModel->setSourceModel(m_todoRightsFilterModel);
+    m_selectableTodoCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
+    m_selectableTodoCollectionsModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    m_selectableTodoCollectionsModel->sort(0, Qt::AscendingOrder);
 
     // Model for todo via collection picker
     m_todoViewCollectionModel = new KalendarCollectionFilterProxyModel(this);
@@ -534,19 +551,24 @@ Akonadi::IncidenceChanger *CalendarManager::incidenceChanger() const
     return m_changer;
 }
 
-KDescendantsProxyModel *CalendarManager::allCalendars()
+Akonadi::CollectionFilterProxyModel *CalendarManager::allCalendars()
 {
     return m_allCalendars;
 }
 
-Akonadi::EntityRightsFilterModel *CalendarManager::selectableEventCalendars() const
+Akonadi::CollectionFilterProxyModel *CalendarManager::selectableCalendars() const
 {
-    return m_eventRightsFilterModel;
+    return m_selectableCollectionsModel;
 }
 
-Akonadi::EntityRightsFilterModel *CalendarManager::selectableTodoCalendars() const
+Akonadi::CollectionFilterProxyModel *CalendarManager::selectableEventCalendars() const
 {
-    return m_todoRightsFilterModel;
+    return m_selectableEventCollectionsModel;
+}
+
+Akonadi::CollectionFilterProxyModel *CalendarManager::selectableTodoCalendars() const
+{
+    return m_selectableTodoCollectionsModel;
 }
 
 qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)

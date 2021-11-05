@@ -156,6 +156,9 @@ Kirigami.OverlayDrawer {
                                 kalendarAction: "options_configure"
                             }
                         },
+                        KActionFromAction {
+                            kalendarAction: "import_calendar"
+                        },
                         Kirigami.Action {
                             icon.name: KalendarApplication.iconName(quitAction.icon)
                             text: quitAction.text
