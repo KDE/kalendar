@@ -223,7 +223,6 @@
       <caption xml:lang="x-test">xxMobilexx</caption>
     </screenshot>
   </screenshots>
-  <value key="KDE::matrix">#kalendar:kde.org</value>
   <provides>
     <binary>kalendar</binary>
   </provides>
@@ -233,8 +232,11 @@
     <release type="development" version="0.1.0" date="2021-11-06">
       <description>
         <p>First beta release of Kalendar</p>
-        <url>https://claudiocambra.com/?p=1296</url>
       </description>
+      <url>https://claudiocambra.com/?p=1296</url>
     </release>
   </releases>
+  <custom>
+    <value key="KDE::matrix">#kalendar:kde.org</value>
+  </custom>
 </component>
