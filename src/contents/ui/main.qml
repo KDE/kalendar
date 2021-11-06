@@ -219,6 +219,17 @@ Kirigami.ApplicationWindow {
             importFileDialog.open();
         }
 
+        function onImportCalendarFromFile(file) {
+            importFileDialog.selectedUrl = file // FIXME don't piggy-back on importFileDialog
+
+            const openDialogWindow = pageStack.pushDialogLayer(importChoicePageComponent, {
+                width: root.width
+            }, {
+                width: Kirigami.Units.gridUnit * 30,
+                height: Kirigami.Units.gridUnit * 8
+            });
+        }
+
         function onImportIntoExistingFinished(success, total) {
             filterHeader.active = true;
             pageStack.currentItem.header = filterHeader.item;

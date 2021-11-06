@@ -61,6 +61,7 @@ Q_SIGNALS:
     void openLanguageSwitcher();
     void openTagManager();
     void importCalendar();
+    void importCalendarFromFile(const QUrl &url);
     void quit();
     void undo();
     void redo();
