@@ -20,6 +20,10 @@ Kirigami.ApplicationWindow {
 
     width: Kirigami.Units.gridUnit * 65
 
+    minimumWidth: Kirigami.Units.gridUnit * 15
+    minimumHeight: Kirigami.Units.gridUnit * 20
+    onClosing: KalendarApplication.saveWindowGeometry(root)
+
     property date currentDate: new Date()
     Timer {
         interval: 5000;

@@ -13,6 +13,7 @@
 #include <QObject>
 
 class QWindow;
+class QQuickWindow;
 class QSortFilterProxyModel;
 
 class KalendarApplication : public QObject
@@ -29,6 +30,7 @@ public:
     Q_INVOKABLE QAction *action(const QString &name);
 
     Q_INVOKABLE QString iconName(const QIcon &icon) const;
+    Q_INVOKABLE void saveWindowGeometry(QQuickWindow *window);
     void setupActions();
     QWindow *window() const;
     void setWindow(QWindow *window);

@@ -6,9 +6,11 @@
 #include <KCalendarCore/VCalFormat>
 #include <KLocalizedContext>
 #include <KLocalizedString>
+#include <KWindowConfig>
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QQmlApplicationEngine>
+#include <QQuickWindow>
 #include <QUrl>
 #include <QtQml>
 #include <akonadi_version.h>
@@ -114,6 +116,18 @@ int main(int argc, char *argv[])
 
     if (engine.rootObjects().isEmpty()) {
         return -1;
+    }
+
+    const auto rootObjects = engine.rootObjects();
+    for (auto obj : rootObjects) {
+        auto view = qobject_cast<QQuickWindow *>(obj);
+        if (view) {
+            KConfig dataResource(QStringLiteral("data"), KConfig::SimpleConfig, QStandardPaths::AppDataLocation);
+            KConfigGroup windowGroup(&dataResource, QStringLiteral("Window"));
+            KWindowConfig::restoreWindowSize(view, windowGroup);
+            KWindowConfig::restoreWindowPosition(view, windowGroup);
+            break;
+        }
     }
 
     return app.exec();

@@ -13,8 +13,10 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
+#include <KWindowConfig>
 #include <KXmlGui/KShortcutsDialog>
 #include <QMenu>
+#include <QQuickWindow>
 #include <QSortFilterProxyModel>
 #include <QWindow>
 #include <vector>
@@ -517,4 +519,13 @@ void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qin
 QString KalendarApplication::importErrorMessage()
 {
     return m_importErrorMessage;
+}
+
+void KalendarApplication::saveWindowGeometry(QQuickWindow *window)
+{
+    KConfig dataResource(QStringLiteral("data"), KConfig::SimpleConfig, QStandardPaths::AppDataLocation);
+    KConfigGroup windowGroup(&dataResource, QStringLiteral("Window"));
+    KWindowConfig::saveWindowPosition(window, windowGroup);
+    KWindowConfig::saveWindowSize(window, windowGroup);
+    dataResource.sync();
 }
