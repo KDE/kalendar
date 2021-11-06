@@ -600,16 +600,16 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 
 int CalendarManager::getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper)
 {
-    Akonadi::EntityRightsFilterModel *model;
+    KDescendantsProxyModel *model = new KDescendantsProxyModel;
 
     switch (incidenceWrapper->incidencePtr()->type()) {
     default:
     case (KCalendarCore::IncidenceBase::TypeEvent): {
-        model = m_eventRightsFilterModel;
+        model->setSourceModel(m_selectableEventCollectionsModel);
         break;
     }
     case (KCalendarCore::IncidenceBase::TypeTodo): {
-        model = m_todoRightsFilterModel;
+        model->setSourceModel(m_selectableTodoCollectionsModel);
         break;
     }
     }
