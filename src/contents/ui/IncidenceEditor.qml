@@ -672,7 +672,6 @@ Kirigami.ScrollablePage {
                                 DatePicker {
                                     id: recurExceptionPicker
                                     anchors.fill: parent
-                                    selectedDate: incidenceStartDateCombo.dateFromText
                                     onDatePicked: {
                                         root.incidenceWrapper.recurrenceExceptionsModel.addExceptionDateTime(pickedDate)
                                         recurExceptionPopup.close()
