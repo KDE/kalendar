@@ -436,7 +436,9 @@ QVariantMap IncidenceWrapper::recurrenceData()
         {QStringLiteral("duration"), m_incidence->recurrence()->duration()},
         {QStringLiteral("frequency"), m_incidence->recurrence()->frequency()},
         {QStringLiteral("startDateTime"), m_incidence->recurrence()->startDateTime()},
+        {QStringLiteral("startDateTimeDisplay"), QLocale::system().toString(m_incidence->recurrence()->startDateTime(), QLocale::NarrowFormat)},
         {QStringLiteral("endDateTime"), m_incidence->recurrence()->endDateTime()},
+        {QStringLiteral("endDateTimeDisplay"), QLocale::system().toString(m_incidence->recurrence()->endDateTime(), QLocale::NarrowFormat)},
         {QStringLiteral("allDay"), m_incidence->recurrence()->allDay()},
         {QStringLiteral("type"), m_incidence->recurrence()->recurrenceType()},
         {QStringLiteral("monthDays"), QVariant::fromValue(m_incidence->recurrence()->monthDays())},
@@ -484,11 +486,19 @@ void IncidenceWrapper::setRecurrenceDataItem(const QString &key, const QVariant 
         } else if (key == QStringLiteral("frequency")) {
             m_incidence->recurrence()->setFrequency(value.toInt());
 
-        } else if (key == QStringLiteral("startDateTime") && value.toDateTime().isValid()) {
-            m_incidence->recurrence()->setStartDateTime(value.toDateTime(), false);
+        } else if ((key == QStringLiteral("startDateTime") || key == QStringLiteral("endDateTime")) && value.toDateTime().isValid()) {
+            auto dt = value.toDateTime();
+            QDateTime adjustedDt;
+            adjustedDt.setTimeZone(incidenceEnd().timeZone());
+            adjustedDt.setDate(dt.date());
+            adjustedDt.setTime(dt.time());
 
-        } else if (key == QStringLiteral("endDateTime") && value.toDateTime().isValid()) {
-            m_incidence->recurrence()->setEndDateTime(value.toDateTime());
+            if (key == QStringLiteral("startDateTime")) {
+                m_incidence->recurrence()->setStartDateTime(adjustedDt, false);
+
+            } else if (key == QStringLiteral("endDateTime")) {
+                m_incidence->recurrence()->setEndDateTime(adjustedDt);
+            }
 
         } else if (key == QStringLiteral("allDay")) {
             m_incidence->recurrence()->setAllDay(value.toBool());
