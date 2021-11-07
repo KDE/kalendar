@@ -433,7 +433,7 @@ Kirigami.ScrollablePage {
                     Layout.leftMargin: Kirigami.Units.largeSpacing
                     visible: repeatComboBox.currentIndex > 0 // Not "Never" index
 
-                    function setOcurrence() {
+                    function setOccurrence() {
                         root.incidenceWrapper.setRegularRecurrence(recurScaleRuleCombobox.currentValue, recurFreqRuleSpinbox.value);
 
                         if(recurScaleRuleCombobox.currentValue === IncidenceWrapper.Weekly) {
@@ -461,12 +461,12 @@ Kirigami.ScrollablePage {
                             Layout.fillWidth: true
                             visible: repeatComboBox.currentIndex === 5
                             // Make sure it defaults to something
-                            onVisibleChanged: if(visible && currentIndex < 0) { currentIndex = 0; customRecurrenceLayout.setOcurrence(); }
+                            onVisibleChanged: if(visible && currentIndex < 0) { currentIndex = 0; customRecurrenceLayout.setOccurrence(); }
 
                             textRole: "display"
                             valueRole: "interval"
                             onCurrentValueChanged: if(visible) {
-                                customRecurrenceLayout.setOcurrence();
+                                customRecurrenceLayout.setOccurrence();
                                 repeatComboBox.currentIndex = 5; // Otherwise resets to default daily/weekly/etc.
                             }
                             currentIndex: {
@@ -499,7 +499,7 @@ Kirigami.ScrollablePage {
                             delegate: Kirigami.BasicListItem {
                                 text: modelData.display
                                 onClicked: {
-                                    customRecurrenceLayout.setOcurrence();
+                                    customRecurrenceLayout.setOccurrence();
                                     repeatComboBox.currentIndex = 5; // Otherwise resets to default daily/weekly/etc.
                                 }
                             }
@@ -575,7 +575,7 @@ Kirigami.ScrollablePage {
                             text: i18nc("%1 is the day number of month", "The %1 of each month", LabelUtils.numberToString(dateOfMonth))
 
                             checked: root.incidenceWrapper.recurrenceData.type === 6 // Monthly on day (1st of month)
-                            onClicked: customRecurrenceLayout.setOcurrence()
+                            onClicked: customRecurrenceLayout.setOccurrence()
                         }
                         QQC2.RadioButton {
                             property int dayOfWeek: incidenceStartDateCombo.dateFromText.getDay() > 0 ?
@@ -636,18 +636,18 @@ Kirigami.ScrollablePage {
                         RowLayout {
                             Layout.fillWidth: true
                             visible: endRecurType.currentIndex === 2
-                            onVisibleChanged: if (visible) { root.incidenceWrapper.setRecurrenceOcurrences(recurOcurrenceEndSpinbox.value) }
+                            onVisibleChanged: if (visible) { root.incidenceWrapper.setRecurrenceOccurrences(recurOccurrenceEndSpinbox.value) }
 
                             QQC2.SpinBox {
-                                id: recurOcurrenceEndSpinbox
+                                id: recurOccurrenceEndSpinbox
 
                                 Layout.fillWidth: true
                                 from: 1
                                 value: root.incidenceWrapper.recurrenceData.duration
-                                onValueChanged: if (visible) { root.incidenceWrapper.setRecurrenceOcurrences(value) }
+                                onValueChanged: if (visible) { root.incidenceWrapper.setRecurrenceOccurrences(value) }
                             }
                             QQC2.Label {
-                                text: i18np("occurrence", "occurrences", recurOcurrenceEndSpinbox.value)
+                                text: i18np("occurrence", "occurrences", recurOccurrenceEndSpinbox.value)
                             }
                         }
                     }
