@@ -381,6 +381,7 @@ Kirigami.ScrollablePage {
                     Kirigami.FormData.label: i18n("Repeat:")
                     Layout.fillWidth: true
 
+                    enabled: !incidenceForm.isTodo || !isNaN(root.incidenceWrapper.incidenceStart.getTime()) || !isNaN(root.incidenceWrapper.incidenceEnd.getTime())
                     textRole: "display"
                     valueRole: "interval"
                     onCurrentIndexChanged: if(currentIndex === 0) { root.incidenceWrapper.clearRecurrences() }
