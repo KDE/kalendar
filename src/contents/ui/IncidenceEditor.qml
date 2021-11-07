@@ -417,7 +417,7 @@ Kirigami.ScrollablePage {
                     ]
                     delegate: Kirigami.BasicListItem {
                         text: modelData.display
-                        onClicked: if (modelData.interval > 0) {
+                        onClicked: if (modelData.interval >= 0) {
                             root.incidenceWrapper.setRegularRecurrence(modelData.interval)
                         } else {
                             root.incidenceWrapper.clearRecurrences();
