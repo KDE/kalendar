@@ -215,7 +215,7 @@ Item {
                         Layout.fillHeight: true
                         property date startDate: periodStartDate
 
-                        ListView {
+                        Repeater {
                             id: linesRepeater
 
                             anchors {
@@ -227,13 +227,13 @@ Item {
 
                             // DO NOT use a ScrollView as a bug causes this to crash randomly.
                             // So we instead make the ListView act like a ScrollView on desktop. No crashing now!
-                            flickableDirection: Flickable.VerticalFlick
-                            boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-                            QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
+                            //flickableDirection: Flickable.VerticalFlick
+                            //boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+                            //QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
 
                             clip: true
-                            spacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
-                                Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
+                            //spacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
+                                //Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
 
                             DayMouseArea {
                                 id: listViewMenu
@@ -262,23 +262,13 @@ Item {
                                 root.numberOfLinesShown = count
                             }
 
-                            delegate: Item {
-                                id: line
-                                height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
-
-                                //Incidences
-                                Repeater {
-                                    id: incidencesRepeater
-                                    model: modelData
-
-                                    MultiDayViewIncidenceDelegate {
-                                        dayWidth: root.dayWidth
-                                        parentViewSpacing: root.spacing
-                                        horizontalSpacing: linesRepeater.spacing
-                                        openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
-                                        isDark: root.isDark
-                                    }
-                                }
+                            delegate: MultiDayViewIncidenceDelegate {
+                                dayWidth: root.dayWidth
+                                parentViewSpacing: root.spacing
+                                horizontalSpacing: Kirigami.Units.smallSpacing//linesRepeater.spacing
+                                openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
+                                isDark: root.isDark
+                                Component.onCompleted: console.log(model.text, model.starts, model.duration, model.line)
                             }
                         }
                     }

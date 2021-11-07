@@ -8,6 +8,7 @@
 #pragma once
 
 #include "incidenceoccurrencemodel.h"
+#include "viewincidencesmodel.h"
 #include <QAbstractItemModel>
 #include <QDateTime>
 #include <QList>
@@ -82,11 +83,10 @@ protected:
 
 private:
     QTimer mRefreshTimer;
-    QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
-    QVariantList layoutLines(const QDate &rowStart) const;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
     int mPeriodLength{7};
     MultiDayIncidenceModel::Filters m_filters;
+    mutable QHash<QDate, ViewIncidencesModel *> m_incidencesModels;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(MultiDayIncidenceModel::Filters)

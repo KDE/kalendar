@@ -11,10 +11,11 @@ import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
 Rectangle {
-    x: ((dayWidth + parentViewSpacing) * modelData.starts) + horizontalSpacing
+    x: ((dayWidth + parentViewSpacing) * model.starts) + horizontalSpacing
+    y: model.line * (Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing)
     z: 10
-    width: ((dayWidth + parentViewSpacing) * modelData.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
-    height: parent.height
+    width: ((dayWidth + parentViewSpacing) * model.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
+    height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
     opacity: isOpenOccurrence || isInCurrentMonth ?
         1.0 : 0.5
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
@@ -26,10 +27,10 @@ Rectangle {
     property int horizontalSpacing: 0 // In between incidence spaces
     property string openOccurrenceId: ""
     property bool isOpenOccurrence: openOccurrenceId ?
-        openOccurrenceId === modelData.incidenceId : false
+        openOccurrenceId === model.incidenceId : false
     property bool reactToCurrentMonth: true
     readonly property bool isInCurrentMonth: reactToCurrentMonth && currentMonth ?
-        modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month :
+        model.endTime.getMonth() == root.month || model.startTime.getMonth() == root.month :
         true
     property bool isDark: false
 
@@ -46,7 +47,7 @@ Rectangle {
         clip: true
         property bool spaceRestricted: parent.width < Kirigami.Units.gridUnit * 5
 
-        property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
+        property color textColor: LabelUtils.getIncidenceLabelColor(model.color, root.isDark)
 
         function otherMonthTextColor(color) {
             if(isDark) {
@@ -68,35 +69,35 @@ Rectangle {
             Layout.maximumHeight: parent.height
             Layout.maximumWidth: height
 
-            source: modelData.incidenceTypeIcon
+            source: model.incidenceTypeIcon
             isMask: true
-            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+            color: isOpenOccurrence ? (LabelUtils.isDarkColor(model.color) ? "white" : "black") :
                 isInCurrentMonth ? incidenceContents.textColor :
-                incidenceContents.otherMonthTextColor(modelData.color)
+                incidenceContents.otherMonthTextColor(model.color)
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
             visible: !parent.spaceRestricted
         }
 
         QQC2.Label {
             Layout.fillWidth: true
-            text: modelData.text
+            text: model.text
             elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
             font.weight: Font.Medium
             font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
                 Kirigami.Theme.defaultFont.pointSize
             renderType: Text.QtRendering
-            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+            color: isOpenOccurrence ? (LabelUtils.isDarkColor(model.color) ? "white" : "black") :
                 isInCurrentMonth ? incidenceContents.textColor :
-                incidenceContents.otherMonthTextColor(modelData.color)
+                incidenceContents.otherMonthTextColor(model.color)
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
         }
     }
 
     IncidenceMouseArea {
-        incidenceData: modelData
-        collectionId: modelData.collectionId
+        incidenceData: model
+        collectionId: model.collectionId
 
-        onViewClicked: viewIncidence(modelData, collectionData)
+        onViewClicked: viewIncidence(model, collectionData)
         onEditClicked: editIncidence(incidencePtr, collectionId)
         onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
         onTodoCompletedClicked: completeTodo(incidencePtr)

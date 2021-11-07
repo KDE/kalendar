@@ -16,8 +16,8 @@ Kirigami.ShadowedRectangle {
     property bool isDark: false
 
     anchors.fill: parent
-    color: isOpenOccurrence ? modelData.color :
-        LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
+    color: isOpenOccurrence ? model.color :
+        LabelUtils.getIncidenceBackgroundColor(model.color, root.isDark)
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
     opacity: isOpenOccurrence || isInCurrentMonth ? 1.0 : 0
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
