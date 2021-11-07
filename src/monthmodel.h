@@ -62,7 +62,7 @@ Q_SIGNALS:
     void selectedChanged();
 
 private:
-    class Private;
+    struct Private;
     QLocale m_locale;
     std::unique_ptr<Private> d;
 };

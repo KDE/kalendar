@@ -408,19 +408,19 @@ void InfiniteCalendarViewModel::setCalendar(Akonadi::ETMCalendar *calendar)
     m_insertedIds.clear();
     m_calendar = calendar;
 
-    for (auto model : m_monthViewModels) {
+    for (auto model : std::as_const(m_monthViewModels)) {
         model->model()->setCalendar(calendar);
     }
 
-    for (auto model : m_scheduleViewModels) {
+    for (auto model : std::as_const(m_scheduleViewModels)) {
         model->model()->setCalendar(calendar);
     }
 
-    for (auto model : m_weekViewModels) {
+    for (auto model : std::as_const(m_weekViewModels)) {
         model->model()->setCalendar(calendar);
     }
 
-    for (auto model : m_weekViewMultiDayModels) {
+    for (auto model : std::as_const(m_weekViewMultiDayModels)) {
         model->model()->setCalendar(calendar);
     }
 
@@ -486,11 +486,11 @@ void InfiniteCalendarViewModel::triggerAffectedModelUpdates()
 {
     for (auto &model : m_models) {
         if (model.modelType != TypeWeek) {
-            for (const auto &startDate : model.affectedStartDates) {
+            for (const auto &startDate : std::as_const(model.affectedStartDates)) {
                 model.multiDayModels->value(startDate)->model()->updateQuery();
             }
         } else {
-            for (const auto &startDate : model.affectedStartDates) {
+            for (const auto &startDate : std::as_const(model.affectedStartDates)) {
                 model.weekModels->value(startDate)->model()->updateQuery();
             }
         }
@@ -545,16 +545,16 @@ QVariantMap InfiniteCalendarViewModel::filter() const
 void InfiniteCalendarViewModel::setFilter(const QVariantMap &filter)
 {
     mFilter = filter;
-    for (auto model : m_monthViewModels) {
+    for (auto model : std::as_const(m_monthViewModels)) {
         model->model()->setFilter(filter);
     }
-    for (auto model : m_scheduleViewModels) {
+    for (auto model : std::as_const(m_scheduleViewModels)) {
         model->model()->setFilter(filter);
     }
-    for (auto model : m_weekViewModels) {
+    for (auto model : std::as_const(m_weekViewModels)) {
         model->model()->setFilter(filter);
     }
-    for (auto model : m_weekViewMultiDayModels) {
+    for (auto model : std::as_const(m_weekViewMultiDayModels)) {
         model->model()->setFilter(filter);
     }
     Q_EMIT filterChanged();

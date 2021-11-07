@@ -506,7 +506,8 @@ QVector<qint64> CalendarManager::enabledTodoCollections()
 void CalendarManager::refreshEnabledTodoCollections()
 {
     m_enabledTodoCollections.clear();
-    for (auto selectedIndex : m_calendar->checkableProxyModel()->selectionModel()->selectedIndexes()) {
+    const auto selectedIndexes = m_calendar->checkableProxyModel()->selectionModel()->selectedIndexes();
+    for (auto selectedIndex : selectedIndexes) {
         auto collection = selectedIndex.data(Akonadi::EntityTreeModel::CollectionRole).value<Akonadi::Collection>();
         if (collection.contentMimeTypes().contains(QStringLiteral("application/x-vnd.akonadi.calendar.todo"))) {
             m_enabledTodoCollections.append(collection.id());
@@ -708,22 +709,22 @@ bool CalendarManager::hasChildren(KCalendarCore::Incidence::Ptr incidence)
 
 void CalendarManager::deleteAllChildren(KCalendarCore::Incidence::Ptr incidence)
 {
-    auto allChildren = m_calendar->childIncidences(incidence->uid());
+    const auto allChildren = m_calendar->childIncidences(incidence->uid());
 
-    for (auto child : allChildren) {
+    for (const auto &child : allChildren) {
         if (!m_calendar->childIncidences(child->uid()).isEmpty()) {
             deleteAllChildren(child);
         }
     }
 
-    for (auto child : allChildren) {
+    for (const auto &child : allChildren) {
         m_calendar->deleteIncidence(child);
     }
 }
 
 void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence, bool deleteChildren)
 {
-    auto directChildren = m_calendar->childIncidences(incidence->uid());
+    const auto directChildren = m_calendar->childIncidences(incidence->uid());
 
     if (!directChildren.isEmpty()) {
         if (deleteChildren) {
@@ -731,8 +732,9 @@ void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence, b
             deleteAllChildren(incidence);
         } else {
             m_changer->startAtomicOperation(i18n("Delete task and make sub-tasks independent"));
-            for (auto child : directChildren) {
-                for (auto instance : m_calendar->instances(child)) {
+            for (const auto &child : directChildren) {
+                const auto instances = m_calendar->instances(child);
+                for (const auto &instance : instances) {
                     KCalendarCore::Incidence::Ptr oldInstance(instance->clone());
                     instance->setRelatedTo(QString());
                     m_changer->modifyIncidence(m_calendar->item(instance), oldInstance);
