@@ -619,49 +619,18 @@ Kirigami.ScrollablePage {
                             }
                             popup.z: 1000
                         }
-                        QQC2.ComboBox {
+                        DateCombo {
                             id: recurEndDateCombo
 
                             Layout.fillWidth: true
                             visible: endRecurType.currentIndex === 1
-                            onVisibleChanged: if (visible && isNaN(root.incidenceWrapper.recurrenceData.endDateTime.getTime())) { root.incidenceWrapper.setRecurrenceDataItem("endDateTime", new Date()); }
-                            editable: true
-                            editText: root.incidenceWrapper.recurrenceData.endDateTime.toLocaleDateString(Qt.locale(), Locale.NarrowFormat);
-
-                            inputMethodHints: Qt.ImhDate
-
-                            property date dateFromText: Date.fromLocaleDateString(Qt.locale(), editText, Locale.NarrowFormat)
-                            property bool validDate: !isNaN(dateFromText.getTime())
-
-                            onDateFromTextChanged: {
-                                const datePicker = recurEndDatePicker;
-                                if (validDate && activeFocus) {
-                                    datePicker.selectedDate = dateFromText;
-                                    datePicker.clickedDate = dateFromText;
-
-                                    if (visible) {
-                                    root.incidenceWrapper.setRecurrenceDataItem("endDateTime", dateFromText);
-                                    }
-                                }
+                            onVisibleChanged: if (visible && isNaN(root.incidenceWrapper.recurrenceData.endDateTime.getTime())) {
+                                root.incidenceWrapper.setRecurrenceDataItem("endDateTime", new Date());
                             }
 
-                            popup: QQC2.Popup {
-                                id: recurEndDatePopup
-
-                                width: Kirigami.Units.gridUnit * 18
-                                height: Kirigami.Units.gridUnit * 18
-                                y: parent.y + parent.height
-                                z: 1000
-
-                                DatePicker {
-                                    id: recurEndDatePicker
-                                    anchors.fill: parent
-                                    onDatePicked: {
-                                        root.incidenceWrapper.setRecurrenceDataItem("endDateTime", pickedDate);
-                                        recurEndDatePopup.close();
-                                    }
-                                }
-                            }
+                            display: root.incidenceWrapper.recurrenceData.endDateTimeDisplay
+                            dateTime: root.incidenceWrapper.recurrenceData.endDateTime
+                            onNewDateChosen: root.incidenceWrapper.setRecurrenceDataItem("endDateTime", new Date(year, month, day));
                         }
 
                         RowLayout {
