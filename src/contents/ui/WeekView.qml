@@ -527,6 +527,7 @@ Kirigami.Page {
                     readonly property real hourHeight: periodsPerHour * root.periodHeight
                     readonly property real minuteHeight: hourHeight / 60
                     readonly property Item vScrollBar: QQC2.ScrollBar.vertical
+                    readonly property real vScrollBarSize: QQC2.ScrollBar.vertical.size
 
                     function setToCurrentTime() {
                         if(currentTimeMarkerLoader.active) {
@@ -535,7 +536,7 @@ Kirigami.Page {
 
                             let yPos = (currentTimeMarkerLoader.item.y / dayHeight) - ((viewHeight / 2) / dayHeight)
                             yPos = Math.max(0.0, yPos);
-                            yPos = Math.min(1.0, yPos);
+                            yPos = vScrollBar.size ? Math.min(vScrollBar.size, yPos) : Math.min(1.0, yPos);
 
                             vScrollBar.position = yPos;
                         }
@@ -728,6 +729,7 @@ Kirigami.Page {
                                                     font.pointSize: parent.isTinyHeight ? Kirigami.Theme.smallFont.pointSize :
                                                         Kirigami.Theme.defaultFont.pointSize
                                                     font.weight: Font.Medium
+                                                    font.strikeout: modelData.todoCompleted
                                                     renderType: Text.QtRendering
                                                     color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                         incidenceContents.textColor

@@ -84,6 +84,7 @@ Rectangle {
             font.weight: Font.Medium
             font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
                 Kirigami.Theme.defaultFont.pointSize
+            font.strikeout: modelData.todoCompleted
             renderType: Text.QtRendering
             color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                 isInCurrentMonth ? incidenceContents.textColor :

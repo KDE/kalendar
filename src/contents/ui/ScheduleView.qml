@@ -396,6 +396,7 @@ Kirigami.Page {
                                                             }
                                                             elide: Text.ElideRight
                                                             font.weight: Font.Medium
+                                                            font.strikeout: modelData.todoCompleted
                                                         }
                                                     }
 
