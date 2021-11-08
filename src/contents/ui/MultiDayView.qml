@@ -268,7 +268,6 @@ Item {
                                 horizontalSpacing: Kirigami.Units.smallSpacing//linesRepeater.spacing
                                 openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                 isDark: root.isDark
-                                Component.onCompleted: console.log(model.text, model.starts, model.duration, model.line)
                             }
                         }
                     }

@@ -8,6 +8,12 @@ ViewIncidencesModel::ViewIncidencesModel(QDate periodStart, int periodLength, In
     : QAbstractListModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
+    QObject::connect(&mRefreshTimer, &QTimer::timeout, this, [this]() {
+        beginResetModel();
+        sortedIncidencesFromSourceModel();
+        layoutLines();
+        endResetModel();
+    });
 
     m_periodStart = periodStart;
     m_periodEnd = periodStart.addDays(periodLength);
@@ -27,11 +33,7 @@ void ViewIncidencesModel::setModel(IncidenceOccurrenceModel *model)
 {
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
-            beginResetModel();
-            sortedIncidencesFromSourceModel();
-            layoutLines();
-            endResetModel();
-            mRefreshTimer.start(50);
+            mRefreshTimer.start(100);
         }
     };
 
@@ -42,13 +44,6 @@ void ViewIncidencesModel::setModel(IncidenceOccurrenceModel *model)
     QObject::connect(model, &QAbstractItemModel::rowsInserted, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
-    /*connect(model, &QAbstractItemModel::rowsInserted, this, [&]() {
-        qDebug() << "wee";
-        for(int i = first; i <= last; i++) {
-            auto index = model->index(i, 0);
-            insertIncidence(index);
-        }
-    });*/
 
     Q_EMIT modelChanged();
 }
@@ -130,9 +125,9 @@ void ViewIncidencesModel::sortedIncidencesFromSourceModel()
             continue;
         }
 
-        /*if (!incidencePassesFilter(srcIdx)) {
-         *                continue;
-    }*/
+        if (!incidencePassesFilter(srcIdx)) {
+            continue;
+        }
 
         // qWarning() << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         m_incidenceOccurrences.append(generateStructFromIndex(srcIdx));
@@ -141,27 +136,6 @@ void ViewIncidencesModel::sortedIncidencesFromSourceModel()
     // Sort incidences by date
     std::sort(m_incidenceOccurrences.begin(), m_incidenceOccurrences.end(), &lesserOccurrence);
 }
-
-void ViewIncidencesModel::insertIncidence(QModelIndex srcIdx)
-{
-    auto incidenceOccurrenceData = generateStructFromIndex(srcIdx);
-    qDebug() << incidenceOccurrenceData.text;
-
-    int i = 0;
-    while (lesserOccurrence(incidenceOccurrenceData, m_incidenceOccurrences[i])) {
-        i++;
-
-        if (i == m_incidenceOccurrences.length()) {
-            break;
-        }
-    }
-
-    beginInsertRows(QModelIndex(), i, i);
-    m_incidenceOccurrences.insert(i, incidenceOccurrenceData);
-    endInsertRows();
-
-    layoutLines();
-};
 
 /*
  * Layout the lines:
@@ -187,8 +161,6 @@ void ViewIncidencesModel::layoutLines()
         const auto startDate = firstOfLine.startTime.date() < m_periodStart ? m_periodStart : firstOfLine.startTime.date();
         const auto start = getStart(firstOfLine.startTime.date());
         const auto duration = qMin(getDuration(startDate, firstOfLine.endTime.date()), m_periodLength - start);
-
-        qDebug() << firstOfLine.text << start << duration << lineNum;
 
         if (start >= m_periodLength) {
             // qWarning() << "Skipping " << srcIdx.data(IncidenceOccurrenceModel::Summary);
@@ -236,7 +208,6 @@ void ViewIncidencesModel::layoutLines()
              *                    continue;
         }*/
 
-            qDebug() << occ.text << start << duration << lineNum;
             if (doesIntersect(start, end)) {
                 it++;
             } else {
@@ -354,4 +325,38 @@ QHash<int, QByteArray> ViewIncidencesModel::roleNames() const
             {IncidenceTypeIconRole, "IncidenceTypeIcon"},
             {IncidencePtrRole, "incidencePtr"},
             {IncidenceOccurrenceRole, "incidenceOccurrence"}};
+}
+
+bool ViewIncidencesModel::incidencePassesFilter(const QModelIndex &idx) const
+{
+    if (!m_filters) {
+        return true;
+    }
+    bool include = false;
+    const auto start = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
+
+    if (m_filters.testFlag(MultiDayIncidenceModel::AllDayOnly) && idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
+        include = true;
+    }
+
+    if (m_filters.testFlag(MultiDayIncidenceModel::NoStartDateOnly) && !start.isValid()) {
+        include = true;
+    }
+    if (m_filters.testFlag(MultiDayIncidenceModel::MultiDayOnly)
+        && idx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
+        include = true;
+    }
+
+    return include;
+}
+
+void ViewIncidencesModel::setFilters(MultiDayIncidenceModel::Filters filters)
+{
+    beginResetModel();
+    m_filters = filters;
+    Q_EMIT filtersChanged();
+
+    sortedIncidencesFromSourceModel();
+    layoutLines();
+    endResetModel();
 }

@@ -6,29 +6,13 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "multidayincidencemodel.h"
+#include "viewincidencesmodel.h"
 #include <QBitArray>
 
 MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractListModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
-}
-
-QModelIndex MultiDayIncidenceModel::index(int row, int column, const QModelIndex &parent) const
-{
-    if (!hasIndex(row, column, parent)) {
-        return {};
-    }
-
-    if (!parent.isValid()) {
-        return createIndex(row, column);
-    }
-    return {};
-}
-
-QModelIndex MultiDayIncidenceModel::parent(const QModelIndex &) const
-{
-    return {};
 }
 
 int MultiDayIncidenceModel::rowCount(const QModelIndex &parent) const
@@ -60,6 +44,7 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
     case Incidences: {
         if (!m_incidencesModels.contains(rowStart)) {
             auto viewIncidenceModel = new ViewIncidencesModel(rowStart, mPeriodLength, mSourceModel);
+            viewIncidenceModel->setFilters(m_filters);
             viewIncidenceModel->setModel(mSourceModel);
             m_incidencesModels[rowStart] = viewIncidenceModel;
         }
@@ -83,20 +68,6 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 
     mSourceModel = model;
     Q_EMIT modelChanged();
-    auto resetModel = [this] {
-        if (!mRefreshTimer.isActive()) {
-            beginResetModel();
-            endResetModel();
-            Q_EMIT incidenceCountChanged();
-            mRefreshTimer.start(50);
-        }
-    };
-    // QObject::connect(model, &QAbstractItemModel::dataChanged, this, resetModel);
-    // QObject::connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);
-    // QObject::connect(model, &QAbstractItemModel::modelReset, this, resetModel);
-    // QObject::connect(model, &QAbstractItemModel::rowsInserted, this, resetModel);
-    // QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
-    // QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
 
     for (auto incidencesModel : m_incidencesModels) {
         incidencesModel->setModel(mSourceModel);
@@ -123,60 +94,13 @@ void MultiDayIncidenceModel::setFilters(MultiDayIncidenceModel::Filters filters)
 {
     beginResetModel();
     m_filters = filters;
+
+    for (auto incidencesModel : m_incidencesModels) {
+        incidencesModel->setFilters(filters);
+    }
+
     Q_EMIT filtersChanged();
     endResetModel();
-}
-
-bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
-{
-    if (!m_filters) {
-        return true;
-    }
-    bool include = false;
-    const auto start = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
-
-    if (m_filters.testFlag(AllDayOnly) && idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
-        include = true;
-    }
-
-    if (m_filters.testFlag(NoStartDateOnly) && !start.isValid()) {
-        include = true;
-    }
-    if (m_filters.testFlag(MultiDayOnly) && idx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
-        include = true;
-    }
-
-    return include;
-}
-
-int MultiDayIncidenceModel::incidenceCount()
-{
-    int count = 0;
-
-    for (int i = 0; i < rowCount({}); i++) {
-        const auto rowStart = mSourceModel->start().addDays(i * mPeriodLength);
-        const auto rowEnd = rowStart.addDays(mPeriodLength > 1 ? mPeriodLength : 0);
-
-        for (int row = 0; row < mSourceModel->rowCount(); row++) {
-            const auto srcIdx = mSourceModel->index(row, 0, {});
-            const auto start = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
-            const auto end = srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date();
-
-            // Skip incidences not part of the week
-            if (end < rowStart || start > rowEnd) {
-                // qWarning() << "Skipping because not part of this week";
-                continue;
-            }
-
-            if (!incidencePassesFilter(srcIdx)) {
-                continue;
-            }
-
-            count++;
-        }
-    }
-
-    return count;
 }
 
 QHash<int, QByteArray> MultiDayIncidenceModel::roleNames() const
@@ -186,3 +110,5 @@ QHash<int, QByteArray> MultiDayIncidenceModel::roleNames() const
         {PeriodStartDate, "periodStartDate"},
     };
 }
+
+Q_DECLARE_METATYPE(ViewIncidencesModel *);

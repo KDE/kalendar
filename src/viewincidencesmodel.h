@@ -4,6 +4,7 @@
 #pragma once
 
 #include "incidenceoccurrencemodel.h"
+#include "multidayincidencemodel.h"
 #include <QAbstractListModel>
 #include <QDateTime>
 #include <QList>
@@ -78,7 +79,6 @@ public:
     // We first sort all occurrences so we get all-day first (sorted by duration),
     // and then the rest sorted by start-date.
     void sortedIncidencesFromSourceModel();
-    void insertIncidence(QModelIndex srcIdx);
 
     /*
      * Layout the lines:
@@ -95,8 +95,12 @@ public:
     QVariant data(const QModelIndex &idx, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
+    bool incidencePassesFilter(const QModelIndex &idx) const;
+    void setFilters(MultiDayIncidenceModel::Filters filters);
+
 Q_SIGNALS:
     void modelChanged();
+    void filtersChanged();
 
 private:
     QTimer mRefreshTimer;
@@ -105,4 +109,5 @@ private:
     QDate m_periodEnd;
     int m_periodLength;
     IncidenceOccurrenceModel *m_sourceModel = nullptr;
+    QFlags<MultiDayIncidenceModel::Filter> m_filters;
 };

@@ -8,7 +8,6 @@
 #pragma once
 
 #include "incidenceoccurrencemodel.h"
-#include "viewincidencesmodel.h"
 #include <QAbstractItemModel>
 #include <QDateTime>
 #include <QList>
@@ -22,17 +21,18 @@ class MemoryCalendar;
 class Incidence;
 }
 
+class ViewIncidencesModel;
+
 /**
  * Each toplevel index represents a week.
  * The "incidences" roles provides a list of lists, where each list represents a visual line,
  * containing a number of events to display.
  */
-class MultiDayIncidenceModel : public QAbstractItemModel
+class MultiDayIncidenceModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
     Q_PROPERTY(MultiDayIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
-    Q_PROPERTY(int incidenceCount READ incidenceCount NOTIFY incidenceCountChanged)
     Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
 
 public:
@@ -53,9 +53,6 @@ public:
     MultiDayIncidenceModel(QObject *parent = nullptr);
     ~MultiDayIncidenceModel() override = default;
 
-    QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
     int rowCount(const QModelIndex &parent) const override;
     int columnCount(const QModelIndex &parent) const override;
 
@@ -69,8 +66,6 @@ public:
     void setPeriodLength(int periodLength);
     MultiDayIncidenceModel::Filters filters();
     void setFilters(MultiDayIncidenceModel::Filters filters);
-    bool incidencePassesFilter(const QModelIndex &idx) const;
-    Q_INVOKABLE int incidenceCount();
 
 Q_SIGNALS:
     void periodLengthChanged();
