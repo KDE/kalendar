@@ -12,7 +12,7 @@ import "labelutils.js" as LabelUtils
 
 Rectangle {
     x: ((dayWidth + parentViewSpacing) * model.starts) + horizontalSpacing
-    y: model.line * (Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing)
+    y: model.line * (Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing + verticalSpacing)
     z: 10
     width: ((dayWidth + parentViewSpacing) * model.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
     height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
@@ -24,7 +24,8 @@ Rectangle {
 
     property real dayWidth: 0
     property real parentViewSpacing: 0
-    property int horizontalSpacing: 0 // In between incidence spaces
+    property real horizontalSpacing: 0 // In between incidence spaces
+    property real verticalSpacing: 0
     property string openOccurrenceId: ""
     property bool isOpenOccurrence: openOccurrenceId ?
         openOccurrenceId === model.incidenceId : false

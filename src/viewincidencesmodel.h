@@ -16,6 +16,7 @@ class ViewIncidencesModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(int lines READ lines NOTIFY linesChanged)
 
 public:
     struct IncidenceOccurrenceData {
@@ -98,9 +99,12 @@ public:
     bool incidencePassesFilter(const QModelIndex &idx) const;
     void setFilters(MultiDayIncidenceModel::Filters filters);
 
+    int lines() const;
+
 Q_SIGNALS:
     void modelChanged();
     void filtersChanged();
+    void linesChanged();
 
 private:
     QTimer mRefreshTimer;
@@ -110,4 +114,5 @@ private:
     int m_periodLength;
     IncidenceOccurrenceModel *m_sourceModel = nullptr;
     QFlags<MultiDayIncidenceModel::Filter> m_filters;
+    int m_lines;
 };

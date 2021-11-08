@@ -33,7 +33,7 @@ void ViewIncidencesModel::setModel(IncidenceOccurrenceModel *model)
 {
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
-            mRefreshTimer.start(100);
+            mRefreshTimer.start(50);
         }
     };
 
@@ -152,7 +152,7 @@ void ViewIncidencesModel::layoutLines()
         return qMax(m_periodStart.daysTo(start), 0ll);
     };
 
-    QVector<IncidenceOccurrenceData> originalOccurrences;
+    QVector<int> changedIndices;
     QVector<IncidenceOccurrenceData> laidOutOccurrences;
     int lineNum = 0;
 
@@ -222,15 +222,22 @@ void ViewIncidencesModel::layoutLines()
         lineNum++;
     }
     m_incidenceOccurrences = laidOutOccurrences;
+    m_lines = lineNum;
+    linesChanged();
 
-    for (int i = 0; i < originalOccurrences.length(); i++) { // Optimise
+    /*for (int i = 0; i < originalOccurrences.length(); i++) { // Optimise
         if (laidOutOccurrences[i].starts == originalOccurrences[i].starts && laidOutOccurrences[i].duration == originalOccurrences[i].duration
             && laidOutOccurrences[i].line == originalOccurrences[i].line) {
             continue;
         }
 
         Q_EMIT dataChanged(index(i, 0), index(i, 0));
-    }
+    }*/
+}
+
+int ViewIncidencesModel::lines() const
+{
+    return m_lines;
 }
 
 int ViewIncidencesModel::rowCount(const QModelIndex &) const

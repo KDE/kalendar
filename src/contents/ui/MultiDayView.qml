@@ -201,61 +201,61 @@ Item {
         Repeater {
             model: root.model
             //One row => one week
+
+            // DO NOT use a ScrollView as a bug causes this to crash randomly.
             Item {
                 width: parent.width
                 height: root.dayHeight
-                clip: true
-                RowLayout {
-                    width: parent.width
-                    height: parent.height
-                    spacing: root.spacing
-                    Item {
-                        id: dayDelegate
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        property date startDate: periodStartDate
+
+                Flickable {
+                    anchors {
+                        fill: parent
+                        // Offset for date
+                        topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 : 0
+                    }
+                    height: root.dayHeight
+                    clip: true
+
+                    flickableDirection: Flickable.VerticalFlick
+                    boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+                    QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
+
+                    contentHeight: listViewMenu.height
+
+                    DayMouseArea {
+                        id: listViewMenu
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                            right: parent.right
+                        }
+
+                        property int lines: incidences.lines
+                        height: lines * (Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing)
+                        z: -1
+                        clip: true
+
+                        function useGridSquareDate(type, root, globalPos) {
+                            for(var i in root.children) {
+                                var child = root.children[i];
+                                var localpos = child.mapFromGlobal(globalPos.x, globalPos.y);
+
+                                if(child.contains(localpos) && child.gridSquareDate) {
+                                    addIncidence(type, child.gridSquareDate);
+                                } else {
+                                    useGridSquareDate(type, child, globalPos);
+                                }
+                            }
+                        }
+
+                        onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
+                        onDeselect: root.deselect()
 
                         Repeater {
                             id: linesRepeater
 
-                            anchors {
-                                fill: parent
-                                // Offset for date
-                                topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 : 0
-                                rightMargin: spacing
-                            }
-
-                            // DO NOT use a ScrollView as a bug causes this to crash randomly.
-                            // So we instead make the ListView act like a ScrollView on desktop. No crashing now!
-                            //flickableDirection: Flickable.VerticalFlick
-                            //boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-                            //QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
-
-                            clip: true
-                            //spacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
-                                //Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
-
-                            DayMouseArea {
-                                id: listViewMenu
-                                anchors.fill: parent
-                                z: -1
-
-                                function useGridSquareDate(type, root, globalPos) {
-                                    for(var i in root.children) {
-                                        var child = root.children[i];
-                                        var localpos = child.mapFromGlobal(globalPos.x, globalPos.y);
-
-                                        if(child.contains(localpos) && child.gridSquareDate) {
-                                            addIncidence(type, child.gridSquareDate);
-                                        } else {
-                                            useGridSquareDate(type, child, globalPos);
-                                        }
-                                    }
-                                }
-
-                                onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
-                                onDeselect: root.deselect()
-                            }
+                            property var spacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
+                                Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
 
                             model: incidences
                             onCountChanged: {
@@ -265,7 +265,8 @@ Item {
                             delegate: MultiDayViewIncidenceDelegate {
                                 dayWidth: root.dayWidth
                                 parentViewSpacing: root.spacing
-                                horizontalSpacing: Kirigami.Units.smallSpacing//linesRepeater.spacing
+                                horizontalSpacing: linesRepeater.spacing
+                                verticalSpacing: linesRepeater.spacing
                                 openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                 isDark: root.isDark
                             }
