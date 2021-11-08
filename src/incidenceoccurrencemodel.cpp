@@ -117,6 +117,7 @@ void IncidenceOccurrenceModel::updateFromSource()
     beginResetModel();
 
     m_incidences.clear();
+    load();
 
     if (m_coreCalendar) {
         const auto allEvents = m_coreCalendar->events(mStart, mEnd); // get all events
