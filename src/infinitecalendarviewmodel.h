@@ -112,4 +112,5 @@ private:
     mutable int m_lastAccessedModelType = TypeMonth;
     Akonadi::ETMCalendar *m_calendar;
     QVariantMap mFilter;
+    QTimer m_triggerUpdatesTimer;
 };
