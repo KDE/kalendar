@@ -25,6 +25,25 @@ InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
     ModelMetaData weekMultiDayModel = {QVector<QDate>(), 7, TypeWeekMultiDay, &m_weekViewMultiDayModels, {}, &m_liveWeekViewMultiDayModelKeys};
 
     m_models = QVector<ModelMetaData>{monthModel, scheduleModel, weekModel, weekMultiDayModel};
+
+    m_triggerUpdatesTimer.setSingleShot(true);
+    QObject::connect(&m_triggerUpdatesTimer, &QTimer::timeout, this, [&]() {
+        if (m_calendar->isLoaded()) { // Save cycles
+            for (auto &model : m_models) {
+                if (model.modelType != TypeWeek) {
+                    for (const auto &startDate : std::as_const(model.affectedStartDates)) {
+                        model.multiDayModels->value(startDate)->model()->updateQuery();
+                    }
+                } else {
+                    for (const auto &startDate : std::as_const(model.affectedStartDates)) {
+                        model.weekModels->value(startDate)->model()->updateQuery();
+                    }
+                }
+            }
+        } else {
+            m_triggerUpdatesTimer.start(); // Avoid situation where no calls are made after cal loaded
+        }
+    });
 }
 
 void InfiniteCalendarViewModel::setup()
@@ -484,16 +503,8 @@ void InfiniteCalendarViewModel::checkCalendarIndex(const QModelIndex &index)
 
 void InfiniteCalendarViewModel::triggerAffectedModelUpdates()
 {
-    for (auto &model : m_models) {
-        if (model.modelType != TypeWeek) {
-            for (const auto &startDate : std::as_const(model.affectedStartDates)) {
-                model.multiDayModels->value(startDate)->model()->updateQuery();
-            }
-        } else {
-            for (const auto &startDate : std::as_const(model.affectedStartDates)) {
-                model.weekModels->value(startDate)->model()->updateQuery();
-            }
-        }
+    if (!m_triggerUpdatesTimer.isActive()) {
+        m_triggerUpdatesTimer.start(50);
     }
 }
 
