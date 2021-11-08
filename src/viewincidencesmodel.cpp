@@ -252,7 +252,7 @@ void ViewIncidencesModel::layoutLines()
     }
     m_incidenceOccurrences = laidOutOccurrences;
 
-    for (int i = 0; i < originalOccurrences.length(); i++) {
+    for (int i = 0; i < originalOccurrences.length(); i++) { // Optimise
         if (laidOutOccurrences[i].starts == originalOccurrences[i].starts && laidOutOccurrences[i].duration == originalOccurrences[i].duration
             && laidOutOccurrences[i].line == originalOccurrences[i].line) {
             continue;

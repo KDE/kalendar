@@ -34,7 +34,7 @@ using namespace KCalendarCore;
  *
  * Recurrences are expanded
  */
-class IncidenceOccurrenceModel : public QAbstractItemModel
+class IncidenceOccurrenceModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QDate start READ start WRITE setStart NOTIFY startChanged)
@@ -71,9 +71,6 @@ public:
     Q_ENUM(Roles);
     IncidenceOccurrenceModel(QObject *parent = nullptr);
     ~IncidenceOccurrenceModel() override = default;
-
-    QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
 
     int rowCount(const QModelIndex &parent = {}) const override;
     int columnCount(const QModelIndex &parent) const override;

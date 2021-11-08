@@ -23,7 +23,7 @@
 #include <etmcalendar.h>
 
 IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractListModel(parent)
     , m_coreCalendar(nullptr)
 {
     mRefreshTimer.setSingleShot(true);
@@ -176,23 +176,6 @@ void IncidenceOccurrenceModel::updateFromSource()
     }
 
     endResetModel();
-}
-
-QModelIndex IncidenceOccurrenceModel::index(int row, int column, const QModelIndex &parent) const
-{
-    if (!hasIndex(row, column, parent)) {
-        return {};
-    }
-
-    if (!parent.isValid()) {
-        return createIndex(row, column);
-    }
-    return {};
-}
-
-QModelIndex IncidenceOccurrenceModel::parent(const QModelIndex &) const
-{
-    return {};
 }
 
 int IncidenceOccurrenceModel::rowCount(const QModelIndex &parent) const
