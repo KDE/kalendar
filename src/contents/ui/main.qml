@@ -817,6 +817,7 @@ Kirigami.ApplicationWindow {
             this, "incidence");
 
         todo.incidencePtr = incidencePtr;
+        todo.collectionId = -1;
 
         if(todo.incidenceType === IncidenceWrapper.TypeTodo) {
             todo.todoCompleted = !todo.todoCompleted;

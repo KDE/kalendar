@@ -689,7 +689,7 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
 
     m_changer->modifyIncidence(modifiedItem, originalPayload);
 
-    if (modifiedItem.parentCollection().id() == incidenceWrapper->collectionId()) {
+    if (!incidenceWrapper->collectionId() || incidenceWrapper->collectionId() < 0 || modifiedItem.parentCollection().id() == incidenceWrapper->collectionId()) {
         return;
     }
 
