@@ -58,7 +58,7 @@ Kirigami.Page {
                                 Layout.row: 0
                                 Layout.column: 1
                                 font.weight: Font.Light
-                                font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.75)
+                                font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.25)
                                 text: model.display
                                 Layout.fillWidth: true
                                 elide: Text.ElideRight
