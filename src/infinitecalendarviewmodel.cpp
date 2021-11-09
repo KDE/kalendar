@@ -32,11 +32,15 @@ InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
             for (auto &model : m_models) {
                 if (model.modelType != TypeWeek) {
                     for (const auto &startDate : std::as_const(model.affectedStartDates)) {
-                        model.multiDayModels->value(startDate)->model()->updateQuery();
+                        if (model.multiDayModels->value(startDate) != nullptr) {
+                            model.multiDayModels->value(startDate)->model()->updateQuery();
+                        }
                     }
                 } else {
                     for (const auto &startDate : std::as_const(model.affectedStartDates)) {
-                        model.weekModels->value(startDate)->model()->updateQuery();
+                        if (model.weekModels->value(startDate) != nullptr) {
+                            model.weekModels->value(startDate)->model()->updateQuery();
+                        }
                     }
                 }
             }
