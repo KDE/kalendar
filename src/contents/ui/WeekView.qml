@@ -100,10 +100,7 @@ Kirigami.Page {
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
         text: i18n("Today")
-        onTriggered: {
-            setToDate(new Date());
-            pathView.currentItem.item.hourScrollView.setToCurrentTime();
-        }
+        onTriggered: setToDate(new Date(), true);
     }
 
     actions {
@@ -527,7 +524,6 @@ Kirigami.Page {
                     readonly property real hourHeight: periodsPerHour * root.periodHeight
                     readonly property real minuteHeight: hourHeight / 60
                     readonly property Item vScrollBar: QQC2.ScrollBar.vertical
-                    readonly property real vScrollBarSize: QQC2.ScrollBar.vertical.size
 
                     function setToCurrentTime() {
                         if(currentTimeMarkerLoader.active) {
@@ -664,6 +660,7 @@ Kirigami.Page {
                                         anchors.fill: parent
                                         spacing: root.gridLineWidth
                                         boundsBehavior: Flickable.StopAtBounds
+                                        interactive: false
 
                                         model: 24
                                         delegate: Rectangle {
