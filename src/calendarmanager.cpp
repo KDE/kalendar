@@ -773,6 +773,7 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     collectionDetails[QLatin1String("name")] = collection.name();
     collectionDetails[QLatin1String("displayName")] = collection.displayName();
     collectionDetails[QLatin1String("color")] = m_baseModel->colorCache[QString::number(collection.id())];
+    collectionDetails[QLatin1String("count")] = collection.statistics().count();
     collectionDetails[QLatin1String("isResource")] = Akonadi::CollectionUtils::isResource(collection);
     collectionDetails[QLatin1String("readOnly")] = collection.rights().testFlag(Collection::ReadOnly);
     collectionDetails[QLatin1String("isFiltered")] = isFiltered;

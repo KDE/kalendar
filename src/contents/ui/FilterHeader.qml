@@ -66,14 +66,6 @@ RowLayout {
         clip: true
         visible: headerLayout.filter.tags.length > 0
 
-        move: Transition {
-            NumberAnimation {
-                properties: "x, y"
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-
         Repeater {
             id: tagRepeater
             model: headerLayout.filter ? headerLayout.filter.tags : {}
@@ -94,5 +86,34 @@ RowLayout {
                 actionText: i18n("Remove filtering tag")
             }
         }
+    }
+
+    Kirigami.Heading {
+        id: numTasksHeading
+
+        Layout.fillWidth: true
+        Layout.rightMargin: Kirigami.Units.largeSpacing
+        horizontalAlignment: Text.AlignRight
+
+        function updateTasksCount() {
+            if(headerLayout.todoMode) text = applicationWindow().pageStack.currentItem.incompleteView.model.rowCount();
+        }
+
+        Connections {
+            target: applicationWindow().pageStack.currentItem.incompleteView.model
+            function onRowsInserted() {
+                numTasksHeading.updateTasksCount();
+            }
+
+            function onRowsRemoved() {
+                numTasksHeading.updateTasksCount();
+            }
+        }
+
+        font.weight: Font.Bold
+        color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+            headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
+        elide: Text.ElideRight
+        visible: headerLayout.todoMode
     }
 }

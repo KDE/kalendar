@@ -66,6 +66,8 @@ Kirigami.ScrollablePage {
     readonly property color standardTextColor: Kirigami.Theme.textColor
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
+    readonly property alias incompleteView: incompleteView
+
     padding: 0
     leftPadding: Kirigami.Units.largeSpacing
 
