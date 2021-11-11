@@ -195,6 +195,10 @@ Kirigami.OverlayDrawer {
                         }
                         QQC2.Slider {
                             Layout.fillWidth: true
+
+                            Kirigami.Theme.inherit: false
+                            Kirigami.Theme.highlightColor: incidenceInfo.incidenceData.color
+
                             orientation: Qt.Horizontal
                             from: 0
                             to: 100.0
