@@ -74,7 +74,7 @@ TreeListView {
         helpfulAction: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: root.addTodo(filterCollectionId);
+            onTriggered: root.addTodo(filter.collectionId);
         }
     }
 
