@@ -983,8 +983,13 @@ Kirigami.ApplicationWindow {
                     visible: !Kirigami.Settings.isMobile
                     icon.name: sidebar.collapsed ? "sidebar-expand" : "sidebar-collapse"
                     onClicked: {
-                        Config.forceCollapsedSidebar = !Config.forceCollapsedSidebar;
-                        Config.save()
+                        if(sidebar.collapsed && !wideScreen) { // Collapsed due to narrow window
+                            // We don't want to write to config as when narrow the button will only open the modal drawer
+                            sidebar.collapsed = !sidebar.collapsed;
+                        } else {
+                            Config.forceCollapsedSidebar = !Config.forceCollapsedSidebar;
+                            Config.save()
+                        }
                     }
 
                     QQC2.ToolTip.text: sidebar.collapsed ? i18n("Expand Sidebar") : i18n("Collapse Sidebar")

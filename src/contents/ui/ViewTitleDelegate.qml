@@ -11,6 +11,10 @@ RowLayout {
     property alias titleDateButton: titleDataButton
 
     spacing: 0
+
+    // REMINDER: The collapse button used in the tasks view has its own implementation!!
+    // You can find it in its instantiating component in main.qml
+
     QQC2.ToolButton {
         visible: !Kirigami.Settings.isMobile
         icon.name: sidebar.collapsed ? "sidebar-expand" : "sidebar-collapse"
