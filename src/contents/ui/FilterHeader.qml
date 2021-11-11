@@ -42,7 +42,7 @@ RowLayout {
                 headerLayout.filterCollectionDetails.displayName : i18n("All Tasks")
             font.weight: !headerLayout.todoMode ? Font.Normal : Font.Bold
             color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
-                LabelUtils.getIncidenceLabelColor(headerLayout.filterCollectionDetails.color, headerLayout.isDark) : Kirigami.Theme.textColor
+                headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
             elide: Text.ElideRight
             level: headerLayout.todoMode ? 1 : 2
         }
@@ -87,7 +87,7 @@ RowLayout {
                     tagFlow.width : itemLayout.implicitWidth
                 isHeading: true
                 headingItem.color: headerLayout.todoMode && headerLayout.filterCollectionDetails ?
-                    LabelUtils.getIncidenceLabelColor(headerLayout.filterCollectionDetails.color, headerLayout.isDark) : Kirigami.Theme.textColor
+                    headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
 
                 icon.name: "edit-delete-remove"
                 onClicked: headerLayout.removeFilterTag(modelData)
