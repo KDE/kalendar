@@ -340,7 +340,7 @@ Kirigami.Page {
                         leftPadding: Kirigami.Units.largeSpacing
                         verticalAlignment: Text.AlignTop
                         horizontalAlignment: Text.AlignRight
-                        text: i18n("Multi / All day")
+                        text: i18n("All day or Multi day")
                         wrapMode: Text.Wrap
                         elide: Text.ElideRight
                         font: Kirigami.Theme.smallFont
