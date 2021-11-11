@@ -31,6 +31,7 @@ Kirigami.Page {
     property bool initialMonth: true
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+    property real maxTimeLabelWidth: 0
 
     onSelectedDateChanged: moveToSelected()
 
@@ -389,7 +390,7 @@ Kirigami.Page {
                                                             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                             text: {
                                                                 if(incidenceCard.multiday) {
-                                                                    return i18n("%1 (Day %2 of %3)", modelData.text, incidenceCard.dayOfMultidayIncidence, incidenceCard.incidenceDays);
+                                                                    return i18nc("%1 is the name of the event", "%1 (Day %2 of %3)", modelData.text, incidenceCard.dayOfMultidayIncidence, incidenceCard.incidenceDays);
                                                                 } else {
                                                                     return modelData.text;
                                                                 }
@@ -434,8 +435,8 @@ Kirigami.Page {
                                                     QQC2.Label {
                                                         Layout.fillHeight: true
                                                         // This way all the icons are aligned
-                                                        Layout.maximumWidth: Kirigami.Units.gridUnit * 7
-                                                        Layout.minimumWidth: Kirigami.Units.gridUnit * 7
+                                                        Layout.maximumWidth: root.maxTimeLabelWidth
+                                                        Layout.minimumWidth: root.maxTimeLabelWidth
                                                         Layout.column: root.isLarge ? 2 : 0
                                                         Layout.row: root.isLarge ? 0 : 1
 
@@ -459,6 +460,7 @@ Kirigami.Page {
                                                                 i18n("Runs All Day")
                                                             }
                                                         }
+                                                        Component.onCompleted: if(implicitWidth > root.maxTimeLabelWidth) root.maxTimeLabelWidth = implicitWidth
                                                     }
                                                 }
 
