@@ -416,7 +416,8 @@ Kirigami.Page {
 
                                                             width: root.dayWidth
                                                             height: linesListViewScrollView.height
-                                                            color: isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+                                                            color: incidenceDropArea.containsDrag ?  Kirigami.Theme.positiveBackgroundColor :
+                                                                isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
 
                                                             DayMouseArea {
                                                                 id: listViewMenu
@@ -425,6 +426,24 @@ Kirigami.Page {
                                                                 addDate: parent.date
                                                                 onAddNewIncidence: root.addIncidence(type, addDate, false)
                                                                 onDeselect: root.deselect()
+
+                                                                DropArea {
+                                                                    id: incidenceDropArea
+                                                                    anchors.fill: parent
+                                                                    z: 9999
+                                                                    onDropped: {
+                                                                        const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
+                                                                        incidenceWrapper.incidencePtr = drop.source.incidencePtr;
+                                                                        incidenceWrapper.collectionId = drop.source.collectionId;
+                                                                        incidenceWrapper.setIncidenceStartDate(listViewMenu.addDate.getDate(), listViewMenu.addDate.getMonth() + 1, listViewMenu.addDate.getFullYear());
+                                                                        Kalendar.CalendarManager.editIncidence(incidenceWrapper);
+
+                                                                        const pos = mapToItem(root, x, y);
+                                                                        drop.source.x = pos.x + root.incidenceSpacing;
+                                                                        drop.source.y = pos.y;
+                                                                        drop.source.opacity = 0;
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -443,12 +462,28 @@ Kirigami.Page {
                                                             id: incidencesRepeater
                                                             model: modelData
                                                             MultiDayViewIncidenceDelegate {
+                                                                id: incidenceDelegate
                                                                 dayWidth: root.dayWidth
+                                                                height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
                                                                 parentViewSpacing: root.gridLineWidth
                                                                 horizontalSpacing: linesRepeater.spacing
                                                                 openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                                                 isDark: root.isDark
                                                                 reactToCurrentMonth: false
+
+                                                                Drag.active: mouseArea.drag.active
+
+                                                                Connections {
+                                                                    target: incidenceDelegate.mouseArea.drag
+                                                                    function onActiveChanged() {
+                                                                        // We can destructively set a bunch of properties as the model
+                                                                        // will reset anyway. If you change the model behaviour you WILL
+                                                                        // need to change how this works.
+                                                                        incidenceDelegate.parent = root;
+                                                                        incidenceDelegate.repositionAnimationEnabled = true;
+                                                                        incidenceDelegate.isOpenOccurrence = true;
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -664,11 +699,54 @@ Kirigami.Page {
 
                                         model: 24
                                         delegate: Rectangle {
+                                            id: backgroundRectangle
                                             width: parent.width
                                             height: hourlyView.hourHeight
                                             color: dayColumn.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
 
+                                            property int index: model.index
+
+                                            ColumnLayout {
+                                                anchors.fill: parent
+                                                spacing: 0
+                                                z: 9999
+                                                Repeater {
+                                                    id: dropAreaRepeater
+                                                    model: 4
+
+                                                    readonly property int minutes: 60 / model
+
+                                                    DropArea {
+                                                        id: incidenceDropArea
+                                                        Layout.fillWidth: true
+                                                        Layout.fillHeight: true
+                                                        z: 9999
+                                                        onDropped: {
+                                                            let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
+                                                            incidenceWrapper.incidencePtr = drop.source.incidencePtr;
+                                                            incidenceWrapper.collectionId = drop.source.collectionId;
+                                                            incidenceWrapper.setIncidenceStartDate(backgroundDayMouseArea.addDate.getDate(), backgroundDayMouseArea.addDate.getMonth() + 1, backgroundDayMouseArea.addDate.getFullYear());
+                                                            incidenceWrapper.setIncidenceStartTime(backgroundRectangle.index, dropAreaRepeater.minutes * index)
+                                                            Kalendar.CalendarManager.editIncidence(incidenceWrapper);
+
+                                                            const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                            //drop.source.parent = this;
+                                                            drop.source.x = pos.x + incidenceSpacing;
+                                                            drop.source.y = pos.y + incidenceSpacing;
+                                                        }
+
+                                                        Rectangle {
+                                                            id: dropAreaHighlightRectangle
+                                                            anchors.fill: parent
+                                                            visible: incidenceDropArea.containsDrag
+                                                            color: Kirigami.Theme.positiveBackgroundColor
+                                                        }
+                                                    }
+                                                }
+                                            }
+
                                             DayMouseArea {
+                                                id: backgroundDayMouseArea
                                                 anchors.fill: parent
                                                 addDate: new Date(DateUtils.addDaysToDate(viewLoader.startDate, dayColumn.index).setHours(index))
                                                 onAddNewIncidence: addIncidence(type, addDate, true)
@@ -680,10 +758,13 @@ Kirigami.Page {
                                     Repeater {
                                         id: incidencesRepeater
                                         model: incidences
+
                                         delegate: Rectangle {
+                                            id: incidenceDelegate
+
                                             readonly property real gridLineYCompensation: (modelData.starts / hourlyView.periodsPerHour) * root.gridLineWidth
                                             readonly property real gridLineHeightCompensation: (modelData.duration / hourlyView.periodsPerHour) * root.gridLineWidth
-                                            readonly property bool isOpenOccurrence: root.openOccurrence ?
+                                            property bool isOpenOccurrence: root.openOccurrence ?
                                                 root.openOccurrence.incidenceId === modelData.incidenceId : false
 
                                             x: root.incidenceSpacing + (modelData.priorTakenWidthShare * root.dayWidth)
@@ -692,8 +773,29 @@ Kirigami.Page {
                                             height: (modelData.duration * root.periodHeight) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
                                             radius: Kirigami.Units.smallSpacing
                                             color: Qt.rgba(0,0,0,0)
-                                            clip: true
                                             visible: !modelData.allDay
+
+                                            property alias mouseArea: mouseArea
+                                            property var incidencePtr: modelData.incidencePtr
+                                            property var collectionId: modelData.collectionId
+                                            property bool repositionAnimationEnabled: false
+
+                                            // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
+                                            Behavior on x {
+                                                enabled: repositionAnimationEnabled
+                                                NumberAnimation {
+                                                    duration: Kirigami.Units.shortDuration
+                                                    easing.type: Easing.OutCubic
+                                                }
+                                            }
+
+                                            Behavior on y {
+                                                enabled: repositionAnimationEnabled
+                                                NumberAnimation {
+                                                    duration: Kirigami.Units.shortDuration
+                                                    easing.type: Easing.OutCubic
+                                                }
+                                            }
 
                                             IncidenceBackground {
                                                 id: incidenceBackground
@@ -706,6 +808,8 @@ Kirigami.Page {
 
                                                 readonly property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
                                                 readonly property bool isTinyHeight: parent.height <= Kirigami.Units.gridUnit
+
+                                                clip: true
 
                                                 anchors {
                                                     fill: parent
@@ -763,14 +867,32 @@ Kirigami.Page {
                                             }
 
                                             IncidenceMouseArea {
+                                                id: mouseArea
                                                 incidenceData: modelData
                                                 collectionId: modelData.collectionId
+
+                                                drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? parent : undefined
+                                                onReleased: parent.Drag.drop()
 
                                                 onViewClicked: viewIncidence(modelData, collectionData)
                                                 onEditClicked: editIncidence(incidencePtr, collectionId)
                                                 onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
                                                 onTodoCompletedClicked: completeTodo(incidencePtr)
                                                 onAddSubTodoClicked: root.addSubTodo(parentWrapper)
+                                            }
+
+                                            Drag.active: mouseArea.drag.active
+
+                                            Connections {
+                                                target: incidenceDelegate.mouseArea.drag
+                                                function onActiveChanged() {
+                                                    // We can destructively set a bunch of properties as the model
+                                                    // will reset anyway. If you change the model behaviour you WILL
+                                                    // need to change how this works.
+                                                    incidenceDelegate.parent = root;
+                                                    incidenceDelegate.repositionAnimationEnabled = true;
+                                                    incidenceDelegate.isOpenOccurrence = true;
+                                                }
                                             }
                                         }
                                     }

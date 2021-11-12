@@ -493,8 +493,9 @@ void InfiniteCalendarViewModel::checkCalendarIndex(const QModelIndex &index)
                 return;
             } else if (!dateStart.isValid()) {
                 checkModels(dateDue, dateDue, incidence);
+            } else {
+                checkModels(dateStart, dateDue, incidence);
             }
-
         } else if (incidence->type() == KCalendarCore::Incidence::TypeEvent) {
             const auto event = incidence.staticCast<KCalendarCore::Event>();
             const QDate dateStart = event->dtStart().date();

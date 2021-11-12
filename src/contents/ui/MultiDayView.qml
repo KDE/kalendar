@@ -49,7 +49,9 @@ Item {
     property int numberOfLinesShown: 0
     property int numberOfRows: (daysToShow / daysPerRow)
     property var dayHeight: ((height - bgLoader.dayLabels.height) / numberOfRows) - spacing
-    property real spacing: Kalendar.Config.monthGridBorderWidth
+    property real spacing: Kalendar.Config.monthGridBorderWidth // Between grid squares in background
+    property real listViewSpacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
+        Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing // Between lines of incidences ( ====== <- )
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows : numberOfLinesShown * Kirigami.Units.gridUnit) + bgLoader.dayLabels.height
@@ -136,17 +138,40 @@ Item {
                                         property bool isCurrentMonth: month === root.month
 
                                         Rectangle {
+                                            id: backgroundRectangle
                                             anchors.fill: parent
                                             Kirigami.Theme.inherit: false
                                             Kirigami.Theme.colorSet: Kirigami.Theme.View
-                                            color: gridItem.isToday ? Kirigami.Theme.activeBackgroundColor :
+                                            color: incidenceDropArea.containsDrag ?  Kirigami.Theme.positiveBackgroundColor :
+                                                gridItem.isToday ? Kirigami.Theme.activeBackgroundColor :
                                                 gridItem.isCurrentMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
 
                                             DayMouseArea {
+                                                id: backgroundDayMouseArea
                                                 anchors.fill: parent
                                                 addDate: gridItem.date
                                                 onAddNewIncidence: addIncidence(type, addDate)
                                                 onDeselect: root.deselect()
+
+                                                DropArea {
+                                                    id: incidenceDropArea
+                                                    anchors.fill: parent
+                                                    z: 9999
+                                                    onDropped: {
+                                                        const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
+                                                        incidenceWrapper.incidencePtr = drop.source.incidencePtr;
+                                                        incidenceWrapper.collectionId = drop.source.collectionId;
+                                                        incidenceWrapper.setIncidenceStartDate(backgroundDayMouseArea.addDate.getDate(), backgroundDayMouseArea.addDate.getMonth() + 1, backgroundDayMouseArea.addDate.getFullYear());
+                                                        Kalendar.CalendarManager.editIncidence(incidenceWrapper);
+
+                                                        const pos = mapToItem(root, backgroundRectangle.x, backgroundRectangle.y);
+                                                        drop.source.x = pos.x + root.listViewSpacing;
+                                                        drop.source.y = root.showDayIndicator ?
+                                                            pos.y + Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 :
+                                                            pos.y;
+                                                        drop.source.opacity = 0;
+                                                    }
+                                                }
                                             }
                                         }
 
@@ -232,8 +257,7 @@ Item {
                             QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
 
                             clip: true
-                            spacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
-                                Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
+                            spacing: root.listViewSpacing
 
                             DayMouseArea {
                                 id: listViewMenu
@@ -272,11 +296,27 @@ Item {
                                     model: modelData
 
                                     MultiDayViewIncidenceDelegate {
+                                        id: incidenceDelegate
                                         dayWidth: root.dayWidth
+                                        height: line.height
                                         parentViewSpacing: root.spacing
                                         horizontalSpacing: linesRepeater.spacing
                                         openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                         isDark: root.isDark
+
+                                        Drag.active: mouseArea.drag.active
+
+                                        Connections {
+                                            target: incidenceDelegate.mouseArea.drag
+                                            function onActiveChanged() {
+                                                // We can destructively set a bunch of properties as the model
+                                                // will reset anyway. If you change the model behaviour you WILL
+                                                // need to change how this works.
+                                                incidenceDelegate.parent = root;
+                                                incidenceDelegate.repositionAnimationEnabled = true;
+                                                incidenceDelegate.isOpenOccurrence = true;
+                                            }
+                                        }
                                     }
                                 }
                             }

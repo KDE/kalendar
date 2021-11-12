@@ -137,6 +137,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
             {QStringLiteral("recurs"), idx.data(IncidenceOccurrenceModel::Recurs)},
             {QStringLiteral("hasReminders"), idx.data(IncidenceOccurrenceModel::HasReminders)},
             {QStringLiteral("isOverdue"), idx.data(IncidenceOccurrenceModel::IsOverdue)},
+            {QStringLiteral("isReadOnly"), idx.data(IncidenceOccurrenceModel::IsReadOnly)},
             {QStringLiteral("color"), idx.data(IncidenceOccurrenceModel::Color)},
             {QStringLiteral("collectionId"), idx.data(IncidenceOccurrenceModel::CollectionId)},
             {QStringLiteral("incidenceId"), idx.data(IncidenceOccurrenceModel::IncidenceId)},

@@ -60,6 +60,7 @@ public:
         AllDay,
         TodoCompleted,
         IsOverdue,
+        IsReadOnly,
         IncidenceId,
         IncidenceType,
         IncidenceTypeStr,

@@ -11,13 +11,34 @@ import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
 Rectangle {
+    id: incidenceDelegate
+
     x: ((dayWidth + parentViewSpacing) * modelData.starts) + horizontalSpacing
     z: 10
     width: ((dayWidth + parentViewSpacing) * modelData.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
+    //Behavior on width { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
     height: parent.height
     opacity: isOpenOccurrence || isInCurrentMonth ?
         1.0 : 0.5
-    Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+    Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.OutCubic } }
+
+    // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
+    Behavior on x {
+        enabled: repositionAnimationEnabled
+        NumberAnimation {
+            duration: Kirigami.Units.shortDuration
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    Behavior on y {
+        enabled: repositionAnimationEnabled
+        NumberAnimation {
+            duration: Kirigami.Units.shortDuration
+            easing.type: Easing.OutCubic
+        }
+    }
+
     radius: Kirigami.Units.smallSpacing
     color: Qt.rgba(0,0,0,0)
 
@@ -32,6 +53,10 @@ Rectangle {
         modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month :
         true
     property bool isDark: false
+    property alias mouseArea: mouseArea
+    property var incidencePtr: modelData.incidencePtr
+    property var collectionId: modelData.collectionId
+    property bool repositionAnimationEnabled: false
 
     IncidenceBackground {
         id: incidenceBackground
@@ -94,8 +119,12 @@ Rectangle {
     }
 
     IncidenceMouseArea {
+        id: mouseArea
         incidenceData: modelData
         collectionId: modelData.collectionId
+
+        drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? parent : undefined
+        onReleased: parent.Drag.drop()
 
         onViewClicked: viewIncidence(modelData, collectionData)
         onEditClicked: editIncidence(incidencePtr, collectionId)

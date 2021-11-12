@@ -303,6 +303,10 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
         auto todo = incidence.incidence.staticCast<KCalendarCore::Todo>();
         return todo->isOverdue();
     }
+    case IsReadOnly: {
+        const auto collection = m_coreCalendar->collection(incidence.collectionId);
+        return collection.rights().testFlag(Akonadi::Collection::ReadOnly);
+    }
     case IncidenceId:
         return incidence.incidence->uid();
     case IncidenceType:
