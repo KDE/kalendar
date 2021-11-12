@@ -43,12 +43,17 @@ Kirigami.Page {
     readonly property real dayWidth: ((root.width - hourLabelWidth - leftPadding - scrollbarWidth) / daysToShow) - gridLineWidth
     readonly property real incidenceSpacing: Kirigami.Units.smallSpacing / 2
     readonly property real gridLineWidth: 1.0
-    readonly property real hourLabelWidth: fontMetrics.boundingRect(new Date(0,0,0,2,0,0,0).toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)).width +
-        Kirigami.Units.largeSpacing * 2
+    readonly property real hourLabelWidth: hourLabelMetrics.boundingRect(new Date(0,0,0,0,0,0,0).toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)).width +
+        Kirigami.Units.largeSpacing * 2.5
     readonly property real periodHeight: Kirigami.Units.gridUnit / 2
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
+
+    FontMetrics {
+        id: hourLabelMetrics
+        font.bold: true
+    }
 
     background: Rectangle {
         color: Kirigami.Theme.backgroundColor
