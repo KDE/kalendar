@@ -21,6 +21,15 @@ Kirigami.Page {
 
     title: collectionId ? i18n("Delete calendar") : i18n("Delete")
 
+    QQC2.Action {
+        id: deleteAction
+        enabled: collectionId !== undefined
+        shortcut: "Return"
+        onTriggered: {
+            deleteCollection(deleteSheet.collectionId);
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
 

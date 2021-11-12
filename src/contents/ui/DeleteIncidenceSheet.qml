@@ -27,6 +27,17 @@ Kirigami.Page {
         i18nc("%1 is the type of the incidence (e.g event, todo, journal entry)", "Delete %1", incidenceWrapper.incidenceTypeStr) :
         i18n("Delete")
 
+    QQC2.Action {
+        id: deleteAction
+        enabled: incidenceWrapper !== undefined
+        shortcut: "Return"
+        onTriggered: {
+            incidenceWrapper.recurrenceData.type > 0 ?
+                addException(deleteDate, incidenceWrapper) :
+                deleteIncidence(incidenceWrapper.incidencePtr);
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
 
