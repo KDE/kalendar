@@ -15,6 +15,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="dateutils.js">contents/ui/dateutils.js</file>
     <file alias="IncidenceEditor.qml">contents/ui/IncidenceEditor.qml</file>
     <file alias="DeleteIncidenceSheet.qml">contents/ui/DeleteIncidenceSheet.qml</file>
+    <file alias="DeleteCalendarSheet.qml">contents/ui/DeleteCalendarSheet.qml</file>
     <file alias="IncidenceInfo.qml">contents/ui/IncidenceInfo.qml</file>
     <file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
@@ -56,5 +57,6 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="AbstractTreeItem.qml">contents/ui/TreeView/AbstractTreeItem.qml</file>
     <file alias="TreeViewDecoration.qml">contents/ui/TreeView/TreeViewDecoration.qml</file>
     <file alias="CollectionPickerPage.qml">contents/ui/CollectionPickerPage.qml</file>
+    <file alias="CalendarItemMouseArea.qml">contents/ui/CalendarItemMouseArea.qml</file>
   </qresource>
 </RCC>

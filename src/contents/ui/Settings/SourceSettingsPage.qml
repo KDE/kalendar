@@ -96,12 +96,16 @@ Kirigami.Page {
                                 Controls.ToolButton {
                                     icon.name: "view-refresh"
                                     text: i18n("Restart")
-                                    onClicked: AgentConfiguration.restart(index);
+                                    onClicked: {
+                                        AgentConfiguration.restart(index);
+                                    }
                                 }
                                 Controls.ToolButton {
                                     icon.name: "entry-edit"
                                     text: i18n("Edit")
-                                    onClicked: AgentConfiguration.edit(index);
+                                    onClicked: {
+                                        AgentConfiguration.edit(index);
+                                    }
                                 }
                                 Controls.ToolButton {
                                     icon.name: "delete"

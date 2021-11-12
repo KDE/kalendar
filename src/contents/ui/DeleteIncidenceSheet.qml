@@ -7,26 +7,57 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 
-Kirigami.OverlaySheet {
-    id: deleteIncidenceSheet
+Kirigami.Page {
+    id: deleteSheet
 
     signal addException(date exceptionDate, var incidenceWrapper)
     signal addRecurrenceEndDate(date endDate, var incidenceWrapper)
     signal deleteIncidence(var incidencePtr)
     signal deleteIncidenceWithChildren(var incidencePtr)
+    signal cancel
 
+    // For incidence deletion
     property var incidenceWrapper
     property bool incidenceHasChildren: incidenceWrapper !== undefined ? CalendarManager.hasChildren(incidenceWrapper.incidencePtr) : false
     property date deleteDate
 
-    header: Kirigami.Heading {
-        text: incidenceWrapper && incidenceWrapper.incidenceTypeStr ?
-            i18nc("%1 is the type of the incidence (e.g event, todo, journal entry)", "Delete %1", incidenceWrapper.incidenceTypeStr) : i18n("Delete Incidence")
-    }
+    padding: Kirigami.Units.largeSpacing
 
-    footer: Loader {
-        active: incidenceWrapper !== undefined
-        sourceComponent: RowLayout {
+    title: incidenceWrapper && incidenceWrapper.incidenceTypeStr ?
+        i18nc("%1 is the type of the incidence (e.g event, todo, journal entry)", "Delete %1", incidenceWrapper.incidenceTypeStr) :
+        i18n("Delete")
+
+    ColumnLayout {
+        anchors.fill: parent
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Kirigami.Icon {
+                Layout.fillHeight: true
+                Layout.minimumHeight: Kirigami.Units.gridUnit * 3
+                Layout.minimumWidth: height
+                source: "dialog-warning"
+            }
+
+            QQC2.Label {
+                Layout.fillWidth: true
+                text: if(incidenceWrapper.recurrenceData.type === 0 && !deleteSheet.incidenceHasChildren) {
+                    return i18n("Do you want to delete item: \"%1\"?", incidenceWrapper.summary)
+                } else if(incidenceWrapper.recurrenceData.type === 0 && deleteSheet.incidenceHasChildren) {
+                    return i18n("Item \"%1\" has sub-items. Do you want to delete all related items, or just the currently selected item?", incidenceWrapper.summary)
+                } else if (incidenceWrapper.recurrenceData.type > 0 && deleteSheet.incidenceHasChildren) {
+                    return i18n("The calendar item \"%1\" recurs over multiple dates. This item also has sub-items.\n\nDo you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?\n\nDeleting all will also delete sub-items!", incidenceWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
+                } else if (incidenceWrapper.recurrenceData.type > 0) {
+                    return i18n("The calendar item \"%1\" recurs over multiple dates. Do you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?", incidenceWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
+                }
+                wrapMode: Text.WordWrap
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
             Item {
@@ -38,7 +69,6 @@ Kirigami.OverlaySheet {
                 text: i18n("Only Delete Current")
                 visible: incidenceWrapper.recurrenceData.type > 0
                 onClicked: addException(deleteDate, incidenceWrapper)
-                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
             }
 
             QQC2.Button {
@@ -53,59 +83,25 @@ Kirigami.OverlaySheet {
                     dateBeforeDeleteDate.setDate(deleteDate.getDate() - 1);
                     addRecurrenceEndDate(dateBeforeDeleteDate, incidenceWrapper)
                 }
-                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
             }
 
             QQC2.Button {
                 icon.name: "group-delete"
                 text: i18n("Delete Only This")
-                visible: deleteIncidenceSheet.incidenceHasChildren && incidenceWrapper.recurrenceData.type === 0
+                visible: deleteSheet.incidenceHasChildren && incidenceWrapper.recurrenceData.type === 0
                 onClicked: deleteIncidence(incidenceWrapper.incidencePtr)
-                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
             }
 
             QQC2.Button {
                 icon.name: "delete"
-                text: deleteIncidenceSheet.incidenceHasChildren || incidenceWrapper.recurrenceData.type > 0 ? i18n("Delete All") : i18n("Delete")
-                onClicked: deleteIncidenceSheet.incidenceHasChildren ? deleteIncidenceWithChildren(incidenceWrapper.incidencePtr) : deleteIncidence(incidenceWrapper.incidencePtr)
-                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+                text: deleteSheet.incidenceHasChildren || incidenceWrapper.recurrenceData.type > 0 ? i18n("Delete All") : i18n("Delete")
+                onClicked: deleteSheet.incidenceHasChildren ? deleteIncidenceWithChildren(incidenceWrapper.incidencePtr) : deleteIncidence(incidenceWrapper.incidencePtr)
             }
 
             QQC2.Button {
                 icon.name: "dialog-cancel"
                 text: i18n("Cancel")
-                onClicked: deleteIncidenceSheet.close()
-                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.DestructiveRole
-            }
-        }
-    }
-
-    Loader {
-        Layout.maximumWidth: Kirigami.Units.gridUnit * 30
-
-        active: incidenceWrapper !== undefined
-        sourceComponent: RowLayout {
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
-
-            Kirigami.Icon {
-                Layout.fillHeight: true
-                Layout.minimumHeight: Kirigami.Units.gridUnit * 4
-                Layout.minimumWidth: height
-                source: "dialog-warning"
-            }
-
-            QQC2.Label {
-                Layout.fillWidth: true
-                text: if(incidenceWrapper.recurrenceData.type === 0 && !deleteIncidenceSheet.incidenceHasChildren) {
-                    return i18n("Do you want to delete item: \"%1\"?", incidenceWrapper.summary)
-                } else if(incidenceWrapper.recurrenceData.type === 0 && deleteIncidenceSheet.incidenceHasChildren) {
-                    return i18n("Item \"%1\" has sub-items. Do you want to delete all related items, or just the currently selected item?", incidenceWrapper.summary)
-                } else if (incidenceWrapper.recurrenceData.type > 0 && deleteIncidenceSheet.incidenceHasChildren) {
-                    return i18n("The calendar item \"%1\" recurs over multiple dates. This item also has sub-items.\n\nDo you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?\n\nDeleting all will also delete sub-items!", incidenceWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
-                } else if (incidenceWrapper.recurrenceData.type > 0) {
-                    return i18n("The calendar item \"%1\" recurs over multiple dates. Do you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?", incidenceWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
-                }
-                wrapMode: Text.WordWrap
+                onClicked: cancel()
             }
         }
     }

@@ -54,6 +54,7 @@ Kirigami.Page {
                     DelegateChoice {
                         roleValue: false
                         Kirigami.BasicListItem {
+                            id: calendarItem
                             property int itemCollectionId: model.collectionId
 
                             label: display
@@ -65,6 +66,38 @@ Kirigami.Page {
                                 color: model.collectionColor
                                 checked: model.checkState === 2
                                 onClicked: model.checkState = model.checkState === 0 ? 2 : 0
+                            }
+
+                            CalendarItemMouseArea {
+                                id: calendarItemMouseArea
+                                parent: calendarItem.contentItem // Otherwise label elide breaks
+                                collectionId: model.collectionId
+                                anchors.fill: parent
+
+                                Component {
+                                    id: deleteCalendarSheetComponent
+                                    DeleteCalendarSheet {
+                                        id: deleteSheet
+                                        onDeleteCollection: {
+                                            CalendarManager.deleteCollection(collectionId);
+                                            closeDialog();
+                                        }
+                                        onCancel: closeDialog()
+                                    }
+                                }
+                                onDeleteCalendar: {
+                                    const openDialogWindow = pageStack.pushDialogLayer(deleteCalendarSheetComponent, {
+                                        collectionId: collectionId,
+                                        collectionDetails: collectionDetails,
+                                    }, {
+                                        width: Kirigami.Units.gridUnit * 30,
+                                        height: Kirigami.Units.gridUnit * 6
+                                    });
+
+                                    if(!Kirigami.Settings.isMobile) {
+                                        openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
+                                    }
+                                }
                             }
                         }
                     }

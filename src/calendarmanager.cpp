@@ -17,9 +17,11 @@
 #include <Akonadi/AgentManager>
 #include <Akonadi/AttributeFactory>
 #include <Akonadi/CollectionColorAttribute>
+#include <Akonadi/CollectionDeleteJob>
 #include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/CollectionIdentificationAttribute>
 #include <Akonadi/CollectionModifyJob>
+#include <Akonadi/CollectionPropertiesDialog>
 #include <Akonadi/CollectionUtils>
 #include <Akonadi/Control>
 #include <Akonadi/EntityDisplayAttribute>
@@ -32,12 +34,14 @@
 #include <AkonadiCore/AgentManager>
 #include <AkonadiCore/AttributeFactory>
 #include <AkonadiCore/CollectionColorAttribute>
+#include <AkonadiCore/CollectionDeleteJob>
 #include <AkonadiCore/CollectionIdentificationAttribute>
 #include <AkonadiCore/CollectionModifyJob>
 #include <AkonadiCore/CollectionUtils>
 #include <AkonadiCore/EntityDisplayAttribute>
 #include <AkonadiCore/ItemModifyJob>
 #include <AkonadiCore/ItemMoveJob>
+#include <AkonadiWidgets/CollectionPropertiesDialog>
 #include <CollectionFilterProxyModel>
 #include <EntityTreeModel>
 #include <Monitor>
@@ -54,6 +58,7 @@
 #include <KLocalizedString>
 #include <QApplication>
 #include <QMetaEnum>
+#include <QPointer>
 #include <QRandomGenerator>
 #include <QTimer>
 #include <etmcalendar.h>
@@ -776,6 +781,9 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     collectionDetails[QLatin1String("count")] = collection.statistics().count();
     collectionDetails[QLatin1String("isResource")] = Akonadi::CollectionUtils::isResource(collection);
     collectionDetails[QLatin1String("readOnly")] = collection.rights().testFlag(Collection::ReadOnly);
+    collectionDetails[QLatin1String("canChange")] = collection.rights().testFlag(Collection::CanChangeCollection);
+    collectionDetails[QLatin1String("canCreate")] = collection.rights().testFlag(Collection::CanCreateCollection);
+    collectionDetails[QLatin1String("canDelete")] = collection.rights().testFlag(Collection::CanDeleteCollection);
     collectionDetails[QLatin1String("isFiltered")] = isFiltered;
     collectionDetails[QLatin1String("allCalendarsRow")] = allCalendarsRow;
 
@@ -787,7 +795,6 @@ void CalendarManager::setCollectionColor(qint64 collectionId, QColor color)
     auto collection = m_calendar->collection(collectionId);
     Akonadi::CollectionColorAttribute *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);
     colorAttr->setColor(color);
-
     Akonadi::CollectionModifyJob *modifyJob = new Akonadi::CollectionModifyJob(collection);
     connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob *job) {
         if (job->error()) {
@@ -807,6 +814,42 @@ void CalendarManager::undoAction()
 void CalendarManager::redoAction()
 {
     m_changer->history()->redo();
+}
+
+void CalendarManager::updateCollection(qint64 collectionId)
+{
+    auto collection = m_calendar->collection(collectionId);
+    Akonadi::AgentManager::self()->synchronizeCollection(collection, false);
+}
+
+void CalendarManager::deleteCollection(qint64 collectionId)
+{
+    auto collection = m_calendar->collection(collectionId);
+    const bool isTopLevel = collection.parentCollection() == Akonadi::Collection::root();
+
+    if (!isTopLevel) {
+        // deletes contents
+        auto job = new Akonadi::CollectionDeleteJob(collection, this);
+        connect(job, &Akonadi::CollectionDeleteJob::result, this, [this](KJob *job) {
+            if (job->error()) {
+                qWarning() << "Error occurred deleting collection: " << job->errorString();
+            }
+        });
+        return;
+    }
+    // deletes the agent, not the contents
+    const Akonadi::AgentInstance instance = Akonadi::AgentManager::self()->instance(collection.resource());
+    if (instance.isValid()) {
+        Akonadi::AgentManager::self()->removeInstance(instance);
+    }
+}
+
+void CalendarManager::editCollection(qint64 collectionId)
+{ // TODO: Reimplement this dialog in QML
+    auto collection = m_calendar->collection(collectionId);
+    QPointer<Akonadi::CollectionPropertiesDialog> dlg = new Akonadi::CollectionPropertiesDialog(collection);
+    dlg->setWindowTitle(i18nc("@title:window", "Properties of Calendar %1", collection.name()));
+    dlg->show();
 }
 
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
