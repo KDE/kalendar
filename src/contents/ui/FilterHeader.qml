@@ -110,6 +110,7 @@ RowLayout {
             }
         }
 
+        text: if(headerLayout.todoMode) applicationWindow().pageStack.currentItem.incompleteView.model.rowCount();
         font.weight: Font.Bold
         color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
             headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
