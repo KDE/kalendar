@@ -25,29 +25,6 @@ InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
     ModelMetaData weekMultiDayModel = {QVector<QDate>(), 7, TypeWeekMultiDay, &m_weekViewMultiDayModels, {}, &m_liveWeekViewMultiDayModelKeys};
 
     m_models = QVector<ModelMetaData>{monthModel, scheduleModel, weekModel, weekMultiDayModel};
-
-    m_triggerUpdatesTimer.setSingleShot(true);
-    QObject::connect(&m_triggerUpdatesTimer, &QTimer::timeout, this, [&]() {
-        if (m_calendar->isLoaded()) { // Save cycles
-            for (auto &model : m_models) {
-                if (model.modelType != TypeWeek) {
-                    for (const auto &startDate : std::as_const(model.affectedStartDates)) {
-                        if (model.multiDayModels->value(startDate) != nullptr) {
-                            model.multiDayModels->value(startDate)->model()->updateQuery();
-                        }
-                    }
-                } else {
-                    for (const auto &startDate : std::as_const(model.affectedStartDates)) {
-                        if (model.weekModels->value(startDate) != nullptr) {
-                            model.weekModels->value(startDate)->model()->updateQuery();
-                        }
-                    }
-                }
-            }
-        } else {
-            m_triggerUpdatesTimer.start(); // Avoid situation where no calls are made after cal loaded
-        }
-    });
 }
 
 void InfiniteCalendarViewModel::setup()
@@ -109,7 +86,6 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         auto model = new MultiDayIncidenceModel;
         model->setPeriodLength(periodLength);
         model->setModel(new IncidenceOccurrenceModel);
-        model->model()->setHandleOwnRefresh(false);
         model->model()->setStart(start);
         model->model()->setLength(length);
         model->model()->setFilter(mFilter);
@@ -228,7 +204,6 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
             m_weekViewModels[startDate]->setPeriodLength(7);
             m_weekViewModels[startDate]->setFilters(HourlyIncidenceModel::NoAllDay | HourlyIncidenceModel::NoMultiDay);
             m_weekViewModels[startDate]->setModel(new IncidenceOccurrenceModel);
-            m_weekViewModels[startDate]->model()->setHandleOwnRefresh(false);
             m_weekViewModels[startDate]->model()->setStart(startDate);
             m_weekViewModels[startDate]->model()->setLength(7);
             m_weekViewModels[startDate]->model()->setFilter(mFilter);
@@ -447,126 +422,7 @@ void InfiniteCalendarViewModel::setCalendar(Akonadi::ETMCalendar *calendar)
         model->model()->setCalendar(calendar);
     }
 
-    connect(m_calendar->model(), &QAbstractItemModel::dataChanged, this, &InfiniteCalendarViewModel::handleCalendarDataChanged);
-    connect(m_calendar->model(), &QAbstractItemModel::rowsInserted, this, &InfiniteCalendarViewModel::handleCalendarRowsInserted);
-    connect(m_calendar->model(), &QAbstractItemModel::rowsRemoved, this, &InfiniteCalendarViewModel::handleCalendarRowsRemoved);
-}
-
-void InfiniteCalendarViewModel::checkModels(const QDate &start, const QDate &end, KCalendarCore::Incidence::Ptr incidence)
-{
-    for (auto &model : m_models) {
-        auto modelKeys = model.modelType != TypeWeek ? model.multiDayModels->keys() : model.weekModels->keys();
-
-        for (const auto &modelStartDate : modelKeys) {
-            if (model.affectedStartDates.contains(modelStartDate)) {
-                continue;
-            }
-
-            QDate modelEndDate =
-                model.modelType == TypeSchedule ? modelStartDate.addDays(modelStartDate.daysInMonth()) : modelStartDate.addDays(model.modelLength);
-
-            if (incidence->recurs() && incidence->recurrence()->timesInInterval(modelStartDate.startOfDay(), modelEndDate.endOfDay()).length()) {
-                model.affectedStartDates.append(modelStartDate);
-
-            } else if (incidence->recurs()) { // Check for exceptions as we also need to update in this case
-                for (auto exDate : incidence->recurrence()->exDates()) {
-                    if (exDate >= modelStartDate && exDate <= modelEndDate) {
-                        model.affectedStartDates.append(modelStartDate);
-                        break;
-                    }
-                }
-
-                for (auto exDateTime : incidence->recurrence()->exDateTimes()) {
-                    if (exDateTime.date() >= modelStartDate && exDateTime.date() <= modelEndDate) {
-                        model.affectedStartDates.append(modelStartDate);
-                        break;
-                    }
-                }
-
-            } else if (!incidence->recurs()
-                       && (((start <= modelStartDate) && (end >= modelStartDate)) || ((start < modelEndDate) && (end > modelEndDate))
-                           || ((start >= modelStartDate) && (end <= modelEndDate)))) {
-                model.affectedStartDates.append(modelStartDate);
-            }
-        }
-    }
-}
-
-void InfiniteCalendarViewModel::checkCalendarIndex(const QModelIndex &index)
-{
-    const auto item = index.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
-
-    if (item.hasPayload<KCalendarCore::Incidence::Ptr>()) {
-        // If the id is already in the set then we don't need to check anything
-        const auto incidence = item.payload<KCalendarCore::Incidence::Ptr>();
-
-        if (incidence->type() == KCalendarCore::Incidence::TypeTodo) {
-            const auto todo = incidence.staticCast<KCalendarCore::Todo>();
-            const QDate dateStart = todo->dtStart().date();
-            const QDate dateDue = todo->dtDue().date();
-
-            if (!dateStart.isValid() && !dateDue.isValid()) {
-                return;
-            } else if (!dateStart.isValid()) {
-                checkModels(dateDue, dateDue, incidence);
-            } else {
-                checkModels(dateStart, dateDue, incidence);
-            }
-        } else if (incidence->type() == KCalendarCore::Incidence::TypeEvent) {
-            const auto event = incidence.staticCast<KCalendarCore::Event>();
-            const QDate dateStart = event->dtStart().date();
-            const QDate dateEnd = event->dtEnd().date();
-
-            checkModels(dateStart, dateEnd, incidence);
-        }
-    }
-}
-
-void InfiniteCalendarViewModel::triggerAffectedModelUpdates()
-{
-    if (!m_triggerUpdatesTimer.isActive()) {
-        m_triggerUpdatesTimer.start(50);
-    }
-}
-
-void InfiniteCalendarViewModel::handleCalendarDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &)
-{
-    const auto parent = topLeft.parent();
-    int first = topLeft.row();
-    int last = bottomRight.row();
-
-    for (int i = first; i <= last; i++) {
-        auto index = m_calendar->model()->index(i, 0, parent);
-        checkCalendarIndex(index);
-    }
-
-    triggerAffectedModelUpdates();
-}
-
-void InfiniteCalendarViewModel::handleCalendarRowsInserted(const QModelIndex &parent, int first, int last)
-{
-    for (int i = first; i <= last; i++) {
-        const auto index = m_calendar->model()->index(i, 0, parent);
-        const auto item = index.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
-
-        // Sometimes the calendar updates with inserted rows for incidences that we have already checked.
-        // We keep track of which incidence ids have already been checked on prior row insertions, so that
-        // we can skip these ones.
-
-        if (!m_insertedIds.contains(item.id())) {
-            m_insertedIds.insert(item.id());
-            checkCalendarIndex(index);
-        }
-    }
-
-    triggerAffectedModelUpdates();
-}
-
-void InfiniteCalendarViewModel::handleCalendarRowsRemoved(const QModelIndex &, int, int)
-{
-    // We don't know if this is a collection being removed or an incidence being deleted, so be safe
-    // The IncidenceOccurrenceModels also handle this themselves for this reason
-    m_insertedIds.clear();
+    Q_EMIT calendarChanged();
 }
 
 QVariantMap InfiniteCalendarViewModel::filter() const

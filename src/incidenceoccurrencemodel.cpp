@@ -27,7 +27,13 @@ IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
     , m_coreCalendar(nullptr)
 {
     mRefreshTimer.setSingleShot(true);
-    QObject::connect(&mRefreshTimer, &QTimer::timeout, this, &IncidenceOccurrenceModel::updateFromSource);
+    QObject::connect(&mRefreshTimer, &QTimer::timeout, this, [&]() {
+        if (m_coreCalendar->isLoaded()) {
+            updateFromSource();
+        } else {
+            mRefreshTimer.start();
+        }
+    });
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup rColorsConfig(config, "Resources Colors");
@@ -100,8 +106,6 @@ void IncidenceOccurrenceModel::updateQuery()
 
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar, &Akonadi::ETMCalendar::collectionsAdded, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar, &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::refreshView);
 
     refreshView();
 }
