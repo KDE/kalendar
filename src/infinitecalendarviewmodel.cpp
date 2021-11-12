@@ -467,6 +467,22 @@ void InfiniteCalendarViewModel::checkModels(const QDate &start, const QDate &end
 
             if (incidence->recurs() && incidence->recurrence()->timesInInterval(modelStartDate.startOfDay(), modelEndDate.endOfDay()).length()) {
                 model.affectedStartDates.append(modelStartDate);
+
+            } else if (incidence->recurs()) { // Check for exceptions as we also need to update in this case
+                for (auto exDate : incidence->recurrence()->exDates()) {
+                    if (exDate >= modelStartDate && exDate <= modelEndDate) {
+                        model.affectedStartDates.append(modelStartDate);
+                        break;
+                    }
+                }
+
+                for (auto exDateTime : incidence->recurrence()->exDateTimes()) {
+                    if (exDateTime.date() >= modelStartDate && exDateTime.date() <= modelEndDate) {
+                        model.affectedStartDates.append(modelStartDate);
+                        break;
+                    }
+                }
+
             } else if (!incidence->recurs()
                        && (((start <= modelStartDate) && (end >= modelStartDate)) || ((start < modelEndDate) && (end > modelEndDate))
                            || ((start >= modelStartDate) && (end <= modelEndDate)))) {
