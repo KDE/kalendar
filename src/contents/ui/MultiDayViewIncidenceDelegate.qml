@@ -57,6 +57,9 @@ Rectangle {
     property var incidencePtr: modelData.incidencePtr
     property var collectionId: modelData.collectionId
     property bool repositionAnimationEnabled: false
+    property bool caught: false
+    property real caughtX: 0
+    property real caughtY: 0
 
     IncidenceBackground {
         id: incidenceBackground

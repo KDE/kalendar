@@ -224,7 +224,12 @@ Kirigami.Page {
                             id: incidenceDropArea
                             anchors.fill: parent
                             z: 9999
-                            onDropped: {
+                            onDropped: if(viewLoader.isCurrentItem) {
+                                const pos = mapToItem(root, backgroundRectangle.x, backgroundRectangle.y);
+                                drop.source.caughtX = pos.x + dayGrid.dayLabelWidth + Kirigami.Units.largeSpacing;
+                                drop.source.caughtY = pos.y + dayColumn.spacing + Kirigami.Units.largeSpacing;
+                                drop.source.caught = true;
+
                                 root.selectedDate = dayMouseArea.addDate;
 
                                 const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
@@ -232,11 +237,6 @@ Kirigami.Page {
                                 incidenceWrapper.collectionId = drop.source.collectionId;
                                 incidenceWrapper.setIncidenceStartDate(dayMouseArea.addDate.getDate(), dayMouseArea.addDate.getMonth() + 1, dayMouseArea.addDate.getFullYear());
                                 Kalendar.CalendarManager.editIncidence(incidenceWrapper);
-
-                                const pos = mapToItem(root, backgroundRectangle.x, backgroundRectangle.y);
-                                drop.source.x = pos.x + dayGrid.dayLabelWidth + Kirigami.Units.largeSpacing;
-                                drop.source.y = pos.y + dayColumn.spacing + Kirigami.Units.largeSpacing;
-                                drop.source.opacity = 0;
                             }
                         }
 
@@ -374,6 +374,9 @@ Kirigami.Page {
                                                 property var incidencePtr: modelData.incidencePtr
                                                 property var collectionId: modelData.collectionId
                                                 property bool repositionAnimationEnabled: false
+                                                property bool caught: false
+                                                property real caughtX: 0
+                                                property real caughtY: 0
 
                                                 Layout.fillWidth: true
                                                 topPadding: paddingSize
@@ -407,17 +410,24 @@ Kirigami.Page {
 
                                                 Drag.active: mouseArea.drag.active
 
-                                                Connections {
-                                                    target: incidenceCard.mouseArea.drag
-                                                    function onActiveChanged() {
-                                                        // We can destructively set a bunch of properties as the model
-                                                        // will reset anyway. If you change the model behaviour you WILL
-                                                        // need to change how this works.
-                                                        incidenceCard.parent = root;
-                                                        incidenceCard.repositionAnimationEnabled = true;
-                                                        incidenceCard.isOpenOccurrence = true;
+                                                states: [
+                                                    State {
+                                                        when: incidenceCard.mouseArea.drag.active
+                                                        ParentChange { target: incidenceCard; parent: root }
+                                                        PropertyChanges { target: incidenceCard; isOpenOccurrence: true }
+                                                    },
+                                                    State {
+                                                        when: incidenceCard.caught
+                                                        ParentChange { target: incidenceCard; parent: root }
+                                                        PropertyChanges {
+                                                            target: incidenceCard
+                                                            repositionAnimationEnabled: true
+                                                            x: caughtX
+                                                            y: caughtY
+                                                            opacity: 0
+                                                        }
                                                     }
-                                                }
+                                                ]
 
                                                 contentItem: GridLayout {
                                                     id: cardContents

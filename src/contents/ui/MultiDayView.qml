@@ -44,6 +44,7 @@ Item {
     property Component weekHeaderDelegate
     property int month
     property alias bgLoader: backgroundLoader.item
+    property bool isCurrentView: true
 
     //Internal
     property int numberOfLinesShown: 0
@@ -157,19 +158,19 @@ Item {
                                                     id: incidenceDropArea
                                                     anchors.fill: parent
                                                     z: 9999
-                                                    onDropped: {
+                                                    onDropped: if(root.isCurrentView) {
+                                                        const pos = mapToItem(root, backgroundRectangle.x, backgroundRectangle.y);
+                                                        drop.source.caughtX = pos.x + root.listViewSpacing;
+                                                        drop.source.caughtY = root.showDayIndicator ?
+                                                            pos.y + Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 :
+                                                            pos.y;
+                                                        drop.source.caught = true;
+
                                                         const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
                                                         incidenceWrapper.incidencePtr = drop.source.incidencePtr;
                                                         incidenceWrapper.collectionId = drop.source.collectionId;
                                                         incidenceWrapper.setIncidenceStartDate(backgroundDayMouseArea.addDate.getDate(), backgroundDayMouseArea.addDate.getMonth() + 1, backgroundDayMouseArea.addDate.getFullYear());
                                                         Kalendar.CalendarManager.editIncidence(incidenceWrapper);
-
-                                                        const pos = mapToItem(root, backgroundRectangle.x, backgroundRectangle.y);
-                                                        drop.source.x = pos.x + root.listViewSpacing;
-                                                        drop.source.y = root.showDayIndicator ?
-                                                            pos.y + Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 :
-                                                            pos.y;
-                                                        drop.source.opacity = 0;
                                                     }
                                                 }
                                             }
@@ -306,17 +307,24 @@ Item {
 
                                         Drag.active: mouseArea.drag.active
 
-                                        Connections {
-                                            target: incidenceDelegate.mouseArea.drag
-                                            function onActiveChanged() {
-                                                // We can destructively set a bunch of properties as the model
-                                                // will reset anyway. If you change the model behaviour you WILL
-                                                // need to change how this works.
-                                                incidenceDelegate.parent = root;
-                                                incidenceDelegate.repositionAnimationEnabled = true;
-                                                incidenceDelegate.isOpenOccurrence = true;
+                                        states: [
+                                            State {
+                                                when: incidenceDelegate.mouseArea.drag.active
+                                                ParentChange { target: incidenceDelegate; parent: root }
+                                                PropertyChanges { target: incidenceDelegate; isOpenOccurrence: true }
+                                            },
+                                            State {
+                                                when: incidenceDelegate.caught
+                                                ParentChange { target: incidenceDelegate; parent: root }
+                                                PropertyChanges {
+                                                    target: incidenceDelegate
+                                                    repositionAnimationEnabled: true
+                                                    x: caughtX
+                                                    y: caughtY
+                                                    opacity: 0
+                                                }
                                             }
-                                        }
+                                        ]
                                     }
                                 }
                             }

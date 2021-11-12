@@ -151,6 +151,7 @@ Kirigami.Page {
                 width: pathView.width
                 height: pathView.height
                 model: monthViewModel // from monthPage model
+                isCurrentView: viewLoader.isCurrentItem
 
                 startDate: viewLoader.startDate
                 currentDate: monthPage.currentDate

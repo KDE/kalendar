@@ -431,17 +431,17 @@ Kirigami.Page {
                                                                     id: incidenceDropArea
                                                                     anchors.fill: parent
                                                                     z: 9999
-                                                                    onDropped: {
+                                                                    onDropped: if(viewLoader.isCurrentItem) {
+                                                                        const pos = mapToItem(root, x, y);
+                                                                        drop.source.caughtX = pos.x + root.incidenceSpacing;
+                                                                        drop.source.caughtY = pos.y;
+                                                                        drop.source.caught = true;
+
                                                                         const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
                                                                         incidenceWrapper.incidencePtr = drop.source.incidencePtr;
                                                                         incidenceWrapper.collectionId = drop.source.collectionId;
                                                                         incidenceWrapper.setIncidenceStartDate(listViewMenu.addDate.getDate(), listViewMenu.addDate.getMonth() + 1, listViewMenu.addDate.getFullYear());
                                                                         Kalendar.CalendarManager.editIncidence(incidenceWrapper);
-
-                                                                        const pos = mapToItem(root, x, y);
-                                                                        drop.source.x = pos.x + root.incidenceSpacing;
-                                                                        drop.source.y = pos.y;
-                                                                        drop.source.opacity = 0;
                                                                     }
                                                                 }
                                                             }
@@ -473,17 +473,23 @@ Kirigami.Page {
 
                                                                 Drag.active: mouseArea.drag.active
 
-                                                                Connections {
-                                                                    target: incidenceDelegate.mouseArea.drag
-                                                                    function onActiveChanged() {
-                                                                        // We can destructively set a bunch of properties as the model
-                                                                        // will reset anyway. If you change the model behaviour you WILL
-                                                                        // need to change how this works.
-                                                                        incidenceDelegate.parent = root;
-                                                                        incidenceDelegate.repositionAnimationEnabled = true;
-                                                                        incidenceDelegate.isOpenOccurrence = true;
+                                                                states: [
+                                                                    State {
+                                                                        when: incidenceDelegate.mouseArea.drag.active
+                                                                        ParentChange { target: incidenceDelegate; parent: root }
+                                                                        PropertyChanges { target: incidenceDelegate; isOpenOccurrence: true }
+                                                                    },
+                                                                    State {
+                                                                        when: incidenceDelegate.caught
+                                                                        ParentChange { target: incidenceDelegate; parent: root }
+                                                                        PropertyChanges {
+                                                                            target: incidenceDelegate
+                                                                            repositionAnimationEnabled: true
+                                                                            x: caughtX
+                                                                            y: caughtY
+                                                                        }
                                                                     }
-                                                                }
+                                                                ]
                                                             }
                                                         }
                                                     }
@@ -721,18 +727,18 @@ Kirigami.Page {
                                                         Layout.fillWidth: true
                                                         Layout.fillHeight: true
                                                         z: 9999
-                                                        onDropped: {
+                                                        onDropped: if(viewLoader.isCurrentItem) {
+                                                            const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                            drop.source.caughtX = pos.x + incidenceSpacing;
+                                                            drop.source.caughtY = pos.y + incidenceSpacing;
+                                                            drop.source.caught = true;
+
                                                             let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
                                                             incidenceWrapper.incidencePtr = drop.source.incidencePtr;
                                                             incidenceWrapper.collectionId = drop.source.collectionId;
                                                             incidenceWrapper.setIncidenceStartDate(backgroundDayMouseArea.addDate.getDate(), backgroundDayMouseArea.addDate.getMonth() + 1, backgroundDayMouseArea.addDate.getFullYear());
                                                             incidenceWrapper.setIncidenceStartTime(backgroundRectangle.index, dropAreaRepeater.minutes * index)
                                                             Kalendar.CalendarManager.editIncidence(incidenceWrapper);
-
-                                                            const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
-                                                            //drop.source.parent = this;
-                                                            drop.source.x = pos.x + incidenceSpacing;
-                                                            drop.source.y = pos.y + incidenceSpacing;
                                                         }
 
                                                         Rectangle {
@@ -779,6 +785,9 @@ Kirigami.Page {
                                             property var incidencePtr: modelData.incidencePtr
                                             property var collectionId: modelData.collectionId
                                             property bool repositionAnimationEnabled: false
+                                            property bool caught: false
+                                            property real caughtX: 0
+                                            property real caughtY: 0
 
                                             // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
                                             Behavior on x {
@@ -796,6 +805,24 @@ Kirigami.Page {
                                                     easing.type: Easing.OutCubic
                                                 }
                                             }
+
+                                            states: [
+                                                State {
+                                                    when: incidenceDelegate.mouseArea.drag.active
+                                                    ParentChange { target: incidenceDelegate; parent: root }
+                                                    PropertyChanges { target: incidenceDelegate; isOpenOccurrence: true }
+                                                },
+                                                State {
+                                                    when: incidenceDelegate.caught
+                                                    ParentChange { target: incidenceDelegate; parent: root }
+                                                    PropertyChanges {
+                                                        target: incidenceDelegate
+                                                        repositionAnimationEnabled: true
+                                                        x: caughtX
+                                                        y: caughtY
+                                                    }
+                                                }
+                                            ]
 
                                             IncidenceBackground {
                                                 id: incidenceBackground
@@ -882,18 +909,6 @@ Kirigami.Page {
                                             }
 
                                             Drag.active: mouseArea.drag.active
-
-                                            Connections {
-                                                target: incidenceDelegate.mouseArea.drag
-                                                function onActiveChanged() {
-                                                    // We can destructively set a bunch of properties as the model
-                                                    // will reset anyway. If you change the model behaviour you WILL
-                                                    // need to change how this works.
-                                                    incidenceDelegate.parent = root;
-                                                    incidenceDelegate.repositionAnimationEnabled = true;
-                                                    incidenceDelegate.isOpenOccurrence = true;
-                                                }
-                                            }
                                         }
                                     }
                                 }
