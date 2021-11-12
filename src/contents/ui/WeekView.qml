@@ -43,7 +43,8 @@ Kirigami.Page {
     readonly property real dayWidth: ((root.width - hourLabelWidth - leftPadding - scrollbarWidth) / daysToShow) - gridLineWidth
     readonly property real incidenceSpacing: Kirigami.Units.smallSpacing / 2
     readonly property real gridLineWidth: 1.0
-    readonly property real hourLabelWidth: Kirigami.Units.gridUnit * 3.5
+    readonly property real hourLabelWidth: fontMetrics.boundingRect(new Date(0,0,0,2,0,0,0).toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)).width +
+        Kirigami.Units.largeSpacing * 2
     readonly property real periodHeight: Kirigami.Units.gridUnit / 2
 
     Kirigami.Theme.inherit: false
@@ -110,6 +111,10 @@ Kirigami.Page {
     }
 
     padding: 0
+
+    FontMetrics {
+        id: fontMetrics
+    }
 
     PathView {
         id: pathView
@@ -204,10 +209,6 @@ Kirigami.Page {
                         delegate: Kirigami.Heading {
                             id: dayHeading
 
-                            FontMetrics {
-                                id: dayTitleMetrics
-                            }
-
                             property date headingDate: DateUtils.addDaysToDate(viewLoader.startDate, index)
                             property bool isToday: headingDate.getDate() === root.currentDay &&
                                                    headingDate.getMonth() === root.currentMonth &&
@@ -223,9 +224,9 @@ Kirigami.Page {
                                 const shortText = mediumText.slice(0,1) + " " + headingDate.toLocaleDateString(Qt.locale(), "<b>dd</b>");
 
 
-                                if(dayTitleMetrics.boundingRect(longText).width < width) {
+                                if(fontMetrics.boundingRect(longText).width < width) {
                                     return longText;
-                                } else if(dayTitleMetrics.boundingRect(mediumText).width < width) {
+                                } else if(fontMetrics.boundingRect(mediumText).width < width) {
                                     return mediumText;
                                 } else {
                                     return shortText;
@@ -613,10 +614,6 @@ Kirigami.Page {
                             anchors.top: parent.top
                             anchors.bottom: parent.bottom
                             width: root.hourLabelWidth
-
-                            FontMetrics {
-                                id: fontMetrics
-                            }
 
                             Loader {
                                 id: currentTimeLabelLoader
