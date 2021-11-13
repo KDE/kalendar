@@ -7,3 +7,5 @@ build*/
 *.kdev4
 CMakeLists.txt.user
 .clang-format
+CMakeCache.txt
+CMakeFiles
