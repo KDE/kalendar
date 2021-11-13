@@ -4,6 +4,7 @@
 include:
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-before.yml
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-applications-linux.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-reuse.yml
 
 build_clazy_clang_tidy:
   stage: build
