@@ -243,13 +243,13 @@ Kirigami.ApplicationWindow {
         }
 
         function onImportCalendarFromFile(file) {
-            importFileDialog.selectedUrl = file // FIXME don't piggy-back on importFileDialog
 
             if (root.calendarImportInProgress) {
                 // Save urls to import
                 root.calendarFilesToImport.push(file)
                 return;
             }
+            importFileDialog.selectedUrl = file // FIXME don't piggy-back on importFileDialog
             root.calendarImportInProgress = true;
 
             const openDialogWindow = pageStack.pushDialogLayer(importChoicePageComponent, {
