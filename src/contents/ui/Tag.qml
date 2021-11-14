@@ -9,10 +9,9 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.15 as Kirigami
 
-Item {
+QQC2.AbstractButton {
     id: tagRoot
-    property string text
-    property alias icon: toolButton.icon
+    property alias actionIcon: toolButton.icon
     property alias actionText: toolButton.text
     property bool showAction: true
     property bool isHeading: false
@@ -20,7 +19,6 @@ Item {
     property alias labelItem: label
     property alias headingItem: heading
     property color backgroundColor: Kirigami.Theme.backgroundColor
-    signal clicked()
 
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
@@ -28,54 +26,56 @@ Item {
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
-    Rectangle {
-        id: mainBg
-        anchors.fill: parent
-        anchors.leftMargin: pointyBit.anchors.leftMargin + pointyBit.width / 2 - radius / 2
-        radius: 3
-        color: tagRoot.backgroundColor
-        border.color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor,
+    background: Item {
+        Rectangle {
+            id: mainBg
+            anchors.fill: parent
+            anchors.leftMargin: pointyBit.anchors.leftMargin + pointyBit.width / 2 - radius / 2
+            radius: 3
+            color: tagRoot.backgroundColor
+            border.color: tagRoot.visualFocus ? Kirigami.Theme.highlightColor
+                    : Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor,
                                                         Kirigami.Theme.textColor,
                                                         0.3)
-        border.width: 1
-    }
-    Rectangle {
-        id: pointyBit
-        antialiasing: true
-        rotation: 45
-        y: (parent.height - height) / 2
-        anchors.left: parent.left
-        anchors.leftMargin: y + radius / 2
-        // `parent.height * Math.cos(radians)` fits a rotated square inside the parent.
-        // `rotation * (Math.PI / 180)` is rotation in radians instead of degrees.
-        // `Math.PI / 4` is 45 degrees. 180 / 4 is 45.
-        // `height + radius / 2` accounts for the rounded corners reducing visual size.
-        height: parent.height * Math.cos(Math.PI / 4) + radius / 2
-        width: height
-        color: mainBg.color
-        border.width: 1
-        border.color: mainBg.border.color
-        radius: 3
-    }
-    Rectangle {
-        id: borderCover
-        antialiasing: true
-        anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-            leftMargin: pointyBit.anchors.leftMargin + pointyBit.width / 2
-            margins: mainBg.border.width
+            border.width: 1
         }
-        width: height
-        color: mainBg.color
-        radius: mainBg.radius - mainBg.border.width
+        Rectangle {
+            id: pointyBit
+            antialiasing: true
+            rotation: 45
+            y: (parent.height - height) / 2
+            anchors.left: parent.left
+            anchors.leftMargin: y + radius / 2
+            // `parent.height * Math.cos(radians)` fits a rotated square inside the parent.
+            // `rotation * (Math.PI / 180)` is rotation in radians instead of degrees.
+            // `Math.PI / 4` is 45 degrees. 180 / 4 is 45.
+            // `height + radius / 2` accounts for the rounded corners reducing visual size.
+            height: parent.height * Math.cos(Math.PI / 4) + radius / 2
+            width: height
+            color: mainBg.color
+            border.width: 1
+            border.color: mainBg.border.color
+            radius: 3
+        }
+        Rectangle {
+            id: borderCover
+            antialiasing: true
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+                leftMargin: pointyBit.anchors.leftMargin + pointyBit.width / 2
+                margins: mainBg.border.width
+            }
+            width: height
+            color: mainBg.color
+            radius: mainBg.radius - mainBg.border.width
+        }
     }
 
-    RowLayout {
+    contentItem: RowLayout {
         id: layout
         spacing: Math.round(label.Layout.leftMargin - (toolButton.implicitWidth - toolButton.icon.width))
-        anchors.fill: parent
         QQC2.Label {
             id: label
             verticalAlignment: Text.AlignVCenter

@@ -81,8 +81,8 @@ RowLayout {
                 headingItem.color: headerLayout.todoMode && headerLayout.filterCollectionDetails ?
                     headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
 
-                icon.name: "edit-delete-remove"
                 onClicked: headerLayout.removeFilterTag(modelData)
+                actionIcon.name: "edit-delete-remove"
                 actionText: i18n("Remove filtering tag")
             }
         }

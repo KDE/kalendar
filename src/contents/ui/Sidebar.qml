@@ -329,23 +329,28 @@ Kirigami.OverlayDrawer {
                     separatorVisible: false
                     hoverEnabled: false
                     visible: TagManager.tagModel.rowCount() > 0
+                    Accessible.name: tagsHeadingItem.expanded ? i18nc('Accessible description of dropdown menu', 'Tags, Expanded') : i18nc('Accessible description of dropdown menu', 'Tags, Collapsed')
 
                     Kirigami.Heading { id: headingSizeCalculator }
 
+                    highlighted: visualFocus
                     leading: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.smallMedium
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        color: Kirigami.Theme.disabledTextColor
                         isMask: true
+                        color: tagsHeadingItem.labelItem.color
                         source: "action-rss_tag"
                     }
                     text: i18n("Tags")
-                    labelItem.color: Kirigami.Theme.disabledTextColor
+                    labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
                     labelItem.font.pointSize: headingSizeCalculator.headerPointSize(4)
+                    Layout.bottomMargin: Kirigami.Units.largeSpacing
                     trailing: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         source: tagsHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
+                        isMask: true
+                        color: tagsHeadingItem.labelItem.color
                     }
                     onClicked: {
                         Config.tagsSectionExpanded = !Config.tagsSectionExpanded;
@@ -371,15 +376,12 @@ Kirigami.OverlayDrawer {
 
                         delegate: Tag {
                             implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
-                            text: display
+                            text: model.display
                             showAction: false
-                            backgroundColor: sidebar.activeTags.includes(display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
-
-                            MouseArea {
-                                anchors.fill: parent
-                                enabled: !sidebar.collapsed
-                                onClicked: tagClicked(display)
-                            }
+                            activeFocusOnTab: true
+                            backgroundColor: sidebar.activeTags.includes(model.display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
+                            enabled: !sidebar.collapsed
+                            onClicked: tagClicked(model.display)
                         }
                     }
                 }
@@ -395,17 +397,20 @@ Kirigami.OverlayDrawer {
                     leading: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.smallMedium
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        color: Kirigami.Theme.disabledTextColor
-                        isMask: true
                         source: "view-calendar"
+                        isMask: true
+                        color: calendarHeadingItem.labelItem.color
                     }
                     text: i18n("Calendars")
-                    labelItem.color: Kirigami.Theme.disabledTextColor
+                    highlighted: visualFocus
+                    labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
                     labelItem.font.pointSize: headingSizeCalculator.headerPointSize(4)
                     trailing: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
                         source: calendarHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
+                        isMask: true
+                        color: calendarHeadingItem.labelItem.color
                     }
                     onClicked: {
                         Config.calendarsSectionExpanded = !Config.calendarsSectionExpanded;
@@ -428,21 +433,22 @@ Kirigami.OverlayDrawer {
                             roleValue: true
 
                             Kirigami.BasicListItem {
+                                id: calendarSourceHeading
                                 label: display
-                                labelItem.color: Kirigami.Theme.disabledTextColor
+                                highlighted: visualFocus
+                                labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
                                 labelItem.font.weight: Font.DemiBold
-                                topPadding: 2 * Kirigami.Units.largeSpacing
+                                Layout.topMargin: 2 * Kirigami.Units.largeSpacing
                                 leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                                 hoverEnabled: false
                                 enabled: !sidebar.collapsed
-                                background: Item {}
 
                                 separatorVisible: false
 
                                 leading: Kirigami.Icon {
                                     implicitWidth: Kirigami.Units.iconSizes.smallMedium
                                     implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                    color: Kirigami.Theme.disabledTextColor
+                                    color: calendarSourceHeading.labelItem.color
                                     isMask: true
                                     source: model.decoration
                                 }
@@ -452,6 +458,8 @@ Kirigami.OverlayDrawer {
                                     implicitWidth: Kirigami.Units.iconSizes.small
                                     implicitHeight: Kirigami.Units.iconSizes.small
                                     source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                                    color: calendarSourceHeading.labelItem.color
+                                    isMask: true
                                 }
 
                                 onClicked: calendarList.model.toggleChildren(index)
