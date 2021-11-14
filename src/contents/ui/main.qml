@@ -68,6 +68,25 @@ Kirigami.ApplicationWindow {
     readonly property var openKCommandBarAction: KalendarApplication.action("open_kcommand_bar")
     readonly property var tagManagerAction: KalendarApplication.action("open_tag_manager")
 
+    property var calendarFilesToImport: []
+    property bool calendarImportInProgress: false
+
+    onCalendarImportInProgressChanged: if (!calendarImportInProgress && calendarFilesToImport.length > 0) {
+        importCalendarTimer.restart()
+    }
+
+    // Timer is needed here since opening and closing a window at the same time can cause
+    // some kwin-x11 freeze
+    Timer {
+        id: importCalendarTimer
+        interval: 1000
+        running: false
+        onTriggered: {
+            // Start importing new calendar
+            KalendarApplication.importCalendarFromFile(calendarFilesToImport.shift())
+        }
+    }
+
     pageStack.globalToolBar.canContainHandles: true
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
     pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
@@ -224,7 +243,14 @@ Kirigami.ApplicationWindow {
         }
 
         function onImportCalendarFromFile(file) {
+
+            if (root.calendarImportInProgress) {
+                // Save urls to import
+                root.calendarFilesToImport.push(file)
+                return;
+            }
             importFileDialog.selectedUrl = file // FIXME don't piggy-back on importFileDialog
+            root.calendarImportInProgress = true;
 
             const openDialogWindow = pageStack.pushDialogLayer(importChoicePageComponent, {
                 width: root.width
@@ -662,7 +688,7 @@ Kirigami.ApplicationWindow {
 
         property string selectedUrl: ""
 
-        title: "Import a calendar"
+        title: i18n("Import a calendar")
         folder: shortcuts.home
         nameFilters: ["Calendar files (*.ics *.vcs)"]
         onAccepted: {
@@ -683,7 +709,9 @@ Kirigami.ApplicationWindow {
     Component {
         id: importChoicePageComponent
         Kirigami.Page {
+            id: importChoicePage
             title: i18n("Import Calendar")
+            signal closed()
 
             ColumnLayout {
                 anchors.fill: parent
@@ -718,6 +746,7 @@ Kirigami.ApplicationWindow {
                         icon.name: "document-new"
                         text: i18n("Create new calendar")
                         onClicked: {
+                            root.calendarImportInProgress = false;
                             KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, false);
                             closeDialog();
                         }
@@ -725,7 +754,10 @@ Kirigami.ApplicationWindow {
                     QQC2.Button {
                         icon.name: "gtk-cancel"
                         text: i18n("Cancel")
-                        onClicked: closeDialog();
+                        onClicked: {
+                            root.calendarImportInProgress = false;
+                            closeDialog();
+                        }
                     }
                 }
             }
@@ -737,9 +769,13 @@ Kirigami.ApplicationWindow {
         CollectionPickerPage {
             onCollectionPicked: {
                 KalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true, collectionId);
+                root.calendarImportInProgress = false;
                 closeDialog();
             }
-            onCancel: closeDialog()
+            onCancel: {
+                root.calendarImportInProgress = false;
+                closeDialog()
+            }
         }
     }
 
