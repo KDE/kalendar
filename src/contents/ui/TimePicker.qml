@@ -39,15 +39,13 @@ Item {
         }
     }
 
-    GridLayout {
+    ColumnLayout {
         anchors.fill: parent
-        columns: timePicker.secondsPicker ? 5 : 3
-        rows: 4
+        spacing: 0
 
         RowLayout {
-            Layout.row: 0
-            Layout.column: 0
-            Layout.columnSpan: timePicker.secondsPicker ? 5 : 3
+            Layout.fillWidth: true
+            Layout.margins: Kirigami.Units.largeSpacing
             QQC2.Label {
                 text: i18n("Min. Interval:")
             }
@@ -62,167 +60,191 @@ Item {
             }
         }
 
-        QQC2.ToolButton {
-            Layout.fillWidth: true
-            Layout.row: 1
-            Layout.column: 0
-            icon.name: "go-up"
-            enabled: hourView.currentIndex != 0
-            onClicked: hourView.currentIndex -= 1
-        }
-        QQC2.ToolButton {
-            Layout.fillWidth: true
-            Layout.row: 1
-            Layout.column: 2
-            icon.name: "go-up"
-            enabled: minuteView.currentIndex != 0
-            onClicked: minuteView.currentIndex -= 1
-        }
-        QQC2.ToolButton {
-            Layout.fillWidth: true
-            Layout.row: 1
-            Layout.column: 4
-            icon.name: "go-up"
-            enabled: secondsView.currentIndex != 0
-            onClicked: secondsView.currentIndex -= 1
-            visible: timePicker.secondsPicker
-        }
-
-        QQC2.Tumbler {
-            id: hourView
+        Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.row: 2
-            Layout.column: 0
-            wrap: true
-
-            model: 24
-            currentIndex: timePicker.hours
-            onCurrentIndexChanged: timePicker.hours = currentIndex
-
-            delegate: Kirigami.Heading {
-                property int thisIndex: index
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
-                font.bold: hourView.currentIndex == thisIndex
-                text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
-            }
-
-            MouseArea {
+            GridLayout {
+                id: tumblerLayout
                 anchors.fill: parent
-                onWheel: timePicker.wheelHandler(parent, wheel)
+                columns: timePicker.secondsPicker ? 5 : 3
+                rows: 3
+
+                QQC2.ToolButton {
+                    Layout.fillWidth: true
+                    Layout.row: 1
+                    Layout.column: 0
+                    icon.name: "go-up"
+                    enabled: hourView.currentIndex != 0
+                    onClicked: hourView.currentIndex -= 1
+                }
+                QQC2.ToolButton {
+                    Layout.fillWidth: true
+                    Layout.row: 1
+                    Layout.column: 2
+                    icon.name: "go-up"
+                    enabled: minuteView.currentIndex != 0
+                    onClicked: minuteView.currentIndex -= 1
+                }
+                QQC2.ToolButton {
+                    Layout.fillWidth: true
+                    Layout.row: 1
+                    Layout.column: 4
+                    icon.name: "go-up"
+                    enabled: secondsView.currentIndex != 0
+                    onClicked: secondsView.currentIndex -= 1
+                    visible: timePicker.secondsPicker
+                }
+
+                QQC2.Tumbler {
+                    id: hourView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.row: 2
+                    Layout.column: 0
+                    wrap: true
+
+                    model: 24
+                    currentIndex: timePicker.hours
+                    onCurrentIndexChanged: timePicker.hours = currentIndex
+
+                    delegate: Kirigami.Heading {
+                        property int thisIndex: index
+
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
+                        font.bold: hourView.currentIndex == thisIndex
+                        text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onWheel: timePicker.wheelHandler(parent, wheel)
+                    }
+                }
+
+                Kirigami.Heading {
+                    Layout.row: 2
+                    Layout.column: 1
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: ":"
+                }
+
+                QQC2.Tumbler {
+                    id: minuteView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    wrap: true
+
+                    property int selectedIndex: 0
+
+                    // We don't want our selected time to get reset when we update minuteMultiples, on which the model depends
+                    Connections { // Gets called before model regen
+                        target: timePicker
+                        onMinuteMultiplesAboutToChange: minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples
+                        onMinutesChanged: minuteView.currentIndex = minutes / timePicker.minuteMultiples
+                    }
+                    onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples
+                    currentIndex: timePicker.minutes
+                    onCurrentIndexChanged: timePicker.minutes = currentIndex * timePicker.minuteMultiples
+
+                    model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
+                    delegate: Kirigami.Heading {
+                        property int thisIndex: index
+                        property int minuteToDisplay: modelData * timePicker.minuteMultiples
+
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
+                        font.bold: minuteView.currentIndex == thisIndex
+                        text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onWheel: timePicker.wheelHandler(parent, wheel)
+                    }
+                }
+
+
+                Kirigami.Heading {
+                    Layout.row: 2
+                    Layout.column: 3
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    visible: timePicker.secondsPicker
+                    font.bold: true
+                    text: ":"
+                }
+
+                QQC2.Tumbler {
+                    id: secondsView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.row: 2
+                    Layout.column: 4
+                    visible: timePicker.secondsPicker
+                    model: 60
+
+                    currentIndex: timePicker.seconds
+                    onCurrentIndexChanged: timePicker.seconds = currentIndex
+
+                    delegate: Kirigami.Heading {
+                        property int thisIndex: index
+
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        opacity: secondsView.currentIndex == thisIndex ? 1 : 0.7
+                        font.bold: secondsView.currentIndex == thisIndex
+                        text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onWheel: timePicker.wheelHandler(parent, wheel)
+                    }
+                }
+
+                QQC2.ToolButton {
+                    Layout.fillWidth: true
+                    Layout.row: 3
+                    Layout.column: 0
+                    icon.name: "go-down"
+                    enabled: hourView.currentIndex < hourView.count - 1
+                    onClicked: hourView.currentIndex += 1
+                }
+                QQC2.ToolButton {
+                    Layout.fillWidth: true
+                    Layout.row: 3
+                    Layout.column: 2
+                    icon.name: "go-down"
+                    enabled: minuteView.currentIndex < minuteView.count - 1
+                    onClicked: minuteView.currentIndex += 1
+                }
+                QQC2.ToolButton {
+                    Layout.fillWidth: true
+                    Layout.row: 3
+                    Layout.column: 4
+                    icon.name: "go-down"
+                    enabled: secondsView.currentIndex < secondsView.count - 1
+                    onClicked: secondsView.currentIndex += 1
+                    visible: timePicker.secondsPicker
+                }
             }
-        }
 
-        Kirigami.Heading {
-            Layout.row: 2
-            Layout.column: 1
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            text: ":"
-        }
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.verticalCenter: tumblerLayout.verticalCenter
+                height: hourView.currentItem.implicitHeight
+                z: -1
 
-        QQC2.Tumbler {
-            id: minuteView
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            wrap: true
+                color: Kirigami.Theme.alternateBackgroundColor
 
-            property int selectedIndex: 0
-
-            // We don't want our selected time to get reset when we update minuteMultiples, on which the model depends
-            Connections { // Gets called before model regen
-                target: timePicker
-                onMinuteMultiplesAboutToChange: minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples
-                onMinutesChanged: minuteView.currentIndex = minutes / timePicker.minuteMultiples
+                border.width: 1
+                border.color: Kirigami.ColorUtils.tintWithAlpha(color, Kirigami.Theme.textColor, 0.2)
             }
-            onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples
-            currentIndex: timePicker.minutes
-            onCurrentIndexChanged: timePicker.minutes = currentIndex * timePicker.minuteMultiples
-
-            model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
-            delegate: Kirigami.Heading {
-                property int thisIndex: index
-                property int minuteToDisplay: modelData * timePicker.minuteMultiples
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
-                font.bold: minuteView.currentIndex == thisIndex
-                text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onWheel: timePicker.wheelHandler(parent, wheel)
-            }
-        }
-
-
-        Kirigami.Heading {
-            Layout.row: 2
-            Layout.column: 3
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            visible: timePicker.secondsPicker
-            font.bold: true
-            text: ":"
-        }
-
-        QQC2.Tumbler {
-            id: secondsView
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.row: 2
-            Layout.column: 4
-            visible: timePicker.secondsPicker
-            model: 60
-
-            currentIndex: timePicker.seconds
-            onCurrentIndexChanged: timePicker.seconds = currentIndex
-
-            delegate: Kirigami.Heading {
-                property int thisIndex: index
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                opacity: secondsView.currentIndex == thisIndex ? 1 : 0.7
-                font.bold: secondsView.currentIndex == thisIndex
-                text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onWheel: timePicker.wheelHandler(parent, wheel)
-            }
-        }
-
-        QQC2.ToolButton {
-            Layout.fillWidth: true
-            Layout.row: 3
-            Layout.column: 0
-            icon.name: "go-down"
-            enabled: hourView.currentIndex < hourView.count - 1
-            onClicked: hourView.currentIndex += 1
-        }
-        QQC2.ToolButton {
-            Layout.fillWidth: true
-            Layout.row: 3
-            Layout.column: 2
-            icon.name: "go-down"
-            enabled: minuteView.currentIndex < minuteView.count - 1
-            onClicked: minuteView.currentIndex += 1
-        }
-        QQC2.ToolButton {
-            Layout.fillWidth: true
-            Layout.row: 3
-            Layout.column: 4
-            icon.name: "go-down"
-            enabled: secondsView.currentIndex < secondsView.count - 1
-            onClicked: secondsView.currentIndex += 1
-            visible: timePicker.secondsPicker
         }
     }
 }

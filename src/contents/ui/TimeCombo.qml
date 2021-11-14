@@ -38,6 +38,7 @@ QQC2.ComboBox {
         x: parent.width - width
         y: parent.y + parent.height
         z: 1000
+        padding: 0
 
         TimePicker {
             id: popupTimePicker
