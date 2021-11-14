@@ -75,6 +75,8 @@ Kirigami.ApplicationWindow {
         importCalendarTimer.restart()
     }
 
+    // Timer is needed here since opening and closing a window at the same time can cause
+    // some kwin-x11 freeze
     Timer {
         id: importCalendarTimer
         interval: 1000
