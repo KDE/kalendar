@@ -106,6 +106,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
+                font.bold: hourView.currentIndex == thisIndex
                 text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
             }
 
@@ -149,6 +150,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
+                font.bold: minuteView.currentIndex == thisIndex
                 text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
             }
 
@@ -165,6 +167,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             visible: timePicker.secondsPicker
+            font.bold: true
             text: ":"
         }
 
@@ -186,6 +189,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 opacity: secondsView.currentIndex == thisIndex ? 1 : 0.7
+                font.bold: secondsView.currentIndex == thisIndex
                 text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
             }
 
