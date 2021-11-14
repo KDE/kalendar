@@ -19,6 +19,7 @@ QQC2.CheckBox {
         y: parent.height / 2 - height / 2
         radius: checkbox.radius
         border.color: checkbox.color
+        border.width: checkbox.visualFocus ? 2 : 1
         color: Qt.rgba(0,0,0,0)
 
         Rectangle {
