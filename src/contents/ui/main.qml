@@ -83,7 +83,7 @@ Kirigami.ApplicationWindow {
         running: false
         onTriggered: {
             // Start importing new calendar
-            KalendarApplication.importCalendarFromFile(calendarFilesToImport.pop())
+            KalendarApplication.importCalendarFromFile(calendarFilesToImport.shift())
         }
     }
 
