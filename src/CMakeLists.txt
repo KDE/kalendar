@@ -14,6 +14,7 @@ target_link_libraries(kalendar
     Qt5::Location
     KF5::I18n
     KF5::CoreAddons
+    KF5::DBusAddons
     KF5::CalendarCore
     KF5::AkonadiCore
     KF5::AkonadiContact

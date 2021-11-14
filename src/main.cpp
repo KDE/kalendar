@@ -4,11 +4,13 @@
 #include <KAboutData>
 #include <KCalendarCore/MemoryCalendar>
 #include <KCalendarCore/VCalFormat>
+#include <KDBusService>
 #include <KLocalizedContext>
 #include <KLocalizedString>
 #include <KWindowConfig>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QDir>
 #include <QQmlApplicationEngine>
 #include <QQuickWindow>
 #include <QUrl>
@@ -73,6 +75,27 @@ int main(int argc, char *argv[])
     KAboutData::setApplicationData(aboutData);
     QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar")));
 
+    auto config = KalendarConfig::self();
+    CalendarManager manager;
+    AgentConfiguration agentConfiguration;
+    auto kalendarApplication = new KalendarApplication;
+    kalendarApplication->setCalendar(manager.calendar());
+
+    KDBusService service(KDBusService::Unique);
+    service.connect(&service,
+                    &KDBusService::activateRequested,
+                    kalendarApplication,
+                    [kalendarApplication](const QStringList &arguments, const QString &workingDirectory) {
+                        if (arguments.isEmpty()) {
+                            return;
+                        }
+                        auto args = arguments;
+                        args.removeFirst();
+                        for (const auto &arg : args) {
+                            Q_EMIT kalendarApplication->importCalendarFromFile(QUrl::fromUserInput(arg, workingDirectory, QUrl::AssumeLocalFile));
+                        }
+                    });
+
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
     parser.process(app);
@@ -80,14 +103,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    auto config = KalendarConfig::self();
-    CalendarManager manager;
-    AgentConfiguration agentConfiguration;
     auto contactsManager = new ContactsManager(&engine);
     auto tagManager = new TagManager(&engine);
-    auto kalendarApplication = new KalendarApplication;
-    kalendarApplication->setCalendar(manager.calendar());
-
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", &manager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
@@ -131,7 +148,10 @@ int main(int argc, char *argv[])
     }
 
     if (!parser.positionalArguments().empty()) {
-        kalendarApplication->importCalendarFromFile(QUrl::fromUserInput(parser.positionalArguments().first()));
+        const auto args = parser.positionalArguments();
+        for (const auto &arg : args) {
+            Q_EMIT kalendarApplication->importCalendarFromFile(QUrl::fromUserInput(arg, QDir::currentPath(), QUrl::AssumeLocalFile));
+        }
     }
 
     return app.exec();
