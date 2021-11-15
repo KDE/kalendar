@@ -184,12 +184,8 @@ void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 
 void TodoSortFilterProxyModel::sortTodoModel(int column, bool ascending)
 {
-    Q_EMIT layoutAboutToBeChanged();
-
     auto order = ascending ? Qt::AscendingOrder : Qt::DescendingOrder;
     this->sort(column, order);
-
-    Q_EMIT layoutChanged();
 }
 
 void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
