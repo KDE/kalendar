@@ -431,18 +431,7 @@ Kirigami.ApplicationWindow {
                 // HACK: The Todo View should be able to detect change in collection filtering independently
             }
         }
-        onTagClicked: if(!root.filter || !root.filter.tags || !root.filter.tags.includes(tagName)) {
-            root.filter ? root.filter.tags ?
-                root.filter.tags.push(tagName) :
-                root.filter.tags = [tagName] :
-                root.filter = {"tags" : [tagName]};
-            root.filterChanged();
-            filterHeader.active = true;
-            pageStack.currentItem.header = filterHeader.item;
-        } else if (root.filter.tags.includes(tagName)) {
-            root.filter.tags = root.filter.tags.filter((tag) => tag !== tagName);
-            root.filterChanged();
-        }
+        onTagClicked: root.toggleFilterTag(tagName)
         onViewAllTodosClicked: if(todoMode) {
             root.filter.collectionId = -1;
             root.filter.tags = [];
@@ -476,6 +465,8 @@ Kirigami.ApplicationWindow {
         handleVisible: enabled && pageStack.layers.depth < 2 && pageStack.depth < 3
         interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
+        activeTags: root.filter && root.filter.tags ?
+                    root.filter.tags : []
         onIncidenceDataChanged: root.openOccurrence = incidenceData;
         onVisibleChanged: {
             if(visible) {
@@ -497,6 +488,7 @@ Kirigami.ApplicationWindow {
             setUpDelete(incidencePtr, deleteDate)
             if (modal) { incidenceInfo.close() }
         }
+        onTagClicked: root.toggleFilterTag(tagName)
 
         readonly property int minWidth: Kirigami.Units.gridUnit * 15
         readonly property int maxWidth: Kirigami.Units.gridUnit * 25
@@ -776,6 +768,21 @@ Kirigami.ApplicationWindow {
                 root.calendarImportInProgress = false;
                 closeDialog()
             }
+        }
+    }
+
+    function toggleFilterTag(tagName) {
+        if(!root.filter || !root.filter.tags || !root.filter.tags.includes(tagName)) {
+            root.filter ? root.filter.tags ?
+                root.filter.tags.push(tagName) :
+                root.filter.tags = [tagName] :
+                root.filter = {"tags" : [tagName]};
+            root.filterChanged();
+            filterHeader.active = true;
+            pageStack.currentItem.header = filterHeader.item;
+        } else if (root.filter.tags.includes(tagName)) {
+            root.filter.tags = root.filter.tags.filter((tag) => tag !== tagName);
+            root.filterChanged();
         }
     }
 

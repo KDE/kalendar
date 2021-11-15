@@ -16,6 +16,7 @@ Kirigami.OverlayDrawer {
     signal addSubTodo(var parentWrapper)
     signal editIncidence(var incidencePtr, var collectionId)
     signal deleteIncidence(var incidencePtr, date deleteDate)
+    signal tagClicked(string tagName)
 
     /**
      * We use both incidenceData and incidenceWrapper to get info about the occurrence.
@@ -29,6 +30,7 @@ Kirigami.OverlayDrawer {
     property var incidenceData
     property var incidenceWrapper
     property var collectionData
+    property var activeTags : []
 
     component HoverLabel: QQC2.Label {
         Layout.fillWidth: true
@@ -237,6 +239,7 @@ Kirigami.OverlayDrawer {
                         visible: incidenceInfo.incidenceWrapper.categories.length > 0
                     }
                     Flow {
+                        id: tagFlow
                         Layout.fillWidth: true
                         visible: incidenceInfo.incidenceWrapper.categories.length > 0
                         spacing: Kirigami.Units.largeSpacing
@@ -247,6 +250,10 @@ Kirigami.OverlayDrawer {
                                 icon.name: "edit-delete-remove"
                                 actionText: i18n("Remove %1 tag", modelData)
                                 showAction: false
+                                implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
+                                activeFocusOnTab: true
+                                backgroundColor: sidebar.activeTags.includes(modelData) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
+                                onClicked: incidenceInfo.tagClicked(modelData)
                             }
                         }
                     }
