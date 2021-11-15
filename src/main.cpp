@@ -54,6 +54,10 @@ int main(int argc, char *argv[])
         QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
     }
 
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
+    QApplication::setStyle(QStringLiteral("breeze"));
+#endif
+
     KAboutData aboutData(
         // The program name used internally.
         QStringLiteral("kalendar"),
