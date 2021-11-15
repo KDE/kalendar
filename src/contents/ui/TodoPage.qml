@@ -54,9 +54,9 @@ Kirigami.ScrollablePage {
 
     property int sortBy: switch (Kalendar.Config.sort) {
         case Kalendar.Config.DueTime:
-            return Kalendar.TodoSortFilterProxyModel.EndTimeColumn;
+            return Kalendar.TodoSortFilterProxyModel.DueDateColumn;
         case Kalendar.Config.Priority:
-            return Kalendar.TodoSortFilterProxyModel.PriorityIntColumn;
+            return Kalendar.TodoSortFilterProxyModel.PriorityColumn;
         case Kalendar.Config.Alphabetically:
             return Kalendar.TodoSortFilterProxyModel.SummaryColumn;
     }

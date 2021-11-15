@@ -16,7 +16,7 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
 
     auto sortTimer = [this] {
         if (!mRefreshTimer.isActive()) {
-            mRefreshTimer.start(50);
+            mRefreshTimer.start(250);
         }
     };
 
@@ -27,6 +27,8 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     connect(m_extraTodoModel, &KExtraColumnsProxyModel::dataChanged, this, sortTimer);
     connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsInserted, this, sortTimer);
     connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsRemoved, this, sortTimer);
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::layoutChanged, this, sortTimer);
+    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsMoved, this, sortTimer);
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const
@@ -182,13 +184,12 @@ void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 
 void TodoSortFilterProxyModel::sortTodoModel(int column, bool ascending)
 {
+    Q_EMIT layoutAboutToBeChanged();
+
     auto order = ascending ? Qt::AscendingOrder : Qt::DescendingOrder;
     this->sort(column, order);
 
-    if (column == PriorityIntColumn) { // Priorities go 1 (most) to 9 (least) so reverse order
-        order = ascending ? Qt::DescendingOrder : Qt::AscendingOrder;
-        this->sort(column, order); // HACK: For some reason, only calling once does not sort (!!!)
-    }
+    Q_EMIT layoutChanged();
 }
 
 void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
@@ -204,17 +205,231 @@ void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
     Q_EMIT layoutChanged();
 }
 
-bool TodoSortFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
+int TodoSortFilterProxyModel::compareStartDates(const QModelIndex &left, const QModelIndex &right) const
 {
-    if (source_left.column() == PriorityIntColumn && source_left.data().toInt() == 0) {
-        return !(sortOrder() == Qt::AscendingOrder);
+    Q_ASSERT(left.column() == TodoModel::StartDateColumn);
+    Q_ASSERT(right.column() == TodoModel::StartDateColumn);
+
+    // The start date column is a QString, so fetch the to-do.
+    // We can't compare QStrings because it won't work if the format is MM/DD/YYYY
+    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+
+    if (!leftTodo || !rightTodo) {
+        return 0;
     }
 
-    if (source_left.column() == EndTimeColumn && !source_left.data().toDateTime().isValid()) {
-        return !(sortOrder() == Qt::AscendingOrder);
+    const bool leftIsEmpty = !leftTodo->hasStartDate();
+    const bool rightIsEmpty = !rightTodo->hasStartDate();
+
+    if (leftIsEmpty != rightIsEmpty) { // One of them doesn't have a start date
+        // For sorting, no date is considered a very big date
+        return rightIsEmpty ? -1 : 1;
+    } else if (!leftIsEmpty) { // Both have start dates
+        const auto leftDateTime = leftTodo->dtStart();
+        const auto rightDateTime = rightTodo->dtStart();
+
+        if (leftDateTime == rightDateTime) {
+            return 0;
+        } else {
+            return leftDateTime < rightDateTime ? -1 : 1;
+        }
+    } else { // Neither has a start date
+        return 0;
+    }
+}
+
+int TodoSortFilterProxyModel::compareCompletedDates(const QModelIndex &left, const QModelIndex &right) const
+{
+    Q_ASSERT(left.column() == TodoModel::CompletedDateColumn);
+    Q_ASSERT(right.column() == TodoModel::CompletedDateColumn);
+
+    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+
+    if (!leftTodo || !rightTodo) {
+        return 0;
     }
 
-    return QSortFilterProxyModel::lessThan(source_left, source_right);
+    const bool leftIsEmpty = !leftTodo->hasCompletedDate();
+    const bool rightIsEmpty = !rightTodo->hasCompletedDate();
+
+    if (leftIsEmpty != rightIsEmpty) { // One of them doesn't have a completed date.
+        // For sorting, no date is considered a very big date.
+        return rightIsEmpty ? -1 : 1;
+    } else if (!leftIsEmpty) { // Both have completed dates.
+        const auto leftDateTime = leftTodo->completed();
+        const auto rightDateTime = rightTodo->completed();
+
+        if (leftDateTime == rightDateTime) {
+            return 0;
+        } else {
+            return leftDateTime < rightDateTime ? -1 : 1;
+        }
+    } else { // Neither has a completed date.
+        return 0;
+    }
+}
+
+/* -1 - less than
+ *  0 - equal
+ *  1 - bigger than
+ */
+int TodoSortFilterProxyModel::compareDueDates(const QModelIndex &left, const QModelIndex &right) const
+{
+    Q_ASSERT(left.column() == TodoModel::DueDateColumn);
+    Q_ASSERT(right.column() == TodoModel::DueDateColumn);
+
+    // The due date column is a QString, so fetch the to-do.
+    // We can't compare QStrings because it won't work if the format is MM/DD/YYYY
+    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    Q_ASSERT(leftTodo);
+    Q_ASSERT(rightTodo);
+
+    if (!leftTodo || !rightTodo) {
+        return 0;
+    }
+
+    const bool leftIsEmpty = !leftTodo->hasDueDate();
+    const bool rightIsEmpty = !rightTodo->hasDueDate();
+
+    if (leftIsEmpty != rightIsEmpty) { // One of them doesn't have a due date
+        // For sorting, no date is considered a very big date
+        return rightIsEmpty ? -1 : 1;
+    } else if (!leftIsEmpty) { // Both have due dates
+        const auto leftDateTime = leftTodo->dtDue();
+        const auto rightDateTime = rightTodo->dtDue();
+
+        if (leftDateTime == rightDateTime) {
+            return 0;
+        } else {
+            return leftDateTime < rightDateTime ? -1 : 1;
+        }
+    } else { // Neither has a due date
+        return 0;
+    }
+}
+
+/* -1 - less than
+ *  0 - equal
+ *  1 - bigger than
+ */
+int TodoSortFilterProxyModel::compareCompletion(const QModelIndex &left, const QModelIndex &right) const
+{
+    Q_ASSERT(left.column() == TodoModel::PercentColumn);
+    Q_ASSERT(right.column() == TodoModel::PercentColumn);
+
+    const int leftValue = sourceModel()->data(left).toInt();
+    const int rightValue = sourceModel()->data(right).toInt();
+
+    if (leftValue == 100 && rightValue == 100) {
+        // Break ties with the completion date.
+        const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+        const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+        Q_ASSERT(leftTodo);
+        Q_ASSERT(rightTodo);
+        if (!leftTodo || !rightTodo) {
+            return 0;
+        } else {
+            return (leftTodo->completed() > rightTodo->completed()) ? -1 : 1;
+        }
+    } else {
+        return (leftValue < rightValue) ? -1 : 1;
+    }
+}
+
+/* -1 - less than
+ *  0 - equal
+ *  1 - bigger than
+ * Sort in numeric order (1 < 9) rather than priority order (lowest 9 < highest 1).
+ * There are arguments either way, but this is consistent with KCalendarCore.
+ */
+int TodoSortFilterProxyModel::comparePriorities(const QModelIndex &left, const QModelIndex &right) const
+{
+    Q_ASSERT(left.isValid());
+    Q_ASSERT(right.isValid());
+
+    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    Q_ASSERT(leftTodo);
+    Q_ASSERT(rightTodo);
+    if (!leftTodo || !rightTodo || leftTodo->priority() == rightTodo->priority()) {
+        return 0;
+    } else if (leftTodo->priority() < rightTodo->priority()) {
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+bool TodoSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
+{
+    // To-dos without due date should appear last when sorting ascending,
+    // so you can see the most urgent tasks first. (bug #174763)
+    if (right.column() == TodoModel::DueDateColumn) {
+        const int comparison = compareDueDates(left, right);
+
+        if (comparison != 0) {
+            return comparison == -1;
+        } else {
+            // Due dates are equal, but the user still expects sorting by importance
+            // Fallback to the PriorityColumn
+            QModelIndex leftPriorityIndex = left.sibling(left.row(), TodoModel::PriorityColumn);
+            QModelIndex rightPriorityIndex = right.sibling(right.row(), TodoModel::PriorityColumn);
+            const int fallbackComparison = comparePriorities(leftPriorityIndex, rightPriorityIndex);
+
+            if (fallbackComparison != 0) {
+                return fallbackComparison == 1;
+            }
+        }
+    } else if (right.column() == TodoModel::StartDateColumn) {
+        return compareStartDates(left, right) == -1;
+    } else if (right.column() == TodoModel::CompletedDateColumn) {
+        return compareCompletedDates(left, right) == -1;
+    } else if (right.column() == TodoModel::PriorityColumn) {
+        const int comparison = comparePriorities(left, right);
+
+        if (comparison != 0) {
+            return comparison == -1;
+        } else {
+            // Priorities are equal, but the user still expects sorting by importance
+            // Fallback to the DueDateColumn
+            QModelIndex leftDueDateIndex = left.sibling(left.row(), TodoModel::DueDateColumn);
+            QModelIndex rightDueDateIndex = right.sibling(right.row(), TodoModel::DueDateColumn);
+            const int fallbackComparison = compareDueDates(leftDueDateIndex, rightDueDateIndex);
+
+            if (fallbackComparison != 0) {
+                return fallbackComparison == 1;
+            }
+        }
+    } else if (right.column() == TodoModel::PercentColumn) {
+        const int comparison = compareCompletion(left, right);
+        if (comparison != 0) {
+            return comparison == -1;
+        }
+    }
+
+    if (left.data() == right.data()) {
+        // If both are equal, lets choose an order, otherwise Qt will display them randomly.
+        // Fixes to-dos jumping around when you have calendar A selected, and then check/uncheck
+        // a calendar B with no to-dos. No to-do is added/removed because calendar B is empty,
+        // but you see the existing to-dos switching places.
+        QModelIndex leftSummaryIndex = left.sibling(left.row(), TodoModel::SummaryColumn);
+        QModelIndex rightSummaryIndex = right.sibling(right.row(), TodoModel::SummaryColumn);
+
+        // This patch is not about fallingback to the SummaryColumn for sorting.
+        // It's about avoiding jumping due to random reasons.
+        // That's why we ignore the sort direction...
+        return m_sortAscending ? QSortFilterProxyModel::lessThan(leftSummaryIndex, rightSummaryIndex)
+                               : QSortFilterProxyModel::lessThan(rightSummaryIndex, leftSummaryIndex);
+
+        // ...so, if you have 4 to-dos, all with CompletionColumn = "55%",
+        // and click the header multiple times, nothing will happen because
+        // it is already sorted by Completion.
+    } else {
+        return QSortFilterProxyModel::lessThan(left, right);
+    }
 }
 
 int TodoSortFilterProxyModel::sortBy()

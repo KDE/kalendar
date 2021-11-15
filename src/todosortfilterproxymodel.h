@@ -82,11 +82,18 @@ Q_SIGNALS:
     void showCompletedChanged();
     void sortByChanged();
     void sortAscendingChanged();
+    void badData();
 
 protected:
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 
 private:
+    int compareStartDates(const QModelIndex &left, const QModelIndex &right) const;
+    int compareDueDates(const QModelIndex &left, const QModelIndex &right) const;
+    int compareCompletedDates(const QModelIndex &left, const QModelIndex &right) const;
+    int comparePriorities(const QModelIndex &left, const QModelIndex &right) const;
+    int compareCompletion(const QModelIndex &left, const QModelIndex &right) const;
+
     ExtraTodoModel *m_extraTodoModel = nullptr;
     int m_showCompleted = ShowComplete::ShowAll;
     int m_showCompletedStore; // For when searches happen

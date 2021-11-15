@@ -75,14 +75,14 @@ static PreNode::List sortedPrenodes(const PreNode::List &nodes)
     return sorted;
 }
 
-IncidenceTreeModel::Private::Private(IncidenceTreeModel *qq, const QStringList &mimeTypes)
+IncidenceTreeModelPrivate::IncidenceTreeModelPrivate(IncidenceTreeModel *qq, const QStringList &mimeTypes)
     : QObject()
     , m_mimeTypes(mimeTypes)
     , q(qq)
 {
 }
 
-int IncidenceTreeModel::Private::rowForNode(const Node::Ptr &node) const
+int IncidenceTreeModelPrivate::rowForNode(const Node::Ptr &node) const
 {
     // Returns it's row number
     const int row = node->parentNode ? node->parentNode->directChilds.indexOf(node) : m_toplevelNodeList.indexOf(node);
@@ -90,9 +90,8 @@ int IncidenceTreeModel::Private::rowForNode(const Node::Ptr &node) const
     return row;
 }
 
-void IncidenceTreeModel::Private::assert_and_dump(bool condition, const QString &message)
+void IncidenceTreeModelPrivate::assert_and_dump(bool condition, const QString &)
 {
-    Q_UNUSED(message)
     if (!condition) {
         // qCCritical(CALENDARVIEW_LOG) << "This should never happen: " << message;
         dumpTree();
@@ -100,14 +99,14 @@ void IncidenceTreeModel::Private::assert_and_dump(bool condition, const QString 
     }
 }
 
-void IncidenceTreeModel::Private::dumpTree()
+void IncidenceTreeModelPrivate::dumpTree()
 {
-    // for (const Node::Ptr &node : std::as_const(m_toplevelNodeList)) {
-    //    qCDebug(CALENDARVIEW_LOG) << node;
-    //}
+    /*for (const Node::Ptr &node : std::as_const(m_toplevelNodeList)) {
+        //qCDebug(CALENDARVIEW_LOG) << node;
+    }*/
 }
 
-QModelIndex IncidenceTreeModel::Private::indexForNode(const Node::Ptr &node) const
+QModelIndex IncidenceTreeModelPrivate::indexForNode(const Node::Ptr &node) const
 {
     if (!node) {
         return {};
@@ -118,7 +117,7 @@ QModelIndex IncidenceTreeModel::Private::indexForNode(const Node::Ptr &node) con
     return q->createIndex(row, 0, node.data());
 }
 
-void IncidenceTreeModel::Private::reset(bool silent)
+void IncidenceTreeModelPrivate::reset(bool silent)
 {
     if (!silent) {
         q->beginResetModel();
@@ -142,12 +141,12 @@ void IncidenceTreeModel::Private::reset(bool silent)
     }
 }
 
-void IncidenceTreeModel::Private::onHeaderDataChanged(Qt::Orientation orientation, int first, int last)
+void IncidenceTreeModelPrivate::onHeaderDataChanged(Qt::Orientation orientation, int first, int last)
 {
     Q_EMIT q->headerDataChanged(orientation, first, last);
 }
 
-void IncidenceTreeModel::Private::onDataChanged(const QModelIndex &begin, const QModelIndex &end)
+void IncidenceTreeModelPrivate::onDataChanged(const QModelIndex &begin, const QModelIndex &end)
 {
     Q_ASSERT(begin.isValid());
     Q_ASSERT(end.isValid());
@@ -258,7 +257,7 @@ void IncidenceTreeModel::Private::onDataChanged(const QModelIndex &begin, const 
     }
 }
 
-void IncidenceTreeModel::Private::onRowsAboutToBeInserted(const QModelIndex &parent, int, int)
+void IncidenceTreeModelPrivate::onRowsAboutToBeInserted(const QModelIndex &parent, int, int)
 {
     // We are a reparenting proxy, the source proxy is flat
     Q_ASSERT(!parent.isValid());
@@ -267,7 +266,7 @@ void IncidenceTreeModel::Private::onRowsAboutToBeInserted(const QModelIndex &par
     // parent yet.
 }
 
-PreNode::Ptr IncidenceTreeModel::Private::prenodeFromSourceRow(int row) const
+PreNode::Ptr IncidenceTreeModelPrivate::prenodeFromSourceRow(int row) const
 {
     PreNode::Ptr node = PreNode::Ptr(new PreNode());
     node->sourceIndex = q->sourceModel()->index(row, 0, QModelIndex());
@@ -287,7 +286,7 @@ PreNode::Ptr IncidenceTreeModel::Private::prenodeFromSourceRow(int row) const
     return node;
 }
 
-void IncidenceTreeModel::Private::onRowsInserted(const QModelIndex &parent, int begin, int end)
+void IncidenceTreeModelPrivate::onRowsInserted(const QModelIndex &parent, int begin, int end)
 {
     // QElapsedTimer timer;
     // timer.start();
@@ -317,7 +316,7 @@ void IncidenceTreeModel::Private::onRowsInserted(const QModelIndex &parent, int 
     // qCDebug(CALENDARVIEW_LOG) << "Took " << timer.elapsed() << " to insert " << end-begin+1;
 }
 
-void IncidenceTreeModel::Private::insertNode(const PreNode::Ptr &prenode, bool silent)
+void IncidenceTreeModelPrivate::insertNode(const PreNode::Ptr &prenode, bool silent)
 {
     KCalendarCore::Incidence::Ptr incidence = prenode->incidence;
     Akonadi::Item item = prenode->item;
@@ -335,7 +334,7 @@ void IncidenceTreeModel::Private::insertNode(const PreNode::Ptr &prenode, bool s
 
     if (m_uidMap.contains(node->uid)) {
         // qCWarning(CALENDARVIEW_LOG) << "Duplicate incidence detected:"
-        //                            << "uid=" << node->uid << ". File a bug against the resource. collection=" << item.storageCollectionId();
+        //<< "uid=" << node->uid << ". File a bug against the resource. collection=" << item.storageCollectionId();
         return;
     }
 
@@ -420,7 +419,7 @@ void IncidenceTreeModel::Private::insertNode(const PreNode::Ptr &prenode, bool s
 }
 
 // Sorts children first parents last
-Node::List IncidenceTreeModel::Private::sorted(const Node::List &nodes) const
+Node::List IncidenceTreeModelPrivate::sorted(const Node::List &nodes) const
 {
     if (nodes.isEmpty()) {
         return nodes;
@@ -437,7 +436,7 @@ Node::List IncidenceTreeModel::Private::sorted(const Node::List &nodes) const
     return sorted;
 }
 
-void IncidenceTreeModel::Private::onRowsAboutToBeRemoved(const QModelIndex &parent, int begin, int end)
+void IncidenceTreeModelPrivate::onRowsAboutToBeRemoved(const QModelIndex &parent, int begin, int end)
 {
     // QElapsedTimer timer;
     // timer.start();
@@ -479,7 +478,7 @@ void IncidenceTreeModel::Private::onRowsAboutToBeRemoved(const QModelIndex &pare
     // qCDebug(CALENDARVIEW_LOG) << "Took " << timer.elapsed() << " to remove " << end-begin+1;
 }
 
-void IncidenceTreeModel::Private::removeNode(const Node::Ptr &node)
+void IncidenceTreeModelPrivate::removeNode(const Node::Ptr &node)
 {
     Q_ASSERT(node);
     // qCDebug(CALENDARVIEW_LOG) << "Dealing with parent: " << node->id << node.data()
@@ -534,7 +533,7 @@ void IncidenceTreeModel::Private::removeNode(const Node::Ptr &node)
     m_removedNodes << node.data();
 }
 
-void IncidenceTreeModel::Private::onRowsRemoved(const QModelIndex &parent, int begin, int end)
+void IncidenceTreeModelPrivate::onRowsRemoved(const QModelIndex &parent, int begin, int end)
 {
     Q_UNUSED(parent)
     Q_UNUSED(begin)
@@ -542,88 +541,88 @@ void IncidenceTreeModel::Private::onRowsRemoved(const QModelIndex &parent, int b
     // Nothing to do here, see comment on ::onRowsAboutToBeRemoved()
 }
 
-void IncidenceTreeModel::Private::onModelAboutToBeReset()
+void IncidenceTreeModelPrivate::onModelAboutToBeReset()
 {
     q->beginResetModel();
 }
 
-void IncidenceTreeModel::Private::onModelReset()
+void IncidenceTreeModelPrivate::onModelReset()
 {
     reset(/**silent=*/false);
     q->endResetModel();
 }
 
-void IncidenceTreeModel::Private::onLayoutAboutToBeChanged()
+void IncidenceTreeModelPrivate::onLayoutAboutToBeChanged()
 {
     Q_ASSERT(q->persistentIndexList().isEmpty());
     Q_EMIT q->layoutAboutToBeChanged();
 }
 
-void IncidenceTreeModel::Private::onLayoutChanged()
+void IncidenceTreeModelPrivate::onLayoutChanged()
 {
     reset(/**silent=*/true);
     Q_ASSERT(q->persistentIndexList().isEmpty());
     Q_EMIT q->layoutChanged();
 }
 
-void IncidenceTreeModel::Private::onRowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)
+void IncidenceTreeModelPrivate::onRowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)
 {
     // Not implemented yet
     Q_ASSERT(false);
 }
 
-void IncidenceTreeModel::Private::setSourceModel(QAbstractItemModel *model)
+void IncidenceTreeModelPrivate::setSourceModel(QAbstractItemModel *model)
 {
     q->beginResetModel();
 
     if (q->sourceModel()) {
-        disconnect(q->sourceModel(), &IncidenceTreeModel::dataChanged, this, &IncidenceTreeModel::Private::onDataChanged);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::dataChanged, this, &IncidenceTreeModelPrivate::onDataChanged);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::headerDataChanged, this, &IncidenceTreeModel::Private::onHeaderDataChanged);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::headerDataChanged, this, &IncidenceTreeModelPrivate::onHeaderDataChanged);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsInserted, this, &IncidenceTreeModel::Private::onRowsInserted);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsInserted, this, &IncidenceTreeModelPrivate::onRowsInserted);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsRemoved, this, &IncidenceTreeModel::Private::onRowsRemoved);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsRemoved, this, &IncidenceTreeModelPrivate::onRowsRemoved);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsMoved, this, &IncidenceTreeModel::Private::onRowsMoved);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsMoved, this, &IncidenceTreeModelPrivate::onRowsMoved);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeInserted, this, &IncidenceTreeModel::Private::onRowsAboutToBeInserted);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeInserted, this, &IncidenceTreeModelPrivate::onRowsAboutToBeInserted);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeRemoved, this, &IncidenceTreeModel::Private::onRowsAboutToBeRemoved);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeRemoved, this, &IncidenceTreeModelPrivate::onRowsAboutToBeRemoved);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::modelAboutToBeReset, this, &IncidenceTreeModel::Private::onModelAboutToBeReset);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::modelAboutToBeReset, this, &IncidenceTreeModelPrivate::onModelAboutToBeReset);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::modelReset, this, &IncidenceTreeModel::Private::onModelReset);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::modelReset, this, &IncidenceTreeModelPrivate::onModelReset);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::layoutAboutToBeChanged, this, &IncidenceTreeModel::Private::onLayoutAboutToBeChanged);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::layoutAboutToBeChanged, this, &IncidenceTreeModelPrivate::onLayoutAboutToBeChanged);
 
-        disconnect(q->sourceModel(), &IncidenceTreeModel::layoutChanged, this, &IncidenceTreeModel::Private::onLayoutChanged);
+        disconnect(q->sourceModel(), &IncidenceTreeModel::layoutChanged, this, &IncidenceTreeModelPrivate::onLayoutChanged);
     }
 
     q->QAbstractProxyModel::setSourceModel(model);
 
     if (q->sourceModel()) {
-        connect(q->sourceModel(), &IncidenceTreeModel::dataChanged, this, &IncidenceTreeModel::Private::onDataChanged);
+        connect(q->sourceModel(), &IncidenceTreeModel::dataChanged, this, &IncidenceTreeModelPrivate::onDataChanged);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::headerDataChanged, this, &IncidenceTreeModel::Private::onHeaderDataChanged);
+        connect(q->sourceModel(), &IncidenceTreeModel::headerDataChanged, this, &IncidenceTreeModelPrivate::onHeaderDataChanged);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeInserted, this, &IncidenceTreeModel::Private::onRowsAboutToBeInserted);
+        connect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeInserted, this, &IncidenceTreeModelPrivate::onRowsAboutToBeInserted);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::rowsInserted, this, &IncidenceTreeModel::Private::onRowsInserted);
+        connect(q->sourceModel(), &IncidenceTreeModel::rowsInserted, this, &IncidenceTreeModelPrivate::onRowsInserted);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeRemoved, this, &IncidenceTreeModel::Private::onRowsAboutToBeRemoved);
+        connect(q->sourceModel(), &IncidenceTreeModel::rowsAboutToBeRemoved, this, &IncidenceTreeModelPrivate::onRowsAboutToBeRemoved);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::rowsRemoved, this, &IncidenceTreeModel::Private::onRowsRemoved);
+        connect(q->sourceModel(), &IncidenceTreeModel::rowsRemoved, this, &IncidenceTreeModelPrivate::onRowsRemoved);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::rowsMoved, this, &IncidenceTreeModel::Private::onRowsMoved);
+        connect(q->sourceModel(), &IncidenceTreeModel::rowsMoved, this, &IncidenceTreeModelPrivate::onRowsMoved);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::modelAboutToBeReset, this, &IncidenceTreeModel::Private::onModelAboutToBeReset);
+        connect(q->sourceModel(), &IncidenceTreeModel::modelAboutToBeReset, this, &IncidenceTreeModelPrivate::onModelAboutToBeReset);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::modelReset, this, &IncidenceTreeModel::Private::onModelReset);
+        connect(q->sourceModel(), &IncidenceTreeModel::modelReset, this, &IncidenceTreeModelPrivate::onModelReset);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::layoutAboutToBeChanged, this, &IncidenceTreeModel::Private::onLayoutAboutToBeChanged);
+        connect(q->sourceModel(), &IncidenceTreeModel::layoutAboutToBeChanged, this, &IncidenceTreeModelPrivate::onLayoutAboutToBeChanged);
 
-        connect(q->sourceModel(), &IncidenceTreeModel::layoutChanged, this, &IncidenceTreeModel::Private::onLayoutChanged);
+        connect(q->sourceModel(), &IncidenceTreeModel::layoutChanged, this, &IncidenceTreeModelPrivate::onLayoutChanged);
     }
 
     reset(/**silent=*/true);
@@ -632,22 +631,19 @@ void IncidenceTreeModel::Private::setSourceModel(QAbstractItemModel *model)
 
 IncidenceTreeModel::IncidenceTreeModel(QObject *parent)
     : QAbstractProxyModel(parent)
-    , d(new Private(this, QStringList()))
+    , d(new IncidenceTreeModelPrivate(this, QStringList()))
 {
     setObjectName(QStringLiteral("IncidenceTreeModel"));
 }
 
 IncidenceTreeModel::IncidenceTreeModel(const QStringList &mimeTypes, QObject *parent)
     : QAbstractProxyModel(parent)
-    , d(new Private(this, mimeTypes))
+    , d(new IncidenceTreeModelPrivate(this, mimeTypes))
 {
     setObjectName(QStringLiteral("IncidenceTreeModel"));
 }
 
-IncidenceTreeModel::~IncidenceTreeModel()
-{
-    delete d;
-}
+IncidenceTreeModel::~IncidenceTreeModel() = default;
 
 QVariant IncidenceTreeModel::data(const QModelIndex &index, int role) const
 {
@@ -697,7 +693,7 @@ QModelIndex IncidenceTreeModel::mapFromSource(const QModelIndex &sourceIndex) co
 {
     if (!sourceIndex.isValid()) {
         // qCWarning(CALENDARVIEW_LOG) << "IncidenceTreeModel::mapFromSource() source index is invalid";
-        // Q_ASSERT( false );
+        //  Q_ASSERT( false );
         return {};
     }
 

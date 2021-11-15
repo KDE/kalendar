@@ -1,8 +1,7 @@
 /*
   SPDX-FileCopyrightText: 2008 Thomas Thrainer <tom_t@gmx.at>
   SPDX-FileCopyrightText: 2012 Sérgio Martins <iamsergio@gmail.com>
-
-  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
+  SPDX-License-Identifier: GPL-2.0-or-later WITH Qt-Commercial-exception-1.0
 */
 
 #include "incidencetreemodel.h"
@@ -50,14 +49,14 @@ static bool isDueToday(const KCalendarCore::Todo::Ptr &todo)
     return !todo->isCompleted() && todo->dtDue().date() == QDate::currentDate();
 }
 
-TodoModel::Private::Private(const EventViews::PrefsPtr &preferences, TodoModel *qq)
+TodoModelPrivate::TodoModelPrivate(const EventViews::PrefsPtr &preferences, TodoModel *qq)
     : QObject()
     , m_preferences(preferences)
     , q(qq)
 {
 }
 
-Akonadi::Item TodoModel::Private::findItemByUid(const QString &uid, const QModelIndex &parent) const
+Akonadi::Item TodoModelPrivate::findItemByUid(const QString &uid, const QModelIndex &parent) const
 {
     Q_ASSERT(!uid.isEmpty());
     auto treeModel = qobject_cast<IncidenceTreeModel *>(q->sourceModel());
@@ -84,7 +83,7 @@ Akonadi::Item TodoModel::Private::findItemByUid(const QString &uid, const QModel
     return item;
 }
 
-void TodoModel::Private::onDataChanged(const QModelIndex &begin, const QModelIndex &end)
+void TodoModelPrivate::onDataChanged(const QModelIndex &begin, const QModelIndex &end)
 {
     Q_ASSERT(begin.isValid());
     Q_ASSERT(end.isValid());
@@ -94,12 +93,12 @@ void TodoModel::Private::onDataChanged(const QModelIndex &begin, const QModelInd
     Q_EMIT q->dataChanged(proxyBegin, proxyEnd.sibling(proxyEnd.row(), TodoModel::ColumnCount - 1));
 }
 
-void TodoModel::Private::onHeaderDataChanged(Qt::Orientation orientation, int first, int last)
+void TodoModelPrivate::onHeaderDataChanged(Qt::Orientation orientation, int first, int last)
 {
     Q_EMIT q->headerDataChanged(orientation, first, last);
 }
 
-void TodoModel::Private::onRowsAboutToBeInserted(const QModelIndex &parent, int begin, int end)
+void TodoModelPrivate::onRowsAboutToBeInserted(const QModelIndex &parent, int begin, int end)
 {
     const QModelIndex index = q->mapFromSource(parent);
     Q_ASSERT(!(parent.isValid() ^ index.isValid())); // Both must be valid, or both invalid
@@ -108,12 +107,12 @@ void TodoModel::Private::onRowsAboutToBeInserted(const QModelIndex &parent, int 
     q->beginInsertRows(index, begin, end);
 }
 
-void TodoModel::Private::onRowsInserted(const QModelIndex &, int, int)
+void TodoModelPrivate::onRowsInserted(const QModelIndex &, int, int)
 {
     q->endInsertRows();
 }
 
-void TodoModel::Private::onRowsAboutToBeRemoved(const QModelIndex &parent, int begin, int end)
+void TodoModelPrivate::onRowsAboutToBeRemoved(const QModelIndex &parent, int begin, int end)
 {
     const QModelIndex index = q->mapFromSource(parent);
     Q_ASSERT(!(parent.isValid() ^ index.isValid())); // Both must be valid, or both invalid
@@ -122,16 +121,16 @@ void TodoModel::Private::onRowsAboutToBeRemoved(const QModelIndex &parent, int b
     q->beginRemoveRows(index, begin, end);
 }
 
-void TodoModel::Private::onRowsRemoved(const QModelIndex &, int, int)
+void TodoModelPrivate::onRowsRemoved(const QModelIndex &, int, int)
 {
     q->endRemoveRows();
 }
 
-void TodoModel::Private::onRowsAboutToBeMoved(const QModelIndex &sourceParent,
-                                              int sourceStart,
-                                              int sourceEnd,
-                                              const QModelIndex &destinationParent,
-                                              int destinationRow)
+void TodoModelPrivate::onRowsAboutToBeMoved(const QModelIndex &sourceParent,
+                                            int sourceStart,
+                                            int sourceEnd,
+                                            const QModelIndex &destinationParent,
+                                            int destinationRow)
 {
     Q_UNUSED(sourceParent)
     Q_UNUSED(sourceStart)
@@ -144,22 +143,22 @@ void TodoModel::Private::onRowsAboutToBeMoved(const QModelIndex &sourceParent,
     */
 }
 
-void TodoModel::Private::onRowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)
+void TodoModelPrivate::onRowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)
 {
     /*q->endMoveRows();*/
 }
 
-void TodoModel::Private::onModelAboutToBeReset()
+void TodoModelPrivate::onModelAboutToBeReset()
 {
     q->beginResetModel();
 }
 
-void TodoModel::Private::onModelReset()
+void TodoModelPrivate::onModelReset()
 {
     q->endResetModel();
 }
 
-void TodoModel::Private::onLayoutAboutToBeChanged()
+void TodoModelPrivate::onLayoutAboutToBeChanged()
 {
     Q_ASSERT(m_persistentIndexes.isEmpty());
     Q_ASSERT(m_layoutChangePersistentIndexes.isEmpty());
@@ -177,7 +176,7 @@ void TodoModel::Private::onLayoutAboutToBeChanged()
     Q_EMIT q->layoutAboutToBeChanged();
 }
 
-void TodoModel::Private::onLayoutChanged()
+void TodoModelPrivate::onLayoutChanged()
 {
     for (int i = 0; i < m_persistentIndexes.size(); ++i) {
         QModelIndex newIndex_col0 = q->mapFromSource(m_layoutChangePersistentIndexes.at(i));
@@ -195,15 +194,12 @@ void TodoModel::Private::onLayoutChanged()
 
 TodoModel::TodoModel(const EventViews::PrefsPtr &preferences, QObject *parent)
     : QAbstractProxyModel(parent)
-    , d(new Private(preferences, this))
+    , d(new TodoModelPrivate(preferences, this))
 {
     setObjectName(QStringLiteral("TodoModel"));
 }
 
-TodoModel::~TodoModel()
-{
-    delete d;
-}
+TodoModel::~TodoModel() = default;
 
 QVariant TodoModel::data(const QModelIndex &index, int role) const
 {
@@ -220,7 +216,7 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
     const auto item = sourceIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
     if (!item.isValid()) {
         // qCWarning(CALENDARVIEW_LOG) << "Invalid index: " << sourceIndex;
-        // Q_ASSERT( false );
+        //  Q_ASSERT( false );
         return QVariant();
     }
     const KCalendarCore::Todo::Ptr todo = CalendarSupport::todo(item);
@@ -297,6 +293,8 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
             return todo->hasStartDate() ? QLocale().toString(todo->dtStart().toLocalTime().date(), QLocale::ShortFormat) : QVariant(QString());
         case DueDateColumn:
             return todo->hasDueDate() ? QLocale().toString(todo->dtDue().toLocalTime().date(), QLocale::ShortFormat) : QVariant(QString());
+        case CompletedDateColumn:
+            return todo->hasCompletedDate() ? QLocale().toString(todo->completed().toLocalTime().date(), QLocale::ShortFormat) : QVariant(QString());
         case CategoriesColumn: {
             QString categories = todo->categories().join(i18nc("delimiter for joining category/tag names", ","));
             return QVariant(categories);
@@ -323,6 +321,8 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
             return QVariant(todo->dtStart().date());
         case DueDateColumn:
             return QVariant(todo->dtDue().date());
+        case CompletedDateColumn:
+            return QVariant(todo->completed().date());
         case CategoriesColumn:
             return QVariant(todo->categories());
         case DescriptionColumn:
@@ -368,15 +368,12 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
     // icon for recurring todos
     // It's in the summary column so you don't accidentally click
     // the checkbox ( which increments the next occurrence date ).
+    // category colour
     if (role == Qt::DecorationRole && index.column() == SummaryColumn) {
         if (todo->recurs()) {
             return QVariant(QIcon::fromTheme(QStringLiteral("task-recurring")));
         }
-    }
-
-    // category colour
-    if (role == Qt::DecorationRole && index.column() == SummaryColumn) {
-        QStringList categories = todo->categories();
+        const QStringList categories = todo->categories();
         return categories.isEmpty() ? QVariant() : QVariant(CalendarSupport::KCalPrefs::instance()->categoryColor(categories.first()));
     } else if (role == Qt::DecorationRole) {
         return QVariant();
@@ -384,6 +381,10 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
 
     if (role == TodoRole) {
         return QVariant::fromValue(item);
+    }
+
+    if (role == TodoPtrRole) {
+        return QVariant::fromValue(todo);
     }
 
     if (role == IsRichTextRole) {
@@ -532,54 +533,60 @@ void TodoModel::setSourceModel(QAbstractItemModel *model)
     beginResetModel();
 
     if (sourceModel()) {
-        disconnect(sourceModel(), &QAbstractItemModel::dataChanged, d, &TodoModel::Private::onDataChanged);
-        disconnect(sourceModel(), &QAbstractItemModel::headerDataChanged, d, &TodoModel::Private::onHeaderDataChanged);
+        disconnect(sourceModel(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), d.get(), SLOT(onDataChanged(QModelIndex, QModelIndex)));
+        disconnect(sourceModel(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), d.get(), SLOT(onHeaderDataChanged(Qt::Orientation, int, int)));
 
-        disconnect(sourceModel(), &QAbstractItemModel::rowsInserted, d, &TodoModel::Private::onRowsInserted);
+        disconnect(sourceModel(), SIGNAL(rowsInserted(QModelIndex, int, int)), d.get(), SLOT(onRowsInserted(QModelIndex, int, int)));
 
-        disconnect(sourceModel(), &QAbstractItemModel::rowsRemoved, d, &TodoModel::Private::onRowsRemoved);
+        disconnect(sourceModel(), SIGNAL(rowsRemoved(QModelIndex, int, int)), d.get(), SLOT(onRowsRemoved(QModelIndex, int, int)));
 
-        disconnect(sourceModel(), &QAbstractItemModel::rowsMoved, d, &TodoModel::Private::onRowsMoved);
+        disconnect(sourceModel(),
+                   SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)),
+                   d.get(),
+                   SLOT(onRowsMoved(QModelIndex, int, int, QModelIndex, int)));
 
-        disconnect(sourceModel(), &QAbstractItemModel::rowsAboutToBeInserted, d, &TodoModel::Private::onRowsAboutToBeInserted);
+        disconnect(sourceModel(), SIGNAL(rowsAboutToBeInserted(QModelIndex, int, int)), d.get(), SLOT(onRowsAboutToBeInserted(QModelIndex, int, int)));
 
-        disconnect(sourceModel(), &QAbstractItemModel::rowsAboutToBeRemoved, d, &TodoModel::Private::onRowsAboutToBeRemoved);
+        disconnect(sourceModel(), SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)), d.get(), SLOT(onRowsAboutToBeRemoved(QModelIndex, int, int)));
 
-        disconnect(sourceModel(), &QAbstractItemModel::modelAboutToBeReset, d, &TodoModel::Private::onModelAboutToBeReset);
+        disconnect(sourceModel(), SIGNAL(modelAboutToBeReset()), d.get(), SLOT(onModelAboutToBeReset()));
 
-        disconnect(sourceModel(), &QAbstractItemModel::modelReset, d, &TodoModel::Private::onModelReset);
+        disconnect(sourceModel(), SIGNAL(modelReset()), d.get(), SLOT(onModelReset()));
 
-        disconnect(sourceModel(), &QAbstractItemModel::layoutAboutToBeChanged, d, &TodoModel::Private::onLayoutAboutToBeChanged);
+        disconnect(sourceModel(), SIGNAL(layoutAboutToBeChanged()), d.get(), SLOT(onLayoutAboutToBeChanged()));
 
-        disconnect(sourceModel(), &QAbstractItemModel::layoutChanged, d, &TodoModel::Private::onLayoutChanged);
+        disconnect(sourceModel(), SIGNAL(layoutChanged()), d.get(), SLOT(onLayoutChanged()));
     }
 
     QAbstractProxyModel::setSourceModel(model);
 
     if (sourceModel()) {
-        connect(sourceModel(), &QAbstractItemModel::dataChanged, d, &TodoModel::Private::onDataChanged);
+        connect(sourceModel(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), d.get(), SLOT(onDataChanged(QModelIndex, QModelIndex)));
 
-        connect(sourceModel(), &QAbstractItemModel::headerDataChanged, d, &TodoModel::Private::onHeaderDataChanged);
+        connect(sourceModel(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), d.get(), SLOT(onHeaderDataChanged(Qt::Orientation, int, int)));
 
-        connect(sourceModel(), &QAbstractItemModel::rowsAboutToBeInserted, d, &TodoModel::Private::onRowsAboutToBeInserted);
+        connect(sourceModel(), SIGNAL(rowsAboutToBeInserted(QModelIndex, int, int)), d.get(), SLOT(onRowsAboutToBeInserted(QModelIndex, int, int)));
 
-        connect(sourceModel(), &QAbstractItemModel::rowsInserted, d, &TodoModel::Private::onRowsInserted);
+        connect(sourceModel(), SIGNAL(rowsInserted(QModelIndex, int, int)), d.get(), SLOT(onRowsInserted(QModelIndex, int, int)));
 
-        connect(sourceModel(), &QAbstractItemModel::rowsAboutToBeRemoved, d, &TodoModel::Private::onRowsAboutToBeRemoved);
+        connect(sourceModel(), SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)), d.get(), SLOT(onRowsAboutToBeRemoved(QModelIndex, int, int)));
 
-        connect(sourceModel(), &QAbstractItemModel::rowsRemoved, d, &TodoModel::Private::onRowsRemoved);
+        connect(sourceModel(), SIGNAL(rowsRemoved(QModelIndex, int, int)), d.get(), SLOT(onRowsRemoved(QModelIndex, int, int)));
 
-        connect(sourceModel(), &QAbstractItemModel::rowsAboutToBeMoved, d, &TodoModel::Private::onRowsAboutToBeMoved);
+        connect(sourceModel(),
+                SIGNAL(rowsAboutToBeMoved(QModelIndex, int, int, QModelIndex, int)),
+                d.get(),
+                SLOT(onRowsAboutToBeMoved(QModelIndex, int, int, QModelIndex, int)));
 
-        connect(sourceModel(), &QAbstractItemModel::rowsMoved, d, &TodoModel::Private::onRowsMoved);
+        connect(sourceModel(), SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)), d.get(), SLOT(onRowsMoved(QModelIndex, int, int, QModelIndex, int)));
 
-        connect(sourceModel(), &QAbstractItemModel::modelAboutToBeReset, d, &TodoModel::Private::onModelAboutToBeReset);
+        connect(sourceModel(), SIGNAL(modelAboutToBeReset()), d.get(), SLOT(onModelAboutToBeReset()));
 
-        connect(sourceModel(), &QAbstractItemModel::modelReset, d, &TodoModel::Private::onModelReset);
+        connect(sourceModel(), SIGNAL(modelReset()), d.get(), SLOT(onModelReset()));
 
-        connect(sourceModel(), &QAbstractItemModel::layoutAboutToBeChanged, d, &TodoModel::Private::onLayoutAboutToBeChanged);
+        connect(sourceModel(), SIGNAL(layoutAboutToBeChanged()), d.get(), SLOT(onLayoutAboutToBeChanged()));
 
-        connect(sourceModel(), &QAbstractItemModel::layoutChanged, d, &TodoModel::Private::onLayoutChanged);
+        connect(sourceModel(), SIGNAL(layoutChanged()), d.get(), SLOT(onLayoutChanged()));
     }
 
     endResetModel();
@@ -610,6 +617,8 @@ QVariant TodoModel::headerData(int column, Qt::Orientation orientation, int role
             return QVariant(i18n("Start Date"));
         case DueDateColumn:
             return QVariant(i18n("Due Date"));
+        case CompletedDateColumn:
+            return QVariant(i18nc("@title:column date completed", "Completed"));
         case CategoriesColumn:
             return QVariant(i18n("Tags"));
         case DescriptionColumn:
@@ -701,7 +710,7 @@ bool TodoModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int r
                 if (tmp->uid() == todo->uid()) { // correct, don't use instanceIdentifier() here
                     KMessageBox::information(nullptr,
                                              i18n("Cannot move to-do to itself or a child of itself."),
-                                             i18n("Drop To-Do"),
+                                             i18n("Drop To-do"),
                                              QStringLiteral("NoDropTodoOntoItself"));
                     return false;
                 }
@@ -743,7 +752,9 @@ bool TodoModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int r
                 } else {
                     QStringList emails = KEmailAddress::splitAddressList(text);
                     for (QStringList::ConstIterator it = emails.constBegin(); it != emails.constEnd(); ++it) {
-                        QString name, email, comment;
+                        QString name;
+                        QString email;
+                        QString comment;
                         if (KEmailAddress::splitAddress(*it, name, email, comment) == KEmailAddress::AddressOk) {
                             destTodo->addAttendee(KCalendarCore::Attendee(name, email));
                         }

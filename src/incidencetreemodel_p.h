@@ -53,11 +53,11 @@ struct PreNode {
     }
 };
 
-class IncidenceTreeModel::Private : public QObject
+class IncidenceTreeModelPrivate : public QObject
 {
     Q_OBJECT
 public:
-    Private(IncidenceTreeModel *qq, const QStringList &mimeTypes);
+    IncidenceTreeModelPrivate(IncidenceTreeModel *qq, const QStringList &mimeTypes);
     void reset(bool silent = false);
     void insertNode(const PreNode::Ptr &node, bool silent = false);
     void insertNode(const QModelIndex &sourceIndex, bool silent = false);

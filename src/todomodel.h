@@ -1,13 +1,13 @@
 /*
   SPDX-FileCopyrightText: 2008 Thomas Thrainer <tom_t@gmx.at>
   SPDX-FileCopyrightText: 2012 Sérgio Martins <iamsergio@gmail.com>
-
-  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
+  SPDX-License-Identifier: GPL-2.0-or-later WITH Qt-Commercial-exception-1.0
 */
 
 #pragma once
 
-#include <EventViews/Prefs>
+#include "eventviews_export.h"
+#include "prefs.h"
 
 #include <Akonadi/Calendar/ETMCalendar>
 #include <Akonadi/Calendar/IncidenceChanger>
@@ -19,14 +19,17 @@
 #include <EntityTreeModel>
 #include <Item>
 #endif
-
 #include <KCalendarCore/Todo>
 #include <QAbstractItemModel>
 #include <QAbstractProxyModel>
 
+#include <memory>
+
 class QMimeData;
 
-class TodoModel : public QAbstractProxyModel
+class TodoModelPrivate;
+
+class EVENTVIEWS_EXPORT TodoModel : public QAbstractProxyModel
 {
     Q_OBJECT
 
@@ -42,12 +45,14 @@ public:
         CategoriesColumn,
         DescriptionColumn,
         CalendarColumn,
+        CompletedDateColumn,
         ColumnCount // Just for iteration/column count purposes. Always keep at the end of enum.
     };
 
     /** This enum defines the user defined roles of the items in this model */
     enum {
         TodoRole = Akonadi::EntityTreeModel::UserRole + 1,
+        TodoPtrRole,
         IsRichTextRole,
         SummaryRole,
         RecurRole,
@@ -57,7 +62,7 @@ public:
         DueDateRole,
         CategoriesRole,
         DescriptionRole,
-        CalendarRole
+        CalendarRole,
     };
 
     explicit TodoModel(const EventViews::PrefsPtr &preferences, QObject *parent = nullptr);
@@ -103,6 +108,6 @@ public:
     Q_REQUIRED_RESULT QHash<int, QByteArray> roleNames() const override;
 
 private:
-    class Private;
-    Private *const d;
+    friend class TodoModelPrivate;
+    std::unique_ptr<TodoModelPrivate> const d;
 };

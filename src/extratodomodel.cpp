@@ -35,6 +35,10 @@ QVariant ExtraTodoModel::extraColumnData(const QModelIndex &parent, int row, int
     const auto todoItem = index(row, extraColumn, parent).data(TodoModel::TodoRole).value<Akonadi::Item>();
     const auto todoPtr = CalendarSupport::todo(todoItem);
 
+    if (todoPtr == nullptr) {
+        return QVariant();
+    }
+
     switch (extraColumn) {
     case StartTimeColumn:
         return todoPtr->dtStart();
@@ -57,6 +61,10 @@ QVariant ExtraTodoModel::data(const QModelIndex &index, int role) const
     auto todoItem = idx.data(TodoModel::TodoRole).value<Akonadi::Item>();
     auto collectionId = todoItem.parentCollection().id();
     auto todoPtr = CalendarSupport::todo(todoItem);
+
+    if (todoPtr == nullptr) {
+        return QVariant();
+    }
 
     if (role == Roles::StartTimeRole) {
         return todoPtr->dtStart();

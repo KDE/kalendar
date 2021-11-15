@@ -1,8 +1,7 @@
 /*
   SPDX-FileCopyrightText: 2008 Thomas Thrainer <tom_t@gmx.at>
   SPDX-FileCopyrightText: 2012 Sérgio Martins <iamsergio@gmail.com>
-
-  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
+  SPDX-License-Identifier: GPL-2.0-or-later WITH Qt-Commercial-exception-1.0
 */
 
 #pragma once
@@ -10,7 +9,6 @@
 #include "todomodel.h"
 
 #include <Akonadi/Calendar/ETMCalendar>
-#include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/Item>
 #else
@@ -25,11 +23,11 @@ namespace Akonadi
 class IncidenceChanger;
 }
 
-class TodoModel::Private : public QObject
+class TodoModelPrivate : public QObject
 {
     Q_OBJECT
 public:
-    Private(const EventViews::PrefsPtr &preferences, TodoModel *qq);
+    TodoModelPrivate(const EventViews::PrefsPtr &preferences, TodoModel *qq);
 
     // TODO: O(N) complexity, see if the profiler complains about this
     Akonadi::Item findItemByUid(const QString &uid, const QModelIndex &parent) const;
@@ -61,6 +59,5 @@ private Q_SLOTS:
     void onLayoutChanged();
 
 private:
-    friend TodoModel;
     TodoModel *const q;
 };
