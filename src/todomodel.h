@@ -29,7 +29,7 @@ class QMimeData;
 
 class TodoModelPrivate;
 
-class EVENTVIEWS_EXPORT TodoModel : public QAbstractProxyModel
+class TodoModel : public QAbstractProxyModel
 {
     Q_OBJECT
 

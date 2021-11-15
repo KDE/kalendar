@@ -21,7 +21,7 @@
 
 class IncidenceTreeModelPrivate;
 
-class EVENTVIEWS_EXPORT IncidenceTreeModel : public QAbstractProxyModel
+class IncidenceTreeModel : public QAbstractProxyModel
 {
     Q_OBJECT
 public:
