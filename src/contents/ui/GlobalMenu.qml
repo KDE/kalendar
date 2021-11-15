@@ -33,7 +33,7 @@ Labs.MenuBar {
         title: i18nc("@action:menu", "Edit")
         Connections {
             target: parentWindow
-            onActiveFocusItemChanged: {
+            function onActiveFocusItemChanged() {
                 if (parentWindow.activeFocusItem instanceof TextEdit || parentWindow.activeFocusItem instanceof TextInput) {
                     editMenu.field = parentWindow.activeFocusItem;
                 }

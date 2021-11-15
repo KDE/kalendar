@@ -118,7 +118,9 @@ Kirigami.OverlayDrawer {
 
                     Connections {
                         target: Config
-                        onShowMenubarChanged: if(!Kirigami.Settings.isMobile && !Kirigami.Settings.hasPlatformMenuBar) menu.visible = !Config.showMenubar
+                        function onShowMenubarChanged() {
+                            if(!Kirigami.Settings.isMobile && !Kirigami.Settings.hasPlatformMenuBar) menu.visible = !Config.showMenubar
+                        }
                     }
 
                     Layout.fillHeight: true
