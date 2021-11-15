@@ -240,7 +240,12 @@
   <url type="homepage">https://apps.kde.org/kalendar/</url>
   <url type="bugtracker">https://invent.kde.org/pim/kalendar/-/issues</url>
   <releases>
-      <release type="development" version="0.2.0" date="2021-11-13">
+    <release type="development" version="0.2.1" date="2021-11-15">
+      <description>
+        <p>Update for second beta release with bug-fixes, accessibility improvements, tweaks to time-editing components, and better iCal importing.</p>
+      </description>
+    </release>
+    <release type="development" version="0.2.0" date="2021-11-13">
       <description>
         <p>Second beta release of Kalendar</p>
       </description>
