@@ -12,6 +12,7 @@
 #include <QCommandLineParser>
 #include <QDir>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #include <QQuickWindow>
 #include <QUrl>
 #include <QtQml>
@@ -47,6 +48,11 @@ int main(int argc, char *argv[])
     KLocalizedString::setApplicationDomain("kalendar");
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setApplicationName(QStringLiteral("Kalendar"));
+
+    // Default to org.kde.desktop style unless the user forces another style
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
+        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+    }
 
     KAboutData aboutData(
         // The program name used internally.
