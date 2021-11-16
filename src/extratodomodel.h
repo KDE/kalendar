@@ -43,7 +43,10 @@ public:
         ItemRole,
         CategoriesRole,
         CategoriesDisplayRole,
-        TreeDepthRole
+        TreeDepthRole,
+        TopMostParentSummary, // These three here are used to help us conserve the proper sections
+        TopMostParentDueDate, // in the Kirigami TreeListView, which otherwise will create new
+        TopMostParentPriority // sections for subtasks
     };
     Q_ENUM(Roles);
 

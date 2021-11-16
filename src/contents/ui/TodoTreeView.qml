@@ -37,6 +37,47 @@ TreeListView {
     currentIndex: -1
     clip: true
 
+    section.criteria: sortBy === Kalendar.TodoSortFilterProxyModel.SummaryColumn ?
+        ViewSection.FirstCharacter : ViewSection.FullString
+    section.property: switch(sortBy) {
+        case Kalendar.TodoSortFilterProxyModel.PriorityColumn:
+            return "topMostParentPriority";
+        case Kalendar.TodoSortFilterProxyModel.DueDateColumn:
+            return "topMostParentDueDate";
+        case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
+        default:
+            return "topMostParentSummary";
+    }
+    section.delegate: Kirigami.AbstractListItem {
+        separatorVisible: false
+        sectionDelegate: true
+        hoverEnabled: false
+
+        activeFocusOnTab: false
+
+        contentItem: Kirigami.Heading {
+            text: {
+                switch(sortBy) {
+                    case Kalendar.TodoSortFilterProxyModel.PriorityColumn:
+                        return section !== "--" ? i18n("Priority %1", section) : i18n("No set priority");
+                    case Kalendar.TodoSortFilterProxyModel.DueDateColumn:
+                        let sectionDate = new Date(section);
+                        return !isNaN(sectionDate.getTime()) ? LabelUtils.todoDateTimeLabel(new Date(section), true, false) : section;
+                    case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
+                    default:
+                        return section;
+                }
+
+            }
+            readonly property bool isOverdue: section === i18n("Overdue")
+            readonly property bool isToday: DateUtils.sameDay(new Date(section), new Date())
+
+            level: 3
+            font.weight: Font.Bold
+            color: isOverdue ? Kirigami.Theme.negativeTextColor : isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+        }
+    }
+
     MouseArea {
         id: incidenceDeselectorMouseArea
         anchors.fill: parent
