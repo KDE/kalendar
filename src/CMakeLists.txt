@@ -24,7 +24,6 @@ target_link_libraries(kalendar
     KF5::WindowSystem
     KF5::ConfigWidgets
     KF5::AkonadiWidgets
-    KF5::People
     KF5::Contacts
     KF5::ItemModels
     KF5::XmlGui
