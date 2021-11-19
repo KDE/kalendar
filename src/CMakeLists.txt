@@ -2,7 +2,59 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-add_executable(kalendar about.cpp main.cpp agentconfiguration.cpp incidenceoccurrencemodel.cpp calendarmanager.cpp multidayincidencemodel.cpp incidencewrapper.cpp remindersmodel.cpp attendeesmodel.cpp recurrenceexceptionsmodel.cpp attachmentsmodel.cpp contactsmanager.cpp todomodel.cpp incidencetreemodel.cpp todosortfilterproxymodel.cpp kalendarapplication.cpp itemtagsmodel.cpp tagmanager.cpp extratodomodel.cpp actionsmodel.cpp commandbarfiltermodel.cpp hourlyincidencemodel.cpp timezonelistmodel.cpp monthmodel.cpp infinitecalendarviewmodel.cpp resources.qrc)
+add_executable(kalendar
+    about.cpp
+    about.h
+    actionsmodel.cpp
+    actionsmodel.h
+    agentconfiguration.cpp
+    agentconfiguration.h
+    attachmentsmodel.cpp
+    attachmentsmodel.h
+    attendeesmodel.cpp
+    attendeesmodel.h
+    calendarmanager.cpp
+    calendarmanager.h
+    commandbarfiltermodel.cpp
+    commandbarfiltermodel.h
+    contactsmanager.cpp
+    contactsmanager.h
+    extratodomodel.cpp
+    extratodomodel.h
+    hourlyincidencemodel.cpp
+    hourlyincidencemodel.h
+    incidenceoccurrencemodel.cpp
+    incidenceoccurrencemodel.h
+    incidencetreemodel.cpp
+    incidencetreemodel.h
+    incidencetreemodel_p.h
+    incidencewrapper.cpp
+    incidencewrapper.h
+    infinitecalendarviewmodel.cpp
+    infinitecalendarviewmodel.h
+    itemtagsmodel.cpp
+    itemtagsmodel.h
+    kalendarapplication.cpp
+    kalendarapplication.h
+    main.cpp
+    monthmodel.cpp
+    monthmodel.h
+    multidayincidencemodel.cpp
+    multidayincidencemodel.h
+    recurrenceexceptionsmodel.cpp
+    recurrenceexceptionsmodel.h
+    remindersmodel.cpp
+    remindersmodel.h
+    tagmanager.cpp
+    tagmanager.h
+    timezonelistmodel.cpp
+    timezonelistmodel.h
+    todomodel.cpp
+    todomodel.h
+    todomodel_p.h
+    todosortfilterproxymodel.cpp
+    todosortfilterproxymodel.h
+    resources.qrc)
 
 target_link_libraries(kalendar
     Qt5::Core
