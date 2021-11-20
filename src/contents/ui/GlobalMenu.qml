@@ -97,6 +97,13 @@ Labs.MenuBar {
         NativeMenuItemFromAction {
             kalendarAction: 'todoview_show_completed'
         }
+
+        Labs.MenuSeparator {
+        }
+
+        NativeMenuItemFromAction {
+            kalendarAction: "refresh_all_calendars"
+        }
     }
 
     Labs.Menu {

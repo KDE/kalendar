@@ -87,6 +87,7 @@ public:
     Q_INVOKABLE void undoAction();
     Q_INVOKABLE void redoAction();
 
+    Q_INVOKABLE void updateAllCollections();
     Q_INVOKABLE void updateCollection(qint64 collectionId);
     Q_INVOKABLE void deleteCollection(qint64 collectionId);
     Q_INVOKABLE void editCollection(qint64 collectionId);

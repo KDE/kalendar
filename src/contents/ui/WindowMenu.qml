@@ -172,6 +172,13 @@ QQC2.MenuBar {
             kalendarAction: "todoview_show_completed"
         }
 
+        QQC2.MenuSeparator {
+        }
+
+        KActionFromAction {
+            kalendarAction: "refresh_all_calendars"
+        }
+
     }
 
     QQC2.Menu {

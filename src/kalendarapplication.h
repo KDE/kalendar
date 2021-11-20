@@ -77,6 +77,7 @@ Q_SIGNALS:
     void importIntoExistingFinished(bool success, int total);
     void importIntoNewFinished(bool success);
     void importErrorMessageChanged();
+    void refreshAllCalendars();
 
 private:
     KActionCollection mCollection;

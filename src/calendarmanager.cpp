@@ -816,6 +816,14 @@ void CalendarManager::redoAction()
     m_changer->history()->redo();
 }
 
+void CalendarManager::updateAllCollections()
+{
+    for (int i = 0; i < collections()->rowCount(); i++) {
+        auto collection = collections()->data(collections()->index(i, 0), Akonadi::EntityTreeModel::CollectionRole).value<Akonadi::Collection>();
+        Akonadi::AgentManager::self()->synchronizeCollection(collection, true);
+    }
+}
+
 void CalendarManager::updateCollection(qint64 collectionId)
 {
     auto collection = m_calendar->collection(collectionId);

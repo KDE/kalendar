@@ -58,6 +58,7 @@ Kirigami.ApplicationWindow {
     readonly property var quitAction: KalendarApplication.action("file_quit")
     readonly property var undoAction: KalendarApplication.action("edit_undo")
     readonly property var redoAction: KalendarApplication.action("edit_redo")
+    readonly property var refreshAllAction: KalendarApplication.action("refresh_all_calendars")
 
     readonly property var todoViewSortAlphabeticallyAction: KalendarApplication.action("todoview_sort_alphabetically")
     readonly property var todoViewSortByDueDateAction: KalendarApplication.action("todoview_sort_by_due_date")
@@ -323,6 +324,10 @@ Kirigami.ApplicationWindow {
 
         function onOpenKCommandBarAction() {
             kcommandbarLoader.active = true;
+        }
+
+        function onRefreshAllCalendars() {
+            CalendarManager.updateAllCollections();
         }
     }
 

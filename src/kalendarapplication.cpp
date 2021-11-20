@@ -367,6 +367,17 @@ void KalendarApplication::setupActions()
         mCollection.addAction(openKCommandBarAction->objectName(), openKCommandBarAction);
         mCollection.setDefaultShortcut(openKCommandBarAction, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_I));
     }
+
+    actionName = QLatin1String("refresh_all_calendars");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto refreshAllAction = mCollection.addAction(actionName, this, &KalendarApplication::refreshAllCalendars);
+        refreshAllAction->setText(i18n("Refresh All Calendars"));
+        refreshAllAction->setIcon(QIcon::fromTheme(QStringLiteral("view-refresh")));
+
+        mCollection.addAction(refreshAllAction->objectName(), refreshAllAction);
+        mCollection.setDefaultShortcut(refreshAllAction, QKeySequence(QKeySequence::Refresh));
+    }
+
     mSortCollection.readSettings();
     mCollection.readSettings();
 }

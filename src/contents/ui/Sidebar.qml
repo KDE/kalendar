@@ -162,6 +162,9 @@ Kirigami.OverlayDrawer {
                         KActionFromAction {
                             kalendarAction: "import_calendar"
                         },
+                        KActionFromAction {
+                            kalendarAction: "refresh_all_calendars"
+                        },
                         Kirigami.Action {
                             icon.name: KalendarApplication.iconName(quitAction.icon)
                             text: quitAction.text
