@@ -683,7 +683,6 @@ Kirigami.Page {
                                 model: weekViewModel // From root.model
 
                                 boundsBehavior: Flickable.StopAtBounds
-                                interactive: Kirigami.Settings.tabletMode || Kirigami.Settings.isMobile
 
                                 delegate: Item {
                                     id: dayColumn
@@ -902,6 +901,7 @@ Kirigami.Page {
 
                                             IncidenceMouseArea {
                                                 id: mouseArea
+                                                preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
                                                 incidenceData: modelData
                                                 collectionId: modelData.collectionId
 
