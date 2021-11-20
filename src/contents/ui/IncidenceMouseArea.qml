@@ -40,6 +40,10 @@ MouseArea {
         clickY = mouseY;
         incidenceActions.createObject(mouseArea, {}).open();
     }
+    onDoubleClicked: {
+        collectionDetails = Kalendar.CalendarManager.getCollectionDetails(collectionId);
+        editClicked(incidenceData.incidencePtr, incidenceData.collectionId);
+    }
 
     Component {
         id: incidenceActions
