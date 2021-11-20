@@ -378,6 +378,10 @@ Kirigami.Page {
                                                 property real caughtX: 0
                                                 property real caughtY: 0
 
+                                                Drag.active: mouseArea.drag.active
+                                                Drag.hotSpot.x: mouseArea.mouseX
+                                                Drag.hotSpot.y: mouseArea.mouseY
+
                                                 Layout.fillWidth: true
                                                 topPadding: paddingSize
                                                 bottomPadding: paddingSize
@@ -407,8 +411,6 @@ Kirigami.Page {
                                                         easing.type: Easing.OutCubic
                                                     }
                                                 }
-
-                                                Drag.active: mouseArea.drag.active
 
                                                 states: [
                                                     State {

@@ -477,8 +477,6 @@ Kirigami.Page {
                                                                 isDark: root.isDark
                                                                 reactToCurrentMonth: false
 
-                                                                Drag.active: mouseArea.drag.active
-
                                                                 states: [
                                                                     State {
                                                                         when: incidenceDelegate.mouseArea.drag.active
@@ -791,6 +789,10 @@ Kirigami.Page {
                                             property real caughtX: 0
                                             property real caughtY: 0
 
+                                            Drag.active: mouseArea.drag.active
+                                            Drag.hotSpot.x: mouseArea.mouseX
+                                            Drag.hotSpot.y: mouseArea.mouseY
+
                                             // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
                                             Behavior on x {
                                                 enabled: repositionAnimationEnabled
@@ -909,8 +911,6 @@ Kirigami.Page {
                                                 onTodoCompletedClicked: completeTodo(incidencePtr)
                                                 onAddSubTodoClicked: root.addSubTodo(parentWrapper)
                                             }
-
-                                            Drag.active: mouseArea.drag.active
                                         }
                                     }
                                 }

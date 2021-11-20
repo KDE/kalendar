@@ -305,8 +305,6 @@ Item {
                                         openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                         isDark: root.isDark
 
-                                        Drag.active: mouseArea.drag.active
-
                                         states: [
                                             State {
                                                 when: incidenceDelegate.mouseArea.drag.active
