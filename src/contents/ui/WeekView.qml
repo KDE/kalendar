@@ -683,6 +683,7 @@ Kirigami.Page {
                                 model: weekViewModel // From root.model
 
                                 boundsBehavior: Flickable.StopAtBounds
+                                interactive: Kirigami.Settings.tabletMode || Kirigami.Settings.isMobile
 
                                 delegate: Item {
                                     id: dayColumn
@@ -736,8 +737,10 @@ Kirigami.Page {
                                                             let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
                                                             incidenceWrapper.incidencePtr = drop.source.incidencePtr;
                                                             incidenceWrapper.collectionId = drop.source.collectionId;
-                                                            incidenceWrapper.setIncidenceStartDate(backgroundDayMouseArea.addDate.getDate(), backgroundDayMouseArea.addDate.getMonth() + 1, backgroundDayMouseArea.addDate.getFullYear());
-                                                            incidenceWrapper.setIncidenceStartTime(backgroundRectangle.index, dropAreaRepeater.minutes * index)
+
+                                                            // This is a case where we want to set datetime according to the view timezone
+                                                            let incidenceStart = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index, dropAreaRepeater.minutes * index)
+                                                            incidenceWrapper.setIncidenceStart(incidenceStart, true);
                                                             Kalendar.CalendarManager.editIncidence(incidenceWrapper);
                                                         }
 

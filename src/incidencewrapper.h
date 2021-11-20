@@ -120,13 +120,13 @@ public:
     float geoLongitude() const;
 
     QDateTime incidenceStart() const;
-    void setIncidenceStart(const QDateTime &incidenceStart, bool respectTimeZone = false);
+    Q_INVOKABLE void setIncidenceStart(const QDateTime &incidenceStart, bool respectTimeZone = false);
     Q_INVOKABLE void setIncidenceStartDate(int day, int month, int year);
     Q_INVOKABLE void setIncidenceStartTime(int hours, int minutes);
     QString incidenceStartDateDisplay() const;
     QString incidenceStartTimeDisplay() const;
     QDateTime incidenceEnd() const;
-    void setIncidenceEnd(const QDateTime &incidenceEnd, bool respectTimeZone = false);
+    Q_INVOKABLE void setIncidenceEnd(const QDateTime &incidenceEnd, bool respectTimeZone = false);
     Q_INVOKABLE void setIncidenceEndDate(int day, int month, int year);
     Q_INVOKABLE void setIncidenceEndTime(int hours, int minutes);
     QString incidenceEndDateDisplay() const;

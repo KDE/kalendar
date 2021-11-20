@@ -181,6 +181,7 @@ Kirigami.Page {
                      */
                     Layout.bottomMargin: Kirigami.Units.largeSpacing * 5
                     highlightRangeMode: ListView.ApplyRange
+                    interactive: Kirigami.Settings.tabletMode || Kirigami.Settings.isMobile
 
                     onCountChanged: if(root.initialMonth) root.moveToSelected()
 
