@@ -907,20 +907,47 @@ Kirigami.ApplicationWindow {
             id: deleteIncidenceSheet
 
             onAddException: {
+                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
+                    DateUtils.sameDay(incidenceInfo.incidenceData.startTime, exceptionDate)) {
+
+                    incidenceInfo.incidenceData = undefined;
+                    root.openOccurrence = undefined;
+                }
+
                 incidenceWrapper.recurrenceExceptionsModel.addExceptionDateTime(exceptionDate);
                 CalendarManager.editIncidence(incidenceWrapper);
                 closeDialog();
             }
             onAddRecurrenceEndDate: {
+                // If occurrence is past the new recurrence end date, it has ben deleted so kill instance in incidence info
+                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
+                    incidenceInfo.incidenceData.startTime >= endDate) {
+
+                    incidenceInfo.incidenceData = undefined;
+                    root.openOccurrence = undefined;
+                }
                 incidenceWrapper.setRecurrenceDataItem("endDateTime", endDate);
                 CalendarManager.editIncidence(incidenceWrapper);
                 closeDialog();
             }
             onDeleteIncidence: {
+                // Deleting an incidence also means deleting all of its occurrences
+                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
+
+                    incidenceInfo.incidenceData = undefined;
+                    root.openOccurrence = undefined;
+                }
                 CalendarManager.deleteIncidence(incidencePtr);
                 closeDialog();
             }
             onDeleteIncidenceWithChildren: {
+                // TODO: Check if parent deleted too
+                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
+
+                    incidenceInfo.incidenceData = undefined;
+                    root.openOccurrence = undefined;
+                }
+
                 CalendarManager.deleteIncidence(incidencePtr, true);
                 closeDialog();
             }
