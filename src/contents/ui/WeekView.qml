@@ -817,7 +817,6 @@ Kirigami.Page {
 
                                             Drag.active: mouseArea.drag.active
                                             Drag.hotSpot.x: mouseArea.mouseX
-                                            Drag.hotSpot.y: mouseArea.mouseY
 
                                             // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
                                             Behavior on x {
