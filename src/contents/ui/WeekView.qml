@@ -728,19 +728,41 @@ Kirigami.Page {
                                                         Layout.fillHeight: true
                                                         z: 9999
                                                         onDropped: if(viewLoader.isCurrentItem) {
-                                                            const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
-                                                            drop.source.caughtX = pos.x + incidenceSpacing;
-                                                            drop.source.caughtY = pos.y + incidenceSpacing;
-                                                            drop.source.caught = true;
-
                                                             let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
-                                                            incidenceWrapper.incidencePtr = drop.source.incidencePtr;
-                                                            incidenceWrapper.collectionId = drop.source.collectionId;
 
-                                                            // This is a case where we want to set datetime according to the view timezone
-                                                            let incidenceStart = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index, dropAreaRepeater.minutes * index)
-                                                            incidenceWrapper.setIncidenceStart(incidenceStart, true);
-                                                            Kalendar.CalendarManager.editIncidence(incidenceWrapper);
+                                                            if(drop.source.objectName === "incidenceDelegate") {
+                                                                incidenceWrapper.incidencePtr = drop.source.incidencePtr;
+                                                                incidenceWrapper.collectionId = drop.source.collectionId;
+
+                                                                const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                                drop.source.caughtX = pos.x + incidenceSpacing;
+                                                                drop.source.caughtY = pos.y + incidenceSpacing;
+                                                                drop.source.caught = true;
+
+                                                                // We want the date as if it were "from the top" of the droparea
+                                                                const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index, dropAreaRepeater.minutes * index);
+
+                                                                // This is a case where we want to set datetime according to the view timezone
+                                                                incidenceWrapper.setIncidenceStart(posDate, true);
+                                                                Kalendar.CalendarManager.editIncidence(incidenceWrapper);
+
+                                                            } else { // The resize affects the end time
+                                                                incidenceWrapper.incidencePtr = drop.source.parent.incidencePtr;
+                                                                incidenceWrapper.collectionId = drop.source.parent.collectionId;
+
+                                                                const pos = mapToItem(drop.source.parent, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                                drop.source.parent.caughtHeight = (pos.y + dropAreaHighlightRectangle.height - incidenceSpacing)
+                                                                drop.source.parent.caught = true;
+
+                                                                // We want the date as if it were "from the bottom" of the droparea
+                                                                const minute = (dropAreaRepeater.minutes * (index + 1)) % 60;
+                                                                const isNextHour = minute === 0 && index !== 0;
+                                                                const hour = isNextHour ? backgroundRectangle.index + 1 : backgroundRectangle.index;
+
+                                                                const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), hour, minute);
+                                                                incidenceWrapper.setIncidenceEnd(posDate, true);
+                                                                Kalendar.CalendarManager.editIncidence(incidenceWrapper);
+                                                            }
                                                         }
 
                                                         Rectangle {
@@ -769,6 +791,7 @@ Kirigami.Page {
 
                                         delegate: Rectangle {
                                             id: incidenceDelegate
+                                            objectName: "incidenceDelegate"
 
                                             readonly property real gridLineYCompensation: (modelData.starts / hourlyView.periodsPerHour) * root.gridLineWidth
                                             readonly property real gridLineHeightCompensation: (modelData.duration / hourlyView.periodsPerHour) * root.gridLineWidth
@@ -788,8 +811,9 @@ Kirigami.Page {
                                             property var collectionId: modelData.collectionId
                                             property bool repositionAnimationEnabled: false
                                             property bool caught: false
-                                            property real caughtX: 0
-                                            property real caughtY: 0
+                                            property real caughtX: x
+                                            property real caughtY: y
+                                            property real caughtHeight: height
 
                                             Drag.active: mouseArea.drag.active
                                             Drag.hotSpot.x: mouseArea.mouseX
@@ -812,6 +836,14 @@ Kirigami.Page {
                                                 }
                                             }
 
+                                            Behavior on height {
+                                                enabled: repositionAnimationEnabled
+                                                NumberAnimation {
+                                                    duration: Kirigami.Units.shortDuration
+                                                    easing.type: Easing.OutCubic
+                                                }
+                                            }
+
                                             states: [
                                                 State {
                                                     when: incidenceDelegate.mouseArea.drag.active
@@ -826,6 +858,7 @@ Kirigami.Page {
                                                         repositionAnimationEnabled: true
                                                         x: caughtX
                                                         y: caughtY
+                                                        height: caughtHeight
                                                     }
                                                 }
                                             ]
@@ -913,6 +946,34 @@ Kirigami.Page {
                                                 onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
                                                 onTodoCompletedClicked: completeTodo(incidencePtr)
                                                 onAddSubTodoClicked: root.addSubTodo(parentWrapper)
+                                            }
+
+                                            MouseArea {
+                                                objectName: "endDtResizeMouseArea"
+                                                anchors.left: parent.left
+                                                anchors.bottom: parent.bottom
+                                                anchors.right: parent.right
+                                                height: 5
+                                                z: Infinity
+                                                cursorShape: !Kirigami.Settings.isMobile ? Qt.SplitVCursor : undefined
+                                                preventStealing: true
+                                                enabled: !Kirigami.Settings.isMobile && !modelData.isReadOnly
+                                                visible: true
+
+                                                drag.target: this
+                                                Drag.active: drag.active
+
+                                                onPressed: _lastY = mouseY;
+                                                onReleased: Drag.drop()
+                                                property real _lastY: -1
+
+                                                onPositionChanged: {
+                                                    if (_lastY === -1) {
+                                                        return;
+                                                    } else {
+                                                        parent.height = Math.max(root.periodHeight, parent.height - _lastY + mouseY)
+                                                    }
+                                                }
                                             }
                                         }
                                     }
