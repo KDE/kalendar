@@ -3,6 +3,7 @@
 
 #include "monthmodel.h"
 #include <QDate>
+#include <QDebug>
 #include <QRandomGenerator>
 
 struct MonthModel::Private {
@@ -153,8 +154,8 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
                 day = row - daysInMonth - prefix + 1;
             } else {
                 // Previous month
-                year = d->month > 0 ? d->year : d->year - 1;
-                month = d->month > 0 ? d->month - 1 : d->calendar.monthsInYear(year) - 1;
+                year = d->month > 1 ? d->year : d->year - 1;
+                month = d->month > 1 ? d->month - 1 : d->calendar.monthsInYear(year);
                 int daysInPreviousMonth = d->calendar.daysInMonth(month, year);
                 day = daysInPreviousMonth - prefix + row + 1;
             }
