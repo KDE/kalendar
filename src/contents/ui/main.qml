@@ -116,10 +116,6 @@ Kirigami.ApplicationWindow {
         id: closeOverlayAction
         shortcut: "Escape"
         onTriggered: {
-            if(applicationWindow().overlay.children[0].visible) {
-                applicationWindow().overlay.children[0].visible = false;
-                return;
-            }
             if(pageStack.layers.depth > 1) {
                 pageStack.layers.pop();
                 return;
