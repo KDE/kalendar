@@ -101,7 +101,6 @@ Kirigami.OverlayDrawer {
                 Kirigami.SearchField { // TODO: Make this open a new search results page
                     id: searchField
                     Layout.fillWidth: true
-                    placeholderText: i18n("Kalendar")
 
                     visible: sidebar.todoMode
                     opacity: sidebar.collapsed ? 0 : 1
