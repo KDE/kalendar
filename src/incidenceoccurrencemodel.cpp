@@ -121,58 +121,47 @@ void IncidenceOccurrenceModel::updateFromSource()
     load();
 
     if (m_coreCalendar) {
-        const auto allEvents = m_coreCalendar->events(mStart, mEnd); // get all events
-        const auto allTodos = m_coreCalendar->todos(mStart, mEnd);
+        KCalendarCore::OccurrenceIterator occurrenceIterator{*m_coreCalendar, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
 
-        Incidence::List allIncidences = Calendar::mergeIncidenceList(allEvents, allTodos, {});
+        while (occurrenceIterator.hasNext()) {
+            occurrenceIterator.next();
+            const auto incidence = occurrenceIterator.incidence();
 
-        // process all recurring events and their exceptions.
-        for (const auto &incidence : allIncidences) {
-            KCalendarCore::MemoryCalendar calendar{QTimeZone::systemTimeZone()};
-            calendar.addIncidence(incidence);
-
-            KCalendarCore::OccurrenceIterator occurrenceIterator{calendar, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
-
-            while (occurrenceIterator.hasNext()) {
-                occurrenceIterator.next();
-                const auto incidence = occurrenceIterator.incidence();
-
-                if (mFilter.contains(QLatin1String("tags")) && mFilter[QLatin1String("tags")].toStringList().length() > 0) {
-                    bool match = false;
-                    QStringList tags = mFilter[QLatin1String("tags")].toStringList();
-                    for (const auto &tag : tags) {
-                        if (incidence->categories().contains(tag)) {
-                            match = true;
-                            break;
-                        }
-                    }
-
-                    if (!match) {
-                        continue;
+            if (mFilter.contains(QLatin1String("tags")) && mFilter[QLatin1String("tags")].toStringList().length() > 0) {
+                bool match = false;
+                QStringList tags = mFilter[QLatin1String("tags")].toStringList();
+                for (const auto &tag : tags) {
+                    if (incidence->categories().contains(tag)) {
+                        match = true;
+                        break;
                     }
                 }
 
-                auto start = occurrenceIterator.occurrenceStartDate();
-                auto end = incidence->endDateForStart(start);
-
-                if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
-                    KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
-
-                    if (!start.isValid()) { // Todos are very likely not to have a set start date
-                        start = todo->dtDue();
-                    }
+                if (!match) {
+                    continue;
                 }
+            }
 
-                if (start.date() < mEnd && end.date() >= mStart) {
-                    m_incidences.append(Occurrence{
-                        start,
-                        end,
-                        incidence,
-                        getColor(incidence),
-                        getCollectionId(incidence),
-                        incidence->allDay(),
-                    });
+            auto start = occurrenceIterator.occurrenceStartDate();
+            auto end = incidence->endDateForStart(start);
+
+            if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
+                KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
+
+                if (!start.isValid()) { // Todos are very likely not to have a set start date
+                    start = todo->dtDue();
                 }
+            }
+
+            if (start.date() < mEnd && end.date() >= mStart) {
+                m_incidences.append(Occurrence{
+                    start,
+                    end,
+                    incidence,
+                    getColor(incidence),
+                    getCollectionId(incidence),
+                    incidence->allDay(),
+                });
             }
         }
     }

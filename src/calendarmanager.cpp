@@ -707,6 +707,83 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
     });
 }
 
+void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, int startOffset, int endOffset, int occurrences, const QDateTime &occurrenceDate)
+{ // start and end offsets are in msecs
+
+    Akonadi::Item item = m_calendar->item(incidenceWrapper->incidencePtr());
+    item.setPayload(incidenceWrapper->incidencePtr());
+
+    auto setNewDates = [&](KCalendarCore::Incidence::Ptr incidence) {
+        if (incidence->type() == KCalendarCore::Incidence::TypeTodo) {
+            // For to-dos endOffset is ignored because it will always be == to startOffset because we only
+            // support moving to-dos, not resizing them. There are no multi-day to-dos.
+            // Lets just call it offset to reduce confusion.
+            const int offset = startOffset;
+
+            KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
+            QDateTime due = todo->dtDue();
+            QDateTime start = todo->dtStart();
+            if (due.isValid()) { // Due has priority over start.
+                // We will only move the due date, unlike events where we move both.
+                due = due.addMSecs(offset);
+                todo->setDtDue(due);
+
+                if (start.isValid() && start > due) {
+                    // Start can't be bigger than due.
+                    todo->setDtStart(due);
+                }
+            } else if (start.isValid()) {
+                // So we're displaying a to-do that doesn't have due date, only start...
+                start = start.addMSecs(offset);
+                todo->setDtStart(start);
+            } else {
+                // This never happens
+                // qCWarning(CALENDARVIEW_LOG) << "Move what? uid:" << todo->uid() << "; summary=" << todo->summary();
+            }
+        } else {
+            incidence->setDtStart(incidence->dtStart().addMSecs(startOffset));
+            if (incidence->type() == KCalendarCore::Incidence::TypeEvent) {
+                KCalendarCore::Event::Ptr event = incidence.staticCast<KCalendarCore::Event>();
+                event->setDtEnd(event->dtEnd().addMSecs(endOffset));
+            }
+        }
+    };
+
+    if (incidenceWrapper->incidencePtr()->recurs()) {
+        switch (occurrences) {
+        case KCalUtils::RecurrenceActions::AllOccurrences: {
+            // All occurrences
+            KCalendarCore::Incidence::Ptr oldIncidence(incidenceWrapper->incidencePtr()->clone());
+            setNewDates(incidenceWrapper->incidencePtr());
+            qDebug() << incidenceWrapper->incidenceStart();
+            m_changer->modifyIncidence(item, oldIncidence);
+            break;
+        }
+        case KCalUtils::RecurrenceActions::SelectedOccurrence: // Just this occurrence
+        case KCalUtils::RecurrenceActions::FutureOccurrences: { // All future occurrences
+            const bool thisAndFuture = (occurrences == KCalUtils::RecurrenceActions::FutureOccurrences);
+            auto tzedOccurrenceDate = occurrenceDate.toTimeZone(incidenceWrapper->incidenceStart().timeZone());
+            KCalendarCore::Incidence::Ptr newIncidence(
+                KCalendarCore::Calendar::createException(incidenceWrapper->incidencePtr(), tzedOccurrenceDate, thisAndFuture));
+
+            if (newIncidence) {
+                m_changer->startAtomicOperation(i18n("Move occurrence(s)"));
+                setNewDates(newIncidence);
+                m_changer->createIncidence(newIncidence, m_calendar->collection(incidenceWrapper->collectionId()));
+                m_changer->endAtomicOperation();
+            } else {
+                qDebug() << i18n("Unable to add the exception item to the calendar. No change will be done.");
+            }
+            break;
+        }
+        }
+    } else { // Doesn't recur
+        KCalendarCore::Incidence::Ptr oldIncidence(incidenceWrapper->incidencePtr()->clone());
+        setNewDates(incidenceWrapper->incidencePtr());
+        m_changer->modifyIncidence(item, oldIncidence);
+    }
+}
+
 bool CalendarManager::hasChildren(KCalendarCore::Incidence::Ptr incidence)
 {
     return !m_calendar->childIncidences(incidence->uid()).isEmpty();

@@ -78,6 +78,11 @@ public:
 
     Q_INVOKABLE void addIncidence(IncidenceWrapper *incidenceWrapper);
     Q_INVOKABLE void editIncidence(IncidenceWrapper *incidenceWrapper);
+    Q_INVOKABLE void updateIncidenceDates(IncidenceWrapper *incidenceWrapper,
+                                          int startOffset,
+                                          int endOffset,
+                                          int occurrences = -1,
+                                          const QDateTime &occurrenceDate = QDateTime());
     Q_INVOKABLE bool hasChildren(KCalendarCore::Incidence::Ptr incidence);
     void deleteAllChildren(KCalendarCore::Incidence::Ptr incidence);
     Q_INVOKABLE void deleteIncidence(KCalendarCore::Incidence::Ptr incidence, bool deleteChildren = false);

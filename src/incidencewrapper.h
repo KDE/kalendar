@@ -5,6 +5,7 @@
 
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
+#include <KCalUtils/RecurrenceActions>
 #include <QByteArray>
 #include <QObject>
 #include <akonadi_version.h>
@@ -88,6 +89,13 @@ public:
         TypeJournal = KCalendarCore::IncidenceBase::TypeJournal,
     };
     Q_ENUM(IncidenceTypes)
+
+    enum RecurrenceActions {
+        AllOccurrences = KCalUtils::RecurrenceActions::AllOccurrences,
+        SelectedOccurrence = KCalUtils::RecurrenceActions::SelectedOccurrence,
+        FutureOccurrences = KCalUtils::RecurrenceActions::FutureOccurrences,
+    };
+    Q_ENUM(RecurrenceActions)
 
     IncidenceWrapper(QObject *parent = nullptr);
     ~IncidenceWrapper() override;

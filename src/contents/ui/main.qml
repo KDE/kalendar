@@ -866,7 +866,7 @@ Kirigami.ApplicationWindow {
             incidenceWrapper: incidenceWrapper,
             deleteDate: deleteDate
         }, {
-            width: Kirigami.Units.gridUnit * 30,
+            width: Kirigami.Units.gridUnit * 32,
             height: Kirigami.Units.gridUnit * 6
         });
 
@@ -883,6 +883,28 @@ Kirigami.ApplicationWindow {
         if(todo.incidenceType === IncidenceWrapper.TypeTodo) {
             todo.todoCompleted = !todo.todoCompleted;
             CalendarManager.editIncidence(todo);
+        }
+    }
+
+    function setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate) {
+        if(incidenceWrapper.recurrenceData.type === 0) {
+            CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset);
+        } else {
+            const openDialogWindow = pageStack.pushDialogLayer(recurringIncidenceChangeSheetComponent, {
+                incidenceWrapper: incidenceWrapper,
+                startOffset: startOffset,
+                endOffset: endOffset,
+                occurrenceDate: occurrenceDate,
+                caughtDelegate: caughtDelegate
+            }, {
+                width: Kirigami.Units.gridUnit * 34,
+                height: Kirigami.Units.gridUnit * 6,
+                onClosing: caughtDelegate.caught = false
+            });
+
+            if(!Kirigami.Settings.isMobile) {
+                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
+            }
         }
     }
 
@@ -953,6 +975,30 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    Component {
+        id: recurringIncidenceChangeSheetComponent
+        RecurringIncidenceChangeSheet {
+            id: recurringIncidenceChangeSheet
+
+            onChangeAll: {
+                CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset, IncidenceWrapper.AllOccurrences);
+                closeDialog();
+            }
+            onChangeThis: {
+                CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset, IncidenceWrapper.SelectedOccurrence, occurrenceDate);
+                closeDialog();
+            }
+            onChangeThisAndFuture: {
+                CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset, IncidenceWrapper.FutureOccurrences, occurrenceDate);
+                closeDialog();
+            }
+            onCancel: {
+                caughtDelegate.caught = false;
+                closeDialog();
+            }
+        }
+    }
+
     Loader {
         id: monthScaleModelLoader
         active: Config.lastOpenedView === Config.MonthView || Config.lastOpenedView === Config.ScheduleView
@@ -997,6 +1043,7 @@ Kirigami.ApplicationWindow {
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
+            onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
@@ -1035,6 +1082,7 @@ Kirigami.ApplicationWindow {
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
+            onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
 
             actions.contextualActions: createAction
         }
@@ -1071,6 +1119,8 @@ Kirigami.ApplicationWindow {
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
+            onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
+            onResizeIncidence: root.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
 
             actions.contextualActions: createAction
         }

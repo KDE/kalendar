@@ -14,6 +14,7 @@ Rectangle {
     id: incidenceDelegate
 
     x: ((dayWidth + parentViewSpacing) * modelData.starts) + horizontalSpacing
+    y: 0
     z: 10
     width: ((dayWidth + parentViewSpacing) * modelData.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
     //Behavior on width { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
@@ -56,6 +57,8 @@ Rectangle {
     property alias mouseArea: mouseArea
     property var incidencePtr: modelData.incidencePtr
     property var collectionId: modelData.collectionId
+    property date occurrenceDate: modelData.startTime
+    property date occurrenceEndDate: modelData.endTime
     property bool repositionAnimationEnabled: false
     property bool caught: false
     property real caughtX: 0
@@ -64,6 +67,32 @@ Rectangle {
     Drag.active: mouseArea.drag.active
     Drag.hotSpot.x: mouseArea.mouseX
     Drag.hotSpot.y: mouseArea.mouseY
+
+    states: [
+        State {
+            when: !incidenceDelegate.mouseArea.drag.active && !incidenceDelegate.caught
+        },
+        State {
+            when: incidenceDelegate.mouseArea.drag.active
+            ParentChange { target: incidenceDelegate; parent: root }
+            PropertyChanges {
+                target: incidenceDelegate
+                isOpenOccurrence: true
+                y: 0
+            }
+        },
+        State {
+            when: incidenceDelegate.caught
+            ParentChange { target: incidenceDelegate; parent: root }
+            PropertyChanges {
+                target: incidenceDelegate
+                repositionAnimationEnabled: true
+                x: caughtX
+                y: caughtY
+                opacity: 0
+            }
+        }
+    ]
 
     IncidenceBackground {
         id: incidenceBackground

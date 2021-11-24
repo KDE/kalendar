@@ -22,6 +22,7 @@ Item {
     signal completeTodo(var incidencePtr)
     signal addSubTodo(var parentWrapper)
     signal deselect()
+    signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
 
     property var openOccurrence
     property var model
@@ -169,8 +170,11 @@ Item {
                                                         const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
                                                         incidenceWrapper.incidencePtr = drop.source.incidencePtr;
                                                         incidenceWrapper.collectionId = drop.source.collectionId;
-                                                        incidenceWrapper.setIncidenceStartDate(backgroundDayMouseArea.addDate.getDate(), backgroundDayMouseArea.addDate.getMonth() + 1, backgroundDayMouseArea.addDate.getFullYear());
-                                                        Kalendar.CalendarManager.editIncidence(incidenceWrapper);
+
+                                                        let sameTimeOnDate = new Date(backgroundDayMouseArea.addDate);
+                                                        sameTimeOnDate = new Date(sameTimeOnDate.setHours(drop.source.occurrenceDate.getHours(), drop.source.occurrenceDate.getMinutes()));
+                                                        const offset = sameTimeOnDate.getTime() - drop.source.occurrenceDate.getTime();
+                                                        root.moveIncidence(offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
                                                     }
                                                 }
                                             }
@@ -304,25 +308,6 @@ Item {
                                         horizontalSpacing: linesRepeater.spacing
                                         openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                         isDark: root.isDark
-
-                                        states: [
-                                            State {
-                                                when: incidenceDelegate.mouseArea.drag.active
-                                                ParentChange { target: incidenceDelegate; parent: root }
-                                                PropertyChanges { target: incidenceDelegate; isOpenOccurrence: true }
-                                            },
-                                            State {
-                                                when: incidenceDelegate.caught
-                                                ParentChange { target: incidenceDelegate; parent: root }
-                                                PropertyChanges {
-                                                    target: incidenceDelegate
-                                                    repositionAnimationEnabled: true
-                                                    x: caughtX
-                                                    y: caughtY
-                                                    opacity: 0
-                                                }
-                                            }
-                                        ]
                                     }
                                 }
                             }
