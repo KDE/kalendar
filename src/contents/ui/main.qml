@@ -917,7 +917,7 @@ Kirigami.ApplicationWindow {
             }
             onDeleteIncidence: {
                 // Deleting an incidence also means deleting all of its occurrences
-                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
+                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
 
                     incidenceInfo.incidenceData = undefined;
                     root.openOccurrence = undefined;

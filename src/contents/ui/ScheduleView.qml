@@ -22,6 +22,13 @@ Kirigami.Page {
     signal addSubTodo(var parentWrapper)
     signal deselect()
 
+    onAddIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
+    onViewIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
+    onEditIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
+    onDeleteIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
+    onCompleteTodo: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
+    onAddSubTodo: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
+
     property var openOccurrence
     property var model
     property date selectedDate: new Date()
