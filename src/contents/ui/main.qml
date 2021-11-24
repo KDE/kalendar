@@ -228,10 +228,7 @@ Kirigami.ApplicationWindow {
 
         function onTodoViewShowCompleted() {
             const openDialogWindow = pageStack.pushDialogLayer(pageStack.currentItem.completedSheetComponent);
-
-            if(!Kirigami.Settings.isMobile) {
-                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-            }
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
         }
 
         function onImportCalendar() {
@@ -299,10 +296,7 @@ Kirigami.ApplicationWindow {
                 width: Kirigami.Units.gridUnit * 45,
                 height: Kirigami.Units.gridUnit * 35
             });
-
-            if(!Kirigami.Settings.isMobile) {
-                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-            }
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
         }
 
         function onOpenTagManager() {
@@ -313,9 +307,7 @@ Kirigami.ApplicationWindow {
                 height: Kirigami.Units.gridUnit * 30
             });
 
-            if(!Kirigami.Settings.isMobile) {
-                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-            }
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
         }
 
         function onOpenKCommandBarAction() {
@@ -448,9 +440,7 @@ Kirigami.ApplicationWindow {
                 height: Kirigami.Units.gridUnit * 6
             });
 
-            if(!Kirigami.Settings.isMobile) {
-                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-            }
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
         }
     }
 
@@ -693,9 +683,7 @@ Kirigami.ApplicationWindow {
                 height: Kirigami.Units.gridUnit * 8
             });
 
-            if(!Kirigami.Settings.isMobile) {
-                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-            }
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
         }
     }
 
@@ -729,9 +717,7 @@ Kirigami.ApplicationWindow {
                                 height: Kirigami.Units.gridUnit * 30
                             });
 
-                            if(!Kirigami.Settings.isMobile) {
-                                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-                            }
+                            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
                         }
                     }
                     QQC2.Button {
@@ -884,9 +870,7 @@ Kirigami.ApplicationWindow {
             height: Kirigami.Units.gridUnit * 6
         });
 
-        if(!Kirigami.Settings.isMobile) {
-            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
+        openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
     }
 
     function completeTodo(incidencePtr) {
