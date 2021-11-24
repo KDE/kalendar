@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.15
+import QtQml 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
@@ -33,7 +34,10 @@ Kirigami.Page {
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
     property real maxTimeLabelWidth: 0
 
-    onSelectedDateChanged: moveToSelected()
+    onSelectedDateChanged: {
+        pathView.currentItem.item.savedYScrollPos = 0;
+        moveToSelected();
+    }
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -46,6 +50,12 @@ Kirigami.Page {
         if (!pathView.currentItem || !pathView.currentItem.item) {
             return;
         }
+
+        if (pathView.currentItem.item.savedYScrollPos > 0) {
+            pathView.currentItem.item.QQC2.ScrollBar.vertical.position = pathView.currentItem.item.savedYScrollPos;
+            return;
+        }
+
         if (selectedDate.getDate() > 1) {
             pathView.currentItem.item.scheduleListView.positionViewAtIndex(selectedDate.getDate() - 1, ListView.Beginning);
         } else {
@@ -164,11 +174,14 @@ Kirigami.Page {
             asynchronous: !isCurrentItem
             visible: status === Loader.Ready
             sourceComponent: QQC2.ScrollView {
+                id: scrollView
                 width: pathView.width
                 height: pathView.height
                 contentWidth: availableWidth
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-                property alias scheduleListView: scheduleListView
+
+                readonly property alias scheduleListView: scheduleListView
+                property real savedYScrollPos
 
                 ListView {
                     id: scheduleListView
@@ -182,7 +195,9 @@ Kirigami.Page {
                     Layout.bottomMargin: Kirigami.Units.largeSpacing * 5
                     highlightRangeMode: ListView.ApplyRange
 
-                    onCountChanged: if(root.initialMonth) root.moveToSelected()
+                    onCountChanged: {
+                        if(root.initialMonth) root.moveToSelected();
+                    }
 
                     Component {
                         id: monthHeaderComponent
@@ -225,12 +240,12 @@ Kirigami.Page {
                             anchors.fill: parent
                             z: 9999
                             onDropped: if(viewLoader.isCurrentItem) {
+                                scrollView.savedYScrollPos = scrollView.QQC2.ScrollBar.vertical.visualPosition;
+
                                 const pos = mapToItem(root, backgroundRectangle.x, backgroundRectangle.y);
                                 drop.source.caughtX = pos.x + dayGrid.dayLabelWidth + Kirigami.Units.largeSpacing;
                                 drop.source.caughtY = pos.y + dayColumn.spacing + Kirigami.Units.largeSpacing;
                                 drop.source.caught = true;
-
-                                root.selectedDate = dayMouseArea.addDate;
 
                                 const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
                                 incidenceWrapper.incidencePtr = drop.source.incidencePtr;
