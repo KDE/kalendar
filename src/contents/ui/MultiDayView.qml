@@ -16,8 +16,8 @@ Item {
     id: root
 
     signal addIncidence(int type, date addDate)
-    signal viewIncidence(var modelData, var collectionData)
-    signal editIncidence(var incidencePtr, var collectionId)
+    signal viewIncidence(var modelData)
+    signal editIncidence(var incidencePtr)
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
     signal addSubTodo(var parentWrapper)
@@ -168,8 +168,7 @@ Item {
                                                         drop.source.caught = true;
 
                                                         const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
-                                                        incidenceWrapper.incidencePtr = drop.source.incidencePtr;
-                                                        incidenceWrapper.collectionId = drop.source.collectionId;
+                                                        incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
                                                         let sameTimeOnDate = new Date(backgroundDayMouseArea.addDate);
                                                         sameTimeOnDate = new Date(sameTimeOnDate.setHours(drop.source.occurrenceDate.getHours(), drop.source.occurrenceDate.getMinutes()));

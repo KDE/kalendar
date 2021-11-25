@@ -76,6 +76,7 @@ public:
     Q_INVOKABLE int getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper);
     QVariantMap undoRedoData();
 
+    Q_INVOKABLE Akonadi::Item incidenceItem(KCalendarCore::Incidence::Ptr incidence);
     Q_INVOKABLE void addIncidence(IncidenceWrapper *incidenceWrapper);
     Q_INVOKABLE void editIncidence(IncidenceWrapper *incidenceWrapper);
     Q_INVOKABLE void updateIncidenceDates(IncidenceWrapper *incidenceWrapper,

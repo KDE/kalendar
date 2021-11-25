@@ -659,6 +659,11 @@ QVariantMap CalendarManager::undoRedoData()
     };
 }
 
+Akonadi::Item CalendarManager::incidenceItem(KCalendarCore::Incidence::Ptr incidence)
+{
+    return m_calendar->item(incidence);
+}
+
 void CalendarManager::addIncidence(IncidenceWrapper *incidenceWrapper)
 {
     Akonadi::Collection collection(incidenceWrapper->collectionId());

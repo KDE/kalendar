@@ -10,8 +10,8 @@ import org.kde.kalendar 1.0 as Kalendar
 MouseArea {
     id: mouseArea
 
-    signal viewClicked(var incidenceData, var collectionData)
-    signal editClicked(var incidencePtr, var collectionId)
+    signal viewClicked(var incidenceData)
+    signal editClicked(var incidencePtr)
     signal deleteClicked(var incidencePtr, date deleteDate)
     signal todoCompletedClicked(var incidencePtr)
     signal addSubTodoClicked(var parentWrapper)
@@ -19,7 +19,7 @@ MouseArea {
     property double clickX
     property double clickY
     property var incidenceData
-    property var collectionId
+    property int collectionId
     property var collectionDetails
 
     anchors.fill: parent
@@ -27,8 +27,8 @@ MouseArea {
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     onClicked: {
         if (mouse.button == Qt.LeftButton) {
-            collectionDetails = Kalendar.CalendarManager.getCollectionDetails(collectionId)
-            viewClicked(incidenceData, collectionDetails);
+            collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+            viewClicked(incidenceData);
         } else if (mouse.button == Qt.RightButton) {
             clickX = mouseX;
             clickY = mouseY;
@@ -41,8 +41,8 @@ MouseArea {
         incidenceActions.createObject(mouseArea, {}).open();
     }
     onDoubleClicked: {
-        collectionDetails = Kalendar.CalendarManager.getCollectionDetails(collectionId);
-        editClicked(incidenceData.incidencePtr, incidenceData.collectionId);
+        collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+        editClicked(incidenceData.incidencePtr);
     }
 
     Component {
@@ -57,13 +57,13 @@ MouseArea {
             QQC2.MenuItem {
                 icon.name: "dialog-icon-preview"
                 text:i18n("View")
-                onClicked: viewClicked(incidenceData, collectionDetails);
+                onClicked: viewClicked(incidenceData);
             }
             QQC2.MenuItem {
                 icon.name: "edit-entry"
                 text:i18n("Edit")
                 enabled: !mouseArea.collectionDetails["readOnly"]
-                onClicked: editClicked(incidenceData.incidencePtr, incidenceData.collectionId)
+                onClicked: editClicked(incidenceData.incidencePtr)
             }
             QQC2.MenuItem {
                 icon.name: "edit-delete"
@@ -87,8 +87,7 @@ MouseArea {
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: {
                     let parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
-                    parentWrapper.incidencePtr = mouseArea.incidenceData.incidencePtr;
-                    parentWrapper.collectionId = mouseArea.collectionDetails.id;
+                    parentWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
                     addSubTodoClicked(parentWrapper);
                 }
                 visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo

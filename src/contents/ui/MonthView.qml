@@ -15,8 +15,8 @@ Kirigami.Page {
     id: monthPage
 
     signal addIncidence(int type, date addDate)
-    signal viewIncidence(var modelData, var collectionData)
-    signal editIncidence(var incidencePtr, var collectionId)
+    signal viewIncidence(var modelData)
+    signal editIncidence(var incidencePtr)
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
     signal addSubTodo(var parentWrapper)
@@ -209,8 +209,8 @@ Kirigami.Page {
                 openOccurrence: monthPage.openOccurrence
 
                 onAddIncidence: monthPage.addIncidence(type, addDate)
-                onViewIncidence: monthPage.viewIncidence(modelData, collectionData)
-                onEditIncidence: monthPage.editIncidence(incidencePtr, collectionId)
+                onViewIncidence: monthPage.viewIncidence(modelData)
+                onEditIncidence: monthPage.editIncidence(incidencePtr)
                 onDeleteIncidence: monthPage.deleteIncidence(incidencePtr, deleteDate)
                 onCompleteTodo: monthPage.completeTodo(incidencePtr)
                 onAddSubTodo: monthPage.addSubTodo(parentWrapper)

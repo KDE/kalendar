@@ -56,7 +56,6 @@ Rectangle {
     property bool isDark: false
     property alias mouseArea: mouseArea
     property var incidencePtr: modelData.incidencePtr
-    property var collectionId: modelData.collectionId
     property date occurrenceDate: modelData.startTime
     property date occurrenceEndDate: modelData.endTime
     property bool repositionAnimationEnabled: false
@@ -162,8 +161,8 @@ Rectangle {
         drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? parent : undefined
         onReleased: parent.Drag.drop()
 
-        onViewClicked: viewIncidence(modelData, collectionData)
-        onEditClicked: editIncidence(incidencePtr, collectionId)
+        onViewClicked: viewIncidence(modelData)
+        onEditClicked: editIncidence(incidencePtr)
         onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
         onTodoCompletedClicked: completeTodo(incidencePtr)
         onAddSubTodoClicked: root.addSubTodo(parentWrapper)

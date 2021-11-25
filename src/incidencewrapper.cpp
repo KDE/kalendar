@@ -9,14 +9,8 @@
 
 IncidenceWrapper::IncidenceWrapper(QObject *parent)
     : QObject(parent)
-    , KCalendarCore::IncidenceBase::IncidenceObserver()
-    , m_incidence(new KCalendarCore::Event)
-    , m_remindersModel(parent, m_incidence)
-    , m_attendeesModel(parent, m_incidence)
-    , m_recurrenceExceptionsModel(parent, m_incidence)
-    , m_attachmentsModel(parent, m_incidence)
+    , Akonadi::ItemMonitor()
 {
-    m_incidence->registerObserver(this);
     // Change incidence pointer in remindersmodel if changed here
     connect(this, &IncidenceWrapper::incidencePtrChanged, &m_remindersModel, [=](KCalendarCore::Incidence::Ptr incidencePtr) {
         m_remindersModel.setIncidencePtr(incidencePtr);
@@ -30,25 +24,20 @@ IncidenceWrapper::IncidenceWrapper(QObject *parent)
     connect(this, &IncidenceWrapper::incidencePtrChanged, &m_attachmentsModel, [=](KCalendarCore::Incidence::Ptr incidencePtr) {
         m_attachmentsModel.setIncidencePtr(incidencePtr);
     });
+
+    Akonadi::ItemFetchScope scope;
+    scope.fetchFullPayload();
+    scope.fetchAllAttributes();
+    scope.setFetchRelations(true);
+    scope.setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+    setFetchScope(scope);
+
+    setNewEvent();
 }
 
 IncidenceWrapper::~IncidenceWrapper()
 {
-    m_incidence->unRegisterObserver(this);
-}
 
-void IncidenceWrapper::incidenceUpdate(const QString &uid, const QDateTime &)
-{
-    if (uid == m_incidence->uid()) {
-        Q_EMIT incidenceAboutToChange();
-    }
-}
-
-void IncidenceWrapper::incidenceUpdated(const QString &uid, const QDateTime &)
-{
-    if (uid == m_incidence->uid()) {
-        notifyDataChanged();
-    }
 }
 
 void IncidenceWrapper::notifyDataChanged()
@@ -83,6 +72,23 @@ void IncidenceWrapper::notifyDataChanged()
     Q_EMIT todoPercentCompleteChanged();
 }
 
+Akonadi::Item IncidenceWrapper::incidenceItem() const
+{
+    return item();
+}
+
+void IncidenceWrapper::setIncidenceItem(const Akonadi::Item &incidenceItem)
+{
+    if (incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
+        setItem(incidenceItem);
+        setIncidencePtr(incidenceItem.payload<KCalendarCore::Incidence::Ptr>());
+        Q_EMIT incidenceItemChanged();
+        Q_EMIT collectionIdChanged();
+    } else {
+        qWarning() << "This is not an incidence item.";
+    }
+}
+
 KCalendarCore::Incidence::Ptr IncidenceWrapper::incidencePtr() const
 {
     return m_incidence;
@@ -90,9 +96,7 @@ KCalendarCore::Incidence::Ptr IncidenceWrapper::incidencePtr() const
 
 void IncidenceWrapper::setIncidencePtr(const KCalendarCore::Incidence::Ptr incidencePtr)
 {
-    m_incidence->unRegisterObserver(this);
     m_incidence = incidencePtr;
-    m_incidence->registerObserver(this);
 
     KCalendarCore::Incidence::Ptr originalIncidence(incidencePtr->clone());
     m_originalIncidence = originalIncidence;
@@ -129,7 +133,7 @@ QString IncidenceWrapper::uid() const
 
 qint64 IncidenceWrapper::collectionId() const
 {
-    return m_collectionId;
+    return m_collectionId < 0 ? item().parentCollection().id() : m_collectionId;
 }
 
 void IncidenceWrapper::setCollectionId(qint64 collectionId)
@@ -641,13 +645,18 @@ void IncidenceWrapper::setNewEvent()
     auto event = KCalendarCore::Event::Ptr(new KCalendarCore::Event);
     event->setDtStart(QDateTime::currentDateTime());
     event->setDtEnd(QDateTime::currentDateTime().addSecs(60 * 60));
-    setIncidencePtr(event);
+
+    Akonadi::Item incidenceItem;
+    incidenceItem.setPayload<KCalendarCore::Event::Ptr>(event);
+    setIncidenceItem(incidenceItem);
 }
 
 void IncidenceWrapper::setNewTodo()
 {
     auto todo = KCalendarCore::Todo::Ptr(new KCalendarCore::Todo);
-    setIncidencePtr(todo);
+    Akonadi::Item incidenceItem;
+    incidenceItem.setPayload<KCalendarCore::Todo::Ptr>(todo);
+    setIncidenceItem(incidenceItem);
 }
 
 void IncidenceWrapper::addAlarms(KCalendarCore::Alarm::List alarms)
@@ -699,6 +708,14 @@ void IncidenceWrapper::clearRecurrences()
 {
     m_incidence->recurrence()->clear();
     Q_EMIT recurrenceDataChanged();
+}
+
+void IncidenceWrapper::itemChanged(const Akonadi::Item &item)
+{
+    if (item.hasPayload<KCalendarCore::Incidence::Ptr>()) {
+        qDebug() << item.payload<KCalendarCore::Incidence::Ptr>()->summary() << item.parentCollection().id();
+        setIncidencePtr(item.payload<KCalendarCore::Incidence::Ptr>());
+    }
 }
 
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);

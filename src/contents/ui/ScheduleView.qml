@@ -15,8 +15,8 @@ Kirigami.Page {
     id: root
 
     signal addIncidence(int type, date addDate)
-    signal viewIncidence(var modelData, var collectionData)
-    signal editIncidence(var incidencePtr, var collectionId)
+    signal viewIncidence(var modelData)
+    signal editIncidence(var incidencePtr)
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
     signal addSubTodo(var parentWrapper)
@@ -257,8 +257,7 @@ Kirigami.Page {
                                 drop.source.caught = true;
 
                                 const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
-                                incidenceWrapper.incidencePtr = drop.source.incidencePtr;
-                                incidenceWrapper.collectionId = drop.source.collectionId;
+                                incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
                                 let sameTimeOnDate = new Date(dayMouseArea.addDate);
                                 sameTimeOnDate = new Date(sameTimeOnDate.setHours(drop.source.occurrenceDate.getHours(), drop.source.occurrenceDate.getMinutes()));
@@ -399,7 +398,6 @@ Kirigami.Page {
 
                                                 property alias mouseArea: incidenceMouseArea
                                                 property var incidencePtr: modelData.incidencePtr
-                                                property var collectionId: modelData.collectionId
                                                 property date occurrenceDate: modelData.startTime
                                                 property date occurrenceEndDate: modelData.endTime
                                                 property bool repositionAnimationEnabled: false
@@ -576,8 +574,8 @@ Kirigami.Page {
                                                     drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? incidenceCard : undefined
                                                     onReleased: incidenceCard.Drag.drop()
 
-                                                    onViewClicked: root.viewIncidence(modelData, collectionData)
-                                                    onEditClicked: root.editIncidence(incidencePtr, collectionId)
+                                                    onViewClicked: root.viewIncidence(modelData)
+                                                    onEditClicked: root.editIncidence(incidencePtr)
                                                     onDeleteClicked: root.deleteIncidence(incidencePtr, deleteDate)
                                                     onTodoCompletedClicked: root.completeTodo(incidencePtr)
                                                     onAddSubTodoClicked: root.addSubTodo(parentWrapper)

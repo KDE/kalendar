@@ -15,8 +15,8 @@ Kirigami.Page {
     id: root
 
     signal addIncidence(int type, date addDate, bool includeTime)
-    signal viewIncidence(var modelData, var collectionData)
-    signal editIncidence(var incidencePtr, var collectionId)
+    signal viewIncidence(var modelData)
+    signal editIncidence(var incidencePtr)
     signal deleteIncidence(var incidencePtr, date deleteDate)
     signal completeTodo(var incidencePtr)
     signal addSubTodo(var parentWrapper)
@@ -446,8 +446,7 @@ Kirigami.Page {
                                                                         drop.source.caught = true;
 
                                                                         const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
-                                                                        incidenceWrapper.incidencePtr = drop.source.incidencePtr;
-                                                                        incidenceWrapper.collectionId = drop.source.collectionId;
+                                                                        incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
                                                                         let sameTimeOnDate = new Date(listViewMenu.addDate);
                                                                         sameTimeOnDate = new Date(sameTimeOnDate.setHours(drop.source.occurrenceDate.getHours(), drop.source.occurrenceDate.getMinutes()));
@@ -718,8 +717,7 @@ Kirigami.Page {
                                                             let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
 
                                                             if(drop.source.objectName === "incidenceDelegate") {
-                                                                incidenceWrapper.incidencePtr = drop.source.incidencePtr;
-                                                                incidenceWrapper.collectionId = drop.source.collectionId;
+                                                                incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
                                                                 const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
                                                                 drop.source.caughtX = pos.x + incidenceSpacing;
@@ -733,8 +731,7 @@ Kirigami.Page {
                                                                 root.moveIncidence(startOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
 
                                                             } else { // The resize affects the end time
-                                                                incidenceWrapper.incidencePtr = drop.source.parent.incidencePtr;
-                                                                incidenceWrapper.collectionId = drop.source.parent.collectionId;
+                                                                incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.parent.incidencePtr);
 
                                                                 const pos = mapToItem(drop.source.parent, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
                                                                 drop.source.parent.caughtHeight = (pos.y + dropAreaHighlightRectangle.height - incidenceSpacing)
@@ -795,7 +792,6 @@ Kirigami.Page {
 
                                             property alias mouseArea: mouseArea
                                             property var incidencePtr: modelData.incidencePtr
-                                            property var collectionId: modelData.collectionId
                                             property date occurrenceDate: modelData.startTime
                                             property date occurrenceEndDate: modelData.endTime
                                             property bool repositionAnimationEnabled: false
@@ -929,8 +925,8 @@ Kirigami.Page {
                                                 drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? parent : undefined
                                                 onReleased: parent.Drag.drop()
 
-                                                onViewClicked: viewIncidence(modelData, collectionData)
-                                                onEditClicked: editIncidence(incidencePtr, collectionId)
+                                                onViewClicked: viewIncidence(modelData)
+                                                onEditClicked: editIncidence(incidencePtr)
                                                 onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
                                                 onTodoCompletedClicked: completeTodo(incidencePtr)
                                                 onAddSubTodoClicked: root.addSubTodo(parentWrapper)

@@ -18,27 +18,25 @@ Kirigami.ScrollablePage {
     id: root
 
     signal addTodo(int collectionId)
-    signal viewTodo(var todoData, var collectionData)
-    signal editTodo(var todoPtr, int collectionId)
+    signal viewTodo(var todoData)
+    signal editTodo(var todoPtr)
     signal deleteTodo(var todoPtr, date deleteDate)
     signal completeTodo(var todoPtr)
     signal addSubTodo(var parentWrapper)
     signal deselect
 
     // We need to store a copy of opened incidence data or we will lose it as we scroll the listviews.
-    function retainTodoData(todoData, collectionData) {
+    function retainTodoData(todoData) {
         retainedTodoData = {
             incidencePtr: todoData.incidencePtr,
             incidenceId: todoData.incidenceId,
-            collectionId: collectionData.id,
             text: todoData.text,
             color: todoData.color,
             startTime: todoData.startTime,
             endTime: todoData.endTime,
             durationString: todoData.durationString
         };
-        retainedCollectionData = Kalendar.CalendarManager.getCollectionDetails(collectionData.id);
-        viewTodo(retainedTodoData, retainedCollectionData);
+        viewTodo(retainedTodoData);
     }
 
     property var retainedTodoData: {}
@@ -144,11 +142,11 @@ Kirigami.ScrollablePage {
                 completedSheet.closeDialog();
             }
             onViewTodo: {
-                root.retainTodoData(todoData, collectionData);
+                root.retainTodoData(todoData);
                 completedSheet.closeDialog();
             }
             onEditTodo: {
-                root.editTodo(todoPtr, collectionId);
+                root.editTodo(todoPtr);
                 completedSheet.closeDialog();
             }
             onDeleteTodo: {
@@ -191,8 +189,8 @@ Kirigami.ScrollablePage {
         sortBy: root.sortBy
         ascendingOrder: root.ascendingOrder
         onAddTodo: root.addTodo(collectionId)
-        onViewTodo: root.retainTodoData(todoData, collectionData)
-        onEditTodo: root.editTodo(todoPtr, collectionId)
+        onViewTodo: root.retainTodoData(todoData)
+        onEditTodo: root.editTodo(todoPtr)
         onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
         onCompleteTodo: root.completeTodo(todoPtr);
         onAddSubTodo: root.addSubTodo(parentWrapper)

@@ -16,8 +16,8 @@ TreeListView {
     id: root
 
     signal addTodo(int collectionId)
-    signal viewTodo(var todoData, var collectionData)
-    signal editTodo(var todoPtr, var collectionId)
+    signal viewTodo(var todoData)
+    signal editTodo(var todoPtr)
     signal deleteTodo(var todoPtr, date deleteDate)
     signal completeTodo(var todoPtr)
     signal addSubTodo(var parentWrapper)
@@ -152,8 +152,8 @@ TreeListView {
             collectionId: model.collectionId
             propagateComposedEvents: true
 
-            onViewClicked: root.viewTodo(model, collectionDetails), listItem.clicked()
-            onEditClicked: root.editTodo(model.incidencePtr, model.collectionId)
+            onViewClicked: root.viewTodo(model), listItem.clicked()
+            onEditClicked: root.editTodo(model.incidencePtr)
             onDeleteClicked: root.deleteTodo(model.incidencePtr, model.endTime ? model.endTime : model.startTime ? model.startTime : null)
             onTodoCompletedClicked: model.checked = model.checked === 0 ? 2 : 0
             onAddSubTodoClicked: root.addSubTodo(parentWrapper)
@@ -267,6 +267,6 @@ TreeListView {
             }
         }
 
-        onClicked: root.viewTodo(model, Kalendar.CalendarManager.getCollectionDetails(model.collectionId))
+        onClicked: root.viewTodo(model)
     }
 }

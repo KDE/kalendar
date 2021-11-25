@@ -472,7 +472,7 @@ Kirigami.ApplicationWindow {
             if (modal) { incidenceInfo.close() }
         }
         onEditIncidence: {
-            setUpEdit(incidencePtr, collectionId);
+            setUpEdit(incidencePtr);
             if (modal) { incidenceInfo.close() }
         }
         onDeleteIncidence: {
@@ -842,25 +842,23 @@ Kirigami.ApplicationWindow {
         editorToUse.incidenceWrapper.incidenceEnd = parentWrapper.incidenceEnd;
     }
 
-    function setUpView(modelData, collectionData) {
-        incidenceInfo.incidenceData = modelData
-        incidenceInfo.collectionData = collectionData
-        incidenceInfo.open()
+    function setUpView(modelData) {
+        incidenceInfo.incidenceData = modelData;
+        incidenceInfo.open();
     }
 
-    function setUpEdit(incidencePtr, collectionId) {
+    function setUpEdit(incidencePtr) {
         let editorToUse = root.editorToUse();
         editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
             editorToUse, "incidence");
-        editorToUse.incidenceWrapper.incidencePtr = incidencePtr;
+        editorToUse.incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
         editorToUse.incidenceWrapper.triggerEditMode();
-        editorToUse.incidenceWrapper.collectionId = collectionId;
         editorToUse.editMode = true;
     }
 
     function setUpDelete(incidencePtr, deleteDate) {
         let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', root, "incidence");
-        incidenceWrapper.incidencePtr = incidencePtr;
+        incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
 
         const openDialogWindow = pageStack.pushDialogLayer(deleteIncidenceSheetComponent, {
             incidenceWrapper: incidenceWrapper,
@@ -877,8 +875,7 @@ Kirigami.ApplicationWindow {
         let todo = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
             this, "incidence");
 
-        todo.incidencePtr = incidencePtr;
-        todo.collectionId = -1;
+        todo.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
 
         if(todo.incidenceType === IncidenceWrapper.TypeTodo) {
             todo.todoCompleted = !todo.todoCompleted;
@@ -1037,8 +1034,8 @@ Kirigami.ApplicationWindow {
             model: monthScaleModelLoader.item
 
             onAddIncidence: root.setUpAdd(type, addDate)
-            onViewIncidence: root.setUpView(modelData, collectionData)
-            onEditIncidence: root.setUpEdit(incidencePtr, collectionId)
+            onViewIncidence: root.setUpView(modelData)
+            onEditIncidence: root.setUpEdit(incidencePtr)
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
@@ -1076,8 +1073,8 @@ Kirigami.ApplicationWindow {
             Component.onCompleted: setToDate(root.selectedDate, true)
 
             onAddIncidence: root.setUpAdd(type, addDate)
-            onViewIncidence: root.setUpView(modelData, collectionData)
-            onEditIncidence: root.setUpEdit(incidencePtr, collectionId)
+            onViewIncidence: root.setUpView(modelData)
+            onEditIncidence: root.setUpEdit(incidencePtr)
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
@@ -1113,8 +1110,8 @@ Kirigami.ApplicationWindow {
             Component.onCompleted: setToDate(root.selectedDate, true)
 
             onAddIncidence: root.setUpAdd(type, addDate, null, includeTime)
-            onViewIncidence: root.setUpView(modelData, collectionData)
-            onEditIncidence: root.setUpEdit(incidencePtr, collectionId)
+            onViewIncidence: root.setUpView(modelData)
+            onEditIncidence: root.setUpEdit(incidencePtr)
             onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: root.completeTodo(incidencePtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
@@ -1160,8 +1157,8 @@ Kirigami.ApplicationWindow {
             filter: if(root.filter) root.filter
 
             onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
-            onViewTodo: root.setUpView(todoData, collectionData)
-            onEditTodo: root.setUpEdit(todoPtr, collectionId)
+            onViewTodo: root.setUpView(todoData)
+            onEditTodo: root.setUpEdit(todoPtr)
             onDeleteTodo: root.setUpDelete(todoPtr, deleteDate)
             onCompleteTodo: root.completeTodo(todoPtr)
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
