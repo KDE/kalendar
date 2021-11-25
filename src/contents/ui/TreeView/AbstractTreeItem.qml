@@ -50,11 +50,28 @@ Kirigami.AbstractListItem {
         }
     ]
 
-    onDoubleClicked: {
-        if (kDescendantExpandable) {
-            decoration.model.toggleChildren(index);
+    Keys.onLeftPressed: if (kDescendantExpandable && kDescendantExpanded) {
+        decoration.model.collapseChildren(index);
+    } else if (!kDescendantExpandable && kDescendantLevel > 0) {
+        if (delegate.ListView.view) {
+            const sourceIndex = decoration.model.mapToSource(decoration.model.index(index, 0));
+            const newIndex = decoration.model.mapFromSource(sourceIndex.parent);
+            delegate.ListView.view.currentIndex = newIndex.row;
         }
     }
+
+    Keys.onRightPressed: if (kDescendantExpandable) {
+        if (kDescendantExpanded && delegate.ListView.view) {
+            ListView.view.incrementCurrentIndex();
+        } else {
+            decoration.model.expandChildren(index);
+        }
+    }
+
+    onDoubleClicked: if (kDescendantExpandable) {
+        decoration.model.toggleChildren(index);
+    }
+
     // FIXME: it should probably use leftInset property but Kirigami.AbstractListItem doesn't have it because can't import QQC2 more than 2.0
     background.anchors {
         left: delegate.left
