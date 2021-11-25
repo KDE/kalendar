@@ -364,7 +364,8 @@ bool TodoSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
     // To-dos without due date should appear last when sorting ascending,
     // so you can see the most urgent tasks first. (bug #174763)
     if (right.column() == TodoModel::DueDateColumn) {
-        const int comparison = compareDueDates(left, right);
+        QModelIndex leftDueDateIndex = left.sibling(left.row(), TodoModel::DueDateColumn); // Prevent possible assert fail
+        const int comparison = compareDueDates(leftDueDateIndex, right);
 
         if (comparison != 0) {
             return comparison == -1;
