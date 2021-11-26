@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "timezonelistmodel.h"
+#include "kalendar_debug.h"
 #include <KLocalizedString>
 #include <QByteArray>
 #include <QDebug>
@@ -37,7 +38,7 @@ QVariant TimeZoneListModel::data(const QModelIndex &idx, int role) const
     case IdRole:
         return timeZone;
     default:
-        qWarning() << "Unknown role for timezone:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_LOG) << "Unknown role for timezone:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "hourlyincidencemodel.h"
+#include "kalendar_debug.h"
 #include <QTimeZone>
 
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
@@ -62,7 +63,7 @@ QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const Q
 
         // Skip incidences not part of the week
         if (end < rowStart || start > rowEnd) {
-            // qWarning() << "Skipping because not part of this week";
+            // qCWarning(KALENDAR_LOG) << "Skipping because not part of this week";
             continue;
         }
 
@@ -73,7 +74,8 @@ QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const Q
         if (m_filters.testFlag(NoMultiDay) && srcIdx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
             continue;
         }
-        // qWarning() << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
+        // qCWarning(KALENDAR_LOG) << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
+        // srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         sorted.append(srcIdx);
     }
 
@@ -115,7 +117,8 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
     const auto rowEnd = rowStart.date().endOfDay();
 
     // for (const auto &srcIdx : sorted) {
-    //     qWarning() << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString()
+    //     qCWarning(KALENDAR_LOG) << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
+    //     srcIdx.data(IncidenceOccurrenceModel::Summary).toString()
     //     << srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
     // }
     auto result = QVariantList{};

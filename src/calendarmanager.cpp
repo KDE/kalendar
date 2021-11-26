@@ -872,7 +872,7 @@ void CalendarManager::setCollectionColor(qint64 collectionId, QColor color)
     auto modifyJob = new Akonadi::CollectionModifyJob(collection);
     connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob *job) {
         if (job->error()) {
-            qWarning() << "Error occurred modifying collection color: " << job->errorString();
+            qCWarning(KALENDAR_LOG) << "Error occurred modifying collection color: " << job->errorString();
         } else {
             m_baseModel->colorCache[QString::number(collectionId)] = color;
             m_baseModel->save();
@@ -914,7 +914,7 @@ void CalendarManager::deleteCollection(qint64 collectionId)
         auto job = new Akonadi::CollectionDeleteJob(collection, this);
         connect(job, &Akonadi::CollectionDeleteJob::result, this, [this](KJob *job) {
             if (job->error()) {
-                qWarning() << "Error occurred deleting collection: " << job->errorString();
+                qCWarning(KALENDAR_LOG) << "Error occurred deleting collection: " << job->errorString();
             }
         });
         return;

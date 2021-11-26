@@ -82,7 +82,7 @@ void IncidenceWrapper::setIncidenceItem(const Akonadi::Item &incidenceItem)
         Q_EMIT incidenceItemChanged();
         Q_EMIT collectionIdChanged();
     } else {
-        qWarning() << "This is not an incidence item.";
+        qCWarning(KALENDAR_LOG) << "This is not an incidence item.";
     }
 }
 
@@ -315,7 +315,7 @@ void IncidenceWrapper::setIncidenceEnd(const QDateTime &incidenceEnd, bool respe
         KCalendarCore::Todo::Ptr todo = m_incidence.staticCast<KCalendarCore::Todo>();
         todo->setDtDue(end);
     } else {
-        qWarning() << "Unknown incidence type";
+        qCWarning(KALENDAR_LOG) << "Unknown incidence type";
     }
     Q_EMIT incidenceEndChanged();
     Q_EMIT incidenceEndDateDisplayChanged();
@@ -683,7 +683,7 @@ void IncidenceWrapper::setRegularRecurrence(IncidenceWrapper::RecurrenceInterval
         Q_EMIT recurrenceDataChanged();
         return;
     default:
-        qWarning() << "Unknown interval for recurrence" << interval;
+        qCWarning(KALENDAR_LOG) << "Unknown interval for recurrence" << interval;
         return;
     }
 }

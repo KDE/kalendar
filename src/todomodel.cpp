@@ -5,6 +5,7 @@
 */
 
 #include "incidencetreemodel.h"
+#include "kalendar_debug.h"
 #include "todomodel_p.h"
 
 #include <CalendarSupport/KCalPrefs>

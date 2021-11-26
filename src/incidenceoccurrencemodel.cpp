@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "incidenceoccurrencemodel.h"
+#include "kalendar_debug.h"
 
 #include <QMetaEnum>
 #include <akonadi_version.h>
@@ -307,7 +308,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     case IncidenceOccurrence:
         return QVariant::fromValue(incidence);
     default:
-        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }

@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include "kalendar_debug.h"
 #include <QMetaEnum>
 #include <remindersmodel.h>
 
@@ -57,7 +58,7 @@ QVariant RemindersModel::data(const QModelIndex &idx, int role) const
     case EndOffsetRole:
         return alarm->endOffset().asSeconds();
     default:
-        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }
@@ -92,7 +93,7 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
         break;
     }
     default:
-        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return false;
     }
     emit dataChanged(idx, idx);

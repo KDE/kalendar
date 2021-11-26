@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "multidayincidencemodel.h"
+#include "kalendar_debug.h"
 #include <QBitArray>
 
 MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
@@ -66,7 +67,7 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
 
         // Skip incidences not part of the week
         if (end < rowStart || start > rowEnd) {
-            // qWarning() << "Skipping because not part of this week";
+            // qCWarning(KALENDAR_LOG) << "Skipping because not part of this week";
             continue;
         }
 
@@ -74,7 +75,8 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
             continue;
         }
 
-        // qWarning() << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
+        // qCWarning(KALENDAR_LOG) << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
+        // srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         sorted.append(srcIdx);
     }
 
@@ -127,7 +129,8 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
     QList<QModelIndex> sorted = sortedIncidencesFromSourceModel(rowStart);
 
     // for (const auto &srcIdx : sorted) {
-    //     qWarning() << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << srcIdx.data(IncidenceOccurrenceModel::Summary).toString()
+    //     qCWarning(KALENDAR_LOG) << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
+    //     srcIdx.data(IncidenceOccurrenceModel::Summary).toString()
     //     << srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
     // }
 
@@ -140,7 +143,7 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
         const auto start = getStart(srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
         const auto duration = qMin(getDuration(startDate, srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
 
-        // qWarning() << "First of line " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration <<
+        // qCWarning(KALENDAR_LOG) << "First of line " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration <<
         // srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         auto currentLine = QVariantList{};
 
@@ -173,7 +176,7 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
         };
 
         if (start >= mPeriodLength) {
-            // qWarning() << "Skipping " << srcIdx.data(IncidenceOccurrenceModel::Summary);
+            // qCWarning(KALENDAR_LOG) << "Skipping " << srcIdx.data(IncidenceOccurrenceModel::Summary);
             continue;
         }
 
@@ -191,7 +194,7 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
         auto doesIntersect = [&](int start, int end) {
             for (int i = start; i < end; i++) {
                 if (takenSpaces[i]) {
-                    // qWarning() << "Found intersection " << start << end;
+                    // qCWarning(KALENDAR_LOG) << "Found intersection " << start << end;
                     return true;
                 }
             }
@@ -224,7 +227,7 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
                 it = sorted.erase(it);
             }
         }
-        // qWarning() << "Appending line " << currentLine;
+        // qCWarning(KALENDAR_LOG) << "Appending line " << currentLine;
         result.append(QVariant::fromValue(currentLine));
     }
     return result;
@@ -338,7 +341,7 @@ int MultiDayIncidenceModel::incidenceCount()
 
             // Skip incidences not part of the week
             if (end < rowStart || start > rowEnd) {
-                // qWarning() << "Skipping because not part of this week";
+                // qCWarning(KALENDAR_LOG) << "Skipping because not part of this week";
                 continue;
             }
 

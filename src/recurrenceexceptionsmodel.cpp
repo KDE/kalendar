@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "recurrenceexceptionsmodel.h"
+#include "kalendar_debug.h"
 #include <QDebug>
 #include <QMetaEnum>
 
@@ -71,7 +72,7 @@ QVariant RecurrenceExceptionsModel::data(const QModelIndex &idx, int role) const
     case DateRole:
         return exception;
     default:
-        qWarning() << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }

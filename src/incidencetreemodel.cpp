@@ -4,8 +4,8 @@
   SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
 */
 
-//#include "calendarview_debug.h"
 #include "incidencetreemodel_p.h"
+#include "kalendar_debug.h"
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/EntityTreeModel>
 #else

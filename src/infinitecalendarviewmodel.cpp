@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "incidenceoccurrencemodel.h"
+#include "kalendar_debug.h"
 #include <QDebug>
 #include <QMetaEnum>
 #include <akonadi_version.h>
@@ -179,7 +180,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
             return QVariant::fromValue(m_scheduleViewModels[firstDay]);
         }
         default:
-            qWarning() << "Unknown role for startdate:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+            qCWarning(KALENDAR_LOG) << "Unknown role for startdate:" << QMetaEnum::fromType<Roles>().valueToKey(role);
             return {};
         }
     }
@@ -232,7 +233,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         return QVariant::fromValue(m_weekViewMultiDayModels[startDate]);
     }
     default:
-        qWarning() << "Unknown role for startdate:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_LOG) << "Unknown role for startdate:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }
