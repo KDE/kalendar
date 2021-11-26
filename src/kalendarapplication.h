@@ -8,7 +8,7 @@
 #include "kalendarconfig.h"
 #include <Akonadi/Calendar/ETMCalendar>
 #include <Akonadi/Calendar/ICalImporter>
-#include <KXmlGui/KActionCollection>
+#include <KActionCollection>
 #include <QActionGroup>
 #include <QObject>
 

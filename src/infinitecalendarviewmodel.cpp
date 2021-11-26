@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "incidenceoccurrencemodel.h"
-#include <QAbstractItemModel>
 #include <QDebug>
 #include <QMetaEnum>
 #include <akonadi_version.h>

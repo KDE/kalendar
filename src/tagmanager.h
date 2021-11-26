@@ -11,7 +11,6 @@
 #include <AkonadiCore/Monitor>
 #include <AkonadiCore/TagModel>
 #endif
-#include <KDescendantsProxyModel>
 #include <QSortFilterProxyModel>
 
 class TagManager : public QObject

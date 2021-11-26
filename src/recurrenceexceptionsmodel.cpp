@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "recurrenceexceptionsmodel.h"
+#include <QDebug>
 #include <QMetaEnum>
 
 RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)

@@ -12,7 +12,6 @@
 #include <QColor>
 #include <QDateTime>
 #include <QList>
-#include <QSet>
 #include <QSharedPointer>
 #include <QTimer>
 #include <etmcalendar.h>

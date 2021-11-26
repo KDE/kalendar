@@ -4,9 +4,7 @@
 #pragma once
 
 #include <KCalendarCore/Calendar>
-#include <QAbstractItemModel>
-#include <QCalendar>
-#include <QDebug>
+#include <QAbstractListModel>
 
 class RecurrenceExceptionsModel : public QAbstractListModel
 {

@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QDebug>
 #include <QMetaEnum>
+#include <QTimeZone>
 
 TimeZoneListModel::TimeZoneListModel(QObject *parent)
     : QAbstractListModel(parent)

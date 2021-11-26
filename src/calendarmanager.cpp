@@ -54,13 +54,10 @@
 #include <EventViews/Prefs>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
-#include <KFormat>
 #include <KLocalizedString>
 #include <QApplication>
-#include <QMetaEnum>
 #include <QPointer>
 #include <QRandomGenerator>
-#include <QTimer>
 #include <etmcalendar.h>
 
 using namespace Akonadi;

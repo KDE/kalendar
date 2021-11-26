@@ -3,8 +3,7 @@
 
 #pragma once
 
-#include <QAbstractItemModel>
-#include <QTimeZone>
+#include <QAbstractListModel>
 #include <QVector>
 
 class TimeZoneListModel : public QAbstractListModel

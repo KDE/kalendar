@@ -13,7 +13,6 @@
 #else
 #include <AkonadiCore/EntityMimeTypeFilterModel>
 #endif
-#include <KItemModels/KDescendantsProxyModel>
 
 class QSortFilterProxyModel;
 

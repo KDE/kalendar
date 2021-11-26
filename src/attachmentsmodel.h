@@ -4,11 +4,8 @@
 #pragma once
 
 #include <KCalendarCore/Calendar>
-#include <QAbstractItemModel>
-#include <QCalendar>
-#include <QDebug>
+#include <QAbstractListModel>
 #include <QMimeDatabase>
-
 class AttachmentsModel : public QAbstractListModel
 {
     Q_OBJECT

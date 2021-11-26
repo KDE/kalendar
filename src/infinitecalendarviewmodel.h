@@ -6,9 +6,6 @@
 #include "hourlyincidencemodel.h"
 #include "multidayincidencemodel.h"
 #include <Akonadi/Calendar/ETMCalendar>
-#include <QAbstractItemModel>
-#include <QCalendar>
-#include <QDateTime>
 #include <QLocale>
 #include <QQueue>
 

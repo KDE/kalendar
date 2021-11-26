@@ -12,10 +12,10 @@
 #include <QCommandLineParser>
 #include <QDir>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QUrl>
-#include <QtQml>
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/AgentFilterProxyModel>

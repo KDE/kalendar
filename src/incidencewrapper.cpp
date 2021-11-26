@@ -4,7 +4,6 @@
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
-#include <QMetaEnum>
 #include <incidencewrapper.h>
 
 IncidenceWrapper::IncidenceWrapper(QObject *parent)

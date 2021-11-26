@@ -6,7 +6,6 @@
 #include <CalendarSupport/Utils>
 #include <KConfigWatcher>
 #include <KExtraColumnsProxyModel>
-#include <KFormat>
 #include <incidencetreemodel.h>
 #include <todomodel.h>
 

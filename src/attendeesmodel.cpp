@@ -5,6 +5,7 @@
 #include <KContacts/Addressee>
 #include <KLocalizedString>
 #include <QMetaEnum>
+#include <QModelIndex>
 #include <QRegularExpression>
 
 #include <akonadi_version.h>

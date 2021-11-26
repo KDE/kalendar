@@ -17,6 +17,7 @@
 #include <Akonadi/Contact/EmailAddressSelectionModel>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
+#include <KDescendantsProxyModel>
 #include <QBuffer>
 #include <QImage>
 

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "attachmentsmodel.h"
+#include <QDebug>
 #include <QMetaEnum>
 
 AttachmentsModel::AttachmentsModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)

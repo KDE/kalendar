@@ -11,6 +11,7 @@
 #include <AkonadiCore/TagDeleteJob>
 #include <AkonadiCore/TagModifyJob>
 #endif
+#include <KDescendantsProxyModel>
 #include <tagmanager.h>
 
 class FlatTagModel : public QSortFilterProxyModel

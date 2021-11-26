@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "hourlyincidencemodel.h"
-#include <QBitArray>
 #include <QTimeZone>
 
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)

@@ -2,9 +2,8 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "monthmodel.h"
+#include <QCalendar>
 #include <QDate>
-#include <QDebug>
-#include <QRandomGenerator>
 
 struct MonthModel::Private {
     int year;

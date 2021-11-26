@@ -4,7 +4,6 @@
 #pragma once
 
 #include <QAbstractListModel>
-#include <QCalendar>
 #include <QDate>
 #include <QLocale>
 #include <memory>

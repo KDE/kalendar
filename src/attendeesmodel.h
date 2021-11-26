@@ -4,11 +4,8 @@
 #pragma once
 
 #include <KCalendarCore/Calendar>
-#include <QAbstractItemModel>
-#include <QCalendar>
+#include <QAbstractListModel>
 #include <QDebug>
-#include <QDebugStateSaver>
-
 /**
  *
  */

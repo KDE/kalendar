@@ -9,9 +9,7 @@
 
 #include "incidenceoccurrencemodel.h"
 #include <QAbstractItemModel>
-#include <QDateTime>
 #include <QList>
-#include <QSet>
 #include <QSharedPointer>
 #include <QTimer>
 
