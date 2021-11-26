@@ -27,9 +27,7 @@ AgentConfiguration::AgentConfiguration(QObject *parent)
 {
 }
 
-AgentConfiguration::~AgentConfiguration()
-{
-}
+AgentConfiguration::~AgentConfiguration() = default;
 
 Akonadi::AgentFilterProxyModel *AgentConfiguration::availableAgents()
 {
@@ -63,7 +61,7 @@ void AgentConfiguration::createNew(int index)
 {
     Q_ASSERT(m_availableAgents != nullptr);
 
-    const Akonadi::AgentType agentType = m_availableAgents->data(m_availableAgents->index(index, 0), AgentTypeModel::TypeRole).value<AgentType>();
+    const auto agentType = m_availableAgents->data(m_availableAgents->index(index, 0), AgentTypeModel::TypeRole).value<AgentType>();
 
     if (agentType.isValid()) {
         auto job = new Akonadi::AgentInstanceCreateJob(agentType, this);
@@ -76,7 +74,7 @@ void AgentConfiguration::edit(int index)
 {
     Q_ASSERT(m_runningAgents != nullptr);
 
-    Akonadi::AgentInstance instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
+    auto instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
     if (instance.isValid()) {
         KWindowSystem::allowExternalProcessWindowActivation();
         QPointer<AgentConfigurationDialog> dlg(new AgentConfigurationDialog(instance, nullptr));
@@ -89,7 +87,7 @@ void AgentConfiguration::restart(int index)
 {
     Q_ASSERT(m_runningAgents != nullptr);
 
-    Akonadi::AgentInstance instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
+    auto instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
     if (instance.isValid()) {
         instance.restart();
     }
@@ -99,7 +97,7 @@ void AgentConfiguration::remove(int index)
 {
     Q_ASSERT(m_runningAgents != nullptr);
 
-    Akonadi::AgentInstance instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
+    auto instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
     if (instance.isValid()) {
         Akonadi::AgentManager::self()->removeInstance(instance);
     }

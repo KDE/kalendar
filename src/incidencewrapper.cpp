@@ -34,10 +34,7 @@ IncidenceWrapper::IncidenceWrapper(QObject *parent)
     setNewEvent();
 }
 
-IncidenceWrapper::~IncidenceWrapper()
-{
-
-}
+IncidenceWrapper::~IncidenceWrapper() = default;
 
 void IncidenceWrapper::notifyDataChanged()
 {
@@ -466,7 +463,7 @@ void IncidenceWrapper::setRecurrenceDataItem(const QString &key, const QVariant 
                 return;
             }
 
-            QVariantList vlist = jsval.toVariant().value<QVariantList>();
+            auto vlist = jsval.toVariant().value<QVariantList>();
             QBitArray days(7);
 
             for (int i = 0; i < vlist.size(); i++) {
@@ -598,7 +595,7 @@ void IncidenceWrapper::setTodoCompleted(bool completed)
 QDateTime IncidenceWrapper::todoCompletionDt()
 {
     if (m_incidence->type() != KCalendarCore::IncidenceBase::TypeTodo) {
-        return QDateTime();
+        return {};
     }
 
     auto todo = m_incidence.staticCast<KCalendarCore::Todo>();

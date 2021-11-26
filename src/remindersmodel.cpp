@@ -70,7 +70,7 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
 
     switch (role) {
     case TypeRole: {
-        KCalendarCore::Alarm::Type type = static_cast<KCalendarCore::Alarm::Type>(value.toInt());
+        auto type = static_cast<KCalendarCore::Alarm::Type>(value.toInt());
         m_incidence->alarms()[idx.row()]->setType(type);
         break;
     }

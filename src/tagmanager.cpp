@@ -20,7 +20,7 @@ public:
     explicit FlatTagModel(QObject *parent = nullptr)
         : QSortFilterProxyModel(parent)
     {
-        Akonadi::Monitor *monitor = new Akonadi::Monitor(this);
+        auto monitor = new Akonadi::Monitor(this);
         monitor->setObjectName(QStringLiteral("TagModelMonitor"));
         monitor->setTypeMonitored(Akonadi::Monitor::Tags);
 
@@ -80,7 +80,7 @@ QSortFilterProxyModel *TagManager::tagModel()
 void TagManager::createTag(const QString &name)
 {
     Akonadi::Tag tag(name);
-    Akonadi::TagCreateJob *job = new Akonadi::TagCreateJob(tag, this);
+    auto job = new Akonadi::TagCreateJob(tag, this);
     connect(job, &Akonadi::TagCreateJob::finished, this, [=](KJob *job) {
         if (job->error())
             qDebug() << "Error occurred creating tag";
@@ -89,7 +89,7 @@ void TagManager::createTag(const QString &name)
 
 void TagManager::deleteTag(Akonadi::Tag tag)
 {
-    Akonadi::TagDeleteJob *job = new Akonadi::TagDeleteJob(tag);
+    auto job = new Akonadi::TagDeleteJob(tag);
     connect(job, &Akonadi::TagDeleteJob::result, this, [=](KJob *job) {
         if (job->error())
             qDebug() << "Error occurred renaming tag";
@@ -99,7 +99,7 @@ void TagManager::deleteTag(Akonadi::Tag tag)
 void TagManager::renameTag(Akonadi::Tag tag, const QString &newName)
 {
     tag.setName(newName);
-    Akonadi::TagModifyJob *job = new Akonadi::TagModifyJob(tag);
+    auto job = new Akonadi::TagModifyJob(tag);
     connect(job, &Akonadi::TagModifyJob::result, this, [=](KJob *job) {
         if (job->error())
             qDebug() << "Error occurred renaming tag";

@@ -79,11 +79,11 @@ void ContactsManager::contactEmails(qint64 itemId)
 {
     Akonadi::Item item(itemId);
 
-    Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(item);
+    auto job = new Akonadi::ItemFetchJob(item);
     job->fetchScope().fetchFullPayload();
 
     connect(job, &Akonadi::ItemFetchJob::result, this, [this, itemId](KJob *job) {
-        Akonadi::ItemFetchJob *fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
+        auto fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
         auto item = fetchJob->items().at(0);
         auto payload = item.payload<KContacts::Addressee>();
 
@@ -97,7 +97,7 @@ QUrl ContactsManager::decorationToUrl(QVariant decoration)
         return {};
     }
 
-    QImage imgDecoration = decoration.value<QImage>();
+    auto imgDecoration = decoration.value<QImage>();
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     buffer.open(QIODevice::WriteOnly);

@@ -113,11 +113,11 @@ void AttendeesModel::updateAkonadiContactIds()
 
     const auto attendees = m_incidence->attendees();
     for (const auto &attendee : attendees) {
-        Akonadi::ContactSearchJob *job = new Akonadi::ContactSearchJob();
+        auto job = new Akonadi::ContactSearchJob();
         job->setQuery(Akonadi::ContactSearchJob::Email, attendee.email());
 
         connect(job, &Akonadi::ContactSearchJob::result, this, [this](KJob *job) {
-            Akonadi::ContactSearchJob *searchJob = qobject_cast<Akonadi::ContactSearchJob *>(job);
+            auto searchJob = qobject_cast<Akonadi::ContactSearchJob *>(job);
 
             const auto items = searchJob->items();
             for (const auto &item : items) {
@@ -187,7 +187,7 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
 
     switch (role) {
     case CuTypeRole: {
-        const KCalendarCore::Attendee::CuType cuType = static_cast<KCalendarCore::Attendee::CuType>(value.toInt());
+        const auto cuType = static_cast<KCalendarCore::Attendee::CuType>(value.toInt());
         currentAttendees[idx.row()].setCuType(cuType);
         break;
     }
@@ -220,7 +220,7 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
         break;
     }
     case RoleRole: {
-        const KCalendarCore::Attendee::Role role = static_cast<KCalendarCore::Attendee::Role>(value.toInt());
+        const auto role = static_cast<KCalendarCore::Attendee::Role>(value.toInt());
         currentAttendees[idx.row()].setRole(role);
         break;
     }
@@ -230,7 +230,7 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
         break;
     }
     case StatusRole: {
-        const KCalendarCore::Attendee::PartStat status = static_cast<KCalendarCore::Attendee::PartStat>(value.toInt());
+        const auto status = static_cast<KCalendarCore::Attendee::PartStat>(value.toInt());
         currentAttendees[idx.row()].setStatus(status);
         break;
     }
@@ -275,7 +275,7 @@ void AttendeesModel::addAttendee(qint64 itemId, const QString &email)
     if (itemId) {
         Akonadi::Item item(itemId);
 
-        Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(item);
+        auto job = new Akonadi::ItemFetchJob(item);
         job->fetchScope().fetchFullPayload();
 
         connect(job, &Akonadi::ItemFetchJob::result, this, [this, email](KJob *job) {
@@ -333,11 +333,11 @@ void AttendeesModel::deleteAttendeeFromAkonadiId(qint64 itemId)
 {
     Akonadi::Item item(itemId);
 
-    Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(item);
+    auto job = new Akonadi::ItemFetchJob(item);
     job->fetchScope().fetchFullPayload();
 
     connect(job, &Akonadi::ItemFetchJob::result, this, [this](KJob *job) {
-        Akonadi::ItemFetchJob *fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
+        auto fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
 
         auto item = fetchJob->items().at(0);
         auto payload = item.payload<KContacts::Addressee>();

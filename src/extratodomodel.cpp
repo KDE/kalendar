@@ -31,14 +31,14 @@ ExtraTodoModel::ExtraTodoModel(QObject *parent)
 QVariant ExtraTodoModel::extraColumnData(const QModelIndex &parent, int row, int extraColumn, int role) const
 {
     if (role != Qt::DisplayRole && role != Qt::EditRole) {
-        return QVariant();
+        return {};
     }
 
     const auto todoItem = index(row, extraColumn, parent).data(TodoModel::TodoRole).value<Akonadi::Item>();
     const auto todoPtr = CalendarSupport::todo(todoItem);
 
     if (todoPtr == nullptr) {
-        return QVariant();
+        return {};
     }
 
     switch (extraColumn) {
@@ -49,14 +49,14 @@ QVariant ExtraTodoModel::extraColumnData(const QModelIndex &parent, int row, int
     case PriorityIntColumn:
         return todoPtr->priority();
     default:
-        return QVariant();
+        return {};
     }
 }
 
 QVariant ExtraTodoModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
 
     auto idx = mapToSource(index);
@@ -65,7 +65,7 @@ QVariant ExtraTodoModel::data(const QModelIndex &index, int role) const
     auto todoPtr = CalendarSupport::todo(todoItem);
 
     if (todoPtr == nullptr) {
-        return QVariant();
+        return {};
     }
 
     if (role == Roles::StartTimeRole) {

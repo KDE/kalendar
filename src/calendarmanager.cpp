@@ -217,7 +217,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const override
     {
         if (!index.isValid()) {
-            return QVariant();
+            return {};
         }
         if (role == Qt::DecorationRole) {
             const Akonadi::Collection collection = CalendarSupport::collectionFromIndex(index);
@@ -292,7 +292,7 @@ public:
         }
 
         if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
-            const auto *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
+            const auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
             if (colorAttr && colorAttr->color().isValid()) {
                 colorCache[id] = colorAttr->color();
                 save();
@@ -597,7 +597,7 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 
 int CalendarManager::getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper)
 {
-    KDescendantsProxyModel *model = new KDescendantsProxyModel;
+    auto model = new KDescendantsProxyModel;
 
     switch (incidenceWrapper->incidencePtr()->type()) {
     default:
@@ -696,7 +696,7 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
 
     Akonadi::Collection newCollection(incidenceWrapper->collectionId());
     modifiedItem.setParentCollection(newCollection);
-    Akonadi::ItemMoveJob *job = new Akonadi::ItemMoveJob(modifiedItem, newCollection);
+    auto job = new Akonadi::ItemMoveJob(modifiedItem, newCollection);
     // Add some type of check here?
     connect(job, &KJob::result, job, [=]() {
         qDebug() << job->error();
@@ -866,9 +866,9 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
 void CalendarManager::setCollectionColor(qint64 collectionId, QColor color)
 {
     auto collection = m_calendar->collection(collectionId);
-    Akonadi::CollectionColorAttribute *colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);
+    auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);
     colorAttr->setColor(color);
-    Akonadi::CollectionModifyJob *modifyJob = new Akonadi::CollectionModifyJob(collection);
+    auto modifyJob = new Akonadi::CollectionModifyJob(collection);
     connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob *job) {
         if (job->error()) {
             qWarning() << "Error occurred modifying collection color: " << job->errorString();

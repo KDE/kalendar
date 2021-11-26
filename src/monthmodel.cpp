@@ -19,9 +19,7 @@ MonthModel::MonthModel(QObject *parent)
     d->selected = QDate::currentDate();
 }
 
-MonthModel::~MonthModel()
-{
-}
+MonthModel::~MonthModel() = default;
 
 int MonthModel::year() const
 {
