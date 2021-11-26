@@ -7,7 +7,6 @@
 #include "kalendarapplication.h"
 
 #include "commandbarfiltermodel.h"
-#include "kalendarconfig.h"
 #include <CalendarSupport/Utils>
 #include <KAuthorized>
 #include <KConfigGroup>

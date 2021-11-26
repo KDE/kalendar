@@ -11,14 +11,12 @@
 #include "calendarmanager.h"
 
 // Akonadi
-#include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/AgentInstanceModel>
 #include <Akonadi/AgentManager>
 #include <Akonadi/AttributeFactory>
 #include <Akonadi/CollectionColorAttribute>
 #include <Akonadi/CollectionDeleteJob>
-#include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/CollectionIdentificationAttribute>
 #include <Akonadi/CollectionModifyJob>
 #include <Akonadi/CollectionPropertiesDialog>
@@ -48,12 +46,8 @@
 #include <control.h>
 #endif
 #include <Akonadi/Calendar/History>
-#include <Akonadi/Calendar/IncidenceChanger>
-#include <CalendarSupport/KCalPrefs>
-#include <CalendarSupport/Utils>
 #include <EventViews/Prefs>
 #include <KCheckableProxyModel>
-#include <KDescendantsProxyModel>
 #include <KLocalizedString>
 #include <QApplication>
 #include <QPointer>

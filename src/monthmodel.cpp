@@ -3,7 +3,6 @@
 
 #include "monthmodel.h"
 #include <QCalendar>
-#include <QDate>
 
 struct MonthModel::Private {
     int year;

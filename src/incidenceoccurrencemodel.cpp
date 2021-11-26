@@ -20,7 +20,6 @@
 #include <KFormat>
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <etmcalendar.h>
 
 IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
     : QAbstractItemModel(parent)
