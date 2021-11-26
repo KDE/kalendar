@@ -33,7 +33,6 @@ class KCheckableProxyModel;
 class QAbstractProxyModel;
 class QAbstractItemModel;
 class ColorProxyModel;
-class CalendarCategoriesModel;
 
 class CalendarManager : public QObject
 {

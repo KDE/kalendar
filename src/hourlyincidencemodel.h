@@ -13,7 +13,6 @@
 
 namespace KCalendarCore
 {
-class MemoryCalendar;
 class Incidence;
 }
 

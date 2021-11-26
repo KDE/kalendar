@@ -19,7 +19,6 @@
 
 namespace KCalendarCore
 {
-class MemoryCalendar;
 class Incidence;
 }
 namespace Akonadi
