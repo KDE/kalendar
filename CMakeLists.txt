@@ -56,7 +56,7 @@ add_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_F
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
-
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055800)
 add_subdirectory(src)
 
 install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
