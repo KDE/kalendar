@@ -117,7 +117,14 @@ int RemindersModel::rowCount(const QModelIndex &) const
 
 void RemindersModel::addAlarm()
 {
-    KCalendarCore::Alarm::Ptr alarm(new KCalendarCore::Alarm(nullptr));
+    KCalendarCore::Alarm::Ptr alarm(new KCalendarCore::Alarm(m_incidence.get()));
+    alarm->setEnabled(true);
+    alarm->setType(KCalendarCore::Alarm::Display);
+    alarm->setText(m_incidence->summary());
+    alarm->setStartOffset(0);
+
+    qDebug() << alarm->parentUid();
+
     m_incidence->addAlarm(alarm);
     Q_EMIT alarmsChanged();
     Q_EMIT layoutChanged();

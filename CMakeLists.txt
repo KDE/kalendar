@@ -8,9 +8,9 @@ project(kalendar VERSION 0.2.1)
 
 set(QT_MIN_VERSION "5.15.2")
 set(KF5_MIN_VERSION "5.86.0")
-set(AKONADI_VERSION "5.15.0")
-set(CALENDARSUPPORT_LIB_VERSION "5.15")
-set(EVENTVIEW_LIB_VERSION "5.15.0")
+set(AKONADI_VERSION "5.18.0")
+set(CALENDARSUPPORT_LIB_VERSION "5.18")
+set(EVENTVIEW_LIB_VERSION "5.18.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.84")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -43,8 +43,8 @@ ecm_setup_version(${PROJECT_VERSION}
 )
 
 ################# Find dependencies #################
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg Location)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons Contacts ItemModels XmlGui)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg Location DBus)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons Contacts ItemModels XmlGui Notifications IconThemes)
 find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiContact ${AKONADI_CONTACT_VERSION} CONFIG REQUIRED)
 find_package(KF5CalendarSupport ${CALENDARSUPPORT_LIB_VERSION} CONFIG REQUIRED)
@@ -59,6 +59,7 @@ add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055800)
 add_subdirectory(src)
+add_subdirectory(kalendarac)
 
 install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.kalendar.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})

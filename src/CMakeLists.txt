@@ -68,6 +68,7 @@ target_link_libraries(kalendar
     Qt5::QuickControls2
     Qt5::Svg
     Qt5::Location
+    Qt5::DBus
     KF5::I18n
     KF5::CoreAddons
     KF5::DBusAddons
@@ -83,7 +84,7 @@ target_link_libraries(kalendar
     KF5::Contacts
     KF5::ItemModels
     KF5::XmlGui
-    KF5::EventViews # for reading KOrganizer calendar colors
+    KF5::EventViews
 
 )
 kconfig_add_kcfg_files(kalendar GENERATE_MOC kalendarconfig.kcfgc)

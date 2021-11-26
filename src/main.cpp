@@ -10,6 +10,8 @@
 #include <KWindowConfig>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QDir>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -163,6 +165,8 @@ int main(int argc, char *argv[])
             Q_EMIT kalendarApplication->importCalendarFromFile(QUrl::fromUserInput(arg, QDir::currentPath(), QUrl::AssumeLocalFile));
         }
     }
+
+    QDBusConnection::sessionBus().interface()->startService(QStringLiteral("org.kde.kalendarac"));
 
     return app.exec();
 }
