@@ -7,6 +7,7 @@
 #include "kalendarapplication.h"
 
 #include "commandbarfiltermodel.h"
+#include "kalendar_debug.h"
 #include <CalendarSupport/Utils>
 #include <KAuthorized>
 #include <KConfigGroup>
@@ -519,7 +520,7 @@ void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qin
     } else {
         // empty error message means user canceled.
         if (!importer->errorMessage().isEmpty()) {
-            qDebug() << i18n("An error occurred: %1", importer->errorMessage());
+            qCDebug(KALENDAR_LOG) << i18n("An error occurred: %1", importer->errorMessage());
             m_importErrorMessage = importer->errorMessage();
             Q_EMIT importErrorMessageChanged();
         }

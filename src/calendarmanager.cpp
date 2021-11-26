@@ -45,6 +45,7 @@
 #include <Monitor>
 #include <control.h>
 #endif
+#include "kalendar_debug.h"
 #include <Akonadi/Calendar/History>
 #include <EventViews/Prefs>
 #include <KCheckableProxyModel>
@@ -699,7 +700,7 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
     auto job = new Akonadi::ItemMoveJob(modifiedItem, newCollection);
     // Add some type of check here?
     connect(job, &KJob::result, job, [=]() {
-        qDebug() << job->error();
+        qCDebug(KALENDAR_LOG) << job->error();
     });
 }
 
@@ -751,7 +752,7 @@ void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, i
             // All occurrences
             KCalendarCore::Incidence::Ptr oldIncidence(incidenceWrapper->incidencePtr()->clone());
             setNewDates(incidenceWrapper->incidencePtr());
-            qDebug() << incidenceWrapper->incidenceStart();
+            qCDebug(KALENDAR_LOG) << incidenceWrapper->incidenceStart();
             m_changer->modifyIncidence(item, oldIncidence);
             break;
         }
@@ -768,7 +769,7 @@ void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, i
                 m_changer->createIncidence(newIncidence, m_calendar->collection(incidenceWrapper->collectionId()));
                 m_changer->endAtomicOperation();
             } else {
-                qDebug() << i18n("Unable to add the exception item to the calendar. No change will be done.");
+                qCDebug(KALENDAR_LOG) << i18n("Unable to add the exception item to the calendar. No change will be done.");
             }
             break;
         }

@@ -27,6 +27,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
+include(ECMQtDeclareLoggingCategory)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(ECMPoQmTools)
@@ -62,6 +63,12 @@ add_subdirectory(src)
 install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.kalendar.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES org.kde.kalendar.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)
+
+ecm_qt_install_logging_categories(
+        EXPORT KALENDAR
+        FILE kalendar.categories
+        DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+        )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 

@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include "kalendar_debug.h"
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
@@ -709,7 +710,7 @@ void IncidenceWrapper::clearRecurrences()
 void IncidenceWrapper::itemChanged(const Akonadi::Item &item)
 {
     if (item.hasPayload<KCalendarCore::Incidence::Ptr>()) {
-        qDebug() << item.payload<KCalendarCore::Incidence::Ptr>()->summary() << item.parentCollection().id();
+        qCDebug(KALENDAR_LOG) << item.payload<KCalendarCore::Incidence::Ptr>()->summary() << item.parentCollection().id();
         setIncidencePtr(item.payload<KCalendarCore::Incidence::Ptr>());
     }
 }

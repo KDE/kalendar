@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
+
 add_executable(kalendar
     about.cpp
     about.h
@@ -55,6 +56,9 @@ add_executable(kalendar
     todosortfilterproxymodel.cpp
     todosortfilterproxymodel.h
     resources.qrc)
+
+ecm_qt_declare_logging_category(kalendar HEADER kalendar_debug.h IDENTIFIER KALENDAR_LOG CATEGORY_NAME org.kde.kalendar DESCRIPTION "kalendar" EXPORT KALENDAR)
+
 
 target_link_libraries(kalendar
     Qt5::Core

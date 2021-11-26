@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
+#include "kalendar_debug.h"
 #include <QObject>
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
@@ -83,7 +84,7 @@ void TagManager::createTag(const QString &name)
     auto job = new Akonadi::TagCreateJob(tag, this);
     connect(job, &Akonadi::TagCreateJob::finished, this, [=](KJob *job) {
         if (job->error())
-            qDebug() << "Error occurred creating tag";
+            qCDebug(KALENDAR_LOG) << "Error occurred creating tag";
     });
 }
 
@@ -92,7 +93,7 @@ void TagManager::deleteTag(Akonadi::Tag tag)
     auto job = new Akonadi::TagDeleteJob(tag);
     connect(job, &Akonadi::TagDeleteJob::result, this, [=](KJob *job) {
         if (job->error())
-            qDebug() << "Error occurred renaming tag";
+            qCDebug(KALENDAR_LOG) << "Error occurred renaming tag";
     });
 }
 
@@ -102,6 +103,6 @@ void TagManager::renameTag(Akonadi::Tag tag, const QString &newName)
     auto job = new Akonadi::TagModifyJob(tag);
     connect(job, &Akonadi::TagModifyJob::result, this, [=](KJob *job) {
         if (job->error())
-            qDebug() << "Error occurred renaming tag";
+            qCDebug(KALENDAR_LOG) << "Error occurred renaming tag";
     });
 }
