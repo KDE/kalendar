@@ -214,7 +214,10 @@ void KalendarAlarmClient::checkAlarms()
             timeText = i18n("Task due at %1", QLocale::system().toString(todo->dtDue().time(), QLocale::NarrowFormat));
         } else if (incidence) {
             QString incidenceString = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
-            timeText = i18nc("Event starts at 10:00", "%1 starts at %2", QLocale::system().toString(incidence->dtStart().time(), QLocale::NarrowFormat));
+            timeText = i18nc("Event starts at 10:00",
+                             "%1 starts at %2",
+                             incidenceString,
+                             QLocale::system().toString(incidence->dtStart().time(), QLocale::NarrowFormat));
         } else {
             QLocale::system().toString(alarm->time(), QLocale::NarrowFormat);
         }
