@@ -151,23 +151,31 @@ Kirigami.ApplicationWindow {
     Connections {
         target: KalendarApplication
         function onOpenMonthView() {
-            monthScaleModelLoader.active = true;
-            root.switchView(monthViewComponent);
+            if(pageStack.currentItem.objectName !== "monthView") {
+                monthScaleModelLoader.active = true;
+                root.switchView(monthViewComponent);
+            }
         }
 
         function onOpenWeekView() {
-            weekScaleModelLoader.active = true;
-            root.switchView(weekViewComponent);
+            if(pageStack.currentItem.objectName !== "weekView") {
+                weekScaleModelLoader.active = true;
+                root.switchView(weekViewComponent);
+            }
         }
 
         function onOpenScheduleView() {
-            monthScaleModelLoader.active = true;
-            root.switchView(scheduleViewComponent);
+            if(pageStack.currentItem.objectName !== "scheduleView") {
+                monthScaleModelLoader.active = true;
+                root.switchView(scheduleViewComponent);
+            }
         }
 
         function onOpenTodoView() {
-            filterHeader.active = true;
-            root.switchView(todoPageComponent);
+            if(pageStack.currentItem.objectName !== "todoView") {
+                filterHeader.active = true;
+                root.switchView(todoPageComponent);
+            }
         }
 
         function onMoveViewForwards() {
