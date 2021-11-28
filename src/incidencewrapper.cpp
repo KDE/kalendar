@@ -637,11 +637,19 @@ void IncidenceWrapper::triggerEditMode() // You edit a clone so that the origina
     setIncidencePtr(clonedPtr);
 }
 
+static int nearestQuarterHour(int secsSinceEpoch)
+{
+    const int quarterHourInSecs = 60 * 15;
+    return secsSinceEpoch + (quarterHourInSecs - secsSinceEpoch % quarterHourInSecs);
+}
+
 void IncidenceWrapper::setNewEvent()
 {
     auto event = KCalendarCore::Event::Ptr(new KCalendarCore::Event);
-    event->setDtStart(QDateTime::currentDateTime());
-    event->setDtEnd(QDateTime::currentDateTime().addSecs(60 * 60));
+    QDateTime start;
+    start.setSecsSinceEpoch(nearestQuarterHour(QDateTime::currentSecsSinceEpoch()));
+    event->setDtStart(start);
+    event->setDtEnd(start.addSecs(60 * 60));
 
     Akonadi::Item incidenceItem;
     incidenceItem.setPayload<KCalendarCore::Event::Ptr>(event);
