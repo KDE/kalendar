@@ -90,7 +90,11 @@ Kirigami.ApplicationWindow {
 
     pageStack.globalToolBar.canContainHandles: true
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
-    pageStack.initialPage: Kirigami.Settings.isMobile ? scheduleViewComponent : monthViewComponent
+    pageStack.initialPage: scheduleViewComponent
+
+    property bool ignoreCurrentPage: true // HACK: ideally we just push an empty page here and save ourselves the trouble,
+    // but we have had issues with pushing empty Kirigami pages somehow causing mobile controls to show up on desktop.
+    // We use this property to temporarily allow a view to be replaced by a view of the same type
 
     Component.onCompleted: {
         switch (Config.lastOpenedView) {
@@ -110,6 +114,7 @@ Kirigami.ApplicationWindow {
                 Kirigami.Settings.isMobile ? scheduleViewAction.trigger() : monthViewAction.trigger();
                 break;
         }
+        ignoreCurrentPage = false;
     }
 
     QQC2.Action {
@@ -151,21 +156,21 @@ Kirigami.ApplicationWindow {
     Connections {
         target: KalendarApplication
         function onOpenMonthView() {
-            if(pageStack.currentItem.objectName !== "monthView") {
+            if(pageStack.currentItem.objectName !== "monthView" || root.ignoreCurrentPage) {
                 monthScaleModelLoader.active = true;
                 root.switchView(monthViewComponent);
             }
         }
 
         function onOpenWeekView() {
-            if(pageStack.currentItem.objectName !== "weekView") {
+            if(pageStack.currentItem.objectName !== "weekView" || root.ignoreCurrentPage) {
                 weekScaleModelLoader.active = true;
                 root.switchView(weekViewComponent);
             }
         }
 
         function onOpenScheduleView() {
-            if(pageStack.currentItem.objectName !== "scheduleView") {
+            if(pageStack.currentItem.objectName !== "scheduleView" || root.ignoreCurrentPage) {
                 monthScaleModelLoader.active = true;
                 root.switchView(scheduleViewComponent);
             }
