@@ -115,6 +115,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
 {
     QList<QModelIndex> sorted = sortedIncidencesFromSourceModel(rowStart);
     const auto rowEnd = rowStart.date().endOfDay();
+    const int periodsPerDay = (24 * 60) / mPeriodLength;
 
     // for (const auto &srcIdx : sorted) {
     //     qCWarning(KALENDAR_LOG) << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
@@ -123,7 +124,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
     // }
     auto result = QVariantList{};
 
-    auto addToResultsAndGetPtr = [&result](const QModelIndex &idx, double start, double duration) {
+    auto addToResults = [&result](const QModelIndex &idx, double start, double duration) {
         auto incidenceMap = QVariantMap{
             {QStringLiteral("text"), idx.data(IncidenceOccurrenceModel::Summary)},
             {QStringLiteral("description"), idx.data(IncidenceOccurrenceModel::Description)},
@@ -176,14 +177,19 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
             ? idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone())
             : rowEnd;
         // Need to convert ints into doubles to get more accurate starting positions
+        // We get a start position relative to the number of period spaces there are in a day
         const auto start = ((startDT.time().hour() * 1.0) * (60.0 / mPeriodLength)) + ((startDT.time().minute() * 1.0) / mPeriodLength);
-        const auto duration = // Give a minimum acceptable height or otherwise have unclickable incidence
+        auto duration = // Give a minimum acceptable height or otherwise have unclickable incidence
             qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 2.5);
+
+        if (start + duration > periodsPerDay) {
+            duration = periodsPerDay - start + 1;
+        }
 
         const auto startMinutesFromDayStart = (startDT.time().hour() * 60) + startDT.time().minute();
         const auto endMinutesFromDayStart = qMin((endDT.time().hour() * 60) + endDT.time().minute(), 24 * 60 * 60);
 
-        addToResultsAndGetPtr(idx, start, duration);
+        addToResults(idx, start, duration);
         setTakenSpaces(startMinutesFromDayStart, endMinutesFromDayStart);
     }
 

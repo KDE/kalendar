@@ -71,7 +71,7 @@ private:
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDateTime &rowStart) const;
     QVariantList layoutLines(const QDateTime &rowStart) const;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
-    int mPeriodLength{15};
+    int mPeriodLength{15}; // In minutes
     HourlyIncidenceModel::Filters m_filters;
 };
 
