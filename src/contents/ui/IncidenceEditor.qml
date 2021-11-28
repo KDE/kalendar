@@ -329,7 +329,11 @@ Kirigami.ScrollablePage {
                             } else if(incidenceForm.isTodo && oldDate) {
                                 root.incidenceWrapper.incidenceEnd = oldDate
                             } else if(incidenceForm.isTodo) {
-                                root.incidenceWrapper.incidenceEnd = new Date()
+                                let start = new Date();
+                                let startInMsecsSinceEpoch = start.getTime();
+                                const quarterHourInMsecs = 15 * 60 * 1000;
+                                const nearestQuarterHourStart = startInMsecsSinceEpoch + (quarterHourInMsecs - startInMsecsSinceEpoch % quarterHourInMsecs);
+                                root.incidenceWrapper.incidenceEnd = new Date(nearestQuarterHourStart);
                             }
                         }
                         visible: incidenceForm.isTodo
