@@ -42,12 +42,36 @@ Name[zh_CN]=Kalendar
 
 [Context/uid]
 Name=Incidence uid
+Name[ca]=UID de la incidència
+Name[ca@valencia]=UID de la incidència
+Name[nl]=Uid van incident
+Name[sv]=Förekomstens användar-id
+Name[uk]=Ідентифікатор випадку
+Name[x-test]=xxIncidence uidxx
 Comment=The uid of the incidence of the alarm
+Comment[ca]=L'UID de la incidència de l'alarma
+Comment[ca@valencia]=L'UID de la incidència de l'alarma
+Comment[nl]=De uid van het incident van het alarm
+Comment[sv]=Användar-id för förekomsten av alarmet
+Comment[uk]=Ідентифікатор випадку нагадування
+Comment[x-test]=xxThe uid of the incidence of the alarmxx
 
 [Event/alarm]
 Name=Alarm
+Name[ca]=Alarma
+Name[ca@valencia]=Alarma
+Name[nl]=Alarm
+Name[sv]=Alarm
+Name[uk]=Нагадування
+Name[x-test]=xxAlarmxx
 Contexts=uid
 Comment=Alarm Notification
+Comment[ca]=Notificació de l'alarma
+Comment[ca@valencia]=Notificació de l'alarma
+Comment[nl]=Alarmmelding
+Comment[sv]=Alarmunderrättelse
+Comment[uk]=Сповіщення для нагадування
+Comment[x-test]=xxAlarm Notificationxx
 Action=Popup|Sound
 Sound=freedesktop/stereo/bell.oga
 Urgency=Critical
