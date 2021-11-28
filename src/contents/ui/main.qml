@@ -127,6 +127,16 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    QQC2.Action {
+        id: deleteIncidenceAction
+        shortcut: "Delete"
+        onTriggered: {
+            if(root.openOccurrence) {
+                root.setUpDelete(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime);
+            }
+        }
+    }
+
     function switchView(newViewComponent) {
         if(pageStack.layers.depth > 1) {
             pageStack.layers.pop(pageStack.layers.initialItem);
