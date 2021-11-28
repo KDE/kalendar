@@ -801,6 +801,7 @@ Kirigami.ScrollablePage {
                     QQC2.ComboBox {
                         Layout.fillWidth: true
 
+                        enabled: count > 0
                         model: TagManager.tagModel
                         displayText: root.incidenceWrapper.categories.length > 0 ?
                             root.incidenceWrapper.categories.join(i18nc("List separator", ", ")) :
