@@ -71,8 +71,8 @@ MouseArea {
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: deleteClicked(incidenceData.incidencePtr, incidenceData.startTime)
             }
+
             QQC2.MenuSeparator {
-                visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
             }
             QQC2.MenuItem {
                 icon.name: "task-complete"
@@ -91,6 +91,70 @@ MouseArea {
                     addSubTodoClicked(parentWrapper);
                 }
                 visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+            }
+            QQC2.Menu {
+                id: setPriorityMenu
+                title: i18n("Set priority...")
+                enabled: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+                z: 1001
+
+                function setPriority(level) {
+                    let wrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                    wrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
+                    wrapper.priority = level;
+                    Kalendar.CalendarManager.editIncidence(wrapper);
+                }
+
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("None")
+                    onClicked: setPriorityMenu.setPriority(0)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("1 (highest priority)")
+                    onClicked: setPriorityMenu.setPriority(1)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("2 (mid-high priority)")
+                    onClicked: setPriorityMenu.setPriority(2)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("3 (mid-high priority)")
+                    onClicked: setPriorityMenu.setPriority(3)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("4 (mid-high priority)")
+                    onClicked: setPriorityMenu.setPriority(4)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("5 (medium priority)")
+                    onClicked: setPriorityMenu.setPriority(5)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("6 (mid-low priority)")
+                    onClicked: setPriorityMenu.setPriority(6)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("7 (mid-low priority)")
+                    onClicked: setPriorityMenu.setPriority(7)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("8 (mid-low priority)")
+                    onClicked: setPriorityMenu.setPriority(8)
+                }
+                QQC2.MenuItem {
+                    icon.name: "emblem-important-symbolic"
+                    text: i18n("9 (lowest priority)")
+                    onClicked: setPriorityMenu.setPriority(9)
+                }
             }
         }
     }
