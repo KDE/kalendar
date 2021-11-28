@@ -70,6 +70,8 @@ Kirigami.ScrollablePage {
 
                     separatorVisible: false
 
+                    Keys.onEnterPressed: clicked();
+                    Keys.onReturnPressed: clicked();
                     onClicked: collectionPickerSheet.collectionPicked(collectionId);
 
                     trailing: Rectangle {
