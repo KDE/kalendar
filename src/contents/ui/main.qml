@@ -378,6 +378,9 @@ Kirigami.ApplicationWindow {
             case "monthView":
                 return i18n("Month View");
                 break;
+            case "weekView":
+                return i18n("Week View");
+                break;
             case "scheduleView":
                 return i18n("Schedule View");
                 break;
