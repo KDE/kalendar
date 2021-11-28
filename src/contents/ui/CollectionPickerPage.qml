@@ -70,7 +70,7 @@ Kirigami.ScrollablePage {
 
                     separatorVisible: false
 
-                    Keys.onEnterPressed: clicked();
+                    Keys.onEnterPressed: clicked(); // TODO: Remove this once upstream item handles this by itself
                     Keys.onReturnPressed: clicked();
                     onClicked: collectionPickerSheet.collectionPicked(collectionId);
 
