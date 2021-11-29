@@ -115,6 +115,11 @@ Item {
                         opacity: hourView.currentIndex == thisIndex ? 1 : 0.7
                         font.bold: hourView.currentIndex == thisIndex
                         text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: hourView.currentIndex = parent.thisIndex
+                        }
                     }
 
                     MouseArea {
@@ -159,6 +164,11 @@ Item {
                         opacity: minuteView.currentIndex == thisIndex ? 1 : 0.7
                         font.bold: minuteView.currentIndex == thisIndex
                         text: minuteToDisplay < 10 ? String(minuteToDisplay).padStart(2, "0") : minuteToDisplay
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: minuteView.currentIndex = parent.thisIndex
+                        }
                     }
 
                     MouseArea {
@@ -198,6 +208,11 @@ Item {
                         opacity: secondsView.currentIndex == thisIndex ? 1 : 0.7
                         font.bold: secondsView.currentIndex == thisIndex
                         text: modelData < 10 ? String(modelData).padStart(2, "0") : modelData
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: secondsView.currentIndex = parent.thisIndex
+                        }
                     }
 
                     MouseArea {
