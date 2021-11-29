@@ -76,6 +76,7 @@ Item {
                     icon.name: "go-up"
                     enabled: hourView.currentIndex != 0
                     onClicked: hourView.currentIndex -= 1
+                    autoRepeat: true
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true
@@ -84,6 +85,7 @@ Item {
                     icon.name: "go-up"
                     enabled: minuteView.currentIndex != 0
                     onClicked: minuteView.currentIndex -= 1
+                    autoRepeat: true
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true
@@ -93,6 +95,7 @@ Item {
                     enabled: secondsView.currentIndex != 0
                     onClicked: secondsView.currentIndex -= 1
                     visible: timePicker.secondsPicker
+                    autoRepeat: true
                 }
 
                 QQC2.Tumbler {
@@ -228,6 +231,7 @@ Item {
                     icon.name: "go-down"
                     enabled: hourView.currentIndex < hourView.count - 1
                     onClicked: hourView.currentIndex += 1
+                    autoRepeat: true
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true
@@ -236,6 +240,7 @@ Item {
                     icon.name: "go-down"
                     enabled: minuteView.currentIndex < minuteView.count - 1
                     onClicked: minuteView.currentIndex += 1
+                    autoRepeat: true
                 }
                 QQC2.ToolButton {
                     Layout.fillWidth: true
@@ -245,6 +250,7 @@ Item {
                     enabled: secondsView.currentIndex < secondsView.count - 1
                     onClicked: secondsView.currentIndex += 1
                     visible: timePicker.secondsPicker
+                    autoRepeat: true
                 }
             }
 
