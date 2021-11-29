@@ -937,7 +937,7 @@ Kirigami.ApplicationWindow {
             id: deleteIncidenceSheet
 
             onAddException: {
-                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
+                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
                     DateUtils.sameDay(incidenceInfo.incidenceData.startTime, exceptionDate)) {
 
                     incidenceInfo.incidenceData = undefined;
@@ -950,7 +950,7 @@ Kirigami.ApplicationWindow {
             }
             onAddRecurrenceEndDate: {
                 // If occurrence is past the new recurrence end date, it has ben deleted so kill instance in incidence info
-                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
+                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
                     incidenceInfo.incidenceData.startTime >= endDate) {
 
                     incidenceInfo.incidenceData = undefined;
@@ -972,7 +972,7 @@ Kirigami.ApplicationWindow {
             }
             onDeleteIncidenceWithChildren: {
                 // TODO: Check if parent deleted too
-                if(incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
+                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
 
                     incidenceInfo.incidenceData = undefined;
                     root.openOccurrence = undefined;
