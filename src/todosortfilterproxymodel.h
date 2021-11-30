@@ -2,10 +2,12 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #pragma once
+#include "kalendarconfig.h"
 #include <Akonadi/Calendar/ETMCalendar>
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
+#include <KSharedConfig>
 #include <QSortFilterProxyModel>
 #include <QTimer>
 #include <extratodomodel.h>
@@ -101,4 +103,5 @@ private:
     int m_sortColumn = EndTimeColumn;
     bool m_sortAscending = false;
     QTimer mRefreshTimer;
+    KalendarConfig *m_config;
 };

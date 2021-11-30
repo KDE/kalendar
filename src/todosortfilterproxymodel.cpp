@@ -29,6 +29,11 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsRemoved, this, sortTimer);
     connect(m_extraTodoModel, &KExtraColumnsProxyModel::layoutChanged, this, sortTimer);
     connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsMoved, this, sortTimer);
+
+    m_config = KalendarConfig::self();
+    QObject::connect(m_config, &KalendarConfig::showCompletedSubtodosChanged, this, [&]() {
+        invalidateFilter();
+    });
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const
@@ -37,20 +42,22 @@ bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sour
         return true;
     }
 
-    // Accept if any parent is accepted itself
-    QModelIndex parent = sourceParent;
-    while (parent.isValid()) {
-        if (filterAcceptsRowCheck(parent.row(), parent.parent()))
-            return true;
-        parent = parent.parent();
+    // Accept if any parent is accepted itself, and if we are the model for the incomplete tasks view, only do this if the config says to show all
+    // of a tasks' incomplete subtasks. By default we include all of a tasks' subtasks, regardless of if they are complete or not, as long as the parent
+    // passes the filter check. If this is not the case, we only include subtasks that pass the filter themselves.
+    auto config = KalendarConfig::self();
+
+    if ((config->showCompletedSubtodos() && m_showCompleted == ShowComplete::ShowIncompleteOnly) || m_showCompleted != ShowComplete::ShowIncompleteOnly) {
+        QModelIndex parent = sourceParent;
+        while (parent.isValid()) {
+            if (filterAcceptsRowCheck(parent.row(), parent.parent()))
+                return true;
+            parent = parent.parent();
+        }
     }
 
     // Accept if any child is accepted itself
-    if (hasAcceptedChildren(row, sourceParent)) {
-        return true;
-    }
-
-    return false;
+    return hasAcceptedChildren(row, sourceParent);
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex &sourceParent) const

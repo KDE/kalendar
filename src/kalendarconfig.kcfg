@@ -155,6 +155,10 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             <label>Sort order</label>
             <default>true</default>
         </entry>
+        <entry name="showCompletedSubtodos" type="Bool">
+            <label>Show all completed subtasks even if the parent task is incomplete</label>
+            <default>true</default>
+        </entry>
     </group>
 </kcfg>
 

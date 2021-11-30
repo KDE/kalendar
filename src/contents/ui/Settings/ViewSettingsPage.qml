@@ -136,5 +136,19 @@ Kirigami.ScrollablePage {
                 }
             }
         }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Tasks View settings")
+        }
+        Controls.CheckBox {
+            text: i18n("Show completed sub-tasks")
+            checked: Config.showCompletedSubtodos
+            enabled: !Config.isShowCompletedSubtodosImmutable
+            onClicked: {
+                Config.showCompletedSubtodos = !Config.showCompletedSubtodos;
+                Config.save();
+            }
+        }
     }
 }
