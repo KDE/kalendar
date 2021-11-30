@@ -65,7 +65,9 @@ Kirigami.Page {
     function setToDate(date, isInitialWeek = false) {
         root.initialWeek = isInitialWeek;
 
-        date = DateUtils.getFirstDayOfWeek(date);
+        if(root.daysToShow % 7 === 0) {
+            date = DateUtils.getFirstDayOfWeek(date);
+        }
         const weekDiff = Math.round((date - pathView.currentItem.startDate) / (root.daysToShow * 24 * 60 * 60 * 1000));
 
         let newIndex = pathView.currentIndex + weekDiff;
