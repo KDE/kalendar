@@ -73,6 +73,12 @@ SPDX-License-Identifier: LGPL-2.0-or-later
         </entry>
     </group>
 
+    <group name="GeneralView">
+        <entry name="showSubtodosInCalendarViews" type="Bool">
+            <label>Show subtasks in the calendar views (e.g. month, schedule, etc. views).</label>
+            <default>true</default>
+        </entry>
+    </group>
     <group name="MonthView">
         <entry name="weekdayLabelAlignment" type="Enum">
             <label>Alignment of week day header in month view.</label>

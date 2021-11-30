@@ -9,6 +9,12 @@ HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
+
+    m_config = KalendarConfig::self();
+    QObject::connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, [&]() {
+        beginResetModel();
+        endResetModel();
+    });
 }
 
 QModelIndex HourlyIncidenceModel::index(int row, int column, const QModelIndex &parent) const
@@ -72,6 +78,11 @@ QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const Q
         }
 
         if (m_filters.testFlag(NoMultiDay) && srcIdx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
+            continue;
+        }
+
+        if (!m_config->showSubtodosInCalendarViews()
+            && !srcIdx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
             continue;
         }
         // qCWarning(KALENDAR_LOG) << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<

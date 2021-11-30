@@ -10,6 +10,20 @@ import org.kde.kalendar 1.0
 Kirigami.ScrollablePage {
     title: i18n("Views")
     Kirigami.FormLayout {
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("General settings")
+        }
+        Controls.CheckBox {
+            text: i18n("Show sub-tasks in calendar views")
+            checked: Config.showSubtodosInCalendarViews
+            enabled: !Config.isShowSubtodosInCalendarViewsImmutable
+            onClicked: {
+                Config.showSubtodosInCalendarViews = !Config.showSubtodosInCalendarViews;
+                Config.save();
+            }
+        }
         Item {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Month View settings")
