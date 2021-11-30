@@ -11,7 +11,7 @@ Kirigami.ScrollablePage {
     title: i18n("Views")
     Kirigami.FormLayout {
 
-        Kirigami.Separator {
+        Item {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("General settings")
         }
@@ -24,7 +24,7 @@ Kirigami.ScrollablePage {
                 Config.save();
             }
         }
-        Item {
+        Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Month View settings")
         }
