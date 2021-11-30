@@ -795,6 +795,13 @@ Kirigami.ScrollablePage {
                         text: root.incidenceWrapper.description
                         wrapMode: Text.Wrap
                         onTextChanged: root.incidenceWrapper.description = text
+                        Keys.onReturnPressed: {
+                            if (event.modifiers & Qt.ShiftModifier) {
+                                submitAction.trigger();
+                            } else {
+                                event.accepted = false;
+                            }
+                        }
                     }
                 }
 
