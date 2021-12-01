@@ -1204,7 +1204,7 @@ Kirigami.ApplicationWindow {
             titleDelegate: ViewTitleDelegate {
                 titleDateButton.range: true
                 titleDateButton.date: hourlyView.startDate
-                titleDateButton.lastDate: DateUtils.addDaysToDate(hourlyView.startDate, 6)
+                titleDateButton.lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
                 titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
             }
             selectedDate: root.selectedDate
