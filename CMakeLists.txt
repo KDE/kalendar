@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(kalendar VERSION 0.2.1)
+project(kalendar VERSION 0.3.1)
 
 set(QT_MIN_VERSION "5.15.2")
 set(KF5_MIN_VERSION "5.86.0")
