@@ -24,7 +24,6 @@ target_link_libraries(kalendarac
     KF5::I18n
     KF5::Notifications
     KF5::IconThemes
-    KF5::Service
     KF5::WindowSystem
     Qt5::Core
     Qt5::DBus
