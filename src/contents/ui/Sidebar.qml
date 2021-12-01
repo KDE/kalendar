@@ -366,8 +366,8 @@ Kirigami.OverlayDrawer {
                     id: tagFlow
                     Layout.fillWidth: true
                     Layout.leftMargin: Kirigami.Settings.isMobile ?
-                        Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 3 :
-                        Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 2
+                        Kirigami.Units.largeSpacing * 2 :
+                        Kirigami.Units.largeSpacing
                     Layout.rightMargin: Kirigami.Units.largeSpacing
                     Layout.bottomMargin: Kirigami.Units.largeSpacing
                     spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
@@ -443,7 +443,9 @@ Kirigami.OverlayDrawer {
                                 labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
                                 labelItem.font.weight: Font.DemiBold
                                 Layout.topMargin: 2 * Kirigami.Units.largeSpacing
-                                leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+                                leftPadding: Kirigami.Settings.isMobile ?
+                                    (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                                    (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
                                 hoverEnabled: false
                                 enabled: !sidebar.collapsed
 
@@ -458,12 +460,27 @@ Kirigami.OverlayDrawer {
                                 }
                                 leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
-                                trailing: Kirigami.Icon {
-                                    implicitWidth: Kirigami.Units.iconSizes.small
-                                    implicitHeight: Kirigami.Units.iconSizes.small
-                                    source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                    color: calendarSourceHeading.labelItem.color
-                                    isMask: true
+                                trailing: RowLayout {
+                                    ColoredCheckbox {
+                                        id: calendarCheckbox
+
+                                        Layout.fillHeight: true
+                                        visible: model.checkState != null
+                                        color: model.collectionColor
+                                        checked: model.checkState === 2
+                                        onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                        onClicked: {
+                                            model.checkState = model.checkState === 0 ? 2 : 0
+                                            calendarCheckChanged(collectionId, checked)
+                                        }
+                                    }
+                                    Kirigami.Icon {
+                                        implicitWidth: Kirigami.Units.iconSizes.small
+                                        implicitHeight: Kirigami.Units.iconSizes.small
+                                        source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                                        color: calendarSourceHeading.labelItem.color
+                                        isMask: true
+                                    }
                                 }
 
                                 onClicked: calendarList.model.toggleChildren(index)
@@ -476,10 +493,18 @@ Kirigami.OverlayDrawer {
                                 id: calendarItem
                                 label: display
                                 labelItem.color: Kirigami.Theme.textColor
-                                leftPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+                                leftPadding: Kirigami.Settings.isMobile ?
+                                    (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                                    (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
                                 separatorVisible: false
-                                reserveSpaceForIcon: true
                                 enabled: !sidebar.collapsed
+
+                                leading: Kirigami.Icon {
+                                    implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                    implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                    source: model.decoration
+                                }
+                                leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
                                 trailing: ColoredCheckbox {
                                     id: calendarCheckbox

@@ -198,7 +198,14 @@ protected:
 /// Despite the name, this handles the presentation of collections including display text and icons, not just colors.
 class ColorProxyModel : public QSortFilterProxyModel
 {
+    Q_OBJECT
+
 public:
+    enum Roles {
+        isResource = Akonadi::EntityTreeModel::UserRole + 1,
+    };
+    Q_ENUM(Roles);
+
     explicit ColorProxyModel(QObject *parent = nullptr)
         : QSortFilterProxyModel(parent)
         , mInitDefaultCalendar(false)
@@ -220,6 +227,7 @@ public:
         if (!index.isValid()) {
             return {};
         }
+
         if (role == Qt::DecorationRole) {
             const Akonadi::Collection collection = CalendarSupport::collectionFromIndex(index);
 
@@ -244,6 +252,7 @@ public:
             const Akonadi::Collection collection = CalendarSupport::collectionFromIndex(index);
             const Akonadi::Collection::Id colId = collection.id();
             const Akonadi::AgentInstance instance = Akonadi::AgentManager::self()->instance(collection.resource());
+
             if (!instance.isOnline() && !collection.isVirtual()) {
                 return i18nc("@item this is the default calendar", "%1 (Offline)", collection.displayName());
             }
@@ -258,6 +267,8 @@ public:
             } else {
                 return {};
             }
+        } else if (role == isResource) {
+            return Akonadi::CollectionUtils::isResource(CalendarSupport::collectionFromIndex(index));
         }
 
         return QSortFilterProxyModel::data(index, role);
@@ -273,6 +284,7 @@ public:
         QHash<int, QByteArray> roleNames = QSortFilterProxyModel::roleNames();
         roleNames[Qt::CheckStateRole] = "checkState";
         roleNames[Qt::BackgroundRole] = "collectionColor";
+        roleNames[isResource] = "isResource";
         return roleNames;
     }
 

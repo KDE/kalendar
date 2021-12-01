@@ -31,20 +31,43 @@ Kirigami.Page {
                         roleValue: true
 
                         Kirigami.BasicListItem {
+                            id: calendarSourceHeading
                             label: display
                             labelItem.color: Kirigami.Theme.disabledTextColor
                             labelItem.font.weight: Font.DemiBold
                             topPadding: 2 * Kirigami.Units.largeSpacing
-                            hoverEnabled: false
                             background: Item {}
+                            leftPadding: Kirigami.Settings.isMobile ?
+                                (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                                (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
+                            hoverEnabled: false
 
                             separatorVisible: false
 
-                            trailing: Kirigami.Icon {
-                                width: Kirigami.Units.iconSizes.small
-                                height: Kirigami.Units.iconSizes.small
-                                source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                x: -4
+                            leading: Kirigami.Icon {
+                                implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                color: calendarSourceHeading.labelItem.color
+                                isMask: true
+                                source: model.decoration
+                            }
+                            leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+
+                            trailing: RowLayout {
+                                ColoredCheckbox {
+                                    Layout.fillHeight: true
+                                    visible: model.checkState != null
+                                    color: model.collectionColor
+                                    checked: model.checkState === 2
+                                    onClicked: model.checkState = model.checkState === 0 ? 2 : 0
+                                }
+                                Kirigami.Icon {
+                                    implicitWidth: Kirigami.Units.iconSizes.small
+                                    implicitHeight: Kirigami.Units.iconSizes.small
+                                    source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                                    color: calendarSourceHeading.labelItem.color
+                                    isMask: true
+                                }
                             }
 
                             onClicked: collectionsList.model.toggleChildren(index)
@@ -61,6 +84,9 @@ Kirigami.Page {
                             labelItem.color: Kirigami.Theme.textColor
                             hoverEnabled: false
                             separatorVisible: false
+                            leftPadding: Kirigami.Settings.isMobile ?
+                                (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                                (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
 
                             trailing: ColoredCheckbox {
                                 color: model.collectionColor
