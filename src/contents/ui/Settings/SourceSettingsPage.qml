@@ -78,11 +78,11 @@ Kirigami.Page {
                                 color: {
                                     // TODO this is weird
                                     if (model.status === /* running */0) {
-                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.positiveTextColor, listItem.textColor) : Kirigami.Theme.positiveTextColor;
+                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.positiveTextColor, listItem.activeTextColor, 0.5) : Kirigami.Theme.positiveTextColor;
                                     } else if (model.status === /* idle */1) {
-                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.disabledTextColor, listItem.activeTextColor) : Kirigami.Theme.disabledTextColor;
+                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.disabledTextColor, listItem.activeTextColor, 0.5) : Kirigami.Theme.disabledTextColor;
                                     } else if (model.status === /* broken */2) {
-                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.negativeTextColor, listItem.activeTextColor) : Kirigami.Theme.negativeTextColor;;
+                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.negativeTextColor, listItem.activeTextColor, 0.5) : Kirigami.Theme.negativeTextColor;;
                                     } else {
                                         return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                                     }
