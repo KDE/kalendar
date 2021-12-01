@@ -461,6 +461,13 @@ Kirigami.OverlayDrawer {
                                 leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
                                 trailing: RowLayout {
+                                    Kirigami.Icon {
+                                        implicitWidth: Kirigami.Units.iconSizes.small
+                                        implicitHeight: Kirigami.Units.iconSizes.small
+                                        source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                                        color: calendarSourceHeading.labelItem.color
+                                        isMask: true
+                                    }
                                     ColoredCheckbox {
                                         id: calendarCheckbox
 
@@ -473,13 +480,6 @@ Kirigami.OverlayDrawer {
                                             model.checkState = model.checkState === 0 ? 2 : 0
                                             calendarCheckChanged(collectionId, checked)
                                         }
-                                    }
-                                    Kirigami.Icon {
-                                        implicitWidth: Kirigami.Units.iconSizes.small
-                                        implicitHeight: Kirigami.Units.iconSizes.small
-                                        source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                        color: calendarSourceHeading.labelItem.color
-                                        isMask: true
                                     }
                                 }
 

@@ -54,19 +54,19 @@ Kirigami.Page {
                             leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
                             trailing: RowLayout {
-                                ColoredCheckbox {
-                                    Layout.fillHeight: true
-                                    visible: model.checkState != null
-                                    color: model.collectionColor
-                                    checked: model.checkState === 2
-                                    onClicked: model.checkState = model.checkState === 0 ? 2 : 0
-                                }
                                 Kirigami.Icon {
                                     implicitWidth: Kirigami.Units.iconSizes.small
                                     implicitHeight: Kirigami.Units.iconSizes.small
                                     source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
                                     color: calendarSourceHeading.labelItem.color
                                     isMask: true
+                                }
+                                ColoredCheckbox {
+                                    Layout.fillHeight: true
+                                    visible: model.checkState != null
+                                    color: model.collectionColor
+                                    checked: model.checkState === 2
+                                    onClicked: model.checkState = model.checkState === 0 ? 2 : 0
                                 }
                             }
 
