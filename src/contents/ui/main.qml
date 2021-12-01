@@ -166,7 +166,9 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        pageStack.currentItem.setToDate(root.selectedDate, true)
+        if(pageStack.currentItem.objectName !== "todoView") {
+            pageStack.currentItem.setToDate(root.selectedDate, true);
+        }
     }
 
     Connections {
