@@ -15,7 +15,7 @@ class InfiniteCalendarViewModel : public QAbstractListModel
     // Amount of dates to add each time the model adds more dates
     Q_PROPERTY(int datesToAdd READ datesToAdd WRITE setDatesToAdd NOTIFY datesToAddChanged)
     Q_PROPERTY(int scale READ scale WRITE setScale NOTIFY scaleChanged)
-    Q_PROPERTY(QStringList weekViewLocalisedHourLabels MEMBER m_weekViewLocalisedHourLabels CONSTANT)
+    Q_PROPERTY(QStringList hourlyViewLocalisedHourLabels MEMBER m_hourlyViewLocalisedHourLabels CONSTANT)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
     Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
 
@@ -86,7 +86,7 @@ Q_SIGNALS:
 private:
     QVector<QDate> m_startDates;
     QVector<QDate> m_firstDayOfMonthDates;
-    QStringList m_weekViewLocalisedHourLabels;
+    QStringList m_hourlyViewLocalisedHourLabels;
     QLocale m_locale;
     int m_datesToAdd = 10;
     int m_scale = MonthScale;

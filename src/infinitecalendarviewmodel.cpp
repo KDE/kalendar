@@ -37,11 +37,11 @@ void InfiniteCalendarViewModel::setup()
     const QDate today = QDate::currentDate();
     QTime time;
 
-    if (!m_weekViewLocalisedHourLabels.length()) {
-        m_weekViewLocalisedHourLabels.clear();
+    if (!m_hourlyViewLocalisedHourLabels.length()) {
+        m_hourlyViewLocalisedHourLabels.clear();
         for (int i = 1; i < 24; i++) {
             time.setHMS(i, 0, 0);
-            m_weekViewLocalisedHourLabels.append(QLocale::system().toString(time, QLocale::NarrowFormat));
+            m_hourlyViewLocalisedHourLabels.append(QLocale::system().toString(time, QLocale::NarrowFormat));
         }
     }
 
@@ -236,7 +236,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
 
         if (!m_weekViewModels.contains(startDate)) {
-            m_weekViewModels[startDate] = generateHourlyIncidenceModel(startDate, 7, 7);
+            m_weekViewModels[startDate] = generateHourlyIncidenceModel(startDate, 7, 15);
 
             m_liveWeekViewModelKeys.enqueue(startDate);
             cleanUpModels();
@@ -269,7 +269,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
 
         if (!m_threeDayViewModels.contains(startDate)) {
-            m_threeDayViewModels[startDate] = generateHourlyIncidenceModel(startDate, 3, 3);
+            m_threeDayViewModels[startDate] = generateHourlyIncidenceModel(startDate, 3, 15);
 
             m_liveThreeDayViewModelKeys.enqueue(startDate);
             cleanUpModels();
@@ -302,9 +302,9 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
 
         if (!m_dayViewModels.contains(startDate)) {
-            m_dayViewModels[startDate] = generateHourlyIncidenceModel(startDate, 1, 1);
+            m_dayViewModels[startDate] = generateHourlyIncidenceModel(startDate, 1, 15);
 
-            m_liveWeekViewModelKeys.enqueue(startDate);
+            m_liveDayViewModelKeys.enqueue(startDate);
             cleanUpModels();
         }
 
@@ -318,10 +318,10 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
 
         if (!m_dayViewMultiDayModels.contains(startDate)) {
-            m_dayViewMultiDayModels[startDate] = generateMultiDayIncidenceModel(startDate, 7, 7);
+            m_dayViewMultiDayModels[startDate] = generateMultiDayIncidenceModel(startDate, 1, 1);
             m_dayViewMultiDayModels[startDate]->setFilters(MultiDayIncidenceModel::AllDayOnly | MultiDayIncidenceModel::MultiDayOnly);
 
-            m_liveWeekViewMultiDayModelKeys.enqueue(startDate);
+            m_liveDayViewMultiDayModelKeys.enqueue(startDate);
             cleanUpModels();
         }
 
@@ -389,6 +389,7 @@ void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, 
 
     for (int i = 0; i < m_datesToAdd; i++) {
         QDate startDate = startFrom.isValid() && i == 0 ? startFrom : atEnd ? m_startDates[rowCount() - 1].addDays(amount) : m_startDates[0].addDays(-amount);
+        qDebug() << startDate;
 
         if (atEnd) {
             m_startDates.append(startDate);
@@ -396,6 +397,8 @@ void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, 
             m_startDates.insert(0, startDate);
         }
     }
+
+    endInsertRows();
 }
 
 void InfiniteCalendarViewModel::addWeekDates(bool atEnd, const QDate &startFrom)

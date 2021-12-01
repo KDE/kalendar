@@ -79,7 +79,7 @@ void KalendarApplication::setupActions()
                 KalendarConfig::self()->save();
             }
         });
-        mCollection.setDefaultShortcut(openTodoAction, QKeySequence(i18n("Ctrl+4")));
+        mCollection.setDefaultShortcut(openTodoAction, QKeySequence(i18n("Ctrl+6")));
     }
 
     actionName = QLatin1String("open_week_view");
@@ -98,6 +98,38 @@ void KalendarApplication::setupActions()
         mCollection.setDefaultShortcut(openWeekAction, QKeySequence(i18n("Ctrl+2")));
     }
 
+    actionName = QLatin1String("open_threeday_view");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto openThreeDayAction = mCollection.addAction(actionName, this, &KalendarApplication::openThreeDayView);
+        openThreeDayAction->setText(i18n("3 Day View"));
+        openThreeDayAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-workweek")));
+        openThreeDayAction->setCheckable(true);
+        openThreeDayAction->setActionGroup(m_viewGroup);
+        connect(openThreeDayAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::ThreeDayView);
+                KalendarConfig::self()->save();
+            }
+        });
+        mCollection.setDefaultShortcut(openThreeDayAction, QKeySequence(i18n("Ctrl+3")));
+    }
+
+    actionName = QLatin1String("open_day_view");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto openDayAction = mCollection.addAction(actionName, this, &KalendarApplication::openDayView);
+        openDayAction->setText(i18n("Day View"));
+        openDayAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-day")));
+        openDayAction->setCheckable(true);
+        openDayAction->setActionGroup(m_viewGroup);
+        connect(openDayAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::DayView);
+                KalendarConfig::self()->save();
+            }
+        });
+        mCollection.setDefaultShortcut(openDayAction, QKeySequence(i18n("Ctrl+4")));
+    }
+
     actionName = QLatin1String("open_schedule_view");
     if (KAuthorized::authorizeAction(actionName)) {
         auto openScheduleAction = mCollection.addAction(actionName, this, &KalendarApplication::openScheduleView);
@@ -111,14 +143,14 @@ void KalendarApplication::setupActions()
                 KalendarConfig::self()->save();
             }
         });
-        mCollection.setDefaultShortcut(openScheduleAction, QKeySequence(i18n("Ctrl+3")));
+        mCollection.setDefaultShortcut(openScheduleAction, QKeySequence(i18n("Ctrl+5")));
     }
 
     actionName = QLatin1String("open_month_view");
     if (KAuthorized::authorizeAction(actionName)) {
         auto openMonthAction = mCollection.addAction(actionName, this, &KalendarApplication::openMonthView);
         openMonthAction->setText(i18n("Month View"));
-        openMonthAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar")));
+        openMonthAction->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-month")));
         openMonthAction->setCheckable(true);
         openMonthAction->setActionGroup(m_viewGroup);
         connect(openMonthAction, &QAction::toggled, this, [](bool checked) {

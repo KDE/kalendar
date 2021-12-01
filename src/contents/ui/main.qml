@@ -43,6 +43,8 @@ Kirigami.ApplicationWindow {
 
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
     readonly property var weekViewAction: KalendarApplication.action("open_week_view")
+    readonly property var threeDayViewAction: KalendarApplication.action("open_threeday_view")
+    readonly property var dayViewAction: KalendarApplication.action("open_day_view")
     readonly property var scheduleViewAction: KalendarApplication.action("open_schedule_view")
     readonly property var todoViewAction: KalendarApplication.action("open_todo_view")
     readonly property var moveViewForwardsAction: KalendarApplication.action("move_view_forwards")
@@ -104,6 +106,12 @@ Kirigami.ApplicationWindow {
             case Config.WeekView:
                 weekViewAction.trigger();
                 break;
+            case Config.ThreeDayView:
+                threeDayViewAction.trigger();
+                break;
+            case Config.DayView:
+                dayViewAction.trigger();
+                break;
             case Config.ScheduleView:
                 scheduleViewAction.trigger();
                 break;
@@ -142,7 +150,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function switchView(newViewComponent) {
+    function switchView(newViewComponent, viewSettings) {
         if(pageStack.layers.depth > 1) {
             pageStack.layers.pop(pageStack.layers.initialItem);
         }
@@ -150,6 +158,12 @@ Kirigami.ApplicationWindow {
 
         if(filterHeader.active) {
             pageStack.currentItem.header = filterHeader.item;
+        }
+
+        if(viewSettings) {
+            for(const [key, value] of Object.entries(viewSettings)) {
+                pageStack.currentItem[key] = value;
+            }
         }
     }
 
@@ -165,7 +179,21 @@ Kirigami.ApplicationWindow {
         function onOpenWeekView() {
             if(pageStack.currentItem.objectName !== "weekView" || root.ignoreCurrentPage) {
                 weekScaleModelLoader.active = true;
-                root.switchView(weekViewComponent);
+                root.switchView(hourlyViewComponent);
+            }
+        }
+
+        function onOpenThreeDayView() {
+            if(pageStack.currentItem.objectName !== "threeDayView" || root.ignoreCurrentPage) {
+                threeDayScaleModelLoader.active = true;
+                root.switchView(hourlyViewComponent, { daysToShow: 3 });
+            }
+        }
+
+        function onOpenDayView() {
+            if(pageStack.currentItem.objectName !== "dayView" || root.ignoreCurrentPage) {
+                dayScaleModelLoader.active = true;
+                root.switchView(hourlyViewComponent, { daysToShow: 1 });
             }
         }
 
@@ -385,6 +413,12 @@ Kirigami.ApplicationWindow {
                 break;
             case "weekView":
                 return i18n("Week View");
+                break;
+            case "threeDayView":
+                return i18n("3 Day View");
+                break;
+            case "dayView":
+                return i18n("Day View");
                 break;
             case "scheduleView":
                 return i18n("Schedule View");
@@ -1063,6 +1097,28 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    Loader {
+        id: threeDayScaleModelLoader
+        active: Config.lastOpenedView === Config.ThreeDayView
+        onStatusChanged: if(status === Loader.Ready) asynchronous = true
+        sourceComponent: InfiniteCalendarViewModel {
+            scale: InfiniteCalendarViewModel.ThreeDayScale
+            calendar: CalendarManager.calendar
+            filter: root.filter
+        }
+    }
+
+    Loader {
+        id: dayScaleModelLoader
+        active: Config.lastOpenedView === Config.DayView
+        onStatusChanged: if(status === Loader.Ready) asynchronous = true
+        sourceComponent: InfiniteCalendarViewModel {
+            scale: InfiniteCalendarViewModel.DayScale
+            calendar: CalendarManager.calendar
+            filter: root.filter
+        }
+    }
+
     Component {
         id: monthViewComponent
 
@@ -1131,22 +1187,39 @@ Kirigami.ApplicationWindow {
     }
 
     Component {
-        id: weekViewComponent
+        id: hourlyViewComponent
 
-        WeekView {
-            id: weekView
-            objectName: "weekView"
+        HourlyView {
+            id: hourlyView
+            objectName: switch(daysToShow) {
+                case 1:
+                    return "dayView";
+                case 3:
+                    return "threeDayView";
+                case 7:
+                default:
+                    return "weekView";
+            }
 
             titleDelegate: ViewTitleDelegate {
                 titleDateButton.range: true
-                titleDateButton.date: weekView.startDate
-                titleDateButton.lastDate: DateUtils.addDaysToDate(weekView.startDate, 6)
+                titleDateButton.date: hourlyView.startDate
+                titleDateButton.lastDate: DateUtils.addDaysToDate(hourlyView.startDate, 6)
                 titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
             }
             selectedDate: root.selectedDate
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-            model: weekScaleModelLoader.item
+            model: switch(daysToShow) {
+                case 1:
+                    return dayScaleModelLoader.item;
+                case 3:
+                    return threeDayScaleModelLoader.item;
+                case 7:
+                default:
+                    return weekScaleModelLoader.item;
+            }
+            onModelChanged: setToDate(root.selectedDate, true)
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
