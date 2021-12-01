@@ -78,7 +78,6 @@ Kirigami.Page {
         while(firstItemDate >= date) {
             pathView.model.addDates(false)
             firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
-            console.log(firstItemDate);
             newIndex = 0;
         }
         if(firstItemDate < date && newIndex === 0) {

@@ -15,8 +15,12 @@ Kirigami.NavigationTabBar {
             property string name: "monthView"
         },
         KActionFromAction {
-            kalendarAction: "open_week_view"
-            property string name: "weekView"
+            kalendarAction: "open_threeday_view"
+            property string name: "threeDayView"
+        },
+        KActionFromAction {
+            kalendarAction: "open_day_view"
+            property string name: "dayView"
         },
         KActionFromAction {
             kalendarAction: "open_schedule_view"
