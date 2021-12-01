@@ -1053,7 +1053,7 @@ Kirigami.ApplicationWindow {
 
             titleDelegate: ViewTitleDelegate {
                 titleDateButton.date: monthView.firstDayOfMonth
-                titleDateButton.onClicked: dateChangeDrawer.open()
+                titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
@@ -1086,7 +1086,7 @@ Kirigami.ApplicationWindow {
 
             titleDelegate: ViewTitleDelegate {
                 titleDateButton.date: scheduleView.startDate
-                titleDateButton.onClicked: dateChangeDrawer.open()
+                titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
             }
             selectedDate: root.selectedDate
             openOccurrence: root.openOccurrence
@@ -1122,7 +1122,7 @@ Kirigami.ApplicationWindow {
                 titleDateButton.range: true
                 titleDateButton.date: weekView.startDate
                 titleDateButton.lastDate: DateUtils.addDaysToDate(weekView.startDate, 6)
-                titleDateButton.onClicked: dateChangeDrawer.open()
+                titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
             }
             selectedDate: root.selectedDate
             currentDate: root.currentDate
