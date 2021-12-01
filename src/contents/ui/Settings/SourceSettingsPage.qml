@@ -24,6 +24,7 @@ Kirigami.Page {
                 clip: true
                 model: AgentConfiguration.runningAgents // CalendarManager.collections
                 delegate: Kirigami.BasicListItem { // Originally swipelistitem, caused issues in mobile mode
+                    id: listItem
                     leftPadding: Kirigami.Units.largeSpacing * 2
                     topPadding: Kirigami.Units.largeSpacing
                     bottomPadding: Kirigami.Units.largeSpacing
@@ -52,6 +53,7 @@ Kirigami.Page {
                                 Layout.rowSpan: 2
                                 Layout.preferredWidth: Kirigami.Units.gridUnit * 3
                                 Layout.preferredHeight: Kirigami.Units.gridUnit * 3
+                                color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                             }
 
                             Controls.Label {
@@ -64,6 +66,7 @@ Kirigami.Page {
                                 elide: Text.ElideRight
                                 maximumLineCount: 2
                                 wrapMode: Text.WordWrap
+                                color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                             }
 
                             Controls.Label {
@@ -75,13 +78,13 @@ Kirigami.Page {
                                 color: {
                                     // TODO this is weird
                                     if (model.status === /* running */0) {
-                                        return Kirigami.Theme.positiveTextColor;
+                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.positiveTextColor, listItem.textColor) : Kirigami.Theme.positiveTextColor;
                                     } else if (model.status === /* idle */1) {
-                                        return Kirigami.Theme.disabledTextColor;
+                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.disabledTextColor, listItem.activeTextColor) : Kirigami.Theme.disabledTextColor;
                                     } else if (model.status === /* broken */2) {
-                                        return Kirigami.Theme.negativeTextColor;
+                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.negativeTextColor, listItem.activeTextColor) : Kirigami.Theme.negativeTextColor;;
                                     } else {
-                                        return Kirigami.Theme.textColor;
+                                        return (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
                                     }
                                 }
                                 text: model.statusMessage
@@ -93,21 +96,21 @@ Kirigami.Page {
                                 Layout.column: smallScreen ? 4 : 2
                                 Layout.columnSpan : 2
                                 Layout.alignment: Qt.AlignRight
-                                Controls.ToolButton {
+                                Controls.Button {
                                     icon.name: "view-refresh"
                                     text: i18n("Restart")
                                     onClicked: {
                                         AgentConfiguration.restart(index);
                                     }
                                 }
-                                Controls.ToolButton {
+                                Controls.Button {
                                     icon.name: "entry-edit"
                                     text: i18n("Edit")
                                     onClicked: {
                                         AgentConfiguration.edit(index);
                                     }
                                 }
-                                Controls.ToolButton {
+                                Controls.Button {
                                     icon.name: "delete"
                                     text: i18n("Remove")
                                     onClicked: {
