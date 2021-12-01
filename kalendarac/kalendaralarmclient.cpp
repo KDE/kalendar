@@ -212,18 +212,18 @@ void KalendarAlarmClient::checkAlarms()
         if (incidence && incidence->type() == KCalendarCore::Incidence::TypeTodo && !incidence->dtStart().isValid()) {
             auto todo = incidence.staticCast<KCalendarCore::Todo>();
             timeText = i18n("Task due at %1", QLocale::system().toString(todo->dtDue().time(), QLocale::NarrowFormat));
+            m_notificationHandler->addActiveNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()));
         } else if (incidence) {
             QString incidenceString = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
             timeText = i18nc("Event starts at 10:00",
                              "%1 starts at %2",
                              incidenceString,
                              QLocale::system().toString(incidence->dtStart().time(), QLocale::NarrowFormat));
+            m_notificationHandler->addActiveNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()));
         } else {
             QLocale::system().toString(alarm->time(), QLocale::NarrowFormat);
+            m_notificationHandler->addActiveNotification(uid, QLatin1String("%1\n%2").arg(timeText, alarm->text()));
         }
-
-        qDebug() << timeText << alarm->text() << uid;
-        m_notificationHandler->addActiveNotification(uid, QLatin1String("%1\n%2").arg(timeText, alarm->text()));
     }
 
     m_notificationHandler->sendNotifications();
