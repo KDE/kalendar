@@ -74,7 +74,6 @@ void KalendarAlarmClient::setupAkonadi()
     mETM = mCalendar->entityTreeModel();
 
     connect(&mCheckTimer, &QTimer::timeout, this, &KalendarAlarmClient::checkAlarms);
-    // connect(m_notificationHandler, &NotificationHandler::scheduleAlarmCheck, this, &KalendarAlarmClient::scheduleAlarmCheck);
     connect(mETM, &Akonadi::EntityTreeModel::collectionPopulated, this, &KalendarAlarmClient::deferredInit);
     connect(mETM, &Akonadi::EntityTreeModel::collectionTreeFetched, this, &KalendarAlarmClient::deferredInit);
 
@@ -201,9 +200,6 @@ void KalendarAlarmClient::checkAlarms()
     qDebug() << "Check:" << from.toString() << " -" << mLastChecked.toString();
 
     const Alarm::List alarms = mCalendar->alarms(from, mLastChecked, true /* exclude blocked alarms */);
-    FilterPeriod fPeriod{.from = from, .to = mLastChecked};
-    m_notificationHandler->setPeriod(fPeriod);
-
     for (const Alarm::Ptr &alarm : alarms) {
         const QString uid = alarm->customProperty("ETMCalendar", "parentUid");
         const KCalendarCore::Incidence::Ptr incidence = mCalendar->incidence(uid);

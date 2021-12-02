@@ -42,7 +42,7 @@ void NotificationHandler::sendSuspendedNotifications()
 {
     auto suspItr = m_suspended_notifications.begin();
     while (suspItr != m_suspended_notifications.end()) {
-        if (suspItr.value()->remindAt() < m_period.to) {
+        if (suspItr.value()->remindAt() < QDateTime::currentDateTime()) {
             qDebug() << "sendNotifications:\tSending notification for suspended alarm" << suspItr.value()->uid() << ", text is" << suspItr.value()->text();
             suspItr.value()->send();
             suspItr = m_suspended_notifications.erase(suspItr);
@@ -74,7 +74,6 @@ void NotificationHandler::dismiss(AlarmNotification *const notification)
     m_active_notifications.remove(notification->uid());
 
     qDebug() << "\ndismiss:\tAlarm" << notification->uid() << "dismissed";
-    Q_EMIT scheduleAlarmCheck();
 }
 
 void NotificationHandler::suspend(AlarmNotification *const notification)
@@ -87,18 +86,6 @@ void NotificationHandler::suspend(AlarmNotification *const notification)
     m_active_notifications.remove(notification->uid());
 
     qDebug() << "\nsuspend\t:Alarm " << notification->uid() << "suspended";
-
-    Q_EMIT scheduleAlarmCheck();
-}
-
-FilterPeriod NotificationHandler::period() const
-{
-    return m_period;
-}
-
-void NotificationHandler::setPeriod(const FilterPeriod &checkPeriod)
-{
-    m_period = checkPeriod;
 }
 
 QHash<QString, AlarmNotification *> NotificationHandler::activeNotifications() const
@@ -109,22 +96,4 @@ QHash<QString, AlarmNotification *> NotificationHandler::activeNotifications() c
 QHash<QString, AlarmNotification *> NotificationHandler::suspendedNotifications() const
 {
     return m_suspended_notifications;
-}
-
-QDateTime NotificationHandler::firstSuspended() const
-{
-    if (m_suspended_notifications.isEmpty()) {
-        return QDateTime{};
-    }
-
-    auto firstAlarmTime = m_suspended_notifications.values().first()->remindAt();
-
-    for (const auto &s : qAsConst(m_suspended_notifications)) {
-        auto alarmTime = s->remindAt();
-        if (alarmTime < firstAlarmTime) {
-            firstAlarmTime = alarmTime;
-        }
-    }
-
-    return firstAlarmTime;
 }

@@ -8,12 +8,8 @@
 #define NOTIFICATIONHANDLER_H
 
 #include <QDateTime>
-#include <QVariantMap>
-
-struct FilterPeriod {
-    QDateTime from;
-    QDateTime to;
-};
+#include <QHash>
+#include <QObject>
 
 class AlarmNotification;
 /**
@@ -45,16 +41,6 @@ public:
     void addSuspendedNotification(const QString &uid, const QString &text, const QDateTime &remindTime);
 
     /**
-     * @return The time period to check for alarms
-     */
-    FilterPeriod period() const;
-
-    /**
-     * @brief Sets the time period to check for alarms
-     */
-    void setPeriod(const FilterPeriod &checkPeriod);
-
-    /**
      * @return The list of active notifications. It is the set of notification that should be sent at the next check
      */
     QHash<QString, AlarmNotification *> activeNotifications() const;
@@ -63,13 +49,6 @@ public:
      * @return The list of suspended notifications
      */
     QHash<QString, AlarmNotification *> suspendedNotifications() const;
-
-    /**
-     * @brief The date time of the first suspended alarm scheduled. If no suspended notifications exist, an invalid datetime is returned.
-     */
-    QDateTime firstSuspended() const;
-
-    Q_SIGNAL void scheduleAlarmCheck();
 
 public Q_SLOTS:
     /**
@@ -90,7 +69,6 @@ private:
 
     QHash<QString, AlarmNotification *> m_active_notifications;
     QHash<QString, AlarmNotification *> m_suspended_notifications;
-    FilterPeriod m_period;
     int m_suspend_seconds;
 };
 #endif
