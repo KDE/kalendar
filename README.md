@@ -20,7 +20,7 @@ Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you
 
 ## Get it
 
-Kalendar is available in the Arch AUR, Fedora and with openSUSE tumbleweed using
+Kalendar is available in the Arch AUR, in Fedora, and in openSUSE Tumbleweed using
 the following two OBS repositories: https://build.opensuse.org/project/show/home:KaratekHD:kirigami
 and https://build.opensuse.org/project/show/home:andresbs:plasma-mobile
 
