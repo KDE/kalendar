@@ -18,9 +18,13 @@ AlarmNotification::AlarmNotification(NotificationHandler *handler, const QString
     m_notification->setActions({i18n("Remind in 5 mins"), i18n("Dismiss")});
 
     connect(m_notification, &KNotification::action1Activated, this, &AlarmNotification::suspend);
-    connect(m_notification, &KNotification::action2Activated, this, &AlarmNotification::dismiss);
+    // dismiss both with the explicit action and just closing the notification
+    // there is no signal for explicit closing though, we only can observe that
+    // indirectly from not having received a different signal before closed()
+    connect(m_notification, &KNotification::closed, this, &AlarmNotification::dismiss);
     connect(this, &AlarmNotification::suspend, m_notification_handler, [this]() {
         m_notification_handler->suspend(this);
+        disconnect(this, &AlarmNotification::dismiss, m_notification_handler, nullptr);
     });
     connect(this, &AlarmNotification::dismiss, m_notification_handler, [this]() {
         m_notification_handler->dismiss(this);

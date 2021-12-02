@@ -8,6 +8,7 @@
 
 #include <KNotification>
 #include <QDateTime>
+#include <QPointer>
 
 class NotificationHandler;
 
@@ -65,7 +66,7 @@ Q_SIGNALS:
     void suspend();
 
 private:
-    KNotification *m_notification;
+    QPointer<KNotification> m_notification;
     QString m_uid;
     QDateTime m_remind_at;
     NotificationHandler *m_notification_handler;
