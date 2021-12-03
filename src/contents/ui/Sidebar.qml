@@ -218,14 +218,6 @@ Kirigami.OverlayDrawer {
                             }
                         },
                         KActionFromAction {
-                            kalendarAction: "open_threeday_view"
-                            checkable: false
-                            onTriggered: {
-                                threeDayViewAction.trigger()
-                                if (sidebar.modal) sidebar.close()
-                            }
-                        },
-                        KActionFromAction {
                             kalendarAction: "open_schedule_view"
                             checkable: false
                             onTriggered: {
