@@ -44,10 +44,10 @@ QQC2.ComboBox {
         height: Kirigami.Units.gridUnit * 18
         y: parent.y + parent.height
         z: 1000
+        padding: 0
 
-        DatePicker {
+        contentItem: DatePicker {
             id: datePicker
-            anchors.fill: parent
 
             clickedDate: root.dateTime
             selectedDate: root.dateTime

@@ -7,7 +7,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0 as Kalendar
 
-Item {
+QQC2.Control {
     id: datepicker
 
     signal datePicked(date pickedDate)
@@ -19,6 +19,12 @@ Item {
     property int month: selectedDate.getMonth()
     property int day: selectedDate.getDate()
     property bool showDays: true
+    property bool showControlHeader: true
+
+    topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    rightPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    bottomPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
     onSelectedDateChanged: setToDate(selectedDate)
     onShowDaysChanged: if (!showDays) pickerView.currentIndex = 1;
@@ -118,15 +124,13 @@ Item {
         selectedDate = new Date(selectedDate.getFullYear() + 10, selectedDate.getMonth(), selectedDate.getDate())
     }
 
-    Layout.fillWidth: true
-    Layout.fillHeight: true
-
-    ColumnLayout {
-        anchors.fill: parent
+    contentItem: ColumnLayout {
+        id: pickerLayout
 
         RowLayout {
             id: headingRow
             Layout.fillWidth: true
+            visible: datepicker.showControlHeader
 
             Kirigami.Heading {
                 id: monthLabel
@@ -189,6 +193,10 @@ Item {
                 text: i18n("Years")
                 onClicked: pickerView.currentIndex = 2
             }
+        }
+        Kirigami.Separator {
+            Layout.topMargin: (-pickerLayout.spacing *2) - 1
+            Layout.fillWidth: true
         }
 
         QQC2.SwipeView {
@@ -476,8 +484,6 @@ Item {
                                     datepicker.datePicked(date);
                                     pickerView.currentIndex = 1;
                                 }
-
-
                             }
                         }
                     }
@@ -486,6 +492,3 @@ Item {
         }
     }
 }
-
-
-
