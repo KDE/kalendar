@@ -516,8 +516,8 @@ Kirigami.ApplicationWindow {
         modal: !root.wideScreen || !enabled
         onEnabledChanged: drawerOpen = enabled && !modal
         onModalChanged: drawerOpen = !modal
-        enabled: incidenceData != undefined && pageStack.layers.depth < 2 && pageStack.depth < 3
-        handleVisible: enabled && pageStack.layers.depth < 2 && pageStack.depth < 3
+        enabled: incidenceData != undefined
+        handleVisible: enabled
         interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
         activeTags: root.filter && root.filter.tags ?
@@ -987,6 +987,22 @@ Kirigami.ApplicationWindow {
         function onUpdateIncidenceDatesCompleted() { root.reenableDragOnCurrentView(); }
     }
 
+    function openDayLayer(selectedDate) {
+        if(!isNaN(selectedDate.getTime())) {
+            dayScaleModelLoader.active = true;
+
+            root.selectedDate = selectedDate;
+            pageStack.layers.push(hourlyViewComponent);
+            pageStack.layers.currentItem.daysToShow = 1;
+
+            if(filterHeader.active) {
+                pageStack.layers.currentItem.header = filterHeader.item;
+            }
+
+            pageStack.layers.currentItem.setToDate(root.selectedDate, true);
+        }
+    }
+
     Component {
         id: deleteIncidenceSheetComponent
         DeleteIncidenceSheet {
@@ -1146,6 +1162,7 @@ Kirigami.ApplicationWindow {
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: root.openDayLayer(selectedDate)
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
@@ -1181,6 +1198,7 @@ Kirigami.ApplicationWindow {
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: root.openDayLayer(selectedDate)
 
             actions.contextualActions: createAction
         }
@@ -1234,6 +1252,7 @@ Kirigami.ApplicationWindow {
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
             onResizeIncidence: root.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: root.openDayLayer(selectedDate)
 
             actions.contextualActions: createAction
         }

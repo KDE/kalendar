@@ -226,14 +226,6 @@ Kirigami.OverlayDrawer {
                             }
                         },
                         KActionFromAction {
-                            kalendarAction: "open_day_view"
-                            checkable: false
-                            onTriggered: {
-                                dayViewAction.trigger()
-                                if (sidebar.modal) sidebar.close()
-                            }
-                        },
-                        KActionFromAction {
                             kalendarAction: "open_schedule_view"
                             checkable: false
                             onTriggered: {

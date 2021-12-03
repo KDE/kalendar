@@ -23,6 +23,7 @@ Kirigami.Page {
     signal deselect()
     signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
     signal resizeIncidence(int endOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
+    signal openDayView(date selectedDate)
 
     property var openOccurrence: {}
     property var model
@@ -225,34 +226,46 @@ Kirigami.Page {
                             default:
                                 return weekViewModel.rowCount();
                         }
-                        delegate: Kirigami.Heading {
-                            id: dayHeading
-
-                            property date headingDate: DateUtils.addDaysToDate(viewLoader.startDate, index)
-                            property bool isToday: headingDate.getDate() === root.currentDay &&
-                                                   headingDate.getMonth() === root.currentMonth &&
-                                                   headingDate.getFullYear() === root.currentYear
+                        delegate: Rectangle {
                             width: root.dayWidth
-                            horizontalAlignment: Text.AlignRight
-                            padding: Kirigami.Units.smallSpacing
-                            level: 2
-                            color: isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-                            text: {
-                                const longText = headingDate.toLocaleDateString(Qt.locale(), "dddd <b>d</b>");
-                                const mediumText = headingDate.toLocaleDateString(Qt.locale(), "ddd <b>d</b>");
-                                const shortText = mediumText.slice(0,1) + " " + headingDate.toLocaleDateString(Qt.locale(), "<b>d</b>");
+                            implicitHeight: dayHeading.implicitHeight
+                            color: dayHeading.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+
+                            Kirigami.Heading { // Heading is out of the button so the color isn't disabled when the button is
+                                id: dayHeading
+
+                                property date headingDate: DateUtils.addDaysToDate(viewLoader.startDate, index)
+                                property bool isToday: headingDate.getDate() === root.currentDay &&
+                                    headingDate.getMonth() === root.currentMonth &&
+                                    headingDate.getFullYear() === root.currentYear
+                                width: parent.width
+                                horizontalAlignment: Text.AlignRight
+                                padding: Kirigami.Units.smallSpacing
+                                level: 2
+                                color: isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                                text: {
+                                    const longText = headingDate.toLocaleDateString(Qt.locale(), "dddd <b>d</b>");
+                                    const mediumText = headingDate.toLocaleDateString(Qt.locale(), "ddd <b>d</b>");
+                                    const shortText = mediumText.slice(0,1) + " " + headingDate.toLocaleDateString(Qt.locale(), "<b>d</b>");
 
 
-                                if(fontMetrics.boundingRect(longText).width < width) {
-                                    return longText;
-                                } else if(fontMetrics.boundingRect(mediumText).width < width) {
-                                    return mediumText;
-                                } else {
-                                    return shortText;
+                                    if(fontMetrics.boundingRect(longText).width < width) {
+                                        return longText;
+                                    } else if(fontMetrics.boundingRect(mediumText).width < width) {
+                                        return mediumText;
+                                    } else {
+                                        return shortText;
+                                    }
                                 }
                             }
-                            background: Rectangle {
-                                color: dayHeading.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+
+                            QQC2.Button {
+                                implicitHeight: dayHeading.implicitHeight
+                                width: parent.width
+
+                                flat: true
+                                enabled: root.daysToShow > 1
+                                onClicked: root.openDayView(dayHeading.headingDate)
                             }
                         }
                     }

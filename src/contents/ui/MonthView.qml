@@ -22,6 +22,7 @@ Kirigami.Page {
     signal addSubTodo(var parentWrapper)
     signal deselect()
     signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
+    signal openDayView(date selectedDate)
 
     property var openOccurrence
     property var model
@@ -219,6 +220,7 @@ Kirigami.Page {
                 onAddSubTodo: monthPage.addSubTodo(parentWrapper)
                 onDeselect: monthPage.deselect()
                 onMoveIncidence: monthPage.moveIncidence(startOffset, occurrenceDate, incidenceWrapper, caughtDelegate)
+                onOpenDayView: monthPage.openDayView(selectedDate)
             }
         }
     }
