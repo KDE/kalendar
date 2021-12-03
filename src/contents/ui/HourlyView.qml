@@ -229,7 +229,7 @@ Kirigami.Page {
                         delegate: Rectangle {
                             width: root.dayWidth
                             implicitHeight: dayHeading.implicitHeight
-                            color: dayHeading.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+                            color: Kirigami.Theme.backgroundColor
 
                             Kirigami.Heading { // Heading is out of the button so the color isn't disabled when the button is
                                 id: dayHeading
