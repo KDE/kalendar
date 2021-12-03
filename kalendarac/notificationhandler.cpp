@@ -24,7 +24,7 @@ NotificationHandler::~NotificationHandler() = default;
 
 void NotificationHandler::addActiveNotification(const QString &uid, const QString &text)
 {
-    AlarmNotification *notification = new AlarmNotification(this, uid);
+    AlarmNotification *notification = new AlarmNotification(uid);
     notification->setText(text);
     m_active_notifications[notification->uid()] = notification;
 }
@@ -32,7 +32,7 @@ void NotificationHandler::addActiveNotification(const QString &uid, const QStrin
 void NotificationHandler::addSuspendedNotification(const QString &uid, const QString &txt, const QDateTime &remindTime)
 {
     qDebug() << "addSuspendedNotification:\tAdding notification to suspended list, uid:" << uid << "text:" << txt << "remindTime:" << remindTime;
-    AlarmNotification *notification = new AlarmNotification(this, uid);
+    AlarmNotification *notification = new AlarmNotification(uid);
     notification->setText(txt);
     notification->setRemindAt(remindTime);
     m_suspended_notifications[notification->uid()] = notification;
@@ -44,7 +44,7 @@ void NotificationHandler::sendSuspendedNotifications()
     while (suspItr != m_suspended_notifications.end()) {
         if (suspItr.value()->remindAt() < QDateTime::currentDateTime()) {
             qDebug() << "sendNotifications:\tSending notification for suspended alarm" << suspItr.value()->uid() << ", text is" << suspItr.value()->text();
-            suspItr.value()->send();
+            suspItr.value()->send(this);
             suspItr = m_suspended_notifications.erase(suspItr);
         } else {
             suspItr++;
@@ -56,7 +56,7 @@ void NotificationHandler::sendActiveNotifications()
 {
     for (const auto &n : qAsConst(m_active_notifications)) {
         qDebug() << "sendNotifications:\tSending notification for alarm" << n->uid();
-        n->send();
+        n->send(this);
     }
 }
 
@@ -78,7 +78,7 @@ void NotificationHandler::dismiss(AlarmNotification *const notification)
 
 void NotificationHandler::suspend(AlarmNotification *const notification)
 {
-    AlarmNotification *suspendedNotification = new AlarmNotification(this, notification->uid());
+    AlarmNotification *suspendedNotification = new AlarmNotification(notification->uid());
     suspendedNotification->setText(notification->text());
     suspendedNotification->setRemindAt(QDateTime(QDateTime::currentDateTime()).addSecs(m_suspend_seconds));
 
