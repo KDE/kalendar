@@ -992,14 +992,19 @@ Kirigami.ApplicationWindow {
             dayScaleModelLoader.active = true;
 
             root.selectedDate = selectedDate;
-            pageStack.layers.push(hourlyViewComponent);
-            pageStack.layers.currentItem.daysToShow = 1;
 
-            if(filterHeader.active) {
-                pageStack.layers.currentItem.header = filterHeader.item;
+            if(Kirigami.Settings.isMobile) {
+                dayViewAction.trigger();
+            } else {
+                pageStack.layers.push(hourlyViewComponent);
+                pageStack.layers.currentItem.daysToShow = 1;
+
+                if(filterHeader.active) {
+                    pageStack.layers.currentItem.header = filterHeader.item;
+                }
+
+                pageStack.layers.currentItem.setToDate(root.selectedDate, true);
             }
-
-            pageStack.layers.currentItem.setToDate(root.selectedDate, true);
         }
     }
 
