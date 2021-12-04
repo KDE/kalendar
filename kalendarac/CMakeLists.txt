@@ -4,7 +4,6 @@
 
 set(kalendarac_SRCS
     kalendaralarmclient.cpp
-    alarmdockwindow.cpp
     alarmnotification.cpp
     notificationhandler.cpp
     kalendaracmain.cpp
@@ -23,8 +22,6 @@ target_link_libraries(kalendarac
     KF5::CalendarSupport
     KF5::I18n
     KF5::Notifications
-    KF5::IconThemes
-    KF5::WindowSystem
     Qt5::Core
     Qt5::DBus
     )

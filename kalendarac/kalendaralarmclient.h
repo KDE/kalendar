@@ -30,18 +30,12 @@ public:
 
     // DBUS interface
     void quit();
-    void hide();
-    void show();
     void forceAlarmCheck();
     Q_REQUIRED_RESULT QString dumpDebug() const;
     Q_REQUIRED_RESULT QStringList dumpAlarms() const;
 
 public Q_SLOTS:
     void slotQuit();
-
-Q_SIGNALS:
-    void reminderCount(int);
-    void saveAllSignal();
 
 private:
     void deferredInit();
@@ -50,11 +44,9 @@ private:
     void checkAlarms();
     void setupAkonadi();
     void slotCommitData(QSessionManager &);
-    Q_REQUIRED_RESULT bool dockerEnabled();
     Q_REQUIRED_RESULT bool collectionsAvailable() const;
     void saveLastCheckTime();
 
-    AlarmDockWindow *mDocker = nullptr; // the panel icon
     Akonadi::ETMCalendar::Ptr mCalendar;
     Akonadi::EntityTreeModel *mETM = nullptr;
 

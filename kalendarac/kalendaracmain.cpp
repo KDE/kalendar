@@ -5,13 +5,14 @@
 #include <KAboutData>
 #include <KDBusService>
 #include <KLocalizedString>
-#include <QApplication>
 #include <QCommandLineParser>
+#include <QGuiApplication>
 
 int main(int argc, char **argv)
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
+    app.setQuitOnLastWindowClosed(false);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
     KAboutData aboutData(
