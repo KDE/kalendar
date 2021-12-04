@@ -118,11 +118,11 @@ void KalendarAlarmClient::restoreSuspendedFromConfig()
         KConfigGroup suspendedAlarm(&suspendedGroup, s);
         QString uid = suspendedAlarm.readEntry("UID");
         QString txt = suspendedAlarm.readEntry("Text");
-        QDateTime remindAt = QDateTime::fromString(suspendedAlarm.readEntry("RemindAt"), QStringLiteral("yyyy,M,d,HH,m,s"));
-        qDebug() << "restoreSuspendedFromConfig: Restoring alarm" << uid << "," << txt << "," << remindAt.toString();
+        QDateTime remindAt = suspendedAlarm.readEntry("RemindAt", QDateTime());
+        qDebug() << "restoreSuspendedFromConfig: Restoring alarm" << uid << "," << txt << "," << remindAt;
 
-        if (!(uid.isEmpty() && remindAt.isValid() && !(txt.isEmpty()))) {
-            m_notificationHandler->addSuspendedNotification(uid, txt, remindAt);
+        if (!uid.isEmpty() && remindAt.isValid() && !txt.isEmpty()) {
+            m_notificationHandler->addNotification(uid, txt, remindAt);
         }
     }
 }
@@ -132,17 +132,17 @@ void KalendarAlarmClient::flushSuspendedToConfig()
     KConfigGroup suspendedGroup(KSharedConfig::openConfig(), "Suspended");
     suspendedGroup.deleteGroup();
 
-    const auto suspendedNotifications = m_notificationHandler->suspendedNotifications();
+    const auto notifications = m_notificationHandler->activeNotifications();
 
-    if (suspendedNotifications.isEmpty()) {
-        qDebug() << "flushSuspendedToConfig: No suspended notification exists, nothing to write to config";
+    if (notifications.isEmpty()) {
+        qDebug() << "flushSuspendedToConfig: No pending notification exists, nothing to write to config";
         KSharedConfig::openConfig()->sync();
 
         return;
     }
 
-    for (const auto &s : suspendedNotifications) {
-        qDebug() << "flushSuspendedToConfig: Flushing suspended alarm" << s->uid() << " to config";
+    for (const auto &s : notifications) {
+        qDebug() << "flushSuspendedToConfig: Flushing alarm" << s->uid() << s->remindAt() << " to config";
         KConfigGroup notificationGroup(&suspendedGroup, s->uid());
         notificationGroup.writeEntry("UID", s->uid());
         notificationGroup.writeEntry("Text", s->text());
@@ -208,17 +208,17 @@ void KalendarAlarmClient::checkAlarms()
         if (incidence && incidence->type() == KCalendarCore::Incidence::TypeTodo && !incidence->dtStart().isValid()) {
             auto todo = incidence.staticCast<KCalendarCore::Todo>();
             timeText = i18n("Task due at %1", QLocale::system().toString(todo->dtDue().time(), QLocale::NarrowFormat));
-            m_notificationHandler->addActiveNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()));
+            m_notificationHandler->addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
         } else if (incidence) {
             QString incidenceString = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
             timeText = i18nc("Event starts at 10:00",
                              "%1 starts at %2",
                              incidenceString,
                              QLocale::system().toString(incidence->dtStart().time(), QLocale::NarrowFormat));
-            m_notificationHandler->addActiveNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()));
+            m_notificationHandler->addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
         } else {
             QLocale::system().toString(alarm->time(), QLocale::NarrowFormat);
-            m_notificationHandler->addActiveNotification(uid, QLatin1String("%1\n%2").arg(timeText, alarm->text()));
+            m_notificationHandler->addNotification(uid, QLatin1String("%1\n%2").arg(timeText, alarm->text()), mLastChecked);
         }
     }
 

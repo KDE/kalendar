@@ -17,7 +17,9 @@ AlarmNotification::AlarmNotification(const QString &uid)
 
 AlarmNotification::~AlarmNotification()
 {
-    delete m_notification;
+    // don't delete immediately, in case we end up here as a result
+    // of a signal from m_notification itself
+    m_notification->deleteLater();
 }
 
 void AlarmNotification::send(NotificationHandler *handler)
