@@ -42,6 +42,7 @@ Kirigami.Page {
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
     property real maxTimeLabelWidth: 0
+    property bool dragDropEnabled: true
 
     onSelectedDateChanged: {
         pathView.currentItem.item.savedYScrollPos = 0;
@@ -571,7 +572,7 @@ Kirigami.Page {
                                                     incidenceData: modelData
                                                     collectionId: modelData.collectionId
 
-                                                    drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? incidenceCard : undefined
+                                                    drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? incidenceCard : undefined
                                                     onReleased: incidenceCard.Drag.drop()
 
                                                     onViewClicked: root.viewIncidence(modelData)

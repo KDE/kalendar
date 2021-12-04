@@ -34,6 +34,8 @@ Kirigami.Page {
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
     readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
 
+    property bool dragDropEnabled: true
+
     function setToDate(date, isInitialMonth = false) {
         monthPage.initialMonth = isInitialMonth;
         let monthDiff = date.getMonth() - pathView.currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - pathView.currentItem.firstDayOfMonth.getFullYear()))
@@ -153,6 +155,7 @@ Kirigami.Page {
                 height: pathView.height
                 model: monthViewModel // from monthPage model
                 isCurrentView: viewLoader.isCurrentItem
+                dragDropEnabled: monthPage.dragDropEnabled
 
                 startDate: viewLoader.startDate
                 currentDate: monthPage.currentDate

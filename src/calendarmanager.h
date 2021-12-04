@@ -106,6 +106,7 @@ Q_SIGNALS:
     void undoRedoDataChanged();
     void incidenceChanged();
     void enabledTodoCollectionsChanged();
+    void updateIncidenceDatesCompleted();
 
 private:
     Akonadi::ETMCalendar::Ptr m_calendar = nullptr;

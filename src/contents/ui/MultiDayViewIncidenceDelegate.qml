@@ -62,6 +62,7 @@ Rectangle {
     property bool caught: false
     property real caughtX: 0
     property real caughtY: 0
+    property bool dragDropEnabled: true
 
     Drag.active: mouseArea.drag.active
     Drag.hotSpot.x: mouseArea.mouseX
@@ -158,7 +159,7 @@ Rectangle {
         incidenceData: modelData
         collectionId: modelData.collectionId
 
-        drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? parent : undefined
+        drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && incidenceDelegate.dragDropEnabled ? parent : undefined
         onReleased: parent.Drag.drop()
 
         onViewClicked: viewIncidence(modelData)

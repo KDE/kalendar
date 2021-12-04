@@ -910,6 +910,12 @@ Kirigami.ApplicationWindow {
     }
 
     function setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate) {
+        pageStack.currentItem.dragDropEnabled = false;
+
+        if(pageStack.layers.currentItem && pageStack.layers.currentItem.dragDropEnabled) {
+            pageStack.layers.currentItem.dragDropEnabled = false;
+        }
+
         if(incidenceWrapper.recurrenceData.type === 0) {
             CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset);
         } else {
@@ -927,6 +933,17 @@ Kirigami.ApplicationWindow {
 
             if(!Kirigami.Settings.isMobile) {
                 openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
+            }
+        }
+    }
+
+    Connections {
+        target: CalendarManager
+        function onUpdateIncidenceDatesCompleted() {
+            pageStack.currentItem.dragDropEnabled = true;
+
+            if(pageStack.layers.currentItem && pageStack.layers.currentItem.dragDropEnabled) {
+                pageStack.layers.currentItem.dragDropEnabled = true;
             }
         }
     }

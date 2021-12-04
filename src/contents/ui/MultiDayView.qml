@@ -46,6 +46,7 @@ Item {
     property int month
     property alias bgLoader: backgroundLoader.item
     property bool isCurrentView: true
+    property bool dragDropEnabled: true
 
     //Internal
     property int numberOfLinesShown: 0
@@ -307,6 +308,7 @@ Item {
                                         horizontalSpacing: linesRepeater.spacing
                                         openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                         isDark: root.isDark
+                                        dragDropEnabled: root.dragDropEnabled
                                     }
                                 }
                             }

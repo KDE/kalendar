@@ -791,6 +791,8 @@ void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, i
         setNewDates(incidenceWrapper->incidencePtr());
         m_changer->modifyIncidence(item, oldIncidence);
     }
+
+    Q_EMIT updateIncidenceDatesCompleted();
 }
 
 bool CalendarManager::hasChildren(KCalendarCore::Incidence::Ptr incidence)

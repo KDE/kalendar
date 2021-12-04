@@ -40,6 +40,7 @@ Kirigami.Page {
     property int daysToShow: 7
     readonly property int minutesFromStartOfDay: (root.currentDate.getHours() * 60) + root.currentDate.getMinutes()
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+    property bool dragDropEnabled: true
 
     property real scrollbarWidth: 0
     readonly property real dayWidth: ((root.width - hourLabelWidth - leftPadding - scrollbarWidth) / daysToShow) - gridLineWidth
@@ -480,6 +481,7 @@ Kirigami.Page {
                                                                 openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
                                                                 isDark: root.isDark
                                                                 reactToCurrentMonth: false
+                                                                dragDropEnabled: root.dragDropEnabled
                                                             }
                                                         }
                                                     }
@@ -923,7 +925,7 @@ Kirigami.Page {
                                                     incidenceData: modelData
                                                     collectionId: modelData.collectionId
 
-                                                    drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly ? parent : undefined
+                                                    drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? parent : undefined
                                                     onReleased: parent.Drag.drop()
 
                                                     onViewClicked: viewIncidence(modelData)
