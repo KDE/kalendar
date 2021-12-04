@@ -53,6 +53,14 @@ Labs.MenuBar {
         }
 
         NativeMenuItemFromAction {
+            kalendarAction: "open_threeday_view"
+        }
+
+        NativeMenuItemFromAction {
+            kalendarAction: "open_day_view"
+        }
+
+        NativeMenuItemFromAction {
             kalendarAction: 'open_schedule_view'
         }
 
