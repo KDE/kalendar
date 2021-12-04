@@ -919,6 +919,7 @@ Kirigami.ApplicationWindow {
         if(incidenceWrapper.recurrenceData.type === 0) {
             CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset);
         } else {
+            const onClosingHandler = () => { caughtDelegate.caught = false; root.reenableDragOnCurrentView(); };
             const openDialogWindow = pageStack.pushDialogLayer(recurringIncidenceChangeSheetComponent, {
                 incidenceWrapper: incidenceWrapper,
                 startOffset: startOffset,
@@ -928,24 +929,24 @@ Kirigami.ApplicationWindow {
             }, {
                 width: Kirigami.Units.gridUnit * 34,
                 height: Kirigami.Units.gridUnit * 6,
-                onClosing: caughtDelegate.caught = false
+                onClosing: onClosingHandler()
             });
 
-            if(!Kirigami.Settings.isMobile) {
-                openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-            }
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
+        }
+    }
+
+    function reenableDragOnCurrentView() {
+        pageStack.currentItem.dragDropEnabled = true;
+
+        if(pageStack.layers.currentItem && pageStack.layers.currentItem.dragDropEnabled) {
+            pageStack.layers.currentItem.dragDropEnabled = true;
         }
     }
 
     Connections {
         target: CalendarManager
-        function onUpdateIncidenceDatesCompleted() {
-            pageStack.currentItem.dragDropEnabled = true;
-
-            if(pageStack.layers.currentItem && pageStack.layers.currentItem.dragDropEnabled) {
-                pageStack.layers.currentItem.dragDropEnabled = true;
-            }
-        }
+        function onUpdateIncidenceDatesCompleted() { root.reenableDragOnCurrentView(); }
     }
 
     Component {
@@ -1034,6 +1035,7 @@ Kirigami.ApplicationWindow {
             }
             onCancel: {
                 caughtDelegate.caught = false;
+                root.reenableDragOnCurrentView();
                 closeDialog();
             }
         }
