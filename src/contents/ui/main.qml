@@ -20,7 +20,7 @@ Kirigami.ApplicationWindow {
 
     width: Kirigami.Units.gridUnit * 65
 
-    minimumWidth: Kirigami.Units.gridUnit * 15
+    minimumWidth: Kirigami.Units.gridUnit * 25
     minimumHeight: Kirigami.Units.gridUnit * 20
     onClosing: KalendarApplication.saveWindowGeometry(root)
 
