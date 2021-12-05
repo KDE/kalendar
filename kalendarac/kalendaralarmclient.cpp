@@ -13,8 +13,6 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 
-#include <QApplication>
-#include <QDBusConnection>
 #include <QDateTime>
 
 using namespace KCalendarCore;
@@ -26,6 +24,8 @@ KalendarAlarmClient::KalendarAlarmClient(QObject *parent)
     QDBusConnection::sessionBus().registerObject(QStringLiteral("/ac"), this);
 
     m_notificationHandler = new NotificationHandler(this);
+    connect(m_notificationHandler, &NotificationHandler::notificationUpdated, this, &KalendarAlarmClient::storeNotification);
+    connect(m_notificationHandler, &NotificationHandler::notificationRemoved, this, &KalendarAlarmClient::removeNotification);
 
     // Check if Akonadi is already configured
     const QString akonadiConfigFile = Akonadi::ServerManager::serverConfigFilePath(Akonadi::ServerManager::ReadWrite);
@@ -49,7 +49,6 @@ KalendarAlarmClient::KalendarAlarmClient(QObject *parent)
     mLastChecked = alarmGroup.readEntry("CalendarsLastChecked", QDateTime::currentDateTime().addDays(-9));
 
     mCheckTimer.start(1000 * interval); // interval in seconds
-    connect(qApp, &QApplication::commitDataRequest, this, &KalendarAlarmClient::slotCommitData);
 
     restoreSuspendedFromConfig();
 }
@@ -117,27 +116,21 @@ void KalendarAlarmClient::restoreSuspendedFromConfig()
     }
 }
 
-void KalendarAlarmClient::flushSuspendedToConfig()
+void KalendarAlarmClient::storeNotification(AlarmNotification *notification)
 {
     KConfigGroup suspendedGroup(KSharedConfig::openConfig(), "Suspended");
-    suspendedGroup.deleteGroup();
+    KConfigGroup notificationGroup(&suspendedGroup, notification->uid());
+    notificationGroup.writeEntry("UID", notification->uid());
+    notificationGroup.writeEntry("Text", notification->text());
+    notificationGroup.writeEntry("RemindAt", notification->remindAt());
+    KSharedConfig::openConfig()->sync();
+}
 
-    const auto notifications = m_notificationHandler->activeNotifications();
-
-    if (notifications.isEmpty()) {
-        qDebug() << "flushSuspendedToConfig: No pending notification exists, nothing to write to config";
-        KSharedConfig::openConfig()->sync();
-
-        return;
-    }
-
-    for (const auto &s : notifications) {
-        qDebug() << "flushSuspendedToConfig: Flushing alarm" << s->uid() << s->remindAt() << " to config";
-        KConfigGroup notificationGroup(&suspendedGroup, s->uid());
-        notificationGroup.writeEntry("UID", s->uid());
-        notificationGroup.writeEntry("Text", s->text());
-        notificationGroup.writeEntry("RemindAt", s->remindAt());
-    }
+void KalendarAlarmClient::removeNotification(AlarmNotification *notification)
+{
+    KConfigGroup suspendedGroup(KSharedConfig::openConfig(), "Suspended");
+    KConfigGroup notificationGroup(&suspendedGroup, notification->uid());
+    notificationGroup.deleteGroup();
     KSharedConfig::openConfig()->sync();
 }
 
@@ -207,14 +200,6 @@ void KalendarAlarmClient::checkAlarms()
 
     m_notificationHandler->sendNotifications();
     saveLastCheckTime();
-    flushSuspendedToConfig();
-}
-
-void KalendarAlarmClient::slotQuit()
-{
-    flushSuspendedToConfig();
-    saveLastCheckTime();
-    quit();
 }
 
 void KalendarAlarmClient::saveLastCheckTime()
@@ -228,11 +213,6 @@ void KalendarAlarmClient::quit()
 {
     // qCDebug(KOALARMCLIENT_LOG);
     qApp->quit();
-}
-
-void KalendarAlarmClient::slotCommitData(QSessionManager &)
-{
-    saveLastCheckTime();
 }
 
 void KalendarAlarmClient::forceAlarmCheck()

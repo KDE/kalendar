@@ -30,6 +30,7 @@ void NotificationHandler::addNotification(const QString &uid, const QString &txt
     notification->setText(txt);
     notification->setRemindAt(remindTime);
     m_notifications[notification->uid()] = notification;
+    Q_EMIT notificationUpdated(notification);
 }
 
 void NotificationHandler::sendNotifications()
@@ -47,6 +48,7 @@ void NotificationHandler::sendNotifications()
 void NotificationHandler::dismiss(AlarmNotification *notification)
 {
     qDebug() << "Alarm" << notification->uid() << "dismissed";
+    Q_EMIT notificationRemoved(notification);
     m_notifications.remove(notification->uid());
     delete notification;
 }
@@ -55,9 +57,5 @@ void NotificationHandler::suspend(AlarmNotification *notification)
 {
     qDebug() << ":Alarm " << notification->uid() << "suspended";
     notification->setRemindAt(QDateTime(QDateTime::currentDateTime()).addSecs(m_suspend_seconds));
-}
-
-QHash<QString, AlarmNotification *> NotificationHandler::activeNotifications() const
-{
-    return m_notifications;
+    Q_EMIT notificationUpdated(notification);
 }

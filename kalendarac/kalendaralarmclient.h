@@ -14,9 +14,8 @@
 #include <AkonadiCore/ServerManager>
 #endif
 #include <Akonadi/Calendar/ETMCalendar>
-#include <QSessionManager>
 
-class AlarmDockWindow;
+class AlarmNotification;
 class NotificationHandler;
 
 class KalendarAlarmClient : public QObject
@@ -34,16 +33,13 @@ public:
     Q_REQUIRED_RESULT QString dumpDebug() const;
     Q_REQUIRED_RESULT QStringList dumpAlarms() const;
 
-public Q_SLOTS:
-    void slotQuit();
-
 private:
     void deferredInit();
     void restoreSuspendedFromConfig();
-    void flushSuspendedToConfig();
+    void storeNotification(AlarmNotification *notification);
+    void removeNotification(AlarmNotification *notification);
     void checkAlarms();
     void setupAkonadi();
-    void slotCommitData(QSessionManager &);
     Q_REQUIRED_RESULT bool collectionsAvailable() const;
     void saveLastCheckTime();
 

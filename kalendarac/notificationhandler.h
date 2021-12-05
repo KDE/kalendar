@@ -33,11 +33,6 @@ public:
      */
     void addNotification(const QString &uid, const QString &text, const QDateTime &remindTime);
 
-    /**
-     * @return The list of active notifications. It is the set of notification that should be sent at the next check
-     */
-    QHash<QString, AlarmNotification *> activeNotifications() const;
-
 public Q_SLOTS:
     /**
      * @brief Dismisses any further notification display for the alarm \p notification.
@@ -50,6 +45,12 @@ public Q_SLOTS:
      * Remind time is set according to configuration.
      */
     void suspend(AlarmNotification *notification);
+
+Q_SIGNALS:
+    /** Store a new or updated notification. */
+    void notificationUpdated(AlarmNotification *notification);
+    /** Remove a dismissed notification. */
+    void notificationRemoved(AlarmNotification *notification);
 
 private:
     QHash<QString, AlarmNotification *> m_notifications;
