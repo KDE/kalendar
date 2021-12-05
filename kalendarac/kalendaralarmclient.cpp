@@ -6,8 +6,6 @@
 #include "kalendaracadaptor.h"
 #include "notificationhandler.h"
 
-#include <CalendarSupport/Utils>
-
 #include <KCheckableProxyModel>
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -245,10 +243,7 @@ QStringList KalendarAlarmClient::dumpAlarms() const
     } else {
         for (const Alarm::Ptr &alarm : alarms) {
             const QString uid = alarm->customProperty("ETMCalendar", "parentUid");
-            const Akonadi::Item::Id id = mCalendar->item(uid).id();
-            const Akonadi::Item item = mCalendar->item(id);
-
-            const Incidence::Ptr incidence = CalendarSupport::incidence(item);
+            const Incidence::Ptr incidence = mCalendar->incidence(uid);
             const QString summary = incidence->summary();
 
             const QDateTime time = incidence->dateTime(Incidence::RoleAlarm);
