@@ -46,6 +46,8 @@ public Q_SLOTS:
 Q_SIGNALS:
     void openMonthView();
     void openWeekView();
+    void openThreeDayView();
+    void openDayView();
     void openScheduleView();
     void openTodoView();
     void openAboutPage();

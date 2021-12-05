@@ -132,6 +132,13 @@ QQC2.MenuBar {
             kalendarAction: "open_week_view"
         }
         KActionFromAction {
+            kalendarAction: "open_threeday_view"
+        }
+        KActionFromAction {
+            kalendarAction: "open_day_view"
+        }
+
+        KActionFromAction {
             kalendarAction: "open_schedule_view"
         }
         KActionFromAction {

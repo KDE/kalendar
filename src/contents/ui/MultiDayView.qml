@@ -23,6 +23,7 @@ Item {
     signal addSubTodo(var parentWrapper)
     signal deselect()
     signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
+    signal openDayView(date selectedDate)
 
     property var openOccurrence
     property var model
@@ -181,31 +182,42 @@ Item {
                                         }
 
                                         // Day number
-                                        RowLayout {
-                                            visible: root.showDayIndicator
+                                        QQC2.Button {
                                             anchors.top: parent.top
                                             anchors.right: parent.right
                                             anchors.left: parent.left
+                                            implicitHeight: dayNumberLayout.implicitHeight
 
-                                            QQC2.Label {
-                                                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                                                padding: Kirigami.Units.smallSpacing
-                                                text: i18n("<b>Today</b>")
-                                                renderType: Text.QtRendering
-                                                color: Kirigami.Theme.highlightColor
-                                                visible: gridItem.isToday && gridItem.width > Kirigami.Units.gridUnit * 5
-                                            }
-                                            QQC2.Label {
-                                                Layout.alignment: Qt.AlignRight | Qt.AlignTop
-                                                text: gridItem.date.toLocaleDateString(Qt.locale(), gridItem.day == 1 ?
-                                                "d MMM" : "d")
-                                                renderType: Text.QtRendering
-                                                padding: Kirigami.Units.smallSpacing
+                                            flat: true
+                                            visible: root.showDayIndicator
+                                            enabled: root.daysToShow > 1
+                                            onClicked: root.openDayView(gridItem.date)
+
+                                            contentItem: RowLayout {
+                                                id: dayNumberLayout
                                                 visible: root.showDayIndicator
-                                                color: gridItem.isToday ?
-                                                    Kirigami.Theme.highlightColor :
-                                                    (!gridItem.isCurrentMonth ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor)
-                                                font.bold: gridItem.isToday
+
+
+                                                QQC2.Label {
+                                                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                                                    padding: Kirigami.Units.smallSpacing
+                                                    text: i18n("<b>Today</b>")
+                                                    renderType: Text.QtRendering
+                                                    color: Kirigami.Theme.highlightColor
+                                                    visible: gridItem.isToday && gridItem.width > Kirigami.Units.gridUnit * 5
+                                                }
+                                                QQC2.Label {
+                                                    Layout.alignment: Qt.AlignRight | Qt.AlignTop
+                                                    text: gridItem.date.toLocaleDateString(Qt.locale(), gridItem.day == 1 ?
+                                                    "d MMM" : "d")
+                                                    renderType: Text.QtRendering
+                                                    padding: Kirigami.Units.smallSpacing
+                                                    visible: root.showDayIndicator
+                                                    color: gridItem.isToday ?
+                                                        Kirigami.Theme.highlightColor :
+                                                        (!gridItem.isCurrentMonth ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor)
+                                                    font.bold: gridItem.isToday
+                                                }
                                             }
                                         }
                                     }

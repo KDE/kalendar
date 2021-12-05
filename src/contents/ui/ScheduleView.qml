@@ -22,6 +22,7 @@ Kirigami.Page {
     signal addSubTodo(var parentWrapper)
     signal deselect()
     signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
+    signal openDayView(date selectedDate)
 
     onAddIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
     onViewIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
@@ -313,19 +314,48 @@ Kirigami.Page {
                                 property real dayLabelWidth: Kirigami.Units.gridUnit * 4
                                 property bool isToday: new Date(periodStartDate).setHours(0,0,0,0) === new Date().setHours(0,0,0,0)
 
-                                QQC2.Label {
-                                    id: smallDayLabel
-
-                                    Layout.alignment: Qt.AlignVCenter
+                                QQC2.Button {
+                                    id: dayButton
+                                    Layout.fillHeight: true
                                     Layout.maximumWidth: dayGrid.dayLabelWidth
                                     Layout.minimumWidth: dayGrid.dayLabelWidth
                                     padding: Kirigami.Units.smallSpacing
                                     rightPadding: Kirigami.Units.largeSpacing
-                                    horizontalAlignment: Text.AlignRight
 
-                                    visible: !cardsColumn.visible
-                                    text: periodStartDate.toLocaleDateString(Qt.locale(), "ddd <b>dd</b>")
-                                    color: Kirigami.Theme.disabledTextColor
+                                    flat: true
+                                    onClicked: root.openDayView(periodStartDate)
+
+                                    property Item smallDayLabel: QQC2.Label {
+                                        id: smallDayLabel
+
+                                        Layout.alignment: Qt.AlignVCenter
+                                        width: dayButton.width
+                                        horizontalAlignment: Text.AlignRight
+
+                                        visible: !cardsColumn.visible
+                                        wrapMode: Text.Wrap
+                                        text: periodStartDate.toLocaleDateString(Qt.locale(), "ddd <b>dd</b>")
+                                        color: Kirigami.Theme.disabledTextColor
+                                    }
+
+
+                                    property Item largeDayLabel: Kirigami.Heading {
+                                        id: largeDayLabel
+
+                                        width: dayButton.width
+                                        Layout.alignment: Qt.AlignTop
+                                        horizontalAlignment: Text.AlignRight
+                                        verticalAlignment: Text.AlignTop
+
+                                        level: dayGrid.isToday ? 1 : 3
+                                        textFormat: Text.StyledText
+                                        wrapMode: Text.Wrap
+                                        color: dayGrid.isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                                        text: periodStartDate.toLocaleDateString(Qt.locale(), "ddd<br><b>dd</b>")
+                                    }
+
+
+                                    contentItem: incidences.length || dayGrid.isToday ? largeDayLabel : smallDayLabel
                                 }
 
                                 QQC2.Label {
@@ -335,26 +365,6 @@ Kirigami.Page {
                                     visible: !cardsColumn.visible
                                     text: i18n("Clear day.")
                                     color: Kirigami.Theme.disabledTextColor
-                                }
-
-                                Kirigami.Heading {
-                                    id: largeDayLabel
-
-                                    Layout.alignment: Qt.AlignTop
-                                    Layout.maximumWidth: dayGrid.dayLabelWidth
-                                    Layout.minimumWidth: dayGrid.dayLabelWidth
-                                    Layout.fillHeight: true
-                                    padding: Kirigami.Units.smallSpacing
-                                    rightPadding: Kirigami.Units.largeSpacing
-                                    horizontalAlignment: Text.AlignRight
-                                    verticalAlignment: Text.AlignTop
-
-                                    level: dayGrid.isToday ? 1 : 3
-                                    textFormat: Text.StyledText
-                                    wrapMode: Text.Wrap
-                                    color: dayGrid.isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-                                    text: periodStartDate.toLocaleDateString(Qt.locale(), "ddd<br><b>dd</b>")
-                                    visible: incidences.length || dayGrid.isToday
                                 }
 
                                 ColumnLayout {

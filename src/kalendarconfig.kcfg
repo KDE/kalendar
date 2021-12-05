@@ -42,6 +42,8 @@ SPDX-License-Identifier: LGPL-2.0-or-later
                 <choice name="ScheduleView"/>
                 <choice name="TodoView"/>
                 <choice name="WeekView"/>
+                <choice name="ThreeDayView"/>
+                <choice name="DayView"/>
             </choices>
             <default>ScheduleView</default>
         </entry>

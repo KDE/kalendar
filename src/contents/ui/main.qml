@@ -43,6 +43,8 @@ Kirigami.ApplicationWindow {
 
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
     readonly property var weekViewAction: KalendarApplication.action("open_week_view")
+    readonly property var threeDayViewAction: KalendarApplication.action("open_threeday_view")
+    readonly property var dayViewAction: KalendarApplication.action("open_day_view")
     readonly property var scheduleViewAction: KalendarApplication.action("open_schedule_view")
     readonly property var todoViewAction: KalendarApplication.action("open_todo_view")
     readonly property var moveViewForwardsAction: KalendarApplication.action("move_view_forwards")
@@ -104,6 +106,12 @@ Kirigami.ApplicationWindow {
             case Config.WeekView:
                 weekViewAction.trigger();
                 break;
+            case Config.ThreeDayView:
+                threeDayViewAction.trigger();
+                break;
+            case Config.DayView:
+                dayViewAction.trigger();
+                break;
             case Config.ScheduleView:
                 scheduleViewAction.trigger();
                 break;
@@ -142,7 +150,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function switchView(newViewComponent) {
+    function switchView(newViewComponent, viewSettings) {
         if(pageStack.layers.depth > 1) {
             pageStack.layers.pop(pageStack.layers.initialItem);
         }
@@ -150,6 +158,16 @@ Kirigami.ApplicationWindow {
 
         if(filterHeader.active) {
             pageStack.currentItem.header = filterHeader.item;
+        }
+
+        if(viewSettings) {
+            for(const [key, value] of Object.entries(viewSettings)) {
+                pageStack.currentItem[key] = value;
+            }
+        }
+
+        if(pageStack.currentItem.objectName !== "todoView") {
+            pageStack.currentItem.setToDate(root.selectedDate, true);
         }
     }
 
@@ -165,7 +183,21 @@ Kirigami.ApplicationWindow {
         function onOpenWeekView() {
             if(pageStack.currentItem.objectName !== "weekView" || root.ignoreCurrentPage) {
                 weekScaleModelLoader.active = true;
-                root.switchView(weekViewComponent);
+                root.switchView(hourlyViewComponent);
+            }
+        }
+
+        function onOpenThreeDayView() {
+            if(pageStack.currentItem.objectName !== "threeDayView" || root.ignoreCurrentPage) {
+                threeDayScaleModelLoader.active = true;
+                root.switchView(hourlyViewComponent, { daysToShow: 3 });
+            }
+        }
+
+        function onOpenDayView() {
+            if(pageStack.currentItem.objectName !== "dayView" || root.ignoreCurrentPage) {
+                dayScaleModelLoader.active = true;
+                root.switchView(hourlyViewComponent, { daysToShow: 1 });
             }
         }
 
@@ -386,6 +418,12 @@ Kirigami.ApplicationWindow {
             case "weekView":
                 return i18n("Week View");
                 break;
+            case "threeDayView":
+                return i18n("3 Day View");
+                break;
+            case "dayView":
+                return i18n("Day View");
+                break;
             case "scheduleView":
                 return i18n("Schedule View");
                 break;
@@ -478,8 +516,8 @@ Kirigami.ApplicationWindow {
         modal: !root.wideScreen || !enabled
         onEnabledChanged: drawerOpen = enabled && !modal
         onModalChanged: drawerOpen = !modal
-        enabled: incidenceData != undefined && pageStack.layers.depth < 2 && pageStack.depth < 3
-        handleVisible: enabled && pageStack.layers.depth < 2 && pageStack.depth < 3
+        enabled: incidenceData != undefined
+        handleVisible: enabled
         interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
         activeTags: root.filter && root.filter.tags ?
@@ -949,6 +987,27 @@ Kirigami.ApplicationWindow {
         function onUpdateIncidenceDatesCompleted() { root.reenableDragOnCurrentView(); }
     }
 
+    function openDayLayer(selectedDate) {
+        if(!isNaN(selectedDate.getTime())) {
+            dayScaleModelLoader.active = true;
+
+            root.selectedDate = selectedDate;
+
+            if(Kirigami.Settings.isMobile) {
+                dayViewAction.trigger();
+            } else {
+                pageStack.layers.push(hourlyViewComponent);
+                pageStack.layers.currentItem.daysToShow = 1;
+
+                if(filterHeader.active) {
+                    pageStack.layers.currentItem.header = filterHeader.item;
+                }
+
+                pageStack.layers.currentItem.setToDate(root.selectedDate, true);
+            }
+        }
+    }
+
     Component {
         id: deleteIncidenceSheetComponent
         DeleteIncidenceSheet {
@@ -1063,6 +1122,28 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    Loader {
+        id: threeDayScaleModelLoader
+        active: Config.lastOpenedView === Config.ThreeDayView
+        onStatusChanged: if(status === Loader.Ready) asynchronous = true
+        sourceComponent: InfiniteCalendarViewModel {
+            scale: InfiniteCalendarViewModel.ThreeDayScale
+            calendar: CalendarManager.calendar
+            filter: root.filter
+        }
+    }
+
+    Loader {
+        id: dayScaleModelLoader
+        active: Config.lastOpenedView === Config.DayView
+        onStatusChanged: if(status === Loader.Ready) asynchronous = true
+        sourceComponent: InfiniteCalendarViewModel {
+            scale: InfiniteCalendarViewModel.DayScale
+            calendar: CalendarManager.calendar
+            filter: root.filter
+        }
+    }
+
     Component {
         id: monthViewComponent
 
@@ -1086,11 +1167,10 @@ Kirigami.ApplicationWindow {
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: root.openDayLayer(selectedDate)
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-
-            Component.onCompleted: setToDate(root.selectedDate, true)
 
             actions.contextualActions: createAction
         }
@@ -1115,8 +1195,6 @@ Kirigami.ApplicationWindow {
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, day)
 
-            Component.onCompleted: setToDate(root.selectedDate, true)
-
             onAddIncidence: root.setUpAdd(type, addDate)
             onViewIncidence: root.setUpView(modelData)
             onEditIncidence: root.setUpEdit(incidencePtr)
@@ -1125,34 +1203,50 @@ Kirigami.ApplicationWindow {
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: root.openDayLayer(selectedDate)
 
             actions.contextualActions: createAction
         }
     }
 
     Component {
-        id: weekViewComponent
+        id: hourlyViewComponent
 
-        WeekView {
-            id: weekView
-            objectName: "weekView"
+        HourlyView {
+            id: hourlyView
+            objectName: switch(daysToShow) {
+                case 1:
+                    return "dayView";
+                case 3:
+                    return "threeDayView";
+                case 7:
+                default:
+                    return "weekView";
+            }
 
             titleDelegate: ViewTitleDelegate {
                 titleDateButton.range: true
-                titleDateButton.date: weekView.startDate
-                titleDateButton.lastDate: DateUtils.addDaysToDate(weekView.startDate, 6)
+                titleDateButton.date: hourlyView.startDate
+                titleDateButton.lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
                 titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
             }
             selectedDate: root.selectedDate
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-            model: weekScaleModelLoader.item
+            model: switch(daysToShow) {
+                case 1:
+                    return dayScaleModelLoader.item;
+                case 3:
+                    return threeDayScaleModelLoader.item;
+                case 7:
+                default:
+                    return weekScaleModelLoader.item;
+            }
+            onModelChanged: setToDate(root.selectedDate, true)
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialWeek) root.selectedDate = new Date (year, month, day)
-
-            Component.onCompleted: setToDate(root.selectedDate, true)
 
             onAddIncidence: root.setUpAdd(type, addDate, null, includeTime)
             onViewIncidence: root.setUpView(modelData)
@@ -1163,6 +1257,7 @@ Kirigami.ApplicationWindow {
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
             onResizeIncidence: root.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: root.openDayLayer(selectedDate)
 
             actions.contextualActions: createAction
         }

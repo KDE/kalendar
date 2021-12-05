@@ -23,6 +23,7 @@ Kirigami.Page {
     signal deselect()
     signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
     signal resizeIncidence(int endOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
+    signal openDayView(date selectedDate)
 
     property var openOccurrence: {}
     property var model
@@ -48,7 +49,7 @@ Kirigami.Page {
     readonly property real gridLineWidth: 1.0
     readonly property real hourLabelWidth: hourLabelMetrics.boundingRect(new Date(0,0,0,0,0,0,0).toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)).width +
         Kirigami.Units.largeSpacing * 2.5
-    readonly property real periodHeight: Kirigami.Units.gridUnit / 2
+    readonly property real periodHeight: Kirigami.Units.gridUnit
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -65,12 +66,15 @@ Kirigami.Page {
     function setToDate(date, isInitialWeek = false) {
         root.initialWeek = isInitialWeek;
 
-        date = DateUtils.getFirstDayOfWeek(date);
-        const weekDiff = Math.round((date - pathView.currentItem.startDate) / (root.daysToShow * 24 * 60 * 60 * 1000));
+        if(root.daysToShow % 7 === 0) {
+            date = DateUtils.getFirstDayOfWeek(date);
+        }
+        const weekDiff = Math.round((date.getTime() - pathView.currentItem.startDate.getTime()) / (root.daysToShow * 24 * 60 * 60 * 1000));
 
         let newIndex = pathView.currentIndex + weekDiff;
         let firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
         let lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
+
 
         while(firstItemDate >= date) {
             pathView.model.addDates(false)
@@ -149,7 +153,7 @@ Kirigami.Page {
         property date dateToUse
         property int startIndex
         Component.onCompleted: {
-            startIndex = count / 2;
+            startIndex = root.model.rowCount() / 2;
             currentIndex = startIndex;
         }
         onCurrentIndexChanged: {
@@ -213,35 +217,55 @@ Kirigami.Page {
                     Repeater {
                         id: dayHeadings
 
-                        model: weekViewModel.rowCount()
-                        delegate: Kirigami.Heading {
-                            id: dayHeading
-
-                            property date headingDate: DateUtils.addDaysToDate(viewLoader.startDate, index)
-                            property bool isToday: headingDate.getDate() === root.currentDay &&
-                                                   headingDate.getMonth() === root.currentMonth &&
-                                                   headingDate.getFullYear() === root.currentYear
+                        model: switch(root.daysToShow) {
+                            case 1:
+                                return dayViewModel.rowCount();
+                            case 3:
+                                return threeDayViewModel.rowCount();
+                            case 7:
+                            default:
+                                return weekViewModel.rowCount();
+                        }
+                        delegate: Rectangle {
                             width: root.dayWidth
-                            horizontalAlignment: Text.AlignRight
-                            padding: Kirigami.Units.smallSpacing
-                            level: 2
-                            color: isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-                            text: {
-                                const longText = headingDate.toLocaleDateString(Qt.locale(), "dddd <b>d</b>");
-                                const mediumText = headingDate.toLocaleDateString(Qt.locale(), "ddd <b>d</b>");
-                                const shortText = mediumText.slice(0,1) + " " + headingDate.toLocaleDateString(Qt.locale(), "<b>d</b>");
+                            implicitHeight: dayHeading.implicitHeight
+                            color: Kirigami.Theme.backgroundColor
+
+                            Kirigami.Heading { // Heading is out of the button so the color isn't disabled when the button is
+                                id: dayHeading
+
+                                property date headingDate: DateUtils.addDaysToDate(viewLoader.startDate, index)
+                                property bool isToday: headingDate.getDate() === root.currentDay &&
+                                    headingDate.getMonth() === root.currentMonth &&
+                                    headingDate.getFullYear() === root.currentYear
+                                width: parent.width
+                                horizontalAlignment: Text.AlignRight
+                                padding: Kirigami.Units.smallSpacing
+                                level: 2
+                                color: isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                                text: {
+                                    const longText = headingDate.toLocaleDateString(Qt.locale(), "dddd <b>d</b>");
+                                    const mediumText = headingDate.toLocaleDateString(Qt.locale(), "ddd <b>d</b>");
+                                    const shortText = mediumText.slice(0,1) + " " + headingDate.toLocaleDateString(Qt.locale(), "<b>d</b>");
 
 
-                                if(fontMetrics.boundingRect(longText).width < width) {
-                                    return longText;
-                                } else if(fontMetrics.boundingRect(mediumText).width < width) {
-                                    return mediumText;
-                                } else {
-                                    return shortText;
+                                    if(fontMetrics.boundingRect(longText).width < width) {
+                                        return longText;
+                                    } else if(fontMetrics.boundingRect(mediumText).width < width) {
+                                        return mediumText;
+                                    } else {
+                                        return shortText;
+                                    }
                                 }
                             }
-                            background: Rectangle {
-                                color: dayHeading.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+
+                            QQC2.Button {
+                                implicitHeight: dayHeading.implicitHeight
+                                width: parent.width
+
+                                flat: true
+                                enabled: root.daysToShow > 1
+                                onClicked: root.openDayView(dayHeading.headingDate)
                             }
                         }
                     }
@@ -360,14 +384,30 @@ Kirigami.Page {
                         id: allDayViewLoader
                         anchors.fill: parent
                         anchors.leftMargin: root.hourLabelWidth
-                        active: weekViewMultiDayViewModel.incidenceCount > 0
+                        active: switch(root.daysToShow) {
+                            case 1:
+                                return dayViewMultiDayViewModel.incidenceCount > 0;
+                            case 3:
+                                return threeDayViewMultiDayViewModel.incidenceCount > 0;
+                            case 7:
+                            default:
+                                return weekViewMultiDayViewModel.incidenceCount > 0;
+                        }
                         sourceComponent: Item {
                             id: allDayViewItem
                             implicitHeight: allDayHeader.actualHeight
                             clip: true
 
                             Repeater {
-                                model: weekViewMultiDayViewModel // from root.model
+                                model: switch(root.daysToShow) {
+                                case 1:
+                                    return dayViewMultiDayViewModel;
+                                case 3:
+                                    return threeDayViewMultiDayViewModel;
+                                case 7:
+                                default:
+                                    return weekViewMultiDayViewModel;
+                            } // from root.model
                                 Layout.topMargin: Kirigami.Units.largeSpacing
                                 //One row => one week
                                 Item {
@@ -551,8 +591,17 @@ Kirigami.Page {
                     z: -2
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-                    readonly property real periodsPerHour: 60 / weekViewModel.periodLength
-                    readonly property real daySections: (60 * 24) / weekViewModel.periodLength
+                    readonly property int periodLength: switch(root.daysToShow) {
+                        case 1:
+                            return dayViewModel.periodLength;
+                        case 3:
+                            return threeDayViewModel.periodLength;
+                        case 7:
+                        default:
+                            return weekViewModel.periodLength;
+                    }
+                    readonly property real periodsPerHour: 60 / periodLength
+                    readonly property real daySections: (60 * 24) / periodLength
                     readonly property real dayHeight: (daySections * root.periodHeight) + (root.gridLineWidth * 23)
                     readonly property real hourHeight: periodsPerHour * root.periodHeight
                     readonly property real minuteHeight: hourHeight / 60
@@ -627,7 +676,7 @@ Kirigami.Page {
                             }
 
                             Repeater {
-                                model: pathView.model.weekViewLocalisedHourLabels // Not a model role but instead one of the model object's properties
+                                model: pathView.model.hourlyViewLocalisedHourLabels // Not a model role but instead one of the model object's properties
 
                                 delegate: QQC2.Label {
                                     property real textYTop: y
@@ -671,7 +720,15 @@ Kirigami.Page {
 
                                 Repeater {
                                     id: dayColumnRepeater
-                                    model: weekViewModel // From root.model
+                                    model: switch(root.daysToShow) {
+                                        case 1:
+                                            return dayViewModel;
+                                        case 3:
+                                            return threeDayViewModel;
+                                        case 7:
+                                        default:
+                                            return weekViewModel;
+                                    } // From root.model
 
                                     delegate: Item {
                                         id: dayColumn
