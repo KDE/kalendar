@@ -108,6 +108,7 @@ Kirigami.ScrollablePage {
         id: newTagField
         Layout.fillWidth: true
         placeholderText: i18n("Create a New Tag…")
+        maximumLength: 50
         background: Rectangle {
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
@@ -123,7 +124,7 @@ Kirigami.ScrollablePage {
 
         function addTag() {
             if(newTagField.text.length > 0) {
-                TagManager.createTag(newTagField.text);
+                TagManager.createTag(newTagField.text.replace(/\r?\n|\r/g, " "));
                 newTagField.text = "";
             }
         }
