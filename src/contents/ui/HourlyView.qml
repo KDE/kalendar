@@ -71,6 +71,7 @@ Kirigami.Page {
         }
         const weekDiff = Math.round((date.getTime() - pathView.currentItem.startDate.getTime()) / (root.daysToShow * 24 * 60 * 60 * 1000));
 
+        let position = pathView.currentItem.item.hourScrollView.getCurrentPosition();
         let newIndex = pathView.currentIndex + weekDiff;
         let firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
         let lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
@@ -94,8 +95,11 @@ Kirigami.Page {
 
         if(isInitialWeek) {
             pathView.currentItem.item.hourScrollView.setToCurrentTime();
+        } else {
+            pathView.currentItem.item.hourScrollView.setPosition(position);
         }
     }
+
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
         text: i18n("Previous Week")
@@ -149,6 +153,15 @@ Kirigami.Page {
         }
 
         model: root.model
+
+        property real scrollPosition
+        onMovementStarted: {
+            scrollPosition = pathView.currentItem.item.hourScrollView.getCurrentPosition();
+        }
+
+        onMovementEnded: {
+            pathView.currentItem.item.hourScrollView.setPosition(scrollPosition);
+        }
 
         property date dateToUse
         property int startIndex
@@ -586,7 +599,7 @@ Kirigami.Page {
                 QQC2.ScrollView {
                     id: hourlyView
                     width: viewColumn.width
-                    height: viewColumn.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height
+                    height: actualHeight
                     contentWidth: availableWidth
                     z: -2
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
@@ -607,6 +620,14 @@ Kirigami.Page {
                     readonly property real minuteHeight: hourHeight / 60
                     readonly property Item vScrollBar: QQC2.ScrollBar.vertical
 
+                    property int actualHeight: {
+                        let h = viewColumn.height - headerBottomSeparator.height - headerTopSeparator.height - headingRow.height;
+                        if (allDayHeader.visible) {
+                            h -= allDayHeader.height;
+                        }
+                        return h;
+                    }
+
                     function setToCurrentTime() {
                         if(currentTimeMarkerLoader.active) {
                             const viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit);
@@ -617,6 +638,23 @@ Kirigami.Page {
                             yPos = vScrollBar.size ? Math.min(vScrollBar.size, yPos) : Math.min(1.0, yPos);
 
                             vScrollBar.position = yPos;
+                        }
+                    }
+
+                    function getCurrentPosition() {
+                        return vScrollBar.position;
+                    }
+
+                    function setPosition(position) {
+                        let offset = vScrollBar.visualSize + position - 1;
+                        if (offset > 0) {
+                            // Ups, it seems that we are going lower than bottom of the hourlyView
+                            // Lets set position to the bottom of the vScrollBar then
+                            vScrollBar.position = 1 - vScrollBar.visualSize;
+                        } else {
+                            // We are still somewhere before bottom of the hourlyView so lets simply
+                            // set vScrollBar position to what was given
+                            vScrollBar.position = position;
                         }
                     }
 
