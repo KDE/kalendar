@@ -231,9 +231,10 @@ Kirigami.ScrollablePage {
                     Kalendar.CalendarManager.addIncidence(incidenceWrapper);
                     addField.clear();
                 } else {
-                    QQC2.ApplicationWindow.window.pageStack.pushDialogLayer(collectionPickerSheetComponent, {
+                    const openDialogWindow = QQC2.ApplicationWindow.window.pageStack.pushDialogLayer(collectionPickerSheetComponent, {
                         incidenceWrapper: incidenceWrapper
                     });
+                    openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
                 }
             }
         }

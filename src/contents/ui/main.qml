@@ -307,6 +307,7 @@ Kirigami.ApplicationWindow {
                 width: Kirigami.Units.gridUnit * 30,
                 height: Kirigami.Units.gridUnit * 8
             });
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
         }
 
         function onImportIntoExistingFinished(success, total) {
