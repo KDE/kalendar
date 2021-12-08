@@ -21,17 +21,10 @@ class NotificationHandler;
 class KalendarAlarmClient : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kalendarac")
 
 public:
     explicit KalendarAlarmClient(QObject *parent = nullptr);
     ~KalendarAlarmClient() override;
-
-    // DBUS interface
-    void quit();
-    void forceAlarmCheck();
-    Q_REQUIRED_RESULT QString dumpDebug() const;
-    Q_REQUIRED_RESULT QStringList dumpAlarms() const;
 
 private:
     void deferredInit();

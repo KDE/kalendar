@@ -9,8 +9,6 @@ set(kalendarac_SRCS
     kalendaracmain.cpp
     )
 
-qt5_add_dbus_adaptor(kalendarac_SRCS org.kde.kalendarac.xml kalendaralarmclient.h KalendarAlarmClient)
-
 add_executable(kalendarac ${kalendarac_SRCS} ${RESOURCES})
 
 target_link_libraries(kalendarac

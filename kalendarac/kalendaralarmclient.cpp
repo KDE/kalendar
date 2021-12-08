@@ -3,7 +3,6 @@
 
 #include "kalendaralarmclient.h"
 #include "alarmnotification.h"
-#include "kalendaracadaptor.h"
 #include "notificationhandler.h"
 
 #include <KCheckableProxyModel>
@@ -12,15 +11,13 @@
 #include <KSharedConfig>
 
 #include <QDateTime>
+#include <QFileInfo>
 
 using namespace KCalendarCore;
 
 KalendarAlarmClient::KalendarAlarmClient(QObject *parent)
     : QObject(parent)
 {
-    new KalendaracAdaptor(this);
-    QDBusConnection::sessionBus().registerObject(QStringLiteral("/ac"), this);
-
     m_notificationHandler = new NotificationHandler(this);
     connect(m_notificationHandler, &NotificationHandler::notificationUpdated, this, &KalendarAlarmClient::storeNotification);
     connect(m_notificationHandler, &NotificationHandler::notificationRemoved, this, &KalendarAlarmClient::removeNotification);
@@ -205,51 +202,4 @@ void KalendarAlarmClient::saveLastCheckTime()
     KConfigGroup cg(KSharedConfig::openConfig(), "Alarms");
     cg.writeEntry("CalendarsLastChecked", mLastChecked);
     KSharedConfig::openConfig()->sync();
-}
-
-void KalendarAlarmClient::quit()
-{
-    // qCDebug(KOALARMCLIENT_LOG);
-    qApp->quit();
-}
-
-void KalendarAlarmClient::forceAlarmCheck()
-{
-    checkAlarms();
-    saveLastCheckTime();
-}
-
-QString KalendarAlarmClient::dumpDebug() const
-{
-    KConfigGroup cfg(KSharedConfig::openConfig(), "Alarms");
-    const QDateTime lastChecked = cfg.readEntry("CalendarsLastChecked", QDateTime());
-    const QString str = QStringLiteral("Last Check: %1").arg(lastChecked.toString());
-    return str;
-}
-
-QStringList KalendarAlarmClient::dumpAlarms() const
-{
-    const QDateTime start = QDateTime(QDate::currentDate(), QTime(0, 0), Qt::LocalTime);
-    const QDateTime end = start.addDays(1).addSecs(-1);
-
-    QStringList lst;
-    const Alarm::List alarms = mCalendar->alarms(start, end);
-    lst.reserve(1 + (alarms.isEmpty() ? 1 : alarms.count()));
-    // Don't translate, this is for debugging purposes.
-    lst << QStringLiteral("dumpAlarms() from ") + start.toString() + QLatin1String(" to ") + end.toString();
-
-    if (alarms.isEmpty()) {
-        lst << QStringLiteral("No alarm found.");
-    } else {
-        for (const Alarm::Ptr &alarm : alarms) {
-            const QString uid = alarm->customProperty("ETMCalendar", "parentUid");
-            const Incidence::Ptr incidence = mCalendar->incidence(uid);
-            const QString summary = incidence->summary();
-
-            const QDateTime time = incidence->dateTime(Incidence::RoleAlarm);
-            lst << QStringLiteral("%1: \"%2\" (alarm text \"%3\")").arg(time.toString(Qt::ISODate), summary, alarm->text());
-        }
-    }
-
-    return lst;
 }
