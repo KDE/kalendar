@@ -131,7 +131,7 @@ QVariant ExtraTodoModel::data(const QModelIndex &index, int role) const
         case TopMostParentDueDate: {
             bool isOverdue = (todo->hasDueDate() && todo->dtDue().date() < QDate::currentDate() && todo->allDay())
                 || (todo->hasDueDate() && todo->dtDue() < QDateTime::currentDateTime() && !todo->allDay());
-            return isOverdue ? i18n("Overdue") : todo->hasDueDate() ? todo->dtDue().toString() : i18n("No set date");
+            return isOverdue ? i18n("Overdue") : todo->hasDueDate() ? QLocale::system().toString(todo->dtDue().date()) : i18n("No set date");
         }
         case TopMostParentPriority:
             return todo->priority();
