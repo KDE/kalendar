@@ -41,32 +41,6 @@ Name[uk]=Kalendar
 Name[x-test]=xxKalendarxx
 Name[zh_CN]=Kalendar
 
-[Context/uid]
-Name=Incidence uid
-Name[ca]=UID de la incidència
-Name[ca@valencia]=UID de la incidència
-Name[es]=Uid de la incidencia
-Name[fr]=UID de l'incidence
-Name[it]=UID incidenza
-Name[nl]=Uid van incident
-Name[pl]=UID wystąpienia
-Name[pt]=UID da incidência
-Name[sv]=Förekomstens användar-id
-Name[uk]=Ідентифікатор випадку
-Name[x-test]=xxIncidence uidxx
-Comment=The uid of the incidence of the alarm
-Comment[ca]=L'UID de la incidència de l'alarma
-Comment[ca@valencia]=L'UID de la incidència de l'alarma
-Comment[es]=El uid de la incidencia de la alarma
-Comment[fr]=L'UID de l'incidence de l'alarme
-Comment[it]=L'UID dell'incidenza dell'avviso
-Comment[nl]=De uid van het incident van het alarm
-Comment[pl]=UID wystąpienia alarmu
-Comment[pt]=O UID da incidência do alarme
-Comment[sv]=Användar-id för förekomsten av alarmet
-Comment[uk]=Ідентифікатор випадку нагадування
-Comment[x-test]=xxThe uid of the incidence of the alarmxx
-
 [Event/alarm]
 Name=Alarm
 Name[ca]=Alarma
