@@ -73,8 +73,7 @@ Item {
     Loader {
         id: backgroundLoader
         anchors.fill: parent
-        active: true
-        //asynchronous: true
+        asynchronous: !root.isCurrentView
         sourceComponent: Column {
             id: rootBackgroundColumn
             spacing: root.spacing
@@ -230,97 +229,102 @@ Item {
         }
     }
 
-    Column {
-        id: rootForegroundColumn
-        spacing: root.spacing
-        anchors {
-            fill: parent
-            topMargin: root.bgLoader.dayLabels.height + root.spacing
-            leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
-        }
+    Loader {
+        id: foregroundLoader
+        anchors.fill: parent
+        asynchronous: !root.isCurrentView
+        sourceComponent: Column {
+            id: rootForegroundColumn
+            spacing: root.spacing
+            anchors {
+                fill: parent
+                topMargin: root.bgLoader.dayLabels.height + root.spacing
+                leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
+            }
 
-        //Weeks
-        Repeater {
-            model: root.model
-            //One row => one week
-            Item {
-                width: parent.width
-                height: root.dayHeight
-                clip: true
-                RowLayout {
+            //Weeks
+            Repeater {
+                model: root.model
+                //One row => one week
+                Item {
                     width: parent.width
-                    height: parent.height
-                    spacing: root.spacing
-                    Item {
-                        id: dayDelegate
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        property date startDate: periodStartDate
+                    height: root.dayHeight
+                    clip: true
+                    RowLayout {
+                        width: parent.width
+                        height: parent.height
+                        spacing: root.spacing
+                        Item {
+                            id: dayDelegate
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            property date startDate: periodStartDate
 
-                        ListView {
-                            id: linesRepeater
+                            ListView {
+                                id: linesRepeater
 
-                            anchors {
-                                fill: parent
-                                // Offset for date
-                                topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 : 0
-                                rightMargin: spacing
-                            }
-
-                            // DO NOT use a ScrollView as a bug causes this to crash randomly.
-                            // So we instead make the ListView act like a ScrollView on desktop. No crashing now!
-                            flickableDirection: Flickable.VerticalFlick
-                            boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-                            QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
-
-                            clip: true
-                            spacing: root.listViewSpacing
-
-                            DayMouseArea {
-                                id: listViewMenu
-                                anchors.fill: parent
-                                z: -1
-
-                                function useGridSquareDate(type, root, globalPos) {
-                                    for(var i in root.children) {
-                                        var child = root.children[i];
-                                        var localpos = child.mapFromGlobal(globalPos.x, globalPos.y);
-
-                                        if(child.contains(localpos) && child.gridSquareDate) {
-                                            addIncidence(type, child.gridSquareDate);
-                                        } else {
-                                            useGridSquareDate(type, child, globalPos);
-                                        }
-                                    }
+                                anchors {
+                                    fill: parent
+                                    // Offset for date
+                                    topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 : 0
+                                    rightMargin: spacing
                                 }
 
-                                onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
-                                onDeselect: root.deselect()
-                            }
+                                // DO NOT use a ScrollView as a bug causes this to crash randomly.
+                                // So we instead make the ListView act like a ScrollView on desktop. No crashing now!
+                                flickableDirection: Flickable.VerticalFlick
+                                boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+                                QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
 
-                            model: incidences
-                            onCountChanged: {
-                                root.numberOfLinesShown = count
-                            }
+                                clip: true
+                                spacing: root.listViewSpacing
 
-                            delegate: Item {
-                                id: line
-                                height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+                                DayMouseArea {
+                                    id: listViewMenu
+                                    anchors.fill: parent
+                                    z: -1
 
-                                //Incidences
-                                Repeater {
-                                    id: incidencesRepeater
-                                    model: modelData
+                                    function useGridSquareDate(type, root, globalPos) {
+                                        for(var i in root.children) {
+                                            var child = root.children[i];
+                                            var localpos = child.mapFromGlobal(globalPos.x, globalPos.y);
 
-                                    MultiDayViewIncidenceDelegate {
-                                        id: incidenceDelegate
-                                        dayWidth: root.dayWidth
-                                        height: line.height
-                                        parentViewSpacing: root.spacing
-                                        horizontalSpacing: linesRepeater.spacing
-                                        openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
-                                        isDark: root.isDark
-                                        dragDropEnabled: root.dragDropEnabled
+                                            if(child.contains(localpos) && child.gridSquareDate) {
+                                                addIncidence(type, child.gridSquareDate);
+                                            } else {
+                                                useGridSquareDate(type, child, globalPos);
+                                            }
+                                        }
+                                    }
+
+                                    onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
+                                    onDeselect: root.deselect()
+                                }
+
+                                model: incidences
+                                onCountChanged: {
+                                    root.numberOfLinesShown = count
+                                }
+
+                                delegate: Item {
+                                    id: line
+                                    height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+
+                                    //Incidences
+                                    Repeater {
+                                        id: incidencesRepeater
+                                        model: modelData
+
+                                        MultiDayViewIncidenceDelegate {
+                                            id: incidenceDelegate
+                                            dayWidth: root.dayWidth
+                                            height: line.height
+                                            parentViewSpacing: root.spacing
+                                            horizontalSpacing: linesRepeater.spacing
+                                            openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
+                                            isDark: root.isDark
+                                            dragDropEnabled: root.dragDropEnabled
+                                        }
                                     }
                                 }
                             }
