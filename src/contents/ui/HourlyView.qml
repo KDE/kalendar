@@ -194,7 +194,9 @@ Kirigami.Page {
             readonly property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
             property int multiDayLinesShown: 0
 
-            readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1
+            readonly property int daysFromWeekStart: index === pathView.startIndex ?
+                DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1 :
+                null
             // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
 
             active: isNextOrCurrentItem
