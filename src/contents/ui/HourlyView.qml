@@ -69,7 +69,7 @@ Kirigami.Page {
         if(root.daysToShow % 7 === 0) {
             date = DateUtils.getFirstDayOfWeek(date);
         }
-        const weekDiff = Math.round((date.getTime() - pathView.currentItem.startDate.getTime()) / (root.daysToShow * 24 * 60 * 60 * 1000));
+        const weekDiff = Math.floor((date.getTime() - pathView.currentItem.startDate.getTime()) / (root.daysToShow * 24 * 60 * 60 * 1000));
 
         let position = pathView.currentItem.item.hourScrollView.getCurrentPosition();
         let newIndex = pathView.currentIndex + weekDiff;
@@ -116,7 +116,7 @@ Kirigami.Page {
     }
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
-        text: i18n("Today")
+        text: i18n("Now")
         onTriggered: setToDate(new Date(), true);
     }
 

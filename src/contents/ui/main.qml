@@ -989,9 +989,9 @@ Kirigami.ApplicationWindow {
     }
 
     function openDayLayer(selectedDate) {
-        if(!isNaN(selectedDate.getTime())) {
-            dayScaleModelLoader.active = true;
+        dayScaleModelLoader.active = true;
 
+        if(!isNaN(selectedDate.getTime())) {
             root.selectedDate = selectedDate;
 
             if(Kirigami.Settings.isMobile) {
@@ -1008,7 +1008,7 @@ Kirigami.ApplicationWindow {
                     view.QQC2.StackView.removed.connect(function () { pageStack.currentItem.header = filterHeader.item; });
                 }
 
-                pageStack.layers.currentItem.setToDate(root.selectedDate, true);
+                view.setToDate(root.selectedDate, true);
             }
         }
     }
