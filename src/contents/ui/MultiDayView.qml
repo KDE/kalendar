@@ -74,7 +74,7 @@ Item {
         id: backgroundLoader
         anchors.fill: parent
         active: true
-        asynchronous: true
+        //asynchronous: true
         sourceComponent: Column {
             id: rootBackgroundColumn
             spacing: root.spacing

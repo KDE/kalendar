@@ -139,6 +139,7 @@ Kirigami.Page {
         flickDeceleration: Kirigami.Units.longDuration
         preferredHighlightBegin: 0.5
         preferredHighlightEnd: 0.5
+        highlightRangeMode: PathView.StrictlyEnforceRange
         snapMode: PathView.SnapToItem
         focus: true
         interactive: Kirigami.Settings.tabletMode
