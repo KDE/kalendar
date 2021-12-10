@@ -228,7 +228,7 @@ Kirigami.ApplicationWindow {
         }
 
         function onOpenDateChanger() {
-            dateChangeDrawer.open()
+            dateChangeDrawer.active = true;
         }
 
         function onOpenAboutPage() {
@@ -587,14 +587,19 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    DateChanger {
+    Loader {
         id: dateChangeDrawer
-        y: pageStack.globalToolBar.height - 1
-        showDays: pageStack.currentItem && pageStack.currentItem.objectName !== "monthView"
-        date: root.selectedDate
-        onDateSelected: if(visible) {
-            pageStack.currentItem.setToDate(date);
-            root.selectedDate = date;
+        active: false
+        visible: status === Loader.Ready
+        onStatusChanged: if(status === Loader.Ready) item.open()
+        sourceComponent: DateChanger {
+            y: pageStack.globalToolBar.height - 1
+            showDays: pageStack.currentItem && pageStack.currentItem.objectName !== "monthView"
+            date: root.selectedDate
+            onDateSelected: if(visible) {
+                pageStack.currentItem.setToDate(date);
+                root.selectedDate = date;
+            }
         }
     }
 
@@ -1155,7 +1160,7 @@ Kirigami.ApplicationWindow {
 
             titleDelegate: ViewTitleDelegate {
                 titleDateButton.date: monthView.firstDayOfMonth
-                titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
+                titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
@@ -1187,7 +1192,7 @@ Kirigami.ApplicationWindow {
 
             titleDelegate: ViewTitleDelegate {
                 titleDateButton.date: scheduleView.startDate
-                titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
+                titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
             }
             selectedDate: root.selectedDate
             openOccurrence: root.openOccurrence
@@ -1230,7 +1235,7 @@ Kirigami.ApplicationWindow {
                 titleDateButton.range: true
                 titleDateButton.date: hourlyView.startDate
                 titleDateButton.lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
-                titleDateButton.onClicked: dateChangeDrawer.visible = !dateChangeDrawer.visible
+                titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
             }
             selectedDate: root.selectedDate
             currentDate: root.currentDate
