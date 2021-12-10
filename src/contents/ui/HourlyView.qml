@@ -858,7 +858,8 @@ Kirigami.Page {
                                                                     id: dropAreaHighlightRectangle
                                                                     anchors.fill: parent
                                                                     visible: incidenceDropArea.containsDrag
-                                                                    color: Kirigami.Theme.positiveBackgroundColor
+                                                                    color: if(visible) Kirigami.Theme.positiveBackgroundColor // Considering how often this gets created,
+                                                                    // only grabbing this colour when visible saves some precious time
                                                                 }
                                                             }
                                                         }
