@@ -1108,7 +1108,6 @@ Kirigami.ApplicationWindow {
     Loader {
         id: monthScaleModelLoader
         active: Config.lastOpenedView === Config.MonthView || Config.lastOpenedView === Config.ScheduleView
-        onStatusChanged: if(status === Loader.Ready) asynchronous = true
         sourceComponent: InfiniteCalendarViewModel {
             scale: InfiniteCalendarViewModel.MonthScale
             calendar: CalendarManager.calendar
@@ -1119,8 +1118,8 @@ Kirigami.ApplicationWindow {
     Loader {
         id: weekScaleModelLoader
         active: Config.lastOpenedView === Config.WeekView
-        onStatusChanged: if(status === Loader.Ready) asynchronous = true
         sourceComponent: InfiniteCalendarViewModel {
+            maxLiveModels: 20
             scale: InfiniteCalendarViewModel.WeekScale
             calendar: CalendarManager.calendar
             filter: root.filter
@@ -1130,7 +1129,6 @@ Kirigami.ApplicationWindow {
     Loader {
         id: threeDayScaleModelLoader
         active: Config.lastOpenedView === Config.ThreeDayView
-        onStatusChanged: if(status === Loader.Ready) asynchronous = true
         sourceComponent: InfiniteCalendarViewModel {
             scale: InfiniteCalendarViewModel.ThreeDayScale
             calendar: CalendarManager.calendar
@@ -1141,7 +1139,6 @@ Kirigami.ApplicationWindow {
     Loader {
         id: dayScaleModelLoader
         active: Config.lastOpenedView === Config.DayView
-        onStatusChanged: if(status === Loader.Ready) asynchronous = true
         sourceComponent: InfiniteCalendarViewModel {
             scale: InfiniteCalendarViewModel.DayScale
             calendar: CalendarManager.calendar

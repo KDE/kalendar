@@ -18,6 +18,7 @@ class InfiniteCalendarViewModel : public QAbstractListModel
     Q_PROPERTY(QStringList hourlyViewLocalisedHourLabels MEMBER m_hourlyViewLocalisedHourLabels CONSTANT)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
     Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
+    Q_PROPERTY(int maxLiveModels READ maxLiveModels WRITE setMaxLiveModels NOTIFY maxLiveModelsChanged)
 
 public:
     // The decade scale is designed to be used in a 4x3 grid, so shows 12 years at a time
@@ -70,6 +71,12 @@ public:
     QVariantMap filter() const;
     void setFilter(const QVariantMap &filter);
 
+    int maxLiveModels();
+    void setMaxLiveModels(int maxLiveModels);
+
+    QDateTime openDate();
+    void setOpenDate(QDateTime openDate);
+
     void checkModels(const QDate &start, const QDate &end, KCalendarCore::Incidence::Ptr incidence);
     void checkCalendarIndex(const QModelIndex &index);
     void triggerAffectedModelUpdates();
@@ -82,6 +89,8 @@ Q_SIGNALS:
     void scaleChanged();
     void calendarChanged();
     void filterChanged();
+    void maxLiveModelsChanged();
+    void openDateChanged();
 
 private:
     QVector<QDate> m_startDates;
@@ -118,7 +127,7 @@ private:
     mutable QQueue<QDate> m_liveThreeDayViewMultiDayModelKeys;
     mutable QQueue<QDate> m_liveDayViewModelKeys;
     mutable QQueue<QDate> m_liveDayViewMultiDayModelKeys;
-    int m_maxLiveModels = 8;
+    int m_maxLiveModels = 10;
     mutable int m_lastAccessedModelType = TypeMonth;
     Akonadi::ETMCalendar *m_calendar;
     QVariantMap mFilter;

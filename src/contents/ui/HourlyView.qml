@@ -200,6 +200,7 @@ Kirigami.Page {
                 root.daysToShow + 1
             // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
 
+            active: isNextOrCurrentItem
             asynchronous: !isCurrentItem
             visible: status === Loader.Ready
             sourceComponent: Column {

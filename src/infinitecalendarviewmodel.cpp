@@ -147,11 +147,6 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
                         }
                     }
 
-                } else if(m_models[i].modelType == m_lastAccessedModelType/* ||
-                   ((m_lastAccessedModelType == TypeWeek && m_models[i].modelType == TypeWeekMultiDay) ||
-                   (m_lastAccessedModelType == TypeWeekMultiDay && m_models[i].modelType == TypeWeek))*/) {
-                    continue;
-
                 } else if (m_models[i].liveKeysQueue->length() > 0) {
                     auto firstKey = m_models[i].liveKeysQueue->dequeue();
 
@@ -165,9 +160,19 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
                     }
                 }
 
+
                 numLiveModels = m_liveMonthViewModelKeys.length() + m_liveScheduleViewModelKeys.length() + m_liveWeekViewModelKeys.length()
                     + m_liveWeekViewMultiDayModelKeys.length() + m_liveThreeDayViewModelKeys.length() + m_liveThreeDayViewMultiDayModelKeys.length()
                     + m_liveDayViewModelKeys.length() + m_liveDayViewMultiDayModelKeys.length();
+            }
+        }
+    };
+
+    auto requeue = [&, this](QQueue<QDate> &liveKeysQueue, const QDate &key) {
+        for (int i = 0; i < liveKeysQueue.length(); i++) {
+            if (liveKeysQueue[i] == key) {
+                liveKeysQueue.move(i, liveKeysQueue.length() - 1);
+                break;
             }
         }
     };
@@ -190,11 +195,13 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
                 // Unfortunately this gets called by the pathviews no matter what the currentIndex
                 // value is set to.
             }
-            if (!m_monthViewModels.contains(startDate)) {
+            if (!m_liveMonthViewModelKeys.contains(startDate)) {
                 m_monthViewModels[startDate] = generateMultiDayIncidenceModel(startDate, 42, 7);
 
                 m_liveMonthViewModelKeys.enqueue(startDate);
                 cleanUpModels();
+            } else {
+                requeue(m_liveMonthViewModelKeys, startDate);
             }
 
             return QVariant::fromValue(m_monthViewModels[startDate]);
@@ -211,6 +218,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
                 m_liveScheduleViewModelKeys.enqueue(startDate);
                 cleanUpModels();
+            } else {
+                requeue(m_liveScheduleViewModelKeys, startDate);
             }
 
             return QVariant::fromValue(m_scheduleViewModels[firstDay]);
@@ -240,6 +249,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
             m_liveWeekViewModelKeys.enqueue(startDate);
             cleanUpModels();
+        } else {
+            requeue(m_liveWeekViewModelKeys, startDate);
         }
 
         return QVariant::fromValue(m_weekViewModels[startDate]);
@@ -257,6 +268,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
             m_liveWeekViewMultiDayModelKeys.enqueue(startDate);
             cleanUpModels();
+        } else {
+            requeue(m_liveWeekViewMultiDayModelKeys, startDate);
         }
 
         return QVariant::fromValue(m_weekViewMultiDayModels[startDate]);
@@ -273,6 +286,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
             m_liveThreeDayViewModelKeys.enqueue(startDate);
             cleanUpModels();
+        } else {
+            requeue(m_liveThreeDayViewModelKeys, startDate);
         }
 
         return QVariant::fromValue(m_threeDayViewModels[startDate]);
@@ -290,6 +305,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
             m_liveThreeDayViewMultiDayModelKeys.enqueue(startDate);
             cleanUpModels();
+        } else {
+            requeue(m_liveThreeDayViewMultiDayModelKeys, startDate);
         }
 
         return QVariant::fromValue(m_threeDayViewMultiDayModels[startDate]);
@@ -306,6 +323,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
             m_liveDayViewModelKeys.enqueue(startDate);
             cleanUpModels();
+        } else {
+            requeue(m_liveDayViewModelKeys, startDate);
         }
 
         return QVariant::fromValue(m_dayViewModels[startDate]);
@@ -323,6 +342,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
             m_liveDayViewMultiDayModelKeys.enqueue(startDate);
             cleanUpModels();
+        } else {
+            requeue(m_liveDayViewMultiDayModelKeys, startDate);
         }
 
         return QVariant::fromValue(m_dayViewMultiDayModels[startDate]);
@@ -598,4 +619,15 @@ void InfiniteCalendarViewModel::setFilter(const QVariantMap &filter)
         model->model()->setFilter(filter);
     }
     Q_EMIT filterChanged();
+}
+
+int InfiniteCalendarViewModel::maxLiveModels()
+{
+    return m_maxLiveModels;
+}
+
+void InfiniteCalendarViewModel::setMaxLiveModels(int maxLiveModels)
+{
+    m_maxLiveModels = maxLiveModels;
+    Q_EMIT maxLiveModelsChanged();
 }
