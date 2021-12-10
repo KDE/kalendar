@@ -196,7 +196,6 @@ Item {
                                                 id: dayNumberLayout
                                                 visible: root.showDayIndicator
 
-
                                                 QQC2.Label {
                                                     Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                                                     padding: Kirigami.Units.smallSpacing

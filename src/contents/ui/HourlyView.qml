@@ -197,10 +197,9 @@ Kirigami.Page {
 
             readonly property int daysFromWeekStart: index === pathView.startIndex ?
                 DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1 :
-                null
+                root.daysToShow + 1
             // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
 
-            active: isNextOrCurrentItem
             asynchronous: !isCurrentItem
             visible: status === Loader.Ready
             sourceComponent: Column {
@@ -400,6 +399,7 @@ Kirigami.Page {
                         id: allDayViewLoader
                         anchors.fill: parent
                         anchors.leftMargin: root.hourLabelWidth
+                        asynchronous: !viewLoader.isCurrentItem
                         active: switch(root.daysToShow) {
                             case 1:
                                 return dayViewMultiDayViewModel.incidenceCount > 0;
@@ -784,279 +784,287 @@ Kirigami.Page {
                                         height: hourlyView.dayHeight
                                         clip: true
 
-                                        ListView {
+                                        Loader {
                                             anchors.fill: parent
-                                            spacing: root.gridLineWidth
-                                            boundsBehavior: Flickable.StopAtBounds
-                                            interactive: false
+                                            asynchronous: !viewLoader.isCurrentView
+                                            ListView {
+                                                anchors.fill: parent
+                                                spacing: root.gridLineWidth
+                                                boundsBehavior: Flickable.StopAtBounds
+                                                interactive: false
 
-                                            model: 24
-                                            delegate: Rectangle {
-                                                id: backgroundRectangle
-                                                width: parent.width
-                                                height: hourlyView.hourHeight
-                                                color: dayColumn.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
+                                                model: 24
+                                                delegate: Rectangle {
+                                                    id: backgroundRectangle
+                                                    width: parent.width
+                                                    height: hourlyView.hourHeight
+                                                    color: dayColumn.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
 
-                                                property int index: model.index
+                                                    property int index: model.index
 
-                                                ColumnLayout {
-                                                    anchors.fill: parent
-                                                    spacing: 0
-                                                    z: 9999
-                                                    Repeater {
-                                                        id: dropAreaRepeater
-                                                        model: 4
+                                                    ColumnLayout {
+                                                        anchors.fill: parent
+                                                        spacing: 0
+                                                        z: 9999
+                                                        Repeater {
+                                                            id: dropAreaRepeater
+                                                            model: 4
 
-                                                        readonly property int minutes: 60 / model
+                                                            readonly property int minutes: 60 / model
 
-                                                        DropArea {
-                                                            id: incidenceDropArea
-                                                            Layout.fillWidth: true
-                                                            Layout.fillHeight: true
-                                                            z: 9999
-                                                            onDropped: if(viewLoader.isCurrentItem) {
-                                                                let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
+                                                            DropArea {
+                                                                id: incidenceDropArea
+                                                                Layout.fillWidth: true
+                                                                Layout.fillHeight: true
+                                                                z: 9999
+                                                                onDropped: if(viewLoader.isCurrentItem) {
+                                                                    let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
 
-                                                                if(drop.source.objectName === "incidenceDelegate") {
-                                                                    incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
+                                                                    if(drop.source.objectName === "incidenceDelegate") {
+                                                                        incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
-                                                                    const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
-                                                                    drop.source.caughtX = pos.x + incidenceSpacing;
-                                                                    drop.source.caughtY = pos.y + incidenceSpacing;
-                                                                    drop.source.caught = true;
+                                                                        const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                                        drop.source.caughtX = pos.x + incidenceSpacing;
+                                                                        drop.source.caughtY = pos.y + incidenceSpacing;
+                                                                        drop.source.caught = true;
 
-                                                                    // We want the date as if it were "from the top" of the droparea
-                                                                    const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index, dropAreaRepeater.minutes * index);
+                                                                        // We want the date as if it were "from the top" of the droparea
+                                                                        const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index, dropAreaRepeater.minutes * index);
 
-                                                                    const startOffset = posDate.getTime() - drop.source.occurrenceDate.getTime();
-                                                                    root.moveIncidence(startOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                                        const startOffset = posDate.getTime() - drop.source.occurrenceDate.getTime();
+                                                                        root.moveIncidence(startOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
 
-                                                                } else { // The resize affects the end time
-                                                                    incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.parent.incidencePtr);
+                                                                    } else { // The resize affects the end time
+                                                                        incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.parent.incidencePtr);
 
-                                                                    const pos = mapToItem(drop.source.parent, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
-                                                                    drop.source.parent.caughtHeight = (pos.y + dropAreaHighlightRectangle.height - incidenceSpacing)
-                                                                    drop.source.parent.caught = true;
+                                                                        const pos = mapToItem(drop.source.parent, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                                        drop.source.parent.caughtHeight = (pos.y + dropAreaHighlightRectangle.height - incidenceSpacing)
+                                                                        drop.source.parent.caught = true;
 
-                                                                    // We want the date as if it were "from the bottom" of the droparea
-                                                                    const minute = (dropAreaRepeater.minutes * (index + 1)) % 60;
-                                                                    const isNextHour = minute === 0 && index !== 0;
-                                                                    const hour = isNextHour ? backgroundRectangle.index + 1 : backgroundRectangle.index;
+                                                                        // We want the date as if it were "from the bottom" of the droparea
+                                                                        const minute = (dropAreaRepeater.minutes * (index + 1)) % 60;
+                                                                        const isNextHour = minute === 0 && index !== 0;
+                                                                        const hour = isNextHour ? backgroundRectangle.index + 1 : backgroundRectangle.index;
 
-                                                                    const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), hour, minute);
+                                                                        const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), hour, minute);
 
-                                                                    const endOffset = posDate.getTime() - drop.source.parent.occurrenceEndDate.getTime();
-                                                                    root.resizeIncidence(endOffset, drop.source.parent.occurrenceDate, incidenceWrapper, drop.source.parent);
+                                                                        const endOffset = posDate.getTime() - drop.source.parent.occurrenceEndDate.getTime();
+                                                                        root.resizeIncidence(endOffset, drop.source.parent.occurrenceDate, incidenceWrapper, drop.source.parent);
+                                                                    }
                                                                 }
-                                                            }
 
-                                                            Rectangle {
-                                                                id: dropAreaHighlightRectangle
-                                                                anchors.fill: parent
-                                                                visible: incidenceDropArea.containsDrag
-                                                                color: Kirigami.Theme.positiveBackgroundColor
+                                                                Rectangle {
+                                                                    id: dropAreaHighlightRectangle
+                                                                    anchors.fill: parent
+                                                                    visible: incidenceDropArea.containsDrag
+                                                                    color: Kirigami.Theme.positiveBackgroundColor
+                                                                }
                                                             }
                                                         }
                                                     }
-                                                }
 
-                                                DayMouseArea {
-                                                    id: backgroundDayMouseArea
-                                                    anchors.fill: parent
-                                                    addDate: new Date(DateUtils.addDaysToDate(viewLoader.startDate, dayColumn.index).setHours(index))
-                                                    onAddNewIncidence: addIncidence(type, addDate, true)
-                                                    onDeselect: root.deselect()
+                                                    DayMouseArea {
+                                                        id: backgroundDayMouseArea
+                                                        anchors.fill: parent
+                                                        addDate: new Date(DateUtils.addDaysToDate(viewLoader.startDate, dayColumn.index).setHours(index))
+                                                        onAddNewIncidence: addIncidence(type, addDate, true)
+                                                        onDeselect: root.deselect()
+                                                    }
                                                 }
                                             }
                                         }
 
-                                        Repeater {
-                                            id: incidencesRepeater
-                                            model: incidences
+                                        Loader {
+                                            anchors.fill: parent
+                                            asynchronous: !viewLoader.isCurrentView
+                                            Repeater {
+                                                id: incidencesRepeater
+                                                model: incidences
 
-                                            delegate: Rectangle {
-                                                id: incidenceDelegate
-                                                objectName: "incidenceDelegate"
+                                                delegate: Rectangle {
+                                                    id: incidenceDelegate
+                                                    objectName: "incidenceDelegate"
 
-                                                readonly property real gridLineYCompensation: (modelData.starts / hourlyView.periodsPerHour) * root.gridLineWidth
-                                                readonly property real gridLineHeightCompensation: (modelData.duration / hourlyView.periodsPerHour) * root.gridLineWidth
-                                                property bool isOpenOccurrence: root.openOccurrence ?
-                                                    root.openOccurrence.incidenceId === modelData.incidenceId : false
+                                                    readonly property real gridLineYCompensation: (modelData.starts / hourlyView.periodsPerHour) * root.gridLineWidth
+                                                    readonly property real gridLineHeightCompensation: (modelData.duration / hourlyView.periodsPerHour) * root.gridLineWidth
+                                                    property bool isOpenOccurrence: root.openOccurrence ?
+                                                        root.openOccurrence.incidenceId === modelData.incidenceId : false
 
-                                                x: root.incidenceSpacing + (modelData.priorTakenWidthShare * root.dayWidth)
-                                                y: (modelData.starts * root.periodHeight) + root.incidenceSpacing + gridLineYCompensation
-                                                width: (root.dayWidth * modelData.widthShare) - (root.incidenceSpacing * 2)
-                                                height: (modelData.duration * root.periodHeight) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
-                                                radius: Kirigami.Units.smallSpacing
-                                                color: Qt.rgba(0,0,0,0)
-                                                visible: !modelData.allDay
+                                                    x: root.incidenceSpacing + (modelData.priorTakenWidthShare * root.dayWidth)
+                                                    y: (modelData.starts * root.periodHeight) + root.incidenceSpacing + gridLineYCompensation
+                                                    width: (root.dayWidth * modelData.widthShare) - (root.incidenceSpacing * 2)
+                                                    height: (modelData.duration * root.periodHeight) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
+                                                    radius: Kirigami.Units.smallSpacing
+                                                    color: Qt.rgba(0,0,0,0)
+                                                    visible: !modelData.allDay
 
-                                                property alias mouseArea: mouseArea
-                                                property var incidencePtr: modelData.incidencePtr
-                                                property date occurrenceDate: modelData.startTime
-                                                property date occurrenceEndDate: modelData.endTime
-                                                property bool repositionAnimationEnabled: false
-                                                property bool caught: false
-                                                property real caughtX: x
-                                                property real caughtY: y
-                                                property real caughtHeight: height
+                                                    property alias mouseArea: mouseArea
+                                                    property var incidencePtr: modelData.incidencePtr
+                                                    property date occurrenceDate: modelData.startTime
+                                                    property date occurrenceEndDate: modelData.endTime
+                                                    property bool repositionAnimationEnabled: false
+                                                    property bool caught: false
+                                                    property real caughtX: x
+                                                    property real caughtY: y
+                                                    property real caughtHeight: height
 
-                                                Drag.active: mouseArea.drag.active
-                                                Drag.hotSpot.x: mouseArea.mouseX
+                                                    Drag.active: mouseArea.drag.active
+                                                    Drag.hotSpot.x: mouseArea.mouseX
 
-                                                // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
-                                                Behavior on x {
-                                                    enabled: repositionAnimationEnabled
-                                                    NumberAnimation {
-                                                        duration: Kirigami.Units.shortDuration
-                                                        easing.type: Easing.OutCubic
-                                                    }
-                                                }
-
-                                                Behavior on y {
-                                                    enabled: repositionAnimationEnabled
-                                                    NumberAnimation {
-                                                        duration: Kirigami.Units.shortDuration
-                                                        easing.type: Easing.OutCubic
-                                                    }
-                                                }
-
-                                                Behavior on height {
-                                                    enabled: repositionAnimationEnabled
-                                                    NumberAnimation {
-                                                        duration: Kirigami.Units.shortDuration
-                                                        easing.type: Easing.OutCubic
-                                                    }
-                                                }
-
-                                                states: [
-                                                    State {
-                                                        when: incidenceDelegate.mouseArea.drag.active
-                                                        ParentChange { target: incidenceDelegate; parent: root }
-                                                        PropertyChanges { target: incidenceDelegate; isOpenOccurrence: true }
-                                                    },
-                                                    State {
-                                                        when: incidenceDelegate.caught
-                                                        ParentChange { target: incidenceDelegate; parent: root }
-                                                        PropertyChanges {
-                                                            target: incidenceDelegate
-                                                            repositionAnimationEnabled: true
-                                                            x: caughtX
-                                                            y: caughtY
-                                                            height: caughtHeight
+                                                    // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
+                                                    Behavior on x {
+                                                        enabled: repositionAnimationEnabled
+                                                        NumberAnimation {
+                                                            duration: Kirigami.Units.shortDuration
+                                                            easing.type: Easing.OutCubic
                                                         }
                                                     }
-                                                ]
 
-                                                IncidenceBackground {
-                                                    id: incidenceBackground
-                                                    isOpenOccurrence: parent.isOpenOccurrence
-                                                    isDark: root.isDark
-                                                }
-
-                                                ColumnLayout {
-                                                    id: incidenceContents
-
-                                                    readonly property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
-                                                    readonly property bool isTinyHeight: parent.height <= Kirigami.Units.gridUnit
-
-                                                    clip: true
-
-                                                    anchors {
-                                                        fill: parent
-                                                        leftMargin: Kirigami.Units.smallSpacing
-                                                        rightMargin: Kirigami.Units.smallSpacing
-                                                        topMargin: !isTinyHeight ? Kirigami.Units.smallSpacing : 0
-                                                        bottomMargin: !isTinyHeight ? Kirigami.Units.smallSpacing : 0
-                                                    }
-
-                                                    QQC2.Label {
-                                                        Layout.fillWidth: true
-                                                        Layout.fillHeight: true
-                                                        text: modelData.text
-                                                        horizontalAlignment: Text.AlignLeft
-                                                        verticalAlignment: Text.AlignTop
-                                                        wrapMode: Text.Wrap
-                                                        elide: Text.ElideRight
-                                                        font.pointSize: parent.isTinyHeight ? Kirigami.Theme.smallFont.pointSize :
-                                                            Kirigami.Theme.defaultFont.pointSize
-                                                        font.weight: Font.Medium
-                                                        font.strikeout: modelData.todoCompleted
-                                                        renderType: Text.QtRendering
-                                                        color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                            incidenceContents.textColor
-                                                        Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-                                                    }
-
-                                                    RowLayout {
-                                                        width: parent.width
-                                                        visible: parent.height > Kirigami.Units.gridUnit * 3
-                                                        Kirigami.Icon {
-                                                            id: incidenceIcon
-                                                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                                                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                                            source: modelData.incidenceTypeIcon
-                                                            isMask: true
-                                                            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                                incidenceContents.textColor
-                                                            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-                                                            visible: parent.width > Kirigami.Units.gridUnit * 4
+                                                    Behavior on y {
+                                                        enabled: repositionAnimationEnabled
+                                                        NumberAnimation {
+                                                            duration: Kirigami.Units.shortDuration
+                                                            easing.type: Easing.OutCubic
                                                         }
+                                                    }
+
+                                                    Behavior on height {
+                                                        enabled: repositionAnimationEnabled
+                                                        NumberAnimation {
+                                                            duration: Kirigami.Units.shortDuration
+                                                            easing.type: Easing.OutCubic
+                                                        }
+                                                    }
+
+                                                    states: [
+                                                        State {
+                                                            when: incidenceDelegate.mouseArea.drag.active
+                                                            ParentChange { target: incidenceDelegate; parent: root }
+                                                            PropertyChanges { target: incidenceDelegate; isOpenOccurrence: true }
+                                                        },
+                                                        State {
+                                                            when: incidenceDelegate.caught
+                                                            ParentChange { target: incidenceDelegate; parent: root }
+                                                            PropertyChanges {
+                                                                target: incidenceDelegate
+                                                                repositionAnimationEnabled: true
+                                                                x: caughtX
+                                                                y: caughtY
+                                                                height: caughtHeight
+                                                            }
+                                                        }
+                                                    ]
+
+                                                    IncidenceBackground {
+                                                        id: incidenceBackground
+                                                        isOpenOccurrence: parent.isOpenOccurrence
+                                                        isDark: root.isDark
+                                                    }
+
+                                                    ColumnLayout {
+                                                        id: incidenceContents
+
+                                                        readonly property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
+                                                        readonly property bool isTinyHeight: parent.height <= Kirigami.Units.gridUnit
+
+                                                        clip: true
+
+                                                        anchors {
+                                                            fill: parent
+                                                            leftMargin: Kirigami.Units.smallSpacing
+                                                            rightMargin: Kirigami.Units.smallSpacing
+                                                            topMargin: !isTinyHeight ? Kirigami.Units.smallSpacing : 0
+                                                            bottomMargin: !isTinyHeight ? Kirigami.Units.smallSpacing : 0
+                                                        }
+
                                                         QQC2.Label {
-                                                            id: timeLabel
                                                             Layout.fillWidth: true
-                                                            horizontalAlignment: Text.AlignRight
-                                                            text: modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) + " - " + modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
+                                                            Layout.fillHeight: true
+                                                            text: modelData.text
+                                                            horizontalAlignment: Text.AlignLeft
+                                                            verticalAlignment: Text.AlignTop
                                                             wrapMode: Text.Wrap
+                                                            elide: Text.ElideRight
+                                                            font.pointSize: parent.isTinyHeight ? Kirigami.Theme.smallFont.pointSize :
+                                                                Kirigami.Theme.defaultFont.pointSize
+                                                            font.weight: Font.Medium
+                                                            font.strikeout: modelData.todoCompleted
                                                             renderType: Text.QtRendering
                                                             color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                                 incidenceContents.textColor
                                                             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-                                                            visible: parent.width > Kirigami.Units.gridUnit * 3
+                                                        }
+
+                                                        RowLayout {
+                                                            width: parent.width
+                                                            visible: parent.height > Kirigami.Units.gridUnit * 3
+                                                            Kirigami.Icon {
+                                                                id: incidenceIcon
+                                                                implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                                                implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                                                source: modelData.incidenceTypeIcon
+                                                                isMask: true
+                                                                color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                                    incidenceContents.textColor
+                                                                Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+                                                                visible: parent.width > Kirigami.Units.gridUnit * 4
+                                                            }
+                                                            QQC2.Label {
+                                                                id: timeLabel
+                                                                Layout.fillWidth: true
+                                                                horizontalAlignment: Text.AlignRight
+                                                                text: modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) + " - " + modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
+                                                                wrapMode: Text.Wrap
+                                                                renderType: Text.QtRendering
+                                                                color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                                    incidenceContents.textColor
+                                                                Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+                                                                visible: parent.width > Kirigami.Units.gridUnit * 3
+                                                            }
                                                         }
                                                     }
-                                                }
 
-                                                IncidenceMouseArea {
-                                                    id: mouseArea
-                                                    preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
-                                                    incidenceData: modelData
-                                                    collectionId: modelData.collectionId
+                                                    IncidenceMouseArea {
+                                                        id: mouseArea
+                                                        preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
+                                                        incidenceData: modelData
+                                                        collectionId: modelData.collectionId
 
-                                                    drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? parent : undefined
-                                                    onReleased: parent.Drag.drop()
+                                                        drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? parent : undefined
+                                                        onReleased: parent.Drag.drop()
 
-                                                    onViewClicked: viewIncidence(modelData)
-                                                    onEditClicked: editIncidence(incidencePtr)
-                                                    onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
-                                                    onTodoCompletedClicked: completeTodo(incidencePtr)
-                                                    onAddSubTodoClicked: root.addSubTodo(parentWrapper)
-                                                }
+                                                        onViewClicked: viewIncidence(modelData)
+                                                        onEditClicked: editIncidence(incidencePtr)
+                                                        onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
+                                                        onTodoCompletedClicked: completeTodo(incidencePtr)
+                                                        onAddSubTodoClicked: root.addSubTodo(parentWrapper)
+                                                    }
 
-                                                MouseArea {
-                                                    objectName: "endDtResizeMouseArea"
-                                                    anchors.left: parent.left
-                                                    anchors.bottom: parent.bottom
-                                                    anchors.right: parent.right
-                                                    height: 5
-                                                    z: Infinity
-                                                    cursorShape: !Kirigami.Settings.isMobile ? Qt.SplitVCursor : undefined
-                                                    preventStealing: true
-                                                    enabled: !Kirigami.Settings.isMobile && !modelData.isReadOnly
-                                                    visible: true
+                                                    MouseArea {
+                                                        objectName: "endDtResizeMouseArea"
+                                                        anchors.left: parent.left
+                                                        anchors.bottom: parent.bottom
+                                                        anchors.right: parent.right
+                                                        height: 5
+                                                        z: Infinity
+                                                        cursorShape: !Kirigami.Settings.isMobile ? Qt.SplitVCursor : undefined
+                                                        preventStealing: true
+                                                        enabled: !Kirigami.Settings.isMobile && !modelData.isReadOnly
+                                                        visible: true
 
-                                                    drag.target: this
-                                                    Drag.active: drag.active
+                                                        drag.target: this
+                                                        Drag.active: drag.active
 
-                                                    onPressed: _lastY = mouseY;
-                                                    onReleased: Drag.drop()
-                                                    property real _lastY: -1
+                                                        onPressed: _lastY = mouseY;
+                                                        onReleased: Drag.drop()
+                                                        property real _lastY: -1
 
-                                                    onPositionChanged: {
-                                                        if (_lastY === -1) {
-                                                            return;
-                                                        } else {
-                                                            parent.height = Math.max(root.periodHeight, parent.height - _lastY + mouseY)
+                                                        onPositionChanged: {
+                                                            if (_lastY === -1) {
+                                                                return;
+                                                            } else {
+                                                                parent.height = Math.max(root.periodHeight, parent.height - _lastY + mouseY)
+                                                            }
                                                         }
                                                     }
                                                 }
