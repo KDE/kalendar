@@ -24,6 +24,9 @@ KalendarAlarmClient::KalendarAlarmClient(QObject *parent)
     connect(m_notificationHandler, &NotificationHandler::notificationUpdated, this, &KalendarAlarmClient::storeNotification);
     connect(m_notificationHandler, &NotificationHandler::notificationRemoved, this, &KalendarAlarmClient::removeNotification);
 
+    mCheckTimer.setSingleShot(true);
+    mCheckTimer.setTimerType(Qt::VeryCoarseTimer);
+
     // Check if Akonadi is already configured
     const QString akonadiConfigFile = Akonadi::ServerManager::serverConfigFilePath(Akonadi::ServerManager::ReadWrite);
     if (QFileInfo::exists(akonadiConfigFile)) {
@@ -41,11 +44,7 @@ KalendarAlarmClient::KalendarAlarmClient(QObject *parent)
     }
 
     KConfigGroup alarmGroup(KSharedConfig::openConfig(), "Alarms");
-    const int interval = alarmGroup.readEntry("Interval", 60);
-    qDebug() << "KalendarAlarmClient check interval:" << interval << "seconds.";
     mLastChecked = alarmGroup.readEntry("CalendarsLastChecked", QDateTime::currentDateTime().addDays(-9));
-
-    mCheckTimer.start(1000 * interval); // interval in seconds
 
     restoreSuspendedFromConfig();
 }
@@ -154,12 +153,6 @@ bool KalendarAlarmClient::collectionsAvailable() const
 
 void KalendarAlarmClient::checkAlarms()
 {
-    KConfigGroup cfg(KSharedConfig::openConfig(), "General");
-
-    if (!cfg.readEntry("Enabled", true)) {
-        return;
-    }
-
     // We do not want to miss any reminders, so don't perform check unless
     // the collections are available and populated.
     if (!collectionsAvailable()) {
@@ -201,6 +194,9 @@ void KalendarAlarmClient::checkAlarms()
 
     m_notificationHandler->sendNotifications();
     saveLastCheckTime();
+
+    // schedule next check for the beginning of the next minute
+    mCheckTimer.start(std::chrono::seconds(60 - mLastChecked.time().second()));
 }
 
 void KalendarAlarmClient::saveLastCheckTime()
