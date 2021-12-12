@@ -4,7 +4,9 @@
 #pragma once
 
 #include <QDateTime>
+#include <QHash>
 #include <QTimer>
+
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/EntityTreeModel>
@@ -16,7 +18,6 @@
 #include <Akonadi/Calendar/ETMCalendar>
 
 class AlarmNotification;
-class NotificationHandler;
 
 class KalendarAlarmClient : public QObject
 {
@@ -26,11 +27,18 @@ public:
     explicit KalendarAlarmClient(QObject *parent = nullptr);
     ~KalendarAlarmClient() override;
 
+    /** Dismisses any further notification display for the alarm \p notification. */
+    void dismiss(AlarmNotification *notification);
+    /** Suspends the display of the alarm \p notification. */
+    void suspend(AlarmNotification *notification);
+
 private:
     void deferredInit();
     void restoreSuspendedFromConfig();
     void storeNotification(AlarmNotification *notification);
     void removeNotification(AlarmNotification *notification);
+    void addNotification(const QString &uid, const QString &text, const QDateTime &remindTime);
+    void sendNotifications();
     void checkAlarms();
     void setupAkonadi();
     Q_REQUIRED_RESULT bool collectionsAvailable() const;
@@ -41,5 +49,5 @@ private:
 
     QDateTime mLastChecked;
     QTimer mCheckTimer;
-    NotificationHandler *m_notificationHandler;
+    QHash<QString, AlarmNotification *> m_notifications;
 };

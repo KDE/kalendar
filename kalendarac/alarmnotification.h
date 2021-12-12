@@ -10,7 +10,7 @@
 #include <QDateTime>
 #include <QPointer>
 
-class NotificationHandler;
+class KalendarAlarmClient;
 
 /**
  * @brief The alarm notification that should be displayed. It is a wrapper of a KNotification enhanced with alarm properties, like uid and remind time
@@ -25,7 +25,7 @@ public:
     /**
      * @brief Sends the notification to be displayed
      */
-    void send(NotificationHandler *handler);
+    void send(KalendarAlarmClient *client);
 
     /**
      * @return The uid of the Incidence of the alarm of the notification

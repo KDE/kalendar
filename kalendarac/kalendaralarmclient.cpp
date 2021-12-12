@@ -3,7 +3,6 @@
 
 #include "kalendaralarmclient.h"
 #include "alarmnotification.h"
-#include "notificationhandler.h"
 
 #include <akonadi-calendar_version.h>
 
@@ -20,10 +19,6 @@ using namespace KCalendarCore;
 KalendarAlarmClient::KalendarAlarmClient(QObject *parent)
     : QObject(parent)
 {
-    m_notificationHandler = new NotificationHandler(this);
-    connect(m_notificationHandler, &NotificationHandler::notificationUpdated, this, &KalendarAlarmClient::storeNotification);
-    connect(m_notificationHandler, &NotificationHandler::notificationRemoved, this, &KalendarAlarmClient::removeNotification);
-
     mCheckTimer.setSingleShot(true);
     mCheckTimer.setTimerType(Qt::VeryCoarseTimer);
 
@@ -107,9 +102,24 @@ void KalendarAlarmClient::restoreSuspendedFromConfig()
         qDebug() << "restoreSuspendedFromConfig: Restoring alarm" << uid << "," << txt << "," << remindAt;
 
         if (!uid.isEmpty() && remindAt.isValid() && !txt.isEmpty()) {
-            m_notificationHandler->addNotification(uid, txt, remindAt);
+            addNotification(uid, txt, remindAt);
         }
     }
+}
+
+void KalendarAlarmClient::dismiss(AlarmNotification *notification)
+{
+    qDebug() << "Alarm" << notification->uid() << "dismissed";
+    removeNotification(notification);
+    m_notifications.remove(notification->uid());
+    delete notification;
+}
+
+void KalendarAlarmClient::suspend(AlarmNotification *notification)
+{
+    qDebug() << "Alarm " << notification->uid() << "suspended";
+    notification->setRemindAt(QDateTime(QDateTime::currentDateTime()).addSecs(5 * 60)); // 5 minutes is hardcoded in the suspend action text
+    storeNotification(notification);
 }
 
 void KalendarAlarmClient::storeNotification(AlarmNotification *notification)
@@ -128,6 +138,30 @@ void KalendarAlarmClient::removeNotification(AlarmNotification *notification)
     KConfigGroup notificationGroup(&suspendedGroup, notification->uid());
     notificationGroup.deleteGroup();
     KSharedConfig::openConfig()->sync();
+}
+
+void KalendarAlarmClient::addNotification(const QString &uid, const QString &text, const QDateTime &remindTime)
+{
+    if (m_notifications.contains(uid)) {
+        return;
+    }
+    qDebug() << "Adding notification, uid:" << uid << "text:" << text << "remindTime:" << remindTime;
+    AlarmNotification *notification = new AlarmNotification(uid);
+    notification->setText(text);
+    notification->setRemindAt(remindTime);
+    m_notifications[notification->uid()] = notification;
+    storeNotification(notification);
+}
+
+void KalendarAlarmClient::sendNotifications()
+{
+    qDebug() << "Looking for notifications, total:" << m_notifications.count();
+    for (auto it = m_notifications.begin(); it != m_notifications.end(); ++it) {
+        if (it.value()->remindAt() <= QDateTime::currentDateTime()) {
+            qDebug() << "Sending notification for alarm" << it.value()->uid() << ", text is" << it.value()->text();
+            it.value()->send(this);
+        }
+    }
 }
 
 bool KalendarAlarmClient::collectionsAvailable() const
@@ -178,21 +212,21 @@ void KalendarAlarmClient::checkAlarms()
         if (incidence && incidence->type() == KCalendarCore::Incidence::TypeTodo && !incidence->dtStart().isValid()) {
             auto todo = incidence.staticCast<KCalendarCore::Todo>();
             timeText = i18n("Task due at %1", QLocale::system().toString(todo->dtDue().time(), QLocale::NarrowFormat));
-            m_notificationHandler->addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
+            addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
         } else if (incidence) {
             QString incidenceString = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
             timeText = i18nc("Event starts at 10:00",
                              "%1 starts at %2",
                              incidenceString,
                              QLocale::system().toString(incidence->dtStart().time(), QLocale::NarrowFormat));
-            m_notificationHandler->addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
+            addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
         } else {
             QLocale::system().toString(alarm->time(), QLocale::NarrowFormat);
-            m_notificationHandler->addNotification(uid, QLatin1String("%1\n%2").arg(timeText, alarm->text()), mLastChecked);
+            addNotification(uid, QLatin1String("%1\n%2").arg(timeText, alarm->text()), mLastChecked);
         }
     }
 
-    m_notificationHandler->sendNotifications();
+    sendNotifications();
     saveLastCheckTime();
 
     // schedule next check for the beginning of the next minute

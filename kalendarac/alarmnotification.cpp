@@ -5,7 +5,7 @@
  */
 
 #include "alarmnotification.h"
-#include "notificationhandler.h"
+#include "kalendaralarmclient.h"
 #include <KLocalizedString>
 #include <QDebug>
 
@@ -22,7 +22,7 @@ AlarmNotification::~AlarmNotification()
     m_notification->deleteLater();
 }
 
-void AlarmNotification::send(NotificationHandler *handler)
+void AlarmNotification::send(KalendarAlarmClient *client)
 {
     if (m_notification) {
         return; // already active
@@ -35,12 +35,12 @@ void AlarmNotification::send(NotificationHandler *handler)
     // dismiss both with the explicit action and just closing the notification
     // there is no signal for explicit closing though, we only can observe that
     // indirectly from not having received a different signal before closed()
-    QObject::connect(m_notification, &KNotification::closed, handler, [this, handler]() {
-        handler->dismiss(this);
+    QObject::connect(m_notification, &KNotification::closed, client, [this, client]() {
+        client->dismiss(this);
     });
-    QObject::connect(m_notification, &KNotification::action1Activated, handler, [this, handler]() {
-        handler->suspend(this);
-        QObject::disconnect(m_notification, &KNotification::closed, handler, nullptr);
+    QObject::connect(m_notification, &KNotification::action1Activated, client, [this, client]() {
+        client->suspend(this);
+        QObject::disconnect(m_notification, &KNotification::closed, client, nullptr);
     });
 
     m_notification->sendEvent();

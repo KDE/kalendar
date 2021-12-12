@@ -5,7 +5,6 @@
 set(kalendarac_SRCS
     kalendaralarmclient.cpp
     alarmnotification.cpp
-    notificationhandler.cpp
     kalendaracmain.cpp
     )
 
