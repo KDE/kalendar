@@ -161,7 +161,8 @@ QVariant MonthModel::data(const QModelIndex &index, int role) const
             }
             const QDate date(year, month, day);
             if (role == Date) {
-                return date;
+                return date.startOfDay();
+                // Ensure the date doesn't get mangled into a different date by QML date conversion
             }
 
             if (role == IsSelected) {
