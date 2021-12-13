@@ -7,7 +7,11 @@
 #include "alarmnotification.h"
 #include "kalendaralarmclient.h"
 #include <KLocalizedString>
+
 #include <QDebug>
+#include <QDesktopServices>
+#include <QRegularExpression>
+#include <QUrlQuery>
 
 AlarmNotification::AlarmNotification(const QString &uid)
     : m_uid{uid}
@@ -22,28 +26,56 @@ AlarmNotification::~AlarmNotification()
     m_notification->deleteLater();
 }
 
-void AlarmNotification::send(KalendarAlarmClient *client)
+void AlarmNotification::send(KalendarAlarmClient *client, const KCalendarCore::Incidence::Ptr &incidence)
 {
-    if (m_notification) {
-        return; // already active
+    const bool notificationExists = m_notification;
+    if (!notificationExists) {
+        m_notification = new KNotification(QStringLiteral("alarm"));
+        m_notification->setFlags(KNotification::Persistent);
+
+        // dismiss both with the explicit action and just closing the notification
+        // there is no signal for explicit closing though, we only can observe that
+        // indirectly from not having received a different signal before closed()
+        QObject::connect(m_notification, &KNotification::closed, client, [this, client]() {
+            client->dismiss(this);
+        });
+        QObject::connect(m_notification, &KNotification::action1Activated, client, [this, client]() {
+            client->suspend(this);
+            QObject::disconnect(m_notification, &KNotification::closed, client, nullptr);
+        });
+        QObject::connect(m_notification, &KNotification::action3Activated, client, [this]() {
+            QDesktopServices::openUrl(m_contextAction);
+        });
     }
 
-    m_notification = new KNotification(QStringLiteral("alarm"));
+    // change the content unconditionally, that will also update already existing notifications
+    m_notification->setTitle(incidence->summary());
     m_notification->setText(m_text);
-    m_notification->setActions({i18n("Remind in 5 mins"), i18n("Dismiss")});
 
-    // dismiss both with the explicit action and just closing the notification
-    // there is no signal for explicit closing though, we only can observe that
-    // indirectly from not having received a different signal before closed()
-    QObject::connect(m_notification, &KNotification::closed, client, [this, client]() {
-        client->dismiss(this);
-    });
-    QObject::connect(m_notification, &KNotification::action1Activated, client, [this, client]() {
-        client->suspend(this);
-        QObject::disconnect(m_notification, &KNotification::closed, client, nullptr);
-    });
+    if (!m_text.isEmpty() && m_text != incidence->summary()) { // MS Teams sometimes repeats the summary as the alarm text, we don't need that
+        m_notification->setText(m_text);
+    } else if (incidence->type() == KCalendarCore::Incidence::TypeTodo && !incidence->dtStart().isValid()) {
+        const auto todo = incidence.staticCast<KCalendarCore::Todo>();
+        m_notification->setText(i18n("Task due at %1", QLocale().toString(todo->dtDue().time(), QLocale::NarrowFormat)));
+    } else {
+        const QString incidenceType = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
+        m_notification->setText(
+            i18nc("Event starts at 10:00", "%1 starts at %2", incidenceType, QLocale().toString(incidence->dtStart().time(), QLocale::NarrowFormat)));
+    }
 
-    m_notification->sendEvent();
+    m_notification->setIconName(incidence->type() == KCalendarCore::Incidence::TypeTodo ? QStringLiteral("view-task")
+                                                                                        : QStringLiteral("view-calendar-upcoming"));
+
+    QStringList actions = {i18n("Remind in 5 mins"), i18n("Dismiss")};
+    const auto contextAction = determineContextAction(incidence);
+    if (!contextAction.isEmpty()) {
+        actions.push_back(contextAction);
+    }
+    m_notification->setActions(actions);
+
+    if (!notificationExists) {
+        m_notification->sendEvent();
+    }
 }
 
 QString AlarmNotification::uid() const
@@ -69,4 +101,59 @@ QDateTime AlarmNotification::remindAt() const
 void AlarmNotification::setRemindAt(const QDateTime &remindAtDt)
 {
     m_remind_at = remindAtDt;
+}
+
+bool AlarmNotification::hasValidContextAction() const
+{
+    return m_contextAction.isValid() && m_contextAction.scheme() == QLatin1String("https");
+}
+
+QString AlarmNotification::determineContextAction(const KCalendarCore::Incidence::Ptr &incidence)
+{
+    // look for possible (meeting) URLs
+    m_contextAction = incidence->url();
+    if (!hasValidContextAction()) {
+        m_contextAction = QUrl(incidence->location());
+    }
+    if (!hasValidContextAction()) {
+        m_contextAction = QUrl(incidence->customProperty("MICROSOFT", "SKYPETEAMSMEETINGURL"));
+    }
+    if (!hasValidContextAction()) {
+        static QRegularExpression urlFinder(QStringLiteral(R"(https://[^\s>]*)"));
+        const auto match = urlFinder.match(incidence->description());
+        if (match.hasMatch()) {
+            m_contextAction = QUrl(match.captured());
+        }
+    }
+
+    if (hasValidContextAction()) {
+        return i18n("Open URL");
+    }
+
+    // navigate to location
+    // ### geo: URLs would be nicer for this, but we don't have a default handler for those yet
+    // on a regular Plasma installation without Marble. Therefore use OSM URLs for now.
+    if (incidence->hasGeo()) {
+        m_contextAction.clear();
+        m_contextAction.setScheme(QStringLiteral("https"));
+        m_contextAction.setHost(QStringLiteral("www.openstreetmap.org"));
+        m_contextAction.setPath(QStringLiteral("/"));
+        const QString fragment =
+            QLatin1String("map=18/") + QString::number(incidence->geoLatitude()) + QLatin1Char('/') + QString::number(incidence->geoLongitude());
+        m_contextAction.setFragment(fragment);
+    } else if (!incidence->location().isEmpty()) {
+        m_contextAction.clear();
+        m_contextAction.setScheme(QStringLiteral("https"));
+        m_contextAction.setHost(QStringLiteral("www.openstreetmap.org"));
+        m_contextAction.setPath(QStringLiteral("/search"));
+        QUrlQuery query;
+        query.addQueryItem(QStringLiteral("query"), incidence->location());
+        m_contextAction.setQuery(query);
+    }
+
+    if (hasValidContextAction()) {
+        return i18n("Map");
+    }
+
+    return QString();
 }

@@ -6,9 +6,11 @@
 
 #pragma once
 
+#include <KCalendarCore/Incidence>
 #include <KNotification>
 #include <QDateTime>
 #include <QPointer>
+#include <QUrl>
 
 class KalendarAlarmClient;
 
@@ -25,7 +27,7 @@ public:
     /**
      * @brief Sends the notification to be displayed
      */
-    void send(KalendarAlarmClient *client);
+    void send(KalendarAlarmClient *client, const KCalendarCore::Incidence::Ptr &incidence);
 
     /**
      * @return The uid of the Incidence of the alarm of the notification
@@ -53,8 +55,12 @@ public:
     void setRemindAt(const QDateTime &remindAtDt);
 
 private:
+    bool hasValidContextAction() const;
+    QString determineContextAction(const KCalendarCore::Incidence::Ptr &incidence);
+
     QPointer<KNotification> m_notification;
     QString m_uid;
     QString m_text;
     QDateTime m_remind_at;
+    QUrl m_contextAction;
 };

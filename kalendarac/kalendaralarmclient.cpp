@@ -101,7 +101,7 @@ void KalendarAlarmClient::restoreSuspendedFromConfig()
         QDateTime remindAt = suspendedAlarm.readEntry("RemindAt", QDateTime());
         qDebug() << "restoreSuspendedFromConfig: Restoring alarm" << uid << "," << txt << "," << remindAt;
 
-        if (!uid.isEmpty() && remindAt.isValid() && !txt.isEmpty()) {
+        if (!uid.isEmpty() && remindAt.isValid()) {
             addNotification(uid, txt, remindAt);
         }
     }
@@ -153,17 +153,6 @@ void KalendarAlarmClient::addNotification(const QString &uid, const QString &tex
     storeNotification(notification);
 }
 
-void KalendarAlarmClient::sendNotifications()
-{
-    qDebug() << "Looking for notifications, total:" << m_notifications.count();
-    for (auto it = m_notifications.begin(); it != m_notifications.end(); ++it) {
-        if (it.value()->remindAt() <= QDateTime::currentDateTime()) {
-            qDebug() << "Sending notification for alarm" << it.value()->uid() << ", text is" << it.value()->text();
-            it.value()->send(this);
-        }
-    }
-}
-
 bool KalendarAlarmClient::collectionsAvailable() const
 {
     // The list of collections must be available.
@@ -199,6 +188,7 @@ void KalendarAlarmClient::checkAlarms()
 
     qDebug() << "Check:" << from.toString() << " -" << mLastChecked.toString();
 
+    // look for new alarms
     const Alarm::List alarms = mCalendar->alarms(from, mLastChecked, true /* exclude blocked alarms */);
     for (const Alarm::Ptr &alarm : alarms) {
 #if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 19, 41)
@@ -206,27 +196,19 @@ void KalendarAlarmClient::checkAlarms()
 #else
         const QString uid = alarm->parentUid();
 #endif
-        const KCalendarCore::Incidence::Ptr incidence = mCalendar->incidence(uid);
-        QString timeText;
+        addNotification(uid, alarm->text(), mLastChecked);
+    }
 
-        if (incidence && incidence->type() == KCalendarCore::Incidence::TypeTodo && !incidence->dtStart().isValid()) {
-            auto todo = incidence.staticCast<KCalendarCore::Todo>();
-            timeText = i18n("Task due at %1", QLocale::system().toString(todo->dtDue().time(), QLocale::NarrowFormat));
-            addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
-        } else if (incidence) {
-            QString incidenceString = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
-            timeText = i18nc("Event starts at 10:00",
-                             "%1 starts at %2",
-                             incidenceString,
-                             QLocale::system().toString(incidence->dtStart().time(), QLocale::NarrowFormat));
-            addNotification(uid, QLatin1String("%1\n%2").arg(timeText, incidence->summary()), mLastChecked);
-        } else {
-            QLocale::system().toString(alarm->time(), QLocale::NarrowFormat);
-            addNotification(uid, QLatin1String("%1\n%2").arg(timeText, alarm->text()), mLastChecked);
+    // execute or update active alarms
+    for (auto it = m_notifications.begin(); it != m_notifications.end(); ++it) {
+        if (it.value()->remindAt() <= mLastChecked) {
+            const auto incidence = mCalendar->incidence(it.value()->uid());
+            if (incidence) { // can still be null when we get here during the early stages of loading/restoring
+                it.value()->send(this, incidence);
+            }
         }
     }
 
-    sendNotifications();
     saveLastCheckTime();
 
     // schedule next check for the beginning of the next minute

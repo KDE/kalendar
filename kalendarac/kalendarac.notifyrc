@@ -73,5 +73,3 @@ Comment[uk]=Сповіщення для нагадування
 Comment[x-test]=xxAlarm Notificationxx
 Action=Popup|Sound
 Sound=freedesktop/stereo/bell.oga
-Urgency=Critical
-
