@@ -165,9 +165,8 @@ Kirigami.Page {
         }
 
         property date dateToUse
-        property int startIndex
+        property int startIndex: root.model.rowCount() / 2;
         Component.onCompleted: {
-            startIndex = root.model.rowCount() / 2;
             currentIndex = startIndex;
         }
         onCurrentIndexChanged: {
@@ -197,7 +196,7 @@ Kirigami.Page {
 
             readonly property int daysFromWeekStart: index === pathView.startIndex ?
                 DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1 :
-                root.daysToShow + 1
+                root.daysToShow
             // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
 
             active: isNextOrCurrentItem
