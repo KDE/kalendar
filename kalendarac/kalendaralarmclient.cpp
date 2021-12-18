@@ -142,11 +142,21 @@ void KalendarAlarmClient::removeNotification(AlarmNotification *notification)
 
 void KalendarAlarmClient::addNotification(const QString &uid, const QString &text, const QDateTime &remindTime)
 {
-    if (m_notifications.contains(uid)) {
+    AlarmNotification *notification = nullptr;
+    const auto it = m_notifications.constFind(uid);
+    if (it != m_notifications.constEnd()) {
+        notification = it.value();
+    } else {
+        notification = new AlarmNotification(uid);
+    }
+
+    if (notification->remindAt().isValid() && notification->remindAt() < remindTime) {
+        // we have a notification for this event already, and it's scheduled earlier than the new one
         return;
     }
+
+    // we either have no notification for this event yet, or one that is scheduled for later and that should be replaced
     qDebug() << "Adding notification, uid:" << uid << "text:" << text << "remindTime:" << remindTime;
-    AlarmNotification *notification = new AlarmNotification(uid);
     notification->setText(text);
     notification->setRemindAt(remindTime);
     m_notifications[notification->uid()] = notification;
