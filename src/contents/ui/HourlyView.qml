@@ -853,11 +853,14 @@ Kirigami.Page {
                                                                     }
                                                                 }
 
-                                                                Rectangle {
-                                                                    id: dropAreaHighlightRectangle
+                                                                Loader {
                                                                     anchors.fill: parent
-                                                                    visible: incidenceDropArea.containsDrag
-                                                                    color: Kirigami.Theme.positiveBackgroundColor
+                                                                    active: incidenceDropArea.containsDrag
+                                                                    sourceComponent: Rectangle {
+                                                                        id: dropAreaHighlightRectangle
+                                                                        anchors.fill: parent
+                                                                        color: Kirigami.Theme.positiveBackgroundColor
+                                                                    }
                                                                 }
                                                             }
                                                         }
