@@ -3,6 +3,7 @@
 
 #include "kalendaralarmclient.h"
 #include "alarmnotification.h"
+#include "calendarinterface.h"
 
 #include <akonadi-calendar_version.h>
 
@@ -121,6 +122,20 @@ void KalendarAlarmClient::suspend(AlarmNotification *notification)
     qDebug() << "Alarm " << notification->uid() << "suspended";
     notification->setRemindAt(QDateTime(QDateTime::currentDateTime()).addSecs(5 * 60)); // 5 minutes is hardcoded in the suspend action text
     storeNotification(notification);
+}
+
+void KalendarAlarmClient::showIncidence(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken)
+{
+    KConfig cfg(QStringLiteral("defaultcalendarrc"));
+    KConfigGroup grp(&cfg, QStringLiteral("General"));
+    const auto appId = grp.readEntry(QStringLiteral("ApplicationId"), QString());
+    if (appId.isEmpty()) {
+        return;
+    }
+
+    QDBusConnection::sessionBus().interface()->startService(appId);
+    org::kde::calendar::Calendar iface(appId, QStringLiteral("/Calendar"), QDBusConnection::sessionBus());
+    iface.showIncidenceByUid(uid, occurrence, xdgActivationToken);
 }
 
 void KalendarAlarmClient::storeNotification(AlarmNotification *notification)

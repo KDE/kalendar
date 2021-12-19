@@ -28,6 +28,7 @@ AlarmNotification::~AlarmNotification()
 
 void AlarmNotification::send(KalendarAlarmClient *client, const KCalendarCore::Incidence::Ptr &incidence)
 {
+    const QDateTime startTime = m_occurrence.isValid() ? m_occurrence : incidence->dtStart();
     const bool notificationExists = m_notification;
     if (!notificationExists) {
         m_notification = new KNotification(QStringLiteral("alarm"));
@@ -38,6 +39,9 @@ void AlarmNotification::send(KalendarAlarmClient *client, const KCalendarCore::I
         // indirectly from not having received a different signal before closed()
         QObject::connect(m_notification, &KNotification::closed, client, [this, client]() {
             client->dismiss(this);
+        });
+        QObject::connect(m_notification, &KNotification::defaultActivated, client, [this, client, startTime]() {
+            client->showIncidence(uid(), startTime, m_notification->xdgActivationToken());
         });
         QObject::connect(m_notification, &KNotification::action1Activated, client, [this, client]() {
             client->suspend(this);
@@ -51,6 +55,7 @@ void AlarmNotification::send(KalendarAlarmClient *client, const KCalendarCore::I
     // change the content unconditionally, that will also update already existing notifications
     m_notification->setTitle(incidence->summary());
     m_notification->setText(m_text);
+    m_notification->setDefaultAction(i18n("View"));
 
     if (!m_text.isEmpty() && m_text != incidence->summary()) { // MS Teams sometimes repeats the summary as the alarm text, we don't need that
         m_notification->setText(m_text);
@@ -59,7 +64,6 @@ void AlarmNotification::send(KalendarAlarmClient *client, const KCalendarCore::I
         m_notification->setText(i18n("Task due at %1", QLocale().toString(todo->dtDue().time(), QLocale::NarrowFormat)));
     } else if (!incidence->allDay()) {
         const QString incidenceType = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
-        const QDateTime startTime = m_occurrence.isValid() ? m_occurrence : incidence->dtStart();
         const int startOffset = qRound(QDateTime::currentDateTime().secsTo(startTime) / 60.0);
         if (startOffset > 0 && startOffset < 60) {
             m_notification->setText(i18ncp("Event starts in 5 minutes", "%2 starts in %1 minute", "%2 starts in %1 minutes", startOffset, incidenceType));

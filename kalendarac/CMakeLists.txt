@@ -3,13 +3,17 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 
-add_executable(kalendarac ${RESOURCES})
+add_executable(kalendarac)
+
+qt_add_dbus_interface(kalendarac_SRCS org.kde.calendar.Calendar.xml calendarinterface)
+
 target_sources(kalendarac PRIVATE
     kalendaralarmclient.cpp
     alarmnotification.cpp
     kalendaralarmclient.h
     alarmnotification.h
     kalendaracmain.cpp
+    ${kalendarac_SRCS}
     )
 
 target_link_libraries(kalendarac

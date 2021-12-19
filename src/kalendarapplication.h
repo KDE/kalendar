@@ -40,6 +40,9 @@ public:
     Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId = -1);
     QString importErrorMessage();
 
+    // D-Bus interface
+    void showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken);
+
 public Q_SLOTS:
     void configureShortcuts();
 
