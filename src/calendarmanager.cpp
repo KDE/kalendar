@@ -51,6 +51,7 @@
 #include <KCheckableProxyModel>
 #include <KLocalizedString>
 #include <QApplication>
+#include <QDebug>
 #include <QPointer>
 #include <QRandomGenerator>
 #include <etmcalendar.h>
@@ -707,13 +708,7 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
         return;
     }
 
-    Akonadi::Collection newCollection(incidenceWrapper->collectionId());
-    modifiedItem.setParentCollection(newCollection);
-    auto job = new Akonadi::ItemMoveJob(modifiedItem, newCollection);
-    // Add some type of check here?
-    connect(job, &KJob::result, job, [=]() {
-        qCDebug(KALENDAR_LOG) << job->error();
-    });
+    changeIncidenceCollection(modifiedItem, incidenceWrapper->collectionId());
 }
 
 void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, int startOffset, int endOffset, int occurrences, const QDateTime &occurrenceDate)
@@ -845,6 +840,47 @@ void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence, b
     }
 
     m_calendar->deleteIncidence(incidence);
+}
+
+void CalendarManager::changeIncidenceCollection(KCalendarCore::Incidence::Ptr incidence, qint64 collectionId)
+{
+    KCalendarCore::Incidence::Ptr incidenceClone(incidence->clone());
+    Akonadi::Item modifiedItem = m_calendar->item(incidence->instanceIdentifier());
+    modifiedItem.setPayload<KCalendarCore::Incidence::Ptr>(incidenceClone);
+
+    if (modifiedItem.parentCollection().id() != collectionId) {
+        changeIncidenceCollection(modifiedItem, collectionId);
+    }
+}
+
+void CalendarManager::changeIncidenceCollection(Akonadi::Item item, qint64 collectionId)
+{
+    if (item.parentCollection().id() == collectionId) {
+        return;
+    }
+
+    Q_ASSERT(item.hasPayload<KCalendarCore::Incidence::Ptr>());
+
+    Akonadi::Collection newCollection(collectionId);
+    item.setParentCollection(newCollection);
+
+    auto job = new Akonadi::ItemMoveJob(item, newCollection);
+    // Add some type of check here?
+    connect(job, &KJob::result, job, [=]() {
+        qCDebug(KALENDAR_LOG) << job->error();
+
+        if (!job->error()) {
+            const auto allChildren = m_calendar->childIncidences(item.id());
+            for (const auto &child : allChildren) {
+                changeIncidenceCollection(m_calendar->item(child), collectionId);
+            }
+
+            auto parent = item.payload<KCalendarCore::Incidence::Ptr>()->relatedTo();
+            if (!parent.isEmpty()) {
+                changeIncidenceCollection(m_calendar->item(parent), collectionId);
+            }
+        }
+    });
 }
 
 QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)

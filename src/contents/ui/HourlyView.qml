@@ -820,6 +820,10 @@ Kirigami.Page {
                                                                 onDropped: if(viewLoader.isCurrentItem) {
                                                                     let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
 
+                                                                    /* So when we drop the entire incidence card somewhere, we are dropping the delegate with object name "incidenceDelegate".
+                                                                     * However, when we are simply resizing, we are actually dropping the specific mouseArea within the delegate that handles
+                                                                     * the dragging for the incidence's bottom edge which has name "endDtResizeMouseArea". Hence why we check the object names
+                                                                     */
                                                                     if(drop.source.objectName === "incidenceDelegate") {
                                                                         incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 

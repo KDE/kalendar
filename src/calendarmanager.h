@@ -86,6 +86,8 @@ public:
     Q_INVOKABLE bool hasChildren(KCalendarCore::Incidence::Ptr incidence);
     void deleteAllChildren(KCalendarCore::Incidence::Ptr incidence);
     Q_INVOKABLE void deleteIncidence(KCalendarCore::Incidence::Ptr incidence, bool deleteChildren = false);
+    Q_INVOKABLE void changeIncidenceCollection(KCalendarCore::Incidence::Ptr incidence, qint64 collectionId);
+    void changeIncidenceCollection(Akonadi::Item item, qint64 collectionId);
     Q_INVOKABLE QVariantMap getCollectionDetails(QVariant collectionId);
     Q_INVOKABLE void setCollectionColor(qint64 collectionId, QColor color);
     Q_INVOKABLE QVariant getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr);

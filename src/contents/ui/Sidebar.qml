@@ -498,6 +498,7 @@ Kirigami.OverlayDrawer {
                                     (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
                                 separatorVisible: false
                                 enabled: !sidebar.collapsed
+                                highlighted: incidenceDropArea.containsDrag
 
                                 leading: Kirigami.Icon {
                                     implicitWidth: Kirigami.Units.iconSizes.smallMedium
@@ -531,6 +532,20 @@ Kirigami.OverlayDrawer {
                                     anchors.fill: parent
 
                                     onDeleteCalendar: sidebar.deleteCalendar(collectionId, collectionDetails)
+
+                                    DropArea {
+                                        id: incidenceDropArea
+                                        anchors.fill: parent
+                                        z: 9999
+                                        onDropped: if(drop.source.objectName === "taskDelegate") {
+                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
+
+                                            const pos = mapToItem(applicationWindow().contentItem, x, y);
+                                            drop.source.caughtX = pos.x;
+                                            drop.source.caughtY = pos.y;
+                                            drop.source.caught = true;
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -30,6 +30,7 @@ TreeListView {
     property int showCompleted: Kalendar.TodoSortFilterProxyModel.ShowAll
     property int sortBy: Kalendar.TodoSortFilterProxyModel.SummaryColumn
     property bool ascendingOrder: false
+    property bool dragDropEnabled: true
 
     property alias model: todoModel
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
@@ -130,6 +131,7 @@ TreeListView {
     }
     delegate: BasicTreeItem {
         id: listItem
+        objectName: "taskDelegate"
         Layout.fillWidth: true
 
         Binding {
@@ -144,19 +146,76 @@ TreeListView {
         activeBackgroundColor: LabelUtils.getIncidenceBackgroundColor(model.color, root.isDark)
         onActiveBackgroundColorChanged: activeBackgroundColor.a = 0.15
 
+        property alias mouseArea: mouseArea
+        property var incidencePtr: model.incidencePtr
+        property date occurrenceDate: model.startTime
+        property date occurrenceEndDate: model.endTime
+        property bool repositionAnimationEnabled: false
+        property bool caught: false
+        property real caughtX: x
+        property real caughtY: y
+
+        Drag.active: mouseArea.drag.active
+        Drag.hotSpot.x: mouseArea.mouseX
+        Drag.hotSpot.y: mouseArea.mouseY
+
+        Behavior on x {
+            enabled: repositionAnimationEnabled
+            NumberAnimation {
+                duration: Kirigami.Units.shortDuration
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        Behavior on y {
+            enabled: repositionAnimationEnabled
+            NumberAnimation {
+                duration: Kirigami.Units.shortDuration
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        states: [
+            State {
+                when: listItem.mouseArea.drag.active
+                ParentChange { target: listItem; parent: applicationWindow().contentItem }
+                PropertyChanges { target: listItem; highlighted: true; z: 9999 }
+                PropertyChanges { target: applicationWindow().contentItem; clip: false }
+                PropertyChanges { target: applicationWindow().globalDrawer; z: -1 }
+            },
+            State {
+                when: listItem.caught
+                ParentChange { target: listItem; parent: root }
+                PropertyChanges {
+                    target: listItem
+                    repositionAnimationEnabled: true
+                    x: caughtX
+                    y: caughtY
+                }
+            }
+        ]
+
         contentItem: IncidenceMouseArea {
+            id: mouseArea
+
             implicitWidth: todoItemContents.implicitWidth
             implicitHeight: Kirigami.Settings.isMobile ?
                 todoItemContents.implicitHeight + Kirigami.Units.largeSpacing : todoItemContents.implicitHeight + Kirigami.Units.smallSpacing
             incidenceData: model
             collectionId: model.collectionId
             propagateComposedEvents: true
+            preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
+
+            drag.target: !Kirigami.Settings.isMobile && !model.isReadOnly && root.dragDropEnabled ? listItem : undefined
+            onReleased: listItem.Drag.drop()
 
             onViewClicked: root.viewTodo(model), listItem.clicked()
             onEditClicked: root.editTodo(model.incidencePtr)
             onDeleteClicked: root.deleteTodo(model.incidencePtr, model.endTime ? model.endTime : model.startTime ? model.startTime : null)
             onTodoCompletedClicked: model.checked = model.checked === 0 ? 2 : 0
             onAddSubTodoClicked: root.addSubTodo(parentWrapper)
+
+            onClicked: root.viewTodo(model)
 
             GridLayout {
                 id: todoItemContents
@@ -266,7 +325,5 @@ TreeListView {
                 }
             }
         }
-
-        onClicked: root.viewTodo(model)
     }
 }
