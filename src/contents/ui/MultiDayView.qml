@@ -31,9 +31,6 @@ Item {
     property int daysToShow: daysPerRow * 6
     property int daysPerRow: 7
     property double weekHeaderWidth: Kalendar.Config.showWeekNumbers ? Kirigami.Units.gridUnit * 1.5 : 0
-    property double dayWidth: Kalendar.Config.showWeekNumbers ?
-        ((width - weekHeaderWidth) / daysPerRow) - spacing : // No spacing on right, spacing in between weekheader and monthgrid
-        (width - weekHeaderWidth - (spacing * (daysPerRow - 1))) / daysPerRow // No spacing on left or right of month grid when no week header
     property date currentDate
     // Getting the components once makes this faster when we need them repeatedly
     property int currentDay: currentDate ? currentDate.getDate() : null
@@ -52,6 +49,9 @@ Item {
     //Internal
     property int numberOfLinesShown: 0
     property int numberOfRows: (daysToShow / daysPerRow)
+    property double dayWidth: Kalendar.Config.showWeekNumbers ?
+        ((width - weekHeaderWidth) / daysPerRow) - spacing : // No spacing on right, spacing in between weekheader and monthgrid
+        (width - weekHeaderWidth - (spacing * (daysPerRow - 1))) / daysPerRow // No spacing on left or right of month grid when no week header
     property var dayHeight: ((height - bgLoader.dayLabels.height) / numberOfRows) - spacing
     property real spacing: Kalendar.Config.monthGridBorderWidth // Between grid squares in background
     property real listViewSpacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?

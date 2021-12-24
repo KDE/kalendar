@@ -10,7 +10,7 @@ import org.kde.kalendar 1.0 as Kalendar
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
-Rectangle {
+Item {
     id: incidenceDelegate
 
     x: ((dayWidth + parentViewSpacing) * modelData.starts) + horizontalSpacing
@@ -40,12 +40,10 @@ Rectangle {
         }
     }
 
-    radius: Kirigami.Units.smallSpacing
-    color: Qt.rgba(0,0,0,0)
-
     property real dayWidth: 0
     property real parentViewSpacing: 0
     property int horizontalSpacing: 0 // In between incidence spaces
+    property real radius: Kirigami.Units.smallSpacing
     property string openOccurrenceId: ""
     property bool isOpenOccurrence: openOccurrenceId ?
         openOccurrenceId === modelData.incidenceId : false
@@ -54,6 +52,7 @@ Rectangle {
         modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month :
         true
     property bool isDark: false
+
     property alias mouseArea: mouseArea
     property var incidencePtr: modelData.incidencePtr
     property date occurrenceDate: modelData.startTime
