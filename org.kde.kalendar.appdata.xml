@@ -251,6 +251,12 @@
   <url type="homepage">https://apps.kde.org/kalendar/</url>
   <url type="bugtracker">https://invent.kde.org/pim/kalendar/-/issues</url>
   <releases>
+    <release type="development" version="0.4.0" date="2021-12-26">
+      <description>
+        <p>This release brings new views, improved performance, and significant bugfixes.</p>
+        <p>https://claudiocambra.com/2021/12/25/happy-holidays-kalendar-v0-4-0-is-our-gift-and-it-brings-new-views-improved-performance-and-many-many-bugfixes-kalendar-devlog-24/</p>
+      </description>
+    </release>
     <release type="development" version="0.3.1" date="2021-12-02">
       <description>
         <p>Bugfix release with fixes to alarm client notification text, accessibility improvements to the sidebar, and more.</p>
