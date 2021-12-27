@@ -363,7 +363,7 @@ Kirigami.Page {
 
                                     Layout.alignment: Qt.AlignVCenter
                                     visible: !cardsColumn.visible
-                                    text: i18n("Clear day.")
+                                    text: i18nc("Date has no events or tasks set", "Clear day.")
                                     color: Kirigami.Theme.disabledTextColor
                                 }
 
