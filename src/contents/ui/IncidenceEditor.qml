@@ -634,7 +634,7 @@ Kirigami.ScrollablePage {
 
                             display: root.incidenceWrapper.recurrenceData.endDateTimeDisplay
                             dateTime: root.incidenceWrapper.recurrenceData.endDateTime
-                            onNewDateChosen: root.incidenceWrapper.setRecurrenceDataItem("endDateTime", new Date(year, month, day));
+                            onNewDateChosen: root.incidenceWrapper.setRecurrenceDataItem("endDateTime", new Date(year, month - 1, day));
                         }
 
                         RowLayout {
