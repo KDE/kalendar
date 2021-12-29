@@ -23,14 +23,16 @@ QQC2.ToolButton {
 
         horizontalAlignment: Text.AlignHCenter
         text: {
-            let locale = Qt.locale();
-            let monthYearString = i18nc("%1 is month name, %2 is year", "<b>%1</b> %2", locale.standaloneMonthName(root.date.getMonth()), String(root.date.getFullYear()));
-            let endRangeMonthYearString = i18nc("%1 is month name, %2 is year", "<b>%1</b> %2", locale.standaloneMonthName(root.lastDate.getMonth()), String(root.lastDate.getFullYear()));
+            const locale = Qt.locale();
+            const monthYearString = i18nc("%1 is month name, %2 is year", "<b>%1</b> %2", locale.standaloneMonthName(root.date.getMonth()), String(root.date.getFullYear()));
+
             if(!root.range) {
                 return monthYearString;
             } else {
+                const endRangeMonthYearString = i18nc("%1 is month name, %2 is year", "<b>%1</b> %2", locale.standaloneMonthName(root.lastDate.getMonth()), String(root.lastDate.getFullYear()));
+
                 if(root.date.getFullYear() !== root.lastDate.getFullYear()) {
-                    return i18nc("%1 is the month and year of the range start, %2 is the same for range end", "%1 - %2", monthYearString, endrangeMonthYearString);
+                    return i18nc("%1 is the month and year of the range start, %2 is the same for range end", "%1 - %2", monthYearString, endRangeMonthYearString);
                 } else if(root.date.getMonth() !== root.lastDate.getMonth()) {
                     return i18nc("%1 is month of range start, %2 is month + year of range end", "<b>%1</b> - %2", locale.standaloneMonthName(root.date.getMonth()), endRangeMonthYearString);
                 } else {
