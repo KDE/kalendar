@@ -71,8 +71,9 @@ Kirigami.ScrollablePage {
                     onClicked: collectionPickerSheet.collectionPicked(collectionId);
 
                     trailing: Rectangle {
+                        anchors.margins: Kirigami.Units.smallSpacing
                         color: model.collectionColor
-                        radius: Kirigami.Units.smallSpacing
+                        radius: width * 0.5
                         width: height
                         height: Kirigami.Units.iconSizes.small
                     }

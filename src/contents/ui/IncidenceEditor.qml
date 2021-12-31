@@ -168,6 +168,12 @@ Kirigami.ScrollablePage {
                             Kirigami.BasicListItem {
                                 label: display
                                 icon: decoration
+                                trailing: Rectangle {
+                                    anchors.margins: Kirigami.Units.smallSpacing
+                                    width: height
+                                    radius: width * 0.5
+                                    color: collectionColor
+                                }
                                 onClicked: root.incidenceWrapper.collectionId = collectionId
                             }
                         }
