@@ -980,6 +980,12 @@ Kirigami.ApplicationWindow {
         }
     }
 
+
+    function convertIncidence(incidenceWrapper, allDay, startOffset, endOffset, occurrenceDate, caughtDelegate) {
+        incidenceWrapper.allDay = allDay;
+        setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate);
+    }
+
     function reenableDragOnCurrentView() {
         pageStack.currentItem.dragDropEnabled = true;
 
@@ -1263,6 +1269,7 @@ Kirigami.ApplicationWindow {
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
+            onConvertIncidence: root.convertIncidence(incidenceWrapper, allDay, startOffset, endOffset, caughtDelegate) // We convert incidence from or to all day event
             onResizeIncidence: root.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
             onOpenDayView: root.openDayLayer(selectedDate)
 

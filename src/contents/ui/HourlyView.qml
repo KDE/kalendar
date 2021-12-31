@@ -22,6 +22,7 @@ Kirigami.Page {
     signal addSubTodo(var parentWrapper)
     signal deselect()
     signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
+    signal convertIncidence(bool allDay, int startOffset, int endOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
     signal resizeIncidence(int endOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
     signal openDayView(date selectedDate)
 
@@ -508,7 +509,15 @@ Kirigami.Page {
                                                                         let sameTimeOnDate = new Date(listViewMenu.addDate);
                                                                         sameTimeOnDate = new Date(sameTimeOnDate.setHours(drop.source.occurrenceDate.getHours(), drop.source.occurrenceDate.getMinutes()));
                                                                         const offset = sameTimeOnDate.getTime() - drop.source.occurrenceDate.getTime();
-                                                                        root.moveIncidence(offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                                        /* There are 2 possibilities here: we move multiday incidence between days or we move hourly incidence
+                                                                         * to convert it into multiday incidence
+                                                                         */
+                                                                        if (drop.source.objectName === 'incidenceDelegate') {
+                                                                            // This is conversion from non-multiday to multiday
+                                                                            root.convertIncidence(true, offset, offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                                        } else {
+                                                                            root.moveIncidence(offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -530,6 +539,7 @@ Kirigami.Page {
                                                             model: modelData
                                                             MultiDayViewIncidenceDelegate {
                                                                 id: incidenceDelegate
+                                                                objectName: "multiDayIncidenceDelegate"
                                                                 dayWidth: root.dayWidth
                                                                 height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
                                                                 parentViewSpacing: root.gridLineWidth
@@ -826,8 +836,7 @@ Kirigami.Page {
                                                                 z: 9999
                                                                 onDropped: if(viewLoader.isCurrentItem) {
                                                                     let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
-
-                                                                    /* So when we drop the entire incidence card somewhere, we are dropping the delegate with object name "incidenceDelegate".
+                                                                    /* So when we drop the entire incidence card somewhere, we are dropping the delegate with object name "incidenceDelegate" or "multiDayIncidenceDelegate" in case when all day event is converted to the hour incidence.
                                                                      * However, when we are simply resizing, we are actually dropping the specific mouseArea within the delegate that handles
                                                                      * the dragging for the incidence's bottom edge which has name "endDtResizeMouseArea". Hence why we check the object names
                                                                      */
@@ -844,6 +853,24 @@ Kirigami.Page {
 
                                                                         const startOffset = posDate.getTime() - drop.source.occurrenceDate.getTime();
                                                                         root.moveIncidence(startOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+
+                                                                    } else if(drop.source.objectName === "multiDayIncidenceDelegate") {
+                                                                        incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
+
+                                                                        const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                                        drop.source.caughtX = pos.x + incidenceSpacing;
+                                                                        drop.source.caughtY = pos.y + incidenceSpacing;
+                                                                        drop.source.caught = true;
+
+                                                                        // We want the date as if it were "from the top" of the droparea
+                                                                        const startPosDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index, dropAreaRepeater.minutes * index);
+                                                                        // In case when incidence is converted to not be all day anymore, lets set it as 1h long
+                                                                        const endPosDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index + 1, dropAreaRepeater.minutes * index);
+
+                                                                        const startOffset = startPosDate.getTime() - drop.source.occurrenceDate.getTime();
+                                                                        const endOffset = endPosDate.getTime() - drop.source.occurrenceEndDate.getTime();
+
+                                                                        root.convertIncidence(false, startOffset, endOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
 
                                                                     } else { // The resize affects the end time
                                                                         incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.parent.incidencePtr);
