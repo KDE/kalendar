@@ -144,6 +144,16 @@ Kirigami.ScrollablePage {
                     valueRole: "collectionId"
                     currentIndex: model && collectionId !== -1 ? CalendarManager.getCalendarSelectableIndex(root.incidenceWrapper) : -1
 
+                    indicator: Rectangle {
+                        id: indicatorDot
+                        implicitHeight: calendarCombo.implicitHeight * 0.4
+                        implicitWidth: implicitHeight
+                        x: calendarCombo.mirrored ? calendarCombo.leftPadding : calendarCombo.width - (calendarCombo.leftPadding * 3) - Kirigami.Units.iconSizes.smallMedium
+                        y: calendarCombo.topPadding + (calendarCombo.availableHeight - height) / 2
+                        radius: width * 0.5
+                        color: CalendarManager.getCollectionDetails(calendarCombo.currentValue).color
+                    }
+
                     model: KDescendantsProxyModel {
                         displayAncestorData: true
                         model: {
