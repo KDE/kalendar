@@ -631,6 +631,12 @@ Kirigami.Page {
                         return h;
                     }
 
+                    NumberAnimation on QQC2.ScrollBar.vertical.position {
+                        id: scrollAnimation
+                        duration: Kirigami.Units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+
                     function setToCurrentTime() {
                         if(currentTimeMarkerLoader.active) {
                             const viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit);
@@ -640,7 +646,8 @@ Kirigami.Page {
                             yPos = Math.max(0.0, yPos);
                             yPos = vScrollBar.size ? Math.min(vScrollBar.size, yPos) : Math.min(1.0, yPos);
 
-                            vScrollBar.position = yPos;
+                            scrollAnimation.to = yPos;
+                            scrollAnimation.start();
                         }
                     }
 
