@@ -168,7 +168,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
     };
 
-    auto requeue = [&, this](QQueue<QDate> &liveKeysQueue, const QDate &key) {
+    auto requeue = [&](QQueue<QDate> &liveKeysQueue, const QDate &key) {
         for (int i = 0; i < liveKeysQueue.length(); i++) {
             if (liveKeysQueue[i] == key) {
                 liveKeysQueue.move(i, liveKeysQueue.length() - 1);

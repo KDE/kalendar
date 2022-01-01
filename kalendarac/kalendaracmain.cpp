@@ -20,7 +20,7 @@ int main(int argc, char **argv)
         QStringLiteral("kalendarac"),
         // A displayable program name string.
         i18nc("@title", "Kalendar Reminders"),
-        QStringLiteral(),
+        QString(),
         // Short description of what the app does.
         i18n("Kalendar Reminder Daemon"),
         // The license this code is released under.

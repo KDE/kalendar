@@ -962,7 +962,7 @@ void CalendarManager::deleteCollection(qint64 collectionId)
     if (!isTopLevel) {
         // deletes contents
         auto job = new Akonadi::CollectionDeleteJob(collection, this);
-        connect(job, &Akonadi::CollectionDeleteJob::result, this, [this](KJob *job) {
+        connect(job, &Akonadi::CollectionDeleteJob::result, this, [](KJob *job) {
             if (job->error()) {
                 qCWarning(KALENDAR_LOG) << "Error occurred deleting collection: " << job->errorString();
             }
