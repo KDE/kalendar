@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Kalendar
+Upstream-Contact: Claudio Cambra <claudio.cambra@gmail.com>
+
+Files: logo.png org.kde.kalendar.svg
+Copyright: 2021 Áron Kovács <aronkvh@gmail.com>
+License: LGPL-2.0-or-later
+
