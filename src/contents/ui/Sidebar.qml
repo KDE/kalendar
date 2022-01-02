@@ -481,7 +481,7 @@ Kirigami.OverlayDrawer {
 
                                         Layout.fillHeight: true
                                         visible: model.checkState != null
-                                        color: model.collectionColor
+                                        color: model.collectionColor ?? Kirigami.Theme.highlightedTextColor
                                         checked: model.checkState === 2
                                         onCheckedChanged: calendarCheckChanged(collectionId, checked)
                                         onClicked: {
