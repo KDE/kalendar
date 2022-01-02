@@ -46,8 +46,10 @@ Kirigami.Page {
     property bool dragDropEnabled: true
 
     onSelectedDateChanged: {
-        pathView.currentItem.item.savedYScrollPos = 0;
-        moveToSelected();
+        if (pathView.currentItem) {
+            pathView.currentItem.item.savedYScrollPos = 0;
+            moveToSelected();
+        }
     }
 
     Kirigami.Theme.inherit: false
