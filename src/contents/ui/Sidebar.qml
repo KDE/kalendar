@@ -335,7 +335,10 @@ Kirigami.OverlayDrawer {
                     visible: TagManager.tagModel.rowCount() > 0
                     Accessible.name: tagsHeadingItem.expanded ? i18nc('Accessible description of dropdown menu', 'Tags, Expanded') : i18nc('Accessible description of dropdown menu', 'Tags, Collapsed')
 
-                    Kirigami.Heading { id: headingSizeCalculator }
+                    Kirigami.Heading {
+                        id: headingSizeCalculator
+                        level: 4
+                    }
 
                     highlighted: visualFocus
                     leading: Kirigami.Icon {
@@ -347,7 +350,7 @@ Kirigami.OverlayDrawer {
                     }
                     text: i18n("Tags")
                     labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
-                    labelItem.font.pointSize: headingSizeCalculator.headerPointSize(4)
+                    labelItem.font.pointSize: headingSizeCalculator.font.pointSize
                     Layout.bottomMargin: Kirigami.Units.largeSpacing
                     trailing: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.small
@@ -408,7 +411,7 @@ Kirigami.OverlayDrawer {
                     text: i18n("Calendars")
                     highlighted: visualFocus
                     labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
-                    labelItem.font.pointSize: headingSizeCalculator.headerPointSize(4)
+                    labelItem.font.pointSize: headingSizeCalculator.font.pointSize
                     trailing: Kirigami.Icon {
                         implicitWidth: Kirigami.Units.iconSizes.small
                         implicitHeight: Kirigami.Units.iconSizes.small
