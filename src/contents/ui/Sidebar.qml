@@ -194,85 +194,90 @@ Kirigami.OverlayDrawer {
 
             clip: true
 
-            ColumnLayout {
+            QQC2.Control {
                 anchors.fill: parent
-                spacing: 0
+                leftPadding: 0
+                rightPadding: 0
+                topPadding: 0
+                bottomPadding: 0
+                topInset: toolbar.visible ? -Kirigami.Units.smallSpacing - 1 : 0
+                contentItem: ColumnLayout {
+                    spacing: 0
 
-                Repeater {
-                    id: generalActions
-                    property list<Kirigami.Action> actions: [
-                        KActionFromAction {
-                            kalendarAction: "open_month_view"
-                            checkable: false
-                            onTriggered: {
-                                monthViewAction.trigger()
-                                if (sidebar.modal) sidebar.close()
+                    Repeater {
+                        id: generalActions
+                        property list<Kirigami.Action> actions: [
+                            KActionFromAction {
+                                kalendarAction: "open_month_view"
+                                checkable: false
+                                onTriggered: {
+                                    monthViewAction.trigger()
+                                    if (sidebar.modal) sidebar.close()
+                                }
+                            },
+                            KActionFromAction {
+                                kalendarAction: "open_week_view"
+                                checkable: false
+                                onTriggered: {
+                                    weekViewAction.trigger()
+                                    if (sidebar.modal) sidebar.close()
+                                }
+                            },
+                            KActionFromAction {
+                                kalendarAction: "open_schedule_view"
+                                checkable: false
+                                onTriggered: {
+                                    scheduleViewAction.trigger()
+                                    if (sidebar.modal) sidebar.close()
+                                }
+                            },
+                            KActionFromAction {
+                                kalendarAction: "open_todo_view"
+                                checkable: false
+                                onTriggered: {
+                                    todoViewAction.trigger()
+                                    if (sidebar.modal) sidebar.close()
+                                }
                             }
-                        },
-                        KActionFromAction {
-                            kalendarAction: "open_week_view"
-                            checkable: false
-                            onTriggered: {
-                                weekViewAction.trigger()
-                                if (sidebar.modal) sidebar.close()
+                        ]
+                        property list<Kirigami.Action> mobileActions: [
+                            KActionFromAction {
+                                text: CalendarManager.undoRedoData.undoAvailable ?
+                                    i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : i18n("Undo")
+                                kalendarAction: "edit_undo"
+                            },
+                            KActionFromAction {
+                                text: CalendarManager.undoRedoData.redoAvailable ?
+                                    i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : i18n("Redo")
+                                kalendarAction: "edit_redo"
+                            },
+                            KActionFromAction {
+                                kalendarAction: "open_tag_manager"
+                                onTriggered: {
+                                    tagManagerAction.trigger()
+                                    if (sidebar.modal) sidebar.close()
+                                }
+                            },
+                            KActionFromAction {
+                                text: i18n("Settings")
+                                kalendarAction: "options_configure"
+                                onTriggered: {
+                                    configureAction.trigger()
+                                    if (sidebar.modal) sidebar.close()
+                                }
                             }
-                        },
-                        KActionFromAction {
-                            kalendarAction: "open_schedule_view"
-                            checkable: false
-                            onTriggered: {
-                                scheduleViewAction.trigger()
-                                if (sidebar.modal) sidebar.close()
-                            }
-                        },
-                        KActionFromAction {
-                            kalendarAction: "open_todo_view"
-                            checkable: false
-                            onTriggered: {
-                                todoViewAction.trigger()
-                                if (sidebar.modal) sidebar.close()
-                            }
+                        ]
+                        model: !Kirigami.Settings.isMobile ? actions : mobileActions
+                        delegate: Kirigami.BasicListItem {
+                            label: modelData.text
+                            icon: modelData.icon.name
+                            separatorVisible: false
+                            action: modelData
                         }
-                    ]
-                    property list<Kirigami.Action> mobileActions: [
-                        KActionFromAction {
-                            text: CalendarManager.undoRedoData.undoAvailable ?
-                                i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : i18n("Undo")
-                            kalendarAction: "edit_undo"
-                        },
-                        KActionFromAction {
-                            text: CalendarManager.undoRedoData.redoAvailable ?
-                                i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : i18n("Redo")
-                            kalendarAction: "edit_redo"
-                        },
-                        KActionFromAction {
-                            kalendarAction: "open_tag_manager"
-                            onTriggered: {
-                                tagManagerAction.trigger()
-                                if (sidebar.modal) sidebar.close()
-                            }
-                        },
-                        KActionFromAction {
-                            text: i18n("Settings")
-                            kalendarAction: "options_configure"
-                            onTriggered: {
-                                configureAction.trigger()
-                                if (sidebar.modal) sidebar.close()
-                            }
-                        }
-                    ]
-                    model: !Kirigami.Settings.isMobile ? actions : mobileActions
-                    delegate: Kirigami.BasicListItem {
-                        label: modelData.text
-                        icon: modelData.icon.name
-                        separatorVisible: false
-                        action: modelData
                     }
                 }
 
-                Rectangle {
-                    anchors.fill: parent
-                    anchors.topMargin: toolbar.visible ? -Kirigami.Units.smallSpacing - 1 : 0
+                background: Rectangle {
                     color: Kirigami.Theme.backgroundColor
                     z: -1
                 }
