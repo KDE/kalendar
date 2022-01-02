@@ -63,7 +63,6 @@ Kirigami.OverlayDrawer {
     edge: Kirigami.Settings.isMobile ? Qt.BottomEdge :
         Qt.application.layoutDirection == Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
 
-    Layout.bottomMargin: Kirigami.Units.largeSpacing
     height: applicationWindow().height * 0.6
 
     topPadding: 0
