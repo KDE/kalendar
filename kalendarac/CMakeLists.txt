@@ -2,15 +2,15 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-set(kalendarac_SRCS
+
+add_executable(kalendarac ${RESOURCES})
+target_sources(kalendarac PRIVATE
     kalendaralarmclient.cpp
     alarmnotification.cpp
     kalendaralarmclient.h
     alarmnotification.h
     kalendaracmain.cpp
     )
-
-add_executable(kalendarac ${kalendarac_SRCS} ${RESOURCES})
 
 target_link_libraries(kalendarac
     KF5::CoreAddons

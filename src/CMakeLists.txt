@@ -3,7 +3,8 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 
-add_executable(kalendar
+add_executable(kalendar)
+target_sources(kalendar PRIVATE
     about.cpp
     about.h
     actionsmodel.cpp
