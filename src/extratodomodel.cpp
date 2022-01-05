@@ -219,4 +219,6 @@ void ExtraTodoModel::loadColors()
     Q_EMIT layoutChanged();
 }
 
+#ifndef UNITY_CMAKE_SUPPORT
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
+#endif

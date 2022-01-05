@@ -23,6 +23,10 @@ target_link_libraries(kalendarac
     Qt5::DBus
     )
 
+if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+    set_target_properties(kalendarac PROPERTIES UNITY_BUILD ON)
+endif()
+
 install(TARGETS
     kalendarac ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
     )

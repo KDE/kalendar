@@ -87,5 +87,11 @@ target_link_libraries(kalendar
     KF5::EventViews
 
 )
+
+if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+    set_target_properties(kalendar PROPERTIES UNITY_BUILD ON)
+endif()
+
+
 kconfig_add_kcfg_files(kalendar GENERATE_MOC kalendarconfig.kcfgc)
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
