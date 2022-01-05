@@ -13,6 +13,18 @@
             "installDir": "$env{KF5}"
         },
         {
+            "name": "dev-qt6",
+            "displayName": "Build against qt6",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build-qt6",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_WITH_QT6": "ON",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "installDir": "$env{KF6}"
+        },
+        {
             "name": "dev-disable-deprecated",
             "displayName": "Build as without deprecated methods",
             "generator": "Ninja",
@@ -48,6 +60,18 @@
             "environment": {
                 "CXX": "clang++",
                 "CCACHE_DISABLE": "ON"
+            },
+            "installDir": "$env{KF5}"
+        },
+        {
+            "name": "unity",
+            "displayName": "Build with CMake unity support.",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build-unity",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "USE_UNITY_CMAKE_SUPPORT": "ON",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             },
             "installDir": "$env{KF5}"
         },
@@ -94,6 +118,10 @@
             "configurePreset": "dev"
         },
         {
+            "name": "dev-qt6",
+            "configurePreset": "dev-qt6"
+        },
+        {
             "name": "dev-disable-deprecated",
             "configurePreset": "dev-disable-deprecated"
         },
@@ -108,6 +136,10 @@
         {
             "name": "asan",
             "configurePreset": "asan"
+        },
+        {
+            "name": "unity",
+            "configurePreset": "unity"
         },
         {
             "name": "clazy",
