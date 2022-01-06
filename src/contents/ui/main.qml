@@ -90,7 +90,6 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack.globalToolBar.canContainHandles: true
     pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
     pageStack.initialPage: scheduleViewComponent
 
