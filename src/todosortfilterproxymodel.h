@@ -8,11 +8,11 @@
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
 #include <KSharedConfig>
+#include <EventViews/IncidenceTreeModel>
+#include <EventViews/TodoModel>
 #include <QSortFilterProxyModel>
 #include <QTimer>
 #include <extratodomodel.h>
-#include <incidencetreemodel.h>
-#include <todomodel.h>
 
 class TodoSortFilterProxyModel : public QSortFilterProxyModel
 {

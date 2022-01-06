@@ -4,10 +4,11 @@
 #pragma once
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
+#include <EventViews/IncidenceTreeModel>
+#include <EventViews/TodoModel>
 #include <KConfigWatcher>
 #include <KExtraColumnsProxyModel>
-#include <incidencetreemodel.h>
-#include <todomodel.h>
+#include <KFormat>
 
 class ExtraTodoModel : public KExtraColumnsProxyModel
 {
