@@ -65,6 +65,10 @@ Kirigami.Page {
     }
 
     function setToDate(date, isInitialWeek = false) {
+        if(!pathView.currentItem) {
+            return;
+        }
+
         root.initialWeek = isInitialWeek;
 
         if(root.daysToShow % 7 === 0) {
@@ -170,7 +174,7 @@ Kirigami.Page {
         Component.onCompleted: {
             currentIndex = startIndex;
         }
-        onCurrentIndexChanged: {
+        onCurrentIndexChanged: if(currentItem) {
             root.startDate = currentItem.startDate;
             root.month = currentItem.month;
             root.year = currentItem.year;
@@ -197,7 +201,7 @@ Kirigami.Page {
 
             readonly property int daysFromWeekStart: index === pathView.startIndex ?
                 DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1 :
-                root.daysToShow
+                root.daysToShow - 1
             // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
 
             active: isNextOrCurrentItem
