@@ -656,7 +656,8 @@ Kirigami.Page {
                             const viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit);
                             // Since we position with anchors, height is 0 -- must calc manually
 
-                            let yPos = (currentTimeMarkerLoader.item.y / dayHeight) - ((viewHeight / 2) / dayHeight)
+                            const timeMarkerY = (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (height / 2) - (root.gridLineWidth / 2)
+                            let yPos = (timeMarkerY / dayHeight) - ((viewHeight / 2) / dayHeight)
                             yPos = Math.max(0.0, yPos);
                             yPos = vScrollBar.size ? Math.min(vScrollBar.size, yPos) : Math.min(1.0, yPos);
 
@@ -1120,6 +1121,7 @@ Kirigami.Page {
                                 id: currentTimeMarkerLoader
 
                                 active: root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow
+
                                 sourceComponent: Rectangle {
                                     id: currentTimeMarker
 
