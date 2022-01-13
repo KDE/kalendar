@@ -467,6 +467,10 @@ CalendarManager::CalendarManager(QObject *parent)
         }
     };
     connect(m_flatCollectionTreeModel, &QSortFilterProxyModel::rowsInserted, this, refreshColors);
+
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    m_colorWatcher = KConfigWatcher::create(config);
+    QObject::connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &CalendarManager::collectionColorsChanged);
 }
 
 CalendarManager::~CalendarManager()

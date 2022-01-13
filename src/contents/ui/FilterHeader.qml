@@ -30,6 +30,14 @@ RowLayout {
 
     spacing: Kirigami.Units.smallSpacing
 
+    Connections {
+        target: Kalendar.CalendarManager
+        function onCollectionColorsChanged() {
+            // Trick into reevaluating filterCollectionDetails
+            headerLayout.filterChanged();
+        }
+    }
+
     RowLayout {
         Layout.margins: Kirigami.Units.largeSpacing
         Kirigami.Heading {

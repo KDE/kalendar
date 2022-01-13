@@ -20,6 +20,7 @@
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
+#include <KConfigWatcher>
 #include <KDescendantsProxyModel>
 #include <incidencewrapper.h>
 #include <todosortfilterproxymodel.h>
@@ -109,6 +110,7 @@ Q_SIGNALS:
     void incidenceChanged();
     void enabledTodoCollectionsChanged();
     void updateIncidenceDatesCompleted();
+    void collectionColorsChanged();
 
 private:
     Akonadi::ETMCalendar::Ptr m_calendar = nullptr;
@@ -129,4 +131,5 @@ private:
     Akonadi::CollectionFilterProxyModel *m_todoViewCollectionModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_viewCollectionModel = nullptr;
     QVector<qint64> m_enabledTodoCollections;
+    KConfigWatcher::Ptr m_colorWatcher;
 };
