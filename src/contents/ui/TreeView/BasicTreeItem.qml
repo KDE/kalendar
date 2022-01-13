@@ -15,75 +15,70 @@ import org.kde.kirigami 2.14
  * It's intended to make all tree views look coherent.
  * It has a default icon and a label
  *
+ * @since org.kde.kirigamiaddons.treeview 1.0
  */
 AbstractTreeItem {
     id: listItem
 
     /**
-     * string: bool
-     * A single text label the list item will contain
+     * This property holds the single text label the list item will contain.
+     *
+     * @since org.kde.kirigamiaddons.treeview 1.0
      */
     property alias label: listItem.text
 
     /**
-     * A subtitle that goes below the main label
-     * Optional; if not defined, the list item will only have a main label
-     * @since 5.70
-     * @since org.kde.kirigami 2.12
+     * This property holds a subtitle that goes below the main label.
+     * Optional; if not defined, the list item will only have a main label.
+     *
+     * @since org.kde.kirigamiaddons.treeview 1.0
      */
     property alias subtitle: subtitleItem.text
 
     /**
-     * bold: bool
-     * Control whether the text (in both primary text and subtitle) should be rendered as bold
-     * @since 5.71
-     * @since org.kde.kirigami 2.13
+     * This property controls whether the text (in both primary text and subtitle)
+     * should be rendered as bold.
+     *
+     * @since org.kde.kirigamiaddons.treeview 1.0
      */
     property bool bold: false
 
     /**
-     * icon: var
-     * A single icon that will be displayed in the list item.
-     * The icon can be a grouped property with name,size,color etc, as QtQuickControls2 icons are defined.
-     * The icon can also be either a QIcon, a string name of a fdo compatible name,
-     * or any url accepted by the Image element.
-     */
-    property var icon
-
-    /**
-     * iconSize: int
-     * The preferred size for the icon
-     * @since 2.5
+     * This property holds the preferred size for the icon.
+     *
+     * @since org.kde.kirigamiaddons.treeview 1.0
      */
     property alias iconSize: iconItem.size
 
     /**
-     * iconColor: color
-     * The color the icon should be colorized to.
-     * By default it will be the text color.
+     * This property holds the color the icon should be colorized to.
      * If the icon shouldn't be colorized in any way, set it to "transparent"
-     * @since 2.7
+     *
+     * By default it will be the text color.
+     *
+     * @since org.kde.kirigamiaddons.treeview 1.0
      */
     property alias iconColor: iconItem.color
 
     /**
-     * reserveSpaceForIcon: bool
-     * If true, even when there is no icon the space will be reserved for it
-     * It's useful in layouts where only some entries have an icon,
-     * having the text all horizontally aligned
+     * @brief This property holds whether when there is no icon the space will
+     * still be reserved for it.
+     *
+     * It's useful in layouts where only some entries have an icon, having the
+     * text all horizontally aligned.
      */
     property alias reserveSpaceForIcon: iconItem.visible
 
     /**
-     * reserveSpaceForLabel: bool
-     * If false, the label will not try to be as wide as possible
-     * It's useful in layouts containing entries without text
+     * @brief This property holds whether the label will try to be as wide as
+     * possible.
+     *
+     * It's useful in layouts containing entries without text. By default, true.
      */
     property alias reserveSpaceForLabel: labelItem.visible
 
     default property alias _basicDefault: layout.data
 
-    icon: action ? action.icon.name || action.icon.source : undefined
     contentItem: RowLayout {
         id: layout
         spacing: LayoutMirroring.enabled ? listItem.rightPadding : listItem.leftPadding
@@ -134,4 +129,3 @@ AbstractTreeItem {
         }
     }
 }
-

@@ -129,19 +129,10 @@ TreeListView {
         sortBy: root.sortBy
         sortAscending: root.ascendingOrder
     }
-    delegate: BasicTreeItem {
+    delegate: AbstractTreeItem {
         id: listItem
         objectName: "taskDelegate"
-        Layout.fillWidth: true
 
-        Binding {
-            target: contentItem.anchors
-            property: "right"
-            value: this.right
-        }
-
-        background.anchors.right: this.right
-        separatorVisible: true
         decoration.decorationHighlightColor: model.color
         activeBackgroundColor: LabelUtils.getIncidenceBackgroundColor(model.color, root.isDark)
         onActiveBackgroundColorChanged: activeBackgroundColor.a = 0.15
@@ -198,9 +189,9 @@ TreeListView {
         contentItem: IncidenceMouseArea {
             id: mouseArea
 
+            anchors.fill: undefined
             implicitWidth: todoItemContents.implicitWidth
-            implicitHeight: Kirigami.Settings.isMobile ?
-                todoItemContents.implicitHeight + Kirigami.Units.largeSpacing : todoItemContents.implicitHeight + Kirigami.Units.smallSpacing
+            implicitHeight: todoItemContents.implicitHeight + (Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing)
             incidenceData: model
             collectionId: model.collectionId
             propagateComposedEvents: true
