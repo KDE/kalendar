@@ -57,7 +57,7 @@ void AlarmNotification::send(KalendarAlarmClient *client, const KCalendarCore::I
     } else if (incidence->type() == KCalendarCore::Incidence::TypeTodo && !incidence->dtStart().isValid()) {
         const auto todo = incidence.staticCast<KCalendarCore::Todo>();
         m_notification->setText(i18n("Task due at %1", QLocale().toString(todo->dtDue().time(), QLocale::NarrowFormat)));
-    } else {
+    } else if (!incidence->allDay()) {
         const QString incidenceType = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
         m_notification->setText(
             i18nc("Event starts at 10:00", "%1 starts at %2", incidenceType, QLocale().toString(incidence->dtStart().time(), QLocale::NarrowFormat)));
