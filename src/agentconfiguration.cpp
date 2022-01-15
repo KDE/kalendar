@@ -2,19 +2,13 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "agentconfiguration.h"
-#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
+
 #include <Akonadi/AgentConfigurationDialog>
 #include <Akonadi/AgentInstanceCreateJob>
 #include <Akonadi/AgentInstanceModel>
 #include <Akonadi/AgentManager>
 #include <Akonadi/AgentTypeModel>
-#else
-#include <AgentConfigurationDialog>
-#include <AkonadiCore/AgentInstanceCreateJob>
-#include <AkonadiCore/AgentInstanceModel>
-#include <AkonadiCore/AgentManager>
-#include <AkonadiCore/AgentTypeModel>
-#endif
+
 #include <KWindowSystem>
 #include <QPointer>
 

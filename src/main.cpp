@@ -21,11 +21,7 @@
 #include <QQuickWindow>
 #include <QUrl>
 #include <akonadi_version.h>
-#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/AgentFilterProxyModel>
-#else
-#include <AkonadiCore/AgentFilterProxyModel>
-#endif
 #include "about.h"
 #include "agentconfiguration.h"
 #include "calendarmanager.h"

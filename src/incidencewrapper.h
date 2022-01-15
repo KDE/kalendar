@@ -9,19 +9,11 @@
 #include <QByteArray>
 #include <QObject>
 #include <akonadi_version.h>
-#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/CollectionIdentificationAttribute>
 #include <Akonadi/Item>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemMonitor>
-#else
-#include <AkonadiCore/CollectionIdentificationAttribute>
-#include <AkonadiCore/Item>
-#include <AkonadiCore/ItemFetchJob>
-#include <AkonadiCore/ItemFetchScope>
-#include <AkonadiCore/ItemMonitor>
-#endif
 #include "attachmentsmodel.h"
 #include "attendeesmodel.h"
 #include "recurrenceexceptionsmodel.h"

@@ -8,11 +8,7 @@
 #include <akonadi_version.h>
 #include <cmath>
 #include <infinitecalendarviewmodel.h>
-#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/EntityTreeModel>
-#else
-#include <AkonadiCore/EntityTreeModel>
-#endif
 
 InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
     : QAbstractListModel(parent)

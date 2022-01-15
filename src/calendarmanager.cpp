@@ -11,7 +11,6 @@
 #include "calendarmanager.h"
 
 // Akonadi
-#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/AgentInstanceModel>
 #include <Akonadi/AgentManager>
 #include <Akonadi/AttributeFactory>
@@ -27,24 +26,6 @@
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/ItemMoveJob>
 #include <Akonadi/Monitor>
-#else
-#include <AkonadiCore/AgentInstanceModel>
-#include <AkonadiCore/AgentManager>
-#include <AkonadiCore/AttributeFactory>
-#include <AkonadiCore/CollectionColorAttribute>
-#include <AkonadiCore/CollectionDeleteJob>
-#include <AkonadiCore/CollectionIdentificationAttribute>
-#include <AkonadiCore/CollectionModifyJob>
-#include <AkonadiCore/CollectionUtils>
-#include <AkonadiCore/EntityDisplayAttribute>
-#include <AkonadiCore/ItemModifyJob>
-#include <AkonadiCore/ItemMoveJob>
-#include <AkonadiWidgets/CollectionPropertiesDialog>
-#include <CollectionFilterProxyModel>
-#include <EntityTreeModel>
-#include <Monitor>
-#include <control.h>
-#endif
 #include "kalendar_debug.h"
 #include <Akonadi/Calendar/History>
 #include <EventViews/Prefs>
