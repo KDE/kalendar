@@ -45,10 +45,10 @@ Item {
     property int horizontalSpacing: 0 // In between incidence spaces
     property real radius: Kirigami.Units.smallSpacing
     property string openOccurrenceId: ""
-    property bool isOpenOccurrence: openOccurrenceId ?
+    property bool isOpenOccurrence: openOccurrenceId.length > 0 ?
         openOccurrenceId === modelData.incidenceId : false
     property bool reactToCurrentMonth: true
-    readonly property bool isInCurrentMonth: reactToCurrentMonth && currentMonth ?
+    readonly property bool isInCurrentMonth: reactToCurrentMonth ?
         modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month :
         true
     property bool isDark: false
