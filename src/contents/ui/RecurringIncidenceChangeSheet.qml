@@ -22,10 +22,17 @@ Kirigami.Page {
     property int endOffset: 0
     property date occurrenceDate
     property Item caughtDelegate
+    property bool allDay
 
     padding: Kirigami.Units.largeSpacing
 
     title: i18n("Change incidence date")
+
+    function setAllDay() {
+        if (allDay !== null) {
+            incidenceWrapper.allDay = allDay;
+        }
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -53,17 +60,26 @@ Kirigami.Page {
                     enabled: incidenceWrapper !== undefined
                     shortcut: "Return"
                     text: i18n("Only This Item")
-                    onTriggered: changeThis()
+                    onTriggered: {
+                        deleteSheet.setAllDay();
+                        changeThis();
+                    }
                 },
                 QQC2.Action {
                     icon.name: "edit-table-delete-row"
                     text: i18n("Also Future Items")
-                    onTriggered: changeThisAndFuture()
+                    onTriggered: {
+                        deleteSheet.setAllDay();
+                        changeThisAndFuture();
+                    }
                 },
                 QQC2.Action {
                     icon.name: "group-delete"
                     text: i18n("All Occurrences")
-                    onTriggered: changeAll()
+                    onTriggered: {
+                        deleteSheet.setAllDay();
+                        changeAll();
+                    }
                 },
                 QQC2.Action {
                     icon.name: "dialog-cancel"

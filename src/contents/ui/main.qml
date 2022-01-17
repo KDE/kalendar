@@ -952,7 +952,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate) {
+    function setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate, allDay=null) {
         pageStack.currentItem.dragDropEnabled = false;
 
         if(pageStack.layers.currentItem && pageStack.layers.currentItem.dragDropEnabled) {
@@ -960,6 +960,9 @@ Kirigami.ApplicationWindow {
         }
 
         if(incidenceWrapper.recurrenceData.type === 0) {
+            if (allDay !== null) {
+                incidenceWrapper.allDay = allDay;
+            }
             CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset);
         } else {
             const onClosingHandler = () => { caughtDelegate.caught = false; root.reenableDragOnCurrentView(); };
@@ -968,7 +971,8 @@ Kirigami.ApplicationWindow {
                 startOffset: startOffset,
                 endOffset: endOffset,
                 occurrenceDate: occurrenceDate,
-                caughtDelegate: caughtDelegate
+                caughtDelegate: caughtDelegate,
+                allDay: allDay
             }, {
                 width: Kirigami.Units.gridUnit * 34,
                 height: Kirigami.Units.gridUnit * 6,
@@ -977,12 +981,6 @@ Kirigami.ApplicationWindow {
 
             openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
         }
-    }
-
-
-    function convertIncidence(incidenceWrapper, allDay, startOffset, endOffset, occurrenceDate, caughtDelegate) {
-        incidenceWrapper.allDay = allDay;
-        setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate);
     }
 
     function reenableDragOnCurrentView() {
@@ -1268,7 +1266,7 @@ Kirigami.ApplicationWindow {
             onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
             onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
-            onConvertIncidence: root.convertIncidence(incidenceWrapper, allDay, startOffset, endOffset, caughtDelegate) // We convert incidence from or to all day event
+            onConvertIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate, allDay) // We convert incidence from/to allDay
             onResizeIncidence: root.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
             onOpenDayView: root.openDayLayer(selectedDate)
 
