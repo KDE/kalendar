@@ -3,7 +3,7 @@
 
 #include <KFormat>
 #include <QDateTime>
-#include <extratodomodel.h>
+#include <models/extratodomodel.h>
 
 ExtraTodoModel::ExtraTodoModel(QObject *parent)
     : KExtraColumnsProxyModel(parent)

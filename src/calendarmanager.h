@@ -16,7 +16,7 @@
 #include <KConfigWatcher>
 #include <KDescendantsProxyModel>
 #include <incidencewrapper.h>
-#include <todosortfilterproxymodel.h>
+#include <models/todosortfilterproxymodel.h>
 
 namespace Akonadi
 {

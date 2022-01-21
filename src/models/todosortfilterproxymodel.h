@@ -7,12 +7,12 @@
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
-#include <KSharedConfig>
 #include <EventViews/IncidenceTreeModel>
 #include <EventViews/TodoModel>
+#include <KSharedConfig>
 #include <QSortFilterProxyModel>
 #include <QTimer>
-#include <extratodomodel.h>
+#include <models/extratodomodel.h>
 
 class TodoSortFilterProxyModel : public QSortFilterProxyModel
 {

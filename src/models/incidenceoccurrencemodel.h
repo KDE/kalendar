@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <Akonadi/Calendar/ETMCalendar>
 #include <KConfigWatcher>
 #include <QAbstractItemModel>
 #include <QColor>
@@ -14,7 +15,6 @@
 #include <QList>
 #include <QSharedPointer>
 #include <QTimer>
-#include <etmcalendar.h>
 
 namespace KCalendarCore
 {
@@ -32,14 +32,13 @@ using namespace KCalendarCore;
  *
  * Recurrences are expanded
  */
-class IncidenceOccurrenceModel : public QAbstractItemModel
+class IncidenceOccurrenceModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QDate start READ start WRITE setStart NOTIFY startChanged)
     Q_PROPERTY(int length READ length WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
-    Q_PROPERTY(bool handleOwnRefresh READ handleOwnRefresh WRITE setHandleOwnRefresh NOTIFY handleOwnRefreshChanged)
 
 public:
     enum Roles {
@@ -71,11 +70,7 @@ public:
     IncidenceOccurrenceModel(QObject *parent = nullptr);
     ~IncidenceOccurrenceModel() override = default;
 
-    QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
     int rowCount(const QModelIndex &parent = {}) const override;
-    int columnCount(const QModelIndex &parent) const override;
 
     QVariant data(const QModelIndex &index, int role) const override;
 
@@ -89,9 +84,6 @@ public:
     int length() const;
     QVariantMap filter() const;
     void setFilter(const QVariantMap &filter);
-
-    bool handleOwnRefresh();
-    void setHandleOwnRefresh(bool handleOwnRefresh);
 
     void load();
 
@@ -109,7 +101,6 @@ Q_SIGNALS:
     void lengthChanged();
     void filterChanged();
     void calendarChanged();
-    void handleOwnRefreshChanged();
 
 private:
     void refreshView();
@@ -129,8 +120,6 @@ private:
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
     QVariantMap mFilter;
-    bool m_handleOwnRefresh = true;
-    bool m_isDirty;
 };
 
 Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence);

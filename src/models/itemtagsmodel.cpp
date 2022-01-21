@@ -7,7 +7,7 @@
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <KCalendarCore/Incidence>
-#include <itemtagsmodel.h>
+#include <models/itemtagsmodel.h>
 
 ItemTagsModel::ItemTagsModel(QObject *parent)
     : QAbstractListModel(parent)

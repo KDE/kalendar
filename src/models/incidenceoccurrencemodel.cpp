@@ -19,7 +19,7 @@
 #include <KSharedConfig>
 
 IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractListModel(parent)
     , m_coreCalendar(nullptr)
 {
     mRefreshTimer.setSingleShot(true);
@@ -88,12 +88,8 @@ void IncidenceOccurrenceModel::updateQuery()
     }
     mEnd = mStart.addDays(mLength);
 
-    if (m_handleOwnRefresh) {
-        // We track certain changes in the calendar to know if we need to update our incidence records
-        QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::refreshView);
-        QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::refreshView);
-    }
-
+    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::refreshView);
+    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar, &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::refreshView);
@@ -165,34 +161,12 @@ void IncidenceOccurrenceModel::updateFromSource()
     endResetModel();
 }
 
-QModelIndex IncidenceOccurrenceModel::index(int row, int column, const QModelIndex &parent) const
-{
-    if (!hasIndex(row, column, parent)) {
-        return {};
-    }
-
-    if (!parent.isValid()) {
-        return createIndex(row, column);
-    }
-    return {};
-}
-
-QModelIndex IncidenceOccurrenceModel::parent(const QModelIndex &) const
-{
-    return {};
-}
-
 int IncidenceOccurrenceModel::rowCount(const QModelIndex &parent) const
 {
     if (!parent.isValid()) {
         return m_incidences.size();
     }
     return 0;
-}
-
-int IncidenceOccurrenceModel::columnCount(const QModelIndex &) const
-{
-    return 1;
 }
 
 qint64 IncidenceOccurrenceModel::getCollectionId(const KCalendarCore::Incidence::Ptr &incidence)
@@ -334,15 +308,4 @@ void IncidenceOccurrenceModel::load()
         QColor color = rColorsConfig.readEntry(key, QColor("blue"));
         m_colors[key] = color;
     }
-}
-
-bool IncidenceOccurrenceModel::handleOwnRefresh()
-{
-    return m_handleOwnRefresh;
-}
-
-void IncidenceOccurrenceModel::setHandleOwnRefresh(bool handleOwnRefresh)
-{
-    m_handleOwnRefresh = handleOwnRefresh;
-    Q_EMIT handleOwnRefreshChanged();
 }

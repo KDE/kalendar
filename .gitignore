@@ -9,3 +9,4 @@ CMakeLists.txt.user
 .clang-format
 CMakeCache.txt
 CMakeFiles
+Testing/

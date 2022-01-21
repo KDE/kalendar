@@ -3,7 +3,7 @@
 
 #include "kalendar_debug.h"
 #include <QMetaEnum>
-#include <remindersmodel.h>
+#include <models/remindersmodel.h>
 
 RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)
     : QAbstractListModel(parent)

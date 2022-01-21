@@ -27,6 +27,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
+include(ECMAddTests)
+include(ECMCoverageOption)
 include(ECMQtDeclareLoggingCategory)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
@@ -43,7 +45,7 @@ ecm_setup_version(${PROJECT_VERSION}
 )
 
 ################# Find dependencies #################
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg Location DBus)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg Location DBus Test QuickTest)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons QQC2DesktopStyle Contacts ItemModels XmlGui Notifications IconThemes Service)
 set_package_properties(KF5QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
@@ -70,6 +72,10 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055800)
 add_subdirectory(src)
 add_subdirectory(kalendarac)
+
+if (BUILD_TESTING)
+    add_subdirectory(autotests)
+endif()
 
 install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.kalendar.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
