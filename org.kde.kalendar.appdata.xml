@@ -31,6 +31,7 @@
   <summary>Manage your tasks and events with speed and ease</summary>
   <summary xml:lang="ca">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
   <summary xml:lang="ca-valencia">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
+  <summary xml:lang="cs">Spravujte své úkoly a události rychle a jednoduše</summary>
   <summary xml:lang="de">Verwalten Sie schnell und einfach Ihre Aufgaben und Termine</summary>
   <summary xml:lang="el">Διαχειριστείτε εργασίες και γεγονότα με ταχύτητα και ευκολία</summary>
   <summary xml:lang="en-GB">Manage your tasks and events with speed and ease</summary>
@@ -120,6 +121,7 @@
     <p>Kalendar was built with the idea to be usable on desktop, on mobile and everything in between.</p>
     <p xml:lang="ca">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
     <p xml:lang="ca-valencia">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
+    <p xml:lang="cs">Kalendar byl navržen s myšlenkou vysoké použitelnosti na počítači, mobilním telefonu a čímkoliv mezi.</p>
     <p xml:lang="el">το Kalendar κατασκευάστηκε με την ιδέα της χρηστικότητας στην επιφάνεια εργασίας, στο κινητό και σε οτιδήποτε ενδιάμεσα.</p>
     <p xml:lang="en-GB">Kalendar was built with the idea to be usable on desktop, on mobile and everything in between.</p>
     <p xml:lang="es">Kalendar se ha creado con la idea de que se pueda usar en el escritorio, en el móvil y en cualquier dispositivo entre ambos.</p>
@@ -169,6 +171,7 @@
       <caption>Week View</caption>
       <caption xml:lang="ca">Vista setmanal</caption>
       <caption xml:lang="ca-valencia">Vista setmanal</caption>
+      <caption xml:lang="cs">Týdenní pohled</caption>
       <caption xml:lang="el">Προβολή εβδομάδας</caption>
       <caption xml:lang="en-GB">Week View</caption>
       <caption xml:lang="es">Vista semanal</caption>
