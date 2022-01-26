@@ -49,12 +49,12 @@ Item {
     //Internal
     property int numberOfLinesShown: 0
     property int numberOfRows: (daysToShow / daysPerRow)
-    property double dayWidth: Kalendar.Config.showWeekNumbers ?
+    property int dayWidth: Kalendar.Config.showWeekNumbers ?
         ((width - weekHeaderWidth) / daysPerRow) - spacing : // No spacing on right, spacing in between weekheader and monthgrid
         (width - weekHeaderWidth - (spacing * (daysPerRow - 1))) / daysPerRow // No spacing on left or right of month grid when no week header
-    property var dayHeight: ((height - bgLoader.dayLabels.height) / numberOfRows) - spacing
-    property real spacing: Kalendar.Config.monthGridBorderWidth // Between grid squares in background
-    property real listViewSpacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
+    property int dayHeight: ((height - bgLoader.dayLabels.height) / numberOfRows) - spacing
+    property int spacing: Kalendar.Config.monthGridBorderWidth // Between grid squares in background
+    property int listViewSpacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
         Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing // Between lines of incidences ( ====== <- )
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
