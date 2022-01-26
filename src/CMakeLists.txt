@@ -21,8 +21,6 @@ set(kalendar_SRCS
     models/commandbarfiltermodel.h
     contactsmanager.cpp
     contactsmanager.h
-    models/extratodomodel.cpp
-    models/extratodomodel.h
     models/hourlyincidencemodel.cpp
     models/hourlyincidencemodel.h
     models/incidenceoccurrencemodel.cpp

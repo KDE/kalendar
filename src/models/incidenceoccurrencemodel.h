@@ -38,7 +38,7 @@ class IncidenceOccurrenceModel : public QAbstractListModel
     Q_PROPERTY(QDate start READ start WRITE setStart NOTIFY startChanged)
     Q_PROPERTY(int length READ length WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
-    Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
+    Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
 
 public:
     enum Roles {
@@ -75,8 +75,8 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
 
     void updateQuery();
-    Akonadi::ETMCalendar *calendar() const;
-    void setCalendar(Akonadi::ETMCalendar *calendar);
+    Akonadi::ETMCalendar::Ptr calendar() const;
+    void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
 
     void setStart(const QDate &start);
     QDate start() const;
@@ -112,7 +112,7 @@ private:
     QDate mStart;
     QDate mEnd;
     int mLength{0};
-    Akonadi::ETMCalendar *m_coreCalendar;
+    Akonadi::ETMCalendar::Ptr m_coreCalendar;
 
     QTimer mRefreshTimer;
 

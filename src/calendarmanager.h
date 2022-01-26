@@ -40,7 +40,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(Akonadi::CollectionFilterProxyModel *selectableCalendars READ selectableCalendars CONSTANT)
     Q_PROPERTY(Akonadi::CollectionFilterProxyModel *selectableEventCalendars READ selectableEventCalendars CONSTANT)
     Q_PROPERTY(Akonadi::CollectionFilterProxyModel *selectableTodoCalendars READ selectableTodoCalendars CONSTANT)
-    Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar CONSTANT)
+    Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar CONSTANT)
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger READ incidenceChanger CONSTANT)
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
 
@@ -59,7 +59,7 @@ public:
     void refreshEnabledTodoCollections();
 
     Q_INVOKABLE void save();
-    Akonadi::ETMCalendar *calendar() const;
+    Akonadi::ETMCalendar::Ptr calendar() const;
     Akonadi::IncidenceChanger *incidenceChanger() const;
     Akonadi::CollectionFilterProxyModel *allCalendars();
     Akonadi::CollectionFilterProxyModel *selectableCalendars() const;
@@ -126,3 +126,5 @@ private:
     QVector<qint64> m_enabledTodoCollections;
     KConfigWatcher::Ptr m_colorWatcher;
 };
+
+Q_DECLARE_METATYPE(Akonadi::ETMCalendar::Ptr);

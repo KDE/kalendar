@@ -522,7 +522,7 @@ QSortFilterProxyModel *KalendarApplication::actionsModel()
     return m_proxyModel;
 }
 
-void KalendarApplication::setCalendar(Akonadi::ETMCalendar *calendar)
+void KalendarApplication::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
 {
     m_calendar = calendar;
 }

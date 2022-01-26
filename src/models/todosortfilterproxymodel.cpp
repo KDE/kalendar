@@ -1,22 +1,37 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include <KFormat>
 #include <models/todosortfilterproxymodel.h>
 
 TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
-    m_extraTodoModel = new ExtraTodoModel;
-    setSourceModel(m_extraTodoModel);
+    const QString todoMimeType = QStringLiteral("application/x-vnd.akonadi.calendar.todo");
+    m_todoTreeModel = new IncidenceTreeModel(QStringList() << todoMimeType, this);
+    const auto pref = EventViews::PrefsPtr();
+    m_baseTodoModel = new TodoModel(pref, this);
+    m_baseTodoModel->setSourceModel(m_todoTreeModel);
+    setSourceModel(m_baseTodoModel);
+
     setDynamicSortFilter(true);
     setSortCaseSensitivity(Qt::CaseInsensitive);
     setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    m_colorWatcher = KConfigWatcher::create(config);
+
+    QObject::connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &TodoSortFilterProxyModel::loadColors);
+
+    loadColors();
 
     mRefreshTimer.setSingleShot(true);
 
     auto sortTimer = [this] {
         if (!mRefreshTimer.isActive()) {
             mRefreshTimer.start(250);
+            qDebug() << m_baseTodoModel->rowCount();
         }
     };
 
@@ -24,16 +39,142 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
         sortTodoModel(m_sortColumn, m_sortAscending);
     });
 
-    connect(m_extraTodoModel, &KExtraColumnsProxyModel::dataChanged, this, sortTimer);
-    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsInserted, this, sortTimer);
-    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsRemoved, this, sortTimer);
-    connect(m_extraTodoModel, &KExtraColumnsProxyModel::layoutChanged, this, sortTimer);
-    connect(m_extraTodoModel, &KExtraColumnsProxyModel::rowsMoved, this, sortTimer);
+    connect(m_baseTodoModel, &TodoModel::dataChanged, this, sortTimer);
+    connect(m_baseTodoModel, &TodoModel::rowsInserted, this, sortTimer);
+    connect(m_baseTodoModel, &TodoModel::rowsRemoved, this, sortTimer);
+    connect(m_baseTodoModel, &TodoModel::layoutChanged, this, sortTimer);
+    connect(m_baseTodoModel, &TodoModel::rowsMoved, this, sortTimer);
 
     m_config = KalendarConfig::self();
     QObject::connect(m_config, &KalendarConfig::showCompletedSubtodosChanged, this, [&]() {
         invalidateFilter();
     });
+}
+
+TodoSortFilterProxyModel::~TodoSortFilterProxyModel()
+{
+    delete m_baseTodoModel;
+    delete m_todoTreeModel;
+}
+
+QHash<int, QByteArray> TodoSortFilterProxyModel::roleNames() const
+{
+    QHash<int, QByteArray> roleNames = QSortFilterProxyModel::roleNames();
+    roleNames[TodoModel::SummaryRole] = "text";
+    roleNames[Roles::StartTimeRole] = "startTime";
+    roleNames[Roles::EndTimeRole] = "endTime";
+    roleNames[Roles::LocationRole] = "location";
+    roleNames[Roles::AllDayRole] = "allDay";
+    roleNames[Roles::ColorRole] = "color";
+    roleNames[Roles::CompletedRole] = "todoCompleted";
+    roleNames[Roles::PriorityRole] = "priority";
+    roleNames[Roles::CollectionIdRole] = "collectionId";
+    roleNames[Roles::DurationStringRole] = "durationString";
+    roleNames[Roles::RecursRole] = "recurs";
+    roleNames[Roles::IsOverdueRole] = "isOverdue";
+    roleNames[Roles::IncidenceIdRole] = "incidenceId";
+    roleNames[Roles::IncidenceTypeRole] = "incidenceType";
+    roleNames[Roles::IncidenceTypeStrRole] = "incidenceTypeStr";
+    roleNames[Roles::IncidenceTypeIconRole] = "incidenceTypeIcon";
+    roleNames[Roles::IncidencePtrRole] = "incidencePtr";
+    roleNames[Roles::TagsRole] = "tags";
+    roleNames[Roles::ItemRole] = "item";
+    roleNames[Roles::CategoriesRole] = "todoCategories"; // Simply 'categories' causes issues
+    roleNames[Roles::CategoriesDisplayRole] = "categoriesDisplay";
+    roleNames[Roles::TreeDepthRole] = "treeDepth";
+    roleNames[Roles::TopMostParentDueDate] = "topMostParentDueDate";
+    roleNames[Roles::TopMostParentSummary] = "topMostParentSummary";
+    roleNames[Roles::TopMostParentPriority] = "topMostParentPriority";
+
+    return roleNames;
+}
+
+QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid()) {
+        return {};
+    }
+
+    auto idx = mapToSource(index);
+    auto todoItem = idx.data(TodoModel::TodoRole).value<Akonadi::Item>();
+    auto collectionId = todoItem.parentCollection().id();
+    auto todoPtr = CalendarSupport::todo(todoItem);
+
+    if (todoPtr == nullptr) {
+        return {};
+    }
+
+    if (role == Roles::StartTimeRole) {
+        return todoPtr->dtStart();
+    } else if (role == Roles::EndTimeRole) {
+        return todoPtr->dtDue();
+    } else if (role == Roles::LocationRole) {
+        return todoPtr->location();
+    } else if (role == Roles::AllDayRole) {
+        return todoPtr->allDay();
+    } else if (role == Roles::ColorRole) {
+        QColor nullcolor;
+        return m_colors.contains(QString::number(collectionId)) ? m_colors[QString::number(collectionId)] : nullcolor;
+    } else if (role == Roles::CompletedRole) {
+        return todoPtr->isCompleted();
+    } else if (role == Roles::PriorityRole) {
+        return todoPtr->priority();
+    } else if (role == Roles::CollectionIdRole) {
+        return collectionId;
+    } else if (role == DurationStringRole) {
+        KFormat format;
+        if (todoPtr->allDay()) {
+            return format.formatSpelloutDuration(24 * 60 * 60 * 1000); // format milliseconds in 1 day
+        }
+        return format.formatSpelloutDuration(todoPtr->duration().asSeconds() * 1000);
+    } else if (role == Roles::RecursRole) {
+        return todoPtr->recurs();
+    } else if (role == Roles::IsOverdueRole) {
+        return todoPtr->isOverdue();
+    } else if (role == Roles::IncidenceIdRole) {
+        return todoPtr->uid();
+    } else if (role == Roles::IncidenceTypeRole) {
+        return todoPtr->type();
+    } else if (role == Roles::IncidenceTypeStrRole) {
+        return todoPtr->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(todoPtr->typeStr());
+    } else if (role == Roles::IncidenceTypeIconRole) {
+        return todoPtr->iconName();
+    } else if (role == Roles::IncidencePtrRole) {
+        return QVariant::fromValue(CalendarSupport::incidence(todoItem));
+    } else if (role == Roles::TagsRole) {
+        return QVariant::fromValue(todoItem.tags());
+    } else if (role == Roles::ItemRole) {
+        return QVariant::fromValue(todoItem);
+    } else if (role == Roles::CategoriesRole) {
+        return todoPtr->categories();
+    } else if (role == Roles::CategoriesDisplayRole) {
+        return todoPtr->categories().join(i18nc("List separator", ", "));
+    } else if (role == Roles::TreeDepthRole || role == TopMostParentSummary || role == TopMostParentDueDate || role == TopMostParentPriority) {
+        int depth = 0;
+        auto idx = index;
+        while (idx.parent().isValid()) {
+            idx = idx.parent();
+            depth++;
+        }
+
+        auto todo = idx.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+
+        switch (role) {
+        case Roles::TreeDepthRole:
+            return depth;
+        case TopMostParentSummary:
+            return todo->summary();
+        case TopMostParentDueDate: {
+            bool isOverdue = (todo->hasDueDate() && todo->dtDue().date() < QDate::currentDate() && todo->allDay())
+                || (todo->hasDueDate() && todo->dtDue() < QDateTime::currentDateTime() && !todo->allDay());
+            return isOverdue ? i18n("Overdue") : todo->hasDueDate() ? QLocale::system().toString(todo->dtDue().date()) : i18n("No set date");
+        }
+        case TopMostParentPriority:
+            return todo->priority();
+        }
+    }
+
+    return QSortFilterProxyModel::data(index, role);
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const
@@ -72,15 +213,16 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
     bool acceptRow = true;
 
     if (m_filter.contains(QLatin1String("collectionId")) && m_filter[QLatin1String("collectionId")].toInt() > -1) {
-        acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CollectionIdRole).toInt() == m_filter[QLatin1String("collectionId")].toInt();
+        const auto collectionId = sourceIndex.data(TodoModel::TodoRole).value<Akonadi::Item>().parentCollection().id();
+        acceptRow = acceptRow && collectionId == m_filter[QLatin1String("collectionId")].toInt();
     }
 
     switch (m_showCompleted) {
     case ShowComplete::ShowCompleteOnly:
-        acceptRow = acceptRow && sourceIndex.data(ExtraTodoModel::CompletedRole).toBool();
+        acceptRow = acceptRow && sourceIndex.data(TodoModel::PercentRole).toInt() == 100;
         break;
     case ShowComplete::ShowIncompleteOnly:
-        acceptRow = acceptRow && !sourceIndex.data(ExtraTodoModel::CompletedRole).toBool();
+        acceptRow = acceptRow && sourceIndex.data(TodoModel::PercentRole).toInt() < 100;
     case ShowComplete::ShowAll:
     default:
         break;
@@ -90,7 +232,8 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
         auto tags = m_filter[QLatin1String("tags")].toStringList();
         bool containsTag = false;
         for (const auto &tag : tags) {
-            if (sourceIndex.data(ExtraTodoModel::CategoriesRole).toStringList().contains(tag)) {
+            const auto todoPtr = sourceIndex.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+            if (todoPtr->categories().contains(tag)) {
                 containsTag = true;
                 break;
             }
@@ -123,32 +266,40 @@ bool TodoSortFilterProxyModel::hasAcceptedChildren(int row, const QModelIndex &s
     return false;
 }
 
-Akonadi::ETMCalendar *TodoSortFilterProxyModel::calendar()
+Akonadi::ETMCalendar::Ptr TodoSortFilterProxyModel::calendar()
 {
-    return m_extraTodoModel->calendar().get();
+    return m_calendar;
 }
 
-void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar *calendar)
+void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar::Ptr &calendar)
 {
-    Akonadi::ETMCalendar::Ptr calendarPtr(calendar);
-    m_extraTodoModel->setCalendar(calendarPtr);
+    m_calendar = calendar;
+    m_todoTreeModel->setSourceModel(calendar->model());
+    m_baseTodoModel->setCalendar(m_calendar);
     Q_EMIT calendarChanged();
-}
-
-Akonadi::IncidenceChanger *TodoSortFilterProxyModel::incidenceChanger()
-{
-    return m_extraTodoModel->incidenceChanger();
 }
 
 void TodoSortFilterProxyModel::setIncidenceChanger(Akonadi::IncidenceChanger *changer)
 {
-    m_extraTodoModel->setIncidenceChanger(changer);
-    Q_EMIT incidenceChangerChanged();
+    m_baseTodoModel->setIncidenceChanger(changer);
 }
 
 void TodoSortFilterProxyModel::setColorCache(QHash<QString, QColor> colorCache)
 {
-    m_extraTodoModel->setColorCache(colorCache);
+    m_colors = colorCache;
+}
+
+void TodoSortFilterProxyModel::loadColors()
+{
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    const QStringList colorKeyList = rColorsConfig.keyList();
+
+    for (const QString &key : colorKeyList) {
+        QColor color = rColorsConfig.readEntry(key, QColor("blue"));
+        m_colors[key] = color;
+    }
+    Q_EMIT layoutChanged();
 }
 
 int TodoSortFilterProxyModel::showCompleted()
@@ -172,11 +323,12 @@ QVariantMap TodoSortFilterProxyModel::filter()
 void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 {
     Q_EMIT layoutAboutToBeChanged();
-
-    m_filter = filter;
-
+    // Reset first, prevent crashing
+    m_filter = QVariantMap();
     invalidateFilter();
 
+    m_filter = filter;
+    invalidateFilter();
     Q_EMIT filterChanged();
     Q_EMIT layoutChanged();
 
@@ -465,3 +617,5 @@ void TodoSortFilterProxyModel::setSortAscending(bool sortAscending)
     Q_EMIT sortAscendingChanged();
     sortTodoModel(m_sortColumn, m_sortAscending);
 }
+
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)

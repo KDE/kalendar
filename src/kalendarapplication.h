@@ -36,7 +36,7 @@ public:
     void setWindow(QWindow *window);
 
     QSortFilterProxyModel *actionsModel();
-    void setCalendar(Akonadi::ETMCalendar *calendar);
+    void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
     Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId = -1);
     QString importErrorMessage();
 
@@ -91,6 +91,6 @@ private:
     KalCommandBarModel *m_actionModel = nullptr;
     QSortFilterProxyModel *m_proxyModel = nullptr;
     KalendarConfig *m_config = nullptr;
-    Akonadi::ETMCalendar *m_calendar;
+    Akonadi::ETMCalendar::Ptr m_calendar;
     QString m_importErrorMessage;
 };

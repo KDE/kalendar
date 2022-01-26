@@ -16,7 +16,7 @@ class InfiniteCalendarViewModel : public QAbstractListModel
     Q_PROPERTY(int datesToAdd READ datesToAdd WRITE setDatesToAdd NOTIFY datesToAddChanged)
     Q_PROPERTY(int scale READ scale WRITE setScale NOTIFY scaleChanged)
     Q_PROPERTY(QStringList hourlyViewLocalisedHourLabels MEMBER m_hourlyViewLocalisedHourLabels CONSTANT)
-    Q_PROPERTY(Akonadi::ETMCalendar *calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
+    Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
     Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(int maxLiveModels READ maxLiveModels WRITE setMaxLiveModels NOTIFY maxLiveModelsChanged)
 
@@ -65,8 +65,8 @@ public:
     int scale();
     void setScale(int scale);
 
-    Akonadi::ETMCalendar *calendar();
-    void setCalendar(Akonadi::ETMCalendar *calendar);
+    Akonadi::ETMCalendar::Ptr calendar();
+    void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
 
     QVariantMap filter() const;
     void setFilter(const QVariantMap &filter);
@@ -129,6 +129,6 @@ private:
     mutable QQueue<QDate> m_liveDayViewMultiDayModelKeys;
     int m_maxLiveModels = 10;
     mutable int m_lastAccessedModelType = TypeMonth;
-    Akonadi::ETMCalendar *m_calendar;
+    Akonadi::ETMCalendar::Ptr m_calendar;
     QVariantMap mFilter;
 };

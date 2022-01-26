@@ -140,7 +140,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");
     qmlRegisterType<MultiDayIncidenceModel>("org.kde.kalendar", 1, 0, "MultiDayIncidenceModel");
     qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
-    qmlRegisterType<ExtraTodoModel>("org.kde.kalendar", 1, 0, "ExtraTodoModel");
     qmlRegisterType<TodoSortFilterProxyModel>("org.kde.kalendar", 1, 0, "TodoSortFilterProxyModel");
     qmlRegisterType<ItemTagsModel>("org.kde.kalendar", 1, 0, "ItemTagsModel");
     qmlRegisterType<HourlyIncidenceModel>("org.kde.kalendar", 1, 0, "HourlyIncidenceModel");
@@ -148,6 +147,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
     qmlRegisterType<InfiniteCalendarViewModel>("org.kde.kalendar", 1, 0, "InfiniteCalendarViewModel");
 
+    qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
     qRegisterMetaType<QAction *>();
 

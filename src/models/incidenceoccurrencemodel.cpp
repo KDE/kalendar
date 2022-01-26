@@ -92,7 +92,7 @@ void IncidenceOccurrenceModel::updateQuery()
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar, &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::refreshView);
+    QObject::connect(m_coreCalendar.get(), &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::refreshView);
 
     refreshView();
 }
@@ -283,7 +283,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     }
 }
 
-void IncidenceOccurrenceModel::setCalendar(Akonadi::ETMCalendar *calendar)
+void IncidenceOccurrenceModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
 {
     if (m_coreCalendar == calendar) {
         return;
@@ -293,7 +293,7 @@ void IncidenceOccurrenceModel::setCalendar(Akonadi::ETMCalendar *calendar)
     Q_EMIT calendarChanged();
 }
 
-Akonadi::ETMCalendar *IncidenceOccurrenceModel::calendar() const
+Akonadi::ETMCalendar::Ptr IncidenceOccurrenceModel::calendar() const
 {
     return m_coreCalendar;
 }

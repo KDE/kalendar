@@ -537,9 +537,9 @@ KCheckableProxyModel *CalendarManager::collectionSelectionProxyModel() const
     return m_selectionProxyModel;
 }
 
-Akonadi::ETMCalendar *CalendarManager::calendar() const
+Akonadi::ETMCalendar::Ptr CalendarManager::calendar() const
 {
-    return m_calendar.get();
+    return m_calendar;
 }
 
 Akonadi::IncidenceChanger *CalendarManager::incidenceChanger() const

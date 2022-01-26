@@ -536,12 +536,12 @@ void InfiniteCalendarViewModel::setScale(int scale)
     endResetModel();
 }
 
-Akonadi::ETMCalendar *InfiniteCalendarViewModel::calendar()
+Akonadi::ETMCalendar::Ptr InfiniteCalendarViewModel::calendar()
 {
     return m_calendar;
 }
 
-void InfiniteCalendarViewModel::setCalendar(Akonadi::ETMCalendar *calendar)
+void InfiniteCalendarViewModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
 {
     m_insertedIds.clear();
     m_calendar = calendar;

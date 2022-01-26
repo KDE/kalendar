@@ -37,7 +37,7 @@ signals:
     void calendarLoaded();
 
 private:
-    QScopedPointer<Akonadi::ETMCalendar> calendar;
+    Akonadi::ETMCalendar::Ptr calendar;
     IncidenceOccurrenceModel model;
     QAbstractItemModelTester modelTester = QAbstractItemModelTester(&model);
     QTimer loadedCheckTimer;
@@ -78,7 +78,7 @@ private slots:
         QCOMPARE(model.start(), now.date());
         model.setLength(7);
         QCOMPARE(model.length(), 7);
-        model.setCalendar(calendar.data());
+        model.setCalendar(calendar);
         QCOMPARE(model.calendar()->id(), calendar->id());
 
         fetchFinished.wait(10000);
