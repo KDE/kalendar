@@ -158,6 +158,7 @@ Item {
         incidenceData: modelData
         collectionId: modelData.collectionId
 
+        preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
         drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && incidenceDelegate.dragDropEnabled ? parent : undefined
         onReleased: parent.Drag.drop()
 
