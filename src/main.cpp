@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
         // Short description of what the app does.
         i18n("Calendar Application"),
         // The license this code is released under.
-        KAboutLicense::GPL,
+        KAboutLicense::GPL_V3,
         // Copyright Statement.
         i18n("(c) KDE Community 2021"));
     aboutData.addAuthor(i18nc("@info:credit", "Carl Schwan"),
