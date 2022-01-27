@@ -258,7 +258,12 @@ Kirigami.ScrollablePage {
                     enabled: !incidenceForm.isTodo || !isNaN(root.incidenceWrapper.incidenceStart.getTime()) || !isNaN(root.incidenceWrapper.incidenceEnd.getTime())
                     onEnabledChanged: if (!enabled) root.incidenceWrapper.allDay = false
                     checked: root.incidenceWrapper.allDay
-                    onClicked: root.incidenceWrapper.allDay = checked
+                    onClicked: {
+                        if (!checked) {
+                            root.incidenceWrapper.setIncidenceTimeToNearestQuarterHour();
+                        }
+                        root.incidenceWrapper.allDay = checked;
+                    }
                 }
 
                 Connections {
@@ -345,11 +350,7 @@ Kirigami.ScrollablePage {
                             } else if(incidenceForm.isTodo && oldDate) {
                                 root.incidenceWrapper.incidenceEnd = oldDate
                             } else if(incidenceForm.isTodo) {
-                                let start = new Date();
-                                let startInMsecsSinceEpoch = start.getTime();
-                                const quarterHourInMsecs = 15 * 60 * 1000;
-                                const nearestQuarterHourStart = startInMsecsSinceEpoch + (quarterHourInMsecs - startInMsecsSinceEpoch % quarterHourInMsecs);
-                                root.incidenceWrapper.incidenceEnd = new Date(nearestQuarterHourStart);
+                                root.incidenceWrapper.incidenceEnd = root.incidenceWrapper.setIncidenceTimeToNearestQuarterHour(false, true);
                             }
                         }
                         visible: incidenceForm.isTodo
