@@ -22,4 +22,9 @@ set (incidenceOccurrenceModelTest_LIBS
     KF5::AkonadiCore
     KF5::AkonadiCalendar
 )
-add_akonadi_isolated_test_advanced(incidenceoccurrencemodeltest.cpp "${incidenceOccurrenceModelTest_SRCS}" "${incidenceOccurrenceModelTest_LIBS}")
+
+# the tests need the ical resource, which we might not have at this point (e.g. on the CI)
+find_program(AKONADI_ICAL_RESOURCE NAMES akonadi_ical_resource)
+# if (AKONADI_ICAL_RESOURCE)
+    add_akonadi_isolated_test_advanced(incidenceoccurrencemodeltest.cpp "${incidenceOccurrenceModelTest_SRCS}" "${incidenceOccurrenceModelTest_LIBS}")
+# endif()

@@ -2,9 +2,10 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['@linux']
+- 'on': ['Linux']
   'require':
     'frameworks/extra-cmake-modules': '@latest'
+    'frameworks/qqc2-desktop-style': '@latest'
     'frameworks/kcalendarcore' : '@latest'
     'frameworks/kconfigwidgets' : '@latest'
     'frameworks/kwindowsystem' : '@latest'
@@ -16,5 +17,8 @@ Dependencies:
     'pim/kcalutils' : '@same'
     'pim/kmime' : '@same'
     'pim/eventviews' : '@same'
+    'pim/kdepim-runtime' : '@same'
     'frameworks/kirigami' : '@latest'
 
+Options:
+  cmake-options: "-DAKONADI_RUN_MYSQL_ISOLATED_TESTS=FALSE -DAKONADI_RUN_PGSQL_ISOLATED_TESTS=FALSE"
