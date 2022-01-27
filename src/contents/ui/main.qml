@@ -1002,22 +1002,7 @@ Kirigami.ApplicationWindow {
         if(!isNaN(selectedDate.getTime())) {
             root.selectedDate = selectedDate;
 
-            if(Kirigami.Settings.isMobile) {
-                dayViewAction.trigger();
-            } else {
-                const view = pageStack.layers.push(hourlyViewComponent);
-                view.daysToShow = 1;
-
-                if(filterHeader.active) {
-                    // We need to remove the header from the view being covered and then reattach it, otherwise we get some
-                    // nasty resizing issues when we remove the layer
-                    pageStack.currentItem.header = null;
-                    view.header = filterHeader.item;
-                    view.QQC2.StackView.removed.connect(function () { pageStack.currentItem.header = filterHeader.item; });
-                }
-
-                view.setToDate(root.selectedDate, true);
-            }
+            dayViewAction.trigger();
         }
     }
 
