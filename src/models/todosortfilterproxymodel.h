@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #pragma once
-#include "kalendarconfig.h"
 #include <Akonadi/Calendar/ETMCalendar>
 #include <Akonadi/Calendar/IncidenceChanger>
 #include <CalendarSupport/KCalPrefs>
@@ -23,6 +22,8 @@ class TodoSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(int showCompleted READ showCompleted WRITE setShowCompleted NOTIFY showCompletedChanged)
     Q_PROPERTY(int sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(bool sortAscending READ sortAscending WRITE setSortAscending NOTIFY sortAscendingChanged)
+    Q_PROPERTY(bool showCompletedSubtodosInIncomplete READ showCompletedSubtodosInIncomplete WRITE setShowCompletedSubtodosInIncomplete NOTIFY
+                   showCompletedSubtodosInIncompleteChanged)
 
 public:
     enum Roles { // Remember to update roles in todosortfilterproxymodel
@@ -101,6 +102,8 @@ public:
     void setSortBy(int sortBy);
     bool sortAscending();
     void setSortAscending(bool sortAscending);
+    bool showCompletedSubtodosInIncomplete();
+    void setShowCompletedSubtodosInIncomplete(bool showCompletedSubtodosInIncomplete);
 
     Q_INVOKABLE void sortTodoModel(int sort, bool ascending);
     Q_INVOKABLE void filterTodoName(QString name, int showCompleted = ShowAll);
@@ -112,6 +115,7 @@ Q_SIGNALS:
     void sortByChanged();
     void sortAscendingChanged();
     void badData();
+    void showCompletedSubtodosInIncompleteChanged();
 
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
@@ -138,6 +142,6 @@ private:
     QVariantMap m_filter;
     int m_sortColumn = EndTimeColumn;
     bool m_sortAscending = false;
+    bool m_showCompletedSubtodosInIncomplete = true;
     QTimer mRefreshTimer;
-    KalendarConfig *m_config;
 };

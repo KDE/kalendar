@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include "todosortfilterproxymodel.h"
 #include <KFormat>
-#include <models/todosortfilterproxymodel.h>
 
 TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
@@ -44,11 +44,6 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     connect(m_baseTodoModel, &TodoModel::rowsRemoved, this, sortTimer);
     connect(m_baseTodoModel, &TodoModel::layoutChanged, this, sortTimer);
     connect(m_baseTodoModel, &TodoModel::rowsMoved, this, sortTimer);
-
-    m_config = KalendarConfig::self();
-    QObject::connect(m_config, &KalendarConfig::showCompletedSubtodosChanged, this, [&]() {
-        invalidateFilter();
-    });
 }
 
 TodoSortFilterProxyModel::~TodoSortFilterProxyModel()
@@ -186,9 +181,8 @@ bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sour
     // Accept if any parent is accepted itself, and if we are the model for the incomplete tasks view, only do this if the config says to show all
     // of a tasks' incomplete subtasks. By default we include all of a tasks' subtasks, regardless of if they are complete or not, as long as the parent
     // passes the filter check. If this is not the case, we only include subtasks that pass the filter themselves.
-    auto config = KalendarConfig::self();
 
-    if ((config->showCompletedSubtodos() && m_showCompleted == ShowComplete::ShowIncompleteOnly) || m_showCompleted != ShowComplete::ShowIncompleteOnly) {
+    if ((m_showCompletedSubtodosInIncomplete && m_showCompleted == ShowComplete::ShowIncompleteOnly) || m_showCompleted != ShowComplete::ShowIncompleteOnly) {
         QModelIndex parent = sourceParent;
         while (parent.isValid()) {
             if (filterAcceptsRowCheck(parent.row(), parent.parent()))
@@ -616,6 +610,19 @@ void TodoSortFilterProxyModel::setSortAscending(bool sortAscending)
     m_sortAscending = sortAscending;
     Q_EMIT sortAscendingChanged();
     sortTodoModel(m_sortColumn, m_sortAscending);
+}
+
+bool TodoSortFilterProxyModel::showCompletedSubtodosInIncomplete()
+{
+    return m_showCompletedSubtodosInIncomplete;
+}
+
+void TodoSortFilterProxyModel::setShowCompletedSubtodosInIncomplete(bool showCompletedSubtodosInIncomplete)
+{
+    m_showCompletedSubtodosInIncomplete = showCompletedSubtodosInIncomplete;
+    Q_EMIT showCompletedSubtodosInIncompleteChanged();
+
+    invalidateFilter();
 }
 
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)

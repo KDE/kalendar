@@ -128,6 +128,8 @@ TreeListView {
         showCompleted: root.showCompleted
         sortBy: root.sortBy
         sortAscending: root.ascendingOrder
+        showCompletedSubtodosInIncomplete: Kalendar.Config.showCompletedSubtodos
+
     }
     delegate: AbstractTreeItem {
         id: listItem
