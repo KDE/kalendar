@@ -134,7 +134,21 @@ Item {
                 isInCurrentMonth ? incidenceContents.textColor :
                 incidenceContents.otherMonthTextColor(modelData.color)
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-            visible: !parent.spaceRestricted
+            visible: !parent.spaceRestricted && modelData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+        }
+
+        QQC2.Label {
+            text: modelData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo ?
+                modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) :
+                modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
+            font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
+                Kirigami.Theme.defaultFont.pointSize
+            renderType: Text.QtRendering
+            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                isInCurrentMonth ? incidenceContents.textColor :
+                incidenceContents.otherMonthTextColor(modelData.color)
+            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+            visible: !modelData.allDay
         }
 
         QQC2.Label {
