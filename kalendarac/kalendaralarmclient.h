@@ -32,11 +32,12 @@ private:
     void restoreSuspendedFromConfig();
     void storeNotification(AlarmNotification *notification);
     void removeNotification(AlarmNotification *notification);
-    void addNotification(const QString &uid, const QString &text, const QDateTime &remindTime);
+    void addNotification(const QString &uid, const QString &text, const QDateTime &occurrence, const QDateTime &remindTime);
     void checkAlarms();
     void setupAkonadi();
     Q_REQUIRED_RESULT bool collectionsAvailable() const;
     void saveLastCheckTime();
+    QDateTime occurrenceForAlarm(const KCalendarCore::Incidence::Ptr &incidence, const KCalendarCore::Alarm::Ptr &alarm, const QDateTime &from) const;
 
     Akonadi::ETMCalendar::Ptr mCalendar;
     Akonadi::EntityTreeModel *mETM = nullptr;

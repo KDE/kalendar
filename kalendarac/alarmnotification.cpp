@@ -93,6 +93,16 @@ void AlarmNotification::setText(const QString &alarmText)
     m_text = alarmText;
 }
 
+QDateTime AlarmNotification::occurrence() const
+{
+    return m_occurrence;
+}
+
+void AlarmNotification::setOccurrence(const QDateTime &occurrence)
+{
+    m_occurrence = occurrence;
+}
+
 QDateTime AlarmNotification::remindAt() const
 {
     return m_remind_at;

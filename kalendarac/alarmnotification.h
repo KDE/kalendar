@@ -44,6 +44,10 @@ public:
      */
     void setText(const QString &alarmText);
 
+    /** Occurrence time in case of recurring incidences. */
+    QDateTime occurrence() const;
+    void setOccurrence(const QDateTime &occurrence);
+
     /**
      * @return In case of a suspended notification, the time that the notification should be displayed. Otherwise, it is empty.
      */
@@ -61,6 +65,7 @@ private:
     QPointer<KNotification> m_notification;
     QString m_uid;
     QString m_text;
+    QDateTime m_occurrence;
     QDateTime m_remind_at;
     QUrl m_contextAction;
 };

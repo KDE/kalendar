@@ -98,11 +98,12 @@ void KalendarAlarmClient::restoreSuspendedFromConfig()
         KConfigGroup suspendedAlarm(&suspendedGroup, s);
         QString uid = suspendedAlarm.readEntry("UID");
         QString txt = suspendedAlarm.readEntry("Text");
+        QDateTime occurrence = suspendedAlarm.readEntry("Occurrence", QDateTime());
         QDateTime remindAt = suspendedAlarm.readEntry("RemindAt", QDateTime());
         qDebug() << "restoreSuspendedFromConfig: Restoring alarm" << uid << "," << txt << "," << remindAt;
 
         if (!uid.isEmpty() && remindAt.isValid()) {
-            addNotification(uid, txt, remindAt);
+            addNotification(uid, txt, occurrence, remindAt);
         }
     }
 }
@@ -128,6 +129,7 @@ void KalendarAlarmClient::storeNotification(AlarmNotification *notification)
     KConfigGroup notificationGroup(&suspendedGroup, notification->uid());
     notificationGroup.writeEntry("UID", notification->uid());
     notificationGroup.writeEntry("Text", notification->text());
+    notificationGroup.writeEntry("Occurrence", notification->occurrence());
     notificationGroup.writeEntry("RemindAt", notification->remindAt());
     KSharedConfig::openConfig()->sync();
 }
@@ -140,7 +142,7 @@ void KalendarAlarmClient::removeNotification(AlarmNotification *notification)
     KSharedConfig::openConfig()->sync();
 }
 
-void KalendarAlarmClient::addNotification(const QString &uid, const QString &text, const QDateTime &remindTime)
+void KalendarAlarmClient::addNotification(const QString &uid, const QString &text, const QDateTime &occurrence, const QDateTime &remindTime)
 {
     AlarmNotification *notification = nullptr;
     const auto it = m_notifications.constFind(uid);
@@ -158,6 +160,7 @@ void KalendarAlarmClient::addNotification(const QString &uid, const QString &tex
     // we either have no notification for this event yet, or one that is scheduled for later and that should be replaced
     qDebug() << "Adding notification, uid:" << uid << "text:" << text << "remindTime:" << remindTime;
     notification->setText(text);
+    notification->setOccurrence(occurrence);
     notification->setRemindAt(remindTime);
     m_notifications[notification->uid()] = notification;
     storeNotification(notification);
@@ -206,7 +209,9 @@ void KalendarAlarmClient::checkAlarms()
 #else
         const QString uid = alarm->parentUid();
 #endif
-        addNotification(uid, alarm->text(), mLastChecked);
+        const auto incidence = mCalendar->incidence(uid);
+        const auto occurrence = occurrenceForAlarm(incidence, alarm, from);
+        addNotification(uid, alarm->text(), occurrence, mLastChecked);
     }
 
     // execute or update active alarms
@@ -230,4 +235,43 @@ void KalendarAlarmClient::saveLastCheckTime()
     KConfigGroup cg(KSharedConfig::openConfig(), "Alarms");
     cg.writeEntry("CalendarsLastChecked", mLastChecked);
     KSharedConfig::openConfig()->sync();
+}
+
+// based on KCalendarCore::Calendar::appendRecurringAlarms()
+QDateTime
+KalendarAlarmClient::occurrenceForAlarm(const KCalendarCore::Incidence::Ptr &incidence, const KCalendarCore::Alarm::Ptr &alarm, const QDateTime &from) const
+{
+    if (!incidence->recurs()) {
+        return {};
+    }
+
+    // recurring alarms not handled here for simplicity
+    if (alarm->repeatCount()) {
+        return {};
+    }
+
+    // Alarm time is defined by an offset from the event start or end time.
+    // Find the offset from the event start time, which is also used as the
+    // offset from the recurrence time.
+    Duration offset(0), endOffset(0);
+    if (alarm->hasStartOffset()) {
+        offset = alarm->startOffset();
+    } else if (alarm->hasEndOffset()) {
+        offset = alarm->endOffset();
+        endOffset = Duration(incidence->dtStart(), incidence->dateTime(Incidence::RoleAlarmEndOffset));
+    } else {
+        // alarms at a fixed time, not handled here for simplicity
+        return {};
+    }
+
+    // Find the incidence's earliest alarm
+    QDateTime alarmStart = offset.end(alarm->hasEndOffset() ? incidence->dateTime(Incidence::RoleAlarmEndOffset) : incidence->dtStart());
+    QDateTime baseStart = incidence->dtStart();
+    if (from > alarmStart) {
+        alarmStart = from; // don't look earlier than the earliest alarm
+        baseStart = (-offset).end((-endOffset).end(alarmStart));
+    }
+
+    // Find the next occurrence from the earliest possible alarm time
+    return incidence->recurrence()->getNextDateTime(baseStart.addSecs(-1));
 }
