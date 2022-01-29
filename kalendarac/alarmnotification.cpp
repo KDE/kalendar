@@ -59,8 +59,14 @@ void AlarmNotification::send(KalendarAlarmClient *client, const KCalendarCore::I
         m_notification->setText(i18n("Task due at %1", QLocale().toString(todo->dtDue().time(), QLocale::NarrowFormat)));
     } else if (!incidence->allDay()) {
         const QString incidenceType = incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n("Event");
-        m_notification->setText(
-            i18nc("Event starts at 10:00", "%1 starts at %2", incidenceType, QLocale().toString(incidence->dtStart().time(), QLocale::NarrowFormat)));
+        const QDateTime startTime = m_occurrence.isValid() ? m_occurrence : incidence->dtStart();
+        const int startOffset = qRound(QDateTime::currentDateTime().secsTo(startTime) / 60.0);
+        if (startOffset > 0 && startOffset < 60) {
+            m_notification->setText(i18ncp("Event starts in 5 minutes", "%2 starts in %1 minute", "%2 starts in %1 minutes", startOffset, incidenceType));
+        } else {
+            m_notification->setText(
+                i18nc("Event starts at 10:00", "%1 starts at %2", incidenceType, QLocale().toString(startTime.time(), QLocale::NarrowFormat)));
+        }
     }
 
     m_notification->setIconName(incidence->type() == KCalendarCore::Incidence::TypeTodo ? QStringLiteral("view-task")
