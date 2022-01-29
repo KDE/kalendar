@@ -125,14 +125,22 @@ Kirigami.Page {
             }
         }
         Component {
-            id: addCalendarOverlay
-            Kirigami.OverlaySheet {
+            id: addCalendarPage
+            Kirigami.ScrollablePage {
                 id: overlay
-                parent: sourcesSettingsPage.Controls.Overlay.overlay
-                header: Kirigami.Heading {
-                    level: 2
-                    text: i18n("Add New Calendar Source")
+                title: i18n("Add New Calendar Source")
+
+                footer: Controls.DialogButtonBox {
+                    Kirigami.Theme.inherit: false
+                    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                    standardButtons: Controls.DialogButtonBox.Close
+                    onRejected: closeDialog()
+
+                    background: Rectangle {
+                        color: Kirigami.Theme.backgroundColor
+                    }
                 }
+
                 ListView {
                     implicitWidth: Kirigami.Units.gridUnit * 20
                     model: AgentConfiguration.availableAgents
@@ -156,10 +164,7 @@ Kirigami.Page {
                 Layout.alignment: Qt.AlignRight
                 text: i18n("Add New Calendar Source…")
                 icon.name: "list-add"
-                onClicked: {
-                    const item = addCalendarOverlay.createObject(addCalendarOverlay, sourcesSettingsPage.Controls.Overlay.overlay)
-                    item.open();
-                }
+                onClicked: pageStack.pushDialogLayer(addCalendarPage)
             }
         }
     }
