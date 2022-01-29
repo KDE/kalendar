@@ -87,12 +87,12 @@ Kirigami.ScrollablePage {
 
             KActionFromAction {
                 kalendarAction: "todoview_sort_by_due_date"
-                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.EndTimeColumn
+                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.DueDateColumn
                 onCheckedChanged: __action.checked = checked // Needed for the actions in the menu bars to be checked on load
             }
             KActionFromAction {
                 kalendarAction: "todoview_sort_by_priority"
-                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.PriorityIntColumn
+                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.PriorityColumn
                 onCheckedChanged: __action.checked = checked
             }
             KActionFromAction {

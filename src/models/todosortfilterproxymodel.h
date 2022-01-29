@@ -66,12 +66,6 @@ public:
     };
     Q_ENUM(BaseTodoModelColumns);
 
-    enum ExtraTodoModelColumns {
-        StartTimeColumn = TodoModel::ColumnCount,
-        EndTimeColumn,
-        PriorityIntColumn,
-    };
-    Q_ENUM(ExtraTodoModelColumns);
 
     enum ShowComplete {
         ShowAll = 0,
@@ -105,7 +99,7 @@ public:
     bool showCompletedSubtodosInIncomplete();
     void setShowCompletedSubtodosInIncomplete(bool showCompletedSubtodosInIncomplete);
 
-    Q_INVOKABLE void sortTodoModel(int sort, bool ascending);
+    void sortTodoModel();
     Q_INVOKABLE void filterTodoName(QString name, int showCompleted = ShowAll);
 
 Q_SIGNALS:
@@ -140,7 +134,7 @@ private:
     int m_showCompleted = ShowComplete::ShowAll;
     int m_showCompletedStore; // For when searches happen
     QVariantMap m_filter;
-    int m_sortColumn = EndTimeColumn;
+    int m_sortColumn = DueDateColumn;
     bool m_sortAscending = false;
     bool m_showCompletedSubtodosInIncomplete = true;
     QTimer mRefreshTimer;

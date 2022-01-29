@@ -31,12 +31,11 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     auto sortTimer = [this] {
         if (!mRefreshTimer.isActive()) {
             mRefreshTimer.start(250);
-            qDebug() << m_baseTodoModel->rowCount();
         }
     };
 
     connect(&mRefreshTimer, &QTimer::timeout, this, [&]() {
-        sortTodoModel(m_sortColumn, m_sortAscending);
+        m_calendar->isLoaded() ? sortTodoModel() : mRefreshTimer.start(250);
     });
 
     connect(m_baseTodoModel, &TodoModel::dataChanged, this, sortTimer);
@@ -86,16 +85,26 @@ QHash<int, QByteArray> TodoSortFilterProxyModel::roleNames() const
 
 QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) {
+    if (!index.isValid() || m_calendar.isNull()) {
         return {};
     }
 
-    auto idx = mapToSource(index);
-    auto todoItem = idx.data(TodoModel::TodoRole).value<Akonadi::Item>();
+    const QModelIndex sourceIndex = mapToSource(index.sibling(index.row(), 0));
+    if (!sourceIndex.isValid()) {
+        return {};
+    }
+    Q_ASSERT(sourceIndex.isValid());
+
+    auto todoItem = sourceIndex.data(TodoModel::TodoRole).value<Akonadi::Item>();
+
+    if (!todoItem.isValid()) {
+        return {};
+    }
+
     auto collectionId = todoItem.parentCollection().id();
     auto todoPtr = CalendarSupport::todo(todoItem);
 
-    if (todoPtr == nullptr) {
+    if (!todoPtr) {
         return {};
     }
 
@@ -168,7 +177,6 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
             return todo->priority();
         }
     }
-
     return QSortFilterProxyModel::data(index, role);
 }
 
@@ -267,10 +275,12 @@ Akonadi::ETMCalendar::Ptr TodoSortFilterProxyModel::calendar()
 
 void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar::Ptr &calendar)
 {
+    beginResetModel();
     m_calendar = calendar;
     m_todoTreeModel->setSourceModel(calendar->model());
     m_baseTodoModel->setCalendar(m_calendar);
     Q_EMIT calendarChanged();
+    endResetModel();
 }
 
 void TodoSortFilterProxyModel::setIncidenceChanger(Akonadi::IncidenceChanger *changer)
@@ -285,6 +295,7 @@ void TodoSortFilterProxyModel::setColorCache(QHash<QString, QColor> colorCache)
 
 void TodoSortFilterProxyModel::loadColors()
 {
+    Q_EMIT layoutAboutToBeChanged();
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup rColorsConfig(config, "Resources Colors");
     const QStringList colorKeyList = rColorsConfig.keyList();
@@ -303,10 +314,16 @@ int TodoSortFilterProxyModel::showCompleted()
 
 void TodoSortFilterProxyModel::setShowCompleted(int showCompleted)
 {
+    Q_EMIT layoutAboutToBeChanged();
+    QSortFilterProxyModel::sort(0,
+                                Qt::AscendingOrder); // Workaround for KDescendantProxyModel bug which would cause ghost entries, duplicates, and general havoc
     m_showCompleted = showCompleted;
     m_showCompletedStore = showCompleted; // For when we search
     invalidateFilter();
     Q_EMIT showCompletedChanged();
+    Q_EMIT layoutChanged();
+
+    sortTodoModel();
 }
 
 QVariantMap TodoSortFilterProxyModel::filter()
@@ -317,33 +334,31 @@ QVariantMap TodoSortFilterProxyModel::filter()
 void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 {
     Q_EMIT layoutAboutToBeChanged();
-    // Reset first, prevent crashing
-    m_filter = QVariantMap();
-    invalidateFilter();
-
+    QSortFilterProxyModel::sort(0,
+                                Qt::AscendingOrder); // Workaround for KDescendantProxyModel bug which would cause ghost entries, duplicates, and general havoc
     m_filter = filter;
-    invalidateFilter();
-    Q_EMIT filterChanged();
-    Q_EMIT layoutChanged();
 
     if (m_filter.contains(QLatin1String("name"))) {
-        Q_EMIT layoutAboutToBeChanged();
         auto name = m_filter[QLatin1String("name")].toString();
         setFilterFixedString(name);
-        invalidateFilter();
-        Q_EMIT layoutChanged();
     }
+    invalidateFilter();
+    Q_EMIT layoutChanged();
+
+    sortTodoModel();
 }
 
-void TodoSortFilterProxyModel::sortTodoModel(int column, bool ascending)
+void TodoSortFilterProxyModel::sortTodoModel()
 {
-    auto order = ascending ? Qt::AscendingOrder : Qt::DescendingOrder;
-    this->sort(column, order);
+    auto order = m_sortAscending ? Qt::AscendingOrder : Qt::DescendingOrder;
+    QSortFilterProxyModel::sort(m_sortColumn, order);
 }
 
 void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
 {
     Q_EMIT layoutAboutToBeChanged();
+    QSortFilterProxyModel::sort(0,
+                                Qt::AscendingOrder); // Workaround for KDescendantProxyModel bug which would cause ghost entries, duplicates, and general havoc
     setFilterFixedString(name);
     if (name.length() > 0) {
         m_showCompleted = showCompleted;
@@ -352,6 +367,8 @@ void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
     }
     invalidateFilter();
     Q_EMIT layoutChanged();
+
+    sortTodoModel();
 }
 
 int TodoSortFilterProxyModel::compareStartDates(const QModelIndex &left, const QModelIndex &right) const
@@ -597,7 +614,7 @@ void TodoSortFilterProxyModel::setSortBy(int sortBy)
 {
     m_sortColumn = sortBy;
     Q_EMIT sortByChanged();
-    sortTodoModel(m_sortColumn, m_sortAscending);
+    sortTodoModel();
 }
 
 bool TodoSortFilterProxyModel::sortAscending()
@@ -609,7 +626,7 @@ void TodoSortFilterProxyModel::setSortAscending(bool sortAscending)
 {
     m_sortAscending = sortAscending;
     Q_EMIT sortAscendingChanged();
-    sortTodoModel(m_sortColumn, m_sortAscending);
+    sortTodoModel();
 }
 
 bool TodoSortFilterProxyModel::showCompletedSubtodosInIncomplete()
