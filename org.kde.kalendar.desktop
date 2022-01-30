@@ -69,3 +69,4 @@ Type=Application
 Terminal=false
 StartupNotify=true
 MimeType=text/calendar
+SingleMainWindow=true
