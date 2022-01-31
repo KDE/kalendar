@@ -2,6 +2,7 @@
 IconName=org.kde.kalendar
 DesktopEntry=org.kde.kalendar
 Comment=Manage your tasks and events with Kalendar
+Comment[az]=Tapşırıqlarınızı və tədbirlərinizi "Kalendar" ilə idarə edin
 Comment[ca]=Gestioneu les tasques i esdeveniments amb el Kalendar
 Comment[ca@valencia]=Gestioneu les tasques i esdeveniments amb el Kalendar
 Comment[cs]=Spravujte své úkoly a události pomocí aplikace Kalendar
@@ -21,6 +22,7 @@ Comment[sv]=Hantera dina uppgifter och händelser med Kalendar
 Comment[uk]=Керуйте вашими записами завдань і подій за допомогою Kalendar
 Comment[x-test]=xxManage your tasks and events with Kalendarxx
 Name=Kalendar
+Name[az]=Kalendar
 Name[ca]=Kalendar
 Name[ca@valencia]=Kalendar
 Name[cs]=Kalendar
@@ -44,6 +46,7 @@ Name[zh_CN]=Kalendar
 
 [Event/alarm]
 Name=Alarm
+Name[az]=Səsli xatırlatma
 Name[ca]=Alarma
 Name[ca@valencia]=Alarma
 Name[cs]=Alarm
@@ -61,6 +64,7 @@ Name[uk]=Нагадування
 Name[x-test]=xxAlarmxx
 Contexts=uid
 Comment=Alarm Notification
+Comment[az]=Səsli xatırlatma bildirişi
 Comment[ca]=Notificació de l'alarma
 Comment[ca@valencia]=Notificació de l'alarma
 Comment[cs]=Oznámení upomínky

@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Kalendar Reminder Client
+Name[az]=Kalendar xatırlatma müştərisi
 Name[ca]=Client de recordatori Kalendar
 Name[ca@valencia]=Client de recordatori Kalendar
 Name[cs]=Klient upomínek Kalendaru
@@ -22,6 +23,7 @@ Icon=org.kde.kalendar
 Type=Application
 Categories=Qt;KDE;
 GenericName=Kalendar Reminder Daemon Client
+GenericName[az]=Kalendar xatırlatma xidməti müştərisi
 GenericName[ca]=Client del dimoni de recordatori Kalendar
 GenericName[ca@valencia]=Client del dimoni de recordatori Kalendar
 GenericName[cs]=Klient démona připomínek Kalendar
