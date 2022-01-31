@@ -702,7 +702,7 @@ Kirigami.ApplicationWindow {
                     Layout.fillHeight: true
                     todoMode: pageStack.currentItem ? pageStack.currentItem.objectName === "todoView" : false
                     filter: root.filter ?
-                        root.filter : {"tags": [], "collectionId": -1}
+                        root.filter : {"tags": [], "collectionId": -1, "name": ""}
                     isDark: root.isDark
                     visible: todoMode || filter.tags.length > 0
                     clip: true
@@ -1290,7 +1290,7 @@ Kirigami.ApplicationWindow {
                 }
             }
 
-            filter: if(root.filter) root.filter
+            filter: root.filter
 
             onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
             onViewTodo: root.setUpView(todoData)

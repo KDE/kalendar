@@ -17,6 +17,25 @@ ListView {
     property alias descendantsModel: descendantsModel
     property alias expandsByDefault: descendantsModel.expandsByDefault
 
+    Connections {
+        target: root.sourceModel
+
+        function onFilterMapAboutToChange() {
+            // This is a must to prevent the KDescendantsProxyModel from crashing
+            for(let i = 0; i < descendantsModel.rowCount(); i++) {
+                descendantsModel.expandChildren(i);
+            }
+        }
+
+        function onLayoutChanged() {
+            if(root.expandsByDefault === false && root.sourceModel.filterMap.name === "") {
+                for(let i = 0; i < descendantsModel.rowCount(); i++) {
+                    descendantsModel.collapseChildren(i);
+                }
+            }
+        }
+    }
+
     /*add: Transition {
         // NumberAnimation behaves better than animators here
         NumberAnimation {
@@ -53,9 +72,7 @@ ListView {
 
     model: KDescendantsProxyModel {
         id: descendantsModel
-        //expandsByDefault: false // This is disabled for a good reason. Leaving this on
-        // wreaks havoc on the ListView and causes phantom indices, inaccurate row counts,
-        // and other calamities. Do not enable this unless this has been fixed!!!
+        expandsByDefault: false
         model: root.sourceModel
     }
 }

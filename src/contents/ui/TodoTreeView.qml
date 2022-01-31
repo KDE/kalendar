@@ -124,7 +124,7 @@ TreeListView {
         id: todoModel
         calendar: Kalendar.CalendarManager.calendar
         incidenceChanger: Kalendar.CalendarManager.incidenceChanger
-        filter: root.filter
+        filterMap: root.filter
         showCompleted: root.showCompleted
         sortBy: root.sortBy
         sortAscending: root.ascendingOrder

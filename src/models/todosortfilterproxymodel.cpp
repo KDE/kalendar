@@ -25,24 +25,6 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     QObject::connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &TodoSortFilterProxyModel::loadColors);
 
     loadColors();
-
-    mRefreshTimer.setSingleShot(true);
-
-    auto sortTimer = [this] {
-        if (!mRefreshTimer.isActive()) {
-            mRefreshTimer.start(250);
-        }
-    };
-
-    connect(&mRefreshTimer, &QTimer::timeout, this, [&]() {
-        m_calendar->isLoaded() ? sortTodoModel() : mRefreshTimer.start(250);
-    });
-
-    connect(m_baseTodoModel, &TodoModel::dataChanged, this, sortTimer);
-    connect(m_baseTodoModel, &TodoModel::rowsInserted, this, sortTimer);
-    connect(m_baseTodoModel, &TodoModel::rowsRemoved, this, sortTimer);
-    connect(m_baseTodoModel, &TodoModel::layoutChanged, this, sortTimer);
-    connect(m_baseTodoModel, &TodoModel::rowsMoved, this, sortTimer);
 }
 
 TodoSortFilterProxyModel::~TodoSortFilterProxyModel()
@@ -208,15 +190,15 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
     const QModelIndex sourceIndex = sourceModel()->index(row, 0, sourceParent);
     Q_ASSERT(sourceIndex.isValid());
 
-    if (m_filter.empty()) {
+    if (m_filterMap.empty()) {
         return QSortFilterProxyModel::filterAcceptsRow(row, sourceParent);
     }
 
     bool acceptRow = true;
 
-    if (m_filter.contains(QLatin1String("collectionId")) && m_filter[QLatin1String("collectionId")].toInt() > -1) {
+    if (m_filterMap.contains(QLatin1String("collectionId")) && m_filterMap[QLatin1String("collectionId")].toInt() > -1) {
         const auto collectionId = sourceIndex.data(TodoModel::TodoRole).value<Akonadi::Item>().parentCollection().id();
-        acceptRow = acceptRow && collectionId == m_filter[QLatin1String("collectionId")].toInt();
+        acceptRow = acceptRow && collectionId == m_filterMap[QLatin1String("collectionId")].toInt();
     }
 
     switch (m_showCompleted) {
@@ -230,8 +212,8 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
         break;
     }
 
-    if (m_filter.contains(QLatin1String("tags")) && !m_filter[QLatin1String("tags")].toStringList().isEmpty()) {
-        auto tags = m_filter[QLatin1String("tags")].toStringList();
+    if (m_filterMap.contains(QLatin1String("tags")) && !m_filterMap[QLatin1String("tags")].toStringList().isEmpty()) {
+        auto tags = m_filterMap[QLatin1String("tags")].toStringList();
         bool containsTag = false;
         for (const auto &tag : tags) {
             const auto todoPtr = sourceIndex.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
@@ -324,18 +306,21 @@ void TodoSortFilterProxyModel::setShowCompleted(int showCompleted)
     sortTodoModel();
 }
 
-QVariantMap TodoSortFilterProxyModel::filter()
+QVariantMap TodoSortFilterProxyModel::filterMap()
 {
-    return m_filter;
+    return m_filterMap;
 }
 
-void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
+void TodoSortFilterProxyModel::setFilterMap(const QVariantMap &filterMap)
 {
-    Q_EMIT layoutAboutToBeChanged();
-    m_filter = filter;
+    Q_EMIT filterMapAboutToChange();
 
-    if (m_filter.contains(QLatin1String("name"))) {
-        auto name = m_filter[QLatin1String("name")].toString();
+    Q_EMIT layoutAboutToBeChanged();
+    m_filterMap = filterMap;
+    Q_EMIT filterMapChanged();
+
+    if (m_filterMap.contains(QLatin1String("name"))) {
+        auto name = m_filterMap[QLatin1String("name")].toString();
         setFilterFixedString(name);
     }
     invalidateFilter();

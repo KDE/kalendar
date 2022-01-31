@@ -18,7 +18,7 @@ class TodoSortFilterProxyModel : public QSortFilterProxyModel
     Q_OBJECT
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger WRITE setIncidenceChanger)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
-    Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
+    Q_PROPERTY(QVariantMap filterMap READ filterMap WRITE setFilterMap NOTIFY filterMapChanged)
     Q_PROPERTY(int showCompleted READ showCompleted WRITE setShowCompleted NOTIFY showCompletedChanged)
     Q_PROPERTY(int sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(bool sortAscending READ sortAscending WRITE setSortAscending NOTIFY sortAscendingChanged)
@@ -89,8 +89,8 @@ public:
 
     int showCompleted();
     void setShowCompleted(int showCompleted);
-    QVariantMap filter();
-    void setFilter(const QVariantMap &filter);
+    QVariantMap filterMap();
+    void setFilterMap(const QVariantMap &filterMap);
 
     int sortBy();
     void setSortBy(int sortBy);
@@ -104,7 +104,8 @@ public:
 
 Q_SIGNALS:
     void calendarChanged();
-    void filterChanged();
+    void filterMapAboutToChange();
+    void filterMapChanged();
     void showCompletedChanged();
     void sortByChanged();
     void sortAscendingChanged();
@@ -133,9 +134,8 @@ private:
     KConfigWatcher::Ptr m_colorWatcher;
     int m_showCompleted = ShowComplete::ShowAll;
     int m_showCompletedStore; // For when searches happen
-    QVariantMap m_filter;
+    QVariantMap m_filterMap;
     int m_sortColumn = DueDateColumn;
     bool m_sortAscending = false;
     bool m_showCompletedSubtodosInIncomplete = true;
-    QTimer mRefreshTimer;
 };
