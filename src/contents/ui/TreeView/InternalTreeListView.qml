@@ -53,7 +53,9 @@ ListView {
 
     model: KDescendantsProxyModel {
         id: descendantsModel
-        //expandsByDefault: false
+        //expandsByDefault: false // This is disabled for a good reason. Leaving this on
+        // wreaks havoc on the ListView and causes phantom indices, inaccurate row counts,
+        // and other calamities. Do not enable this unless this has been fixed!!!
         model: root.sourceModel
     }
 }
