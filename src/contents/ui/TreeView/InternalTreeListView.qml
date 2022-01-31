@@ -53,7 +53,7 @@ ListView {
 
     model: KDescendantsProxyModel {
         id: descendantsModel
-        expandsByDefault: false
+        //expandsByDefault: false
         model: root.sourceModel
     }
 }

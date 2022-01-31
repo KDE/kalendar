@@ -9,7 +9,7 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
 {
     const QString todoMimeType = QStringLiteral("application/x-vnd.akonadi.calendar.todo");
     m_todoTreeModel = new IncidenceTreeModel(QStringList() << todoMimeType, this);
-    const auto pref = EventViews::PrefsPtr();
+    const auto pref = EventViews::PrefsPtr(new EventViews::Prefs);
     m_baseTodoModel = new TodoModel(pref, this);
     m_baseTodoModel->setSourceModel(m_todoTreeModel);
     setSourceModel(m_baseTodoModel);
@@ -315,8 +315,6 @@ int TodoSortFilterProxyModel::showCompleted()
 void TodoSortFilterProxyModel::setShowCompleted(int showCompleted)
 {
     Q_EMIT layoutAboutToBeChanged();
-    QSortFilterProxyModel::sort(0,
-                                Qt::AscendingOrder); // Workaround for KDescendantProxyModel bug which would cause ghost entries, duplicates, and general havoc
     m_showCompleted = showCompleted;
     m_showCompletedStore = showCompleted; // For when we search
     invalidateFilter();
@@ -334,8 +332,6 @@ QVariantMap TodoSortFilterProxyModel::filter()
 void TodoSortFilterProxyModel::setFilter(const QVariantMap &filter)
 {
     Q_EMIT layoutAboutToBeChanged();
-    QSortFilterProxyModel::sort(0,
-                                Qt::AscendingOrder); // Workaround for KDescendantProxyModel bug which would cause ghost entries, duplicates, and general havoc
     m_filter = filter;
 
     if (m_filter.contains(QLatin1String("name"))) {
@@ -357,8 +353,6 @@ void TodoSortFilterProxyModel::sortTodoModel()
 void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
 {
     Q_EMIT layoutAboutToBeChanged();
-    QSortFilterProxyModel::sort(0,
-                                Qt::AscendingOrder); // Workaround for KDescendantProxyModel bug which would cause ghost entries, duplicates, and general havoc
     setFilterFixedString(name);
     if (name.length() > 0) {
         m_showCompleted = showCompleted;
