@@ -33,6 +33,11 @@ TodoSortFilterProxyModel::~TodoSortFilterProxyModel()
     delete m_todoTreeModel;
 }
 
+int TodoSortFilterProxyModel::columnCount(const QModelIndex &parent) const
+{
+    return 1;
+}
+
 QHash<int, QByteArray> TodoSortFilterProxyModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames = QSortFilterProxyModel::roleNames();
