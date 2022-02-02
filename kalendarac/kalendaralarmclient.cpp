@@ -133,7 +133,21 @@ void KalendarAlarmClient::showIncidence(const QString &uid, const QDateTime &occ
         return;
     }
 
+    // start the calendar application if it isn't running yet
     QDBusConnection::sessionBus().interface()->startService(appId);
+
+    // if running inside Kontact, select the right plugin
+    if (appId == QLatin1String("org.kde.kontact")) {
+        const auto kontactPlugin = grp.readEntry(QStringLiteral("KontactPlugin"), QStringLiteral("korganizer"));
+        const QString objectName = QLatin1Char('/') + kontactPlugin + QLatin1String("_PimApplication");
+        QDBusInterface iface(appId, objectName, QStringLiteral("org.kde.PIMUniqueApplication"), QDBusConnection::sessionBus());
+        if (iface.isValid()) {
+            QStringList arguments({kontactPlugin});
+            iface.call(QStringLiteral("newInstance"), QByteArray(), arguments, QString());
+        }
+    }
+
+    // select the right incidence/occurrence
     org::kde::calendar::Calendar iface(appId, QStringLiteral("/Calendar"), QDBusConnection::sessionBus());
     iface.showIncidenceByUid(uid, occurrence, xdgActivationToken);
 }
