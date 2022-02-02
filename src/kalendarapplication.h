@@ -83,6 +83,7 @@ Q_SIGNALS:
     void importIntoNewFinished(bool success);
     void importErrorMessageChanged();
     void refreshAllCalendars();
+    void openIncidence(const QVariantMap incidenceData, const QDateTime occurrence);
 
 private:
     KActionCollection mCollection;

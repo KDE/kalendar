@@ -12,6 +12,7 @@
 #include <CalendarSupport/Utils>
 #include <KAuthorized>
 #include <KConfigGroup>
+#include <KFormat>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KWindowConfig>
@@ -585,7 +586,58 @@ void KalendarApplication::saveWindowGeometry(QQuickWindow *window)
 
 void KalendarApplication::showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken)
 {
-    // TODO select uid/occurence
+    const auto incidence = m_calendar->incidence(uid);
+    if (!incidence) {
+        return;
+    }
+
+    const auto collection = m_calendar->item(incidence).parentCollection();
+    const auto incidenceEnd = incidence->endDateForStart(occurrence);
+    KFormat format;
+    KCalendarCore::Duration duration(occurrence, incidenceEnd);
+
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    const QStringList colorKeyList = rColorsConfig.keyList();
+
+    QColor incidenceColor;
+
+    for (const QString &key : colorKeyList) {
+        if (key == QString::number(collection.id())) {
+            incidenceColor = rColorsConfig.readEntry(key, QColor("blue"));
+        }
+    }
+
+    auto incidenceData = QVariantMap{
+        {QStringLiteral("text"), incidence->summary()},
+        {QStringLiteral("description"), incidence->description()},
+        {QStringLiteral("location"), incidence->location()},
+        {QStringLiteral("startTime"), occurrence},
+        {QStringLiteral("endTime"), incidenceEnd},
+        {QStringLiteral("allDay"), incidence->allDay()},
+        {QStringLiteral("todoCompleted"), false},
+        {QStringLiteral("priority"), incidence->priority()},
+        {QStringLiteral("durationString"), duration.asSeconds() > 0 ? format.formatSpelloutDuration(duration.asSeconds() * 1000) : QString()},
+        {QStringLiteral("recurs"), incidence->recurs()},
+        {QStringLiteral("hasReminders"), incidence->alarms().length() > 0},
+        {QStringLiteral("isOverdue"), false},
+        {QStringLiteral("isReadOnly"), collection.rights().testFlag(Akonadi::Collection::ReadOnly)},
+        {QStringLiteral("color"), QVariant::fromValue(incidenceColor)},
+        {QStringLiteral("collectionId"), collection.id()},
+        {QStringLiteral("incidenceId"), uid},
+        {QStringLiteral("incidenceType"), incidence->type()},
+        {QStringLiteral("incidenceTypeStr"), incidence->typeStr()},
+        {QStringLiteral("incidenceTypeIcon"), incidence->iconName()},
+        {QStringLiteral("incidencePtr"), QVariant::fromValue(incidence)},
+    };
+
+    if (incidence->type() == KCalendarCore::Incidence::TypeTodo) {
+        const auto todo = incidence.staticCast<KCalendarCore::Todo>();
+        incidenceData[QStringLiteral("todoCompleted")] = todo->isCompleted();
+        incidenceData[QStringLiteral("isOverdue")] = todo->isOverdue();
+    }
+
+    Q_EMIT openIncidence(incidenceData, occurrence);
 
     KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
     QWindow *window = QGuiApplication::topLevelWindows().isEmpty() ? nullptr : QGuiApplication::topLevelWindows().at(0);
@@ -594,3 +646,5 @@ void KalendarApplication::showIncidenceByUid(const QString &uid, const QDateTime
         window->raise();
     }
 }
+
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);

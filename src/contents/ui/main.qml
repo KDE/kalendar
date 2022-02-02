@@ -372,6 +372,11 @@ Kirigami.ApplicationWindow {
         function onRefreshAllCalendars() {
             CalendarManager.updateAllCollections();
         }
+
+        function onOpenIncidence(incidenceData, occurrenceDate) {
+            root.setUpView(incidenceData);
+            pageStack.currentItem.setToDate(occurrenceDate);
+        }
     }
 
     Loader {
