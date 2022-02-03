@@ -23,6 +23,7 @@ target_link_libraries(kalendarac
     KF5::DBusAddons
     KF5::AkonadiCore
     KF5::AkonadiCalendar
+    KF5::KIOGui
     KF5::I18n
     KF5::Notifications
     Qt5::Core

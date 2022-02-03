@@ -7,6 +7,8 @@
 
 #include <akonadi-calendar_version.h>
 
+#include <KIO/ApplicationLauncherJob>
+
 #include <KCheckableProxyModel>
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -132,24 +134,31 @@ void KalendarAlarmClient::showIncidence(const QString &uid, const QDateTime &occ
     if (appId.isEmpty()) {
         return;
     }
+    const auto kontactPlugin = grp.readEntry(QStringLiteral("KontactPlugin"), QStringLiteral("korganizer"));
 
     // start the calendar application if it isn't running yet
-    QDBusConnection::sessionBus().interface()->startService(appId);
-
-    // if running inside Kontact, select the right plugin
-    if (appId == QLatin1String("org.kde.kontact")) {
-        const auto kontactPlugin = grp.readEntry(QStringLiteral("KontactPlugin"), QStringLiteral("korganizer"));
-        const QString objectName = QLatin1Char('/') + kontactPlugin + QLatin1String("_PimApplication");
-        QDBusInterface iface(appId, objectName, QStringLiteral("org.kde.PIMUniqueApplication"), QDBusConnection::sessionBus());
-        if (iface.isValid()) {
-            QStringList arguments({kontactPlugin});
-            iface.call(QStringLiteral("newInstance"), QByteArray(), arguments, QString());
-        }
+    const auto service = KService::serviceByDesktopName(appId);
+    if (!service) {
+        return;
     }
+    auto job = new KIO::ApplicationLauncherJob(service, this);
+    job->setStartupId(xdgActivationToken.toUtf8());
+    connect(job, &KJob::finished, this, [appId, kontactPlugin, uid, occurrence, xdgActivationToken]() {
+        // if running inside Kontact, select the right plugin
+        if (appId == QLatin1String("org.kde.kontact")) {
+            const QString objectName = QLatin1Char('/') + kontactPlugin + QLatin1String("_PimApplication");
+            QDBusInterface iface(appId, objectName, QStringLiteral("org.kde.PIMUniqueApplication"), QDBusConnection::sessionBus());
+            if (iface.isValid()) {
+                QStringList arguments({kontactPlugin});
+                iface.call(QStringLiteral("newInstance"), QByteArray(), arguments, QString());
+            }
+        }
 
-    // select the right incidence/occurrence
-    org::kde::calendar::Calendar iface(appId, QStringLiteral("/Calendar"), QDBusConnection::sessionBus());
-    iface.showIncidenceByUid(uid, occurrence, xdgActivationToken);
+        // select the right incidence/occurrence
+        org::kde::calendar::Calendar iface(appId, QStringLiteral("/Calendar"), QDBusConnection::sessionBus());
+        iface.showIncidenceByUid(uid, occurrence, xdgActivationToken);
+    });
+    job->start();
 }
 
 void KalendarAlarmClient::storeNotification(AlarmNotification *notification)

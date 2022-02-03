@@ -46,7 +46,7 @@ ecm_setup_version(${PROJECT_VERSION}
 
 ################# Find dependencies #################
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg Location DBus Test QuickTest)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons QQC2DesktopStyle Contacts ItemModels XmlGui Notifications IconThemes Service)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons QQC2DesktopStyle Contacts ItemModels XmlGui Notifications IconThemes Service KIO)
 set_package_properties(KF5QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
 )
