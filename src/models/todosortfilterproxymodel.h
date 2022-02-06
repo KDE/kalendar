@@ -77,6 +77,7 @@ public:
     TodoSortFilterProxyModel(QObject *parent = nullptr);
     ~TodoSortFilterProxyModel();
 
+    int columnCount(const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     bool filterAcceptsRow(int row, const QModelIndex &sourceParent) const override;
