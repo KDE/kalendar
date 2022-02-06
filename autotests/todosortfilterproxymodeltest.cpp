@@ -65,6 +65,9 @@ private slots:
         QSignalSpy loaded(this, &TodoSortFilterProxyModelTest::calendarLoaded);
         loaded.wait(10000);
         checkAllItems(calendar->checkableProxyModel());
+
+        qRegisterMetaType<QList<QPersistentModelIndex>>();
+        qRegisterMetaType<QAbstractItemModel::LayoutChangeHint>();
     }
 
     void testAddCalendar()
@@ -78,10 +81,10 @@ private slots:
         QCOMPARE(model.calendar()->id(), calendar->id());
 
         fetchFinished.wait(10000);
-        // Our test calendar file has an event that recurs every day of the week.
-        // Since we are checking for 7 days, we should have an instance of this event
-        // 7 times.
-        // QCOMPARE(model.rowCount(), 2);
+
+        // Our test calendar file has two todos, with sub-todos
+
+        QCOMPARE(model.rowCount(), 2);
     }
 };
 
