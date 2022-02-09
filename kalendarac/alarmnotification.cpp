@@ -121,7 +121,7 @@ void AlarmNotification::setRemindAt(const QDateTime &remindAtDt)
 
 bool AlarmNotification::hasValidContextAction() const
 {
-    return m_contextAction.isValid() && m_contextAction.scheme() == QLatin1String("https");
+    return m_contextAction.isValid() && (m_contextAction.scheme() == QLatin1String("https") || m_contextAction.scheme() == QLatin1String("geo"));
 }
 
 QString AlarmNotification::determineContextAction(const KCalendarCore::Incidence::Ptr &incidence)
@@ -147,23 +147,16 @@ QString AlarmNotification::determineContextAction(const KCalendarCore::Incidence
     }
 
     // navigate to location
-    // ### geo: URLs would be nicer for this, but we don't have a default handler for those yet
-    // on a regular Plasma installation without Marble. Therefore use OSM URLs for now.
     if (incidence->hasGeo()) {
         m_contextAction.clear();
-        m_contextAction.setScheme(QStringLiteral("https"));
-        m_contextAction.setHost(QStringLiteral("www.openstreetmap.org"));
-        m_contextAction.setPath(QStringLiteral("/"));
-        const QString fragment =
-            QLatin1String("map=18/") + QString::number(incidence->geoLatitude()) + QLatin1Char('/') + QString::number(incidence->geoLongitude());
-        m_contextAction.setFragment(fragment);
+        m_contextAction.setScheme(QStringLiteral("geo"));
+        m_contextAction.setPath(QString::number(incidence->geoLatitude()) + QLatin1Char(',') + QString::number(incidence->geoLongitude()));
     } else if (!incidence->location().isEmpty()) {
         m_contextAction.clear();
-        m_contextAction.setScheme(QStringLiteral("https"));
-        m_contextAction.setHost(QStringLiteral("www.openstreetmap.org"));
-        m_contextAction.setPath(QStringLiteral("/search"));
+        m_contextAction.setScheme(QStringLiteral("geo"));
+        m_contextAction.setPath(QStringLiteral("0,0"));
         QUrlQuery query;
-        query.addQueryItem(QStringLiteral("query"), incidence->location());
+        query.addQueryItem(QStringLiteral("q"), incidence->location());
         m_contextAction.setQuery(query);
     }
 
