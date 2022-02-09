@@ -132,15 +132,6 @@ Kirigami.ScrollablePage {
             Kirigami.FormData.labelAlignment: Qt.AlignTop
 
             Controls.CheckBox {
-                text: i18n("Show month header")
-                checked: Config.showMonthHeader
-                enabled: !Config.isShowMonthHeaderImmutable
-                onClicked: {
-                    Config.showMonthHeader = !Config.showMonthHeader;
-                    Config.save();
-                }
-            }
-            Controls.CheckBox {
                 text: i18n("Show week headers")
                 checked: Config.showWeekHeaders
                 enabled: !Config.isShowWeekHeadersImmutable

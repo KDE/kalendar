@@ -212,17 +212,6 @@ Kirigami.Page {
                         if(root.initialMonth) root.moveToSelected();
                     }
 
-                    Component {
-                        id: monthHeaderComponent
-                        Kirigami.ItemViewHeader {
-                            //backgroundImage.source: "../banner.jpg"
-                            title: Qt.locale().monthName(viewLoader.month)
-                            visible: Kalendar.Config.showMonthHeader
-                        }
-                    }
-
-                    header: Kalendar.Config.showMonthHeader ? monthHeaderComponent : null
-
                     model: scheduleViewModel
 
                     delegate: DayMouseArea {

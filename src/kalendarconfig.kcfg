@@ -133,10 +133,6 @@ SPDX-License-Identifier: LGPL-2.0-or-later
     </group>
 
     <group name="ScheduleView">
-        <entry name="showMonthHeader" type="Bool">
-            <label>Show month header in schedule view.</label>
-            <default>true</default>
-        </entry>
         <entry name="showWeekHeaders" type="Bool">
             <label>Show week headers in schedule view.</label>
             <default>true</default>
