@@ -64,7 +64,7 @@ Kirigami.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
-    function setToDate(date, isInitialWeek = false) {
+    function setToDate(date, isInitialWeek = false, animate = false) {
         if(!pathView.currentItem) {
             return;
         }
@@ -99,7 +99,7 @@ Kirigami.Page {
         selectedDate = date;
 
         if(isInitialWeek) {
-            pathView.currentItem.item.hourScrollView.setToCurrentTime();
+            pathView.currentItem.item.hourScrollView.setToCurrentTime(animate);
         } else {
             pathView.currentItem.item.hourScrollView.setPosition(position);
         }
@@ -122,7 +122,7 @@ Kirigami.Page {
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
         text: i18n("Now")
-        onTriggered: setToDate(new Date(), true);
+        onTriggered: setToDate(new Date(), true, true);
     }
 
     actions {
@@ -651,7 +651,7 @@ Kirigami.Page {
                         easing.type: Easing.InOutQuad
                     }
 
-                    function setToCurrentTime() {
+                    function setToCurrentTime(animate = false) {
                         if(currentTimeMarkerLoader.active) {
                             const viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit);
                             // Since we position with anchors, height is 0 -- must calc manually
@@ -661,8 +661,15 @@ Kirigami.Page {
                             yPos = Math.max(0.0, yPos);
                             yPos = vScrollBar.size ? Math.min(vScrollBar.size, yPos) : Math.min(1.0, yPos);
 
-                            scrollAnimation.to = yPos;
-                            scrollAnimation.start();
+                            if(animate) {
+                                scrollAnimation.to = yPos;
+                                if(scrollAnimation.running) {
+                                    scrollAnimation.stop();
+                                }
+                                scrollAnimation.start();
+                            } else {
+                                vScrollBar.position = yPos;
+                            }
                         }
                     }
 
