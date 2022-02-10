@@ -191,6 +191,7 @@ Kirigami.Page {
             id: viewLoader
 
             readonly property date startDate: model.startDate
+            readonly property date endDate: DateUtils.addDaysToDate(model.startDate, root.daysToShow)
             readonly property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
             readonly property int year: model.selectedYear
 
@@ -1127,7 +1128,7 @@ Kirigami.Page {
                             Loader {
                                 id: currentTimeMarkerLoader
 
-                                active: root.currentDate >= viewLoader.startDate && viewLoader.daysFromWeekStart < root.daysToShow
+                                active: root.currentDate >= viewLoader.startDate && root.currentDate < viewLoader.endDate
 
                                 sourceComponent: Rectangle {
                                     id: currentTimeMarker
