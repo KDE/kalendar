@@ -58,6 +58,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="TreeViewDecoration.qml">contents/ui/TreeView/TreeViewDecoration.qml</file>
     <file alias="CollectionPickerPage.qml">contents/ui/CollectionPickerPage.qml</file>
     <file alias="CalendarItemMouseArea.qml">contents/ui/CalendarItemMouseArea.qml</file>
+    <file alias="CalendarItemMenu.qml">contents/ui/CalendarItemMenu.qml</file>
     <file alias="RecurringIncidenceChangeSheet.qml">contents/ui/RecurringIncidenceChangeSheet.qml</file>
   </qresource>
 </RCC>

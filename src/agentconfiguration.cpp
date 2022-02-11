@@ -69,6 +69,17 @@ void AgentConfiguration::edit(int index)
     Q_ASSERT(m_runningAgents != nullptr);
 
     auto instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
+    setupEdit(instance);
+}
+
+void AgentConfiguration::editIdentifier(QString resourceIdentifier)
+{
+    auto instance = Akonadi::AgentManager::self()->instance(resourceIdentifier);
+    setupEdit(instance);
+}
+
+void AgentConfiguration::setupEdit(Akonadi::AgentInstance instance)
+{
     if (instance.isValid()) {
         KWindowSystem::allowExternalProcessWindowActivation();
         QPointer<AgentConfigurationDialog> dlg(new AgentConfigurationDialog(instance, nullptr));
@@ -82,6 +93,17 @@ void AgentConfiguration::restart(int index)
     Q_ASSERT(m_runningAgents != nullptr);
 
     auto instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
+    setupRestart(instance);
+}
+
+void AgentConfiguration::restartIdentifier(QString resourceIdentifier)
+{
+    auto instance = Akonadi::AgentManager::self()->instance(resourceIdentifier);
+    setupRestart(instance);
+}
+
+void AgentConfiguration::setupRestart(Akonadi::AgentInstance instance)
+{
     if (instance.isValid()) {
         instance.restart();
     }
@@ -92,6 +114,17 @@ void AgentConfiguration::remove(int index)
     Q_ASSERT(m_runningAgents != nullptr);
 
     auto instance = m_runningAgents->data(m_runningAgents->index(index, 0), AgentInstanceModel::InstanceRole).value<AgentInstance>();
+    setupRemove(instance);
+}
+
+void AgentConfiguration::removeIdentifier(QString resourceIdentifier)
+{
+    auto instance = Akonadi::AgentManager::self()->instance(resourceIdentifier);
+    setupRemove(instance);
+}
+
+void AgentConfiguration::setupRemove(Akonadi::AgentInstance instance)
+{
     if (instance.isValid()) {
         Akonadi::AgentManager::self()->removeInstance(instance);
     }

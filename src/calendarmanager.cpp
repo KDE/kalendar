@@ -889,10 +889,12 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     collectionDetails[QLatin1String("color")] = m_baseModel->colorCache[QString::number(collection.id())];
     collectionDetails[QLatin1String("count")] = collection.statistics().count();
     collectionDetails[QLatin1String("isResource")] = Akonadi::CollectionUtils::isResource(collection);
+    collectionDetails[QLatin1String("resource")] = collection.resource();
     collectionDetails[QLatin1String("readOnly")] = collection.rights().testFlag(Collection::ReadOnly);
     collectionDetails[QLatin1String("canChange")] = collection.rights().testFlag(Collection::CanChangeCollection);
     collectionDetails[QLatin1String("canCreate")] = collection.rights().testFlag(Collection::CanCreateCollection);
-    collectionDetails[QLatin1String("canDelete")] = collection.rights().testFlag(Collection::CanDeleteCollection);
+    collectionDetails[QLatin1String("canDelete")] =
+        collection.rights().testFlag(Collection::CanDeleteCollection) && !Akonadi::CollectionUtils::isResource(collection);
     collectionDetails[QLatin1String("isFiltered")] = isFiltered;
     collectionDetails[QLatin1String("allCalendarsRow")] = allCalendarsRow;
 

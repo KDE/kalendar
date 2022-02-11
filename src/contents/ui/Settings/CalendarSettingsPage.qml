@@ -31,7 +31,7 @@ Kirigami.Page {
                         roleValue: true
 
                         Kirigami.BasicListItem {
-                            id: calendarSourceHeading
+                            id: calendarSourceItem
                             label: display
                             labelItem.color: Kirigami.Theme.disabledTextColor
                             labelItem.font.weight: Font.DemiBold
@@ -47,7 +47,7 @@ Kirigami.Page {
                             leading: Kirigami.Icon {
                                 implicitWidth: Kirigami.Units.iconSizes.smallMedium
                                 implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                color: calendarSourceHeading.labelItem.color
+                                color: calendarSourceItem.labelItem.color
                                 isMask: true
                                 source: model.decoration
                             }
@@ -58,7 +58,7 @@ Kirigami.Page {
                                     implicitWidth: Kirigami.Units.iconSizes.small
                                     implicitHeight: Kirigami.Units.iconSizes.small
                                     source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                    color: calendarSourceHeading.labelItem.color
+                                    color: calendarSourceItem.labelItem.color
                                     isMask: true
                                 }
                                 ColoredCheckbox {
@@ -71,6 +71,13 @@ Kirigami.Page {
                             }
 
                             onClicked: collectionsList.model.toggleChildren(index)
+
+                            CalendarItemMouseArea {
+                                id: calendarItemMouseArea
+                                parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                                collectionId: model.collectionId
+                                anchors.fill: parent
+                            }
                         }
                     }
 

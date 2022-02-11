@@ -3,9 +3,10 @@
 
 #pragma once
 
+#include <Akonadi/AgentFilterProxyModel>
+#include <Akonadi/AgentInstance>
 #include <QObject>
 #include <akonadi_version.h>
-#include <Akonadi/AgentFilterProxyModel>
 
 class AgentConfiguration : public QObject
 {
@@ -21,10 +22,17 @@ public:
 
     Q_INVOKABLE void createNew(int index);
     Q_INVOKABLE void edit(int index);
+    Q_INVOKABLE void editIdentifier(QString resourceIdentifier);
     Q_INVOKABLE void remove(int index);
+    Q_INVOKABLE void removeIdentifier(QString resourceIdentifier);
     Q_INVOKABLE void restart(int index);
+    Q_INVOKABLE void restartIdentifier(QString resourceIdentifier);
 
 private:
+    void setupEdit(Akonadi::AgentInstance instance);
+    void setupRemove(Akonadi::AgentInstance instance);
+    void setupRestart(Akonadi::AgentInstance instance);
+
     Akonadi::AgentFilterProxyModel *m_runningAgents;
     Akonadi::AgentFilterProxyModel *m_availableAgents;
 };

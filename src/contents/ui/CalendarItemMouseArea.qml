@@ -52,39 +52,12 @@ MouseArea {
     Component {
         id: calendarActions
 
-        QQC2.Menu {
-            id: actionsPopup
+        CalendarItemMenu {
             y: calendarMouseArea.clickY
             x: calendarMouseArea.clickX
-            z: 1000
+            collectionId: calendarMouseArea.collectionId
+            collectionDetails: calendarMouseArea.collectionDetails
             Component.onCompleted: if(calendarMouseArea.collectionId && !calendarMouseArea.collectionDetails) calendarMouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(calendarMouseArea.collectionId)
-
-            QQC2.MenuItem {
-                icon.name: "edit-entry"
-                text: i18nc("@action:inmenu", "Edit calendar…")
-                onClicked: Kalendar.CalendarManager.editCollection(calendarMouseArea.collectionId);
-            }
-            QQC2.MenuItem {
-                icon.name: "view-refresh"
-                text: i18nc("@action:inmenu", "Update calendar")
-                onClicked: Kalendar.CalendarManager.updateCollection(calendarMouseArea.collectionId);
-            }
-            QQC2.MenuItem {
-                icon.name: "edit-delete"
-                text: i18nc("@action:inmenu", "Delete calendar")
-                enabled: calendarMouseArea.collectionDetails["canDelete"]
-                onClicked: deleteCalendar(calendarMouseArea.collectionId, calendarMouseArea.collectionDetails)
-            }
-            QQC2.MenuSeparator {
-            }
-            QQC2.MenuItem {
-                icon.name: "color-picker"
-                text: i18nc("@action:inmenu", "Set calendar colour…")
-                onClicked: {
-                    colorDialogLoader.active = true;
-                    colorDialogLoader.item.open();
-                }
-            }
         }
     }
 }

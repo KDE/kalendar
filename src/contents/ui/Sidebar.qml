@@ -438,6 +438,7 @@ Kirigami.OverlayDrawer {
                         model: sidebar.todoMode ? CalendarManager.todoCollections : CalendarManager.viewCollections
                     }
 
+
                     model: calendarHeadingItem.expanded ? calendarModel : []
 
                     delegate: DelegateChooser {
@@ -446,9 +447,9 @@ Kirigami.OverlayDrawer {
                             roleValue: true
 
                             Kirigami.BasicListItem {
-                                id: calendarSourceHeading
+                                id: calendarSourceItem
                                 label: display
-                                highlighted: visualFocus
+                                highlighted: visualFocus || incidenceDropArea.containsDrag
                                 labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
                                 labelItem.font.weight: Font.DemiBold
                                 Layout.topMargin: 2 * Kirigami.Units.largeSpacing
@@ -463,7 +464,7 @@ Kirigami.OverlayDrawer {
                                 leading: Kirigami.Icon {
                                     implicitWidth: Kirigami.Units.iconSizes.smallMedium
                                     implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                    color: calendarSourceHeading.labelItem.color
+                                    color: calendarSourceItem.labelItem.color
                                     isMask: true
                                     source: model.decoration
                                 }
@@ -474,7 +475,7 @@ Kirigami.OverlayDrawer {
                                         implicitWidth: Kirigami.Units.iconSizes.small
                                         implicitHeight: Kirigami.Units.iconSizes.small
                                         source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                        color: calendarSourceHeading.labelItem.color
+                                        color: calendarSourceItem.labelItem.color
                                         isMask: true
                                     }
                                     ColoredCheckbox {
@@ -493,6 +494,29 @@ Kirigami.OverlayDrawer {
                                 }
 
                                 onClicked: calendarList.model.toggleChildren(index)
+
+                                CalendarItemMouseArea {
+                                    id: calendarSourceItemMouseArea
+                                    parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                                    collectionId: model.collectionId
+                                    collectionDetails: CalendarManager.getCollectionDetails(collectionId)
+                                    anchors.fill: parent
+
+                                    DropArea {
+                                        id: incidenceDropArea
+                                        anchors.fill: parent
+                                        z: 9999
+                                        enabled: calendarSourceItemMouseArea.collectionDetails.canCreate
+                                        onDropped: if(drop.source.objectName === "taskDelegate") {
+                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collectionId);
+
+                                            const pos = mapToItem(applicationWindow().contentItem, x, y);
+                                            drop.source.caughtX = pos.x;
+                                            drop.source.caughtY = pos.y;
+                                            drop.source.caught = true;
+                                        }
+                                    }
+                                }
                             }
                         }
 
@@ -507,7 +531,7 @@ Kirigami.OverlayDrawer {
                                     (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
                                 separatorVisible: false
                                 enabled: !sidebar.collapsed
-                                highlighted: incidenceDropArea.containsDrag
+                                highlighted: visualFocus || incidenceDropArea.containsDrag
 
                                 leading: Kirigami.Icon {
                                     implicitWidth: Kirigami.Units.iconSizes.smallMedium
@@ -538,6 +562,7 @@ Kirigami.OverlayDrawer {
                                     id: calendarItemMouseArea
                                     parent: calendarItem.contentItem // Otherwise label elide breaks
                                     collectionId: model.collectionId
+                                    collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                     anchors.fill: parent
 
                                     onDeleteCalendar: sidebar.deleteCalendar(collectionId, collectionDetails)
@@ -546,6 +571,7 @@ Kirigami.OverlayDrawer {
                                         id: incidenceDropArea
                                         anchors.fill: parent
                                         z: 9999
+                                        enabled: calendarItemMouseArea.collectionDetails.canCreate
                                         onDropped: if(drop.source.objectName === "taskDelegate") {
                                             CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
 
