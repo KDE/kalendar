@@ -33,7 +33,7 @@ TodoSortFilterProxyModel::~TodoSortFilterProxyModel()
     delete m_todoTreeModel;
 }
 
-int TodoSortFilterProxyModel::columnCount(const QModelIndex &parent) const
+int TodoSortFilterProxyModel::columnCount(const QModelIndex &) const
 {
     return 1;
 }
@@ -270,9 +270,17 @@ void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar::Ptr &calendar)
     endResetModel();
 }
 
+Akonadi::IncidenceChanger *TodoSortFilterProxyModel::incidenceChanger()
+{
+    return m_lastSetChanger;
+}
+
 void TodoSortFilterProxyModel::setIncidenceChanger(Akonadi::IncidenceChanger *changer)
 {
     m_baseTodoModel->setIncidenceChanger(changer);
+    m_lastSetChanger = changer;
+
+    Q_EMIT incidenceChangerChanged();
 }
 
 void TodoSortFilterProxyModel::setColorCache(QHash<QString, QColor> colorCache)

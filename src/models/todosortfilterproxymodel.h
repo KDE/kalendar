@@ -16,7 +16,7 @@
 class TodoSortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
-    Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger WRITE setIncidenceChanger)
+    Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger READ incidenceChanger WRITE setIncidenceChanger NOTIFY incidenceChangerChanged)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
     Q_PROPERTY(QVariantMap filterMap READ filterMap WRITE setFilterMap NOTIFY filterMapChanged)
     Q_PROPERTY(int showCompleted READ showCompleted WRITE setShowCompleted NOTIFY showCompletedChanged)
@@ -86,6 +86,7 @@ public:
 
     Akonadi::ETMCalendar::Ptr calendar();
     void setCalendar(Akonadi::ETMCalendar::Ptr &calendar);
+    Akonadi::IncidenceChanger *incidenceChanger();
     void setIncidenceChanger(Akonadi::IncidenceChanger *changer);
 
     int showCompleted();
@@ -112,6 +113,7 @@ Q_SIGNALS:
     void sortAscendingChanged();
     void badData();
     void showCompletedSubtodosInIncompleteChanged();
+    void incidenceChangerChanged();
 
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
