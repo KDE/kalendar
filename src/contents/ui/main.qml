@@ -374,8 +374,15 @@ Kirigami.ApplicationWindow {
         }
 
         function onOpenIncidence(incidenceData, occurrenceDate) {
+            if(pageStack.currentItem.objectName === "todoView" && incidenceData.incidenceType !== IncidenceWrapper.TypeTodo) {
+                Kirigami.Settings.isMobile ? dayViewAction.trigger() : weekViewAction.trigger();
+            }
+
             root.setUpView(incidenceData);
-            pageStack.currentItem.setToDate(occurrenceDate);
+
+            if(pageStack.currentItem.objectName !== "todoView") {
+                pageStack.currentItem.setToDate(occurrenceDate);
+            }
         }
     }
 
