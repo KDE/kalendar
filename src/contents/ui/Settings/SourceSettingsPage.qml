@@ -148,6 +148,7 @@ Kirigami.Page {
                         label: model.display
                         icon: model.decoration
                         subtitle: model.description
+                        subtitleItem.wrapMode: Text.Wrap
                         enabled: AgentConfiguration.availableAgents.flags(AgentConfiguration.availableAgents.index(index, 0)) & Qt.ItemIsEnabled
                         onClicked: {
                             AgentConfiguration.createNew(index);
