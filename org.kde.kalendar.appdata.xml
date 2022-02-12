@@ -267,6 +267,12 @@
   <url type="homepage">https://apps.kde.org/kalendar/</url>
   <url type="bugtracker">https://invent.kde.org/pim/kalendar/-/issues</url>
   <releases>
+    <release version="1.0.0" date="2022-02-12">
+      <description>
+        <p>This release brings stability, usability, and aesthetic improvements across the board, and is the first version recommended for any home user.</p>
+      </description>
+      <url>https://claudiocambra.com/2022/02/12/kalendar-1-0-is-out/</url>
+    </release>
     <release type="development" version="0.4.0" date="2021-12-26">
       <description>
         <p>This release brings new views, improved performance, and significant bugfixes.</p>
