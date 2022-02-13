@@ -4,6 +4,7 @@
 
 [Desktop Entry]
 Name=Kalendar
+Name[ar]=التقويم
 Name[az]=Kalendar
 Name[ca]=Kalendar
 Name[ca@valencia]=Kalendar
@@ -26,6 +27,7 @@ Name[uk]=Kalendar
 Name[x-test]=xxKalendarxx
 Name[zh_CN]=Kalendar
 GenericName=Calendar application
+GenericName[ar]=تطبيق التقويم
 GenericName[az]=Təqvim tətbiqi
 GenericName[ca]=Aplicació de calendari
 GenericName[ca@valencia]=Aplicació de calendari
@@ -46,6 +48,7 @@ GenericName[sv]=Kalenderprogram
 GenericName[uk]=Програма-календар
 GenericName[x-test]=xxCalendar applicationxx
 Comment=Manage your tasks and events with Kalendar
+Comment[ar]=أدر المهام والأحداث مع التقويم
 Comment[az]=Tapşırıqlarınızı və tədbirlərinizi "Kalendar" ilə idarə edin
 Comment[ca]=Gestioneu les tasques i esdeveniments amb el Kalendar
 Comment[ca@valencia]=Gestioneu les tasques i esdeveniments amb el Kalendar
