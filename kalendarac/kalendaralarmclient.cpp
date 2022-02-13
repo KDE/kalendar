@@ -4,6 +4,7 @@
 #include "kalendaralarmclient.h"
 #include "alarmnotification.h"
 #include "calendarinterface.h"
+#include "logging.h"
 
 #include <akonadi-calendar_version.h>
 
@@ -82,7 +83,7 @@ void KalendarAlarmClient::deferredInit()
         return;
     }
 
-    qDebug() << "Performing delayed initialization.";
+    qCDebug(Log) << "Performing delayed initialization.";
 
     KCheckableProxyModel *checkableModel = mCalendar->checkableProxyModel();
     checkAllItems(checkableModel);
@@ -93,7 +94,7 @@ void KalendarAlarmClient::deferredInit()
 
 void KalendarAlarmClient::restoreSuspendedFromConfig()
 {
-    qDebug() << "\nrestoreSuspendedFromConfig: Restore suspended alarms from config";
+    qCDebug(Log) << "Restore suspended alarms from config";
     KConfigGroup suspendedGroup(KSharedConfig::openConfig(), "Suspended");
     const auto suspendedAlarms = suspendedGroup.groupList();
 
@@ -103,7 +104,7 @@ void KalendarAlarmClient::restoreSuspendedFromConfig()
         QString txt = suspendedAlarm.readEntry("Text");
         QDateTime occurrence = suspendedAlarm.readEntry("Occurrence", QDateTime());
         QDateTime remindAt = suspendedAlarm.readEntry("RemindAt", QDateTime());
-        qDebug() << "restoreSuspendedFromConfig: Restoring alarm" << uid << "," << txt << "," << remindAt;
+        qCDebug(Log) << "restoreSuspendedFromConfig: Restoring alarm" << uid << "," << txt << "," << remindAt;
 
         if (!uid.isEmpty() && remindAt.isValid()) {
             addNotification(uid, txt, occurrence, remindAt);
@@ -113,7 +114,7 @@ void KalendarAlarmClient::restoreSuspendedFromConfig()
 
 void KalendarAlarmClient::dismiss(AlarmNotification *notification)
 {
-    qDebug() << "Alarm" << notification->uid() << "dismissed";
+    qCDebug(Log) << "Alarm" << notification->uid() << "dismissed";
     removeNotification(notification);
     m_notifications.remove(notification->uid());
     delete notification;
@@ -121,7 +122,7 @@ void KalendarAlarmClient::dismiss(AlarmNotification *notification)
 
 void KalendarAlarmClient::suspend(AlarmNotification *notification)
 {
-    qDebug() << "Alarm " << notification->uid() << "suspended";
+    qCDebug(Log) << "Alarm " << notification->uid() << "suspended";
     notification->setRemindAt(QDateTime(QDateTime::currentDateTime()).addSecs(5 * 60)); // 5 minutes is hardcoded in the suspend action text
     storeNotification(notification);
 }
@@ -196,7 +197,7 @@ void KalendarAlarmClient::addNotification(const QString &uid, const QString &tex
     }
 
     // we either have no notification for this event yet, or one that is scheduled for later and that should be replaced
-    qDebug() << "Adding notification, uid:" << uid << "text:" << text << "remindTime:" << remindTime;
+    qCDebug(Log) << "Adding notification, uid:" << uid << "text:" << text << "remindTime:" << remindTime;
     notification->setText(text);
     notification->setOccurrence(occurrence);
     notification->setRemindAt(remindTime);
@@ -230,14 +231,14 @@ void KalendarAlarmClient::checkAlarms()
     // We do not want to miss any reminders, so don't perform check unless
     // the collections are available and populated.
     if (!collectionsAvailable()) {
-        qDebug() << "Collections are not available; aborting check.";
+        qCDebug(Log) << "Collections are not available; aborting check.";
         return;
     }
 
     const QDateTime from = mLastChecked.addSecs(1);
     mLastChecked = QDateTime::currentDateTime();
 
-    qDebug() << "Check:" << from.toString() << " -" << mLastChecked.toString();
+    qCDebug(Log) << "Check:" << from.toString() << " -" << mLastChecked.toString();
 
     // look for new alarms
     const Alarm::List alarms = mCalendar->alarms(from, mLastChecked, true /* exclude blocked alarms */);
