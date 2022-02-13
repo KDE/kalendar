@@ -7,6 +7,7 @@
   -->
   <id>org.kde.kalendar</id>
   <name>Kalendar</name>
+  <name xml:lang="ar">التقويم</name>
   <name xml:lang="az">Kalendar</name>
   <name xml:lang="ca">Kalendar</name>
   <name xml:lang="ca-valencia">Kalendar</name>
@@ -30,6 +31,7 @@
   <name xml:lang="x-test">xxKalendarxx</name>
   <name xml:lang="zh-CN">Kalendar</name>
   <summary>Manage your tasks and events with speed and ease</summary>
+  <summary xml:lang="ar">أدر المهام والأحداث بسرعة وسهولة</summary>
   <summary xml:lang="az">Tapşırıqlarınızı və təqdbirlərinizi sürətlə və asan idarə edin</summary>
   <summary xml:lang="ca">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
   <summary xml:lang="ca-valencia">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
@@ -52,6 +54,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <developer_name>KDE Community, Clau Cambra and Carl Schwan</developer_name>
+  <developer_name xml:lang="ar">مجتمع كدي،  وكلاو كامبرا وكارل شوان</developer_name>
   <developer_name xml:lang="az">KDE Cəmiyyəti, Clau Cambra və Carl Schwan</developer_name>
   <developer_name xml:lang="ca">Comunitat KDE, Clau Cambra i Carl Schwan</developer_name>
   <developer_name xml:lang="ca-valencia">Comunitat KDE, Clau Cambra i Carl Schwan</developer_name>
@@ -74,6 +77,7 @@
   <developer_name xml:lang="zh-CN">KDE 社区、Clau Cambra 和 Carl Schwan</developer_name>
   <description>
     <p>Kalendar is a calendar application that allows you to manage your tasks and events. Kalendar supports both local calendars as well as a multitude of online calendars: Nextcloud, Google® Calendar, Outlook®, Caldav, and many more.</p>
+    <p xml:lang="ar">التقويم هو تطبيق تقويم يسمح لك بإدارة مهامك وأحداثك. ويدعم كلاً من التقويمات المحلية بالإضافة إلى العديد من التقاويم عبر الإنترنت: Nextcloud و Google® Calendar و Outlook® و Caldav وغيرها الكثير.</p>
     <p xml:lang="az">Kalendar, sizə tapşırıqlarınızı və tədbirlərinizi idarə etməyə imkan verən bir təqvim tətbiqidir. Kalendar, həm yerli həm də NextCloud, Google® Təqvim, Outlook®, CalDav və bir çoxları kimi onlayn təqvimləri dətəkləyir.</p>
     <p xml:lang="ca">El Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, així com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
     <p xml:lang="ca-valencia">El Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, així com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
@@ -91,6 +95,7 @@
     <p xml:lang="uk">Kalendar — програма-календар, за допомогою якої ви можете керувати вашими записами завдань і подій. У Kalendar передбачено підтримку локальних календарів, а також цілого спектру інтернет-календарів: Nextcloud, Google® Calendar, Outlook®, Caldav та багатьох інших.</p>
     <p xml:lang="x-test">xxKalendar is a calendar application that allows you to manage your tasks and events. Kalendar supports both local calendars as well as a multitude of online calendars: Nextcloud, Google® Calendar, Outlook®, Caldav, and many more.xx</p>
     <p>Kalendar gives you many ways to interact with your events. The month view provides an overview of the entire month; the week view presents a detailed hour-by-hour overview of your week; and the schedule view lists all of your upcoming events so that you can easily and quickly plan ahead.</p>
+    <p xml:lang="ar">يمنحك التقويم العديد من الطرق للتفاعل مع الأحداث الخاصة بك. يوفر عرض الشهر نظرة عامة على الشهر بأكمله، ويقدم عرض الأسبوع نظرة عامة مفصلة ساعة بساعة لأسبوعك، ويسرد عرض الجدول جميع الأحداث القادمة بحيث يمكنك التخطيط مسبقًا بسهولة وسرعة.</p>
     <p xml:lang="az">Kalendar, sizə tədbirlərinizi əlaqələndirməyin bir çox yolunu təqdim edir. Ay görünüşü bütün ayın icmalını təqdim edir; həftə görünüşü həftənizin ətraflı saat-saat icmalını təqdim edir; və gündəlik görünüşü bütün qarşıdan gələn hadisələrinizin siyahısını verir ki, siz gələcək işlərinizi asanlıqla və cəld planlaşdıra biləsiniz.</p>
     <p xml:lang="ca">El Kalendar ofereix moltes maneres d'interactuar amb els esdeveniments. La vista mensual proporciona una visió general de tot el mes. La vista setmanal presenta una visió general detallada de la vostra setmana. I la vista de llista enumera tots els propers esdeveniments de manera que pugueu planificar amb facilitat i rapidesa.</p>
     <p xml:lang="ca-valencia">El Kalendar ofereix moltes maneres d'interactuar amb els esdeveniments. La vista mensual proporciona una visió general de tot el mes. La vista setmanal presenta una visió general detallada de la vostra setmana. I la vista de llista enumera tots els propers esdeveniments de manera que pugueu planificar amb facilitat i rapidesa.</p>
@@ -108,6 +113,7 @@
     <p xml:lang="uk">За допомогою Kalendar ви зможете працювати із вашими записами подій у багато способів. На панелі перегляду місяця буде показано загальний огляд подій місяця; на панелі перегляду тижня ви зможете побачити погодинних розклад подій тижня; а на панелі розкладу буде показано список усіх наступних подій, який надасть вам змогу без проблем швидко спланувати свої дії.</p>
     <p xml:lang="x-test">xxKalendar gives you many ways to interact with your events. The month view provides an overview of the entire month; the week view presents a detailed hour-by-hour overview of your week; and the schedule view lists all of your upcoming events so that you can easily and quickly plan ahead.xx</p>
     <p>A tasks view is also available, making it possible for you to manage your tasks and subtasks with Kalendar's powerful tree view and its customisable filtering capabilities.</p>
+    <p xml:lang="ar">يتوفر أيضًا عرض المهام، مما يتيح لك إدارة المهام والمهام الفرعية باستخدام عرض الشجرة القوي للتقويم وإمكانيات التصفية القابلة للتخصيص.</p>
     <p xml:lang="az">Kalendarda budaqlanma görünüşü və onun fərdiləşdirilə bilən filtrləmə imkanları ilə tapşırıqlarınızı və alt tapşırıqlarınızı idarə etməyə imkan verən tapşırıqlar görünüşü də mövcuddur.</p>
     <p xml:lang="ca">També hi ha disponible una vista de tasques, la qual permet gestionar les tasques i subtasques amb la potent vista en arbre del Kalendar i les seves capacitats personalitzables de filtratge.</p>
     <p xml:lang="ca-valencia">També hi ha disponible una vista de tasques, la qual permet gestionar les tasques i subtasques amb la potent vista en arbre del Kalendar i les seues capacitats personalitzables de filtratge.</p>
@@ -125,6 +131,7 @@
     <p xml:lang="uk">Також доступна панель перегляду завдань, за допомогою якої ви можете керувати записами завдань і підзавдань у потужній ієрархічній структурі записів Kalendar із гнучкими можливостями фільтрування.</p>
     <p xml:lang="x-test">xxA tasks view is also available, making it possible for you to manage your tasks and subtasks with Kalendar's powerful tree view and its customisable filtering capabilities.xx</p>
     <p>Kalendar was built with the idea to be usable on desktop, on mobile and everything in between.</p>
+    <p xml:lang="ar">صمم التقويم بفكرة أن تكون قابل للاستخدام على سطح المكتب وعلى الهاتف المحمول وكل شيء بينهما.</p>
     <p xml:lang="az">Kalendar, Masaüstü, mobil və onlar arasındakı cihazlarda istifadə ediləbiləcək şəkildə hazırlanmışdır.</p>
     <p xml:lang="ca">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
     <p xml:lang="ca-valencia">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
@@ -155,6 +162,7 @@
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/kalendar/month_view.png</image>
       <caption>Month View</caption>
+      <caption xml:lang="ar">عرض الشهر</caption>
       <caption xml:lang="az">Ay görünüşü</caption>
       <caption xml:lang="ca">Vista mensual</caption>
       <caption xml:lang="ca-valencia">Vista mensual</caption>
@@ -177,6 +185,7 @@
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/kalendar/week_view.png</image>
       <caption>Week View</caption>
+      <caption xml:lang="ar">عرض الأسبوع</caption>
       <caption xml:lang="az">Həftə görünüşü</caption>
       <caption xml:lang="ca">Vista setmanal</caption>
       <caption xml:lang="ca-valencia">Vista setmanal</caption>
@@ -198,6 +207,7 @@
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/kalendar/schedule_view.png</image>
       <caption>Schedule View</caption>
+      <caption xml:lang="ar">عرض الجدولة</caption>
       <caption xml:lang="az">Gündəlik görünüşü</caption>
       <caption xml:lang="ca">Vista de la Planificació</caption>
       <caption xml:lang="ca-valencia">Vista de la Planificació</caption>
@@ -219,6 +229,7 @@
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/kalendar/task_view.png</image>
       <caption>Task View</caption>
+      <caption xml:lang="ar">عرض المهام</caption>
       <caption xml:lang="az">Tapşırıq görünüşü</caption>
       <caption xml:lang="ca">Vista de tasca</caption>
       <caption xml:lang="ca-valencia">Vista de tasca</caption>
@@ -241,6 +252,7 @@
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/kalendar/mobile_view.png</image>
       <caption>Mobile</caption>
+      <caption xml:lang="ar">المحمول</caption>
       <caption xml:lang="az">Mobile</caption>
       <caption xml:lang="ca">Mòbil</caption>
       <caption xml:lang="ca-valencia">Mòbil</caption>
