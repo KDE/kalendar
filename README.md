@@ -34,7 +34,7 @@ Please note that this is pre-release software and that you may encounter bugs, c
 
 ## Build
 
-**Kalendar requires KFrameworks 5.86 to be installed.** This package version is fairly recent and may not yet be available in your distribution of choice, meaning Kalendar might not work.
+**Kalendar requires KFrameworks 5.90 and version 21.12 of the KDE PIM-related dependencies (e.g. Akonadi, kdepim-runtime) to be installed.** This package version is fairly recent and may not yet be available in your distribution of choice, meaning Kalendar might not work.
 
 **We also strongly recommend you install the `kdepim-runtime` package before starting Kalendar** -- this will provide you with the ability to add calendars from online resources. Having this package will also let Kalendar's backend automatically create a default local calendar. 
 
