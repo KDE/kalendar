@@ -1,7 +1,7 @@
 [Global]
-IconName=org.kde.kalendar
+IconName=appointment-reminder
 DesktopEntry=org.kde.kalendar
-Comment=Manage your tasks and events with Kalendar
+Comment=Reminders about calendar events and tasks
 Comment[ar]=أدر المهام والأحداث مع التقويم
 Comment[az]=Tapşırıqlarınızı və tədbirlərinizi "Kalendar" ilə idarə edin
 Comment[ca]=Gestioneu les tasques i esdeveniments amb el Kalendar
@@ -22,7 +22,7 @@ Comment[sl]=Upravljajte vaše naloge in dogodke s programom Kalendar
 Comment[sv]=Hantera dina uppgifter och händelser med Kalendar
 Comment[uk]=Керуйте вашими записами завдань і подій за допомогою Kalendar
 Comment[x-test]=xxManage your tasks and events with Kalendarxx
-Name=Kalendar
+Name=Calendar Reminders
 Name[ar]=التقويم
 Name[az]=Kalendar
 Name[ca]=Kalendar

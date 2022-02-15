@@ -21,10 +21,10 @@ int main(int argc, char **argv)
         // The program name used internally.
         QStringLiteral("kalendarac"),
         // A displayable program name string.
-        i18nc("@title", "Kalendar Reminders"),
+        i18nc("@title", "Reminders"),
         QStringLiteral(KALENDAR_VERSION_STRING),
         // Short description of what the app does.
-        i18n("Kalendar Reminder Daemon"),
+        i18n("Calendar Reminder Service"),
         // The license this code is released under.
         KAboutLicense::GPL,
         // Copyright Statement.

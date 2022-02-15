@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 [Desktop Entry]
-Name=Kalendar Reminder Client
+Name=Calendar Reminders
 Name[ar]=عميل تذكير التقويم
 Name[az]=Kalendar xatırlatma müştərisi
 Name[ca]=Client de recordatori Kalendar
@@ -21,10 +21,10 @@ Name[sv]=Kalendar påminnelseklient
 Name[uk]=Клієнт нагадування Kalendar
 Name[x-test]=xxKalendar Reminder Clientxx
 Exec=kalendarac
-Icon=org.kde.kalendar
+Icon=appointment-reminder
 Type=Application
 Categories=Qt;KDE;
-GenericName=Kalendar Reminder Daemon Client
+GenericName=Reminder Daemon Client
 GenericName[ar]=عميل خدمة تذكير التقويم
 GenericName[az]=Kalendar xatırlatma xidməti müştərisi
 GenericName[ca]=Client del dimoni de recordatori Kalendar
