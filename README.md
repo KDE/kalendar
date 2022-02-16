@@ -65,9 +65,9 @@ Yes. We support:
 
 #### Will support for Todoist/Proton Calendar/etc. be added?
 
-Online event and task services such as Todoist that have noin-standard implementations of things such as tasks and calendars depend on someone taking the time to write specific code to support them. That doesn't mean this will never happen, but it will depend on how popular these services are and on someone being willing to maintain support for them.
+Online event and task services such as Todoist that have non-standard implementations of things such as tasks and calendars depend on someone taking the time to write specific code to support them. That doesn't mean this will never happen, but it will depend on how popular these services are and on someone being willing to maintain support for them.
 
-Proton Calendar is specifically problematic, and it is impossible for us to support until Proton provides a way for us to interact and interface with the calendar (i.e. through the bridge application). 
+Proton Calendar specifically is problematic, and it is impossible for us to support until Proton provides a way for us to interact and interface with the calendar (i.e. through the bridge application). 
 
 #### Does Kalendar work with Plasma's digital clock calendar widget?
 
@@ -83,11 +83,11 @@ Yes. It is what allows us to support all the services that we support, and provi
 
 While we’re actively working on reducing our number of external dependencies, these removals often take time and require reimplementing things in a new way, which is not always easy.
 
-Other dependencies we require are there so we don’t bloat programs copying functionally that can be provided by a common external package.
+Other dependencies we require are there so we don’t bloat Kalendar by copying functionality that can be provided by an external package also used by other applications.
 
 #### Will Kalendar replace KOrganizer?
 
-For the moment, no.
+For the time being, no.
 
 KOrganizer has an incredibly expansive feature set, which makes it a powerful tool for power users. Kalendar is instead focused on providing an approachable calendar for Plasma. You can expect great usability and a visually appealing interface that works on both desktop and mobile.
 
@@ -100,7 +100,6 @@ We are actively discussing this, but it is not as easy for Kalendar as for other
 #### How can I install Kalendar on Ubuntu/Kubuntu/Debian? Is there a deb package?
 
 This is unfortunately out of our hands -- we have packages on Neon, but will almost certainly not be compatible with Ubuntu. If you'd like Kalendar on Ubuntu, Kubuntu, or another Debian derivative, ask the your distribution's packagers (nicely!) if they'd like to package Kalendar.
-
 
 ## License
 
