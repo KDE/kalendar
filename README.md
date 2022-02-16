@@ -65,9 +65,9 @@ Yes. We support:
 
 #### Will support for Todoist/Proton Calendar/etc. be added?
 
-Online event and task services such as Todoist that have non-standard implementations of things such as tasks and calendars depend on someone taking the time to write specific code to support them. That doesn't mean this will never happen, but it will depend on how popular these services are and on someone being willing to maintain support for them.
+Online event/task services such as Todoist that have non-standard implementations of calendars/task lists depend on someone taking the time to write code that adds support for the specific service in question. When (or if) that will happen will depend on how popular the service is, and on someone being willing to maintain support for said service.
 
-Proton Calendar specifically is problematic, and it is impossible for us to support until Proton provides a way for us to interact and interface with the calendar (i.e. through the bridge application). 
+Proton Calendar specifically is problematic, and it is impossible for us to support until Proton provides a way for us to interact and interface with the calendar (i.e. with the bridge application). 
 
 #### Does Kalendar work with Plasma's digital clock calendar widget?
 
