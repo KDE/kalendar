@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC0-1.0
 
 # Kalendar
 
-Kalendar is a Kirigami-based calendar application that uses Akonadi. It lets you add, edit and delete events from local and remote accounts of your choice, while keeping changes synchronised across your Plasma desktop or phone.
+Kalendar is a Kirigami-based calendar and task management application that uses Akonadi. It lets you add, edit and delete events and tasks from local and remote accounts of your choice, while keeping changes synchronised across your Plasma desktop or phone.
 
 **Kalendar is still under heavy development, and has no stable releases yet.** We do, however, welcome suggestions! Get involved and join our Matrix channel: #kalendar:kde.org
 
@@ -30,8 +30,6 @@ Installation for Fedora
 sudo dnf install kalendar
 ```
 
-Please note that this is pre-release software and that you may encounter bugs, crashes, or errors.
-
 ## Build
 
 **Kalendar requires KFrameworks 5.88 and version 21.12 of the KDE PIM-related dependencies (e.g. Akonadi, kdepim-runtime) to be installed.** This package version is fairly recent and may not yet be available in your distribution of choice, meaning Kalendar might not work.
@@ -50,6 +48,59 @@ mkdir build && cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=~/.local/kde -GNinja
 ninja
 ```
+
+## Frequently asked questions
+
+### Does Kalendar support Google/Exchange/Nextcloud calendars?
+
+Yes. We support:
+
+- CalDAV calendars (e.g. Nextcloud)
+- Google calendars
+- Exchange calendars
+- iCal calendar files (.ics)
+- iCal calendar folders
+- Kolab groupware servers
+- Open-Xchange groupware servers
+
+#### Will support for Todoist/Proton Calendar/etc. be added?
+
+Online event and task services such as Todoist that have noin-standard implementations of things such as tasks and calendars depend on someone taking the time to write specific code to support them. That doesn't mean this will never happen, but it will depend on how popular these services are and on someone being willing to maintain support for them.
+
+Proton Calendar is specifically problematic, and it is impossible for us to support until Proton provides a way for us to interact and interface with the calendar (i.e. through the bridge application). 
+
+#### Does Kalendar work with Plasma's digital clock calendar widget?
+
+Yes. This can be configured by right-clicking on the digital clock -> Configure digital clock... -> Calendar -> enable PIM Events Plugin
+
+This should reveal a new section in the widget settings, letting you configure which calendars' events will be visible in the widget.
+
+#### Does Kalendar use Akonadi?
+
+Yes. It is what allows us to support all the services that we support, and provides the core functionality of Kalendar (fetching, editing, creating, and deleting events from remote resources).
+
+#### Why all the dependencies?
+
+While we’re actively working on reducing our number of external dependencies, these removals often take time and require reimplementing things in a new way, which is not always easy.
+
+Other dependencies we require are there so we don’t bloat programs copying functionally that can be provided by a common external package.
+
+#### Will Kalendar replace KOrganizer?
+
+For the moment, no.
+
+KOrganizer has an incredibly expansive feature set, which makes it a powerful tool for power users. Kalendar is instead focused on providing an approachable calendar for Plasma. You can expect great usability and a visually appealing interface that works on both desktop and mobile.
+
+The intention is for the two apps to co-exist and for you to have the choice of using the one best suited to your needs. If you really need the advanced and expansive feature-set of KOrganizer, you will want to use that. If you want a versatile calendar application that is nice to use and you can comfortably use on your desktop and on your phone, Kalendar will fill that role well!
+
+#### Will there be a flatpak?
+
+We are actively discussing this, but it is not as easy for Kalendar as for other applications due to our reliance on an external service in Akonadi. We will eventually find a solution for this, but it may take some time.
+
+#### How can I install Kalendar on Ubuntu/Kubuntu/Debian? Is there a deb package?
+
+This is unfortunately out of our hands -- we have packages on Neon, but will almost certainly not be compatible with Ubuntu. If you'd like Kalendar on Ubuntu, Kubuntu, or another Debian derivative, ask the your distribution's packagers (nicely!) if they'd like to package Kalendar.
+
 
 ## License
 
