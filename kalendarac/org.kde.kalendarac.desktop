@@ -3,11 +3,27 @@
 
 [Desktop Entry]
 Name=Calendar Reminders
+Name[ar]=عميل تذكير
+Name[ca]=Recordatoris del calendari
+Name[en_GB]=Calendar Reminders
+Name[es]=Recordatorios de calendario
+Name[nl]=Agendaherinneringen
+Name[sv]=Kalenderpåminnelser
+Name[uk]=Нагадування календаря
+Name[x-test]=xxCalendar Remindersxx
 Exec=kalendarac
 Icon=appointment-reminder
 Type=Application
 Categories=Qt;KDE;
 GenericName=Reminder Daemon Client
+GenericName[ar]=عميل خدمة تذكير
+GenericName[ca]=Client del dimoni de recordatoris
+GenericName[en_GB]=Reminder Daemon Client
+GenericName[es]=Cliente del demonio de recordatorios
+GenericName[nl]=Client voor daemon voor herinneringen
+GenericName[sv]=Påminnelsedemonklient
+GenericName[uk]=Клієнт фонової служби нагадувань
+GenericName[x-test]=xxReminder Daemon Clientxx
 Terminal=false
 X-KDE-autostart-phase=2
 X-KDE-autostart-condition=kalendaracrc:General:Autostart:true

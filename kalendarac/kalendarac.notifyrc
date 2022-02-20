@@ -2,7 +2,23 @@
 IconName=appointment-reminder
 DesktopEntry=org.kde.kalendar
 Comment=Reminders about calendar events and tasks
+Comment[ar]=مذكر بأحداث التقويم والمهام
+Comment[ca]=Recordatoris dels esdeveniments i les tasques del calendari
+Comment[en_GB]=Reminders about calendar events and tasks
+Comment[es]=Recordatorios de eventos de calendario y tareas
+Comment[nl]=Herinneringen over agenda-afspraken en taken
+Comment[sv]=Påminnelser om kalenderhändelser och uppgifter
+Comment[uk]=Нагадування щодо подій та завдань з календаря
+Comment[x-test]=xxReminders about calendar events and tasksxx
 Name=Calendar Reminders
+Name[ar]=عميل تذكير
+Name[ca]=Recordatoris del calendari
+Name[en_GB]=Calendar Reminders
+Name[es]=Recordatorios de calendario
+Name[nl]=Agendaherinneringen
+Name[sv]=Kalenderpåminnelser
+Name[uk]=Нагадування календаря
+Name[x-test]=xxCalendar Remindersxx
 
 [Event/alarm]
 Name=Alarm
