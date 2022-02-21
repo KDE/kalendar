@@ -7,11 +7,15 @@
 #include <QHash>
 #include <QTimer>
 
-#include <akonadi_version.h>
 #include <Akonadi/EntityTreeModel>
 #include <Akonadi/ServerManager>
+#include <akonadi-calendar_version.h>
+#include <akonadi_version.h>
+#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
+#include <Akonadi/ETMCalendar>
+#else
 #include <Akonadi/Calendar/ETMCalendar>
-
+#endif
 class AlarmNotification;
 
 class KalendarAlarmClient : public QObject

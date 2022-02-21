@@ -6,8 +6,16 @@
 #pragma once
 #include "kalendarconfig.h"
 #include "models/actionsmodel.h"
+
+#include <akonadi-calendar_version.h>
+#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
+#include <Akonadi/ETMCalendar>
+#include <Akonadi/ICalImporter>
+#else
 #include <Akonadi/Calendar/ETMCalendar>
 #include <Akonadi/Calendar/ICalImporter>
+#endif
+
 #include <KActionCollection>
 #include <QActionGroup>
 #include <QObject>

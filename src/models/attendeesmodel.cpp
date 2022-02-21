@@ -22,6 +22,7 @@
 #include <AkonadiCore/SearchQuery>
 #endif
 #include <Akonadi/Contact/ContactSearchJob>
+#include <akonadi_con>
 
 AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
     : QAbstractListModel(parent)

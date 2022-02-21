@@ -11,6 +11,7 @@
 #include "calendarmanager.h"
 
 // Akonadi
+#include "kalendar_debug.h"
 #include <Akonadi/AgentInstanceModel>
 #include <Akonadi/AgentManager>
 #include <Akonadi/AttributeFactory>
@@ -26,8 +27,12 @@
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/ItemMoveJob>
 #include <Akonadi/Monitor>
-#include "kalendar_debug.h"
+#include <akonadi-calendar_version.h>
+#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
+#include <Akonadi/History>
+#else
 #include <Akonadi/Calendar/History>
+#endif
 #include <EventViews/Prefs>
 #include <KCheckableProxyModel>
 #include <KLocalizedString>
@@ -35,7 +40,12 @@
 #include <QDebug>
 #include <QPointer>
 #include <QRandomGenerator>
+
+#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
+#include <Akonadi/ETMCalendar>
+#else
 #include <etmcalendar.h>
+#endif
 
 using namespace Akonadi;
 

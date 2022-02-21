@@ -2,8 +2,13 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #pragma once
+#include <QObject>
+#include <akonadi-calendar_version.h>
+#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
+#include <Akonadi/ETMCalendar>
+#else
 #include <Akonadi/Calendar/ETMCalendar>
-#include <Akonadi/Calendar/IncidenceChanger>
+#endif
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
 #include <EventViews/IncidenceTreeModel>
