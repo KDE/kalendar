@@ -2,12 +2,17 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #pragma once
-
+#include <QObject>
+#include <akonadi-contact_version.h>
+#if AKONADICONTACT_VERSION > QT_VERSION_CHECK(5, 19, 40)
+#include <Akonadi/ContactsFilterProxyModel>
+#include <Akonadi/ContactsTreeModel>
+#else
 #include <Akonadi/Contact/ContactsFilterProxyModel>
 #include <Akonadi/Contact/ContactsTreeModel>
+#endif
 #include <QObject>
 #include <QSortFilterProxyModel>
-#include <akonadi_version.h>
 #include <Akonadi/EntityMimeTypeFilterModel>
 
 class QSortFilterProxyModel;

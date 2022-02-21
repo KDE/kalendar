@@ -1,13 +1,18 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
-#include <QObject>
-#include <akonadi_version.h>
+#include "contactsmanager.h"
 #include <Akonadi/Item>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Monitor>
-#include "contactsmanager.h"
+#include <QObject>
+#include <akonadi-contact_version.h>
+#include <akonadi_version.h>
+#if AKONADICONTACT_VERSION > QT_VERSION_CHECK(5, 19, 40)
+#include <Akonadi/EmailAddressSelectionModel>
+#else
 #include <Akonadi/Contact/EmailAddressSelectionModel>
+#endif
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 #include <KDescendantsProxyModel>
