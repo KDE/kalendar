@@ -18,6 +18,7 @@
   <name xml:lang="es">Kalendar</name>
   <name xml:lang="fi">Kalendar</name>
   <name xml:lang="fr">Kalendar</name>
+  <name xml:lang="hu">Kalendar</name>
   <name xml:lang="it">Kalendar</name>
   <name xml:lang="ko">Kalendar</name>
   <name xml:lang="nl">Kalendar</name>
@@ -42,6 +43,7 @@
   <summary xml:lang="es">Gestione tareas y eventos con rapidez y facilidad</summary>
   <summary xml:lang="fi">Hallitse tehtäviä ja tapahtumia nopeasti ja vaivatta</summary>
   <summary xml:lang="fr">Gérer vos tâches et vos évènements avec efficacité et facilité</summary>
+  <summary xml:lang="hu">Kezelje feladatait és eseményeit gyorsan és könnyedén</summary>
   <summary xml:lang="it">Gestisci le tue attività e gli eventi con velocità e facilità</summary>
   <summary xml:lang="nl">Uw taken en afspraken beheren met snelheid en gemak</summary>
   <summary xml:lang="pl">Zarządzaj swoimi zadaniami i wydarzeniami szybko i z łatwością</summary>
@@ -64,6 +66,7 @@
   <developer_name xml:lang="es">La Comunidad de KDE, Clau Cambra y Carl Schwan</developer_name>
   <developer_name xml:lang="fi">KDE-yhteisö, Clau Cambra ja Carl Schwan</developer_name>
   <developer_name xml:lang="fr">Communauté KDE, Clau Cambra et Carl Schwan</developer_name>
+  <developer_name xml:lang="hu">A KDE közösség, Clau Cambra és Carl Schwan</developer_name>
   <developer_name xml:lang="it">Comunità KDE, Clau Cambra e Carl Schwan</developer_name>
   <developer_name xml:lang="ko">KDE 커뮤니티, Clau Cambra, Carl Schwan</developer_name>
   <developer_name xml:lang="nl">KDE-gemeenschap, Clau Cambra en Carl Schwan</developer_name>
@@ -86,6 +89,7 @@
     <p xml:lang="es">Kalendar es una aplicación de calendarios que permite la gestión de tareas y eventos. Kalendar puede usar calendarios locales y muchos tipos de calendarios en línea: Nextcloud, Google® Calendar, Outlook® y Caldav, entre otros.</p>
     <p xml:lang="fi">Kalendar on kalenterisovellus, jolla hallita tehtäviä ja tapahtumia. Se tukee niin paikallisia kuin monia verkkokalentereitakin: Nextcloudia, Googlen® kalenteria, Outlookia®, CalDAVia ja monia muita.</p>
     <p xml:lang="fr">Kalendar est une application d'agendas, vous permettant de gérer vos tâches et vos évènements. Kalendar prend en charge les calendriers locaux ainsi qu'une multitude de calendriers en ligne comme Nextcloud, Google® Calendar, Outlook®, Caldav, et bien d'autres.</p>
+    <p xml:lang="hu">A Kalendar egy naptáralkalmazás, amely lehetővé teszi feladatai és eseményei kezelését. Támogatja a helyi naptárakat és számos online naptárat: Nextcloud, Google® Calendar, Outlook®, Caldav, és sok-sok egyebet.</p>
     <p xml:lang="it">Kalendar è un'applicazione di calendario che ti consente di gestire le tue attività e gli eventi. Kalendar supporta sia i calendari locali che una moltitudine di calendari in linea: Nextcloud, Google® Calendar, Outlook®, Caldav e molti altri.</p>
     <p xml:lang="nl">Kalendar is een agenda-toepassing die u uw taken en afspraken laat beheren. Kalendar ondersteunt zowel lokale agenda's alsook een veelheid aan online agenda's: Nextcloud, Google® Calendar, Outlook®, Caldav en vele anderen.</p>
     <p xml:lang="pl">Kalendar jest aplikacją kalendarza, która umożliwia zarządzanie twoimi zadaniami i wydarzeniami. Kalendar obsługuje zarówno kalendarze lokalne, a także mnogość kalendarzy zdalnych: Nextcloud, Google® Calendar, Outlook®, Caldav i wiele innych.</p>
@@ -104,6 +108,7 @@
     <p xml:lang="es">Kalendar le proporciona muchos modos de interactuar con los eventos. La vista mensual muestra un resumen de todo el mes; la vista semanal presenta un detallado resumen de la semana por horas; y la vista de planificación lista todos los eventos futuros para que pueda programarlos con antelación de una forma fácil y rápida.</p>
     <p xml:lang="fi">Kalendar tarjoaa useita tapoja vuorovaikuttaa tapahtumiin. Kuukausinäkymä tarjoaa koko kuun yleisnäkymän, viikkonäkymä antaa yksityiskohtaisen tunneittaisen näkymän koko viikosta ja aikataulunäkymä luettelee tulevat tapahtumat, jotta eteenpäin suunnitteleminen on helppoa.</p>
     <p xml:lang="fr">Kalendar vous offre de nombreuses façons d'interagir avec vos évènements. L'affichage par mois vous donne un aperçu de l'ensemble du mois. L'affichage par semaines vous présente un aperçu détaillé heure par heure de votre semaine. L'affichage en calendrier vous présente une liste de tous vos évènements à venir afin que vous puissiez facilement et rapidement les planifier.</p>
+    <p xml:lang="hu">Számos módon kezelheti az eseményeit. A havi nézetben áttekinthet egy-egy hónapot; a heti nézetben óráról-órára megtervezheti egy hetét; az ütemezés nézetben pedig listázhatja az összes soron következő eseményt, egyszerűen és gyorsan tervezhet előre.</p>
     <p xml:lang="it">Kalendar ti offre molti modi per interagire con i tuoi eventi. La vista mensile fornisce una panoramica dell'intero mese; la vista settimanale presenta una panoramica dettagliata ora per ora della tua settimana e la visualizzazione delle pianificazioni elenca tutti i tuoi eventi imminenti in modo da poter pianificare in anticipo in modo facile e veloce.</p>
     <p xml:lang="nl">Kalendar geeft u veel manieren om te interageren met uw afspraken. De maandweergave biedt een overzicht over de gehele maand; de weekweergave presenteert een gedetailleerde uur-voor-uur overzicht van uw week; en de planningweergavelijsten al uw komende afspraken zodat u gemakkelijk en snel vooruit kunt plannen.</p>
     <p xml:lang="pl">Kalendarz daje wiele sposobów do obsługi twoich wydarzeń. Widok miesiąca daje pogląd na cały miesiąc; widok tygodnia daje pogląd na tydzień godzina po godzinie; a widok harmonogramu zestawia wszystkie twoje nadchodzące wydarzenia tak, abyś mógł planować na przyszłość.</p>
@@ -122,6 +127,7 @@
     <p xml:lang="es">También dispone de una vista de tareas, haciendo posible la gestión de tareas y subtareas con la potente vista de árbol de Kalendar y sus personalizables capacidades de filtrado.</p>
     <p xml:lang="fi">Käytettävissä on myös tehtävänäkymä, jolla tehtäviä voi hallita Kalendarin tehokkaassa puunäkymässä mukautettavine suodatusominaisuuksineen.</p>
     <p xml:lang="fr">Un affichage par tâches est aussi disponible. Il vous permet ainsi de gérer vos tâches et sous-tâches avec l'affichage très efficace en arborescence et des capacités de filtrage personnalisé.</p>
+    <p xml:lang="hu">A feladat nézet sem maradt ki, melyben a Kalendarból ismert hatékony faszerkezetben kezelhetőek a feladatok és részfeladatok, testre szabható szűrőkkel.</p>
     <p xml:lang="it">È inoltre disponibile una visualizzazione delle attività, che consente di gestire le attività e le sottoattività con la potente visualizzazione ad albero di Kalendar e le sue capacità di filtraggio personalizzabili.</p>
     <p xml:lang="nl">Een takenweergave is ook beschikbaar, waarmee u uw taken en subtaken met de krachtige boomstructuur weergave van Kalendar en zijn aanpasbare mogelijkheden voor filtering kunt beheren.</p>
     <p xml:lang="pl">Dostępny jest także widok zadań, co umożliwia zarządzanie zadaniami i ich podzadaniami, dzięki rozbudowanemu widokowi drzewa i możliwością dostosowania jego filtrowania.</p>
@@ -141,6 +147,7 @@
     <p xml:lang="es">Kalendar se ha creado con la idea de que se pueda usar en el escritorio, en el móvil y en cualquier dispositivo entre ambos.</p>
     <p xml:lang="fi">Kalendar on luotu olemaan hyödyksi niin työpöydällä, mobiilissa kuin kaikkialla siltä väliltäkin.</p>
     <p xml:lang="fr">Kalendar a été conçu avec l'idée d'être utilisable sur un ordinateur de bureau, sur un téléphone portable et dans tous les périphériques intermédiaires.</p>
+    <p xml:lang="hu">A Kalendart úgy tervezték, hogy használható legyen mindenféle eszközön, az asztali számítógépektől kezdve a mobiltelefonokig.</p>
     <p xml:lang="it">Kalendar è stato creato con l'idea di essere utilizzabile su desktop, mobile e tutto il resto.</p>
     <p xml:lang="nl">Kalendar is gebouwd met het idee om bruikbaar te zijn op een bureaublad, op een mobiel en alles er tussenin.</p>
     <p xml:lang="pl">Kalendar został zbudowany z zamysłem bycia użytecznym na urządzeniach biurkowych, przenośnych i wszystkich innych.</p>
@@ -172,6 +179,7 @@
       <caption xml:lang="es">Vista mensual</caption>
       <caption xml:lang="fi">Kuukausinäkymä</caption>
       <caption xml:lang="fr">Affichage en mois</caption>
+      <caption xml:lang="hu">Havi nézet</caption>
       <caption xml:lang="it">Vista mensile</caption>
       <caption xml:lang="nl">Maandweergave</caption>
       <caption xml:lang="pl">Widok miesiąca</caption>
@@ -195,6 +203,7 @@
       <caption xml:lang="es">Vista semanal</caption>
       <caption xml:lang="fi">Viikkonäkymä</caption>
       <caption xml:lang="fr">Affichage en semaines</caption>
+      <caption xml:lang="hu">Heti nézet</caption>
       <caption xml:lang="it">Vista settimanale</caption>
       <caption xml:lang="nl">Weekweergave</caption>
       <caption xml:lang="pl">Widok tygodnia</caption>
@@ -217,6 +226,7 @@
       <caption xml:lang="es">Vista de planificación</caption>
       <caption xml:lang="fi">Aikataulunäkymä</caption>
       <caption xml:lang="fr">Affichage en calendrier</caption>
+      <caption xml:lang="hu">Ütemezés nézet</caption>
       <caption xml:lang="it">Vista delle pianificazioni</caption>
       <caption xml:lang="nl">Periodieke transactie venster</caption>
       <caption xml:lang="pl">Widok harmonogramu</caption>
@@ -239,6 +249,7 @@
       <caption xml:lang="es">Vista de tareas</caption>
       <caption xml:lang="fi">Tehtävänäkymä</caption>
       <caption xml:lang="fr">Affichage en tâches</caption>
+      <caption xml:lang="hu">Feladat nézet</caption>
       <caption xml:lang="it">Vista delle attività</caption>
       <caption xml:lang="nl">Taakweergave</caption>
       <caption xml:lang="pl">Widok zadań</caption>
@@ -262,6 +273,7 @@
       <caption xml:lang="es">Móvil</caption>
       <caption xml:lang="fi">Mobiili</caption>
       <caption xml:lang="fr">Mobile</caption>
+      <caption xml:lang="hu">Mobil</caption>
       <caption xml:lang="it">Mobile</caption>
       <caption xml:lang="nl">Mobiel</caption>
       <caption xml:lang="pl">Telefon komórkowy</caption>
