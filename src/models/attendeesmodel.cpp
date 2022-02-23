@@ -21,8 +21,7 @@
 #include <AkonadiCore/ItemFetchScope>
 #include <AkonadiCore/SearchQuery>
 #endif
-#include <akonadi-contact_version.h>
-#if AKONADICONTACT_VERSION > QT_VERSION_CHECK(5, 19, 40)
+#if AKONADI_VERSION > QT_VERSION_CHECK(5, 19, 40)
 #include <Akonadi/ContactSearchJob>
 #else
 #include <Akonadi/Contact/ContactSearchJob>

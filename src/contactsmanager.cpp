@@ -6,9 +6,8 @@
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Monitor>
 #include <QObject>
-#include <akonadi-contact_version.h>
 #include <akonadi_version.h>
-#if AKONADICONTACT_VERSION > QT_VERSION_CHECK(5, 19, 40)
+#if AKONADI_VERSION > QT_VERSION_CHECK(5, 19, 40)
 #include <Akonadi/EmailAddressSelectionModel>
 #else
 #include <Akonadi/Contact/EmailAddressSelectionModel>
