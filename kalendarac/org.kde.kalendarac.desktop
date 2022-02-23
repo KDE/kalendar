@@ -4,6 +4,7 @@
 [Desktop Entry]
 Name=Calendar Reminders
 Name[ar]=عميل تذكير
+Name[az]=Təqvim xatırlatmaları
 Name[ca]=Recordatoris del calendari
 Name[en_GB]=Calendar Reminders
 Name[es]=Recordatorios de calendario
@@ -20,6 +21,7 @@ Type=Application
 Categories=Qt;KDE;
 GenericName=Reminder Daemon Client
 GenericName[ar]=عميل خدمة تذكير
+GenericName[az]=Xatırlatma xidməti müştərisi
 GenericName[ca]=Client del dimoni de recordatoris
 GenericName[en_GB]=Reminder Daemon Client
 GenericName[es]=Cliente del demonio de recordatorios
