@@ -268,7 +268,7 @@ Kirigami.OverlayDrawer {
                         text: if(incidenceInfo.incidenceData.startTime.toDateString() === incidenceInfo.incidenceData.endTime.toDateString()) {
                             return incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale());
                         } else if (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) && !isNaN(incidenceInfo.incidenceData.endTime.getTime())) {
-                            incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale()) + " - " + incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
+                            incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale()) + "–" + incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
                         } else if (isNaN(incidenceInfo.incidenceData.startTime.getTime()) && !isNaN(incidenceInfo.incidenceData.endTime.getTime())) {
                             return incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
                         } else if (isNaN(incidenceInfo.incidenceData.endTime.getTime()) && !isNaN(incidenceInfo.incidenceData.startTime.getTime())) {
@@ -291,7 +291,7 @@ Kirigami.OverlayDrawer {
 
                         text: {
                             if(incidenceInfo.incidenceData.startTime.toTimeString() != incidenceInfo.incidenceData.endTime.toTimeString()) {
-                                incidenceInfo.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + " - " + incidenceInfo.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                                incidenceInfo.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + "–" + incidenceInfo.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
                             } else if (incidenceInfo.incidenceData.startTime.toTimeString() == incidenceInfo.incidenceData.endTime.toTimeString()) {
                                 incidenceInfo.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
                             }

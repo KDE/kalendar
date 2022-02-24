@@ -1062,7 +1062,7 @@ Kirigami.Page {
                                                                 id: timeLabel
                                                                 Layout.fillWidth: true
                                                                 horizontalAlignment: Text.AlignRight
-                                                                text: modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) + " - " + modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
+                                                                text: modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) + "–" + modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
                                                                 wrapMode: Text.Wrap
                                                                 renderType: Text.QtRendering
                                                                 color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :

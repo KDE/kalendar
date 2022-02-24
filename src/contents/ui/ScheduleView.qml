@@ -278,7 +278,7 @@ Kirigami.Page {
                                         nextDay = new Date(nextDay.getFullYear(), nextDay.getMonth(), 0);
                                     }
 
-                                    return periodStartDate.toLocaleDateString(Qt.locale(), "dddd <b>dd</b>") + " - " + nextDay.toLocaleDateString(Qt.locale(), "dddd <b>dd</b> MMMM");
+                                    return periodStartDate.toLocaleDateString(Qt.locale(), "dddd <b>dd</b>") + "–" + nextDay.toLocaleDateString(Qt.locale(), "dddd <b>dd</b> MMMM");
                                 }
                                 visible: Kalendar.Config.showWeekHeaders &&
                                     periodStartDate !== undefined &&
