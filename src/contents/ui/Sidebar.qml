@@ -470,7 +470,28 @@ Kirigami.OverlayDrawer {
                                 }
                                 leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
+                                Connections {
+                                    target: AgentConfiguration
+                                    function onAgentProgressChanged(agentData) {
+                                        if(agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource &&
+                                            agentData.status === AgentConfiguration.Running) {
+
+                                            loadingIndicator.visible = true;
+                                        } else if (agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource) {
+                                            loadingIndicator.visible = false;
+                                        }
+                                    }
+                                }
+
                                 trailing: RowLayout {
+                                    QQC2.BusyIndicator {
+                                        id: loadingIndicator
+                                        Layout.fillHeight: true
+                                        padding: 0
+                                        visible: false
+                                        running: visible
+                                    }
+
                                     Kirigami.Icon {
                                         implicitWidth: Kirigami.Units.iconSizes.small
                                         implicitHeight: Kirigami.Units.iconSizes.small

@@ -10,6 +10,7 @@
 #include <Akonadi/AgentTypeModel>
 
 #include <KWindowSystem>
+#include <QDebug>
 #include <QPointer>
 
 using namespace Akonadi;
@@ -19,6 +20,8 @@ AgentConfiguration::AgentConfiguration(QObject *parent)
     , m_runningAgents(nullptr)
     , m_availableAgents(nullptr)
 {
+    connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceProgressChanged, this, &AgentConfiguration::processInstanceProgressChanged);
+    connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceStatusChanged, this, &AgentConfiguration::processInstanceProgressChanged);
 }
 
 AgentConfiguration::~AgentConfiguration() = default;
@@ -128,4 +131,15 @@ void AgentConfiguration::setupRemove(Akonadi::AgentInstance instance)
     if (instance.isValid()) {
         Akonadi::AgentManager::self()->removeInstance(instance);
     }
+}
+
+void AgentConfiguration::processInstanceProgressChanged(const Akonadi::AgentInstance &instance)
+{
+    const QVariantMap instanceData = {
+        {QStringLiteral("instanceId"), instance.identifier()},
+        {QStringLiteral("progress"), instance.progress()}, // Not very reliable so beware
+        {QStringLiteral("status"), instance.status()},
+    };
+
+    Q_EMIT agentProgressChanged(instanceData);
 }
