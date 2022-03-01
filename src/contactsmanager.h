@@ -4,7 +4,7 @@
 #pragma once
 #include <QObject>
 #include <akonadi_version.h>
-#if AKONADI_VERSION > QT_VERSION_CHECK(5, 19, 40)
+#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 19, 40)
 #include <Akonadi/ContactsFilterProxyModel>
 #include <Akonadi/ContactsTreeModel>
 #else
