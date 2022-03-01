@@ -4,6 +4,7 @@
 
 
 add_executable(kalendarac)
+add_definitions(-DTRANSLATION_DOMAIN=\"kalendarac\")
 
 qt_add_dbus_interface(kalendarac_SRCS org.kde.calendar.Calendar.xml calendarinterface)
 
