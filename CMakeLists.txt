@@ -72,7 +72,6 @@ add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055800)
 add_subdirectory(src)
-add_subdirectory(kalendarac)
 
 if (BUILD_TESTING)
     add_subdirectory(autotests)

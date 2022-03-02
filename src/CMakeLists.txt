@@ -50,7 +50,7 @@ set(kalendar_SRCS
     models/todosortfilterproxymodel.h
     resources.qrc
 )
-qt_add_dbus_adaptor(kalendar_SRCS ../kalendarac/org.kde.calendar.Calendar.xml kalendarapplication.h KalendarApplication)
+qt_add_dbus_adaptor(kalendar_SRCS org.kde.calendar.Calendar.xml kalendarapplication.h KalendarApplication)
 
 target_sources(kalendar PRIVATE
     ${kalendar_SRCS})
