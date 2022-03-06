@@ -216,6 +216,8 @@ protected:
     void itemChanged(const Akonadi::Item &item) override;
 
 private:
+    void setNewIncidence(KCalendarCore::Incidence::Ptr incidence);
+
     KCalendarCore::Incidence::Ptr m_incidence;
     KCalendarCore::Incidence::Ptr m_originalIncidence;
     qint64 m_collectionId = -1; // For when we want to edit, this is temporary
