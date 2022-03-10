@@ -47,6 +47,6 @@ private:
     void setupRemove(Akonadi::AgentInstance instance);
     void setupRestart(Akonadi::AgentInstance instance);
 
-    Akonadi::AgentFilterProxyModel *m_runningAgents;
-    Akonadi::AgentFilterProxyModel *m_availableAgents;
+    Akonadi::AgentFilterProxyModel *m_runningAgents = nullptr;
+    Akonadi::AgentFilterProxyModel *m_availableAgents = nullptr;
 };

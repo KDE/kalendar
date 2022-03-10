@@ -17,8 +17,6 @@ using namespace Akonadi;
 
 AgentConfiguration::AgentConfiguration(QObject *parent)
     : QObject(parent)
-    , m_runningAgents(nullptr)
-    , m_availableAgents(nullptr)
 {
     connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceProgressChanged, this, &AgentConfiguration::processInstanceProgressChanged);
     connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceStatusChanged, this, &AgentConfiguration::processInstanceProgressChanged);

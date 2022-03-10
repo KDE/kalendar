@@ -98,7 +98,7 @@ private:
     KActionCollection mCollection;
     KActionCollection mSortCollection;
     QWindow *m_window = nullptr;
-    QActionGroup *m_viewGroup = nullptr;
+    QActionGroup *const m_viewGroup;
     QActionGroup *m_todoViewOrderGroup = nullptr;
     QActionGroup *m_todoViewSortGroup = nullptr;
     KalCommandBarModel *m_actionModel = nullptr;
