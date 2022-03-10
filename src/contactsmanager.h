@@ -3,6 +3,7 @@
 
 #pragma once
 #include <QObject>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 19, 40)
 #include <Akonadi/ContactsFilterProxyModel>
@@ -10,6 +11,10 @@
 #else
 #include <Akonadi/Contact/ContactsFilterProxyModel>
 #include <Akonadi/Contact/ContactsTreeModel>
+#endif
+#else
+#include <Akonadi/ContactsFilterProxyModel>
+#include <Akonadi/ContactsTreeModel>
 #endif
 #include <QObject>
 #include <QSortFilterProxyModel>
