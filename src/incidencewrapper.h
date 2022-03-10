@@ -36,7 +36,7 @@ class IncidenceWrapper : public QObject, public Akonadi::ItemMonitor
     Q_PROPERTY(int incidenceType READ incidenceType NOTIFY incidenceTypeChanged)
     Q_PROPERTY(QString incidenceTypeStr READ incidenceTypeStr NOTIFY incidenceTypeStrChanged)
     Q_PROPERTY(QString incidenceIconName READ incidenceIconName NOTIFY incidenceIconNameChanged)
-    Q_PROPERTY(QString uid READ uid CONSTANT);
+    Q_PROPERTY(QString uid READ uid CONSTANT)
 
     Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
     Q_PROPERTY(QString parent READ parent WRITE setParent NOTIFY parentChanged)
