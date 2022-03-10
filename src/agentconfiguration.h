@@ -37,10 +37,10 @@ public:
     Q_INVOKABLE void restart(int index);
     Q_INVOKABLE void restartIdentifier(QString resourceIdentifier);
 
-public slots:
+public Q_SLOTS:
     void processInstanceProgressChanged(const Akonadi::AgentInstance &instance);
 
-signals:
+Q_SIGNALS:
     void agentProgressChanged(const QVariantMap agentData);
 
 private:

@@ -38,7 +38,7 @@ public:
         }
     }
 
-signals:
+Q_SIGNALS:
     void calendarLoaded();
 
 private:
@@ -48,7 +48,7 @@ private:
     QTimer loadedCheckTimer;
     QDateTime now = QDate(2022, 01, 10).startOfDay();
 
-private slots:
+private Q_SLOTS:
     void initTestCase()
     {
         AkonadiTest::checkTestIsIsolated();
