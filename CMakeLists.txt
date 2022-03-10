@@ -13,9 +13,6 @@ set(AKONADI_CONTACT_VERSION "5.19.0")
 set(CALENDARSUPPORT_LIB_VERSION "5.19")
 set(EVENTVIEW_LIB_VERSION "5.19.0")
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 include(FeatureSummary)
 
 ################# set KDE specific information #################
