@@ -981,6 +981,6 @@ void CalendarManager::editCollection(qint64 collectionId)
     dlg->show();
 }
 
-Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 
 #include "calendarmanager.moc"

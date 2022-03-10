@@ -133,4 +133,4 @@ private:
     KConfigWatcher::Ptr m_colorWatcher;
 };
 
-Q_DECLARE_METATYPE(Akonadi::ETMCalendar::Ptr);
+Q_DECLARE_METATYPE(Akonadi::ETMCalendar::Ptr)

@@ -748,5 +748,5 @@ void IncidenceWrapper::itemChanged(const Akonadi::Item &item)
     }
 }
 #ifndef UNITY_CMAKE_SUPPORT
-Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif

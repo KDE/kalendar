@@ -129,7 +129,7 @@ private:
     QVariantMap mFilter;
 };
 
-Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence);
+Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif
