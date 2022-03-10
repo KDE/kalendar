@@ -8,7 +8,6 @@
 #include <KCalUtils/RecurrenceActions>
 #include <QByteArray>
 #include <QObject>
-#include <akonadi_version.h>
 #include <Akonadi/CollectionIdentificationAttribute>
 #include <Akonadi/Item>
 #include <Akonadi/ItemFetchJob>

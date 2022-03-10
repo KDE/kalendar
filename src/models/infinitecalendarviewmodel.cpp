@@ -5,7 +5,6 @@
 #include "kalendar_debug.h"
 #include <QDebug>
 #include <QMetaEnum>
-#include <akonadi_version.h>
 #include <cmath>
 #include <models/infinitecalendarviewmodel.h>
 #include <Akonadi/EntityTreeModel>

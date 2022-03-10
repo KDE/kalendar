@@ -3,7 +3,6 @@
 
 #pragma once
 #include <QObject>
-#include <akonadi_version.h>
 #include <Akonadi/Item>
 #include <QAbstractListModel>
 

@@ -9,7 +9,6 @@
 #include "kalendar_debug.h"
 
 #include <QMetaEnum>
-#include <akonadi_version.h>
 #include <Akonadi/EntityTreeModel>
 #include <KCalendarCore/MemoryCalendar>
 #include <KCalendarCore/OccurrenceIterator>

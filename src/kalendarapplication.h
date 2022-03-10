@@ -19,6 +19,7 @@
 #include <KActionCollection>
 #include <QActionGroup>
 #include <QObject>
+#include <QWindow>
 
 class QWindow;
 class QQuickWindow;

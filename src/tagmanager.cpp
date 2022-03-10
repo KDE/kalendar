@@ -5,7 +5,6 @@
 #include "kalendar_debug.h"
 
 #include <QObject>
-#include <akonadi_version.h>
 #include <Akonadi/TagCreateJob>
 #include <Akonadi/TagDeleteJob>
 #include <Akonadi/TagModifyJob>

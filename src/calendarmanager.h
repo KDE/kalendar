@@ -5,7 +5,6 @@
 #pragma once
 
 #include <QObject>
-#include <akonadi_version.h>
 #include <Akonadi/AgentFilterProxyModel>
 #include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/ETMViewStateSaver>

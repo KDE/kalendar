@@ -3,7 +3,6 @@
 
 #include "kalendar_debug.h"
 #include <QMetaEnum>
-#include <akonadi_version.h>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <KCalendarCore/Incidence>

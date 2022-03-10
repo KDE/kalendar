@@ -15,9 +15,9 @@
 #include <KFormat>
 #include <KLocalizedString>
 #include <KSharedConfig>
+#include <KShortcutsDialog>
 #include <KWindowConfig>
 #include <KWindowSystem>
-#include <KXmlGui/KShortcutsDialog>
 #include <QGuiApplication>
 #include <QMenu>
 #include <QQuickWindow>

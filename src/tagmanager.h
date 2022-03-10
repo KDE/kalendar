@@ -4,7 +4,6 @@
 #pragma once
 
 #include <QObject>
-#include <akonadi_version.h>
 #include <Akonadi/Monitor>
 #include <Akonadi/TagModel>
 #include <QSortFilterProxyModel>

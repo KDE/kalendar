@@ -20,7 +20,6 @@
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QUrl>
-#include <akonadi_version.h>
 #include <Akonadi/AgentFilterProxyModel>
 #include "about.h"
 #include "agentconfiguration.h"

@@ -7,7 +7,6 @@
 #include <Akonadi/AgentInstance>
 #include <QObject>
 #include <QTimer>
-#include <akonadi_version.h>
 
 class AgentConfiguration : public QObject
 {
