@@ -58,14 +58,13 @@ target_sources(kalendar PRIVATE
 ecm_qt_declare_logging_category(kalendar HEADER kalendar_debug.h IDENTIFIER KALENDAR_LOG CATEGORY_NAME org.kde.kalendar DESCRIPTION "kalendar" EXPORT KALENDAR)
 
 set(kalendar_LIBS
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Qml
-    Qt5::Quick
-    Qt5::QuickControls2
-    Qt5::Svg
-    Qt5::Location
-    Qt5::DBus
+    Qt::Core
+    Qt::Gui
+    Qt::Qml
+    Qt::Quick
+    Qt::QuickControls2
+    Qt::Svg
+    Qt::DBus
     KF5::I18n
     KF5::CoreAddons
     KF5::DBusAddons
