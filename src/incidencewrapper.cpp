@@ -115,7 +115,7 @@ int IncidenceWrapper::incidenceType() const
 
 QString IncidenceWrapper::incidenceTypeStr() const
 {
-    return m_incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(m_incidence->typeStr());
+    return m_incidence->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(m_incidence->typeStr().constData());
 }
 
 QString IncidenceWrapper::incidenceIconName() const

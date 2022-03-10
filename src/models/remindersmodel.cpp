@@ -96,7 +96,7 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
         qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return false;
     }
-    emit dataChanged(idx, idx);
+    Q_EMIT dataChanged(idx, idx);
     return true;
 }
 

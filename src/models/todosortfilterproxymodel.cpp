@@ -127,7 +127,7 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
     } else if (role == Roles::IncidenceTypeRole) {
         return todoPtr->type();
     } else if (role == Roles::IncidenceTypeStrRole) {
-        return todoPtr->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(todoPtr->typeStr());
+        return todoPtr->type() == KCalendarCore::Incidence::TypeTodo ? i18n("Task") : i18n(todoPtr->typeStr().constData());
     } else if (role == Roles::IncidenceTypeIconRole) {
         return todoPtr->iconName();
     } else if (role == Roles::IncidencePtrRole) {

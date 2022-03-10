@@ -12,7 +12,6 @@ set(AKONADI_VERSION "5.19.0")
 set(AKONADI_CONTACT_VERSION "5.19.0")
 set(CALENDARSUPPORT_LIB_VERSION "5.19")
 set(EVENTVIEW_LIB_VERSION "5.19.0")
-set(KDE_COMPILERSETTINGS_LEVEL "5.84")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -66,9 +65,6 @@ if (USE_UNITY_CMAKE_SUPPORT)
 endif()
 
 ################# build and install #################
-
-add_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
-add_definitions(-DQT_USE_QSTRINGBUILDER)
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.92.0)
 add_subdirectory(src)
