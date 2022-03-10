@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.16)
 project(kalendar VERSION 1.0.0)
 
 set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.88.0")
+set(KF5_MIN_VERSION "5.91.0")
 set(AKONADI_VERSION "5.19.0")
 set(AKONADI_CONTACT_VERSION "5.19.0")
 set(CALENDARSUPPORT_LIB_VERSION "5.18")
@@ -36,6 +36,7 @@ include(ECMGenerateHeaders)
 include(ECMPoQmTools)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
+include(ECMDeprecationSettings)
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
@@ -68,9 +69,8 @@ endif()
 
 add_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DQT_USE_QSTRINGBUILDER)
-add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055800)
+
+ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.92.0)
 add_subdirectory(src)
 
 if (BUILD_TESTING)
