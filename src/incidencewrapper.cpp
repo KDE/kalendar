@@ -666,6 +666,13 @@ void IncidenceWrapper::setNewEvent()
     event->setDtStart(start);
     event->setDtEnd(start.addSecs(60 * 60));
 
+    KCalendarCore::Alarm::Ptr alarm(new KCalendarCore::Alarm(event.get()));
+    alarm->setEnabled(true);
+    alarm->setType(KCalendarCore::Alarm::Display);
+    alarm->setStartOffset(-1 * 15 * 60); // 15 minutes
+
+    event->addAlarm(alarm);
+
     setNewIncidence(event);
 }
 
@@ -677,13 +684,6 @@ void IncidenceWrapper::setNewTodo()
 
 void IncidenceWrapper::setNewIncidence(KCalendarCore::Incidence::Ptr incidence)
 {
-    KCalendarCore::Alarm::Ptr alarm(new KCalendarCore::Alarm(incidence.get()));
-    alarm->setEnabled(true);
-    alarm->setType(KCalendarCore::Alarm::Display);
-    alarm->setStartOffset(-1 * 15 * 60); // 15 minutes
-
-    incidence->addAlarm(alarm);
-
     Akonadi::Item incidenceItem;
     incidenceItem.setPayload<KCalendarCore::Incidence::Ptr>(incidence);
     setIncidenceItem(incidenceItem);
