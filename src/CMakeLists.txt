@@ -51,6 +51,7 @@ set(kalendar_SRCS
     resources.qrc
 )
 qt_add_dbus_adaptor(kalendar_SRCS org.kde.calendar.Calendar.xml kalendarapplication.h KalendarApplication)
+set_source_files_properties(models/todosortfilterproxymodel.cpp PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 target_sources(kalendar PRIVATE
     ${kalendar_SRCS})
@@ -91,6 +92,5 @@ target_link_libraries(kalendar
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(kalendar PROPERTIES UNITY_BUILD ON)
 endif()
-
 kconfig_add_kcfg_files(kalendar GENERATE_MOC kalendarconfig.kcfgc)
 install(TARGETS kalendar ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
