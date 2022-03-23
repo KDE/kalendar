@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.16)
 project(kalendar VERSION 1.0.0)
 
 set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.91.0")
+set(KF5_MIN_VERSION "5.92.0")
 set(AKONADI_VERSION "5.19.0")
 set(AKONADI_CONTACT_VERSION "5.19.0")
 set(CALENDARSUPPORT_LIB_VERSION "5.19")
