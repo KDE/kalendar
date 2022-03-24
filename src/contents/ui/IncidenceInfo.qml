@@ -158,7 +158,9 @@ Kirigami.OverlayDrawer {
                         Kirigami.Heading {
                             Layout.fillWidth: true
 
-                            text: "<b>" + incidenceInfo.incidenceWrapper.summary + "</b>"
+                            text: incidenceInfo.incidenceWrapper.summary
+                            textFormat: Text.PlainText
+                            font.weight: Font.Bold
                             wrapMode: Text.Wrap
                         }
                         Kirigami.Icon {
