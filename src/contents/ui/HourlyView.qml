@@ -74,7 +74,7 @@ Kirigami.Page {
         if(root.daysToShow % 7 === 0) {
             date = DateUtils.getFirstDayOfWeek(date);
         }
-        const weekDiff = Math.floor((date.getTime() - pathView.currentItem.startDate.getTime()) / (root.daysToShow * 24 * 60 * 60 * 1000));
+        const weekDiff = Math.round((date.getTime() - pathView.currentItem.startDate.getTime()) / (root.daysToShow * 24 * 60 * 60 * 1000));
 
         let position = pathView.currentItem.item.hourScrollView.getCurrentPosition();
         let newIndex = pathView.currentIndex + weekDiff;
