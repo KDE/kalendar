@@ -11,7 +11,11 @@
 #endif
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
+#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 41)
 #include <EventViews/IncidenceTreeModel>
+#else
+#include <Akonadi/IncidenceTreeModel>
+#endif
 #include <EventViews/TodoModel>
 #include <KConfigWatcher>
 #include <KSharedConfig>
@@ -135,7 +139,11 @@ private:
     int compareCompletion(const QModelIndex &left, const QModelIndex &right) const;
 
     Akonadi::ETMCalendar::Ptr m_calendar;
+#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 41)
     IncidenceTreeModel *m_todoTreeModel = nullptr;
+#else
+    Akonadi::IncidenceTreeModel *m_todoTreeModel = nullptr;
+#endif
     TodoModel *m_baseTodoModel = nullptr;
     Akonadi::IncidenceChanger *m_lastSetChanger = nullptr;
     QHash<QString, QColor> m_colors;

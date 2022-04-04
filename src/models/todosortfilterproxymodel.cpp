@@ -8,7 +8,11 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
     const QString todoMimeType = QStringLiteral("application/x-vnd.akonadi.calendar.todo");
+#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 41)
     m_todoTreeModel = new IncidenceTreeModel(QStringList() << todoMimeType, this);
+#else
+    m_todoTreeModel = new Akonadi::IncidenceTreeModel(QStringList() << todoMimeType, this);
+#endif
     const auto pref = EventViews::PrefsPtr(new EventViews::Prefs);
     m_baseTodoModel = new TodoModel(pref, this);
     m_baseTodoModel->setSourceModel(m_todoTreeModel);
