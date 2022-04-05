@@ -138,6 +138,8 @@ TreeListView {
         decoration.decorationHighlightColor: model.color
         activeBackgroundColor: LabelUtils.getIncidenceBackgroundColor(model.color, root.isDark)
         onActiveBackgroundColorChanged: activeBackgroundColor.a = 0.15
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.highlightColor: activeBackgroundColor
 
         property alias mouseArea: mouseArea
         property var incidencePtr: model.incidencePtr
