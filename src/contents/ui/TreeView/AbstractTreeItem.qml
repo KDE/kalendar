@@ -154,7 +154,7 @@ QQC2.ItemDelegate {
     QtObject {
         id: internal
         property Flickable view: listItem.ListView.view || (listItem.parent ? listItem.parent.ListView.view : null)
-        property bool indicateActiveFocus: listItem.pressed || Settings.tabletMode || listItem.activeFocus || (view ? view.activeFocus : false)
+        property bool indicateActiveFocus: listItem.pressed || Kirigami.Settings.tabletMode || listItem.activeFocus || (view ? view.activeFocus : false)
     }
 
     highlighted: focus && ListView.isCurrentItem && ListView.view && ListView.view.keyNavigationEnabled
