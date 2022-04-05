@@ -67,6 +67,12 @@ QQC2.ItemDelegate {
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
+    Kirigami.Theme.textColor: textColor
+    Kirigami.Theme.backgroundColor: backgroundColor
+    Kirigami.Theme.alternateBackgroundColor: alternateBackgroundColor
+    Kirigami.Theme.activeTextColor: activeTextColor
+    Kirigami.Theme.activeBackgroundColor: activeBackgroundColor
+
     width: parent && parent.width > 0 ? parent.width : implicitWidth
 
     padding: Kirigami.Settings.tabletMode ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
