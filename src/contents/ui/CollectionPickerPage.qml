@@ -66,8 +66,6 @@ Kirigami.ScrollablePage {
                     label: display
                     labelItem.color: Kirigami.Theme.textColor
 
-                    Keys.onEnterPressed: clicked(); // TODO: Remove this once upstream item handles this by itself
-                    Keys.onReturnPressed: clicked();
                     onClicked: collectionPickerSheet.collectionPicked(collectionId);
 
                     trailing: Rectangle {
