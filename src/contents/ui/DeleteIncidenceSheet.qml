@@ -63,7 +63,7 @@ Kirigami.Page {
                 } else if (incidenceWrapper.recurrenceData.type > 0) {
                     return i18n("The calendar item \"%1\" recurs over multiple dates. Do you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?", incidenceWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
                 }
-                wrapMode: Text.WordWrap
+                wrapMode: Text.Wrap
             }
         }
 
