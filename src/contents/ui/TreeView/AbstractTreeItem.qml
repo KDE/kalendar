@@ -111,6 +111,24 @@ QQC2.ItemDelegate {
         }
     }
 
+    activeFocusOnTab: ListView.view ? false : true
+
+    text: action ? action.text : undefined
+    checked: action ? action.checked : false
+    checkable: action ? action.checkable : false
+
+    onClicked: {
+        if (ListView.view && typeof index !== "undefined") {
+            ListView.view.currentIndex = index;
+        }
+        if (!action) {
+            return;
+        }
+
+        action.trigger();
+        checked = Qt.binding(function() { return action.checked });
+    }
+
     onDoubleClicked: if (kDescendantExpandable) {
         decoration.model.toggleChildren(index);
     }
@@ -120,4 +138,24 @@ QQC2.ItemDelegate {
 
     rightPadding: Qt.application.layoutDirection === Qt.RightToLeft ? decoration.width + listItem.padding * 2 : 0
     rightInset: Qt.application.layoutDirection === Qt.RightToLeft ? decoration.width + listItem.padding * 2 : 0
+
+    opacity: enabled ? 1 : 0.6
+
+    onVisibleChanged: {
+        if (visible) {
+            height = Qt.binding(() => { return implicitHeight; })
+        } else {
+            if (ListView.view && ListView.view.visible) {
+                height = 0;
+            }
+        }
+    }
+
+    QtObject {
+        id: internal
+        property Flickable view: listItem.ListView.view || (listItem.parent ? listItem.parent.ListView.view : null)
+        property bool indicateActiveFocus: listItem.pressed || Settings.tabletMode || listItem.activeFocus || (view ? view.activeFocus : false)
+    }
+
+    highlighted: focus && ListView.isCurrentItem && ListView.view && ListView.view.keyNavigationEnabled
 }
