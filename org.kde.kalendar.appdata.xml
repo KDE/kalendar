@@ -299,6 +299,7 @@
   <url type="homepage">https://apps.kde.org/kalendar/</url>
   <url type="bugtracker">https://invent.kde.org/pim/kalendar/-/issues</url>
   <releases>
+    <release version="22.04.0" date="2022-04-21"/>
     <release version="1.0.0" date="2022-02-12">
       <description>
         <p>This release brings stability, usability, and aesthetic improvements across the board, and is the first version recommended for any home user.</p>
@@ -315,29 +316,6 @@
       <description>
         <p>Bugfix release with fixes to alarm client notification text, accessibility improvements to the sidebar, and more.</p>
       </description>
-    </release>
-    <release type="development" version="0.3.0" date="2021-11-30">
-      <description>
-        <p>This release brings an alarm client for reminders, major stability improvements, improved accessibility, visual tweaks, and more.</p>
-      </description>
-      <url>https://claudiocambra.com/2021/11/28/kalendar-v0-3-0-out-soon-with-improved-stability-efficiency-accessibility-and-a-windows-version-kalendar-devlog-23/</url>
-    </release>
-    <release type="development" version="0.2.1" date="2021-11-15">
-      <description>
-        <p>Update for second beta release with bug-fixes, accessibility improvements, tweaks to time-editing components, and better iCal importing.</p>
-      </description>
-    </release>
-    <release type="development" version="0.2.0" date="2021-11-13">
-      <description>
-        <p>Second beta release of Kalendar</p>
-      </description>
-      <url>https://claudiocambra.com/?p=1317</url>
-    </release>
-    <release type="development" version="0.1.0" date="2021-11-06">
-      <description>
-        <p>First beta release of Kalendar</p>
-      </description>
-      <url>https://claudiocambra.com/?p=1296</url>
     </release>
   </releases>
   <custom>
