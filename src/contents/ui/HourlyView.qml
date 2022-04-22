@@ -427,7 +427,7 @@ Kirigami.Page {
                                 case 7:
                                 default:
                                     return weekViewMultiDayViewModel;
-                            } // from root.model
+                                } // from root.model
                                 Layout.topMargin: Kirigami.Units.largeSpacing
                                 //One row => one week
                                 Item {
@@ -562,46 +562,24 @@ Kirigami.Page {
                             }
                         }
                     }
-
-                    MouseArea {
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        height: 5
-                        z: Infinity
-                        cursorShape: !Kirigami.Settings.isMobile ? Qt.SplitVCursor : undefined
-                        preventStealing: true
-                        enabled: true
-                        visible: true
-                        onPressed: {
-                            _lastY = mapToGlobal(mouseX, mouseY).y;
-                            if(Kalendar.Config.weekViewAllDayHeaderHeight === -1) {
-                                // Stops shrink on first drag
-                                Kalendar.Config.weekViewAllDayHeaderHeight = allDayHeader.defaultHeight;
-                            }
-                        }
-                        onReleased: {
-                            Kalendar.Config.weekViewAllDayHeaderHeight = allDayHeader.actualHeight;
-                            Kalendar.Config.save();
-                        }
-                        property real _lastY: -1
-
-                        onPositionChanged: {
-                            if (_lastY === -1) {
-                                return;
-                            } else {
-                                allDayHeader.actualHeight = Math.min(allDayHeader.maxHeight, Math.max(allDayHeader.minHeight, Kalendar.Config.weekViewAllDayHeaderHeight - _lastY + mapToGlobal(mouseX, mouseY).y))
-                            }
-                        }
-                    }
                 }
 
-                Kirigami.Separator {
+                ResizerSeparator {
                     id: headerBottomSeparator
                     width: pathView.width
                     height: root.gridLineWidth
-                    z: -1
+                    oversizeMouseAreaVertical: 5
+                    z: Infinity
                     visible: allDayViewLoader.active
+
+                    function setPos() {
+                        Kalendar.Config.weekViewAllDayHeaderHeight = allDayHeader.actualHeight;
+                        Kalendar.Config.save();
+                    }
+
+                    onDragBegin:  setPos()
+                    onDragReleased: setPos()
+                    onDragPositionChanged: allDayHeader.actualHeight = Math.min(allDayHeader.maxHeight, Math.max(allDayHeader.minHeight, Kalendar.Config.weekViewAllDayHeaderHeight + changeY))
 
                     RectangularGlow {
                         anchors.fill: parent
