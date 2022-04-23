@@ -10,7 +10,11 @@
 #include <Akonadi/Calendar/ETMCalendar>
 #endif
 #include <CalendarSupport/KCalPrefs>
+#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 42)
 #include <CalendarSupport/Utils>
+#else
+#include <Akonadi/CalendarUtils>
+#endif
 #if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 41)
 #include <EventViews/IncidenceTreeModel>
 #else

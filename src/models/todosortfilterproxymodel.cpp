@@ -93,7 +93,11 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
     }
 
     auto collectionId = todoItem.parentCollection().id();
+#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 42)
     auto todoPtr = CalendarSupport::todo(todoItem);
+#else
+    auto todoPtr = Akonadi::CalendarUtils::todo(todoItem);
+#endif
 
     if (!todoPtr) {
         return {};
@@ -135,7 +139,11 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
     } else if (role == Roles::IncidenceTypeIconRole) {
         return todoPtr->iconName();
     } else if (role == Roles::IncidencePtrRole) {
+#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 42)
         return QVariant::fromValue(CalendarSupport::incidence(todoItem));
+#else
+        return QVariant::fromValue(Akonadi::CalendarUtils::incidence(todoItem));
+#endif
     } else if (role == Roles::TagsRole) {
         return QVariant::fromValue(todoItem.tags());
     } else if (role == Roles::ItemRole) {
