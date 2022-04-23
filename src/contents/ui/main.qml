@@ -568,31 +568,30 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        MouseArea {
-            anchors.left: parent.left
+        ResizerSeparator {
+            anchors.left: if(Qt.application.layoutDirection !== Qt.RightToLeft) parent.left
+            anchors.leftMargin: if(Qt.application.layoutDirection !== Qt.RightToLeft) -1 // Cover up the natural separator on the drawer
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.right: undefined
-            width: 2
+            anchors.right: if(Qt.application.layoutDirection === Qt.RightToLeft) parent.right
+            anchors.rightMargin: if(Qt.application.layoutDirection === Qt.RightToLeft) -1
+            width: 1
+            oversizeMouseAreaHorizontal: 5
             z: 500
-            cursorShape: !Kirigami.Settings.isMobile ? Qt.SplitHCursor : undefined
-            enabled: true
-            visible: true
-            onPressed: _lastX = mapToGlobal(mouseX, mouseY).x
-            onReleased: {
+
+            function savePos() {
                 Config.incidenceInfoDrawerWidth = incidenceInfo.actualWidth;
                 Config.save();
             }
-            property real _lastX: -1
 
-            onPositionChanged: {
-                if (_lastX === -1) {
-                    return;
-                }
+            onDragBegin: savePos()
+            onDragReleased: savePos()
+
+            onDragPositionChanged: {
                 if (Qt.application.layoutDirection === Qt.RightToLeft) {
-                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth - _lastX + mapToGlobal(mouseX, mouseY).x))
+                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth + changeX));
                 } else {
-                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth + _lastX - mapToGlobal(mouseX, mouseY).x))
+                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth - changeX));
                 }
             }
         }
