@@ -191,7 +191,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         // We get a start position relative to the number of period spaces there are in a day
         const auto start = ((startDT.time().hour() * 1.0) * (60.0 / mPeriodLength)) + ((startDT.time().minute() * 1.0) / mPeriodLength);
         auto duration = // Give a minimum acceptable height or otherwise have unclickable incidence
-            qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 2.5);
+            qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 1.0);
 
         if (start + duration > periodsPerDay) {
             duration = periodsPerDay - start + 1;
