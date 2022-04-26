@@ -4,6 +4,7 @@
 #include "hourlyincidencemodel.h"
 #include "kalendar_debug.h"
 #include <QTimeZone>
+#include <math.h>
 
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -189,18 +190,18 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         // We get a start position relative to the number of period spaces there are in a day
         const auto start = ((startDT.time().hour() * 1.0) * (60.0 / mPeriodLength)) + ((startDT.time().minute() * 1.0) / mPeriodLength);
         auto duration = // Give a minimum acceptable height or otherwise have unclickable incidence
-            qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 1.5);
+            qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 1.0);
 
         // Make sure incidence doesn't extend past the end of the day
         if (start + duration > periodsPerDay) {
-            duration = periodsPerDay - start + 1;
+            duration = periodsPerDay - start;
         }
 
         const auto realEndMinutesFromDayStart = qMin((endDT.time().hour() * 60) + endDT.time().minute(), 24 * 60 * 60);
         // Todos likely won't have end date
         const auto startMinutesFromDayStart =
             startDT.isValid() ? (startDT.time().hour() * 60) + startDT.time().minute() : qMax(realEndMinutesFromDayStart - mPeriodLength, 0);
-        const auto displayedEndMinutesFromDayStart = qRound(startMinutesFromDayStart + (mPeriodLength * duration));
+        const auto displayedEndMinutesFromDayStart = floor(startMinutesFromDayStart + (mPeriodLength * duration));
 
         addToResults(idx, start, duration);
         setTakenSpaces(startMinutesFromDayStart, displayedEndMinutesFromDayStart);
@@ -240,7 +241,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         // Todos likely won't have end date
         const auto startMinutesFromDayStart =
             startDT.isValid() ? (startDT.time().hour() * 60) + startDT.time().minute() : qMax(realEndMinutesFromDayStart - mPeriodLength, 0);
-        const auto displayedEndMinutesFromDayStart = qRound(startMinutesFromDayStart + (mPeriodLength * duration));
+        const int displayedEndMinutesFromDayStart = floor(startMinutesFromDayStart + (mPeriodLength * duration));
 
         // Get max number of incidences that happen at the same time as this
         // (there can be different numbers of concurrent incidences during the time)
@@ -260,7 +261,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         // is empty space at the left of the day column.
         double minStartX = 1.0;
 
-        for (int i = startMinutesFromDayStart; i < displayedEndMinutesFromDayStart; i++) {
+        for (int i = startMinutesFromDayStart; i < displayedEndMinutesFromDayStart - 1; i++) {
             // If this is the first incidence that has taken up this minute position, set details
             if (!startX.contains(i)) {
                 takenWidth[i] = widthShare;
