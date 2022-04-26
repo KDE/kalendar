@@ -63,6 +63,7 @@
   <developer_name xml:lang="ca">Comunitat KDE, Clau Cambra i Carl Schwan</developer_name>
   <developer_name xml:lang="ca-valencia">Comunitat KDE, Clau Cambra i Carl Schwan</developer_name>
   <developer_name xml:lang="cs">Komunita KDE, Clau Cambra a Carl Schwan</developer_name>
+  <developer_name xml:lang="de">KDE-Gemeinschaft, Clau Cambra und Carl Schwan</developer_name>
   <developer_name xml:lang="el">Η Κοινότητα του KDE, Clau Cambra και Carl Schwan</developer_name>
   <developer_name xml:lang="en-GB">KDE Community, Clau Cambra and Carl Schwan</developer_name>
   <developer_name xml:lang="es">La Comunidad de KDE, Clau Cambra y Carl Schwan</developer_name>
@@ -181,6 +182,7 @@
       <caption xml:lang="ca">Vista mensual</caption>
       <caption xml:lang="ca-valencia">Vista mensual</caption>
       <caption xml:lang="cs">Pohled na měsíc</caption>
+      <caption xml:lang="de">Monatsansicht</caption>
       <caption xml:lang="el">Προβολή μήνα</caption>
       <caption xml:lang="en-GB">Month View</caption>
       <caption xml:lang="es">Vista mensual</caption>
@@ -206,6 +208,7 @@
       <caption xml:lang="ca">Vista setmanal</caption>
       <caption xml:lang="ca-valencia">Vista setmanal</caption>
       <caption xml:lang="cs">Týdenní pohled</caption>
+      <caption xml:lang="de">Wochenansicht</caption>
       <caption xml:lang="el">Προβολή εβδομάδας</caption>
       <caption xml:lang="en-GB">Week View</caption>
       <caption xml:lang="es">Vista semanal</caption>
@@ -230,6 +233,7 @@
       <caption xml:lang="ca">Vista de la Planificació</caption>
       <caption xml:lang="ca-valencia">Vista de la Planificació</caption>
       <caption xml:lang="cs">Pohled na plánování</caption>
+      <caption xml:lang="de">Terminplanansicht</caption>
       <caption xml:lang="el">Προβολή χρονοπρογραμματισμού</caption>
       <caption xml:lang="en-GB">Schedule View</caption>
       <caption xml:lang="es">Vista de planificación</caption>
@@ -254,6 +258,7 @@
       <caption xml:lang="ca">Vista de tasca</caption>
       <caption xml:lang="ca-valencia">Vista de tasca</caption>
       <caption xml:lang="cs">Pohled na úlohy</caption>
+      <caption xml:lang="de">Aufgabenansicht</caption>
       <caption xml:lang="el">Προβολή εργασιών</caption>
       <caption xml:lang="en-GB">Task View</caption>
       <caption xml:lang="es">Vista de tareas</caption>
@@ -279,6 +284,7 @@
       <caption xml:lang="ca">Mòbil</caption>
       <caption xml:lang="ca-valencia">Mòbil</caption>
       <caption xml:lang="cs">Mobilní</caption>
+      <caption xml:lang="de">Mobil</caption>
       <caption xml:lang="el">Κινητό</caption>
       <caption xml:lang="en-GB">Mobile</caption>
       <caption xml:lang="es">Móvil</caption>
