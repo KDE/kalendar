@@ -119,8 +119,6 @@ QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const Q
  * The line grouping algorithm then always picks the first incidence,
  * and tries to add more to the same line.
  *
- * We never mix all-day and non-all day, and otherwise try to fit as much as possible
- * on the same line. Same day time-order should be preserved because of the sorting.
  */
 QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
 {
@@ -191,17 +189,21 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         // We get a start position relative to the number of period spaces there are in a day
         const auto start = ((startDT.time().hour() * 1.0) * (60.0 / mPeriodLength)) + ((startDT.time().minute() * 1.0) / mPeriodLength);
         auto duration = // Give a minimum acceptable height or otherwise have unclickable incidence
-            qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 1.0);
+            qMax(getDuration(startDT, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().toTimeZone(QTimeZone::systemTimeZone()), mPeriodLength), 1.5);
 
+        // Make sure incidence doesn't extend past the end of the day
         if (start + duration > periodsPerDay) {
             duration = periodsPerDay - start + 1;
         }
 
-        const auto startMinutesFromDayStart = (startDT.time().hour() * 60) + startDT.time().minute();
-        const auto endMinutesFromDayStart = qMin((endDT.time().hour() * 60) + endDT.time().minute(), 24 * 60 * 60);
+        const auto realEndMinutesFromDayStart = qMin((endDT.time().hour() * 60) + endDT.time().minute(), 24 * 60 * 60);
+        // Todos likely won't have end date
+        const auto startMinutesFromDayStart =
+            startDT.isValid() ? (startDT.time().hour() * 60) + startDT.time().minute() : qMax(realEndMinutesFromDayStart - mPeriodLength, 0);
+        const auto displayedEndMinutesFromDayStart = qRound(startMinutesFromDayStart + (mPeriodLength * duration));
 
         addToResults(idx, start, duration);
-        setTakenSpaces(startMinutesFromDayStart, endMinutesFromDayStart);
+        setTakenSpaces(startMinutesFromDayStart, displayedEndMinutesFromDayStart);
     }
 
     QHash<int, double> takenWidth; // We need this for potential movers
@@ -228,13 +230,21 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         const auto endDT = incidence[QLatin1String("endTime")].toDateTime().toTimeZone(QTimeZone::systemTimeZone()) < rowEnd
             ? incidence[QLatin1String("endTime")].toDateTime().toTimeZone(QTimeZone::systemTimeZone())
             : rowEnd;
+        const auto duration = incidence[QLatin1String("duration")].toDouble();
 
-        const auto endMinutesFromDayStart = qMin((endDT.time().hour() * 60) + endDT.time().minute(), 24 * 60 * 60);
+        // We need a "real" and "displayed" end time for two reasons:
+        // 1. We need the real end minutes to give a fake start time to todos which do not have a start time
+        // 2. We need the displayed end minutes to be able to properly position those incidences which are displayed as longer
+        // than they actually are
+        const auto realEndMinutesFromDayStart = qMin((endDT.time().hour() * 60) + endDT.time().minute(), 24 * 60 * 60);
+        // Todos likely won't have end date
         const auto startMinutesFromDayStart =
-            startDT.isValid() ? (startDT.time().hour() * 60) + startDT.time().minute() : qMax(endMinutesFromDayStart - mPeriodLength, 0);
+            startDT.isValid() ? (startDT.time().hour() * 60) + startDT.time().minute() : qMax(realEndMinutesFromDayStart - mPeriodLength, 0);
+        const auto displayedEndMinutesFromDayStart = qRound(startMinutesFromDayStart + (mPeriodLength * duration));
 
         // Get max number of incidences that happen at the same time as this
-        for (int i = startMinutesFromDayStart; i < endMinutesFromDayStart; i++) {
+        // (there can be different numbers of concurrent incidences during the time)
+        for (int i = startMinutesFromDayStart; i < displayedEndMinutesFromDayStart; i++) {
             concurrentIncidences = qMax(concurrentIncidences, takenSpaces[i]);
         }
 
@@ -250,8 +260,8 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         // is empty space at the left of the day column.
         double minStartX = 1.0;
 
-        for (int i = startMinutesFromDayStart; i < endMinutesFromDayStart; i++) {
-            // If this is the first incidence that is taken up this minute position, set details
+        for (int i = startMinutesFromDayStart; i < displayedEndMinutesFromDayStart; i++) {
+            // If this is the first incidence that has taken up this minute position, set details
             if (!startX.contains(i)) {
                 takenWidth[i] = widthShare;
                 startX[i] = priorTakenWidthShare;
@@ -269,15 +279,15 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
 
         if (minStartX > 0) {
             priorTakenWidthShare = 0;
-            for (int i = startMinutesFromDayStart; i < endMinutesFromDayStart; i++) {
+            for (int i = startMinutesFromDayStart; i < displayedEndMinutesFromDayStart; i++) {
                 startX[i] = 0;
             }
         }
 
         incidence[QLatin1String("priorTakenWidthShare")] = priorTakenWidthShare;
 
-        if (takenSpaces[startMinutesFromDayStart] < takenSpaces[endMinutesFromDayStart - 1] && priorTakenWidthShare > 0) {
-            potentialMovers.append(PotentialMover{incidence, i, startMinutesFromDayStart, endMinutesFromDayStart});
+        if (takenSpaces[startMinutesFromDayStart] < takenSpaces[displayedEndMinutesFromDayStart - 1] && priorTakenWidthShare > 0) {
+            potentialMovers.append(PotentialMover{incidence, i, startMinutesFromDayStart, displayedEndMinutesFromDayStart});
         }
 
         result[i] = incidence;
