@@ -26,7 +26,7 @@ Kirigami.Page {
     signal resizeIncidence(int endOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
     signal openDayView(date selectedDate)
 
-    property var openOccurrence: {}
+    property var openOccurrence: ({})
     property var model
 
     property date selectedDate: new Date()
@@ -485,7 +485,7 @@ Kirigami.Page {
 
                                                             width: root.dayWidth
                                                             height: linesListViewScrollView.height
-                                                            color: incidenceDropArea.containsDrag ?  Kirigami.Theme.positiveBackgroundColor :
+                                                            color: multiDayViewIncidenceDropArea.containsDrag ?  Kirigami.Theme.positiveBackgroundColor :
                                                                 isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
 
                                                             DayMouseArea {
@@ -497,7 +497,7 @@ Kirigami.Page {
                                                                 onDeselect: root.deselect()
 
                                                                 DropArea {
-                                                                    id: incidenceDropArea
+                                                                    id: multiDayViewIncidenceDropArea
                                                                     anchors.fill: parent
                                                                     z: 9999
                                                                     onDropped: if(viewLoader.isCurrentItem) {
@@ -506,7 +506,7 @@ Kirigami.Page {
                                                                         drop.source.caughtY = pos.y;
                                                                         drop.source.caught = true;
 
-                                                                        const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
+                                                                        const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', multiDayViewIncidenceDropArea, "incidence");
                                                                         incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
                                                                         let sameTimeOnDate = new Date(listViewMenu.addDate);
@@ -515,7 +515,7 @@ Kirigami.Page {
                                                                         /* There are 2 possibilities here: we move multiday incidence between days or we move hourly incidence
                                                                          * to convert it into multiday incidence
                                                                          */
-                                                                        if (drop.source.objectName === 'incidenceDelegate') {
+                                                                        if (drop.source.objectName === 'hourlyIncidenceDelegate') {
                                                                             // This is conversion from non-multiday to multiday
                                                                             root.convertIncidence(true, offset, offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
                                                                         } else {
@@ -538,10 +538,10 @@ Kirigami.Page {
 
                                                         //Incidences
                                                         Repeater {
-                                                            id: incidencesRepeater
+                                                            id: allDayIncidencesRepeater
                                                             model: modelData
                                                             MultiDayViewIncidenceDelegate {
-                                                                id: incidenceDelegate
+                                                                id: multiDayIncidenceDelegate
                                                                 objectName: "multiDayIncidenceDelegate"
                                                                 dayWidth: root.dayWidth
                                                                 height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
@@ -819,17 +819,17 @@ Kirigami.Page {
                                                             readonly property int minutes: 60 / model
 
                                                             DropArea {
-                                                                id: incidenceDropArea
+                                                                id: hourlyViewIncidenceDropArea
                                                                 Layout.fillWidth: true
                                                                 Layout.fillHeight: true
                                                                 z: 9999
                                                                 onDropped: if(viewLoader.isCurrentItem) {
-                                                                    let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
-                                                                    /* So when we drop the entire incidence card somewhere, we are dropping the delegate with object name "incidenceDelegate" or "multiDayIncidenceDelegate" in case when all day event is converted to the hour incidence.
+                                                                    let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', hourlyViewIncidenceDropArea, "incidence");
+                                                                    /* So when we drop the entire incidence card somewhere, we are dropping the delegate with object name "hourlyIncidenceDelegate" or "multiDayIncidenceDelegate" in case when all day event is converted to the hour incidence.
                                                                      * However, when we are simply resizing, we are actually dropping the specific mouseArea within the delegate that handles
                                                                      * the dragging for the incidence's bottom edge which has name "endDtResizeMouseArea". Hence why we check the object names
                                                                      */
-                                                                    if(drop.source.objectName === "incidenceDelegate") {
+                                                                    if(drop.source.objectName === "hourlyIncidenceDelegate") {
                                                                         incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
                                                                         const pos = mapToItem(root, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
@@ -862,11 +862,11 @@ Kirigami.Page {
                                                                         root.convertIncidence(false, startOffset, endOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
 
                                                                     } else { // The resize affects the end time
-                                                                        incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.parent.incidencePtr);
+                                                                        incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.resizerSeparator.parent.incidencePtr);
 
-                                                                        const pos = mapToItem(drop.source.parent, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
-                                                                        drop.source.parent.caughtHeight = (pos.y + dropAreaHighlightRectangle.height - incidenceSpacing)
-                                                                        drop.source.parent.caught = true;
+                                                                        const pos = mapToItem(drop.source.resizerSeparator.parent, dropAreaHighlightRectangle.x, dropAreaHighlightRectangle.y);
+                                                                        drop.source.resizerSeparator.parent.caughtHeight = (pos.y + dropAreaHighlightRectangle.height - incidenceSpacing)
+                                                                        drop.source.resizerSeparator.parent.caught = true;
 
                                                                         // We want the date as if it were "from the bottom" of the droparea
                                                                         const minute = (dropAreaRepeater.minutes * (index + 1)) % 60;
@@ -875,8 +875,8 @@ Kirigami.Page {
 
                                                                         const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), hour, minute);
 
-                                                                        const endOffset = posDate.getTime() - drop.source.parent.occurrenceEndDate.getTime();
-                                                                        root.resizeIncidence(endOffset, drop.source.parent.occurrenceDate, incidenceWrapper, drop.source.parent);
+                                                                        const endOffset = posDate.getTime() - drop.source.resizerSeparator.parent.occurrenceEndDate.getTime();
+                                                                        root.resizeIncidence(endOffset, drop.source.resizerSeparator.parent.occurrenceDate, incidenceWrapper, drop.source.resizerSeparator.parent);
                                                                     }
                                                                 }
 
@@ -884,7 +884,7 @@ Kirigami.Page {
                                                                     id: dropAreaHighlightRectangle
                                                                     anchors.fill: parent
                                                                     color: Kirigami.Theme.positiveBackgroundColor
-                                                                    visible: incidenceDropArea.containsDrag
+                                                                    visible: hourlyViewIncidenceDropArea.containsDrag
                                                                 }
                                                             }
                                                         }
@@ -905,13 +905,14 @@ Kirigami.Page {
                                             anchors.fill: parent
                                             asynchronous: !viewLoader.isCurrentView
                                             Repeater {
-                                                id: incidencesRepeater
+                                                id: hourlyIncidencesRepeater
                                                 model: incidences
 
                                                 delegate: Rectangle {
-                                                    id: incidenceDelegate
-                                                    objectName: "incidenceDelegate"
+                                                    id: hourlyIncidenceDelegate
+                                                    objectName: "hourlyIncidenceDelegate"
 
+                                                    readonly property int initialIncidenceHeight: (modelData.duration * root.periodHeight) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
                                                     readonly property real gridLineYCompensation: (modelData.starts / hourlyView.periodsPerHour) * root.gridLineWidth
                                                     readonly property real gridLineHeightCompensation: (modelData.duration / hourlyView.periodsPerHour) * root.gridLineWidth
                                                     property bool isOpenOccurrence: root.openOccurrence ?
@@ -920,7 +921,7 @@ Kirigami.Page {
                                                     x: root.incidenceSpacing + (modelData.priorTakenWidthShare * root.dayWidth)
                                                     y: (modelData.starts * root.periodHeight) + root.incidenceSpacing + gridLineYCompensation
                                                     width: (root.dayWidth * modelData.widthShare) - (root.incidenceSpacing * 2)
-                                                    height: (modelData.duration * root.periodHeight) - (root.incidenceSpacing * 2) + gridLineHeightCompensation - root.gridLineWidth
+                                                    height: initialIncidenceHeight
                                                     radius: Kirigami.Units.smallSpacing
                                                     color: Qt.rgba(0,0,0,0)
                                                     visible: !modelData.allDay
@@ -934,11 +935,12 @@ Kirigami.Page {
                                                     property real caughtX: x
                                                     property real caughtY: y
                                                     property real caughtHeight: height
+                                                    property real resizeHeight: height
 
                                                     Drag.active: mouseArea.drag.active
                                                     Drag.hotSpot.x: mouseArea.mouseX
 
-                                                    // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
+                                                    // Drag reposition animations -- when the incidence goes to the correct cell of the hourly grid
                                                     Behavior on x {
                                                         enabled: repositionAnimationEnabled
                                                         NumberAnimation {
@@ -965,15 +967,19 @@ Kirigami.Page {
 
                                                     states: [
                                                         State {
-                                                            when: incidenceDelegate.mouseArea.drag.active
-                                                            ParentChange { target: incidenceDelegate; parent: root }
-                                                            PropertyChanges { target: incidenceDelegate; isOpenOccurrence: true }
+                                                            when: hourlyIncidenceDelegate.mouseArea.drag.active
+                                                            ParentChange { target: hourlyIncidenceDelegate; parent: root }
+                                                            PropertyChanges { target: hourlyIncidenceDelegate; isOpenOccurrence: true }
                                                         },
                                                         State {
-                                                            when: incidenceDelegate.caught
-                                                            ParentChange { target: incidenceDelegate; parent: root }
+                                                            when: hourlyIncidenceResizer.mouseArea.drag.active
+                                                            PropertyChanges { target: hourlyIncidenceDelegate; height: resizeHeight }
+                                                        },
+                                                        State {
+                                                            when: hourlyIncidenceDelegate.caught
+                                                            ParentChange { target: hourlyIncidenceDelegate; parent: root }
                                                             PropertyChanges {
-                                                                target: incidenceDelegate
+                                                                target: hourlyIncidenceDelegate
                                                                 repositionAnimationEnabled: true
                                                                 x: caughtX
                                                                 y: caughtY
@@ -1067,32 +1073,21 @@ Kirigami.Page {
                                                         onAddSubTodoClicked: root.addSubTodo(parentWrapper)
                                                     }
 
-                                                    MouseArea {
+                                                    ResizerSeparator {
+                                                        id: hourlyIncidenceResizer
                                                         objectName: "endDtResizeMouseArea"
                                                         anchors.left: parent.left
+                                                        anchors.leftMargin: hourlyIncidenceDelegate.radius
                                                         anchors.bottom: parent.bottom
                                                         anchors.right: parent.right
-                                                        height: 5
+                                                        anchors.rightMargin: hourlyIncidenceDelegate.radius
+                                                        height: 1
+                                                        oversizeMouseAreaVertical: 2
                                                         z: Infinity
-                                                        cursorShape: !Kirigami.Settings.isMobile ? Qt.SplitVCursor : undefined
-                                                        preventStealing: true
                                                         enabled: !Kirigami.Settings.isMobile && !modelData.isReadOnly
-                                                        visible: true
+                                                        unhoveredColor: "transparent"
 
-                                                        drag.target: this
-                                                        Drag.active: drag.active
-
-                                                        onPressed: _lastY = mouseY;
-                                                        onReleased: Drag.drop()
-                                                        property real _lastY: -1
-
-                                                        onPositionChanged: {
-                                                            if (_lastY === -1) {
-                                                                return;
-                                                            } else {
-                                                                parent.height = Math.max(root.periodHeight, parent.height - _lastY + mouseY)
-                                                            }
-                                                        }
+                                                        onDragPositionChanged: parent.resizeHeight = Math.max(root.periodHeight, hourlyIncidenceDelegate.initialIncidenceHeight + changeY)
                                                     }
                                                 }
                                             }

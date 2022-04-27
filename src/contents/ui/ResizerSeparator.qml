@@ -15,11 +15,14 @@ Kirigami.Separator {
 
     property int oversizeMouseAreaVertical: 0
     property int oversizeMouseAreaHorizontal: 0
+    property color unhoveredColor: defaultSeparator.color
 
     property Item mouseArea: separatorMouseArea
 
     MouseArea {
         id: separatorMouseArea
+
+        property Item resizerSeparator: parent
 
         anchors.centerIn: parent
         width: root.width + root.oversizeMouseAreaHorizontal
@@ -28,6 +31,10 @@ Kirigami.Separator {
         cursorShape: !Kirigami.Settings.isMobile ? root.width < root.height ? Qt.SplitHCursor : Qt.SplitVCursor : undefined
         preventStealing: true
         hoverEnabled: true
+        enabled: parent.enabled
+
+        drag.target: this
+        Drag.active: drag.active
 
         property real initX: 0
         property real initY: 0
@@ -48,6 +55,7 @@ Kirigami.Separator {
             const totalChangedX = globalPos.x - initX;
             const totalChangedY = globalPos.y - initY;
             root.dragReleased(totalChangedX, totalChangedY);
+            Drag.drop();
         }
 
         onPositionChanged: if(pressed) {
@@ -58,7 +66,7 @@ Kirigami.Separator {
         }
     }
 
-    color: mouseArea.containsMouse || mouseArea.pressed ? Kirigami.Theme.highlightColor : defaultSeparator.color
+    color: (mouseArea.containsMouse || mouseArea.pressed) && enabled ? Kirigami.Theme.highlightColor : unhoveredColor
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
 
     Kirigami.Separator { // So we can pull the normal separator colour, as we always want to match
