@@ -63,7 +63,7 @@ ContactsManager::ContactsManager(QObject *parent)
     : QObject(parent)
 {
     auto model = new ContactsModel(this);
-    m_model = new QSortFilterProxyModel;
+    m_model = new QSortFilterProxyModel(this);
     m_model->setSourceModel(model);
     m_model->setDynamicSortFilter(true);
     m_model->setSortCaseSensitivity(Qt::CaseInsensitive);
