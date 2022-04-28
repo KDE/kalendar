@@ -20,7 +20,7 @@ public:
     };
     Q_ENUM(Roles);
 
-    AttendeeStatusModel(QObject *parent = nullptr);
+    explicit AttendeeStatusModel(QObject *parent = nullptr);
     ~AttendeeStatusModel() override = default;
 
     QVariant data(const QModelIndex &idx, int role) const override;

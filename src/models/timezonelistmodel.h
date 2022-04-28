@@ -14,7 +14,7 @@ public:
     enum Roles { IdRole = Qt::UserRole + 1 };
     Q_ENUM(Roles);
 
-    TimeZoneListModel(QObject *parent = nullptr);
+    explicit TimeZoneListModel(QObject *parent = nullptr);
     ~TimeZoneListModel() override = default;
 
     QVariant data(const QModelIndex &idx, int role) const override;

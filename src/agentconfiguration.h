@@ -22,7 +22,7 @@ public:
     };
     Q_ENUM(AgentStatuses);
 
-    AgentConfiguration(QObject *parent = nullptr);
+    explicit AgentConfiguration(QObject *parent = nullptr);
     ~AgentConfiguration() override;
 
     Akonadi::AgentFilterProxyModel *availableAgents();

@@ -42,7 +42,7 @@ public:
         PeriodStartDateTime,
     };
 
-    HourlyIncidenceModel(QObject *parent = nullptr);
+    explicit HourlyIncidenceModel(QObject *parent = nullptr);
     ~HourlyIncidenceModel() override = default;
 
     QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
@@ -74,7 +74,7 @@ private:
     IncidenceOccurrenceModel *mSourceModel{nullptr};
     int mPeriodLength{15}; // In minutes
     HourlyIncidenceModel::Filters m_filters;
-    KalendarConfig *m_config;
+    KalendarConfig *m_config = nullptr;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(HourlyIncidenceModel::Filters)

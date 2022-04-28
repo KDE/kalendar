@@ -14,7 +14,7 @@ class TagManager : public QObject
     Q_PROPERTY(QSortFilterProxyModel *tagModel READ tagModel NOTIFY tagModelChanged)
 
 public:
-    TagManager(QObject *parent = nullptr);
+    explicit TagManager(QObject *parent = nullptr);
     ~TagManager() override = default;
 
     QSortFilterProxyModel *tagModel();

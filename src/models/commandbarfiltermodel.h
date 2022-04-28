@@ -8,7 +8,7 @@ class CommandBarFilterModel final : public QSortFilterProxyModel
     Q_OBJECT
     Q_PROPERTY(QString filterString READ filterString WRITE setFilterString NOTIFY filterStringChanged)
 public:
-    CommandBarFilterModel(QObject *parent = nullptr);
+    explicit CommandBarFilterModel(QObject *parent = nullptr);
 
     QString filterString() const;
 

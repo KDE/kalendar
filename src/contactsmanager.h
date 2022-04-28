@@ -28,7 +28,7 @@ class ContactsManager : public QObject
     Q_PROPERTY(QSortFilterProxyModel *contactsModel READ contactsModel CONSTANT)
 
 public:
-    ContactsManager(QObject *parent = nullptr);
+    explicit ContactsManager(QObject *parent = nullptr);
     ~ContactsManager() override = default;
 
     QSortFilterProxyModel *contactsModel();

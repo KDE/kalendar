@@ -87,7 +87,7 @@ public:
     };
     Q_ENUM(ShowComplete);
 
-    TodoSortFilterProxyModel(QObject *parent = nullptr);
+    explicit TodoSortFilterProxyModel(QObject *parent = nullptr);
     ~TodoSortFilterProxyModel();
 
     int columnCount(const QModelIndex &parent) const override;

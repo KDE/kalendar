@@ -14,7 +14,7 @@ class KalCommandBarModel final : public QAbstractTableModel
 public:
     struct Item {
         QString groupName;
-        QAction *action;
+        QAction *action = nullptr;
         int score;
     };
 
@@ -28,7 +28,7 @@ public:
         QList<QAction *> actions;
     };
 
-    KalCommandBarModel(QObject *parent = nullptr);
+    explicit KalCommandBarModel(QObject *parent = nullptr);
 
     enum Role {
         Score = Qt::UserRole + 1,

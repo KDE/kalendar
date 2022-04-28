@@ -97,7 +97,7 @@ public:
     };
     Q_ENUM(RecurrenceActions)
 
-    IncidenceWrapper(QObject *parent = nullptr);
+    explicit IncidenceWrapper(QObject *parent = nullptr);
     ~IncidenceWrapper() override;
 
     void notifyDataChanged();

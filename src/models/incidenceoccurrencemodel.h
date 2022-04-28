@@ -74,7 +74,7 @@ public:
         LastRole
     };
     Q_ENUM(Roles);
-    IncidenceOccurrenceModel(QObject *parent = nullptr);
+    explicit IncidenceOccurrenceModel(QObject *parent = nullptr);
     ~IncidenceOccurrenceModel() override = default;
 
     int rowCount(const QModelIndex &parent = {}) const override;

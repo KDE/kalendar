@@ -47,7 +47,7 @@ public:
         PeriodStartDate,
     };
 
-    MultiDayIncidenceModel(QObject *parent = nullptr);
+    explicit MultiDayIncidenceModel(QObject *parent = nullptr);
     ~MultiDayIncidenceModel() override = default;
 
     QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
@@ -85,7 +85,7 @@ private:
     IncidenceOccurrenceModel *mSourceModel{nullptr};
     int mPeriodLength{7};
     MultiDayIncidenceModel::Filters m_filters;
-    KalendarConfig *m_config;
+    KalendarConfig *m_config = nullptr;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(MultiDayIncidenceModel::Filters)

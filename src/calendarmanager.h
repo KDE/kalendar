@@ -51,7 +51,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
 
 public:
-    CalendarManager(QObject *parent = nullptr);
+    explicit CalendarManager(QObject *parent = nullptr);
     ~CalendarManager() override;
 
     KCheckableProxyModel *collectionSelectionProxyModel() const;
@@ -113,8 +113,8 @@ Q_SIGNALS:
 
 private:
     Akonadi::ETMCalendar::Ptr m_calendar = nullptr;
-    Akonadi::IncidenceChanger *m_changer;
-    KDescendantsProxyModel *m_flatCollectionTreeModel;
+    Akonadi::IncidenceChanger *m_changer = nullptr;
+    KDescendantsProxyModel *m_flatCollectionTreeModel = nullptr;
     ColorProxyModel *m_baseModel = nullptr;
     KCheckableProxyModel *m_selectionProxyModel = nullptr;
     Akonadi::ETMViewStateSaver *mCollectionSelectionModelStateSaver = nullptr;
