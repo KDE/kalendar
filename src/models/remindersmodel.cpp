@@ -123,7 +123,7 @@ void RemindersModel::addAlarm()
     alarm->setText(m_incidence->summary());
     alarm->setStartOffset(0);
 
-    qDebug() << alarm->parentUid();
+    qCDebug(KALENDAR_LOG) << alarm->parentUid();
 
     m_incidence->addAlarm(alarm);
     Q_EMIT alarmsChanged();
