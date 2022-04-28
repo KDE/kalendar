@@ -364,7 +364,7 @@ void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
 {
     Q_EMIT layoutAboutToBeChanged();
     setFilterFixedString(name);
-    if (name.length() > 0) {
+    if (!name.isEmpty()) {
         m_showCompleted = showCompleted;
     } else {
         setShowCompleted(m_showCompletedStore);
