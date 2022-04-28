@@ -102,16 +102,16 @@ public:
     Akonadi::IncidenceChanger *incidenceChanger();
     void setIncidenceChanger(Akonadi::IncidenceChanger *changer);
 
-    int showCompleted();
+    int showCompleted() const;
     void setShowCompleted(int showCompleted);
-    QVariantMap filterMap();
+    QVariantMap filterMap() const;
     void setFilterMap(const QVariantMap &filterMap);
 
-    int sortBy();
+    int sortBy() const;
     void setSortBy(int sortBy);
-    bool sortAscending();
+    bool sortAscending() const;
     void setSortAscending(bool sortAscending);
-    bool showCompletedSubtodosInIncomplete();
+    bool showCompletedSubtodosInIncomplete() const;
     void setShowCompletedSubtodosInIncomplete(bool showCompletedSubtodosInIncomplete);
 
     void sortTodoModel();

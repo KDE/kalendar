@@ -67,7 +67,7 @@ QVariant RecurrenceExceptionsModel::data(const QModelIndex &idx, int role) const
     if (!hasIndex(idx.row(), idx.column())) {
         return {};
     }
-    QDate exception = m_exceptions[idx.row()];
+    const QDate exception = m_exceptions[idx.row()];
     switch (role) {
     case DateRole:
         return exception;

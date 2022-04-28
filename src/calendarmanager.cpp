@@ -911,7 +911,7 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     return collectionDetails;
 }
 
-void CalendarManager::setCollectionColor(qint64 collectionId, QColor color)
+void CalendarManager::setCollectionColor(qint64 collectionId, const QColor &color)
 {
     auto collection = m_calendar->collection(collectionId);
     auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);

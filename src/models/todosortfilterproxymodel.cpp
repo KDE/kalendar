@@ -230,7 +230,7 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
     }
 
     if (m_filterMap.contains(QLatin1String("tags")) && !m_filterMap[QLatin1String("tags")].toStringList().isEmpty()) {
-        auto tags = m_filterMap[QLatin1String("tags")].toStringList();
+        const auto tags = m_filterMap[QLatin1String("tags")].toStringList();
         bool containsTag = false;
         for (const auto &tag : tags) {
             const auto todoPtr = sourceIndex.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
@@ -314,7 +314,7 @@ void TodoSortFilterProxyModel::loadColors()
     Q_EMIT layoutChanged();
 }
 
-int TodoSortFilterProxyModel::showCompleted()
+int TodoSortFilterProxyModel::showCompleted() const
 {
     return m_showCompleted;
 }
@@ -331,7 +331,7 @@ void TodoSortFilterProxyModel::setShowCompleted(int showCompleted)
     sortTodoModel();
 }
 
-QVariantMap TodoSortFilterProxyModel::filterMap()
+QVariantMap TodoSortFilterProxyModel::filterMap() const
 {
     return m_filterMap;
 }
@@ -345,7 +345,7 @@ void TodoSortFilterProxyModel::setFilterMap(const QVariantMap &filterMap)
     Q_EMIT filterMapChanged();
 
     if (m_filterMap.contains(QLatin1String("name"))) {
-        auto name = m_filterMap[QLatin1String("name")].toString();
+        const auto name = m_filterMap[QLatin1String("name")].toString();
         setFilterFixedString(name);
     }
     invalidateFilter();
@@ -356,7 +356,7 @@ void TodoSortFilterProxyModel::setFilterMap(const QVariantMap &filterMap)
 
 void TodoSortFilterProxyModel::sortTodoModel()
 {
-    auto order = m_sortAscending ? Qt::AscendingOrder : Qt::DescendingOrder;
+    const auto order = m_sortAscending ? Qt::AscendingOrder : Qt::DescendingOrder;
     QSortFilterProxyModel::sort(m_sortColumn, order);
 }
 
@@ -609,7 +609,7 @@ bool TodoSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
     }
 }
 
-int TodoSortFilterProxyModel::sortBy()
+int TodoSortFilterProxyModel::sortBy() const
 {
     return m_sortColumn;
 }
@@ -621,7 +621,7 @@ void TodoSortFilterProxyModel::setSortBy(int sortBy)
     sortTodoModel();
 }
 
-bool TodoSortFilterProxyModel::sortAscending()
+bool TodoSortFilterProxyModel::sortAscending() const
 {
     return m_sortAscending;
 }
@@ -633,7 +633,7 @@ void TodoSortFilterProxyModel::setSortAscending(bool sortAscending)
     sortTodoModel();
 }
 
-bool TodoSortFilterProxyModel::showCompletedSubtodosInIncomplete()
+bool TodoSortFilterProxyModel::showCompletedSubtodosInIncomplete() const
 {
     return m_showCompletedSubtodosInIncomplete;
 }

@@ -37,7 +37,7 @@ AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
         // QLatin1String is a workaround for QT_NO_CAST_FROM_ASCII.
         // Regular expression adds space between every lowercase and Capitalised character then does the same
         // for capitalised letters together, e.g. ThisIsATest. Not a problem right now, but best to be safe.
-        QLatin1String enumName = QLatin1String(QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().key(i));
+        const QLatin1String enumName = QLatin1String(QMetaEnum::fromType<KCalendarCore::Attendee::PartStat>().key(i));
         QString displayName = enumName;
         displayName.replace(lowerToCapitalSep, QStringLiteral("\\1 \\2"));
         displayName.replace(capitalToCapitalSep, QStringLiteral("\\1 \\2"));

@@ -30,11 +30,11 @@ public:
 
     Q_INVOKABLE void createNew(int index);
     Q_INVOKABLE void edit(int index);
-    Q_INVOKABLE void editIdentifier(QString resourceIdentifier);
+    Q_INVOKABLE void editIdentifier(const QString &resourceIdentifier);
     Q_INVOKABLE void remove(int index);
-    Q_INVOKABLE void removeIdentifier(QString resourceIdentifier);
+    Q_INVOKABLE void removeIdentifier(const QString &resourceIdentifier);
     Q_INVOKABLE void restart(int index);
-    Q_INVOKABLE void restartIdentifier(QString resourceIdentifier);
+    Q_INVOKABLE void restartIdentifier(const QString &resourceIdentifier);
 
 public Q_SLOTS:
     void processInstanceProgressChanged(const Akonadi::AgentInstance &instance);
@@ -44,7 +44,7 @@ Q_SIGNALS:
 
 private:
     void setupEdit(Akonadi::AgentInstance instance);
-    void setupRemove(Akonadi::AgentInstance instance);
+    void setupRemove(const Akonadi::AgentInstance &instance);
     void setupRestart(Akonadi::AgentInstance instance);
 
     Akonadi::AgentFilterProxyModel *m_runningAgents = nullptr;

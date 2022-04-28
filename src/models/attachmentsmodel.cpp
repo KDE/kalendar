@@ -91,9 +91,9 @@ int AttachmentsModel::rowCount(const QModelIndex &) const
     return m_incidence->attachments().size();
 }
 
-void AttachmentsModel::addAttachment(QString uri)
+void AttachmentsModel::addAttachment(const QString &uri)
 {
-    QMimeType type = m_mimeDb.mimeTypeForUrl(QUrl(uri));
+    const QMimeType type = m_mimeDb.mimeTypeForUrl(QUrl(uri));
 
     KCalendarCore::Attachment attachment(uri);
     attachment.setLabel(QUrl(uri).fileName());
@@ -104,7 +104,7 @@ void AttachmentsModel::addAttachment(QString uri)
     Q_EMIT layoutChanged();
 }
 
-void AttachmentsModel::deleteAttachment(QString uri)
+void AttachmentsModel::deleteAttachment(const QString &uri)
 {
     KCalendarCore::Attachment::List attachments = m_incidence->attachments();
 

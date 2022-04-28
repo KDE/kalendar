@@ -73,7 +73,7 @@ void AgentConfiguration::edit(int index)
     setupEdit(instance);
 }
 
-void AgentConfiguration::editIdentifier(QString resourceIdentifier)
+void AgentConfiguration::editIdentifier(const QString &resourceIdentifier)
 {
     auto instance = Akonadi::AgentManager::self()->instance(resourceIdentifier);
     setupEdit(instance);
@@ -97,7 +97,7 @@ void AgentConfiguration::restart(int index)
     setupRestart(instance);
 }
 
-void AgentConfiguration::restartIdentifier(QString resourceIdentifier)
+void AgentConfiguration::restartIdentifier(const QString &resourceIdentifier)
 {
     auto instance = Akonadi::AgentManager::self()->instance(resourceIdentifier);
     setupRestart(instance);
@@ -118,13 +118,13 @@ void AgentConfiguration::remove(int index)
     setupRemove(instance);
 }
 
-void AgentConfiguration::removeIdentifier(QString resourceIdentifier)
+void AgentConfiguration::removeIdentifier(const QString &resourceIdentifier)
 {
     auto instance = Akonadi::AgentManager::self()->instance(resourceIdentifier);
     setupRemove(instance);
 }
 
-void AgentConfiguration::setupRemove(Akonadi::AgentInstance instance)
+void AgentConfiguration::setupRemove(const Akonadi::AgentInstance &instance)
 {
     if (instance.isValid()) {
         Akonadi::AgentManager::self()->removeInstance(instance);
