@@ -5,9 +5,7 @@
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Monitor>
-#include <QObject>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <akonadi_version.h>
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 19, 40)
 #include <Akonadi/EmailAddressSelectionModel>
 #else

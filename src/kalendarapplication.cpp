@@ -22,7 +22,6 @@
 #include <QMenu>
 #include <QQuickWindow>
 #include <QSortFilterProxyModel>
-#include <QWindow>
 #include <vector>
 
 KalendarApplication::KalendarApplication(QObject *parent)
