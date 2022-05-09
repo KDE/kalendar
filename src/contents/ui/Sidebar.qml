@@ -21,7 +21,7 @@ Kirigami.OverlayDrawer {
     signal tagClicked(string tagName)
     signal deleteCalendar(int collectionId, var collectionDetails)
 
-    property bool todoMode: false
+    property var mode: KalendarApplication.Event
     property alias toolbar: toolbar
     property var activeTags : []
     property alias searchText: searchField.text
@@ -81,7 +81,7 @@ Kirigami.OverlayDrawer {
                     Layout.leftMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing
                     text: i18n("Kalendar")
 
-                    visible: !sidebar.todoMode
+                    visible: !searchField.visible
                     opacity: sidebar.collapsed ? 0 : 1
                     Behavior on opacity {
                         OpacityAnimator {
@@ -95,7 +95,7 @@ Kirigami.OverlayDrawer {
                     id: searchField
                     Layout.fillWidth: true
 
-                    visible: sidebar.todoMode
+                    visible: sidebar.mode !== KalendarApplication.Event
                     opacity: sidebar.collapsed ? 0 : 1
                     Behavior on opacity {
                         OpacityAnimator {
@@ -239,6 +239,14 @@ Kirigami.OverlayDrawer {
                                     todoViewAction.trigger()
                                     if (sidebar.modal) sidebar.close()
                                 }
+                            },
+                            KActionFromAction {
+                                kalendarAction: "open_contact_view"
+                                checkable: false
+                                onTriggered: {
+                                    contactViewAction.trigger()
+                                    if (sidebar.modal) sidebar.close()
+                                }
                             }
                         ]
                         property list<Kirigami.Action> mobileActions: [
@@ -338,7 +346,7 @@ Kirigami.OverlayDrawer {
                     Layout.topMargin: Kirigami.Units.largeSpacing
                     separatorVisible: false
                     hoverEnabled: false
-                    visible: TagManager.tagModel.rowCount() > 0
+                    visible: TagManager.tagModel.rowCount() > 0 && mode !== KalendarApplication.Contact
                     Accessible.name: tagsHeadingItem.expanded ? i18nc('Accessible description of dropdown menu', 'Tags, Expanded') : i18nc('Accessible description of dropdown menu', 'Tags, Collapsed')
 
                     Kirigami.Heading {
@@ -380,7 +388,7 @@ Kirigami.OverlayDrawer {
                     Layout.rightMargin: Kirigami.Units.largeSpacing
                     Layout.bottomMargin: Kirigami.Units.largeSpacing
                     spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
-                    visible: TagManager.tagModel.rowCount() > 0 && tagsHeadingItem.expanded
+                    visible: TagManager.tagModel.rowCount() > 0 && tagsHeadingItem.expanded && mode !== KalendarApplication.Contact
 
                     Repeater {
                         id: tagList
@@ -414,7 +422,13 @@ Kirigami.OverlayDrawer {
                         isMask: true
                         color: calendarHeadingItem.labelItem.color
                     }
-                    text: i18n("Calendars")
+                    text: switch (mode) {
+                        case KalendarApplication.Event:
+                        case KalendarApplication.Todo:
+                            return i18n("Calendars");
+                        case KalendarApplication.Contact:
+                            return i18n("Contacts");
+                    }
                     highlighted: visualFocus
                     labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
                     labelItem.font.pointSize: headingSizeCalculator.font.pointSize
@@ -435,7 +449,16 @@ Kirigami.OverlayDrawer {
                     id: calendarList
 
                     property var calendarModel: KDescendantsProxyModel {
-                        model: sidebar.todoMode ? CalendarManager.todoCollections : CalendarManager.viewCollections
+                        model: switch(sidebar.mode) {
+                        case KalendarApplication.Todo:
+                            return CalendarManager.todoCollections;
+                        case KalendarApplication.Event:
+                            return CalendarManager.viewCollections;
+                        case KalendarApplication.Contact:
+                            return ContactManager.contactCollections;
+                        default:
+                            console.log('Should not happen', sidebar.mode)
+                        }
                     }
 
 
@@ -522,6 +545,7 @@ Kirigami.OverlayDrawer {
                                     collectionId: model.collectionId
                                     collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                     anchors.fill: parent
+                                    enabled: mode !== KalendarApplication.Contact
 
                                     DropArea {
                                         id: incidenceDropArea
@@ -585,6 +609,7 @@ Kirigami.OverlayDrawer {
                                     collectionId: model.collectionId
                                     collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                     anchors.fill: parent
+                                    enabled: mode !== KalendarApplication.Contact
 
                                     onDeleteCalendar: sidebar.deleteCalendar(collectionId, collectionDetails)
 
@@ -624,11 +649,11 @@ Kirigami.OverlayDrawer {
         icon: "show-all-effects"
         label: i18n("View all tasks")
         labelItem.color: Kirigami.Theme.textColor
-        visible: sidebar.todoMode
+        visible: sidebar.mode === KalendarApplication.Todo
         separatorVisible: false
         onClicked: {
             viewAllTodosClicked();
-            if(sidebar.modal && sidebar.todoMode) sidebar.close()
+            if(sidebar.modal && sidebar.mode === KalendarApplication.Todo) sidebar.close()
         }
     }
 }

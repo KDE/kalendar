@@ -27,7 +27,7 @@ Kirigami.AbstractListItem {
             id: avatar
             Layout.maximumHeight: parent.height
             Layout.maximumWidth: parent.height
-            source: ContactsManager.decorationToUrl(avatarIcon)
+            source: ContactManager.decorationToUrl(avatarIcon)
             name: name
         }
 

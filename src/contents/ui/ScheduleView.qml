@@ -44,6 +44,7 @@ Kirigami.Page {
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
     property real maxTimeLabelWidth: 0
     property bool dragDropEnabled: true
+    readonly property int mode: Kalendar.KalendarApplication.Event
 
     onSelectedDateChanged: {
         if (pathView.currentItem) {

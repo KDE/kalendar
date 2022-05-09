@@ -14,12 +14,21 @@ import org.kde.kalendar 1.0 as Kalendar
 
 Kirigami.ScrollablePage {
     id: collectionPickerSheet
-    title: todoMode ? i18n("Choose a Task Calendar") : i18n("Choose a Calendar")
+    title: switch (mode) {
+    case Kalendar.KalendarApplication.Todo:
+        return i18n("Choose a Task Calendar");
+    case Kalendar.KalendarApplication.Event:
+        return i18n("Choose a Calendar");
+    case Kalendar.KalendarApplication.Contact:
+        return i18n("Choose an Address Book");
+    default:
+        return 'BUG';
+    }
 
     signal cancel
     signal collectionPicked(int collectionId)
 
-    property bool todoMode: false;
+    property bool mode: Kalendar.KalendarApplication.Event
 
     ListView {
         id: collectionsList
@@ -31,7 +40,14 @@ Kirigami.ScrollablePage {
         }
 
         model: KDescendantsProxyModel {
-            model: collectionPickerSheet.todoMode ? Kalendar.CalendarManager.selectableTodoCalendars : Kalendar.CalendarManager.selectableCalendars
+            model: switch (collectionPickerSheet.mode) {
+            case Kalendar.KalendarApplication.Todo:
+                return Kalendar.CalendarManager.selectableTodoCalendars;
+            case Kalendar.KalendarApplication.Event:
+                return Kalendar.CalendarManager.selectableCalendars;
+            case Kalendar.KalendarApplication.Contact:
+                return Kalendar.CalendarManager.selectableContacts;
+            }
         }
 
         delegate: DelegateChooser {

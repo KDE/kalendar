@@ -156,6 +156,22 @@ void KalendarApplication::setupActions()
         mCollection.setDefaultShortcut(openScheduleAction, QKeySequence(i18n("Ctrl+5")));
     }
 
+    actionName = QLatin1String("open_contact_view");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto openContactAction = mCollection.addAction(actionName, this, &KalendarApplication::openContactView);
+        openContactAction->setText(i18n("Contacts View"));
+        openContactAction->setIcon(QIcon::fromTheme(QStringLiteral("view-pim-contacts")));
+        openContactAction->setCheckable(true);
+        openContactAction->setActionGroup(m_viewGroup);
+        connect(openContactAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::ContactView);
+                KalendarConfig::self()->save();
+            }
+        });
+        mCollection.setDefaultShortcut(openContactAction, QKeySequence(i18n("Ctrl+5")));
+    }
+
     actionName = QLatin1String("open_month_view");
     if (KAuthorized::authorizeAction(actionName)) {
         auto openMonthAction = mCollection.addAction(actionName, this, &KalendarApplication::openMonthView);

@@ -78,7 +78,7 @@ Kirigami.ScrollablePage {
 
     Component {
         id: contactsPage
-        ContactsPage {
+        ContactChooserPage {
             attendeeAkonadiIds: root.incidenceWrapper.attendeesModel.attendeesAkonadiIds
 
             onAddAttendee: {

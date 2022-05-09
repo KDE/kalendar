@@ -3,20 +3,20 @@
 
 #pragma once
 
-#include <CalendarSupport/KCalPrefs>
-#include <CalendarSupport/Utils>
-#include <KCalUtils/RecurrenceActions>
-#include <QByteArray>
-#include <QObject>
+#include "models/attachmentsmodel.h"
+#include "models/attendeesmodel.h"
+#include "models/recurrenceexceptionsmodel.h"
+#include "models/remindersmodel.h"
 #include <Akonadi/CollectionIdentificationAttribute>
 #include <Akonadi/Item>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemMonitor>
-#include "models/attachmentsmodel.h"
-#include "models/attendeesmodel.h"
-#include "models/recurrenceexceptionsmodel.h"
-#include "models/remindersmodel.h"
+#include <CalendarSupport/KCalPrefs>
+#include <CalendarSupport/Utils>
+#include <KCalUtils/RecurrenceActions>
+#include <QByteArray>
+#include <QObject>
 
 /**
  * This class is a wrapper for a KCalendarCore::Incidence::Ptr object.

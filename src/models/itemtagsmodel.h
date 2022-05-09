@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #pragma once
-#include <QObject>
 #include <Akonadi/Item>
 #include <QAbstractListModel>
+#include <QObject>
 
 class ItemTagsModel : public QAbstractListModel
 {

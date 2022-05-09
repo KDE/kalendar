@@ -41,6 +41,7 @@ Kirigami.ScrollablePage {
 
     property var retainedTodoData: {}
     property var retainedCollectionData: {}
+    property var mode: Kalendar.KalendarApplication.Todo
 
     property var filter: {
         "collectionId": -1,
@@ -165,7 +166,7 @@ Kirigami.ScrollablePage {
             id: collectionPickerSheet
             property var incidenceWrapper
 
-            todoMode: true
+            mode: Kalendar.KalendarApplication.Todo
             onCollectionPicked: {
                 collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
                 Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);

@@ -17,7 +17,7 @@ RowLayout {
     signal searchTextChanged(string text)
 
     property bool isDark: false
-    property bool todoMode: false
+    property bool mode: Kalendar.KalendarApplication.Event
     property var filter: {
         "tags": [],
         "collectionId": -1
@@ -25,7 +25,7 @@ RowLayout {
     property var filterCollectionDetails: filter && filter.collectionId >= 0 ?
         Kalendar.CalendarManager.getCollectionDetails(filter.collectionId) : null
 
-    visible: todoMode || filter.tags.length > 0 || filter.collectionId > -1
+    visible: mode === Kalendar.KalendarApplication.Todo || filter.tags.length > 0 || filter.collectionId > -1
     height: visible ? implicitHeight : 0
 
     spacing: Kirigami.Units.smallSpacing
@@ -46,18 +46,18 @@ RowLayout {
             Layout.alignment: Qt.AlignVCenter
             width: implicitWidth
 
-            text: !headerLayout.todoMode ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+            text: headerLayout.mode !== Kalendar.KalendarApplication.Todo ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
                 headerLayout.filterCollectionDetails.displayName : i18n("All Tasks")
-            font.weight: !headerLayout.todoMode ? Font.Normal : Font.Bold
-            color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+            font.weight: headerLayout.mode !== Kalendar.KalendarApplication.Todo ? Font.Normal : Font.Bold
+            color: headerLayout.mode !== Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
                 headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
             elide: Text.ElideRight
-            level: headerLayout.todoMode ? 1 : 2
+            level: headerLayout.mode === Kalendar.KalendarApplication.Todo ? 1 : 2
         }
         QQC2.ToolButton {
             Layout.alignment: Qt.AlignVCenter
             icon.name: "edit-reset"
-            visible: headerLayout.todoMode && headerLayout.filter.collectionId > -1
+            visible: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filter.collectionId > -1
             onClicked: headerLayout.resetFilterCollection()
         }
     }
@@ -86,7 +86,7 @@ RowLayout {
                 implicitWidth: itemLayout.implicitWidth > tagFlow.width ?
                     tagFlow.width : itemLayout.implicitWidth
                 isHeading: true
-                headingItem.color: headerLayout.todoMode && headerLayout.filterCollectionDetails ?
+                headingItem.color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails ?
                     headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
 
                 onClicked: headerLayout.removeFilterTag(modelData)
@@ -104,11 +104,13 @@ RowLayout {
         horizontalAlignment: Text.AlignRight
 
         function updateTasksCount() {
-            if(headerLayout.todoMode) text = applicationWindow().pageStack.currentItem.incompleteView.model.rowCount();
+            if (headerLayout.mode === Kalendar.KalendarApplication.Todo) {
+                text = applicationWindow().pageStack.currentItem.incompleteView.model.rowCount();
+            }
         }
 
         Connections {
-            target: applicationWindow().pageStack.currentItem.incompleteView.model
+            target: headerLayout.mode === Kalendar.KalendarApplication.Todo ? applicationWindow().pageStack.currentItem.incompleteView.model : null
             function onRowsInserted() {
                 numTasksHeading.updateTasksCount();
             }
@@ -118,11 +120,11 @@ RowLayout {
             }
         }
 
-        text: if(headerLayout.todoMode) applicationWindow().pageStack.currentItem.incompleteView.model.rowCount();
+        text: headerLayout.mode === Kalendar.KalendarApplication.Todo ? applicationWindow().pageStack.currentItem.incompleteView.model.rowCount() : ''
         font.weight: Font.Bold
-        color: headerLayout.todoMode && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+        color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
             headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
         elide: Text.ElideRight
-        visible: headerLayout.todoMode
+        visible: headerLayout.mode === Kalendar.KalendarApplication.Todo
     }
 }

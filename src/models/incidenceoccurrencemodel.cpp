@@ -8,7 +8,6 @@
 #include "incidenceoccurrencemodel.h"
 #include "kalendar_debug.h"
 
-#include <QMetaEnum>
 #include <Akonadi/EntityTreeModel>
 #include <KCalendarCore/MemoryCalendar>
 #include <KCalendarCore/OccurrenceIterator>
@@ -16,6 +15,7 @@
 #include <KFormat>
 #include <KLocalizedString>
 #include <KSharedConfig>
+#include <QMetaEnum>
 
 IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
     : QAbstractListModel(parent)

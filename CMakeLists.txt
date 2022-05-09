@@ -72,7 +72,11 @@ if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
-install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+if (BUILD_FLATPAK)
+    install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR} RENAME org.kde.kontact.kalendar.desktop)
+else()
+    install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+endif()
 install(FILES org.kde.kalendar.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES org.kde.kalendar.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)
 

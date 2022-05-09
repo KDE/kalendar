@@ -1,6 +1,25 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 #define QT_QML_DEBUG
+#include "about.h"
+#include "agentconfiguration.h"
+#include "calendarmanager.h"
+#include "config-kalendar.h"
+#include "contacts/addresseewrapper.h"
+#include "contacts/contactmanager.h"
+#include "incidencewrapper.h"
+#include "kalendarapplication.h"
+#include "kalendarconfig.h"
+#include "models/hourlyincidencemodel.h"
+#include "models/incidenceoccurrencemodel.h"
+#include "models/infinitecalendarviewmodel.h"
+#include "models/itemtagsmodel.h"
+#include "models/monthmodel.h"
+#include "models/multidayincidencemodel.h"
+#include "models/timezonelistmodel.h"
+#include "models/todosortfilterproxymodel.h"
+#include "tagmanager.h"
+#include <Akonadi/AgentFilterProxyModel>
 #include <KAboutData>
 #include <KCalendarCore/MemoryCalendar>
 #include <KCalendarCore/VCalFormat>
@@ -20,23 +39,6 @@
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QUrl>
-#include <Akonadi/AgentFilterProxyModel>
-#include "about.h"
-#include "agentconfiguration.h"
-#include "calendarmanager.h"
-#include "config-kalendar.h"
-#include "contactsmanager.h"
-#include "incidencewrapper.h"
-#include "kalendarapplication.h"
-#include "kalendarconfig.h"
-#include "models/hourlyincidencemodel.h"
-#include "models/incidenceoccurrencemodel.h"
-#include "models/infinitecalendarviewmodel.h"
-#include "models/itemtagsmodel.h"
-#include "models/monthmodel.h"
-#include "models/multidayincidencemodel.h"
-#include "models/timezonelistmodel.h"
-#include "tagmanager.h"
 
 using namespace KCalendarCore;
 
@@ -98,6 +100,7 @@ int main(int argc, char *argv[])
 
     auto config = KalendarConfig::self();
     CalendarManager manager;
+    ContactManager contactManager;
     AgentConfiguration agentConfiguration;
     auto kalendarApplication = new KalendarApplication;
     kalendarApplication->setCalendar(manager.calendar());
@@ -125,17 +128,17 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     QQmlDebuggingEnabler enabler;
 
-    auto contactsManager = new ContactsManager(&engine);
     auto tagManager = new TagManager(&engine);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", &manager);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "ContactManager", &contactManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "ContactsManager", contactsManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", kalendarApplication);
 
     qmlRegisterType<IncidenceWrapper>("org.kde.kalendar", 1, 0, "IncidenceWrapper");
+    qmlRegisterType<AddresseeWrapper>("org.kde.kalendar", 1, 0, "AddresseeWrapper");
     qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");
     qmlRegisterType<MultiDayIncidenceModel>("org.kde.kalendar", 1, 0, "MultiDayIncidenceModel");
     qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
@@ -148,6 +151,9 @@ int main(int argc, char *argv[])
 
     qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
+    qRegisterMetaType<KContacts::Picture>("KContacts::Picture");
+    qRegisterMetaType<KContacts::PhoneNumber::List>("KContacts::PhoneNumber::List");
+    qRegisterMetaType<KContacts::PhoneNumber>("KContacts::PhoneNumber");
     qRegisterMetaType<QAction *>();
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));

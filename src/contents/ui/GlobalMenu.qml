@@ -12,7 +12,7 @@ import QtQuick.Window 2.15
 Labs.MenuBar {
     id: bar
     property var parentWindow: null
-    property bool todoMode: false
+    property bool mode: KalendarApplication.Event
 
     Labs.Menu {
         title: i18nc("@action:menu", "File")

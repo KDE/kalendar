@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include <QObject>
 #include <Akonadi/Monitor>
 #include <Akonadi/TagModel>
+#include <QObject>
 #include <QSortFilterProxyModel>
 
 class TagManager : public QObject

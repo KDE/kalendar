@@ -8,6 +8,7 @@
 #include <Akonadi/TagDeleteJob>
 #include <Akonadi/TagModifyJob>
 #include <KDescendantsProxyModel>
+#include <QObject>
 
 class FlatTagModel : public QSortFilterProxyModel
 {

@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "kalendar_debug.h"
-#include <QMetaEnum>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <KCalendarCore/Incidence>
+#include <QMetaEnum>
 #include <models/itemtagsmodel.h>
 
 ItemTagsModel::ItemTagsModel(QObject *parent)

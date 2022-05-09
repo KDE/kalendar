@@ -34,6 +34,7 @@ Kirigami.Page {
     property bool initialMonth: true
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
     readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
+    readonly property int mode: Kalendar.KalendarApplication.Event
 
     property bool dragDropEnabled: true
 
