@@ -65,6 +65,12 @@ Kirigami.ScrollablePage {
         Qt.openUrlExternally("sms:" + number)
     }
 
+    Component {
+        id: callPopup
+
+        PhoneNumberDialog {}
+    }
+
     ColumnLayout {
         spacing: 0
         Header {
@@ -104,16 +110,18 @@ Kirigami.ScrollablePage {
                         iconName: "call-start"
                         visible: addressee.phoneNumbers.length > 0
                         onTriggered: {
-                            applicationWindow().showPassiveNotification(i18n("Call support is not implemented yet"));
-                            //const model = addressee.phoneNumbers
+                            const model = addressee.phoneNumbers;
 
-                            //if (addressee.phoneNumbers.length === 1) {
-                            //    page.callNumber(model[0].normalizedNumber)
-                            //} else {
-                            //    var pop = callPopup.createObject(page, {numbers: addressee.phoneNumbers, title: i18n("Select number to call")})
-                            //    pop.onNumberSelected.connect(number => callNumber(number))
-                            //    pop.open()
-                            //}
+                            if (addressee.phoneNumbers.length === 1) {
+                                page.callNumber(model[0].normalizedNumber);
+                            } else {
+                                const pop = callPopup.createObject(page, {
+                                    numbers: addressee.phoneNumbers,
+                                    title: i18n("Select number to call")
+                                });
+                                pop.onNumberSelected.connect(number => callNumber(number));
+                                pop.open();
+                            }
                         }
                     },
                     Kirigami.Action {
@@ -121,19 +129,18 @@ Kirigami.ScrollablePage {
                         iconName: "mail-message"
                         visible: addressee.phoneNumbers.length > 0
                         onTriggered: {
-                            applicationWindow().showPassiveNotification(i18n("SMS support is not implemented yet"));
-                            //var model = addressee.phoneNumbers
+                            const model = addressee.phoneNumbers;
 
-                            //if (addressee.phoneNumbers.length === 1) {
-                            //    page.sendSms(model[0].normalizedNumber)
-                            //} else {
-                            //    var pop = callPopup.createObject(page, {
-                            //        numbers: addressee.phoneNumbers,
-                            //        title: i18n("Select number to send message to"),
-                            //    })
-                            //    pop.onNumberSelected.connect(number => sendSms(number))
-                            //    pop.open()
-                            //}
+                            if (addressee.phoneNumbers.length === 1) {
+                                page.sendSms(model[0].normalizedNumber);
+                            } else {
+                                const pop = callPopup.createObject(page, {
+                                    numbers: addressee.phoneNumbers,
+                                    title: i18n("Select number to send message to"),
+                                });
+                                pop.onNumberSelected.connect(number => sendSms(number));
+                                pop.open();
+                            }
                         }
                     },
                     Kirigami.Action {

@@ -65,6 +65,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="CalendarItemMenu.qml">contents/ui/CalendarItemMenu.qml</file>
     <file alias="RecurringIncidenceChangeSheet.qml">contents/ui/RecurringIncidenceChangeSheet.qml</file>
     <file alias="ResizerSeparator.qml">contents/ui/ResizerSeparator.qml</file>
+    <file alias="PhoneNumberDialog.qml">contents/ui/PhoneNumberDialog.qml</file>
     <file alias="fallbackBackground.png">contents/resources/fallbackBackground.png</file>
   </qresource>
 </RCC>
