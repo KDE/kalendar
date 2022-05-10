@@ -52,6 +52,8 @@ set(kalendar_SRCS
     contacts/addresseewrapper.h
     contacts/addressmodel.cpp
     contacts/addressmodel.h
+    contacts/emailmodel.h
+    contacts/emailmodel.cpp
     contacts/globalcontactmodel.cpp
     contacts/globalcontactmodel.h
     contacts/contactmanager.h

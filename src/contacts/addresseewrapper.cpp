@@ -6,13 +6,14 @@
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
-#include <akonadi/itemmonitor.h>
-#include <kcontacts/addressee.h>
+#include <Akonadi/ItemMonitor>
+#include <KContacts/Addressee>
 
 AddresseeWrapper::AddresseeWrapper(QObject *parent)
     : QObject(parent)
     , Akonadi::ItemMonitor()
     , m_addressesModel(new AddressModel(this))
+    , m_emailModel(new EmailModel(this))
 {
     Akonadi::ItemFetchScope scope;
     scope.fetchFullPayload();
@@ -80,6 +81,7 @@ void AddresseeWrapper::setAddressee(const KContacts::Addressee &addressee)
 {
     m_addressee = addressee;
     m_addressesModel->setAddresses(addressee.addresses());
+    m_emailModel->setEmails(addressee.emailList());
     notifyDataChanged();
 }
 
@@ -140,4 +142,9 @@ KContacts::Picture AddresseeWrapper::photo() const
 QString AddresseeWrapper::preferredEmail() const
 {
     return m_addressee.preferredEmail();
+}
+
+EmailModel *AddresseeWrapper::emailModel() const
+{
+    return m_emailModel;
 }

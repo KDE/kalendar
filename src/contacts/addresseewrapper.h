@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include "addressmodel.h"
 #include <Akonadi/CollectionIdentificationAttribute>
 #include <Akonadi/Item>
 #include <Akonadi/ItemFetchJob>
@@ -12,7 +11,9 @@
 #include <Akonadi/ItemMonitor>
 #include <KContacts/Addressee>
 #include <QObject>
-#include <qdatetime.h>
+
+#include "emailmodel.h"
+#include "addressmodel.h"
 
 /// This class is a QObject wrapper for a KContact::Adressee
 class AddresseeWrapper : public QObject, public Akonadi::ItemMonitor
@@ -27,6 +28,7 @@ class AddresseeWrapper : public QObject, public Akonadi::ItemMonitor
     Q_PROPERTY(KContacts::PhoneNumber::List phoneNumbers READ phoneNumbers NOTIFY phoneNumbersChanged)
     Q_PROPERTY(KContacts::Picture photo READ photo NOTIFY photoChanged)
     Q_PROPERTY(AddressModel *addressesModel READ addressesModel CONSTANT)
+    Q_PROPERTY(EmailModel *emailModel READ emailModel CONSTANT)
 
 public:
     AddresseeWrapper(QObject *parent = nullptr);
@@ -38,6 +40,7 @@ public:
 
     KContacts::PhoneNumber::List phoneNumbers() const;
     AddressModel *addressesModel() const;
+    EmailModel *emailModel() const;
 
     qint64 collectionId() const;
     void setCollectionId(qint64 collectionId);
@@ -65,4 +68,5 @@ private:
     KContacts::Addressee m_addressee;
     qint64 m_collectionId = -1; // For when we want to edit, this is temporary
     AddressModel *m_addressesModel;
+    EmailModel *m_emailModel;
 };

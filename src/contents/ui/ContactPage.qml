@@ -174,6 +174,16 @@ Kirigami.ScrollablePage {
                     Kirigami.FormData.labelAlignment: Qt.AlignTop
                 }
             }
+
+            Repeater {
+                model: addressee.emailModel
+                Controls.Label {
+                    visible: text !== ""
+                    text: model.display
+                    Kirigami.FormData.label: model.type
+                    Kirigami.FormData.labelAlignment: Qt.AlignTop
+                }
+            }
         }
     }
 }
