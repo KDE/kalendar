@@ -11,7 +11,10 @@
 #include <Akonadi/CollectionUtils>
 #include <Akonadi/EntityDisplayAttribute>
 #include <CalendarSupport/KCalPrefs>
+#include <akonadi_version.h>
+#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
 #include <CalendarSupport/Utils>
+#endif
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
@@ -68,7 +71,11 @@ QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Qt::DecorationRole) {
+#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
         const Akonadi::Collection collection = CalendarSupport::collectionFromIndex(index);
+#else
+        const Akonadi::Collection collection = Akonadi::CollectionUtils::fromIndex(index);
+#endif
 
         if (hasCompatibleMimeTypes(collection)) {
             if (collection.hasAttribute<Akonadi::EntityDisplayAttribute>() && !collection.attribute<Akonadi::EntityDisplayAttribute>()->iconName().isEmpty()) {
@@ -76,7 +83,11 @@ QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
             }
         }
     } else if (role == Qt::FontRole) {
+#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
         const Akonadi::Collection collection = CalendarSupport::collectionFromIndex(index);
+#else
+        const Akonadi::Collection collection = Akonadi::CollectionUtils::fromIndex(index);
+#endif
         if (!collection.contentMimeTypes().isEmpty() && isStandardCalendar(collection.id()) && collection.rights() & Akonadi::Collection::CanCreateItem) {
             auto font = qvariant_cast<QFont>(QSortFilterProxyModel::data(index, Qt::FontRole));
             font.setBold(true);
@@ -87,7 +98,11 @@ QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
             return font;
         }
     } else if (role == Qt::DisplayRole) {
+#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
         const Akonadi::Collection collection = CalendarSupport::collectionFromIndex(index);
+#else
+        const Akonadi::Collection collection = Akonadi::CollectionUtils::fromIndex(index);
+#endif
         const Akonadi::Collection::Id colId = collection.id();
         const Akonadi::AgentInstance instance = Akonadi::AgentManager::self()->instance(collection.resource());
 
@@ -98,7 +113,11 @@ QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
             return i18nc("@item this is the default calendar", "%1 (Default)", collection.displayName());
         }
     } else if (role == Qt::BackgroundRole) {
+#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
         auto color = getCollectionColor(CalendarSupport::collectionFromIndex(index));
+#else
+        auto color = getCollectionColor(Akonadi::CollectionUtils::fromIndex(index));
+#endif
         // Otherwise QML will get black
         if (color.isValid()) {
             return color;
@@ -106,7 +125,11 @@ QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
             return {};
         }
     } else if (role == isResource) {
+#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
         return Akonadi::CollectionUtils::isResource(CalendarSupport::collectionFromIndex(index));
+#else
+        return Akonadi::CollectionUtils::isResource(Akonadi::CollectionUtils::fromIndex(index));
+#endif
     }
 
     return QSortFilterProxyModel::data(index, role);
