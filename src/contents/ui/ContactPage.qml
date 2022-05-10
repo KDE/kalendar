@@ -154,6 +154,8 @@ Kirigami.ScrollablePage {
         }
 
         Kirigami.FormLayout {
+            id: addreseseForm
+            twinFormLayouts: [emailForm]
             width: parent.width
             Controls.Label {
                 visible: text !== ""
@@ -165,23 +167,51 @@ Kirigami.ScrollablePage {
                 }
                 Kirigami.FormData.label: i18n("Birthday:")
             }
+
+            Item {
+                visible: addressee.addressesModel.rowCount() > 0
+                Kirigami.FormData.isSection: true
+                Kirigami.FormData.label: i18np("Address", "Addresses", addressee.addressesModel.rowCount())
+            }
+
             Repeater {
                 model: addressee.addressesModel
                 Controls.Label {
                     visible: text !== ""
                     text: model.formattedAddress
-                    Kirigami.FormData.label: i18nc("%1 is the type of the address, e.g. home, work, ...", "%1:", model.typeLabel)
+                    Kirigami.FormData.label: model.typeLabel ? i18nc("%1 is the type of the address, e.g. home, work, ...", "%1:", model.typeLabel) : i18n("Home:")
                     Kirigami.FormData.labelAlignment: Qt.AlignTop
                 }
+            }
+        }
+
+        Kirigami.FormLayout {
+            id: emailForm
+            twinFormLayouts: [addreseseForm]
+            width: parent.width
+
+            Item {
+                Kirigami.FormData.isSection: true
+                visible: addressee.emailModel.rowCount() > 0
+                Kirigami.FormData.label: i18np("Email Address", "Email Addresses", addressee.emailModel.rowCount())
             }
 
             Repeater {
                 model: addressee.emailModel
                 Controls.Label {
                     visible: text !== ""
-                    text: model.display
+                    text: `<a href="mailto:${model.dispaly}">${model.display}</a>`
+                    onLinkActivated: Qt.openUrlExternally(link)
                     Kirigami.FormData.label: model.type
                     Kirigami.FormData.labelAlignment: Qt.AlignTop
+                    MouseArea {
+                        id: area
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: Qt.openUrlExternally(`mailto:${model.dispaly}`)
+                        onPressed: Qt.openUrlExternally(`mailto:${model.dispaly}`)
+                    }
                 }
             }
         }
