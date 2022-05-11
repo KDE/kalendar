@@ -4,7 +4,7 @@
 #include "hourlyincidencemodel.h"
 #include "kalendar_debug.h"
 #include <QTimeZone>
-#include <math.h>
+#include <cmath>
 
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
