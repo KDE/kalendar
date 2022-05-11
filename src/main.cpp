@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<InfiniteCalendarViewModel>("org.kde.kalendar", 1, 0, "InfiniteCalendarViewModel");
 
     qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
+    qRegisterMetaType<QAbstractProxyModel *>("QAbstractProxyModel*");
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
     qRegisterMetaType<KContacts::Picture>("KContacts::Picture");
     qRegisterMetaType<KContacts::PhoneNumber::List>("KContacts::PhoneNumber::List");

@@ -5,6 +5,7 @@ import QtQuick 2.15
 import org.kde.kirigami 2.18 as Kirigami
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
+import org.kde.kalendar 1.0
 
 Kirigami.CategorizedSettings {
     objectName: "settingsPage"
@@ -23,6 +24,13 @@ Kirigami.CategorizedSettings {
             text: i18n("Calendar Sources")
             icon.name: "preferences-system-users"
             page: Qt.resolvedUrl("SourceSettingsPage.qml")
+            onTriggered: AgentConfiguration.mode = KalendarApplication.Event
+        },
+        Kirigami.SettingAction {
+            text: i18n("Address Book Sources")
+            icon.name: "preferences-system-users"
+            page: Qt.resolvedUrl("SourceSettingsPage.qml")
+            onTriggered: AgentConfiguration.mode = KalendarApplication.Contact
         },
         Kirigami.SettingAction {
             text: i18n("Calendars")

@@ -2,21 +2,26 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "agentconfiguration.h"
+#include "kalendarapplication.h"
 
 #include <Akonadi/AgentConfigurationDialog>
 #include <Akonadi/AgentInstanceCreateJob>
 #include <Akonadi/AgentInstanceModel>
 #include <Akonadi/AgentManager>
 #include <Akonadi/AgentTypeModel>
+#include <KContacts/Addressee>
+#include <KContacts/ContactGroup>
 
 #include <KWindowSystem>
 #include <QDebug>
 #include <QPointer>
+#include <qobjectdefs.h>
 
 using namespace Akonadi;
 
 AgentConfiguration::AgentConfiguration(QObject *parent)
     : QObject(parent)
+    , m_mode(KalendarApplication::Event)
 {
     connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceProgressChanged, this, &AgentConfiguration::processInstanceProgressChanged);
     connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceStatusChanged, this, &AgentConfiguration::processInstanceProgressChanged);
@@ -32,7 +37,12 @@ Akonadi::AgentFilterProxyModel *AgentConfiguration::availableAgents()
 
     auto agentInstanceModel = new AgentTypeModel(this);
     m_availableAgents = new AgentFilterProxyModel(this);
-    m_availableAgents->addMimeTypeFilter(QStringLiteral("text/calendar"));
+    if (m_mode == KalendarApplication::Contact) {
+        m_availableAgents->addMimeTypeFilter(KContacts::Addressee::mimeType());
+        m_availableAgents->addMimeTypeFilter(KContacts::ContactGroup::mimeType());
+    } else {
+        m_availableAgents->addMimeTypeFilter(QStringLiteral("text/calendar"));
+    }
     m_availableAgents->setSourceModel(agentInstanceModel);
     m_availableAgents->addCapabilityFilter(QStringLiteral("Resource")); // show only resources, no agents
     return m_availableAgents;
@@ -46,7 +56,12 @@ Akonadi::AgentFilterProxyModel *AgentConfiguration::runningAgents()
 
     auto agentInstanceModel = new AgentInstanceModel(this);
     m_runningAgents = new AgentFilterProxyModel(this);
-    m_runningAgents->addMimeTypeFilter(QStringLiteral("text/calendar"));
+    if (m_mode == KalendarApplication::Contact) {
+        m_runningAgents->addMimeTypeFilter(KContacts::Addressee::mimeType());
+        m_runningAgents->addMimeTypeFilter(KContacts::ContactGroup::mimeType());
+    } else {
+        m_runningAgents->addMimeTypeFilter(QStringLiteral("text/calendar"));
+    }
     m_runningAgents->setSourceModel(agentInstanceModel);
     m_runningAgents->addCapabilityFilter(QStringLiteral("Resource")); // show only resources, no agents
     return m_runningAgents;
@@ -140,4 +155,32 @@ void AgentConfiguration::processInstanceProgressChanged(const Akonadi::AgentInst
     };
 
     Q_EMIT agentProgressChanged(instanceData);
+}
+
+
+KalendarApplication::Mode AgentConfiguration::mode() const
+{
+    return m_mode;
+}
+
+void AgentConfiguration::setMode(KalendarApplication::Mode mode)
+{
+    if (mode == m_mode) {
+        return;
+    }
+    m_mode = mode;
+    Q_EMIT modeChanged();
+
+
+    if (m_runningAgents) {
+        delete m_runningAgents;
+        m_runningAgents = nullptr;
+        Q_EMIT runningAgentsChanged();
+    }
+
+    if (m_availableAgents) {
+        delete m_availableAgents;
+        m_availableAgents = nullptr;
+        Q_EMIT availableAgentsChanged();
+    }
 }

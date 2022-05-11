@@ -9,7 +9,14 @@ import org.kde.kalendar 1.0
 
 Kirigami.Page {
     id: sourcesSettingsPage
-    title: i18n("Calendar Sources")
+    title: switch (mode) {
+    case KalendarApplication.Contact:
+        return i18n("Address Book Sources");
+    case KalendarApplication.Event:
+        return i18n("Calendar Sources");
+    }
+
+    property int mode: AgentConfiguration.mode
 
     ColumnLayout {
         anchors.fill: parent
@@ -22,8 +29,8 @@ Kirigami.Page {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 clip: true
-                model: AgentConfiguration.runningAgents // CalendarManager.collections
-                delegate: Kirigami.BasicListItem { // Originally swipelistitem, caused issues in mobile mode
+                model: AgentConfiguration.runningAgents
+                delegate: Kirigami.BasicListItem {
                     id: listItem
                     leftPadding: Kirigami.Units.largeSpacing * 2
                     topPadding: Kirigami.Units.largeSpacing
@@ -128,7 +135,7 @@ Kirigami.Page {
             id: addCalendarPage
             Kirigami.ScrollablePage {
                 id: overlay
-                title: i18n("Add New Calendar Source")
+                title: sourcesSettingsPage.mode === KalendarApplication.Contact ? i18n("Add New Address Book Source…") : i18n("Add New Calendar Source")
 
                 footer: Controls.DialogButtonBox {
                     Kirigami.Theme.inherit: false
@@ -163,7 +170,8 @@ Kirigami.Page {
             Layout.fillWidth: true
             Controls.Button {
                 Layout.alignment: Qt.AlignRight
-                text: i18n("Add New Calendar Source…")
+                text: mode === KalendarApplication.Contact ? i18n("Add New Address Book Source…") : i18n("Add New Calendar Source")
+
                 icon.name: "list-add"
                 onClicked: pageStack.pushDialogLayer(addCalendarPage)
             }
