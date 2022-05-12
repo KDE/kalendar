@@ -38,7 +38,10 @@ Kirigami.ApplicationWindow {
         "tags": [],
         "name": ""
     }
-    onFilterChanged: if(pageStack.currentItem.objectName === "todoView") pageStack.currentItem.filter = filter
+    onFilterChanged: if(pageStack.currentItem.mode === KalendarApplication.Todo) {
+        pageStack.currentItem.filter = filter
+    }
+
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
@@ -61,7 +64,7 @@ Kirigami.ApplicationWindow {
     readonly property var quitAction: KalendarApplication.action("file_quit")
     readonly property var undoAction: KalendarApplication.action("edit_undo")
     readonly property var redoAction: KalendarApplication.action("edit_redo")
-    readonly property var refreshAllAction: KalendarApplication.action("refresh_all_calendars")
+    readonly property var refreshAllAction: KalendarApplication.action("refresh_all")
 
     readonly property var todoViewSortAlphabeticallyAction: KalendarApplication.action("todoview_sort_alphabetically")
     readonly property var todoViewSortByDueDateAction: KalendarApplication.action("todoview_sort_by_due_date")
@@ -382,12 +385,16 @@ Kirigami.ApplicationWindow {
             kcommandbarLoader.active = true;
         }
 
-        function onRefreshAllCalendars() {
-            CalendarManager.updateAllCollections();
+        function onRefreshAll() {
+            if (pageStack.currentItem.mode === KalendarApplication.Contact) {
+                ContactManager.updateAllCollections();
+            } else {
+                CalendarManager.updateAllCollections();
+            }
         }
 
         function onOpenIncidence(incidenceData, occurrenceDate) {
-            if(pageStack.currentItem.objectName === "todoView" && incidenceData.incidenceType !== IncidenceWrapper.TypeTodo) {
+            if(pageStack.currentItem.mode === KalendarApplication.Todo && incidenceData.incidenceType !== IncidenceWrapper.TypeTodo) {
                 Kirigami.Settings.isMobile ? dayViewAction.trigger() : weekViewAction.trigger();
             }
 
@@ -475,7 +482,8 @@ Kirigami.ApplicationWindow {
 
         sourceComponent: WindowMenu {
             parentWindow: root
-            mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
+            mode: applicationWindow().pageStack.currentItem  ? applicationWindow().pageStack.currentItem.mode : KalendarApplication.Event
+            Component.onCompleted: console.log(mode, KalendarApplication.Event, KalendarApplication.Todo)
             Kirigami.Theme.colorSet: Kirigami.Theme.Header
         }
     }

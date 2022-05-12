@@ -5,6 +5,7 @@
 
 #include "contactmanager.h"
 
+#include <Akonadi/AgentManager>
 #include <Akonadi/Collection>
 #include <Akonadi/ContactsTreeModel>
 #include <Akonadi/ETMViewStateSaver>
@@ -240,4 +241,12 @@ QUrl ContactManager::decorationToUrl(QVariant decoration)
     imgDecoration.save(&buffer, "png");
     const QString base64 = QString::fromUtf8(byteArray.toBase64());
     return QUrl(QLatin1String("data:image/png;base64,") + base64);
+}
+
+void ContactManager::updateAllCollections()
+{
+    for (int i = 0; i < contactCollections()->rowCount(); i++) {
+        auto collection = contactCollections()->data(contactCollections()->index(i, 0), Akonadi::EntityTreeModel::CollectionRole).value<Akonadi::Collection>();
+        Akonadi::AgentManager::self()->synchronizeCollection(collection, true);
+    }
 }

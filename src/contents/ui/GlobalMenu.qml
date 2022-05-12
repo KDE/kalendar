@@ -8,6 +8,7 @@ import QtQuick.Controls 2.12 as QQC2
 import QtQuick.Layouts 1.10
 import org.kde.kirigami 2.15 as Kirigami
 import QtQuick.Window 2.15
+import org.kde.kalendar 1.0
 
 Labs.MenuBar {
     id: bar
@@ -69,6 +70,10 @@ Labs.MenuBar {
         }
 
         NativeMenuItemFromAction {
+            kalendarAction: 'open_contact_view'
+        }
+
+        NativeMenuItemFromAction {
             kalendarAction: 'open_kcommand_bar'
         }
 
@@ -77,6 +82,7 @@ Labs.MenuBar {
 
         Labs.Menu {
             title: i18nc("@action:menu", "Sort Tasks")
+            enabled: mode === KalendarApplication.Todo
 
             NativeMenuItemFromAction {
                 kalendarAction: 'todoview_sort_by_due_date'
@@ -104,13 +110,20 @@ Labs.MenuBar {
 
         NativeMenuItemFromAction {
             kalendarAction: 'todoview_show_completed'
+            enabled: mode === KalendarApplication.Todo
         }
 
         Labs.MenuSeparator {
         }
 
         NativeMenuItemFromAction {
-            kalendarAction: "refresh_all_calendars"
+            text: switch(mode) {
+            case KalendarApplication.Contact:
+                return i18n('Refresh All Address Books')
+            default:
+                return i18n('Refresh All Calendars')
+            }
+            kalendarAction: "refresh_all"
         }
     }
 
@@ -119,18 +132,22 @@ Labs.MenuBar {
 
         NativeMenuItemFromAction {
             kalendarAction: "move_view_backwards"
+            enabled: mode === KalendarApplication.Event
         }
         NativeMenuItemFromAction {
             kalendarAction: "move_view_forwards"
+            enabled: mode === KalendarApplication.Event
         }
 
         Labs.MenuSeparator {}
 
         NativeMenuItemFromAction {
             kalendarAction: "move_view_to_today"
+            enabled: mode === KalendarApplication.Event
         }
         NativeMenuItemFromAction {
             kalendarAction: "open_date_changer"
+            enabled: mode === KalendarApplication.Event
         }
     }
 

@@ -99,7 +99,7 @@ Q_SIGNALS:
     void importIntoExistingFinished(bool success, int total);
     void importIntoNewFinished(bool success);
     void importErrorMessageChanged();
-    void refreshAllCalendars();
+    void refreshAll();
     void openIncidence(const QVariantMap incidenceData, const QDateTime occurrence);
 
 private:
