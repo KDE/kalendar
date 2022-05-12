@@ -35,11 +35,11 @@
 #include <Akonadi/Monitor>
 #include <akonadi_version.h>
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
-#include <Akonadi/IncidenceChanger>
 #include <Akonadi/History>
+#include <Akonadi/IncidenceChanger>
 #else
-#include <Akonadi/Calendar/IncidenceChanger>
 #include <Akonadi/Calendar/History>
+#include <Akonadi/Calendar/IncidenceChanger>
 #endif
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
@@ -58,7 +58,7 @@
 #else
 #include <etmcalendar.h>
 #endif
-#include "models/colorproxymodel.h"
+#include <colorproxymodel.h>
 
 using namespace Akonadi;
 

@@ -8,6 +8,7 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.16 as Kirigami
 import org.kde.kalendar 1.0
+import org.kde.kalendar.contact 1.0
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
 import QtGraphicalEffects 1.12

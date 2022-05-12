@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "addresseewrapper.h"
-#include "kalendar_debug.h"
+#include "kalendar_contact_debug.h"
+#include <Akonadi/ItemMonitor>
+#include <KContacts/Addressee>
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
-#include <Akonadi/ItemMonitor>
-#include <KContacts/Addressee>
 
 AddresseeWrapper::AddresseeWrapper(QObject *parent)
     : QObject(parent)

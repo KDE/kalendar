@@ -1,0 +1,9 @@
+<RCC>
+<!--
+SPDX-FileCopyrightText: None
+SPDX-License-Identifier: CC0-1.0
+-->
+  <qresource prefix="/">
+    <file alias="fallbackBackground.png">resources/fallbackBackground.png</file>
+  </qresource>
+</RCC>

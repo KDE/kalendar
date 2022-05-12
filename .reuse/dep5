@@ -6,7 +6,10 @@ Files: logo.png org.kde.kalendar.svg
 Copyright: 2021 Áron Kovács <aronkvh@gmail.com>
 License: LGPL-2.0-or-later
 
-Files: src/contents/resources/fallbackBackground.png
+Files: src/contacts/resources/fallbackBackground.png
 Copyright: Jonah Brüchert <jbb.prv@gmx.de>
 License: GPL-3.0-or-later
 
+Files: src/contacts/qml/qmldir
+Copyright: Carl Schwan <carl@carlschwan.eu>
+License: CC0-1.0

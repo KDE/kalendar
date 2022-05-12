@@ -5,7 +5,9 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kalendar.contact 1.0
 import org.kde.kalendar 1.0
+import './private'
 
 Kirigami.ScrollablePage {
     objectName: "contactView"
@@ -25,7 +27,7 @@ Kirigami.ScrollablePage {
             name: model && model.display
             avatarIcon: model && model.decoration
 
-            onClicked: applicationWindow().pageStack.push('qrc:/ContactPage.qml', {
+            onClicked: applicationWindow().pageStack.push(Qt.resolvedUrl('./private/ContactPage.qml'), {
                 contact: model,
                 itemId: model.itemId,
             })
