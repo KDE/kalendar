@@ -482,8 +482,7 @@ Kirigami.ApplicationWindow {
 
         sourceComponent: WindowMenu {
             parentWindow: root
-            mode: applicationWindow().pageStack.currentItem  ? applicationWindow().pageStack.currentItem.mode : KalendarApplication.Event
-            Component.onCompleted: console.log(mode, KalendarApplication.Event, KalendarApplication.Todo)
+            mode: applicationWindow().pageStack.currentItem ? applicationWindow().pageStack.currentItem.mode : KalendarApplication.Event
             Kirigami.Theme.colorSet: Kirigami.Theme.Header
         }
     }

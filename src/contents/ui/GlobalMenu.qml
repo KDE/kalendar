@@ -13,7 +13,7 @@ import org.kde.kalendar 1.0
 Labs.MenuBar {
     id: bar
     property var parentWindow: null
-    property bool mode: KalendarApplication.Event
+    property var mode: KalendarApplication.Event
 
     Labs.Menu {
         title: i18nc("@action:menu", "File")
