@@ -4,8 +4,8 @@
 #pragma once
 
 #include <Akonadi/Item>
-#include <QObject>
 #include <KDescendantsProxyModel>
+#include <QObject>
 
 namespace Akonadi
 {

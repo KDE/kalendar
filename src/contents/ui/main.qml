@@ -220,7 +220,7 @@ Kirigami.ApplicationWindow {
 
         function onOpenContactView() {
             if(pageStack.currentItem.objectName !== "contactView" || root.ignoreCurrentPage) {
-                root.switchView("qrc:/ContactView.qml");
+                root.switchView("qrc:/LazyContactView.qml");
             }
         }
 

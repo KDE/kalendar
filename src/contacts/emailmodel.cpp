@@ -4,10 +4,10 @@
 #include "emailmodel.h"
 #include <KLocalizedString>
 
-
 EmailModel::EmailModel(QObject *parent)
     : QAbstractListModel(parent)
-{}
+{
+}
 
 int EmailModel::rowCount(const QModelIndex &parent) const
 {

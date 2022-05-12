@@ -4,13 +4,12 @@
 
 set(kalendar_lib_SRCS
     colorproxymodel.cpp
-    colorproxymodel.h
 )
 
 add_library(kalendar_lib STATIC)
-target_sources(kalendar_lib PUBLIC ${kalendar_lib_SRCS})
+target_sources(kalendar_lib PRIVATE ${kalendar_lib_SRCS})
 
-target_include_directories(kalendar_lib INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(kalendar_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(kalendar_lib PUBLIC
     Qt::Core
     Qt::Gui

@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include <QAbstractListModel>
 #include <KContacts/Email>
+#include <QAbstractListModel>
 
 class EmailModel : public QAbstractListModel
 {

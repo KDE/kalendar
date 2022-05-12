@@ -12,8 +12,8 @@
 #include <KContacts/Addressee>
 #include <QObject>
 
-#include "emailmodel.h"
 #include "addressmodel.h"
+#include "emailmodel.h"
 
 /// This class is a QObject wrapper for a KContact::Adressee
 class AddresseeWrapper : public QObject, public Akonadi::ItemMonitor
