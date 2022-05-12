@@ -95,7 +95,7 @@ The intention is for the two apps to co-exist and for you to have the choice of 
 
 #### Will there be a flatpak?
 
-We are actively discussing this, but it is not as easy for Kalendar as for other applications due to our reliance on an external service in Akonadi. We will eventually find a solution for this, but it may take some time.
+Yes, Kalendar is part of the the [org.kde.kontact flatpal](https://flathub.org/apps/details/org.kde.kontact). Please not that this is missing some desktop integration (e.g. the calendar applet plugin) and we recommend to use the distro package if the version provided is recent.
 
 #### How can I install Kalendar on Ubuntu/Kubuntu/Debian? Is there a deb package?
 
