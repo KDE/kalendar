@@ -44,12 +44,8 @@ using namespace KCalendarCore;
 
 static void raiseWindow(QWindow *window)
 {
-    if (KWindowSystem::isPlatformWayland()) {
-        KWindowSystem::setCurrentXdgActivationToken(qEnvironmentVariable("XDG_ACTIVATION_TOKEN"));
-        KWindowSystem::activateWindow(window->winId());
-    } else {
-        window->raise();
-    }
+    KWindowSystem::updateStartupId(window);
+    KWindowSystem::activateWindow(window);
 }
 
 int main(int argc, char *argv[])
