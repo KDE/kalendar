@@ -165,7 +165,7 @@ Kirigami.ApplicationWindow {
         }
         pageStack.replace(newViewComponent);
 
-        if(filterHeader.active) {
+        if (filterHeader.active && pageStack.currentItem.mode !== KalendarApplication.Contact) {
             pageStack.currentItem.header = filterHeader.item;
         }
 
@@ -695,12 +695,6 @@ Kirigami.ApplicationWindow {
         id: filterHeader
         active: false
         sourceComponent: Item {
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
-
             readonly property bool show: header.mode === KalendarApplication.Todo || header.filter.tags.length > 0 || notifyMessage.visible
             readonly property alias messageItem: notifyMessage
 
