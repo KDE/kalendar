@@ -33,7 +33,7 @@
 #endif
 #include "contactcollectionmodel.h"
 #include "globalcontactmodel.h"
-#include "models/colorproxymodel.h"
+#include <colorproxymodel.h>
 #include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <Akonadi/EntityRightsFilterModel>

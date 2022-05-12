@@ -14,6 +14,7 @@ import QtQuick.Dialogs 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
+import org.kde.kalendar.contact 1.0
 
 Kirigami.ApplicationWindow {
     id: root

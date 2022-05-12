@@ -1,0 +1,17 @@
+<RCC>
+<!--
+SPDX-FileCopyrightText: None
+SPDX-License-Identifier: CC0-1.0
+-->
+  <qresource prefix="/">
+    <file alias="ContactsPage.qml">qml/ContactsPage.qml</file>
+    <file alias="ContactPage.qml">qml/ContactPage.qml</file>
+    <file alias="ContactListItem.qml">qml/ContactListItem.qml</file>
+    <file alias="ContactView.qml">qml/ContactView.qml</file>
+    <file alias="ContactChooserPage.qml">qml/ContactChooserPage.qml</file>
+    <file alias="PhoneNumberDialog.qml">qml/PhoneNumberDialog.qml</file>
+    <file alias="Header.qml">qml/Header.qml</file>
+    <file>qml/qmldir</file>
+    <file alias="fallbackBackground.png">resources/fallbackBackground.png</file>
+  </qresource>
+</RCC>

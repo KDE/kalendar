@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
+add_subdirectory(lib)
+add_subdirectory(contacts)
+
 add_executable(kalendar)
 
 set(kalendar_SRCS
@@ -46,20 +49,6 @@ set(kalendar_SRCS
     models/timezonelistmodel.h
     models/todosortfilterproxymodel.cpp
     models/todosortfilterproxymodel.h
-    models/colorproxymodel.h
-    models/colorproxymodel.cpp
-    contacts/addresseewrapper.cpp
-    contacts/addresseewrapper.h
-    contacts/addressmodel.cpp
-    contacts/addressmodel.h
-    contacts/emailmodel.h
-    contacts/emailmodel.cpp
-    contacts/globalcontactmodel.cpp
-    contacts/globalcontactmodel.h
-    contacts/contactmanager.h
-    contacts/contactmanager.cpp
-    contacts/contactcollectionmodel.cpp
-    contacts/contactcollectionmodel.h
     resources.qrc
 )
 qt_add_dbus_adaptor(kalendar_SRCS org.kde.calendar.Calendar.xml kalendarapplication.h KalendarApplication)
@@ -71,15 +60,7 @@ target_sources(kalendar PRIVATE
 ecm_qt_declare_logging_category(kalendar HEADER kalendar_debug.h IDENTIFIER KALENDAR_LOG CATEGORY_NAME org.kde.kalendar DESCRIPTION "kalendar" EXPORT KALENDAR)
 
 set(kalendar_LIBS
-    Qt::Core
-    Qt::Gui
-    Qt::Qml
-    Qt::Quick
-    Qt::QuickControls2
-    Qt::Svg
-    Qt::DBus
-    KF5::I18n
-    KF5::CoreAddons
+    kalendar_lib
     KF5::DBusAddons
     KF5::CalendarCore
     KF5::AkonadiCore

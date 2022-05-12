@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2022 Carl Schwan <carl@carlschwan.eu>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-#include "contacts/addressmodel.h"
+#include "addressmodel.h"
 #include <QDebug>
 #include <qabstractitemmodel.h>
 

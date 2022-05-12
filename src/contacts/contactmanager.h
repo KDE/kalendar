@@ -5,8 +5,7 @@
 
 #include <Akonadi/Item>
 #include <QObject>
-#include <kdescendantsproxymodel.h>
-#include <qobjectdefs.h>
+#include <KDescendantsProxyModel>
 
 namespace Akonadi
 {
