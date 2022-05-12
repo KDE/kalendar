@@ -162,7 +162,6 @@ int main(int argc, char *argv[])
         for (auto obj : rootObjects) {
             auto view = qobject_cast<QQuickWindow *>(obj);
             if (view) {
-                view->show();
                 raiseWindow(view);
                 return;
             }
