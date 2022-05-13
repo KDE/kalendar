@@ -71,7 +71,7 @@ Kirigami.ScrollablePage {
         PhoneNumberDialog {}
     }
 
-    ColumnLayout {
+    header: ColumnLayout {
         spacing: 0
         Header {
             id: header
@@ -152,7 +152,9 @@ Kirigami.ScrollablePage {
                 ]
             }
         }
+    }
 
+    ColumnLayout {
         Kirigami.FormLayout {
             id: addreseseForm
             twinFormLayouts: [emailForm]
