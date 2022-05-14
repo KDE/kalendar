@@ -33,7 +33,7 @@ ecm_qt_declare_logging_category(incidenceOccurrenceModelTest_SRCS HEADER kalenda
 
 # the tests need the ical resource, which we might not have at this point (e.g. on the CI)
 find_program(AKONADI_ICAL_RESOURCE NAMES akonadi_ical_resource)
-# if (AKONADI_ICAL_RESOURCE)
+if (UNIX)
     add_akonadi_isolated_test_advanced(incidenceoccurrencemodeltest.cpp "${incidenceOccurrenceModelTest_SRCS}" "${commonAkonadiTest_LIBS}")
     add_akonadi_isolated_test_advanced(todosortfilterproxymodeltest.cpp "${todoSortFilterProxyModelTest_SRCS}" "${commonAkonadiTest_LIBS}")
-# endif()
+endif()

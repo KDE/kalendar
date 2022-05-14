@@ -50,7 +50,10 @@ Kirigami.OverlayDrawer {
     handleOpenIcon.source: null
     width: sidebar.collapsed ? menu.Layout.minimumWidth + Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit * 16
 
-    Component.onCompleted: collapsed = Config.forceCollapsedSidebar // Fix crashing caused by setting on load
+    Component.onCompleted: {
+        collapsed = Config.forceCollapsedSidebar // Fix crashing caused by setting on load
+        ContactManager.contactCollections; // Fix crashing because the contactCollections was created too late
+    }
     Behavior on width { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
@@ -461,7 +464,6 @@ Kirigami.OverlayDrawer {
                             console.log('Should not happen', sidebar.mode)
                         }
                     }
-
 
                     model: calendarHeadingItem.expanded ? calendarModel : []
 

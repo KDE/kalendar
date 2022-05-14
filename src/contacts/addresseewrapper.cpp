@@ -5,6 +5,7 @@
 #include "kalendar_contact_debug.h"
 #include <Akonadi/ItemMonitor>
 #include <KContacts/Addressee>
+#include <KContacts/VCardConverter>
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
@@ -147,4 +148,13 @@ QString AddresseeWrapper::preferredEmail() const
 EmailModel *AddresseeWrapper::emailModel() const
 {
     return m_emailModel;
+}
+
+QString AddresseeWrapper::qrCodeData() const
+{
+    KContacts::VCardConverter converter;
+    KContacts::Addressee addr(m_addressee);
+    addr.setPhoto(KContacts::Picture());
+    addr.setLogo(KContacts::Picture());
+    return QString::fromUtf8(converter.createVCard(addr));
 }

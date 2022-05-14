@@ -127,8 +127,8 @@ ContactManager::ContactManager(QObject *parent)
     m_colorProxy->setObjectName(QStringLiteral("Show contact colors"));
     m_colorProxy->setDynamicSortFilter(true);
 
-    KSharedConfig::Ptr config = KSharedConfig::openConfig();
-    m_collectionSelectionModelStateSaver = new Akonadi::ETMViewStateSaver(); // not a leak
+    KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral("kalendarrc"));
+    m_collectionSelectionModelStateSaver = new Akonadi::ETMViewStateSaver(this);
     KConfigGroup selectionGroup = config->group("ContactCollectionSelection");
     m_collectionSelectionModelStateSaver->setView(nullptr);
     m_collectionSelectionModelStateSaver->setSelectionModel(m_checkableProxyModel->selectionModel());
@@ -179,7 +179,7 @@ ContactManager::ContactManager(QObject *parent)
 ContactManager::~ContactManager()
 {
     Akonadi::ETMViewStateSaver treeStateSaver;
-    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral("kalendarrc"));
     KConfigGroup group = config->group("ContactCollectionSelection");
     treeStateSaver.setView(nullptr);
     treeStateSaver.setSelectionModel(m_checkableProxyModel->selectionModel());

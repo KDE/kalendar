@@ -53,6 +53,10 @@ public:
     void setAddressee(const KContacts::Addressee &addressee);
     void notifyDataChanged();
 
+    // Invokable since we don't want expensive data bindings when any of the
+    // fields change, instead generate it on demand
+    Q_INVOKABLE QString qrCodeData() const;
+
 Q_SIGNALS:
     void addresseeItemChanged();
     void collectionIdChanged();
