@@ -55,6 +55,8 @@ if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
+add_subdirectory(applet)
+
 ecm_finalize_qml_module(kalendar_contact_plugin
     DESTINATION ${KDE_INSTALL_QMLDIR}
     BUILD_SHARED_LIBS OFF)

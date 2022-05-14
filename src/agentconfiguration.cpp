@@ -157,7 +157,6 @@ void AgentConfiguration::processInstanceProgressChanged(const Akonadi::AgentInst
     Q_EMIT agentProgressChanged(instanceData);
 }
 
-
 KalendarApplication::Mode AgentConfiguration::mode() const
 {
     return m_mode;
@@ -170,7 +169,6 @@ void AgentConfiguration::setMode(KalendarApplication::Mode mode)
     }
     m_mode = mode;
     Q_EMIT modeChanged();
-
 
     if (m_runningAgents) {
         delete m_runningAgents;

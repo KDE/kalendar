@@ -3,11 +3,11 @@
 
 #pragma once
 
+#include "kalendarapplication.h"
 #include <Akonadi/AgentFilterProxyModel>
 #include <Akonadi/AgentInstance>
 #include <QObject>
 #include <QTimer>
-#include "kalendarapplication.h"
 
 class AgentConfiguration : public QObject
 {

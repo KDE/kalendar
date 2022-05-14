@@ -28,7 +28,6 @@ Kirigami.ScrollablePage {
             avatarIcon: model && model.decoration
 
             onClicked: applicationWindow().pageStack.push(Qt.resolvedUrl('./private/ContactPage.qml'), {
-                contact: model,
                 itemId: model.itemId,
             })
         }

@@ -10,7 +10,6 @@ import org.kde.kalendar.contact 1.0
 
 Kirigami.ScrollablePage {
     id: page
-    property var contact
     property int itemId
     title: addressee.name
     property int mode: KalendarApplication.Contact
@@ -164,9 +163,9 @@ Kirigami.ScrollablePage {
                 visible: text !== ""
                 // We do not always have the year
                 text: if (addressee.birthday.getFullYear() === 0) {
-                    return Qt.formatDate(addressee.birthday, "dd.MM.")
+                    return Qt.formatDate(addressee.birthday, i18nc('Day month format', 'dd.MM.'))
                 } else {
-                    return Qt.formatDate(addressee.birthday)
+                    return addressee.birthday.toLocaleDateString()
                 }
                 Kirigami.FormData.label: i18n("Birthday:")
             }
@@ -203,7 +202,7 @@ Kirigami.ScrollablePage {
                 model: addressee.emailModel
                 Controls.Label {
                     visible: text !== ""
-                    text: `<a href="mailto:${model.dispaly}">${model.display}</a>`
+                    text: `<a href="mailto:${model.display}">${model.display}</a>`
                     onLinkActivated: Qt.openUrlExternally(link)
                     Kirigami.FormData.label: model.type
                     Kirigami.FormData.labelAlignment: Qt.AlignTop
@@ -212,8 +211,8 @@ Kirigami.ScrollablePage {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: Qt.openUrlExternally(`mailto:${model.dispaly}`)
-                        onPressed: Qt.openUrlExternally(`mailto:${model.dispaly}`)
+                        onClicked: Qt.openUrlExternally(`mailto:${model.display}`)
+                        onPressed: Qt.openUrlExternally(`mailto:${model.display}`)
                     }
                 }
             }

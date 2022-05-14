@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2022 Carl Schwan <carl@carlschwan.eu>
+# SPDX-License-Identifier: BSD-2-Clause
+
+[Desktop Entry]
+Name=Contact
+Comment=Contact list
+Icon=im-user
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+X-Plasma-NotificationArea=true
+X-Plasma-NotificationAreaCategory=PIM
+
+X-KDE-PluginInfo-Name=org.kde.kalendar.contact
+X-KDE-PluginInfo-Category=Personal information
+X-KDE-PluginInfo-Author=Carl Schwan
+X-KDE-PluginInfo-Email=carl@carlschwan.eu
+X-KDE-PluginInfo-Version=1.0.0
+X-KDE-PluginInfo-Website=https://apps.kde.org/kalendar
+X-KDE-PluginInfo-License=GPL-3.0-or-later
+X-KDE-PluginInfo-EnabledByDefault=true

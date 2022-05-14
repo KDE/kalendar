@@ -2,8 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "addressmodel.h"
-#include <QDebug>
-#include <qabstractitemmodel.h>
+#include <QAbstractItemModel>
 
 AddressModel::AddressModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -57,21 +56,23 @@ QVariant AddressModel::data(const QModelIndex &idx, int role) const
 
 QHash<int, QByteArray> AddressModel::roleNames() const
 {
-    return {{CountryRole, QByteArrayLiteral("country")},
-            {ExtendedRole, QByteArrayLiteral("extended")},
-            {FormattedAddressRole, QByteArrayLiteral("formattedAddress")},
-            {HasGeoRole, QByteArrayLiteral("hasGeo")},
-            {LatitudeRole, QByteArrayLiteral("latitude")},
-            {LongitudeRole, QByteArrayLiteral("longitude")},
-            {IdRole, QByteArrayLiteral("id")},
-            {IsEmptyRole, QByteArrayLiteral("isEmpty")},
-            {LabelRole, QByteArrayLiteral("label")},
-            {PostalCodeRole, QByteArrayLiteral("postalCode")},
-            {PostOfficeBoxRole, QByteArrayLiteral("postOfficeBox")},
-            {RegionRole, QByteArrayLiteral("region")},
-            {StreetRole, QByteArrayLiteral("street")},
-            {TypeRole, QByteArrayLiteral("type")},
-            {TypeLabelRole, QByteArrayLiteral("typeLabel")}};
+    return {
+        {CountryRole, QByteArrayLiteral("country")},
+        {ExtendedRole, QByteArrayLiteral("extended")},
+        {FormattedAddressRole, QByteArrayLiteral("formattedAddress")},
+        {HasGeoRole, QByteArrayLiteral("hasGeo")},
+        {LatitudeRole, QByteArrayLiteral("latitude")},
+        {LongitudeRole, QByteArrayLiteral("longitude")},
+        {IdRole, QByteArrayLiteral("id")},
+        {IsEmptyRole, QByteArrayLiteral("isEmpty")},
+        {LabelRole, QByteArrayLiteral("label")},
+        {PostalCodeRole, QByteArrayLiteral("postalCode")},
+        {PostOfficeBoxRole, QByteArrayLiteral("postOfficeBox")},
+        {RegionRole, QByteArrayLiteral("region")},
+        {StreetRole, QByteArrayLiteral("street")},
+        {TypeRole, QByteArrayLiteral("type")},
+        {TypeLabelRole, QByteArrayLiteral("typeLabel")},
+    };
 }
 
 void AddressModel::setAddresses(const KContacts::Address::List &addresses)
