@@ -20,7 +20,7 @@ Kirigami.ApplicationWindow {
 
     width: Kirigami.Units.gridUnit * 65
 
-    minimumWidth: Kirigami.Units.gridUnit * 15
+    minimumWidth: Kirigami.Units.gridUnit * 25
     minimumHeight: Kirigami.Units.gridUnit * 20
     onClosing: KalendarApplication.saveWindowGeometry(root)
 
@@ -1256,6 +1256,34 @@ Kirigami.ApplicationWindow {
                 titleDateButton.date: hourlyView.startDate
                 titleDateButton.lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
                 titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
+
+                Kirigami.ActionToolBar {
+                    id: weekViewScaleToggles
+                    Layout.preferredWidth: weekViewScaleToggles.maximumContentWidth
+                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                    visible: !Kirigami.Settings.isMobile
+
+                    actions: [
+                        Kirigami.Action {
+                            text: "Week"
+                            checkable: true
+                            checked: pageStack.currentItem.objectName == "weekView"
+                            onTriggered: weekViewAction.trigger()
+                        },
+                        Kirigami.Action {
+                            text: "3 Days"
+                            checkable: true
+                            checked: pageStack.currentItem.objectName == "threeDayView"
+                            onTriggered: threeDayViewAction.trigger()
+                        },
+                        Kirigami.Action {
+                            text: "Day"
+                            checkable: true
+                            checked: pageStack.currentItem.objectName == "dayView"
+                            onTriggered: dayViewAction.trigger()
+                        }
+                    ]
+                }
             }
             selectedDate: root.selectedDate
             currentDate: root.currentDate

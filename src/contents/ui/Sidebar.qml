@@ -210,17 +210,14 @@ Kirigami.OverlayDrawer {
                             },
                             KActionFromAction {
                                 kalendarAction: "open_week_view"
-                                checkable: false
+                                // Override the default checkable behaviour as we want this to stay highlighted
+                                // in any of the hourly views, at least in desktop mode
+                                checkable: true
+                                checked: pageStack.currentItem.objectName == "weekView" ||
+                                         pageStack.currentItem.objectName == "threeDayView" ||
+                                         pageStack.currentItem.objectName == "dayView"
                                 onTriggered: {
                                     weekViewAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
-                                }
-                            },
-                            KActionFromAction {
-                                kalendarAction: "open_day_view"
-                                checkable: false
-                                onTriggered: {
-                                    dayViewAction.trigger()
                                     if (sidebar.modal) sidebar.close()
                                 }
                             },
