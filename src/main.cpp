@@ -110,17 +110,13 @@ int main(int argc, char *argv[])
     service.connect(&service,
                     &KDBusService::activateRequested,
                     kalendarApplication,
-                    [kalendarApplication](const QStringList &arguments, const QString &workingDirectory) {
-                        if (arguments.isEmpty()) {
-                            return;
-                        }
-                        auto args = arguments;
-                        args.removeFirst();
+                    [kalendarApplication, &parser](const QStringList &arguments, const QString &workingDirectory) {
+                        parser.parse(arguments);
+                        const QStringList args = parser.positionalArguments();
                         for (const auto &arg : args) {
                             Q_EMIT kalendarApplication->importCalendarFromFile(QUrl::fromUserInput(arg, workingDirectory, QUrl::AssumeLocalFile));
                         }
                     });
-
 
     QQmlApplicationEngine engine;
     QQmlDebuggingEnabler enabler;
