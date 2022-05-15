@@ -94,6 +94,11 @@ int main(int argc, char *argv[])
     KAboutData::setApplicationData(aboutData);
     QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar")));
 
+    QCommandLineParser parser;
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
+
     auto config = KalendarConfig::self();
     CalendarManager manager;
     ContactManager contactManager;
@@ -116,10 +121,6 @@ int main(int argc, char *argv[])
                         }
                     });
 
-    QCommandLineParser parser;
-    aboutData.setupCommandLine(&parser);
-    parser.process(app);
-    aboutData.processCommandLine(&parser);
 
     QQmlApplicationEngine engine;
     QQmlDebuggingEnabler enabler;
