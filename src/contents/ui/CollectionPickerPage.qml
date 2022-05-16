@@ -28,7 +28,7 @@ Kirigami.ScrollablePage {
     signal cancel
     signal collectionPicked(int collectionId)
 
-    property bool mode: Kalendar.KalendarApplication.Event
+    property int mode: Kalendar.KalendarApplication.Event
 
     ListView {
         id: collectionsList
