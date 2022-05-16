@@ -447,25 +447,18 @@ Kirigami.ApplicationWindow {
         switch (pageStack.currentItem.objectName) {
             case "monthView":
                 return i18n("Month View");
-                break;
             case "weekView":
                 return i18n("Week View");
-                break;
             case "threeDayView":
                 return i18n("3 Day View");
-                break;
             case "dayView":
                 return i18n("Day View");
-                break;
             case "scheduleView":
                 return i18n("Schedule View");
-                break;
             case "todoView":
                 return i18n("Tasks View");
-                break;
             case "contactView":
                 return i18n("Contacts View");
-                break;
             default:
                 return i18n("Calendar");
         }
