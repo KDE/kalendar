@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC0-1.0
 
 Kalendar is a Kirigami-based calendar and task management application that uses Akonadi. It lets you add, edit and delete events and tasks from local and remote accounts of your choice, while keeping changes synchronised across your Plasma desktop or phone.
 
-**Get involved and join our Matrix channel: #kalendar:kde.org**
+**Get involved and join our Matrix channel: [#kalendar:kde.org](https://matrix.to/#/#kalendar:kde.org=)**
 
 ## Screenshots
 
@@ -95,11 +95,11 @@ The intention is for the two apps to co-exist and for you to have the choice of 
 
 #### Will there be a flatpak?
 
-Yes, Kalendar is part of the the [org.kde.kontact flatpal](https://flathub.org/apps/details/org.kde.kontact). Please not that this is missing some desktop integration (e.g. the calendar applet plugin) and we recommend to use the distro package if the version provided is recent.
+Yes, Kalendar is part of the [org.kde.kontact flatpak](https://flathub.org/apps/details/org.kde.kontact). Please note that this package is missing some desktop integration features (e.g. the calendar applet plugin), and we generally recommend the use of the distro package if the version provided in the repositories is recent.
 
-#### How can I install Kalendar on Ubuntu/Kubuntu/Debian? Is there a deb package?
+#### How can I install Kalendar on distro "X"?
 
-This is unfortunately out of our hands -- we have packages on Neon, but will almost certainly not be compatible with Ubuntu. If you'd like Kalendar on Ubuntu, Kubuntu, or another Debian derivative, ask the your distribution's packagers (nicely!) if they'd like to package Kalendar.
+This is unfortunately out of our hands. If you'd like a Kalendar package on your distribution of choice, ask your distribution's packagers (nicely!) if they'd like to package Kalendar.
 
 ## License
 
