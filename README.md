@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC0-1.0
 
 Kalendar is a Kirigami-based calendar and task management application that uses Akonadi. It lets you add, edit and delete events and tasks from local and remote accounts of your choice, while keeping changes synchronised across your Plasma desktop or phone.
 
-**Kalendar is still under heavy development, and has no stable releases yet.** We do, however, welcome suggestions! Get involved and join our Matrix channel: #kalendar:kde.org
+**Get involved and join our Matrix channel: #kalendar:kde.org**
 
 ## Screenshots
 
