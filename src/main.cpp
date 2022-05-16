@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
+#include "akonadi/collectionfilterproxymodel.h"
 #define QT_QML_DEBUG
 #include "about.h"
 #include "agentconfiguration.h"
@@ -140,6 +141,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
     qRegisterMetaType<QAbstractProxyModel *>("QAbstractProxyModel*");
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
+    qRegisterMetaType<Akonadi::CollectionFilterProxyModel *>();
     qRegisterMetaType<QAction *>();
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
