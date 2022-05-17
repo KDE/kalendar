@@ -148,6 +148,13 @@ Kirigami.ScrollablePage {
                         iconName: "mail-message"
                         visible: addressee.preferredEmail.length > 0
                         onTriggered: Qt.openUrlExternally(`mailto:${addressee.preferredEmail}`)
+                    },
+                    Kirigami.Action {
+                        text: i18n("Show QR Code")
+                        iconName: 'view-barcode-qr'
+                        onTriggered: pageStack.layers.push(Qt.resolvedUrl('./QrCodePage.qml'), {
+                            qrCodeData: addressee.qrCodeData(),
+                        })
                     }
                 ]
             }

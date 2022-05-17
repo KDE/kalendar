@@ -33,6 +33,7 @@ ecm_target_qml_sources(kalendar_contact_plugin
     qml/private/ContactsPage.qml
     qml/private/Header.qml
     qml/private/PhoneNumberDialog.qml
+    qml/private/QrCodePage.qml
 )
 
 ecm_qt_declare_logging_category(kalendar_contact_plugin
