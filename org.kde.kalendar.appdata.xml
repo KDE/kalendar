@@ -327,4 +327,5 @@
   <custom>
     <value key="KDE::matrix">#kalendar:kde.org</value>
   </custom>
+  <launchable type="desktop-id">org.kde.kalendar.desktop</launchable>
 </component>
