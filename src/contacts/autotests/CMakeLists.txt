@@ -8,6 +8,8 @@ add_library(kalendar_contact STATIC
     ../addressmodel.h
     ../emailmodel.h
     ../emailmodel.cpp
+    ../phonemodel.h
+    ../phonemodel.cpp
     ../globalcontactmodel.cpp
     ../globalcontactmodel.h
     ../contactmanager.h

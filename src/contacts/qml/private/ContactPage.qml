@@ -82,21 +82,10 @@ Kirigami.ScrollablePage {
 
             backgroundSource: "qrc:/fallbackBackground.png"
 
-            contentItems: [
-                Kirigami.Heading {
-                    text: addressee.name
-                    color: "#fcfcfc"
-                    level: 2
-                },
-                Repeater {
-                    model: addressee.phoneNumbers
-                    Kirigami.Heading {
-                        text: modelData.normalizedNumber
-                        color: "#fcfcfc"
-                        level: 3
-                    }
-                }
-            ]
+            contentItems: Kirigami.Heading {
+                text: addressee.name
+                color: "#fcfcfc"
+            }
         }
 
         Controls.ToolBar {
@@ -163,10 +152,49 @@ Kirigami.ScrollablePage {
 
     ColumnLayout {
         Kirigami.FormLayout {
-            id: addreseseForm
-            twinFormLayouts: [emailForm]
-            width: parent.width
+            id: contactForm
+            twinFormLayouts: [addreseesForm, phoneForm, contactForm, businessForm]
+            Item {
+                Kirigami.FormData.isSection: true
+                Kirigami.FormData.label: i18n("Contact information")
+            }
+
             Controls.Label {
+                visible: text !== ""
+                text: addressee.name
+                Kirigami.FormData.label: i18n("Name:")
+            }
+
+            Controls.Label {
+                visible: text !== ""
+                text: addressee.nickName
+                Kirigami.FormData.label: i18n("Nickname:")
+            }
+
+            Controls.Label {
+                id: blogFeed
+                visible: addressee.blogFeed + '' !== ''
+                // We do not always have the year
+                text: `<a href="${addressee.blogFeed}">${addressee.blogFeed}</a>`
+                Kirigami.FormData.label: i18n("Blog Feed:")
+                MouseArea {
+                    id: area
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Qt.openUrlExternally(addressee.blogFeed)
+                    onPressed: Qt.openUrlExternally(addressee.blogFeed)
+                }
+            }
+
+            Item {
+                visible: birthday.visible || anniversary.visible || spousesName.visible
+                Kirigami.FormData.isSection: true
+                Kirigami.FormData.label: i18n("Personal information")
+            }
+
+            Controls.Label {
+                id: birthday
                 visible: text !== ""
                 // We do not always have the year
                 text: if (addressee.birthday.getFullYear() === 0) {
@@ -177,13 +205,71 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: i18n("Birthday:")
             }
 
+            Controls.Label {
+                id: anniversary
+                visible: text !== ""
+                // We do not always have the year
+                text: if (addressee.anniversary.getFullYear() === 0) {
+                    return Qt.formatDate(addressee.anniversary, i18nc('Day month format', 'dd.MM.'))
+                } else {
+                    return addressee.anniversary.toLocaleDateString()
+                }
+                Kirigami.FormData.label: i18n("Anniversary:")
+            }
+
+            Controls.Label {
+                id: spousesName
+                visible: text !== ""
+                text: addressee.spousesName
+                Kirigami.FormData.label: i18n("Partner's name:")
+            }
+        }
+
+        Kirigami.FormLayout {
+            id: phoneForm
+            twinFormLayouts: [emailForm, contactForm, businessForm]
+            width: parent.width
+
             Item {
-                visible: addressee.addressesModel.rowCount() > 0
+                visible: phoneRepeater.count > 0
                 Kirigami.FormData.isSection: true
-                Kirigami.FormData.label: i18np("Address", "Addresses", addressee.addressesModel.rowCount())
+                Kirigami.FormData.label: i18np("Phone Number", "Phone Numbers", addressee.phoneModel.count)
             }
 
             Repeater {
+                id: phoneRepeater
+                model: addressee.phoneModel
+                Controls.Label {
+                    visible: text !== ""
+                    text: `<a href="tel:${model.display}">${model.display}</a>`
+                    onLinkActivated: Qt.openUrlExternally(link)
+                    Kirigami.FormData.label: i18nc("Label for a phone number type", "%1:", model.type)
+                    Kirigami.FormData.labelAlignment: Qt.AlignTop
+                    MouseArea {
+                        id: area
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: Qt.openUrlExternally(`tel:${model.display}`)
+                        onPressed: Qt.openUrlExternally(`tel:${model.display}`)
+                    }
+                }
+            }
+        }
+
+        Kirigami.FormLayout {
+            id: addreseesForm
+            twinFormLayouts: [emailForm, phoneForm, contactForm, businessForm]
+            width: parent.width
+
+            Item {
+                visible: addressesRepeater.count > 0
+                Kirigami.FormData.isSection: true
+                Kirigami.FormData.label: i18np("Address", "Addresses", addressesRepeater.count)
+            }
+
+            Repeater {
+                id: addressesRepeater
                 model: addressee.addressesModel
                 Controls.Label {
                     visible: text !== ""
@@ -195,17 +281,79 @@ Kirigami.ScrollablePage {
         }
 
         Kirigami.FormLayout {
-            id: emailForm
-            twinFormLayouts: [addreseseForm]
+            id: businessForm
+            twinFormLayouts: [emailForm, addreseesForm, contactForm, phoneForm]
             width: parent.width
 
             Item {
                 Kirigami.FormData.isSection: true
-                visible: addressee.emailModel.rowCount() > 0
-                Kirigami.FormData.label: i18np("Email Address", "Email Addresses", addressee.emailModel.rowCount())
+                visible: organization.visible || profession.visible || title.visible || department.visible || office.visible || managersName.visible || assistantsName.visible
+                Kirigami.FormData.label: i18n("Business Information")
+            }
+
+            Controls.Label {
+                id: organization
+                visible: text !== ""
+                text: addressee.organization
+                Kirigami.FormData.label: i18n("Organization:")
+            }
+
+            Controls.Label {
+                id: profession
+                visible: text !== ""
+                text: addressee.profession
+                Kirigami.FormData.label: i18n("Profession:")
+            }
+
+            Controls.Label {
+                id: title
+                visible: text.trim() !== ""
+                text: addressee.title
+                Kirigami.FormData.label: i18n("Title:")
+            }
+
+            Controls.Label {
+                id: department
+                visible: text !== ""
+                text: addressee.department
+                Kirigami.FormData.label: i18n("Department:")
+            }
+
+            Controls.Label {
+                id: office
+                visible: text !== ""
+                text: addressee.office
+                Kirigami.FormData.label: i18n("Office:")
+            }
+
+            Controls.Label {
+                id: managersName
+                visible: text !== ""
+                text: addressee.managersName
+                Kirigami.FormData.label: i18n("Manager's name:")
+            }
+
+            Controls.Label {
+                id: assistantsName
+                visible: text !== ""
+                text: addressee.assistantsName
+                Kirigami.FormData.label: i18n("Assistants's name:")
+            }
+        }
+
+        Kirigami.FormLayout {
+            id: emailForm
+            twinFormLayouts: [addreseesForm, phoneForm, contactForm, businessForm]
+            width: parent.width
+
+            Item {
+                Kirigami.FormData.isSection: true
+                visible: emailRepeater.count > 0
+                Kirigami.FormData.label: i18np("Email Address", "Email Addresses", emailRepeater.count > 0)
             }
 
             Repeater {
+                id: emailRepeater
                 model: addressee.emailModel
                 Controls.Label {
                     visible: text !== ""

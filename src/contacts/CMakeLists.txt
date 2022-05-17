@@ -10,6 +10,8 @@ target_sources(kalendar_contact_plugin PRIVATE
     addresseewrapper.h
     addressmodel.cpp
     addressmodel.h
+    phonemodel.h
+    phonemodel.cpp
     emailmodel.h
     emailmodel.cpp
     globalcontactmodel.cpp
