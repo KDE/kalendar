@@ -15,6 +15,7 @@ import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
+import org.kde.kalendar.utils 1.0
 
 Kirigami.ApplicationWindow {
     id: root
@@ -103,6 +104,7 @@ Kirigami.ApplicationWindow {
     // We use this property to temporarily allow a view to be replaced by a view of the same type
 
     Component.onCompleted: {
+        KalendarUiUtils.appMain = root; // Most of our util functions use things defined here in main
         switch (Config.lastOpenedView) {
             case Config.MonthView:
                 monthViewAction.trigger();
@@ -152,32 +154,8 @@ Kirigami.ApplicationWindow {
         shortcut: "Delete"
         onTriggered: {
             if(root.openOccurrence) {
-                root.setUpDelete(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime);
+                KalendarUiUtils.setUpDelete(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime);
             }
-        }
-    }
-
-    function switchView(newViewComponent, viewSettings) {
-        if(pageStack.layers.depth > 1) {
-            pageStack.layers.pop(pageStack.layers.initialItem);
-        }
-        if (pageStack.depth > 1) {
-            pageStack.pop();
-        }
-        pageStack.replace(newViewComponent);
-
-        if (filterHeader.active && pageStack.currentItem.mode !== KalendarApplication.Contact) {
-            pageStack.currentItem.header = filterHeader.item;
-        }
-
-        if(viewSettings) {
-            for(const [key, value] of Object.entries(viewSettings)) {
-                pageStack.currentItem[key] = value;
-            }
-        }
-
-        if (pageStack.currentItem.mode === KalendarApplication.Event) {
-            pageStack.currentItem.setToDate(root.selectedDate, true);
         }
     }
 
@@ -186,48 +164,48 @@ Kirigami.ApplicationWindow {
         function onOpenMonthView() {
             if(pageStack.currentItem.objectName !== "monthView" || root.ignoreCurrentPage) {
                 monthScaleModelLoader.active = true;
-                root.switchView(monthViewComponent);
+                KalendarUiUtils.switchView(monthViewComponent);
             }
         }
 
         function onOpenWeekView() {
             if(pageStack.currentItem.objectName !== "weekView" || root.ignoreCurrentPage) {
                 weekScaleModelLoader.active = true;
-                root.switchView(hourlyViewComponent);
+                KalendarUiUtils.switchView(hourlyViewComponent);
             }
         }
 
         function onOpenThreeDayView() {
             if(pageStack.currentItem.objectName !== "threeDayView" || root.ignoreCurrentPage) {
                 threeDayScaleModelLoader.active = true;
-                root.switchView(hourlyViewComponent, { daysToShow: 3 });
+                KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 3 });
             }
         }
 
         function onOpenDayView() {
             if(pageStack.currentItem.objectName !== "dayView" || root.ignoreCurrentPage) {
                 dayScaleModelLoader.active = true;
-                root.switchView(hourlyViewComponent, { daysToShow: 1 });
+                KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 1 });
             }
         }
 
         function onOpenScheduleView() {
             if(pageStack.currentItem.objectName !== "scheduleView" || root.ignoreCurrentPage) {
                 monthScaleModelLoader.active = true;
-                root.switchView(scheduleViewComponent);
+                KalendarUiUtils.switchView(scheduleViewComponent);
             }
         }
 
         function onOpenContactView() {
             if(pageStack.currentItem.objectName !== "contactView" || root.ignoreCurrentPage) {
-                root.switchView("qrc:/LazyContactView.qml");
+                KalendarUiUtils.switchView("qrc:/LazyContactView.qml");
             }
         }
 
         function onOpenTodoView() {
             if(pageStack.currentItem.objectName !== "todoView") {
                 filterHeader.active = true;
-                root.switchView(todoPageComponent);
+                KalendarUiUtils.switchView(todoPageComponent);
             }
         }
 
@@ -257,11 +235,11 @@ Kirigami.ApplicationWindow {
         }
 
         function onCreateNewEvent() {
-            root.setUpAdd(IncidenceWrapper.TypeEvent);
+            KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeEvent);
         }
 
         function onCreateNewTodo() {
-            root.setUpAdd(IncidenceWrapper.TypeTodo);
+            KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeTodo);
         }
 
         function onUndo() {
@@ -399,7 +377,7 @@ Kirigami.ApplicationWindow {
                 Kirigami.Settings.isMobile ? dayViewAction.trigger() : weekViewAction.trigger();
             }
 
-            root.setUpView(incidenceData);
+            KalendarUiUtils.setUpView(incidenceData);
 
             if(pageStack.currentItem.objectName !== "todoView") {
                 pageStack.currentItem.setToDate(occurrenceDate);
@@ -572,15 +550,15 @@ Kirigami.ApplicationWindow {
         }
 
         onAddSubTodo: {
-            setUpAddSubTodo(parentWrapper);
+            KalendarUiUtils.setUpAddSubTodo(parentWrapper);
             if (modal) { incidenceInfo.close() }
         }
         onEditIncidence: {
-            setUpEdit(incidencePtr);
+            KalendarUiUtils.setUpEdit(incidencePtr);
             if (modal) { incidenceInfo.close() }
         }
         onDeleteIncidence: {
-            setUpDelete(incidencePtr, deleteDate)
+            KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
             if (modal) { incidenceInfo.close() }
         }
         onTagClicked: root.toggleFilterTag(tagName)
@@ -657,6 +635,7 @@ Kirigami.ApplicationWindow {
         onLoaded: item.parentWindow = root;
     }
 
+    property alias editorWindowedLoaderItem: editorWindowedLoader
     Loader {
         id: editorWindowedLoader
         active: false
@@ -692,6 +671,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias filterHeaderLoaderItem: filterHeader
     Loader {
         id: filterHeader
         active: false
@@ -845,6 +825,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias importMergeCollectionPickerComponent: importMergeCollectionPickerComponent
     Component {
         id: importMergeCollectionPickerComponent
         CollectionPickerPage {
@@ -875,170 +856,12 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function editorToUse() {
-        if (!Kirigami.Settings.isMobile) {
-            editorWindowedLoader.active = true
-            return editorWindowedLoader.item.incidenceEditor
-        } else {
-            pageStack.layers.push(incidenceEditor);
-            return incidenceEditor;
-        }
-    }
-
-    function setUpAdd(type, addDate, collectionId, includeTime) {
-        let editorToUse = root.editorToUse();
-        if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
-            editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-                editorToUse, "incidence");
-        }
-        editorToUse.editMode = false;
-
-        if(type === IncidenceWrapper.TypeEvent) {
-            editorToUse.incidenceWrapper.setNewEvent();
-        } else if (type === IncidenceWrapper.TypeTodo) {
-            editorToUse.incidenceWrapper.setNewTodo();
-        }
-
-        if(addDate !== undefined && !isNaN(addDate.getTime())) {
-            let existingStart = editorToUse.incidenceWrapper.incidenceStart;
-            let existingEnd = editorToUse.incidenceWrapper.incidenceEnd;
-
-            let newStart = addDate;
-            let newEnd = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate(), newStart.getHours() + 1, newStart.getMinutes());
-
-            if(!includeTime) {
-                newStart = new Date(addDate.setHours(existingStart.getHours(), existingStart.getMinutes()));
-                newEnd = new Date(addDate.setHours(existingStart.getHours() + 1, existingStart.getMinutes()));
-            }
-
-            if(type === IncidenceWrapper.TypeEvent) {
-                editorToUse.incidenceWrapper.incidenceStart = newStart;
-                editorToUse.incidenceWrapper.incidenceEnd = newEnd;
-            } else if (type === IncidenceWrapper.TypeTodo) {
-                editorToUse.incidenceWrapper.incidenceEnd = newStart;
-            }
-        }
-
-        if(collectionId && collectionId >= 0) {
-            editorToUse.incidenceWrapper.collectionId = collectionId;
-        } else if(type === IncidenceWrapper.TypeEvent && Config.lastUsedEventCollection > -1) {
-            editorToUse.incidenceWrapper.collectionId = Config.lastUsedEventCollection;
-        } else if (type === IncidenceWrapper.TypeTodo && Config.lastUsedTodoCollection > -1) {
-            editorToUse.incidenceWrapper.collectionId = Config.lastUsedTodoCollection;
-        } else {
-            editorToUse.incidenceWrapper.collectionId = CalendarManager.defaultCalendarId(editorToUse.incidenceWrapper);
-        }
-    }
-
-    function setUpAddSubTodo(parentWrapper) {
-        let editorToUse = root.editorToUse();
-        if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
-            editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-                editorToUse, "incidence");
-        }
-        editorToUse.editMode = false;
-        editorToUse.incidenceWrapper.setNewTodo();
-        editorToUse.incidenceWrapper.parent = parentWrapper.uid;
-        editorToUse.incidenceWrapper.collectionId = parentWrapper.collectionId;
-        editorToUse.incidenceWrapper.incidenceStart = parentWrapper.incidenceStart;
-        editorToUse.incidenceWrapper.incidenceEnd = parentWrapper.incidenceEnd;
-    }
-
-    function setUpView(modelData) {
-        incidenceInfo.incidenceData = modelData;
-        incidenceInfo.open();
-    }
-
-    function setUpEdit(incidencePtr) {
-        let editorToUse = root.editorToUse();
-        editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-            editorToUse, "incidence");
-        editorToUse.incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
-        editorToUse.incidenceWrapper.triggerEditMode();
-        editorToUse.editMode = true;
-    }
-
-    function setUpDelete(incidencePtr, deleteDate) {
-        let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', root, "incidence");
-        incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
-
-        const openDialogWindow = pageStack.pushDialogLayer(deleteIncidenceSheetComponent, {
-            incidenceWrapper: incidenceWrapper,
-            deleteDate: deleteDate
-        }, {
-            width: Kirigami.Units.gridUnit * 32,
-            height: Kirigami.Units.gridUnit * 6
-        });
-
-        openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-    }
-
-    function completeTodo(incidencePtr) {
-        let todo = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-            this, "incidence");
-
-        todo.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
-
-        if(todo.incidenceType === IncidenceWrapper.TypeTodo) {
-            todo.todoCompleted = !todo.todoCompleted;
-            CalendarManager.editIncidence(todo);
-        }
-    }
-
-    function setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate, allDay=null) {
-        pageStack.currentItem.dragDropEnabled = false;
-
-        if(pageStack.layers.currentItem && pageStack.layers.currentItem.dragDropEnabled) {
-            pageStack.layers.currentItem.dragDropEnabled = false;
-        }
-
-        if(incidenceWrapper.recurrenceData.type === 0) {
-            if (allDay !== null) {
-                incidenceWrapper.allDay = allDay;
-            }
-            CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset);
-        } else {
-            const onClosingHandler = () => { caughtDelegate.caught = false; root.reenableDragOnCurrentView(); };
-            const openDialogWindow = pageStack.pushDialogLayer(recurringIncidenceChangeSheetComponent, {
-                incidenceWrapper: incidenceWrapper,
-                startOffset: startOffset,
-                endOffset: endOffset,
-                occurrenceDate: occurrenceDate,
-                caughtDelegate: caughtDelegate,
-                allDay: allDay
-            }, {
-                width: Kirigami.Units.gridUnit * 34,
-                height: Kirigami.Units.gridUnit * 6,
-                onClosing: onClosingHandler()
-            });
-
-            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
-    }
-
-    function reenableDragOnCurrentView() {
-        pageStack.currentItem.dragDropEnabled = true;
-
-        if(pageStack.layers.currentItem && pageStack.layers.currentItem.dragDropEnabled) {
-            pageStack.layers.currentItem.dragDropEnabled = true;
-        }
-    }
-
     Connections {
         target: CalendarManager
-        function onUpdateIncidenceDatesCompleted() { root.reenableDragOnCurrentView(); }
+        function onUpdateIncidenceDatesCompleted() { KalendarUiUtils.reenableDragOnCurrentView(); }
     }
 
-    function openDayLayer(selectedDate) {
-        dayScaleModelLoader.active = true;
-
-        if(!isNaN(selectedDate.getTime())) {
-            root.selectedDate = selectedDate;
-
-            dayViewAction.trigger();
-        }
-    }
-
+    property alias deleteIncidenceSheetComponent: deleteIncidenceSheetComponent
     Component {
         id: deleteIncidenceSheetComponent
         DeleteIncidenceSheet {
@@ -1093,6 +916,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias deleteCalendarSheetComponent: deleteCalendarSheetComponent
     Component {
         id: deleteCalendarSheetComponent
         DeleteCalendarSheet {
@@ -1106,6 +930,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias recurringIncidenceChangeSheetComponent: recurringIncidenceChangeSheetComponent
     Component {
         id: recurringIncidenceChangeSheetComponent
         RecurringIncidenceChangeSheet {
@@ -1125,12 +950,13 @@ Kirigami.ApplicationWindow {
             }
             onCancel: {
                 caughtDelegate.caught = false;
-                root.reenableDragOnCurrentView();
+                KalendarUiUtils.reenableDragOnCurrentView();
                 closeDialog();
             }
         }
     }
 
+    property alias monthScaleModelLoaderItem: monthScaleModelLoader
     Loader {
         id: monthScaleModelLoader
         active: Config.lastOpenedView === Config.MonthView || Config.lastOpenedView === Config.ScheduleView
@@ -1141,6 +967,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias weekScaleModelLoaderItem: weekScaleModelLoader
     Loader {
         id: weekScaleModelLoader
         active: Config.lastOpenedView === Config.WeekView
@@ -1152,6 +979,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias threeDayScaleModelLoaderItem: threeDayScaleModelLoader
     Loader {
         id: threeDayScaleModelLoader
         active: Config.lastOpenedView === Config.ThreeDayView
@@ -1162,6 +990,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias dayScaleModelLoaderItem: dayScaleModelLoader
     Loader {
         id: dayScaleModelLoader
         active: Config.lastOpenedView === Config.DayView
@@ -1187,15 +1016,15 @@ Kirigami.ApplicationWindow {
             openOccurrence: root.openOccurrence
             model: monthScaleModelLoader.item
 
-            onAddIncidence: root.setUpAdd(type, addDate)
-            onViewIncidence: root.setUpView(modelData)
-            onEditIncidence: root.setUpEdit(incidencePtr)
-            onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
-            onCompleteTodo: root.completeTodo(incidencePtr)
-            onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onAddIncidence: KalendarUiUtils.setUpAdd(type, addDate)
+            onViewIncidence: KalendarUiUtils.setUpView(modelData)
+            onEditIncidence: KalendarUiUtils.setUpEdit(incidencePtr)
+            onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
+            onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
+            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
-            onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
-            onOpenDayView: root.openDayLayer(selectedDate)
+            onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
@@ -1223,15 +1052,15 @@ Kirigami.ApplicationWindow {
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, day)
 
-            onAddIncidence: root.setUpAdd(type, addDate)
-            onViewIncidence: root.setUpView(modelData)
-            onEditIncidence: root.setUpEdit(incidencePtr)
-            onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
-            onCompleteTodo: root.completeTodo(incidencePtr)
-            onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onAddIncidence: KalendarUiUtils.setUpAdd(type, addDate)
+            onViewIncidence: KalendarUiUtils.setUpView(modelData)
+            onEditIncidence: KalendarUiUtils.setUpEdit(incidencePtr)
+            onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
+            onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
+            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
-            onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
-            onOpenDayView: root.openDayLayer(selectedDate)
+            onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
 
             actions.contextualActions: createAction
         }
@@ -1304,17 +1133,17 @@ Kirigami.ApplicationWindow {
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialWeek) root.selectedDate = new Date (year, month, day)
 
-            onAddIncidence: root.setUpAdd(type, addDate, null, includeTime)
-            onViewIncidence: root.setUpView(modelData)
-            onEditIncidence: root.setUpEdit(incidencePtr)
-            onDeleteIncidence: root.setUpDelete(incidencePtr, deleteDate)
-            onCompleteTodo: root.completeTodo(incidencePtr)
-            onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onAddIncidence: KalendarUiUtils.setUpAdd(type, addDate, null, includeTime)
+            onViewIncidence: KalendarUiUtils.setUpView(modelData)
+            onEditIncidence: KalendarUiUtils.setUpEdit(incidencePtr)
+            onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
+            onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
+            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
-            onMoveIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
-            onConvertIncidence: root.setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate, allDay) // We convert incidence from/to allDay
-            onResizeIncidence: root.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
-            onOpenDayView: root.openDayLayer(selectedDate)
+            onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
+            onConvertIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate, allDay) // We convert incidence from/to allDay
+            onResizeIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
+            onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
 
             actions.contextualActions: createAction
         }
@@ -1353,12 +1182,12 @@ Kirigami.ApplicationWindow {
 
             filter: root.filter
 
-            onAddTodo: root.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
-            onViewTodo: root.setUpView(todoData)
-            onEditTodo: root.setUpEdit(todoPtr)
-            onDeleteTodo: root.setUpDelete(todoPtr, deleteDate)
-            onCompleteTodo: root.completeTodo(todoPtr)
-            onAddSubTodo: root.setUpAddSubTodo(parentWrapper)
+            onAddTodo: KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
+            onViewTodo: KalendarUiUtils.setUpView(todoData)
+            onEditTodo: KalendarUiUtils.setUpEdit(todoPtr)
+            onDeleteTodo: KalendarUiUtils.setUpDelete(todoPtr, deleteDate)
+            onCompleteTodo: KalendarUiUtils.completeTodo(todoPtr)
+            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
             onDeselect: incidenceInfo.close()
         }
     }

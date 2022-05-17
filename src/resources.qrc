@@ -12,14 +12,14 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="MultiDayView.qml">contents/ui/MultiDayView.qml</file>
     <file alias="MonthView.qml">contents/ui/MonthView.qml</file>
     <file alias="DayLabels.qml">contents/ui/DayLabels.qml</file>
-    <file alias="dateutils.js">contents/ui/dateutils.js</file>
+    <file alias="dateutils.js">contents/ui/KalendarUtils/dateutils.js</file>
     <file alias="IncidenceEditor.qml">contents/ui/IncidenceEditor.qml</file>
     <file alias="DeleteIncidenceSheet.qml">contents/ui/DeleteIncidenceSheet.qml</file>
     <file alias="DeleteCalendarSheet.qml">contents/ui/DeleteCalendarSheet.qml</file>
     <file alias="IncidenceInfo.qml">contents/ui/IncidenceInfo.qml</file>
     <file alias="DatePicker.qml">contents/ui/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/TimePicker.qml</file>
-    <file alias="labelutils.js">contents/ui/labelutils.js</file>
+    <file alias="labelutils.js">contents/ui/KalendarUtils/labelutils.js</file>
     <file alias="TitleDateButton.qml">contents/ui/TitleDateButton.qml</file>
     <file alias="ViewTitleDelegate.qml">contents/ui/ViewTitleDelegate.qml</file>
     <file alias="DateChanger.qml">contents/ui/DateChanger.qml</file>
@@ -60,5 +60,6 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="RecurringIncidenceChangeSheet.qml">contents/ui/RecurringIncidenceChangeSheet.qml</file>
     <file alias="ResizerSeparator.qml">contents/ui/ResizerSeparator.qml</file>
     <file alias="LazyContactView.qml">contents/ui/LazyContactView.qml</file>
+    <file alias="KalendarUiUtils.qml">contents/ui/KalendarUtils/KalendarUiUtils.qml</file>
   </qresource>
 </RCC>

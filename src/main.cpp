@@ -138,6 +138,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
     qmlRegisterType<InfiniteCalendarViewModel>("org.kde.kalendar", 1, 0, "InfiniteCalendarViewModel");
 
+    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/KalendarUiUtils.qml")), "org.kde.kalendar.utils", 1, 0, "KalendarUiUtils");
+
     qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
     qRegisterMetaType<QAbstractProxyModel *>("QAbstractProxyModel*");
     qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
