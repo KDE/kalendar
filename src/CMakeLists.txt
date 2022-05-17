@@ -57,7 +57,13 @@ set_source_files_properties(models/todosortfilterproxymodel.cpp PROPERTIES SKIP_
 target_sources(kalendar PRIVATE
     ${kalendar_SRCS})
 
-ecm_qt_declare_logging_category(kalendar HEADER kalendar_debug.h IDENTIFIER KALENDAR_LOG CATEGORY_NAME org.kde.kalendar DESCRIPTION "kalendar" EXPORT KALENDAR)
+ecm_qt_declare_logging_category(kalendar
+    HEADER kalendar_debug.h
+    IDENTIFIER KALENDAR_LOG
+    CATEGORY_NAME org.kde.kalendar
+    DESCRIPTION "kalendar"
+    EXPORT KALENDAR
+)
 
 set(kalendar_LIBS
     kalendar_lib
