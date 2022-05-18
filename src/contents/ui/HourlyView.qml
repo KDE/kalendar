@@ -635,19 +635,8 @@ Kirigami.Page {
                             // Since we position with anchors, height is 0 -- must calc manually
 
                             const timeMarkerY = (root.currentDate.getHours() * root.gridLineWidth) + (hourlyView.minuteHeight * root.minutesFromStartOfDay) - (height / 2) - (root.gridLineWidth / 2)
-                            let yPos = (timeMarkerY / dayHeight) - ((viewHeight / 2) / dayHeight)
-                            yPos = Math.max(0.0, yPos);
-                            yPos = vScrollBar.size ? Math.min(vScrollBar.size, yPos) : Math.min(1.0, yPos);
-
-                            if(animate) {
-                                scrollAnimation.to = yPos;
-                                if(scrollAnimation.running) {
-                                    scrollAnimation.stop();
-                                }
-                                scrollAnimation.start();
-                            } else {
-                                vScrollBar.position = yPos;
-                            }
+                            const yPos = Math.max(0.0, (timeMarkerY / dayHeight))
+                            setPosition(yPos, animate);
                         }
                     }
 
@@ -655,16 +644,24 @@ Kirigami.Page {
                         return vScrollBar.position;
                     }
 
-                    function setPosition(position) {
+                    function setPosition(position, animate = false) {
                         let offset = vScrollBar.visualSize + position - 1;
+                        // Initially let's assume that we are still somewhere before bottom of the hourlyView
+                        // so lets simply set vScrollBar position to what was given
+                        let yPos = position;
                         if (offset > 0) {
                             // Ups, it seems that we are going lower than bottom of the hourlyView
                             // Lets set position to the bottom of the vScrollBar then
-                            vScrollBar.position = 1 - vScrollBar.visualSize;
+                            yPos = 1 - vScrollBar.visualSize;
+                        }
+                        if (animate) {
+                            scrollAnimation.to = yPos;
+                            if (scrollAnimation.running) {
+                                scrollAnimation.stop();
+                            }
+                            scrollAnimation.start();
                         } else {
-                            // We are still somewhere before bottom of the hourlyView so lets simply
-                            // set vScrollBar position to what was given
-                            vScrollBar.position = position;
+                            vScrollBar.position = yPos;
                         }
                     }
 
