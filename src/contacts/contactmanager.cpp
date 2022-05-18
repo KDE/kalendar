@@ -33,7 +33,6 @@
 #endif
 #include "contactcollectionmodel.h"
 #include "globalcontactmodel.h"
-#include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <Akonadi/EntityRightsFilterModel>
 #include <KCheckableProxyModel>
@@ -45,7 +44,6 @@
 #include <KSharedConfig>
 #include <QBuffer>
 #include <QItemSelectionModel>
-#include <QSortFilterProxyModel>
 #include <colorproxymodel.h>
 
 namespace

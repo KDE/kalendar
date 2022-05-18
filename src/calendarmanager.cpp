@@ -20,7 +20,6 @@
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionColorAttribute>
 #include <Akonadi/CollectionDeleteJob>
-#include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/CollectionIdentificationAttribute>
 #include <Akonadi/CollectionModifyJob>
 #include <Akonadi/CollectionPropertiesDialog>
@@ -36,10 +35,8 @@
 #include <akonadi_version.h>
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/History>
-#include <Akonadi/IncidenceChanger>
 #else
 #include <Akonadi/Calendar/History>
-#include <Akonadi/Calendar/IncidenceChanger>
 #endif
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>

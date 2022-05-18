@@ -3,13 +3,14 @@
 
 #pragma once
 
+#include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/Item>
 #include <KDescendantsProxyModel>
 #include <QObject>
+#include <QSortFilterProxyModel>
 
 namespace Akonadi
 {
-class CollectionFilterProxyModel;
 class EntityRightsFilterModel;
 class ETMViewStateSaver;
 class EntityMimeTypeFilterModel;
@@ -17,7 +18,6 @@ class EntityMimeTypeFilterModel;
 class KCheckableProxyModel;
 class QAbstractItemModel;
 class QItemSelectionModel;
-class QSortFilterProxyModel;
 class ColorProxyModel;
 
 class ContactManager : public QObject
