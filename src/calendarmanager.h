@@ -19,11 +19,9 @@
 
 namespace Akonadi
 {
-class AgentFilterProxyModel;
 class CollectionFilterProxyModel;
 class ETMViewStateSaver;
 class EntityRightsFilterModel;
-class EntityMimeTypeFilterModel;
 class IncidenceChanger;
 }
 

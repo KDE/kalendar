@@ -5,8 +5,6 @@
 
 #include <QQmlExtensionPlugin>
 
-class QQmlEngine;
-
 class CalendarPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
