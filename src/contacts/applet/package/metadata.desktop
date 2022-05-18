@@ -3,7 +3,25 @@
 
 [Desktop Entry]
 Name=Contact
+Name[ca]=Contact
+Name[ca@valencia]=Contact
+Name[es]=Contacto
+Name[nl]=Contactpersoon
+Name[pt]=Contacto
+Name[ta]=தொடர்பு
+Name[tr]=Kişi
+Name[uk]=Контакт
+Name[x-test]=xxContactxx
 Comment=Contact list
+Comment[ca]=Llista de contactes
+Comment[ca@valencia]=Llista de contactes
+Comment[es]=Lista de contactos
+Comment[nl]=Contactenlijst
+Comment[pt]=Lista de contactos
+Comment[ta]=தொடர்புப்பட்டியல்
+Comment[tr]=Kişi listesi
+Comment[uk]=Список контактів
+Comment[x-test]=xxContact listxx
 Icon=im-user
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
