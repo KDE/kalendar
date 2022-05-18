@@ -820,6 +820,8 @@ void CalendarManager::editCollection(qint64 collectionId)
     dlg->show();
 }
 
+#ifndef UNITY_CMAKE_SUPPORT
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
+#endif
 
 #include "calendarmanager.moc"
