@@ -11,6 +11,7 @@ EmailModel::EmailModel(QObject *parent)
 
 int EmailModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return m_emails.count();
 }
 
