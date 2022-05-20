@@ -676,7 +676,9 @@ Kirigami.ApplicationWindow {
         id: filterHeaderBar
         active: false
         sourceComponent: Item {
-            readonly property bool show: header.mode === KalendarApplication.Todo || header.filter.tags.length > 0 || notifyMessage.visible
+            readonly property bool show: header.mode === KalendarApplication.Todo ||
+                                         header.filter.tags.length > 0 ||
+                                         notifyMessage.visible
             readonly property alias messageItem: notifyMessage
 
             height: show ? headerLayout.implicitHeight + headerSeparator.height : 0
@@ -1097,19 +1099,19 @@ Kirigami.ApplicationWindow {
                         Kirigami.Action {
                             text: "Week"
                             checkable: true
-                            checked: pageStack.currentItem.objectName == "weekView"
+                            checked: pageStack.currentItem && pageStack.currentItem.objectName == "weekView"
                             onTriggered: weekViewAction.trigger()
                         },
                         Kirigami.Action {
                             text: "3 Days"
                             checkable: true
-                            checked: pageStack.currentItem.objectName == "threeDayView"
+                            checked: pageStack.currentItem && pageStack.currentItem.objectName == "threeDayView"
                             onTriggered: threeDayViewAction.trigger()
                         },
                         Kirigami.Action {
                             text: "Day"
                             checkable: true
-                            checked: pageStack.currentItem.objectName == "dayView"
+                            checked: pageStack.currentItem && pageStack.currentItem.objectName == "dayView"
                             onTriggered: dayViewAction.trigger()
                         }
                     ]
