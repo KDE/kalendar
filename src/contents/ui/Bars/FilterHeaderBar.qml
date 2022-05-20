@@ -17,7 +17,7 @@ RowLayout {
     signal searchTextChanged(string text)
 
     property bool isDark: false
-    property bool mode: Kalendar.KalendarApplication.Event
+    property var mode: Kalendar.KalendarApplication.Event
     property var filter: {
         "tags": [],
         "collectionId": -1
