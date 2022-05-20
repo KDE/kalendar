@@ -420,6 +420,7 @@ Kirigami.Page {
                             clip: true
 
                             Repeater {
+                                // TODO: Clean this up
                                 model: switch(root.daysToShow) {
                                 case 1:
                                     return dayViewDayGridViewModel;
@@ -581,14 +582,17 @@ Kirigami.Page {
                     onDragBegin:  setPos()
                     onDragReleased: setPos()
                     onDragPositionChanged: allDayHeader.actualHeight = Math.min(allDayHeader.maxHeight, Math.max(allDayHeader.minHeight, Kalendar.Config.weekViewAllDayHeaderHeight + changeY))
+                }
 
-                    RectangularGlow {
-                        anchors.fill: parent
-                        z: -1
-                        glowRadius: 5
-                        spread: 0.3
-                        color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
-                    }
+                RectangularGlow {
+                    id: headerBottomShadow
+                    anchors.top: headerBottomSeparator.bottom
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    z: -1
+                    glowRadius: 5
+                    spread: 0.3
+                    color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
                 }
 
                 QQC2.ScrollView {
