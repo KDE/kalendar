@@ -8,7 +8,7 @@ import org.kde.kirigami 2.14 as Kirigami
 import "labelutils.js" as LabelUtils
 
 Kirigami.ShadowedRectangle {
-    id: incidenceBackground
+    id: incidenceDelegateBackground
 
     property bool isOpenOccurrence: false
     property bool reactToCurrentMonth: false
@@ -17,7 +17,7 @@ Kirigami.ShadowedRectangle {
 
     anchors.fill: parent
     color: isOpenOccurrence ? modelData.color :
-        LabelUtils.getIncidenceBackgroundColor(modelData.color, root.isDark)
+        LabelUtils.getIncidenceDelegateBackgroundColor(modelData.color, root.isDark)
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
     opacity: isOpenOccurrence || isInCurrentMonth ? 1.0 : 0
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }

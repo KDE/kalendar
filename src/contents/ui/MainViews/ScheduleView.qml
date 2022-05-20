@@ -417,8 +417,8 @@ Kirigami.Page {
                                                 bottomPadding: paddingSize
 
                                                 showClickFeedback: true
-                                                background: IncidenceBackground {
-                                                    id: incidenceBackground
+                                                background: IncidenceDelegateBackground {
+                                                    id: incidenceDelegateBackground
                                                     isOpenOccurrence: parent.isOpenOccurrence
                                                     isDark: root.isDark
                                                 }
@@ -595,5 +595,5 @@ Kirigami.Page {
         }
     }
 
-    NavigationMouseArea {}
+    KeyboardNavigationMouseArea {}
 }

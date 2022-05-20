@@ -11,7 +11,7 @@ import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
 
 Kirigami.OverlayDrawer {
-    id: incidenceInfo
+    id: incidenceInfoDrawer
 
     signal addSubTodo(var parentWrapper)
     signal editIncidence(var incidencePtr)
@@ -53,7 +53,7 @@ Kirigami.OverlayDrawer {
 
     onIncidenceDataChanged: {
         incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
-                                              incidenceInfo, "incidence");
+                                              incidenceInfoDrawer, "incidence");
         incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidenceData.incidencePtr);
         collectionData = CalendarManager.getCollectionDetails(incidenceWrapper.collectionId);
     }
@@ -75,7 +75,7 @@ Kirigami.OverlayDrawer {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        active: incidenceInfo.drawerOpen
+        active: incidenceInfoDrawer.drawerOpen
         sourceComponent: ColumnLayout {
             Kirigami.AbstractApplicationHeader {
                 Layout.fillWidth: true
@@ -90,7 +90,7 @@ Kirigami.OverlayDrawer {
                         id: infoHeader
                         Layout.fillHeight: true
                         Layout.leftMargin: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-                        text: i18n(incidenceInfo.incidenceWrapper.incidenceTypeStr)
+                        text: i18n(incidenceInfoDrawer.incidenceWrapper.incidenceTypeStr)
                     }
 
                     Kirigami.ActionToolBar {
@@ -103,32 +103,32 @@ Kirigami.OverlayDrawer {
                             Kirigami.Action {
                                 icon.name: "list-add"
                                 text: i18n("Add Sub-Task")
-                                visible: incidenceInfo.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
+                                visible: incidenceInfoDrawer.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
                                 onTriggered: {
-                                    addSubTodo(incidenceInfo.incidenceWrapper);
+                                    addSubTodo(incidenceInfoDrawer.incidenceWrapper);
                                 }
                             },
                             Kirigami.Action {
-                                property bool todoCompleted: incidenceInfo.incidenceWrapper.todoCompleted
+                                property bool todoCompleted: incidenceInfoDrawer.incidenceWrapper.todoCompleted
                                 icon.name: todoCompleted ? "edit-undo" : "checkmark"
                                 text: todoCompleted ? i18n("Mark Incomplete") : i18n("Mark Complete")
-                                visible: incidenceInfo.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
+                                visible: incidenceInfoDrawer.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
                                 onTriggered: {
-                                    incidenceInfo.incidenceWrapper.todoCompleted = !incidenceInfo.incidenceWrapper.todoCompleted;
-                                    CalendarManager.editIncidence(incidenceInfo.incidenceWrapper);
+                                    incidenceInfoDrawer.incidenceWrapper.todoCompleted = !incidenceInfoDrawer.incidenceWrapper.todoCompleted;
+                                    CalendarManager.editIncidence(incidenceInfoDrawer.incidenceWrapper);
                                 }
                             },
                             Kirigami.Action {
                                 icon.name: "edit-entry"
                                 text: i18n("Edit")
-                                enabled: incidenceInfo.collectionData && !incidenceInfo.collectionData.readOnly
-                                onTriggered: editIncidence(incidenceInfo.incidenceData.incidencePtr)
+                                enabled: incidenceInfoDrawer.collectionData && !incidenceInfoDrawer.collectionData.readOnly
+                                onTriggered: editIncidence(incidenceInfoDrawer.incidenceData.incidencePtr)
                             },
                             Kirigami.Action {
                                 icon.name: "edit-delete"
                                 text: i18n("Delete")
-                                enabled: incidenceInfo.collectionData && !incidenceInfo.collectionData.readOnly
-                                onTriggered: deleteIncidence(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime)
+                                enabled: incidenceInfoDrawer.collectionData && !incidenceInfoDrawer.collectionData.readOnly
+                                onTriggered: deleteIncidence(incidenceInfoDrawer.incidenceData.incidencePtr, incidenceInfoDrawer.incidenceData.startTime)
                             }
                         ]
                     }
@@ -142,7 +142,7 @@ Kirigami.OverlayDrawer {
                 clip: true
 
                 property real yScrollPos: QQC2.ScrollBar.vertical.position
-                onYScrollPosChanged: if(Kirigami.Settings.isMobile) incidenceInfo.interactive = incidenceInfo.enabled && yScrollPos <= 0
+                onYScrollPosChanged: if(Kirigami.Settings.isMobile) incidenceInfoDrawer.interactive = incidenceInfoDrawer.enabled && yScrollPos <= 0
 
                 GridLayout {
                     id: infoBody
@@ -158,21 +158,21 @@ Kirigami.OverlayDrawer {
                         Kirigami.Heading {
                             Layout.fillWidth: true
 
-                            text: incidenceInfo.incidenceWrapper.summary
+                            text: incidenceInfoDrawer.incidenceWrapper.summary
                             textFormat: Text.PlainText
                             font.weight: Font.Bold
                             wrapMode: Text.Wrap
                         }
                         Kirigami.Icon {
-                            source: incidenceInfo.incidenceWrapper.incidenceIconName
+                            source: incidenceInfoDrawer.incidenceWrapper.incidenceIconName
                         }
                         Kirigami.Icon {
                             source: "appointment-recurring"
-                            visible: incidenceInfo.incidenceWrapper.recurrenceData.type
+                            visible: incidenceInfoDrawer.incidenceWrapper.recurrenceData.type
                         }
                         Kirigami.Icon {
                             source: "appointment-reminder"
-                            visible: incidenceInfo.incidenceWrapper.remindersModel.rowCount() > 0
+                            visible: incidenceInfoDrawer.incidenceWrapper.remindersModel.rowCount() > 0
                         }
                     }
                     Rectangle {
@@ -180,36 +180,36 @@ Kirigami.OverlayDrawer {
                         Layout.fillWidth: true
                         height: Kirigami.Units.gridUnit / 2
 
-                        color: incidenceInfo.collectionData.color
+                        color: incidenceInfoDrawer.collectionData.color
                     }
 
                     ColumnLayout {
                         id: todoCompletionLayout
 
                         Layout.columnSpan: 2
-                        visible: incidenceInfo.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
+                        visible: incidenceInfoDrawer.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
 
                         Kirigami.Heading {
                             Layout.alignment: Qt.AlignTop
                             Layout.fillWidth: true
                             level: 2
-                            text: i18nc("%1 is a percentage number", "<b>%1\%</b> Complete", String(incidenceInfo.incidenceWrapper.todoPercentComplete))
+                            text: i18nc("%1 is a percentage number", "<b>%1\%</b> Complete", String(incidenceInfoDrawer.incidenceWrapper.todoPercentComplete))
                         }
                         QQC2.Slider {
                             Layout.fillWidth: true
 
                             Kirigami.Theme.inherit: false
-                            Kirigami.Theme.highlightColor: incidenceInfo.incidenceData.color
+                            Kirigami.Theme.highlightColor: incidenceInfoDrawer.incidenceData.color
 
                             orientation: Qt.Horizontal
                             from: 0
                             to: 100.0
                             stepSize: 10.0
-                            value: incidenceInfo.incidenceWrapper.todoPercentComplete
+                            value: incidenceInfoDrawer.incidenceWrapper.todoPercentComplete
                             onValueChanged: {
-                                if (incidenceInfo.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo && activeFocus) {
-                                    incidenceInfo.incidenceWrapper.todoPercentComplete = value;
-                                    CalendarManager.editIncidence(incidenceInfo.incidenceWrapper);
+                                if (incidenceInfoDrawer.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo && activeFocus) {
+                                    incidenceInfoDrawer.incidenceWrapper.todoPercentComplete = value;
+                                    CalendarManager.editIncidence(incidenceInfoDrawer.incidenceWrapper);
                                 }
                             }
                         }
@@ -229,22 +229,22 @@ Kirigami.OverlayDrawer {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
-                        text: incidenceInfo.collectionData ? incidenceInfo.collectionData.displayName : ""
+                        text: incidenceInfoDrawer.collectionData ? incidenceInfoDrawer.collectionData.displayName : ""
                         wrapMode: Text.Wrap
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Tags:</b>")
-                        visible: incidenceInfo.incidenceWrapper.categories.length > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.categories.length > 0
                     }
                     Flow {
                         id: tagFlow
                         Layout.fillWidth: true
-                        visible: incidenceInfo.incidenceWrapper.categories.length > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.categories.length > 0
                         spacing: Kirigami.Units.largeSpacing
                         Repeater {
-                            model: incidenceInfo.incidenceWrapper.categories
+                            model: incidenceInfoDrawer.incidenceWrapper.categories
                             Tag {
                                 text: modelData
                                 icon.name: "edit-delete-remove"
@@ -252,8 +252,8 @@ Kirigami.OverlayDrawer {
                                 showAction: false
                                 implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
                                 activeFocusOnTab: true
-                                backgroundColor: sidebar.activeTags.includes(modelData) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
-                                onClicked: incidenceInfo.tagClicked(modelData)
+                                backgroundColor: mainDrawer.activeTags.includes(modelData) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
+                                onClicked: incidenceInfoDrawer.tagClicked(modelData)
                             }
                         }
                     }
@@ -261,91 +261,91 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Date:</b>")
-                        visible: !isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime())
+                        visible: !isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
-                        text: if(incidenceInfo.incidenceData.startTime.toDateString() === incidenceInfo.incidenceData.endTime.toDateString()) {
-                            return incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale());
-                        } else if (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) && !isNaN(incidenceInfo.incidenceData.endTime.getTime())) {
-                            incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale()) + "–" + incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
-                        } else if (isNaN(incidenceInfo.incidenceData.startTime.getTime()) && !isNaN(incidenceInfo.incidenceData.endTime.getTime())) {
-                            return incidenceInfo.incidenceData.endTime.toLocaleDateString(Qt.locale())
-                        } else if (isNaN(incidenceInfo.incidenceData.endTime.getTime()) && !isNaN(incidenceInfo.incidenceData.startTime.getTime())) {
-                            return incidenceInfo.incidenceData.startTime.toLocaleDateString(Qt.locale())
+                        text: if(incidenceInfoDrawer.incidenceData.startTime.toDateString() === incidenceInfoDrawer.incidenceData.endTime.toDateString()) {
+                            return incidenceInfoDrawer.incidenceData.startTime.toLocaleDateString(Qt.locale());
+                        } else if (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) && !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())) {
+                            incidenceInfoDrawer.incidenceData.startTime.toLocaleDateString(Qt.locale()) + "–" + incidenceInfoDrawer.incidenceData.endTime.toLocaleDateString(Qt.locale())
+                        } else if (isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) && !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())) {
+                            return incidenceInfoDrawer.incidenceData.endTime.toLocaleDateString(Qt.locale())
+                        } else if (isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()) && !isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime())) {
+                            return incidenceInfoDrawer.incidenceData.startTime.toLocaleDateString(Qt.locale())
                         }
                         wrapMode: Text.Wrap
-                        visible: !isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime())
+                        visible: !isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Time:</b>")
-                        visible: !incidenceInfo.incidenceData.allDay &&
-                            incidenceInfo.incidenceData.startTime.toDateString() == incidenceInfo.incidenceData.endTime.toDateString() &&
-                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
+                        visible: !incidenceInfoDrawer.incidenceData.allDay &&
+                            incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() &&
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
                         text: {
-                            if(incidenceInfo.incidenceData.startTime.toTimeString() != incidenceInfo.incidenceData.endTime.toTimeString()) {
-                                incidenceInfo.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + "–" + incidenceInfo.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
-                            } else if (incidenceInfo.incidenceData.startTime.toTimeString() == incidenceInfo.incidenceData.endTime.toTimeString()) {
-                                incidenceInfo.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                            if(incidenceInfoDrawer.incidenceData.startTime.toTimeString() != incidenceInfoDrawer.incidenceData.endTime.toTimeString()) {
+                                incidenceInfoDrawer.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + "–" + incidenceInfoDrawer.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                            } else if (incidenceInfoDrawer.incidenceData.startTime.toTimeString() == incidenceInfoDrawer.incidenceData.endTime.toTimeString()) {
+                                incidenceInfoDrawer.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
                             }
                         }
                         wrapMode: Text.Wrap
-                        visible: !incidenceInfo.incidenceData.allDay &&
-                            incidenceInfo.incidenceData.startTime.toDateString() == incidenceInfo.incidenceData.endTime.toDateString() &&
-                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
+                        visible: !incidenceInfoDrawer.incidenceData.allDay &&
+                            incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() &&
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Duration:</b>")
-                        visible: incidenceInfo.incidenceData.durationString &&
-                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
+                        visible: incidenceInfoDrawer.incidenceData.durationString &&
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
-                        text: incidenceInfo.incidenceData.durationString
-                        visible: incidenceInfo.incidenceData.durationString &&
-                            (!isNaN(incidenceInfo.incidenceData.startTime.getTime()) || !isNaN(incidenceInfo.incidenceData.endTime.getTime()))
+                        text: incidenceInfoDrawer.incidenceData.durationString
+                        visible: incidenceInfoDrawer.incidenceData.durationString &&
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
                         wrapMode: Text.Wrap
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Priority level:</b>")
-                        visible: incidenceInfo.incidenceWrapper.priority
+                        visible: incidenceInfoDrawer.incidenceWrapper.priority
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
-                        text: LabelUtils.priorityString(incidenceInfo.incidenceWrapper.priority)
-                        visible: incidenceInfo.incidenceWrapper.priority
+                        text: LabelUtils.priorityString(incidenceInfoDrawer.incidenceWrapper.priority)
+                        visible: incidenceInfoDrawer.incidenceWrapper.priority
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Completed:</b>")
-                        visible: incidenceInfo.incidenceWrapper.todoCompleted
+                        visible: incidenceInfoDrawer.incidenceWrapper.todoCompleted
                     }
                     QQC2.Label {
                         id: todoCompletedTimeLabel
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
-                        property date completionDate: incidenceInfo.incidenceWrapper.todoCompletionDt
+                        property date completionDate: incidenceInfoDrawer.incidenceWrapper.todoCompletionDt
 
                         text: completionDate.toLocaleString(Qt.locale())
-                        visible: incidenceInfo.incidenceWrapper.todoCompleted
+                        visible: incidenceInfoDrawer.incidenceWrapper.todoCompleted
                         // HACK: For some reason, calling the todoCompletionDt always returns an invalid date once it is changed (???)
                         onVisibleChanged: if(visible && isNaN(completionDate.getTime())) { text = new Date().toLocaleString(Qt.locale()) }
                         wrapMode: Text.Wrap
@@ -354,17 +354,17 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Recurrence:</b>")
-                        visible: incidenceInfo.incidenceWrapper.recurrenceData.type
+                        visible: incidenceInfoDrawer.incidenceWrapper.recurrenceData.type
                     }
                     ColumnLayout {
                         Layout.fillWidth: true
-                        visible: incidenceInfo.incidenceWrapper.recurrenceData.type
+                        visible: incidenceInfoDrawer.incidenceWrapper.recurrenceData.type
 
                         QQC2.Label {
                             Layout.alignment: Qt.AlignTop
                             Layout.fillWidth: true
 
-                            text: LabelUtils.recurrenceToString(incidenceInfo.incidenceWrapper.recurrenceData)
+                            text: LabelUtils.recurrenceToString(incidenceInfoDrawer.incidenceWrapper.recurrenceData)
                             wrapMode: Text.Wrap
                         }
 
@@ -384,7 +384,7 @@ Kirigami.OverlayDrawer {
 
                                 Repeater {
                                     id: exceptionsRepeater
-                                    model: incidenceInfo.incidenceWrapper.recurrenceExceptionsModel
+                                    model: incidenceInfoDrawer.incidenceWrapper.recurrenceExceptionsModel
                                     delegate: QQC2.Label {
                                         Layout.fillWidth: true
                                         text: date.toLocaleDateString(Qt.locale())
@@ -396,9 +396,9 @@ Kirigami.OverlayDrawer {
                         QQC2.Label {
                             Layout.alignment: Qt.AlignTop
                             Layout.fillWidth: true
-                            visible: incidenceInfo.incidenceWrapper.recurrenceData.duration > -1
+                            visible: incidenceInfoDrawer.incidenceWrapper.recurrenceData.duration > -1
 
-                            text: LabelUtils.recurrenceEndToString(incidenceInfo.incidenceWrapper.recurrenceData)
+                            text: LabelUtils.recurrenceEndToString(incidenceInfoDrawer.incidenceWrapper.recurrenceData)
                             wrapMode: Text.Wrap
                         }
                     }
@@ -406,7 +406,7 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Location:</b>")
-                        visible: incidenceInfo.incidenceWrapper.location
+                        visible: incidenceInfoDrawer.incidenceWrapper.location
                     }
                     TextEdit {
                         id: locationLabel
@@ -421,10 +421,10 @@ Kirigami.OverlayDrawer {
                         wrapMode: Text.Wrap
                         textFormat: Text.RichText
                         color: Kirigami.Theme.textColor
-                        text: incidenceInfo.incidenceWrapper.location.replace(LabelUtils.urlRegexp, (match) => `<a style="color: "${Kirigami.Theme.linkColor}"; text-decoration: none;" href="${match}">${match}</a>`)
-                        onTextChanged: isLink = LabelUtils.urlRegexp.test(incidenceInfo.incidenceWrapper.location);
+                        text: incidenceInfoDrawer.incidenceWrapper.location.replace(LabelUtils.urlRegexp, (match) => `<a style="color: "${Kirigami.Theme.linkColor}"; text-decoration: none;" href="${match}">${match}</a>`)
+                        onTextChanged: isLink = LabelUtils.urlRegexp.test(incidenceInfoDrawer.incidenceWrapper.location);
                         onLinkActivated: Qt.openUrlExternally(link)
-                        visible: incidenceInfo.incidenceWrapper.location
+                        visible: incidenceInfoDrawer.incidenceWrapper.location
                         onHoveredLinkChanged: if (hoveredLink.length > 0) {
                             applicationWindow().hoverLinkIndicator.text = hoveredLink;
                         } else {
@@ -438,7 +438,7 @@ Kirigami.OverlayDrawer {
                     ColumnLayout {
                         Layout.columnSpan: 2
                         Layout.fillWidth: true
-                        visible: Config.enableMaps && (incidenceInfo.incidenceWrapper.location || incidenceInfo.incidenceWrapper.hasGeo)
+                        visible: Config.enableMaps && (incidenceInfoDrawer.incidenceWrapper.location || incidenceInfoDrawer.incidenceWrapper.hasGeo)
 
                         QQC2.BusyIndicator {
                             id: mapLoadingIndicator
@@ -472,24 +472,24 @@ Kirigami.OverlayDrawer {
                             height: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 12 : Kirigami.Units.gridUnit * 16
                             asynchronous: true
                             active: Config.enableMaps &&
-                                incidenceInfo.visible &&
-                                (incidenceInfo.incidenceWrapper.location || incidenceInfo.incidenceWrapper.hasGeo) &&
+                                incidenceInfoDrawer.visible &&
+                                (incidenceInfoDrawer.incidenceWrapper.location || incidenceInfoDrawer.incidenceWrapper.hasGeo) &&
                                 !locationLabel.isLink
                             visible: active && (item.queryHasResults || item.hasCoordinate)
 
                             sourceComponent: LocationMap {
                                 id: map
-                                query: incidenceInfo.incidenceWrapper.location
-                                selectedLatitude: incidenceInfo.incidenceWrapper.hasGeo ? incidenceInfo.incidenceWrapper.geoLatitude : NaN
-                                selectedLongitude: incidenceInfo.incidenceWrapper.hasGeo ? incidenceInfo.incidenceWrapper.geoLongitude : NaN
+                                query: incidenceInfoDrawer.incidenceWrapper.location
+                                selectedLatitude: incidenceInfoDrawer.incidenceWrapper.hasGeo ? incidenceInfoDrawer.incidenceWrapper.geoLatitude : NaN
+                                selectedLongitude: incidenceInfoDrawer.incidenceWrapper.hasGeo ? incidenceInfoDrawer.incidenceWrapper.geoLongitude : NaN
 
                                 MouseArea {
                                     anchors.fill: parent
                                     onClicked: {
-                                        if (incidenceInfo.incidenceWrapper.hasGeo)
-                                            Qt.openUrlExternally("https://www.openstreetmap.org/#map=17/" + incidenceInfo.incidenceWrapper.geoLatitude + "/" + incidenceInfo.incidenceWrapper.geoLongitude)
+                                        if (incidenceInfoDrawer.incidenceWrapper.hasGeo)
+                                            Qt.openUrlExternally("https://www.openstreetmap.org/#map=17/" + incidenceInfoDrawer.incidenceWrapper.geoLatitude + "/" + incidenceInfoDrawer.incidenceWrapper.geoLongitude)
                                         else
-                                            Qt.openUrlExternally("https://www.openstreetmap.org/search?query=" + incidenceInfo.incidenceWrapper.location)
+                                            Qt.openUrlExternally("https://www.openstreetmap.org/search?query=" + incidenceInfoDrawer.incidenceWrapper.location)
                                     }
                                 }
                             }
@@ -501,7 +501,7 @@ Kirigami.OverlayDrawer {
                         Layout.alignment: Qt.AlignTop
 
                         text: i18n("<b>Description:</b>")
-                        visible: incidenceInfo.incidenceWrapper.description
+                        visible: incidenceInfoDrawer.incidenceWrapper.description
                     }
                     HoverLabel {
                         id: descriptionText
@@ -509,27 +509,27 @@ Kirigami.OverlayDrawer {
                         Layout.fillWidth: true
 
                         textFormat: Text.MarkdownText
-                        text: incidenceInfo.incidenceWrapper.description.replace(LabelUtils.urlRegexp, (match) => `[${match}](${match})`)
+                        text: incidenceInfoDrawer.incidenceWrapper.description.replace(LabelUtils.urlRegexp, (match) => `[${match}](${match})`)
                         onLinkActivated: Qt.openUrlExternally(link)
-                        visible: incidenceInfo.incidenceWrapper.description
+                        visible: incidenceInfoDrawer.incidenceWrapper.description
                     }
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
-                        text: i18np("<b>Attachment:</b>", "<b>Attachments:</b>", incidenceInfo.incidenceWrapper.attachmentsModel.rowCount())
-                        visible: incidenceInfo.incidenceWrapper.attachmentsModel.rowCount() > 0
+                        text: i18np("<b>Attachment:</b>", "<b>Attachments:</b>", incidenceInfoDrawer.incidenceWrapper.attachmentsModel.rowCount())
+                        visible: incidenceInfoDrawer.incidenceWrapper.attachmentsModel.rowCount() > 0
                     }
 
                     ColumnLayout {
                         id: attachmentsColumn
 
                         Layout.fillWidth: true
-                        visible: incidenceInfo.incidenceWrapper.attachmentsModel.rowCount() > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.attachmentsModel.rowCount() > 0
 
                         Repeater {
                             Layout.fillWidth: true
 
-                            model: incidenceInfo.incidenceWrapper.attachmentsModel
+                            model: incidenceInfoDrawer.incidenceWrapper.attachmentsModel
 
                             delegate: HoverLabel {
                                 Layout.fillWidth: true
@@ -542,19 +542,19 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Reminders:</b>")
-                        visible: incidenceInfo.incidenceWrapper.remindersModel.rowCount() > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.remindersModel.rowCount() > 0
                     }
 
                     ColumnLayout {
                         id: remindersColumn
 
                         Layout.fillWidth: true
-                        visible: incidenceInfo.incidenceWrapper.remindersModel.rowCount() > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.remindersModel.rowCount() > 0
 
                         Repeater {
                             Layout.fillWidth: true
 
-                            model: incidenceInfo.incidenceWrapper.remindersModel
+                            model: incidenceInfoDrawer.incidenceWrapper.remindersModel
 
                             delegate: QQC2.Label {
                                 Layout.fillWidth: true
@@ -567,14 +567,14 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Organizer:</b>")
-                        visible: incidenceInfo.incidenceWrapper.organizer.fullName
+                        visible: incidenceInfoDrawer.incidenceWrapper.organizer.fullName
                     }
 
                     HoverLabel {
                         Layout.fillWidth: true
 
-                        property var organizer: incidenceInfo.incidenceWrapper.organizer
-                        visible: incidenceInfo.incidenceWrapper.organizer.fullName
+                        property var organizer: incidenceInfoDrawer.incidenceWrapper.organizer
+                        visible: incidenceInfoDrawer.incidenceWrapper.organizer.fullName
 
                         text: organizer.name ?
                             `[${organizer.name}](mailto:${organizer.email})` :
@@ -584,19 +584,19 @@ Kirigami.OverlayDrawer {
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Guests:</b>")
-                        visible: incidenceInfo.incidenceWrapper.attendeesModel.rowCount() > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.attendeesModel.rowCount() > 0
                     }
 
                     ColumnLayout {
                         id: attendeesColumn
 
                         Layout.fillWidth: true
-                        visible: incidenceInfo.incidenceWrapper.attendeesModel.rowCount() > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.attendeesModel.rowCount() > 0
 
                         Repeater {
                             Layout.fillWidth: true
 
-                            model: incidenceInfo.incidenceWrapper.attendeesModel
+                            model: incidenceInfoDrawer.incidenceWrapper.attendeesModel
 
                             delegate: HoverLabel {}
                         }

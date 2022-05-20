@@ -108,9 +108,9 @@ Kirigami.Page {
                                 anchors.fill: parent
 
                                 Component {
-                                    id: deleteCalendarSheetComponent
-                                    DeleteCalendarSheet {
-                                        id: deleteSheet
+                                    id: deleteCalendarPageComponent
+                                    DeleteCalendarPage {
+                                        id: deletePage
                                         onDeleteCollection: {
                                             CalendarManager.deleteCollection(collectionId);
                                             closeDialog();
@@ -119,7 +119,7 @@ Kirigami.Page {
                                     }
                                 }
                                 onDeleteCalendar: {
-                                    const openDialogWindow = pageStack.pushDialogLayer(deleteCalendarSheetComponent, {
+                                    const openDialogWindow = pageStack.pushDialogLayer(deleteCalendarPageComponent, {
                                         collectionId: collectionId,
                                         collectionDetails: collectionDetails,
                                     }, {

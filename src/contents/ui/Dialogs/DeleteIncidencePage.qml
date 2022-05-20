@@ -8,7 +8,7 @@ import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 
 Kirigami.Page {
-    id: deleteSheet
+    id: deletePage
 
     signal addException(date exceptionDate, var incidenceWrapper)
     signal addRecurrenceEndDate(date endDate, var incidenceWrapper)
@@ -54,11 +54,11 @@ Kirigami.Page {
 
             QQC2.Label {
                 Layout.fillWidth: true
-                text: if(incidenceWrapper.recurrenceData.type === 0 && !deleteSheet.incidenceHasChildren) {
+                text: if(incidenceWrapper.recurrenceData.type === 0 && !deletePage.incidenceHasChildren) {
                     return i18n("Do you want to delete item: \"%1\"?", incidenceWrapper.summary)
-                } else if(incidenceWrapper.recurrenceData.type === 0 && deleteSheet.incidenceHasChildren) {
+                } else if(incidenceWrapper.recurrenceData.type === 0 && deletePage.incidenceHasChildren) {
                     return i18n("Item \"%1\" has sub-items. Do you want to delete all related items, or just the currently selected item?", incidenceWrapper.summary)
-                } else if (incidenceWrapper.recurrenceData.type > 0 && deleteSheet.incidenceHasChildren) {
+                } else if (incidenceWrapper.recurrenceData.type > 0 && deletePage.incidenceHasChildren) {
                     return i18n("The calendar item \"%1\" recurs over multiple dates. This item also has sub-items.\n\nDo you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?\n\nDeleting all will also delete sub-items!", incidenceWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
                 } else if (incidenceWrapper.recurrenceData.type > 0) {
                     return i18n("The calendar item \"%1\" recurs over multiple dates. Do you want to delete the selected occurrence on %2, also future occurrences, or all of its occurrences?", incidenceWrapper.summary, deleteDate.toLocaleDateString(Qt.locale()))
@@ -99,14 +99,14 @@ Kirigami.Page {
             QQC2.Button {
                 icon.name: "group-delete"
                 text: i18n("Delete Only This")
-                visible: deleteSheet.incidenceHasChildren && incidenceWrapper.recurrenceData.type === 0
+                visible: deletePage.incidenceHasChildren && incidenceWrapper.recurrenceData.type === 0
                 onClicked: deleteIncidence(incidenceWrapper.incidencePtr)
             }
 
             QQC2.Button {
                 icon.name: "delete"
-                text: deleteSheet.incidenceHasChildren || incidenceWrapper.recurrenceData.type > 0 ? i18n("Delete All") : i18n("Delete")
-                onClicked: deleteSheet.incidenceHasChildren ? deleteIncidenceWithChildren(incidenceWrapper.incidencePtr) : deleteIncidence(incidenceWrapper.incidencePtr)
+                text: deletePage.incidenceHasChildren || incidenceWrapper.recurrenceData.type > 0 ? i18n("Delete All") : i18n("Delete")
+                onClicked: deletePage.incidenceHasChildren ? deleteIncidenceWithChildren(incidenceWrapper.incidencePtr) : deleteIncidence(incidenceWrapper.incidencePtr)
             }
 
             QQC2.Button {

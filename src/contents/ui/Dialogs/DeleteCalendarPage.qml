@@ -8,7 +8,7 @@ import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 
 Kirigami.Page {
-    id: deleteSheet
+    id: deletePage
 
     signal deleteCollection(int collectionId)
     signal cancel
@@ -26,7 +26,7 @@ Kirigami.Page {
         enabled: collectionId !== undefined
         shortcut: "Return"
         onTriggered: {
-            deleteCollection(deleteSheet.collectionId);
+            deleteCollection(deletePage.collectionId);
         }
     }
 
@@ -63,7 +63,7 @@ Kirigami.Page {
             QQC2.Button {
                 icon.name: "delete"
                 text: i18n("Delete")
-                onClicked: deleteCollection(deleteSheet.collectionId)
+                onClicked: deleteCollection(deletePage.collectionId)
             }
 
             QQC2.Button {

@@ -273,7 +273,7 @@ CalendarManager::CalendarManager(QObject *parent)
     m_todoViewCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     m_todoViewCollectionModel->sort(0, Qt::AscendingOrder);
 
-    // Model for the sidebar
+    // Model for the mainDrawer
     m_viewCollectionModel = new KalendarCollectionFilterProxyModel(this);
     m_viewCollectionModel->setSourceModel(collectionFilter);
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));

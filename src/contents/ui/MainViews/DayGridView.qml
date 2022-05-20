@@ -52,21 +52,21 @@ Item {
     property int dayWidth: Kalendar.Config.showWeekNumbers ?
         ((width - weekHeaderWidth) / daysPerRow) - spacing : // No spacing on right, spacing in between weekheader and monthgrid
         (width - weekHeaderWidth - (spacing * (daysPerRow - 1))) / daysPerRow // No spacing on left or right of month grid when no week header
-    property int dayHeight: ((height - bgLoader.dayLabels.height) / numberOfRows) - spacing
+    property int dayHeight: ((height - bgLoader.dayLabelsBar.height) / numberOfRows) - spacing
     property int spacing: Kalendar.Config.monthGridBorderWidth // Between grid squares in background
     property int listViewSpacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
         Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing // Between lines of incidences ( ====== <- )
     readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
     readonly property int mode: Kalendar.KalendarApplication.Event
 
-    implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows : numberOfLinesShown * Kirigami.Units.gridUnit) + bgLoader.dayLabels.height
+    implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows : numberOfLinesShown * Kirigami.Units.gridUnit) + bgLoader.dayLabelsBar.height
     height: implicitHeight
 
     Kirigami.Separator {
         id: gridBackground
         anchors {
             fill: parent
-            topMargin: root.bgLoader.dayLabels.height
+            topMargin: root.bgLoader.dayLabelsBar.height
         }
         visible: backgroundLoader.status === Loader.Ready
     }
@@ -80,9 +80,9 @@ Item {
             spacing: root.spacing
             anchors.fill: parent
 
-            property alias dayLabels: dayLabelsComponent
-            DayLabels {
-                id: dayLabelsComponent
+            property alias dayLabelsBar: dayLabelsBarComponent
+            DayLabelsBar {
+                id: dayLabelsBarComponent
                 delegate: root.dayHeaderDelegate
                 startDate: root.startDate
                 dayWidth: root.dayWidth
@@ -238,7 +238,7 @@ Item {
             spacing: root.spacing
             anchors {
                 fill: parent
-                topMargin: root.bgLoader.dayLabels.height + root.spacing
+                topMargin: root.bgLoader.dayLabelsBar.height + root.spacing
                 leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
             }
 
@@ -315,7 +315,7 @@ Item {
                                         id: incidencesRepeater
                                         model: modelData
 
-                                        MultiDayViewIncidenceDelegate {
+                                        DayGridViewIncidenceDelegate {
                                             id: incidenceDelegate
                                             dayWidth: root.dayWidth
                                             height: line.height

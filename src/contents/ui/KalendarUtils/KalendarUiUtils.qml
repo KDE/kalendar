@@ -24,8 +24,8 @@ QtObject {
         }
         appMain.pageStack.replace(newViewComponent);
 
-        if (appMain.filterHeaderLoaderItem.active && appMain.pageStack.currentItem.mode !== KalendarApplication.Contact) {
-            appMain.pageStack.currentItem.header = appMain.filterHeaderLoaderItem.item;
+        if (appMain.filterHeaderBarLoaderItem.active && appMain.pageStack.currentItem.mode !== KalendarApplication.Contact) {
+            appMain.pageStack.currentItem.header = appMain.filterHeaderBarLoaderItem.item;
         }
 
         if(viewSettings) {
@@ -42,10 +42,10 @@ QtObject {
     function editorToUse() {
         if (!Kirigami.Settings.isMobile) {
             appMain.editorWindowedLoaderItem.active = true
-            return appMain.editorWindowedLoaderItem.item.incidenceEditor
+            return appMain.editorWindowedLoaderItem.item.incidenceEditorPage
         } else {
-            appMain.pageStack.layers.push(incidenceEditor);
-            return incidenceEditor;
+            appMain.pageStack.layers.push(incidenceEditorPage);
+            return incidenceEditorPage;
         }
     }
 
@@ -126,7 +126,7 @@ QtObject {
         let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', utilsObject, "incidence");
         incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
 
-        const openDialogWindow = appMain.pageStack.pushDialogLayer(appMain.deleteIncidenceSheetComponent, {
+        const openDialogWindow = appMain.pageStack.pushDialogLayer(appMain.deleteIncidencePageComponent, {
             incidenceWrapper: incidenceWrapper,
             deleteDate: deleteDate
         }, {
@@ -163,7 +163,7 @@ QtObject {
             CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset);
         } else {
             const onClosingHandler = () => { caughtDelegate.caught = false; utilsObject.reenableDragOnCurrentView(); };
-            const openDialogWindow = appMain.pageStack.pushDialogLayer(appMain.recurringIncidenceChangeSheetComponent, {
+            const openDialogWindow = appMain.pageStack.pushDialogLayer(appMain.recurringIncidenceChangePageComponent, {
                 incidenceWrapper: incidenceWrapper,
                 startOffset: startOffset,
                 endOffset: endOffset,

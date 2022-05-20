@@ -154,7 +154,7 @@ Kirigami.ApplicationWindow {
         shortcut: "Delete"
         onTriggered: {
             if(root.openOccurrence) {
-                KalendarUiUtils.setUpDelete(incidenceInfo.incidenceData.incidencePtr, incidenceInfo.incidenceData.startTime);
+                KalendarUiUtils.setUpDelete(incidenceInfoDrawer.incidenceData.incidencePtr, incidenceInfoDrawer.incidenceData.startTime);
             }
         }
     }
@@ -204,8 +204,8 @@ Kirigami.ApplicationWindow {
 
         function onOpenTodoView() {
             if(pageStack.currentItem.objectName !== "todoView") {
-                filterHeader.active = true;
-                KalendarUiUtils.switchView(todoPageComponent);
+                filterHeaderBar.active = true;
+                KalendarUiUtils.switchView(todoViewComponent);
             }
         }
 
@@ -281,7 +281,7 @@ Kirigami.ApplicationWindow {
         }
 
         function onImportCalendar() {
-            filterHeader.active = true;
+            filterHeaderBar.active = true;
             importFileDialog.open();
         }
 
@@ -305,33 +305,33 @@ Kirigami.ApplicationWindow {
         }
 
         function onImportIntoExistingFinished(success, total) {
-            filterHeader.active = true;
-            pageStack.currentItem.header = filterHeader.item;
+            filterHeaderBar.active = true;
+            pageStack.currentItem.header = filterHeaderBar.item;
 
             if(success) {
-                filterHeader.item.messageItem.type = Kirigami.MessageType.Positive;
-                filterHeader.item.messageItem.text = i18nc("%1 is a number", "%1 incidences were imported successfully.", total);
+                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Positive;
+                filterHeaderBar.item.messageItem.text = i18nc("%1 is a number", "%1 incidences were imported successfully.", total);
             } else {
-                filterHeader.item.messageItem.type = Kirigami.MessageType.Error;
-                filterHeader.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", KalendarApplication.importErrorMessage);
+                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Error;
+                filterHeaderBar.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", KalendarApplication.importErrorMessage);
             }
 
-            filterHeader.item.messageItem.visible = true;
+            filterHeaderBar.item.messageItem.visible = true;
         }
 
         function onImportIntoNewFinished(success) {
-            filterHeader.active = true;
-            pageStack.currentItem.header = filterHeader.item;
+            filterHeaderBar.active = true;
+            pageStack.currentItem.header = filterHeaderBar.item;
 
             if(success) {
-                filterHeader.item.messageItem.type = Kirigami.MessageType.Positive;
-                filterHeader.item.messageItem.text = i18n("New calendar  created from imported file successfully.");
+                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Positive;
+                filterHeaderBar.item.messageItem.text = i18n("New calendar  created from imported file successfully.");
             } else {
-                filterHeader.item.messageItem.type = Kirigami.MessageType.Error;
-                filterHeader.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", KalendarApplication.importErrorMessage);
+                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Error;
+                filterHeaderBar.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", KalendarApplication.importErrorMessage);
             }
 
-            filterHeader.item.messageItem.visible = true;
+            filterHeaderBar.item.messageItem.visible = true;
         }
 
         function onQuit() {
@@ -388,7 +388,7 @@ Kirigami.ApplicationWindow {
     Loader {
         id: kcommandbarLoader
         active: false
-        source: 'qrc:/KQuickCommandbar.qml'
+        source: 'qrc:/KQuickCommandBarPage.qml'
         onActiveChanged: if (active) {
             item.open()
         }
@@ -474,8 +474,8 @@ Kirigami.ApplicationWindow {
         source: Qt.resolvedUrl("qrc:/BottomToolBar.qml")
     }
 
-    globalDrawer: Sidebar {
-        id: sidebar
+    globalDrawer: MainDrawer {
+        id: mainDrawer
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
         activeTags: root.filter && root.filter.tags ?
@@ -514,7 +514,7 @@ Kirigami.ApplicationWindow {
             root.filterChanged();
         }
         onDeleteCalendar: {
-            const openDialogWindow = pageStack.pushDialogLayer(deleteCalendarSheetComponent, {
+            const openDialogWindow = pageStack.pushDialogLayer(deleteCalendarPageComponent, {
                 collectionId: collectionId,
                 collectionDetails: collectionDetails
             }, {
@@ -526,8 +526,8 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    contextDrawer: IncidenceInfo {
-        id: incidenceInfo
+    contextDrawer: IncidenceInfoDrawer {
+        id: incidenceInfoDrawer
 
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         width: actualWidth
@@ -551,15 +551,15 @@ Kirigami.ApplicationWindow {
 
         onAddSubTodo: {
             KalendarUiUtils.setUpAddSubTodo(parentWrapper);
-            if (modal) { incidenceInfo.close() }
+            if (modal) { incidenceInfoDrawer.close() }
         }
         onEditIncidence: {
             KalendarUiUtils.setUpEdit(incidencePtr);
-            if (modal) { incidenceInfo.close() }
+            if (modal) { incidenceInfoDrawer.close() }
         }
         onDeleteIncidence: {
             KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
-            if (modal) { incidenceInfo.close() }
+            if (modal) { incidenceInfoDrawer.close() }
         }
         onTagClicked: root.toggleFilterTag(tagName)
 
@@ -567,10 +567,10 @@ Kirigami.ApplicationWindow {
         readonly property int maxWidth: Kirigami.Units.gridUnit * 25
         readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
         property int actualWidth: {
-            if (Config.incidenceInfoDrawerWidth === -1) {
+            if (Config.incidenceInfoDrawerDrawerWidth === -1) {
                 return defaultWidth;
             } else {
-                return Config.incidenceInfoDrawerWidth;
+                return Config.incidenceInfoDrawerDrawerWidth;
             }
         }
 
@@ -586,7 +586,7 @@ Kirigami.ApplicationWindow {
             z: 500
 
             function savePos() {
-                Config.incidenceInfoDrawerWidth = incidenceInfo.actualWidth;
+                Config.incidenceInfoDrawerDrawerWidth = incidenceInfoDrawer.actualWidth;
                 Config.save();
             }
 
@@ -595,9 +595,9 @@ Kirigami.ApplicationWindow {
 
             onDragPositionChanged: {
                 if (Qt.application.layoutDirection === Qt.RightToLeft) {
-                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth + changeX));
+                    incidenceInfoDrawer.actualWidth = Math.min(incidenceInfoDrawer.maxWidth, Math.max(incidenceInfoDrawer.minWidth, Config.incidenceInfoDrawerDrawerWidth + changeX));
                 } else {
-                    incidenceInfo.actualWidth = Math.min(incidenceInfo.maxWidth, Math.max(incidenceInfo.minWidth, Config.incidenceInfoDrawerWidth - changeX));
+                    incidenceInfoDrawer.actualWidth = Math.min(incidenceInfoDrawer.maxWidth, Math.max(incidenceInfoDrawer.minWidth, Config.incidenceInfoDrawerDrawerWidth - changeX));
                 }
             }
         }
@@ -619,8 +619,8 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    IncidenceEditor {
-        id: incidenceEditor
+    IncidenceEditorPage {
+        id: incidenceEditorPage
         onAdded: CalendarManager.addIncidence(incidenceWrapper)
         onEdited: CalendarManager.editIncidence(incidenceWrapper)
         onCancel: pageStack.layers.pop()
@@ -648,9 +648,9 @@ Kirigami.ApplicationWindow {
             flags: Qt.Dialog | Qt.WindowCloseButtonHint
 
             // Probably a more elegant way of accessing the editor from outside than this.
-            property var incidenceEditor: incidenceEditorInLoader
+            property var incidenceEditorPage: incidenceEditorPageInLoader
 
-            pageStack.initialPage: incidenceEditorInLoader
+            pageStack.initialPage: incidenceEditorPageInLoader
 
             Loader {
                 active: !Kirigami.Settings.isMobile
@@ -658,8 +658,8 @@ Kirigami.ApplicationWindow {
                 onLoaded: item.parentWindow = root
             }
 
-            IncidenceEditor {
-                id: incidenceEditorInLoader
+            IncidenceEditorPage {
+                id: incidenceEditorPageInLoader
                 onAdded: CalendarManager.addIncidence(incidenceWrapper)
                 onEdited: CalendarManager.editIncidence(incidenceWrapper)
                 onCancel: root.close()
@@ -671,9 +671,9 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    property alias filterHeaderLoaderItem: filterHeader
+    property alias filterHeaderBarLoaderItem: filterHeaderBar
     Loader {
-        id: filterHeader
+        id: filterHeaderBar
         active: false
         sourceComponent: Item {
             readonly property bool show: header.mode === KalendarApplication.Todo || header.filter.tags.length > 0 || notifyMessage.visible
@@ -709,7 +709,7 @@ Kirigami.ApplicationWindow {
                     visible: false
                 }
 
-                FilterHeader {
+                FilterHeaderBar {
                     id: header
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -848,8 +848,8 @@ Kirigami.ApplicationWindow {
                 root.filter.tags = [tagName] :
                 root.filter = {"tags" : [tagName]};
             root.filterChanged();
-            filterHeader.active = true;
-            pageStack.currentItem.header = filterHeader.item;
+            filterHeaderBar.active = true;
+            pageStack.currentItem.header = filterHeaderBar.item;
         } else if (root.filter.tags.includes(tagName)) {
             root.filter.tags = root.filter.tags.filter((tag) => tag !== tagName);
             root.filterChanged();
@@ -861,17 +861,17 @@ Kirigami.ApplicationWindow {
         function onUpdateIncidenceDatesCompleted() { KalendarUiUtils.reenableDragOnCurrentView(); }
     }
 
-    property alias deleteIncidenceSheetComponent: deleteIncidenceSheetComponent
+    property alias deleteIncidencePageComponent: deleteIncidencePageComponent
     Component {
-        id: deleteIncidenceSheetComponent
-        DeleteIncidenceSheet {
-            id: deleteIncidenceSheet
+        id: deleteIncidencePageComponent
+        DeleteIncidencePage {
+            id: deleteIncidencePage
 
             onAddException: {
-                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
-                    DateUtils.sameDay(incidenceInfo.incidenceData.startTime, exceptionDate)) {
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId &&
+                    DateUtils.sameDay(incidenceInfoDrawer.incidenceData.startTime, exceptionDate)) {
 
-                    incidenceInfo.incidenceData = undefined;
+                    incidenceInfoDrawer.incidenceData = undefined;
                     root.openOccurrence = undefined;
                 }
 
@@ -881,10 +881,10 @@ Kirigami.ApplicationWindow {
             }
             onAddRecurrenceEndDate: {
                 // If occurrence is past the new recurrence end date, it has ben deleted so kill instance in incidence info
-                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId &&
-                    incidenceInfo.incidenceData.startTime >= endDate) {
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId &&
+                    incidenceInfoDrawer.incidenceData.startTime >= endDate) {
 
-                    incidenceInfo.incidenceData = undefined;
+                    incidenceInfoDrawer.incidenceData = undefined;
                     root.openOccurrence = undefined;
                 }
                 incidenceWrapper.setRecurrenceDataItem("endDateTime", endDate);
@@ -893,9 +893,9 @@ Kirigami.ApplicationWindow {
             }
             onDeleteIncidence: {
                 // Deleting an incidence also means deleting all of its occurrences
-                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId) {
 
-                    incidenceInfo.incidenceData = undefined;
+                    incidenceInfoDrawer.incidenceData = undefined;
                     root.openOccurrence = undefined;
                 }
                 CalendarManager.deleteIncidence(incidencePtr);
@@ -903,9 +903,9 @@ Kirigami.ApplicationWindow {
             }
             onDeleteIncidenceWithChildren: {
                 // TODO: Check if parent deleted too
-                if(incidenceInfo.incidenceWrapper && incidenceInfo.incidenceWrapper.incidenceId == deleteIncidenceSheet.incidenceWrapper.incidenceId) {
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId) {
 
-                    incidenceInfo.incidenceData = undefined;
+                    incidenceInfoDrawer.incidenceData = undefined;
                     root.openOccurrence = undefined;
                 }
 
@@ -916,11 +916,11 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    property alias deleteCalendarSheetComponent: deleteCalendarSheetComponent
+    property alias deleteCalendarPageComponent: deleteCalendarPageComponent
     Component {
-        id: deleteCalendarSheetComponent
-        DeleteCalendarSheet {
-            id: deleteCalendarSheet
+        id: deleteCalendarPageComponent
+        DeleteCalendarPage {
+            id: deleteCalendarPage
 
             onDeleteCollection: {
                 CalendarManager.deleteCollection(collectionId);
@@ -930,11 +930,11 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    property alias recurringIncidenceChangeSheetComponent: recurringIncidenceChangeSheetComponent
+    property alias recurringIncidenceChangePageComponent: recurringIncidenceChangePageComponent
     Component {
-        id: recurringIncidenceChangeSheetComponent
-        RecurringIncidenceChangeSheet {
-            id: recurringIncidenceChangeSheet
+        id: recurringIncidenceChangePageComponent
+        RecurringIncidenceChangePage {
+            id: recurringIncidenceChangePage
 
             onChangeAll: {
                 CalendarManager.updateIncidenceDates(incidenceWrapper, startOffset, endOffset, IncidenceWrapper.AllOccurrences);
@@ -1022,7 +1022,7 @@ Kirigami.ApplicationWindow {
             onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
             onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfo.close()
+            onDeselect: incidenceInfoDrawer.close()
             onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
             onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
 
@@ -1058,7 +1058,7 @@ Kirigami.ApplicationWindow {
             onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
             onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfo.close()
+            onDeselect: incidenceInfoDrawer.close()
             onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
             onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
 
@@ -1139,7 +1139,7 @@ Kirigami.ApplicationWindow {
             onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
             onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
             onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfo.close()
+            onDeselect: incidenceInfoDrawer.close()
             onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
             onConvertIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate, allDay) // We convert incidence from/to allDay
             onResizeIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
@@ -1150,28 +1150,28 @@ Kirigami.ApplicationWindow {
     }
 
     Component {
-        id: todoPageComponent
+        id: todoViewComponent
 
-        TodoPage {
-            id: todoPage
+        TodoView {
+            id: todoView
             objectName: "todoView"
 
             titleDelegate: RowLayout {
                 spacing: 0
                 QQC2.ToolButton {
                     visible: !Kirigami.Settings.isMobile
-                    icon.name: sidebar.collapsed ? "sidebar-expand" : "sidebar-collapse"
+                    icon.name: mainDrawer.collapsed ? "sidebar-expand" : "sidebar-collapse"
                     onClicked: {
-                        if(sidebar.collapsed && !wideScreen) { // Collapsed due to narrow window
+                        if(mainDrawer.collapsed && !wideScreen) { // Collapsed due to narrow window
                             // We don't want to write to config as when narrow the button will only open the modal drawer
-                            sidebar.collapsed = !sidebar.collapsed;
+                            mainDrawer.collapsed = !mainDrawer.collapsed;
                         } else {
-                            Config.forceCollapsedSidebar = !Config.forceCollapsedSidebar;
+                            Config.forceCollapsedMainDrawer = !Config.forceCollapsedMainDrawer;
                             Config.save()
                         }
                     }
 
-                    QQC2.ToolTip.text: sidebar.collapsed ? i18n("Expand Sidebar") : i18n("Collapse Sidebar")
+                    QQC2.ToolTip.text: mainDrawer.collapsed ? i18n("Expand MainDrawer") : i18n("Collapse MainDrawer")
                     QQC2.ToolTip.visible: hovered
                     QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 }
@@ -1188,7 +1188,7 @@ Kirigami.ApplicationWindow {
             onDeleteTodo: KalendarUiUtils.setUpDelete(todoPtr, deleteDate)
             onCompleteTodo: KalendarUiUtils.completeTodo(todoPtr)
             onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfo.close()
+            onDeselect: incidenceInfoDrawer.close()
         }
     }
 

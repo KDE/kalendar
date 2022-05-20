@@ -364,11 +364,11 @@ QHash<int, QByteArray> InfiniteCalendarViewModel::roleNames() const
         {MonthViewModelRole, QByteArrayLiteral("monthViewModel")},
         {ScheduleViewModelRole, QByteArrayLiteral("scheduleViewModel")},
         {WeekViewModelRole, QByteArrayLiteral("weekViewModel")},
-        {WeekViewMultiDayModelRole, QByteArrayLiteral("weekViewMultiDayViewModel")},
+        {WeekViewMultiDayModelRole, QByteArrayLiteral("weekViewDayGridViewModel")},
         {ThreeDayViewModelRole, QByteArrayLiteral("threeDayViewModel")},
-        {ThreeDayViewMultiDayModelRole, QByteArrayLiteral("threeDayViewMultiDayViewModel")},
+        {ThreeDayViewMultiDayModelRole, QByteArrayLiteral("threeDayViewDayGridViewModel")},
         {DayViewModelRole, QByteArrayLiteral("dayViewModel")},
-        {DayViewMultiDayModelRole, QByteArrayLiteral("dayViewMultiDayViewModel")},
+        {DayViewMultiDayModelRole, QByteArrayLiteral("dayViewDayGridViewModel")},
     };
 }
 

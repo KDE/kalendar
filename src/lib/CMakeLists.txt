@@ -31,5 +31,3 @@ target_link_libraries(kalendar_lib PUBLIC
     KF5::ItemModels
     KF5::EventViews
 )
-
-install(TARGETS kalendar_lib DESTINATION ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

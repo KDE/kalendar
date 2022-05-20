@@ -6,22 +6,22 @@ SPDX-License-Identifier: CC0-1.0
   <qresource prefix="/">
     <file alias="main.qml">contents/ui/main.qml</file>
 
-    <file alias="Sidebar.qml">contents/ui/Drawers/Sidebar.qml</file>
-    <file alias="IncidenceInfo.qml">contents/ui/Drawers/IncidenceInfo.qml</file>
+    <file alias="MainDrawer.qml">contents/ui/Drawers/MainDrawer.qml</file>
+    <file alias="IncidenceInfoDrawer.qml">contents/ui/Drawers/IncidenceInfoDrawer.qml</file>
 
     <file alias="BottomToolBar.qml">contents/ui/Bars/BottomToolBar.qml</file>
-    <file alias="FilterHeader.qml">contents/ui/Bars/FilterHeader.qml</file>
+    <file alias="FilterHeaderBar.qml">contents/ui/Bars/FilterHeaderBar.qml</file>
+    <file alias="DayLabelsBar.qml">contents/ui/Bars/DayLabelsBar.qml</file>
 
-    <file alias="IncidenceBackground.qml">contents/ui/Delegates/IncidenceBackground.qml</file>
-    <file alias="MultiDayViewIncidenceDelegate.qml">contents/ui/Delegates/MultiDayViewIncidenceDelegate.qml</file>
-    <file alias="DayLabels.qml">contents/ui/Delegates/DayLabels.qml</file>
+    <file alias="IncidenceDelegateBackground.qml">contents/ui/Delegates/IncidenceDelegateBackground.qml</file>
+    <file alias="DayGridViewIncidenceDelegate.qml">contents/ui/Delegates/DayGridViewIncidenceDelegate.qml</file>
     <file alias="ViewTitleDelegate.qml">contents/ui/Delegates/ViewTitleDelegate.qml</file>
 
-    <file alias="MultiDayView.qml">contents/ui/MainViews/MultiDayView.qml</file>
+    <file alias="DayGridView.qml">contents/ui/MainViews/DayGridView.qml</file>
     <file alias="MonthView.qml">contents/ui/MainViews/MonthView.qml</file>
     <file alias="ScheduleView.qml">contents/ui/MainViews/ScheduleView.qml</file>
     <file alias="TodoTreeView.qml">contents/ui/MainViews/TodoTreeView.qml</file>
-    <file alias="TodoPage.qml">contents/ui/MainViews/TodoPage.qml</file>
+    <file alias="TodoView.qml">contents/ui/MainViews/TodoView.qml</file>
     <file alias="HourlyView.qml">contents/ui/MainViews/HourlyView.qml</file>
     <file alias="LazyContactView.qml">contents/ui/MainViews/LazyContactView.qml</file>
 
@@ -29,13 +29,13 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="labelutils.js">contents/ui/KalendarUtils/labelutils.js</file>
     <file alias="KalendarUiUtils.qml">contents/ui/KalendarUtils/KalendarUiUtils.qml</file>
 
-    <file alias="IncidenceEditor.qml">contents/ui/Dialogs/IncidenceEditor.qml</file>
-    <file alias="DeleteIncidenceSheet.qml">contents/ui/Dialogs/DeleteIncidenceSheet.qml</file>
-    <file alias="DeleteCalendarSheet.qml">contents/ui/Dialogs/DeleteCalendarSheet.qml</file>
+    <file alias="IncidenceEditorPage.qml">contents/ui/Dialogs/IncidenceEditorPage.qml</file>
+    <file alias="DeleteIncidencePage.qml">contents/ui/Dialogs/DeleteIncidencePage.qml</file>
+    <file alias="DeleteCalendarPage.qml">contents/ui/Dialogs/DeleteCalendarPage.qml</file>
     <file alias="TagManagerPage.qml">contents/ui/Dialogs/TagManagerPage.qml</file>
-    <file alias="KQuickCommandbar.qml">contents/ui/Dialogs/KQuickCommandBar.qml</file>
+    <file alias="KQuickCommandBarPage.qml">contents/ui/Dialogs/KQuickCommandBarPage.qml</file>
     <file alias="CollectionPickerPage.qml">contents/ui/Dialogs/CollectionPickerPage.qml</file>
-    <file alias="RecurringIncidenceChangeSheet.qml">contents/ui/Dialogs/RecurringIncidenceChangeSheet.qml</file>
+    <file alias="RecurringIncidenceChangePage.qml">contents/ui/Dialogs/RecurringIncidenceChangePage.qml</file>
 
     <file alias="DatePicker.qml">contents/ui/Controls/DateControls/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/Controls/DateControls/TimePicker.qml</file>
@@ -45,7 +45,7 @@ SPDX-License-Identifier: CC0-1.0
 
     <file alias="TitleDateButton.qml">contents/ui/Controls/TitleDateButton.qml</file>
     <file alias="IncidenceMouseArea.qml">contents/ui/Controls/IncidenceMouseArea.qml</file>
-    <file alias="NavigationMouseArea.qml">contents/ui/Controls/NavigationMouseArea.qml</file>
+    <file alias="KeyboardNavigationMouseArea.qml">contents/ui/Controls/KeyboardNavigationMouseArea.qml</file>
     <file alias="DayMouseArea.qml">contents/ui/Controls/DayMouseArea.qml</file>
     <file alias="ColoredCheckbox.qml">contents/ui/Controls/ColoredCheckbox.qml</file>
     <file alias="Tag.qml">contents/ui/Controls/Tag.qml</file>

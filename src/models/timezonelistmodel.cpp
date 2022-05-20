@@ -12,7 +12,7 @@
 TimeZoneListModel::TimeZoneListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    // Reimplementation of IncidenceEditor's KTimeZoneComboBox
+    // Reimplementation of IncidenceEditorPage's KTimeZoneComboBox
     // Read all system time zones
     const QList<QByteArray> lstTimeZoneIds = QTimeZone::availableTimeZoneIds();
     m_timeZones.reserve(lstTimeZoneIds.count());

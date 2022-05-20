@@ -168,7 +168,7 @@ function isDarkColor(background) {
     return temp.a > 0 && getDarkness(background) >= 0.4;
 }
 
-function getIncidenceBackgroundColor(color, darkMode) {
+function getIncidenceDelegateBackgroundColor(color, darkMode) {
     let bgColor = getDarkness(color) > 0.9 ? Qt.lighter(color, 1.5) : color;
     if(darkMode) {
         if(getDarkness(color) >= 0.5) {

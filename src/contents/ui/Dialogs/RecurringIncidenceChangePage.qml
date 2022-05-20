@@ -8,7 +8,7 @@ import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 
 Kirigami.Page {
-    id: deleteSheet
+    id: recurringIncidenceChangePage
 
     signal changeAll
     signal changeThis
@@ -61,7 +61,7 @@ Kirigami.Page {
                     shortcut: "Return"
                     text: i18n("Only This Item")
                     onTriggered: {
-                        deleteSheet.setAllDay();
+                        recurringIncidenceChangePage.setAllDay();
                         changeThis();
                     }
                 },
@@ -69,7 +69,7 @@ Kirigami.Page {
                     icon.name: "edit-table-delete-row"
                     text: i18n("Also Future Items")
                     onTriggered: {
-                        deleteSheet.setAllDay();
+                        recurringIncidenceChangePage.setAllDay();
                         changeThisAndFuture();
                     }
                 },
@@ -77,7 +77,7 @@ Kirigami.Page {
                     icon.name: "group-delete"
                     text: i18n("All Occurrences")
                     onTriggered: {
-                        deleteSheet.setAllDay();
+                        recurringIncidenceChangePage.setAllDay();
                         changeAll();
                     }
                 },

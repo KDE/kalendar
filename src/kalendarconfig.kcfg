@@ -15,8 +15,8 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             <label>Show the Menubar.</label>
             <default>false</default>
         </entry>
-        <entry name="forceCollapsedSidebar" type="Bool">
-            <label>Always have sidebar collapsed.</label>
+        <entry name="forceCollapsedMainDrawer" type="Bool">
+            <label>Always have mainDrawer.collapsed.</label>
             <default>false</default>
         </entry>
         <entry name="enableMaps" type="Bool">
@@ -48,19 +48,19 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             </choices>
             <default>ScheduleView</default>
         </entry>
-        <entry name="incidenceInfoDrawerWidth" type="Int">
+        <entry name="incidenceInfoDrawerDrawerWidth" type="Int">
             <label>Width of the incidence drawer</label>
             <default>-1</default>
         </entry>
     </group>
 
-    <group name="Sidebar">
+    <group name="MainDrawer">
         <entry name="tagsSectionExpanded" type="Bool">
-            <label>Whether the "Tags" section of the sidebar is expanded.</label>
+            <label>Whether the "Tags" section of the mainDrawer.is expanded.</label>
             <default>true</default>
         </entry>
         <entry name="calendarsSectionExpanded" type="Bool">
-            <label>Whether the "Tags" section of the sidebar is expanded.</label>
+            <label>Whether the "Tags" section of the mainDrawer.is expanded.</label>
             <default>true</default>
         </entry>
     </group>

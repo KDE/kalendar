@@ -14,7 +14,7 @@ import org.kde.kitemmodels 1.0
 import QtGraphicalEffects 1.12
 
 Kirigami.OverlayDrawer {
-    id: sidebar
+    id: mainDrawer
 
     signal calendarClicked(int collectionId)
     signal calendarCheckChanged(int collectionId, bool checked)
@@ -30,16 +30,16 @@ Kirigami.OverlayDrawer {
     Connections {
         target: applicationWindow()
         function onWidthChanged() {
-            if(!Kirigami.Settings.isMobile && !Config.forceCollapsedSidebar) {
-                sidebar.collapsed = applicationWindow().width < Kirigami.Units.gridUnit * 50
+            if(!Kirigami.Settings.isMobile && !Config.forceCollapsedMainDrawer) {
+                mainDrawer.collapsed = applicationWindow().width < Kirigami.Units.gridUnit * 50
             } // HACK: Workaround for incredibly glitchy behaviour caused by using wideScreen property
         }
     }
 
     Connections {
         target: Config
-        function onForceCollapsedSidebarChanged() {
-            sidebar.collapsed = Config.forceCollapsedSidebar;
+        function onForceCollapsedMainDrawerChanged() {
+            mainDrawer.collapsed = Config.forceCollapsedMainDrawer;
         }
     }
 
@@ -48,10 +48,10 @@ Kirigami.OverlayDrawer {
     handleVisible: modal
     handleClosedIcon.source: null
     handleOpenIcon.source: null
-    width: sidebar.collapsed ? menu.Layout.minimumWidth + Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit * 16
+    width: mainDrawer.collapsed ? menu.Layout.minimumWidth + Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit * 16
 
     Component.onCompleted: {
-        collapsed = Config.forceCollapsedSidebar // Fix crashing caused by setting on load
+        collapsed = Config.forceCollapsedMainDrawer // Fix crashing caused by setting on load
         ContactManager.contactCollections; // Fix crashing because the contactCollections was created too late
     }
     Behavior on width { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
@@ -73,8 +73,8 @@ Kirigami.OverlayDrawer {
             Layout.fillWidth: true
             Layout.preferredHeight: pageStack.globalToolBar.preferredHeight
 
-            leftPadding: sidebar.collapsed ? 0 : Kirigami.Units.smallSpacing
-            rightPadding: sidebar.collapsed ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
+            leftPadding: mainDrawer.collapsed ? 0 : Kirigami.Units.smallSpacing
+            rightPadding: mainDrawer.collapsed ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
             topPadding: 0
             bottomPadding: 0
 
@@ -86,7 +86,7 @@ Kirigami.OverlayDrawer {
                     text: i18n("Kalendar")
 
                     visible: !searchField.visible
-                    opacity: sidebar.collapsed ? 0 : 1
+                    opacity: mainDrawer.collapsed ? 0 : 1
                     Behavior on opacity {
                         OpacityAnimator {
                             duration: Kirigami.Units.longDuration
@@ -99,8 +99,8 @@ Kirigami.OverlayDrawer {
                     id: searchField
                     Layout.fillWidth: true
 
-                    visible: sidebar.mode !== KalendarApplication.Event
-                    opacity: sidebar.collapsed ? 0 : 1
+                    visible: mainDrawer.mode !== KalendarApplication.Event
+                    opacity: mainDrawer.collapsed ? 0 : 1
                     Behavior on opacity {
                         OpacityAnimator {
                             duration: Kirigami.Units.longDuration
@@ -209,7 +209,7 @@ Kirigami.OverlayDrawer {
                                 checkable: false
                                 onTriggered: {
                                     monthViewAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
+                                    if (mainDrawer.modal) mainDrawer.close()
                                 }
                             },
                             KActionFromAction {
@@ -222,7 +222,7 @@ Kirigami.OverlayDrawer {
                                          pageStack.currentItem.objectName == "dayView"
                                 onTriggered: {
                                     weekViewAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
+                                    if (mainDrawer.modal) mainDrawer.close()
                                 }
                             },
                             KActionFromAction {
@@ -230,7 +230,7 @@ Kirigami.OverlayDrawer {
                                 checkable: false
                                 onTriggered: {
                                     scheduleViewAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
+                                    if (mainDrawer.modal) mainDrawer.close()
                                 }
                             },
                             KActionFromAction {
@@ -238,7 +238,7 @@ Kirigami.OverlayDrawer {
                                 checkable: false
                                 onTriggered: {
                                     todoViewAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
+                                    if (mainDrawer.modal) mainDrawer.close()
                                 }
                             },
                             KActionFromAction {
@@ -246,7 +246,7 @@ Kirigami.OverlayDrawer {
                                 checkable: false
                                 onTriggered: {
                                     contactViewAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
+                                    if (mainDrawer.modal) mainDrawer.close()
                                 }
                             }
                         ]
@@ -265,7 +265,7 @@ Kirigami.OverlayDrawer {
                                 kalendarAction: "open_tag_manager"
                                 onTriggered: {
                                     tagManagerAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
+                                    if (mainDrawer.modal) mainDrawer.close()
                                 }
                             },
                             KActionFromAction {
@@ -273,7 +273,7 @@ Kirigami.OverlayDrawer {
                                 kalendarAction: "options_configure"
                                 onTriggered: {
                                     configureAction.trigger()
-                                    if (sidebar.modal) sidebar.close()
+                                    if (mainDrawer.modal) mainDrawer.close()
                                 }
                             }
                         ]
@@ -300,7 +300,7 @@ Kirigami.OverlayDrawer {
             height: 1
             z: -2
 
-            opacity: sidebar.collapsed ? 0 : 1
+            opacity: mainDrawer.collapsed ? 0 : 1
             Behavior on opacity {
                 OpacityAnimator {
                     duration: Kirigami.Units.longDuration
@@ -327,7 +327,7 @@ Kirigami.OverlayDrawer {
             clip: true
             z: -2
 
-            opacity: sidebar.collapsed ? 0 : 1
+            opacity: mainDrawer.collapsed ? 0 : 1
             Behavior on opacity {
                 OpacityAnimator {
                     duration: Kirigami.Units.longDuration
@@ -401,8 +401,8 @@ Kirigami.OverlayDrawer {
                             text: model.display
                             showAction: false
                             activeFocusOnTab: true
-                            backgroundColor: sidebar.activeTags.includes(model.display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
-                            enabled: !sidebar.collapsed
+                            backgroundColor: mainDrawer.activeTags.includes(model.display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
+                            enabled: !mainDrawer.collapsed
                             onClicked: tagClicked(model.display)
                         }
                     }
@@ -450,7 +450,7 @@ Kirigami.OverlayDrawer {
                     id: calendarList
 
                     property var calendarModel: KDescendantsProxyModel {
-                        model: switch(sidebar.mode) {
+                        model: switch(mainDrawer.mode) {
                         case KalendarApplication.Todo:
                             return CalendarManager.todoCollections;
                         case KalendarApplication.Event:
@@ -458,7 +458,7 @@ Kirigami.OverlayDrawer {
                         case KalendarApplication.Contact:
                             return ContactManager.contactCollections;
                         default:
-                            console.log('Should not happen', sidebar.mode)
+                            console.log('Should not happen', mainDrawer.mode)
                         }
                     }
 
@@ -480,7 +480,7 @@ Kirigami.OverlayDrawer {
                                     (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
                                     (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
                                 hoverEnabled: false
-                                enabled: !sidebar.collapsed
+                                enabled: !mainDrawer.collapsed
 
                                 separatorVisible: false
 
@@ -575,7 +575,7 @@ Kirigami.OverlayDrawer {
                                     (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
                                     (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
                                 separatorVisible: false
-                                enabled: !sidebar.collapsed
+                                enabled: !mainDrawer.collapsed
                                 highlighted: visualFocus || incidenceDropArea.containsDrag
 
                                 leading: Kirigami.Icon {
@@ -600,7 +600,7 @@ Kirigami.OverlayDrawer {
 
                                 onClicked: {
                                     calendarClicked(collectionId);
-                                    if(sidebar.modal) sidebar.close()
+                                    if(mainDrawer.modal) mainDrawer.close()
                                 }
 
                                 CalendarItemMouseArea {
@@ -611,7 +611,7 @@ Kirigami.OverlayDrawer {
                                     anchors.fill: parent
                                     enabled: mode !== KalendarApplication.Contact
 
-                                    onDeleteCalendar: sidebar.deleteCalendar(collectionId, collectionDetails)
+                                    onDeleteCalendar: mainDrawer.deleteCalendar(collectionId, collectionDetails)
 
                                     DropArea {
                                         id: incidenceDropArea
@@ -649,11 +649,11 @@ Kirigami.OverlayDrawer {
         icon: "show-all-effects"
         label: i18n("View all tasks")
         labelItem.color: Kirigami.Theme.textColor
-        visible: sidebar.mode === KalendarApplication.Todo
+        visible: mainDrawer.mode === KalendarApplication.Todo
         separatorVisible: false
         onClicked: {
             viewAllTodosClicked();
-            if(sidebar.modal && sidebar.mode === KalendarApplication.Todo) sidebar.close()
+            if(mainDrawer.modal && mainDrawer.mode === KalendarApplication.Todo) mainDrawer.close()
         }
     }
 }

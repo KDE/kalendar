@@ -206,7 +206,7 @@ Kirigami.ScrollablePage {
             id: textMetrics
         }
 
-        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing + 1 // To align with 'Show all' button in sidebar
+        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing + 1 // To align with 'Show all' button in mainDrawer
 
         background: Rectangle {
             Kirigami.Theme.inherit: false

@@ -24,7 +24,7 @@ class ContactManager : public QObject
 {
     Q_OBJECT
 
-    /// Model for getting the contact collections available for the sidebar
+    /// Model for getting the contact collections available for the mainDrawer
     Q_PROPERTY(QAbstractItemModel *contactCollections READ contactCollections CONSTANT)
 
     /// Model for getting the edidable contact collections (with enough access right)

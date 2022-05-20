@@ -93,8 +93,8 @@ Item {
         }
     ]
 
-    IncidenceBackground {
-        id: incidenceBackground
+    IncidenceDelegateBackground {
+        id: incidenceDelegateBackground
         isOpenOccurrence: parent.isOpenOccurrence
         reactToCurrentMonth: parent.reactToCurrentMonth
         isInCurrentMonth: parent.isInCurrentMonth

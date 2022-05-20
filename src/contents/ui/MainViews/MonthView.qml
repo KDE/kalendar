@@ -150,7 +150,7 @@ Kirigami.Page {
             active: isNextOrCurrentItem
             asynchronous: !isCurrentItem
             visible: status === Loader.Ready
-            sourceComponent: MultiDayView {
+            sourceComponent: DayGridView {
                 id: dayView
                 objectName: "monthView"
                 width: pathView.width
@@ -226,6 +226,6 @@ Kirigami.Page {
         }
     }
 
-    NavigationMouseArea {}
+    KeyboardNavigationMouseArea {}
 }
 
