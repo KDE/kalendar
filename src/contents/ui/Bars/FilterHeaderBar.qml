@@ -49,7 +49,7 @@ RowLayout {
             text: headerLayout.mode !== Kalendar.KalendarApplication.Todo ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
                 headerLayout.filterCollectionDetails.displayName : i18n("All Tasks")
             font.weight: headerLayout.mode !== Kalendar.KalendarApplication.Todo ? Font.Normal : Font.Bold
-            color: headerLayout.mode !== Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+            color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
                 headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
             elide: Text.ElideRight
             level: headerLayout.mode === Kalendar.KalendarApplication.Todo ? 1 : 2
