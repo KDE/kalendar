@@ -20,6 +20,13 @@ target_sources(kalendar_contact_plugin PRIVATE
     contactmanager.cpp
     contactcollectionmodel.cpp
     contactcollectionmodel.h
+    contacteditorbackend.h
+    contacteditorbackend.cpp
+    contactmetadata.cpp
+    contactmetadata.h
+    attributes/contactmetadataattribute_p.h
+    attributes/contactmetadataattribute.cpp
+    attributes/attributeregistrar.cpp
     resources.qrc
 )
 

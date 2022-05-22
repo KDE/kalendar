@@ -9,6 +9,8 @@
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
+#include <kcontacts/addressee.h>
+#include <qobjectdefs.h>
 
 AddresseeWrapper::AddresseeWrapper(QObject *parent)
     : QObject(parent)
@@ -89,6 +91,11 @@ void AddresseeWrapper::setAddresseeItem(const Akonadi::Item &addresseeItem)
 void AddresseeWrapper::itemChanged(const Akonadi::Item &item)
 {
     setAddressee(item.payload<KContacts::Addressee>());
+}
+
+KContacts::Addressee AddresseeWrapper::addressee() const
+{
+    return m_addressee;
 }
 
 void AddresseeWrapper::setAddressee(const KContacts::Addressee &addressee)
@@ -344,4 +351,18 @@ void AddresseeWrapper::setBlogFeed(const QUrl &blogFeed)
     }
     m_addressee.setBlogFeed(blogFeed);
     Q_EMIT blogFeedChanged();
+}
+
+AddresseeWrapper::DisplayType AddresseeWrapper::displayType() const
+{
+    return m_displayType;
+}
+
+void AddresseeWrapper::setDisplayType(AddresseeWrapper::DisplayType displayType)
+{
+    if (m_displayType == displayType) {
+        return;
+    }
+    m_displayType = displayType;
+    Q_EMIT displayTypeChanged();
 }

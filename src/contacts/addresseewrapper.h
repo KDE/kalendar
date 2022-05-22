@@ -11,6 +11,8 @@
 #include <Akonadi/ItemMonitor>
 #include <KContacts/Addressee>
 #include <QObject>
+#include <kcontacts/addressee.h>
+#include <qobjectdefs.h>
 
 #include "addressmodel.h"
 
@@ -55,16 +57,37 @@ class AddresseeWrapper : public QObject, public Akonadi::ItemMonitor
     Q_PROPERTY(QString note READ note WRITE setNote NOTIFY noteChanged)
     Q_PROPERTY(KContacts::Picture photo READ photo NOTIFY photoChanged)
 
+    Q_PROPERTY(DisplayType displayType READ displayType WRITE setDisplayType NOTIFY displayTypeChanged)
 public:
+    /**
+     * Describes what the display name should look like.
+     */
+    enum DisplayType {
+        SimpleName, ///< A name of the form: givenName familyName
+        FullName, ///< A name of the form: prefix givenName additionalName familyName suffix
+        ReverseNameWithComma, ///< A name of the form: familyName, givenName
+        ReverseName, ///< A name of the form: familyName givenName
+        Organization, ///< The organization name
+        CustomName ///< Let the user input a display name
+    };
+    Q_ENUM(DisplayType);
+
     AddresseeWrapper(QObject *parent = nullptr);
     ~AddresseeWrapper() override;
 
     Akonadi::Item addresseeItem() const;
     void setAddresseeItem(const Akonadi::Item &item);
+
+    KContacts::Addressee addressee() const;
+    void setAddressee(const KContacts::Addressee &addressee);
+
     QString uid() const;
 
     qint64 collectionId() const;
     void setCollectionId(qint64 collectionId);
+
+    DisplayType displayType() const;
+    void setDisplayType(DisplayType displayType);
 
     QString name() const;
     void setName(const QString &name);
@@ -81,7 +104,6 @@ public:
     QString preferredEmail() const;
     KContacts::Picture photo() const;
 
-    void setAddressee(const KContacts::Addressee &addressee);
     AddressModel *addressesModel() const;
 
     EmailModel *emailModel() const;
@@ -146,6 +168,7 @@ Q_SIGNALS:
     void officeChanged();
     void managersNameChanged();
     void assistantsNameChanged();
+    void displayTypeChanged();
 
 private:
     void itemChanged(const Akonadi::Item &item) override;
@@ -154,4 +177,5 @@ private:
     AddressModel *m_addressesModel;
     EmailModel *m_emailModel;
     PhoneModel *m_phoneModel;
+    DisplayType m_displayType;
 };
