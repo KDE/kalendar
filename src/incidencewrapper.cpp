@@ -855,6 +855,13 @@ void IncidenceWrapper::itemChanged(const Akonadi::Item &item)
         setIncidenceItem(item);
     }
 }
+
+// TODO remove with 22.08, won't be needed anymore
+void IncidenceWrapper::setCollection(const Akonadi::Collection &collection)
+{
+    setCollectionId(collection.id());
+}
+
 #ifndef UNITY_CMAKE_SUPPORT
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif

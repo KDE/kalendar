@@ -8,6 +8,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kalendar.contact 1.0
+import org.kde.kitemmodels 1.0
 
 PlasmaComponents3.ScrollView {
     id: scrollView
@@ -21,7 +22,7 @@ PlasmaComponents3.ScrollView {
             PlasmaExtras.SearchField {
                 id: searchField
                 Layout.fillWidth: true
-                onTextChanged: ContactManager.filteredContacts.setFilterFixedString(text)
+                onTextChanged: contactsList.model.setFilterFixedString(text)
             }
         }
     }
@@ -62,7 +63,10 @@ PlasmaComponents3.ScrollView {
 
     contentItem: ListView {
         id: contactsList
-        model: ContactManager.filteredContacts
+        model: KSortFilterProxyModel {
+            filterCaseSensitivity: Qt.CaseInsensitive
+            sourceModel: ContactsModel {}
+        }
         boundsBehavior: Flickable.StopAtBounds
         topMargin: PlasmaCore.Units.smallSpacing * 2
         bottomMargin: PlasmaCore.Units.smallSpacing * 2

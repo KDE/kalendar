@@ -57,6 +57,7 @@
 
 #include <colorproxymodel.h>
 #include <incidencewrapper.h>
+#include <sortedcollectionproxymodel.h>
 
 using namespace Akonadi;
 
@@ -161,29 +162,6 @@ protected:
     }
 };
 
-class KalendarCollectionFilterProxyModel : public Akonadi::CollectionFilterProxyModel
-{
-public:
-    explicit KalendarCollectionFilterProxyModel(QObject *parent = nullptr)
-        : Akonadi::CollectionFilterProxyModel(parent)
-    {
-    }
-
-protected:
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override
-    {
-        const auto leftHasChildren = sourceModel()->hasChildren(source_left);
-        const auto rightHasChildren = sourceModel()->hasChildren(source_right);
-        if (leftHasChildren && !rightHasChildren) {
-            return false;
-        } else if (!leftHasChildren && rightHasChildren) {
-            return true;
-        }
-
-        return Akonadi::CollectionFilterProxyModel::lessThan(source_left, source_right);
-    }
-};
-
 Q_GLOBAL_STATIC(CalendarManager, calendarManagerGlobalInstance)
 
 CalendarManager *CalendarManager::instance()
@@ -253,28 +231,8 @@ CalendarManager::CalendarManager(QObject *parent)
     m_todoRightsFilterModel->setAccessRights(Collection::CanCreateItem);
     m_todoRightsFilterModel->setSourceModel(m_todoMimeTypeFilterModel);
 
-    // Use our custom class to order them properly
-    m_selectableCollectionsModel = new KalendarCollectionFilterProxyModel(this);
-    m_selectableCollectionsModel->setSourceModel(m_allCollectionsRightsFilterModel);
-    m_selectableCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
-    m_selectableCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
-    m_selectableCollectionsModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-    m_selectableCollectionsModel->sort(0, Qt::AscendingOrder);
-
-    m_selectableEventCollectionsModel = new KalendarCollectionFilterProxyModel(this);
-    m_selectableEventCollectionsModel->setSourceModel(m_eventRightsFilterModel);
-    m_selectableEventCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
-    m_selectableEventCollectionsModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-    m_selectableEventCollectionsModel->sort(0, Qt::AscendingOrder);
-
-    m_selectableTodoCollectionsModel = new KalendarCollectionFilterProxyModel(this);
-    m_selectableTodoCollectionsModel->setSourceModel(m_todoRightsFilterModel);
-    m_selectableTodoCollectionsModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
-    m_selectableTodoCollectionsModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-    m_selectableTodoCollectionsModel->sort(0, Qt::AscendingOrder);
-
     // Model for todo via collection picker
-    m_todoViewCollectionModel = new KalendarCollectionFilterProxyModel(this);
+    m_todoViewCollectionModel = new SortedCollectionProxModel(this);
     m_todoViewCollectionModel->setSourceModel(collectionFilter);
     m_todoViewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
     m_todoViewCollectionModel->setExcludeVirtualCollections(true);
@@ -282,7 +240,7 @@ CalendarManager::CalendarManager(QObject *parent)
     m_todoViewCollectionModel->sort(0, Qt::AscendingOrder);
 
     // Model for the mainDrawer
-    m_viewCollectionModel = new KalendarCollectionFilterProxyModel(this);
+    m_viewCollectionModel = new SortedCollectionProxModel(this);
     m_viewCollectionModel->setSourceModel(collectionFilter);
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
@@ -410,21 +368,6 @@ Akonadi::CollectionFilterProxyModel *CalendarManager::allCalendars()
     return m_allCalendars;
 }
 
-Akonadi::CollectionFilterProxyModel *CalendarManager::selectableCalendars() const
-{
-    return m_selectableCollectionsModel;
-}
-
-Akonadi::CollectionFilterProxyModel *CalendarManager::selectableEventCalendars() const
-{
-    return m_selectableEventCollectionsModel;
-}
-
-Akonadi::CollectionFilterProxyModel *CalendarManager::selectableTodoCalendars() const
-{
-    return m_selectableTodoCollectionsModel;
-}
-
 qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 {
     // Checks if default collection accepts this type of incidence
@@ -450,33 +393,6 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
     }
 
     return -1;
-}
-
-int CalendarManager::getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper)
-{
-    auto model = new KDescendantsProxyModel;
-
-    switch (incidenceWrapper->incidencePtr()->type()) {
-    default:
-    case (KCalendarCore::IncidenceBase::TypeEvent): {
-        model->setSourceModel(m_selectableEventCollectionsModel);
-        break;
-    }
-    case (KCalendarCore::IncidenceBase::TypeTodo): {
-        model->setSourceModel(m_selectableTodoCollectionsModel);
-        break;
-    }
-    }
-
-    for (int i = 0; i < model->rowCount(); i++) {
-        QModelIndex idx = model->index(i, 0);
-        QVariant data = idx.data(Akonadi::EntityTreeModel::Roles::CollectionIdRole);
-
-        if (data == incidenceWrapper->collectionId())
-            return i;
-    }
-
-    return 0;
 }
 
 QVariant CalendarManager::getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr)

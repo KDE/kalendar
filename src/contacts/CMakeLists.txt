@@ -20,8 +20,25 @@ target_sources(kalendar_contact_plugin PRIVATE
     contactmanager.cpp
     contactcollectionmodel.cpp
     contactcollectionmodel.h
+    contacteditorbackend.h
+    contacteditorbackend.cpp
+    contactgroupeditor.h
+    contactgroupeditor.cpp
+    contactgroupwrapper.h
+    contactgroupwrapper.cpp
+    contactgroupmodel.h
+    contactgroupmodel.cpp
+    contactmetadata.cpp
+    contactmetadata.h
+    contactsmodel.cpp
+    contactsmodel.h
+    attributes/contactmetadataattribute_p.h
+    attributes/contactmetadataattribute.cpp
+    attributes/attributeregistrar.cpp
     resources.qrc
 )
+
+kconfig_add_kcfg_files(kalendar_contact_plugin GENERATE_MOC contactconfig.kcfgc)
 
 ecm_target_qml_sources(kalendar_contact_plugin SOURCES
     qml/ContactChooserPage.qml
@@ -30,9 +47,12 @@ ecm_target_qml_sources(kalendar_contact_plugin SOURCES
 
 ecm_target_qml_sources(kalendar_contact_plugin
     PRIVATE PATH private SOURCES
-    qml/private/ContactListItem.qml
     qml/private/ContactPage.qml
+    qml/private/ContactEditorPage.qml
+    qml/private/ContactGroupPage.qml
+    qml/private/ContactGroupEditorPage.qml
     qml/private/ContactsPage.qml
+    qml/private/ContactListItem.qml
     qml/private/Header.qml
     qml/private/PhoneNumberDialog.qml
     qml/private/QrCodePage.qml

@@ -43,9 +43,6 @@ class CalendarManager : public QObject
     Q_PROPERTY(QAbstractItemModel *viewCollections READ viewCollections CONSTANT)
     Q_PROPERTY(QVector<qint64> enabledTodoCollections READ enabledTodoCollections NOTIFY enabledTodoCollectionsChanged)
     Q_PROPERTY(Akonadi::CollectionFilterProxyModel *allCalendars READ allCalendars CONSTANT)
-    Q_PROPERTY(Akonadi::CollectionFilterProxyModel *selectableCalendars READ selectableCalendars CONSTANT)
-    Q_PROPERTY(Akonadi::CollectionFilterProxyModel *selectableEventCalendars READ selectableEventCalendars CONSTANT)
-    Q_PROPERTY(Akonadi::CollectionFilterProxyModel *selectableTodoCalendars READ selectableTodoCalendars CONSTANT)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar CONSTANT)
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger READ incidenceChanger CONSTANT)
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
@@ -69,11 +66,7 @@ public:
     Akonadi::ETMCalendar::Ptr calendar() const;
     Akonadi::IncidenceChanger *incidenceChanger() const;
     Akonadi::CollectionFilterProxyModel *allCalendars();
-    Akonadi::CollectionFilterProxyModel *selectableCalendars() const;
-    Akonadi::CollectionFilterProxyModel *selectableEventCalendars() const;
-    Akonadi::CollectionFilterProxyModel *selectableTodoCalendars() const;
     Q_INVOKABLE qint64 defaultCalendarId(IncidenceWrapper *incidenceWrapper);
-    Q_INVOKABLE int getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper);
     QVariantMap undoRedoData();
 
     Q_INVOKABLE Akonadi::Item incidenceItem(KCalendarCore::Incidence::Ptr incidence) const;
@@ -129,9 +122,6 @@ private:
     Akonadi::EntityRightsFilterModel *m_allCollectionsRightsFilterModel = nullptr;
     Akonadi::EntityRightsFilterModel *m_eventRightsFilterModel = nullptr;
     Akonadi::EntityRightsFilterModel *m_todoRightsFilterModel = nullptr;
-    Akonadi::CollectionFilterProxyModel *m_selectableCollectionsModel = nullptr;
-    Akonadi::CollectionFilterProxyModel *m_selectableEventCollectionsModel = nullptr;
-    Akonadi::CollectionFilterProxyModel *m_selectableTodoCollectionsModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_todoViewCollectionModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_viewCollectionModel = nullptr;
     QVector<qint64> m_enabledTodoCollections;

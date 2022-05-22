@@ -7,6 +7,8 @@
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
+#include <kcontacts/addressee.h>
+#include <qobjectdefs.h>
 
 AddresseeWrapper::AddresseeWrapper(QObject *parent)
     : QObject(parent)
@@ -21,14 +23,27 @@ AddresseeWrapper::AddresseeWrapper(QObject *parent)
     scope.setFetchRelations(true);
     scope.setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
     setFetchScope(scope);
+
+    connect(m_emailModel, &EmailModel::changed, this, [this](const KContacts::Email::List &emails) {
+        m_addressee.setEmailList(emails);
+    });
+
+    connect(m_phoneModel, &PhoneModel::changed, this, [this](const KContacts::PhoneNumber::List &phoneNumbers) {
+        m_addressee.setPhoneNumbers(phoneNumbers);
+    });
 }
 
 AddresseeWrapper::~AddresseeWrapper() = default;
 
 void AddresseeWrapper::notifyDataChanged()
 {
-    Q_EMIT collectionIdChanged();
-    Q_EMIT nameChanged();
+    Q_EMIT collectionChanged();
+    Q_EMIT formattedNameChanged();
+    Q_EMIT additionalNameChanged();
+    Q_EMIT familyNameChanged();
+    Q_EMIT givenNameChanged();
+    Q_EMIT prefixChanged();
+    Q_EMIT suffixChanged();
     Q_EMIT birthdayChanged();
     Q_EMIT photoChanged();
     Q_EMIT phoneNumbersChanged();
@@ -60,11 +75,11 @@ AddressModel *AddresseeWrapper::addressesModel() const
 
 void AddresseeWrapper::setAddresseeItem(const Akonadi::Item &addresseeItem)
 {
+    Akonadi::ItemMonitor::setItem(addresseeItem);
     if (addresseeItem.hasPayload<KContacts::Addressee>()) {
-        setItem(addresseeItem);
         setAddressee(addresseeItem.payload<KContacts::Addressee>());
         Q_EMIT addresseeItemChanged();
-        Q_EMIT collectionIdChanged();
+        Q_EMIT collectionChanged();
     } else {
         // Payload not found, try to fetch it
         auto job = new Akonadi::ItemFetchJob(addresseeItem);
@@ -73,10 +88,9 @@ void AddresseeWrapper::setAddresseeItem(const Akonadi::Item &addresseeItem)
             auto fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
             auto item = fetchJob->items().at(0);
             if (item.hasPayload<KContacts::Addressee>()) {
-                setItem(item);
                 setAddressee(item.payload<KContacts::Addressee>());
                 Q_EMIT addresseeItemChanged();
-                Q_EMIT collectionIdChanged();
+                Q_EMIT collectionChanged();
             } else {
                 qCWarning(KALENDAR_LOG) << "This is not an addressee item.";
             }
@@ -89,12 +103,17 @@ void AddresseeWrapper::itemChanged(const Akonadi::Item &item)
     setAddressee(item.payload<KContacts::Addressee>());
 }
 
+KContacts::Addressee AddresseeWrapper::addressee() const
+{
+    return m_addressee;
+}
+
 void AddresseeWrapper::setAddressee(const KContacts::Addressee &addressee)
 {
     m_addressee = addressee;
     m_addressesModel->setAddresses(addressee.addresses());
-    m_emailModel->setEmails(addressee.emailList());
-    m_phoneModel->setPhoneNumbers(addressee.phoneNumbers());
+    m_emailModel->loadContact(addressee);
+    m_phoneModel->loadContact(addressee);
     notifyDataChanged();
 }
 
@@ -103,29 +122,39 @@ QString AddresseeWrapper::uid() const
     return m_addressee.uid();
 }
 
+Akonadi::Collection AddresseeWrapper::collection() const
+{
+    return m_collection.isValid() ? m_collection : item().parentCollection();
+}
+
 qint64 AddresseeWrapper::collectionId() const
 {
-    return m_collectionId < 0 ? item().parentCollection().id() : m_collectionId;
+    return collection().id();
 }
 
-void AddresseeWrapper::setCollectionId(qint64 collectionId)
+void AddresseeWrapper::setCollection(Akonadi::Collection collection)
 {
-    m_collectionId = collectionId;
-    Q_EMIT collectionIdChanged();
+    m_collection = collection;
+    Q_EMIT collectionChanged();
 }
 
-QString AddresseeWrapper::name() const
+QString AddresseeWrapper::formattedName() const
 {
     return m_addressee.formattedName();
 }
 
-void AddresseeWrapper::setName(const QString &name)
+void AddresseeWrapper::setFormattedName(const QString &name)
 {
     if (name == m_addressee.formattedName()) {
         return;
     }
-    m_addressee.setFormattedName(name);
-    Q_EMIT nameChanged();
+    m_addressee.setNameFromString(name);
+    Q_EMIT formattedNameChanged();
+    Q_EMIT givenNameChanged();
+    Q_EMIT familyNameChanged();
+    Q_EMIT suffixChanged();
+    Q_EMIT prefixChanged();
+    Q_EMIT additionalNameChanged();
 }
 
 QDateTime AddresseeWrapper::birthday() const
@@ -342,4 +371,93 @@ void AddresseeWrapper::setBlogFeed(const QUrl &blogFeed)
     }
     m_addressee.setBlogFeed(blogFeed);
     Q_EMIT blogFeedChanged();
+}
+
+AddresseeWrapper::DisplayType AddresseeWrapper::displayType() const
+{
+    return m_displayType;
+}
+
+void AddresseeWrapper::setDisplayType(AddresseeWrapper::DisplayType displayType)
+{
+    if (m_displayType == displayType) {
+        return;
+    }
+    m_displayType = displayType;
+    Q_EMIT displayTypeChanged();
+}
+
+QString AddresseeWrapper::additionalName() const
+{
+    return m_addressee.additionalName();
+}
+
+void AddresseeWrapper::setAdditionalName(const QString &name)
+{
+    if (name == m_addressee.additionalName()) {
+        return;
+    }
+    m_addressee.setAdditionalName(name);
+    setFormattedName(m_addressee.assembledName());
+    Q_EMIT additionalNameChanged();
+}
+
+QString AddresseeWrapper::givenName() const
+{
+    return m_addressee.givenName();
+}
+
+void AddresseeWrapper::setGivenName(const QString &name)
+{
+    if (name == m_addressee.givenName()) {
+        return;
+    }
+    m_addressee.setGivenName(name);
+    setFormattedName(m_addressee.assembledName());
+    Q_EMIT givenNameChanged();
+}
+
+QString AddresseeWrapper::familyName() const
+{
+    return m_addressee.familyName();
+}
+
+void AddresseeWrapper::setFamilyName(const QString &name)
+{
+    if (name == m_addressee.familyName()) {
+        return;
+    }
+    m_addressee.setFamilyName(name);
+    setFormattedName(m_addressee.assembledName());
+    Q_EMIT familyNameChanged();
+}
+
+QString AddresseeWrapper::prefix() const
+{
+    return m_addressee.prefix();
+}
+
+void AddresseeWrapper::setPrefix(const QString &name)
+{
+    if (name == m_addressee.prefix()) {
+        return;
+    }
+    m_addressee.setPrefix(name);
+    setFormattedName(m_addressee.assembledName());
+    Q_EMIT prefixChanged();
+}
+
+QString AddresseeWrapper::suffix() const
+{
+    return m_addressee.suffix();
+}
+
+void AddresseeWrapper::setSuffix(const QString &name)
+{
+    if (name == m_addressee.suffix()) {
+        return;
+    }
+    m_addressee.setSuffix(name);
+    setFormattedName(m_addressee.assembledName());
+    Q_EMIT suffixChanged();
 }

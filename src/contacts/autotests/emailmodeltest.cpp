@@ -18,6 +18,7 @@ private Q_SLOTS:
 
     void testReading()
     {
+        KContacts::Addressee addressee;
         KContacts::Email::List emails;
         emails.append(KContacts::Email(QStringLiteral("carl@carlschwan.eu")));
         emails.append(KContacts::Email(QStringLiteral("carl1@carlschwan.eu")));
@@ -25,8 +26,9 @@ private Q_SLOTS:
         email.setPreferred(true);
         email.setType(KContacts::Email::Home);
         emails.append(email);
+        addressee.setEmailList(emails);
         EmailModel emailModel;
-        emailModel.setEmails(emails);
+        emailModel.loadContact(addressee);
 
         QCOMPARE(emailModel.rowCount(), 3);
         QCOMPARE(emailModel.data(emailModel.index(2, 0), Qt::DisplayRole).toString(), QStringLiteral("carl2@carlschwan.eu"));

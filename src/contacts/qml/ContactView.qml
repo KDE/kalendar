@@ -14,12 +14,32 @@ Kirigami.ScrollablePage {
     property int mode: KalendarApplication.Contact
     property var attendeeAkonadiIds
     title: i18n("Contacts")
+
+    actions.main: Kirigami.Action {
+        icon.name: 'contact-new-symbolic'
+        text: i18n('Create')
+        Kirigami.Action {
+            text: i18n('New Contact')
+            onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("private/ContactEditorPage.qml"), {
+                mode: ContactEditor.CreateMode,
+            })
+        }
+        Kirigami.Action {
+            text: i18n('New Contact Group')
+            onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("private/ContactGroupEditorPage.qml"), {
+                mode: ContactGroupEditor.CreateMode,
+            })
+        }
+    }
+
     ListView {
         id: contactsList
         reuseItems: true
         section.property: "display"
         section.criteria: ViewSection.FirstCharacter
-        section.delegate: Kirigami.ListSectionHeader {text: section}
+        section.delegate: Kirigami.ListSectionHeader {
+            text: section
+        }
         clip: true
         model: ContactManager.filteredContacts
         delegate: ContactListItem {
@@ -27,9 +47,15 @@ Kirigami.ScrollablePage {
             name: model && model.display
             avatarIcon: model && model.decoration
 
-            onClicked: applicationWindow().pageStack.push(Qt.resolvedUrl('./private/ContactPage.qml'), {
-                itemId: model.itemId,
-            })
+            onClicked: if (model.mimeType === 'application/x-vnd.kde.contactgroup') {
+                applicationWindow().pageStack.push(Qt.resolvedUrl('./private/ContactGroupPage.qml'), {
+                    itemId: model.itemId,
+                })
+            } else {
+                applicationWindow().pageStack.push(Qt.resolvedUrl('./private/ContactPage.qml'), {
+                    itemId: model.itemId,
+                })
+            }
         }
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent

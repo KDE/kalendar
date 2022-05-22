@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+File=contactconfig.kcfg
+ClassName=ContactConfig
+Mutators=true
+DefaultValueGetters=true
+GenerateProperties=true
+ParentInConstructor=true
+Singleton=false
+UseEnumTypes=true
+GlobalEnums=true
+

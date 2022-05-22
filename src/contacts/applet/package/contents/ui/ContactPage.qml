@@ -156,21 +156,11 @@ PlasmaComponents3.ScrollView {
                 source: addressee.photo.isIntern ? addressee.photo.data : addressee.photo.url
                 backgroundSource: Qt.resolvedUrl("../resources/fallbackBackground.png")
 
-                contentItems: [
-                    PlasmaExtras.Heading {
-                        text: addressee.name
-                        color: "#fcfcfc"
-                        level: 2
-                    },
-                    Repeater {
-                        model: addressee.phoneNumbers
-                        PlasmaExtras.Heading {
-                            text: modelData.normalizedNumber
-                            color: "#fcfcfc"
-                            level: 3
-                        }
-                    }
-                ]
+                contentItems: PlasmaExtras.Heading {
+                    text: addressee.formattedName
+                    color: "#fcfcfc"
+                    level: 2
+                }
             }
 
             PlasmaComponents3.Label {
@@ -231,6 +221,36 @@ PlasmaComponents3.ScrollView {
                         cursorShape: Qt.PointingHandCursor
                         onClicked: Qt.openUrlExternally(`mailto:${model.display}`)
                         onPressed: Qt.openUrlExternally(`mailto:${model.display}`)
+                    }
+                }
+            }
+
+            PlasmaExtras.Heading {
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
+                Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                Layout.rightMargin: PlasmaCore.Units.smallSpacing
+                visible: phoneRepeater.count > 0
+                text: i18np("Phone number", "Phone numbers", phoneRepeater.count)
+                level: 4
+            }
+
+            Repeater {
+                id: phoneRepeater
+                model: addressee.phoneModel
+                PlasmaComponents3.Label {
+                    visible: text !== ""
+                    text: i18n('%1:', model.type) + ` <a href="tel:${model.display}">${model.display}</a>`
+                    Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                    Layout.rightMargin: PlasmaCore.Units.smallSpacing
+                    PlasmaComponents3.ToolTip { text: i18n("Call") }
+                    onLinkActivated: Qt.openUrlExternally(link)
+                    MouseArea {
+                        id: area
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: Qt.openUrlExternally(`tel:${model.display}`)
+                        onPressed: Qt.openUrlExternally(`tel:${model.display}`)
                     }
                 }
             }

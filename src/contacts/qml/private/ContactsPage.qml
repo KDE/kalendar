@@ -41,7 +41,7 @@ Kirigami.ScrollablePage {
         section.criteria: ViewSection.FirstCharacter
         section.delegate: Kirigami.ListSectionHeader {text: section}
         clip: true
-        model: ContactManager.contactsModel
+        model: ContactsModel {}
 
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent

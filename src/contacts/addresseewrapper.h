@@ -11,6 +11,8 @@
 #include <Akonadi/ItemMonitor>
 #include <KContacts/Addressee>
 #include <QObject>
+#include <kcontacts/addressee.h>
+#include <qobjectdefs.h>
 
 #include "addressmodel.h"
 
@@ -21,12 +23,20 @@
 class AddresseeWrapper : public QObject, public Akonadi::ItemMonitor
 {
     Q_OBJECT
+    // Akonadi properties
     Q_PROPERTY(Akonadi::Item addresseeItem READ addresseeItem WRITE setAddresseeItem NOTIFY addresseeItemChanged)
+    Q_PROPERTY(Akonadi::Collection collection READ collection WRITE setCollection NOTIFY collectionChanged)
+    Q_PROPERTY(qint64 collectionId READ collectionId NOTIFY collectionChanged)
+
     Q_PROPERTY(QString uid READ uid NOTIFY uidChanged)
-    Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
 
     // Contact information
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString formattedName READ formattedName WRITE setFormattedName NOTIFY formattedNameChanged)
+    Q_PROPERTY(QString additionalName READ additionalName WRITE setAdditionalName NOTIFY additionalNameChanged)
+    Q_PROPERTY(QString familyName READ familyName WRITE setFamilyName NOTIFY familyNameChanged)
+    Q_PROPERTY(QString givenName READ givenName WRITE setGivenName NOTIFY givenNameChanged)
+    Q_PROPERTY(QString prefix READ prefix WRITE setPrefix NOTIFY prefixChanged)
+    Q_PROPERTY(QString suffix READ suffix WRITE setSuffix NOTIFY suffixChanged)
     Q_PROPERTY(QString nickName READ nickName WRITE setNickName NOTIFY nickNameChanged)
     Q_PROPERTY(QUrl blogFeed READ blogFeed WRITE setBlogFeed NOTIFY blogFeedChanged)
     Q_PROPERTY(QString preferredEmail READ preferredEmail NOTIFY preferredEmailChanged)
@@ -55,19 +65,41 @@ class AddresseeWrapper : public QObject, public Akonadi::ItemMonitor
     Q_PROPERTY(QString note READ note WRITE setNote NOTIFY noteChanged)
     Q_PROPERTY(KContacts::Picture photo READ photo NOTIFY photoChanged)
 
+    Q_PROPERTY(DisplayType displayType READ displayType WRITE setDisplayType NOTIFY displayTypeChanged)
 public:
+    /**
+     * Describes what the display name should look like.
+     */
+    enum DisplayType {
+        SimpleName, ///< A name of the form: givenName familyName
+        FullName, ///< A name of the form: prefix givenName additionalName familyName suffix
+        ReverseNameWithComma, ///< A name of the form: familyName, givenName
+        ReverseName, ///< A name of the form: familyName givenName
+        Organization, ///< The organization name
+        CustomName ///< Let the user input a display name
+    };
+    Q_ENUM(DisplayType);
+
     AddresseeWrapper(QObject *parent = nullptr);
     ~AddresseeWrapper() override;
 
     Akonadi::Item addresseeItem() const;
     void setAddresseeItem(const Akonadi::Item &item);
+
+    KContacts::Addressee addressee() const;
+    void setAddressee(const KContacts::Addressee &addressee);
+
     QString uid() const;
 
+    Akonadi::Collection collection() const;
     qint64 collectionId() const;
-    void setCollectionId(qint64 collectionId);
+    void setCollection(Akonadi::Collection collection);
 
-    QString name() const;
-    void setName(const QString &name);
+    DisplayType displayType() const;
+    void setDisplayType(DisplayType displayType);
+
+    QString formattedName() const;
+    void setFormattedName(const QString &formattedName);
 
     QString nickName() const;
     void setNickName(const QString &nickName);
@@ -81,7 +113,6 @@ public:
     QString preferredEmail() const;
     KContacts::Picture photo() const;
 
-    void setAddressee(const KContacts::Addressee &addressee);
     AddressModel *addressesModel() const;
 
     EmailModel *emailModel() const;
@@ -118,6 +149,21 @@ public:
     void setSpousesName(const QString &spousesName);
     QString spousesName() const;
 
+    QString additionalName() const;
+    void setAdditionalName(const QString &additionalName);
+
+    QString familyName() const;
+    void setFamilyName(const QString &familyName);
+
+    QString givenName() const;
+    void setGivenName(const QString &givenName);
+
+    QString prefix() const;
+    void setPrefix(const QString &prefix);
+
+    QString suffix() const;
+    void setSuffix(const QString &suffix);
+
     // Invokable since we don't want expensive data bindings when any of the
     // fields change, instead generate it on demand
     Q_INVOKABLE QString qrCodeData() const;
@@ -125,8 +171,8 @@ public:
     void notifyDataChanged();
 Q_SIGNALS:
     void addresseeItemChanged();
-    void collectionIdChanged();
-    void nameChanged();
+    void collectionChanged();
+    void formattedNameChanged();
     void birthdayChanged();
     void photoChanged();
     void phoneNumbersChanged();
@@ -135,6 +181,11 @@ Q_SIGNALS:
     void noteChanged();
     void nickNameChanged();
     void blogFeedChanged();
+    void additionalNameChanged();
+    void familyNameChanged();
+    void givenNameChanged();
+    void prefixChanged();
+    void suffixChanged();
 
     void anniversaryChanged();
     void spousesNameChanged();
@@ -146,12 +197,14 @@ Q_SIGNALS:
     void officeChanged();
     void managersNameChanged();
     void assistantsNameChanged();
+    void displayTypeChanged();
 
 private:
     void itemChanged(const Akonadi::Item &item) override;
     KContacts::Addressee m_addressee;
-    qint64 m_collectionId = -1; // For when we want to edit, this is temporary
+    Akonadi::Collection m_collection; // For when we want to edit, this is temporary
     AddressModel *m_addressesModel;
     EmailModel *m_emailModel;
     PhoneModel *m_phoneModel;
+    DisplayType m_displayType;
 };

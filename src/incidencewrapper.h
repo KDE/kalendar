@@ -32,14 +32,22 @@
 class IncidenceWrapper : public QObject, public Akonadi::ItemMonitor
 {
     Q_OBJECT
+
+    // Akonadi properties
     Q_PROPERTY(Akonadi::Item incidenceItem READ incidenceItem WRITE setIncidenceItem NOTIFY incidenceItemChanged)
-    Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr NOTIFY incidencePtrChanged)
+    Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
+    Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
+
+    // Incidence properties
+    Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
     Q_PROPERTY(KCalendarCore::Incidence::Ptr originalIncidencePtr READ originalIncidencePtr NOTIFY originalIncidencePtrChanged)
     Q_PROPERTY(int incidenceType READ incidenceType NOTIFY incidenceTypeChanged)
     Q_PROPERTY(QString incidenceTypeStr READ incidenceTypeStr NOTIFY incidenceTypeStrChanged)
     Q_PROPERTY(QString incidenceIconName READ incidenceIconName NOTIFY incidenceIconNameChanged)
     Q_PROPERTY(QString uid READ uid CONSTANT) // TODO: This needs to not be a CONSTANT
     Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
+    Q_PROPERTY(QString uid READ uid CONSTANT)
+
     Q_PROPERTY(QString parent READ parent WRITE setParent NOTIFY parentChanged)
     Q_PROPERTY(IncidenceWrapper *parentIncidence READ parentIncidence NOTIFY parentIncidenceChanged)
     Q_PROPERTY(QVariantList childIncidences READ childIncidences NOTIFY childIncidencesChanged)
@@ -189,6 +197,7 @@ public:
     Q_INVOKABLE void setRecurrenceOccurrences(int occurrences);
     Q_INVOKABLE void clearRecurrences();
 
+    Q_INVOKABLE void setCollection(const Akonadi::Collection &collection);
 Q_SIGNALS:
     void incidenceItemChanged();
     void incidencePtrChanged(KCalendarCore::Incidence::Ptr incidencePtr);

@@ -276,6 +276,7 @@ int AttendeesModel::rowCount(const QModelIndex &) const
 void AttendeesModel::addAttendee(qint64 itemId, const QString &email)
 {
     if (itemId) {
+        qDebug() << "itemId" << itemId;
         Akonadi::Item item(itemId);
 
         auto job = new Akonadi::ItemFetchJob(item);
@@ -286,7 +287,7 @@ void AttendeesModel::addAttendee(qint64 itemId, const QString &email)
             const auto item = fetchJob->items().at(0);
             const auto payload = item.payload<KContacts::Addressee>();
 
-            KCalendarCore::Attendee attendee(payload.name(),
+            KCalendarCore::Attendee attendee(payload.formattedName(),
                                              payload.preferredEmail(),
                                              true,
                                              KCalendarCore::Attendee::NeedsAction,

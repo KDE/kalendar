@@ -11,8 +11,12 @@ import org.kde.kalendar.contact 1.0
 import './private'
 
 ContactsPage {
+    id: root
     signal addAttendee(var itemId, string email)
     signal removeAttendee(var itemId)
+
+    property var attendeeAkonadiIds
+
     actions.main: Kirigami.Action {
         icon.name: "object-select-symbolic"
         text: i18n("Done")
@@ -24,18 +28,19 @@ ContactsPage {
         avatarIcon: model && model.decoration
         added: root.attendeeAkonadiIds.includes(model.itemId)
 
-        onClicked: added ? removeAttendee(itemId) : ContactManager.contactEmails(model.itemId);
-    }
-
-    Connections {
-        target: ContactManager
-        function onEmailsFetched(emails, itemId) {
-            if(emails.length > 1) {
-                emailsView.itemId = itemId;
-                emailsView.model = emails;
+        onClicked: if (added) {
+            removeAttendee(itemId);
+        } else {
+            const allEmail = root.model.data(root.model.index(index, 0), ContactsModel.AllEmailsRole);
+            console.log(model.itemId, model.item)
+            if (allEmail.length > 1) {
+                emailsView.model = allEmail;
+                emailsView.itemId = model.itemId;
                 emailPickerSheet.open();
+            } else if(allEmail.length === 1) {
+                addAttendee(model.itemId, allEmail[0])
             } else {
-                addAttendee(itemId, undefined);
+                addAttendee(model.itemId, undefined)
             }
         }
     }
@@ -52,6 +57,7 @@ ContactsPage {
             property var itemId
 
             implicitWidth: Kirigami.Units.gridUnit * 30
+            model: []
 
             delegate: Kirigami.BasicListItem {
                 text: modelData
