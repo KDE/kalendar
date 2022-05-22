@@ -74,6 +74,7 @@ class ContactEditorBackend : public QObject
     Q_OBJECT
     Q_PROPERTY(Mode mode READ mode WRITE setMode NOTIFY modeChanged)
     Q_PROPERTY(AddresseeWrapper *contact READ contact NOTIFY addresseeChanged NOTIFY modeChanged)
+    Q_PROPERTY(bool isReadOnly READ isReadOnly NOTIFY addresseeChanged NOTIFY modeChanged)
 
 public:
     /**
@@ -101,13 +102,15 @@ public:
      * Sets the @p addressbook which shall be used to store new
      * contacts.
      */
-    void setDefaultAddressBook(const Akonadi::Collection &addressbook);
+    Q_INVOKABLE void setDefaultAddressBook(const Akonadi::Collection &addressbook);
 
     [[nodiscard]] bool hasNoSavedData() const;
 
     [[nodiscard]] AddresseeWrapper *contact();
     [[nodiscard]] Mode mode() const;
     void setMode(Mode mode);
+    [[nodiscard]] bool isReadOnly() const;
+    void setReadOnly(bool isReadOnly);
 
     /**
      * Loads the @p contact into the editor.
@@ -142,6 +145,7 @@ Q_SIGNALS:
 
     void addresseeChanged();
     void modeChanged();
+    void isReadOnlyChanged();
 
 private:
     void itemFetchDone(KJob *job);
@@ -156,7 +160,7 @@ private:
     Akonadi::Collection m_defaltAddressBook;
     AddresseeWrapper *m_addressee = nullptr;
     Mode m_mode;
-    bool m_readOnly;
+    bool m_readOnly = false;
     ContactMetaData m_contactMetaData;
     Akonadi::Monitor *m_monitor = nullptr;
 };

@@ -14,6 +14,15 @@ Kirigami.ScrollablePage {
     property int mode: KalendarApplication.Contact
     property var attendeeAkonadiIds
     title: i18n("Contacts")
+
+    actions.main: Kirigami.Action {
+        icon.name: 'contact-new-symbolic'
+        text: i18n('Create New')
+        onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("private/ContactEditorPage.qml"), {
+            mode: ContactEditor.CreateMode
+        })
+    }
+
     ListView {
         id: contactsList
         reuseItems: true

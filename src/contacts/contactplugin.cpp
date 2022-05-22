@@ -5,6 +5,7 @@
 #include "addresseewrapper.h"
 #include "addressmodel.h"
 #include "contactcollectionmodel.h"
+#include "contacteditorbackend.h"
 #include "contactmanager.h"
 #include "emailmodel.h"
 #include "globalcontactmodel.h"
@@ -24,6 +25,7 @@ void CalendarPlugin::registerTypes(const char *uri)
     });
 
     qmlRegisterType<AddresseeWrapper>("org.kde.kalendar.contact", 1, 0, "AddresseeWrapper");
+    qmlRegisterType<ContactEditorBackend>("org.kde.kalendar.contact", 1, 0, "ContactEditor");
     qRegisterMetaType<KContacts::Picture>("KContacts::Picture");
     qRegisterMetaType<KContacts::PhoneNumber::List>("KContacts::PhoneNumber::List");
     qRegisterMetaType<KContacts::PhoneNumber>("KContacts::PhoneNumber");

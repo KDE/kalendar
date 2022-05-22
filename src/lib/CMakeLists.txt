@@ -4,6 +4,8 @@
 
 set(kalendar_lib_SRCS
     colorproxymodel.cpp
+    collectioncomboboxmodel.cpp
+    collection.cpp
 )
 
 add_library(kalendar_lib STATIC)

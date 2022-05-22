@@ -130,7 +130,7 @@ void ContactEditorBackend::itemFetchDone(KJob *job)
 
     m_item = fetchJob->items().at(0);
 
-    m_readOnly = false;
+    setReadOnly(false);
     if (m_mode == ContactEditorBackend::EditMode) {
         // if in edit mode we have to fetch the parent collection to find out
         // about the modify rights of the item
@@ -162,7 +162,7 @@ void ContactEditorBackend::parentCollectionFetchDone(KJob *job)
 
     const Akonadi::Collection parentCollection = fetchJob->collections().at(0);
     if (parentCollection.isValid()) {
-        m_readOnly = !(parentCollection.rights() & Akonadi::Collection::CanChangeItem);
+        setReadOnly(!(parentCollection.rights() & Akonadi::Collection::CanChangeItem));
     }
 
     m_contactMetaData.load(m_item);
@@ -247,4 +247,17 @@ void ContactEditorBackend::storeContact(KContacts::Addressee &contact, ContactMe
     // metaData.setCustomFieldDescriptions(d->mCustomFieldsWidget->localCustomFieldDescriptions());
 
     metaData.setDisplayNameMode(m_addressee->displayType());
+}
+
+bool ContactEditorBackend::isReadOnly() const
+{
+    return m_readOnly;
+}
+void ContactEditorBackend::setReadOnly(bool isReadOnly)
+{
+    if (m_readOnly == isReadOnly) {
+        return;
+    }
+    m_readOnly = isReadOnly;
+    Q_EMIT isReadOnlyChanged();
 }
