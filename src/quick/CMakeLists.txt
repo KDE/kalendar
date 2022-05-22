@@ -7,6 +7,8 @@ ecm_add_qml_module(akonadi_quick_plugin URI "org.kde.akonadi" VERSION 1.0)
 target_sources(akonadi_quick_plugin PRIVATE
     collectioncomboboxmodel.cpp
     collectioncomboboxmodel.h
+    collectionpickermodel.cpp
+    collectionpickermodel.h
     collection.cpp
     collection.h
     mimetypes.cpp

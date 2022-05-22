@@ -11,6 +11,7 @@ import org.kde.kitemmodels 1.0
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
+import org.kde.akonadi 1.0 as Akonadi
 import "labelutils.js" as LabelUtils
 
 Kirigami.ScrollablePage {
@@ -155,39 +156,27 @@ Kirigami.ScrollablePage {
                         color: CalendarManager.getCollectionDetails(calendarCombo.currentValue).color
                     }
 
-                    model: KDescendantsProxyModel {
-                        displayAncestorData: true
-                        model: {
-                            if(root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeEvent) {
-                                return CalendarManager.selectableEventCalendars;
-                            } else if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
-                                return CalendarManager.selectableTodoCalendars;
-                            }
+                    model: Akonadi.CollectionComboBoxModel {
+                        id: collectionComboBoxModel
+                        mimeTypeFilter: if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeEvent) {
+                            return [Akonadi.MimeTypes.calendar]
+                        } else if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
+                            return [Akonadi.MimeTypes.todo]
                         }
+                        accessRightsFilter: Akonadi.Collection.CanCreateItem
+                        onCurrentIndexChanged: addressBookComboBox.currentIndex = currentIndex
+                        onCurrentCollectionChanged: contactEditor.setDefaultAddressBook(currentCollection)
                     }
-                    delegate: DelegateChooser {
-                        role: 'kDescendantExpandable'
-
-                        DelegateChoice {
-                            roleValue: true
-                            Item {}
+                    delegate: Kirigami.BasicListItem {
+                        label: display
+                        icon: decoration
+                        trailing: Rectangle {
+                            anchors.margins: Kirigami.Units.smallSpacing
+                            width: height
+                            radius: width * 0.5
+                            color: collectionColor
                         }
-
-                        DelegateChoice {
-                            roleValue: false
-
-                            Kirigami.BasicListItem {
-                                label: display
-                                icon: decoration
-                                trailing: Rectangle {
-                                    anchors.margins: Kirigami.Units.smallSpacing
-                                    width: height
-                                    radius: width * 0.5
-                                    color: collectionColor
-                                }
-                                onClicked: root.incidenceWrapper.collectionId = collectionId
-                            }
-                        }
+                        onClicked: root.incidenceWrapper.collectionId = collectionId
                     }
 
                     popup.z: 1000

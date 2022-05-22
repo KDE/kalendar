@@ -69,6 +69,16 @@ Kirigami.ScrollablePage {
                 onCurrentIndexChanged: addressBookComboBox.currentIndex = currentIndex
                 onCurrentCollectionChanged: contactEditor.setDefaultAddressBook(currentCollection)
             }
+            delegate: Kirigami.BasicListItem {
+                label: display
+                icon: decoration
+                trailing: Rectangle {
+                    anchors.margins: Kirigami.Units.smallSpacing
+                    width: height
+                    radius: width * 0.5
+                    color: collectionColor
+                }
+            }
             currentIndex: -1
             onCurrentIndexChanged: if (currentIndex !== -1) {
                 collectionComboBoxModel.currentIndex = currentIndex;

@@ -45,6 +45,7 @@
 #include <QBuffer>
 #include <QItemSelectionModel>
 #include <colorproxymodel.h>
+#include <sortedcollectionproxymodel.h>
 
 namespace
 {
@@ -81,28 +82,6 @@ protected:
 };
 
 // TODO move to seperate file
-class KalendarCollectionFilterProxyModel : public Akonadi::CollectionFilterProxyModel
-{
-public:
-    explicit KalendarCollectionFilterProxyModel(QObject *parent = nullptr)
-        : Akonadi::CollectionFilterProxyModel(parent)
-    {
-    }
-
-protected:
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override
-    {
-        const auto leftHasChildren = sourceModel()->hasChildren(source_left);
-        const auto rightHasChildren = sourceModel()->hasChildren(source_right);
-        if (leftHasChildren && !rightHasChildren) {
-            return false;
-        } else if (!leftHasChildren && rightHasChildren) {
-            return true;
-        }
-
-        return Akonadi::CollectionFilterProxyModel::lessThan(source_left, source_right);
-    }
-};
 }
 
 ContactManager::ContactManager(QObject *parent)
@@ -120,8 +99,11 @@ ContactManager::ContactManager(QObject *parent)
     m_checkableProxyModel->setSelectionModel(m_collectionSelectionModel);
     m_checkableProxyModel->setSourceModel(m_collectionTree);
 
+    auto sortedProxyModel = new SortedCollectionProxModel(this);
+    sortedProxyModel->setSourceModel(m_checkableProxyModel);
+
     m_colorProxy = new ColorProxyModel(this);
-    m_colorProxy->setSourceModel(m_checkableProxyModel);
+    m_colorProxy->setSourceModel(sortedProxyModel);
     m_colorProxy->setObjectName(QStringLiteral("Show contact colors"));
     m_colorProxy->setDynamicSortFilter(true);
 
@@ -131,15 +113,6 @@ ContactManager::ContactManager(QObject *parent)
     m_collectionSelectionModelStateSaver->setView(nullptr);
     m_collectionSelectionModelStateSaver->setSelectionModel(m_checkableProxyModel->selectionModel());
     m_collectionSelectionModelStateSaver->restoreState(selectionGroup);
-
-    m_contactRightsFilterModel = new Akonadi::EntityRightsFilterModel(this);
-    m_contactRightsFilterModel->setAccessRights(Akonadi::Collection::CanCreateItem);
-    m_contactRightsFilterModel->setSourceModel(m_collectionTree);
-
-    m_selectableContactCollectionsModel = new KalendarCollectionFilterProxyModel(this);
-    m_selectableContactCollectionsModel->setSourceModel(m_contactRightsFilterModel);
-    m_selectableContactCollectionsModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-    m_selectableContactCollectionsModel->sort(0, Qt::AscendingOrder);
 
     auto sourceModel = new Akonadi::EmailAddressSelectionModel(this);
 
@@ -187,11 +160,6 @@ ContactManager::~ContactManager()
 QAbstractItemModel *ContactManager::contactCollections() const
 {
     return m_colorProxy;
-}
-
-Akonadi::CollectionFilterProxyModel *ContactManager::selectableContacts() const
-{
-    return m_selectableContactCollectionsModel;
 }
 
 QAbstractItemModel *ContactManager::filteredContacts() const

@@ -19,6 +19,7 @@
 #include <KDescendantsProxyModel>
 
 #include <QAbstractItemModel>
+#include "colorproxymodel.h"
 
 using namespace Akonadi::Quick;
 
@@ -40,13 +41,19 @@ public:
 
         mBaseModel = mModel;
 
+        // Display color
+        auto colorProxy = new ColorProxyModel(mParent);
+        colorProxy->setObjectName(QStringLiteral("Show collection colors"));
+        colorProxy->setDynamicSortFilter(true);
+        colorProxy->setSourceModel(mBaseModel);
+
         // Flatten the tree, e.g.
         // Kolab
         // Kolab / Inbox
         // Kolab / Inbox / Calendar
         auto proxyModel = new KDescendantsProxyModel(parent);
         proxyModel->setDisplayAncestorData(true);
-        proxyModel->setSourceModel(mBaseModel);
+        proxyModel->setSourceModel(colorProxy);
 
         // Filter it by mimetype again, to only keep
         // Kolab / Inbox / Calendar

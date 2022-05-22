@@ -9,6 +9,7 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
+import org.kde.akonadi 1.0 as Akonadi
 
 import org.kde.kalendar 1.0 as Kalendar
 
@@ -40,13 +41,19 @@ Kirigami.ScrollablePage {
         }
 
         model: KDescendantsProxyModel {
-            model: switch (collectionPickerSheet.mode) {
-            case Kalendar.KalendarApplication.Todo:
-                return Kalendar.CalendarManager.selectableTodoCalendars;
-            case Kalendar.KalendarApplication.Event:
-                return Kalendar.CalendarManager.selectableCalendars;
-            case Kalendar.KalendarApplication.Contact:
-                return Kalendar.CalendarManager.selectableContacts;
+            model: Akonadi.CollectionPickerModel {
+                id: collectionPickerModel
+                mimeTypeFilter: switch (collectionPickerSheet.mode) {
+                case Kalendar.KalendarApplication.Todo:
+                    return [Akonadi.MimeTypes.todo];
+                case Kalendar.KalendarApplication.Event:
+                    return [Akonadi.MimeTypes.calendar];
+                case Kalendar.KalendarApplication.Contact:
+                    return [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup];
+                }
+                excludeVirtualCollections: true
+
+                accessRightsFilter: Akonadi.Collection.CanCreateItem
             }
         }
 

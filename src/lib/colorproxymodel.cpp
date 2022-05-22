@@ -19,8 +19,8 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <QRandomGenerator>
-#include <kcontacts/addressee.h>
-#include <kcontacts/contactgroup.h>
+#include <KContacts/Addressee>
+#include <KContacts/ContactGroup>
 
 namespace
 {
@@ -34,7 +34,11 @@ static bool hasCompatibleMimeTypes(const Akonadi::Collection &collection)
     static QStringList goodMimeTypes;
 
     if (goodMimeTypes.isEmpty()) {
-        goodMimeTypes << QStringLiteral("text/calendar") << KCalendarCore::Event::eventMimeType() << KCalendarCore::Todo::todoMimeType()
+        goodMimeTypes << QStringLiteral("text/calendar")
+                      << KCalendarCore::Event::eventMimeType()
+                      << KCalendarCore::Todo::todoMimeType()
+                      << KContacts::Addressee::mimeType()
+                      << KContacts::ContactGroup::mimeType()
                       << KCalendarCore::Journal::journalMimeType();
     }
 
