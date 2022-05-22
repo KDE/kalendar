@@ -114,7 +114,7 @@ void CollectionComboBoxModelPrivate::activated(int index)
 {
     const QModelIndex modelIndex = mParent->index(index, 0);
     if (modelIndex.isValid()) {
-        Q_EMIT mParent->currentChanged(modelIndex.data(EntityTreeModel::CollectionRole).value<Collection>());
+        Q_EMIT mParent->currentCollectionChanged();
     }
 }
 
@@ -127,6 +127,12 @@ CollectionComboBoxModel::CollectionComboBoxModel(QObject *parent)
     : QSortFilterProxyModel(parent)
     , d(new CollectionComboBoxModelPrivate(this))
 {
+    connect(this, &CollectionComboBoxModel::currentIndexChanged, this, [this]() {
+        const QModelIndex modelIndex = index(d->mCurrentIndex, 0);
+        if (modelIndex.isValid()) {
+            Q_EMIT currentCollectionChanged();
+        }
+    });
 }
 
 CollectionComboBoxModel::~CollectionComboBoxModel() = default;
@@ -187,6 +193,15 @@ bool CollectionComboBoxModel::excludeVirtualCollections() const
 int CollectionComboBoxModel::currentIndex() const
 {
     return d->mCurrentIndex;
+}
+
+void CollectionComboBoxModel::setCurrentIndex(int currentIndex)
+{
+    if (d->mCurrentIndex == currentIndex) {
+        return;
+    }
+    d->mCurrentIndex = currentIndex;
+    Q_EMIT currentIndexChanged();
 }
 
 #include "moc_collectioncomboboxmodel.cpp"

@@ -2,16 +2,16 @@
 // SPDX-FileCopyrightText: 2022 Carl Schwan <carl@carlschwan.eu>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.6
-import QtQuick.Controls 2.2 as Controls
-import QtQuick.Layouts 1.2
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Layouts 1.15
 import Qt.labs.platform 1.1
-import org.kde.kirigami 2.4 as Kirigami
-import org.kde.people 1.0 as KPeople
+import org.kde.kirigami 2.19 as Kirigami
 
 import QtQuick.Templates 2.15 as T
 
 import org.kde.kalendar.contact 1.0
+import org.kde.akonadi 1.0 as Akonadi
 
 Kirigami.ScrollablePage {
     id: root
@@ -62,33 +62,15 @@ Kirigami.ScrollablePage {
             //     // color: CalendarManager.getCollectionDetails(calendarCombo.currentValue).color
             // }
 
-            model: KDescendantsProxyModel {
-                displayAncestorData: true
-                model: ContactManager.selectableContacts
+            model: Akonadi.CollectionComboBoxModel {
+                id: collectionComboBoxModel
+                mimeTypeFilter: [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup]
+                onCurrentIndexChanged: addressBookComboBox.currentIndex = currentIndex
+                onCurrentCollectionChanged: contactEditor.setDefaultAddressBook(currentCollection)
             }
-            delegate: DelegateChooser {
-                role: 'kDescendantExpandable'
-
-                DelegateChoice {
-                    roleValue: true
-                    Item {}
-                }
-
-                DelegateChoice {
-                    roleValue: false
-
-                    Kirigami.BasicListItem {
-                        label: display
-                        icon: decoration
-                        trailing: Rectangle {
-                            anchors.margins: Kirigami.Units.smallSpacing
-                            width: height
-                            radius: width * 0.5
-                            color: collectionColor
-                        }
-                        onClicked: contactEditor.setDefaultAddressBook() .collectionId = collectionId
-                    }
-                }
+            currentIndex: -1
+            onCurrentIndexChanged: if (currentIndex !== -1) {
+                collectionComboBoxModel.currentIndex = currentIndex;
             }
 
             popup.z: 1000
@@ -129,7 +111,7 @@ Kirigami.ScrollablePage {
         //    onClicked: fileDialog.open()
         //}
 
-        Controls.TextField {
+        QQC2.TextField {
             id: name
             Kirigami.FormData.label: i18n("Name:")
             Layout.fillWidth: true

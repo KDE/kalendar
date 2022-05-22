@@ -6,6 +6,7 @@
 #include <Akonadi/Collection>
 #include <QSortFilterProxyModel>
 #include <memory>
+#include <qobjectdefs.h>
 
 namespace Akonadi
 {
@@ -26,12 +27,12 @@ class CollectionComboBoxModelPrivate;
  * @code{.qml}
  *
  * import QtQuick.Controls 2.15 as QQC2
- * import org.kde.akonadi.quick 1.0 as AkonadiQuick
+ * import org.kde.akonadi 1.0 as Akonadi
  *
  * QQC2.ComboBox {
  *    model: AkonadiQuick.ComboBoxModel {
- *         mimeTypeFilter: [AkonadiQuick.Mimetypes.address, AkonadiQuick.Mimetypes.contactGroup]
- *         accessRightsFilters: AkonadiQuick.Collection.CanCreateItem
+ *         mimeTypeFilter: [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup]
+ *         accessRightsFilters: Akonadi.Collection.CanCreateItem
  *    }
  * }
  * @endcode
@@ -42,6 +43,8 @@ class CollectionComboBoxModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QStringList mimeTypeFilter READ mimeTypeFilter WRITE setMimeTypeFilter NOTIFY mimeTypeFilterChanged)
+    Q_PROPERTY(Akonadi::Collection currentCollection READ currentCollection NOTIFY currentCollectionChanged)
+    Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
 
 public:
     explicit CollectionComboBoxModel(QObject *parent = nullptr);
@@ -89,6 +92,7 @@ public:
     Q_REQUIRED_RESULT bool excludeVirtualCollections() const;
 
     int currentIndex() const;
+    void setCurrentIndex(int currendIndex);
 
 Q_SIGNALS:
     /**
@@ -97,7 +101,8 @@ Q_SIGNALS:
      *
      * @param collection The current selection.
      */
-    void currentChanged(const Akonadi::Collection &collection);
+    void currentCollectionChanged();
+    void currentIndexChanged();
     void mimeTypeFilterChanged();
 
 private:

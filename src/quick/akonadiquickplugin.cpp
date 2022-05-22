@@ -13,14 +13,14 @@
 
 void AkonadiQuickPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QByteArray("org.kde.akonadi.quick"));
+    Q_ASSERT(uri == QByteArray("org.kde.akonadi"));
 
-    qmlRegisterSingletonType<Akonadi::Quick::MimeTypes>("org.kde.akonadi.quick", 1, 0, "MimeTypes", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+    qmlRegisterSingletonType<Akonadi::Quick::MimeTypes>("org.kde.akonadi", 1, 0, "MimeTypes", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
         return new Akonadi::Quick::MimeTypes;
     });
 
-    qmlRegisterType<Akonadi::Quick::CollectionComboBoxModel>("org.kde.akonadi.quick", 1, 0, "CollectionComboBoxModel");
-    qmlRegisterUncreatableType<Akonadi::Quick::Collection>("org.kde.akonadi.quick", 1, 0, "Collection", QStringLiteral("It's just an enum"));
+    qmlRegisterType<Akonadi::Quick::CollectionComboBoxModel>("org.kde.akonadi", 1, 0, "CollectionComboBoxModel");
+    qmlRegisterUncreatableType<Akonadi::Quick::Collection>("org.kde.akonadi", 1, 0, "Collection", QStringLiteral("It's just an enum"));
 }
