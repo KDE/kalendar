@@ -9,6 +9,10 @@ target_sources(akonadi_quick_plugin PRIVATE
     collectioncomboboxmodel.h
     collection.cpp
     collection.h
+    mimetypes.cpp
+    mimetypes.h
+    akonadiquickplugin.cpp
+    akonadiquickplugin.h
 )
 
 ecm_qt_declare_logging_category(akonadi_quick_plugin
