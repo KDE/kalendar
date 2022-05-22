@@ -154,14 +154,15 @@ QStringList CollectionComboBoxModel::mimeTypeFilter() const
     return d->mMimeTypeFilterModel->mimeTypeFilters();
 }
 
-void CollectionComboBoxModel::setAccessRightsFilter(Collection::Rights rights)
+void CollectionComboBoxModel::setAccessRightsFilter(Collection::Right rights)
 {
     d->mRightsFilterModel->setAccessRights(rights);
+    Q_EMIT accessRightsFilterChanged();
 }
 
-Akonadi::Collection::Rights CollectionComboBoxModel::accessRightsFilter() const
+Akonadi::Collection::Right CollectionComboBoxModel::accessRightsFilter() const
 {
-    return d->mRightsFilterModel->accessRights();
+    return (Akonadi::Collection::Right)(int)d->mRightsFilterModel->accessRights();
 }
 
 void CollectionComboBoxModel::setDefaultCollection(const Collection &collection)

@@ -65,6 +65,7 @@ Kirigami.ScrollablePage {
             model: Akonadi.CollectionComboBoxModel {
                 id: collectionComboBoxModel
                 mimeTypeFilter: [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup]
+                accessRightsFilter: Akonadi.Collection.CanCreateItem
                 onCurrentIndexChanged: addressBookComboBox.currentIndex = currentIndex
                 onCurrentCollectionChanged: contactEditor.setDefaultAddressBook(currentCollection)
             }

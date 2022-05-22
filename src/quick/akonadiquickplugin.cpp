@@ -6,7 +6,9 @@
 #include "mimetypes.h"
 #include "collection.h"
 #include "collectioncomboboxmodel.h"
+#include <akonadi_version.h>
 
+#include <Akonadi/Collection>
 #include <QAbstractListModel>
 #include <QQmlEngine>
 #include <QtQml>
@@ -22,5 +24,10 @@ void AkonadiQuickPlugin::registerTypes(const char *uri)
     });
 
     qmlRegisterType<Akonadi::Quick::CollectionComboBoxModel>("org.kde.akonadi", 1, 0, "CollectionComboBoxModel");
+
+#if AKONADI_VERSION > QT_VERSION_CHECK(5, 20, 41)
+    qmlRegisterUncreatableType<Akonadi::Collection>("org.kde.akonadi", 1, 0, "Collection", QStringLiteral("It's just an enum"));
+#else
     qmlRegisterUncreatableType<Akonadi::Quick::Collection>("org.kde.akonadi", 1, 0, "Collection", QStringLiteral("It's just an enum"));
+#endif
 }

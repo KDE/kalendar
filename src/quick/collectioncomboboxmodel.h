@@ -30,10 +30,10 @@ class CollectionComboBoxModelPrivate;
  * import org.kde.akonadi 1.0 as Akonadi
  *
  * QQC2.ComboBox {
- *    model: AkonadiQuick.ComboBoxModel {
+ *     model: AkonadiQuick.ComboBoxModel {
  *         mimeTypeFilter: [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup]
- *         accessRightsFilters: Akonadi.Collection.CanCreateItem
- *    }
+ *         accessRightsFilter: Akonadi.Collection.CanCreateItem
+ *     }
  * }
  * @endcode
  *
@@ -43,6 +43,7 @@ class CollectionComboBoxModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QStringList mimeTypeFilter READ mimeTypeFilter WRITE setMimeTypeFilter NOTIFY mimeTypeFilterChanged)
+    Q_PROPERTY(Akonadi::Collection::Right accessRightsFilter READ accessRightsFilter WRITE setAccessRightsFilter NOTIFY accessRightsFilterChanged)
     Q_PROPERTY(Akonadi::Collection currentCollection READ currentCollection NOTIFY currentCollectionChanged)
     Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
 
@@ -64,12 +65,12 @@ public:
     /**
      * Sets the access @p rights the collections shall be filtered by.
      */
-    void setAccessRightsFilter(Akonadi::Collection::Rights rights);
+    void setAccessRightsFilter(Akonadi::Collection::Right rights);
 
     /**
      * Returns the access rights the collections are filtered by.
      */
-    Q_REQUIRED_RESULT Akonadi::Collection::Rights accessRightsFilter() const;
+    Q_REQUIRED_RESULT Akonadi::Collection::Right accessRightsFilter() const;
 
     /**
      * Sets the @p collection that shall be selected by default.
@@ -104,6 +105,7 @@ Q_SIGNALS:
     void currentCollectionChanged();
     void currentIndexChanged();
     void mimeTypeFilterChanged();
+    void accessRightsFilterChanged();
 
 private:
     std::unique_ptr<CollectionComboBoxModelPrivate> const d;
