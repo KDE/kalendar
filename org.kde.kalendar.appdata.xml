@@ -308,6 +308,7 @@
   </provides>
   <url type="homepage">https://apps.kde.org/kalendar/</url>
   <url type="bugtracker">https://invent.kde.org/pim/kalendar/-/issues</url>
+  <content_rating type="oars-1.1"/>
   <releases>
     <release version="22.04.1" date="2022-05-12"/>
     <release version="22.04.0" date="2022-04-21"/>
