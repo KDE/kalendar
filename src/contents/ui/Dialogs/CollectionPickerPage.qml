@@ -27,7 +27,7 @@ Kirigami.ScrollablePage {
     }
 
     signal cancel
-    signal collectionPicked(int collectionId)
+    signal collectionPicked(int collection)
 
     property int mode: Kalendar.KalendarApplication.Event
 
@@ -89,7 +89,7 @@ Kirigami.ScrollablePage {
                     label: display
                     labelItem.color: Kirigami.Theme.textColor
 
-                    onClicked: collectionPickerSheet.collectionPicked(collectionId);
+                    onClicked: collectionPickerSheet.collectionPicked(collection);
 
                     trailing: Rectangle {
                         anchors.margins: Kirigami.Units.smallSpacing

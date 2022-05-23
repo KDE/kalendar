@@ -53,7 +53,7 @@ public:
 
     QSortFilterProxyModel *actionsModel();
     void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
-    Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId = -1);
+    Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, Akonadi::Collection collection = {});
     QString importErrorMessage();
 
     // D-Bus interface

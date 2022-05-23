@@ -9,6 +9,7 @@ import org.kde.kirigami 2.14 as Kirigami
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
+import org.kde.akonadi 1.0 as Akonadi
 import org.kde.kalendar.contact 1.0
 
 QtObject {
@@ -49,7 +50,7 @@ QtObject {
         }
     }
 
-    function setUpAdd(type, addDate, collectionId, includeTime) {
+    function setUpAdd(type, addDate, collection, includeTime) {
         let editorToUse = utilsObject.editorToUse();
         if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
             editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
@@ -82,15 +83,15 @@ QtObject {
                 editorToUse.incidenceWrapper.incidenceEnd = newStart;
             }
         }
-
-        if(collectionId && collectionId >= 0) {
-            editorToUse.incidenceWrapper.collectionId = collectionId;
+        const collectionId = Akonadi.Collection.id(collection);
+        if (collectionId >= 0) {
+            editorToUse.incidenceWrapper.collection = collection;
         } else if(type === IncidenceWrapper.TypeEvent && Config.lastUsedEventCollection > -1) {
-            editorToUse.incidenceWrapper.collectionId = Config.lastUsedEventCollection;
+            editorToUse.incidenceWrapper.collection = Akonadi.Collection.fromId(Config.lastUsedEventCollection);
         } else if (type === IncidenceWrapper.TypeTodo && Config.lastUsedTodoCollection > -1) {
-            editorToUse.incidenceWrapper.collectionId = Config.lastUsedTodoCollection;
+            editorToUse.incidenceWrapper.collection = Akonadi.Collection.fromId(Config.lastUsedTodoCollection);
         } else {
-            editorToUse.incidenceWrapper.collectionId = CalendarManager.defaultCalendarId(editorToUse.incidenceWrapper);
+            editorToUse.incidenceWrapper.collection = CalendarManager.defaultCalendar(editorToUse.incidenceWrapper);
         }
     }
 
@@ -103,7 +104,7 @@ QtObject {
         editorToUse.editMode = false;
         editorToUse.incidenceWrapper.setNewTodo();
         editorToUse.incidenceWrapper.parent = parentWrapper.uid;
-        editorToUse.incidenceWrapper.collectionId = parentWrapper.collectionId;
+        editorToUse.incidenceWrapper.collection = parentWrapper.collection;
         editorToUse.incidenceWrapper.incidenceStart = parentWrapper.incidenceStart;
         editorToUse.incidenceWrapper.incidenceEnd = parentWrapper.incidenceEnd;
     }

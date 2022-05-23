@@ -16,11 +16,11 @@ import QtGraphicalEffects 1.12
 Kirigami.OverlayDrawer {
     id: mainDrawer
 
-    signal calendarClicked(int collectionId)
-    signal calendarCheckChanged(int collectionId, bool checked)
+    signal calendarClicked(var collection)
+    signal calendarCheckChanged(var collection, bool checked)
     signal viewAllTodosClicked
     signal tagClicked(string tagName)
-    signal deleteCalendar(int collectionId, var collectionDetails)
+    signal deleteCalendar(var collection, var collectionDetails)
 
     property var mode: KalendarApplication.Event
     property alias toolbar: toolbar
@@ -531,10 +531,10 @@ Kirigami.OverlayDrawer {
                                         visible: model.checkState != null
                                         color: model.collectionColor ?? Kirigami.Theme.highlightedTextColor
                                         checked: model.checkState === 2
-                                        onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                        onCheckedChanged: calendarCheckChanged(collection, checked)
                                         onClicked: {
                                             model.checkState = model.checkState === 0 ? 2 : 0
-                                            calendarCheckChanged(collectionId, checked)
+                                            calendarCheckChanged(collection, checked)
                                         }
                                     }
                                 }
@@ -544,8 +544,8 @@ Kirigami.OverlayDrawer {
                                 CalendarItemMouseArea {
                                     id: calendarSourceItemMouseArea
                                     parent: calendarSourceItem.contentItem // Otherwise label elide breaks
-                                    collectionId: model.collectionId
-                                    collectionDetails: CalendarManager.getCollectionDetails(collectionId)
+                                    collection: model.collection
+                                    collectionDetails: CalendarManager.getCollectionDetails(collection)
                                     anchors.fill: parent
                                     enabled: mode !== KalendarApplication.Contact
 
@@ -555,7 +555,7 @@ Kirigami.OverlayDrawer {
                                         z: 9999
                                         enabled: calendarSourceItemMouseArea.collectionDetails.canCreate
                                         onDropped: if(drop.source.objectName === "taskDelegate") {
-                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collectionId);
+                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collection);
 
                                             const pos = mapToItem(applicationWindow().contentItem, x, y);
                                             drop.source.caughtX = pos.x;
@@ -593,27 +593,29 @@ Kirigami.OverlayDrawer {
                                     visible: model.checkState != null
                                     color: model.collectionColor
                                     checked: model.checkState === 2
-                                    onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                    onCheckedChanged: calendarCheckChanged(collection, checked)
                                     onClicked: {
                                         model.checkState = model.checkState === 0 ? 2 : 0
-                                        calendarCheckChanged(collectionId, checked)
+                                        calendarCheckChanged(collection, checked)
                                     }
                                 }
 
                                 onClicked: {
-                                    calendarClicked(collectionId);
-                                    if(mainDrawer.modal) mainDrawer.close()
+                                    calendarClicked(collection);
+                                    if (mainDrawer.modal) {
+                                        mainDrawer.close()
+                                    }
                                 }
 
                                 CalendarItemMouseArea {
                                     id: calendarItemMouseArea
                                     parent: calendarItem.contentItem // Otherwise label elide breaks
-                                    collectionId: model.collectionId
-                                    collectionDetails: CalendarManager.getCollectionDetails(collectionId)
+                                    collection: model.collection
+                                    collectionDetails: CalendarManager.getCollectionDetails(collection)
                                     anchors.fill: parent
                                     enabled: mode !== KalendarApplication.Contact
 
-                                    onDeleteCalendar: mainDrawer.deleteCalendar(collectionId, collectionDetails)
+                                    onDeleteCalendar: mainDrawer.deleteCalendar(collection, collectionDetails)
 
                                     DropArea {
                                         id: incidenceDropArea
@@ -621,7 +623,7 @@ Kirigami.OverlayDrawer {
                                         z: 9999
                                         enabled: calendarItemMouseArea.collectionDetails.canCreate
                                         onDropped: if(drop.source.objectName === "taskDelegate") {
-                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
+                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collection);
 
                                             const pos = mapToItem(applicationWindow().contentItem, x, y);
                                             drop.source.caughtX = pos.x;

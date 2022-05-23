@@ -61,6 +61,7 @@ public:
         Priority,
         Color,
         CollectionId,
+        Collection,
         AllDay,
         TodoCompleted,
         IsOverdue,

@@ -53,6 +53,7 @@ QHash<int, QByteArray> TodoSortFilterProxyModel::roleNames() const
     roleNames[Roles::ColorRole] = "color";
     roleNames[Roles::CompletedRole] = "todoCompleted";
     roleNames[Roles::PriorityRole] = "priority";
+    roleNames[Roles::CollectionRole] = "collection";
     roleNames[Roles::CollectionIdRole] = "collectionId";
     roleNames[Roles::DurationStringRole] = "durationString";
     roleNames[Roles::RecursRole] = "recurs";
@@ -120,6 +121,8 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
         return todoPtr->priority();
     } else if (role == Roles::CollectionIdRole) {
         return collectionId;
+    } else if (role == Roles::CollectionRole) {
+        return QVariant::fromValue(todoItem.parentCollection());
     } else if (role == DurationStringRole) {
         KFormat format;
         if (todoPtr->allDay()) {

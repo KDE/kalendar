@@ -170,7 +170,7 @@ Item {
     IncidenceMouseArea {
         id: mouseArea
         incidenceData: modelData
-        collectionId: modelData.collectionId
+        collection: modelData.collection
 
         preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
         drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && incidenceDelegate.dragDropEnabled ? parent : undefined

@@ -32,6 +32,7 @@
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/ItemMoveJob>
 #include <Akonadi/Monitor>
+#include <akonadi/collection.h>
 #include <akonadi_version.h>
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/History>
@@ -359,7 +360,7 @@ Akonadi::CollectionFilterProxyModel *CalendarManager::allCalendars()
     return m_allCalendars;
 }
 
-qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
+Akonadi::Collection CalendarManager::defaultCalendar(IncidenceWrapper *incidenceWrapper)
 {
     // Checks if default collection accepts this type of incidence
     auto mimeType = incidenceWrapper->incidencePtr()->mimeType();
@@ -367,7 +368,7 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
     bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
     bool hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
     if (collection.isValid() && supportsMimeType && hasRights) {
-        return collection.id();
+        return collection;
     }
 
     // Should add last used collection by mimetype somewhere.
@@ -379,11 +380,11 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
         supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
         hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
         if (collection.isValid() && supportsMimeType && hasRights) {
-            return collection.id();
+            return collection;
         }
     }
 
-    return -1;
+    return {};
 }
 
 QVariant CalendarManager::getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr)
@@ -421,7 +422,7 @@ Akonadi::Item CalendarManager::incidenceItem(KCalendarCore::Incidence::Ptr incid
 
 void CalendarManager::addIncidence(IncidenceWrapper *incidenceWrapper)
 {
-    Akonadi::Collection collection(incidenceWrapper->collectionId());
+    auto collection = incidenceWrapper->collection();
 
     switch (incidenceWrapper->incidencePtr()->type()) {
     case (KCalendarCore::IncidenceBase::TypeEvent): {
@@ -454,11 +455,11 @@ void CalendarManager::editIncidence(IncidenceWrapper *incidenceWrapper)
 
     m_changer->modifyIncidence(modifiedItem, originalPayload);
 
-    if (!incidenceWrapper->collectionId() || incidenceWrapper->collectionId() < 0 || modifiedItem.parentCollection().id() == incidenceWrapper->collectionId()) {
+    if (!incidenceWrapper->collection().isValid() || modifiedItem.parentCollection().id() == incidenceWrapper->collection().id()) {
         return;
     }
 
-    changeIncidenceCollection(modifiedItem, incidenceWrapper->collectionId());
+    changeIncidenceCollection(modifiedItem, incidenceWrapper->collection());
 }
 
 void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, int startOffset, int endOffset, int occurrences, const QDateTime &occurrenceDate)
@@ -523,7 +524,7 @@ void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, i
             if (newIncidence) {
                 m_changer->startAtomicOperation(i18n("Move occurrence(s)"));
                 setNewDates(newIncidence);
-                m_changer->createIncidence(newIncidence, m_calendar->collection(incidenceWrapper->collectionId()));
+                m_changer->createIncidence(newIncidence, incidenceWrapper->collection());
                 m_changer->endAtomicOperation();
             } else {
                 qCDebug(KALENDAR_LOG) << i18n("Unable to add the exception item to the calendar. No change will be done.");
@@ -592,26 +593,26 @@ void CalendarManager::deleteIncidence(KCalendarCore::Incidence::Ptr incidence, b
     m_calendar->deleteIncidence(incidence);
 }
 
-void CalendarManager::changeIncidenceCollection(KCalendarCore::Incidence::Ptr incidence, qint64 collectionId)
+void CalendarManager::changeIncidenceCollection(KCalendarCore::Incidence::Ptr incidence, Akonadi::Collection collection)
 {
     KCalendarCore::Incidence::Ptr incidenceClone(incidence->clone());
     Akonadi::Item modifiedItem = m_calendar->item(incidence->instanceIdentifier());
     modifiedItem.setPayload<KCalendarCore::Incidence::Ptr>(incidenceClone);
 
-    if (modifiedItem.parentCollection().id() != collectionId) {
-        changeIncidenceCollection(modifiedItem, collectionId);
+    if (modifiedItem.parentCollection().id() != collection.id()) {
+        changeIncidenceCollection(modifiedItem, collection);
     }
 }
 
-void CalendarManager::changeIncidenceCollection(Akonadi::Item item, qint64 collectionId)
+void CalendarManager::changeIncidenceCollection(Akonadi::Item item, Akonadi::Collection collection)
 {
-    if (item.parentCollection().id() == collectionId) {
+    if (item.parentCollection().id() == collection.id()) {
         return;
     }
 
     Q_ASSERT(item.hasPayload<KCalendarCore::Incidence::Ptr>());
 
-    Akonadi::Collection newCollection(collectionId);
+    Akonadi::Collection newCollection(collection);
     item.setParentCollection(newCollection);
 
     auto job = new Akonadi::ItemMoveJob(item, newCollection);
@@ -622,26 +623,25 @@ void CalendarManager::changeIncidenceCollection(Akonadi::Item item, qint64 colle
         if (!job->error()) {
             const auto allChildren = m_calendar->childIncidences(item.id());
             for (const auto &child : allChildren) {
-                changeIncidenceCollection(m_calendar->item(child), collectionId);
+                changeIncidenceCollection(m_calendar->item(child), collection);
             }
 
             auto parent = item.payload<KCalendarCore::Incidence::Ptr>()->relatedTo();
             if (!parent.isEmpty()) {
-                changeIncidenceCollection(m_calendar->item(parent), collectionId);
+                changeIncidenceCollection(m_calendar->item(parent), collection);
             }
         }
     });
 }
 
-QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
+QVariantMap CalendarManager::getCollectionDetails(Akonadi::Collection collection)
 {
     QVariantMap collectionDetails;
-    Akonadi::Collection collection = m_calendar->collection(collectionId.toInt());
     bool isFiltered = false;
     int allCalendarsRow = 0;
 
     for (int i = 0; i < m_allCalendars->rowCount(); i++) {
-        if (m_allCalendars->data(m_allCalendars->index(i, 0), Akonadi::EntityTreeModel::CollectionIdRole).toInt() == collectionId) {
+        if (m_allCalendars->data(m_allCalendars->index(i, 0), Akonadi::EntityTreeModel::CollectionIdRole).toInt() == collection.id()) {
             isFiltered = !m_allCalendars->data(m_allCalendars->index(i, 0), Qt::CheckStateRole).toBool();
             allCalendarsRow = i;
             break;
@@ -666,17 +666,16 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     return collectionDetails;
 }
 
-void CalendarManager::setCollectionColor(qint64 collectionId, const QColor &color)
+void CalendarManager::setCollectionColor(Akonadi::Collection collection, const QColor &color)
 {
-    auto collection = m_calendar->collection(collectionId);
     auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);
     colorAttr->setColor(color);
     auto modifyJob = new Akonadi::CollectionModifyJob(collection);
-    connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob *job) {
+    connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collection, color](KJob *job) {
         if (job->error()) {
             qCWarning(KALENDAR_LOG) << "Error occurred modifying collection color: " << job->errorString();
         } else {
-            m_baseModel->colorCache[QString::number(collectionId)] = color;
+            m_baseModel->colorCache[QString::number(collection.id())] = color;
             m_baseModel->save();
         }
     });
@@ -700,15 +699,13 @@ void CalendarManager::updateAllCollections()
     }
 }
 
-void CalendarManager::updateCollection(qint64 collectionId)
+void CalendarManager::updateCollection(Akonadi::Collection collection)
 {
-    auto collection = m_calendar->collection(collectionId);
     Akonadi::AgentManager::self()->synchronizeCollection(collection, false);
 }
 
-void CalendarManager::deleteCollection(qint64 collectionId)
+void CalendarManager::deleteCollection(Akonadi::Collection collection)
 {
-    auto collection = m_calendar->collection(collectionId);
     const bool isTopLevel = collection.parentCollection() == Akonadi::Collection::root();
 
     if (!isTopLevel) {
@@ -728,9 +725,9 @@ void CalendarManager::deleteCollection(qint64 collectionId)
     }
 }
 
-void CalendarManager::editCollection(qint64 collectionId)
-{ // TODO: Reimplement this dialog in QML
-    auto collection = m_calendar->collection(collectionId);
+void CalendarManager::editCollection(Akonadi::Collection collection)
+{
+    // TODO: Reimplement this dialog in QML
     QPointer<Akonadi::CollectionPropertiesDialog> dlg = new Akonadi::CollectionPropertiesDialog(collection);
     dlg->setWindowTitle(i18nc("@title:window", "Properties of Calendar %1", collection.name()));
     dlg->show();

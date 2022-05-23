@@ -3,11 +3,13 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include <QObject>
+#include <Akonadi/Collection>
 
 namespace Akonadi
 {
 namespace Quick
 {
+// TODO remove this when 22.08 is out
 class Collection : public QObject
 {
     Q_OBJECT
@@ -26,6 +28,11 @@ public:
                      | CanDeleteCollection) ///< Has all rights on this storage collection
     };
     Q_ENUM(Right)
+
+    // Temporary hack to work around Collection not being a QGadget yet
+    Q_INVOKABLE qint64 id(Akonadi::Collection collection) const;
+
+    Q_INVOKABLE Akonadi::Collection fromId(qint64 collectionId) const;
 };
 }
 }

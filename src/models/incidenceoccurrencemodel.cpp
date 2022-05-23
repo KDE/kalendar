@@ -242,6 +242,8 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
         return incidence.color;
     case CollectionId:
         return incidence.collectionId;
+    case Collection:
+        return QVariant::fromValue(Akonadi::Collection(incidence.collectionId));
     case AllDay:
         return incidence.allDay;
     case TodoCompleted: {

@@ -17,6 +17,7 @@
 #include <KCalUtils/RecurrenceActions>
 #include <QByteArray>
 #include <QObject>
+#include <qglobal.h>
 
 /**
  * This class is a wrapper for a KCalendarCore::Incidence::Ptr object.
@@ -37,7 +38,9 @@ class IncidenceWrapper : public QObject, public Akonadi::ItemMonitor
     Q_PROPERTY(QString incidenceIconName READ incidenceIconName NOTIFY incidenceIconNameChanged)
     Q_PROPERTY(QString uid READ uid CONSTANT)
 
-    Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
+    Q_PROPERTY(Akonadi::Collection collection READ collection WRITE setCollection NOTIFY collectionChanged)
+    Q_PROPERTY(bool collectionIsValid READ collectionIsValid NOTIFY collectionChanged)
+    Q_PROPERTY(qint64 collectionId READ collectionId NOTIFY collectionChanged)
     Q_PROPERTY(QString parent READ parent WRITE setParent NOTIFY parentChanged)
     Q_PROPERTY(QString summary READ summary WRITE setSummary NOTIFY summaryChanged)
     Q_PROPERTY(QStringList categories READ categories WRITE setCategories NOTIFY categoriesChanged)
@@ -111,8 +114,12 @@ public:
     QString incidenceTypeStr() const;
     QString incidenceIconName() const;
     QString uid() const;
+    Akonadi::Collection collection() const;
+    void setCollection(Akonadi::Collection collection);
+    // TODO remove with 22.08 and replace by collection.isValid and collection.id instead
+    bool collectionIsValid() const;
     qint64 collectionId() const;
-    void setCollectionId(qint64 collectionId);
+
     QString parent() const;
     void setParent(QString parent);
     QString summary() const;
@@ -183,7 +190,7 @@ Q_SIGNALS:
     void incidenceTypeChanged();
     void incidenceTypeStrChanged();
     void incidenceIconNameChanged();
-    void collectionIdChanged();
+    void collectionChanged();
     void parentChanged();
     void summaryChanged();
     void categoriesChanged();
@@ -219,7 +226,7 @@ private:
 
     KCalendarCore::Incidence::Ptr m_incidence;
     KCalendarCore::Incidence::Ptr m_originalIncidence;
-    qint64 m_collectionId = -1; // For when we want to edit, this is temporary
+    Akonadi::Collection m_collection; // For when we want to edit, this is temporary
     RemindersModel m_remindersModel;
     AttendeesModel m_attendeesModel;
     RecurrenceExceptionsModel m_recurrenceExceptionsModel;

@@ -19,7 +19,7 @@ MouseArea {
     property double clickX
     property double clickY
     property var incidenceData
-    property int collectionId
+    property var collection
     property var collectionDetails
 
     anchors.fill: parent
@@ -27,7 +27,7 @@ MouseArea {
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     onClicked: {
         if (mouse.button == Qt.LeftButton) {
-            collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+            collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collection)
             viewClicked(incidenceData);
         } else if (mouse.button == Qt.RightButton) {
             clickX = mouseX;
@@ -41,7 +41,7 @@ MouseArea {
         incidenceActions.createObject(mouseArea, {}).open();
     }
     onDoubleClicked: {
-        collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+        collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collection)
         editClicked(incidenceData.incidencePtr);
     }
 
@@ -52,7 +52,9 @@ MouseArea {
             y: mouseArea.clickY
             x: mouseArea.clickX
             z: 1000
-            Component.onCompleted: if(mouseArea.collectionId && !mouseArea.collectionDetails) mouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+            Component.onCompleted: if (!mouseArea.collectionDetails) {
+                mouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collection)
+            }
 
             QQC2.MenuItem {
                 icon.name: "dialog-icon-preview"

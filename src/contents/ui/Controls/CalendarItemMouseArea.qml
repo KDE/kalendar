@@ -11,7 +11,7 @@ import org.kde.kalendar 1.0 as Kalendar
 MouseArea {
     id: calendarMouseArea
 
-    signal deleteCalendar(int collectionId, var collectionDetails)
+    signal deleteCalendar(var collection, var collectionDetails)
 
     property double clickX
     property double clickY
@@ -41,7 +41,7 @@ MouseArea {
             id: colorDialog
             title: i18nc("@title:window", "Choose Calendar Color")
             color: calendarMouseArea.collectionDetails.color
-            onAccepted: Kalendar.CalendarManager.setCollectionColor(calendarMouseArea.collectionId, color)
+            onAccepted: Kalendar.CalendarManager.setCollectionColor(calendarMouseArea.collection, color)
             onRejected: {
                 close();
                 colorDialogLoader.active = false;
@@ -57,7 +57,9 @@ MouseArea {
             x: calendarMouseArea.clickX
             collectionId: calendarMouseArea.collectionId
             collectionDetails: calendarMouseArea.collectionDetails
-            Component.onCompleted: if(calendarMouseArea.collectionId && !calendarMouseArea.collectionDetails) calendarMouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(calendarMouseArea.collectionId)
+            Component.onCompleted: if (!calendarMouseArea.collectionDetails) {
+                calendarMouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(calendarMouseArea.collection)
+            }
         }
     }
 }

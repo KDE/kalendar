@@ -50,7 +50,7 @@ Kirigami.ScrollablePage {
         QQC2.Button {
             icon.name: editMode ? "document-save" : "list-add"
             text: editMode ? i18n("Save") : i18n("Add")
-            enabled: root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId
+            enabled: root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionIsValid
             QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
         }
 
@@ -60,7 +60,7 @@ Kirigami.ScrollablePage {
 
     QQC2.Action {
         id: submitAction
-        enabled: root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId
+        enabled: root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionIsValid
         shortcut: "Return"
         onTriggered: {
             if (editMode) {
@@ -139,12 +139,8 @@ Kirigami.ScrollablePage {
                     Kirigami.FormData.label: i18n("Calendar:")
                     Layout.fillWidth: true
 
-                    // Not using a property from the incidenceWrapper object makes currentIndex send old incidenceWrapper to function
-                    property int collectionId: root.incidenceWrapper.collectionId
-
                     textRole: "display"
                     valueRole: "collectionId"
-                    currentIndex: model && collectionId !== -1 ? CalendarManager.getCalendarSelectableIndex(root.incidenceWrapper) : -1
 
                     indicator: Rectangle {
                         id: indicatorDot
@@ -163,6 +159,7 @@ Kirigami.ScrollablePage {
                         } else if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
                             return [Akonadi.MimeTypes.todo]
                         }
+                        currentCollection: root.incidenceWrapper.collection
                         accessRightsFilter: Akonadi.Collection.CanCreateItem
                         onCurrentIndexChanged: addressBookComboBox.currentIndex = currentIndex
                         onCurrentCollectionChanged: contactEditor.setDefaultAddressBook(currentCollection)
@@ -176,7 +173,7 @@ Kirigami.ScrollablePage {
                             radius: width * 0.5
                             color: collectionColor
                         }
-                        onClicked: root.incidenceWrapper.collectionId = collectionId
+                        onClicked: root.incidenceWrapper.collection = collection
                     }
 
                     popup.z: 1000

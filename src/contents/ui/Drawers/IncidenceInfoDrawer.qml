@@ -55,7 +55,7 @@ Kirigami.OverlayDrawer {
         incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}',
                                               incidenceInfoDrawer, "incidence");
         incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidenceData.incidencePtr);
-        collectionData = CalendarManager.getCollectionDetails(incidenceWrapper.collectionId);
+        collectionData = CalendarManager.getCollectionDetails(incidenceWrapper.collection);
     }
 
     enabled: true

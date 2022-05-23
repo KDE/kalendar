@@ -44,7 +44,7 @@ class CollectionComboBoxModel : public QSortFilterProxyModel
     Q_OBJECT
     Q_PROPERTY(QStringList mimeTypeFilter READ mimeTypeFilter WRITE setMimeTypeFilter NOTIFY mimeTypeFilterChanged)
     Q_PROPERTY(Akonadi::Collection::Right accessRightsFilter READ accessRightsFilter WRITE setAccessRightsFilter NOTIFY accessRightsFilterChanged)
-    Q_PROPERTY(Akonadi::Collection currentCollection READ currentCollection NOTIFY currentCollectionChanged)
+    Q_PROPERTY(Akonadi::Collection currentCollection READ currentCollection WRITE setDefaultCollection NOTIFY currentCollectionChanged)
     Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
 
 public:

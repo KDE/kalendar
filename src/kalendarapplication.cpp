@@ -553,7 +553,7 @@ void KalendarApplication::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
     m_calendar = calendar;
 }
 
-void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId)
+void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, Akonadi::Collection collection)
 {
     if (!m_calendar) {
         return;
@@ -565,7 +565,6 @@ void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qin
     if (merge) {
         connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &KalendarApplication::importFinished);
         connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &KalendarApplication::importIntoExistingFinished);
-        auto collection = m_calendar->collection(collectionId);
         jobStarted = importer->importIntoExistingResource(url, collection);
     } else {
         connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &KalendarApplication::importFinished);

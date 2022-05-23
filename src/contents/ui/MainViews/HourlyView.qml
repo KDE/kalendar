@@ -1063,7 +1063,7 @@ Kirigami.Page {
                                                         id: mouseArea
                                                         preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
                                                         incidenceData: modelData
-                                                        collectionId: modelData.collectionId
+                                                        collection: modelData.collection
 
                                                         drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? parent : undefined
                                                         onReleased: parent.Drag.drop()

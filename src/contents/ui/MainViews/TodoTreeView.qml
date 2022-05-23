@@ -197,7 +197,7 @@ TreeListView {
             implicitWidth: todoItemContents.implicitWidth
             implicitHeight: todoItemContents.implicitHeight + (Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing)
             incidenceData: model
-            collectionId: model.collectionId
+            collection: model.collection
             propagateComposedEvents: true
             preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
 

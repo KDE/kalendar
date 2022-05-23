@@ -24,6 +24,13 @@ void AkonadiQuickPlugin::registerTypes(const char *uri)
         return new Akonadi::Quick::MimeTypes;
     });
 
+    qmlRegisterSingletonType<Akonadi::Quick::Collection>("org.kde.akonadi", 1, 0, "CollectionHelper", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new Akonadi::Quick::Collection;
+    });
+
+
     qmlRegisterType<Akonadi::Quick::CollectionComboBoxModel>("org.kde.akonadi", 1, 0, "CollectionComboBoxModel");
     qmlRegisterType<Akonadi::Quick::CollectionPickerModel>("org.kde.akonadi", 1, 0, "CollectionPickerModel");
 

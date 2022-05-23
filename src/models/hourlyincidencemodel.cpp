@@ -153,6 +153,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
             {QStringLiteral("isReadOnly"), idx.data(IncidenceOccurrenceModel::IsReadOnly)},
             {QStringLiteral("color"), idx.data(IncidenceOccurrenceModel::Color)},
             {QStringLiteral("collectionId"), idx.data(IncidenceOccurrenceModel::CollectionId)},
+            {QStringLiteral("collection"), idx.data(IncidenceOccurrenceModel::Collection)},
             {QStringLiteral("incidenceId"), idx.data(IncidenceOccurrenceModel::IncidenceId)},
             {QStringLiteral("incidenceType"), idx.data(IncidenceOccurrenceModel::IncidenceType)},
             {QStringLiteral("incidenceTypeStr"), idx.data(IncidenceOccurrenceModel::IncidenceTypeStr)},

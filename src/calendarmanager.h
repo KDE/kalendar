@@ -7,6 +7,7 @@
 #include <QObject>
 
 #include <akonadi-calendar_version.h>
+#include <akonadi/collection.h>
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/ETMCalendar>
 #include <Akonadi/IncidenceChanger>
@@ -64,7 +65,7 @@ public:
     Akonadi::ETMCalendar::Ptr calendar() const;
     Akonadi::IncidenceChanger *incidenceChanger() const;
     Akonadi::CollectionFilterProxyModel *allCalendars();
-    Q_INVOKABLE qint64 defaultCalendarId(IncidenceWrapper *incidenceWrapper);
+    Q_INVOKABLE Akonadi::Collection defaultCalendar(IncidenceWrapper *incidenceWrapper);
     QVariantMap undoRedoData();
 
     Q_INVOKABLE Akonadi::Item incidenceItem(KCalendarCore::Incidence::Ptr incidence);
@@ -78,18 +79,18 @@ public:
     Q_INVOKABLE bool hasChildren(KCalendarCore::Incidence::Ptr incidence);
     void deleteAllChildren(KCalendarCore::Incidence::Ptr incidence);
     Q_INVOKABLE void deleteIncidence(KCalendarCore::Incidence::Ptr incidence, bool deleteChildren = false);
-    Q_INVOKABLE void changeIncidenceCollection(KCalendarCore::Incidence::Ptr incidence, qint64 collectionId);
-    void changeIncidenceCollection(Akonadi::Item item, qint64 collectionId);
-    Q_INVOKABLE QVariantMap getCollectionDetails(QVariant collectionId);
-    Q_INVOKABLE void setCollectionColor(qint64 collectionId, const QColor &color);
+    Q_INVOKABLE void changeIncidenceCollection(KCalendarCore::Incidence::Ptr incidence, Akonadi::Collection collection);
+    void changeIncidenceCollection(Akonadi::Item item, Akonadi::Collection collection);
+    Q_INVOKABLE QVariantMap getCollectionDetails(Akonadi::Collection collection);
+    Q_INVOKABLE void setCollectionColor(Akonadi::Collection collection, const QColor &color);
     Q_INVOKABLE QVariant getIncidenceSubclassed(KCalendarCore::Incidence::Ptr incidencePtr);
     Q_INVOKABLE void undoAction();
     Q_INVOKABLE void redoAction();
 
     Q_INVOKABLE void updateAllCollections();
-    Q_INVOKABLE void updateCollection(qint64 collectionId);
-    Q_INVOKABLE void deleteCollection(qint64 collectionId);
-    Q_INVOKABLE void editCollection(qint64 collectionId);
+    Q_INVOKABLE void updateCollection(Akonadi::Collection collection);
+    Q_INVOKABLE void deleteCollection(Akonadi::Collection collection);
+    Q_INVOKABLE void editCollection(Akonadi::Collection collection);
 
 private Q_SLOTS:
     void delayedInit();

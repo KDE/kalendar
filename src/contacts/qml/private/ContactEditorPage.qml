@@ -417,4 +417,19 @@ Kirigami.ScrollablePage {
     //        }
     //    }
     //}
+
+
+    footer: QQC2.DialogButtonBox {
+        standardButtons: QQC2.DialogButtonBox.Cancel
+
+        QQC2.Button {
+            icon.name: mode === ContactEditor.EditMode ? "document-save" : "list-add"
+            text: ContactEditor.CreateMode ? i18n("Save") : i18n("Add")
+            enabled: root.validDates && incidenceWrapper.summary && incidenceWrapper.collectionId
+            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+        }
+
+        onRejected: cancel()
+        onAccepted: submitAction.trigger()
+    }
 }

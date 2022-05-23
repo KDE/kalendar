@@ -42,7 +42,7 @@ void IncidenceWrapper::notifyDataChanged()
     Q_EMIT incidenceTypeChanged();
     Q_EMIT incidenceTypeStrChanged();
     Q_EMIT incidenceIconNameChanged();
-    Q_EMIT collectionIdChanged();
+    Q_EMIT collectionChanged();
     Q_EMIT summaryChanged();
     Q_EMIT categoriesChanged();
     Q_EMIT descriptionChanged();
@@ -80,7 +80,7 @@ void IncidenceWrapper::setIncidenceItem(const Akonadi::Item &incidenceItem)
         setItem(incidenceItem);
         setIncidencePtr(incidenceItem.payload<KCalendarCore::Incidence::Ptr>());
         Q_EMIT incidenceItemChanged();
-        Q_EMIT collectionIdChanged();
+        Q_EMIT collectionChanged();
     } else {
         qCWarning(KALENDAR_LOG) << "This is not an incidence item.";
     }
@@ -128,15 +128,25 @@ QString IncidenceWrapper::uid() const
     return m_incidence->uid();
 }
 
-qint64 IncidenceWrapper::collectionId() const
+Akonadi::Collection IncidenceWrapper::collection() const
 {
-    return m_collectionId < 0 ? item().parentCollection().id() : m_collectionId;
+    return m_collection.id() < 0 ? item().parentCollection() : m_collection;
 }
 
-void IncidenceWrapper::setCollectionId(qint64 collectionId)
+bool IncidenceWrapper::collectionIsValid() const
 {
-    m_collectionId = collectionId;
-    Q_EMIT collectionIdChanged();
+    return collection().isValid();
+}
+
+qint64 IncidenceWrapper::collectionId() const
+{
+    return collection().id();
+}
+
+void IncidenceWrapper::setCollection(Akonadi::Collection collection)
+{
+    m_collection = collection;
+    Q_EMIT collectionChanged();
 }
 
 QString IncidenceWrapper::parent() const

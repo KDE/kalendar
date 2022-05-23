@@ -48,6 +48,7 @@ public:
         PriorityRole,
         ColorRole,
         CollectionIdRole,
+        CollectionRole,
         DurationStringRole,
         RecursRole,
         IsOverdueRole,

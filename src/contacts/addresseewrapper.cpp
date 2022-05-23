@@ -31,7 +31,7 @@ AddresseeWrapper::~AddresseeWrapper() = default;
 
 void AddresseeWrapper::notifyDataChanged()
 {
-    Q_EMIT collectionIdChanged();
+    Q_EMIT collectionChanged();
     Q_EMIT nameChanged();
     Q_EMIT birthdayChanged();
     Q_EMIT photoChanged();
@@ -68,7 +68,7 @@ void AddresseeWrapper::setAddresseeItem(const Akonadi::Item &addresseeItem)
         setItem(addresseeItem);
         setAddressee(addresseeItem.payload<KContacts::Addressee>());
         Q_EMIT addresseeItemChanged();
-        Q_EMIT collectionIdChanged();
+        Q_EMIT collectionChanged();
     } else {
         // Payload not found, try to fetch it
         auto job = new Akonadi::ItemFetchJob(addresseeItem);
@@ -80,7 +80,7 @@ void AddresseeWrapper::setAddresseeItem(const Akonadi::Item &addresseeItem)
                 setItem(item);
                 setAddressee(item.payload<KContacts::Addressee>());
                 Q_EMIT addresseeItemChanged();
-                Q_EMIT collectionIdChanged();
+                Q_EMIT collectionChanged();
             } else {
                 qCWarning(KALENDAR_LOG) << "This is not an addressee item.";
             }
@@ -112,15 +112,15 @@ QString AddresseeWrapper::uid() const
     return m_addressee.uid();
 }
 
-qint64 AddresseeWrapper::collectionId() const
+Akonadi::Collection AddresseeWrapper::collection() const
 {
-    return m_collectionId < 0 ? item().parentCollection().id() : m_collectionId;
+    return !m_collection.isValid() ? item().parentCollection() : m_collection;
 }
 
-void AddresseeWrapper::setCollectionId(qint64 collectionId)
+void AddresseeWrapper::setCollection(Akonadi::Collection collection)
 {
-    m_collectionId = collectionId;
-    Q_EMIT collectionIdChanged();
+    m_collection = collection;
+    Q_EMIT collectionChanged();
 }
 
 QString AddresseeWrapper::name() const
