@@ -159,6 +159,8 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    KBMNavigationMouseArea { anchors.fill: parent }
+
     Connections {
         target: KalendarApplication
         function onOpenMonthView() {

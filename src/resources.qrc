@@ -45,7 +45,7 @@ SPDX-License-Identifier: CC0-1.0
 
     <file alias="TitleDateButton.qml">contents/ui/Controls/TitleDateButton.qml</file>
     <file alias="IncidenceMouseArea.qml">contents/ui/Controls/IncidenceMouseArea.qml</file>
-    <file alias="KeyboardNavigationMouseArea.qml">contents/ui/Controls/KeyboardNavigationMouseArea.qml</file>
+    <file alias="KBMNavigationMouseArea.qml">contents/ui/Controls/KBMNavigationMouseArea.qml</file>
     <file alias="DayMouseArea.qml">contents/ui/Controls/DayMouseArea.qml</file>
     <file alias="ColoredCheckbox.qml">contents/ui/Controls/ColoredCheckbox.qml</file>
     <file alias="Tag.qml">contents/ui/Controls/Tag.qml</file>

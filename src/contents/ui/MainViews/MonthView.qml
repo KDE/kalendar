@@ -225,7 +225,5 @@ Kirigami.Page {
             }
         }
     }
-
-    KeyboardNavigationMouseArea {}
 }
 

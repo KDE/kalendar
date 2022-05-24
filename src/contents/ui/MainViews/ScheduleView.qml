@@ -594,6 +594,4 @@ Kirigami.Page {
             }
         }
     }
-
-    KeyboardNavigationMouseArea {}
 }
