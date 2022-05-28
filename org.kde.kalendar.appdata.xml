@@ -87,7 +87,7 @@
     <p xml:lang="ar">التقويم هو تطبيق تقويم يسمح لك بإدارة مهامك وأحداثك. ويدعم كلاً من التقويمات المحلية بالإضافة إلى العديد من التقاويم عبر الإنترنت: Nextcloud و Google® Calendar و Outlook® و Caldav وغيرها الكثير.</p>
     <p xml:lang="az">Kalendar, sizə tapşırıqlarınızı və tədbirlərinizi idarə etməyə imkan verən bir təqvim tətbiqidir. Kalendar, həm yerli həm də NextCloud, Google® Təqvim, Outlook®, CalDav və bir çoxları kimi onlayn təqvimləri dətəkləyir.</p>
     <p xml:lang="ca">El Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, així com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
-    <p xml:lang="ca-valencia">Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, així com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
+    <p xml:lang="ca-valencia">Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, aixina com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
     <p xml:lang="el">Το Kalendar είναι μια εφαρμογή ημερολογίου που σας επιτρέπει να διαχειρίζεστε εργασίες και γεγονότα. Το Kalendar υποστηρίζει τοπικά ημερολόγια καθώς επίσης και μαι πληθώρα επιγραμμικών (online) ημερολογίων: Nextcloud, Google® Calendar, Outlook®, Caldav, και πολλά άλλα.</p>
     <p xml:lang="en-GB">Kalendar is a calendar application that allows you to manage your tasks and events. Kalendar supports both local calendars as well as a multitude of online calendars: Nextcloud, Google® Calendar, Outlook®, Caldav, and many more.</p>
     <p xml:lang="es">Kalendar es una aplicación de calendarios que permite la gestión de tareas y eventos. Kalendar puede usar calendarios locales y muchos tipos de calendarios en línea: Nextcloud, Google® Calendar, Outlook® y Caldav, entre otros.</p>
@@ -147,7 +147,7 @@
     <p xml:lang="ar">صمم التقويم بفكرة أن تكون قابل للاستخدام على سطح المكتب وعلى الهاتف المحمول وكل شيء بينهما.</p>
     <p xml:lang="az">Kalendar, Masaüstü, mobil və onlar arasındakı cihazlarda istifadə ediləbiləcək şəkildə hazırlanmışdır.</p>
     <p xml:lang="ca">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
-    <p xml:lang="ca-valencia">Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
+    <p xml:lang="ca-valencia">Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot lo que hi ha entre ells.</p>
     <p xml:lang="cs">Kalendar byl navržen s myšlenkou vysoké použitelnosti na počítači, mobilním telefonu a čímkoliv mezi.</p>
     <p xml:lang="el">το Kalendar κατασκευάστηκε με την ιδέα της χρηστικότητας στην επιφάνεια εργασίας, στο κινητό και σε οτιδήποτε ενδιάμεσα.</p>
     <p xml:lang="en-GB">Kalendar was built with the idea to be usable on desktop, on mobile and everything in between.</p>
