@@ -24,6 +24,21 @@ Kirigami.ScrollablePage {
                 Config.save();
             }
         }
+        RowLayout {
+            Kirigami.FormData.label: i18n("Past event transparency:")
+            Layout.fillWidth: true
+            Controls.Slider {
+                stepSize: 1.0
+                from: 0.0
+                to: 100.0
+                value: Config.pastEventsTransparencyLevel * 100
+                onMoved: {
+                    Config.pastEventsTransparencyLevel = value / 100;
+                    Config.save();
+                }
+            }
+        }
+
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Month View settings")

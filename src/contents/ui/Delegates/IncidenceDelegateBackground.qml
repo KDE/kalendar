@@ -5,6 +5,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
+import org.kde.kalendar 1.0 as Kalendar
 import "labelutils.js" as LabelUtils
 
 Kirigami.ShadowedRectangle {
@@ -17,7 +18,7 @@ Kirigami.ShadowedRectangle {
 
     anchors.fill: parent
     color: isOpenOccurrence ? modelData.color :
-        LabelUtils.getIncidenceDelegateBackgroundColor(modelData.color, root.isDark)
+        LabelUtils.getIncidenceDelegateBackgroundColor(modelData, root.isDark, Kalendar.Config.pastEventsTransparencyLevel)
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
     opacity: isOpenOccurrence || isInCurrentMonth ? 1.0 : 0
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
