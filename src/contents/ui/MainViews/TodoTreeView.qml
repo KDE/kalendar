@@ -9,19 +9,12 @@ import org.kde.kirigami 2.14 as Kirigami
 //import org.kde.kirigamiaddons.treeview 1.0 as KirigamiAddonsTreeView
 
 import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.utils 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
 TreeListView {
     id: root
-
-    signal addTodo(int collectionId)
-    signal viewTodo(var todoData)
-    signal editTodo(var todoPtr)
-    signal deleteTodo(var todoPtr, date deleteDate)
-    signal completeTodo(var todoPtr)
-    signal addSubTodo(var parentWrapper)
-    signal deselect()
 
     property date currentDate: new Date()
     property var filter
@@ -84,7 +77,7 @@ TreeListView {
         anchors.fill: parent
         enabled: !Kirigami.Settings.isMobile
         parent: background
-        onClicked: deselect()
+        onClicked: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
         propagateComposedEvents: true
     }
 
@@ -116,7 +109,7 @@ TreeListView {
         helpfulAction: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: root.addTodo(filter.collectionId);
+            onTriggered: KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), filter.collectionId);
         }
     }
 
@@ -190,27 +183,33 @@ TreeListView {
             }
         ]
 
+        onClicked: KalendarUiUtils.setUpView(model)
+
         contentItem: IncidenceMouseArea {
             id: mouseArea
 
             anchors.fill: undefined
             implicitWidth: todoItemContents.implicitWidth
             implicitHeight: todoItemContents.implicitHeight + (Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing)
+
             incidenceData: model
             collectionId: model.collectionId
+
+            acceptedButtons: Qt.RightButton
             propagateComposedEvents: true
             preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
 
             drag.target: !Kirigami.Settings.isMobile && !model.isReadOnly && root.dragDropEnabled ? listItem : undefined
             onReleased: listItem.Drag.drop()
 
-            onViewClicked: root.viewTodo(model), listItem.clicked()
-            onEditClicked: root.editTodo(model.incidencePtr)
-            onDeleteClicked: root.deleteTodo(model.incidencePtr, model.endTime ? model.endTime : model.startTime ? model.startTime : null)
+            onViewClicked: listItem.clicked()
+            onEditClicked: KalendarUiUtils.setUpEdit(model.incidencePtr)
+            onDeleteClicked: KalendarUiUtils.setUpDelete(model.incidencePtr,
+                                                         model.endTime ? model.endTime :
+                                                                         model.startTime ? model.startTime :
+                                                                                           null)
             onTodoCompletedClicked: model.checked = model.checked === 0 ? 2 : 0
-            onAddSubTodoClicked: root.addSubTodo(parentWrapper)
-
-            onClicked: root.viewTodo(model)
+            onAddSubTodoClicked: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
 
             GridLayout {
                 id: todoItemContents
@@ -281,7 +280,7 @@ TreeListView {
                     color: model.color
                     radius: 100
                     checked: model.todoCompleted
-                    onClicked: completeTodo(model.incidencePtr)
+                    onClicked: KalendarUiUtils.completeTodo(model.incidencePtr)
                 }
 
                 QQC2.Label {

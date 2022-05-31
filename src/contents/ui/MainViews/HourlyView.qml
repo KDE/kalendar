@@ -8,23 +8,12 @@ import org.kde.kirigami 2.14 as Kirigami
 import QtGraphicalEffects 1.12
 
 import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.utils 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
 Kirigami.Page {
     id: root
-
-    signal addIncidence(int type, date addDate, bool includeTime)
-    signal viewIncidence(var modelData)
-    signal editIncidence(var incidencePtr)
-    signal deleteIncidence(var incidencePtr, date deleteDate)
-    signal completeTodo(var incidencePtr)
-    signal addSubTodo(var parentWrapper)
-    signal deselect()
-    signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
-    signal convertIncidence(bool allDay, int startOffset, int endOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
-    signal resizeIncidence(int endOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
-    signal openDayView(date selectedDate)
 
     property var openOccurrence: ({})
     property var model
@@ -285,7 +274,7 @@ Kirigami.Page {
 
                                 flat: true
                                 enabled: root.daysToShow > 1
-                                onClicked: root.openDayView(dayHeading.headingDate)
+                                onClicked: KalendarUiUtils.openDayLayer(dayHeading.headingDate)
                             }
                         }
                     }
@@ -496,7 +485,7 @@ Kirigami.Page {
 
                                                                 addDate: parent.date
                                                                 onAddNewIncidence: root.addIncidence(type, addDate, false)
-                                                                onDeselect: root.deselect()
+                                                                onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
 
                                                                 DropArea {
                                                                     id: multiDayViewIncidenceDropArea
@@ -519,9 +508,9 @@ Kirigami.Page {
                                                                          */
                                                                         if (drop.source.objectName === 'hourlyIncidenceDelegateBackgroundBackground') {
                                                                             // This is conversion from non-multiday to multiday
-                                                                            root.convertIncidence(true, offset, offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                                            KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, offset, offset, drop.source.occurrenceDate, drop.source, true)
                                                                         } else {
-                                                                            root.moveIncidence(offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                                            KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, offset, offset, drop.source.occurrenceDate, drop.source)
                                                                         }
                                                                     }
                                                                 }
@@ -843,7 +832,8 @@ Kirigami.Page {
                                                                         const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), backgroundRectangle.index, dropAreaRepeater.minutes * index);
 
                                                                         const startOffset = posDate.getTime() - drop.source.occurrenceDate.getTime();
-                                                                        root.moveIncidence(startOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+
+                                                                        KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, drop.source.occurrenceDate, drop.source);
 
                                                                     } else if(drop.source.objectName === "multiDayIncidenceDelegateBackgroundBackground") {
                                                                         incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
@@ -861,7 +851,7 @@ Kirigami.Page {
                                                                         const startOffset = startPosDate.getTime() - drop.source.occurrenceDate.getTime();
                                                                         const endOffset = endPosDate.getTime() - drop.source.occurrenceEndDate.getTime();
 
-                                                                        root.convertIncidence(false, startOffset, endOffset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                                        KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, drop.source.occurrenceDate, drop.source);
 
                                                                     } else { // The resize affects the end time
                                                                         incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.resizerSeparator.parent.incidencePtr);
@@ -878,7 +868,8 @@ Kirigami.Page {
                                                                         const posDate = new Date(backgroundDayMouseArea.addDate.getFullYear(), backgroundDayMouseArea.addDate.getMonth(), backgroundDayMouseArea.addDate.getDate(), hour, minute);
 
                                                                         const endOffset = posDate.getTime() - drop.source.resizerSeparator.parent.occurrenceEndDate.getTime();
-                                                                        root.resizeIncidence(endOffset, drop.source.resizerSeparator.parent.occurrenceDate, incidenceWrapper, drop.source.resizerSeparator.parent);
+
+                                                                        KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, drop.source.resizerSeparator.parent.occurrenceDate, drop.source.resizerSeparator.parent);
                                                                     }
                                                                 }
 
@@ -896,8 +887,8 @@ Kirigami.Page {
                                                         id: backgroundDayMouseArea
                                                         anchors.fill: parent
                                                         addDate: new Date(DateUtils.addDaysToDate(viewLoader.startDate, dayColumn.index).setHours(index))
-                                                        onAddNewIncidence: addIncidence(type, addDate, true)
-                                                        onDeselect: root.deselect()
+                                                        onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate, null, true)
+                                                        onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
                                                     }
                                                 }
                                             }
@@ -1068,11 +1059,11 @@ Kirigami.Page {
                                                         drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? parent : undefined
                                                         onReleased: parent.Drag.drop()
 
-                                                        onViewClicked: viewIncidence(modelData)
-                                                        onEditClicked: editIncidence(incidencePtr)
-                                                        onDeleteClicked: deleteIncidence(incidencePtr, deleteDate)
-                                                        onTodoCompletedClicked: completeTodo(incidencePtr)
-                                                        onAddSubTodoClicked: root.addSubTodo(parentWrapper)
+                                                        onViewClicked: KalendarUiUtils.setUpView(modelData)
+                                                        onEditClicked: KalendarUiUtils.setUpEdit(incidencePtr)
+                                                        onDeleteClicked: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
+                                                        onTodoCompletedClicked: KalendarUiUtils.completeTodo(incidencePtr)
+                                                        onAddSubTodoClicked: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
                                                     }
 
                                                     ResizerSeparator {

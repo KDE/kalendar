@@ -8,29 +8,47 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 
 import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.utils 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
 Kirigami.Page {
     id: root
 
-    signal addIncidence(int type, date addDate)
-    signal viewIncidence(var modelData)
-    signal editIncidence(var incidencePtr)
-    signal deleteIncidence(var incidencePtr, date deleteDate)
-    signal completeTodo(var incidencePtr)
-    signal addSubTodo(var parentWrapper)
-    signal deselect()
-    signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
-    signal openDayView(date selectedDate)
+    function addIncidence(type, addDate) {
+        pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
+        KalendarUiUtils.setUpAdd(type, addDate);
+    }
 
-    onAddIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
-    onViewIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
-    onEditIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
-    onDeleteIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
-    onCompleteTodo: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
-    onAddSubTodo: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
-    onMoveIncidence: pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition
+    function viewIncidence(modelData) {
+        pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
+        KalendarUiUtils.setUpView(modelData);
+    }
+
+    function editIncidence(incidencePtr) {
+        pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
+        KalendarUiUtils.setUpEdit(incidencePtr);
+    }
+
+    function deleteIncidence(incidencePtr, deleteDate) {
+        pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
+        KalendarUiUtils.setUpDelete(incidencePtr, deleteDate);
+    }
+
+    function completeTodo(incidencePtr) {
+        pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
+        KalendarUiUtils.completeTodo(incidencePtr);
+    }
+
+    function addSubTodo(parentWrapper) {
+        pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
+        KalendarUiUtils.setUpAddSubTodo(parentWrapper);
+    }
+
+    function moveIncidence(startOffset, occurrenceDate, incidenceWrapper, caughtDelegate) {
+        pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
+        KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate);
+    }
 
     property var openOccurrence
     property var model
@@ -223,7 +241,7 @@ Kirigami.Page {
 
                         addDate: periodStartDate
                         onAddNewIncidence: addIncidence(type, addDate)
-                        onDeselect: root.deselect()
+                        onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
 
                         Rectangle {
                             id: backgroundRectangle
@@ -315,7 +333,7 @@ Kirigami.Page {
                                     rightPadding: Kirigami.Units.largeSpacing
 
                                     flat: true
-                                    onClicked: root.openDayView(periodStartDate)
+                                    onClicked: KalendarUiUtils.openDayLayer(periodStartDate)
 
                                     property Item smallDayLabel: QQC2.Label {
                                         id: smallDayLabel

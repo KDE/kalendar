@@ -9,21 +9,12 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 
 import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.utils 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
 Item {
     id: root
-
-    signal addIncidence(int type, date addDate)
-    signal viewIncidence(var modelData)
-    signal editIncidence(var incidencePtr)
-    signal deleteIncidence(var incidencePtr, date deleteDate)
-    signal completeTodo(var incidencePtr)
-    signal addSubTodo(var parentWrapper)
-    signal deselect()
-    signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
-    signal openDayView(date selectedDate)
 
     property var openOccurrence
     property var model
@@ -154,8 +145,8 @@ Item {
                                                 id: backgroundDayMouseArea
                                                 anchors.fill: parent
                                                 addDate: gridItem.date
-                                                onAddNewIncidence: addIncidence(type, addDate)
-                                                onDeselect: root.deselect()
+                                                onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate)
+                                                onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
 
                                                 DropArea {
                                                     id: incidenceDropArea
@@ -175,7 +166,7 @@ Item {
                                                         let sameTimeOnDate = new Date(backgroundDayMouseArea.addDate);
                                                         sameTimeOnDate = new Date(sameTimeOnDate.setHours(drop.source.occurrenceDate.getHours(), drop.source.occurrenceDate.getMinutes()));
                                                         const offset = sameTimeOnDate.getTime() - drop.source.occurrenceDate.getTime();
-                                                        root.moveIncidence(offset, drop.source.occurrenceDate, incidenceWrapper, drop.source);
+                                                        KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, offset, offset, drop.source.occurrenceDate, drop.source)
                                                     }
                                                 }
                                             }
@@ -191,7 +182,7 @@ Item {
                                             flat: true
                                             visible: root.showDayIndicator
                                             enabled: root.daysToShow > 1
-                                            onClicked: root.openDayView(gridItem.date)
+                                            onClicked: KalendarUiUtils.openDayLayer(gridItem.date)
 
                                             contentItem: RowLayout {
                                                 id: dayNumberLayout
@@ -290,7 +281,7 @@ Item {
                                             var localpos = child.mapFromGlobal(globalPos.x, globalPos.y);
 
                                             if(child.contains(localpos) && child.gridSquareDate) {
-                                                addIncidence(type, child.gridSquareDate);
+                                                KalendarUiUtils.setUpAdd(type, child.gridSquareDate);
                                             } else {
                                                 useGridSquareDate(type, child, globalPos);
                                             }
@@ -298,7 +289,7 @@ Item {
                                     }
 
                                     onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
-                                    onDeselect: root.deselect()
+                                    onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
                                 }
 
                                 model: incidences

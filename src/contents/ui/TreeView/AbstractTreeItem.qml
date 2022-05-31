@@ -127,11 +127,10 @@ QQC2.ItemDelegate {
         if (ListView.view && typeof index !== "undefined") {
             ListView.view.currentIndex = index;
         }
-        if (!action) {
-            return;
+        if (action) {
+            action.trigger();
         }
 
-        action.trigger();
         checked = Qt.binding(function() { return action.checked });
     }
 

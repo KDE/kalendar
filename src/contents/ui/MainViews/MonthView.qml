@@ -14,16 +14,6 @@ import "dateutils.js" as DateUtils
 Kirigami.Page {
     id: monthPage
 
-    signal addIncidence(int type, date addDate)
-    signal viewIncidence(var modelData)
-    signal editIncidence(var incidencePtr)
-    signal deleteIncidence(var incidencePtr, date deleteDate)
-    signal completeTodo(var incidencePtr)
-    signal addSubTodo(var parentWrapper)
-    signal deselect()
-    signal moveIncidence(int startOffset, date occurrenceDate, var incidenceWrapper, Item caughtDelegate)
-    signal openDayView(date selectedDate)
-
     property var openOccurrence
     property var model
     property date startDate
@@ -212,16 +202,6 @@ Kirigami.Page {
                 }
 
                 openOccurrence: monthPage.openOccurrence
-
-                onAddIncidence: monthPage.addIncidence(type, addDate)
-                onViewIncidence: monthPage.viewIncidence(modelData)
-                onEditIncidence: monthPage.editIncidence(incidencePtr)
-                onDeleteIncidence: monthPage.deleteIncidence(incidencePtr, deleteDate)
-                onCompleteTodo: monthPage.completeTodo(incidencePtr)
-                onAddSubTodo: monthPage.addSubTodo(parentWrapper)
-                onDeselect: monthPage.deselect()
-                onMoveIncidence: monthPage.moveIncidence(startOffset, occurrenceDate, incidenceWrapper, caughtDelegate)
-                onOpenDayView: monthPage.openDayView(selectedDate)
             }
         }
     }

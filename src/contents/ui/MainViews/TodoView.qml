@@ -11,19 +11,12 @@ import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
 
 import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.utils 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
 Kirigami.ScrollablePage {
     id: root
-
-    signal addTodo(int collectionId)
-    signal viewTodo(var todoData)
-    signal editTodo(var todoPtr)
-    signal deleteTodo(var todoPtr, date deleteDate)
-    signal completeTodo(var todoPtr)
-    signal addSubTodo(var parentWrapper)
-    signal deselect
 
     // We need to store a copy of opened incidence data or we will lose it as we scroll the listviews.
     function retainTodoData(todoData) {
@@ -36,11 +29,11 @@ Kirigami.ScrollablePage {
             endTime: todoData.endTime,
             durationString: todoData.durationString
         };
-        viewTodo(retainedTodoData);
+        KalendarUiUtils.setUpView(retainedTodoData);
     }
 
-    property var retainedTodoData: {}
-    property var retainedCollectionData: {}
+    property var retainedTodoData: ({})
+    property var retainedCollectionData: ({})
     property var mode: Kalendar.KalendarApplication.Todo
 
     property var filter: {
@@ -80,7 +73,7 @@ Kirigami.ScrollablePage {
         main: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: root.addTodo(root.filter.collectionId);
+            onTriggered: KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), root.filter.collectionId);
         }
         left: Kirigami.Action {
             text: i18n("Sort")
@@ -138,25 +131,6 @@ Kirigami.ScrollablePage {
             showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
             sortBy: root.sortBy
             ascendingOrder: root.ascendingOrder
-            onAddTodo: {
-                root.addTodo(collectionId)
-                completedSheet.closeDialog();
-            }
-            onViewTodo: {
-                root.retainTodoData(todoData);
-                completedSheet.closeDialog();
-            }
-            onEditTodo: {
-                root.editTodo(todoPtr);
-                completedSheet.closeDialog();
-            }
-            onDeleteTodo: {
-                root.deleteTodo(todoPtr, deleteDate);
-                completedSheet.closeDialog();
-            }
-            onDeselect: root.deselect()
-            onCompleteTodo: root.completeTodo(todoPtr);
-            onAddSubTodo: root.addSubTodo(parentWrapper)
         }
     }
 
@@ -189,13 +163,6 @@ Kirigami.ScrollablePage {
         showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
         sortBy: root.sortBy
         ascendingOrder: root.ascendingOrder
-        onAddTodo: root.addTodo(collectionId)
-        onViewTodo: root.retainTodoData(todoData)
-        onEditTodo: root.editTodo(todoPtr)
-        onDeleteTodo: root.deleteTodo(todoPtr, deleteDate)
-        onCompleteTodo: root.completeTodo(todoPtr);
-        onAddSubTodo: root.addSubTodo(parentWrapper)
-        onDeselect: root.deselect()
     }
 
 

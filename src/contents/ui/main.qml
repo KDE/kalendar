@@ -528,6 +528,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    property alias incidenceInfoDrawer: incidenceInfoDrawer
     contextDrawer: IncidenceInfoDrawer {
         id: incidenceInfoDrawer
 
@@ -1020,16 +1021,6 @@ Kirigami.ApplicationWindow {
             openOccurrence: root.openOccurrence
             model: monthScaleModelLoader.item
 
-            onAddIncidence: KalendarUiUtils.setUpAdd(type, addDate)
-            onViewIncidence: KalendarUiUtils.setUpView(modelData)
-            onEditIncidence: KalendarUiUtils.setUpEdit(incidencePtr)
-            onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
-            onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
-            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfoDrawer.close()
-            onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
-            onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
-
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
 
@@ -1055,16 +1046,6 @@ Kirigami.ApplicationWindow {
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, day)
-
-            onAddIncidence: KalendarUiUtils.setUpAdd(type, addDate)
-            onViewIncidence: KalendarUiUtils.setUpView(modelData)
-            onEditIncidence: KalendarUiUtils.setUpEdit(incidencePtr)
-            onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
-            onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
-            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfoDrawer.close()
-            onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate)
-            onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
 
             actions.contextualActions: createAction
         }
@@ -1137,18 +1118,6 @@ Kirigami.ApplicationWindow {
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialWeek) root.selectedDate = new Date (year, month, day)
 
-            onAddIncidence: KalendarUiUtils.setUpAdd(type, addDate, null, includeTime)
-            onViewIncidence: KalendarUiUtils.setUpView(modelData)
-            onEditIncidence: KalendarUiUtils.setUpEdit(incidencePtr)
-            onDeleteIncidence: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
-            onCompleteTodo: KalendarUiUtils.completeTodo(incidencePtr)
-            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfoDrawer.close()
-            onMoveIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, occurrenceDate, caughtDelegate) // We move the entire incidence
-            onConvertIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, endOffset, occurrenceDate, caughtDelegate, allDay) // We convert incidence from/to allDay
-            onResizeIncidence: KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, 0, endOffset, occurrenceDate, caughtDelegate)
-            onOpenDayView: KalendarUiUtils.openDayLayer(selectedDate)
-
             actions.contextualActions: createAction
         }
     }
@@ -1185,14 +1154,6 @@ Kirigami.ApplicationWindow {
             }
 
             filter: root.filter
-
-            onAddTodo: KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), collectionId)
-            onViewTodo: KalendarUiUtils.setUpView(todoData)
-            onEditTodo: KalendarUiUtils.setUpEdit(todoPtr)
-            onDeleteTodo: KalendarUiUtils.setUpDelete(todoPtr, deleteDate)
-            onCompleteTodo: KalendarUiUtils.completeTodo(todoPtr)
-            onAddSubTodo: KalendarUiUtils.setUpAddSubTodo(parentWrapper)
-            onDeselect: incidenceInfoDrawer.close()
         }
     }
 
