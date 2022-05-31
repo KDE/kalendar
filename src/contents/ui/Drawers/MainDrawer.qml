@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.16 as Kirigami
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
+import org.kde.kalendar.mail 1.0
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
 import QtGraphicalEffects 1.12
@@ -250,6 +251,14 @@ Kirigami.OverlayDrawer {
                                     contactViewAction.trigger()
                                     if (mainDrawer.modal) mainDrawer.close()
                                 }
+                            },
+                            KActionFromAction {
+                                kalendarAction: "open_mail_view"
+                                checkable: false
+                                onTriggered: {
+                                    mailViewAction.trigger()
+                                    if (mainDrawer.modal) mainDrawer.close()
+                                }
                             }
                         ]
                         property list<Kirigami.Action> mobileActions: [
@@ -319,217 +328,286 @@ Kirigami.OverlayDrawer {
             }
         }
 
-        QQC2.ScrollView {
-            id: calendarView
-            implicitWidth: Kirigami.Units.gridUnit * 16
+        Loader {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-            contentWidth: availableWidth
-            clip: true
-            z: -2
+            active: true
+            sourceComponent: mode !== KalendarApplication.Mail ? calendarContactView : mailView
+        }
 
-            opacity: mainDrawer.collapsed ? 0 : 1
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
+        Component {
+            id: calendarContactView
+            QQC2.ScrollView {
+                id: calendarView
+                implicitWidth: Kirigami.Units.gridUnit * 16
+                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+                contentWidth: availableWidth
+                clip: true
+                z: -2
 
-            ColumnLayout {
-                anchors.fill: parent
-                spacing: 0
-
-                Kirigami.BasicListItem {
-                    id: tagsHeadingItem
-
-                    property bool expanded: Config.tagsSectionExpanded
-
-                    Layout.topMargin: Kirigami.Units.largeSpacing
-                    separatorVisible: false
-                    hoverEnabled: false
-                    visible: TagManager.tagModel.rowCount() > 0 && mode !== KalendarApplication.Contact
-                    Accessible.name: tagsHeadingItem.expanded ? i18nc('Accessible description of dropdown menu', 'Tags, Expanded') : i18nc('Accessible description of dropdown menu', 'Tags, Collapsed')
-
-                    Kirigami.Heading {
-                        id: headingSizeCalculator
-                        level: 4
-                    }
-
-                    highlighted: visualFocus
-                    leading: Kirigami.Icon {
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        isMask: true
-                        color: tagsHeadingItem.labelItem.color
-                        source: "action-rss_tag"
-                    }
-                    text: i18n("Tags")
-                    labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
-                    labelItem.font.pointSize: headingSizeCalculator.font.pointSize
-                    Layout.bottomMargin: Kirigami.Units.largeSpacing
-                    trailing: Kirigami.Icon {
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        source: tagsHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
-                        isMask: true
-                        color: tagsHeadingItem.labelItem.color
-                    }
-                    onClicked: {
-                        Config.tagsSectionExpanded = !Config.tagsSectionExpanded;
-                        Config.save();
+                opacity: mainDrawer.collapsed ? 0 : 1
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.longDuration
+                        easing.type: Easing.InOutQuad
                     }
                 }
 
-                Flow {
-                    id: tagFlow
-                    Layout.fillWidth: true
-                    Layout.leftMargin: Kirigami.Settings.isMobile ?
-                        Kirigami.Units.largeSpacing * 2 :
-                        Kirigami.Units.largeSpacing
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
-                    Layout.bottomMargin: Kirigami.Units.largeSpacing
-                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
-                    visible: TagManager.tagModel.rowCount() > 0 && tagsHeadingItem.expanded && mode !== KalendarApplication.Contact
+                ColumnLayout {
+                    anchors.fill: parent
+                    spacing: 0
+
+                    Kirigami.BasicListItem {
+                        id: tagsHeadingItem
+
+                        property bool expanded: Config.tagsSectionExpanded
+
+                        Layout.topMargin: Kirigami.Units.largeSpacing
+                        separatorVisible: false
+                        hoverEnabled: false
+                        visible: TagManager.tagModel.rowCount() > 0 && mode !== KalendarApplication.Contact
+                        Accessible.name: tagsHeadingItem.expanded ? i18nc('Accessible description of dropdown menu', 'Tags, Expanded') : i18nc('Accessible description of dropdown menu', 'Tags, Collapsed')
+
+                        Kirigami.Heading {
+                            id: headingSizeCalculator
+                            level: 4
+                        }
+
+                        highlighted: visualFocus
+                        leading: Kirigami.Icon {
+                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                            isMask: true
+                            color: tagsHeadingItem.labelItem.color
+                            source: "action-rss_tag"
+                        }
+                        text: i18n("Tags")
+                        labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
+                        labelItem.font.pointSize: headingSizeCalculator.font.pointSize
+                        Layout.bottomMargin: Kirigami.Units.largeSpacing
+                        trailing: Kirigami.Icon {
+                            implicitWidth: Kirigami.Units.iconSizes.small
+                            implicitHeight: Kirigami.Units.iconSizes.small
+                            source: tagsHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
+                            isMask: true
+                            color: tagsHeadingItem.labelItem.color
+                        }
+                        onClicked: {
+                            Config.tagsSectionExpanded = !Config.tagsSectionExpanded;
+                            Config.save();
+                        }
+                    }
+
+                    Flow {
+                        id: tagFlow
+                        Layout.fillWidth: true
+                        Layout.leftMargin: Kirigami.Settings.isMobile ?
+                            Kirigami.Units.largeSpacing * 2 :
+                            Kirigami.Units.largeSpacing
+                        Layout.rightMargin: Kirigami.Units.largeSpacing
+                        Layout.bottomMargin: Kirigami.Units.largeSpacing
+                        spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
+                        visible: TagManager.tagModel.rowCount() > 0 && tagsHeadingItem.expanded && mode !== KalendarApplication.Contact
+
+                        Repeater {
+                            id: tagList
+
+                            model: parent.visible ? TagManager.tagModel : []
+
+                            delegate: Tag {
+                                implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
+                                text: model.display
+                                showAction: false
+                                activeFocusOnTab: true
+                                backgroundColor: mainDrawer.activeTags.includes(model.display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
+                                enabled: !mainDrawer.collapsed
+                                onClicked: tagClicked(model.display)
+                            }
+                        }
+                    }
+
+                    Kirigami.BasicListItem {
+                        id: calendarHeadingItem
+                        property bool expanded: Config.calendarsSectionExpanded
+
+                        separatorVisible: false
+                        hoverEnabled: false
+                        Layout.topMargin: Kirigami.Units.largeSpacing
+
+                        leading: Kirigami.Icon {
+                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                            source: "view-calendar"
+                            isMask: true
+                            color: calendarHeadingItem.labelItem.color
+                        }
+                        text: switch (mode) {
+                            case KalendarApplication.Event:
+                            case KalendarApplication.Todo:
+                                return i18n("Calendars");
+                            case KalendarApplication.Contact:
+                                return i18n("Contacts");
+                        }
+                        highlighted: visualFocus
+                        labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
+                        labelItem.font.pointSize: headingSizeCalculator.font.pointSize
+                        trailing: Kirigami.Icon {
+                            implicitWidth: Kirigami.Units.iconSizes.small
+                            implicitHeight: Kirigami.Units.iconSizes.small
+                            source: calendarHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
+                            isMask: true
+                            color: calendarHeadingItem.labelItem.color
+                        }
+                        onClicked: {
+                            Config.calendarsSectionExpanded = !Config.calendarsSectionExpanded;
+                            Config.save();
+                        }
+                    }
 
                     Repeater {
-                        id: tagList
+                        id: calendarList
 
-                        model: parent.visible ? TagManager.tagModel : []
-
-                        delegate: Tag {
-                            implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
-                            text: model.display
-                            showAction: false
-                            activeFocusOnTab: true
-                            backgroundColor: mainDrawer.activeTags.includes(model.display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
-                            enabled: !mainDrawer.collapsed
-                            onClicked: tagClicked(model.display)
+                        property var calendarModel: KDescendantsProxyModel {
+                            model: switch(mainDrawer.mode) {
+                            case KalendarApplication.Todo:
+                                return CalendarManager.todoCollections;
+                            case KalendarApplication.Event:
+                                return CalendarManager.viewCollections;
+                            case KalendarApplication.Contact:
+                                return ContactManager.contactCollections;
+                            default:
+                                console.log('Should not happen', mainDrawer.mode)
+                            }
                         }
-                    }
-                }
 
-                Kirigami.BasicListItem {
-                    id: calendarHeadingItem
-                    property bool expanded: Config.calendarsSectionExpanded
+                        model: calendarHeadingItem.expanded ? calendarModel : []
 
-                    separatorVisible: false
-                    hoverEnabled: false
-                    Layout.topMargin: Kirigami.Units.largeSpacing
+                        delegate: DelegateChooser {
+                            role: 'kDescendantExpandable'
+                            DelegateChoice {
+                                roleValue: true
 
-                    leading: Kirigami.Icon {
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        source: "view-calendar"
-                        isMask: true
-                        color: calendarHeadingItem.labelItem.color
-                    }
-                    text: switch (mode) {
-                        case KalendarApplication.Event:
-                        case KalendarApplication.Todo:
-                            return i18n("Calendars");
-                        case KalendarApplication.Contact:
-                            return i18n("Contacts");
-                    }
-                    highlighted: visualFocus
-                    labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
-                    labelItem.font.pointSize: headingSizeCalculator.font.pointSize
-                    trailing: Kirigami.Icon {
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        source: calendarHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
-                        isMask: true
-                        color: calendarHeadingItem.labelItem.color
-                    }
-                    onClicked: {
-                        Config.calendarsSectionExpanded = !Config.calendarsSectionExpanded;
-                        Config.save();
-                    }
-                }
+                                Kirigami.BasicListItem {
+                                    id: calendarSourceItem
+                                    label: display
+                                    highlighted: visualFocus || incidenceDropArea.containsDrag
+                                    labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
+                                    labelItem.font.weight: Font.DemiBold
+                                    Layout.topMargin: 2 * Kirigami.Units.largeSpacing
+                                    leftPadding: Kirigami.Settings.isMobile ?
+                                        (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                                        (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
+                                    hoverEnabled: false
+                                    enabled: !mainDrawer.collapsed
 
-                Repeater {
-                    id: calendarList
+                                    separatorVisible: false
 
-                    property var calendarModel: KDescendantsProxyModel {
-                        model: switch(mainDrawer.mode) {
-                        case KalendarApplication.Todo:
-                            return CalendarManager.todoCollections;
-                        case KalendarApplication.Event:
-                            return CalendarManager.viewCollections;
-                        case KalendarApplication.Contact:
-                            return ContactManager.contactCollections;
-                        default:
-                            console.log('Should not happen', mainDrawer.mode)
-                        }
-                    }
+                                    leading: Kirigami.Icon {
+                                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                        color: calendarSourceItem.labelItem.color
+                                        isMask: true
+                                        source: model.decoration
+                                    }
+                                    leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
-                    model: calendarHeadingItem.expanded ? calendarModel : []
+                                    Connections {
+                                        target: AgentConfiguration
+                                        function onAgentProgressChanged(agentData) {
+                                            if(agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource &&
+                                                agentData.status === AgentConfiguration.Running) {
 
-                    delegate: DelegateChooser {
-                        role: 'kDescendantExpandable'
-                        DelegateChoice {
-                            roleValue: true
+                                                loadingIndicator.visible = true;
+                                            } else if (agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource) {
+                                                loadingIndicator.visible = false;
+                                            }
+                                        }
+                                    }
 
-                            Kirigami.BasicListItem {
-                                id: calendarSourceItem
-                                label: display
-                                highlighted: visualFocus || incidenceDropArea.containsDrag
-                                labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
-                                labelItem.font.weight: Font.DemiBold
-                                Layout.topMargin: 2 * Kirigami.Units.largeSpacing
-                                leftPadding: Kirigami.Settings.isMobile ?
-                                    (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
-                                    (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
-                                hoverEnabled: false
-                                enabled: !mainDrawer.collapsed
+                                    trailing: RowLayout {
+                                        QQC2.BusyIndicator {
+                                            id: loadingIndicator
+                                            Layout.fillHeight: true
+                                            padding: 0
+                                            visible: false
+                                            running: visible
+                                        }
 
-                                separatorVisible: false
+                                        Kirigami.Icon {
+                                            implicitWidth: Kirigami.Units.iconSizes.small
+                                            implicitHeight: Kirigami.Units.iconSizes.small
+                                            source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                                            color: calendarSourceItem.labelItem.color
+                                            isMask: true
+                                        }
+                                        ColoredCheckbox {
+                                            id: calendarCheckbox
 
-                                leading: Kirigami.Icon {
-                                    implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                                    implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                    color: calendarSourceItem.labelItem.color
-                                    isMask: true
-                                    source: model.decoration
-                                }
-                                leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+                                            Layout.fillHeight: true
+                                            visible: model.checkState != null
+                                            color: model.collectionColor ?? Kirigami.Theme.highlightedTextColor
+                                            checked: model.checkState === 2
+                                            onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                            onClicked: {
+                                                model.checkState = model.checkState === 0 ? 2 : 0
+                                                calendarCheckChanged(collectionId, checked)
+                                            }
+                                        }
+                                    }
 
-                                Connections {
-                                    target: AgentConfiguration
-                                    function onAgentProgressChanged(agentData) {
-                                        if(agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource &&
-                                            agentData.status === AgentConfiguration.Running) {
+                                    onClicked: calendarList.model.toggleChildren(index)
 
-                                            loadingIndicator.visible = true;
-                                        } else if (agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource) {
-                                            loadingIndicator.visible = false;
+                                    CalendarItemMouseArea {
+                                        id: calendarSourceItemMouseArea
+                                        parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                                        collectionId: model.collectionId
+                                        collectionDetails: CalendarManager.getCollectionDetails(collectionId)
+                                        anchors.fill: parent
+                                        enabled: mode !== KalendarApplication.Contact
+
+                                        DropArea {
+                                            id: incidenceDropArea
+                                            anchors.fill: parent
+                                            z: 9999
+                                            enabled: calendarSourceItemMouseArea.collectionDetails.canCreate
+                                            onDropped: if(drop.source.objectName === "taskDelegate") {
+                                                CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collectionId);
+
+                                                const pos = mapToItem(applicationWindow().contentItem, x, y);
+                                                drop.source.caughtX = pos.x;
+                                                drop.source.caughtY = pos.y;
+                                                drop.source.caught = true;
+                                            }
                                         }
                                     }
                                 }
+                            }
 
-                                trailing: RowLayout {
-                                    QQC2.BusyIndicator {
-                                        id: loadingIndicator
-                                        Layout.fillHeight: true
-                                        padding: 0
-                                        visible: false
-                                        running: visible
-                                    }
+                            DelegateChoice {
+                                roleValue: false
+                                Kirigami.BasicListItem {
+                                    id: calendarItem
+                                    label: display
+                                    labelItem.color: Kirigami.Theme.textColor
+                                    leftPadding: Kirigami.Settings.isMobile ?
+                                        (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                                        (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
+                                    separatorVisible: false
+                                    enabled: !mainDrawer.collapsed
+                                    highlighted: visualFocus || incidenceDropArea.containsDrag
 
-                                    Kirigami.Icon {
-                                        implicitWidth: Kirigami.Units.iconSizes.small
-                                        implicitHeight: Kirigami.Units.iconSizes.small
-                                        source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                        color: calendarSourceItem.labelItem.color
-                                        isMask: true
+                                    leading: Kirigami.Icon {
+                                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                        source: model.decoration
                                     }
-                                    ColoredCheckbox {
+                                    leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+
+                                    trailing: ColoredCheckbox {
                                         id: calendarCheckbox
 
-                                        Layout.fillHeight: true
                                         visible: model.checkState != null
-                                        color: model.collectionColor ?? Kirigami.Theme.highlightedTextColor
+                                        color: model.collectionColor
                                         checked: model.checkState === 2
                                         onCheckedChanged: calendarCheckChanged(collectionId, checked)
                                         onClicked: {
@@ -537,96 +615,35 @@ Kirigami.OverlayDrawer {
                                             calendarCheckChanged(collectionId, checked)
                                         }
                                     }
-                                }
 
-                                onClicked: calendarList.model.toggleChildren(index)
-
-                                CalendarItemMouseArea {
-                                    id: calendarSourceItemMouseArea
-                                    parent: calendarSourceItem.contentItem // Otherwise label elide breaks
-                                    collectionId: model.collectionId
-                                    collectionDetails: CalendarManager.getCollectionDetails(collectionId)
-                                    anchors.fill: parent
-                                    enabled: mode !== KalendarApplication.Contact
-
-                                    DropArea {
-                                        id: incidenceDropArea
-                                        anchors.fill: parent
-                                        z: 9999
-                                        enabled: calendarSourceItemMouseArea.collectionDetails.canCreate
-                                        onDropped: if(drop.source.objectName === "taskDelegate") {
-                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collectionId);
-
-                                            const pos = mapToItem(applicationWindow().contentItem, x, y);
-                                            drop.source.caughtX = pos.x;
-                                            drop.source.caughtY = pos.y;
-                                            drop.source.caught = true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        DelegateChoice {
-                            roleValue: false
-                            Kirigami.BasicListItem {
-                                id: calendarItem
-                                label: display
-                                labelItem.color: Kirigami.Theme.textColor
-                                leftPadding: Kirigami.Settings.isMobile ?
-                                    (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
-                                    (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
-                                separatorVisible: false
-                                enabled: !mainDrawer.collapsed
-                                highlighted: visualFocus || incidenceDropArea.containsDrag
-
-                                leading: Kirigami.Icon {
-                                    implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                                    implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                    source: model.decoration
-                                }
-                                leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
-
-                                trailing: ColoredCheckbox {
-                                    id: calendarCheckbox
-
-                                    visible: model.checkState != null
-                                    color: model.collectionColor
-                                    checked: model.checkState === 2
-                                    onCheckedChanged: calendarCheckChanged(collectionId, checked)
                                     onClicked: {
-                                        model.checkState = model.checkState === 0 ? 2 : 0
-                                        calendarCheckChanged(collectionId, checked)
+                                        calendarClicked(collectionId);
+                                        if(mainDrawer.modal) mainDrawer.close()
                                     }
-                                }
 
-                                onClicked: {
-                                    calendarClicked(collectionId);
-                                    if(mainDrawer.modal) mainDrawer.close()
-                                }
-
-                                CalendarItemMouseArea {
-                                    id: calendarItemMouseArea
-                                    parent: calendarItem.contentItem // Otherwise label elide breaks
-                                    collectionId: model.collectionId
-                                    collectionDetails: CalendarManager.getCollectionDetails(collectionId)
-                                    anchors.fill: parent
-                                    enabled: mode !== KalendarApplication.Contact
-
-                                    onDeleteCalendar: mainDrawer.deleteCalendar(collectionId, collectionDetails)
-
-                                    DropArea {
-                                        id: incidenceDropArea
+                                    CalendarItemMouseArea {
+                                        id: calendarItemMouseArea
+                                        parent: calendarItem.contentItem // Otherwise label elide breaks
+                                        collectionId: model.collectionId
+                                        collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                         anchors.fill: parent
-                                        z: 9999
-                                        enabled: calendarItemMouseArea.collectionDetails.canCreate
-                                        onDropped: if(drop.source.objectName === "taskDelegate") {
-                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
+                                        enabled: mode !== KalendarApplication.Contact
 
-                                            const pos = mapToItem(applicationWindow().contentItem, x, y);
-                                            drop.source.caughtX = pos.x;
-                                            drop.source.caughtY = pos.y;
-                                            drop.source.caught = true;
+                                        onDeleteCalendar: mainDrawer.deleteCalendar(collectionId, collectionDetails)
+
+                                        DropArea {
+                                            id: incidenceDropArea
+                                            anchors.fill: parent
+                                            z: 9999
+                                            enabled: calendarItemMouseArea.collectionDetails.canCreate
+                                            onDropped: if(drop.source.objectName === "taskDelegate") {
+                                                CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
+
+                                                const pos = mapToItem(applicationWindow().contentItem, x, y);
+                                                drop.source.caughtX = pos.x;
+                                                drop.source.caughtY = pos.y;
+                                                drop.source.caught = true;
+                                            }
                                         }
                                     }
                                 }
@@ -635,6 +652,12 @@ Kirigami.OverlayDrawer {
                     }
                 }
             }
+        }
+
+        Component {
+            id: mailView
+
+            MailSidebar {}
         }
     }
 

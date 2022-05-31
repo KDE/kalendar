@@ -169,7 +169,23 @@ void KalendarApplication::setupActions()
                 KalendarConfig::self()->save();
             }
         });
-        mCollection.setDefaultShortcut(openContactAction, QKeySequence(i18n("Ctrl+5")));
+        mCollection.setDefaultShortcut(openContactAction, QKeySequence(i18n("Ctrl+6")));
+    }
+
+    actionName = QLatin1String("open_mail_view");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto mailAction = mCollection.addAction(actionName, this, &KalendarApplication::openMailView);
+        mailAction->setText(i18n("Mail View"));
+        mailAction->setIcon(QIcon::fromTheme(QStringLiteral("gnumeric-link-email")));
+        mailAction->setCheckable(true);
+        mailAction->setActionGroup(m_viewGroup);
+        connect(mailAction, &QAction::toggled, this, [](bool checked) {
+            if (checked) {
+                KalendarConfig::setLastOpenedView(KalendarConfig::ThreeDayView);
+                KalendarConfig::self()->save();
+            }
+        });
+        mCollection.setDefaultShortcut(mailAction, QKeySequence(i18n("Ctrl+7")));
     }
 
     actionName = QLatin1String("open_month_view");
