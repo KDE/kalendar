@@ -38,6 +38,7 @@ public:
         Event,
         Todo,
         Contact,
+        Mail,
     };
     Q_ENUM(Mode)
 
@@ -69,6 +70,7 @@ Q_SIGNALS:
     void openDayView();
     void openScheduleView();
     void openTodoView();
+    void openMailView();
     void openContactView();
     void openAboutPage();
     void moveViewForwards();

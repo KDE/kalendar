@@ -51,6 +51,7 @@ Kirigami.ApplicationWindow {
     readonly property var scheduleViewAction: KalendarApplication.action("open_schedule_view")
     readonly property var contactViewAction: KalendarApplication.action("open_contact_view")
     readonly property var todoViewAction: KalendarApplication.action("open_todo_view")
+    readonly property var mailViewAction: KalendarApplication.action("open_mail_view")
     readonly property var moveViewForwardsAction: KalendarApplication.action("move_view_forwards")
     readonly property var moveViewBackwardsAction: KalendarApplication.action("move_view_backwards")
     readonly property var moveViewToTodayAction: KalendarApplication.action("move_view_to_today")
@@ -125,6 +126,9 @@ Kirigami.ApplicationWindow {
             case Config.ContactView:
                 contactViewAction.trigger();
                 break;
+            case Config.MailView:
+                mailViewAction.trigger();
+                break;
             default:
                 Kirigami.Settings.isMobile ? scheduleViewAction.trigger() : monthViewAction.trigger();
                 break;
@@ -194,6 +198,12 @@ Kirigami.ApplicationWindow {
         function onOpenContactView() {
             if(pageStack.currentItem.objectName !== "contactView" || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView("qrc:/LazyContactView.qml");
+            }
+        }
+
+        function onOpenMailView() {
+            if(pageStack.currentItem.objectName !== "mailView" || root.ignoreCurrentPage) {
+                KalendarUiUtils.switchView("qrc:/LazyMailView.qml");
             }
         }
 
@@ -438,6 +448,9 @@ Kirigami.ApplicationWindow {
                 break;
             case "contactView":
                 return i18n("Contacts View");
+                break;
+            case "mailView":
+                return i18n("Mail View");
                 break;
             default:
                 return i18n("Calendar");

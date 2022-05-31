@@ -14,10 +14,7 @@ project(kalendar VERSION ${RELEASE_SERVICE_VERSION})
 
 set(QT_MIN_VERSION "5.15.2")
 set(KF5_MIN_VERSION "5.92.0")
-set(AKONADI_VERSION "5.19.0")
-set(AKONADI_CONTACT_VERSION "5.19.0")
-set(CALENDARSUPPORT_LIB_VERSION "5.19")
-set(EVENTVIEW_LIB_VERSION "5.19.0")
+set(PIM_VERSION "5.19.0")
 
 include(FeatureSummary)
 
@@ -57,10 +54,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18
 set_package_properties(KF5QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
 )
-find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
-find_package(KF5AkonadiContact ${AKONADI_CONTACT_VERSION} CONFIG REQUIRED)
-find_package(KF5CalendarSupport ${CALENDARSUPPORT_LIB_VERSION} CONFIG REQUIRED)
-find_package(KF5EventViews ${EVENTVIEW_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5 ${PIM_VERSION} REQUIRED COMPONENTS Akonadi AkonadiContact AkonadiCalendar MailCommon PimCommonAkonadi CalendarSupport EventViews)
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
