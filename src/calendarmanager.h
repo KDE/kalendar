@@ -97,6 +97,7 @@ public:
     Q_INVOKABLE void updateCollection(qint64 collectionId);
     Q_INVOKABLE void deleteCollection(qint64 collectionId);
     Q_INVOKABLE void editCollection(qint64 collectionId);
+    Q_INVOKABLE void toggleCollection(qint64 collectionId);
 
 private Q_SLOTS:
     void delayedInit();

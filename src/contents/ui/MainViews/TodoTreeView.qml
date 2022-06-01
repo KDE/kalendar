@@ -96,8 +96,7 @@ TreeListView {
         helpfulAction: Kirigami.Action {
             icon.name: "gtk-yes"
             text: i18n("Enable")
-            onTriggered: Kalendar.CalendarManager.allCalendars.setData(Kalendar.CalendarManager.allCalendars.index(root.filterCollectionDetails.allCalendarsRow, 0), 2, 10)
-            // HACK: Last two numbers are Qt.Checked and Qt.CheckStateRole
+            onTriggered: Kalendar.CalendarManager.toggleCollection(root.filterCollectionDetails.id)
         }
     }
 
