@@ -7,7 +7,6 @@
 
 #include <Akonadi/AgentManager>
 #include <Akonadi/Collection>
-#include <Akonadi/ContactsTreeModel>
 #include <Akonadi/ETMViewStateSaver>
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <Akonadi/Item>
