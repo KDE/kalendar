@@ -109,7 +109,7 @@ TreeListView {
         helpfulAction: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeTodo, new Date(), filter.collectionId);
+            onTriggered: KalendarUiUtils.setUpAdd(Kalendar.IncidenceWrapper.TypeTodo, new Date(), filter.collectionId);
         }
     }
 
