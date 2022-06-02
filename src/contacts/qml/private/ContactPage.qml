@@ -19,6 +19,7 @@ Kirigami.ScrollablePage {
     topPadding: 0
 
     property AddresseeWrapper addressee: AddresseeWrapper {
+        id: addressee
         addresseeItem: ContactManager.getItem(page.itemId)
     }
 

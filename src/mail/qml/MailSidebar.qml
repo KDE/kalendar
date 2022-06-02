@@ -19,7 +19,7 @@ QQC2.ScrollView {
     contentWidth: availableWidth
     clip: true
 
-    ListView {
+    contentItem: ListView {
         id: calendarList
 
         model: KDescendantsProxyModel {
@@ -44,13 +44,7 @@ QQC2.ScrollView {
 
                     separatorVisible: false
 
-                    leading: Kirigami.Icon {
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        color: Kirigami.Theme.disabledTextColor
-                        isMask: true
-                        source: model.decoration
-                    }
+                    icon: model.decoration
                     leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
                     trailing: Kirigami.Icon {
@@ -65,25 +59,39 @@ QQC2.ScrollView {
 
             DelegateChoice {
                 roleValue: false
-                Kirigami.BasicListItem {
-                    label: display
-                    labelItem.color: Kirigami.Theme.textColor
-                    leftPadding: Kirigami.Units.largeSpacing * 2 * (model.kDescendantLevel - 2)
-                    separatorVisible: false
-                    reserveSpaceForIcon: true
+                QQC2.ItemDelegate {
+                    id: controlRoot
+                    text: model.display
+                    width: ListView.view.width
+                    padding: Kirigami.Units.largeSpacing
+                    leftPadding: (Kirigami.Settings.isMobile ? 3 : 2) * Kirigami.Units.largeSpacing * model.kDescendantLevel
+                    contentItem: RowLayout {
+                        spacing: Kirigami.Units.smallSpacing
+                        Kirigami.Icon {
+                            Layout.alignment: Qt.AlignVCenter
+                            source: model.decoration
+                            Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                            Layout.preferredWidth: Layout.preferredHeight
+                        }
+                        QQC2.Label {
+                            leftPadding: controlRoot.mirrored ? (controlRoot.indicator ? controlRoot.indicator.width : 0) + controlRoot.spacing : 0
+                            rightPadding: !controlRoot.mirrored ? (controlRoot.indicator ? controlRoot.indicator.width : 0) + controlRoot.spacing : 0
+
+                            text: controlRoot.text
+                            font: controlRoot.font
+                            color: Kirigami.Theme.textColor
+                            elide: Text.ElideRight
+                            visible: controlRoot.text
+                            horizontalAlignment: Text.AlignLeft
+                            verticalAlignment: Text.AlignVCenter
+                            Layout.alignment: Qt.AlignLeft
+                            Layout.fillWidth: true
+                        }
+                    }
 
                     onClicked: {
                         model.checkState = model.checkState === 0 ? 2 : 0
                         MailManager.loadMailCollection(foldersModel.mapToSource(foldersModel.index(model.index, 0)));
-                        //if (sidebar.mailListPage) {
-                        //    sidebar.mailListPage.title = model.display
-                        //    sidebar.mailListPage.forceActiveFocus();
-                        //    applicationWindow().pageStack.currentIndex = 1;
-                        //} else {
-                        //    sidebar.mailListPage = root.pageStack.push(folderPageComponent, {
-                        //        title: model.display
-                        //    });
-                        //}
                     }
                 }
             }
