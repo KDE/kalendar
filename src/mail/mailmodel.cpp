@@ -22,14 +22,16 @@ MailModel::MailModel(QObject *parent)
 
 QHash<int, QByteArray> MailModel::roleNames() const
 {
-    return {{TitleRole, QByteArrayLiteral("title")},
-            {DateRole, QByteArrayLiteral("date")},
-            {DateTimeRole, QByteArrayLiteral("datetime")},
-            {SenderRole, QByteArrayLiteral("sender")},
-            {UnreadRole, QByteArrayLiteral("unread")},
-            {FavoriteRole, QByteArrayLiteral("favorite")},
-            {TextColorRole, QByteArrayLiteral("textColor")},
-            {BackgroundColorRole, QByteArrayLiteral("backgroudColor")}};
+    return {
+        {TitleRole, QByteArrayLiteral("title")},
+        {DateRole, QByteArrayLiteral("date")},
+        {DateTimeRole, QByteArrayLiteral("datetime")},
+        {SenderRole, QByteArrayLiteral("sender")},
+        {UnreadRole, QByteArrayLiteral("unread")},
+        {FavoriteRole, QByteArrayLiteral("favorite")},
+        {TextColorRole, QByteArrayLiteral("textColor")},
+        {BackgroundColorRole, QByteArrayLiteral("backgroudColor")},
+    };
 }
 
 QVariant MailModel::data(const QModelIndex &index, int role) const

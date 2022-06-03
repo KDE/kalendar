@@ -11,6 +11,7 @@ import org.kde.kitemmodels 1.0 as KItemModels
  Kirigami.ScrollablePage {
     id: folderView
     property var mailViewer: null;
+    title: MailManager.selectedFolderName
     ListView {
         id: mails
         model: MailManager.folderModel
