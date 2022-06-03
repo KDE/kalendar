@@ -57,6 +57,24 @@ MailManager::MailManager(QObject *parent)
 
     // Setup selection model
     m_collectionSelectionModel = new QItemSelectionModel(m_foldersModel);
+    connect(m_collectionSelectionModel, &QItemSelectionModel::selectionChanged, this, [this](const QItemSelection &selected, const QItemSelection &deselected) {
+        Q_UNUSED(deselected)
+        const auto indexes = selected.indexes();
+        if (indexes.count()) {
+            QString name;
+            QModelIndex index = indexes[0];
+            while (index.isValid()) {
+                if (name.isEmpty()) {
+                    name = index.data(Qt::DisplayRole).toString();
+                } else {
+                    name = index.data(Qt::DisplayRole).toString() + QLatin1String(" / ") + name;
+                }
+                index = index.parent();
+            }
+            m_selectedFolderName = name;
+            Q_EMIT selectedFolderNameChanged();
+        }
+    });
     auto selectionModel = new SelectionProxyModel(m_collectionSelectionModel, this);
     selectionModel->setSourceModel(treeModel);
     selectionModel->setFilterBehavior(KSelectionProxyModel::ChildrenOfExactSelection);
@@ -102,7 +120,6 @@ MailModel *MailManager::folderModel() const
 void MailManager::loadMailCollection(const QModelIndex &modelIndex)
 {
     if (!modelIndex.isValid()) {
-        qDebug() << "hello";
         return;
     }
 
@@ -122,4 +139,9 @@ Akonadi::CollectionFilterProxyModel *MailManager::foldersModel() const
 Akonadi::Session *MailManager::session() const
 {
     return m_session;
+}
+
+QString MailManager::selectedFolderName() const
+{
+    return m_selectedFolderName;
 }

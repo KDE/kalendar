@@ -14,8 +14,6 @@ class MailModel : public QIdentityProxyModel
 {
     Q_OBJECT
 
-//    Q_PROPERTY(ViewerHelper *viewerHelper READ viewerHelper WRITE setViewerHelper NOTIFY viewerHelperChanged)
-
 public:
     enum AnimalRoles {
         TitleRole = Qt::UserRole + 1,
@@ -29,18 +27,9 @@ public:
         FavoriteRole,
     };
 
-    //    ViewerHelper *viewerHelper() const;
-    //    void setViewerHelper(ViewerHelper *viewerHelper);
-
     explicit MailModel(QObject *parent = nullptr);
     QHash<int, QByteArray> roleNames() const override;
     virtual QVariant data(const QModelIndex &index, int role) const override;
 
     Q_INVOKABLE void loadItem(int row);
-
-///Q_SIGNALS:
-///    void viewerHelperChanged();
-///
-///private:
-///    ViewerHelper *m_viewerHelper = nullptr;
 };
