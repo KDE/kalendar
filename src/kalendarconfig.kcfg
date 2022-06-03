@@ -23,6 +23,10 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             <label>Enable maps. NOTE: may cause crashing on some systems.</label>
             <default>false</default>
         </entry>
+        <entry name="enableMailIntegration" type="Bool">
+            <label>Enable mail integration</label>
+            <default>false</default>
+        </entry>
         <entry name="locationMarker" type="Enum">
             <label>Type of marker for showing a place's location.</label>
             <choices>
