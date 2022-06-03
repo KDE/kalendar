@@ -22,14 +22,15 @@ public:
         SenderRole,
         TextColorRole,
         DateRole,
+        DateTimeRole,
         BackgroundColorRole,
         UnreadRole,
         MailRole,
         FavoriteRole,
     };
 
-//    ViewerHelper *viewerHelper() const;
-//    void setViewerHelper(ViewerHelper *viewerHelper);
+    //    ViewerHelper *viewerHelper() const;
+    //    void setViewerHelper(ViewerHelper *viewerHelper);
 
     explicit MailModel(QObject *parent = nullptr);
     QHash<int, QByteArray> roleNames() const override;
