@@ -14,6 +14,11 @@ import org.kde.kitemmodels 1.0 as KItemModels
     ListView {
         id: mails
         model: MailManager.folderModel
+        section.delegate: Kirigami.ListSectionHeader {
+            required property string section
+            label: section
+        }
+        section.property: "date"
         delegate: Kirigami.BasicListItem {
             label: model.title
             subtitle: sender

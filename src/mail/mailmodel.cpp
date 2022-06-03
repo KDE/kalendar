@@ -8,9 +8,11 @@
 //#include "messageviewer/viewer.h"
 
 #include <Akonadi/EntityTreeModel>
-#include <KMime/Message>
+#include <KFormat>
 #include <KLocalizedString>
+#include <KMime/Message>
 #include <QQmlEngine>
+#include <kformat.h>
 
 MailModel::MailModel(QObject *parent)
     : QIdentityProxyModel(parent)
@@ -20,14 +22,14 @@ MailModel::MailModel(QObject *parent)
 
 QHash<int, QByteArray> MailModel::roleNames() const
 {
-    return {
-        {TitleRole, QByteArrayLiteral("title")},
-        {SenderRole, QByteArrayLiteral("sender")},
-        {UnreadRole, QByteArrayLiteral("unread")},
-        {FavoriteRole, QByteArrayLiteral("favorite")},
-        {TextColorRole, QByteArrayLiteral("textColor")},
-        {BackgroundColorRole, QByteArrayLiteral("backgroudColor")}
-    };
+    return {{TitleRole, QByteArrayLiteral("title")},
+            {DateRole, QByteArrayLiteral("date")},
+            {DateTimeRole, QByteArrayLiteral("datetime")},
+            {SenderRole, QByteArrayLiteral("sender")},
+            {UnreadRole, QByteArrayLiteral("unread")},
+            {FavoriteRole, QByteArrayLiteral("favorite")},
+            {TextColorRole, QByteArrayLiteral("textColor")},
+            {BackgroundColorRole, QByteArrayLiteral("backgroudColor")}};
 }
 
 QVariant MailModel::data(const QModelIndex &index, int role) const
@@ -102,6 +104,13 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
             return QString();
         }
     case DateRole:
+        if (mail->date()) {
+            KFormat format;
+            return format.formatRelativeDate(mail->date()->dateTime().date(), QLocale::ShortFormat);
+        } else {
+            return QString();
+        }
+    case DateTimeRole:
         if (mail->date()) {
             return mail->date()->asUnicodeString();
         } else {
