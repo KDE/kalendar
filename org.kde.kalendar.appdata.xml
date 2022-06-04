@@ -310,6 +310,7 @@
   <url type="bugtracker">https://invent.kde.org/pim/kalendar/-/issues</url>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="22.04.2" date="2022-06-09"/>
     <release version="22.04.1" date="2022-05-12"/>
     <release version="22.04.0" date="2022-04-21"/>
     <release version="1.0.0" date="2022-02-12">
@@ -317,12 +318,6 @@
         <p>This release brings stability, usability, and aesthetic improvements across the board, and is the first version recommended for any home user.</p>
       </description>
       <url>https://claudiocambra.com/2022/02/12/kalendar-1-0-is-out/</url>
-    </release>
-    <release type="development" version="0.4.0" date="2021-12-26">
-      <description>
-        <p>This release brings new views, improved performance, and significant bugfixes.</p>
-      </description>
-      <url>https://claudiocambra.com/2021/12/25/happy-holidays-kalendar-v0-4-0-is-our-gift-and-it-brings-new-views-improved-performance-and-many-many-bugfixes-kalendar-devlog-24/</url>
     </release>
   </releases>
   <custom>
