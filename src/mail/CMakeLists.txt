@@ -10,7 +10,11 @@ target_sources(kalendar_mail_plugin PRIVATE
     mailmanager.h
     mailmodel.cpp
     mailmodel.h
+    searchhelper.h
+    searchhelper.cpp
 )
+
+kconfig_add_kcfg_files(kalendar_mail_plugin GENERATE_MOC mailconfig.kcfgc)
 
 ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/MailSidebar.qml

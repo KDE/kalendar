@@ -14,7 +14,7 @@ import org.kde.kitemmodels 1.0 as KItemModels
     title: MailManager.selectedFolderName
     ListView {
         id: mails
-        model: MailManager.folderModel
+        model: SearchHelper.searchString ? SearchHelper.mailModel : MailManager.folderModel
         section.delegate: Kirigami.ListSectionHeader {
             required property string section
             label: section

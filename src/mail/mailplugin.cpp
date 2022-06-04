@@ -9,6 +9,7 @@
 
 #include "mailmanager.h"
 #include "mailmodel.h"
+#include "searchhelper.h"
 
 void CalendarPlugin::registerTypes(const char *uri)
 {
@@ -18,6 +19,11 @@ void CalendarPlugin::registerTypes(const char *uri)
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
         return new MailManager;
+    });
+    qmlRegisterSingletonType<SearchHelper>("org.kde.kalendar.mail", 1, 0, "SearchHelper", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new SearchHelper;
     });
     qRegisterMetaType<MailModel*>("MailModel*");
 }

@@ -16,7 +16,6 @@
 
 MailModel::MailModel(QObject *parent)
     : QIdentityProxyModel(parent)
-//    , m_viewerHelper(new ViewerHelper(this))
 {
 }
 

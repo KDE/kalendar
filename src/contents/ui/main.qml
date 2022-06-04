@@ -15,6 +15,7 @@ import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
+import org.kde.kalendar.mail 1.0 as Mail
 import org.kde.kalendar.utils 1.0
 
 Kirigami.ApplicationWindow {
@@ -498,6 +499,10 @@ Kirigami.ApplicationWindow {
         onSearchTextChanged: {
             if (mode === KalendarApplication.Contact) {
                 ContactManager.filteredContacts.setFilterFixedString(searchText)
+                return;
+            }
+            if (mode === KalendarApplication.Mail) {
+                Mail.SearchHelper.searchString = searchText;
                 return;
             }
             if(root.filter) {
