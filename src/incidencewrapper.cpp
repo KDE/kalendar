@@ -648,8 +648,10 @@ void IncidenceWrapper::setTodoPercentComplete(int todoPercentComplete)
 
 void IncidenceWrapper::triggerEditMode() // You edit a clone so that the original ptr isn't messed with
 {
+    auto itemToEdit = item();
     KCalendarCore::Incidence::Ptr clonedPtr(m_incidence->clone());
-    setIncidencePtr(clonedPtr);
+    itemToEdit.setPayload<KCalendarCore::Incidence::Ptr>(clonedPtr);
+    setIncidenceItem(itemToEdit);
 }
 
 static int nearestQuarterHour(int secsSinceEpoch)
