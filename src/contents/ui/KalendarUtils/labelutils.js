@@ -215,7 +215,7 @@ function todoDateTimeLabel(datetime, allDay, completed) {
             i18nc("%1 is the time, spaces included to allow use of 'empty' string when an event is allday and has no time", " at %1 ", datetime.toLocaleTimeString(Qt.locale(), 1));
 
         if(DateUtils.sameDay(datetime, now)) {
-            return (datetime > now) && !completed && !allDay ?
+            return (datetime < now) && !completed && !allDay ?
                 i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Today%1(overdue)", timeString) :
                 i18nc("No space since the %1 string, which includes the time (or not), includes this space", "Today%1", timeString);
         } else if(DateUtils.sameDay(DateUtils.addDaysToDate(datetime, - 1), now)) { // Tomorrow
