@@ -22,6 +22,7 @@
 #endif
 #include <EventViews/TodoModel>
 #include <KConfigWatcher>
+#include <KFormat>
 #include <KSharedConfig>
 #include <QSortFilterProxyModel>
 #include <QTimer>
@@ -157,4 +158,5 @@ private:
     int m_sortColumn = DueDateColumn;
     bool m_sortAscending = false;
     bool m_showCompletedSubtodosInIncomplete = true;
+    KFormat m_format;
 };

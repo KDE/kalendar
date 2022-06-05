@@ -121,11 +121,15 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
     } else if (role == Roles::CollectionIdRole) {
         return collectionId;
     } else if (role == DurationStringRole) {
-        KFormat format;
-        if (todoPtr->allDay()) {
-            return format.formatSpelloutDuration(24 * 60 * 60 * 1000); // format milliseconds in 1 day
+        const auto duration = KCalendarCore::Duration(todoPtr->dtStart(), todoPtr->dtDue());
+
+        if (todoPtr->allDay() && !todoPtr->dtStart().isValid()) {
+            return m_format.formatSpelloutDuration(24 * 60 * 60 * 1000); // format milliseconds in 1 day
+        } else if (!todoPtr->dtStart().isValid() || duration.asSeconds() == 0) {
+            return QString();
         }
-        return format.formatSpelloutDuration(todoPtr->duration().asSeconds() * 1000);
+
+        return m_format.formatSpelloutDuration(duration.asSeconds() * 1000);
     } else if (role == Roles::RecursRole) {
         return todoPtr->recurs();
     } else if (role == Roles::IsOverdueRole) {

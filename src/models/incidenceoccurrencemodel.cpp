@@ -208,7 +208,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     }
     auto incidence = m_incidences.at(idx.row());
     auto icalIncidence = incidence.incidence;
-    const auto duration = icalIncidence->duration();
+    const KCalendarCore::Duration duration(incidence.start, incidence.end);
 
     switch (role) {
     case Summary:
@@ -226,9 +226,9 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     case DurationString: {
         if (duration.asSeconds() == 0) {
             return QString();
-        } else {
-            return m_format.formatSpelloutDuration(duration.asSeconds() * 1000);
         }
+
+        return m_format.formatSpelloutDuration(duration.asSeconds() * 1000);
     }
     case Recurs:
         return icalIncidence->recurs();
