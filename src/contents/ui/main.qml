@@ -873,7 +873,7 @@ Kirigami.ApplicationWindow {
             id: deleteIncidencePage
 
             onAddException: {
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId &&
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid === deleteIncidencePage.incidenceWrapper.uid &&
                     DateUtils.sameDay(incidenceInfoDrawer.incidenceData.startTime, exceptionDate)) {
 
                     incidenceInfoDrawer.incidenceData = undefined;
@@ -886,7 +886,7 @@ Kirigami.ApplicationWindow {
             }
             onAddRecurrenceEndDate: {
                 // If occurrence is past the new recurrence end date, it has ben deleted so kill instance in incidence info
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId &&
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid === deleteIncidencePage.incidenceWrapper.uid &&
                     incidenceInfoDrawer.incidenceData.startTime >= endDate) {
 
                     incidenceInfoDrawer.incidenceData = undefined;
@@ -898,7 +898,7 @@ Kirigami.ApplicationWindow {
             }
             onDeleteIncidence: {
                 // Deleting an incidence also means deleting all of its occurrences
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId) {
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid === deleteIncidencePage.incidenceWrapper.uid) {
 
                     incidenceInfoDrawer.incidenceData = undefined;
                     root.openOccurrence = undefined;
@@ -908,7 +908,7 @@ Kirigami.ApplicationWindow {
             }
             onDeleteIncidenceWithChildren: {
                 // TODO: Check if parent deleted too
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.incidenceId == deleteIncidencePage.incidenceWrapper.incidenceId) {
+                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid == deleteIncidencePage.incidenceWrapper.uid) {
 
                     incidenceInfoDrawer.incidenceData = undefined;
                     root.openOccurrence = undefined;
