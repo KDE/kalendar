@@ -59,7 +59,7 @@ Kirigami.Page {
     property int year: selectedDate.getFullYear()
     property bool initialMonth: true
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
-    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+    readonly property bool isDark: KalendarUiUtils.darkMode
     property real maxTimeLabelWidth: 0
     property bool dragDropEnabled: true
     readonly property int mode: Kalendar.KalendarApplication.Event

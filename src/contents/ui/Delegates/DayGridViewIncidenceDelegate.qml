@@ -52,7 +52,7 @@ Item {
     readonly property bool isInCurrentMonth: reactToCurrentMonth ?
         modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month :
         true
-    property bool isDark: false
+    property bool isDark: KalendarUiUtils.darkMode
 
     property alias mouseArea: mouseArea
     property var incidencePtr: modelData.incidencePtr

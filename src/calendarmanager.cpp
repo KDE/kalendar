@@ -55,7 +55,9 @@
 #else
 #include <etmcalendar.h>
 #endif
+
 #include <colorproxymodel.h>
+#include <incidencewrapper.h>
 
 using namespace Akonadi;
 
@@ -183,6 +185,13 @@ protected:
     }
 };
 
+Q_GLOBAL_STATIC(CalendarManager, calendarManagerGlobalInstance)
+
+CalendarManager *CalendarManager::instance()
+{
+    return calendarManagerGlobalInstance;
+}
+
 CalendarManager::CalendarManager(QObject *parent)
     : QObject(parent)
     , m_calendar(nullptr)
@@ -300,7 +309,9 @@ CalendarManager::CalendarManager(QObject *parent)
 
     KConfigGroup rColorsConfig(config, "Resources Colors");
     m_colorWatcher = KConfigWatcher::create(config);
-    QObject::connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &CalendarManager::collectionColorsChanged);
+    connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &CalendarManager::collectionColorsChanged);
+
+    connect(m_calendar.data(), &Akonadi::ETMCalendar::calendarChanged, this, &CalendarManager::calendarChanged);
 }
 
 CalendarManager::~CalendarManager()
@@ -323,7 +334,6 @@ void CalendarManager::save()
 
 void CalendarManager::delayedInit()
 {
-    Q_EMIT entityTreeModelChanged();
     Q_EMIT loadingChanged();
 }
 
@@ -498,9 +508,19 @@ QVariantMap CalendarManager::undoRedoData()
     };
 }
 
-Akonadi::Item CalendarManager::incidenceItem(KCalendarCore::Incidence::Ptr incidence)
+Akonadi::Item CalendarManager::incidenceItem(KCalendarCore::Incidence::Ptr incidence) const
 {
     return m_calendar->item(incidence);
+}
+
+Akonadi::Item CalendarManager::incidenceItem(const QString &uid) const
+{
+    return incidenceItem(m_calendar->incidence(uid));
+}
+
+KCalendarCore::Incidence::List CalendarManager::childIncidences(const QString &uid) const
+{
+    return m_calendar->childIncidences(uid);
 }
 
 void CalendarManager::addIncidence(IncidenceWrapper *incidenceWrapper)

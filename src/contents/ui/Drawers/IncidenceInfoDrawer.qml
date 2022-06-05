@@ -32,6 +32,8 @@ Kirigami.OverlayDrawer {
     property var collectionData
     property var activeTags : []
 
+    readonly property int relatedIncidenceDelegateHeight: Kirigami.Units.gridUnit * 3
+
     component HoverLabel: QQC2.Label {
         Layout.fillWidth: true
         textFormat: Text.MarkdownText
@@ -218,6 +220,8 @@ Kirigami.OverlayDrawer {
                     Kirigami.Separator {
                         Layout.columnSpan: 2
                         Layout.fillWidth: true
+                        Layout.topMargin: Kirigami.Units.largeSpacing
+                        Layout.bottomMargin: Kirigami.Units.largeSpacing
                         visible: todoCompletionLayout.visible
                     }
 
@@ -599,6 +603,59 @@ Kirigami.OverlayDrawer {
                             model: incidenceInfoDrawer.incidenceWrapper.attendeesModel
 
                             delegate: HoverLabel {}
+                        }
+                    }
+
+                    Kirigami.Separator {
+                        Layout.columnSpan: 2
+                        Layout.fillWidth: true
+                        Layout.topMargin: Kirigami.Units.largeSpacing
+                        Layout.bottomMargin: Kirigami.Units.largeSpacing
+                        visible: superTaskColumn.visible || subTaskColumn.visible
+                    }
+
+                    ColumnLayout {
+                        id: superTaskColumn
+                        Layout.columnSpan: 2
+                        Layout.fillWidth: true
+                        visible: incidenceInfoDrawer.incidenceWrapper.parent !== ""
+
+                        Kirigami.Heading {
+                            text: i18n("Super-task")
+                            level: 2
+                            font.weight: Font.Bold
+                        }
+
+                        Loader {
+                            Layout.fillWidth: true
+                            height: incidenceInfoDrawer.relatedIncidenceDelegateHeight
+
+                            active: incidenceInfoDrawer.incidenceWrapper.parent !== ""
+                            sourceComponent: RelatedIncidenceDelegate {
+                                incidenceWrapper: incidenceInfoDrawer.incidenceWrapper.parentIncidence
+                            }
+                        }
+                    }
+
+                    ColumnLayout {
+                        id: subTaskColumn
+                        Layout.topMargin: superTaskColumn.visible ? Kirigami.Units.largeSpacing : 0
+                        Layout.columnSpan: 2
+                        Layout.fillWidth: true
+                        visible: incidenceInfoDrawer.incidenceWrapper.childIncidences.length > 0
+
+                        Kirigami.Heading {
+                            text: i18np("Sub-task", "Sub-tasks", incidenceInfoDrawer.incidenceWrapper.childIncidences.length)
+                            level: 2
+                            font.weight: Font.Bold
+                        }
+
+                        Repeater {
+                            model: incidenceInfoDrawer.incidenceWrapper.childIncidences
+                            delegate: RelatedIncidenceDelegate {
+                                implicitHeight: incidenceInfoDrawer.relatedIncidenceDelegateHeight
+                                incidenceWrapper: modelData
+                            }
                         }
                     }
                 }

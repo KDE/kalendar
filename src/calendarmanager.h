@@ -19,7 +19,8 @@
 #include <KConfigWatcher>
 #include <QObject>
 #include <akonadi-calendar_version.h>
-#include <incidencewrapper.h>
+
+class IncidenceWrapper;
 
 namespace Akonadi
 {
@@ -50,6 +51,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
 
 public:
+    static CalendarManager *instance();
     explicit CalendarManager(QObject *parent = nullptr);
     ~CalendarManager() override;
 
@@ -74,7 +76,10 @@ public:
     Q_INVOKABLE int getCalendarSelectableIndex(IncidenceWrapper *incidenceWrapper);
     QVariantMap undoRedoData();
 
-    Q_INVOKABLE Akonadi::Item incidenceItem(KCalendarCore::Incidence::Ptr incidence);
+    Q_INVOKABLE Akonadi::Item incidenceItem(KCalendarCore::Incidence::Ptr incidence) const;
+    Akonadi::Item incidenceItem(const QString &uid) const;
+    KCalendarCore::Incidence::List childIncidences(const QString &uid) const;
+
     Q_INVOKABLE void addIncidence(IncidenceWrapper *incidenceWrapper);
     Q_INVOKABLE void editIncidence(IncidenceWrapper *incidenceWrapper);
     Q_INVOKABLE void updateIncidenceDates(IncidenceWrapper *incidenceWrapper,
@@ -104,12 +109,12 @@ private Q_SLOTS:
 
 Q_SIGNALS:
     void loadingChanged();
-    void entityTreeModelChanged();
+    void calendarChanged();
     void undoRedoDataChanged();
-    void incidenceChanged();
     void enabledTodoCollectionsChanged();
     void updateIncidenceDatesCompleted();
     void collectionColorsChanged();
+    void incidenceAdded();
 
 private:
     Akonadi::ETMCalendar::Ptr m_calendar = nullptr;

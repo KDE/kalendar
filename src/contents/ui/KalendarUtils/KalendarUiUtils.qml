@@ -15,6 +15,8 @@ QtObject {
     id: utilsObject
     property var appMain
 
+    readonly property bool darkMode: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+
     function switchView(newViewComponent, viewSettings) {
         if(appMain.pageStack.layers.depth > 1) {
             appMain.pageStack.layers.pop(appMain.pageStack.layers.initialItem);
@@ -109,8 +111,45 @@ QtObject {
     }
 
     function setUpView(modelData) {
-        appMain.contextDrawer.incidenceData = modelData;
-        appMain.contextDrawer.open();
+        appMain.incidenceInfoDrawer.incidenceData = modelData;
+        appMain.incidenceInfoDrawer.open();
+    }
+
+    function fakeModelDataFromIncidenceWrapper(incidenceWrapper) {
+        // Spoof what a modelData would look like from the model
+        const collectionDetails = CalendarManager.getCollectionDetails(incidenceWrapper.collectionId)
+        const fakeModelData = {
+            "text": incidenceWrapper.summary,
+            "description": incidenceWrapper.description,
+            "location": incidenceWrapper.location,
+            "startTime": incidenceWrapper.incidenceStart,
+            "endTime": incidenceWrapper.incidenceEnd,
+            "allDay": incidenceWrapper.allDay,
+            "todoCompleted": incidenceWrapper.todoCompleted,
+            "priority": incidenceWrapper.priority,
+            // These next two are mainly used in the hourly and day grid views, and we don't use this for
+            // anything but the incidence info drawer -- for now. Remember that they are different to
+            // the incidence's actual startTime and duration time -- these are just for positioning!
+            //"starts":
+            //"duration":
+            "durationString": incidenceWrapper.durationDisplayString,
+            "recurs": incidenceWrapper.recurrenceData.type !== 0,
+            "hasReminders": incidenceWrapper.remindersModel.rowCount() > 0,
+            "isOverdue": incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo &&
+                         !isNaN(incidenceWrapper.incidenceEnd.getTime()) &&
+                         incidenceWrapper.incidenceEnd < appMain.currentDate,
+            "isReadOnly": collectionDetails.readOnly,
+            "color": collectionDetails.color,
+            "collectionId": incidenceWrapper.collectionId,
+            "incidenceId": incidenceWrapper.uid,
+            "incidenceType": incidenceWrapper.incidenceType,
+            "incidenceTypeStr": incidenceWrapper.incidenceTypeStr,
+            "incidenceTypeIcon": incidenceWrapper.incidenceIconName,
+            "incidencePtr": incidenceWrapper.incidencePtr,
+            //"incidenceOccurrence":
+        };
+
+        return fakeModelData;
     }
 
     function setUpEdit(incidencePtr) {

@@ -99,10 +99,9 @@ int main(int argc, char *argv[])
     aboutData.processCommandLine(&parser);
 
     auto config = KalendarConfig::self();
-    CalendarManager manager;
     AgentConfiguration agentConfiguration;
     auto kalendarApplication = new KalendarApplication;
-    kalendarApplication->setCalendar(manager.calendar());
+    kalendarApplication->setCalendar(CalendarManager::instance()->calendar());
 
     KDBusService service(KDBusService::Unique);
     service.connect(&service,
@@ -121,7 +120,7 @@ int main(int argc, char *argv[])
 
     auto tagManager = new TagManager(&engine);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", &manager);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", CalendarManager::instance());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());

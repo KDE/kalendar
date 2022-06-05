@@ -168,10 +168,10 @@ function isDarkColor(background) {
     return temp.a > 0 && getDarkness(background) >= 0.4;
 }
 
-function getIncidenceDelegateBackgroundColor(modelData, darkMode, pastEventsDimmLevel=0.0) {
-    let bgColor = getDarkness(modelData.color) > 0.9 ? Qt.lighter(modelData.color, 1.5) : modelData.color;
+function getIncidenceDelegateBackgroundColor(backgroundColor, darkMode, eventEnd = null, pastEventsDimLevel = 0.0) {
+    let bgColor = getDarkness(backgroundColor) > 0.9 ? Qt.lighter(backgroundColor, 1.5) : backgroundColor;
     if(darkMode) {
-        if(getDarkness(modelData.color) >= 0.5) {
+        if(getDarkness(backgroundColor) >= 0.5) {
             bgColor.a = 0.6;
         } else {
             bgColor.a = 0.4;
@@ -179,9 +179,12 @@ function getIncidenceDelegateBackgroundColor(modelData, darkMode, pastEventsDimm
     } else {
         bgColor.a = 0.7;
     }
-    const now = new Date();
-    if (modelData.endTime < now) {
-        bgColor.a = Math.max(0.0, bgColor.a - pastEventsDimmLevel);
+
+    if(pastEventsDimLevel > 0 && eventEnd) {
+        const now = new Date();
+        if (modelData.endTime < now) {
+            bgColor.a = Math.max(0.0, bgColor.a - pastEventsDimLevel);
+        }
     }
     return bgColor;
 }

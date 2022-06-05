@@ -16,7 +16,7 @@ RowLayout {
     signal removeFilterTag(string tagName)
     signal searchTextChanged(string text)
 
-    property bool isDark: false
+    property bool isDark: KalendarUiUtils.darkMode
     property var mode: Kalendar.KalendarApplication.Event
     property var filter: {
         "tags": [],

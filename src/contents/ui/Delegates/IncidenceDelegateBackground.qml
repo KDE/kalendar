@@ -14,11 +14,11 @@ Kirigami.ShadowedRectangle {
     property bool isOpenOccurrence: false
     property bool reactToCurrentMonth: false
     property bool isInCurrentMonth: true
-    property bool isDark: false
+    property bool isDark: KalendarUiUtils.darkMode
 
     anchors.fill: parent
     color: isOpenOccurrence ? modelData.color :
-        LabelUtils.getIncidenceDelegateBackgroundColor(modelData, root.isDark, Kalendar.Config.pastEventsTransparencyLevel)
+        LabelUtils.getIncidenceDelegateBackgroundColor(modelData.color, root.isDark, modelData.endTime, Kalendar.Config.pastEventsTransparencyLevel)
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
     opacity: isOpenOccurrence || isInCurrentMonth ? 1.0 : 0
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }

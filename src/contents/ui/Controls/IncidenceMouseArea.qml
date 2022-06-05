@@ -25,6 +25,8 @@ MouseArea {
     anchors.fill: parent
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.RightButton
+    cursorShape: Qt.PointingHandCursor
+
     onClicked: {
         if (mouse.button == Qt.LeftButton) {
             collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)

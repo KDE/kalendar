@@ -44,8 +44,6 @@ Kirigami.ApplicationWindow {
         pageStack.currentItem.filter = filter
     }
 
-    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
-
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
     readonly property var weekViewAction: KalendarApplication.action("open_week_view")
     readonly property var threeDayViewAction: KalendarApplication.action("open_threeday_view")
@@ -721,7 +719,7 @@ Kirigami.ApplicationWindow {
                     mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
                     filter: root.filter ?
                         root.filter : {"tags": [], "collectionId": -1, "name": ""}
-                    isDark: root.isDark
+                    isDark: KalendarUiUtils.darkMode
                     visible: mode === KalendarApplication.Todo || filter.tags.length > 0
                     clip: true
 

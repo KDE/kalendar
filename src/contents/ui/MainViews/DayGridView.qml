@@ -47,7 +47,7 @@ Item {
     property int spacing: Kalendar.Config.monthGridBorderWidth // Between grid squares in background
     property int listViewSpacing: root.dayWidth < (Kirigami.Units.gridUnit * 5 + Kirigami.Units.smallSpacing * 2) ?
         Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing // Between lines of incidences ( ====== <- )
-    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+    readonly property bool isDark: KalendarUiUtils.darkMode
     readonly property int mode: Kalendar.KalendarApplication.Event
 
     implicitHeight: (numberOfRows > 1 ? Kirigami.Units.gridUnit * 10 * numberOfRows : numberOfLinesShown * Kirigami.Units.gridUnit) + bgLoader.dayLabelsBar.height

@@ -43,7 +43,7 @@ TreeListView {
     property bool dragDropEnabled: true
 
     property alias model: todoModel
-    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+    readonly property bool isDark: KalendarUiUtils.darkMode
 
     currentIndex: -1
     clip: true
@@ -145,7 +145,7 @@ TreeListView {
         objectName: "taskDelegate"
 
         decoration.decorationHighlightColor: model.color
-        activeBackgroundColor: LabelUtils.getIncidenceDelegateBackgroundColor(model, root.isDark)
+        activeBackgroundColor: LabelUtils.getIncidenceDelegateBackgroundColor(model.color, root.isDark)
         onActiveBackgroundColorChanged: activeBackgroundColor.a = 0.15
         Kirigami.Theme.inherit: false
         Kirigami.Theme.highlightColor: activeBackgroundColor
@@ -241,62 +241,15 @@ TreeListView {
                 rows: 2
                 columnSpacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
-                ColoredCheckbox {
-                    id: todoCheckbox
-
+                TodoCheckBox {
                     Layout.row: 0
                     Layout.column: 0
                     Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 || recurIcon.visible || dateLabel.visible ? 1 : 2
-                    indicator: Item {
-                        height: parent.height
-                        width: height
-                        x: todoCheckbox.leftPadding
-                        y: parent.height / 2 - height / 2
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.verticalCenter: parent.verticalCenter
 
-                        // The icon provides the main circle for the checkbox when not checked,
-                        // whereas the rectangle provides the circle when it is checked.
-                        // The rectangle always provides the tinted background.
-
-                        Kirigami.Icon {
-                            isMask: true
-                            color: model.color
-                            anchors.fill: parent
-                            anchors.margins: parent.height * -0.16
-                            visible: !todoCheckbox.checked
-                            source: {
-                                if (model.percent >= 75) {
-                                    return 'task-process-3';
-                                }
-                                if (model.percent >= 50) {
-                                    return 'task-process-2';
-                                }
-                                if (model.percent >= 25) {
-                                    return 'task-process-1';
-                                }
-                                return 'task-process-0';
-                            }
-                        }
-                        Rectangle {
-                            anchors.fill: parent
-                            radius: todoCheckbox.radius
-                            border.color: todoCheckbox.checked ? todoCheckbox.color : Qt.rgba(0,0,0,0)
-                            color: Qt.rgba(todoCheckbox.color.r, todoCheckbox.color.g, todoCheckbox.color.b, 0.1)
-
-                            Rectangle {
-                                anchors.margins: parent.height * 0.2
-                                anchors.fill: parent
-                                radius: todoCheckbox.radius / 3
-                                color: todoCheckbox.color
-                                visible: todoCheckbox.checked
-                            }
-                        }
-                    }
+                    todoCompleted: model.todoCompleted
+                    todoCompletion: model.percent
+                    todoPtr: model.incidencePtr
                     color: model.color
-                    radius: 100
-                    checked: model.todoCompleted
-                    onClicked: KalendarUiUtils.completeTodo(model.incidencePtr)
                 }
 
                 QQC2.Label {

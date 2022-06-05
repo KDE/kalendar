@@ -30,7 +30,7 @@ Kirigami.Page {
     property bool initialWeek: true
     property int daysToShow: 7
     readonly property int minutesFromStartOfDay: (root.currentDate.getHours() * 60) + root.currentDate.getMinutes()
-    readonly property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
+    readonly property bool isDark: KalendarUiUtils.darkMode
     property bool dragDropEnabled: true
 
     property real scrollbarWidth: 0
