@@ -18,22 +18,6 @@ import "labelutils.js" as LabelUtils
 Kirigami.ScrollablePage {
     id: root
 
-    // We need to store a copy of opened incidence data or we will lose it as we scroll the listviews.
-    function retainTodoData(todoData) {
-        retainedTodoData = {
-            incidencePtr: todoData.incidencePtr,
-            incidenceId: todoData.incidenceId,
-            text: todoData.text,
-            color: todoData.color,
-            startTime: todoData.startTime,
-            endTime: todoData.endTime,
-            durationString: todoData.durationString
-        };
-        KalendarUiUtils.setUpView(retainedTodoData);
-    }
-
-    property var retainedTodoData: ({})
-    property var retainedCollectionData: ({})
     property var mode: Kalendar.KalendarApplication.Todo
 
     property var filter: {
