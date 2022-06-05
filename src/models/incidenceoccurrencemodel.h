@@ -16,6 +16,7 @@
 #endif
 
 #include <KConfigWatcher>
+#include <KFormat>
 #include <QAbstractItemModel>
 #include <QColor>
 #include <QDateTime>
@@ -127,6 +128,7 @@ private:
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
     QVariantMap mFilter;
+    KFormat m_format;
 };
 
 Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence)
