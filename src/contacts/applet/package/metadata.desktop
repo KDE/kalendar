@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Contact
+Name[ar]=المراسَل
 Name[ca]=Contact
 Name[ca@valencia]=Contact
 Name[es]=Contacto
@@ -17,6 +18,7 @@ Name[tr]=Kişi
 Name[uk]=Контакт
 Name[x-test]=xxContactxx
 Comment=Contact list
+Comment[ar]=قائمة المراسلين
 Comment[ca]=Llista de contactes
 Comment[ca@valencia]=Llista de contactes
 Comment[es]=Lista de contactos
