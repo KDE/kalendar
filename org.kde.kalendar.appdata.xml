@@ -35,7 +35,7 @@
   <summary xml:lang="ar">أدر المهام والأحداث بسرعة وسهولة</summary>
   <summary xml:lang="az">Tapşırıqlarınızı və təqdbirlərinizi sürətlə və asan idarə edin</summary>
   <summary xml:lang="ca">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
-  <summary xml:lang="ca-valencia">Gestioneu les tasques i esdeveniments amb rapidesa i facilitat</summary>
+  <summary xml:lang="ca-valencia">Gestioneu les tasques i successos amb rapidesa i facilitat</summary>
   <summary xml:lang="cs">Spravujte své úkoly a události rychle a jednoduše</summary>
   <summary xml:lang="de">Verwalten Sie schnell und einfach Ihre Aufgaben und Termine</summary>
   <summary xml:lang="el">Διαχειριστείτε εργασίες και γεγονότα με ταχύτητα και ευκολία</summary>
@@ -86,7 +86,7 @@
     <p xml:lang="ar">التقويم هو تطبيق تقويم يسمح لك بإدارة مهامك وأحداثك. ويدعم كلاً من التقويمات المحلية بالإضافة إلى العديد من التقاويم عبر الإنترنت: Nextcloud و Google® Calendar و Outlook® و Caldav وغيرها الكثير.</p>
     <p xml:lang="az">Kalendar, sizə tapşırıqlarınızı və tədbirlərinizi idarə etməyə imkan verən bir təqvim tətbiqidir. Kalendar, həm yerli həm də NextCloud, Google® Təqvim, Outlook®, CalDav və bir çoxları kimi onlayn təqvimləri dətəkləyir.</p>
     <p xml:lang="ca">El Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, així com una multitud de calendaris en línia: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
-    <p xml:lang="ca-valencia">Kalendar és una aplicació de calendari que permet gestionar les tasques i esdeveniments. Dona suport a dos calendaris locals, aixina com una multitud de calendaris en llínea: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
+    <p xml:lang="ca-valencia">Kalendar és una aplicació de calendari que permet gestionar les tasques i successos. Dona soport a dos calendaris locals, aixina com una multitud de calendaris en llínea: NextCloud, Google® Calendar, Outlook®, Caldav i molts més.</p>
     <p xml:lang="el">Το Kalendar είναι μια εφαρμογή ημερολογίου που σας επιτρέπει να διαχειρίζεστε εργασίες και γεγονότα. Το Kalendar υποστηρίζει τοπικά ημερολόγια καθώς επίσης και μαι πληθώρα επιγραμμικών (online) ημερολογίων: Nextcloud, Google® Calendar, Outlook®, Caldav, και πολλά άλλα.</p>
     <p xml:lang="en-GB">Kalendar is a calendar application that allows you to manage your tasks and events. Kalendar supports both local calendars as well as a multitude of online calendars: Nextcloud, Google® Calendar, Outlook®, Caldav, and many more.</p>
     <p xml:lang="es">Kalendar es una aplicación de calendarios que permite la gestión de tareas y eventos. Kalendar puede usar calendarios locales y muchos tipos de calendarios en línea: Nextcloud, Google® Calendar, Outlook® y Caldav, entre otros.</p>
@@ -106,7 +106,7 @@
     <p xml:lang="ar">يمنحك التقويم العديد من الطرق للتفاعل مع الأحداث الخاصة بك. يوفر عرض الشهر نظرة عامة على الشهر بأكمله، ويقدم عرض الأسبوع نظرة عامة مفصلة ساعة بساعة لأسبوعك، ويسرد عرض الجدول جميع الأحداث القادمة بحيث يمكنك التخطيط مسبقًا بسهولة وسرعة.</p>
     <p xml:lang="az">Kalendar, sizə tədbirlərinizi əlaqələndirməyin bir çox yolunu təqdim edir. Ay görünüşü bütün ayın icmalını təqdim edir; həftə görünüşü həftənizin ətraflı saat-saat icmalını təqdim edir; və gündəlik görünüşü bütün qarşıdan gələn hadisələrinizin siyahısını verir ki, siz gələcək işlərinizi asanlıqla və cəld planlaşdıra biləsiniz.</p>
     <p xml:lang="ca">El Kalendar ofereix moltes maneres d'interactuar amb els esdeveniments. La vista mensual proporciona una visió general de tot el mes. La vista setmanal presenta una visió general detallada de la vostra setmana. I la vista de llista enumera tots els pròxims esdeveniments de manera que pugueu planificar amb facilitat i rapidesa.</p>
-    <p xml:lang="ca-valencia">Kalendar ofereix moltes maneres d'interactuar amb els esdeveniments. La vista mensual proporciona una visió general de tot el mes. La vista setmanal presenta una visió general detallada de la vostra setmana. I la vista de llista enumera tots els pròxims esdeveniments de manera que pugau planificar amb facilitat i rapidesa.</p>
+    <p xml:lang="ca-valencia">Kalendar ofereix moltes maneres d'interactuar amb els successos. La vista mensual proporciona una visió general de tot el mes. La vista setmanal presenta una visió general detallada de la vostra setmana. I la vista de llista enumera tots els pròxims successos de manera que pugau planificar amb facilitat i rapidesa.</p>
     <p xml:lang="el">Το Kalendar δίνει πολλούς τρόπους αλληλεπίδρασης με γεγονότα. Η προβολή του μήνα παρέχει μια επισκόπηση όλου του μήνα. Η προβολή της εβδομάδας παρουσιάζει μια λεπτομερή ανά ώρα επισκόπηση της εβδομάδας. Και η προβολή χρονοπρογραμματισμού εμφανίζει όλα τα επερχόμενα γεγονότα έτσι ώστε εύκολα και γρήγορα να οργανώνετε το χρόνο σας.</p>
     <p xml:lang="en-GB">Kalendar gives you many ways to interact with your events. The month view provides an overview of the entire month; the week view presents a detailed hour-by-hour overview of your week; and the schedule view lists all of your upcoming events so that you can easily and quickly plan ahead.</p>
     <p xml:lang="es">Kalendar le proporciona muchos modos de interactuar con los eventos. La vista mensual muestra un resumen de todo el mes; la vista semanal presenta un detallado resumen de la semana por horas; y la vista de planificación lista todos los eventos futuros para que pueda programarlos con antelación de una forma fácil y rápida.</p>
@@ -146,7 +146,7 @@
     <p xml:lang="ar">صمم التقويم بفكرة أن تكون قابل للاستخدام على سطح المكتب وعلى الهاتف المحمول وكل شيء بينهما.</p>
     <p xml:lang="az">Kalendar, Masaüstü, mobil və onlar arasındakı cihazlarda istifadə ediləbiləcək şəkildə hazırlanmışdır.</p>
     <p xml:lang="ca">El Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
-    <p xml:lang="ca-valencia">Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot lo que hi ha entre ells.</p>
+    <p xml:lang="ca-valencia">Kalendar s'ha construït amb la idea de ser usable a l'escriptori, al mòbil i tot el que hi ha entre ells.</p>
     <p xml:lang="cs">Kalendar byl navržen s myšlenkou vysoké použitelnosti na počítači, mobilním telefonu a čímkoliv mezi.</p>
     <p xml:lang="el">το Kalendar κατασκευάστηκε με την ιδέα της χρηστικότητας στην επιφάνεια εργασίας, στο κινητό και σε οτιδήποτε ενδιάμεσα.</p>
     <p xml:lang="en-GB">Kalendar was built with the idea to be usable on desktop, on mobile and everything in between.</p>
