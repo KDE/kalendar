@@ -149,3 +149,43 @@ function unadjustDateTimeToLocalTimeZone(dateTime, timeZoneOffset) {
     // Undoes what prior func does
     return new Date(dateTime.getTime() - (timeZoneOffset * 1000) - (new Date().getTimezoneOffset() * 60 * 1000));
 }
+
+function parseDateString(dateString) {
+    function defaultParse() {
+        return Date.fromLocaleDateString(Qt.locale(), dateString, Locale.NarrowFormat);
+    }
+
+    const dateStringDelimiterMatches = dateString.match(/\D/);
+    if(dateStringDelimiterMatches.length === 0) { // Let the date method figure out this weirdness
+        return defaultParse();
+    }
+
+    const dateStringDelimiter = dateStringDelimiterMatches[0];
+
+    const localisedDateFormatSplit = Qt.locale().dateFormat(Locale.NarrowFormat).split(dateStringDelimiter);
+    const localisedDateYearPosition = localisedDateFormatSplit.findIndex((x) => /y/gi.test(x));
+
+    let splitDateString = dateString.split(dateStringDelimiter);
+    let userProvidedYear = splitDateString[localisedDateYearPosition]
+
+    const dateNow = new Date();
+    const stringifiedCurrentYear = dateNow.getFullYear().toString();
+
+    // If we have any input weirdness, or if we have a fully-written year (e.g. 2022 instead of 22) then use default parse
+    if(splitDateString.length === 0 || splitDateString.length > 3 || userProvidedYear.length >= stringifiedCurrentYear.length) {
+        return defaultParse();
+    }
+
+    let fullyWrittenYear = userProvidedYear.split("");
+    const digitsToAdd = stringifiedCurrentYear.length - fullyWrittenYear.length;
+    for(let i = 0; i < digitsToAdd; i++) {
+        fullyWrittenYear.splice(i, 0, stringifiedCurrentYear[i])
+    }
+    fullyWrittenYear = fullyWrittenYear.join("");
+
+    let fixedSplitDateString = splitDateString;
+    fixedSplitDateString[localisedDateYearPosition] = fullyWrittenYear;
+    const fixedDateString = fixedSplitDateString.join(dateStringDelimiter);
+
+    return Date.fromLocaleDateString(Qt.locale(), fixedDateString, Locale.NarrowFormat);
+}
