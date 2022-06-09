@@ -852,7 +852,7 @@ void IncidenceWrapper::itemChanged(const Akonadi::Item &item)
 {
     if (item.hasPayload<KCalendarCore::Incidence::Ptr>()) {
         qCDebug(KALENDAR_LOG) << item.payload<KCalendarCore::Incidence::Ptr>()->summary() << item.parentCollection().id();
-        setIncidencePtr(item.payload<KCalendarCore::Incidence::Ptr>());
+        setIncidenceItem(item);
     }
 }
 #ifndef UNITY_CMAKE_SUPPORT
