@@ -8,6 +8,7 @@
 #pragma once
 
 #include "incidenceoccurrencemodel.h"
+#include "qbitarray.h"
 #include <QAbstractItemModel>
 #include <QList>
 #include <QSharedPointer>
@@ -79,11 +80,25 @@ protected:
     void setIncidenceCount(int incidenceCount);
 
 private:
-    QTimer mRefreshTimer;
+    enum LayoutIncidenceProcessResult { Proceed, Delay, Skip };
+
+    struct ProcessedIncidenceLayout {
+        LayoutIncidenceProcessResult result;
+        int start;
+        int duration;
+        int end;
+    };
+
+    void updateShownDays();
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
+    ProcessedIncidenceLayout layoutIncidenceProcess(const QModelIndex &index, const QBitArray takenSpaces, const QDate &rowStart) const;
+
+    QTimer mRefreshTimer;
     QVariantList layoutLines(const QDate &rowStart) const;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
     int mPeriodLength{7};
+    QBitArray m_hiddenSpaces = QBitArray(7); // TODO: Use a more flexible way of doing this
+    int m_numHiddenSpaces = 0;
     MultiDayIncidenceModel::Filters m_filters;
     KalendarConfig *m_config = nullptr;
 };

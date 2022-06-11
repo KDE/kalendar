@@ -14,10 +14,39 @@ MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
 {
     mRefreshTimer.setSingleShot(true);
     m_config = KalendarConfig::self();
-    QObject::connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, [&]() {
+
+    const auto resetModel = [&] {
         beginResetModel();
         endResetModel();
-    });
+    };
+
+    connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, resetModel);
+    connect(m_config, &KalendarConfig::showDay1Changed, this, &MultiDayIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay2Changed, this, &MultiDayIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay3Changed, this, &MultiDayIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay4Changed, this, &MultiDayIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay5Changed, this, &MultiDayIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay6Changed, this, &MultiDayIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay7Changed, this, &MultiDayIncidenceModel::updateShownDays);
+
+    updateShownDays();
+}
+
+void MultiDayIncidenceModel::updateShownDays()
+{
+    beginResetModel();
+
+    m_hiddenSpaces[0] = !m_config->showDay1();
+    m_hiddenSpaces[1] = !m_config->showDay2();
+    m_hiddenSpaces[2] = !m_config->showDay3();
+    m_hiddenSpaces[3] = !m_config->showDay4();
+    m_hiddenSpaces[4] = !m_config->showDay5();
+    m_hiddenSpaces[5] = !m_config->showDay6();
+    m_hiddenSpaces[6] = !m_config->showDay7();
+
+    m_numHiddenSpaces = m_hiddenSpaces.count(true);
+
+    endResetModel();
 }
 
 QModelIndex MultiDayIncidenceModel::index(int row, int column, const QModelIndex &parent) const
@@ -116,6 +145,84 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
     return sorted;
 }
 
+MultiDayIncidenceModel::ProcessedIncidenceLayout
+MultiDayIncidenceModel::layoutIncidenceProcess(const QModelIndex &idx, const QBitArray takenSpaces, const QDate &rowStart) const
+{
+    auto getStart = [&rowStart](const QDate &start) {
+        return (qMax(rowStart.daysTo(start), 0ll));
+    };
+
+    const auto startDate = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart
+        ? rowStart
+        : idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
+
+    // There is no way these numbers will realistically require anything larger than an integer.
+    // With a minimum of 0 and a maximum of whatever the mPeriodLength is (we skip over events
+    // beyond the end of the period being examined in this model) then an int will always suffice.
+    // Please don't try and break this wrong with a massive mPeriodLength ;)
+
+    // Start position on view, as an index (i.e. if 7 days in a week in the month view, position ranging 0-6)
+    int start = getStart(idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
+    // Number of positions to take up (positions being, for example, day grid columns)
+    int duration = qMin(static_cast<int>(getDuration(startDate, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date())), (mPeriodLength - start));
+
+    // For some reason we have received an incidence with a date outside our date range, so skip
+    if (start >= mPeriodLength) {
+        qDebug() << "WOOP!";
+        return {Skip, 0, 0, 0};
+    }
+
+    // TODO: Again, generalise this code for other periods
+    if (mPeriodLength <= 7) {
+        if (duration == 1 && m_hiddenSpaces[start]) {
+            qDebug() << "PISS!";
+            return {Skip, 0, 0, 0};
+        }
+
+        // We also have to check for which days are hidden by the user. If a day is hidden we have to adjust the start
+        // or end numbers as well. Here we move forward start (and cut back duration) if the start date is hidden
+        while (start < mPeriodLength && duration > 0 && m_numHiddenSpaces > 0 && m_hiddenSpaces[start]) {
+            start += 1;
+            duration -= 1;
+        }
+        if (start >= mPeriodLength || duration < 0) {
+            qDebug() << "PEE!";
+            return {Skip, 0, 0, 0};
+        }
+        for (int i = 0; i < duration; i++) {
+            if (m_hiddenSpaces[start + i]) {
+                duration -= 1;
+            }
+        }
+        if (start >= mPeriodLength || duration < 0) {
+            qDebug() << "POO!";
+            return {Skip, 0, 0, 0};
+        }
+    }
+
+    const auto end = start + duration;
+
+    // TODO: Add this as an option
+    // This leaves a space in rows with all day events, making this y area of the row exclusively for all day events
+    /*if (allDayLine && !idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
+        continue;
+    }*/
+
+    bool doesIntersect = false; // Check if positions for this incidence are already taken
+    for (int i = start; i < end; i++) {
+        if (takenSpaces[i]) {
+            return {Delay, 0, 0, 0};
+        }
+    }
+
+    if (doesIntersect) {
+        return {Delay, 0, 0, 0};
+    } else {
+        // Incidence fits on line, set its space as taken
+        return {Proceed, start, duration, end};
+    }
+}
+
 /*
  * Layout the lines:
  *
@@ -127,31 +234,18 @@ QList<QModelIndex> MultiDayIncidenceModel::sortedIncidencesFromSourceModel(const
  */
 QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
 {
-    auto getStart = [&rowStart](const QDate &start) {
-        return qMax(rowStart.daysTo(start), 0ll);
-    };
-
     QList<QModelIndex> sorted = sortedIncidencesFromSourceModel(rowStart);
-
-    // for (const auto &srcIdx : sorted) {
-    //     qCWarning(KALENDAR_LOG) << "sorted " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
-    //     srcIdx.data(IncidenceOccurrenceModel::Summary).toString()
-    //     << srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
-    // }
-
     auto result = QVariantList{};
+
     while (!sorted.isEmpty()) {
-        const auto srcIdx = sorted.takeFirst();
-        const auto startDate = srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart
-            ? rowStart
-            : srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
-        const auto start = getStart(srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
-        const auto duration = qMin(getDuration(startDate, srcIdx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
+        QBitArray takenSpaces(mPeriodLength);
+        auto fillSpaces = [&takenSpaces](int start, int duration) {
+            for (int i = start; i < start + duration; i++) {
+                takenSpaces[i] = true;
+            }
+        };
 
-        // qCWarning(KALENDAR_LOG) << "First of line " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() << duration <<
-        // srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
         auto currentLine = QVariantList{};
-
         auto addToLine = [&currentLine](const QModelIndex &idx, int start, int duration) {
             currentLine.append(QVariantMap{
                 {QStringLiteral("text"), idx.data(IncidenceOccurrenceModel::Summary)},
@@ -180,55 +274,36 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
             });
         };
 
-        if (start >= mPeriodLength) {
-            // qCWarning(KALENDAR_LOG) << "Skipping " << srcIdx.data(IncidenceOccurrenceModel::Summary);
+        const auto srcIdx = sorted.takeFirst();
+        const auto processed = layoutIncidenceProcess(srcIdx, takenSpaces, rowStart);
+
+        if (processed.result == Skip) {
+            qDebug() << processed.start << srcIdx.data(IncidenceOccurrenceModel::Summary).toString();
             continue;
         }
 
         // Add first incidence of line
-        addToLine(srcIdx, start, duration);
+        addToLine(srcIdx, processed.start, processed.duration);
         // const bool allDayLine = srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
 
         // Fill line with incidences that fit
-        QBitArray takenSpaces(mPeriodLength);
-        // Set this incidence's space as taken
-        for (int i = start; i < start + duration; i++) {
-            takenSpaces[i] = true;
-        }
-
-        auto doesIntersect = [&](int start, int end) {
-            for (int i = start; i < end; i++) {
-                if (takenSpaces[i]) {
-                    // qCWarning(KALENDAR_LOG) << "Found intersection " << start << end;
-                    return true;
-                }
-            }
-
-            // If incidence fits on line, set its space as taken
-            for (int i = start; i < end; i++) {
-                takenSpaces[i] = true;
-            }
-            return false;
-        };
+        fillSpaces(processed.start, processed.duration);
 
         for (auto it = sorted.begin(); it != sorted.end();) {
             const auto idx = *it;
-            const auto startDate = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date() < rowStart
-                ? rowStart
-                : idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
-            const auto start = getStart(idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
-            const auto duration = qMin(getDuration(startDate, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date()), mPeriodLength - start);
-            const auto end = start + duration;
+            const auto processed = layoutIncidenceProcess(idx, takenSpaces, rowStart);
 
-            // This leaves a space in rows with all day events, making this y area of the row exclusively for all day events
-            /*if (allDayLine && !idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
-                continue;
-            }*/
-
-            if (doesIntersect(start, end)) {
+            // Somehow the incidences are getting eaten up right to left?
+            qDebug() << processed.start << idx.data(IncidenceOccurrenceModel::Summary).toString();
+            if (processed.result == Skip) {
+                qDebug() << processed.start << idx.data(IncidenceOccurrenceModel::Summary).toString();
+                it = sorted.erase(it);
+            } else if (processed.result == Delay) {
                 it++;
             } else {
-                addToLine(idx, start, duration);
+                // Incidence fits on line, set its space as taken
+                addToLine(idx, processed.start, processed.duration);
+                fillSpaces(processed.start, processed.duration);
                 it = sorted.erase(it);
             }
         }
