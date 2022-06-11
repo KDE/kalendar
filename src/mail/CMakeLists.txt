@@ -10,6 +10,24 @@ target_sources(kalendar_mail_plugin PRIVATE
     mailmanager.h
     mailmodel.cpp
     mailmodel.h
+
+    crypto.cpp
+    mimetreeparser/messagepart.cpp
+    mimetreeparser/bodypartformatter.cpp
+    mimetreeparser/bodypartformatter_impl.cpp
+    mimetreeparser/bodypartformatterbasefactory.cpp
+    mimetreeparser/bodypartformatterbasefactory.cpp
+    mimetreeparser/cryptohelper.cpp
+    mimetreeparser/messagepart.cpp
+    mimetreeparser/mimetreeparser_debug.cpp
+    mimetreeparser/objecttreeparser.cpp
+    mimetreeparser/utils.cpp
+    mime/attachmentmodel.cpp
+    mime/htmlutils.cpp
+    mime/mailcrypto.cpp
+    mime/mailtemplates.cpp
+    mime/messageparser.cpp
+    mime/partmodel.cpp
 )
 
 ecm_target_qml_sources(kalendar_mail_plugin SOURCES
@@ -17,15 +35,15 @@ ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/FolderView.qml
 )
 
-#ecm_target_qml_sources(kalendar_contact_plugin
-#    PRIVATE PATH private SOURCES
-#    qml/private/ContactListItem.qml
-#    qml/private/ContactPage.qml
-#    qml/private/ContactsPage.qml
-#    qml/private/Header.qml
-#    qml/private/PhoneNumberDialog.qml
-#    qml/private/QrCodePage.qml
-#)
+ecm_target_qml_sources(kalendar_contact_plugin
+    PRIVATE PATH private SOURCES
+    qml/mailpartview/HtmlPart.qml
+    qml/mailpartview/ICalPart.qml
+    qml/mailpartview/MailPart.qml
+    qml/mailpartview/MailPartModel.qml
+    qml/mailpartview/MailPartView.qml
+    qml/mailpartview/TextPart.qml
+)
 
 ecm_qt_declare_logging_category(kalendar_contact_plugin
     HEADER kalendar_mail_debug.h
@@ -35,7 +53,7 @@ ecm_qt_declare_logging_category(kalendar_contact_plugin
     EXPORT KALENDAR
 )
 
-target_link_libraries(kalendar_mail_plugin PRIVATE kalendar_lib KF5::MailCommon KF5::AkonadiMime)
+target_link_libraries(kalendar_mail_plugin PRIVATE kalendar_lib KF5::MailCommon KF5::AkonadiMime Qt5::WebEngineWidgets)
 
 ecm_qt_install_logging_categories(
     EXPORT KALENDAR
