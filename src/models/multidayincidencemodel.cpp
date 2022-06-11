@@ -164,18 +164,17 @@ MultiDayIncidenceModel::layoutIncidenceProcess(const QModelIndex &idx, const QBi
     // Start position on view, as an index (i.e. if 7 days in a week in the month view, position ranging 0-6)
     int start = getStart(idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date());
     // Number of positions to take up (positions being, for example, day grid columns)
-    int duration = qMin(static_cast<int>(getDuration(startDate, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date())), (mPeriodLength - start));
+    int duration = qMin(static_cast<int>(getDuration(startDate, idx.data(IncidenceOccurrenceModel::EndTime).toDateTime().date())), mPeriodLength - start);
 
     // For some reason we have received an incidence with a date outside our date range, so skip
     if (start >= mPeriodLength) {
-        qDebug() << "WOOP!";
         return {Skip, 0, 0, 0};
     }
 
     // TODO: Again, generalise this code for other periods
     if (mPeriodLength <= 7) {
+        // We always try to exit as quickly as possible to prevent bogging down unnecessarily
         if (duration == 1 && m_hiddenSpaces[start]) {
-            qDebug() << "PISS!";
             return {Skip, 0, 0, 0};
         }
 
@@ -186,7 +185,6 @@ MultiDayIncidenceModel::layoutIncidenceProcess(const QModelIndex &idx, const QBi
             duration -= 1;
         }
         if (start >= mPeriodLength || duration < 0) {
-            qDebug() << "PEE!";
             return {Skip, 0, 0, 0};
         }
         for (int i = 0; i < duration; i++) {
@@ -195,7 +193,6 @@ MultiDayIncidenceModel::layoutIncidenceProcess(const QModelIndex &idx, const QBi
             }
         }
         if (start >= mPeriodLength || duration < 0) {
-            qDebug() << "POO!";
             return {Skip, 0, 0, 0};
         }
     }
