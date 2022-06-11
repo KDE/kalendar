@@ -131,6 +131,35 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             <label>Set the height of the all-day header at the top of the week view."</label>
             <default>-1</default>
         </entry>
+
+        <entry name="showDay1" type="Bool">
+            <label>Show the first day of the week on the week view."</label>
+            <default>true</default>
+        </entry>
+        <entry name="showDay2" type="Bool">
+            <label>Show the second day of the week on the week view."</label>
+            <default>true</default>
+        </entry>
+        <entry name="showDay3" type="Bool">
+            <label>Show the third day of the week on the week view."</label>
+            <default>true</default>
+        </entry>
+        <entry name="showDay4" type="Bool">
+            <label>Show the fourth day of the week on the week view."</label>
+            <default>true</default>
+        </entry>
+        <entry name="showDay5" type="Bool">
+            <label>Show the fifth day of the week on the week view."</label>
+            <default>true</default>
+        </entry>
+        <entry name="showDay6" type="Bool">
+            <label>Show the sixth day of the week on the week view."</label>
+            <default>true</default>
+        </entry>
+        <entry name="showDay7" type="Bool">
+            <label>Show the seventh day of the week on the week view."</label>
+            <default>true</default>
+        </entry>
     </group>
 
     <group name="ScheduleView">

@@ -140,6 +140,76 @@ Kirigami.ScrollablePage {
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Week View settings")
+        }
+        GridLayout {
+            id: recurWeekdayRuleLayout
+            Layout.fillWidth: true
+
+            columns: 7
+
+            Repeater {
+                model: 7
+                delegate: Controls.Label {
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                    text: Qt.locale().dayName(Qt.locale().firstDayOfWeek + index, Locale.ShortFormat)
+                }
+            }
+
+            Controls.CheckBox {
+                checked: Config.showDay1
+                onClicked: {
+                    Config.showDay1 = !Config.showDay1;
+                    Config.save();
+                }
+            }
+            Controls.CheckBox {
+                checked: Config.showDay2
+                onClicked: {
+                    Config.showDay2 = !Config.showDay2;
+                    Config.save();
+                }
+            }
+            Controls.CheckBox {
+                checked: Config.showDay3
+                onClicked: {
+                    Config.showDay3 = !Config.showDay3;
+                    Config.save();
+                }
+            }
+            Controls.CheckBox {
+                checked: Config.showDay4
+                onClicked: {
+                    Config.showDay4 = !Config.showDay4;
+                    Config.save();
+                }
+            }
+            Controls.CheckBox {
+                checked: Config.showDay5
+                onClicked: {
+                    Config.showDay5 = !Config.showDay5;
+                    Config.save();
+                }
+            }
+            Controls.CheckBox {
+                checked: Config.showDay6
+                onClicked: {
+                    Config.showDay6 = !Config.showDay6;
+                    Config.save();
+                }
+            }
+            Controls.CheckBox {
+                checked: Config.showDay7
+                onClicked: {
+                    Config.showDay7 = !Config.showDay7;
+                    Config.save();
+                }
+            }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Schedule View settings")
         }
         Column {
