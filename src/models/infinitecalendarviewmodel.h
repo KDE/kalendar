@@ -5,8 +5,8 @@
 
 #include "hourlyincidencemodel.h"
 #include "multidayincidencemodel.h"
-#include <kalendarconfig.h>
 #include <akonadi-calendar_version.h>
+#include <kalendarconfig.h>
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/ETMCalendar>
 #else

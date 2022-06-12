@@ -483,7 +483,7 @@ Kirigami.Page {
                                                         delegate: Rectangle {
                                                             id: multiDayViewBackground
 
-                                                            readonly property int representativeIndex: viewLoader.hourlyViewModel.dateAdjustedIndex(index, viewLoader.startDate, true)
+                                                            readonly property int representativeIndex: viewLoader.hourlyViewModel.dateAdjustedIndex(index, viewLoader.startDate)
                                                             readonly property date date: DateUtils.addDaysToDate(viewLoader.startDate, representativeIndex)
                                                             readonly property bool isToday: date.getDate() === root.currentDay &&
                                                                 date.getMonth() === root.currentMonth &&

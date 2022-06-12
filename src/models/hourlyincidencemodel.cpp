@@ -43,7 +43,7 @@ void HourlyIncidenceModel::updateShownDays()
     m_numHiddenSpaces = m_hiddenSpaces.count(true);
     Q_EMIT numHiddenDaysChanged();
 
-    if(mSourceModel && m_numHiddenSpaces > 0) {
+    if (mSourceModel && m_numHiddenSpaces > 0) {
         // For delegates of some models, like the date heading, we want to adjust the index used.
         // When we hide days we reduce the size of the model from, say, 7 to 4, and without changes this would show something
         // like Monday to Thursday even though we might have hidden Mon, Tues, and Wed. So we need to provide a fake index that
@@ -53,11 +53,9 @@ void HourlyIncidenceModel::updateShownDays()
 
         // Iterate over visibleDays forwards to find the nearest next visible day
         int daysToPushForwardBy = 0;
-        for(int indexToAdjust = 0; indexToAdjust < m_hiddenSpaces.count(); indexToAdjust++) {
-
-            for(int nextVisibleIndex = indexToAdjust; nextVisibleIndex < m_hiddenSpaces.count(); nextVisibleIndex++) {
-
-                if(m_hiddenSpaces[nextVisibleIndex]) {
+        for (int indexToAdjust = 0; indexToAdjust < m_hiddenSpaces.count(); indexToAdjust++) {
+            for (int nextVisibleIndex = indexToAdjust; nextVisibleIndex < m_hiddenSpaces.count(); nextVisibleIndex++) {
+                if (m_hiddenSpaces[nextVisibleIndex]) {
                     daysToPushForwardBy++;
                     continue;
                 }
@@ -65,14 +63,13 @@ void HourlyIncidenceModel::updateShownDays()
                 indices[indexToAdjust] = (indexToAdjust + daysToPushForwardBy);
                 // Since the delegate index does not adjust, we need to push forward the indices that are now
                 // representing hidden days
-                while(m_hiddenSpaces[indices[indexToAdjust] % m_hiddenSpaces.count()]) {
+                while (m_hiddenSpaces[indices[indexToAdjust] % m_hiddenSpaces.count()]) {
                     indices[indexToAdjust]++;
                 }
                 break;
             }
         }
         m_dateRepresentativeIndices = indices;
-        qDebug() << indices;
         Q_EMIT dateRepresentativeIndicesChanged();
     }
 
@@ -81,32 +78,31 @@ void HourlyIncidenceModel::updateShownDays()
 
 int HourlyIncidenceModel::dateAdjustedIndex(int index, const QDateTime &rowStartDate) const
 {
-    if(!mSourceModel || m_numHiddenSpaces == 0 || index > m_dateRepresentativeIndices.count()) {
+    if (!mSourceModel || m_numHiddenSpaces == 0 || index > m_dateRepresentativeIndices.count()) {
         return index;
     }
 
     // 3 day views are tricky
-    if(mSourceModel->length() == 3) {
-        if(index == 0) {
+    if (mSourceModel->length() == 3) {
+        if (index == 0) {
             // First index will always be correct as this is provided by C++ model which takes into account hidden days
             // when providing the start dates
             return 0;
         }
 
         int adjustedIndex = index;
-        const auto startDateVisibleDateIndex = rowStartDate.date().addDays(-m_locale.firstDayOfWeek() + 1).day();
+        const auto startDateVisibleDateIndex = rowStartDate.date().addDays(m_locale.firstDayOfWeek() - 1).dayOfWeek() - 1;
 
-        int indexToCheck = startDateVisibleDateIndex + 1;
+        int indexToCheck = (startDateVisibleDateIndex + 1) % m_hiddenSpaces.count();
         // We now need to provide the next visible day. Unlike with the others, we need to know what the start date is
-        for(int i = 0; i < index; ++i) {
-            while(m_hiddenSpaces[indexToCheck % m_hiddenSpaces.count()]) {
+        for (int i = 0; i < index; ++i) {
+            while (m_hiddenSpaces[indexToCheck]) {
                 indexToCheck = ++indexToCheck % m_hiddenSpaces.count();
                 adjustedIndex++;
             }
             indexToCheck = ++indexToCheck % m_hiddenSpaces.count();
         }
 
-        //qDebug() << index << adjustedIndex << rowStartDate;
         return adjustedIndex;
     }
 
@@ -426,7 +422,7 @@ QVariant HourlyIncidenceModel::data(const QModelIndex &idx, int role) const
     }
 
     // Adjust rowStart for hidden days, also make sure we bound it
-    const auto offset = dateAdjustedIndex(idx.row());
+    const auto offset = dateAdjustedIndex(idx.row(), mSourceModel->start().startOfDay());
     const auto rowStart = mSourceModel->start().addDays(offset).startOfDay();
 
     qDebug() << idx.row() << offset << rowStart;

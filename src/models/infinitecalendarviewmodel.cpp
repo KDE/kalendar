@@ -419,7 +419,7 @@ void InfiniteCalendarViewModel::addDates(bool atEnd, const QDate startFrom)
 void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, int amount)
 {
     const auto toLocalizedIndex = [&](const QDate &date) {
-        if(!date.isValid()) {
+        if (!date.isValid()) {
             return -1;
         }
 
@@ -433,7 +433,7 @@ void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, 
     };
 
     const auto adjustStartDate = [&](const QDate &date) {
-        if(!date.isValid()) {
+        if (!date.isValid()) {
             return QDate();
         }
 
@@ -473,7 +473,7 @@ void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, 
             auto adjustedStartDate = adjustStartDate(startDate);
             // If we end up getting an adjusted start date that we already have as a start date, do the next set instead
             auto backOffset = amount;
-            while(m_startDates.constFirst() == adjustedStartDate) {
+            while (m_startDates.constFirst() == adjustedStartDate) {
                 adjustedStartDate = adjustStartDate(adjustedStartDate.addDays(-backOffset));
                 backOffset += amount;
             }
