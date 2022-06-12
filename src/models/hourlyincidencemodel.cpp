@@ -16,6 +16,111 @@ HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
         beginResetModel();
         endResetModel();
     });
+
+    connect(m_config, &KalendarConfig::showDay1Changed, this, &HourlyIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay2Changed, this, &HourlyIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay3Changed, this, &HourlyIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay4Changed, this, &HourlyIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay5Changed, this, &HourlyIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay6Changed, this, &HourlyIncidenceModel::updateShownDays);
+    connect(m_config, &KalendarConfig::showDay7Changed, this, &HourlyIncidenceModel::updateShownDays);
+
+    updateShownDays();
+}
+
+void HourlyIncidenceModel::updateShownDays()
+{
+    beginResetModel();
+
+    m_hiddenSpaces[0] = !m_config->showDay1();
+    m_hiddenSpaces[1] = !m_config->showDay2();
+    m_hiddenSpaces[2] = !m_config->showDay3();
+    m_hiddenSpaces[3] = !m_config->showDay4();
+    m_hiddenSpaces[4] = !m_config->showDay5();
+    m_hiddenSpaces[5] = !m_config->showDay6();
+    m_hiddenSpaces[6] = !m_config->showDay7();
+
+    m_numHiddenSpaces = m_hiddenSpaces.count(true);
+    Q_EMIT numHiddenDaysChanged();
+
+    if(mSourceModel && m_numHiddenSpaces > 0) {
+        // For delegates of some models, like the date heading, we want to adjust the index used.
+        // When we hide days we reduce the size of the model from, say, 7 to 4, and without changes this would show something
+        // like Monday to Thursday even though we might have hidden Mon, Tues, and Wed. So we need to provide a fake index that
+        // reflects what index this delegate is supposedly representing
+
+        QVector<int> indices(m_hiddenSpaces.count());
+
+        // Iterate over visibleDays forwards to find the nearest next visible day
+        int daysToPushForwardBy = 0;
+        for(int indexToAdjust = 0; indexToAdjust < m_hiddenSpaces.count(); indexToAdjust++) {
+
+            for(int nextVisibleIndex = indexToAdjust; nextVisibleIndex < m_hiddenSpaces.count(); nextVisibleIndex++) {
+
+                if(m_hiddenSpaces[nextVisibleIndex]) {
+                    daysToPushForwardBy++;
+                    continue;
+                }
+
+                indices[indexToAdjust] = (indexToAdjust + daysToPushForwardBy);
+                // Since the delegate index does not adjust, we need to push forward the indices that are now
+                // representing hidden days
+                while(m_hiddenSpaces[indices[indexToAdjust] % m_hiddenSpaces.count()]) {
+                    indices[indexToAdjust]++;
+                }
+                break;
+            }
+        }
+        m_dateRepresentativeIndices = indices;
+        qDebug() << indices;
+        Q_EMIT dateRepresentativeIndicesChanged();
+    }
+
+    endResetModel();
+}
+
+int HourlyIncidenceModel::dateAdjustedIndex(int index, const QDateTime &rowStartDate) const
+{
+    if(!mSourceModel || m_numHiddenSpaces == 0 || index > m_dateRepresentativeIndices.count()) {
+        return index;
+    }
+
+    // 3 day views are tricky
+    if(mSourceModel->length() == 3) {
+        if(index == 0) {
+            // First index will always be correct as this is provided by C++ model which takes into account hidden days
+            // when providing the start dates
+            return 0;
+        }
+
+        int adjustedIndex = index;
+        const auto startDateVisibleDateIndex = rowStartDate.date().addDays(-m_locale.firstDayOfWeek() + 1).day();
+
+        int indexToCheck = startDateVisibleDateIndex + 1;
+        // We now need to provide the next visible day. Unlike with the others, we need to know what the start date is
+        for(int i = 0; i < index; ++i) {
+            while(m_hiddenSpaces[indexToCheck % m_hiddenSpaces.count()]) {
+                indexToCheck = ++indexToCheck % m_hiddenSpaces.count();
+                adjustedIndex++;
+            }
+            indexToCheck = ++indexToCheck % m_hiddenSpaces.count();
+        }
+
+        //qDebug() << index << adjustedIndex << rowStartDate;
+        return adjustedIndex;
+    }
+
+    return m_dateRepresentativeIndices[index];
+}
+
+QVector<int> HourlyIncidenceModel::dateRepresentativeIndices() const
+{
+    return m_dateRepresentativeIndices;
+}
+
+int HourlyIncidenceModel::numHiddenDays() const
+{
+    return m_numHiddenSpaces;
 }
 
 QModelIndex HourlyIncidenceModel::index(int row, int column, const QModelIndex &parent) const
@@ -37,9 +142,9 @@ QModelIndex HourlyIncidenceModel::parent(const QModelIndex &) const
 
 int HourlyIncidenceModel::rowCount(const QModelIndex &parent) const
 {
-    // Number of weeks
+    // Number of days
     if (!parent.isValid() && mSourceModel) {
-        return qMax(mSourceModel->length(), 1);
+        return mSourceModel->length() == 7 ? qMax(mSourceModel->length() - m_numHiddenSpaces, 1) : qMax(mSourceModel->length(), 1);
     }
     return 0;
 }
@@ -319,7 +424,13 @@ QVariant HourlyIncidenceModel::data(const QModelIndex &idx, int role) const
     if (!mSourceModel) {
         return {};
     }
-    const auto rowStart = mSourceModel->start().addDays(idx.row()).startOfDay();
+
+    // Adjust rowStart for hidden days, also make sure we bound it
+    const auto offset = dateAdjustedIndex(idx.row());
+    const auto rowStart = mSourceModel->start().addDays(offset).startOfDay();
+
+    qDebug() << idx.row() << offset << rowStart;
+
     switch (role) {
     case PeriodStartDateTime:
         return rowStart;
@@ -339,7 +450,9 @@ IncidenceOccurrenceModel *HourlyIncidenceModel::model()
 void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 {
     beginResetModel();
+
     mSourceModel = model;
+
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
             beginResetModel();
@@ -347,13 +460,17 @@ void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
             mRefreshTimer.start(50);
         }
     };
+
     QObject::connect(model, &QAbstractItemModel::dataChanged, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::modelReset, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsInserted, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
+
     endResetModel();
+
+    updateShownDays();
 }
 
 int HourlyIncidenceModel::periodLength()

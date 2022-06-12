@@ -16,7 +16,7 @@ Kirigami.Page {
     id: root
 
     property var openOccurrence: ({})
-    property var model
+    property var model: ({})
 
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
@@ -32,15 +32,7 @@ Kirigami.Page {
     readonly property int minutesFromStartOfDay: (root.currentDate.getHours() * 60) + root.currentDate.getMinutes()
     readonly property bool isDark: KalendarUiUtils.darkMode
     property bool dragDropEnabled: true
-    readonly property var visibleDays: [
-        Kalendar.Config.showDay1,
-        Kalendar.Config.showDay2,
-        Kalendar.Config.showDay3,
-        Kalendar.Config.showDay4,
-        Kalendar.Config.showDay5,
-        Kalendar.Config.showDay6,
-        Kalendar.Config.showDay7
-    ]
+
     readonly property int numHiddenDays: {
         let count = 7;
         count -= Kalendar.Config.showDay1 +
@@ -51,39 +43,6 @@ Kirigami.Page {
             Kalendar.Config.showDay6 +
             Kalendar.Config.showDay7
         return count;
-    }
-    // For delegates of some models, like the date heading, we want to adjust the index used.
-    // When we hide days we reduce the size of the model from, say, 7 to 4, and without changes this would show something
-    // like Monday to Thursday even though we might have hidden Mon, Tues, and Wed. So we need to provide a fake index that
-    // reflects what index this delegate is supposedly representing
-    readonly property var dateRepresentativeIndices: {
-        if(numHiddenDays === 0) {
-            return [...Array(daysToShow).keys()];
-        }
-
-        let indices = [];
-
-        // Iterate over visibleDays forwards to find the nearest next visible day
-        let daysToPushForwardBy = 0;
-        for(let indexToAdjust = 0; indexToAdjust < visibleDays.length; indexToAdjust++) {
-
-            for(let nextVisibleIndex = indexToAdjust; nextVisibleIndex < visibleDays.length; nextVisibleIndex++) {
-
-                if(visibleDays[nextVisibleIndex]) {
-                    indices[indexToAdjust] = indexToAdjust + daysToPushForwardBy;
-                    // Since the delegate index does not adjust, we need to push forward the indices that are now
-                    // representing hidden days
-                    while(!visibleDays[indices[indexToAdjust]] && indices[indexToAdjust] < daysToShow) {
-                        indices[indexToAdjust]++;
-                    }
-
-                    break;
-                } else {
-                    daysToPushForwardBy++;
-                }
-            }
-        }
-        return indices;
     }
 
     property real scrollbarWidth: 0
@@ -119,6 +78,7 @@ Kirigami.Page {
         if(root.daysToShow % 7 === 0) {
             date = DateUtils.getFirstDayOfWeek(date);
         }
+
         const weekDiff = Math.round((date.getTime() - pathView.currentItem.startDate.getTime()) / (root.daysToShow * 24 * 60 * 60 * 1000));
 
         let position = pathView.currentItem.item.hourScrollView.getCurrentPosition();
@@ -245,8 +205,31 @@ Kirigami.Page {
             readonly property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
             property int multiDayLinesShown: 0
 
-            readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1
             // As long as the date is even slightly larger, it will return 1; since we start from the startDate at 00:00, adjust
+            readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(startDate, root.currentDate) - 1
+
+            readonly property var allDayViewModel: {
+                switch(root.daysToShow) {
+                case 1:
+                    return model.dayViewDayGridViewModel;
+                case 3:
+                    return model.threeDayViewDayGridViewModel;
+                case 7:
+                default:
+                    return model.weekViewDayGridViewModel;
+                }
+            }
+            readonly property var hourlyViewModel: {
+                switch(root.daysToShow) {
+                case 1:
+                    return model.dayViewModel;
+                case 3:
+                    return model.threeDayViewModel;
+                case 7:
+                default:
+                    return model.weekViewModel;
+                }
+            }
 
             active: isNextOrCurrentItem
             asynchronous: !isCurrentItem
@@ -290,7 +273,7 @@ Kirigami.Page {
                             Kirigami.Heading { // Heading is out of the button so the color isn't disabled when the button is
                                 id: dayHeading
 
-                                readonly property int representativeIndex: root.dateRepresentativeIndices[index]
+                                readonly property int representativeIndex: viewLoader.hourlyViewModel.dateAdjustedIndex(index, viewLoader.startDate)
                                 readonly property date headingDate: DateUtils.addDaysToDate(viewLoader.startDate, representativeIndex)
                                 readonly property bool isToday: headingDate.getDate() === root.currentDay &&
                                     headingDate.getMonth() === root.currentMonth &&
@@ -304,7 +287,6 @@ Kirigami.Page {
                                     const longText = headingDate.toLocaleDateString(Qt.locale(), "dddd <b>d</b>");
                                     const mediumText = headingDate.toLocaleDateString(Qt.locale(), "ddd <b>d</b>");
                                     const shortText = mediumText.slice(0,1) + " " + headingDate.toLocaleDateString(Qt.locale(), "<b>d</b>");
-
 
                                     if(fontMetrics.boundingRect(longText).width < width) {
                                         return longText;
@@ -442,15 +424,7 @@ Kirigami.Page {
                         anchors.fill: parent
                         anchors.leftMargin: root.hourLabelWidth
                         asynchronous: !viewLoader.isCurrentItem
-                        active: switch(root.daysToShow) {
-                            case 1:
-                                return dayViewDayGridViewModel.incidenceCount > 0;
-                            case 3:
-                                return threeDayViewDayGridViewModel.incidenceCount > 0;
-                            case 7:
-                            default:
-                                return weekViewDayGridViewModel.incidenceCount > 0;
-                        }
+                        active: viewLoader.allDayViewModel.incidenceCount > 0
                         sourceComponent: Item {
                             id: allDayViewItem
                             implicitHeight: allDayHeader.actualHeight
@@ -458,15 +432,7 @@ Kirigami.Page {
 
                             Repeater {
                                 // TODO: Clean this up
-                                model: switch(root.daysToShow) {
-                                case 1:
-                                    return dayViewDayGridViewModel;
-                                case 3:
-                                    return threeDayViewDayGridViewModel;
-                                case 7:
-                                default:
-                                    return weekViewDayGridViewModel;
-                                } // from root.model
+                                model: viewLoader.allDayViewModel
                                 Layout.topMargin: Kirigami.Units.largeSpacing
                                 //One row => one week
                                 Item {
@@ -517,7 +483,7 @@ Kirigami.Page {
                                                         delegate: Rectangle {
                                                             id: multiDayViewBackground
 
-                                                            readonly property int representativeIndex: root.dateRepresentativeIndices[index]
+                                                            readonly property int representativeIndex: viewLoader.hourlyViewModel.dateAdjustedIndex(index, viewLoader.startDate, true)
                                                             readonly property date date: DateUtils.addDaysToDate(viewLoader.startDate, representativeIndex)
                                                             readonly property bool isToday: date.getDate() === root.currentDay &&
                                                                 date.getMonth() === root.currentMonth &&
@@ -586,7 +552,7 @@ Kirigami.Page {
                                                                 dayWidth: root.dayWidth
                                                                 height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
                                                                 x: ((dayWidth + parentViewSpacing) *
-                                                                    (modelData.starts - (root.dateRepresentativeIndices[modelData.starts] - modelData.starts))) +
+                                                                    (modelData.starts - (viewLoader.hourlyViewModel.dateRepresentativeIndices[modelData.starts] - modelData.starts))) +
                                                                    horizontalSpacing
                                                                 parentViewSpacing: root.gridLineWidth
                                                                 horizontalSpacing: linesRepeater.spacing
@@ -644,15 +610,7 @@ Kirigami.Page {
                     z: -2
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-                    readonly property int periodLength: switch(root.daysToShow) {
-                        case 1:
-                            return dayViewModel.periodLength;
-                        case 3:
-                            return threeDayViewModel.periodLength;
-                        case 7:
-                        default:
-                            return weekViewModel.periodLength;
-                    }
+                    readonly property int periodLength: viewLoader.hourlyViewModel.periodLength
                     readonly property real periodsPerHour: 60 / periodLength
                     readonly property real daySections: (60 * 24) / periodLength
                     readonly property real dayHeight: (daySections * root.periodHeight) + (root.gridLineWidth * 23)
@@ -810,21 +768,14 @@ Kirigami.Page {
 
                                 Repeater {
                                     id: dayColumnRepeater
-                                    model: switch(root.daysToShow) {
-                                        case 1:
-                                            return dayViewModel;
-                                        case 3:
-                                            return threeDayViewModel;
-                                        case 7:
-                                        default:
-                                            return weekViewModel;
-                                    } // From root.model
+                                    model: viewLoader.hourlyViewModel
 
                                     delegate: Item {
                                         id: dayColumn
 
                                         readonly property int index: model.index
-                                        readonly property date columnDate: DateUtils.addDaysToDate(viewLoader.startDate, index)
+                                        readonly property date columnDate: model.periodStartDateTime
+                                        onColumnDateChanged: console.log(columnDate)
                                         readonly property bool isToday: columnDate.getDate() === root.currentDay &&
                                             columnDate.getMonth() === root.currentMonth &&
                                             columnDate.getFullYear() === root.currentYear
@@ -833,12 +784,9 @@ Kirigami.Page {
                                         height: hourlyView.dayHeight
                                         clip: true
 
-                                        visible: root.daysToShow !== 7 || (root.visibleDays && root.visibleDays[index])
-
                                         Loader {
                                             anchors.fill: parent
                                             asynchronous: !viewLoader.isCurrentView
-                                            active: dayColumn.visible
                                             ListView {
                                                 anchors.fill: parent
                                                 spacing: root.gridLineWidth
@@ -941,7 +889,7 @@ Kirigami.Page {
                                                     DayMouseArea {
                                                         id: backgroundDayMouseArea
                                                         anchors.fill: parent
-                                                        addDate: new Date(DateUtils.addDaysToDate(viewLoader.startDate, dayColumn.index).setHours(index))
+                                                        addDate: new Date(dayColumn.columnDate.setHours(backgroundRectangle.index))
                                                         onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate, null, true)
                                                         onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
                                                     }
@@ -952,7 +900,6 @@ Kirigami.Page {
                                         Loader {
                                             anchors.fill: parent
                                             asynchronous: !viewLoader.isCurrentView
-                                            active: dayColumn.visible
                                             Repeater {
                                                 id: hourlyIncidencesRepeater
                                                 model: incidences

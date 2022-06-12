@@ -5,6 +5,7 @@
 
 #include "hourlyincidencemodel.h"
 #include "multidayincidencemodel.h"
+#include <kalendarconfig.h>
 #include <akonadi-calendar_version.h>
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/ETMCalendar>
@@ -113,6 +114,9 @@ private:
         QHash<QDate, HourlyIncidenceModel *> *hourlyModels;
         QQueue<QDate> *liveKeysQueue;
     };
+
+    KalendarConfig *m_config = nullptr;
+    QBitArray m_hiddenSpaces = QBitArray(7); // TODO: Use a more flexible way of doing this
 
     QVector<ModelMetaData> m_models;
     mutable QHash<QDate, MultiDayIncidenceModel *> m_monthViewModels;

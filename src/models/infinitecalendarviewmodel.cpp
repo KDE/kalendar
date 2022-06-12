@@ -12,6 +12,16 @@
 InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+    m_config = KalendarConfig::self();
+
+    connect(m_config, &KalendarConfig::showDay1Changed, this, &InfiniteCalendarViewModel::setup);
+    connect(m_config, &KalendarConfig::showDay2Changed, this, &InfiniteCalendarViewModel::setup);
+    connect(m_config, &KalendarConfig::showDay3Changed, this, &InfiniteCalendarViewModel::setup);
+    connect(m_config, &KalendarConfig::showDay4Changed, this, &InfiniteCalendarViewModel::setup);
+    connect(m_config, &KalendarConfig::showDay5Changed, this, &InfiniteCalendarViewModel::setup);
+    connect(m_config, &KalendarConfig::showDay6Changed, this, &InfiniteCalendarViewModel::setup);
+    connect(m_config, &KalendarConfig::showDay7Changed, this, &InfiniteCalendarViewModel::setup);
+
     setup();
 
     ModelMetaData monthModel = {QVector<QDate>(), 42, TypeMonth, &m_monthViewModels, {}, &m_liveMonthViewModelKeys};
@@ -29,6 +39,16 @@ InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
 
 void InfiniteCalendarViewModel::setup()
 {
+    m_startDates.clear();
+
+    m_hiddenSpaces[0] = !m_config->showDay1();
+    m_hiddenSpaces[1] = !m_config->showDay2();
+    m_hiddenSpaces[2] = !m_config->showDay3();
+    m_hiddenSpaces[3] = !m_config->showDay4();
+    m_hiddenSpaces[4] = !m_config->showDay5();
+    m_hiddenSpaces[5] = !m_config->showDay6();
+    m_hiddenSpaces[6] = !m_config->showDay7();
+
     const QDate today = QDate::currentDate();
     QTime time;
 
@@ -108,7 +128,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         return model;
     };
 
-    auto generateHourlyIncidenceModel = [&](QDate start, int length, int periodLength) {
+    auto generateHourlyIncidenceModel = [&](QDate start, int length, int periodLength, bool handleHiddenDays = false) {
         auto model = new HourlyIncidenceModel;
         model->setPeriodLength(periodLength);
         model->setFilters(HourlyIncidenceModel::NoAllDay | HourlyIncidenceModel::NoMultiDay);
@@ -239,7 +259,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
 
         if (!m_weekViewModels.contains(startDate)) {
-            m_weekViewModels[startDate] = generateHourlyIncidenceModel(startDate, 7, 15);
+            m_weekViewModels[startDate] = generateHourlyIncidenceModel(startDate, 7, 15, true);
 
             m_liveWeekViewModelKeys.enqueue(startDate);
             cleanUpModels();
@@ -398,6 +418,35 @@ void InfiniteCalendarViewModel::addDates(bool atEnd, const QDate startFrom)
 
 void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, int amount)
 {
+    const auto toLocalizedIndex = [&](const QDate &date) {
+        if(!date.isValid()) {
+            return -1;
+        }
+
+        // Convert to index of m_hiddenSpaces, which requires localising the day of the week
+        int localizedIndex = date.dayOfWeek() - m_locale.firstDayOfWeek();
+        if (localizedIndex < 0) {
+            localizedIndex *= -1;
+        }
+
+        return localizedIndex;
+    };
+
+    const auto adjustStartDate = [&](const QDate &date) {
+        if(!date.isValid()) {
+            return QDate();
+        }
+
+        auto adjustedDate = date;
+        auto spaceIndex = toLocalizedIndex(adjustedDate);
+        while (m_hiddenSpaces[spaceIndex]) {
+            adjustedDate = adjustedDate.addDays(1);
+            spaceIndex = toLocalizedIndex(adjustedDate);
+        }
+
+        return adjustedDate;
+    };
+
     const int newRow = atEnd ? rowCount() : 0;
 
     beginInsertRows(QModelIndex(), newRow, newRow + m_datesToAdd - 1);
@@ -406,9 +455,29 @@ void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, 
         QDate startDate = startFrom.isValid() && i == 0 ? startFrom : atEnd ? m_startDates[rowCount() - 1].addDays(amount) : m_startDates[0].addDays(-amount);
 
         if (atEnd) {
-            m_startDates.append(startDate);
+            if (!m_startDates.empty() && amount > 1) {
+                // Check hidden days in prior week and push forward if there are
+                auto priorStart = m_startDates.constLast();
+                auto spaceIndex = toLocalizedIndex(priorStart);
+
+                for (int i = 0; i < amount - 1; i++) {
+                    spaceIndex = ++spaceIndex % 7;
+                    if (m_hiddenSpaces[spaceIndex]) {
+                        startDate = startDate.addDays(1);
+                    }
+                }
+            }
+
+            m_startDates.append(adjustStartDate(startDate));
         } else {
-            m_startDates.insert(0, startDate);
+            auto adjustedStartDate = adjustStartDate(startDate);
+            // If we end up getting an adjusted start date that we already have as a start date, do the next set instead
+            auto backOffset = amount;
+            while(m_startDates.constFirst() == adjustedStartDate) {
+                adjustedStartDate = adjustStartDate(adjustedStartDate.addDays(-backOffset));
+                backOffset += amount;
+            }
+            m_startDates.insert(0, adjustedStartDate);
         }
     }
 
