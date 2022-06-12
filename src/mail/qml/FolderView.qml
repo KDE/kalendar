@@ -22,17 +22,12 @@ import org.kde.kitemmodels 1.0 as KItemModels
         section.property: "date"
         delegate: Kirigami.BasicListItem {
             label: model.title
-            subtitle: sender
+            subtitle: model.from
             onClicked: {
-                if (!folderView.mailViewer) {
-                    folderView.mailViewer = root.pageStack.push(mailComponent, {
-                        viewerHelper: MailManager.folderModel.viewerHelper
-                    });
-                } else {
-                    applicationWindow().pageStack.currentIndex = applicationWindow().pageStack.depth - 1;
-                }
-
-                QuickMail.folderModel.loadItem(index);
+                applicationWindow().pageStack.push(Qt.resolvedUrl('ConversationViewer.qml'), {
+                    item: model.item,
+                    props: model,
+                })
             }
         }
     }

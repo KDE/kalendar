@@ -22,6 +22,7 @@
 #include <QString>
 #include <QStringList>
 
+#include <Akonadi/Item>
 #include <QAbstractItemModel>
 #include <QModelIndex>
 
@@ -39,7 +40,7 @@ class ObjectTreeParser;
 class MessageParser : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QVariant message READ message WRITE setMessage)
+    Q_PROPERTY(Akonadi::Item item READ item WRITE setItem NOTIFY htmlChanged)
     Q_PROPERTY(QAbstractItemModel *parts READ parts NOTIFY htmlChanged)
     Q_PROPERTY(QAbstractItemModel *attachments READ attachments NOTIFY htmlChanged)
     Q_PROPERTY(QString rawContent READ rawContent NOTIFY htmlChanged)
@@ -50,8 +51,8 @@ public:
     explicit MessageParser(QObject *parent = Q_NULLPTR);
     ~MessageParser();
 
-    QVariant message() const;
-    void setMessage(const QVariant &to);
+    Akonadi::Item item() const;
+    void setItem(const Akonadi::Item &item);
     QAbstractItemModel *parts() const;
     QAbstractItemModel *attachments() const;
     QString rawContent() const;

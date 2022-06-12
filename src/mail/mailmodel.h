@@ -18,13 +18,15 @@ public:
     enum AnimalRoles {
         TitleRole = Qt::UserRole + 1,
         SenderRole,
+        FromRole,
+        ToRole,
         TextColorRole,
         DateRole,
         DateTimeRole,
         BackgroundColorRole,
         UnreadRole,
-        MailRole,
         FavoriteRole,
+        ItemRole,
     };
 
     explicit MailModel(QObject *parent = nullptr);

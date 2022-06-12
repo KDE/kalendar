@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.7
-import QtQuick.Controls 2
+import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kalendar 1.0
 import org.kde.kalendar.mail 1.0
@@ -28,6 +28,9 @@ Item {
     QQC2.TextArea {
         id: textEdit
         objectName: "textView"
+        background: Item {}
+        readOnly: true
+        textFormat: TextEdit.RichText
 
         anchors {
             top: parent.top

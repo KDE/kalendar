@@ -13,6 +13,7 @@
 #include <KMime/Message>
 #include <QQmlEngine>
 #include <kformat.h>
+#include <qvariant.h>
 
 MailModel::MailModel(QObject *parent)
     : QIdentityProxyModel(parent)
@@ -27,10 +28,13 @@ QHash<int, QByteArray> MailModel::roleNames() const
         {DateRole, QByteArrayLiteral("date")},
         {DateTimeRole, QByteArrayLiteral("datetime")},
         {SenderRole, QByteArrayLiteral("sender")},
+        {FromRole, QByteArrayLiteral("from")},
+        {ToRole, QByteArrayLiteral("to")},
         {UnreadRole, QByteArrayLiteral("unread")},
         {FavoriteRole, QByteArrayLiteral("favorite")},
         {TextColorRole, QByteArrayLiteral("textColor")},
         {BackgroundColorRole, QByteArrayLiteral("backgroudColor")},
+        {ItemRole, QByteArrayLiteral("item")},
     };
 }
 
@@ -99,31 +103,39 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
         } else {
             return QStringLiteral("(No subject)");
         }
-    case SenderRole:
+    case FromRole:
         if (mail->from()) {
             return mail->from()->asUnicodeString();
+        } else {
+            return QString();
+        }
+    case SenderRole:
+        if (mail->sender()) {
+            return mail->sender()->asUnicodeString();
+        } else {
+            return QString();
+        }
+    case ToRole:
+        if (mail->to()) {
+            return mail->sender()->asUnicodeString();
         } else {
             return QString();
         }
     case DateRole:
         if (mail->date()) {
             KFormat format;
-            return format.formatRelativeDate(mail->date()->dateTime().date(), QLocale::ShortFormat);
+            return format.formatRelativeDate(mail->date()->dateTime().date(), QLocale::LongFormat);
         } else {
             return QString();
         }
     case DateTimeRole:
         if (mail->date()) {
-            return mail->date()->asUnicodeString();
+            return mail->date()->dateTime();
         } else {
             return QString();
         }
-    case MailRole:
-        {
-            //auto wrapper = new MessageWrapper(item);
-            //QQmlEngine::setObjectOwnership(wrapper, QQmlEngine::JavaScriptOwnership);
-            //return QVariant::fromValue(wrapper);
-        }
+    case ItemRole:
+        return QVariant::fromValue(item);
     }
 
     return {};

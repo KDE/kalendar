@@ -19,6 +19,9 @@
 #include "messageparser.h"
 
 #include "../mimetreeparser/objecttreeparser.h"
+#include <Akonadi/Item>
+#include <Akonadi/ItemFetchJob>
+#include <Akonadi/ItemFetchScope>
 #include <QElapsedTimer>
 
 #include "async.h"
@@ -41,30 +44,33 @@ MessageParser::~MessageParser()
 {
 }
 
-QVariant MessageParser::message() const
+Akonadi::Item MessageParser::item() const
 {
     return {};
 }
 
-void MessageParser::setMessage(const QVariant &message)
+void MessageParser::setItem(const Akonadi::Item &item)
 {
-    mRawContent = message.toString();
-    asyncRun<std::shared_ptr<MimeTreeParser::ObjectTreeParser>>(
-        this,
-        [=] {
+    auto job = new Akonadi::ItemFetchJob(item);
+    job->fetchScope().fetchFullPayload();
+    connect(job, &Akonadi::ItemFetchJob::result, this, [this](KJob *job) {
+        auto fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
+        auto item = fetchJob->items().at(0);
+        if (item.hasPayload<KMime::Message::Ptr>()) {
+            const auto message = item.payload<KMime::Message::Ptr>();
             QElapsedTimer time;
             time.start();
             auto parser = std::make_shared<MimeTreeParser::ObjectTreeParser>();
-            parser->parseObjectTree(message.toByteArray());
+            parser->parseObjectTree(message.data());
             qDebug() << "Message parsing took: " << time.elapsed();
             parser->decryptParts();
             qDebug() << "Message parsing and decryption/verification: " << time.elapsed();
-            return parser;
-        },
-        [this](const std::shared_ptr<MimeTreeParser::ObjectTreeParser> &parser) {
             d->mParser = parser;
             Q_EMIT htmlChanged();
-        });
+        } else {
+            qWarning() << "This is not a mime item.";
+        }
+    });
 }
 
 QString MessageParser::rawContent() const
@@ -91,7 +97,6 @@ QAbstractItemModel *MessageParser::parts() const
         return nullptr;
     }
     const auto model = new PartModel(d->mParser);
-    // new ModelTest(model, model);
     return model;
 }
 
@@ -101,6 +106,5 @@ QAbstractItemModel *MessageParser::attachments() const
         return nullptr;
     }
     const auto model = new AttachmentModel(d->mParser);
-    // new ModelTest(model, model);
     return model;
 }

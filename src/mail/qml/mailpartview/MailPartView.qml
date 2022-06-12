@@ -1,39 +1,33 @@
-/*
-  Copyright (C) 2016 Michael Bohlender, <michael.bohlender@kdemail.net>
+// SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
+// SPDX-FileCopyrightText: 2016 Michael Bohlender <michael.bohlender@kdemail.net>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import org.kde.kirigami 2.14 as Kirigami
+import QtQuick.Controls 2.15 as Controls
+import org.kde.kalendar 1.0
+import org.kde.kalendar.mail 1.0
+import org.kde.kitemmodels 1.0 as KItemModels
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License along
-  with this program; if not, write to the Free Software Foundation, Inc.,
-  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-*/
-
-import QtQuick 2.4
-import org.kde.kirigami 2.19 as Kirigami
-
-Kirigami.ScrollablePage {
+ListView {
     id: root
+
+    implicitHeight: contentHeight
+    property var item
     property alias rootIndex: visualModel.rootIndex
-    property alias model: visualModel.model
     property alias searchString: visualModel.searchString
     property alias autoLoadImages: visualModel.autoLoadImages
+    property var attachmentModel: messageParser.attachments
 
-    ListView {
-        id: partListView
-        spacing: 5
-        height: contentHeight
-        width: parent.width - 10
-        interactive: false
-        model: MailPartModel {
-            id: visualModel
-        }
+    interactive: false
+    spacing: Kirigami.Units.smallSpacing
+    model: MailPartModel {
+        id: visualModel
+        model: messageParser.parts
+    }
+    MessageParser {
+        id: messageParser
+        item: root.item
     }
 }

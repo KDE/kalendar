@@ -64,8 +64,8 @@ DelegateModel {
             id: buttons
             anchors.left: parent.left
             anchors.top: parent.top
-            anchors.rightMargin: Kube.Units.smallSpacing
-            spacing: Kube.Units.smallSpacing
+            anchors.rightMargin: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
             Kube.IconButton {
                 id: encryptedButton
                 width: Kube.Units.gridUnit
@@ -94,7 +94,7 @@ DelegateModel {
         Rectangle {
             id: border
             visible: encryptedButton.hovered || signedButton.hovered
-            anchors.topMargin: Kube.Units.smallSpacing
+            anchors.topMargin: Kirigami.Units.smallSpacing
             anchors.top: buttons.bottom
             anchors.bottom: partLoader.bottom
             anchors.right: buttons.right

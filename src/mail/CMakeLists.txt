@@ -33,10 +33,12 @@ target_sources(kalendar_mail_plugin PRIVATE
 ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/MailSidebar.qml
     qml/FolderView.qml
+    qml/MailViewer.qml
+    qml/ConversationViewer.qml
 )
 
-ecm_target_qml_sources(kalendar_contact_plugin
-    PRIVATE PATH private SOURCES
+ecm_target_qml_sources(kalendar_mail_plugin
+    PRIVATE PATH mailpartview SOURCES
     qml/mailpartview/HtmlPart.qml
     qml/mailpartview/ICalPart.qml
     qml/mailpartview/MailPart.qml
