@@ -5,15 +5,16 @@
 #pragma once
 
 #include <Akonadi/Item>
-#include <QIdentityProxyModel>
 #include <QItemSelectionModel>
 #include <QObject>
+#include <QSortFilterProxyModel>
 
 #include "messagestatus.h"
 
-class MailModel : public QIdentityProxyModel
+class MailModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+    Q_PROPERTY(QString searchString READ searchString WRITE setSearchString NOTIFY searchStringChanged)
 
 public:
     enum ExtraRole {
@@ -33,10 +34,18 @@ public:
     explicit MailModel(QObject *parent = nullptr);
     QHash<int, QByteArray> roleNames() const override;
     virtual QVariant data(const QModelIndex &index, int role) const override;
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
 
     Q_INVOKABLE void updateMessageStatus(int row, MessageStatus messageStatus);
     Q_INVOKABLE MessageStatus copyMessageStatus(MessageStatus messageStatus);
 
+    QString searchString() const;
+    void setSearchString(const QString &searchString);
+
+Q_SIGNALS:
+    void searchStringChanged();
+
 private:
     Akonadi::Item itemForRow(int row) const;
+    QString m_searchString;
 };

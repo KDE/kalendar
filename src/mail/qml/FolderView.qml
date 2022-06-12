@@ -25,7 +25,7 @@ import org.kde.kitemmodels 1.0 as KItemModels
             labelItem.color: if (highlighted) {
                 return Kirigami.Theme.highlightedTextColor;
             } else {
-                return model.status.isRead ? Kirigami.Theme.textColor : Kirigami.Theme.linkColor;
+                return !model.status || model.status.isRead ? Kirigami.Theme.textColor : Kirigami.Theme.linkColor;
             }
             onClicked: {
                 applicationWindow().pageStack.push(Qt.resolvedUrl('ConversationViewer.qml'), {

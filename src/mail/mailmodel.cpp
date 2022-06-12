@@ -14,7 +14,7 @@
 #include <QQmlEngine>
 
 MailModel::MailModel(QObject *parent)
-    : QIdentityProxyModel(parent)
+    : QSortFilterProxyModel(parent)
 {
 }
 
@@ -127,4 +127,43 @@ MessageStatus MailModel::copyMessageStatus(MessageStatus messageStatus)
     MessageStatus newStatus;
     newStatus.set(messageStatus);
     return messageStatus;
+}
+
+QString MailModel::searchString() const
+{
+    return m_searchString;
+}
+
+void MailModel::setSearchString(const QString &searchString)
+{
+    if (searchString == m_searchString) {
+        return;
+    }
+    m_searchString = searchString;
+    invalidateFilter();
+    Q_EMIT searchStringChanged();
+}
+
+bool MailModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+{
+    Q_UNUSED(sourceParent)
+    if (m_searchString.isEmpty()) {
+        return true;
+    }
+    QVariant itemVariant = sourceModel()->index(sourceRow, 0).data(Akonadi::EntityTreeModel::ItemRole);
+
+    Akonadi::Item item = itemVariant.value<Akonadi::Item>();
+
+    if (!item.hasPayload<KMime::Message::Ptr>()) {
+        return false;
+    }
+    const KMime::Message::Ptr mail = item.payload<KMime::Message::Ptr>();
+
+    if (mail->subject() && mail->subject()->asUnicodeString().contains(m_searchString)) {
+        return true;
+    }
+    if (mail->from() && mail->from()->asUnicodeString().contains(m_searchString)) {
+        return true;
+    }
+    return false;
 }
