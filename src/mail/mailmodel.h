@@ -4,18 +4,19 @@
 
 #pragma once
 
-#include <QObject>
+#include <Akonadi/Item>
 #include <QIdentityProxyModel>
 #include <QItemSelectionModel>
+#include <QObject>
 
-//class ViewerHelper;
+#include "messagestatus.h"
 
 class MailModel : public QIdentityProxyModel
 {
     Q_OBJECT
 
 public:
-    enum AnimalRoles {
+    enum ExtraRole {
         TitleRole = Qt::UserRole + 1,
         SenderRole,
         FromRole,
@@ -24,7 +25,7 @@ public:
         DateRole,
         DateTimeRole,
         BackgroundColorRole,
-        UnreadRole,
+        StatusRole,
         FavoriteRole,
         ItemRole,
     };
@@ -33,5 +34,9 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     virtual QVariant data(const QModelIndex &index, int role) const override;
 
-    Q_INVOKABLE void loadItem(int row);
+    Q_INVOKABLE void updateMessageStatus(int row, MessageStatus messageStatus);
+    Q_INVOKABLE MessageStatus copyMessageStatus(MessageStatus messageStatus);
+
+private:
+    Akonadi::Item itemForRow(int row) const;
 };

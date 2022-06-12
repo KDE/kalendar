@@ -11,6 +11,9 @@ target_sources(kalendar_mail_plugin PRIVATE
     mailmodel.cpp
     mailmodel.h
 
+    messagestatus.h
+    messagestatus.cpp
+
     crypto.cpp
     mimetreeparser/messagepart.cpp
     mimetreeparser/bodypartformatter.cpp

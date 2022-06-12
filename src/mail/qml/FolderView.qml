@@ -10,7 +10,6 @@ import org.kde.kitemmodels 1.0 as KItemModels
 
  Kirigami.ScrollablePage {
     id: folderView
-    property var mailViewer: null;
     title: MailManager.selectedFolderName
     ListView {
         id: mails
@@ -23,11 +22,22 @@ import org.kde.kitemmodels 1.0 as KItemModels
         delegate: Kirigami.BasicListItem {
             label: model.title
             subtitle: model.from
+            labelItem.color: if (highlighted) {
+                return Kirigami.Theme.highlightedTextColor;
+            } else {
+                return model.status.isRead ? Kirigami.Theme.textColor : Kirigami.Theme.linkColor;
+            }
             onClicked: {
                 applicationWindow().pageStack.push(Qt.resolvedUrl('ConversationViewer.qml'), {
                     item: model.item,
                     props: model,
-                })
+                });
+
+                if (!model.status.isRead) {
+                    const status = MailManager.folderModel.copyMessageStatus(model.status);
+                    status.isRead = true;
+                    MailManager.folderModel.updateMessageStatus(index, status)
+                }
             }
         }
     }

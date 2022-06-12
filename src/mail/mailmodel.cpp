@@ -4,20 +4,17 @@
 
 #include "mailmodel.h"
 
-//#include "messagewrapper.h"
-//#include "messageviewer/viewer.h"
-
+#include "messagestatus.h"
 #include <Akonadi/EntityTreeModel>
+#include <Akonadi/ItemModifyJob>
+#include <Akonadi/MessageStatus>
 #include <KFormat>
 #include <KLocalizedString>
 #include <KMime/Message>
 #include <QQmlEngine>
-#include <kformat.h>
-#include <qvariant.h>
 
 MailModel::MailModel(QObject *parent)
     : QIdentityProxyModel(parent)
-//    , m_viewerHelper(new ViewerHelper(this))
 {
 }
 
@@ -30,7 +27,7 @@ QHash<int, QByteArray> MailModel::roleNames() const
         {SenderRole, QByteArrayLiteral("sender")},
         {FromRole, QByteArrayLiteral("from")},
         {ToRole, QByteArrayLiteral("to")},
-        {UnreadRole, QByteArrayLiteral("unread")},
+        {StatusRole, QByteArrayLiteral("status")},
         {FavoriteRole, QByteArrayLiteral("favorite")},
         {TextColorRole, QByteArrayLiteral("textColor")},
         {BackgroundColorRole, QByteArrayLiteral("backgroudColor")},
@@ -49,51 +46,17 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
     }
     const KMime::Message::Ptr mail = item.payload<KMime::Message::Ptr>();
 
-    //const Collection parentCol = parentCollectionForRow(row);
-
-    QString sender;
-    if (mail->from()) {
-        sender = mail->from()->asUnicodeString();
-    }
-    QString receiver;
-    if (mail->to()) {
-        receiver = mail->to()->asUnicodeString();
-    }
-
     // Static for speed reasons
     static const QString noSubject = i18nc("displayed as subject when the subject of a mail is empty", "No Subject");
     static const QString unknown(i18nc("displayed when a mail has unknown sender, receiver or date", "Unknown"));
-
-    if (sender.isEmpty()) {
-        sender = unknown;
-    }
-    if (receiver.isEmpty()) {
-        receiver = unknown;
-    }
-
-    //mi->initialSetup(mail->date()->dateTime().toSecsSinceEpoch(), item.size(), sender, receiver, bUseReceiver);
-    //mi->setItemId(item.id());
-    //mi->setParentCollectionId(parentCol.id());
 
     QString subject = mail->subject()->asUnicodeString();
     if (subject.isEmpty()) {
         subject = QLatin1Char('(') + noSubject + QLatin1Char(')');
     }
 
-    //mi->setSubject(subject);
-
-    //auto it = d->mFolderHash.find(item.storageCollectionId());
-    //if (it == d->mFolderHash.end()) {
-    //    QString folder;
-    //    Collection collection = collectionForId(item.storageCollectionId());
-    //    while (collection.parentCollection().isValid()) {
-    //        folder = collection.displayName() + QLatin1Char('/') + folder;
-    //        collection = collection.parentCollection();
-    //    }
-    //    folder.chop(1);
-    //    it = d->mFolderHash.insert(item.storageCollectionId(), folder);
-    //}
-    //mi->setFolder(it.value());
+    MessageStatus stat;
+    stat.setStatusFromFlags(item.flags());
 
     // NOTE: remember to update AkonadiBrowserSortModel::lessThan if you insert/move columns
     switch (role) {
@@ -101,7 +64,7 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
         if (mail->subject()) {
             return mail->subject()->asUnicodeString();
         } else {
-            return QStringLiteral("(No subject)");
+            return noSubject;
         }
     case FromRole:
         if (mail->from()) {
@@ -117,9 +80,9 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
         }
     case ToRole:
         if (mail->to()) {
-            return mail->sender()->asUnicodeString();
+            return mail->to()->asUnicodeString();
         } else {
-            return QString();
+            return unknown;
         }
     case DateRole:
         if (mail->date()) {
@@ -134,6 +97,8 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
         } else {
             return QString();
         }
+    case StatusRole:
+        return QVariant::fromValue(stat);
     case ItemRole:
         return QVariant::fromValue(item);
     }
@@ -141,28 +106,25 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
     return {};
 }
 
-void MailModel::loadItem(int row)
+Akonadi::Item MailModel::itemForRow(int row) const
 {
-    //if (!m_viewerHelper) {
-    //    return;
-    //}
-    QVariant itemVariant = sourceModel()->data(mapToSource(index(row, 0)), Akonadi::EntityTreeModel::ItemRole);
-
-    Akonadi::Item item = itemVariant.value<Akonadi::Item>();
-
-    //m_viewerHelper->setMessageItem(item);
+    return data(index(row, 0), ItemRole).value<Akonadi::Item>();
 }
 
-//void MailModel::setViewerHelper(ViewerHelper *viewerHelper)
-//{
-//    if (m_viewerHelper == viewerHelper) {
-//        return;
-//    }
-//    m_viewerHelper = viewerHelper;
-//    Q_EMIT viewerHelperChanged();
-//}
-//
-//ViewerHelper *MailModel::viewerHelper() const
-//{
-//    return m_viewerHelper;
-//}
+void MailModel::updateMessageStatus(int row, MessageStatus messageStatus)
+{
+    Akonadi::Item item = itemForRow(row);
+    item.setFlags(messageStatus.statusFlags());
+    auto job = new Akonadi::ItemModifyJob(item, this);
+    job->disableRevisionCheck();
+    job->setIgnorePayload(true);
+
+    Q_EMIT dataChanged(index(row, 0), index(row, 0), {StatusRole});
+}
+
+MessageStatus MailModel::copyMessageStatus(MessageStatus messageStatus)
+{
+    MessageStatus newStatus;
+    newStatus.set(messageStatus);
+    return messageStatus;
+}
