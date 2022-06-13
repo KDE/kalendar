@@ -9,6 +9,7 @@ import org.kde.kalendar 1.0
 import org.kde.kalendar.mail 1.0
 import org.kde.kitemmodels 1.0 as KItemModels
 import './mailpartview'
+import './private'
 
 QQC2.Page {
     id: root
@@ -58,6 +59,18 @@ QQC2.Page {
             }
 
             QQC2.Label {
+                text: i18n('Sender:')
+                visible: root.sender.length > 0 && root.sender !== root.from
+                Layout.rightMargin: Kirigami.Units.largeSpacing
+            }
+
+            QQC2.Label {
+                visible: root.sender.length > 0 && root.sender !== root.from
+                text: root.sender
+                Layout.columnSpan: 2
+            }
+
+            QQC2.Label {
                 text: i18n('To:')
                 Layout.rightMargin: Kirigami.Units.largeSpacing
             }
@@ -68,7 +81,51 @@ QQC2.Page {
         }
     }
     contentItem: MailPartView {
+        id: mailPartView
         item: root.item
+    }
+
+    footer: QQC2.ToolBar {
+        topInset: 1
+        leftInset: 1
+        rightInset: 1
+        bottomInset: 1
+        leftPadding: Kirigami.Units.largeSpacing
+        rightPadding: Kirigami.Units.largeSpacing
+        topPadding: Kirigami.Units.largeSpacing
+        bottomPadding: Kirigami.Units.largeSpacing
+        background: Item {
+            implicitHeight: 40
+            Kirigami.Separator {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: undefined
+                    bottom:  parent.bottom
+                }
+            }
+        }
+
+        contentItem: Flow {
+            spacing: Kirigami.Units.smallSpacing
+            Repeater {
+                model: mailPartView.attachmentModel
+
+                delegate: AttachmentDelegate {
+                    name: model.name
+                    type: model.type
+                    icon.name: model.iconName
+
+                    clip: true
+
+                    actionIcon: 'download'
+                    actionTooltip: i18n("Save attachment")
+                    onExecute: mailPartView.attachmentModel.saveAttachmentToDisk(mailPartView.attachmentModel.index(index, 0))
+                    onClicked: mailPartView.attachmentModel.openAttachment(mailPartView.attachmentModel.index(index, 0))
+                    onPublicKeyImport: mailPartView.attachmentModel.importPublicKey(mailPartView.attachmentModel.index(index, 0))
+                }
+            }
+        }
     }
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false

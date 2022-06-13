@@ -39,6 +39,10 @@ ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/MailViewer.qml
     qml/ConversationViewer.qml
 )
+ecm_target_qml_sources(kalendar_mail_plugin
+    PRIVATE PATH private SOURCES
+    qml/private/AttachmentDelegate.qml
+)
 
 ecm_target_qml_sources(kalendar_mail_plugin
     PRIVATE PATH mailpartview SOURCES

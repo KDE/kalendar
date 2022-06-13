@@ -4,13 +4,58 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.14 as Kirigami
-import QtQuick.Controls 2.15 as Controls
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kalendar.mail 1.0
 import org.kde.kitemmodels 1.0 as KItemModels
 
  Kirigami.ScrollablePage {
     id: folderView
     title: MailManager.selectedFolderName
+
+    Component {
+        id: contextMenu
+        QQC2.Menu {
+            property int row
+            property var status
+
+            QQC2.Menu {
+                title: i18nc('@action:menu', 'Mark Message')
+                QQC2.MenuItem {
+                    text: i18n('Mark message as Read')
+                }
+                QQC2.MenuItem {
+                    text: i18n('Mark message as Unread')
+                }
+
+                QQC2.MenuSeparator {}
+
+                QQC2.MenuItem {
+                    text: status.isImportant ? i18n("Don't Mark as Important") : i18n('Mark as Important')
+                }
+            }
+
+            QQC2.MenuItem {
+                icon.name: 'delete'
+                text: i18n('Move to trash')
+            }
+
+            QQC2.MenuItem {
+                icon.name: 'edit-move'
+                text: i18n('Move Message to...')
+            }
+
+            QQC2.MenuItem {
+                icon.name: 'edit-copy'
+                text: i18n('Copy Message to...')
+            }
+
+            QQC2.MenuItem {
+                icon.name: 'edit-copy'
+                text: i18n('Add followup reminder')
+            }
+        }
+    }
+
     ListView {
         id: mails
         model: MailManager.folderModel
@@ -27,6 +72,38 @@ import org.kde.kitemmodels 1.0 as KItemModels
             } else {
                 return !model.status || model.status.isRead ? Kirigami.Theme.textColor : Kirigami.Theme.linkColor;
             }
+
+            TapHandler {
+                acceptedButtons: Qt.RightButton
+                onTapped: {
+                    const menu = contextMenu.createObject(folderView, {
+                        row: index,
+                        status: MailManager.folderModel.copyMessageStatus(model.status),
+                    });
+                    menu.popup();
+                }
+            }
+
+
+            trailing: RowLayout {
+                QQC2.Label {
+                    text: model.datetime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                    QQC2.ToolTip {
+                        text:  model.datetime.toLocaleString()
+                    }
+                }
+                QQC2.ToolButton {
+                    icon.name: status.isImportant ? 'starred-symbolic' : 'non-starred-symbolic'
+                    implicitHeight: Kirigami.Units.gridUnit
+                    implicitWidth: Kirigami.Units.gridUnit
+                    onClicked: {
+                        const status = MailManager.folderModel.copyMessageStatus(model.status);
+                        status.isImportant = !status.isImportant;
+                        MailManager.folderModel.updateMessageStatus(index, status)
+                    }
+                }
+            }
+
             onClicked: {
                 applicationWindow().pageStack.push(Qt.resolvedUrl('ConversationViewer.qml'), {
                     item: model.item,
