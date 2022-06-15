@@ -106,6 +106,7 @@ public:
 
     void checkPart(const MimeTreeParser::MessagePart::Ptr part)
     {
+        mMimeTypeCache[part.data()] = part->mimeType();
         // Extract the content of the part and
         mContents.insert(part.data(), extractContent(part.data()));
     }
@@ -169,28 +170,32 @@ public:
         containsHtmlAndPlain = false;
         isTrimmed = false;
 
-        mParts = mParser->collectContentParts();
-        for (auto p : mParts) {
+        const auto parts = mParser->collectContentParts();
+        for (auto p : parts) {
             checkPart(p);
             if (auto e = p.dynamicCast<MimeTreeParser::EncapsulatedRfc822MessagePart>()) {
                 findEncapsulated(e);
+            }
+        }
+        for (auto p : parts) {
+            if (mMimeTypeCache[p.data()] == "text/calendar") {
+                mParts.prepend(p);
+            } else {
+                mParts.append(p);
             }
         }
     }
 
     PartModel *q;
     QVector<MimeTreeParser::MessagePartPtr> mParts;
+    QHash<MimeTreeParser::MessagePart *, QByteArray> mMimeTypeCache;
     QHash<MimeTreeParser::MessagePart *, QVector<MimeTreeParser::MessagePartPtr>> mEncapsulatedParts;
     QHash<MimeTreeParser::MessagePart *, MimeTreeParser::MessagePart *> mParents;
     QMap<MimeTreeParser::MessagePart *, QVariant> mContents;
     std::shared_ptr<MimeTreeParser::ObjectTreeParser> mParser;
     bool showHtml{false};
     bool containsHtmlAndPlain{false};
-#ifdef KUBE_EXPERIMENTAL
-    bool trimMail{true};
-#else
     bool trimMail{false};
-#endif
     bool isTrimmed{false};
 };
 
@@ -356,6 +361,16 @@ QVariant PartModel::data(const QModelIndex &index, int role) const
             }
             if (auto alternativePart = dynamic_cast<MimeTreeParser::AlternativeMessagePart *>(messagePart)) {
                 if (alternativePart->availableModes().contains(MimeTreeParser::AlternativeMessagePart::MultipartIcal)) {
+                    return QStringLiteral("ical");
+                }
+            }
+            if (auto attachmentPart = dynamic_cast<MimeTreeParser::AttachmentMessagePart *>(messagePart)) {
+                auto node = attachmentPart->node();
+                if (!node) {
+                    qWarning() << "no content for attachment";
+                    return {};
+                }
+                if (d->mMimeTypeCache[attachmentPart] == "text/calendar") {
                     return QStringLiteral("ical");
                 }
             }

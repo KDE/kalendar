@@ -85,26 +85,26 @@ AttachmentModel::~AttachmentModel()
 
 QHash<int, QByteArray> AttachmentModel::roleNames() const
 {
-    QHash<int, QByteArray> roles;
-    roles[TypeRole] = "type";
-    roles[NameRole] = "name";
-    roles[SizeRole] = "size";
-    roles[IconRole] = "iconName";
-    roles[IsEncryptedRole] = "encrypted";
-    roles[IsSignedRole] = "signed";
-    return roles;
+    return {
+        {TypeRole, QByteArrayLiteral("type")},
+        {NameRole, QByteArrayLiteral("name")},
+        {SizeRole, QByteArrayLiteral("size")},
+        {IconRole, QByteArrayLiteral("iconName")},
+        {IsEncryptedRole, QByteArrayLiteral("encrypted")},
+        {IsSignedRole, QByteArrayLiteral("signed")},
+    };
 }
 
 QModelIndex AttachmentModel::index(int row, int column, const QModelIndex &) const
 {
     if (row < 0 || column != 0) {
-        return QModelIndex();
+        return {};
     }
 
     if (row < d->mAttachments.size()) {
         return createIndex(row, column, d->mAttachments.at(row).data());
     }
-    return QModelIndex();
+    return {};
 }
 
 QVariant AttachmentModel::data(const QModelIndex &index, int role) const
@@ -253,7 +253,7 @@ bool AttachmentModel::importPublicKey(const QModelIndex &index)
 
 QModelIndex AttachmentModel::parent(const QModelIndex &) const
 {
-    return QModelIndex();
+    return {};
 }
 
 int AttachmentModel::rowCount(const QModelIndex &parent) const

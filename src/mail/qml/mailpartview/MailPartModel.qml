@@ -4,6 +4,7 @@
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Layouts 1.15
 import QtQml.Models 2.2
 import org.kde.kalendar 1.0
 import org.kde.kalendar.mail 1.0
@@ -18,147 +19,141 @@ DelegateModel {
     delegate: Item {
         id: partColumn
 
-        width: parent ? parent.width : 0
+        width: ListView.view.width
         height: childrenRect.height
 
-        /*function getColor(securityLevel) {
+        function getType(securityLevel) {
             if (securityLevel == "good") {
-                return Kube.Colors.positiveColor
+                return Kirigami.MessageType.Positive
             }
             if (securityLevel == "bad") {
-                return Kube.Colors.negativeColor
+                return Kirigami.MessageType.Error
             }
             if (securityLevel == "notsogood") {
-                return Kube.Colors.warningColor
+                return Kirigami.MessageType.Warning
             }
-            return Kube.Colors.lightgrey
+            return Kirigami.MessageType.Information
         }
 
-        function getDetails(signatureDetails)
-        {
-            var details = "";
-            if (signatureDetails.noSignaturesFound) {
-                details += qsTr("This message has been signed but we failed to validate the signature.") + "\n"
-            } else if (signatureDetails.keyMissing) {
-                details += qsTr("This message has been signed using the key %1.").arg(signatureDetails.keyId) + "\n";
-                details += qsTr("The key details are not available.") + "\n";
+        function getColor(securityLevel) {
+            if (securityLevel == "good") {
+                return Kirigami.Theme.positiveTextColor
+            }
+            if (securityLevel == "bad") {
+                return Kirigami.Theme.negativeTextColor
+            }
+            if (securityLevel == "notsogood") {
+                return Kirigami.Theme.neutralTextColor
+            }
+            return Kirigami.Theme.disabledColor
+        }
+
+        function getDetails(signatureDetails) {
+            let details = "";
+            if (signatureDetails.keyMissing) {
+                details += i18n("This message has been signed using the key %1.", signatureDetails.keyId) + "\n";
+                details += i18n("The key details are not available.") + "\n";
             } else {
-                details += qsTr("This message has been signed using the key %1 by %2.").arg(signatureDetails.keyId).arg(signatureDetails.signer) + "\n";
+                details += i18n("This message has been signed using the key %1 by %2.", signatureDetails.keyId, signatureDetails.signer) + "\n";
                 if (signatureDetails.keyRevoked) {
-                    details += qsTr("The key was revoked.") + "\n"
+                    details += i18n("The key was revoked.") + "\n"
                 }
                 if (signatureDetails.keyExpired) {
-                    details += qsTr("The key has expired.") + "\n"
+                    details += i18n("The key has expired.") + "\n"
                 }
                 if (signatureDetails.keyIsTrusted) {
-                    details += qsTr("You are trusting this key.") + "\n"
+                    details += i18n("You are trusting this key.") + "\n"
                 }
                 if (!signatureDetails.signatureIsGood && !signatureDetails.keyRevoked && !signatureDetails.keyExpired && !signatureDetails.keyIsTrusted) {
-                    details += qsTr("The signature is invalid.") + "\n"
+                    details += i18n("The signature is invalid.") + "\n"
                 }
             }
             return details
         }
 
-        Column {
+        ColumnLayout {
             id: buttons
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.rightMargin: Kirigami.Units.smallSpacing
-            spacing: Kirigami.Units.smallSpacing
-            Kube.IconButton {
-                id: encryptedButton
-                width: Kube.Units.gridUnit
-                height: width
-                iconName: Kube.Icons.secure
-                color: getColor(model.encryptionSecurityLevel)
-                backgroundOpacity: 0.5
-                visible: model.encrypted
-                tooltip: model.encryptionDetails.keyId == "" ? qsTr("This message is encrypted but we don't have the key for it.") : qsTr("This message is encrypted to the key: %1").arg(model.encryptionDetails.keyId);
-
-                //FIXME make text copyable
-                // Kube.SelectableItem {
-                //     visualParent: encryptedButton
-                //     text: parent.tooltip
-                // }
-            }
-            QQC2.ToolButton {
-                id: signedButton
-                icon.name: 'mail-signed-full'
-                color: getColor(model.signatureSecurityLevel)
-                backgroundOpacity: 0.5
-                visible: model.signed
-                tooltip: getDetails(model.signatureDetails)
-            }
-        }*/
-        Rectangle {
-            id: border
-            visible: encryptedButton.hovered || signedButton.hovered
-            anchors.topMargin: Kirigami.Units.smallSpacing
-            anchors.top: buttons.bottom
-            anchors.bottom: partLoader.bottom
-            anchors.right: buttons.right
-            width: Kirigami.Units.smallSpacing
-            color: getColor(model.securityLevel)
-            opacity: 0.5
-        }
-
-        Loader {
-            id: partLoader
             anchors {
-                top: parent.top
-                left: buttons.right
-                leftMargin: Kirigami.Units.smallSpacing
+                left: parent.left
                 right: parent.right
+                top: parent.top
+                rightMargin: Kirigami.Units.largeSpacing
+                leftMargin: Kirigami.Units.largeSpacing
+                topMargin: Kirigami.Units.smallSpacing
             }
-            height: item ? item.contentHeight : 0
-            width: parent.width
-            Binding {
-                target: partLoader.item
-                property: "searchString"
-                value: root.searchString
-                when: partLoader.status === Loader.Ready
+            spacing: Kirigami.Units.smallSpacing
+
+            Kirigami.InlineMessage {
+                id: encryptedButton
+                Layout.fillWidth: true
+                Layout.maximumWidth: parent.width
+                icon.name: 'mail-encrypted'
+                type: getType(model.encryptionSecurityLevel)
+                visible: model.encrypted
+                text: model.encryptionDetails.keyId == "" ? i18n("This message is encrypted but we don't have the key for it.") : i18n("This message is encrypted to the key: %1", model.encryptionDetails.keyId);
             }
-            Binding {
-                target: partLoader.item
-                property: "autoLoadImages"
-                value: root.autoLoadImages
-                when: partLoader.status === Loader.Ready
+            Kirigami.InlineMessage {
+                id: signedButton
+                Layout.fillWidth: true
+                Layout.maximumWidth: parent.width
+                icon.name: 'mail-signed'
+                visible: model.signed
+                type: getType(model.signatureSecurityLevel)
+                text: getDetails(model.signatureDetails)
             }
-        }
-        Component.onCompleted: {
-            switch (model.type) {
-                case "plain":
-                    partLoader.setSource("TextPart.qml", {
-                        content: model.content,
-                        embedded: model.embedded,
-                        type: model.type
-                    })
-                    break
-                case "html":
-                    partLoader.setSource("HtmlPart.qml", {
-                        content: model.content,
-                    })
-                    break;
-                case "error":
-                    partLoader.setSource("ErrorPart.qml", {
-                        errorType: model.errorType,
-                        errorString: model.errorString,
-                    })
-                    break;
-                case "encapsulated":
-                    partLoader.setSource("MailPart.qml", {
-                        rootIndex: root.modelIndex(index),
-                        model: root.model,
-                        sender: model.sender,
-                        date: model.date,
-                    })
-                    break;
-                case "ical":
-                    partLoader.setSource("ICalPart.qml", {
-                        content: model.content,
-                    })
-                    break;
+
+            Loader {
+                id: partLoader
+                Layout.preferredHeight: item ? item.contentHeight : 0
+                Layout.maximumWidth: parent.width
+                width: parent.width
+                Binding {
+                    target: partLoader.item
+                    property: "searchString"
+                    value: root.searchString
+                    when: partLoader.status === Loader.Ready
+                }
+                Binding {
+                    target: partLoader.item
+                    property: "autoLoadImages"
+                    value: root.autoLoadImages
+                    when: partLoader.status === Loader.Ready
+                }
+            }
+            Component.onCompleted: {
+                switch (model.type) {
+                    case "plain":
+                        partLoader.setSource("TextPart.qml", {
+                            content: model.content,
+                            embedded: model.embedded,
+                            type: model.type
+                        })
+                        break
+                    case "html":
+                        partLoader.setSource("HtmlPart.qml", {
+                            content: model.content,
+                        })
+                        break;
+                    case "error":
+                        partLoader.setSource("ErrorPart.qml", {
+                            errorType: model.errorType,
+                            errorString: model.errorString,
+                        })
+                        break;
+                    case "encapsulated":
+                        partLoader.setSource("MailPart.qml", {
+                            rootIndex: root.modelIndex(index),
+                            model: root.model,
+                            sender: model.sender,
+                            date: model.date,
+                        })
+                        break;
+                    case "ical":
+                        partLoader.setSource("ICalPart.qml", {
+                            content: model.content,
+                        })
+                        break;
+                }
             }
         }
     }

@@ -1,39 +1,10 @@
-/*
-    objecttreeparser.cpp
-
-    This file is part of KMail, the KDE mail client.
-    Copyright (c) 2003      Marc Mutz <mutz@kde.org>
-    Copyright (C) 2002-2004 Klarälvdalens Datakonsult AB, a KDAB Group company, info@kdab.net
-    Copyright (c) 2009 Andras Mantia <andras@kdab.net>
-    Copyright (c) 2015 Sandro Knauß <sknauss@kde.org>
-    Copyright (c) 2017 Christian Mollekopf <mollekopf@kolabsystems.com>
-
-    KMail is free software; you can redistribute it and/or modify it
-    under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
-
-    KMail is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-    In addition, as a special exception, the copyright holders give
-    permission to link the code of this program with any edition of
-    the Qt library by Trolltech AS, Norway (or with modified versions
-    of Qt that use the same license as Qt), and distribute linked
-    combinations including the two.  You must obey the GNU General
-    Public License in all respects for all of the code used other than
-    Qt.  If you modify this file, you may extend this exception to
-    your version of the file, but you are not obligated to do so.  If
-    you do not wish to do so, delete this exception statement from
-    your version.
-*/
-
-// MessageViewer includes
+// This file is part of KMail, the KDE mail client.
+// SPDX-FileCopyrightText: 2003      Marc Mutz <mutz@kde.org>
+// SPDX-FileCopyrightText: 2002-2004 Klarälvdalens Datakonsult AB, a KDAB Group company, info@kdab.net
+// SPDX-FileCopyrightText: 2009 Andras Mantia <andras@kdab.net>
+// SPDX-FileCopyrightText: 2015 Sandro Knauß <sknauss@kde.org>
+// SPDX-FileCopyrightText: 2017 Christian Mollekopf <mollekopf@kolabsystems.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "objecttreeparser.h"
 
@@ -224,8 +195,8 @@ QVector<MessagePart::Ptr> ObjectTreeParser::collectContentParts(MessagePart::Ptr
             return true;
         },
         [start](const MessagePartPtr &part) {
-            if (dynamic_cast<MimeTreeParser::AttachmentMessagePart *>(part.data())) {
-                return false;
+            if (const auto attachment = dynamic_cast<MimeTreeParser::AttachmentMessagePart *>(part.data())) {
+                return attachment->mimeType() == "text/calendar";
             } else if (const auto text = dynamic_cast<MimeTreeParser::TextMessagePart *>(part.data())) {
                 auto enc = dynamic_cast<MimeTreeParser::EncryptedMessagePart *>(text->parentPart());
                 if (enc && enc->error()) {
