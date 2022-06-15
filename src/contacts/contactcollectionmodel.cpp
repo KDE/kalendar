@@ -3,9 +3,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "contactcollectionmodel.h"
-#include <Akonadi/Collection>
-#include <Akonadi/EntityTreeModel>
-#include <KCheckableProxyModel>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 

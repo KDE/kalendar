@@ -9,7 +9,6 @@
 #include <Akonadi/Collection>
 #include <Akonadi/ETMViewStateSaver>
 #include <Akonadi/EntityMimeTypeFilterModel>
-#include <Akonadi/Item>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Monitor>
@@ -38,7 +37,6 @@
 #include <KConfigGroup>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
-#include <KDescendantsProxyModel>
 #include <KSelectionProxyModel>
 #include <KSharedConfig>
 #include <QBuffer>

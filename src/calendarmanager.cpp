@@ -51,7 +51,6 @@
 #include <models/todosortfilterproxymodel.h>
 
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
-#include <Akonadi/ETMCalendar>
 #else
 #include <etmcalendar.h>
 #endif

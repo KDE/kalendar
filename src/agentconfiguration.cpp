@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "agentconfiguration.h"
-#include "kalendarapplication.h"
 
 #include <Akonadi/AgentConfigurationDialog>
 #include <Akonadi/AgentInstanceCreateJob>
