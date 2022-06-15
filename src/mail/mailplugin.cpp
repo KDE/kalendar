@@ -30,5 +30,5 @@ void CalendarPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<MessageParser>(uri, 1, 0, "MessageParser");
 
-    qRegisterMetaType<MailModel*>("MailModel*");
+    qRegisterMetaType<MailModel *>("MailModel*");
 }

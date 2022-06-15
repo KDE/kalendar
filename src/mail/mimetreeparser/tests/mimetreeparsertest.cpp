@@ -1,21 +1,6 @@
-/*
-    Copyright (c) 2016 Sandro Knauß <knauss@kolabsystems.com>
+// SPDX-FileCopyrightText: 2016 Sandro Knauß <knauss@kolabsystems.com>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
-    This library is free software; you can redistribute it and/or modify it
-    under the terms of the GNU Library General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or (at your
-    option) any later version.
-
-    This library is distributed in the hope that it will be useful, but WITHOUT
-    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
-    License for more details.
-
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to the
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-    02110-1301, USA.
-*/
 #include <objecttreeparser.h>
 
 #include <QDebug>
@@ -33,14 +18,15 @@ QByteArray readMailFromFile(const QString &mailFile)
 class MimeTreeParserTest : public QObject
 {
     Q_OBJECT
-private slots:
+
+private Q_SLOTS:
     void testTextMail()
     {
         const auto expectedText = QStringLiteral(
             "If you can see this text it means that your email client couldn't display our newsletter properly.\nPlease visit this link to view the newsletter "
             "on our website: http://www.gog.com/newsletter/");
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("plaintext.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("plaintext.mbox")));
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
         auto part = partList[0].dynamicCast<MimeTreeParser::MessagePart>();
@@ -59,7 +45,7 @@ private slots:
     void testAlternative()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("alternative.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("alternative.mbox")));
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
         auto part = partList[0].dynamicCast<MimeTreeParser::AlternativeMessagePart>();
@@ -78,7 +64,7 @@ private slots:
     {
         auto expectedText = QStringLiteral("<html><body><p><span>HTML</span> text</p></body></html>");
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("html.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("html.mbox")));
         otp.print();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
@@ -98,7 +84,7 @@ private slots:
     void testSMimeEncrypted()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("smime-encrypted.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("smime-encrypted.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -117,7 +103,7 @@ private slots:
     void testOpenPGPEncryptedAttachment()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-encrypted-attachment-and-non-encrypted-attachment.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-encrypted-attachment-and-non-encrypted-attachment.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -150,7 +136,7 @@ private slots:
     void testOpenPGPInline()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-inline-charset-encrypted.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-inline-charset-encrypted.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -169,7 +155,7 @@ private slots:
     void testOpenPPGInlineWithNonEncText()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-inline-encrypted+nonenc.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-inline-encrypted+nonenc.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -196,7 +182,7 @@ private slots:
     void testEncryptionBlock()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-encrypted-attachment-and-non-encrypted-attachment.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-encrypted-attachment-and-non-encrypted-attachment.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -232,7 +218,7 @@ private slots:
     void testSignatureBlock()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-encrypted-attachment-and-non-encrypted-attachment.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-encrypted-attachment-and-non-encrypted-attachment.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -257,7 +243,7 @@ private slots:
     void testRelatedAlternative()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("cid-links.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("cid-links.mbox")));
         otp.print();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
@@ -271,59 +257,59 @@ private slots:
     void testAttachmentPart()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("attachment.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("attachment.mbox")));
         otp.print();
         auto partList = otp.collectAttachmentParts();
         QCOMPARE(partList.size(), 1);
         auto part = partList[0].dynamicCast<MimeTreeParser::MessagePart>();
         QVERIFY(bool(part));
-        QCOMPARE(part->mimeType(), QByteArray("image/jpeg"));
-        QCOMPARE(part->filename(), QByteArray("aqnaozisxya.jpeg"));
+        QCOMPARE(part->mimeType(), "image/jpeg");
+        QCOMPARE(part->filename(), QStringLiteral("aqnaozisxya.jpeg"));
     }
 
     void testAttachment2Part()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("attachment2.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("attachment2.mbox")));
         otp.print();
         auto partList = otp.collectAttachmentParts();
         QCOMPARE(partList.size(), 1);
         auto part = partList[0].dynamicCast<MimeTreeParser::MessagePart>();
         QVERIFY(bool(part));
-        QCOMPARE(part->mimeType(), QByteArray("image/jpeg"));
-        QCOMPARE(part->filename(), QByteArray("aqnaozisxya.jpeg"));
+        QCOMPARE(part->mimeType(), "image/jpeg");
+        QCOMPARE(part->filename(), QStringLiteral("aqnaozisxya.jpeg"));
     }
 
     void testCidLink()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("cid-links.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("cid-links.mbox")));
         otp.print();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
         auto part = partList[0].dynamicCast<MimeTreeParser::AlternativeMessagePart>();
         QVERIFY(bool(part));
         auto resolvedContent = otp.resolveCidLinks(part->htmlContent());
-        QVERIFY(!resolvedContent.contains("cid:"));
+        QVERIFY(!resolvedContent.contains(QLatin1String("cid:")));
     }
 
     void testCidLinkInForwardedInline()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("cid-links-forwarded-inline.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("cid-links-forwarded-inline.mbox")));
         otp.print();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
         auto part = partList[0].dynamicCast<MimeTreeParser::AlternativeMessagePart>();
         QVERIFY(bool(part));
         auto resolvedContent = otp.resolveCidLinks(part->htmlContent());
-        QVERIFY(!resolvedContent.contains("cid:"));
+        QVERIFY(!resolvedContent.contains(QLatin1String("cid:")));
     }
 
     void testOpenPGPInlineError()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("inlinepgpgencrypted-error.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("inlinepgpgencrypted-error.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -337,7 +323,7 @@ private slots:
     void testEncapsulated()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("encapsulated-with-attachment.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("encapsulated-with-attachment.mbox")));
         otp.decryptParts();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 2);
@@ -355,7 +341,7 @@ private slots:
     void test8bitEncodedInPlaintext()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("8bitencoded.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("8bitencoded.mbox")));
         QVERIFY(otp.plainTextContent().contains(QString::fromUtf8("Why Pisa’s Tower")));
         QVERIFY(otp.htmlContent().contains(QString::fromUtf8("Why Pisa’s Tower")));
     }
@@ -363,7 +349,7 @@ private slots:
     void testInlineSigned()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-inline-signed.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-inline-signed.mbox")));
         otp.decryptParts();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
@@ -386,13 +372,13 @@ private slots:
         QCOMPARE(signaturePart->partMetaData()->crlTooOld, false);
         QCOMPARE(signaturePart->partMetaData()->keyId, QByteArray{"8D9860C58F246DE6"});
         QCOMPARE(signaturePart->partMetaData()->signer, QLatin1String{"unittest key (no password) <test@kolab.org>"});
-        QCOMPARE(signaturePart->partMetaData()->signerMailAddresses, QStringList{{"test@kolab.org"}});
+        QCOMPARE(signaturePart->partMetaData()->signerMailAddresses, QStringList{{QStringLiteral("test@kolab.org")}});
     }
 
     void testEncryptedAndSigned()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-encrypted+signed.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-encrypted+signed.mbox")));
         otp.decryptParts();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
@@ -411,7 +397,7 @@ private slots:
     void testOpenpgpMultipartEmbedded()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-multipart-embedded.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-multipart-embedded.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -426,7 +412,7 @@ private slots:
     void testOpenpgpMultipartEmbeddedSigned()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-multipart-embedded-signed.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-multipart-embedded-signed.mbox")));
         otp.decryptParts();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
@@ -447,7 +433,7 @@ private slots:
     void testAppleHtmlWithAttachments()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("applehtmlwithattachments.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("applehtmlwithattachments.mbox")));
         otp.decryptParts();
         auto partList = otp.collectContentParts();
         QCOMPARE(partList.size(), 1);
@@ -474,7 +460,7 @@ private slots:
     void testAppleHtmlWithAttachmentsMixed()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("applehtmlwithattachmentsmixed.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("applehtmlwithattachmentsmixed.mbox")));
         otp.decryptParts();
         otp.print();
         auto partList = otp.collectContentParts();
@@ -501,7 +487,7 @@ private slots:
     void testInvitation()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("invitation.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("invitation.mbox")));
         otp.decryptParts();
         otp.print();
         auto partList = otp.collectContentParts();
@@ -520,7 +506,7 @@ private slots:
     void testGmailInvitation()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("gmail-invitation.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("gmail-invitation.mbox")));
         otp.decryptParts();
         otp.print();
         auto partList = otp.collectContentParts();
@@ -539,7 +525,7 @@ private slots:
     void testMemoryHole()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-encrypted-memoryhole.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-encrypted-memoryhole.mbox")));
         otp.decryptParts();
         otp.print();
 
@@ -566,7 +552,7 @@ private slots:
     void testMemoryHoleWithList()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("cid-links-forwarded-inline.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("cid-links-forwarded-inline.mbox")));
         auto part = otp.collectContentParts()[0];
         QVERIFY(part->header("references"));
         QCOMPARE(part->header("references")->asUnicodeString(), QStringLiteral("<a1777ec781546ccc5dcd4918a5e4e03d@info>"));
@@ -575,7 +561,7 @@ private slots:
     void testMemoryHoleMultipartMixed()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-encrypted-memoryhole2.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-encrypted-memoryhole2.mbox")));
         otp.decryptParts();
         otp.print();
 
@@ -593,7 +579,7 @@ private slots:
     void testMIMESignature()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("text+html-maillinglist.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("text+html-maillinglist.mbox")));
         otp.decryptParts();
         otp.print();
 
@@ -619,41 +605,41 @@ private slots:
     void testCRLFEncryptedWithSignature()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("crlf-encrypted-with-signature.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("crlf-encrypted-with-signature.mbox")));
         otp.decryptParts();
         otp.print();
 
-        QCOMPARE(otp.plainTextContent(), "CRLF file\n\n-- \nThis is a signature\nWith two lines\n\nAand another line\n");
+        QCOMPARE(otp.plainTextContent(), QStringLiteral("CRLF file\n\n-- \nThis is a signature\nWith two lines\n\nAand another line\n"));
     }
 
     void testCRLFEncryptedWithSignatureMultipart()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("crlf-encrypted-with-signature-multipart.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("crlf-encrypted-with-signature-multipart.mbox")));
         otp.decryptParts();
         otp.print();
 
         QEXPECT_FAIL("", "because MessagePart::parseInternal uses \n\n to detect encapsulated messages (so 'CRLF file' ends up as header)", Continue);
-        QCOMPARE(otp.plainTextContent(), "CRLF file\n\n-- \nThis is a signature\nWith two lines\n\nAand another line\n");
-        QVERIFY(!otp.htmlContent().contains("\r\n"));
+        QCOMPARE(otp.plainTextContent(), QStringLiteral("CRLF file\n\n-- \nThis is a signature\nWith two lines\n\nAand another line\n"));
+        QVERIFY(!otp.htmlContent().contains(QStringLiteral("\r\n")));
     }
 
     void testCRLFOutlook()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("outlook.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("outlook.mbox")));
         otp.decryptParts();
         otp.print();
 
         qWarning() << otp.plainTextContent();
-        QVERIFY(otp.plainTextContent().startsWith("Hi Christian,\n\nhabs gerade getestet:\n\n\u00ABThis is a test"));
-        QVERIFY(!otp.htmlContent().contains("\r\n"));
+        QVERIFY(otp.plainTextContent().startsWith(QLatin1String("Hi Christian,\n\nhabs gerade getestet:\n\n\u00ABThis is a test")));
+        QVERIFY(!otp.htmlContent().contains(QLatin1String("\r\n")));
     }
 
     void testOpenPGPEncryptedSignedThunderbird()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-encrypted-signed-thunderbird.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("openpgp-encrypted-signed-thunderbird.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -680,7 +666,7 @@ private slots:
     void testSignedForwardOpenpgpSignedEncrypted()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("signed-forward-openpgp-signed-encrypted.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("signed-forward-openpgp-signed-encrypted.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -703,7 +689,7 @@ private slots:
     void testSmimeOpaqueSign()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("smime-opaque-sign.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("smime-opaque-sign.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -717,7 +703,7 @@ private slots:
     void testSmimeEncrypted()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("smime-encrypted.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("smime-encrypted.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -731,7 +717,7 @@ private slots:
     void testSmimeSignedApple()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("smime-signed-apple.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("smime-signed-apple.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -745,7 +731,7 @@ private slots:
     void testSmimeEncryptedOctetStream()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("smime-encrypted-octet-stream.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("smime-encrypted-octet-stream.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -759,7 +745,7 @@ private slots:
     void testSmimeOpaqueSignedEncryptedAttachment()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("smime-opaque-signed-encrypted-attachment.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("smime-opaque-signed-encrypted-attachment.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -773,7 +759,7 @@ private slots:
     void testSmimeOpaqueEncSign()
     {
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("smime-opaque-enc+sign.mbox"));
+        otp.parseObjectTree(readMailFromFile(QLatin1String("smime-opaque-enc+sign.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();

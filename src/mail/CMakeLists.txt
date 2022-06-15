@@ -3,7 +3,7 @@
 
 ecm_add_qml_module(kalendar_mail_plugin URI "org.kde.kalendar.mail" VERSION 1.0)
 
-target_sources(kalendar_mail_plugin PRIVATE
+target_sources(kalendar_mail_plugin PUBLIC
     mailplugin.cpp
     mailplugin.h
     mailmanager.cpp
@@ -70,9 +70,11 @@ ecm_qt_install_logging_categories(
     DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
 )
 
-#if (BUILD_TESTING)
-#    add_subdirectory(autotests)
-#endif()
+if (BUILD_TESTING)
+    add_subdirectory(mime/tests)
+    add_subdirectory(mimetreeparser/autotests)
+    add_subdirectory(mimetreeparser/tests)
+endif()
 
 ecm_finalize_qml_module(kalendar_mail_plugin
     DESTINATION ${KDE_INSTALL_QMLDIR}

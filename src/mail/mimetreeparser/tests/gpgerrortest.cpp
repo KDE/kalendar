@@ -1,21 +1,5 @@
-/*
-    Copyright (c) 2016 Sandro Knauß <knauss@kolabsystems.com>
-
-    This library is free software; you can redistribute it and/or modify it
-    under the terms of the GNU Library General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or (at your
-    option) any later version.
-
-    This library is distributed in the hope that it will be useful, but WITHOUT
-    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
-    License for more details.
-
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to the
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-    02110-1301, USA.
-*/
+// SPDX-FileCopyrightText: 2016 Sandro Knauß <knauss@kolabsystems.com>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include <objecttreeparser.h>
 
@@ -26,6 +10,7 @@
 #include <QProcess>
 #include <QTest>
 #include <QtGlobal>
+#include <qobjectdefs.h>
 
 QByteArray readMailFromFile(const QString &mailFile)
 {
@@ -40,7 +25,7 @@ void killAgent(const QString &dir)
     QProcess proc;
     proc.setProgram(QStringLiteral("gpg-connect-agent"));
     QStringList arguments;
-    arguments << "-S " << dir + "/S.gpg-agent";
+    arguments << QStringLiteral("-S ") << dir + QStringLiteral("/S.gpg-agent");
     proc.start();
     proc.waitForStarted();
     proc.write("KILLAGENT\n");
@@ -53,14 +38,14 @@ class GpgErrorTest : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
 
     void testGpgConfiguredCorrectly()
     {
         setEnv("GNUPGHOME", GNUPGHOME);
 
         MimeTreeParser::ObjectTreeParser otp;
-        otp.parseObjectTree(readMailFromFile("openpgp-inline-charset-encrypted.mbox"));
+        otp.parseObjectTree(readMailFromFile(QStringLiteral("openpgp-inline-charset-encrypted.mbox")));
         otp.print();
         otp.decryptParts();
         otp.print();
@@ -69,7 +54,7 @@ private slots:
         auto part = partList[0];
         QVERIFY(bool(part));
 
-        QVERIFY(part->text().startsWith("asdasd"));
+        QVERIFY(part->text().startsWith(QStringLiteral("asdasd")));
         QCOMPARE(part->encryptions().size(), 1);
         auto enc = part->encryptions()[0];
         QCOMPARE(enc->error(), MimeTreeParser::MessagePart::NoError);
@@ -146,8 +131,8 @@ public Q_SLOTS:
         mResetGpgmeEngine = false;
         mModifiedEnv.clear();
         {
-            gpgme_check_version(0);
-            gpgme_ctx_t ctx = 0;
+            gpgme_check_version(nullptr);
+            gpgme_ctx_t ctx = nullptr;
             gpgme_new(&ctx);
             gpgme_set_protocol(ctx, GPGME_PROTOCOL_OpenPGP);
             gpgme_engine_info_t info = gpgme_ctx_get_engine_info(ctx);
@@ -162,7 +147,7 @@ public Q_SLOTS:
     {
         QCoreApplication::sendPostedEvents();
 
-        const QString &gnupghome = qgetenv("GNUPGHOME");
+        const QString &gnupghome = QString::fromUtf8(qgetenv("GNUPGHOME"));
         if (!gnupghome.isEmpty()) {
             killAgent(gnupghome);
         }
@@ -175,22 +160,23 @@ private:
     void unsetEnv(const QByteArray &name)
     {
         mModifiedEnv << name;
-        qunsetenv(name);
+        qunsetenv(name.data());
     }
 
     void setEnv(const QByteArray &name, const QByteArray &value)
     {
         mModifiedEnv << name;
-        qputenv(name, value);
+        qputenv(name.data(), value);
     }
 
     void resetEnv()
     {
-        foreach (const auto &i, mModifiedEnv) {
-            if (mEnv.contains(i)) {
-                qputenv(i, mEnv.value(i).toUtf8());
+        for (const auto &i : std::as_const(mModifiedEnv)) {
+            const auto env = i.data();
+            if (mEnv.contains(QString::fromUtf8(i))) {
+                qputenv(env, mEnv.value(QString::fromUtf8(i)).toUtf8());
             } else {
-                qunsetenv(i);
+                qunsetenv(env);
             }
         }
     }
@@ -198,14 +184,14 @@ private:
     void resetGpgMfname()
     {
         if (mResetGpgmeEngine) {
-            gpgme_set_engine_info(GPGME_PROTOCOL_OpenPGP, mGpgmeEngine_fname, NULL);
+            gpgme_set_engine_info(GPGME_PROTOCOL_OpenPGP, mGpgmeEngine_fname.data(), nullptr);
         }
     }
 
     void setGpgMEfname(const QByteArray &fname, const QByteArray &homedir)
     {
         mResetGpgmeEngine = true;
-        gpgme_set_engine_info(GPGME_PROTOCOL_OpenPGP, fname, homedir);
+        gpgme_set_engine_info(GPGME_PROTOCOL_OpenPGP, fname.data(), homedir.data());
     }
 
     QSet<QByteArray> mModifiedEnv;

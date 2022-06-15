@@ -42,7 +42,7 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
     Akonadi::Item item = itemVariant.value<Akonadi::Item>();
 
     if (!item.hasPayload<KMime::Message::Ptr>()) {
-         return {};
+        return {};
     }
     const KMime::Message::Ptr mail = item.payload<KMime::Message::Ptr>();
 

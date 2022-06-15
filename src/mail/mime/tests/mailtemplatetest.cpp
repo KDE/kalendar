@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2017 Christian Mollekopf <mollekopf@kolabsys.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 #include <QDebug>
 #include <QDir>
 #include <QSignalSpy>
@@ -5,9 +8,10 @@
 #include <QTest>
 #include <QtWebEngine>
 #include <functional>
+#include <qchar.h>
 
-#include "mailcrypto.h"
-#include "mailtemplates.h"
+#include "../mailcrypto.h"
+#include "../mailtemplates.h"
 
 static KMime::Content *getSubpart(KMime::Content *msg, const QByteArray &mimeType)
 {
@@ -38,23 +42,23 @@ static KMime::Message::Ptr readMail(const QString &mailFile)
 
 static QString removeFirstLine(const QString &s)
 {
-    return s.mid(s.indexOf("\n") + 1);
+    return s.mid(s.indexOf(QLatin1String("\n")) + 1);
 }
 
 static QString normalize(const QString &s)
 {
     auto text = s;
-    text.replace(">", "");
-    text.replace("\n", "");
-    text.replace("=", "");
-    text.replace(" ", "");
+    text.replace(QLatin1String(">"), QString());
+    text.replace(QLatin1String("\n"), QString());
+    text.replace(QLatin1String("="), QString());
+    text.replace(QLatin1String(" "), QString());
     return text;
 }
 
 static QString unquote(const QString &s)
 {
     auto text = s;
-    text.replace("> ", "");
+    text.replace(QLatin1String("> "), QString());
     return text;
 }
 
@@ -72,7 +76,7 @@ class MailTemplateTest : public QObject
         return true;
     }
 
-private slots:
+private Q_SLOTS:
 
     void initTestCase()
     {
@@ -87,31 +91,31 @@ private slots:
 
     void testPlainReply()
     {
-        auto msg = readMail("plaintext.mbox");
+        auto msg = readMail(QLatin1String("plaintext.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
         });
         QTRY_VERIFY(result);
-        QCOMPARE(normalize(removeFirstLine(result->body())), normalize(msg->body()));
+        QCOMPARE(normalize(removeFirstLine(QString::fromUtf8(result->body()))), normalize(QString::fromUtf8(msg->body())));
         QCOMPARE(result->to()->addresses(), {{"konqi@example.org"}});
         QCOMPARE(result->subject()->asUnicodeString(), QLatin1String{"RE: A random subject with alternative contenttype"});
     }
 
     void testHtmlReply()
     {
-        auto msg = readMail("html.mbox");
+        auto msg = readMail(QLatin1String("html.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
         });
         QTRY_VERIFY(result);
-        QCOMPARE(unquote(removeFirstLine(result->body())), QLatin1String("HTML text"));
+        QCOMPARE(unquote(removeFirstLine(QString::fromUtf8(result->body()))), QLatin1String("HTML text"));
     }
 
     void testStripSignatureReply()
     {
-        auto msg = readMail("plaintext-with-signature.mbox");
+        auto msg = readMail(QLatin1String("plaintext-with-signature.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -122,7 +126,7 @@ private slots:
 
     void testStripSignatureHtmlReply()
     {
-        auto msg = readMail("html-with-signature.mbox");
+        auto msg = readMail(QLatin1String("html-with-signature.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -145,7 +149,7 @@ private slots:
 
     void testStripEncryptedCRLFReply()
     {
-        auto msg = readMail("crlf-encrypted-with-signature.mbox");
+        auto msg = readMail(QLatin1String("crlf-encrypted-with-signature.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -156,7 +160,7 @@ private slots:
 
     void testHtml8BitEncodedReply()
     {
-        auto msg = readMail("8bitencoded.mbox");
+        auto msg = readMail(QLatin1String("8bitencoded.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -167,26 +171,26 @@ private slots:
 
     void testMultipartSignedReply()
     {
-        auto msg = readMail("openpgp-signed-mailinglist.mbox");
+        auto msg = readMail(QLatin1String("openpgp-signed-mailinglist.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
         });
         QTRY_VERIFY(result);
-        auto content = removeFirstLine(result->body());
+        auto content = removeFirstLine(QString::fromUtf8(result->body()));
         QVERIFY(!content.isEmpty());
-        QVERIFY(content.contains("i noticed a new branch"));
+        QVERIFY(content.contains(QLatin1String("i noticed a new branch")));
     }
 
     void testMultipartAlternativeReply()
     {
-        auto msg = readMail("alternative.mbox");
+        auto msg = readMail(QLatin1String("alternative.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
         });
         QTRY_VERIFY(result);
-        auto content = removeFirstLine(result->body());
+        auto content = removeFirstLine(QString::fromUtf8(result->body()));
         QVERIFY(!content.isEmpty());
         QCOMPARE(unquote(content),
                  QLatin1String("If you can see this text it means that your email client couldn't display our newsletter properly.\nPlease visit this link to "
@@ -195,26 +199,26 @@ private slots:
 
     void testAttachmentReply()
     {
-        auto msg = readMail("plaintextattachment.mbox");
+        auto msg = readMail(QLatin1String("plaintextattachment.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
         });
         QTRY_VERIFY(result);
-        auto content = removeFirstLine(result->body());
+        auto content = removeFirstLine(QString::fromUtf8(result->body()));
         QVERIFY(!content.isEmpty());
         QCOMPARE(unquote(content), QLatin1String("sdlkjsdjf"));
     }
 
     void testMultiRecipientReply()
     {
-        auto msg = readMail("multirecipients.mbox");
+        auto msg = readMail(QLatin1String("multirecipients.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
         });
         QTRY_VERIFY(result);
-        auto content = removeFirstLine(result->body());
+        auto content = removeFirstLine(QString::fromUtf8(result->body()));
         QVERIFY(!content.isEmpty());
         QCOMPARE(unquote(content), QLatin1String("test"));
         QCOMPARE(result->to()->addresses(), {{"from@example.org"}});
@@ -229,7 +233,7 @@ private slots:
         mb.setAddress("to1@example.org");
         me << mb.addrSpec();
 
-        auto msg = readMail("multirecipients.mbox");
+        auto msg = readMail(QLatin1String("multirecipients.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(
             msg,
@@ -250,7 +254,7 @@ private slots:
         mb.setAddress("from@example.org");
         me << mb.addrSpec();
 
-        auto msg = readMail("multirecipients.mbox");
+        auto msg = readMail(QLatin1String("multirecipients.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(
             msg,
@@ -273,7 +277,7 @@ private slots:
         mb.setAddress("me@example.org");
         me << mb.addrSpec();
 
-        auto msg = readMail("listmessage.mbox");
+        auto msg = readMail(QLatin1String("listmessage.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(
             msg,
@@ -291,7 +295,7 @@ private slots:
 
     void testForwardAsAttachment()
     {
-        auto msg = readMail("plaintext.mbox");
+        auto msg = readMail(QString::fromUtf8("plaintext.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::forward(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -317,7 +321,7 @@ private slots:
 
     void testEncryptedForwardAsAttachment()
     {
-        auto msg = readMail("openpgp-encrypted.mbox");
+        auto msg = readMail(QLatin1String("openpgp-encrypted.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::forward(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -343,7 +347,7 @@ private slots:
 
     void testEncryptedWithAttachmentsForwardAsAttachment()
     {
-        auto msg = readMail("openpgp-encrypted-two-attachments.mbox");
+        auto msg = readMail(QLatin1String("openpgp-encrypted-two-attachments.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::forward(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -374,7 +378,7 @@ private slots:
 
     void testForwardAlreadyForwarded()
     {
-        auto msg = readMail("cid-links-forwarded-inline.mbox");
+        auto msg = readMail(QLatin1String("cid-links-forwarded-inline.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::forward(msg, [&](const KMime::Message::Ptr &r) {
             result = r;
@@ -390,14 +394,14 @@ private slots:
 
     void testCreatePlainMail()
     {
-        QStringList to = {{"to@example.org"}};
-        QStringList cc = {{"cc@example.org"}};
-        QStringList bcc = {{"bcc@example.org"}};
-        ;
+        QStringList to = {{QLatin1String("to@example.org")}};
+        QStringList cc = {{QLatin1String("cc@example.org")}};
+        QStringList bcc = {{QLatin1String("bcc@example.org")}};
+
         KMime::Types::Mailbox from;
-        from.fromUnicodeString("from@example.org");
-        QString subject = "subject";
-        QString body = "body";
+        from.fromUnicodeString(QLatin1String("from@example.org"));
+        QString subject = QLatin1String("subject");
+        QString body = QLatin1String("body");
         QList<Attachment> attachments;
 
         auto result = MailTemplates::createMessage({}, to, cc, bcc, from, subject, body, false, attachments);
@@ -413,14 +417,14 @@ private slots:
 
     void testCreateHtmlMail()
     {
-        QStringList to = {{"to@example.org"}};
-        QStringList cc = {{"cc@example.org"}};
-        QStringList bcc = {{"bcc@example.org"}};
-        ;
+        QStringList to = {{QLatin1String("to@example.org")}};
+        QStringList cc = {{QLatin1String("cc@example.org")}};
+        QStringList bcc = {{QLatin1String("bcc@example.org")}};
+
         KMime::Types::Mailbox from;
-        from.fromUnicodeString("from@example.org");
-        QString subject = "subject";
-        QString body = "body";
+        from.fromUnicodeString(QLatin1String("from@example.org"));
+        QString subject = QLatin1String("subject");
+        QString body = QLatin1String("body");
         QList<Attachment> attachments;
 
         auto result = MailTemplates::createMessage({}, to, cc, bcc, from, subject, body, true, attachments);
@@ -437,17 +441,16 @@ private slots:
 
     void testCreatePlainMailWithAttachments()
     {
-        QStringList to = {{"to@example.org"}};
-        QStringList cc = {{"cc@example.org"}};
-        ;
-        QStringList bcc = {{"bcc@example.org"}};
-        ;
+        QStringList to = {{QLatin1String("to@example.org")}};
+        QStringList cc = {{QLatin1String("cc@example.org")}};
+        QStringList bcc = {{QLatin1String("bcc@example.org")}};
+
         KMime::Types::Mailbox from;
-        from.fromUnicodeString("from@example.org");
-        QString subject = "subject";
-        QString body = "body";
-        QList<Attachment> attachments = {{"name", "filename", "mimetype", true, "inlineAttachment"},
-                                         {"name", "filename", "mimetype", false, "nonInlineAttachment"}};
+        from.fromUnicodeString(QLatin1String("from@example.org"));
+        QString subject = QLatin1String("subject");
+        QString body = QLatin1String("body");
+        QList<Attachment> attachments = {{QLatin1String("name"), QLatin1String("filename"), "mimetype", true, "inlineAttachment"},
+                                         {QLatin1String("name"), QLatin1String("filename"), "mimetype", false, "nonInlineAttachment"}};
 
         auto result = MailTemplates::createMessage({}, to, cc, bcc, from, subject, body, false, attachments);
 
@@ -465,17 +468,18 @@ private slots:
 
     void testCreateHtmlMailWithAttachments()
     {
-        QStringList to = {{"to@example.org"}};
-        QStringList cc = {{"cc@example.org"}};
-        ;
-        QStringList bcc = {{"bcc@example.org"}};
-        ;
+        QStringList to = {{QLatin1String("to@example.org")}};
+        QStringList cc = {{QLatin1String("cc@example.org")}};
+        QStringList bcc = {{QLatin1String("bcc@example.org")}};
+
         KMime::Types::Mailbox from;
-        from.fromUnicodeString("from@example.org");
-        QString subject = "subject";
-        QString body = "body";
-        QList<Attachment> attachments = {{"name", "filename", "mimetype", true, "inlineAttachment"},
-                                         {"name", "filename", "mimetype", false, "nonInlineAttachment"}};
+        from.fromUnicodeString(QLatin1String("from@example.org"));
+        QString subject = QLatin1String("subject");
+        QString body = QLatin1String("body");
+        QList<Attachment> attachments = {
+            {QLatin1String("name"), QLatin1String("filename"), "mimetype", true, "inlineAttachment"},
+            {QLatin1String("name"), QLatin1String("filename"), "mimetype", false, "nonInlineAttachment"},
+        };
 
         auto result = MailTemplates::createMessage({}, to, cc, bcc, from, subject, body, true, attachments);
 
@@ -493,15 +497,14 @@ private slots:
 
     void testCreatePlainMailSigned()
     {
-        QStringList to = {{"to@example.org"}};
-        QStringList cc = {{"cc@example.org"}};
-        ;
-        QStringList bcc = {{"bcc@example.org"}};
-        ;
+        QStringList to = {{QLatin1String("to@example.org")}};
+        QStringList cc = {{QLatin1String("cc@example.org")}};
+        QStringList bcc = {{QLatin1String("bcc@example.org")}};
+
         KMime::Types::Mailbox from;
-        from.fromUnicodeString("from@example.org");
-        QString subject = "subject";
-        QString body = "body";
+        from.fromUnicodeString(QLatin1String("from@example.org"));
+        QString subject = QLatin1String("subject");
+        QString body = QLatin1String("body");
         QList<Attachment> attachments;
 
         auto keys = Crypto::findKeys({}, true, false);
@@ -535,17 +538,18 @@ private slots:
 
     void testCreatePlainMailWithAttachmentsSigned()
     {
-        QStringList to = {{"to@example.org"}};
-        QStringList cc = {{"cc@example.org"}};
-        ;
-        QStringList bcc = {{"bcc@example.org"}};
-        ;
+        QStringList to = {{QLatin1String("to@example.org")}};
+        QStringList cc = {{QLatin1String("cc@example.org")}};
+        QStringList bcc = {{QLatin1String("bcc@example.org")}};
+
         KMime::Types::Mailbox from;
-        from.fromUnicodeString("from@example.org");
-        QString subject = "subject";
-        QString body = "body";
-        QList<Attachment> attachments = {{"name", "filename1", "mimetype1", true, "inlineAttachment"},
-                                         {"name", "filename2", "mimetype2", false, "nonInlineAttachment"}};
+        from.fromUnicodeString(QLatin1String("from@example.org"));
+        QString subject = QLatin1String("subject");
+        QString body = QLatin1String("body");
+        QList<Attachment> attachments = {
+            {QLatin1String("name"), QLatin1String("filename1"), "mimetype1", true, "inlineAttachment"},
+            {QLatin1String("name"), QLatin1String("filename2"), "mimetype2", false, "nonInlineAttachment"},
+        };
 
         auto signingKeys = Crypto::findKeys({}, true, false);
         auto result = MailTemplates::createMessage({}, to, cc, bcc, from, subject, body, false, attachments, signingKeys, {}, signingKeys[0]);
@@ -579,14 +583,14 @@ private slots:
 
     void testCreateIMipMessage()
     {
-        QStringList to = {{"to@example.org"}};
-        QStringList cc = {{"cc@example.org"}};
-        QStringList bcc = {{"bcc@example.org"}};
-        QString from = {"from@example.org"};
-        QString subject = "subject";
-        QString body = "body";
+        QStringList to = {{QLatin1String("to@example.org")}};
+        QStringList cc = {{QLatin1String("cc@example.org")}};
+        QStringList bcc = {{QLatin1String("bcc@example.org")}};
+        QString from = {QLatin1String("from@example.org")};
+        QString subject = QLatin1String("subject");
+        QString body = QLatin1String("body");
 
-        QString ical = "ical";
+        QString ical = QLatin1String("ical");
 
         auto result = MailTemplates::createIMipMessage(from, {to, cc, bcc}, subject, body, ical);
 
@@ -613,7 +617,7 @@ private slots:
         mb.setAddress("to1@example.org");
         me << mb.addrSpec();
 
-        auto msg = readMail("openpgp-encrypted-memoryhole2.mbox");
+        auto msg = readMail(QLatin1String("openpgp-encrypted-memoryhole2.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::reply(
             msg,
@@ -628,13 +632,13 @@ private slots:
         QCOMPARE(result->inReplyTo()->asUnicodeString(), QLatin1String{"<03db3530-0000-0000-95a2-8a148f00000@example.com>"});
         QCOMPARE(result->references()->asUnicodeString(),
                  QLatin1String{"<dbe9d22b-0a3f-cb1e-e883-8a148f00000@example.com> <03db3530-0000-0000-95a2-8a148f00000@example.com>"});
-        QCOMPARE(normalize(removeFirstLine(result->body())),
+        QCOMPARE(normalize(removeFirstLine(QString::fromUtf8(result->body()))),
                  QLatin1String{"FsdflkjdslfjHappyMonday!Belowyouwillfindaquickoverviewofthecurrenton-goings.Remember"});
     }
 
     void testEncryptedWithProtectedHeadersForwardAsAttachment()
     {
-        auto msg = readMail("openpgp-encrypted-memoryhole2.mbox");
+        auto msg = readMail(QLatin1String("openpgp-encrypted-memoryhole2.mbox"));
         KMime::Message::Ptr result;
         MailTemplates::forward(msg, [&](const KMime::Message::Ptr &r) {
             result = r;

@@ -18,6 +18,8 @@ Dependencies:
     'pim/kmime' : '@same'
     'pim/eventviews' : '@same'
     'pim/kdepim-runtime' : '@same'
+    'pim/mailcommon' : '@same'
+    'pim/pimcommon' : '@same'
     'frameworks/kirigami' : '@latest'
 
 Options:

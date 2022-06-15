@@ -176,7 +176,7 @@ void KalendarApplication::setupActions()
     if (KAuthorized::authorizeAction(actionName)) {
         auto mailAction = mCollection.addAction(actionName, this, &KalendarApplication::openMailView);
         mailAction->setText(i18n("Mail View"));
-        mailAction->setIcon(QIcon::fromTheme(QStringLiteral("gnumeric-link-email")));
+        mailAction->setIcon(QIcon::fromTheme(QStringLiteral("mail-message")));
         mailAction->setCheckable(true);
         mailAction->setActionGroup(m_viewGroup);
         connect(mailAction, &QAction::toggled, this, [](bool checked) {

@@ -7,19 +7,19 @@
 #include <QTimer>
 
 // Akonadi
+#include <Akonadi/ChangeRecorder>
 #include <Akonadi/CollectionFilterProxyModel>
+#include <Akonadi/EntityMimeTypeFilterModel>
+#include <Akonadi/EntityTreeModel>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/MessageModel>
 #include <Akonadi/Monitor>
-#include <Akonadi/Session>
-#include <Akonadi/ChangeRecorder>
-#include <MailCommon/FolderCollectionMonitor>
-#include <KMime/Message>
-#include <KDescendantsProxyModel>
-#include <Akonadi/EntityMimeTypeFilterModel>
-#include <Akonadi/EntityTreeModel>
 #include <Akonadi/SelectionProxyModel>
 #include <Akonadi/ServerManager>
+#include <Akonadi/Session>
+#include <KDescendantsProxyModel>
+#include <KMime/Message>
+#include <MailCommon/FolderCollectionMonitor>
 #include <QApplication>
 #include <QtCore/QItemSelectionModel>
 
@@ -29,7 +29,6 @@ MailManager::MailManager(QObject *parent)
     : QObject(parent)
     , m_loading(true)
 {
-
     using namespace Akonadi;
     //                              mailModel
     //                                  ^
@@ -93,20 +92,19 @@ MailManager::MailManager(QObject *parent)
     if (Akonadi::ServerManager::isRunning()) {
         m_loading = false;
     } else {
-        connect(Akonadi::ServerManager::self(), &Akonadi::ServerManager::stateChanged,
-                this, [this](Akonadi::ServerManager::State state) {
-                    if (state == Akonadi::ServerManager::State::Broken) {
-                        qApp->exit(-1);
-                        return;
-                    }
-                    bool loading = state != Akonadi::ServerManager::State::Running;
-                    if (loading == m_loading) {
-                        return;
-                    }
-                    m_loading = loading;
-                    Q_EMIT loadingChanged();
-                    disconnect(Akonadi::ServerManager::self(), &Akonadi::ServerManager::stateChanged, this, nullptr);
-                });
+        connect(Akonadi::ServerManager::self(), &Akonadi::ServerManager::stateChanged, this, [this](Akonadi::ServerManager::State state) {
+            if (state == Akonadi::ServerManager::State::Broken) {
+                qApp->exit(-1);
+                return;
+            }
+            bool loading = state != Akonadi::ServerManager::State::Running;
+            if (loading == m_loading) {
+                return;
+            }
+            m_loading = loading;
+            Q_EMIT loadingChanged();
+            disconnect(Akonadi::ServerManager::self(), &Akonadi::ServerManager::stateChanged, this, nullptr);
+        });
     }
     Q_EMIT folderModelChanged();
     Q_EMIT loadingChanged();

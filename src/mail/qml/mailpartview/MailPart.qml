@@ -1,24 +1,13 @@
-/*
-  Copyright (C) 2016 Michael Bohlender, <michael.bohlender@kdemail.net>
+// SPDX-FileCopyrightText: 2016 Michael Bohlender <michael.bohlender@kdemail.net>
+// SPDX-FileCopyrightText: 2022 Carl Schwan <carl@carlschwan.eu>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
+import QtQuick 2.7
+import QtQuick.Controls 2.15 as QQC2
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License along
-  with this program; if not, write to the Free Software Foundation, Inc.,
-  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-*/
-
-import QtQuick 2.4
-
-import org.kube.framework 1.0 as Kube
+import org.kde.kalendar 1.0
+import org.kde.kalendar.mail 1.0
+import org.kde.kirigami 2.19 as Kirigami
 
 Item {
     id: root
@@ -35,11 +24,11 @@ Item {
         anchors {
             top: parent.top
             left: parent.left
-            leftMargin: Kube.Units.smallSpacing
+            leftMargin: Kirigami.Units.smallSpacing
         }
-        color: Kube.Colors.lightgrey
+        color: Kirigami.Theme.disabledTextColor
         height: partListView.height + sender.height
-        width: Kube.Units.smallSpacing
+        width: Kirigami.Units.smallSpacing
     }
 
     Text {
@@ -47,11 +36,11 @@ Item {
         anchors {
             top: parent.top
             left: border.right
-            leftMargin: Kube.Units.smallSpacing
+            leftMargin: Kirigami.Units.smallSpacing
             right: parent.right
         }
 
-        text: qsTr("sent by %1 on %2").arg(root.sender).arg(Qt.formatDateTime(root.date, "dd MMM yyyy hh:mm"))
+        text: i18n("sent by %1 on %2", root.sender, Qt.formatDateTime(root.date, "dd MMM yyyy hh:mm"))
         color: "grey"
         clip: true
     }
@@ -60,15 +49,15 @@ Item {
         anchors {
             top: sender.bottom
             left: border.right
-            margins: Kube.Units.smallSpacing
-            leftMargin: Kube.Units.smallSpacing
+            margins: Kirigami.Units.smallSpacing
+            leftMargin: Kirigami.Units.smallSpacing
         }
         model: MailPartModel {
             id: visualModel
         }
         spacing: 7
         height: contentHeight
-        width: parent.width - Kube.Units.smallSpacing * 3
+        width: parent.width - Kirigami.Units.smallSpacing * 3
         interactive: false
     }
 }

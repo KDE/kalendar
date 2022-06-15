@@ -3,10 +3,11 @@
 
 #include <QObject>
 
-namespace Akonadi {
-    class CollectionFilterProxyModel;
-    class EntityMimeTypeFilterModel;
-    class Session;
+namespace Akonadi
+{
+class CollectionFilterProxyModel;
+class EntityMimeTypeFilterModel;
+class Session;
 }
 
 class QAbstractListModel;
@@ -45,9 +46,8 @@ private:
     Akonadi::Session *m_session;
     Akonadi::CollectionFilterProxyModel *m_foldersModel;
 
-    //folders
+    // folders
     QItemSelectionModel *m_collectionSelectionModel;
     MailModel *m_folderModel;
     QString m_selectedFolderName;
 };
-

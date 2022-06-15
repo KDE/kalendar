@@ -1,5 +1,8 @@
+# SPDX-FileCopyrightText: 2017 Christian Mollekopf <mollekopf@kolabsys.com>
+# SPDX-License-Identifier: BSD-3-Clause
+
 add_subdirectory(gnupg_home)
-add_definitions( -DMAIL_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../../testdata" )
+add_definitions( -DMAIL_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../testdata" )
 include(${CMAKE_SOURCE_DIR}/cmake/modules/add_gpg_crypto_test.cmake)
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -12,18 +15,25 @@ include(ECMAddTests)
 add_executable(mimetreeparsertest mimetreeparsertest.cpp)
 add_gpg_crypto_test(mimetreeparsertest mimetreeparsertest)
 target_link_libraries(mimetreeparsertest
-    sink_mimetreeparser
     Qt5::Core
     Qt5::Test
     KF5::Mime
+    kalendar_lib
+    KF5::MailCommon
+    KF5::AkonadiMime
+    Qt5::WebEngineWidgets
+    kalendar_mail_plugin
 )
 
 add_executable(gpgerrortest gpgerrortest.cpp)
 target_link_libraries(gpgerrortest
-    sink_mimetreeparser
     Qt5::Core
     Qt5::Test
     KF5::Mime
-    Gpgme::Gpgme
+    kalendar_lib
+    KF5::MailCommon
+    KF5::AkonadiMime
+    Qt5::WebEngineWidgets
+    kalendar_mail_plugin
 )
 add_test(NAME gpgerrortest COMMAND $<TARGET_FILE:gpgerrortest>)
