@@ -17,7 +17,7 @@ Item {
     id: root
 
     property var openOccurrence
-    property var model
+    property var filter: ({})
 
     property int daysToShow: daysPerRow * 6
     property int daysPerRow: 7
@@ -235,7 +235,15 @@ Item {
 
             //Weeks
             Repeater {
-                model: root.model
+                model: Kalendar.MultiDayIncidenceModel {
+                    periodLength: 7
+                    model: Kalendar.IncidenceOccurrenceModel {
+                        start: root.startDate
+                        length: root.daysToShow
+                        calendar: Kalendar.CalendarManager.calendar
+                        filter: root.filter
+                    }
+                }
                 //One row => one week
                 Item {
                     width: parent.width

@@ -16,7 +16,7 @@ Kirigami.Page {
     id: root
 
     property var openOccurrence: ({})
-    property var model
+    property var filter: ({})
 
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
@@ -33,6 +33,7 @@ Kirigami.Page {
     readonly property bool isDark: KalendarUiUtils.darkMode
     property bool dragDropEnabled: true
 
+    property int periodLength: 15
     property real scrollbarWidth: 0
     readonly property real dayWidth: ((root.width - hourLabelWidth - leftPadding - scrollbarWidth) / daysToShow) - gridLineWidth
     readonly property real incidenceSpacing: Kirigami.Units.smallSpacing / 2
@@ -139,16 +140,51 @@ Kirigami.Page {
         focus: true
         interactive: Kirigami.Settings.tabletMode
 
+        pathItemCount: 3
         path: Path {
-            startX: - pathView.width * pathView.count / 2 + pathView.width / 2
+            startX: - pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
             startY: pathView.height / 2
             PathLine {
-                x: pathView.width * pathView.count / 2 + pathView.width / 2
+                x: pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
                 y: pathView.height / 2
             }
         }
 
-        model: root.model
+        Component {
+            id: weekModel
+            Kalendar.InfiniteCalendarViewModel {
+                scale: Kalendar.InfiniteCalendarViewModel.WeekScale
+            }
+        }
+
+        Component {
+            id: threeDayModel
+            Kalendar.InfiniteCalendarViewModel {
+                scale: Kalendar.InfiniteCalendarViewModel.ThreeDayScale
+            }
+        }
+
+        Component {
+            id: dayModel
+            Kalendar.InfiniteCalendarViewModel {
+                scale: Kalendar.InfiniteCalendarViewModel.DayScale
+            }
+        }
+
+        Loader {
+            id: modelLoader
+            sourceComponent: switch(root.daysToShow) {
+                             case 1:
+                                 return dayModel;
+                             case 3:
+                                 return threeDayModel;
+                             case 7:
+                             default:
+                                 return weekModel;
+                             }
+        }
+
+        model: modelLoader.item
 
         property real scrollPosition
         onMovementStarted: {
@@ -160,10 +196,8 @@ Kirigami.Page {
         }
 
         property date dateToUse
-        property int startIndex: root.model.rowCount() / 2;
-        Component.onCompleted: {
-            currentIndex = startIndex;
-        }
+        property int startIndex: count / 2;
+        currentIndex: startIndex
         onCurrentIndexChanged: if(currentItem) {
             root.startDate = currentItem.startDate;
             root.month = currentItem.month;
@@ -226,15 +260,7 @@ Kirigami.Page {
                     Repeater {
                         id: dayHeadings
 
-                        model: switch(root.daysToShow) {
-                            case 1:
-                                return dayViewModel.rowCount();
-                            case 3:
-                                return threeDayViewModel.rowCount();
-                            case 7:
-                            default:
-                                return weekViewModel.rowCount();
-                        }
+                        model: root.daysToShow
                         delegate: Rectangle {
                             width: root.dayWidth
                             implicitHeight: dayHeading.implicitHeight
@@ -394,31 +420,24 @@ Kirigami.Page {
                         anchors.fill: parent
                         anchors.leftMargin: root.hourLabelWidth
                         asynchronous: !viewLoader.isCurrentItem
-                        active: switch(root.daysToShow) {
-                            case 1:
-                                return dayViewDayGridViewModel.incidenceCount > 0;
-                            case 3:
-                                return threeDayViewDayGridViewModel.incidenceCount > 0;
-                            case 7:
-                            default:
-                                return weekViewDayGridViewModel.incidenceCount > 0;
-                        }
+
                         sourceComponent: Item {
                             id: allDayViewItem
                             implicitHeight: allDayHeader.actualHeight
                             clip: true
 
                             Repeater {
-                                // TODO: Clean this up
-                                model: switch(root.daysToShow) {
-                                case 1:
-                                    return dayViewDayGridViewModel;
-                                case 3:
-                                    return threeDayViewDayGridViewModel;
-                                case 7:
-                                default:
-                                    return weekViewDayGridViewModel;
-                                } // from root.model
+                                model: Kalendar.MultiDayIncidenceModel {
+                                    periodLength: root.daysToShow
+                                    filters: Kalendar.MultiDayIncidenceModel.AllDayOnly | Kalendar.MultiDayIncidenceModel.MultiDayOnly
+                                    model: Kalendar.IncidenceOccurrenceModel {
+                                        start: viewLoader.startDate
+                                        length: root.daysToShow
+                                        calendar: Kalendar.CalendarManager.calendar
+                                        filter: root.filter
+                                    }
+                                }
+
                                 Layout.topMargin: Kirigami.Units.largeSpacing
                                 //One row => one week
                                 Item {
@@ -592,17 +611,8 @@ Kirigami.Page {
                     z: -2
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-                    readonly property int periodLength: switch(root.daysToShow) {
-                        case 1:
-                            return dayViewModel.periodLength;
-                        case 3:
-                            return threeDayViewModel.periodLength;
-                        case 7:
-                        default:
-                            return weekViewModel.periodLength;
-                    }
-                    readonly property real periodsPerHour: 60 / periodLength
-                    readonly property real daySections: (60 * 24) / periodLength
+                    readonly property real periodsPerHour: 60 / root.periodLength
+                    readonly property real daySections: (60 * 24) / root.periodLength
                     readonly property real dayHeight: (daySections * root.periodHeight) + (root.gridLineWidth * 23)
                     readonly property real hourHeight: periodsPerHour * root.periodHeight
                     readonly property real minuteHeight: hourHeight / 60
@@ -758,15 +768,16 @@ Kirigami.Page {
 
                                 Repeater {
                                     id: dayColumnRepeater
-                                    model: switch(root.daysToShow) {
-                                        case 1:
-                                            return dayViewModel;
-                                        case 3:
-                                            return threeDayViewModel;
-                                        case 7:
-                                        default:
-                                            return weekViewModel;
-                                    } // From root.model
+                                    model: Kalendar.HourlyIncidenceModel {
+                                       periodLength: root.periodLength
+                                       filters: Kalendar.MultiDayIncidenceModel.AllDayOnly | Kalendar.MultiDayIncidenceModel.MultiDayOnly
+                                       model: Kalendar.IncidenceOccurrenceModel {
+                                           start: viewLoader.startDate
+                                           length: root.daysToShow
+                                           calendar: Kalendar.CalendarManager.calendar
+                                           filter: root.filter
+                                       }
+                                   }
 
                                     delegate: Item {
                                         id: dayColumn

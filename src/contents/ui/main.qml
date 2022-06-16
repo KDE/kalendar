@@ -163,35 +163,30 @@ Kirigami.ApplicationWindow {
         target: KalendarApplication
         function onOpenMonthView() {
             if(pageStack.currentItem.objectName !== "monthView" || root.ignoreCurrentPage) {
-                monthScaleModelLoader.active = true;
                 KalendarUiUtils.switchView(monthViewComponent);
             }
         }
 
         function onOpenWeekView() {
             if(pageStack.currentItem.objectName !== "weekView" || root.ignoreCurrentPage) {
-                weekScaleModelLoader.active = true;
                 KalendarUiUtils.switchView(hourlyViewComponent);
             }
         }
 
         function onOpenThreeDayView() {
             if(pageStack.currentItem.objectName !== "threeDayView" || root.ignoreCurrentPage) {
-                threeDayScaleModelLoader.active = true;
                 KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 3 });
             }
         }
 
         function onOpenDayView() {
             if(pageStack.currentItem.objectName !== "dayView" || root.ignoreCurrentPage) {
-                dayScaleModelLoader.active = true;
                 KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 1 });
             }
         }
 
         function onOpenScheduleView() {
             if(pageStack.currentItem.objectName !== "scheduleView" || root.ignoreCurrentPage) {
-                monthScaleModelLoader.active = true;
                 KalendarUiUtils.switchView(scheduleViewComponent);
             }
         }
@@ -959,51 +954,6 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    property alias monthScaleModelLoaderItem: monthScaleModelLoader
-    Loader {
-        id: monthScaleModelLoader
-        active: Config.lastOpenedView === Config.MonthView || Config.lastOpenedView === Config.ScheduleView
-        sourceComponent: InfiniteCalendarViewModel {
-            scale: InfiniteCalendarViewModel.MonthScale
-            calendar: CalendarManager.calendar
-            filter: root.filter
-        }
-    }
-
-    property alias weekScaleModelLoaderItem: weekScaleModelLoader
-    Loader {
-        id: weekScaleModelLoader
-        active: Config.lastOpenedView === Config.WeekView
-        sourceComponent: InfiniteCalendarViewModel {
-            maxLiveModels: 20
-            scale: InfiniteCalendarViewModel.WeekScale
-            calendar: CalendarManager.calendar
-            filter: root.filter
-        }
-    }
-
-    property alias threeDayScaleModelLoaderItem: threeDayScaleModelLoader
-    Loader {
-        id: threeDayScaleModelLoader
-        active: Config.lastOpenedView === Config.ThreeDayView
-        sourceComponent: InfiniteCalendarViewModel {
-            scale: InfiniteCalendarViewModel.ThreeDayScale
-            calendar: CalendarManager.calendar
-            filter: root.filter
-        }
-    }
-
-    property alias dayScaleModelLoaderItem: dayScaleModelLoader
-    Loader {
-        id: dayScaleModelLoader
-        active: Config.lastOpenedView === Config.DayView
-        sourceComponent: InfiniteCalendarViewModel {
-            scale: InfiniteCalendarViewModel.DayScale
-            calendar: CalendarManager.calendar
-            filter: root.filter
-        }
-    }
-
     Component {
         id: monthViewComponent
 
@@ -1017,7 +967,7 @@ Kirigami.ApplicationWindow {
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-            model: monthScaleModelLoader.item
+            filter: root.filter
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
@@ -1039,7 +989,7 @@ Kirigami.ApplicationWindow {
             }
             selectedDate: root.selectedDate
             openOccurrence: root.openOccurrence
-            model: monthScaleModelLoader.item
+            filter: root.filter
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
@@ -1101,16 +1051,7 @@ Kirigami.ApplicationWindow {
             selectedDate: root.selectedDate
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-            model: switch(daysToShow) {
-                case 1:
-                    return dayScaleModelLoader.item;
-                case 3:
-                    return threeDayScaleModelLoader.item;
-                case 7:
-                default:
-                    return weekScaleModelLoader.item;
-            }
-            onModelChanged: setToDate(root.selectedDate, true)
+            filter: root.filter
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)

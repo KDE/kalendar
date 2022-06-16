@@ -15,7 +15,7 @@ Kirigami.Page {
     id: monthPage
 
     property var openOccurrence
-    property var model
+    property var filter: ({})
     property date startDate
     property date currentDate
     property date firstDayOfMonth
@@ -96,16 +96,19 @@ Kirigami.Page {
         focus: true
         interactive: Kirigami.Settings.tabletMode
 
+        pathItemCount: 3
         path: Path {
-            startX: - pathView.width * pathView.count / 2 + pathView.width / 2
+            startX: - pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
             startY: pathView.height / 2
             PathLine {
-                x: pathView.width * pathView.count / 2 + pathView.width / 2
+                x: pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
                 y: pathView.height / 2
             }
         }
 
-        model: monthPage.model
+        model: Kalendar.InfiniteCalendarViewModel {
+            scale: Kalendar.InfiniteCalendarViewModel.MonthScale
+        }
 
         property int startIndex
         Component.onCompleted: {
@@ -145,9 +148,9 @@ Kirigami.Page {
                 objectName: "monthView"
                 width: pathView.width
                 height: pathView.height
-                model: monthViewModel // from monthPage model
                 isCurrentView: viewLoader.isCurrentItem
                 dragDropEnabled: monthPage.dragDropEnabled
+                filter: root.filter
 
                 startDate: viewLoader.startDate
                 currentDate: monthPage.currentDate

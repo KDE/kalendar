@@ -51,7 +51,7 @@ Kirigami.Page {
     }
 
     property var openOccurrence
-    property var model
+    property var filter: ({})
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
     property int day: selectedDate.getDate()
@@ -160,16 +160,19 @@ Kirigami.Page {
         focus: true
         interactive: Kirigami.Settings.tabletMode
 
+        pathItemCount: 3
         path: Path {
-            startX: - pathView.width * pathView.count / 2 + pathView.width / 2
+            startX: - pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
             startY: pathView.height / 2
             PathLine {
-                x: pathView.width * pathView.count / 2 + pathView.width / 2
+                x: pathView.width * pathView.pathItemCount / 2 + pathView.width / 2
                 y: pathView.height / 2
             }
         }
 
-        model: root.model
+        model: Kalendar.InfiniteCalendarViewModel {
+            scale: Kalendar.InfiniteCalendarViewModel.MonthScale
+        }
 
         property date dateToUse
         property int startIndex
@@ -195,6 +198,7 @@ Kirigami.Page {
 
             property date startDate: model.startDate
             property date firstDayOfMonth: model.firstDay
+            property int daysInMonth: new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth(), 0).getDate()
             property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
             property int year: model.selectedYear
 
@@ -231,7 +235,15 @@ Kirigami.Page {
                         if(root.initialMonth) root.moveToSelected();
                     }
 
-                    model: scheduleViewModel
+                    model: Kalendar.MultiDayIncidenceModel {
+                       periodLength: 1
+                       model: Kalendar.IncidenceOccurrenceModel {
+                           start: viewLoader.firstDayOfMonth
+                           length: viewLoader.daysInMonth
+                           calendar: Kalendar.CalendarManager.calendar
+                           filter: root.filter
+                       }
+                   }
 
                     delegate: DayMouseArea {
                         id: dayMouseArea
