@@ -4,6 +4,10 @@
 
 #pragma once
 
+#include "bodypartformatterbasefactory.h"
+#include <memory>
+#include <optional>
+
 namespace MimeTreeParser
 {
 class BodyPartFormatterBaseFactory;
@@ -17,10 +21,10 @@ public:
 
     void setup();
     void messageviewer_create_builtin_bodypart_formatters(); // defined in bodypartformatter.cpp
-    void insert(const char *type, const char *subtype, Interface::BodyPartFormatter *formatter);
+    void insert(const char *type, const char *subtype, std::unique_ptr<Interface::BodyPartFormatter> formatter);
 
     BodyPartFormatterBaseFactory *q;
-    TypeRegistry *all;
+    std::optional<TypeRegistry> all;
     ObjectTreeParser *mOtp;
 };
 

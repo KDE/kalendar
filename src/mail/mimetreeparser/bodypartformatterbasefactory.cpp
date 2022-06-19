@@ -13,27 +13,22 @@ using namespace MimeTreeParser;
 
 BodyPartFormatterBaseFactoryPrivate::BodyPartFormatterBaseFactoryPrivate(BodyPartFormatterBaseFactory *factory)
     : q(factory)
-    , all(nullptr)
 {
 }
 
 BodyPartFormatterBaseFactoryPrivate::~BodyPartFormatterBaseFactoryPrivate()
 {
-    if (all) {
-        delete all;
-        all = nullptr;
-    }
 }
 
 void BodyPartFormatterBaseFactoryPrivate::setup()
 {
     if (!all) {
-        all = new TypeRegistry();
+        all = std::make_optional<TypeRegistry>();
         messageviewer_create_builtin_bodypart_formatters();
     }
 }
 
-void BodyPartFormatterBaseFactoryPrivate::insert(const char *type, const char *subtype, Interface::BodyPartFormatter *formatter)
+void BodyPartFormatterBaseFactoryPrivate::insert(const char *type, const char *subtype, std::unique_ptr<Interface::BodyPartFormatter> formatter)
 {
     if (!type || !*type || !subtype || !*subtype || !formatter || !all) {
         return;
@@ -47,22 +42,19 @@ void BodyPartFormatterBaseFactoryPrivate::insert(const char *type, const char *s
 
     SubtypeRegistry &subtype_reg = type_it->second;
 
-    subtype_reg.insert(std::make_pair(subtype, formatter));
+    subtype_reg.insert(std::make_pair(subtype, std::move(formatter)));
 }
 
 BodyPartFormatterBaseFactory::BodyPartFormatterBaseFactory()
-    : d(new BodyPartFormatterBaseFactoryPrivate(this))
+    : d(std::make_unique<BodyPartFormatterBaseFactoryPrivate>(this))
 {
 }
 
-BodyPartFormatterBaseFactory::~BodyPartFormatterBaseFactory()
-{
-    delete d;
-}
+BodyPartFormatterBaseFactory::~BodyPartFormatterBaseFactory() = default;
 
-void BodyPartFormatterBaseFactory::insert(const char *type, const char *subtype, Interface::BodyPartFormatter *formatter)
+void BodyPartFormatterBaseFactory::insert(const char *type, const char *subtype, std::unique_ptr<Interface::BodyPartFormatter> formatter)
 {
-    d->insert(type, subtype, formatter);
+    d->insert(type, subtype, std::move(formatter));
 }
 
 const SubtypeRegistry &BodyPartFormatterBaseFactory::subtypeRegistry(const char *type) const
@@ -92,49 +84,4 @@ const SubtypeRegistry &BodyPartFormatterBaseFactory::subtypeRegistry(const char 
         return emptyRegistry;
     }
     return subtype_reg;
-}
-
-SubtypeRegistry::const_iterator BodyPartFormatterBaseFactory::createForIterator(const char *type, const char *subtype) const
-{
-    if (!type || !*type) {
-        type = "*"; // krazy:exclude=doublequote_chars
-    }
-    if (!subtype || !*subtype) {
-        subtype = "*"; // krazy:exclude=doublequote_chars
-    }
-
-    d->setup();
-    assert(d->all);
-
-    if (d->all->empty()) {
-        return SubtypeRegistry::const_iterator();
-    }
-
-    TypeRegistry::const_iterator type_it = d->all->find(type);
-    if (type_it == d->all->end()) {
-        type_it = d->all->find("*");
-    }
-    if (type_it == d->all->end()) {
-        return SubtypeRegistry::const_iterator();
-    }
-
-    const SubtypeRegistry &subtype_reg = type_it->second;
-    if (subtype_reg.empty()) {
-        return SubtypeRegistry::const_iterator();
-    }
-
-    SubtypeRegistry::const_iterator subtype_it = subtype_reg.find(subtype);
-    qCWarning(MIMETREEPARSER_LOG) << type << subtype << subtype_reg.size();
-    if (subtype_it == subtype_reg.end()) {
-        subtype_it = subtype_reg.find("*");
-    }
-    if (subtype_it == subtype_reg.end()) {
-        return SubtypeRegistry::const_iterator();
-    }
-
-    if (!(*subtype_it).second) {
-        qCWarning(MIMETREEPARSER_LOG) << "BodyPartFormatterBaseFactory: a null bodypart formatter sneaked in for \"" << type << "/" << subtype << "\"!";
-    }
-
-    return subtype_it;
 }

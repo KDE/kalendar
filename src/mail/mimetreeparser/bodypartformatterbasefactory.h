@@ -6,6 +6,7 @@
 
 #include <QByteArray>
 #include <map>
+#include <memory>
 
 namespace MimeTreeParser
 {
@@ -22,7 +23,7 @@ struct ltstr {
     }
 };
 
-typedef std::multimap<const char *, const Interface::BodyPartFormatter *, ltstr> SubtypeRegistry;
+typedef std::multimap<const char *, std::unique_ptr<Interface::BodyPartFormatter>, ltstr> SubtypeRegistry;
 typedef std::map<const char *, MimeTreeParser::SubtypeRegistry, MimeTreeParser::ltstr> TypeRegistry;
 
 class BodyPartFormatterBaseFactoryPrivate;
@@ -31,18 +32,17 @@ class BodyPartFormatterBaseFactory
 {
 public:
     BodyPartFormatterBaseFactory();
-    virtual ~BodyPartFormatterBaseFactory();
+    ~BodyPartFormatterBaseFactory();
 
-    SubtypeRegistry::const_iterator createForIterator(const char *type, const char *subtype) const;
     const SubtypeRegistry &subtypeRegistry(const char *type) const;
 
 protected:
-    void insert(const char *type, const char *subtype, Interface::BodyPartFormatter *formatter);
+    void insert(const char *type, const char *subtype, std::unique_ptr<Interface::BodyPartFormatter> formatter);
 
 private:
     static BodyPartFormatterBaseFactory *mSelf;
 
-    BodyPartFormatterBaseFactoryPrivate *d;
+    std::unique_ptr<BodyPartFormatterBaseFactoryPrivate> d;
     friend class BodyPartFormatterBaseFactoryPrivate;
 
 private:

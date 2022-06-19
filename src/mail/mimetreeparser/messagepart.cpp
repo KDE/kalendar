@@ -682,8 +682,8 @@ static void sigStatusToMetaData(PartMetaData &mMetaData, const Signature &signat
     }
     for (const auto &userId : key.userIds) {
         QString email = QString::fromUtf8(userId.email);
-        // ### work around gpgme 0.3.QString text() const Q_DECL_OVERRIDE;x / cryptplug bug where the
-        // ### email addresses are specified as angle-addr, not addr-spec:
+        // Work around cryptplug bug where email addresses are specified as angle-addr ( <person@example.org> ),
+        // not addr-spec ( person@example.org ):
         if (email.startsWith(QLatin1Char('<')) && email.endsWith(QLatin1Char('>'))) {
             email = email.mid(1, email.length() - 2);
         }

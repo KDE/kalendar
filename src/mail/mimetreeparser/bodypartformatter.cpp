@@ -12,6 +12,8 @@ namespace Interface
 
 MessagePart::Ptr BodyPartFormatter::process(ObjectTreeParser *otp, KMime::Content *node) const
 {
+    Q_UNUSED(otp)
+    Q_UNUSED(node)
     return {};
 }
 

@@ -368,10 +368,10 @@ MessagePartPtr ObjectTreeParser::parsedPart() const
 QVector<MessagePartPtr> ObjectTreeParser::processType(KMime::Content *node, const QByteArray &mediaType, const QByteArray &subType)
 {
     static MimeTreeParser::BodyPartFormatterBaseFactory factory;
-    const auto sub = factory.subtypeRegistry(mediaType.constData());
-    auto range = sub.equal_range(subType.constData());
+    const auto &sub = factory.subtypeRegistry(mediaType.constData());
+    const auto range = sub.equal_range(subType.constData());
     for (auto it = range.first; it != range.second; ++it) {
-        const auto formatter = (*it).second;
+        const auto formatter = (*it).second.get();
         if (!formatter) {
             continue;
         }
