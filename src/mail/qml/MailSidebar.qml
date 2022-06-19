@@ -20,7 +20,7 @@ QQC2.ScrollView {
     clip: true
 
     contentItem: ListView {
-        id: calendarList
+        id: mailList
 
         model: KDescendantsProxyModel {
             id: foldersModel
@@ -53,7 +53,7 @@ QQC2.ScrollView {
                         source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
                     }
 
-                    onClicked: calendarList.model.toggleChildren(index)
+                    onClicked: mailList.model.toggleChildren(index)
                 }
             }
 

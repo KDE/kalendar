@@ -21,10 +21,10 @@ import org.kde.kitemmodels 1.0 as KItemModels
             QQC2.Menu {
                 title: i18nc('@action:menu', 'Mark Message')
                 QQC2.MenuItem {
-                    text: i18n('Mark message as Read')
+                    text: i18n('Mark Message as Read')
                 }
                 QQC2.MenuItem {
-                    text: i18n('Mark message as Unread')
+                    text: i18n('Mark Message as Unread')
                 }
 
                 QQC2.MenuSeparator {}
@@ -36,7 +36,7 @@ import org.kde.kitemmodels 1.0 as KItemModels
 
             QQC2.MenuItem {
                 icon.name: 'delete'
-                text: i18n('Move to trash')
+                text: i18n('Move to Trash')
             }
 
             QQC2.MenuItem {
@@ -51,7 +51,7 @@ import org.kde.kitemmodels 1.0 as KItemModels
 
             QQC2.MenuItem {
                 icon.name: 'edit-copy'
-                text: i18n('Add followup reminder')
+                text: i18n('Add Followup Reminder')
             }
         }
     }

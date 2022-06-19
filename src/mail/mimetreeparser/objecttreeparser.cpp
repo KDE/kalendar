@@ -484,8 +484,8 @@ const QTextCodec *ObjectTreeParser::codecFor(KMime::Content *node) const
 
     QByteArray charset = node->contentType()->charset().toLower();
 
-    // utf-8 is a superset of us-ascii, so we don't loose anything, if we it insead
-    // utf-8 is nowadays that widely, that it is a good guess to use it to fix issus with broken clients.
+    // utf-8 is a superset of us-ascii, so we don't lose anything if we use it instead
+    // utf-8 is used so widely nowadays that it is a good idea to use it to fix issues with broken clients.
     if (charset == "us-ascii") {
         charset = "utf-8";
     }

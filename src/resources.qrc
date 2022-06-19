@@ -16,6 +16,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="IncidenceDelegateBackground.qml">contents/ui/Delegates/IncidenceDelegateBackground.qml</file>
     <file alias="DayGridViewIncidenceDelegate.qml">contents/ui/Delegates/DayGridViewIncidenceDelegate.qml</file>
     <file alias="ViewTitleDelegate.qml">contents/ui/Delegates/ViewTitleDelegate.qml</file>
+    <file alias="RelatedIncidenceDelegate.qml">contents/ui/Delegates/RelatedIncidenceDelegate.qml</file>
 
     <file alias="DayGridView.qml">contents/ui/MainViews/DayGridView.qml</file>
     <file alias="MonthView.qml">contents/ui/MainViews/MonthView.qml</file>
@@ -24,6 +25,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="TodoView.qml">contents/ui/MainViews/TodoView.qml</file>
     <file alias="HourlyView.qml">contents/ui/MainViews/HourlyView.qml</file>
     <file alias="LazyContactView.qml">contents/ui/MainViews/LazyContactView.qml</file>
+    <file alias="LazyMailView.qml">contents/ui/MainViews/LazyMailView.qml</file>
 
     <file alias="dateutils.js">contents/ui/KalendarUtils/dateutils.js</file>
     <file alias="labelutils.js">contents/ui/KalendarUtils/labelutils.js</file>
@@ -51,6 +53,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="Tag.qml">contents/ui/Controls/Tag.qml</file>
     <file alias="ResizerSeparator.qml">contents/ui/Controls/ResizerSeparator.qml</file>
     <file alias="CalendarItemTapHandler.qml">contents/ui/Controls/CalendarItemTapHandler.qml</file>
+    <file alias="TodoCheckBox.qml">contents/ui/Controls/TodoCheckBox.qml</file>
 
     <file alias="LocationMap.qml">contents/ui/Location/LocationMap.qml</file>
 

@@ -37,6 +37,10 @@ struct Error {
     {
         return gpgme_err_code(error);
     }
+    const char *errorMessage() const
+    {
+        return gpgme_strerror(error);
+    }
     operator bool() const
     {
         return error != GPG_ERR_NO_ERROR;

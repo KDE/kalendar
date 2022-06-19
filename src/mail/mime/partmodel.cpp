@@ -12,6 +12,7 @@
 #include <QRegularExpression>
 #include <QTextDocument>
 
+// We return a pair containing the trimmed string, as well as a boolean indicating whether the string was trimmed or not
 std::pair<QString, bool> PartModel::trim(const QString &text)
 {
     // The delimiters have <p>.? prefixed including the .? because sometimes we get a byte order mark <feff> (seen with user-agent:
@@ -117,7 +118,8 @@ public:
         }
 
         auto preprocessPlaintext = [&](const QString &text) {
-            // We alwas do richtext (so we get highlighted links and stuff). NOTE: this inserts non-breaking spaces instead of regular spaces.
+            // We always do rich text (so we get highlighted links and stuff). 
+            // NOTE: this inserts non-breaking spaces instead of regular spaces.
             const auto html = Qt::convertFromPlainText(text);
             if (trimMail) {
                 const auto result = PartModel::trim(html);
@@ -155,17 +157,17 @@ public:
         isTrimmed = false;
 
         const auto parts = mParser->collectContentParts();
-        for (auto p : parts) {
-            checkPart(p);
-            if (auto e = p.dynamicCast<MimeTreeParser::EncapsulatedRfc822MessagePart>()) {
-                findEncapsulated(e);
+        for (auto part : parts) {
+            checkPart(part);
+            if (auto encapsulatedPart = part.dynamicCast<MimeTreeParser::EncapsulatedRfc822MessagePart>()) {
+                findEncapsulated(encapsulatedPart);
             }
         }
-        for (auto p : parts) {
-            if (mMimeTypeCache[p.data()] == "text/calendar") {
-                mParts.prepend(p);
+        for (auto part : parts) {
+            if (mMimeTypeCache[part.data()] == "text/calendar") {
+                mParts.prepend(part);
             } else {
-                mParts.append(p);
+                mParts.append(part);
             }
         }
     }
@@ -261,8 +263,11 @@ QModelIndex PartModel::index(int row, int column, const QModelIndex &parent) con
         return QModelIndex();
     }
     if (parent.isValid()) {
-        if (auto e = dynamic_cast<MimeTreeParser::EncapsulatedRfc822MessagePart *>(static_cast<MimeTreeParser::MessagePart *>(parent.internalPointer()))) {
-            const auto parts = d->mEncapsulatedParts[e];
+        const auto part = static_cast<MimeTreeParser::MessagePart *>(parent.internalPointer());
+        auto encapsulatedPart = dynamic_cast<MimeTreeParser::EncapsulatedRfc822MessagePart *>(part);
+
+        if (encapsulatedPart) {
+            const auto parts = d->mEncapsulatedParts[encapsulatedPart];
             if (row < parts.size()) {
                 return createIndex(row, column, parts.at(row).data());
             }
@@ -282,8 +287,8 @@ SignatureInfo *encryptionInfo(MimeTreeParser::MessagePart *messagePart)
     if (encryptions.size() > 1) {
         qWarning() << "Can't deal with more than one encryption";
     }
-    for (const auto &p : encryptions) {
-        signatureInfo->keyId = p->partMetaData()->keyId;
+    for (const auto &encryptionPart : encryptions) {
+        signatureInfo->keyId = encryptionPart->partMetaData()->keyId;
     }
     return signatureInfo;
 };
@@ -291,22 +296,22 @@ SignatureInfo *encryptionInfo(MimeTreeParser::MessagePart *messagePart)
 SignatureInfo *signatureInfo(MimeTreeParser::MessagePart *messagePart)
 {
     auto signatureInfo = new SignatureInfo;
-    const auto signatureParts = messagePart->signatures();
-    if (signatureParts.size() > 1) {
+    const auto signatures = messagePart->signatures();
+    if (signatures.size() > 1) {
         qWarning() << "Can't deal with more than one signature";
     }
-    for (const auto &p : signatureParts) {
-        signatureInfo->keyId = p->partMetaData()->keyId;
-        signatureInfo->keyMissing = p->partMetaData()->keyMissing;
-        signatureInfo->keyExpired = p->partMetaData()->keyExpired;
-        signatureInfo->keyRevoked = p->partMetaData()->keyRevoked;
-        signatureInfo->sigExpired = p->partMetaData()->sigExpired;
-        signatureInfo->crlMissing = p->partMetaData()->crlMissing;
-        signatureInfo->crlTooOld = p->partMetaData()->crlTooOld;
-        signatureInfo->signer = p->partMetaData()->signer;
-        signatureInfo->signerMailAddresses = p->partMetaData()->signerMailAddresses;
-        signatureInfo->signatureIsGood = p->partMetaData()->isGoodSignature;
-        signatureInfo->keyIsTrusted = p->partMetaData()->keyIsTrusted;
+    for (const auto &signaturePart : signatures) {
+        signatureInfo->keyId = signaturePart->partMetaData()->keyId;
+        signatureInfo->keyMissing = signaturePart->partMetaData()->keyMissing;
+        signatureInfo->keyExpired = signaturePart->partMetaData()->keyExpired;
+        signatureInfo->keyRevoked = signaturePart->partMetaData()->keyRevoked;
+        signatureInfo->sigExpired = signaturePart->partMetaData()->sigExpired;
+        signatureInfo->crlMissing = signaturePart->partMetaData()->crlMissing;
+        signatureInfo->crlTooOld = signaturePart->partMetaData()->crlTooOld;
+        signatureInfo->signer = signaturePart->partMetaData()->signer;
+        signatureInfo->signerMailAddresses = signaturePart->partMetaData()->signerMailAddresses;
+        signatureInfo->signatureIsGood = signaturePart->partMetaData()->isGoodSignature;
+        signatureInfo->keyIsTrusted = signaturePart->partMetaData()->keyIsTrusted;
     }
     return signatureInfo;
 }
@@ -482,18 +487,18 @@ QVariant PartModel::data(const QModelIndex &index, int role) const
 QModelIndex PartModel::parent(const QModelIndex &index) const
 {
     if (index.isValid()) {
-        if (auto e = static_cast<MimeTreeParser::MessagePart *>(index.internalPointer())) {
-            for (const auto &p : d->mParts) {
-                if (p.data() == e) {
+        if (auto indexPart = static_cast<MimeTreeParser::MessagePart *>(index.internalPointer())) {
+            for (const auto &part : d->mParts) {
+                if (part.data() == indexPart) {
                     return QModelIndex();
                 }
             }
-            const auto parentPart = d->mParents[e];
+            const auto parentPart = d->mParents[indexPart];
             Q_ASSERT(parentPart);
             int row = 0;
             const auto parts = d->mEncapsulatedParts[parentPart];
-            for (const auto &p : parts) {
-                if (p.data() == e) {
+            for (const auto &part : parts) {
+                if (part.data() == indexPart) {
                     break;
                 }
                 row++;
@@ -508,8 +513,11 @@ QModelIndex PartModel::parent(const QModelIndex &index) const
 int PartModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
-        if (auto e = dynamic_cast<MimeTreeParser::EncapsulatedRfc822MessagePart *>(static_cast<MimeTreeParser::MessagePart *>(parent.internalPointer()))) {
-            const auto parts = d->mEncapsulatedParts[e];
+        const auto part = static_cast<MimeTreeParser::MessagePart *>(parent.internalPointer());
+        auto encapsulatedPart = dynamic_cast<MimeTreeParser::EncapsulatedRfc822MessagePart *>(part);
+
+        if (encapsulatedPart) {
+            const auto parts = d->mEncapsulatedParts[encapsulatedPart];
             return parts.size();
         }
         return 0;

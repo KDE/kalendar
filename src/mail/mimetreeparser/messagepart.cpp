@@ -9,6 +9,7 @@
 
 #include "utils.h"
 
+#include <KLocalizedString>
 #include <KMime/Content>
 
 #include <QTextCodec>
@@ -614,7 +615,7 @@ SignedMessagePart::SignedMessagePart(ObjectTreeParser *otp,
 {
     mMetaData.isSigned = true;
     mMetaData.isGoodSignature = false;
-    mMetaData.status = tr("Wrong Crypto Plug-In.");
+    mMetaData.status = i18n("Wrong Crypto Plug-In.");
 }
 
 SignedMessagePart::~SignedMessagePart()
@@ -714,7 +715,7 @@ void SignedMessagePart::startVerification()
     }
 
     mMetaData.isSigned = false;
-    mMetaData.status = tr("Wrong Crypto Plug-In.");
+    mMetaData.status = i18n("Wrong Crypto Plug-In.");
     mMetaData.isEncrypted = false;
     mMetaData.isDecryptable = false;
 
@@ -788,7 +789,7 @@ EncryptedMessagePart::EncryptedMessagePart(ObjectTreeParser *otp,
     mMetaData.isGoodSignature = false;
     mMetaData.isEncrypted = false;
     mMetaData.isDecryptable = false;
-    mMetaData.status = tr("Wrong Crypto Plug-In.");
+    mMetaData.status = i18n("Wrong Crypto Plug-In.");
 }
 
 void EncryptedMessagePart::setIsEncrypted(bool encrypted)
@@ -870,14 +871,13 @@ bool EncryptedMessagePart::decrypt(KMime::Content &data)
 
         if (noSecretKeyAvilable) {
             mError = NoKeyError;
-            mMetaData.errorText = tr("Could not decrypt the data: no key found for recipients.");
+            mMetaData.errorText = i18n("Could not decrypt the data: no key found for recipients.");
         } else if (passphraseError) {
             mError = PassphraseError;
-            // mMetaData.errorText = QString::fromLocal8Bit(decryptResult.error().asString());
+            mMetaData.errorText = QString::fromLocal8Bit(decryptResult.error.errorMessage());
         } else {
             mError = UnknownError;
-            mMetaData.errorText = tr("Could not decrypt the data.");
-            //                         + tr("Error: %1").arg(QString::fromLocal8Bit(decryptResult.error().asString()));
+            mMetaData.errorText = i18n("Could not decrypt the data. Error: %1", QString::fromLocal8Bit(decryptResult.error.errorMessage()));
         }
         setText(QString::fromUtf8(mDecryptedData.constData()));
         return false;

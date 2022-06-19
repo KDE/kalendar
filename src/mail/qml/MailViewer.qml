@@ -20,16 +20,12 @@ QQC2.Page {
     property string to
     property date dateTime
 
-    Layout.fillWidth: true
     header: QQC2.ToolBar {
-        topInset: 1
-        leftInset: 1
-        rightInset: 1
-        bottomInset: 1
-        leftPadding: Kirigami.Units.largeSpacing
-        rightPadding: Kirigami.Units.largeSpacing
-        topPadding: Kirigami.Units.largeSpacing
-        bottomPadding: Kirigami.Units.largeSpacing
+        padding: Kirigami.Units.largeSpacing
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+
         background: Item {
             implicitHeight: 40
             Kirigami.Separator {
@@ -41,7 +37,9 @@ QQC2.Page {
                 }
             }
         }
-        contentItem: GridLayout {
+
+        GridLayout {
+            anchors.fill: parent
             columns: 3
             QQC2.Label {
                 text: i18n('From:')
@@ -80,20 +78,19 @@ QQC2.Page {
             }
         }
     }
-    contentItem: MailPartView {
+
+    MailPartView {
         id: mailPartView
+        anchors.fill: parent
         item: root.item
     }
 
     footer: QQC2.ToolBar {
-        topInset: 1
-        leftInset: 1
-        rightInset: 1
-        bottomInset: 1
-        leftPadding: Kirigami.Units.largeSpacing
-        rightPadding: Kirigami.Units.largeSpacing
-        topPadding: Kirigami.Units.largeSpacing
-        bottomPadding: Kirigami.Units.largeSpacing
+        padding: Kirigami.Units.largeSpacing
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+
         background: Item {
             implicitHeight: 40
             Kirigami.Separator {
@@ -106,7 +103,8 @@ QQC2.Page {
             }
         }
 
-        contentItem: Flow {
+        Flow {
+            anchors.fill: parent
             spacing: Kirigami.Units.smallSpacing
             Repeater {
                 model: mailPartView.attachmentModel

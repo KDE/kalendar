@@ -21,6 +21,8 @@ Kirigami.ScrollablePage {
     ColumnLayout {
         // TODO use repeater to see the full conversation
         MailViewer {
+            Layout.fillWidth: true
+
             item: root.item
             subject: props.title
             from: props.from
