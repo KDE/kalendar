@@ -4,6 +4,7 @@
 [Desktop Entry]
 Name=Contact
 Name[ar]=المراسَل
+Name[az]=Əlaqə
 Name[ca]=Contact
 Name[ca@valencia]=Contact
 Name[es]=Contacto
@@ -19,6 +20,7 @@ Name[uk]=Контакт
 Name[x-test]=xxContactxx
 Comment=Contact list
 Comment[ar]=قائمة المراسلين
+Comment[az]=Əlaqələr siyahısı
 Comment[ca]=Llista de contactes
 Comment[ca@valencia]=Llista de contactes
 Comment[es]=Lista de contactos
