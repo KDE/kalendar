@@ -32,7 +32,7 @@ public:
         StartOffsetRole,
         EndOffsetRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit RemindersModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~RemindersModel() override = default;

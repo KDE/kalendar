@@ -18,7 +18,7 @@ public:
         DisplayNameRole = Qt::UserRole + 1,
         ValueRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit AttendeeStatusModel(QObject *parent = nullptr);
     ~AttendeeStatusModel() override = default;
@@ -53,7 +53,7 @@ public:
         StatusRole,
         UidRole
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit AttendeesModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~AttendeesModel() override = default;

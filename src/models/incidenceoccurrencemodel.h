@@ -74,7 +74,7 @@ public:
         IncidenceOccurrence,
         LastRole
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
     explicit IncidenceOccurrenceModel(QObject *parent = nullptr);
     ~IncidenceOccurrenceModel() override = default;
 

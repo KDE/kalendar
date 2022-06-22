@@ -25,7 +25,7 @@ class InfiniteCalendarViewModel : public QAbstractListModel
 public:
     // The decade scale is designed to be used in a 4x3 grid, so shows 12 years at a time
     enum Scale { DayScale, ThreeDayScale, WeekScale, MonthScale, YearScale, DecadeScale };
-    Q_ENUM(Scale);
+    Q_ENUM(Scale)
 
     enum Roles {
         StartDateRole = Qt::UserRole + 1,
@@ -33,7 +33,7 @@ public:
         SelectedMonthRole,
         SelectedYearRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit InfiniteCalendarViewModel(QObject *parent = nullptr);
     ~InfiniteCalendarViewModel() override = default;

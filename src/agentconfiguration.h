@@ -22,7 +22,7 @@ public:
         Broken = Akonadi::AgentInstance::Broken,
         NotConfigured = Akonadi::AgentInstance::NotConfigured,
     };
-    Q_ENUM(AgentStatuses);
+    Q_ENUM(AgentStatuses)
 
     explicit AgentConfiguration(QObject *parent = nullptr);
     ~AgentConfiguration() override;

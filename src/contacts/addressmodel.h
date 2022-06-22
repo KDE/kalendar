@@ -28,7 +28,7 @@ public:
         TypeRole,
         TypeLabelRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
     AddressModel(QObject *parent = nullptr);
 
     void setAddresses(const KContacts::Address::List &addresses);

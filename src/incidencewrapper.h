@@ -88,7 +88,7 @@ public:
         Monthly,
         Yearly,
     };
-    Q_ENUM(RecurrenceIntervals);
+    Q_ENUM(RecurrenceIntervals)
 
     enum IncidenceTypes {
         TypeEvent = KCalendarCore::IncidenceBase::TypeEvent,

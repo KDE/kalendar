@@ -66,7 +66,7 @@ public:
         TopMostParentDueDate, // in the Kirigami TreeListView, which otherwise will create new
         TopMostParentPriority // sections for subtasks
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     enum BaseTodoModelColumns {
         SummaryColumn = TodoModel::SummaryColumn,
@@ -78,14 +78,14 @@ public:
         DescriptionColumn = TodoModel::DescriptionColumn,
         CalendarColumn = TodoModel::CalendarColumn,
     };
-    Q_ENUM(BaseTodoModelColumns);
+    Q_ENUM(BaseTodoModelColumns)
 
     enum ShowComplete {
         ShowAll = 0,
         ShowCompleteOnly,
         ShowIncompleteOnly,
     };
-    Q_ENUM(ShowComplete);
+    Q_ENUM(ShowComplete)
 
     explicit TodoSortFilterProxyModel(QObject *parent = nullptr);
     ~TodoSortFilterProxyModel();

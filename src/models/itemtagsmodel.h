@@ -16,7 +16,7 @@ public:
         NameRole = Qt::UserRole + 1,
         IdRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit ItemTagsModel(QObject *parent = nullptr);
     ~ItemTagsModel() override = default;

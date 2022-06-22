@@ -39,7 +39,7 @@ public:
         Todo,
         Contact,
     };
-    Q_ENUM(Mode);
+    Q_ENUM(Mode)
 
     explicit KalendarApplication(QObject *parent = nullptr);
     ~KalendarApplication() override;

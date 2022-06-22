@@ -24,7 +24,7 @@ public:
         SizeRole,
         URIRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit AttachmentsModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~AttachmentsModel() override = default;

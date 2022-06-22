@@ -17,7 +17,7 @@ public:
     enum Roles {
         DateRole = Qt::UserRole + 1,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit RecurrenceExceptionsModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~RecurrenceExceptionsModel() override = default;
