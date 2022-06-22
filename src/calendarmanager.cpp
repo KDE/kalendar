@@ -158,7 +158,7 @@ protected:
         }
 
         return QSortFilterProxyModel::data(index, role);
-    };
+    }
 };
 
 class KalendarCollectionFilterProxyModel : public Akonadi::CollectionFilterProxyModel

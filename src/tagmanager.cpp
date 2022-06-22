@@ -25,7 +25,7 @@ public:
 
         setDynamicSortFilter(true);
         sort(0);
-    };
+    }
 
     QHash<int, QByteArray> roleNames() const override
     {
