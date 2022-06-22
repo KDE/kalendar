@@ -273,7 +273,7 @@ void InfiniteCalendarViewModel::setDatesToAdd(int datesToAdd)
     Q_EMIT datesToAddChanged();
 }
 
-int InfiniteCalendarViewModel::scale()
+int InfiniteCalendarViewModel::scale() const
 {
     return m_scale;
 }

@@ -62,7 +62,7 @@ public:
 
     IncidenceOccurrenceModel *model();
     void setModel(IncidenceOccurrenceModel *model);
-    int periodLength();
+    int periodLength() const;
     void setPeriodLength(int periodLength);
     MultiDayIncidenceModel::Filters filters();
     void setFilters(MultiDayIncidenceModel::Filters filters);

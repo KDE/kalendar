@@ -53,7 +53,7 @@ public:
     int datesToAdd() const;
     void setDatesToAdd(int datesToAdd);
 
-    int scale();
+    int scale() const;
     void setScale(int scale);
 
 Q_SIGNALS:

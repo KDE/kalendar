@@ -286,7 +286,7 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
     endResetModel();
 }
 
-int MultiDayIncidenceModel::periodLength()
+int MultiDayIncidenceModel::periodLength() const
 {
     return mPeriodLength;
 }
