@@ -190,7 +190,7 @@ Kirigami.ScrollablePage {
 
             QQC2.ComboBox {
                 visible: displayAdvancedNameFields
-                Kirigami.FormData.label: i18n("Honorific sufixes:")
+                Kirigami.FormData.label: i18n("Honorific suffixes:")
                 onCurrentValueChanged: contactEditor.contact.suffix = currentValue
                 editable: true
                 editText: contactEditor.contact.suffix
