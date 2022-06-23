@@ -10,7 +10,6 @@
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/Monitor>
 #include <Akonadi/Session>
-#include <KLocalizedString>
 
 ContactEditorBackend::ContactEditorBackend(QObject *parent)
     : QObject(parent)

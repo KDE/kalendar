@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "phonemodel.h"
-#include <KLocalizedString>
-#include <QDebug>
 #include <kcontacts/phonenumber.h>
 
 PhoneModel::PhoneModel(QObject *parent)

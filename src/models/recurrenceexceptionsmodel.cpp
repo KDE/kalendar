@@ -3,7 +3,6 @@
 
 #include "recurrenceexceptionsmodel.h"
 #include "kalendar_debug.h"
-#include <QDebug>
 #include <QMetaEnum>
 
 RecurrenceExceptionsModel::RecurrenceExceptionsModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)

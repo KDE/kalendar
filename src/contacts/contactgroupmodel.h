@@ -4,7 +4,6 @@
 #pragma once
 
 #include <QAbstractListModel>
-#include <QSortFilterProxyModel>
 
 #include <KContacts/ContactGroup>
 

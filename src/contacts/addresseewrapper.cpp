@@ -4,9 +4,6 @@
 #include "addresseewrapper.h"
 #include "kalendar_contact_debug.h"
 #include <KContacts/VCardConverter>
-#include <KLocalizedString>
-#include <QBitArray>
-#include <QJSValue>
 
 AddresseeWrapper::AddresseeWrapper(QObject *parent)
     : QObject(parent)

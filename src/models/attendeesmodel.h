@@ -5,7 +5,6 @@
 
 #include <KCalendarCore/Calendar>
 #include <QAbstractListModel>
-#include <QDebug>
 /**
  *
  */

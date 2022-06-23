@@ -3,7 +3,6 @@
 
 #include "emailmodel.h"
 #include <KLocalizedString>
-#include <QDebug>
 
 EmailModel::EmailModel(QObject *parent)
     : QAbstractListModel(parent)

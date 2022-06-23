@@ -45,9 +45,7 @@
 #include <KDescendantsProxyModel>
 #include <KLocalizedString>
 #include <QApplication>
-#include <QDebug>
 #include <QPointer>
-#include <QRandomGenerator>
 #include <models/todosortfilterproxymodel.h>
 
 #if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)

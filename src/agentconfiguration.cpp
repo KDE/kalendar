@@ -12,7 +12,6 @@
 #include <KContacts/ContactGroup>
 
 #include <KWindowSystem>
-#include <QDebug>
 #include <QPointer>
 #include <qobjectdefs.h>
 

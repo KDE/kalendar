@@ -10,9 +10,7 @@
 #include <akonadi_version.h>
 
 #include <Akonadi/Collection>
-#include <QAbstractListModel>
 #include <QQmlEngine>
-#include <QtQml>
 
 void AkonadiQuickPlugin::registerTypes(const char *uri)
 {

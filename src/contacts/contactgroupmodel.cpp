@@ -9,7 +9,6 @@
 #include <KContacts/Addressee>
 
 #include <KLocalizedString>
-#include <QIcon>
 
 using namespace Akonadi;
 

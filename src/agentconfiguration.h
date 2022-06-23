@@ -7,7 +7,6 @@
 #include <Akonadi/AgentFilterProxyModel>
 #include <Akonadi/AgentInstance>
 #include <QObject>
-#include <QTimer>
 
 class AgentConfiguration : public QObject
 {

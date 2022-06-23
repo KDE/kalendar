@@ -14,9 +14,7 @@
 #include "globalcontactmodel.h"
 #include "contactconfig.h"
 
-#include <QAbstractListModel>
 #include <QQmlEngine>
-#include <QtQml>
 
 void CalendarPlugin::registerTypes(const char *uri)
 {

@@ -38,6 +38,7 @@
 #include <KConfigGroup>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
+#include <KDescendantsProxyModel>
 #include <KSelectionProxyModel>
 #include <KSharedConfig>
 #include <QBuffer>

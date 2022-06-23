@@ -22,10 +22,6 @@
 #include <KColorScheme>
 #include <KContacts/ContactGroup>
 #include <KLocalizedString>
-#include <KMessageBox>
-
-#include <QMessageBox>
-#include <QTimer>
 
 using namespace Akonadi;
 

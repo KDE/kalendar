@@ -5,7 +5,6 @@
 #include "kalendar_debug.h"
 #include <KLocalizedString>
 #include <QByteArray>
-#include <QDebug>
 #include <QMetaEnum>
 #include <QTimeZone>
 

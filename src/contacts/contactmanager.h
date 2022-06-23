@@ -5,7 +5,6 @@
 
 #include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/Item>
-#include <KDescendantsProxyModel>
 #include <QObject>
 #include <QSortFilterProxyModel>
 

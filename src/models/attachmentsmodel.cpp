@@ -3,7 +3,6 @@
 
 #include "attachmentsmodel.h"
 #include "kalendar_debug.h"
-#include <QDebug>
 #include <QMetaEnum>
 
 AttachmentsModel::AttachmentsModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)

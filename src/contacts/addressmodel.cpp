@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "addressmodel.h"
-#include <QAbstractItemModel>
 
 AddressModel::AddressModel(QObject *parent)
     : QAbstractListModel(parent)

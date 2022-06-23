@@ -12,7 +12,6 @@
 #include <Akonadi/Calendar/ETMCalendar>
 #endif
 #include <QLocale>
-#include <QQueue>
 
 class InfiniteCalendarViewModel : public QAbstractListModel
 {

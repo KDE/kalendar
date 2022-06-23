@@ -25,7 +25,6 @@
 #include <KFormat>
 #include <KSharedConfig>
 #include <QSortFilterProxyModel>
-#include <QTimer>
 
 class TodoSortFilterProxyModel : public QSortFilterProxyModel
 {

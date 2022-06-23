@@ -5,7 +5,6 @@
 
 #include <KCalendarCore/Calendar>
 #include <QAbstractItemModel>
-#include <QDebug>
 
 /**
  * This class provides a QAbstractItemModel for an incidences' reminders/alarms.

@@ -15,8 +15,6 @@
 #include <Akonadi/Monitor>
 #include <Akonadi/Session>
 
-#include <KDescendantsProxyModel>
-
 #include <QAbstractItemModel>
 #include "colorproxymodel.h"
 #include "sortedcollectionproxymodel.h"

@@ -4,7 +4,6 @@
 #include "incidenceoccurrencemodel.h"
 #include "kalendar_debug.h"
 #include <Akonadi/EntityTreeModel>
-#include <QDebug>
 #include <QMetaEnum>
 #include <cmath>
 #include <models/infinitecalendarviewmodel.h>
