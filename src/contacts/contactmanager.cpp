@@ -13,7 +13,6 @@
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Monitor>
 #include <Akonadi/SelectionProxyModel>
-#include <KDescendantsProxyModel>
 #include <qsortfilterproxymodel.h>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <akonadi_version.h>

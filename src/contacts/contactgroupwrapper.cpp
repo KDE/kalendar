@@ -3,13 +3,12 @@
 
 #include "contactgroupwrapper.h"
 
+#include "contactgroupmodel.h"
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Session>
-#include <Akonadi/ItemMonitor>
 #include <QAbstractListModel>
 #include <akonadi/itemmonitor.h>
-#include "contactgroupmodel.h"
 
 using namespace Akonadi;
 

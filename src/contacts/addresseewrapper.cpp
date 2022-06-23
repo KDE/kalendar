@@ -7,8 +7,6 @@
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
-#include <kcontacts/addressee.h>
-#include <qobjectdefs.h>
 
 AddresseeWrapper::AddresseeWrapper(QObject *parent)
     : QObject(parent)

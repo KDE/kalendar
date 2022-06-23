@@ -4,7 +4,6 @@
 #include "contacteditorbackend.h"
 #include "addresseewrapper.h"
 #include "attributes/contactmetadataattribute_p.h"
-#include <Akonadi/Collection>
 #include <Akonadi/CollectionDialog>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/ItemCreateJob>
