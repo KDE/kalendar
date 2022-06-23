@@ -14,12 +14,6 @@ namespace KContacts
 class Addressee;
 }
 
-namespace Akonadi
-{
-class Monitor;
-}
-
-class AddresseeWrapper;
 class ContactGroupEditorPrivate;
 class QAbstractItemModel;
 

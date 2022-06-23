@@ -11,7 +11,6 @@
 
 namespace Akonadi
 {
-class EntityRightsFilterModel;
 class ETMViewStateSaver;
 class EntityMimeTypeFilterModel;
 }
