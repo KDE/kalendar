@@ -28,6 +28,7 @@
   <name xml:lang="sk">Kalendar</name>
   <name xml:lang="sl">Kalendar</name>
   <name xml:lang="sv">Kalendar</name>
+  <name xml:lang="ta">காலென்டர்</name>
   <name xml:lang="tr">Kalendar</name>
   <name xml:lang="uk">Kalendar</name>
   <name xml:lang="x-test">xxKalendarxx</name>
@@ -52,6 +53,7 @@
   <summary xml:lang="pt-BR">Gerencie suas tarefas e eventos com velocidade e facilidade</summary>
   <summary xml:lang="sl">Upravljajte vaše naloge in dogodke hitro in enostavno</summary>
   <summary xml:lang="sv">Hantera dina uppgifter och händelser snabbt och lätt</summary>
+  <summary xml:lang="ta">உங்கள் நிகழ்வுகளையும் பணிகளையும் எளிதாகவும் விரைவாகவும் நிர்வகியுங்கள்</summary>
   <summary xml:lang="tr">Görevlerinizi ve etkinliklerinizi hızlıca ve kolayca yönetin</summary>
   <summary xml:lang="uk">Швидко і ефективно керуйте вашими записами завдань і подій</summary>
   <summary xml:lang="x-test">xxManage your tasks and events with speed and easexx</summary>
@@ -196,6 +198,7 @@
       <caption xml:lang="sk">Mesačný pohľad</caption>
       <caption xml:lang="sl">Mesečni pogled</caption>
       <caption xml:lang="sv">Månadsvy</caption>
+      <caption xml:lang="ta">மாதக்காட்சி</caption>
       <caption xml:lang="tr">Ay Görünümü</caption>
       <caption xml:lang="uk">Перегляд місяця</caption>
       <caption xml:lang="x-test">xxMonth Viewxx</caption>
@@ -221,6 +224,7 @@
       <caption xml:lang="pt">Vista da Semana</caption>
       <caption xml:lang="sl">Tedenski pogled</caption>
       <caption xml:lang="sv">Veckovy</caption>
+      <caption xml:lang="ta">வாரக்காட்சி</caption>
       <caption xml:lang="tr">Hafta Görünümü</caption>
       <caption xml:lang="uk">Перегляд тижня</caption>
       <caption xml:lang="x-test">xxWeek Viewxx</caption>
@@ -246,6 +250,7 @@
       <caption xml:lang="pt">Área de Calendarização</caption>
       <caption xml:lang="sl">Časovni plan</caption>
       <caption xml:lang="sv">Schemaläggningsvy</caption>
+      <caption xml:lang="ta">அட்டவணை காட்சி</caption>
       <caption xml:lang="tr">Ajanda Görünümü</caption>
       <caption xml:lang="uk">Перегляд розкладу</caption>
       <caption xml:lang="x-test">xxSchedule Viewxx</caption>
@@ -272,6 +277,7 @@
       <caption xml:lang="sk">Pohľad úloh</caption>
       <caption xml:lang="sl">Pregled nalog</caption>
       <caption xml:lang="sv">Uppgiftsvy</caption>
+      <caption xml:lang="ta">பணிக்காட்சி</caption>
       <caption xml:lang="tr">Görev Görünümü</caption>
       <caption xml:lang="uk">Перегляд завдання</caption>
       <caption xml:lang="x-test">xxTask Viewxx</caption>
@@ -298,6 +304,7 @@
       <caption xml:lang="sk">Mobil</caption>
       <caption xml:lang="sl">Mobilno</caption>
       <caption xml:lang="sv">Mobil</caption>
+      <caption xml:lang="ta">கைபேசியில்</caption>
       <caption xml:lang="tr">Taşınabilir</caption>
       <caption xml:lang="uk">Мобільний</caption>
       <caption xml:lang="x-test">xxMobilexx</caption>
