@@ -29,7 +29,7 @@ class ContactManager : public QObject
     Q_PROPERTY(QAbstractItemModel *filteredContacts READ filteredContacts CONSTANT)
 public:
     explicit ContactManager(QObject *parent = nullptr);
-    ~ContactManager();
+    ~ContactManager() override;
     QAbstractItemModel *contactCollections() const;
     QAbstractItemModel *filteredContacts() const;
 

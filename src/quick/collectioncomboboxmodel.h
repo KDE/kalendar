@@ -50,7 +50,7 @@ class CollectionComboBoxModel : public QSortFilterProxyModel
 
 public:
     explicit CollectionComboBoxModel(QObject *parent = nullptr);
-    ~CollectionComboBoxModel();
+    ~CollectionComboBoxModel() override;
 
     /**
      * Sets the content @p mimetypes the collections shall be filtered by.

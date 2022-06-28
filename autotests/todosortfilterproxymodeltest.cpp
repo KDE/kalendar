@@ -24,7 +24,7 @@ class TodoSortFilterProxyModelTest : public QObject
 
 public:
     TodoSortFilterProxyModelTest() = default;
-    ~TodoSortFilterProxyModelTest() = default;
+    ~TodoSortFilterProxyModelTest() override = default;
 
     void checkAllItems(KCheckableProxyModel *model, const QModelIndex &parent = QModelIndex())
     {

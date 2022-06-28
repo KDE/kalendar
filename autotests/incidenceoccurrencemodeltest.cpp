@@ -23,7 +23,7 @@ class IncidenceOccurrenceModelTest : public QObject
 
 public:
     IncidenceOccurrenceModelTest() = default;
-    ~IncidenceOccurrenceModelTest() = default;
+    ~IncidenceOccurrenceModelTest() override = default;
 
     void checkAllItems(KCheckableProxyModel *model, const QModelIndex &parent = QModelIndex())
     {

@@ -87,7 +87,7 @@ public:
     Q_ENUM(ShowComplete)
 
     explicit TodoSortFilterProxyModel(QObject *parent = nullptr);
-    ~TodoSortFilterProxyModel();
+    ~TodoSortFilterProxyModel() override;
 
     int columnCount(const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;

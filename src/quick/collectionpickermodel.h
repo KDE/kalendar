@@ -48,7 +48,7 @@ class CollectionPickerModel : public QSortFilterProxyModel
 
 public:
     explicit CollectionPickerModel(QObject *parent = nullptr);
-    ~CollectionPickerModel();
+    ~CollectionPickerModel() override;
 
     /**
      * Sets the content @p mimetypes the collections shall be filtered by.
