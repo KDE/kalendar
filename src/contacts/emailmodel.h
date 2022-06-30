@@ -5,7 +5,6 @@
 
 #include <KContacts/Addressee>
 #include <QAbstractListModel>
-#include <kcontacts/addressee.h>
 
 class EmailModel : public QAbstractListModel
 {

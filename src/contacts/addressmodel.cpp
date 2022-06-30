@@ -9,6 +9,30 @@ AddressModel::AddressModel(QObject *parent)
 {
 }
 
+void AddressModel::loadContact(const KContacts::Addressee &contact)
+{
+    beginResetModel();
+    m_addresses = contact.addresses();
+    endResetModel();
+}
+
+void AddressModel::storeContact(KContacts::Addressee &contact) const
+{
+    KContacts::Address::List addresses;
+
+    for (const auto &address : contact.addresses()) {
+        contact.removeAddress(address);
+    }
+    for (const auto &address : m_addresses) {
+        if (!address.isEmpty()) {
+            addresses.append(address);
+        }
+    }
+    for (const auto &address : addresses) {
+        contact.insertAddress(address);
+    }
+}
+
 int AddressModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
@@ -54,6 +78,60 @@ QVariant AddressModel::data(const QModelIndex &idx, int role) const
     }
 }
 
+bool AddressModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    auto address = m_addresses[index.row()];
+    switch (role) {
+    case CountryRole:
+        address.setCountry(value.toString());
+        m_addresses.replace(index.row(), address);
+        return true;
+    case ExtendedRole:
+        address.setExtended(value.toString());
+        m_addresses.replace(index.row(), address);
+        return true;
+    case LongitudeRole: {
+        auto geo = address.geo();
+        KContacts::Geo newGeo(geo.latitude(), value.toFloat());
+        address.setGeo(newGeo);
+        m_addresses.replace(index.row(), address);
+        return true;
+    }
+    case LatitudeRole: {
+        auto geo = address.geo();
+        KContacts::Geo newGeo(value.toFloat(), geo.longitude());
+        address.setGeo(newGeo);
+        m_addresses.replace(index.row(), address);
+        return true;
+    }
+    case LabelRole:
+        address.setLabel(value.toString());
+        m_addresses.replace(index.row(), address);
+        return true;
+    case PostalCodeRole:
+        address.setPostalCode(value.toString());
+        m_addresses.replace(index.row(), address);
+        return true;
+    case PostOfficeBoxRole:
+        address.setPostOfficeBox(value.toString());
+        m_addresses.replace(index.row(), address);
+        return true;
+    case RegionRole:
+        address.setRegion(value.toString());
+        m_addresses.replace(index.row(), address);
+        return true;
+    case StreetRole:
+        address.setStreet(value.toString());
+        m_addresses.replace(index.row(), address);
+        return true;
+    case TypeRole:
+        address.setType((KContacts::Address::Type)value.toInt());
+        m_addresses.replace(index.row(), address);
+        return true;
+    }
+    return false;
+}
+
 QHash<int, QByteArray> AddressModel::roleNames() const
 {
     return {
@@ -75,9 +153,22 @@ QHash<int, QByteArray> AddressModel::roleNames() const
     };
 }
 
-void AddressModel::setAddresses(const KContacts::Address::List &addresses)
+void AddressModel::addAddress()
 {
-    beginResetModel();
-    m_addresses = addresses;
-    endResetModel();
+    beginInsertRows({}, m_addresses.count(), m_addresses.count());
+    KContacts::Address addressObject;
+    m_addresses.append(addressObject);
+    endInsertRows();
+    Q_EMIT changed(m_addresses);
+}
+
+void AddressModel::deleteAddress(int row)
+{
+    if (!hasIndex(row, 0)) {
+        return;
+    }
+    beginRemoveRows({}, row, row);
+    m_addresses.removeAt(row);
+    endRemoveRows();
+    Q_EMIT changed(m_addresses);
 }

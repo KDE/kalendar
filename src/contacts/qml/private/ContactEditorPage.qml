@@ -199,6 +199,105 @@ Kirigami.ScrollablePage {
             }
 
             ColumnLayout {
+                id: address
+                Layout.fillWidth: true
+                Kirigami.FormData.label: i18n("Address:")
+                Kirigami.FormData.labelAlignment: addressRepeater.count > 0 ? Qt.AlignTop : Qt.AlignVCenter
+                Repeater {
+                    id: addressRepeater
+                    model: contactEditor.contact.addressesModel
+
+                    delegate: RowLayout {
+                        QQC2.ComboBox {
+                            model: ListModel {id: addressTypeModel; dynamicRoles: true }
+                            Component.onCompleted: {
+                                    { value: AddressModel.Home, text: i18nc("Address type", "Home") },
+                                    { value: AddressModel.Work, text: i18nc("Address type", "Work") },
+                                    { value: AddressModel.Dom, text: i18nc("Address type", "Domestic") },
+                                    { value: AddressModel.Intl, text: i18nc("Address type", "International") },
+                                    { value: AddressModel.Postal, text: i18nc("Address type", "Postal") },
+                                    { value: AddressModel.Parcel, text: i18nc("Address type", "Parcel") },
+                                ].forEach((type) => {
+                                    addressTypeModel.append(type);
+                                });
+                                currentIndex = typeValue !== 0 ? indexOfValue(typeValue) : 0
+                            }
+                            textRole: "text"
+                            valueRole: "value"
+                            onCurrentValueChanged: type = currentValue
+                        }
+                        QQC2.TextField {
+                            id: streetField
+                            text: model.street 
+                            inputMethodHints: Qt.ImhDialableCharactersOnly
+                            Layout.fillWidth: true
+                            onTextChanged: model.street = text
+                        }
+                        QQC2.TextField {
+                            id: contryField
+                            text: model.country
+                            inputMethodHints: Qt.ImhDialableCharactersOnly
+                            Layout.fillWidth: true
+                            onTextChanged: model.country = text
+                        }
+                        QQC2.Button {
+                            icon.name: "list-remove"
+                            implicitWidth: implicitHeight
+                            onClicked: contactEditor.contact.phoneModel.deletePhoneNumber(index)
+                        }
+                    }
+                }
+                RowLayout {
+                    visible: !root.saving
+                    QQC2.ComboBox {
+                        id: newPhoneTypeCombo
+                        model: ListModel {id: phoneTypeModel; dynamicRoles: true }
+                        Component.onCompleted: {
+                            [
+                                { value: PhoneModel.Home, text: i18n("Home") },
+                                { value: PhoneModel.Work, text: i18n("Work") },
+                                { value: PhoneModel.Msg, text: i18n("Messaging") },
+                                { value: PhoneModel.Voice, text: i18n("Voice") },
+                                { value: PhoneModel.Fax, text: i18n("Fax") },
+                                { value: PhoneModel.Cell, text: i18n("Cell") },
+                                { value: PhoneModel.Video, text: i18n("Video") },
+                                { value: PhoneModel.Bbs, text: i18n("Mailbox") },
+                                { value: PhoneModel.Modem, text: i18n("Modem") },
+                                { value: PhoneModel.Car, text: i18n("Car") },
+                                { value: PhoneModel.Isdn, text: i18n("ISDN") },
+                                { value: PhoneModel.Psc, text: i18n("PCS") },
+                                { value: PhoneModel.Pager, text: i18n("Pager") }
+                            ].forEach((type) => {
+                                phoneTypeModel.append(type);
+                            });
+                        }
+                        textRole: "text"
+                        valueRole: "value"
+                        currentIndex: 0
+                    }
+                    QQC2.TextField {
+                        id: toAddPhone
+                        Layout.fillWidth: true
+                        placeholderText: i18n("+33 7 55 23 68 67")
+                        inputMethodHints: Qt.ImhDialableCharactersOnly
+                    }
+
+                    // button to add additional text field
+                    QQC2.Button {
+                        icon.name: "list-add"
+                        implicitWidth: implicitHeight
+                        enabled: toAddPhone.text.length > 0
+                        onClicked: {
+                            contactEditor.contact.phoneModel.addPhoneNumber(toAddPhone.text, newPhoneTypeCombo.currentValue)
+                            toAddPhone.text = '';
+                            newPhoneTypeCombo.currentIndex = 0;
+                        }
+                    }
+                }
+            }
+
+
+            ColumnLayout {
                 id: phoneNumber
                 Layout.fillWidth: true
                 Kirigami.FormData.label: i18n("Phone:")
