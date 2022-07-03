@@ -18,6 +18,13 @@ Kirigami.ScrollablePage {
     rightPadding: 0
     topPadding: 0
 
+    function openEditor() {
+        pageStack.pushDialogLayer(Qt.resolvedUrl("ContactGroupEditorPage.qml"), {
+            mode: ContactGroupEditor.EditMode,
+            item: page.contactGroup.item
+        })
+    }
+
     property ContactGroupWrapper contactGroup: ContactGroupWrapper {
         id: contactGroup
         item: ContactManager.getItem(page.itemId)
@@ -27,10 +34,7 @@ Kirigami.ScrollablePage {
         main: Kirigami.Action {
             iconName: "document-edit"
             text: i18n("Edit")
-            onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("ContactGroupEditorPage.qml"), {
-                mode: ContactGroupEditor.EditMode,
-                item: page.contactGroup.item
-            })
+            onTriggered: openEditor()
         }
     }
 

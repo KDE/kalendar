@@ -7,6 +7,7 @@
 #include <Akonadi/Item>
 #include <QObject>
 #include <QSortFilterProxyModel>
+#include <qobjectdefs.h>
 
 namespace Akonadi
 {
@@ -33,9 +34,16 @@ public:
     QAbstractItemModel *contactCollections() const;
     QAbstractItemModel *filteredContacts() const;
 
-    Q_INVOKABLE void updateAllCollections();
     Q_INVOKABLE QUrl decorationToUrl(QVariant decoration);
     Q_INVOKABLE Akonadi::Item getItem(qint64 itemId);
+
+    Q_INVOKABLE void setCollectionColor(Akonadi::Collection collection, const QColor &color);
+    Q_INVOKABLE void deleteItem(const Akonadi::Item &item);
+    Q_INVOKABLE void updateAllCollections();
+    Q_INVOKABLE void updateCollection(const Akonadi::Collection &collection);
+    Q_INVOKABLE void deleteCollection(const Akonadi::Collection &collection);
+    Q_INVOKABLE void editCollection(const Akonadi::Collection &collection);
+    Q_INVOKABLE QVariantMap getCollectionDetails(const Akonadi::Collection &collection);
 
 private:
     Akonadi::EntityMimeTypeFilterModel *m_collectionTree;

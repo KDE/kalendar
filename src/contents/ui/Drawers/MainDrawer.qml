@@ -249,7 +249,7 @@ Kirigami.OverlayDrawer {
                                 onTriggered: {
                                     contactViewAction.trigger()
                                     if (mainDrawer.modal) mainDrawer.close()
-                                }
+ KalendarApplication.Contact                               }
                             }
                         ]
                         property list<Kirigami.Action> mobileActions: [
@@ -541,9 +541,16 @@ Kirigami.OverlayDrawer {
 
                                 onClicked: calendarList.model.toggleChildren(index)
 
+                                AddressBookCollectionHandler {
+                                    collection: model.collection
+                                    collectionDetails: ContactManager.getCollectionDetails(model.collection)
+                                    enabled: mainDrawer.mode === KalendarApplication.Contact
+                                }
+
+                                // TODO port to TapHanlder
                                 CalendarItemMouseArea {
                                     id: calendarSourceItemMouseArea
-                                    parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                                    parent: calendarItem.contentItem // Otherwise label elide breaks
                                     collectionId: model.collectionId
                                     collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                     anchors.fill: parent
@@ -571,7 +578,7 @@ Kirigami.OverlayDrawer {
                             roleValue: false
                             Kirigami.BasicListItem {
                                 id: calendarItem
-                                label: display
+                                label: model.display
                                 labelItem.color: Kirigami.Theme.textColor
                                 leftPadding: Kirigami.Settings.isMobile ?
                                     (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
@@ -603,6 +610,12 @@ Kirigami.OverlayDrawer {
                                 onClicked: {
                                     calendarClicked(collectionId);
                                     if(mainDrawer.modal) mainDrawer.close()
+                                }
+
+                                AddressBookCollectionHandler {
+                                    collection: model.collection
+                                    collectionDetails: ContactManager.getCollectionDetails(model.collection)
+                                    enabled: mainDrawer.mode === KalendarApplication.Contact
                                 }
 
                                 CalendarItemMouseArea {

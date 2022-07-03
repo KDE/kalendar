@@ -6,23 +6,24 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-import QtQuick 2.3
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0 as Controls
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15 as QQC2
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kalendar.contact 1.0
 
-Kirigami.AbstractListItem {
+Kirigami.BasicListItem {
     id: listItem
 
     property string name
     property bool added: false
     property var avatarIcon
 
-    contentItem: RowLayout {
+    signal createContextMenu()
 
+    contentItem: RowLayout {
         Kirigami.Avatar {
             id: avatar
             Layout.maximumHeight: parent.height
@@ -45,6 +46,11 @@ Kirigami.AbstractListItem {
             width: height
             source: "checkmark"
             visible: added
+        }
+
+        TapHandler {
+            acceptedButtons: Qt.RightButton
+            onTapped: createContextMenu()
         }
     }
 }

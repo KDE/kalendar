@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 import QtQuick 2.15
-import QtQuick.Controls 2.15 as Controls
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kalendar 1.0
@@ -11,7 +11,7 @@ import org.kde.kalendar.contact 1.0
 Kirigami.ScrollablePage {
     id: page
     property int itemId
-    title: addressee.name
+    title: addressee.formattedName
     property int mode: KalendarApplication.Contact
 
     leftPadding: 0
@@ -22,38 +22,35 @@ Kirigami.ScrollablePage {
         addresseeItem: ContactManager.getItem(page.itemId)
     }
 
+    function openEditor() {
+        pageStack.pushDialogLayer(Qt.resolvedUrl("ContactEditorPage.qml"), {
+            mode: ContactEditor.EditMode,
+            item: page.addressee.addresseeItem,
+        })
+    }
+
     actions {
         main: Kirigami.Action {
             iconName: "document-edit"
-            text: i18n("Edit")
+            text: i18nc("@action:inmenu", "Edit")
+            onTriggered: openEditor()
+        }
+
+        contextualActions: DeleteContactAction {
+            name: page.addressee.formattedName
+            item: page.addressee.addresseeItem
+        }
+
+        left: Kirigami.Action {
+            text: i18n("Cancel")
+            icon.name: "dialog-cancel"
+            visible: Kirigami.Settings.isMobile
+
             onTriggered: {
-                pageStack.pushDialogLayer(Qt.resolvedUrl("ContactEditorPage.qml"), {
-                    mode: ContactEditor.EditMode,
-                    item: page.addressee.addresseeItem,
-                })
+                pageStack.pop()
             }
         }
     }
-    //    contextualActions: [
-    //        Kirigami.Action {
-    //            iconName: "delete"
-    //            text: i18n("Delete contact")
-    //            onTriggered: {
-    //                KPeople.PersonPluginManager.deleteContact(page.personUri)
-    //                pageStack.pop()
-    //            }
-    //        }
-    //    ]
-    //    left: Kirigami.Action {
-    //        text: i18n("Cancel")
-    //        icon.name: "dialog-cancel"
-    //        visible: Kirigami.Settings.isMobile
-
-    //        onTriggered: {
-    //            pageStack.pop()
-    //        }
-    //    }
-    //}
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 
@@ -88,7 +85,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        Controls.ToolBar {
+        QQC2.ToolBar {
             Layout.fillWidth: true
             contentItem: Kirigami.ActionToolBar {
                 id: toolbar
@@ -160,19 +157,19 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: i18n("Contact information")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 visible: text !== ""
                 text: addressee.formattedName
                 Kirigami.FormData.label: i18n("Name:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 visible: text !== ""
                 text: addressee.nickName
                 Kirigami.FormData.label: i18n("Nickname:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: blogFeed
                 visible: addressee.blogFeed + '' !== ''
                 // We do not always have the year
@@ -194,7 +191,7 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: i18n("Personal information")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: birthday
                 visible: text !== ""
                 // We do not always have the year
@@ -206,7 +203,7 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: i18n("Birthday:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: anniversary
                 visible: text !== ""
                 // We do not always have the year
@@ -218,7 +215,7 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: i18n("Anniversary:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: spousesName
                 visible: text !== ""
                 text: addressee.spousesName
@@ -240,7 +237,7 @@ Kirigami.ScrollablePage {
             Repeater {
                 id: phoneRepeater
                 model: addressee.phoneModel
-                Controls.Label {
+                QQC2.Label {
                     visible: text !== ""
                     text: `<a href="tel:${model.display}">${model.display}</a>`
                     onLinkActivated: Qt.openUrlExternally(link)
@@ -272,7 +269,7 @@ Kirigami.ScrollablePage {
             Repeater {
                 id: addressesRepeater
                 model: addressee.addressesModel
-                Controls.Label {
+                QQC2.Label {
                     visible: text !== ""
                     text: model.formattedAddress
                     Kirigami.FormData.label: model.typeLabel ? i18nc("%1 is the type of the address, e.g. home, work, ...", "%1:", model.typeLabel) : i18n("Home:")
@@ -292,49 +289,49 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: i18n("Business Information")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: organization
                 visible: text !== ""
                 text: addressee.organization
                 Kirigami.FormData.label: i18n("Organization:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: profession
                 visible: text !== ""
                 text: addressee.profession
                 Kirigami.FormData.label: i18n("Profession:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: title
                 visible: text.trim() !== ""
                 text: addressee.title
                 Kirigami.FormData.label: i18n("Title:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: department
                 visible: text !== ""
                 text: addressee.department
                 Kirigami.FormData.label: i18n("Department:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: office
                 visible: text !== ""
                 text: addressee.office
                 Kirigami.FormData.label: i18n("Office:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: managersName
                 visible: text !== ""
                 text: addressee.managersName
                 Kirigami.FormData.label: i18n("Manager's name:")
             }
 
-            Controls.Label {
+            QQC2.Label {
                 id: assistantsName
                 visible: text !== ""
                 text: addressee.assistantsName
@@ -356,7 +353,7 @@ Kirigami.ScrollablePage {
             Repeater {
                 id: emailRepeater
                 model: addressee.emailModel
-                Controls.Label {
+                QQC2.Label {
                     visible: text !== ""
                     text: `<a href="mailto:${model.display}">${model.display}</a>`
                     onLinkActivated: Qt.openUrlExternally(link)

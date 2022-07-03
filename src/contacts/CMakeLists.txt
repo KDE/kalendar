@@ -43,6 +43,7 @@ kconfig_add_kcfg_files(kalendar_contact_plugin GENERATE_MOC contactconfig.kcfgc)
 ecm_target_qml_sources(kalendar_contact_plugin SOURCES
     qml/ContactChooserPage.qml
     qml/ContactView.qml
+    qml/AddressBookCollectionHandler.qml
 )
 
 ecm_target_qml_sources(kalendar_contact_plugin
@@ -56,6 +57,8 @@ ecm_target_qml_sources(kalendar_contact_plugin
     qml/private/Header.qml
     qml/private/PhoneNumberDialog.qml
     qml/private/QrCodePage.qml
+    qml/private/AddressBookMenu.qml
+    qml/private/DeleteContactAction.qml
 )
 
 ecm_qt_declare_logging_category(kalendar_contact_plugin
