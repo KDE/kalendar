@@ -163,6 +163,8 @@ function parseDateString(dateString) {
     const dateStringDelimiter = dateStringDelimiterMatches[0];
 
     const localisedDateFormatSplit = Qt.locale().dateFormat(Locale.NarrowFormat).split(dateStringDelimiter);
+    const localisedDateDayPosition = localisedDateFormatSplit.findIndex((x) => /d/gi.test(x));
+    const localisedDateMonthPosition = localisedDateFormatSplit.findIndex((x) => /m/gi.test(x));
     const localisedDateYearPosition = localisedDateFormatSplit.findIndex((x) => /y/gi.test(x));
 
     let splitDateString = dateString.split(dateStringDelimiter);
@@ -183,9 +185,11 @@ function parseDateString(dateString) {
     }
     fullyWrittenYear = fullyWrittenYear.join("");
 
-    let fixedSplitDateString = splitDateString;
-    fixedSplitDateString[localisedDateYearPosition] = fullyWrittenYear;
-    const fixedDateString = fixedSplitDateString.join(dateStringDelimiter);
+    const fixedYearNum = Number(fullyWrittenYear);
+    const monthIndexNum = Number(splitDateString[localisedDateMonthPosition]) - 1;
+    const dayNum = Number(splitDateString[localisedDateDayPosition]);
 
-    return Date.fromLocaleDateString(Qt.locale(), fixedDateString, Locale.NarrowFormat);
+    console.log(new Date(fixedYearNum, monthIndexNum, dayNum))
+
+    return new Date(fixedYearNum, monthIndexNum, dayNum);
 }
