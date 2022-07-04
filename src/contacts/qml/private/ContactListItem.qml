@@ -21,7 +21,7 @@ Kirigami.BasicListItem {
     property bool added: false
     property var avatarIcon
 
-    signal createContextMenu()
+    signal createContextMenu
 
     contentItem: RowLayout {
         Kirigami.Avatar {
@@ -50,7 +50,7 @@ Kirigami.BasicListItem {
 
         TapHandler {
             acceptedButtons: Qt.RightButton
-            onTapped: createContextMenu()
+            onTapped: listItem.createContextMenu()
         }
     }
 }
