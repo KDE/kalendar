@@ -249,7 +249,7 @@ Kirigami.OverlayDrawer {
                                 onTriggered: {
                                     contactViewAction.trigger()
                                     if (mainDrawer.modal) mainDrawer.close()
- KalendarApplication.Contact                               }
+                                }
                             }
                         ]
                         property list<Kirigami.Action> mobileActions: [
