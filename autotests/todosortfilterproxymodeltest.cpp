@@ -12,7 +12,6 @@
 
 #include <KCalendarCore/Incidence>
 #include <KCheckableProxyModel>
-#include <KFormat>
 #include <QAbstractItemModelTester>
 #include <QSignalSpy>
 #include <QTest>
