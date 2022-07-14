@@ -17,7 +17,7 @@ PlasmaComponents3.ScrollView {
     property int itemId
     topPadding: 0
 
-    property string title: addressee.name
+    property string title: addressee.formattedName
 
     property AddresseeWrapper addressee: AddresseeWrapper {
         addresseeItem: ContactManager.getItem(root.itemId)
@@ -161,6 +161,14 @@ PlasmaComponents3.ScrollView {
                     color: "#fcfcfc"
                     level: 2
                 }
+            }
+
+            PlasmaComponents3.Label {
+                visible: addressee.nickName !== ""
+                text: i18n("Nickname: %1", addressee.nickName)
+                Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                Layout.rightMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
             }
 
             PlasmaComponents3.Label {
