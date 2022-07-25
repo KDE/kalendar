@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 #include "akonadi/collectionfilterproxymodel.h"
-#define QT_QML_DEBUG
 #include "about.h"
 #include "agentconfiguration.h"
 #include "calendarmanager.h"
