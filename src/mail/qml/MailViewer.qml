@@ -20,14 +20,25 @@ QQC2.Page {
     property string to
     property date dateTime
 
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
+    padding: Kirigami.Units.largeSpacing * 2
+
+    background: Rectangle {
+        color: Kirigami.Theme.backgroundColor
+        property color borderColor: Kirigami.Theme.textColor
+        border.color: Qt.rgba(borderColor.r, borderColor.g, borderColor.b, 0.3)
+        radius: Kirigami.Units.largeSpacing
+    }
+
     header: QQC2.ToolBar {
-        padding: Kirigami.Units.largeSpacing
+        padding: root.padding
 
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.View
 
         background: Item {
-            implicitHeight: 40
             Kirigami.Separator {
                 anchors {
                     left: parent.left
@@ -86,13 +97,12 @@ QQC2.Page {
     }
 
     footer: QQC2.ToolBar {
-        padding: Kirigami.Units.largeSpacing
+        padding: root.padding
 
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.View
 
         background: Item {
-            implicitHeight: 40
             Kirigami.Separator {
                 anchors {
                     left: parent.left
@@ -124,14 +134,5 @@ QQC2.Page {
                 }
             }
         }
-    }
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
-
-    background: Rectangle {
-        color: Kirigami.Theme.backgroundColor
-        property color borderColor: Kirigami.Theme.textColor
-        border.color: Qt.rgba(borderColor.r, borderColor.g, borderColor.b, 0.3)
-        radius: 4
     }
 }

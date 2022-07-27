@@ -31,6 +31,7 @@ Item {
         background: Item {}
         readOnly: true
         textFormat: TextEdit.RichText
+        padding: 0
 
         anchors {
             top: parent.top

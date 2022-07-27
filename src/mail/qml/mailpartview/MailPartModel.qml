@@ -77,9 +77,6 @@ DelegateModel {
                 left: parent.left
                 right: parent.right
                 top: parent.top
-                rightMargin: Kirigami.Units.largeSpacing
-                leftMargin: Kirigami.Units.largeSpacing
-                topMargin: Kirigami.Units.smallSpacing
             }
             spacing: Kirigami.Units.smallSpacing
 
@@ -106,7 +103,7 @@ DelegateModel {
                 id: partLoader
                 Layout.preferredHeight: item ? item.contentHeight : 0
                 Layout.maximumWidth: parent.width
-                width: parent.width
+                Layout.fillWidth: true
                 Binding {
                     target: partLoader.item
                     property: "searchString"
