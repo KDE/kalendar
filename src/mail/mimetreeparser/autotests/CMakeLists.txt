@@ -9,7 +9,7 @@ include_directories(
 
 set(AUTOMOC ON)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
-add_definitions(-DMAIL_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../../testdata" )
+add_definitions(-DMAIL_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../testdata" )
 
 include(ECMAddTests)
 include(${CMAKE_SOURCE_DIR}/cmake/modules/add_gpg_crypto_test.cmake)

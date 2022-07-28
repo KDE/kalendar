@@ -130,7 +130,7 @@ QVariant AttachmentModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-static QString saveAttachmentToDisk(const QModelIndex &index, const QString &path, bool readonly = false)
+static QString internalSaveAttachmentToDisk(const QModelIndex &index, const QString &path, bool readonly = false)
 {
     if (index.internalPointer()) {
         const auto part = static_cast<MimeTreeParser::MessagePart *>(index.internalPointer());
@@ -187,7 +187,7 @@ bool AttachmentModel::saveAttachmentToDisk(const QModelIndex &index)
     downloadDir += QStringLiteral("/kalendar/");
     QDir{}.mkpath(downloadDir);
 
-    auto path = ::saveAttachmentToDisk(index, downloadDir);
+    auto path = internalSaveAttachmentToDisk(index, downloadDir);
     if (path.isEmpty()) {
         return false;
     }
@@ -199,7 +199,7 @@ bool AttachmentModel::openAttachment(const QModelIndex &index)
 {
     auto downloadDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QStringLiteral("/kalendar/");
     QDir{}.mkpath(downloadDir);
-    const auto filePath = ::saveAttachmentToDisk(index, downloadDir, true);
+    const auto filePath = internalSaveAttachmentToDisk(index, downloadDir, true);
     if (!filePath.isEmpty()) {
         if (!QDesktopServices::openUrl(QUrl(QStringLiteral("file://") + filePath))) {
             // Kube::Fabric::Fabric{}.postMessage("notification", {{"message", tr("Failed to open attachment.")}});

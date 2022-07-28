@@ -3,11 +3,12 @@
 
 #pragma once
 
-#include "mailcrypto.h"
 #include <KMime/Message>
 #include <QByteArray>
 #include <QStringList>
 #include <functional>
+
+#include "mailcrypto.h"
 
 struct Attachment {
     QString name;

@@ -562,7 +562,6 @@ Kirigami.OverlayDrawer {
                                     onClicked: calendarList.model.toggleChildren(index)
 
                                     CalendarItemTapHandler {
-                                        parent: calendarSourceItem.contentItem // Otherwise label elide breaks
                                         collectionId: model.collectionId
                                         collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                         enabled: mode !== KalendarApplication.Contact
@@ -570,9 +569,11 @@ Kirigami.OverlayDrawer {
 
                                     DropArea {
                                         id: incidenceDropArea
+                                        property var collectionDetails: CalendarManager.getCollectionDetails(model.collectionId)
+                                        parent: calendarItem.contentItem // Otherwise label elide breaks
                                         anchors.fill: parent
                                         z: 9999
-                                        enabled: calendarSourceItemMouseArea.collectionDetails.canCreate
+                                        enabled: collectionDetails.canCreate
                                         onDropped: if(drop.source.objectName === "taskDelegate") {
                                             CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collectionId);
 
@@ -623,8 +624,7 @@ Kirigami.OverlayDrawer {
                                         if(mainDrawer.modal) mainDrawer.close()
                                     }
 
-                                    CalendarItemHandler {
-                                        parent: calendarItem.contentItem // Otherwise label elide breaks
+                                    CalendarItemTapHandler {
                                         collectionId: model.collectionId
                                         collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                         enabled: mode !== KalendarApplication.Contact
@@ -633,9 +633,11 @@ Kirigami.OverlayDrawer {
 
                                     DropArea {
                                         id: incidenceDropArea
+                                        property var collectionDetails: CalendarManager.getCollectionDetails(model.collectionId)
+                                        parent: calendarItem.contentItem // Otherwise label elide breaks
                                         anchors.fill: parent
                                         z: 9999
-                                        enabled: calendarItemMouseArea.collectionDetails.canCreate
+                                        enabled: collectionDetails.canCreate
                                         onDropped: if(drop.source.objectName === "taskDelegate") {
                                             CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
 

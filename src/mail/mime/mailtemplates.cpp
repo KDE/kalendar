@@ -247,23 +247,25 @@ QString plainToHtml(const QString &body)
 }
 
 // TODO implement this function using a DOM tree parser
-void makeValidHtml(QString &body, const QString &headElement)
+QString makeValidHtml(const QString &body, const QString &headElement)
 {
+    QString newBody = body;
     QRegExp regEx;
     regEx.setMinimal(true);
     regEx.setPattern(QStringLiteral("<html.*>"));
 
-    if (!body.isEmpty() && !body.contains(regEx)) {
+    if (!newBody.isEmpty() && !newBody.contains(regEx)) {
         regEx.setPattern(QStringLiteral("<body.*>"));
-        if (!body.contains(regEx)) {
-            body = QLatin1String("<body>") + body + QLatin1String("<br/></body>");
+        if (!newBody.contains(regEx)) {
+            newBody = QLatin1String("<body>") + body + QLatin1String("<br/></body>");
         }
         regEx.setPattern(QStringLiteral("<head.*>"));
-        if (!body.contains(regEx)) {
-            body = QLatin1String("<head>") + headElement + QLatin1String("</head>") + body;
+        if (!newBody.contains(regEx)) {
+            newBody = QLatin1String("<head>") + headElement + QLatin1String("</head>") + body;
         }
-        body = QLatin1String("<html>") + body + QLatin1String("</html>");
+        newBody = QLatin1String("<html>") + body + QLatin1String("</html>");
     }
+    return newBody;
 }
 
 // FIXME strip signature works partially for HTML mails
@@ -484,7 +486,7 @@ QString quotedHtmlText(const QString &selection)
     //  then the <blockquote> tags below should open and close as when required.
 
     // Add blockquote tag, so that quoted message can be differentiated from normal message
-    content = QLatin1String("<blockquote>") + content + QLatin1String("</blockquote>");
+    content = QStringLiteral("<blockquote>") + content + QStringLiteral("</blockquote>");
     return content;
 }
 
@@ -754,19 +756,16 @@ void MailTemplates::reply(const KMime::Message::Ptr &origMsg,
             result.chop(1);
         }
         // The plain body is complete
-        auto plainBodyResult = plainBody + result;
+        QString plainBodyResult = plainBody + result;
         htmlMessageText(plainTextContent, htmlContent, [=](const QString &body, const QString &headElement) {
             QString result = stripSignature(body);
 
+            QString htmlBodyResult;
             // The html body is complete
-            const auto htmlBodyResult = [&]() -> QString {
-                if (!alwaysPlain) {
-                    QString htmlBodyResult = htmlBody + quotedHtmlText(result);
-                    makeValidHtml(htmlBodyResult, headElement);
-                    return htmlBodyResult;
-                }
-                return QString();
-            }();
+            if (!alwaysPlain) {
+                htmlBodyResult = htmlBody + quotedHtmlText(result);
+                htmlBodyResult = makeValidHtml(htmlBodyResult, headElement);
+            }
 
             // Assemble the message
             msg->contentType()->clear(); // to get rid of old boundary

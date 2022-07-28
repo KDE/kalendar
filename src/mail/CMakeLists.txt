@@ -71,6 +71,7 @@ ecm_qt_install_logging_categories(
 )
 
 if (BUILD_TESTING)
+    add_subdirectory(tests)
     add_subdirectory(mime/tests)
     add_subdirectory(mimetreeparser/autotests)
     add_subdirectory(mimetreeparser/tests)

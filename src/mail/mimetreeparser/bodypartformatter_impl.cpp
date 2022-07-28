@@ -317,28 +317,41 @@ public:
 
 void BodyPartFormatterBaseFactoryPrivate::messageviewer_create_builtin_bodypart_formatters()
 {
-    insert("application", "octet-stream", std::make_unique<AnyTypeBodyPartFormatter>());
-    insert("application", "pgp", std::make_unique<TextPlainBodyPartFormatter>());
-    insert("application", "pkcs7-mime", std::make_unique<ApplicationPkcs7MimeBodyPartFormatter>());
-    insert("application", "x-pkcs7-mime", std::make_unique<ApplicationPkcs7MimeBodyPartFormatter>());
-    insert("application", "pgp-encrypted", std::make_unique<ApplicationPGPEncryptedBodyPartFormatter>());
-    insert("application", "*", std::make_unique<AnyTypeBodyPartFormatter>());
+    auto any = new AnyTypeBodyPartFormatter;
+    auto textPlain = new TextPlainBodyPartFormatter;
+    auto pkcs7 = new ApplicationPkcs7MimeBodyPartFormatter;
+    auto pgp = new ApplicationPGPEncryptedBodyPartFormatter;
+    auto html = new TextHtmlBodyPartFormatter;
+    auto headers = new HeadersBodyPartFormatter;
+    auto multipartAlternative = new MultiPartAlternativeBodyPartFormatter;
+    auto multipartMixed = new MultiPartMixedBodyPartFormatter;
+    auto multipartSigned = new MultiPartSignedBodyPartFormatter;
+    auto multipartEncrypted = new MultiPartEncryptedBodyPartFormatter;
+    auto message = new MessageRfc822BodyPartFormatter;
+    auto multipartRelated = new MultiPartRelatedBodyPartFormatter;
 
-    insert("text", "html", std::make_unique<TextHtmlBodyPartFormatter>());
-    insert("text", "rtf", std::make_unique<AnyTypeBodyPartFormatter>());
-    insert("text", "plain", std::make_unique<TextPlainBodyPartFormatter>());
-    insert("text", "rfc822-headers", std::make_unique<HeadersBodyPartFormatter>());
-    insert("text", "*", std::make_unique<TextPlainBodyPartFormatter>());
+    insert("application", "octet-stream", any);
+    insert("application", "pgp", textPlain);
+    insert("application", "pkcs7-mime", pkcs7);
+    insert("application", "x-pkcs7-mime", pkcs7);
+    insert("application", "pgp-encrypted", pgp);
+    insert("application", "*", any);
 
-    insert("image", "*", std::make_unique<AnyTypeBodyPartFormatter>());
+    insert("text", "html", html);
+    insert("text", "rtf", any);
+    insert("text", "plain", textPlain);
+    insert("text", "rfc822-headers", headers);
+    insert("text", "*", textPlain);
 
-    insert("message", "rfc822", std::make_unique<MessageRfc822BodyPartFormatter>());
-    insert("message", "*", std::make_unique<AnyTypeBodyPartFormatter>());
+    insert("image", "*", any);
 
-    insert("multipart", "alternative", std::make_unique<MultiPartAlternativeBodyPartFormatter>());
-    insert("multipart", "encrypted", std::make_unique<MultiPartEncryptedBodyPartFormatter>());
-    insert("multipart", "signed", std::make_unique<MultiPartSignedBodyPartFormatter>());
-    insert("multipart", "related", std::make_unique<MultiPartRelatedBodyPartFormatter>());
-    insert("multipart", "*", std::make_unique<MultiPartMixedBodyPartFormatter>());
-    insert("*", "*", std::make_unique<AnyTypeBodyPartFormatter>());
+    insert("message", "rfc822", message);
+    insert("message", "*", any);
+
+    insert("multipart", "alternative", multipartAlternative);
+    insert("multipart", "encrypted", multipartEncrypted);
+    insert("multipart", "signed", multipartSigned);
+    insert("multipart", "related", multipartRelated);
+    insert("multipart", "*", multipartMixed);
+    insert("*", "*", any);
 }

@@ -21,7 +21,7 @@ public:
 
     void setup();
     void messageviewer_create_builtin_bodypart_formatters(); // defined in bodypartformatter.cpp
-    void insert(const char *type, const char *subtype, std::unique_ptr<Interface::BodyPartFormatter> formatter);
+    void insert(const char *type, const char *subtype, Interface::BodyPartFormatter *formatter);
 
     BodyPartFormatterBaseFactory *q;
     std::optional<TypeRegistry> all;

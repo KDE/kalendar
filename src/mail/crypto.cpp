@@ -6,12 +6,13 @@
 
 #include "crypto.h"
 
-#include "errors.h"
-
+#ifndef _WIN32
 #include <gpgme.h>
+#endif
 
 #include <QDateTime>
 #include <QDebug>
+#include <QFile>
 
 #include <future>
 #include <utility>
@@ -26,10 +27,11 @@ QDebug operator<<(QDebug d, const Key &key)
 
 QDebug operator<<(QDebug d, const Error &error)
 {
-    d << error.errorCode() << gpgme_strerror(error.errorCode());
+    d << error.error;
     return d;
 }
 
+#ifndef _WIN32
 namespace Crypto
 {
 struct Data {
@@ -87,7 +89,39 @@ static std::pair<gpgme_error_t, gpgme_ctx_t> createForProtocol(CryptoProtocol pr
     }
     // We want the output to always be ASCII armored
     gpgme_set_armor(ctx, 1);
+
+    // Trust new keys
+    if (auto e = gpgme_set_ctx_flag(ctx, "trust-model", "tofu+pgp")) {
+        gpgme_release(ctx);
+        return std::make_pair(e, nullptr);
+    }
+
+    // That's a great way to bring signature verification to a crawl
+    if (auto e = gpgme_set_ctx_flag(ctx, "auto-key-retrieve", "0")) {
+        gpgme_release(ctx);
+        return std::make_pair(e, nullptr);
+    }
+
     return std::make_pair(GPG_ERR_NO_ERROR, ctx);
+}
+
+gpgme_error_t gpgme_passphrase(void *hook, const char *uid_hint, const char *passphrase_info, int prev_was_bad, int fd)
+{
+    Q_UNUSED(hook);
+    Q_UNUSED(prev_was_bad);
+    // uid_hint will be something like "CAA5183608F0FB50 Test1 Kolab <test1@kolab.org>" (CAA518... is the key)
+    // pahhphrase_info will be something like "CAA5183608F0FB50 2E3B7787B1B75920 1 0"
+    qInfo() << "Requested passphrase for " << (uid_hint ? QByteArray{uid_hint} : QByteArray{})
+            << (passphrase_info ? QByteArray{passphrase_info} : QByteArray{});
+
+    QFile file;
+    file.open(fd, QIODevice::WriteOnly);
+    // FIXME hardcoded as a test
+    auto passphrase = QByteArray{"test1"} + QByteArray{"\n"};
+    file.write(passphrase);
+    file.close();
+
+    return 0;
 }
 
 namespace Crypto
@@ -127,7 +161,7 @@ static std::vector<Recipient> copyRecipients(gpgme_decrypt_result_t result)
 {
     std::vector<Recipient> recipients;
     for (gpgme_recipient_t r = result->recipients; r; r = r->next) {
-        recipients.push_back({QByteArray{r->keyid}, {r->status}});
+        recipients.push_back({QByteArray{r->keyid}, r->status != GPG_ERR_NO_SECKEY});
     }
     return recipients;
 }
@@ -139,10 +173,19 @@ static std::vector<Signature> copySignatures(gpgme_verify_result_t result)
         Signature sig;
         sig.fingerprint = QByteArray{is->fpr};
         sig.creationTime.setSecsSinceEpoch(is->timestamp);
-        sig.summary = is->summary;
+        if (is->summary & GPGME_SIGSUM_VALID) {
+            sig.result = Signature::Ok;
+        } else {
+            sig.result = Signature::Invalid;
+            if (is->summary & GPGME_SIGSUM_KEY_EXPIRED) {
+                sig.result = Signature::Expired;
+            }
+            if (is->summary & GPGME_SIGSUM_KEY_MISSING) {
+                sig.result = Signature::KeyNotFound;
+            }
+        }
         sig.status = {is->status};
-        sig.validity = is->validity;
-        sig.validity_reason = is->validity_reason;
+        sig.isTrusted = is->validity == GPGME_VALIDITY_FULL || is->validity == GPGME_VALIDITY_ULTIMATE;
         signatures.push_back(sig);
     }
     return signatures;
@@ -160,6 +203,19 @@ VerificationResult Crypto::verifyDetachedSignature(CryptoProtocol protocol, cons
     auto err = gpgme_op_verify(ctx, Data{signature}.data, Data{text}.data, nullptr);
     gpgme_verify_result_t res = gpgme_op_verify_result(ctx);
     return {copySignatures(res), {err}};
+}
+
+static DecryptionResult::Result toResult(gpgme_error_t err)
+{
+    if (err == GPG_ERR_NO_DATA) {
+        return DecryptionResult::NotEncrypted;
+    } else if (err == GPG_ERR_NO_SECKEY) {
+        return DecryptionResult::NoSecretKeyError;
+    } else if (err == GPG_ERR_CANCELED || err == GPG_ERR_INV_PASSPHRASE) {
+        return DecryptionResult::PassphraseError;
+    }
+    qWarning() << "unknown error" << err << gpgme_strerror(err);
+    return DecryptionResult::NoSecretKeyError;
 }
 
 VerificationResult Crypto::verifyOpaqueSignature(CryptoProtocol protocol, const QByteArray &signature, QByteArray &outdata)
@@ -189,8 +245,9 @@ std::pair<DecryptionResult, VerificationResult> Crypto::decryptAndVerify(CryptoP
 {
     Context context{protocol};
     if (!context) {
-        qWarning() << "Failed to create context " << context.error;
-        return std::make_pair(DecryptionResult{{}, context.error}, VerificationResult{{}, context.error});
+        qWarning() << "Failed to create context " << gpgme_strerror(context.error);
+        qWarning() << "returning early";
+        return std::make_pair(DecryptionResult{{}, {context.error}, DecryptionResult::NoSecretKeyError}, VerificationResult{{}, context.error});
     }
     auto ctx = context.context;
 
@@ -203,7 +260,7 @@ std::pair<DecryptionResult, VerificationResult> Crypto::decryptAndVerify(CryptoP
         qWarning() << "Failed to decrypt and verify" << Error{err};
         // We make sure we don't return any plain-text if the decryption failed to prevent EFAIL
         if (err == GPG_ERR_DECRYPT_FAILED) {
-            return std::make_pair(DecryptionResult{{}, {err}}, VerificationResult{{}, {err}});
+            return std::make_pair(DecryptionResult{{}, {err}, DecryptionResult::DecryptionError}, VerificationResult{{}, {err}});
         }
     }
 
@@ -216,9 +273,48 @@ std::pair<DecryptionResult, VerificationResult> Crypto::decryptAndVerify(CryptoP
     if (gpgme_decrypt_result_t res = gpgme_op_decrypt_result(ctx)) {
         decryptionResult.recipients = copyRecipients(res);
     }
+    decryptionResult.result = toResult(err);
 
     outdata = toBA(out);
     return std::make_pair(decryptionResult, verificationResult);
+}
+
+static DecryptionResult decryptGPGME(CryptoProtocol protocol, const QByteArray &ciphertext, QByteArray &outdata)
+{
+    Context context{protocol};
+    if (!context) {
+        qWarning() << "Failed to create context " << context.error;
+        return DecryptionResult{{}, context.error};
+    }
+    auto ctx = context.context;
+
+    gpgme_data_t out;
+    if (gpgme_error_t e = gpgme_data_new(&out)) {
+        qWarning() << "Failed to allocated data" << e;
+    }
+    auto err = gpgme_op_decrypt(ctx, Data{ciphertext}.data, out);
+    if (err) {
+        qWarning() << "Failed to decrypt" << gpgme_strerror(err);
+        // We make sure we don't return any plain-text if the decryption failed to prevent EFAIL
+        if (err == GPG_ERR_DECRYPT_FAILED) {
+            return DecryptionResult{{}, {err}};
+        }
+    }
+
+    DecryptionResult decryptionResult{{}, {err}};
+    if (gpgme_decrypt_result_t res = gpgme_op_decrypt_result(ctx)) {
+        decryptionResult.recipients = copyRecipients(res);
+    }
+
+    decryptionResult.result = toResult(err);
+
+    outdata = toBA(out);
+    return decryptionResult;
+}
+
+DecryptionResult Crypto::decrypt(CryptoProtocol protocol, const QByteArray &ciphertext, QByteArray &outdata)
+{
+    return decryptGPGME(protocol, ciphertext, outdata);
 }
 
 ImportResult Crypto::importKey(CryptoProtocol protocol, const QByteArray &certData)
@@ -237,6 +333,27 @@ ImportResult Crypto::importKey(CryptoProtocol protocol, const QByteArray &certDa
     } else {
         return {0, 0, 0};
     }
+}
+
+static bool validateKey(const gpgme_key_t key)
+{
+    if (key->revoked) {
+        qWarning() << "Key is revoked " << key->fpr;
+        return false;
+    }
+    if (key->expired) {
+        qWarning() << "Key is expired " << key->fpr;
+        return false;
+    }
+    if (key->disabled) {
+        qWarning() << "Key is disabled " << key->fpr;
+        return false;
+    }
+    if (key->invalid) {
+        qWarning() << "Key is invalid " << key->fpr;
+        return false;
+    }
+    return true;
 }
 
 static KeyListResult listKeys(CryptoProtocol protocol, const std::vector<const char *> &patterns, bool secretOnly, int keyListMode, bool importKeys)
@@ -275,10 +392,8 @@ static KeyListResult listKeys(CryptoProtocol protocol, const std::vector<const c
     while (true) {
         gpgme_key_t key;
         if (auto err = gpgme_op_keylist_next(ctx, &key)) {
-            Error error{err};
-            if (error.errorCode() != GPG_ERR_EOF) {
-                result.error = error;
-                qWarning() << "Error after listing keys" << result.error;
+            if (gpgme_err_code(err) != GPG_ERR_EOF) {
+                qWarning() << "Error after listing keys" << result.error << gpgme_strerror(err);
             }
             break;
         }
@@ -294,7 +409,7 @@ static KeyListResult listKeys(CryptoProtocol protocol, const std::vector<const c
         for (gpgme_user_id_t uid = key->uids; uid; uid = uid->next) {
             k.userIds.push_back(UserId{QByteArray{uid->name}, QByteArray{uid->email}, QByteArray{uid->uid}});
         }
-        k.isExpired = key->expired;
+        k.isUsable = validateKey(key);
         result.keys.push_back(k);
     }
     gpgme_op_keylist_end(ctx);
@@ -302,7 +417,7 @@ static KeyListResult listKeys(CryptoProtocol protocol, const std::vector<const c
     if (importKeys && !listedKeys.empty()) {
         listedKeys.push_back(nullptr);
         if (auto err = gpgme_op_import_keys(ctx, const_cast<gpgme_key_t *>(listedKeys.data()))) {
-            qWarning() << "Error while importing keys" << Error{err};
+            qWarning() << "Error while importing keys" << gpgme_strerror(err);
         }
     }
     return result;
@@ -355,9 +470,15 @@ Expected<Error, QByteArray> Crypto::signAndEncrypt(const QByteArray &content, co
         qDebug() << "Encrypting to " << k;
         gpgme_key_t key;
         if (auto e = gpgme_get_key(context.context, k.fingerprint.data(), &key, /*secret*/ false)) {
+            delete[] keys;
             qWarning() << "Failed to retrieve key " << k.fingerprint << Error{e};
             return makeUnexpected(Error{e});
         } else {
+            if (!key->can_encrypt || !validateKey(key)) {
+                qWarning() << "Key cannot be used for encryption " << k.fingerprint;
+                delete[] keys;
+                return makeUnexpected(Error{e});
+            }
             *keys_it++ = key;
         }
     }
@@ -366,6 +487,7 @@ Expected<Error, QByteArray> Crypto::signAndEncrypt(const QByteArray &content, co
     gpgme_data_t out;
     if (auto e = gpgme_data_new(&out)) {
         qWarning() << "Failed to allocate output buffer";
+        delete[] keys;
         return makeUnexpected(Error{e});
     }
 
@@ -373,9 +495,8 @@ Expected<Error, QByteArray> Crypto::signAndEncrypt(const QByteArray &content, co
                                              : gpgme_op_encrypt(context.context, keys, GPGME_ENCRYPT_ALWAYS_TRUST, Data{content}.data, out);
     delete[] keys;
     if (err) {
-        const auto error = Error{err};
-        qWarning() << "Encryption failed:" << error;
-        switch (error.errorCode()) {
+        qWarning() << "Encryption failed:" << gpgme_err_code(err);
+        switch (gpgme_err_code(err)) {
         case GPG_ERR_UNUSABLE_PUBKEY:
             for (const auto &k : encryptionKeys) {
                 qWarning() << "Encryption key:" << k;
@@ -389,7 +510,7 @@ Expected<Error, QByteArray> Crypto::signAndEncrypt(const QByteArray &content, co
         default:
             break;
         }
-        return makeUnexpected(error);
+        return makeUnexpected(Error{err});
     }
 
     return toBA(out);
@@ -454,12 +575,22 @@ std::vector<Key> Crypto::findKeys(const QStringList &patterns, bool findPrivate,
         qWarning() << "Failed to lookup keys: " << res.error;
         return {};
     }
-    qDebug() << "got keys:" << res.keys.size() << " for " << patterns;
+    qDebug() << "Found " << res.keys.size() << " keys for the patterns: " << patterns;
+
+    std::vector<Key> usableKeys;
     for (const auto &key : res.keys) {
-        qDebug() << "isexpired:" << key.isExpired;
-        for (const auto &userId : key.userIds) {
-            qDebug() << "userID:" << userId.email;
+        if (!key.isUsable) {
+            qWarning() << "Key is not usable: " << key.fingerprint;
+            continue;
         }
+
+        qDebug() << "Key:" << key.fingerprint;
+        for (const auto &userId : key.userIds) {
+            qDebug() << "  userID:" << userId.email;
+        }
+        usableKeys.push_back(key);
     }
-    return res.keys;
+    return usableKeys;
 }
+
+#endif

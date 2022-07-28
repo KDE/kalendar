@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['@all']
+- 'on': ['Linux', 'FreeBSD']
   'require':
     'frameworks/extra-cmake-modules': '@latest'
     'frameworks/qqc2-desktop-style': '@latest'

@@ -23,7 +23,7 @@ struct ltstr {
     }
 };
 
-typedef std::multimap<const char *, std::unique_ptr<Interface::BodyPartFormatter>, ltstr> SubtypeRegistry;
+typedef std::multimap<const char *, Interface::BodyPartFormatter *, ltstr> SubtypeRegistry;
 typedef std::map<const char *, MimeTreeParser::SubtypeRegistry, MimeTreeParser::ltstr> TypeRegistry;
 
 class BodyPartFormatterBaseFactoryPrivate;
@@ -37,7 +37,7 @@ public:
     const SubtypeRegistry &subtypeRegistry(const char *type) const;
 
 protected:
-    void insert(const char *type, const char *subtype, std::unique_ptr<Interface::BodyPartFormatter> formatter);
+    void insert(const char *type, const char *subtype, Interface::BodyPartFormatter *formatter);
 
 private:
     static BodyPartFormatterBaseFactory *mSelf;

@@ -14,6 +14,16 @@
 using namespace MailCrypto;
 using namespace Crypto;
 
+#ifdef _WIN32
+Expected<Error, std::unique_ptr<KMime::Content>>
+MailCrypto::processCrypto(std::unique_ptr<KMime::Content> content, const std::vector<Key> &signingKeys, const std::vector<Key> &encryptionKeys)
+{
+    Q_UNUSED(content)
+    Q_UNUSED(signingKeys)
+    Q_UNUSED(encryptionKeys)
+    return makeUnexpected(Error{});
+}
+#else
 static QByteArray canonicalizeContent(KMime::Content *content)
 {
     // if (d->format & Kleo::InlineOpenPGPFormat) {
@@ -177,3 +187,4 @@ MailCrypto::processCrypto(std::unique_ptr<KMime::Content> content, const std::ve
         return content;
     }
 }
+#endif

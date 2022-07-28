@@ -640,22 +640,13 @@ static QString prettifyDN(const char *uid)
 
 static void sigStatusToMetaData(PartMetaData &mMetaData, const Signature &signature)
 {
-    mMetaData.isGoodSignature = signature.status.errorCode() == GPG_ERR_NO_ERROR;
+    mMetaData.isGoodSignature = !signature.status;
     if (!mMetaData.isGoodSignature) {
-        if (signature.status.errorCode() == GPG_ERR_NO_PUBKEY) {
-            qWarning() << "No public key to verify signature.";
-        } else {
-            qWarning() << "Is no good signature" << signature.status;
-        }
+        qWarning() << "The signature is bad." << signature.status;
     }
     // save extended signature status flags
-    auto summary = signature.summary;
-    mMetaData.keyMissing = summary & GPGME_SIGSUM_KEY_MISSING;
-    mMetaData.keyExpired = summary & GPGME_SIGSUM_KEY_EXPIRED;
-    mMetaData.keyRevoked = summary & GPGME_SIGSUM_KEY_REVOKED;
-    mMetaData.sigExpired = summary & GPGME_SIGSUM_SIG_EXPIRED;
-    mMetaData.crlMissing = summary & GPGME_SIGSUM_CRL_MISSING;
-    mMetaData.crlTooOld = summary & GPGME_SIGSUM_CRL_TOO_OLD;
+    mMetaData.keyMissing = signature.result == Crypto::Signature::KeyNotFound;
+    mMetaData.keyExpired = signature.result == Crypto::Signature::Expired;
 
     Key key;
     if (mMetaData.isGoodSignature) {
@@ -677,7 +668,7 @@ static void sigStatusToMetaData(PartMetaData &mMetaData, const Signature &signat
     if (mMetaData.keyId.isEmpty()) {
         mMetaData.keyId = signature.fingerprint;
     }
-    mMetaData.keyIsTrusted = signature.validity == GPGME_VALIDITY_FULL || signature.validity == GPGME_VALIDITY_ULTIMATE;
+    mMetaData.keyIsTrusted = signature.isTrusted;
     if (!key.userIds.empty()) {
         mMetaData.signer = prettifyDN(key.userIds[0].id.data());
     }
@@ -728,11 +719,11 @@ void SignedMessagePart::startVerification()
         // This is necessary in case the original data contained CRLF's. Otherwise the signature will not match the data (since KMIME normalizes to LF)
         const QByteArray signedData = KMime::LFtoCRLF(mSignedData->encodedContent());
 
-        setVerificationResult(verifyDetachedSignature(mProtocol, signature, signedData), signedData);
+        setVerificationResult(Crypto::verifyDetachedSignature(mProtocol, signature, signedData), signedData);
         setText(codec->toUnicode(KMime::CRLFtoLF(signedData)));
     } else {
         QByteArray outdata;
-        setVerificationResult(verifyOpaqueSignature(mProtocol, mSignedData->decodedContent(), outdata), outdata);
+        setVerificationResult(Crypto::verifyOpaqueSignature(mProtocol, mSignedData->decodedContent(), outdata), outdata);
         setText(codec->toUnicode(KMime::CRLFtoLF(outdata)));
     }
 
@@ -819,7 +810,7 @@ bool EncryptedMessagePart::decrypt(KMime::Content &data)
     QByteArray plainText;
     DecryptionResult decryptResult;
     VerificationResult verifyResult;
-    std::tie(decryptResult, verifyResult) = decryptAndVerify(mProtocol, ciphertext, plainText);
+    std::tie(decryptResult, verifyResult) = Crypto::decryptAndVerify(mProtocol, ciphertext, plainText);
     mMetaData.isSigned = verifyResult.signatures.size() > 0;
 
     // Normalize CRLF's
@@ -846,7 +837,7 @@ bool EncryptedMessagePart::decrypt(KMime::Content &data)
     if (mMetaData.isEncrypted) {
         mMetaData.keyId = [&] {
             for (const auto &recipient : std::as_const(decryptResult.recipients)) {
-                if (recipient.status.errorCode() != GPG_ERR_NO_SECKEY) {
+                if (recipient.secretKeyAvailable) {
                     return recipient.keyId;
                 }
             }
@@ -858,26 +849,17 @@ bool EncryptedMessagePart::decrypt(KMime::Content &data)
         mDecryptedData = plainText;
         setText(decoded);
     } else {
-        const auto errorCode = decryptResult.error.errorCode();
-        mMetaData.isEncrypted = errorCode != GPG_ERR_NO_DATA;
+        mMetaData.isEncrypted = decryptResult.result != Crypto::DecryptionResult::NotEncrypted;
         qWarning() << "Failed to decrypt : " << decryptResult.error;
 
-        const bool noSecretKeyAvilable = mMetaData.keyId.isEmpty();
-        bool passphraseError = errorCode == GPG_ERR_CANCELED || errorCode == GPG_ERR_NO_SECKEY;
-        // We only get a decryption failed error when we enter the wrong passphrase....
-        if (!passphraseError && !noSecretKeyAvilable) {
-            passphraseError = true;
-        }
-
-        if (noSecretKeyAvilable) {
+        if (decryptResult.result == Crypto::DecryptionResult::NoSecretKeyError) {
             mError = NoKeyError;
             mMetaData.errorText = i18n("Could not decrypt the data: no key found for recipients.");
-        } else if (passphraseError) {
+        } else if (decryptResult.result == Crypto::DecryptionResult::PassphraseError) {
             mError = PassphraseError;
-            mMetaData.errorText = QString::fromLocal8Bit(decryptResult.error.errorMessage());
         } else {
             mError = UnknownError;
-            mMetaData.errorText = i18n("Could not decrypt the data. Error: %1", QString::fromLocal8Bit(decryptResult.error.errorMessage()));
+            mMetaData.errorText = i18n("Could not decrypt the data.");
         }
         setText(QString::fromUtf8(mDecryptedData.constData()));
         return false;

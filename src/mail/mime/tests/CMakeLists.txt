@@ -6,7 +6,7 @@ add_definitions( -DMAIL_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../testdata" )
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/..
-    )
+)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test WebEngine)
 

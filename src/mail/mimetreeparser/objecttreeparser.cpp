@@ -110,7 +110,7 @@ QString ObjectTreeParser::htmlContent()
     return content;
 }
 
-static void print(QTextStream &s, KMime::Content *node, const QString prefix = {})
+static void print(QTextStream &stream, KMime::Content *node, const QString prefix = {})
 {
     QByteArray mediaType("text");
     QByteArray subType("plain");
@@ -118,30 +118,30 @@ static void print(QTextStream &s, KMime::Content *node, const QString prefix = {
         mediaType = node->contentType()->mediaType();
         subType = node->contentType()->subType();
     }
-    s << prefix << "! " << mediaType << subType << " isAttachment: " << KMime::isAttachment(node) << "\n";
-    for (const auto c : node->contents()) {
-        print(s, c, prefix + QLatin1String(" "));
+    stream << prefix << "! " << mediaType << subType << " isAttachment: " << KMime::isAttachment(node) << "\n";
+    for (const auto nodeContent : node->contents()) {
+        print(stream, nodeContent, prefix + QLatin1String(" "));
     }
 }
 
-static void print(QTextStream &s, const MessagePart &messagePart, const QByteArray pre = {})
+static void print(QTextStream &stream, const MessagePart &messagePart, const QByteArray pre = {})
 {
-    s << pre << "# " << messagePart.metaObject()->className() << " isAttachment: " << messagePart.isAttachment() << "\n";
-    for (const auto &p : messagePart.subParts()) {
-        print(s, *p, pre + " ");
+    stream << pre << "# " << messagePart.metaObject()->className() << " isAttachment: " << messagePart.isAttachment() << "\n";
+    for (const auto &subPart : messagePart.subParts()) {
+        print(stream, *subPart, pre + " ");
     }
 }
 
 QString ObjectTreeParser::structureAsString() const
 {
     QString string;
-    QTextStream s{&string};
+    QTextStream stream{&string};
 
     if (mTopLevelContent) {
-        ::print(s, mTopLevelContent);
+        ::print(stream, mTopLevelContent);
     }
     if (mParsedPart) {
-        ::print(s, *mParsedPart);
+        ::print(stream, *mParsedPart);
     }
     return string;
 }
@@ -162,9 +162,9 @@ static KMime::Content *find(KMime::Content *node, const std::function<bool(KMime
     if (select(node)) {
         return node;
     }
-    for (const auto c : node->contents()) {
-        if (const auto n = find(c, select)) {
-            return n;
+    for (const auto nodeContent : node->contents()) {
+        if (const auto content = find(nodeContent, select)) {
+            return content;
         }
     }
     return nullptr;
@@ -189,7 +189,7 @@ QVector<MessagePart::Ptr> ObjectTreeParser::collectContentParts(MessagePart::Ptr
             if (start.data() == part.data()) {
                 return true;
             }
-            if (auto e = part.dynamicCast<MimeTreeParser::EncapsulatedRfc822MessagePart>()) {
+            if (auto encapsulatedPart = part.dynamicCast<MimeTreeParser::EncapsulatedRfc822MessagePart>()) {
                 return false;
             }
             return true;
@@ -297,26 +297,26 @@ void ObjectTreeParser::importCertificates()
 QString ObjectTreeParser::resolveCidLinks(const QString &html)
 {
     auto text = html;
-    const auto rx = QRegExp(QLatin1String("(src)\\s*=\\s*(\"|')(cid:[^\"']+)\\2"));
+    const auto regex = QRegExp(QLatin1String("(src)\\s*=\\s*(\"|')(cid:[^\"']+)\\2"));
     int pos = 0;
-    while ((pos = rx.indexIn(text, pos)) != -1) {
-        const auto link = QUrl(rx.cap(3));
-        pos += rx.matchedLength();
+    while ((pos = regex.indexIn(text, pos)) != -1) {
+        const auto link = QUrl(regex.cap(3));
+        pos += regex.matchedLength();
         auto cid = link.path();
-        auto mailMime = const_cast<KMime::Content *>(find([=](KMime::Content *c) {
-            if (!c || !c->contentID(false)) {
+        auto mailMime = const_cast<KMime::Content *>(find([=](KMime::Content *content) {
+            if (!content || !content->contentID(false)) {
                 return false;
             }
-            return QString::fromLatin1(c->contentID(false)->identifier()) == cid;
+            return QString::fromLatin1(content->contentID(false)->identifier()) == cid;
         }));
         if (mailMime) {
-            const auto ct = mailMime->contentType(false);
-            if (!ct) {
+            const auto contentType = mailMime->contentType(false);
+            if (!contentType) {
                 qWarning() << "No content type, skipping";
                 continue;
             }
             QMimeDatabase mimeDb;
-            const auto mimetype = mimeDb.mimeTypeForName(QString::fromLatin1(ct->mimeType())).name();
+            const auto mimetype = mimeDb.mimeTypeForName(QString::fromLatin1(contentType->mimeType())).name();
             if (mimetype.startsWith(QLatin1String("image/"))) {
                 // We reencode to base64 below.
                 const auto data = mailMime->decodedContent();
@@ -324,7 +324,7 @@ QString ObjectTreeParser::resolveCidLinks(const QString &html)
                     qWarning() << "Attachment is empty.";
                     continue;
                 }
-                text.replace(rx.cap(0), QString::fromLatin1("src=\"data:%1;base64,%2\"").arg(mimetype, QString::fromLatin1(data.toBase64())));
+                text.replace(regex.cap(0), QString::fromLatin1("src=\"data:%1;base64,%2\"").arg(mimetype, QString::fromLatin1(data.toBase64())));
             }
         } else {
             qWarning() << "Failed to find referenced attachment: " << cid;
@@ -368,10 +368,10 @@ MessagePartPtr ObjectTreeParser::parsedPart() const
 QVector<MessagePartPtr> ObjectTreeParser::processType(KMime::Content *node, const QByteArray &mediaType, const QByteArray &subType)
 {
     static MimeTreeParser::BodyPartFormatterBaseFactory factory;
-    const auto &sub = factory.subtypeRegistry(mediaType.constData());
+    const auto sub = factory.subtypeRegistry(mediaType.constData());
     const auto range = sub.equal_range(subType.constData());
     for (auto it = range.first; it != range.second; ++it) {
-        const auto formatter = (*it).second.get();
+        const auto formatter = it->second;
         if (!formatter) {
             continue;
         }
@@ -402,7 +402,7 @@ MessagePart::Ptr ObjectTreeParser::parseObjectTreeInternal(KMime::Content *node,
             subType = node->contentType()->subType();
         }
 
-        auto mp = [&] {
+        auto messageParts = [&] {
             // Try the specific type handler
             {
                 auto list = processType(node, mediaType, subType);
@@ -421,8 +421,8 @@ MessagePart::Ptr ObjectTreeParser::parseObjectTreeInternal(KMime::Content *node,
             return defaultHandling(node);
         }();
 
-        for (const auto &p : mp) {
-            parsedPart->appendSubPart(p);
+        for (const auto &part : messageParts) {
+            parsedPart->appendSubPart(part);
         }
 
         if (onlyOneMimePart) {

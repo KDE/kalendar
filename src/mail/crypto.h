@@ -9,7 +9,6 @@
 
 #include <QDateTime>
 #include <functional>
-#include <gpgme.h>
 #include <memory>
 
 namespace Crypto
@@ -27,33 +26,25 @@ struct Key {
     QByteArray keyId;
     QByteArray shortKeyId;
     QByteArray fingerprint;
-    bool isExpired = false;
+    bool isUsable = false;
     std::vector<UserId> userIds;
 };
 
 struct Error {
-    gpgme_error_t error;
-    gpgme_err_code_t errorCode() const
-    {
-        return gpgme_err_code(error);
-    }
-    const char *errorMessage() const
-    {
-        return gpgme_strerror(error);
-    }
+    unsigned int error;
     operator bool() const
     {
-        return error != GPG_ERR_NO_ERROR;
+        return error != 0;
     }
 };
 
 struct Signature {
     QByteArray fingerprint;
-    gpgme_sigsum_t summary;
     Error status;
-    gpgme_validity_t validity;
-    gpgme_error_t validity_reason;
     QDateTime creationTime;
+    enum Result { Ok, NotVerified, Expired, KeyNotFound, Invalid };
+    Result result{NotVerified};
+    bool isTrusted{false};
 };
 
 struct VerificationResult {
@@ -63,12 +54,14 @@ struct VerificationResult {
 
 struct Recipient {
     QByteArray keyId;
-    Error status;
+    bool secretKeyAvailable{false};
 };
 
 struct DecryptionResult {
     std::vector<Recipient> recipients;
     Error error;
+    enum Result { NoError, NotEncrypted, PassphraseError, NoSecretKeyError, DecryptionError };
+    Result result{NoError};
 };
 
 struct KeyListResult {
@@ -76,15 +69,17 @@ struct KeyListResult {
     Error error;
 };
 
-std::vector<Key> findKeys(const QStringList &filter, bool findPrivate = false, bool remote = false);
-
-Expected<Error, QByteArray> exportPublicKey(const Key &key);
-
 struct ImportResult {
     int considered;
     int imported;
     int unchanged;
 };
+
+#ifndef _WIN32
+std::vector<Key> findKeys(const QStringList &filter, bool findPrivate = false, bool remote = false);
+
+Expected<Error, QByteArray> exportPublicKey(const Key &key);
+
 ImportResult importKey(CryptoProtocol protocol, const QByteArray &certData);
 ImportResult importKey(CryptoProtocol protocol, const Key &key);
 
@@ -96,9 +91,11 @@ Expected<Error, std::pair<QByteArray, QString>> sign(const QByteArray &content, 
 Expected<Error, QByteArray> signAndEncrypt(const QByteArray &content, const std::vector<Key> &encryptionKeys, const std::vector<Key> &signingKeys);
 
 std::pair<DecryptionResult, VerificationResult> decryptAndVerify(CryptoProtocol protocol, const QByteArray &ciphertext, QByteArray &outdata);
+DecryptionResult decrypt(CryptoProtocol protocol, const QByteArray &ciphertext, QByteArray &outdata);
 VerificationResult verifyDetachedSignature(CryptoProtocol protocol, const QByteArray &signature, const QByteArray &outdata);
 VerificationResult verifyOpaqueSignature(CryptoProtocol protocol, const QByteArray &signature, QByteArray &outdata);
 };
+#endif
 
 Q_DECLARE_METATYPE(Crypto::Key);
 
