@@ -550,7 +550,7 @@ Kirigami.OverlayDrawer {
                                 // TODO port to TapHanlder
                                 CalendarItemMouseArea {
                                     id: calendarSourceItemMouseArea
-                                    parent: calendarItem.contentItem // Otherwise label elide breaks
+                                    parent: calendarSourceItem.contentItem // Otherwise label elide breaks
                                     collectionId: model.collectionId
                                     collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                                     anchors.fill: parent
