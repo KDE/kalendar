@@ -269,6 +269,7 @@ TreeListView {
                 Flow {
                     id: tagFlow
                     Layout.fillWidth: true
+                    Layout.minimumWidth: tagsRepeater.count > 0 ? Math.min(tagsRepeater.itemAt(0).implicitWidth, Kirigami.Units.gridUnit * 6) : -1
                     Layout.row: root.width < Kirigami.Units.gridUnit * 28 && (recurIcon.visible || dateLabel.visible || priorityLayout.visible) ? 1 : 0
                     Layout.column: 2
                     Layout.rowSpan: root.width < Kirigami.Units.gridUnit * 28 ? 1 : 2
@@ -283,7 +284,7 @@ TreeListView {
                         model: todoCategories // From todoModel
 
                         Tag {
-                            implicitWidth: itemLayout.implicitWidth > tagFlow.width ? tagFlow.width : itemLayout.implicitWidth
+                            width: implicitWidth > tagFlow.width ? tagFlow.width : implicitWidth
                             text: modelData
                             showAction: false
                         }
