@@ -228,11 +228,8 @@ QtObject {
     }
 
     function openDayLayer(selectedDate) {
-        appMain.dayScaleModelLoaderItem.active = true;
-
         if(!isNaN(selectedDate.getTime())) {
             appMain.selectedDate = selectedDate;
-
             appMain.dayViewAction.trigger();
         }
     }
