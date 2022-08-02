@@ -9,11 +9,6 @@
 #include <Akonadi/Item>
 #include <QObject>
 
-namespace KContacts
-{
-class Addressee;
-}
-
 class ContactGroupEditorPrivate;
 class QAbstractItemModel;
 
