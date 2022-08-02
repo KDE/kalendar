@@ -44,7 +44,7 @@ SPDX-License-Identifier: CC0-1.0
         <file alias="TodoCheckBox.qml">contents/ui/Controls/TodoCheckBox.qml</file>
         <file alias="Tag.qml">contents/ui/Controls/Tag.qml</file>
         <file alias="ResizerSeparator.qml">contents/ui/Controls/ResizerSeparator.qml</file>
-        <file alias="CalendarItemMouseArea.qml">contents/ui/Controls/CalendarItemMouseArea.qml</file>
+        <file alias="CalendarItemTapHandler.qml">contents/ui/Controls/CalendarItemTapHandler.qml</file>
         <file alias="LocationMap.qml">contents/ui/Location/LocationMap.qml</file>
         <file alias="SettingsPage.qml">contents/ui/Settings/SettingsPage.qml</file>
         <file alias="AboutPage.qml">contents/ui/Settings/AboutPage.qml</file>

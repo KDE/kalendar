@@ -72,11 +72,8 @@ Kirigami.Page {
 
                             onClicked: collectionsList.model.toggleChildren(index)
 
-                            CalendarItemMouseArea {
-                                id: calendarItemMouseArea
-                                parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                            CalendarItemTapHandler {
                                 collectionId: model.collectionId
-                                anchors.fill: parent
                             }
                         }
                     }
@@ -101,14 +98,10 @@ Kirigami.Page {
                                 onClicked: model.checkState = model.checkState === 0 ? 2 : 0
                             }
 
-                            CalendarItemMouseArea {
-                                id: calendarItemMouseArea
-                                parent: calendarItem.contentItem // Otherwise label elide breaks
+                            CalendarItemTapHandler {
                                 collectionId: model.collectionId
-                                anchors.fill: parent
 
-                                Component {
-                                    id: deleteCalendarPageComponent
+                                property Component deleteCalendarPageComponent: Component {
                                     DeleteCalendarPage {
                                         id: deletePage
                                         onDeleteCollection: {
@@ -118,10 +111,11 @@ Kirigami.Page {
                                         onCancel: closeDialog()
                                     }
                                 }
+
                                 onDeleteCalendar: {
                                     const openDialogWindow = pageStack.pushDialogLayer(deleteCalendarPageComponent, {
-                                        collectionId: collectionId,
-                                        collectionDetails: collectionDetails,
+                                        collectionId: model.collectionId,
+                                        collectionDetails: CalendarManager.getCollectionDetails(model.collectionId),
                                     }, {
                                         width: Kirigami.Units.gridUnit * 30,
                                         height: Kirigami.Units.gridUnit * 6

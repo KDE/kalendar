@@ -496,13 +496,15 @@ Kirigami.OverlayDrawer {
                                 leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
                                 Connections {
+                                    property var collectionDetails: CalendarManager.getCollectionDetails(collectionId)
+
                                     target: AgentConfiguration
                                     function onAgentProgressChanged(agentData) {
-                                        if(agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource &&
+                                        if(agentData.instanceId === collectionDetails.resource &&
                                             agentData.status === AgentConfiguration.Running) {
 
                                             loadingIndicator.visible = true;
-                                        } else if (agentData.instanceId === calendarSourceItemMouseArea.collectionDetails.resource) {
+                                        } else if (agentData.instanceId === collectionDetails.resource) {
                                             loadingIndicator.visible = false;
                                         }
                                     }
@@ -547,28 +549,28 @@ Kirigami.OverlayDrawer {
                                     enabled: mainDrawer.mode === KalendarApplication.Contact
                                 }
 
-                                // TODO port to TapHanlder
-                                CalendarItemMouseArea {
-                                    id: calendarSourceItemMouseArea
-                                    parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                                CalendarItemTapHandler {
                                     collectionId: model.collectionId
                                     collectionDetails: CalendarManager.getCollectionDetails(collectionId)
-                                    anchors.fill: parent
                                     enabled: mode !== KalendarApplication.Contact
+                                }
 
-                                    DropArea {
-                                        id: incidenceDropArea
-                                        anchors.fill: parent
-                                        z: 9999
-                                        enabled: calendarSourceItemMouseArea.collectionDetails.canCreate
-                                        onDropped: if(drop.source.objectName === "taskDelegate") {
-                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collectionId);
+                                DropArea {
+                                    id: incidenceDropArea
 
-                                            const pos = mapToItem(applicationWindow().contentItem, x, y);
-                                            drop.source.caughtX = pos.x;
-                                            drop.source.caughtY = pos.y;
-                                            drop.source.caught = true;
-                                        }
+                                    property var collectionDetails: CalendarManager.getCollectionDetails(model.collectionId)
+
+                                    parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                                    anchors.fill: parent
+                                    z: 9999
+                                    enabled: collectionDetails.canCreate
+                                    onDropped: if(drop.source.objectName === "taskDelegate") {
+                                        CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, model.collectionId);
+
+                                        const pos = mapToItem(applicationWindow().contentItem, x, y);
+                                        drop.source.caughtX = pos.x;
+                                        drop.source.caughtY = pos.y;
+                                        drop.source.caught = true;
                                     }
                                 }
                             }
@@ -618,29 +620,29 @@ Kirigami.OverlayDrawer {
                                     enabled: mainDrawer.mode === KalendarApplication.Contact
                                 }
 
-                                CalendarItemMouseArea {
-                                    id: calendarItemMouseArea
-                                    parent: calendarItem.contentItem // Otherwise label elide breaks
+                                CalendarItemTapHandler {
                                     collectionId: model.collectionId
                                     collectionDetails: CalendarManager.getCollectionDetails(collectionId)
-                                    anchors.fill: parent
                                     enabled: mode !== KalendarApplication.Contact
-
                                     onDeleteCalendar: mainDrawer.deleteCalendar(collectionId, collectionDetails)
+                                }
 
-                                    DropArea {
-                                        id: incidenceDropArea
-                                        anchors.fill: parent
-                                        z: 9999
-                                        enabled: calendarItemMouseArea.collectionDetails.canCreate
-                                        onDropped: if(drop.source.objectName === "taskDelegate") {
-                                            CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
+                                DropArea {
+                                    id: incidenceDropArea
 
-                                            const pos = mapToItem(applicationWindow().contentItem, x, y);
-                                            drop.source.caughtX = pos.x;
-                                            drop.source.caughtY = pos.y;
-                                            drop.source.caught = true;
-                                        }
+                                    property var collectionDetails: CalendarManager.getCollectionDetails(model.collectionId)
+
+                                    parent: calendarItem.contentItem // Otherwise label elide breaks
+                                    anchors.fill: parent
+                                    z: 9999
+                                    enabled: collectionDetails.canCreate
+                                    onDropped: if(drop.source.objectName === "taskDelegate") {
+                                        CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, model.collectionId);
+
+                                        const pos = mapToItem(applicationWindow().contentItem, x, y);
+                                        drop.source.caughtX = pos.x;
+                                        drop.source.caughtY = pos.y;
+                                        drop.source.caught = true;
                                     }
                                 }
                             }
