@@ -21,6 +21,7 @@
 #include <KCharsets>
 #include <QByteArray>
 #include <QMimeDatabase>
+#include <QRegularExpression>
 #include <QTextCodec>
 #include <QTextStream>
 #include <QUrl>
@@ -297,11 +298,11 @@ void ObjectTreeParser::importCertificates()
 QString ObjectTreeParser::resolveCidLinks(const QString &html)
 {
     auto text = html;
-    const auto regex = QRegExp(QLatin1String("(src)\\s*=\\s*(\"|')(cid:[^\"']+)\\2"));
-    int pos = 0;
-    while ((pos = regex.indexIn(text, pos)) != -1) {
-        const auto link = QUrl(regex.cap(3));
-        pos += regex.matchedLength();
+    static const auto regex = QRegularExpression(QLatin1String("(src)\\s*=\\s*(\"|')(cid:[^\"']+)\\2"));
+    auto it = regex.globalMatch(text);
+    while (it.hasNext()) {
+        const auto match = it.next();
+        const auto link = QUrl(match.captured(3));
         auto cid = link.path();
         auto mailMime = const_cast<KMime::Content *>(find([=](KMime::Content *content) {
             if (!content || !content->contentID(false)) {
@@ -324,7 +325,7 @@ QString ObjectTreeParser::resolveCidLinks(const QString &html)
                     qWarning() << "Attachment is empty.";
                     continue;
                 }
-                text.replace(regex.cap(0), QString::fromLatin1("src=\"data:%1;base64,%2\"").arg(mimetype, QString::fromLatin1(data.toBase64())));
+                text.replace(match.captured(0), QString::fromLatin1("src=\"data:%1;base64,%2\"").arg(mimetype, QString::fromLatin1(data.toBase64())));
             }
         } else {
             qWarning() << "Failed to find referenced attachment: " << cid;

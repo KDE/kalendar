@@ -10,6 +10,7 @@
 #include <QByteArray>
 #include <QDebug>
 #include <QList>
+#include <QRegularExpression>
 #include <QSysInfo>
 #include <QTextCodec>
 #include <QTextDocument>
@@ -85,22 +86,17 @@ QString replacePrefixes(const QString &str, const QStringList &prefixRegExps, co
     // 1. is anchored to the beginning of str (sans whitespace)
     // 2. matches at least one of the part regexps in prefixRegExps
     const QString bigRegExp = QStringLiteral("^(?:\\s+|(?:%1))+\\s*").arg(prefixRegExps.join(QStringLiteral(")|(?:")));
-    QRegExp rx(bigRegExp, Qt::CaseInsensitive);
-    if (!rx.isValid()) {
-        qWarning() << "bigRegExp = \"" << bigRegExp << "\"\n"
-                   << "prefix regexp is invalid!";
-        qWarning() << "Error: " << rx.errorString() << rx;
-        Q_ASSERT(false);
-        return str;
-    }
+    static QRegularExpression regex(bigRegExp, QRegularExpression::CaseInsensitiveOption);
+    Q_ASSERT(regex.isValid());
 
     QString tmp = str;
     // We expect a match at the beginning of the string
-    if (rx.indexIn(tmp) == 0) {
-        return tmp.replace(0, rx.matchedLength(), newPrefix + QLatin1String(" "));
+    const auto match = regex.match(tmp);
+    if (match.hasMatch()) {
+        return tmp.replace(0, match.captured(0).length(), newPrefix + QLatin1Char(' '));
     }
     // No match, we just prefix the newPrefix
-    return newPrefix + QStringLiteral(" ") + str;
+    return newPrefix + QLatin1Char(' ') + str;
 }
 
 const QStringList getForwardPrefixes()
@@ -251,9 +247,9 @@ static QString stripSignature(const QString &msg)
         qWarning() << "Message contains CRLF, but shouldn't: " << msg;
         Q_ASSERT(false);
     }
-    const QRegExp sbDelimiterSearch = QRegExp(QLatin1String("(^|\n)[> ]*-- \n"));
+    const QRegExp sbDelimiterSearch(QLatin1String("(^|\n)[> ]*-- \n"));
     // The regular expression to look for prefix change
-    const QRegExp commonReplySearch = QRegExp(QLatin1String("^[ ]*>"));
+    const QRegExp commonReplySearch(QLatin1String("^[ ]*>"));
 
     QString res = msg;
     int posDeletingStart = 1; // to start looking at 0
