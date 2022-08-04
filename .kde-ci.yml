@@ -24,4 +24,4 @@ Dependencies:
 
 Options:
   cmake-options: "-DAKONADI_RUN_MYSQL_ISOLATED_TESTS=FALSE -DAKONADI_RUN_PGSQL_ISOLATED_TESTS=FALSE"
-  require-passing-tests-on: [ 'Linux', 'FreeBSD']
+  require-passing-tests-on: ['Linux']
