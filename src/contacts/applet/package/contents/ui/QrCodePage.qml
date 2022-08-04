@@ -56,10 +56,7 @@ ColumnLayout {
                     [
                         {text: i18n("QR Code"), type: Prison.Barcode.QRCode},
                         {text: i18n("Data Matrix"), type: Prison.Barcode.DataMatrix},
-                        {text: i18nc("Aztec barcode", "Aztec"), type: Prison.Barcode.Aztec},
-                        {text: i18n("Code 39"), type: Prison.Barcode.Code39},
-                        {text: i18n("Code 93"), type: Prison.Barcode.Code93},
-                        {text: i18n("Code 128"), type: Prison.Barcode.Code128}
+                        {text: i18nc("Aztec barcode", "Aztec"), type: Prison.Barcode.Aztec}
                     ].forEach((item) => {
                         let menuItem = menuItemComponent.createObject(menu, {
                             text: item.text,
