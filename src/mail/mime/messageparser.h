@@ -16,11 +16,6 @@ class QAbstractItemModel;
 
 class MessagePartPrivate;
 
-namespace MimeTreeParser
-{
-class ObjectTreeParser;
-}
-
 class MessageParser : public QObject
 {
     Q_OBJECT

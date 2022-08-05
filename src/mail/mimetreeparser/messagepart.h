@@ -11,8 +11,6 @@
 #include <QSharedPointer>
 #include <QString>
 
-class QTextCodec;
-
 namespace KMime
 {
 class Content;

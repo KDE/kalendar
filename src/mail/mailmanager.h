@@ -6,11 +6,9 @@
 namespace Akonadi
 {
 class CollectionFilterProxyModel;
-class EntityMimeTypeFilterModel;
 class Session;
 }
 
-class QAbstractListModel;
 class QItemSelectionModel;
 
 class MailModel;
