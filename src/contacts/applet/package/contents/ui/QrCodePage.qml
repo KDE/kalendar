@@ -7,7 +7,6 @@ import QtQml 2.15
 import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.components 2.0 as PlasmaComponents // For ContextMenu
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -39,18 +38,14 @@ ColumnLayout {
 
             Component {
                 id: menuItemComponent
-                PlasmaComponents.MenuItem { }
+                PlasmaComponents3.MenuItem { }
             }
 
-            PlasmaComponents.ContextMenu {
+            PlasmaComponents3.Menu {
                 id: menu
-                visualParent: configureButton
-                placement: PlasmaCore.Types.BottomPosedLeftAlignedPopup
-                onStatusChanged: {
-                    if (status == PlasmaComponents.DialogStatus.Closed) {
-                        configureButton.checked = false;
-                    }
-                }
+                x: configureButton.x
+                y: configureButton.y + configureButton.height
+                onClosed: configureButton.checked = false
 
                 Component.onCompleted: {
                     [
@@ -69,7 +64,7 @@ ColumnLayout {
                             barcodeItem.barcodeType = item.type;
                             Plasmoid.configuration.barcodeType = item.type;
                         });
-                        menu.addMenuItem(menuItem);
+                        menu.addItem(menuItem);
                     });
                 }
             }
@@ -77,7 +72,8 @@ ColumnLayout {
                 id: configureButton
                 checkable: true
                 icon.name: "configure"
-                onClicked: menu.openRelative()
+                onCheckedChanged: console.log("checked", checked)
+                onClicked: menu.open()
 
                 PlasmaComponents3.ToolTip {
                     text: i18n("Change the QR code type")

@@ -8,7 +8,6 @@ import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kalendar.contact 1.0
 
 PlasmaComponents3.ScrollView {
@@ -40,7 +39,7 @@ PlasmaComponents3.ScrollView {
     property var header: PlasmaExtras.PlasmoidHeading {
         Component {
             id: menuItemComponent
-            PlasmaComponents.MenuItem { }
+            PlasmaComponents3.MenuItem { }
         }
         RowLayout {
             width: parent.width
@@ -64,27 +63,23 @@ PlasmaComponents3.ScrollView {
                     if (model.length === 1) {
                         page.callNumber(model[0].normalizedNumber);
                     } else {
-                        model.forEach((item) => {
-                            let menuItem = menuItemComponent.createObject(menuCall, {
-                                text: item.number,
+                        if (menuCall.count == 0) {
+                            model.forEach((item) => {
+                                let menuItem = menuItemComponent.createObject(menuCall, {
+                                    text: i18n("%1 (%2)", item.typeLabel, item.number)
+                                });
+                                menuItem.clicked.connect(() => {
+                                    callNumber(item.number);
+                                });
+                                menuCall.addItem(menuItem);
                             });
-                            menuItem.clicked.connect(() => {
-                                callNumber(item.number);
-                            });
-                            menuCall.addMenuItem(menuItem);
-                        });
-                        menuCall.openRelative();
+                        }
+                        menuCall.open();
                     }
                 }
-                PlasmaComponents.ContextMenu {
+                PlasmaComponents3.Menu {
                     id: menuCall
-                    visualParent: configureButtonCall
-                    placement: PlasmaCore.Types.BottomPosedLeftAlignedPopup
-                    onStatusChanged: {
-                        if (status === PlasmaComponents.DialogStatus.Closed) {
-                            configureButtonCall.checked = false;
-                        }
-                    }
+                    y: configureButtonCall.height
                 }
             }
 
@@ -100,27 +95,23 @@ PlasmaComponents3.ScrollView {
                     if (addressee.phoneNumbers.length === 1) {
                         sendSms(model[0].normalizedNumber);
                     } else {
-                        model.forEach((item) => {
-                            let menuItem = menuItemComponent.createObject(menuSms, {
-                                text: item.number,
+                        if (menuSms.count == 0) {
+                            model.forEach((item) => {
+                                let menuItem = menuItemComponent.createObject(menuSms, {
+                                    text: i18n("%1 (%2)", item.typeLabel, item.number)
+                                });
+                                menuItem.clicked.connect(() => {
+                                    sendSms(item.number);
+                                });
+                                menuSms.addItem(menuItem);
                             });
-                            menuItem.clicked.connect(() => {
-                                sendSms(item.number);
-                            });
-                            menuSms.addMenuItem(menuItem);
-                        });
-                        menuSms.openRelative();
+                        }
+                        menuSms.open();
                     }
                 }
-                PlasmaComponents.ContextMenu {
+                PlasmaComponents3.Menu {
                     id: menuSms
-                    visualParent: configureButtonSms
-                    placement: PlasmaCore.Types.BottomPosedLeftAlignedPopup
-                    onStatusChanged: {
-                        if (status === PlasmaComponents.DialogStatus.Closed) {
-                            configureButtonSms.checked = false;
-                        }
-                    }
+                    y: configureButtonSms.height
                 }
             }
 
