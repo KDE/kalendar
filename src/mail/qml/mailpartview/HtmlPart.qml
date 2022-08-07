@@ -11,8 +11,6 @@ import org.kde.kalendar 1.0
 import org.kde.kalendar.mail 1.0
 import org.kde.kirigami 2.19 as Kirigami
 
-import org.kube.framework 1.0 as Kube
-
 Item {
     id: root
     objectName: "htmlPart"
