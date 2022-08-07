@@ -328,7 +328,7 @@ void CalendarManager::refreshEnabledTodoCollections()
 
 bool CalendarManager::loading() const
 {
-    return !m_calendar->isLoaded();
+    return m_calendar->isLoading();
 }
 
 void CalendarManager::setCollectionSelectionProxyModel(KCheckableProxyModel *m)

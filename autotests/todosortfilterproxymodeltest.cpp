@@ -60,7 +60,7 @@ private Q_SLOTS:
         loadedCheckTimer.setInterval(300);
         loadedCheckTimer.setSingleShot(true);
         connect(&loadedCheckTimer, &QTimer::timeout, this, [&]() {
-            if (calendar->isLoaded()) {
+            if (!calendar->isLoading()) {
                 Q_EMIT calendarLoaded();
             } else {
                 loadedCheckTimer.start();
@@ -77,7 +77,7 @@ private Q_SLOTS:
 
     void testAddCalendar()
     {
-        QVERIFY(calendar->isLoaded());
+        QVERIFY(!calendar->isLoading());
         QVERIFY(calendar->items().count() > 0);
 
         QSignalSpy fetchFinished(&model, &QAbstractItemModel::modelReset);
