@@ -21,7 +21,6 @@
 #include <QObject>
 #include <QWindow>
 
-class QWindow;
 class QQuickWindow;
 class QSortFilterProxyModel;
 

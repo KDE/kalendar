@@ -12,8 +12,6 @@
 
 #include <memory>
 
-class QAbstractItemModel;
-
 class MessagePartPrivate;
 
 class MessageParser : public QObject
