@@ -35,7 +35,6 @@ class IncidenceWrapper : public QObject, public Akonadi::ItemMonitor
 
     // Akonadi properties
     Q_PROPERTY(Akonadi::Item incidenceItem READ incidenceItem WRITE setIncidenceItem NOTIFY incidenceItemChanged)
-    Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
     Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
 
     // Incidence properties
@@ -45,8 +44,6 @@ class IncidenceWrapper : public QObject, public Akonadi::ItemMonitor
     Q_PROPERTY(QString incidenceTypeStr READ incidenceTypeStr NOTIFY incidenceTypeStrChanged)
     Q_PROPERTY(QString incidenceIconName READ incidenceIconName NOTIFY incidenceIconNameChanged)
     Q_PROPERTY(QString uid READ uid CONSTANT) // TODO: This needs to not be a CONSTANT
-    Q_PROPERTY(qint64 collectionId READ collectionId WRITE setCollectionId NOTIFY collectionIdChanged)
-    Q_PROPERTY(QString uid READ uid CONSTANT)
 
     Q_PROPERTY(QString parent READ parent WRITE setParent NOTIFY parentChanged)
     Q_PROPERTY(IncidenceWrapper *parentIncidence READ parentIncidence NOTIFY parentIncidenceChanged)
