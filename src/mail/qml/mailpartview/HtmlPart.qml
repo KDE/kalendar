@@ -25,8 +25,11 @@ Item {
     onSearchStringChanged: {
         htmlView.findText(searchString)
     }
+    onContentChanged: {
+        htmlView.loadHtml(content, "file:///");
+    }
 
-    QQC.ScrollView {
+    QQC2.ScrollView {
         anchors.fill: parent
         Flickable {
             id: flickable
@@ -101,9 +104,6 @@ Item {
                     request.accepted = true
                 }
             }
-        }
-        onContentChanged: {
-            htmlView.loadHtml(content, "file:///");
         }
     }
 }
