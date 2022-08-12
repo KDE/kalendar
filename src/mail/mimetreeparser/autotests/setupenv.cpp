@@ -11,7 +11,6 @@
 
 void MimeTreeParser::Test::setupEnv()
 {
-    qputenv("LC_ALL", "C");
-    qputenv("KDEHOME", QFile::encodeName(QDir::homePath() + QString::fromLatin1("/.qttest")).constData());
+    qputenv("LC_ALL", "en_US.UTF-8");
     QStandardPaths::setTestModeEnabled(true);
 }

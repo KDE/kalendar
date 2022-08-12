@@ -85,8 +85,8 @@ QString replacePrefixes(const QString &str, const QStringList &prefixRegExps, co
     // construct a big regexp that
     // 1. is anchored to the beginning of str (sans whitespace)
     // 2. matches at least one of the part regexps in prefixRegExps
-    const QString bigRegExp = QStringLiteral("^(?:\\s+|(?:%1))+\\s*").arg(prefixRegExps.join(QStringLiteral(")|(?:")));
-    static QRegularExpression regex(bigRegExp, QRegularExpression::CaseInsensitiveOption);
+    const QString bigRegExp = QStringLiteral("^(\\s+|(%1))+\\s*").arg(prefixRegExps.join(QStringLiteral(")|(")));
+    const QRegularExpression regex(bigRegExp, QRegularExpression::CaseInsensitiveOption);
     Q_ASSERT(regex.isValid());
 
     QString tmp = str;
@@ -106,6 +106,8 @@ const QStringList getForwardPrefixes()
     // We want to be able to potentially reply to a variety of languages, so only translating is not enough
     list << i18n("fwd");
     list << QStringLiteral("fwd");
+    list << QStringLiteral("Fwd");
+    list << QStringLiteral("fw");
     list << QStringLiteral("fw");
     list << QStringLiteral("wg");
     list << QStringLiteral("vs");
