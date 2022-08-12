@@ -1,0 +1,31 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "carl@carlschwan.eu",
+                "Name": "Carl Schwan"
+            }
+        ],
+        "Name": "Contact",
+        "Category": "Personal information",
+        "Description": "Contact list",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop"
+        ],
+        "Icon": "im-user",
+        "Id": "org.kde.kalendar.contact",
+        "License": "GPL-2.0+",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0.0",
+        "Website": "https://apps.kde.org/kalendar"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-NotificationArea": true,
+    "X-Plasma-NotificationAreaCategory": "PIM"
+}
+
+
