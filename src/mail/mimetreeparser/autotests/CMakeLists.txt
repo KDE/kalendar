@@ -25,7 +25,6 @@ function(add_mimetreeparser_class_unittest _name _additionalSource)
         kalendar_lib
         KF5::MailCommon
         KF5::AkonadiMime
-        Qt5::WebEngineWidgets
         kalendar_mail_plugin
     )
     add_test(NAME ${_name} COMMAND $<TARGET_FILE:${_name}>)
@@ -42,7 +41,6 @@ function(add_mimetreeparser_crypto_unittest _name)
         Gpgme::Gpgme
         KF5::MailCommon
         KF5::AkonadiMime
-        Qt5::WebEngineWidgets
         kalendar_mail_plugin
     )
 endfunction()

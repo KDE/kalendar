@@ -5,17 +5,12 @@
 
 #include <QDebug>
 #include <QTest>
-#include <QtWebEngine>
 
 class CryptoTest : public QObject
 {
     Q_OBJECT
-private Q_SLOTS:
 
-    void initTestCase()
-    {
-        QtWebEngine::initialize();
-    }
+private Q_SLOTS:
 
     void testDecrypt()
     {

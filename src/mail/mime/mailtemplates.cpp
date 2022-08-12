@@ -14,15 +14,10 @@
 #include <QTextCodec>
 #include <QTextDocument>
 #include <QUuid>
-#include <QWebEnginePage>
-#include <QWebEngineProfile>
-#include <QWebEngineScript>
-#include <QWebEngineSettings>
 #include <functional>
 
 #include <KCodecs/KCharsets>
 #include <KMime/Types>
-#include <qstringliteral.h>
 
 #include "../mimetreeparser/objecttreeparser.h"
 
@@ -247,7 +242,7 @@ QString plainToHtml(const QString &body)
 }
 
 // TODO implement this function using a DOM tree parser
-QString makeValidHtml(const QString &body, const QString &headElement)
+QString makeValidHtml(const QString &body)
 {
     QString newBody = body;
     QRegExp regEx;
@@ -259,10 +254,10 @@ QString makeValidHtml(const QString &body, const QString &headElement)
         if (!newBody.contains(regEx)) {
             newBody = QLatin1String("<body>") + body + QLatin1String("<br/></body>");
         }
-        regEx.setPattern(QStringLiteral("<head.*>"));
-        if (!newBody.contains(regEx)) {
-            newBody = QLatin1String("<head>") + headElement + QLatin1String("</head>") + body;
-        }
+        // regEx.setPattern(QStringLiteral("<head.*>"));
+        // if (!newBody.contains(regEx)) {
+        //     newBody = QLatin1String("<head>") + headElement + QLatin1String("</head>") + body;
+        // }
         newBody = QLatin1String("<html>") + body + QLatin1String("</html>");
     }
     return newBody;
@@ -334,72 +329,10 @@ static QString stripSignature(const QString &msg)
     return res;
 }
 
-static void setupPage(QWebEnginePage *page)
-{
-    page->profile()->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
-    page->profile()->setPersistentCookiesPolicy(QWebEngineProfile::NoPersistentCookies);
-    page->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::JavascriptCanOpenWindows, false);
-    page->settings()->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, false);
-    page->settings()->setAttribute(QWebEngineSettings::LocalStorageEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::XSSAuditingEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::ErrorPageEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, false);
-    page->settings()->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, false);
-    page->settings()->setAttribute(QWebEngineSettings::HyperlinkAuditingEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::ScreenCaptureEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::WebGLEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::AutoLoadIconsForPage, false);
-    page->settings()->setAttribute(QWebEngineSettings::Accelerated2dCanvasEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::FocusOnNavigationEnabled, false);
-    page->settings()->setAttribute(QWebEngineSettings::AllowRunningInsecureContent, false);
-}
-
 static void plainMessageText(const QString &plainTextContent, const QString &htmlContent, const std::function<void(const QString &)> &callback)
 {
     const auto result = plainTextContent.isEmpty() ? toPlainText(htmlContent) : plainTextContent;
     callback(result);
-}
-
-static QString extractHeaderBodyScript()
-{
-    return QStringLiteral(
-        "(function() {"
-        "var res = {"
-        "    body: document.getElementsByTagName('body')[0].innerHTML,"
-        "    header: document.getElementsByTagName('head')[0].innerHTML"
-        "};"
-        "return res;"
-        "})()");
-}
-
-void htmlMessageText(const QString &plainTextContent, const QString &htmlContent, const std::function<void(const QString &body, QString &head)> &callback)
-{
-    QString htmlElement = htmlContent;
-
-    if (htmlElement.isEmpty()) { // plain mails only
-        QString htmlReplace = plainTextContent.toHtmlEscaped();
-        htmlReplace = htmlReplace.replace(QStringLiteral("\n"), QStringLiteral("<br />"));
-        htmlElement = QStringLiteral("<html><head></head><body>%1</body></html>\n").arg(htmlReplace);
-    }
-
-    auto page = new QWebEnginePage;
-    setupPage(page);
-
-    page->setHtml(htmlElement);
-    page->runJavaScript(extractHeaderBodyScript(), QWebEngineScript::ApplicationWorld, [=](const QVariant &result) {
-        page->deleteLater();
-        const QVariantMap map = result.toMap();
-        auto bodyElement = map.value(QStringLiteral("body")).toString();
-        auto headerElement = map.value(QStringLiteral("header")).toString();
-        if (!bodyElement.isEmpty()) {
-            return callback(bodyElement, headerElement);
-        }
-
-        return callback(htmlElement, headerElement);
-    });
 }
 
 QString formatQuotePrefix(const QString &wildString, const QString &fromDisplayString)
@@ -488,44 +421,6 @@ QString quotedHtmlText(const QString &selection)
     // Add blockquote tag, so that quoted message can be differentiated from normal message
     content = QStringLiteral("<blockquote>") + content + QStringLiteral("</blockquote>");
     return content;
-}
-
-void applyCharset(const KMime::Message::Ptr msg, const KMime::Message::Ptr &origMsg)
-{
-    // first convert the body from its current encoding to unicode representation
-    QTextCodec *bodyCodec = KCharsets::charsets()->codecForName(QString::fromLatin1(msg->contentType()->charset()));
-    if (!bodyCodec) {
-        bodyCodec = KCharsets::charsets()->codecForName(QStringLiteral("UTF-8"));
-    }
-
-    const QString body = bodyCodec->toUnicode(msg->body());
-
-    // then apply the encoding of the original message
-    msg->contentType()->setCharset(origMsg->contentType()->charset());
-
-    QTextCodec *codec = KCharsets::charsets()->codecForName(QString::fromLatin1(msg->contentType()->charset()));
-    if (!codec) {
-        qCritical() << "Could not get text codec for charset" << msg->contentType()->charset();
-    } else if (!codec->canEncode(body)) { // charset can't encode body, fall back to preferred
-        const QStringList charsets /*= preferredCharsets() */;
-
-        QList<QByteArray> chars;
-        chars.reserve(charsets.count());
-        for (const QString &charset : charsets) {
-            chars << charset.toLatin1();
-        }
-
-        // FIXME
-        QByteArray fallbackCharset /* = selectCharset(chars, body)*/;
-        if (fallbackCharset.isEmpty()) { // UTF-8 as fall-through
-            fallbackCharset = "UTF-8";
-        }
-
-        codec = KCharsets::charsets()->codecForName(QString::fromLatin1(fallbackCharset));
-        msg->setBody(codec->fromUnicode(body));
-    } else {
-        msg->setBody(codec->fromUnicode(body));
-    }
 }
 
 enum ReplyStrategy { ReplyList, ReplySmart, ReplyAll, ReplyAuthor, ReplyNone };
@@ -672,9 +567,6 @@ void MailTemplates::reply(const KMime::Message::Ptr &origMsg,
                           const std::function<void(const KMime::Message::Ptr &result)> &callback,
                           const KMime::Types::AddrSpecList &me)
 {
-    // FIXME
-    const bool alwaysPlain = true;
-
     // Decrypt what we have to
     MimeTreeParser::ObjectTreeParser otp;
     otp.parseObjectTree(origMsg.data());
@@ -757,32 +649,19 @@ void MailTemplates::reply(const KMime::Message::Ptr &origMsg,
         }
         // The plain body is complete
         QString plainBodyResult = plainBody + result;
-        htmlMessageText(plainTextContent, htmlContent, [=](const QString &body, const QString &headElement) {
-            QString result = stripSignature(body);
 
-            QString htmlBodyResult;
-            // The html body is complete
-            if (!alwaysPlain) {
-                htmlBodyResult = htmlBody + quotedHtmlText(result);
-                htmlBodyResult = makeValidHtml(htmlBodyResult, headElement);
-            }
+        // Assemble the message
+        msg->contentType()->clear(); // to get rid of old boundary
 
-            // Assemble the message
-            msg->contentType()->clear(); // to get rid of old boundary
+        KMime::Content *const mainTextPart = createPlainPartContent(plainBodyResult, msg.data());
+        mainTextPart->assemble();
 
-            KMime::Content *const mainTextPart = htmlBodyResult.isEmpty() ? createPlainPartContent(plainBodyResult, msg.data())
-                                                                          : createMultipartAlternativeContent(plainBodyResult, htmlBodyResult, msg.data());
-            mainTextPart->assemble();
+        msg->setBody(mainTextPart->encodedBody());
+        msg->setHeader(mainTextPart->contentType());
+        msg->setHeader(mainTextPart->contentTransferEncoding());
+        msg->assemble();
 
-            msg->setBody(mainTextPart->encodedBody());
-            msg->setHeader(mainTextPart->contentType());
-            msg->setHeader(mainTextPart->contentTransferEncoding());
-            // FIXME this does more harm than good right now.
-            //  applyCharset(msg, origMsg);
-            msg->assemble();
-
-            callback(msg);
-        });
+        callback(msg);
     });
 }
 

@@ -8,7 +8,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test WebEngine)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
 
 include( ${CMAKE_SOURCE_DIR}/cmake/modules/add_gpg_crypto_test.cmake )
 
@@ -20,10 +20,8 @@ add_gpg_crypto_test(mailtemplatetest mailtemplatetest)
 target_link_libraries(mailtemplatetest
     Qt5::Core
     Qt5::Test
-    Qt5::WebEngine
     kalendar_lib
     KF5::MailCommon
     KF5::AkonadiMime
-    Qt5::WebEngineWidgets
     kalendar_mail_plugin
 )

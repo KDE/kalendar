@@ -6,9 +6,7 @@
 #include <QSignalSpy>
 #include <QStandardPaths>
 #include <QTest>
-#include <QtWebEngine>
 #include <functional>
-#include <qchar.h>
 
 #include "../mailcrypto.h"
 #include "../mailtemplates.h"
@@ -77,11 +75,6 @@ class MailTemplateTest : public QObject
     }
 
 private Q_SLOTS:
-
-    void initTestCase()
-    {
-        QtWebEngine::initialize();
-    }
 
     // Ensures we don't crash on garbage
     void testEmpty()

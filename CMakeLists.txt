@@ -53,7 +53,7 @@ ecm_setup_version(${PROJECT_VERSION}
 )
 
 ################# Find dependencies #################
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg DBus Test QuickTest WebEngineWidgets)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg DBus Test QuickTest)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons QQC2DesktopStyle Contacts ItemModels XmlGui IconThemes)
 find_package(Gpgme REQUIRED)
 set_package_properties(KF5QQC2DesktopStyle PROPERTIES

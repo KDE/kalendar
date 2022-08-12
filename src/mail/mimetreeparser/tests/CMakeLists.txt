@@ -21,7 +21,6 @@ target_link_libraries(mimetreeparsertest
     kalendar_lib
     KF5::MailCommon
     KF5::AkonadiMime
-    Qt5::WebEngineWidgets
     kalendar_mail_plugin
 )
 
@@ -33,7 +32,6 @@ target_link_libraries(gpgerrortest
     kalendar_lib
     KF5::MailCommon
     KF5::AkonadiMime
-    Qt5::WebEngineWidgets
     kalendar_mail_plugin
 )
 add_test(NAME gpgerrortest COMMAND $<TARGET_FILE:gpgerrortest>)

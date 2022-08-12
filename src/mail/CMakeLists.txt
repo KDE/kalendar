@@ -62,7 +62,8 @@ ecm_qt_declare_logging_category(kalendar_contact_plugin
     EXPORT KALENDAR
 )
 
-target_link_libraries(kalendar_mail_plugin PRIVATE kalendar_lib KF5::MailCommon KF5::AkonadiMime Qt5::WebEngineWidgets)
+target_link_libraries(kalendar_mail_plugin PRIVATE kalendar_lib KF5::MailCommon KF5::AkonadiMime)
+
 
 ecm_qt_install_logging_categories(
     EXPORT KALENDAR
