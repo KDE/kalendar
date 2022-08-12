@@ -241,28 +241,6 @@ QString plainToHtml(const QString &body)
     return str;
 }
 
-// TODO implement this function using a DOM tree parser
-QString makeValidHtml(const QString &body)
-{
-    QString newBody = body;
-    QRegExp regEx;
-    regEx.setMinimal(true);
-    regEx.setPattern(QStringLiteral("<html.*>"));
-
-    if (!newBody.isEmpty() && !newBody.contains(regEx)) {
-        regEx.setPattern(QStringLiteral("<body.*>"));
-        if (!newBody.contains(regEx)) {
-            newBody = QLatin1String("<body>") + body + QLatin1String("<br/></body>");
-        }
-        // regEx.setPattern(QStringLiteral("<head.*>"));
-        // if (!newBody.contains(regEx)) {
-        //     newBody = QLatin1String("<head>") + headElement + QLatin1String("</head>") + body;
-        // }
-        newBody = QLatin1String("<html>") + body + QLatin1String("</html>");
-    }
-    return newBody;
-}
-
 // FIXME strip signature works partially for HTML mails
 static QString stripSignature(const QString &msg)
 {
