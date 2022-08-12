@@ -31,7 +31,9 @@ std::pair<QString, bool> PartModel::trim(const QString &text)
         // Reply
         QRegularExpression{QStringLiteral("<p>.?Am.*schrieb.*:</p>"), QRegularExpression::CaseInsensitiveOption},
         // Signature
-        QRegularExpression{QStringLiteral("<p>.?--(\\s|\u00A0)<br>"), QRegularExpression::CaseInsensitiveOption}};
+        QRegularExpression{QStringLiteral("<p>.?--(\\s|\u00A0)<br>"), QRegularExpression::CaseInsensitiveOption},
+    };
+
     for (const auto &expression : delimiters) {
         auto i = expression.globalMatch(text);
         while (i.hasNext()) {
@@ -54,9 +56,9 @@ std::pair<QString, bool> PartModel::trim(const QString &text)
 static QString addCss(const QString &s)
 {
     // Get the default font from QApplication
-    static const auto fontFamily = QFont{}.family();
+    static const QString fontFamily = QFont{}.family();
     // overflow:hidden ensures no scrollbars are ever shown.
-    static const auto css = QStringLiteral("<style>\n")
+    static const QString css = QStringLiteral("<style>\n")
         + QStringLiteral(
               "body {\n"
               "  overflow:hidden;\n"
@@ -70,9 +72,9 @@ static QString addCss(const QString &s)
                          "}\n")
         + QStringLiteral("</style>");
 
-    const auto header = QLatin1String(
-                            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
-                            "<html><head><title></title>")
+    const QString header = QLatin1String(
+                               "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
+                               "<html><head><title></title>")
         + css + QLatin1String("</head>\n<body>\n");
     return header + s + QStringLiteral("</body></html>");
 }
