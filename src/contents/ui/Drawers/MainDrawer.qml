@@ -159,7 +159,13 @@ Kirigami.OverlayDrawer {
                             kalendarAction: "import_calendar"
                         },
                         KActionFromAction {
-                            kalendarAction: "refresh_all_calendars"
+                            text: switch(root.mode) {
+                            case KalendarApplication.Contact:
+                                return i18n('Refresh All Address Books')
+                            default:
+                                return i18n('Refresh All Calendars')
+                            }
+                            kalendarAction: "refresh_all"
                         },
                         Kirigami.Action {
                             icon.name: KalendarApplication.iconName(quitAction.icon)
