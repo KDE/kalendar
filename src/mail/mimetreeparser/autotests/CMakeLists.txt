@@ -32,17 +32,21 @@ endfunction()
 
 function(add_mimetreeparser_crypto_unittest _name)
     add_executable(${_name} ${_name}.cpp setupenv.cpp)
-    add_gpg_crypto_test(${_name} mimetreeparser-${_name})
+    if (QT_MAJOR_VERSION STREQUAL "6")
+        target_link_libraries(${_name} QGpgmeQt6 Qt6::Core5Compat)
+    else()
+        target_link_libraries(${_name} Gpgme::Gpgme)
+    endif()
     target_link_libraries(${_name}
         Qt5::Core
         Qt5::Test
         KF5::Mime
         kalendar_lib
-        Gpgme::Gpgme
         KF5::MailCommon
         KF5::AkonadiMime
         kalendar_mail_plugin
     )
+    add_gpg_crypto_test(${_name} mimetreeparser-${_name})
 endfunction()
 
 add_mimetreeparser_crypto_unittest(attachmenttest)
