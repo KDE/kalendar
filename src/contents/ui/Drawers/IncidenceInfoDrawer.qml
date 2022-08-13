@@ -392,6 +392,7 @@ Kirigami.OverlayDrawer {
                                     delegate: QQC2.Label {
                                         Layout.fillWidth: true
                                         text: date.toLocaleDateString(Qt.locale())
+                                        wrapMode: Text.Wrap
                                     }
                                 }
                             }
