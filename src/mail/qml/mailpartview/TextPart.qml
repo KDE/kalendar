@@ -41,6 +41,7 @@ Item {
 
         text: content.substring(0, 100000) //The TextEdit deals poorly with messages that are too large.
         color: embedded ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor
+        onLinkActivated: Qt.openUrlExternally(link)
 
         //Kube.ViewHighlighter {
         //    textDocument: textEdit.textDocument
