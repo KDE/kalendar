@@ -3,11 +3,23 @@
         "Authors": [
             {
                 "Email": "carl@carlschwan.eu",
-                "Name": "Carl Schwan"
+                "Name": "Carl Schwan",
+                "Name[ca@valencia]": "Carl Schwan",
+                "Name[ca]": "Carl Schwan",
+                "Name[nl]": "Carl Schwan",
+                "Name[pt]": "Carl Schwan",
+                "Name[uk]": "Carl Schwan",
+                "Name[x-test]": "xxCarl Schwanxx"
             }
         ],
         "Category": "Personal information",
         "Description": "Contact list",
+        "Description[ca@valencia]": "Llista de contactes",
+        "Description[ca]": "Llista de contactes",
+        "Description[nl]": "Contactenlijst",
+        "Description[pt]": "Lista de contactos",
+        "Description[uk]": "Список контактів",
+        "Description[x-test]": "xxContact listxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
@@ -16,6 +28,12 @@
         "Id": "org.kde.kalendar.contact",
         "License": "GPL-2.0+",
         "Name": "Contact",
+        "Name[ca@valencia]": "Contact",
+        "Name[ca]": "Contact",
+        "Name[nl]": "Contactpersoon",
+        "Name[pt]": "Contacto",
+        "Name[uk]": "Контакт",
+        "Name[x-test]": "xxContactxx",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
