@@ -25,6 +25,7 @@
   <name xml:lang="pl">Kalendarz</name>
   <name xml:lang="pt">Kalendar</name>
   <name xml:lang="pt-BR">Kalendar</name>
+  <name xml:lang="ru">Kalendar</name>
   <name xml:lang="sk">Kalendar</name>
   <name xml:lang="sl">Kalendar</name>
   <name xml:lang="sv">Kalendar</name>
@@ -195,6 +196,7 @@
       <caption xml:lang="nl">Maandweergave</caption>
       <caption xml:lang="pl">Widok miesiąca</caption>
       <caption xml:lang="pt">Vista Mensal</caption>
+      <caption xml:lang="ru">Обзор месяца</caption>
       <caption xml:lang="sk">Mesačný pohľad</caption>
       <caption xml:lang="sl">Mesečni pogled</caption>
       <caption xml:lang="sv">Månadsvy</caption>
@@ -222,6 +224,7 @@
       <caption xml:lang="nl">Weekweergave</caption>
       <caption xml:lang="pl">Widok tygodnia</caption>
       <caption xml:lang="pt">Vista da Semana</caption>
+      <caption xml:lang="ru">Обзор недели</caption>
       <caption xml:lang="sl">Tedenski pogled</caption>
       <caption xml:lang="sv">Veckovy</caption>
       <caption xml:lang="ta">வாரக்காட்சி</caption>
@@ -248,6 +251,7 @@
       <caption xml:lang="nl">Periodieke transactie venster</caption>
       <caption xml:lang="pl">Widok harmonogramu</caption>
       <caption xml:lang="pt">Área de Calendarização</caption>
+      <caption xml:lang="ru">Расписание</caption>
       <caption xml:lang="sl">Časovni plan</caption>
       <caption xml:lang="sv">Schemaläggningsvy</caption>
       <caption xml:lang="ta">அட்டவணை காட்சி</caption>
@@ -274,6 +278,7 @@
       <caption xml:lang="nl">Taakweergave</caption>
       <caption xml:lang="pl">Widok zadań</caption>
       <caption xml:lang="pt">Vista das Tarefas</caption>
+      <caption xml:lang="ru">Просмотр задачи</caption>
       <caption xml:lang="sk">Pohľad úloh</caption>
       <caption xml:lang="sl">Pregled nalog</caption>
       <caption xml:lang="sv">Uppgiftsvy</caption>
