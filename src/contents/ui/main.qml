@@ -525,8 +525,10 @@ Kirigami.ApplicationWindow {
     contextDrawer: IncidenceInfoDrawer {
         id: incidenceInfoDrawer
 
-        bottomPadding: menuLoader.active ? menuLoader.height : 0
-        width: actualWidth
+        width: if(!Kirigami.Settings.isMobile) actualWidth
+	height: if(Kirigami.Settings.isMobile) applicationWindow().height * 0.6
+	bottomPadding: menuLoader.active ? menuLoader.height : 0
+	
         modal: !root.wideScreen || !enabled
         onEnabledChanged: drawerOpen = enabled && !modal
         onModalChanged: drawerOpen = !modal

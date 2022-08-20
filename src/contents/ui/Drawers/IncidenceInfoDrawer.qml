@@ -65,12 +65,11 @@ Kirigami.OverlayDrawer {
     edge: Kirigami.Settings.isMobile ? Qt.BottomEdge :
         Qt.application.layoutDirection == Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
 
-    height: applicationWindow().height * 0.6
-
     topPadding: 0
     leftPadding: 0
     rightPadding: 0
-
+    bottomPadding: 0
+    
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
     contentItem: Loader {
@@ -140,7 +139,8 @@ Kirigami.OverlayDrawer {
                 id: contentsView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                contentWidth: this.availableWidth
+                contentWidth: availableWidth
+		contentHeight: infoBody.implicitHeight + (infoBody.padding * 2)
                 clip: true
 
                 property real yScrollPos: QQC2.ScrollBar.vertical.position
@@ -149,8 +149,12 @@ Kirigami.OverlayDrawer {
                 GridLayout {
                     id: infoBody
 
-                    anchors.fill: parent
-                    anchors.margins: Kirigami.Units.largeSpacing
+		    property int padding: Kirigami.Units.largeSpacing
+		    
+                    anchors.top: parent.top
+		    anchors.left: parent.left
+		    anchors.right: parent.right
+                    anchors.margins: padding
                     columns: 2
 
                     RowLayout {
