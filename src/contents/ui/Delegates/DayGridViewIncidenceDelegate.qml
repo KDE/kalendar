@@ -155,7 +155,7 @@ Item {
         QQC2.Label {
             Layout.fillWidth: true
             text: modelData.text
-            elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
+            //elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
             font.weight: Font.Medium
             font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
                 Kirigami.Theme.defaultFont.pointSize
