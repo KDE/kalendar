@@ -576,7 +576,7 @@ Kirigami.OverlayDrawer {
                                     DropArea {
                                         id: incidenceDropArea
                                         property var collectionDetails: CalendarManager.getCollectionDetails(model.collectionId)
-                                        parent: calendarItem.contentItem // Otherwise label elide breaks
+                                        parent: calendarSourceItem.contentItem // Otherwise label elide breaks
                                         anchors.fill: parent
                                         z: 9999
                                         enabled: collectionDetails.canCreate
