@@ -253,7 +253,7 @@ Item {
                         width: parent.width
                         height: parent.height
                         spacing: root.spacing
-                        Item {
+                        QQC2.ScrollView {
                             id: dayDelegate
                             Layout.fillWidth: true
                             Layout.fillHeight: true
@@ -268,12 +268,6 @@ Item {
                                     topMargin: root.showDayIndicator ? Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing * 1.5 : 0
                                     rightMargin: spacing
                                 }
-
-                                // DO NOT use a ScrollView as a bug causes this to crash randomly.
-                                // So we instead make the ListView act like a ScrollView on desktop. No crashing now!
-                                flickableDirection: Flickable.VerticalFlick
-                                boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-                                QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
 
                                 clip: true
                                 spacing: root.listViewSpacing
