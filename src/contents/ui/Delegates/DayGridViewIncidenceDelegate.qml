@@ -100,71 +100,79 @@ Item {
         reactToCurrentMonth: parent.reactToCurrentMonth
         isInCurrentMonth: parent.isInCurrentMonth
         isDark: parent.isDark
+	allDay: modelData.allDay
     }
 
     RowLayout {
         id: incidenceContents
         clip: true
-        property bool spaceRestricted: parent.width < Kirigami.Units.gridUnit * 5
+	
+        readonly property bool spaceRestricted: parent.width < Kirigami.Units.gridUnit * 5
 
-        property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
+        readonly property color textColor: incidenceDelegateBackground.opacity > 0 ?
+	    LabelUtils.getIncidenceLabelColor(modelData.color, incidenceDelegate.isDark) : Kirigami.Theme.textColor
+	readonly property color otherMonthTextColor: {
+	    if(incidenceDelegateBackground.visible && incidenceDelegateBackground.opacity > 0) {
+		if (incidenceDelegate.isDark) {
+		    return LabelUtils.getDarkness(modelData.color) >= 0.5 ?
+			Qt.lighter(modelData.color, 2) : Qt.lighter(modelData.color, 1.5);
+		}
 
-        function otherMonthTextColor(color) {
-            if(isDark) {
-                if(LabelUtils.getDarkness(color) >= 0.5) {
-                    return Qt.lighter(color, 2);
-                }
-                return Qt.lighter(color, 1.5);
-            }
-            return Qt.darker(color, 3);
-        }
+		return Qt.darker(modelData.color, 3);
+	    }
 
+	    return Kirigami.Theme.textColor;
+	}
+	readonly property color selectedContentColor: LabelUtils.isDarkColor(modelData.color) ? "white" : "black"
+	readonly property color contentColor: incidenceDelegate.isOpenOccurrence ?
+	    selectedContentColor : incidenceDelegate.isInCurrentMonth ?
+	    textColor : otherMonthTextColor
+
+	readonly property int leadingIconSize: Kirigami.Units.gridUnit / 2
+	
         anchors {
             fill: parent
             leftMargin: spaceRestricted ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
             rightMargin: spaceRestricted ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
         }
 
-        Kirigami.Icon {
-            Layout.maximumHeight: parent.height
-            Layout.maximumWidth: height
+	Rectangle {
+	    id: dotRectangle
+	    width: incidenceContents.leadingIconSize
+	    height: width
+	    radius: width / 2
 
-            source: modelData.incidenceTypeIcon
-            isMask: true
-            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                isInCurrentMonth ? incidenceContents.textColor :
-                incidenceContents.otherMonthTextColor(modelData.color)
-            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-            visible: !parent.spaceRestricted && modelData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
-        }
+	    // We want equal alignment for items that both have a dot, don't have a dot because they are all-day, and
+	    // items that don't have a dot because they represent todos. Hidden items are compressed to a size of 0 so
+	    // instead we set the color to transparent.
+	    color: modelData.allDay ? "transparent" :
+		incidenceDelegate.isOpenOccurrence ? incidenceContents.selectedContentColor : modelData.color
+	    Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+	}
 
         QQC2.Label {
+            Layout.fillWidth: true
+            text: modelData.text
+            elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
+            font.weight: Font.Medium
+            font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
+                Kirigami.Theme.defaultFont.pointSize
+            font.strikeout: modelData.todoCompleted
+            renderType: Text.QtRendering
+            color: incidenceContents.contentColor
+            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+        }
+
+	QQC2.Label {
             text: modelData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo ?
                 modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) :
                 modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
             font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
                 Kirigami.Theme.defaultFont.pointSize
             renderType: Text.QtRendering
-            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                isInCurrentMonth ? incidenceContents.textColor :
-                incidenceContents.otherMonthTextColor(modelData.color)
+            color: incidenceContents.contentColor
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
             visible: !modelData.allDay
-        }
-
-        QQC2.Label {
-            Layout.fillWidth: true
-            text: modelData.text
-            //elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
-            font.weight: Font.Medium
-            font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
-                Kirigami.Theme.defaultFont.pointSize
-            font.strikeout: modelData.todoCompleted
-            renderType: Text.QtRendering
-            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                isInCurrentMonth ? incidenceContents.textColor :
-                incidenceContents.otherMonthTextColor(modelData.color)
-            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
         }
     }
 

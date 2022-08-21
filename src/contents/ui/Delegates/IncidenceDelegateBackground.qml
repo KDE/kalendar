@@ -15,12 +15,13 @@ Kirigami.ShadowedRectangle {
     property bool reactToCurrentMonth: false
     property bool isInCurrentMonth: true
     property bool isDark: KalendarUiUtils.darkMode
-
+    property bool allDay: false
+    
     anchors.fill: parent
     color: isOpenOccurrence ? modelData.color :
         LabelUtils.getIncidenceDelegateBackgroundColor(modelData.color, root.isDark, modelData.endTime, Kalendar.Config.pastEventsTransparencyLevel)
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-    opacity: isOpenOccurrence || isInCurrentMonth ? 1.0 : 0
+    opacity: isOpenOccurrence || (isInCurrentMonth && allDay) ? 1.0 : 0
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
 
     radius: Kirigami.Units.smallSpacing
