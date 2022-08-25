@@ -149,7 +149,8 @@ Kirigami.ApplicationWindow {
         shortcut: "Delete"
         onTriggered: {
             if(root.openOccurrence) {
-                KalendarUiUtils.setUpDelete(incidenceInfoDrawer.incidenceData.incidencePtr, incidenceInfoDrawer.incidenceData.startTime);
+                KalendarUiUtils.setUpDelete(root.openOccurrence.incidencePtr,
+                                            root.openOccurrence.startTime);
             }
         }
     }
@@ -497,80 +498,148 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    property alias incidenceInfoDrawer: incidenceInfoDrawer
-    contextDrawer: IncidenceInfoDrawer {
-        id: incidenceInfoDrawer
+    contextDrawer: if(incidenceInfoDrawerEnabled) incidenceInfoDrawer
 
-        width: if(!Kirigami.Settings.isMobile) actualWidth
-        height: if(Kirigami.Settings.isMobile) applicationWindow().height * 0.6
-        bottomPadding: menuLoader.active ? menuLoader.height : 0
+    readonly property bool incidenceInfoViewer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer :
+        incidenceInfoPopupEnabled ? incidenceInfoPopup :
+        null
 
-        modal: !root.wideScreen || !enabled
-        onEnabledChanged: drawerOpen = enabled && !modal
-        onModalChanged: drawerOpen = !modal
-        enabled: incidenceData != undefined && pageStack.currentItem.mode !== KalendarApplication.Contact
-        handleVisible: enabled
-        interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
+    property bool incidenceInfoDrawerEnabled: Kirigami.Settings.isMobile
+    readonly property alias incidenceInfoDrawer: incidenceInfoDrawerLoader.item
+    Loader {
+        id: incidenceInfoDrawerLoader
+        active: root.incidenceInfoDrawerEnabled
+        sourceComponent: IncidenceInfoDrawer {
+            id: incidenceInfoDrawer
 
-        onIncidenceDataChanged: root.openOccurrence = incidenceData;
-        onVisibleChanged: {
-            if(visible) {
-                root.openOccurrence = incidenceData;
-            } else {
-                root.openOccurrence = null;
-            }
-        }
+            width: if(!Kirigami.Settings.isMobile) actualWidth
+            height: if(Kirigami.Settings.isMobile) applicationWindow().height * 0.6
+            bottomPadding: menuLoader.active ? menuLoader.height : 0
 
-        onAddSubTodo: {
-            KalendarUiUtils.setUpAddSubTodo(parentWrapper);
-            if (modal) { incidenceInfoDrawer.close() }
-        }
-        onEditIncidence: {
-            KalendarUiUtils.setUpEdit(incidencePtr);
-            if (modal) { incidenceInfoDrawer.close() }
-        }
-        onDeleteIncidence: {
-            KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
-            if (modal) { incidenceInfoDrawer.close() }
-        }
+            modal: !root.wideScreen || !enabled
+            onEnabledChanged: drawerOpen = enabled && !modal
+            onModalChanged: drawerOpen = !modal
+            enabled: incidenceData != undefined && pageStack.currentItem.mode !== KalendarApplication.Contact
+            handleVisible: enabled
+            interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
-        readonly property int minWidth: Kirigami.Units.gridUnit * 15
-        readonly property int maxWidth: Kirigami.Units.gridUnit * 25
-        readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
-        property int actualWidth: {
-            if (Config.incidenceInfoDrawerDrawerWidth === -1) {
-                return defaultWidth;
-            } else {
-                return Config.incidenceInfoDrawerDrawerWidth;
-            }
-        }
+            onIncidenceDataChanged: root.openOccurrence = incidenceData;
+            onVisibleChanged: visible ?
+                root.openOccurrence = incidenceData : root.openOccurrence = null
 
-        ResizerSeparator {
-            anchors.left: if(Qt.application.layoutDirection !== Qt.RightToLeft) parent.left
-            anchors.leftMargin: if(Qt.application.layoutDirection !== Qt.RightToLeft) -1 // Cover up the natural separator on the drawer
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.right: if(Qt.application.layoutDirection === Qt.RightToLeft) parent.right
-            anchors.rightMargin: if(Qt.application.layoutDirection === Qt.RightToLeft) -1
-            width: 1
-            oversizeMouseAreaHorizontal: 5
-            z: 500
-
-            function savePos() {
-                Config.incidenceInfoDrawerDrawerWidth = incidenceInfoDrawer.actualWidth;
-                Config.save();
-            }
-
-            onDragBegin: savePos()
-            onDragReleased: savePos()
-
-            onDragPositionChanged: {
-                if (Qt.application.layoutDirection === Qt.RightToLeft) {
-                    incidenceInfoDrawer.actualWidth = Math.min(incidenceInfoDrawer.maxWidth, Math.max(incidenceInfoDrawer.minWidth, Config.incidenceInfoDrawerDrawerWidth + changeX));
+            readonly property int minWidth: Kirigami.Units.gridUnit * 15
+            readonly property int maxWidth: Kirigami.Units.gridUnit * 25
+            readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
+            property int actualWidth: {
+                if (Config.incidenceInfoDrawerDrawerWidth === -1) {
+                    return defaultWidth;
                 } else {
-                    incidenceInfoDrawer.actualWidth = Math.min(incidenceInfoDrawer.maxWidth, Math.max(incidenceInfoDrawer.minWidth, Config.incidenceInfoDrawerDrawerWidth - changeX));
+                    return Config.incidenceInfoDrawerDrawerWidth;
                 }
             }
+
+            ResizerSeparator {
+                anchors.left: if(Qt.application.layoutDirection !== Qt.RightToLeft) parent.left
+                anchors.leftMargin: if(Qt.application.layoutDirection !== Qt.RightToLeft) -1 // Cover up the natural separator on the drawer
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: if(Qt.application.layoutDirection === Qt.RightToLeft) parent.right
+                anchors.rightMargin: if(Qt.application.layoutDirection === Qt.RightToLeft) -1
+                width: 1
+                oversizeMouseAreaHorizontal: 5
+                z: 500
+
+                function savePos() {
+                    Config.incidenceInfoDrawerDrawerWidth = incidenceInfoDrawer.actualWidth;
+                    Config.save();
+                }
+
+                onDragBegin: savePos()
+                onDragReleased: savePos()
+
+                onDragPositionChanged: {
+                    if (Qt.application.layoutDirection === Qt.RightToLeft) {
+                        incidenceInfoDrawer.actualWidth = Math.min(incidenceInfoDrawer.maxWidth, Math.max(incidenceInfoDrawer.minWidth, Config.incidenceInfoDrawerDrawerWidth + changeX));
+                    } else {
+                        incidenceInfoDrawer.actualWidth = Math.min(incidenceInfoDrawer.maxWidth, Math.max(incidenceInfoDrawer.minWidth, Config.incidenceInfoDrawerDrawerWidth - changeX));
+                    }
+                }
+            }
+        }
+    }
+
+    property bool incidenceInfoPopupEnabled: !Kirigami.Settings.isMobile
+    readonly property alias incidenceInfoPopup: incidenceInfoPopupLoader.item
+    Loader {
+        id: incidenceInfoPopupLoader
+        active: incidenceInfoPopupEnabled
+        sourceComponent: IncidenceInfoPopup {
+            id: incidenceInfoPopup
+
+            // HACK: This is called on mouse events by the KBMNavigationMouseArea in root
+            // so that we can react to scrolling in the different views, as there is no
+            // way to track the assigned incidence item delegate in a global sense.
+            // Remember that when a delegate is scrolled within a scroll view, the
+            // delegate's own relative x and y values do not change
+            function reposition() {
+                calculatePositionTimer.start();
+            }
+
+            function calculateIncidenceItemPosition() {
+                if (!openingIncidenceItem) {
+                    console.log("Can't calculate incidence item position for popup, no opening incidence item is set");
+                    return;
+                }
+
+                // We need to compensate for the x and y local adjustments used, for instance,
+                // in the day grid view to position the incidence item delegates
+                incidenceItemPosition = openingIncidenceItem.mapToItem(root.pageStack.currentItem,
+                                                                    openingIncidenceItem.x,
+                                                                    openingIncidenceItem.y);
+                incidenceItemPosition.x -= openingIncidenceItem.x;
+                incidenceItemPosition.y -= openingIncidenceItem.y;
+            }
+
+            property Item openingIncidenceItem: null
+            onOpeningIncidenceItemChanged: reposition()
+
+            property point incidenceItemPosition
+            property bool positionBelowIncidenceItem: incidenceItemPosition &&
+                incidenceItemPosition.y < root.pageStack.currentItem.height / 2;
+            property int maxXPosition: root.pageStack.currentItem.width - width
+
+            // HACK:
+            // If we reposition immediately we often end up updating the position of the popup
+            // before the assigned delegate has finished changing position itself. Even with
+            // this tiny interval, we avoid the problem and 2ms is not enough to be noticeable
+            Timer {
+                id: calculatePositionTimer
+                interval: 2
+                onTriggered: incidenceInfoPopup.calculateIncidenceItemPosition()
+            }
+
+            Connections {
+                target: incidenceInfoPopup.openingIncidenceItem
+                function onXChanged() { incidenceInfoPopup.reposition(); }
+                function onYChanged() { incidenceInfoPopup.reposition(); }
+                function onWidthChanged() { incidenceInfoPopup.reposition(); }
+                function onHeightChanged() { incidenceInfoPopup.reposition(); }
+            }
+
+            x: Math.min(incidenceItemPosition.x, maxXPosition)
+            y: positionBelowIncidenceItem ? incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
+
+            width: Kirigami.Units.gridUnit * 30
+            height: Math.min(Kirigami.Units.gridUnit * 50, scrollView.contentHeight)
+
+            activeTags: root.filter && root.filter.tags ? root.filter.tags : []
+            onIncidenceDataChanged: root.openOccurrence = incidenceData
+            onVisibleChanged: {
+                reposition();
+                visible ? root.openOccurrence = incidenceData : root.openOccurrence = null;
+            }
+
+            onTagClicked: root.toggleFilterTag(tagName)
         }
     }
 
@@ -813,12 +882,21 @@ Kirigami.ApplicationWindow {
         DeleteIncidencePage {
             id: deleteIncidencePage
 
-            onAddException: {
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid === deleteIncidencePage.incidenceWrapper.uid &&
-                    DateUtils.sameDay(incidenceInfoDrawer.incidenceData.startTime, exceptionDate)) {
+            function closeOpenIncidenceIfSame() {
+                const deletingIncidenceIsOpen = incidenceWrapper &&
+                                                root.incidenceInfoViewer &&
+                                                root.incidenceInfoViewer.incidenceWrapper &&
+                                                root.incidenceInfoViewer.incidenceWrapper.uid === incidenceWrapper.uid;
 
-                    incidenceInfoDrawer.incidenceData = undefined;
+                if (deletingIncidenceIsOpen) {
+                    root.incidenceInfoViewer.incidenceData = undefined;
                     root.openOccurrence = undefined;
+                }
+            }
+
+            onAddException: {
+                if (root.openOccurrence && DateUtils.sameDay(root.openOccurrence.incidenceData.startTime, exceptionDate)) {
+                    closeOpenIncidenceIfSame()
                 }
 
                 incidenceWrapper.recurrenceExceptionsModel.addExceptionDateTime(exceptionDate);
@@ -827,34 +905,23 @@ Kirigami.ApplicationWindow {
             }
             onAddRecurrenceEndDate: {
                 // If occurrence is past the new recurrence end date, it has ben deleted so kill instance in incidence info
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid === deleteIncidencePage.incidenceWrapper.uid &&
-                    incidenceInfoDrawer.incidenceData.startTime >= endDate) {
-
-                    incidenceInfoDrawer.incidenceData = undefined;
-                    root.openOccurrence = undefined;
+                if (root.openOccurrence && root.openOccurrence.startTime >= endDate) {
+                    closeOpenIncidenceIfSame();
                 }
+
                 incidenceWrapper.setRecurrenceDataItem("endDateTime", endDate);
                 CalendarManager.editIncidence(incidenceWrapper);
                 closeDialog();
             }
             onDeleteIncidence: {
                 // Deleting an incidence also means deleting all of its occurrences
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid === deleteIncidencePage.incidenceWrapper.uid) {
-
-                    incidenceInfoDrawer.incidenceData = undefined;
-                    root.openOccurrence = undefined;
-                }
+                closeOpenIncidenceIfSame()
                 CalendarManager.deleteIncidence(incidencePtr);
                 closeDialog();
             }
             onDeleteIncidenceWithChildren: {
                 // TODO: Check if parent deleted too
-                if(incidenceInfoDrawer.incidenceWrapper && incidenceInfoDrawer.incidenceWrapper.uid == deleteIncidencePage.incidenceWrapper.uid) {
-
-                    incidenceInfoDrawer.incidenceData = undefined;
-                    root.openOccurrence = undefined;
-                }
-
+                closeOpenIncidenceIfSame();
                 CalendarManager.deleteIncidence(incidencePtr, true);
                 closeDialog();
             }

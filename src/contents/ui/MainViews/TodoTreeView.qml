@@ -17,7 +17,7 @@ TreeListView {
     id: root
 
     // We need to store a copy of opened incidence data or we will lose it as we scroll the listviews.
-    function viewAndRetainTodoData(todoData) {
+    function viewAndRetainTodoData(todoData, incidenceItem) {
         retainedTodoData = {
             incidencePtr: todoData.incidencePtr,
             incidenceId: todoData.incidenceId,
@@ -27,7 +27,7 @@ TreeListView {
             endTime: todoData.endTime,
             durationString: todoData.durationString
         };
-        KalendarUiUtils.setUpView(retainedTodoData);
+        KalendarUiUtils.setUpView(retainedTodoData, incidenceItem);
     }
 
     property var retainedTodoData: ({})
@@ -198,7 +198,7 @@ TreeListView {
             }
         ]
 
-        onClicked: root.viewAndRetainTodoData(model)
+        onClicked: root.viewAndRetainTodoData(model, listItem)
 
         contentItem: IncidenceMouseArea {
             id: mouseArea

@@ -11,6 +11,7 @@ import org.kde.kalendar 1.0
 import org.kde.kalendar.utils 1.0
 
 Item {
+    id: root
     property var incidenceWrapper: modelData
     property var collectionData: CalendarManager.getCollectionDetails(incidenceWrapper.collectionId)
 
@@ -26,7 +27,7 @@ Item {
         //drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && incidenceDelegate.dragDropEnabled ? parent : undefined
         //onReleased: parent.Drag.drop()
 
-        onViewClicked: KalendarUiUtils.setUpView(incidenceData)
+        onViewClicked: KalendarUiUtils.setUpView(incidenceData, root)
         onEditClicked: KalendarUiUtils.setUpEdit(incidencePtr)
         onDeleteClicked: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
         onTodoCompletedClicked: KalendarUiUtils.completeTodo(incidencePtr)

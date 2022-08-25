@@ -20,9 +20,9 @@ Kirigami.Page {
         KalendarUiUtils.setUpAdd(type, addDate);
     }
 
-    function viewIncidence(modelData) {
+    function viewIncidence(modelData, incidenceItem) {
         pathView.currentItem.item.savedYScrollPos = pathView.currentItem.item.QQC2.ScrollBar.vertical.visualPosition;
-        KalendarUiUtils.setUpView(modelData);
+        KalendarUiUtils.setUpView(modelData, incidenceItem);
     }
 
     function editIncidence(incidencePtr) {
@@ -606,7 +606,7 @@ Kirigami.Page {
                                                     drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? incidenceCard : undefined
                                                     onReleased: incidenceCard.Drag.drop()
 
-                                                    onViewClicked: root.viewIncidence(modelData)
+                                                    onViewClicked: root.viewIncidence(modelData, incidenceCard)
                                                     onEditClicked: root.editIncidence(incidencePtr)
                                                     onDeleteClicked: root.deleteIncidence(incidencePtr, deleteDate)
                                                     onTodoCompletedClicked: root.completeTodo(incidencePtr)

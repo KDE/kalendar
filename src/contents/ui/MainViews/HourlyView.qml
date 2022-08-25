@@ -1076,7 +1076,7 @@ Kirigami.Page {
                                                         drag.target: !Kirigami.Settings.isMobile && !modelData.isReadOnly && root.dragDropEnabled ? parent : undefined
                                                         onReleased: parent.Drag.drop()
 
-                                                        onViewClicked: KalendarUiUtils.setUpView(modelData)
+                                                        onViewClicked: KalendarUiUtils.setUpView(modelData, hourlyIncidenceDelegateBackgroundBackground)
                                                         onEditClicked: KalendarUiUtils.setUpEdit(incidencePtr)
                                                         onDeleteClicked: KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
                                                         onTodoCompletedClicked: KalendarUiUtils.completeTodo(incidencePtr)
