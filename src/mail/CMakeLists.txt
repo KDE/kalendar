@@ -9,8 +9,6 @@ if (BUILD_TESTING)
 endif()
 
 set(kalendar_mail_SRCS
-    mailplugin.cpp
-    mailplugin.h
     mailmanager.cpp
     mailmanager.h
     mailmodel.cpp
@@ -67,6 +65,11 @@ target_link_libraries(kalendar_mail_static PUBLIC kalendar_lib KF5::MailCommon K
 
 ecm_add_qml_module(kalendar_mail_plugin URI "org.kde.kalendar.mail" VERSION 1.0)
 
+target_sources(kalendar_mail_plugin PRIVATE
+    mailplugin.cpp
+    mailplugin.h
+)
+
 ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/MailSidebar.qml
     qml/FolderView.qml
@@ -92,4 +95,4 @@ target_link_libraries(kalendar_mail_plugin PUBLIC kalendar_mail_static)
 
 ecm_finalize_qml_module(kalendar_mail_plugin
     DESTINATION ${KDE_INSTALL_QMLDIR}
-    BUILD_SHARED_LIBS ON)
+    BUILD_SHARED_LIBS OFF)
