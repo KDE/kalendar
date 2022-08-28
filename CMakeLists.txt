@@ -54,7 +54,7 @@ ecm_setup_version(${PROJECT_VERSION}
 
 ################# Find dependencies #################
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg DBus Test QuickTest)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons QQC2DesktopStyle Contacts ItemModels XmlGui IconThemes)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons QQC2DesktopStyle Contacts ItemModels XmlGui IconThemes Notifications)
 find_package(Gpgme REQUIRED)
 set_package_properties(KF5QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
@@ -75,11 +75,15 @@ ki18n_install(po)
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.97.0)
 add_definitions(-DQT_STRICT_ITERATORS)
-add_subdirectory(src)
 
 if (BUILD_TESTING)
+    include(ECMAddTests)
+    find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Test)
     add_subdirectory(autotests)
 endif()
+
+add_subdirectory(src)
+add_subdirectory(agents/followupreminderagent)
 
 if (BUILD_FLATPAK)
     install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR} RENAME org.kde.kontact.kalendar.desktop)

@@ -10,15 +10,11 @@ include_directories(
 include_directories(${GPGME_INCLUDE_DIRS})
 
 include(ECMAddTests)
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Test)
 
 add_executable(cryptotest cryptotest.cpp)
 add_gpg_crypto_test(cryptotest cryptotest)
 target_link_libraries(cryptotest
-    kalendar_lib
     kalendar_mail_plugin
-    Qt5::Core
     Qt5::Test
-    KF5::MailCommon
-    KF5::AkonadiMime
 )

@@ -1,0 +1,6 @@
+# Code generation options for kconfig_compiler
+File=followupreminderagentsettings.kcfg
+ClassName=FollowUpReminderAgentSettings
+Singleton=true
+Mutators=true
+

@@ -18,13 +18,8 @@ find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
 
 function(add_mimetreeparser_class_unittest _name _additionalSource)
     add_executable(${_name} ${_name}.cpp setupenv.cpp ${_additionalSource})
-    target_link_libraries(${_name}
-        Qt5::Core
+    target_link_libraries(${_name} PUBLIC
         Qt5::Test
-        KF5::Mime
-        kalendar_lib
-        KF5::MailCommon
-        KF5::AkonadiMime
         kalendar_mail_plugin
     )
     add_test(NAME ${_name} COMMAND $<TARGET_FILE:${_name}>)
@@ -33,17 +28,12 @@ endfunction()
 function(add_mimetreeparser_crypto_unittest _name)
     add_executable(${_name} ${_name}.cpp setupenv.cpp)
     if (QT_MAJOR_VERSION STREQUAL "6")
-        target_link_libraries(${_name} QGpgmeQt6 Qt6::Core5Compat)
+        target_link_libraries(${_name} PUBLIC QGpgmeQt6 Qt6::Core5Compat)
     else()
-        target_link_libraries(${_name} Gpgme::Gpgme)
+        target_link_libraries(${_name} PUBLIC Gpgme::Gpgme)
     endif()
-    target_link_libraries(${_name}
-        Qt5::Core
+    target_link_libraries(${_name} PRIVATE
         Qt5::Test
-        KF5::Mime
-        kalendar_lib
-        KF5::MailCommon
-        KF5::AkonadiMime
         kalendar_mail_plugin
     )
     add_gpg_crypto_test(${_name} mimetreeparser-${_name})

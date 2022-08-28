@@ -1,0 +1,5 @@
+{
+    "X-Akonadi-PluginType": "AgentConfig",
+    "X-Akonadi-Library": "followupreminderagentconfig",
+    "X-Akonadi-AgentConfig-Type": "kalendar_followupreminder_agent"
+}
