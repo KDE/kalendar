@@ -8,8 +8,6 @@ if (BUILD_TESTING)
     add_subdirectory(mimetreeparser/tests)
 endif()
 
-ecm_add_qml_module(kalendar_mail_plugin URI "org.kde.kalendar.mail" VERSION 1.0)
-
 set(kalendar_mail_SRCS
     mailplugin.cpp
     mailplugin.h
@@ -64,7 +62,10 @@ ecm_qt_export_logging_category(
     EXPORT KALENDAR
 )
 
-target_sources(kalendar_mail_plugin PRIVATE ${kalendar_mail_SRCS})
+add_library(kalendar_mail_static STATIC ${kalendar_mail_SRCS})
+target_link_libraries(kalendar_mail_static PUBLIC kalendar_lib KF5::MailCommon KF5::AkonadiMime)
+
+ecm_add_qml_module(kalendar_mail_plugin URI "org.kde.kalendar.mail" VERSION 1.0)
 
 ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/MailSidebar.qml
@@ -87,8 +88,8 @@ ecm_target_qml_sources(kalendar_mail_plugin
     qml/mailpartview/TextPart.qml
 )
 
-target_link_libraries(kalendar_mail_plugin PUBLIC kalendar_lib KF5::MailCommon KF5::AkonadiMime)
+target_link_libraries(kalendar_mail_plugin PUBLIC kalendar_mail_static)
 
 ecm_finalize_qml_module(kalendar_mail_plugin
     DESTINATION ${KDE_INSTALL_QMLDIR}
-    BUILD_SHARED_LIBS OFF)
+    BUILD_SHARED_LIBS ON)
