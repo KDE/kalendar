@@ -91,7 +91,7 @@ QQC2.ScrollView {
 
                     onClicked: {
                         model.checkState = model.checkState === 0 ? 2 : 0
-                        MailManager.loadMailCollection(foldersModel.mapToSource(foldersModel.index(model.index, 0)));
+                        MailManager.loadMailCollectionByIndex(foldersModel.mapToSource(foldersModel.index(model.index, 0)));
                     }
                 }
             }

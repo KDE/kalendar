@@ -83,7 +83,6 @@ if (BUILD_TESTING)
 endif()
 
 add_subdirectory(src)
-add_subdirectory(agents/followupreminderagent)
 
 if (BUILD_FLATPAK)
     install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR} RENAME org.kde.kontact.kalendar.desktop)

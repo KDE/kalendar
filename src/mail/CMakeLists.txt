@@ -34,15 +34,6 @@ set(kalendar_mail_SRCS
     mime/mailtemplates.cpp
     mime/messageparser.cpp
     mime/partmodel.cpp
-
-    followupreminder/followupremindercreatejob.cpp
-    followupreminder/followupreminder.cpp
-    followupreminder/followupreminderselectdatedialog.cpp
-)
-
-qt_add_dbus_interface(kalendar_mail_SRCS
-    followupreminder/org.freedesktop.Kalendar.FollowUpReminder.xml
-    followupreminderinterface
 )
 
 ecm_qt_declare_logging_category(kalendar_mail_SRCS
@@ -59,6 +50,10 @@ ecm_qt_export_logging_category(
     DESCRIPTION "Kalendar - mail"
     EXPORT KALENDAR
 )
+
+qt_generate_dbus_interface(mailmanager.h org.kde.kalendar.mail.xml OPTIONS -a)
+
+qt_add_dbus_adaptor(kalendar_mail_SRCS ${kalendar_BINARY_DIR}/src/mail/org.kde.kalendar.mail.xml mailmanager.h MailManager)
 
 add_library(kalendar_mail_static STATIC ${kalendar_mail_SRCS})
 target_link_libraries(kalendar_mail_static PUBLIC kalendar_lib KF5::MailCommon KF5::AkonadiMime)
@@ -79,6 +74,7 @@ ecm_target_qml_sources(kalendar_mail_plugin SOURCES
 ecm_target_qml_sources(kalendar_mail_plugin
     PRIVATE PATH private SOURCES
     qml/private/AttachmentDelegate.qml
+    qml/private/FollowUpReminderCreateDialog.qml
 )
 
 ecm_target_qml_sources(kalendar_mail_plugin

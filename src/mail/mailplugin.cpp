@@ -7,12 +7,11 @@
 #include <QQmlEngine>
 #include <QtQml>
 
-#include "followupreminder/followupreminder.h"
-#include "followupreminder/followupremindercreatejob.h"
 #include "mailmanager.h"
 #include "mailmodel.h"
 #include "mime/htmlutils.h"
 #include "mime/messageparser.h"
+#include <MessageComposer/FollowupReminderCreateJob>
 
 void CalendarPlugin::registerTypes(const char *uri)
 {
@@ -30,14 +29,8 @@ void CalendarPlugin::registerTypes(const char *uri)
         return new HtmlUtils::HtmlUtils;
     });
 
-    qmlRegisterSingletonType<HtmlUtils::HtmlUtils>("org.kde.kalendar.mail", 1, 0, "FollowUpReminder", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-        return new FollowUpReminder;
-    });
-
     qmlRegisterType<MessageParser>(uri, 1, 0, "MessageParser");
-    qmlRegisterType<FollowupReminderCreateJob>(uri, 1, 0, "FollowupReminderCreateJob");
+    qmlRegisterType<MessageComposer::FollowupReminderCreateJob>(uri, 1, 0, "FollowupReminderCreateJob");
 
     qRegisterMetaType<MailModel *>("MailModel*");
 }

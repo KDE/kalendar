@@ -52,6 +52,13 @@ import org.kde.kitemmodels 1.0 as KItemModels
             QQC2.MenuItem {
                 icon.name: 'edit-copy'
                 text: i18n('Add Followup Reminder')
+                onClicked: {
+                    applicationWindow().pageStack.pushDialogLayer(Qt.resolvedUrl('./private/FollowUpReminderCreateDialog.qml'), {
+                    }, {
+                        width: Kirigami.Units.gridUnit * 20,
+                        height: Kirigami.Units.gridUnit * 15
+                    })
+                }
             }
         }
     }

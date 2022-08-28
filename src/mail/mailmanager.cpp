@@ -11,6 +11,7 @@
 #include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <Akonadi/EntityTreeModel>
+#include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/MessageModel>
 #include <Akonadi/Monitor>
@@ -23,7 +24,9 @@
 #include <QApplication>
 #include <QtCore/QItemSelectionModel>
 
+#include "mailadaptor.h"
 #include <KItemModels/KDescendantsProxyModel>
+#include <qabstractitemmodel.h>
 
 MailManager::MailManager(QObject *parent)
     : QObject(parent)
@@ -37,13 +40,13 @@ MailManager::MailManager(QObject *parent)
     //                                  |
     //                              flatModel
     //                                  |
-    //  descendantsProxyModel ------> selectionModel
-    //           ^                      ^
+    //           /---------------> selectionModel
+    //           |                      ^
     //           |                      |
     //  collectionFilter                |
     //            \__________________treemodel
 
-    m_session = new Session(QByteArrayLiteral("KMailManager Kernel ETM"), this);
+    m_session = new Session(QByteArrayLiteral("Kalendar Mail Manager Kernel ETM"), this);
     auto folderCollectionMonitor = new MailCommon::FolderCollectionMonitor(m_session, this);
 
     // setup collection model
@@ -56,24 +59,8 @@ MailManager::MailManager(QObject *parent)
 
     // Setup selection model
     m_collectionSelectionModel = new QItemSelectionModel(m_foldersModel);
-    connect(m_collectionSelectionModel, &QItemSelectionModel::selectionChanged, this, [this](const QItemSelection &selected, const QItemSelection &deselected) {
-        Q_UNUSED(deselected)
-        const auto indexes = selected.indexes();
-        if (indexes.count()) {
-            QString name;
-            QModelIndex index = indexes[0];
-            while (index.isValid()) {
-                if (name.isEmpty()) {
-                    name = index.data(Qt::DisplayRole).toString();
-                } else {
-                    name = index.data(Qt::DisplayRole).toString() + QLatin1String(" / ") + name;
-                }
-                index = index.parent();
-            }
-            m_selectedFolderName = name;
-            Q_EMIT selectedFolderNameChanged();
-        }
-    });
+    connect(m_collectionSelectionModel, &QItemSelectionModel::selectionChanged, this, &MailManager::computeFolderName);
+
     auto selectionModel = new SelectionProxyModel(m_collectionSelectionModel, this);
     selectionModel->setSourceModel(treeModel);
     selectionModel->setFilterBehavior(KSelectionProxyModel::ChildrenOfExactSelection);
@@ -108,6 +95,9 @@ MailManager::MailManager(QObject *parent)
     }
     Q_EMIT folderModelChanged();
     Q_EMIT loadingChanged();
+
+    (void)new MailManagerAdaptor(this);
+    QDBusConnection::sessionBus().registerObject(QStringLiteral("/Mail"), this);
 }
 
 MailModel *MailManager::folderModel() const
@@ -115,13 +105,43 @@ MailModel *MailManager::folderModel() const
     return m_folderModel;
 }
 
-void MailManager::loadMailCollection(const QModelIndex &modelIndex)
+void MailManager::loadMailCollectionByIndex(const QModelIndex &modelIndex)
 {
     if (!modelIndex.isValid()) {
         return;
     }
 
     m_collectionSelectionModel->select(modelIndex, QItemSelectionModel::ClearAndSelect);
+}
+
+QModelIndex findCollectionInTreeModel(QAbstractItemModel *model, Akonadi::Collection::Id id, const QModelIndex &parentIndex = {})
+{
+    for (int i = 0; i < model->rowCount(); i++) {
+        const auto index = model->index(i, 0, parentIndex);
+        const auto collectionId = model->data(index, Akonadi::EntityTreeModel::CollectionIdRole);
+        if (collectionId == id) {
+            return index;
+        }
+        if (model->rowCount(index)) {
+            const auto childIndex = findCollectionInTreeModel(model, id, index);
+            if (childIndex.isValid()) {
+                return childIndex;
+            }
+        }
+    }
+    return {};
+}
+
+void MailManager::loadMailCollection(const Akonadi::Collection &collection)
+{
+    if (!collection.isValid()) {
+        return;
+    }
+
+    const auto index = findCollectionInTreeModel(m_collectionSelectionModel->model(), collection.id());
+    if (index.isValid()) {
+        m_collectionSelectionModel->select(index, QItemSelectionModel::ClearAndSelect);
+    }
 }
 
 bool MailManager::loading() const
@@ -142,4 +162,51 @@ Akonadi::Session *MailManager::session() const
 QString MailManager::selectedFolderName() const
 {
     return m_selectedFolderName;
+}
+
+void MailManager::setSelectedFolderName(const QString &selectedFolderName)
+{
+    if (m_selectedFolderName == selectedFolderName) {
+        return;
+    }
+    m_selectedFolderName = selectedFolderName;
+    Q_EMIT selectedFolderNameChanged();
+}
+
+bool MailManager::showMail(qint64 serialNumber)
+{
+    auto job = new Akonadi::ItemFetchJob(Akonadi::Item(serialNumber), this);
+    job->fetchScope().fetchFullPayload();
+    job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+    connect(job, &Akonadi::ItemFetchJob::result, this, [this](KJob *job) {
+        const auto fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
+        if (fetchJob->items().count() >= 1) {
+            const auto item = fetchJob->items().at(0);
+            const auto collection = item.parentCollection();
+            loadMailCollection(collection);
+            Q_EMIT showMailInViewer(item);
+        }
+    });
+
+    return true;
+}
+
+void MailManager::computeFolderName(const QItemSelection &selected, const QItemSelection &deselected)
+{
+    Q_UNUSED(deselected)
+
+    const auto indexes = selected.indexes();
+    if (indexes.count()) {
+        QModelIndex index = indexes[0];
+        QString name;
+        while (index.isValid()) {
+            if (name.isEmpty()) {
+                name = index.data(Qt::DisplayRole).toString();
+            } else {
+                name = index.data(Qt::DisplayRole).toString() + QLatin1String(" / ") + name;
+            }
+            index = index.parent();
+        }
+        setSelectedFolderName(name);
+    }
 }

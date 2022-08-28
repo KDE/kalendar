@@ -96,5 +96,5 @@ Icon=org.kde.kalendar
 Type=Application
 Terminal=false
 StartupNotify=true
-MimeType=text/calendar;
+MimeType=text/calendar;x-scheme-handler/mailto;
 SingleMainWindow=true
