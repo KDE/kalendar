@@ -14,7 +14,7 @@ project(kalendar VERSION ${RELEASE_SERVICE_VERSION})
 
 set(QT_MIN_VERSION "5.15.2")
 set(KF5_MIN_VERSION "5.96.0")
-set(PIM_VERSION "5.19.0")
+set(PIM_VERSION "5.21.0")
 
 include(FeatureSummary)
 

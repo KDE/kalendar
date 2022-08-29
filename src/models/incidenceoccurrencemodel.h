@@ -8,12 +8,7 @@
 #pragma once
 
 #include <QObject>
-#include <akonadi-calendar_version.h>
-#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/ETMCalendar>
-#else
-#include <Akonadi/Calendar/ETMCalendar>
-#endif
 
 #include <KConfigWatcher>
 #include <KFormat>

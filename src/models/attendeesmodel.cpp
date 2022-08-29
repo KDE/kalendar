@@ -14,16 +14,7 @@
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/SearchQuery>
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <akonadi_version.h>
-#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 19, 40)
 #include <Akonadi/ContactSearchJob>
-#else
-#include <Akonadi/Contact/ContactSearchJob>
-#endif
-#else
-#include <Akonadi/ContactSearchJob>
-#endif
 
 AttendeeStatusModel::AttendeeStatusModel(QObject *parent)
     : QAbstractListModel(parent)

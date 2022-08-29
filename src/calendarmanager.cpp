@@ -32,12 +32,7 @@
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/ItemMoveJob>
 #include <Akonadi/Monitor>
-#include <akonadi_version.h>
-#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/History>
-#else
-#include <Akonadi/Calendar/History>
-#endif
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
 #include <EventViews/Prefs>
@@ -47,11 +42,6 @@
 #include <QApplication>
 #include <QPointer>
 #include <models/todosortfilterproxymodel.h>
-
-#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
-#else
-#include <etmcalendar.h>
-#endif
 
 #include <colorproxymodel.h>
 #include <incidencewrapper.h>
@@ -148,11 +138,7 @@ protected:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override
     {
         if (role == Qt::ToolTipRole) {
-#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
-            const Akonadi::Collection col = CalendarSupport::collectionFromIndex(index);
-#else
             const Akonadi::Collection col = Akonadi::CollectionUtils::fromIndex(index);
-#endif
             return CalendarSupport::toolTipString(col);
         }
 
@@ -253,11 +239,7 @@ CalendarManager::CalendarManager(QObject *parent)
     auto refreshColors = [=]() {
         for (auto i = 0; i < m_flatCollectionTreeModel->rowCount(); i++) {
             auto idx = m_flatCollectionTreeModel->index(i, 0, {});
-#if AKONADI_VERSION < QT_VERSION_CHECK(5, 20, 41)
-            colorProxy->getCollectionColor(CalendarSupport::collectionFromIndex(idx));
-#else
             colorProxy->getCollectionColor(Akonadi::CollectionUtils::fromIndex(idx));
-#endif
         }
     };
     connect(m_flatCollectionTreeModel, &QSortFilterProxyModel::rowsInserted, this, refreshColors);

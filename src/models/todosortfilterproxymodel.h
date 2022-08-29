@@ -3,23 +3,10 @@
 
 #pragma once
 #include <QObject>
-#include <akonadi-calendar_version.h>
-#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/ETMCalendar>
-#else
-#include <Akonadi/Calendar/ETMCalendar>
-#endif
 #include <CalendarSupport/KCalPrefs>
-#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 42)
-#include <CalendarSupport/Utils>
-#else
 #include <Akonadi/CalendarUtils>
-#endif
-#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 41)
-#include <EventViews/IncidenceTreeModel>
-#else
 #include <Akonadi/IncidenceTreeModel>
-#endif
 #include <EventViews/TodoModel>
 #include <KConfigWatcher>
 #include <KFormat>
@@ -142,11 +129,7 @@ private:
     int compareCompletion(const QModelIndex &left, const QModelIndex &right) const;
 
     Akonadi::ETMCalendar::Ptr m_calendar;
-#if AKONADICALENDAR_VERSION < QT_VERSION_CHECK(5, 20, 41)
-    IncidenceTreeModel *m_todoTreeModel = nullptr;
-#else
     Akonadi::IncidenceTreeModel *m_todoTreeModel = nullptr;
-#endif
     TodoModel *m_baseTodoModel = nullptr;
     Akonadi::IncidenceChanger *m_lastSetChanger = nullptr;
     QHash<QString, QColor> m_colors;
