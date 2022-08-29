@@ -4,27 +4,13 @@
 #include "contactsmodel.h"
 #include <akonadi/entitytreemodel.h>
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <akonadi_version.h>
-#if AKONADI_VERSION >= QT_VERSION_CHECK(5, 19, 40)
 #include <Akonadi/ContactsFilterProxyModel>
 #include <Akonadi/ContactsTreeModel>
 #include <Akonadi/EmailAddressSelectionModel>
-#else
-#include <Akonadi/Contact/ContactsFilterProxyModel>
-#include <Akonadi/Contact/ContactsTreeModel>
-#include <Akonadi/Contact/EmailAddressSelectionModel>
-#endif
-#else
-#include <Akonadi/ContactsFilterProxyModel>
-#include <Akonadi/ContactsTreeModel>
-#include <Akonadi/EmailAddressSelectionModel>
-#endif
-#include <KDescendantsProxyModel>
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
-
+#include <KDescendantsProxyModel>
 
 ContactsModel::ContactsModel(QObject *parent)
     : QSortFilterProxyModel(parent)

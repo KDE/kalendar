@@ -5,12 +5,7 @@
 
 #include "hourlyincidencemodel.h"
 #include "multidayincidencemodel.h"
-#include <akonadi-calendar_version.h>
-#if AKONADICALENDAR_VERSION > QT_VERSION_CHECK(5, 19, 41)
 #include <Akonadi/ETMCalendar>
-#else
-#include <Akonadi/Calendar/ETMCalendar>
-#endif
 #include <QLocale>
 
 class InfiniteCalendarViewModel : public QAbstractListModel
