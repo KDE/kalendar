@@ -34,12 +34,12 @@ Item {
         padding: 0
 
         anchors {
-            top: parent.top
             left: parent.left
             right: parent.right
+            top: parent.top
         }
 
-        text: content.substring(0, 100000) //The TextEdit deals poorly with messages that are too large.
+        text: content.substring(0, 100000).replace(/\u00A0/g,' ') //The TextEdit deals poorly with messages that are too large.
         color: embedded ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor
         onLinkActivated: Qt.openUrlExternally(link)
 
