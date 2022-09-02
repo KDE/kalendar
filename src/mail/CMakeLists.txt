@@ -54,6 +54,13 @@ ecm_target_qml_sources(kalendar_mail_plugin
     qml/mailpartview/TextPart.qml
 )
 
+ecm_target_qml_sources(kalendar_mail_plugin
+    PRIVATE PATH mailboxselector SOURCES
+    qml/mailboxselector/MailBoxList.qml
+    qml/mailboxselector/MailBoxListPage.qml
+)
+
+
 ecm_qt_declare_logging_category(kalendar_contact_plugin
     HEADER kalendar_mail_debug.h
     IDENTIFIER KALENDAR_MAIL_LOG
