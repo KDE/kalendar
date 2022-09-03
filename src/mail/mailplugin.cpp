@@ -7,6 +7,7 @@
 #include <QQmlEngine>
 #include <QtQml>
 
+#include "helper.h"
 #include "mailmanager.h"
 #include "mailmodel.h"
 #include "mime/htmlutils.h"
@@ -26,6 +27,12 @@ void CalendarPlugin::registerTypes(const char *uri)
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
         return new HtmlUtils::HtmlUtils;
+    });
+
+    qmlRegisterSingletonType<MailCollectionHelper>("org.kde.kalendar.mail", 1, 0, "MailCollectionHelper", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new MailCollectionHelper;
     });
 
     qmlRegisterType<MessageParser>(uri, 1, 0, "MessageParser");

@@ -152,6 +152,23 @@ ListView {
                         Layout.alignment: Qt.AlignLeft
                         Layout.fillWidth: true
                     }
+
+                    QQC2.Label {
+                        property int unreadCount: MailCollectionHelper.unreadCount(model.collection)
+                        text: unreadCount
+                        visible: unreadCount > 0
+                        padding: Kirigami.Units.smallSpacing
+                        color: Kirigami.Theme.textColor
+                        Layout.minimumWidth: height
+                        horizontalAlignment: Text.AlignHCenter
+                        background: Rectangle {
+                            visible: unreadCount > 0
+                            Kirigami.Theme.colorSet: Kirigami.Theme.Button
+                            color: Kirigami.Theme.disabledTextColor
+                            opacity: 0.3
+                            radius: height / 2
+                        }
+                    }
                 }
 
                 onClicked: {

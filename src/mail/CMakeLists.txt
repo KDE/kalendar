@@ -10,6 +10,8 @@ target_sources(kalendar_mail_plugin PUBLIC
     mailmanager.h
     mailmodel.cpp
     mailmodel.h
+    helper.h
+    helper.cpp
 
     messagestatus.h
     messagestatus.cpp
