@@ -46,7 +46,7 @@ Kirigami.ScrollablePage {
             text: props.title
             maximumLineCount: 2
             wrapMode: Text.Wrap
-            elide: Text.ElideRIght
+            elide: Text.ElideRight
 
             font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.2
         }
@@ -55,12 +55,12 @@ Kirigami.ScrollablePage {
         MailViewer {
             Layout.fillWidth: true
 
-            item: root.item
-            subject: props.title
-            from: props.from
-            to: props.to
-            sender: props.sender
-            dateTime: props.datetime
+            item: root.item ?? ''
+            subject: props.title ?? ''
+            from: props.from ?? ''
+            to: props.to ?? ''
+            sender: props.sender ?? ''
+            dateTime: props.datetime ?? ''
         }
     }
 }

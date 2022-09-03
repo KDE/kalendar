@@ -42,6 +42,7 @@ ecm_target_qml_sources(kalendar_mail_plugin SOURCES
 ecm_target_qml_sources(kalendar_mail_plugin
     PRIVATE PATH private SOURCES
     qml/private/AttachmentDelegate.qml
+    qml/private/MailDelegate.qml
 )
 
 ecm_target_qml_sources(kalendar_mail_plugin
@@ -59,7 +60,6 @@ ecm_target_qml_sources(kalendar_mail_plugin
     qml/mailboxselector/MailBoxList.qml
     qml/mailboxselector/MailBoxListPage.qml
 )
-
 
 ecm_qt_declare_logging_category(kalendar_contact_plugin
     HEADER kalendar_mail_debug.h

@@ -7,8 +7,9 @@ import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kalendar.mail 1.0
 import org.kde.kitemmodels 1.0 as KItemModels
+import './private'
 
- Kirigami.ScrollablePage {
+Kirigami.ScrollablePage {
     id: folderView
     title: MailManager.selectedFolderName
 
@@ -59,52 +60,48 @@ import org.kde.kitemmodels 1.0 as KItemModels
     ListView {
         id: mails
         model: MailManager.folderModel
+        currentIndex: -1
+
+        Connections {
+            target: MailManager
+
+            function onFolderModelChanged() {
+                mails.currentIndex = -1;
+            }
+        }
+
+        Kirigami.PlaceholderMessage {
+            id: mailboxSelected
+            anchors.centerIn: parent
+            visible: MailManager.selectedFolderName === ""
+            text: i18n("No mailbox selected")
+            explanation: i18n("Select a mailbox from the sidebar.")
+            icon.name: "mail-unread"
+        }
+
+        Kirigami.PlaceholderMessage {
+            anchors.centerIn: parent
+            visible: mails.count === 0 && !mailboxSelected.visible
+            text: i18n("Mailbox is empty")
+            icon.name: "mail-folder-inbox"
+        }
+
         section.delegate: Kirigami.ListSectionHeader {
             required property string section
             label: section
         }
         section.property: "date"
-        delegate: Kirigami.BasicListItem {
-            label: model.title
-            subtitle: model.from
-            labelItem.color: if (highlighted) {
-                return Kirigami.Theme.highlightedTextColor;
-            } else {
-                return !model.status || model.status.isRead ? Kirigami.Theme.textColor : Kirigami.Theme.linkColor;
-            }
 
-            TapHandler {
-                acceptedButtons: Qt.RightButton
-                onTapped: {
-                    const menu = contextMenu.createObject(folderView, {
-                        row: index,
-                        status: MailManager.folderModel.copyMessageStatus(model.status),
-                    });
-                    menu.popup();
-                }
-            }
+        delegate: MailDelegate {
+            showSeparator: model.index !== folderView.count - 1
 
+            datetime: model.datetime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) // TODO this is not showing date !
+            author: model.from
+            title: model.title
 
-            trailing: RowLayout {
-                QQC2.Label {
-                    text: model.datetime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
-                    QQC2.ToolTip {
-                        text:  model.datetime.toLocaleString()
-                    }
-                }
-                QQC2.ToolButton {
-                    icon.name: status.isImportant ? 'starred-symbolic' : 'non-starred-symbolic'
-                    implicitHeight: Kirigami.Units.gridUnit
-                    implicitWidth: Kirigami.Units.gridUnit
-                    onClicked: {
-                        const status = MailManager.folderModel.copyMessageStatus(model.status);
-                        status.isImportant = !status.isImportant;
-                        MailManager.folderModel.updateMessageStatus(index, status)
-                    }
-                }
-            }
+            isRead: !model.status || model.status.isRead
 
-            onClicked: {
+            onOpenMailRequested: {
                 applicationWindow().pageStack.push(Qt.resolvedUrl('ConversationViewer.qml'), {
                     item: model.item,
                     props: model,
@@ -115,6 +112,20 @@ import org.kde.kitemmodels 1.0 as KItemModels
                     status.isRead = true;
                     MailManager.folderModel.updateMessageStatus(index, status)
                 }
+            }
+
+            onStarMailRequested: {
+                const status = MailManager.folderModel.copyMessageStatus(model.status);
+                status.isImportant = !status.isImportant;
+                MailManager.folderModel.updateMessageStatus(index, status)
+            }
+
+            onContextMenuRequested: {
+                const menu = contextMenu.createObject(folderView, {
+                    row: index,
+                    status: MailManager.folderModel.copyMessageStatus(model.status),
+                });
+                menu.popup();
             }
         }
     }

@@ -21,5 +21,18 @@ QQC2.ScrollView {
     contentWidth: availableWidth
     clip: true
 
-    contentItem: MailBoxList {}
+    contentItem: MailBoxList { }
+
+    property Kirigami.PagePool pagePool: Kirigami.PagePool {
+        id: pagePool
+    }
+
+    function getPage(name) {
+        switch (name) {
+        case "FolderView":
+            return pagePool.loadPage(Qt.resolvedUrl("./FolderView.qml"))
+        case "MailBoxListPage":
+            return pagePool.loadPage(Qt.resolvedUrl("./mailboxselector/MailBoxListPage.qml"))
+        }
+    }
 }
