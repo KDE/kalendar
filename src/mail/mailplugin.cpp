@@ -7,6 +7,7 @@
 #include <QQmlEngine>
 #include <QtQml>
 
+#include "contactimageprovider.h"
 #include "helper.h"
 #include "mailmanager.h"
 #include "mailmodel.h"
@@ -38,4 +39,10 @@ void CalendarPlugin::registerTypes(const char *uri)
     qmlRegisterType<MessageParser>(uri, 1, 0, "MessageParser");
 
     qRegisterMetaType<MailModel *>("MailModel*");
+}
+
+void CalendarPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+{
+    Q_UNUSED(uri);
+    engine->addImageProvider(QLatin1String("contact"), new ContactImageProvider);
 }

@@ -15,6 +15,8 @@ set(kalendar_mail_SRCS
     mailmodel.h
     helper.h
     helper.cpp
+    contactimageprovider.cpp
+    contactimageprovider.h
 
     messagestatus.h
     messagestatus.cpp
