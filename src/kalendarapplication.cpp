@@ -181,7 +181,7 @@ void KalendarApplication::setupActions()
         mailAction->setActionGroup(m_viewGroup);
         connect(mailAction, &QAction::toggled, this, [](bool checked) {
             if (checked) {
-                KalendarConfig::setLastOpenedView(KalendarConfig::ThreeDayView);
+                KalendarConfig::setLastOpenedView(KalendarConfig::MailView);
                 KalendarConfig::self()->save();
             }
         });
