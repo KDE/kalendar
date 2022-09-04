@@ -380,7 +380,7 @@ Kirigami.ApplicationWindow {
 
         function onOpenIncidence(incidenceData, occurrenceDate) {
             // Switch to an event view if the current view is not compatible with the current incidence type
-            if((pageStack.currentItem.mode & (KalendarApplication.Todo | KalendarApplication.Event) ||
+            if (pageStack.currentItem.mode & (KalendarApplication.Todo | KalendarApplication.Event) ||
                 (pageStack.currentItem.mode === KalendarApplication.Todo && incidenceData.incidenceType !== IncidenceWrapper.TypeTodo)) {
 
                 Kirigami.Settings.isMobile ? dayViewAction.trigger() : weekViewAction.trigger();
@@ -388,7 +388,7 @@ Kirigami.ApplicationWindow {
 
             KalendarUiUtils.setUpView(incidenceData);
 
-            if(pageStack.currentItem.objectName !== "todoView") {
+            if (pageStack.currentItem.mode !== KalendarApplication.Todo) {
                 pageStack.currentItem.setToDate(occurrenceDate);
             }
         }
@@ -630,7 +630,7 @@ Kirigami.ApplicationWindow {
         onStatusChanged: if(status === Loader.Ready) item.open()
         sourceComponent: DateChanger {
             y: pageStack.globalToolBar.height - 1
-            showDays: pageStack.currentItem && pageStack.currentItem.objectName !== "monthView"
+            showDays: pageStack.currentItem && pageStack.currentItem.mode !== KalendarApplication.MonthView
             date: root.selectedDate
             onDateSelected: if(visible) {
                 pageStack.currentItem.setToDate(date);
@@ -1052,21 +1052,21 @@ Kirigami.ApplicationWindow {
 
                     actions: [
                         Kirigami.Action {
-                            text: "Week"
+                            text: i18nc("@action:inmenu open week view", "Week")
                             checkable: true
-                            checked: pageStack.currentItem && pageStack.currentItem.objectName == "weekView"
+                            checked: pageStack.currentItem && pageStack.currentItem.mode === KalendarApplication.Week
                             onTriggered: weekViewAction.trigger()
                         },
                         Kirigami.Action {
-                            text: "3 Days"
+                            text: i18nc("@action:inmenu open 3 days view", "3 Days")
                             checkable: true
-                            checked: pageStack.currentItem && pageStack.currentItem.objectName == "threeDayView"
+                            checked: pageStack.currentItem && pageStack.currentItem.mode === KalendarApplication.ThreeDay
                             onTriggered: threeDayViewAction.trigger()
                         },
                         Kirigami.Action {
-                            text: "Day"
+                            text: i18nc("@action:inmenu open day view", "Day")
                             checkable: true
-                            checked: pageStack.currentItem && pageStack.currentItem.objectName == "dayView"
+                            checked: pageStack.currentItem && pageStack.currentItem.mode === KalendarApplication.Day
                             onTriggered: dayViewAction.trigger()
                         }
                     ]

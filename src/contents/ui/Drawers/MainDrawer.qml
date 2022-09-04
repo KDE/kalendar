@@ -225,10 +225,7 @@ Kirigami.OverlayDrawer {
                                 // in any of the hourly views, at least in desktop mode
                                 checkable: true
                                 checked: pageStack.currentItem && (
-                                         pageStack.currentItem.objectName == "weekView" ||
-                                         pageStack.currentItem.objectName == "threeDayView" ||
-                                         pageStack.currentItem.objectName == "dayView"
-                                         )
+                                         pageStack.currentItem.mode & (KalendarApplication.Week | KalendarApplication.ThreeDay | KalendarApplication.Day))
                                 onTriggered: {
                                     weekViewAction.trigger()
                                     if (mainDrawer.modal) mainDrawer.close()
