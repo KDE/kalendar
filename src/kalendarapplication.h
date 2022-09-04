@@ -28,10 +28,15 @@ class KalendarApplication : public QObject
 
 public:
     enum Mode {
-        Event,
-        Todo,
-        Contact,
-        Mail,
+        Month = 1,
+        Week = 2,
+        ThreeDay = 4,
+        Day = 8,
+        Schedule = 16,
+        Event = Month | Week | ThreeDay | Day | Schedule,
+        Todo = 32,
+        Contact = 64,
+        Mail = 128,
     };
     Q_ENUM(Mode)
 

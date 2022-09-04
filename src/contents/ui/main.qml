@@ -431,36 +431,37 @@ Kirigami.ApplicationWindow {
     }
 
     title: if(pageStack.currentItem) {
-        switch (pageStack.currentItem.objectName) {
-            case "monthView":
-                return i18n("Month View");
+        switch (pageStack.currentItem.mode) {
+            case KalendarApplication.Month:
+                return i18n("Month");
                 break;
-            case "weekView":
-                return i18n("Week View");
+            case KalendarApplication.Week:
+                return i18n("Week");
                 break;
-            case "threeDayView":
-                return i18n("3 Day View");
+            case KalendarApplication.ThreeDay:
+                return i18n("3 Days");
                 break;
-            case "dayView":
-                return i18n("Day View");
+            case KalendarApplication.Day:
+                return i18n("Day");
                 break;
-            case "scheduleView":
-                return i18n("Schedule View");
+            case KalendarApplication.Schedule:
+                return i18n("Schedule");
                 break;
-            case "todoView":
-                return i18n("Tasks View");
+            case KalendarApplication.Todo:
+                return i18n("Tasks");
                 break;
-            case "contactView":
-                return i18n("Contacts View");
+            case KalendarApplication.Contact:
+                return i18n("Contacts");
                 break;
-            case "mailView":
-                return i18n("Mail View");
+            case KalendarApplication.Mail:
+                return i18n("Mail");
                 break;
             default:
-                return i18n("Calendar");
+                // Should not happen
+                return 'Kalendar';
         }
     } else {
-        return i18n("Calendar");
+        return 'Kalendar';
     }
 
     menuBar: Loader {

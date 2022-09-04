@@ -41,7 +41,15 @@ Kirigami.Page {
     readonly property real hourLabelWidth: hourLabelMetrics.boundingRect(new Date(0,0,0,0,0,0,0).toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)).width +
         Kirigami.Units.largeSpacing * 2.5
     readonly property real periodHeight: Kirigami.Units.gridUnit
-    readonly property var mode: Kalendar.KalendarApplication.Event
+    readonly property var mode: switch(daysToShow) {
+        case 1:
+            return Kalendar.KalendarApplication.Day;
+        case 3:
+            return Kalendar.KalendarApplication.ThreeDay;
+        case 7:
+        default:
+            return Kalendar.KalendarApplication.Week;
+    }
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View

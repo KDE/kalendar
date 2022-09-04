@@ -12,6 +12,7 @@ import './private'
 Kirigami.ScrollablePage {
     id: folderView
     title: MailManager.selectedFolderName
+    readonly property int mode: KalendarApplication.Mail
 
     Component {
         id: contextMenu

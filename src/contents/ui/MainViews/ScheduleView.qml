@@ -62,7 +62,7 @@ Kirigami.Page {
     readonly property bool isDark: KalendarUiUtils.darkMode
     property real maxTimeLabelWidth: 0
     property bool dragDropEnabled: true
-    readonly property int mode: Kalendar.KalendarApplication.Event
+    readonly property int mode: Kalendar.KalendarApplication.Schedule
 
     onSelectedDateChanged: {
         if (pathView.currentItem) {
