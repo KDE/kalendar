@@ -380,7 +380,7 @@ Kirigami.ApplicationWindow {
 
         function onOpenIncidence(incidenceData, occurrenceDate) {
             // Switch to an event view if the current view is not compatible with the current incidence type
-            if((pageStack.currentItem.mode !== KalendarApplication.Todo && pageStack.currentItem.mode !== KalendarApplication.Event) ||
+            if((pageStack.currentItem.mode & (KalendarApplication.Todo | KalendarApplication.Event) ||
                 (pageStack.currentItem.mode === KalendarApplication.Todo && incidenceData.incidenceType !== IncidenceWrapper.TypeTodo)) {
 
                 Kirigami.Settings.isMobile ? dayViewAction.trigger() : weekViewAction.trigger();

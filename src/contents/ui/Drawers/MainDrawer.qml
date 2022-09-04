@@ -100,7 +100,7 @@ Kirigami.OverlayDrawer {
                     id: searchField
                     Layout.fillWidth: true
 
-                    visible: mainDrawer.mode !== KalendarApplication.Event
+                    visible: mainDrawer.mode & (KalendarApplication.Todo | KalendarApplication.Mail | KalendarApplication.Contact)
                     opacity: mainDrawer.collapsed ? 0 : 1
                     Behavior on opacity {
                         OpacityAnimator {
@@ -449,12 +449,10 @@ Kirigami.OverlayDrawer {
                             isMask: true
                             color: calendarHeadingItem.labelItem.color
                         }
-                        text: switch (mode) {
-                            case KalendarApplication.Event:
-                            case KalendarApplication.Todo:
-                                return i18n("Calendars");
-                            case KalendarApplication.Contact:
-                                return i18n("Contacts");
+                        text: if (mode === KalendarApplication.Contact) {
+                            return i18n("Contacts");
+                        } else {
+                            return i18n("Calendars");
                         }
                         highlighted: visualFocus
                         labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
@@ -479,12 +477,10 @@ Kirigami.OverlayDrawer {
                             model: switch(mainDrawer.mode) {
                             case KalendarApplication.Todo:
                                 return CalendarManager.todoCollections;
-                            case KalendarApplication.Event:
-                                return CalendarManager.viewCollections;
                             case KalendarApplication.Contact:
                                 return ContactManager.contactCollections;
                             default:
-                                console.log('Should not happen', mainDrawer.mode)
+                                return CalendarManager.viewCollections;
                             }
                         }
 

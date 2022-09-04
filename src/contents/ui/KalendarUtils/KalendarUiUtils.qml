@@ -36,7 +36,7 @@ QtObject {
             }
         }
 
-        if (appMain.pageStack.currentItem.mode === KalendarApplication.Event) {
+        if (appMain.pageStack.currentItem.mode & KalendarApplication.Event) {
             appMain.pageStack.currentItem.setToDate(appMain.selectedDate, true);
         }
     }
