@@ -13,7 +13,7 @@ import org.kde.kitemmodels 1.0 as KItemModels
 ListView {
     id: root
 
-    implicitHeight: contentHeight
+    implicitHeight: root.count === 0 ? Kirigami.Units.gridUnit * 20 : contentHeight
     property var item
     property alias rootIndex: visualModel.rootIndex
     property alias searchString: visualModel.searchString
@@ -26,6 +26,14 @@ ListView {
         id: visualModel
         model: messageParser.parts
     }
+
+    Kirigami.PlaceholderMessage {
+        anchors.centerIn: parent
+        visible: root.count === 0
+        text: i18n("Loading mail...")
+        icon.name: "mail-folder-inbox"
+    }
+
     MessageParser {
         id: messageParser
         item: root.item
