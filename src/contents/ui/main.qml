@@ -167,49 +167,49 @@ Kirigami.ApplicationWindow {
     Connections {
         target: KalendarApplication
         function onOpenMonthView() {
-            if(pageStack.currentItem.objectName !== "monthView" || root.ignoreCurrentPage) {
+            if(pageStack.currentItem.mode !== KalendarApplication.Month || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView(monthViewComponent);
             }
         }
 
         function onOpenWeekView() {
-            if(pageStack.currentItem.objectName !== "weekView" || root.ignoreCurrentPage) {
+            if(pageStack.currentItem.mode !== KalendarApplication.Week || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView(hourlyViewComponent);
             }
         }
 
         function onOpenThreeDayView() {
-            if(pageStack.currentItem.objectName !== "threeDayView" || root.ignoreCurrentPage) {
+            if(pageStack.currentItem.mode !== KalendarApplication.ThreeDay || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 3 });
             }
         }
 
         function onOpenDayView() {
-            if(pageStack.currentItem.objectName !== "dayView" || root.ignoreCurrentPage) {
+            if(pageStack.currentItem.mode !== KalendarApplication.Day || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 1 });
             }
         }
 
         function onOpenScheduleView() {
-            if(pageStack.currentItem.objectName !== "scheduleView" || root.ignoreCurrentPage) {
+            if(pageStack.currentItem.mode !== KalendarApplication.Schedule || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView(scheduleViewComponent);
             }
         }
 
         function onOpenContactView() {
-            if(pageStack.currentItem.objectName !== "contactView" || root.ignoreCurrentPage) {
+            if(pageStack.currentItem.mode !== KalendarApplication.Contact || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView("qrc:/LazyContactView.qml");
             }
         }
 
         function onOpenMailView() {
-            if(pageStack.currentItem.objectName !== "mailView" || root.ignoreCurrentPage) {
+            if(pageStack.currentItem.mode !== KalendarApplication.Mail || root.ignoreCurrentPage) {
                 KalendarUiUtils.switchView("qrc:/LazyMailView.qml");
             }
         }
 
         function onOpenTodoView() {
-            if(pageStack.currentItem.objectName !== "todoView") {
+            if(pageStack.currentItem.mode !== KalendarApplication.Todo) {
                 filterHeaderBar.active = true;
                 KalendarUiUtils.switchView(todoViewComponent);
             }
