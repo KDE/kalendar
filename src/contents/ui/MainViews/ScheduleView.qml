@@ -51,7 +51,6 @@ Kirigami.Page {
     }
 
     property var openOccurrence
-    property var filter: ({})
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
     property int day: selectedDate.getDate()
@@ -241,7 +240,7 @@ Kirigami.Page {
                            start: viewLoader.firstDayOfMonth
                            length: viewLoader.daysInMonth
                            calendar: Kalendar.CalendarManager.calendar
-                           filter: root.filter
+                           filter: Kalendar.Filter
                        }
                    }
 

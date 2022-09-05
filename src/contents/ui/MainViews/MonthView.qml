@@ -15,7 +15,6 @@ Kirigami.Page {
     id: monthPage
 
     property var openOccurrence
-    property var filter: ({})
     property date startDate
     property date currentDate
     property date firstDayOfMonth
@@ -150,7 +149,6 @@ Kirigami.Page {
                 height: pathView.height
                 isCurrentView: viewLoader.isCurrentItem
                 dragDropEnabled: monthPage.dragDropEnabled
-                filter: root.filter
 
                 startDate: viewLoader.startDate
                 currentDate: monthPage.currentDate

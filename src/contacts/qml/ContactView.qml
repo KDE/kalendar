@@ -16,6 +16,11 @@ Kirigami.ScrollablePage {
     property var attendeeAkonadiIds
     title: i18n("Contacts")
 
+    Connections {
+        target: Filter
+        onNameChanged: ContactManager.filteredContacts.setFilterFixedString(Filter.name)
+    }
+
     actions.main: Kirigami.Action {
         icon.name: 'contact-new-symbolic'
         text: i18n('Create')

@@ -17,7 +17,6 @@ Item {
     id: root
 
     property var openOccurrence
-    property var filter: ({})
 
     property int daysToShow: daysPerRow * 6
     property int daysPerRow: 7
@@ -241,7 +240,7 @@ Item {
                         start: root.startDate
                         length: root.daysToShow
                         calendar: Kalendar.CalendarManager.calendar
-                        filter: root.filter
+                        filter: Kalendar.Filter
                     }
                 }
                 //One row => one week

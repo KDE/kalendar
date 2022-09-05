@@ -22,6 +22,8 @@ set(kalendar_SRCS
     models/attendeesmodel.h
     calendarmanager.cpp
     calendarmanager.h
+    filter.cpp
+    filter.h
     models/commandbarfiltermodel.cpp
     models/commandbarfiltermodel.h
     models/hourlyincidencemodel.cpp

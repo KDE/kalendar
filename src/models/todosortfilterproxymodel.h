@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #pragma once
+
 #include <QObject>
 #include <Akonadi/ETMCalendar>
 #include <CalendarSupport/KCalPrefs>
@@ -13,12 +14,14 @@
 #include <KSharedConfig>
 #include <QSortFilterProxyModel>
 
+class Filter;
+
 class TodoSortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger READ incidenceChanger WRITE setIncidenceChanger NOTIFY incidenceChangerChanged)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
-    Q_PROPERTY(QVariantMap filterMap READ filterMap WRITE setFilterMap NOTIFY filterMapChanged)
+    Q_PROPERTY(Filter *filterMap READ filterMap WRITE setFilterMap NOTIFY filterMapChanged)
     Q_PROPERTY(int showCompleted READ showCompleted WRITE setShowCompleted NOTIFY showCompletedChanged)
     Q_PROPERTY(int sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(bool sortAscending READ sortAscending WRITE setSortAscending NOTIFY sortAscendingChanged)
@@ -90,8 +93,8 @@ public:
 
     int showCompleted() const;
     void setShowCompleted(int showCompleted);
-    QVariantMap filterMap() const;
-    void setFilterMap(const QVariantMap &filterMap);
+    Filter *filterMap() const;
+    void setFilterMap(Filter *filterMap);
 
     int sortBy() const;
     void setSortBy(int sortBy);
@@ -136,7 +139,7 @@ private:
     KConfigWatcher::Ptr m_colorWatcher;
     int m_showCompleted = ShowComplete::ShowAll;
     int m_showCompletedStore; // For when searches happen
-    QVariantMap m_filterMap;
+    Filter *m_filterMap = nullptr;
     int m_sortColumn = DueDateColumn;
     bool m_sortAscending = false;
     bool m_showCompletedSubtodosInIncomplete = true;

@@ -20,13 +20,8 @@ Kirigami.ScrollablePage {
 
     property var mode: Kalendar.KalendarApplication.Todo
 
-    property var filter: {
-        "collectionId": -1,
-        "tags": [],
-        "name": ""
-    }
-    property var filterCollectionDetails: root.filter && root.filter.collectionId >= 0 ?
-        Kalendar.CalendarManager.getCollectionDetails(root.filter.collectionId) : null
+    property var filterCollectionDetails: Kalendar.Filter.collectionId >= 0 ?
+        Kalendar.CalendarManager.getCollectionDetails(Kalendar.Filter.collectionId) : null
 
     property int sortBy: switch (Kalendar.Config.sort) {
         case Kalendar.Config.DueTime:
@@ -57,7 +52,7 @@ Kirigami.ScrollablePage {
         main: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: KalendarUiUtils.setUpAdd(Kalendar.IncidenceWrapper.TypeTodo, new Date(), root.filter.collectionId);
+            onTriggered: KalendarUiUtils.setUpAdd(Kalendar.IncidenceWrapper.TypeTodo, new Date(), Kalendar.Filter.collectionId);
         }
         left: Kirigami.Action {
             text: i18n("Sort")
@@ -101,7 +96,7 @@ Kirigami.ScrollablePage {
 
     property Component completedSheetComponent: Kirigami.ScrollablePage {
         id: completedSheet
-        title: root.filterCollectionDetails && root.filter && root.filter.collectionId > -1 ?
+        title: root.filterCollectionDetails && Kalendar.Filter.collectionId > -1 ?
             i18n("Completed Tasks in %1", root.filterCollectionDetails.displayName) : i18n("Completed Tasks")
 
         TodoTreeView {
@@ -109,7 +104,6 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            filter: root.filter
             filterCollectionDetails: root.filterCollectionDetails
 
             showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
@@ -141,7 +135,6 @@ Kirigami.ScrollablePage {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        filter: root.filter
         filterCollectionDetails: root.filterCollectionDetails
 
         showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
@@ -178,8 +171,8 @@ Kirigami.ScrollablePage {
                 incidenceWrapper.setNewTodo();
                 incidenceWrapper.summary = addField.text;
 
-                if(root.filter && root.filter.collectionId >= 0) {
-                    incidenceWrapper.collectionId = root.filter.collectionId;
+                if(Kalendar.Filter.collectionId >= 0) {
+                    incidenceWrapper.collectionId = Kalendar.Filter.collectionId;
                     Kalendar.CalendarManager.addIncidence(incidenceWrapper);
                     addField.clear();
                 } else {

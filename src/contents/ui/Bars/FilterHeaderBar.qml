@@ -12,20 +12,12 @@ import "labelutils.js" as LabelUtils
 RowLayout {
     id: headerLayout
 
-    signal resetFilterCollection()
-    signal removeFilterTag(string tagName)
-    signal searchTextChanged(string text)
-
     property bool isDark: KalendarUiUtils.darkMode
     property var mode: Kalendar.KalendarApplication.Event
-    property var filter: {
-        "tags": [],
-        "collectionId": -1
-    }
-    property var filterCollectionDetails: filter && filter.collectionId >= 0 ?
-        Kalendar.CalendarManager.getCollectionDetails(filter.collectionId) : null
+    property var filterCollectionDetails: Kalendar.Filter.collectionId >= 0 ?
+        Kalendar.CalendarManager.getCollectionDetails(Kalendar.Filter.collectionId) : null
 
-    visible: mode === Kalendar.KalendarApplication.Todo || filter.tags.length > 0 || filter.collectionId > -1
+    visible: mode === Kalendar.KalendarApplication.Todo || Kalendar.Filter.tags.length > 0 || Kalendar.Filter.collectionId > -1
     height: visible ? implicitHeight : 0
 
     spacing: Kirigami.Units.smallSpacing
@@ -34,7 +26,7 @@ RowLayout {
         target: Kalendar.CalendarManager
         function onCollectionColorsChanged() {
             // Trick into reevaluating filterCollectionDetails
-            headerLayout.filterChanged();
+            Kalendar.Filter.tagsChanged();
         }
     }
 
@@ -46,10 +38,10 @@ RowLayout {
             Layout.alignment: Qt.AlignVCenter
             width: implicitWidth
 
-            text: headerLayout.mode !== Kalendar.KalendarApplication.Todo ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+            text: headerLayout.mode !== Kalendar.KalendarApplication.Todo ? i18n("Filtering by tags") : headerLayout.filterCollectionDetails && Kalendar.Filter.collectionId > -1 ?
                 headerLayout.filterCollectionDetails.displayName : i18n("All Tasks")
             font.weight: headerLayout.mode !== Kalendar.KalendarApplication.Todo ? Font.Normal : Font.Bold
-            color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+            color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && Kalendar.Filter.collectionId > -1 ?
                 headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
             elide: Text.ElideRight
             level: headerLayout.mode === Kalendar.KalendarApplication.Todo ? 1 : 2
@@ -57,8 +49,8 @@ RowLayout {
         QQC2.ToolButton {
             Layout.alignment: Qt.AlignVCenter
             icon.name: "edit-reset"
-            visible: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filter.collectionId > -1
-            onClicked: headerLayout.resetFilterCollection()
+            visible: headerLayout.mode === Kalendar.KalendarApplication.Todo && Kalendar.Filter.collectionId > -1
+            onClicked: Kalendar.Filter.collectionId = -1
         }
     }
 
@@ -72,11 +64,11 @@ RowLayout {
         spacing: Kirigami.Units.smallSpacing
         layoutDirection: Qt.RightToLeft
         clip: true
-        visible: headerLayout.filter.tags.length > 0
+        visible: Kalendar.Filter.tags.length > 0
 
         Repeater {
             id: tagRepeater
-            model: headerLayout.filter ? headerLayout.filter.tags : {}
+            model: Kalendar.Filter ? Kalendar.Filter.tags : {}
 
             Tag {
                 id: filterTag
@@ -89,7 +81,7 @@ RowLayout {
                 headingItem.color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails ?
                     headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
 
-                onClicked: headerLayout.removeFilterTag(modelData)
+                onClicked: Kalendar.Filter.removeTag(modelData)
                 actionIcon.name: "edit-delete-remove"
                 actionText: i18n("Remove filtering tag")
             }
@@ -122,7 +114,7 @@ RowLayout {
 
         text: headerLayout.mode === Kalendar.KalendarApplication.Todo ? applicationWindow().pageStack.currentItem.incompleteView.model.rowCount() : ''
         font.weight: Font.Bold
-        color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && headerLayout.filter.collectionId > -1 ?
+        color: headerLayout.mode === Kalendar.KalendarApplication.Todo && headerLayout.filterCollectionDetails && Kalendar.Filter.collectionId > -1 ?
             headerLayout.filterCollectionDetails.color : Kirigami.Theme.textColor
         elide: Text.ElideRight
         visible: headerLayout.mode === Kalendar.KalendarApplication.Todo

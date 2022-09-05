@@ -34,7 +34,6 @@ TreeListView {
     property var retainedCollectionData: ({})
 
     property date currentDate: new Date()
-    property var filter
     property var filterCollectionDetails
 
     property int showCompleted: Kalendar.TodoSortFilterProxyModel.ShowAll
@@ -101,14 +100,14 @@ TreeListView {
     Kirigami.PlaceholderMessage {
         id: allTasksPlaceholderMessage
         anchors.centerIn: parent
-        visible: (!root.filter || !root.filter.collectionId || root.filter.collectionId < 0) && Kalendar.CalendarManager.enabledTodoCollections.length === 0 && parent.count === 0
+        visible: (!Kalendar.Filter.collectionId || Kalendar.Filter.collectionId < 0) && Kalendar.CalendarManager.enabledTodoCollections.length === 0 && parent.count === 0
         text: i18n("No task calendars enabled.")
     }
 
     Kirigami.PlaceholderMessage {
         id: collectionPlaceholderMessage
         anchors.centerIn: parent
-        visible: root.filter && root.filter.collectionId >= 0 && !Kalendar.CalendarManager.enabledTodoCollections.includes(root.filter.collectionId) && parent.count === 0
+        visible: Kalendar.Filter && Kalendar.Filter.collectionId >= 0 && !Kalendar.CalendarManager.enabledTodoCollections.includes(Kalendar.Filter.collectionId) && parent.count === 0
         text: i18n("Calendar is not enabled")
         helpfulAction: Kirigami.Action {
             icon.name: "gtk-yes"
@@ -133,7 +132,7 @@ TreeListView {
         id: todoModel
         calendar: Kalendar.CalendarManager.calendar
         incidenceChanger: Kalendar.CalendarManager.incidenceChanger
-        filterMap: root.filter
+        filterMap: Kalendar.Filter
         showCompleted: root.showCompleted
         sortBy: root.sortBy
         sortAscending: root.ascendingOrder

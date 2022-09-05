@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "todosortfilterproxymodel.h"
+#include "../filter.h"
 
 TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
@@ -198,15 +199,15 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
     const QModelIndex sourceIndex = sourceModel()->index(row, 0, sourceParent);
     Q_ASSERT(sourceIndex.isValid());
 
-    if (m_filterMap.empty()) {
+    if (m_filterMap == nullptr) {
         return QSortFilterProxyModel::filterAcceptsRow(row, sourceParent);
     }
 
     bool acceptRow = true;
 
-    if (m_filterMap.contains(QLatin1String("collectionId")) && m_filterMap[QLatin1String("collectionId")].toInt() > -1) {
+    if (m_filterMap->collectionId() > -1) {
         const auto collectionId = sourceIndex.data(TodoModel::TodoRole).value<Akonadi::Item>().parentCollection().id();
-        acceptRow = acceptRow && collectionId == m_filterMap[QLatin1String("collectionId")].toInt();
+        acceptRow = acceptRow && collectionId == m_filterMap->collectionId();
     }
 
     switch (m_showCompleted) {
@@ -220,8 +221,8 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
         break;
     }
 
-    if (m_filterMap.contains(QLatin1String("tags")) && !m_filterMap[QLatin1String("tags")].toStringList().isEmpty()) {
-        const auto tags = m_filterMap[QLatin1String("tags")].toStringList();
+    if (!m_filterMap->tags().isEmpty()) {
+        const auto tags = m_filterMap->tags();
         bool containsTag = false;
         for (const auto &tag : tags) {
             const auto todoPtr = sourceIndex.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
@@ -322,24 +323,44 @@ void TodoSortFilterProxyModel::setShowCompleted(int showCompleted)
     sortTodoModel();
 }
 
-QVariantMap TodoSortFilterProxyModel::filterMap() const
+Filter *TodoSortFilterProxyModel::filterMap() const
 {
     return m_filterMap;
 }
 
-void TodoSortFilterProxyModel::setFilterMap(const QVariantMap &filterMap)
+void TodoSortFilterProxyModel::setFilterMap(Filter *filterMap)
 {
+    if (m_filterMap == filterMap) {
+        return;
+    }
+
+    if (m_filterMap) {
+        disconnect(m_filterMap, nullptr, this, nullptr);
+    }
+
     Q_EMIT filterMapAboutToChange();
 
     Q_EMIT layoutAboutToBeChanged();
     m_filterMap = filterMap;
     Q_EMIT filterMapChanged();
 
-    if (m_filterMap.contains(QLatin1String("name"))) {
-        const auto name = m_filterMap[QLatin1String("name")].toString();
+    if (!m_filterMap->name().isEmpty()) {
+        const auto name = m_filterMap->name();
         setFilterFixedString(name);
     }
     invalidateFilter();
+    connect(m_filterMap, &Filter::nameChanged, this, [this]() {
+        Q_EMIT filterMapAboutToChange();
+        setFilterFixedString(m_filterMap->name());
+        Q_EMIT layoutChanged();
+    });
+    auto handleFilterChange = [this]() {
+        Q_EMIT filterMapAboutToChange();
+        invalidateFilter();
+        Q_EMIT layoutChanged();
+    };
+    connect(m_filterMap, &Filter::tagsChanged, this, handleFilterChange);
+    connect(m_filterMap, &Filter::collectionIdChanged, this, handleFilterChange);
     Q_EMIT layoutChanged();
 
     sortTodoModel();

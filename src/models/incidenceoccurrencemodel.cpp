@@ -8,6 +8,7 @@
 #include "incidenceoccurrencemodel.h"
 #include "kalendar_debug.h"
 
+#include "../filter.h"
 #include <Akonadi/EntityTreeModel>
 #include <KCalendarCore/MemoryCalendar>
 #include <KCalendarCore/OccurrenceIterator>
@@ -62,12 +63,12 @@ int IncidenceOccurrenceModel::length() const
     return mLength;
 }
 
-QVariantMap IncidenceOccurrenceModel::filter() const
+Filter *IncidenceOccurrenceModel::filter() const
 {
     return mFilter;
 }
 
-void IncidenceOccurrenceModel::setFilter(const QVariantMap &filter)
+void IncidenceOccurrenceModel::setFilter(Filter *filter)
 {
     mFilter = filter;
     updateQuery();
@@ -117,9 +118,9 @@ void IncidenceOccurrenceModel::updateFromSource()
             occurrenceIterator.next();
             const auto incidence = occurrenceIterator.incidence();
 
-            if (mFilter.contains(QLatin1String("tags")) && mFilter[QLatin1String("tags")].toStringList().length() > 0) {
+            if (mFilter && mFilter->tags().length() > 0) {
                 bool match = false;
-                QStringList tags = mFilter[QLatin1String("tags")].toStringList();
+                QStringList tags = mFilter->tags();
                 for (const auto &tag : tags) {
                     if (incidence->categories().contains(tag)) {
                         match = true;

@@ -19,6 +19,7 @@
 #include <QSharedPointer>
 #include <QTimer>
 
+class Filter;
 namespace KCalendarCore
 {
 class Incidence;
@@ -40,7 +41,7 @@ class IncidenceOccurrenceModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(QDate start READ start WRITE setStart NOTIFY startChanged)
     Q_PROPERTY(int length READ length WRITE setLength NOTIFY lengthChanged)
-    Q_PROPERTY(QVariantMap filter READ filter WRITE setFilter NOTIFY filterChanged)
+    Q_PROPERTY(Filter *filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
 
 public:
@@ -85,8 +86,8 @@ public:
     QDate start() const;
     void setLength(int length);
     int length() const;
-    QVariantMap filter() const;
-    void setFilter(const QVariantMap &filter);
+    Filter *filter() const;
+    void setFilter(Filter *filter);
 
     void load();
 
@@ -122,7 +123,7 @@ private:
     QList<Occurrence> m_incidences;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
-    QVariantMap mFilter;
+    Filter *mFilter;
     KFormat m_format;
 };
 

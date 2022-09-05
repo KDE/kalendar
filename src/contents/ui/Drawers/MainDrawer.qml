@@ -18,15 +18,11 @@ Kirigami.OverlayDrawer {
     id: mainDrawer
 
     signal calendarClicked(int collectionId)
-    signal calendarCheckChanged(int collectionId, bool checked)
-    signal viewAllTodosClicked
-    signal tagClicked(string tagName)
     signal deleteCalendar(int collectionId, var collectionDetails)
 
     property var mode: KalendarApplication.Event
     property alias toolbar: toolbar
-    property var activeTags : []
-    property alias searchText: searchField.text
+    property var activeTags : Filter.tags
 
     Connections {
         target: applicationWindow()
@@ -99,6 +95,7 @@ Kirigami.OverlayDrawer {
                 Kirigami.SearchField { // TODO: Make this open a new search results page
                     id: searchField
                     Layout.fillWidth: true
+                    onTextChanged: Filter.name = text
 
                     visible: mainDrawer.mode & (KalendarApplication.Todo | KalendarApplication.Mail | KalendarApplication.Contact)
                     opacity: mainDrawer.collapsed ? 0 : 1
@@ -426,7 +423,7 @@ Kirigami.OverlayDrawer {
                                 activeFocusOnTab: true
                                 backgroundColor: mainDrawer.activeTags.includes(model.display) ? Kirigami.Theme.highlightColor : Kirigami.Theme.backgroundColor
                                 enabled: !mainDrawer.collapsed
-                                onClicked: tagClicked(model.display)
+                                onClicked: Filter.toggleFilterTag(model.display)
                             }
                         }
                     }
@@ -550,10 +547,10 @@ Kirigami.OverlayDrawer {
                                             visible: model.checkState != null
                                             color: model.collectionColor ?? Kirigami.Theme.highlightedTextColor
                                             checked: model.checkState === 2
-                                            onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                            onCheckedChanged: mainDrawer.calendarCheckChanged()
                                             onClicked: {
                                                 model.checkState = model.checkState === 0 ? 2 : 0
-                                                calendarCheckChanged(collectionId, checked)
+                                                calendarCheckChanged()
                                             }
                                         }
                                     }
@@ -611,16 +608,18 @@ Kirigami.OverlayDrawer {
                                         visible: model.checkState != null
                                         color: model.collectionColor
                                         checked: model.checkState === 2
-                                        onCheckedChanged: calendarCheckChanged(collectionId, checked)
+                                        onCheckedChanged: mainDrawer.calendarCheckChanged()
                                         onClicked: {
                                             model.checkState = model.checkState === 0 ? 2 : 0
-                                            calendarCheckChanged(collectionId, checked)
+                                            calendarCheckChanged()
                                         }
                                     }
 
                                     onClicked: {
-                                        calendarClicked(collectionId);
-                                        if(mainDrawer.modal) mainDrawer.close()
+                                        Filter.collectionId = collectionId;
+                                        if (mainDrawer.modal) {
+                                            mainDrawer.close()
+                                        }
                                     }
 
                                     CalendarItemTapHandler {
@@ -664,8 +663,8 @@ Kirigami.OverlayDrawer {
     Kirigami.Separator {
         Layout.fillWidth: true
     }
-    Kirigami.BasicListItem {
 
+    Kirigami.BasicListItem {
         FontMetrics {
             id: textMetrics
         }
@@ -677,8 +676,16 @@ Kirigami.OverlayDrawer {
         visible: mainDrawer.mode === KalendarApplication.Todo
         separatorVisible: false
         onClicked: {
-            viewAllTodosClicked();
-            if(mainDrawer.modal && mainDrawer.mode === KalendarApplication.Todo) mainDrawer.close()
+            Filter.reset()
+            if (mainDrawer.modal && mainDrawer.mode === KalendarApplication.Todo) {
+                mainDrawer.close()
+            }
+        }
+    }
+
+    function calendarCheckChanged() {
+        if (mode & (KalendarApplication.Event | KalendarApplication.Todo)) {
+            CalendarManager.save();
         }
     }
 }

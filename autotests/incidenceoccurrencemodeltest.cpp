@@ -3,6 +3,7 @@
 
 #include "../src/models/incidenceoccurrencemodel.h"
 
+#include "../src/filter.h"
 #include <Akonadi/IncidenceChanger>
 #include <KCalendarCore/Incidence>
 #include <KCheckableProxyModel>
@@ -180,12 +181,12 @@ private Q_SLOTS:
 
     void testFilter()
     {
-        QVariantMap filter;
-        filter[QStringLiteral("tags")] = QStringList(QStringLiteral("Tag 2"));
+        Filter filter;
+        filter.setTags(QStringList(QStringLiteral("Tag 2")));
 
         QSignalSpy fetchFinished(&model, &QAbstractItemModel::modelReset);
-        model.setFilter(filter);
-        QCOMPARE(model.filter(), filter);
+        model.setFilter(&filter);
+        QCOMPARE(model.filter(), &filter);
         fetchFinished.wait(10000);
 
         QCOMPARE(model.rowCount(), 1);

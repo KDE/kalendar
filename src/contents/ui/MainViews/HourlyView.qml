@@ -16,7 +16,6 @@ Kirigami.Page {
     id: root
 
     property var openOccurrence: ({})
-    property var filter: ({})
 
     property date selectedDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(selectedDate)
@@ -442,7 +441,7 @@ Kirigami.Page {
                                         start: viewLoader.startDate
                                         length: root.daysToShow
                                         calendar: Kalendar.CalendarManager.calendar
-                                        filter: root.filter
+                                        filter: Kalendar.Filter
                                     }
                                 }
 
@@ -783,7 +782,7 @@ Kirigami.Page {
                                            start: viewLoader.startDate
                                            length: root.daysToShow
                                            calendar: Kalendar.CalendarManager.calendar
-                                           filter: root.filter
+                                           filter: Kalendar.Filter
                                        }
                                    }
 

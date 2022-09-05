@@ -36,14 +36,6 @@ Kirigami.ApplicationWindow {
     }
     property date selectedDate: new Date()
     property var openOccurrence: {}
-    property var filter: {
-        "collectionId": -1,
-        "tags": [],
-        "name": ""
-    }
-    onFilterChanged: if(pageStack.currentItem.mode === KalendarApplication.Todo) {
-        pageStack.currentItem.filter = filter
-    }
 
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
     readonly property var weekViewAction: KalendarApplication.action("open_week_view")
@@ -491,45 +483,7 @@ Kirigami.ApplicationWindow {
         id: mainDrawer
         bottomPadding: menuLoader.active ? menuLoader.height : 0
         mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
-        activeTags: root.filter && root.filter.tags ?
-                    root.filter.tags : []
-        onSearchTextChanged: {
-            if (mode === KalendarApplication.Contact) {
-                ContactManager.filteredContacts.setFilterFixedString(searchText)
-                return;
-            }
-            if (mode === KalendarApplication.Mail) {
-                MailManager.folderModel.searchString = searchText;
-                return;
-            }
-            if(root.filter) {
-                root.filter.name = searchText;
-            } else {
-                root.filter = {name: searchText};
-            }
-            root.filterChanged();
-        }
-        onCalendarClicked: if (mode === KalendarApplication.Todo) {
-            root.filter ?
-                root.filter.collectionId = collectionId :
-                root.filter = {"collectionId" : collectionId};
-            root.filterChanged();
-            pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(collectionId);
-        }
-        onCalendarCheckChanged: {
-            CalendarManager.save();
-            if(mode === KalendarApplication.Todo && collectionId === pageStack.currentItem.filterCollectionId) {
-                pageStack.currentItem.filterCollectionDetails = CalendarManager.getCollectionDetails(pageStack.currentItem.filterCollectionId);
-                // HACK: The Todo View should be able to detect change in collection filtering independently
-            }
-        }
-        onTagClicked: root.toggleFilterTag(tagName)
-        onViewAllTodosClicked: if(mode === KalendarApplication.Todo) {
-            root.filter.collectionId = -1;
-            root.filter.tags = [];
-            root.filter.name = "";
-            root.filterChanged();
-        }
+
         onDeleteCalendar: {
             const openDialogWindow = pageStack.pushDialogLayer(deleteCalendarPageComponent, {
                 collectionId: collectionId,
@@ -548,9 +502,9 @@ Kirigami.ApplicationWindow {
         id: incidenceInfoDrawer
 
         width: if(!Kirigami.Settings.isMobile) actualWidth
-	height: if(Kirigami.Settings.isMobile) applicationWindow().height * 0.6
-	bottomPadding: menuLoader.active ? menuLoader.height : 0
-	
+        height: if(Kirigami.Settings.isMobile) applicationWindow().height * 0.6
+        bottomPadding: menuLoader.active ? menuLoader.height : 0
+
         modal: !root.wideScreen || !enabled
         onEnabledChanged: drawerOpen = enabled && !modal
         onModalChanged: drawerOpen = !modal
@@ -558,8 +512,6 @@ Kirigami.ApplicationWindow {
         handleVisible: enabled
         interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
-        activeTags: root.filter && root.filter.tags ?
-                    root.filter.tags : []
         onIncidenceDataChanged: root.openOccurrence = incidenceData;
         onVisibleChanged: {
             if(visible) {
@@ -581,7 +533,6 @@ Kirigami.ApplicationWindow {
             KalendarUiUtils.setUpDelete(incidencePtr, deleteDate)
             if (modal) { incidenceInfoDrawer.close() }
         }
-        onTagClicked: root.toggleFilterTag(tagName)
 
         readonly property int minWidth: Kirigami.Units.gridUnit * 15
         readonly property int maxWidth: Kirigami.Units.gridUnit * 25
@@ -697,7 +648,7 @@ Kirigami.ApplicationWindow {
         active: false
         sourceComponent: Item {
             readonly property bool show: header.mode === KalendarApplication.Todo ||
-                                         header.filter.tags.length > 0 ||
+                                         Filter.tags.length > 0 ||
                                          notifyMessage.visible
             readonly property alias messageItem: notifyMessage
 
@@ -736,20 +687,8 @@ Kirigami.ApplicationWindow {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
-                    filter: root.filter ?
-                        root.filter : {"tags": [], "collectionId": -1, "name": ""}
                     isDark: KalendarUiUtils.darkMode
-                    visible: mode === KalendarApplication.Todo || filter.tags.length > 0
                     clip: true
-
-                    onRemoveFilterTag: {
-                        root.filter.tags.splice(root.filter.tags.indexOf(tagName), 1);
-                        root.filterChanged();
-                    }
-                    onResetFilterCollection: {
-                        root.filter.collectionId = -1;
-                        root.filterChanged();
-                    }
                 }
             }
             Kirigami.Separator {
@@ -860,21 +799,6 @@ Kirigami.ApplicationWindow {
                 root.calendarImportInProgress = false;
                 closeDialog()
             }
-        }
-    }
-
-    function toggleFilterTag(tagName) {
-        if(!root.filter || !root.filter.tags || !root.filter.tags.includes(tagName)) {
-            root.filter ? root.filter.tags ?
-                root.filter.tags.push(tagName) :
-                root.filter.tags = [tagName] :
-                root.filter = {"tags" : [tagName]};
-            root.filterChanged();
-            filterHeaderBar.active = true;
-            pageStack.currentItem.header = filterHeaderBar.item;
-        } else if (root.filter.tags.includes(tagName)) {
-            root.filter.tags = root.filter.tags.filter((tag) => tag !== tagName);
-            root.filterChanged();
         }
     }
 
@@ -991,7 +915,6 @@ Kirigami.ApplicationWindow {
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-            filter: root.filter
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
@@ -1013,7 +936,6 @@ Kirigami.ApplicationWindow {
             }
             selectedDate: root.selectedDate
             openOccurrence: root.openOccurrence
-            filter: root.filter
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialMonth) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, day)
@@ -1075,7 +997,6 @@ Kirigami.ApplicationWindow {
             selectedDate: root.selectedDate
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-            filter: root.filter
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
@@ -1115,8 +1036,6 @@ Kirigami.ApplicationWindow {
                     text: i18n("Tasks")
                 }
             }
-
-            filter: root.filter
         }
     }
 

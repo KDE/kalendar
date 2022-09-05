@@ -1,10 +1,11 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
-#include "akonadi/collectionfilterproxymodel.h"
 #include "about.h"
 #include "agentconfiguration.h"
+#include "akonadi/collectionfilterproxymodel.h"
 #include "calendarmanager.h"
 #include "config-kalendar.h"
+#include "filter.h"
 #include "incidencewrapper.h"
 #include "kalendarapplication.h"
 #include "kalendarconfig.h"
@@ -125,6 +126,12 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", kalendarApplication);
+
+    qmlRegisterSingletonType<Filter>("org.kde.kalendar", 1, 0, "Filter", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new Filter;
+    });
 
     qmlRegisterType<IncidenceWrapper>("org.kde.kalendar", 1, 0, "IncidenceWrapper");
     qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");
