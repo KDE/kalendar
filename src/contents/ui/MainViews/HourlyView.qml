@@ -1009,7 +1009,9 @@ Kirigami.Page {
                                                     ColumnLayout {
                                                         id: incidenceContents
 
-                                                        readonly property color textColor: LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
+                                                        readonly property color textColor: isOpenOccurrence ?
+                                                            (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
+                                                            LabelUtils.getIncidenceLabelColor(modelData.color, root.isDark)
                                                         readonly property bool isTinyHeight: parent.height <= Kirigami.Units.gridUnit
 
                                                         clip: true
@@ -1048,8 +1050,7 @@ Kirigami.Page {
                                                                 implicitHeight: Kirigami.Units.iconSizes.smallMedium
                                                                 source: modelData.incidenceTypeIcon
                                                                 isMask: true
-                                                                color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                                    incidenceContents.textColor
+                                                                color: incidenceContents.textColor
                                                                 Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                                 visible: parent.width > Kirigami.Units.gridUnit * 4
                                                             }
@@ -1060,8 +1061,7 @@ Kirigami.Page {
                                                                 text: modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) + "–" + modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
                                                                 wrapMode: Text.Wrap
                                                                 renderType: Text.QtRendering
-                                                                color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                                    incidenceContents.textColor
+                                                                color: incidenceContents.textColor
                                                                 Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                                 visible: parent.width > Kirigami.Units.gridUnit * 3
                                                             }
