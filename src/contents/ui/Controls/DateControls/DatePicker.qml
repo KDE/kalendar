@@ -152,7 +152,10 @@ QQC2.Control {
             }
             QQC2.ToolButton {
                 icon.name: 'go-jump-today'
-                onClicked: selectedDate = new Date()
+                onClicked: {
+                    selectedDate = today;
+                    clickedDate = today;
+                }
             }
             QQC2.ToolButton {
                 icon.name: 'go-next-view'
