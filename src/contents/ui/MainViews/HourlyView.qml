@@ -1004,6 +1004,7 @@ Kirigami.Page {
                                                         id: incidenceDelegateBackground
                                                         isOpenOccurrence: parent.isOpenOccurrence
                                                         isDark: root.isDark
+                                                        isInHourlyView: true
                                                     }
 
                                                     ColumnLayout {
@@ -1035,8 +1036,7 @@ Kirigami.Page {
                                                             font.weight: Font.Medium
                                                             font.strikeout: modelData.todoCompleted
                                                             renderType: Text.QtRendering
-                                                            color: isOpenOccurrence ? (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
-                                                                incidenceContents.textColor
+                                                            color: incidenceContents.textColor
                                                             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
                                                         }
 

@@ -11,6 +11,7 @@ import "labelutils.js" as LabelUtils
 Kirigami.ShadowedRectangle {
     id: incidenceDelegateBackground
 
+    property bool isInHourlyView: false
     property bool isOpenOccurrence: false
     property bool reactToCurrentMonth: false
     property bool isInCurrentMonth: true
@@ -18,10 +19,14 @@ Kirigami.ShadowedRectangle {
     property bool allDay: false
     
     anchors.fill: parent
-    color: isOpenOccurrence ? modelData.color :
+    color: isOpenOccurrence || isInHourlyView ? modelData.color :
         LabelUtils.getIncidenceDelegateBackgroundColor(modelData.color, root.isDark, modelData.endTime, Kalendar.Config.pastEventsTransparencyLevel)
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-    opacity: isOpenOccurrence || (isInCurrentMonth && allDay) ? 1.0 : 0
+    opacity: if (isInHourlyView) {
+        return isOpenOccurrence ? 0.5 : 0.1
+    } else {
+        return isOpenOccurrence || (isInCurrentMonth && allDay) ? 1 : 0
+    }
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
 
     radius: Kirigami.Units.smallSpacing
