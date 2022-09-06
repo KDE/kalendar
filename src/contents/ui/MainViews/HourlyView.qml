@@ -1004,7 +1004,6 @@ Kirigami.Page {
                                                         id: incidenceDelegateBackground
                                                         isOpenOccurrence: parent.isOpenOccurrence
                                                         isDark: root.isDark
-                                                        isInHourlyView: true
                                                     }
 
                                                     ColumnLayout {

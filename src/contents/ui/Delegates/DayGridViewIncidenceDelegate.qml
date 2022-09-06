@@ -96,59 +96,60 @@ Item {
 
     IncidenceDelegateBackground {
         id: incidenceDelegateBackground
+        isInDayGridView: true
         isOpenOccurrence: parent.isOpenOccurrence
         reactToCurrentMonth: parent.reactToCurrentMonth
         isInCurrentMonth: parent.isInCurrentMonth
         isDark: parent.isDark
-	allDay: modelData.allDay
+        allDay: modelData.allDay
     }
 
     RowLayout {
         id: incidenceContents
         clip: true
-	
+
         readonly property bool spaceRestricted: parent.width < Kirigami.Units.gridUnit * 5
 
         readonly property color textColor: incidenceDelegateBackground.opacity > 0 ?
-	    LabelUtils.getIncidenceLabelColor(modelData.color, incidenceDelegate.isDark) : Kirigami.Theme.textColor
-	readonly property color otherMonthTextColor: {
-	    if(incidenceDelegateBackground.visible && incidenceDelegateBackground.opacity > 0) {
-		if (incidenceDelegate.isDark) {
-		    return LabelUtils.getDarkness(modelData.color) >= 0.5 ?
-			Qt.lighter(modelData.color, 2) : Qt.lighter(modelData.color, 1.5);
-		}
+            LabelUtils.getIncidenceLabelColor(modelData.color, incidenceDelegate.isDark) : Kirigami.Theme.textColor
+        readonly property color otherMonthTextColor: {
+            if(incidenceDelegateBackground.visible && incidenceDelegateBackground.opacity > 0) {
+                if (incidenceDelegate.isDark) {
+                    return LabelUtils.getDarkness(modelData.color) >= 0.5 ?
+                        Qt.lighter(modelData.color, 2) : Qt.lighter(modelData.color, 1.5);
+                }
 
-		return Qt.darker(modelData.color, 3);
-	    }
+                return Qt.darker(modelData.color, 3);
+            }
 
-	    return Kirigami.Theme.textColor;
-	}
-	readonly property color selectedContentColor: LabelUtils.isDarkColor(modelData.color) ? "white" : "black"
-	readonly property color contentColor: incidenceDelegate.isOpenOccurrence ?
-	    selectedContentColor : incidenceDelegate.isInCurrentMonth ?
-	    textColor : otherMonthTextColor
+            return Kirigami.Theme.textColor;
+        }
+        readonly property color selectedContentColor: LabelUtils.isDarkColor(modelData.color) ? "white" : "black"
+        readonly property color contentColor: incidenceDelegate.isOpenOccurrence ?
+            selectedContentColor : incidenceDelegate.isInCurrentMonth ?
+            textColor : otherMonthTextColor
 
-	readonly property int leadingIconSize: Kirigami.Units.gridUnit / 2
-	
+        readonly property int leadingIconSize: Kirigami.Units.gridUnit / 2
+
         anchors {
             fill: parent
             leftMargin: spaceRestricted ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
             rightMargin: spaceRestricted ? Kirigami.Units.smallSpacing / 2 : Kirigami.Units.smallSpacing
         }
 
-	Rectangle {
-	    id: dotRectangle
-	    width: incidenceContents.leadingIconSize
-	    height: width
-	    radius: width / 2
+        Rectangle {
+            id: dotRectangle
+            width: incidenceContents.leadingIconSize
+            height: width
+            radius: width / 2
 
-	    // We want equal alignment for items that both have a dot, don't have a dot because they are all-day, and
-	    // items that don't have a dot because they represent todos. Hidden items are compressed to a size of 0 so
-	    // instead we set the color to transparent.
-	    color: modelData.allDay ? "transparent" :
-		incidenceDelegate.isOpenOccurrence ? incidenceContents.selectedContentColor : modelData.color
-	    Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-	}
+            // We want equal alignment for items that both have a dot, don't have a dot because they are all-day, and
+            // items that don't have a dot because they represent todos. Hidden items are compressed to a size of 0 so
+            // instead we set the color to transparent.
+            color: modelData.allDay ? "transparent" :
+            incidenceDelegate.isOpenOccurrence ? incidenceContents.selectedContentColor : modelData.color
+            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+        }
 
         QQC2.Label {
             Layout.fillWidth: true
@@ -163,7 +164,7 @@ Item {
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
         }
 
-	QQC2.Label {
+        QQC2.Label {
             text: modelData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo ?
                 modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) :
                 modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
