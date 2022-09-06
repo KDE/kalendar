@@ -77,6 +77,8 @@ Q_SIGNALS:
     void openDateChanger();
     void toggleMenubar();
     void createNewEvent();
+    void createNewMail();
+    void createNewContact();
     void createNewTodo();
     void windowChanged();
     void openSettings();
@@ -105,6 +107,8 @@ Q_SIGNALS:
 private:
     KActionCollection mCollection;
     KActionCollection mSortCollection;
+    KActionCollection mMailCollection;
+    KActionCollection mContactCollection;
     QWindow *m_window = nullptr;
     QActionGroup *const m_viewGroup;
     QActionGroup *m_todoViewOrderGroup = nullptr;

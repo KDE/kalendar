@@ -70,11 +70,13 @@ ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/FolderView.qml
     qml/MailViewer.qml
     qml/ConversationViewer.qml
+    qml/MailApplication.qml
 )
 ecm_target_qml_sources(kalendar_mail_plugin
     PRIVATE PATH private SOURCES
     qml/private/AttachmentDelegate.qml
     qml/private/MailDelegate.qml
+    qml/private/MenuBar.qml
 )
 
 ecm_target_qml_sources(kalendar_mail_plugin

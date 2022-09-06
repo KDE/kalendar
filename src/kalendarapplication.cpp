@@ -28,9 +28,13 @@ KalendarApplication::KalendarApplication(QObject *parent)
     : QObject(parent)
     , mCollection(parent)
     , mSortCollection(parent, i18n("Sort"))
+    , mMailCollection(parent, i18n("Mail"))
+    , mContactCollection(parent, i18n("Contact"))
     , m_viewGroup(new QActionGroup(this))
 {
     mSortCollection.setComponentDisplayName(i18n("Sort"));
+    mMailCollection.setComponentDisplayName(i18n("Mail"));
+    mContactCollection.setComponentDisplayName(i18n("Contact"));
     setupActions();
 
     new CalendarAdaptor(this);
@@ -60,6 +64,18 @@ QAction *KalendarApplication::action(const QString &name)
     }
 
     resultAction = mSortCollection.action(name);
+
+    if (resultAction) {
+        return resultAction;
+    }
+
+    resultAction = mMailCollection.action(name);
+
+    if (resultAction) {
+        return resultAction;
+    }
+
+    resultAction = mContactCollection.action(name);
 
     if (resultAction) {
         return resultAction;
@@ -287,6 +303,20 @@ void KalendarApplication::setupActions()
         action->setIcon(QIcon::fromTheme(QStringLiteral("view-task-add")));
     }
 
+    actionName = QLatin1String("create_mail");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto action = mMailCollection.addAction(actionName, this, &KalendarApplication::createNewMail);
+        action->setText(i18n("New Mail…"));
+        action->setIcon(QIcon::fromTheme(QStringLiteral("mail-message-new")));
+    }
+
+    actionName = QLatin1String("create_contact");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto action = mContactCollection.addAction(actionName, this, &KalendarApplication::createNewContact);
+        action->setText(i18n("New Mail…"));
+        action->setIcon(QIcon::fromTheme(QStringLiteral("contact-new-symbolic")));
+    }
+
     actionName = QLatin1String("options_configure");
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::preferences(this, &KalendarApplication::openSettings, this);
@@ -454,6 +484,8 @@ void KalendarApplication::setupActions()
 
     mSortCollection.readSettings();
     mCollection.readSettings();
+    mMailCollection.readSettings();
+    mContactCollection.readSettings();
 }
 
 void KalendarApplication::configureShortcuts()
@@ -463,6 +495,8 @@ void KalendarApplication::configureShortcuts()
     dlg.setModal(true);
     dlg.addCollection(&mCollection);
     dlg.addCollection(&mSortCollection);
+    dlg.addCollection(&mMailCollection);
+    dlg.addCollection(&mContactCollection);
     dlg.configure();
 }
 
@@ -559,7 +593,7 @@ QSortFilterProxyModel *KalendarApplication::actionsModel()
     QStringList actionNames = cg.readEntry(QStringLiteral("CommandBarLastUsedActions"), QStringList());
 
     m_actionModel->setLastUsedActions(actionNames);
-    std::vector<KActionCollection *> actionCollections = {&mCollection, &mSortCollection};
+    std::vector<KActionCollection *> actionCollections = {&mCollection, &mSortCollection, &mMailCollection, &mContactCollection};
     m_actionModel->refresh(actionCollectionToActionGroup(actionCollections));
     return m_proxyModel;
 }

@@ -6,6 +6,8 @@ add_subdirectory(lib)
 add_subdirectory(quick)
 add_subdirectory(contacts)
 add_subdirectory(mail)
+add_subdirectory(calendar)
+add_subdirectory(components)
 
 add_executable(kalendar)
 

@@ -14,6 +14,7 @@ import QtQuick.Dialogs 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
+import org.kde.kalendar.calendar 1.0
 import org.kde.kalendar.contact 1.0
 import org.kde.kalendar.mail 1.0
 import org.kde.kalendar.utils 1.0
@@ -26,6 +27,9 @@ Kirigami.ApplicationWindow {
     minimumWidth: Kirigami.Units.gridUnit * 25
     minimumHeight: Kirigami.Units.gridUnit * 20
     onClosing: KalendarApplication.saveWindowGeometry(root)
+
+    readonly property var calendarApplication: CalendarApplication {}
+    readonly property var mailApplication: MailApplication {}
 
     property date currentDate: new Date()
     Timer {
@@ -68,6 +72,8 @@ Kirigami.ApplicationWindow {
     readonly property var todoViewShowCompletedAction: KalendarApplication.action("todoview_show_completed")
     readonly property var openKCommandBarAction: KalendarApplication.action("open_kcommand_bar")
     readonly property var tagManagerAction: KalendarApplication.action("open_tag_manager")
+
+    readonly property int mode: applicationWindow().pageStack.currentItem ? applicationWindow().pageStack.currentItem.mode : KalendarApplication.Event
 
     property var calendarFilesToImport: []
     property bool calendarImportInProgress: false
@@ -468,16 +474,31 @@ Kirigami.ApplicationWindow {
 
     menuBar: Loader {
         id: menuLoader
-        active: Kirigami.Settings.hasPlatformMenuBar != undefined ?
-                !Kirigami.Settings.hasPlatformMenuBar && !Kirigami.Settings.isMobile : !Kirigami.Settings.isMobile && Config.showMenubar
+        active: !Kirigami.Settings.hasPlatformMenuBar && !Kirigami.Settings.isMobile && Config.showMenubar && applicationWindow().pageStack.currentItem
 
         visible: Config.showMenubar
         height: visible ? implicitHeight : 0
 
-        sourceComponent: WindowMenu {
-            parentWindow: root
-            mode: applicationWindow().pageStack.currentItem ? applicationWindow().pageStack.currentItem.mode : KalendarApplication.Event
-            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+        onItemChanged: if (item) {
+            item.parentWindow = root;
+            item.mode = applicationWindow().pageStack.currentItem.mode;
+            item.Kirigami.Theme.colorSet = Kirigami.Theme.Header;
+        }
+
+        source: switch (applicationWindow().pageStack.currentItem.mode) {
+            case KalendarApplication.Mail:
+                return mailApplication.menuBar
+            case KalendarApplication.Contact:
+                return mailApplication.menuBar
+            case KalendarApplication.Event:
+            case KalendarApplication.Todo:
+            case KalendarApplication.ThreeDay:
+            case KalendarApplication.Day:
+            case KalendarApplication.Week:
+            case KalendarApplication.Schedule:
+                return calendarApplication.menuBar
+            default: 
+                return calendarApplication.menuBar
         }
     }
 

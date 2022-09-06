@@ -12,6 +12,7 @@ import org.kde.kitemmodels 1.0
 
 import org.kde.kalendar 1.0 as Kalendar
 import org.kde.kalendar.utils 1.0
+import org.kde.kalendar.components 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
