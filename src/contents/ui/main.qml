@@ -591,6 +591,7 @@ Kirigami.ApplicationWindow {
             function calculateIncidenceItemPosition() {
                 if (!openingIncidenceItem) {
                     console.log("Can't calculate incidence item position for popup, no opening incidence item is set");
+                    close();
                     return;
                 }
 
