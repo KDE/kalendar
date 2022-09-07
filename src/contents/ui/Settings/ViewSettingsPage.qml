@@ -16,6 +16,16 @@ Kirigami.ScrollablePage {
             Kirigami.FormData.label: i18n("General settings")
         }
         Controls.CheckBox {
+            text: i18n("Use popup to show incidence information")
+            checked: Config.useIncidenceInfoPopupInCalendarViews
+            enabled: !Config.isUseIncidenceInfoPopupInCalendarViewsImmutable && !Kirigami.Settings.isMobile
+            visible: !Kirigami.Settings.isMobile
+            onClicked: {
+                Config.useIncidenceInfoPopupInCalendarViews = !Config.useIncidenceInfoPopupInCalendarViews;
+                Config.save();
+            }
+        }
+        Controls.CheckBox {
             text: i18n("Show sub-tasks in calendar views")
             checked: Config.showSubtodosInCalendarViews
             enabled: !Config.isShowSubtodosInCalendarViewsImmutable
