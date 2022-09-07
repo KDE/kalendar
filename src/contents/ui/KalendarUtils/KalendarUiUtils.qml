@@ -112,7 +112,9 @@ QtObject {
 
     function setUpView(modelData, incidenceItem = null) {
         // Choose between opening the incidence information in the drawer or the popup
-        const usingDrawer = Kirigami.Settings.isMobile || !incidenceItem;
+        const usingDrawer = Kirigami.Settings.isMobile ||
+                            !incidenceItem ||
+                            appMain.pageStack.currentItem.objectName === "todoView";
 
         appMain.incidenceInfoDrawerEnabled = usingDrawer;
         appMain.incidenceInfoPopupEnabled = !usingDrawer;
