@@ -632,13 +632,15 @@ Kirigami.ApplicationWindow {
                 function onHeightChanged() { incidenceInfoPopup.reposition(); }
             }
 
-            // Center the popup on the incidence item if possible
-            x: Math.min(incidenceItemMidXPoint - width / 2, maxXPosition)
+            // Center the popup on the incidence item if possible, but also ensure
+            // it is not going further left or right than the left and right edges
+            // of the current view
+            x: Math.max(0, Math.min(incidenceItemMidXPoint - width / 2, maxXPosition))
             // Make sure not to cover up the incidence item
             y: positionBelowIncidenceItem ?
                 incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
 
-            width: Kirigami.Units.gridUnit * 30
+            width: Math.min(pageStack.currentItem.width, Kirigami.Units.gridUnit * 30)
             height: Math.min(Kirigami.Units.gridUnit * 50, scrollView.contentHeight)
 
             onIncidenceDataChanged: root.openOccurrence = incidenceData
