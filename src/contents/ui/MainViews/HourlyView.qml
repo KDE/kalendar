@@ -906,7 +906,7 @@ Kirigami.Page {
                                                         anchors.fill: parent
                                                         addDate: new Date(DateUtils.addDaysToDate(viewLoader.startDate, dayColumn.index).setHours(index))
                                                         onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate, null, true)
-                                                        onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
+                                                        onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
                                                     }
                                                 }
                                             }
