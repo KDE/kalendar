@@ -16,6 +16,7 @@
           pkgs = import nixpkgs {
             inherit system;
           };
+
           nativeBuildInputs = with pkgs; [
             cmake
             extra-cmake-modules
@@ -26,11 +27,12 @@
             mariadb
             gpgme
 
-            libsForQt5.qt5.qtbase
-            libsForQt5.qt5.qtquickcontrols2
-            libsForQt5.qt5.qtsvg
-            libsForQt5.qt5.qtlocation
-            libsForQt5.qt5.qtdeclarative
+            qt5.qtbase
+            qt5.qtquickcontrols2
+            qt5.qtsvg
+            qt5.qtlocation
+            qt5.qtgraphicaleffects
+            qt5.qtdeclarative
 
             libsForQt5.breeze-icons
             libsForQt5.qqc2-desktop-style
@@ -62,6 +64,7 @@
             libsForQt5.akonadi-calendar
             libsForQt5.kdepim-runtime
           ];
+
           packages.default = with pkgs; stdenv.mkDerivation rec {
             inherit nativeBuildInputs buildInputs;
             pname = "kalendar";
@@ -74,11 +77,21 @@
             dontStrip = true;
             enableDebugging = true;
             separateDebugInfo = false;
+            postFixup = ''
+              wrapProgram "$out/bin/kalendar" \
+                --set PATH ${lib.makeBinPath [
+                  libsForQt5.akonadi
+                  libsForQt5.kdepim-runtime
+                ]} \
+                --set QML_DISABLE_DISK_CACHE "1"
+            '';
           };
+
           apps.default = mkApp {
             name = "kalendar";
             drv = packages.default;
           };
+
         in {
           inherit packages apps;
           devShell = pkgs.mkShell {
