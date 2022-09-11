@@ -22,54 +22,54 @@ Kirigami.ScrollablePage {
 
     Component.onCompleted: MailManager.folderModel.searchString = Kalendar.Filter.name
 
-    Component {
-        id: contextMenu
-        QQC2.Menu {
-            property int row
-            property var status
-
-            QQC2.Menu {
-                title: i18nc('@action:menu', 'Mark Message')
-                QQC2.MenuItem {
-                    text: i18n('Mark Message as Read')
-                }
-                QQC2.MenuItem {
-                    text: i18n('Mark Message as Unread')
-                }
-
-                QQC2.MenuSeparator {}
-
-                QQC2.MenuItem {
-                    text: status.isImportant ? i18n("Don't Mark as Important") : i18n('Mark as Important')
-                }
-            }
-
-            QQC2.MenuItem {
-                icon.name: 'delete'
-                text: i18n('Move to Trash')
-            }
-
-            QQC2.MenuItem {
-                icon.name: 'edit-move'
-                text: i18n('Move Message to...')
-            }
-
-            QQC2.MenuItem {
-                icon.name: 'edit-copy'
-                text: i18n('Copy Message to...')
-            }
-
-            QQC2.MenuItem {
-                icon.name: 'edit-copy'
-                text: i18n('Add Followup Reminder')
-            }
-        }
-    }
-
     ListView {
         id: mails
         model: MailManager.folderModel
         currentIndex: -1
+
+        Component {
+            id: contextMenu
+            QQC2.Menu {
+                property int row
+                property var status
+
+                QQC2.Menu {
+                    title: i18nc('@action:menu', 'Mark Message')
+                    QQC2.MenuItem {
+                        text: i18n('Mark Message as Read')
+                    }
+                    QQC2.MenuItem {
+                        text: i18n('Mark Message as Unread')
+                    }
+
+                    QQC2.MenuSeparator {}
+
+                    QQC2.MenuItem {
+                        text: status.isImportant ? i18n("Don't Mark as Important") : i18n('Mark as Important')
+                    }
+                }
+
+                QQC2.MenuItem {
+                    icon.name: 'delete'
+                    text: i18n('Move to Trash')
+                }
+
+                QQC2.MenuItem {
+                    icon.name: 'edit-move'
+                    text: i18n('Move Message to...')
+                }
+
+                QQC2.MenuItem {
+                    icon.name: 'edit-copy'
+                    text: i18n('Copy Message to...')
+                }
+
+                QQC2.MenuItem {
+                    icon.name: 'edit-copy'
+                    text: i18n('Add Followup Reminder')
+                }
+            }
+        }
 
         Connections {
             target: MailManager
@@ -139,4 +139,3 @@ Kirigami.ScrollablePage {
         }
     }
 }
-

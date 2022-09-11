@@ -313,7 +313,7 @@ void KalendarApplication::setupActions()
     actionName = QLatin1String("create_contact");
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = mContactCollection.addAction(actionName, this, &KalendarApplication::createNewContact);
-        action->setText(i18n("New Mail…"));
+        action->setText(i18n("New Contact…"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("contact-new-symbolic")));
     }
 

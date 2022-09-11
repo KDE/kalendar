@@ -18,6 +18,7 @@ import org.kde.kalendar.calendar 1.0
 import org.kde.kalendar.contact 1.0
 import org.kde.kalendar.mail 1.0
 import org.kde.kalendar.utils 1.0
+import org.kde.kalendar.components 1.0
 
 Kirigami.ApplicationWindow {
     id: root
@@ -30,6 +31,8 @@ Kirigami.ApplicationWindow {
 
     readonly property var calendarApplication: CalendarApplication {}
     readonly property var mailApplication: MailApplication {}
+    readonly property var contactApplication: ContactApplication {}
+
 
     property date currentDate: new Date()
     Timer {
@@ -480,34 +483,57 @@ Kirigami.ApplicationWindow {
         height: visible ? implicitHeight : 0
 
         onItemChanged: if (item) {
-            item.parentWindow = root;
-            item.mode = applicationWindow().pageStack.currentItem.mode;
             item.Kirigami.Theme.colorSet = Kirigami.Theme.Header;
         }
 
-        source: switch (applicationWindow().pageStack.currentItem.mode) {
+        source: switch (applicationWindow().mode) {
             case KalendarApplication.Mail:
-                return mailApplication.menuBar
+                return mailApplication.menuBar;
             case KalendarApplication.Contact:
-                return mailApplication.menuBar
+                return contactApplication.menuBar;
             case KalendarApplication.Event:
             case KalendarApplication.Todo:
             case KalendarApplication.ThreeDay:
             case KalendarApplication.Day:
             case KalendarApplication.Week:
+            case KalendarApplication.Month:
             case KalendarApplication.Schedule:
-                return calendarApplication.menuBar
-            default: 
-                return calendarApplication.menuBar
+                return calendarApplication.menuBar;
+            default:
+                return undefined;
         }
     }
+
+    Loader {
+        id: globalMenuLoader
+        active: !Kirigami.Settings.isMobile
+
+        source: switch (applicationWindow().mode) {
+            case KalendarApplication.Mail:
+                return mailApplication.globalMenuBar;
+            case KalendarApplication.Contact:
+                return contactApplication.globalMenuBar;
+            case KalendarApplication.Event:
+            case KalendarApplication.Todo:
+            case KalendarApplication.ThreeDay:
+            case KalendarApplication.Day:
+            case KalendarApplication.Month:
+            case KalendarApplication.Week:
+            case KalendarApplication.Schedule:
+                return calendarApplication.globalMenuBar;
+            default:
+                return undefined;
+        }
+    }
+
+
 
     footer: Loader {
         id: bottomLoader
         active: Kirigami.Settings.isMobile
         visible: pageStack.currentItem && pageStack.currentItem.objectName !== "settingsPage"
 
-        source: Qt.resolvedUrl("qrc:/BottomToolBar.qml")
+        sourceComponent: BottomToolBar {}
     }
 
     property alias mainDrawer: mainDrawer
@@ -719,15 +745,6 @@ Kirigami.ApplicationWindow {
         onAdded: CalendarManager.addIncidence(incidenceWrapper)
         onEdited: CalendarManager.editIncidence(incidenceWrapper)
         onCancel: pageStack.layers.pop()
-    }
-
-    Loader {
-        id: globalMenuLoader
-        active: !Kirigami.Settings.isMobile
-        sourceComponent: GlobalMenu {
-            mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
-        }
-        onLoaded: item.parentWindow = root;
     }
 
     property alias editorWindowedLoaderItem: editorWindowedLoader

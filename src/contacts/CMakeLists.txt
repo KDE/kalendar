@@ -57,6 +57,7 @@ ecm_target_qml_sources(kalendar_contact_plugin
     qml/private/ContactListItem.qml
     qml/private/Header.qml
     qml/private/MenuBar.qml
+    qml/private/GlobalMenuBar.qml
     qml/private/PhoneNumberDialog.qml
     qml/private/QrCodePage.qml
     qml/private/AddressBookMenu.qml

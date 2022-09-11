@@ -18,7 +18,9 @@ Kirigami.ScrollablePage {
 
     Connections {
         target: Filter
-        onNameChanged: ContactManager.filteredContacts.setFilterFixedString(Filter.name)
+        function onNameChanged() {
+            ContactManager.filteredContacts.setFilterFixedString(Filter.name)
+        }
     }
 
     actions.main: Kirigami.Action {

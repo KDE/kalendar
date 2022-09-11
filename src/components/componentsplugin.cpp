@@ -3,7 +3,6 @@
 
 #include "componentsplugin.h"
 
-#include <QAbstractListModel>
 #include <QQmlEngine>
 #include <QtQml>
 

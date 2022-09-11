@@ -9,7 +9,6 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="MainDrawer.qml">contents/ui/Drawers/MainDrawer.qml</file>
     <file alias="IncidenceInfoDrawer.qml">contents/ui/Drawers/IncidenceInfoDrawer.qml</file>
 
-    <file alias="BottomToolBar.qml">contents/ui/Bars/BottomToolBar.qml</file>
     <file alias="FilterHeaderBar.qml">contents/ui/Bars/FilterHeaderBar.qml</file>
     <file alias="DayLabelsBar.qml">contents/ui/Bars/DayLabelsBar.qml</file>
 
@@ -74,10 +73,6 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="SourceSettingsPage.qml">contents/ui/Settings/SourceSettingsPage.qml</file>
     <file alias="CalendarSettingsPage.qml">contents/ui/Settings/CalendarSettingsPage.qml</file>
 
-    <file alias="GlobalMenu.qml">contents/ui/Menus/GlobalMenu.qml</file>
-    <file alias="WindowMenu.qml">contents/ui/Menus/WindowMenu.qml</file>
-    <file alias="EditMenu.qml">contents/ui/Menus/EditMenu.qml</file>
-    <file alias="NativeMenuItemFromAction.qml">contents/ui/Menus/NativeMenuItemFromAction.qml</file>
     <file alias="CalendarItemMenu.qml">contents/ui/Menus/CalendarItemMenu.qml</file>
 
     <file alias="InternalTreeListView.qml">contents/ui/TreeView/InternalTreeListView.qml</file>

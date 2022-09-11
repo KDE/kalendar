@@ -29,9 +29,28 @@ target_sources(kalendar_components_plugin PRIVATE
 )
 
 ecm_target_qml_sources(kalendar_components_plugin SOURCES
-    qml/KActionFromAction.qml
-)
+    # Shell components
+    qml/KalendarApp.qml
+    qml/BottomToolBar.qml
 
+    # In window-menu components
+    qml/KActionFromAction.qml
+    qml/ViewMenu.qml
+    qml/EditMenu.qml
+    qml/FileMenu.qml
+    qml/SettingsMenu.qml
+    qml/WindowMenu.qml
+    qml/HelpMenu.qml
+
+    # global menu components
+    qml/NativeMenuItemFromAction.qml
+    qml/NativeFileMenu.qml
+    qml/NativeEditMenu.qml
+    qml/NativeWindowMenu.qml
+    qml/NativeViewMenu.qml
+    qml/NativeSettingsMenu.qml
+    qml/NativeHelpMenu.qml
+)
 
 target_link_libraries(kalendar_components_plugin PUBLIC kalendar_components_static)
 

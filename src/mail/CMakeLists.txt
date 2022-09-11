@@ -77,6 +77,8 @@ ecm_target_qml_sources(kalendar_mail_plugin
     qml/private/AttachmentDelegate.qml
     qml/private/MailDelegate.qml
     qml/private/MenuBar.qml
+    qml/private/GlobalMenuBar.qml
+    qml/private/EditMenu.qml
 )
 
 ecm_target_qml_sources(kalendar_mail_plugin
