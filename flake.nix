@@ -62,33 +62,32 @@
             libsForQt5.akonadi-calendar
             libsForQt5.kdepim-runtime
           ];
-          packages = {
-            kalendar = pkgs.stdenv.mkDerivation rec {
-              inherit nativeBuildInputs buildInputs;
-              pname = "kalendar";
-              version = "dev";
-              src = ./.;
-              propagatedUserEnvPkgs = with pkgs; [
-                libsForQt5.akonadi
-                libsForQt5.kdepim-runtime
-              ];
-            };
+          packages.default = with pkgs; stdenv.mkDerivation rec {
+            inherit nativeBuildInputs buildInputs;
+            pname = "kalendar";
+            version = "dev";
+            src = ./.;
+            propagatedUserEnvPkgs = [
+              libsForQt5.akonadi
+              libsForQt5.kdepim-runtime
+            ];
+            dontStrip = true;
+            enableDebugging = true;
+            separateDebugInfo = false;
           };
-          apps = {
-            kalendar = mkApp {
-              name = "Kalendar";
-              drv = packages.kalendar;
-            };
+          apps.default = mkApp {
+            name = "kalendar";
+            drv = packages.default;
           };
         in {
           inherit packages apps;
-          defaultPackage = packages.kalendar;
-          defaultApp = apps.kalendar;
           devShell = pkgs.mkShell {
             inherit buildInputs;
             nativeBuildInputs = with pkgs; nativeBuildInputs ++[
               clang-tools
               libclang.python
+              ninja
+              gdb
             ];
             name = "kalendar-shell";
             shellHook = ''
