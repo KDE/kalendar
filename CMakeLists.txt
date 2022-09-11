@@ -53,13 +53,44 @@ ecm_setup_version(${PROJECT_VERSION}
 )
 
 ################# Find dependencies #################
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Qml QuickControls2 Svg DBus Test QuickTest)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 DBusAddons I18n CalendarCore ConfigWidgets WindowSystem CoreAddons QQC2DesktopStyle Contacts ItemModels XmlGui IconThemes)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS
+    Core
+    DBus
+    Gui
+    Svg
+    Test
+    Qml
+    QuickControls2
+    QuickTest
+)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+    CalendarCore
+    ConfigWidgets
+    Contacts
+    CoreAddons
+    DBusAddons
+    I18n
+    IconThemes
+    ItemModels
+    Kirigami2
+    KIO
+    QQC2DesktopStyle
+    WindowSystem
+    XmlGui
+)
 find_package(Gpgme REQUIRED)
 set_package_properties(KF5QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
 )
-find_package(KF5 ${PIM_VERSION} REQUIRED COMPONENTS Akonadi AkonadiContact AkonadiCalendar MailCommon PimCommonAkonadi CalendarSupport EventViews)
+find_package(KF5 ${PIM_VERSION} REQUIRED COMPONENTS
+    Akonadi
+    AkonadiCalendar
+    AkonadiContact
+    CalendarSupport
+    EventViews
+    MailCommon
+    PimCommonAkonadi
+)
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
