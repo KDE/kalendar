@@ -561,7 +561,7 @@ Item {
                 Layout.topMargin: superTaskColumn.visible ? Kirigami.Units.largeSpacing : 0
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
-                visible: root.incidenceWrapper.childIncidences.length > 0
+                visible: root.incidenceWrapper.childIncidences.length > 0 || placeholderAddSubtaskCard.visible
 
                 Kirigami.Heading {
                     text: i18np("Sub-task", "Sub-tasks", root.incidenceWrapper.childIncidences.length)
@@ -574,6 +574,46 @@ Item {
                     delegate: RelatedIncidenceDelegate {
                         implicitHeight: root.relatedIncidenceDelegateHeight
                         incidenceWrapper: modelData
+                    }
+                }
+
+                MouseArea {
+                    id: placeholderAddSubtaskCard
+
+                    Layout.fillWidth: true
+                    implicitHeight: root.relatedIncidenceDelegateHeight
+
+                    visible: root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
+
+                    onClicked: Kalendar.UiUtils.setUpAddSubTodo(incidenceInfoContents.incidenceWrapper);
+
+                    IncidenceDelegateBackground {
+                        color: Kirigami.Theme.backgroundColor
+                    }
+
+                    RowLayout {
+                        id: incidenceContents
+                        clip: true
+
+                        anchors.fill: parent
+                        anchors.margins: Kirigami.Units.largeSpacing
+
+                        Kirigami.Icon {
+                            Layout.maximumWidth: height
+                            Layout.maximumHeight: parent.height
+
+                            source: "list-add"
+                            isMask: true
+                            color: Kirigami.Theme.textColor
+                            visible: incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
+                        }
+
+                        QQC2.Label {
+                            Layout.fillWidth: true
+                            text: i18n("Add a sub-task")
+                            elide: Text.ElideRight
+                            font.weight: Font.Medium
+                        }
                     }
                 }
             }
