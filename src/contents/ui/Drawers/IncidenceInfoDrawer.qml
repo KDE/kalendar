@@ -20,7 +20,6 @@ Kirigami.OverlayDrawer {
     property var incidenceData
     property var incidenceWrapper
     property var collectionData
-    readonly property var activeTags : Filter.tags
 
     enabled: true
     interactive: enabled
@@ -116,8 +115,6 @@ Kirigami.OverlayDrawer {
                 Layout.fillHeight: true
 
                 incidenceData: root.incidenceData
-                activeTags: root.activeTags
-                onTagClicked: Filter.toggleFilterTag(modelData)
             }
         }
     }

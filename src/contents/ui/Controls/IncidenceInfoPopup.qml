@@ -13,10 +13,7 @@ import org.kde.kalendar 1.0
 QQC2.Popup {
     id: root
 
-    signal tagClicked(string tagName)
-
     property var incidenceData
-    property var activeTags : []
 
     property alias scrollView: incidenceInfoContents.scrollView
 
@@ -33,7 +30,5 @@ QQC2.Popup {
         id: incidenceInfoContents
         anchors.fill: parent
         incidenceData: root.incidenceData
-        activeTags: root.activeTags
-        onTagClicked: root.tagClicked(tagName)
     }
 }

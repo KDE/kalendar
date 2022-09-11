@@ -641,14 +641,11 @@ Kirigami.ApplicationWindow {
             width: Kirigami.Units.gridUnit * 30
             height: Math.min(Kirigami.Units.gridUnit * 50, scrollView.contentHeight)
 
-            activeTags: root.filter && root.filter.tags ? root.filter.tags : []
             onIncidenceDataChanged: root.openOccurrence = incidenceData
             onVisibleChanged: {
                 reposition();
                 visible ? root.openOccurrence = incidenceData : root.openOccurrence = null;
             }
-
-            onTagClicked: root.toggleFilterTag(tagName)
         }
     }
 
