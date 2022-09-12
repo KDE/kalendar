@@ -561,7 +561,8 @@ Item {
                 Layout.topMargin: superTaskColumn.visible ? Kirigami.Units.largeSpacing : 0
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
-                visible: root.incidenceWrapper.childIncidences.length > 0
+                visible: root.incidenceWrapper.childIncidences.length > 0 &&
+                    root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
 
                 Kirigami.Heading {
                     text: i18np("Sub-task", "Sub-tasks", root.incidenceWrapper.childIncidences.length)
@@ -570,7 +571,7 @@ Item {
                 }
 
                 Repeater {
-                    model: root.incidenceWrapper.childIncidences
+                    model: subTaskColumn.visible ? root.incidenceWrapper.childIncidences : []
                     delegate: RelatedIncidenceDelegate {
                         implicitHeight: root.relatedIncidenceDelegateHeight
                         incidenceWrapper: modelData
