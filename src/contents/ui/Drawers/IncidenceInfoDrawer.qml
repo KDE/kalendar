@@ -647,7 +647,8 @@ Kirigami.OverlayDrawer {
                         Layout.topMargin: superTaskColumn.visible ? Kirigami.Units.largeSpacing : 0
                         Layout.columnSpan: 2
                         Layout.fillWidth: true
-                        visible: incidenceInfoDrawer.incidenceWrapper.childIncidences.length > 0
+                        visible: incidenceInfoDrawer.incidenceWrapper.childIncidences.length > 0 &&
+                            incidenceInfoDrawer.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
 
                         Kirigami.Heading {
                             text: i18np("Sub-task", "Sub-tasks", incidenceInfoDrawer.incidenceWrapper.childIncidences.length)
@@ -656,7 +657,7 @@ Kirigami.OverlayDrawer {
                         }
 
                         Repeater {
-                            model: incidenceInfoDrawer.incidenceWrapper.childIncidences
+                            model: subTaskColumn.visible ? incidenceInfoDrawer.incidenceWrapper.childIncidences : []
                             delegate: RelatedIncidenceDelegate {
                                 implicitHeight: incidenceInfoDrawer.relatedIncidenceDelegateHeight
                                 incidenceWrapper: modelData
