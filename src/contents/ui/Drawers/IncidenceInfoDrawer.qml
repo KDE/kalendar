@@ -68,7 +68,7 @@ Kirigami.OverlayDrawer {
                                 text: i18n("Add Sub-Task")
                                 visible: incidenceInfoContents.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo
                                 onTriggered: {
-                                    Kalendar.UiUtils.setUpAddSubTodo(incidenceInfoContents.incidenceWrapper);
+                                    KalendarUiUtils.setUpAddSubTodo(incidenceInfoContents.incidenceWrapper);
 
                                     if(Kirigami.Settings.isMobile) {
                                         root.close();
