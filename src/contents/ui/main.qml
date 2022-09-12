@@ -503,7 +503,8 @@ Kirigami.ApplicationWindow {
 
     contextDrawer: if(incidenceInfoDrawerEnabled) incidenceInfoDrawer
 
-    readonly property bool incidenceInfoViewer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer :
+    // Drawers inherit from popups too
+    readonly property QQC2.Popup incidenceInfoViewer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer :
         incidenceInfoPopupEnabled ? incidenceInfoPopup :
         null
 
