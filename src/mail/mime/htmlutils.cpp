@@ -4,7 +4,6 @@
 #include "htmlutils.h"
 
 #include <QMap>
-#include <QString>
 #include <QUrl>
 
 static QString resolveEntities(const QString &in)

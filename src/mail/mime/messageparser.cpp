@@ -4,7 +4,6 @@
 #include "messageparser.h"
 
 #include "../mimetreeparser/objecttreeparser.h"
-#include <Akonadi/Item>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <QElapsedTimer>

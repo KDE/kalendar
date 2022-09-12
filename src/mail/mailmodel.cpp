@@ -4,7 +4,6 @@
 
 #include "mailmodel.h"
 
-#include "messagestatus.h"
 #include <Akonadi/EntityTreeModel>
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/MessageStatus>

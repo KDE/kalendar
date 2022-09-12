@@ -9,7 +9,6 @@
 #include "objecttreeparser.h"
 
 #include "bodypartformatterbasefactory.h"
-#include "messagepart.h"
 
 #include "mimetreeparser_debug.h"
 

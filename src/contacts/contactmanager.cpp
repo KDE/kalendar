@@ -5,6 +5,9 @@
 
 #include "contactmanager.h"
 
+#include "contactcollectionmodel.h"
+#include "globalcontactmodel.h"
+#include "kalendar_contact_debug.h"
 #include <Akonadi/AgentManager>
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionColorAttribute>
@@ -13,22 +16,17 @@
 #include <Akonadi/CollectionPropertiesDialog>
 #include <Akonadi/CollectionStatistics>
 #include <Akonadi/CollectionUtils>
+#include <Akonadi/ContactsFilterProxyModel>
+#include <Akonadi/ContactsTreeModel>
 #include <Akonadi/ETMViewStateSaver>
+#include <Akonadi/EmailAddressSelectionModel>
 #include <Akonadi/EntityMimeTypeFilterModel>
+#include <Akonadi/EntityRightsFilterModel>
 #include <Akonadi/ItemDeleteJob>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Monitor>
 #include <Akonadi/SelectionProxyModel>
-#include <QSortFilterProxyModel>
-#include <Akonadi/ContactsFilterProxyModel>
-#include <Akonadi/ContactsTreeModel>
-#include <Akonadi/EmailAddressSelectionModel>
-#include "contactcollectionmodel.h"
-#include "globalcontactmodel.h"
-#include "kalendar_contact_debug.h"
-#include <Akonadi/EntityMimeTypeFilterModel>
-#include <Akonadi/EntityRightsFilterModel>
 #include <KCheckableProxyModel>
 #include <KConfigGroup>
 #include <KContacts/Addressee>

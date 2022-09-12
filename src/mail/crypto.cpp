@@ -10,7 +10,6 @@
 #include <gpgme.h>
 #endif
 
-#include <QDateTime>
 #include <QDebug>
 #include <QFile>
 

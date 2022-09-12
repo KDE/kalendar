@@ -7,7 +7,6 @@
 #include "mailtemplates.h"
 
 #include <KLocalizedString>
-#include <QByteArray>
 #include <QDebug>
 #include <QList>
 #include <QRegularExpression>
@@ -15,14 +14,11 @@
 #include <QTextCodec>
 #include <QTextDocument>
 #include <QUuid>
-#include <functional>
 
 #include <KCodecs/KCharsets>
 #include <KMime/Types>
 
 #include "../mimetreeparser/objecttreeparser.h"
-
-#include "mailcrypto.h"
 
 QDebug operator<<(QDebug dbg, const KMime::Types::Mailbox &mb)
 {
