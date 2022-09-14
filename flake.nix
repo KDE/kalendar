@@ -101,6 +101,7 @@
               libclang.python
               ninja
               gdb
+              kdevelop
             ];
             name = "kalendar-shell";
             shellHook = ''
