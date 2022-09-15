@@ -199,8 +199,6 @@ TreeListView {
             }
         ]
 
-        onClicked: root.viewAndRetainTodoData(model)
-
         contentItem: IncidenceMouseArea {
             id: mouseArea
 
@@ -211,14 +209,16 @@ TreeListView {
             incidenceData: model
             collectionId: model.collectionId
 
-            acceptedButtons: Qt.RightButton
             propagateComposedEvents: true
             preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
 
             drag.target: !Kirigami.Settings.isMobile && !model.isReadOnly && root.dragDropEnabled ? listItem : undefined
             onReleased: listItem.Drag.drop()
 
-            onViewClicked: listItem.clicked()
+            onViewClicked: {
+                root.viewAndRetainTodoData(model, listItem);
+                listItem.clicked(); // Properly highlight the tree item
+            }
             onEditClicked: KalendarUiUtils.setUpEdit(model.incidencePtr)
             onDeleteClicked: KalendarUiUtils.setUpDelete(model.incidencePtr,
                                                          model.endTime ? model.endTime :
