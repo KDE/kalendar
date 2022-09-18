@@ -38,8 +38,6 @@ QQC2.Popup {
     contentItem: IncidenceInfoContents {
         id: incidenceInfoContents
         anchors.fill: parent
-        anchors.left: Kirigami.Units.largeSpacing
-        anchors.right: Kirigami.Units.largeSpacing
 
         clip: true
         incidenceData: root.incidenceData
