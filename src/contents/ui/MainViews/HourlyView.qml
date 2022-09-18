@@ -99,20 +99,21 @@ Kirigami.Page {
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
         text: i18n("Previous Week")
-        shortcut: "Left"
+        shortcut: StandardKey.MoveToPreviousPage
         onTriggered: setToDate(DateUtils.addDaysToDate(pathView.currentItem.startDate, -root.daysToShow))
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action nextAction: Kirigami.Action {
         icon.name: "go-next"
         text: i18n("Next Week")
-        shortcut: "Right"
+        shortcut: StandardKey.MoveToNextPage
         onTriggered: setToDate(DateUtils.addDaysToDate(pathView.currentItem.startDate, root.daysToShow))
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
         text: i18n("Now")
+        shortcut: StandardKey.MoveToStartOfLine
         onTriggered: setToDate(new Date(), true, true);
     }
 

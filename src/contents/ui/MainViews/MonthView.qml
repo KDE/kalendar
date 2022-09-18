@@ -63,20 +63,21 @@ Kirigami.Page {
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
         text: i18n("Previous Month")
-        shortcut: "Left"
+        shortcut: StandardKey.MoveToPreviousPage
         onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, -1))
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action nextAction: Kirigami.Action {
         icon.name: "go-next"
         text: i18n("Next Month")
-        shortcut: "Right"
+        shortcut: StandardKey.MoveToNextPage
         onTriggered: setToDate(DateUtils.addMonthsToDate(pathView.currentItem.firstDayOfMonth, 1))
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
         text: i18n("Today")
+        shortcut: StandardKey.MoveToStartOfLine
         onTriggered: setToDate(new Date())
     }
     actions {
