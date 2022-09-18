@@ -212,11 +212,9 @@ Kirigami.OverlayDrawer {
                             to: 100.0
                             stepSize: 10.0
                             value: incidenceInfoDrawer.incidenceWrapper.todoPercentComplete
-                            onValueChanged: {
-                                if (incidenceInfoDrawer.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo && activeFocus) {
-                                    incidenceInfoDrawer.incidenceWrapper.todoPercentComplete = value;
-                                    CalendarManager.editIncidence(incidenceInfoDrawer.incidenceWrapper);
-                                }
+                            onMoved: if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
+                                root.incidenceWrapper.todoPercentComplete = value;
+                                CalendarManager.editIncidence(root.incidenceWrapper);
                             }
                         }
                     }
