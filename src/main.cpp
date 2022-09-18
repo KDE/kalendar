@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 #include "about.h"
-#include "agentconfiguration.h"
 #include "akonadi/collectionfilterproxymodel.h"
 #include "calendarmanager.h"
 #include "config-kalendar.h"
@@ -100,7 +99,6 @@ int main(int argc, char *argv[])
     aboutData.processCommandLine(&parser);
 
     auto config = KalendarConfig::self();
-    AgentConfiguration agentConfiguration;
     auto kalendarApplication = new KalendarApplication;
     kalendarApplication->setCalendar(CalendarManager::instance()->calendar());
 
@@ -122,7 +120,6 @@ int main(int argc, char *argv[])
     auto tagManager = new TagManager(&engine);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", CalendarManager::instance());
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AgentConfiguration", &agentConfiguration);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", kalendarApplication);

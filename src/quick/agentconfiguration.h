@@ -3,17 +3,15 @@
 
 #pragma once
 
-#include "kalendarapplication.h"
 #include <Akonadi/AgentFilterProxyModel>
 #include <Akonadi/AgentInstance>
-#include <QObject>
 
 class AgentConfiguration : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(Akonadi::AgentFilterProxyModel *availableAgents READ availableAgents NOTIFY availableAgentsChanged)
     Q_PROPERTY(Akonadi::AgentFilterProxyModel *runningAgents READ runningAgents NOTIFY runningAgentsChanged)
-    Q_PROPERTY(KalendarApplication::Mode mode READ mode WRITE setMode NOTIFY modeChanged)
+    Q_PROPERTY(QStringList mimetypes READ mimetypes WRITE setMimetypes NOTIFY mimetypesChanged)
 public:
     enum AgentStatuses {
         Idle = Akonadi::AgentInstance::Idle,
@@ -28,8 +26,8 @@ public:
 
     Akonadi::AgentFilterProxyModel *availableAgents();
     Akonadi::AgentFilterProxyModel *runningAgents();
-    KalendarApplication::Mode mode() const;
-    void setMode(KalendarApplication::Mode mode);
+    QStringList mimetypes() const;
+    void setMimetypes(QStringList mimetypes);
 
     Q_INVOKABLE void createNew(int index);
     Q_INVOKABLE void edit(int index);
@@ -44,7 +42,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void agentProgressChanged(const QVariantMap agentData);
-    void modeChanged();
+    void mimetypesChanged();
     void runningAgentsChanged();
     void availableAgentsChanged();
 
@@ -55,5 +53,5 @@ private:
 
     Akonadi::AgentFilterProxyModel *m_runningAgents = nullptr;
     Akonadi::AgentFilterProxyModel *m_availableAgents = nullptr;
-    KalendarApplication::Mode m_mode;
+    QStringList m_mimetypes;
 };

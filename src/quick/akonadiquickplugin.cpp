@@ -3,10 +3,11 @@
 
 #include "akonadiquickplugin.h"
 
-#include "mimetypes.h"
+#include "agentconfiguration.h"
 #include "collection.h"
 #include "collectioncomboboxmodel.h"
 #include "collectionpickermodel.h"
+#include "mimetypes.h"
 #include <akonadi_version.h>
 
 #include <Akonadi/Collection>
@@ -22,6 +23,7 @@ void AkonadiQuickPlugin::registerTypes(const char *uri)
         return new Akonadi::Quick::MimeTypes;
     });
 
+    qmlRegisterType<AgentConfiguration>("org.kde.akonadi", 1, 0, "AgentConfiguration");
     qmlRegisterType<Akonadi::Quick::CollectionComboBoxModel>("org.kde.akonadi", 1, 0, "CollectionComboBoxModel");
     qmlRegisterType<Akonadi::Quick::CollectionPickerModel>("org.kde.akonadi", 1, 0, "CollectionPickerModel");
 

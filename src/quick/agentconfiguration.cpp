@@ -13,13 +13,11 @@
 
 #include <KWindowSystem>
 #include <QPointer>
-#include <qobjectdefs.h>
 
 using namespace Akonadi;
 
 AgentConfiguration::AgentConfiguration(QObject *parent)
     : QObject(parent)
-    , m_mode(KalendarApplication::Event)
 {
     connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceProgressChanged, this, &AgentConfiguration::processInstanceProgressChanged);
     connect(Akonadi::AgentManager::self(), &Akonadi::AgentManager::instanceStatusChanged, this, &AgentConfiguration::processInstanceProgressChanged);
@@ -35,11 +33,8 @@ Akonadi::AgentFilterProxyModel *AgentConfiguration::availableAgents()
 
     auto agentInstanceModel = new AgentTypeModel(this);
     m_availableAgents = new AgentFilterProxyModel(this);
-    if (m_mode == KalendarApplication::Contact) {
-        m_availableAgents->addMimeTypeFilter(KContacts::Addressee::mimeType());
-        m_availableAgents->addMimeTypeFilter(KContacts::ContactGroup::mimeType());
-    } else {
-        m_availableAgents->addMimeTypeFilter(QStringLiteral("text/calendar"));
+    for (const auto &mimetype : m_mimetypes) {
+        m_availableAgents->addMimeTypeFilter(mimetype);
     }
     m_availableAgents->setSourceModel(agentInstanceModel);
     m_availableAgents->addCapabilityFilter(QStringLiteral("Resource")); // show only resources, no agents
@@ -54,11 +49,8 @@ Akonadi::AgentFilterProxyModel *AgentConfiguration::runningAgents()
 
     auto agentInstanceModel = new AgentInstanceModel(this);
     m_runningAgents = new AgentFilterProxyModel(this);
-    if (m_mode == KalendarApplication::Contact) {
-        m_runningAgents->addMimeTypeFilter(KContacts::Addressee::mimeType());
-        m_runningAgents->addMimeTypeFilter(KContacts::ContactGroup::mimeType());
-    } else {
-        m_runningAgents->addMimeTypeFilter(QStringLiteral("text/calendar"));
+    for (const auto &mimetype : m_mimetypes) {
+        m_runningAgents->addMimeTypeFilter(mimetype);
     }
     m_runningAgents->setSourceModel(agentInstanceModel);
     m_runningAgents->addCapabilityFilter(QStringLiteral("Resource")); // show only resources, no agents
@@ -155,18 +147,18 @@ void AgentConfiguration::processInstanceProgressChanged(const Akonadi::AgentInst
     Q_EMIT agentProgressChanged(instanceData);
 }
 
-KalendarApplication::Mode AgentConfiguration::mode() const
+QStringList AgentConfiguration::mimetypes() const
 {
-    return m_mode;
+    return m_mimetypes;
 }
 
-void AgentConfiguration::setMode(KalendarApplication::Mode mode)
+void AgentConfiguration::setMimetypes(QStringList mimetypes)
 {
-    if (mode == m_mode) {
+    if (mimetypes == m_mimetypes) {
         return;
     }
-    m_mode = mode;
-    Q_EMIT modeChanged();
+    m_mimetypes = mimetypes;
+    Q_EMIT mimetypesChanged();
 
     if (m_runningAgents) {
         delete m_runningAgents;

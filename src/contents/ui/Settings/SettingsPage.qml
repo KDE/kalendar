@@ -21,16 +21,9 @@ Kirigami.CategorizedSettings {
             page: Qt.resolvedUrl("ViewSettingsPage.qml")
         },
         Kirigami.SettingAction {
-            text: i18n("Calendar Sources")
+            text: i18n("Accounts")
             icon.name: "preferences-system-users"
             page: Qt.resolvedUrl("SourceSettingsPage.qml")
-            onTriggered: AgentConfiguration.mode = KalendarApplication.Event
-        },
-        Kirigami.SettingAction {
-            text: i18n("Address Book Sources")
-            icon.name: "preferences-system-users"
-            page: Qt.resolvedUrl("SourceSettingsPage.qml")
-            onTriggered: AgentConfiguration.mode = KalendarApplication.Contact
         },
         Kirigami.SettingAction {
             text: i18n("Calendars")

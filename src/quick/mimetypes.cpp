@@ -34,3 +34,7 @@ QString MimeTypes::contactGroup() const
     return KContacts::ContactGroup::mimeType();
 }
 
+QString MimeTypes::mail() const
+{
+    return QStringLiteral("message/rfc822");
+}

@@ -15,10 +15,13 @@ target_sources(akonadi_quick_plugin PRIVATE
     mimetypes.h
     akonadiquickplugin.cpp
     akonadiquickplugin.h
+    agentconfiguration.cpp
+    agentconfiguration.h
 )
 
 ecm_target_qml_sources(akonadi_quick_plugin SOURCES
     qml/CollectionComboBox.qml
+    qml/AgentConfigurationForm.qml
 )
 
 ecm_qt_declare_logging_category(akonadi_quick_plugin
@@ -29,7 +32,7 @@ ecm_qt_declare_logging_category(akonadi_quick_plugin
     EXPORT KALENDAR
 )
 
-target_link_libraries(akonadi_quick_plugin PRIVATE kalendar_lib)
+target_link_libraries(akonadi_quick_plugin PRIVATE kalendar_lib KF5::WindowSystem)
 
 ecm_qt_install_logging_categories(
     EXPORT KALENDAR

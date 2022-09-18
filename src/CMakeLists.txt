@@ -14,8 +14,6 @@ set(kalendar_SRCS
     about.h
     models/actionsmodel.cpp
     models/actionsmodel.h
-    agentconfiguration.cpp
-    agentconfiguration.h
     models/attachmentsmodel.cpp
     models/attachmentsmodel.h
     models/attendeesmodel.cpp

@@ -14,6 +14,7 @@ class MimeTypes : public QObject
     Q_PROPERTY(QString todo READ todo CONSTANT)
     Q_PROPERTY(QString address READ address CONSTANT)
     Q_PROPERTY(QString contactGroup READ contactGroup CONSTANT)
+    Q_PROPERTY(QString mail READ mail CONSTANT)
 
 public:
     MimeTypes(QObject *parent = nullptr);
@@ -21,6 +22,7 @@ public:
     QString todo() const;
     QString address() const;
     QString contactGroup() const;
+    QString mail() const;
 };
 }
 }
