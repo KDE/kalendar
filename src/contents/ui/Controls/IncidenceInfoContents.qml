@@ -129,11 +129,9 @@ Item {
                     to: 100.0
                     stepSize: 10.0
                     value: root.incidenceWrapper.todoPercentComplete
-                    onValueChanged: {
-                        if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo && activeFocus) {
-                            root.incidenceWrapper.todoPercentComplete = value;
-                            CalendarManager.editIncidence(root.incidenceWrapper);
-                        }
+                    onMoved: if (root.incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo) {
+                        root.incidenceWrapper.todoPercentComplete = value;
+                        CalendarManager.editIncidence(root.incidenceWrapper);
                     }
                 }
             }
