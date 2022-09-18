@@ -211,7 +211,6 @@ TreeListView {
             incidenceData: model
             collectionId: model.collectionId
 
-            acceptedButtons: Qt.RightButton
             preventStealing: !Kirigami.Settings.tabletMode && !Kirigami.Settings.isMobile
 
             drag.target: !Kirigami.Settings.isMobile && !model.isReadOnly && root.dragDropEnabled ? listItem : undefined
