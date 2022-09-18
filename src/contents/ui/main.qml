@@ -137,7 +137,7 @@ Kirigami.ApplicationWindow {
                 pageStack.layers.pop();
                 return;
             }
-            if(contextDrawer.visible) {
+            if(contextDrawer && contextDrawer.visible) {
                 contextDrawer.close();
                 return;
             }
@@ -650,7 +650,7 @@ Kirigami.ApplicationWindow {
                 return Math.max(itemLeft, Math.min(clickPosition.x, itemRight - width));
             }
             // Make sure not to cover up the incidence item
-            y: positionBelowIncidenceItem ? incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
+            y: positionBelowIncidenceItem && openingIncidenceItem ? incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
 
             width: Math.min(pageStack.currentItem.width, Kirigami.Units.gridUnit * 30)
             height: Math.min(Kirigami.Units.gridUnit * 50, scrollView.contentHeight)
