@@ -501,7 +501,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    contextDrawer: if(incidenceInfoDrawerEnabled) incidenceInfoDrawer
+    contextDrawer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer : null
 
     // Drawers inherit from popups too
     readonly property QQC2.Popup incidenceInfoViewer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer :
@@ -610,7 +610,7 @@ Kirigami.ApplicationWindow {
 
             property point incidenceItemPosition
             property point clickPosition
-            property int incidenceItemMidXPoint: incidenceItemPosition ?
+            property int incidenceItemMidXPoint: incidenceItemPosition && openingIncidenceItem ?
                 incidenceItemPosition.x + openingIncidenceItem.width / 2 : 0
             property bool positionBelowIncidenceItem: incidenceItemPosition &&
                 incidenceItemPosition.y < root.pageStack.currentItem.height / 2;
@@ -642,12 +642,15 @@ Kirigami.ApplicationWindow {
                     // it is not going further left or right than the left and right edges
                     // of the current view
                     return Math.max(0, Math.min(incidenceItemMidXPoint - width / 2, maxXPosition));
+
+                } else if(openingIncidenceItem) {
+                    const itemLeft = mapFromItem(openingIncidenceItem, 0, 0).x;
+                    const itemRight = mapFromItem(openingIncidenceItem, openingIncidenceItem.width, 0).x;
+
+                    return Math.max(itemLeft, Math.min(clickPosition.x, itemRight - width));
                 }
 
-                const itemLeft = mapFromItem(openingIncidenceItem, 0, 0).x;
-                const itemRight = mapFromItem(openingIncidenceItem, openingIncidenceItem.width, 0).x;
-
-                return Math.max(itemLeft, Math.min(clickPosition.x, itemRight - width));
+                return 0;
             }
             // Make sure not to cover up the incidence item
             y: positionBelowIncidenceItem && openingIncidenceItem ? incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
