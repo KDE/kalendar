@@ -599,8 +599,8 @@ Kirigami.ApplicationWindow {
                 // We need to compensate for the x and y local adjustments used, for instance,
                 // in the day grid view to position the incidence item delegates
                 incidenceItemPosition = openingIncidenceItem.mapToItem(root.pageStack.currentItem,
-                                                                    openingIncidenceItem.x,
-                                                                    openingIncidenceItem.y);
+                                                                       openingIncidenceItem.x,
+                                                                       openingIncidenceItem.y);
                 incidenceItemPosition.x -= openingIncidenceItem.x;
                 incidenceItemPosition.y -= openingIncidenceItem.y;
             }
@@ -609,10 +609,13 @@ Kirigami.ApplicationWindow {
             onOpeningIncidenceItemChanged: reposition()
 
             property point incidenceItemPosition
+            property point clickPosition
             property int incidenceItemMidXPoint: incidenceItemPosition ?
                 incidenceItemPosition.x + openingIncidenceItem.width / 2 : 0
             property bool positionBelowIncidenceItem: incidenceItemPosition &&
                 incidenceItemPosition.y < root.pageStack.currentItem.height / 2;
+            property bool positionAtIncidenceItemCenter: openingIncidenceItem &&
+                openingIncidenceItem.width < width
             property int maxXPosition: root.pageStack.currentItem.width - width
 
             // HACK:
@@ -633,21 +636,34 @@ Kirigami.ApplicationWindow {
                 function onHeightChanged() { incidenceInfoPopup.reposition(); }
             }
 
-            // Center the popup on the incidence item if possible, but also ensure
-            // it is not going further left or right than the left and right edges
-            // of the current view
-            x: Math.max(0, Math.min(incidenceItemMidXPoint - width / 2, maxXPosition))
+            x: {
+                if(positionAtIncidenceItemCenter) {
+                    // Center the popup on the incidence item if possible, but also ensure
+                    // it is not going further left or right than the left and right edges
+                    // of the current view
+                    return Math.max(0, Math.min(incidenceItemMidXPoint - width / 2, maxXPosition));
+                }
+
+                const itemLeft = mapFromItem(openingIncidenceItem, 0, 0).x;
+                const itemRight = mapFromItem(openingIncidenceItem, openingIncidenceItem.width, 0).x;
+
+                return Math.max(itemLeft, Math.min(clickPosition.x, itemRight - width));
+            }
             // Make sure not to cover up the incidence item
-            y: positionBelowIncidenceItem ?
-                incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
+            y: positionBelowIncidenceItem ? incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
 
             width: Math.min(pageStack.currentItem.width, Kirigami.Units.gridUnit * 30)
             height: Math.min(Kirigami.Units.gridUnit * 50, scrollView.contentHeight)
 
             onIncidenceDataChanged: root.openOccurrence = incidenceData
             onVisibleChanged: {
-                reposition();
-                visible ? root.openOccurrence = incidenceData : root.openOccurrence = null;
+                if (visible) {
+                    clickPosition = mapFromItem(kbmNavigationMouseArea, kbmNavigationMouseArea.mouseX, 0);
+                    root.openOccurrence = incidenceData;
+                    reposition();
+                } else {
+                    root.openOccurrence = null;
+                }
             }
         }
     }
