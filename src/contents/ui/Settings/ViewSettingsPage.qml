@@ -17,11 +17,11 @@ Kirigami.ScrollablePage {
         }
         Controls.CheckBox {
             text: i18n("Use popup to show incidence information")
-            checked: Config.useIncidenceInfoPopupInCalendarViews
-            enabled: !Config.isUseIncidenceInfoPopupInCalendarViewsImmutable && !Kirigami.Settings.isMobile
+            checked: Config.useIncidenceInfoPopup
+            enabled: !Config.isUseIncidenceInfoPopupImmutable && !Kirigami.Settings.isMobile
             visible: !Kirigami.Settings.isMobile
             onClicked: {
-                Config.useIncidenceInfoPopupInCalendarViews = !Config.useIncidenceInfoPopupInCalendarViews;
+                Config.useIncidenceInfoPopup = !Config.useIncidenceInfoPopup;
                 Config.save();
             }
         }

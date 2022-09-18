@@ -82,7 +82,7 @@ SPDX-License-Identifier: LGPL-2.0-or-later
     </group>
 
     <group name="GeneralView">
-        <entry name="useIncidenceInfoPopupInCalendarViews" type="Bool">
+        <entry name="useIncidenceInfoPopup" type="Bool">
             <label>Use a popup to view incidence information instead of a drawer.</label>
             <default>true</default>
         </entry>

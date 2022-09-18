@@ -112,11 +112,9 @@ QtObject {
 
     function setUpView(modelData, incidenceItem = null) {
         // Choose between opening the incidence information in the drawer or the popup
-        const showingCalendarView = KalendarApplication.Event & appMain.pageStack.currentItem.mode;
         const usingDrawer = Kirigami.Settings.isMobile ||
                             !incidenceItem ||
-                            !showingCalendarView ||
-                            !Config.useIncidenceInfoPopupInCalendarViews;
+                            !Config.useIncidenceInfoPopup;
 
         appMain.incidenceInfoDrawerEnabled = usingDrawer;
         appMain.incidenceInfoPopupEnabled = !usingDrawer;
