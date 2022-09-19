@@ -499,6 +499,18 @@ QQC2.ScrollView {
         }
 
         QQC2.Label {
+            Layout.alignment: QT.AlignTop
+            text: i18n("<b>Google Meet:</b>")
+            visible: root.incidenceWrapper.googleConferenceUrl
+        }
+
+        HoverLabel {
+            Layout.fillWidth: true
+            text: root.incidenceWrapper.googleConferenceUrl
+            visible: root.incidenceWrapper.googleConferenceUrl
+        }
+
+        QQC2.Label {
             Layout.alignment: Qt.AlignTop
             text: i18n("<b>Guests:</b>")
             visible: root.incidenceWrapper.attendeesModel.rowCount() > 0

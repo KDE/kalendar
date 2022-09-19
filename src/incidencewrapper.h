@@ -86,6 +86,8 @@ class IncidenceWrapper : public QObject, public Akonadi::ItemMonitor
     Q_PROPERTY(QDateTime todoCompletionDt READ todoCompletionDt NOTIFY todoCompletionDtChanged)
     Q_PROPERTY(int todoPercentComplete READ todoPercentComplete WRITE setTodoPercentComplete NOTIFY todoPercentCompleteChanged)
 
+    Q_PROPERTY(QString googleConferenceUrl READ googleConferenceUrl NOTIFY googleConferenceUrlChanged)
+
 public:
     enum RecurrenceIntervals {
         Daily,
@@ -195,6 +197,8 @@ public:
     Q_INVOKABLE void clearRecurrences();
 
     Q_INVOKABLE void setCollection(const Akonadi::Collection &collection);
+
+    QString googleConferenceUrl();
 Q_SIGNALS:
     void incidenceItemChanged();
     void incidencePtrChanged(KCalendarCore::Incidence::Ptr incidencePtr);
@@ -237,6 +241,8 @@ Q_SIGNALS:
     void todoCompletionDtChanged();
     void todoPercentCompleteChanged();
     void attendeesChanged();
+
+    void googleConferenceUrlChanged();
 
 protected:
     void itemChanged(const Akonadi::Item &item) override;

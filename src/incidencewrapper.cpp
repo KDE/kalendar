@@ -87,6 +87,7 @@ void IncidenceWrapper::notifyDataChanged()
     Q_EMIT todoCompletedChanged();
     Q_EMIT todoCompletionDtChanged();
     Q_EMIT todoPercentCompleteChanged();
+    Q_EMIT googleConferenceUrlChanged();
 }
 
 Akonadi::Item IncidenceWrapper::incidenceItem() const
@@ -601,6 +602,11 @@ void IncidenceWrapper::setRecurrenceDataItem(const QString &key, const QVariant 
         }
     }
     Q_EMIT recurrenceDataChanged();
+}
+
+QString IncidenceWrapper::googleConferenceUrl()
+{
+    return m_incidence->customProperty("LIBKGAPI", "EventHangoutLink");
 }
 
 QVariantMap IncidenceWrapper::organizer()
