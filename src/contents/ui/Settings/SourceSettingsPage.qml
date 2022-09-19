@@ -14,30 +14,30 @@ Kirigami.ScrollablePage {
     title: i18n("Accounts")
 
     ColumnLayout {
-    	AgentConfigurationForm {
+        AgentConfigurationForm {
             mimetypes: [MimeTypes.calendar, MimeTypes.todo]
             title: i18n("Calendars")
             addPageTitle: i18n("Add New Calendar Source…")
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
-	}
+        }
 
-    	AgentConfigurationForm {
+        AgentConfigurationForm {
             mimetypes: [MimeTypes.contactGroup, MimeTypes.address]
             title: i18n("Contact Books")
             addPageTitle: i18n("Add New Address Book Source…")
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
-	}
+        }
 
-	// TODO actually we should show identity instead as an identity contains a receiving and sending account
-    	AgentConfigurationForm {
+        // TODO actually we should show identity instead as an identity contains a receiving and sending account
+        AgentConfigurationForm {
             visible: Config.enableMailIntegration
             mimetypes: [MimeTypes.mail]
             title: i18n("Mail Accounts")
             addPageTitle: i18n("Add New mail account…")
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
-	}
+        }
     }
 }

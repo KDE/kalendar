@@ -16,99 +16,99 @@ MobileForm.FormCard {
     required property string addPageTitle
 
     readonly property AgentConfiguration _configuration: AgentConfiguration {
-	mimetypes: root.mimetypes
+        mimetypes: root.mimetypes
     }
 
     contentItem: ColumnLayout {
-	spacing: 0
-	
-	MobileForm.FormCardHeader {
-	    title: root.title
-	}
-	
-	Repeater {
-	    model: root._configuration.runningAgents
-	    delegate: MobileForm.FormButtonDelegate {
-		Loader {
-		    id: dialogLoader
-		    sourceComponent: Kirigami.PromptDialog {
-			id: dialog
-			title: i18n("Configure %1", model.display)
-			subtitle: i18n("Modify or delete this account agent.")
-			standardButtons: Kirigami.Dialog.NoButton
-			
-			customFooterActions: [
-			    Kirigami.Action {
-				text: i18n("Modify")
-				iconName: "edit-entry"
-				onTriggered: {
-				    root._configuration.edit(model.index);
-				    dialog.close();
-				}
-			    },
-			    Kirigami.Action {
-				text: i18n("Delete")
-				iconName: "delete"
-				onTriggered: {
-				    root._configuration.remove(model.index);
-				    dialog.close();
-				}
-			    }
-			]
-		    }
-		}
-		
-		onClicked: {
-		    dialogLoader.active = true;
-		    dialogLoader.item.open();
-		}
-		
-		contentItem: RowLayout {
-		    Kirigami.Icon {
-			source: model.decoration
-			Layout.rightMargin: Kirigami.Units.largeSpacing
-			implicitWidth: Kirigami.Units.iconSizes.medium
-			implicitHeight: Kirigami.Units.iconSizes.medium
-		    }
-		    
-		    ColumnLayout {
-			Layout.fillWidth: true
-			spacing: Kirigami.Units.smallSpacing
-			
-			QQC2.Label {
-			    Layout.fillWidth: true
-			    text: model.display
-			    elide: Text.ElideRight
-			    wrapMode: Text.Wrap
-			    maximumLineCount: 2
-			    color: Kirigami.Theme.textColor
-			}
-			
-			QQC2.Label {
-			    Layout.fillWidth: true
-			    text: model.statusMessage
-			    color: Kirigami.Theme.disabledTextColor
-			    font: Kirigami.Theme.smallFont
-			    elide: Text.ElideRight
-			}
-		    }
-		    
-		    MobileForm.FormArrow {
-			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-			direction: MobileForm.FormArrow.Right
-		    }
-		}
-	    }
-	}
-	
-	MobileForm.FormDelegateSeparator { below: addAccountDelegate }
-	
-	MobileForm.FormButtonDelegate {
-	    id: addAccountDelegate
-	    text: i18n("Add Account")
-	    icon.name: "list-add"
-	    onClicked: pageStack.pushDialogLayer(addAccountPage)
-	}
+        spacing: 0
+
+        MobileForm.FormCardHeader {
+            title: root.title
+        }
+
+        Repeater {
+            model: root._configuration.runningAgents
+            delegate: MobileForm.FormButtonDelegate {
+                Loader {
+                    id: dialogLoader
+                    sourceComponent: Kirigami.PromptDialog {
+                        id: dialog
+                        title: i18n("Configure %1", model.display)
+                        subtitle: i18n("Modify or delete this account agent.")
+                        standardButtons: Kirigami.Dialog.NoButton
+
+                        customFooterActions: [
+                        Kirigami.Action {
+                            text: i18n("Modify")
+                            iconName: "edit-entry"
+                            onTriggered: {
+                                root._configuration.edit(model.index);
+                                dialog.close();
+                            }
+                        },
+                        Kirigami.Action {
+                            text: i18n("Delete")
+                            iconName: "delete"
+                            onTriggered: {
+                                root._configuration.remove(model.index);
+                                dialog.close();
+                            }
+                        }
+                        ]
+                    }
+                }
+
+                onClicked: {
+                    dialogLoader.active = true;
+                    dialogLoader.item.open();
+                }
+
+                contentItem: RowLayout {
+                    Kirigami.Icon {
+                        source: model.decoration
+                        Layout.rightMargin: Kirigami.Units.largeSpacing
+                        implicitWidth: Kirigami.Units.iconSizes.medium
+                        implicitHeight: Kirigami.Units.iconSizes.medium
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: Kirigami.Units.smallSpacing
+
+                        QQC2.Label {
+                            Layout.fillWidth: true
+                            text: model.display
+                            elide: Text.ElideRight
+                            wrapMode: Text.Wrap
+                            maximumLineCount: 2
+                            color: Kirigami.Theme.textColor
+                        }
+
+                        QQC2.Label {
+                            Layout.fillWidth: true
+                            text: model.statusMessage
+                            color: Kirigami.Theme.disabledTextColor
+                            font: Kirigami.Theme.smallFont
+                            elide: Text.ElideRight
+                        }
+                    }
+
+                    MobileForm.FormArrow {
+                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                        direction: MobileForm.FormArrow.Right
+                    }
+                }
+            }
+        }
+
+        MobileForm.FormDelegateSeparator { below: addAccountDelegate }
+
+        MobileForm.FormButtonDelegate {
+            id: addAccountDelegate
+            text: i18n("Add Account")
+            icon.name: "list-add"
+            onClicked: pageStack.pushDialogLayer(addAccountPage)
+        }
     }
 
     Component {
