@@ -11,13 +11,8 @@ Kirigami.CategorizedSettings {
     objectName: "settingsPage"
     actions: [
         Kirigami.SettingAction {
-            text: i18n("General")
-            icon.name: "korganizer"
-            page: Qt.resolvedUrl("GeneralSettingsPage.qml")
-        },
-        Kirigami.SettingAction {
-            text: i18n("Views")
-            icon.name: "view-choose"
+            text: i18n("Appearance")
+            icon.name: "preferences-desktop-theme-global"
             page: Qt.resolvedUrl("ViewSettingsPage.qml")
         },
         Kirigami.SettingAction {
