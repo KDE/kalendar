@@ -158,6 +158,65 @@ MouseArea {
                     onClicked: setPriorityMenu.setPriority(9)
                 }
             }
+            QQC2.Menu {
+                id: setDueDateMenu
+                title: i18n("Set due date...")
+                enabled: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+                z: 1001
+
+                function setDate(date) {
+                    let wrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                    wrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
+
+                    if(date && !isNaN(date.getTime())) {
+                        // Remember we have to convert from JS months (0-11) to Qt months (1-12)
+                        wrapper.setIncidenceEndDate(date.getDate(), date.getMonth() + 1, date.getFullYear());
+                        wrapper.allDay = true;
+                    } else {
+                        wrapper.incidenceEnd = new Date(undefined);
+                    }
+
+                    Kalendar.CalendarManager.editIncidence(wrapper);
+                }
+
+                QQC2.MenuItem {
+                    icon.name: "edit-none"
+                    text: i18n("None")
+                    onClicked: setDueDateMenu.setDate(undefined)
+                }
+                QQC2.MenuItem {
+                    icon.name: "go-jump-today"
+                    text: i18n("Today")
+                    onClicked: setDueDateMenu.setDate(new Date())
+                }
+                QQC2.MenuItem {
+                    icon.name: "view-calendar-day"
+                    text: i18n("Tomorrow")
+                    onClicked: {
+                        let date = new Date();
+                        date.setDate(date.getDate() + 1);
+                        setDueDateMenu.setDate(date);
+                    }
+                }
+                QQC2.MenuItem {
+                    icon.name: "view-calendar-week"
+                    text: i18n("In a week")
+                    onClicked: {
+                        let date = new Date();
+                        date.setDate(date.getDate() + 7);
+                        setDueDateMenu.setDate(date);
+                    }
+                }
+                QQC2.MenuItem {
+                    icon.name: "view-calendar-month"
+                    text: i18n("In a month")
+                    onClicked: {
+                        let date = new Date();
+                        date.setMonth(date.getMonth() + 1);
+                        setDueDateMenu.setDate(date);
+                    }
+                }
+            }
         }
     }
 }
