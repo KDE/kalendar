@@ -185,36 +185,43 @@ MouseArea {
                     onClicked: setDueDateMenu.setDate(undefined)
                 }
                 QQC2.MenuItem {
+                    readonly property date dateToday: new Date()
+
                     icon.name: "go-jump-today"
-                    text: i18n("Today")
-                    onClicked: setDueDateMenu.setDate(new Date())
+                    text: i18n("Today (%1)").arg(dateToday.toLocaleDateString(Qt.locale(), Locale.NarrowFormat))
+                    onClicked: setDueDateMenu.setDate(dateToday)
                 }
                 QQC2.MenuItem {
-                    icon.name: "view-calendar-day"
-                    text: i18n("Tomorrow")
-                    onClicked: {
+                    readonly property date dateTomorrow: {
                         let date = new Date();
                         date.setDate(date.getDate() + 1);
-                        setDueDateMenu.setDate(date);
+                        return date;
                     }
+
+                    icon.name: "view-calendar-day"
+                    text: i18n("Tomorrow (%1)").arg(dateTomorrow.toLocaleDateString(Qt.locale(), Locale.NarrowFormat))
+                    onClicked: setDueDateMenu.setDate(dateTomorrow);
                 }
                 QQC2.MenuItem {
-                    icon.name: "view-calendar-week"
-                    text: i18n("In a week")
-                    onClicked: {
+                    readonly property date dateInAWeek: {
                         let date = new Date();
                         date.setDate(date.getDate() + 7);
-                        setDueDateMenu.setDate(date);
+                        return date;
                     }
+                    icon.name: "view-calendar-week"
+                    text: i18n("In a week (%1)").arg(dateInAWeek.toLocaleDateString(Qt.locale(), Locale.NarrowFormat))
+                    onClicked: setDueDateMenu.setDate(dateInAWeek);
                 }
                 QQC2.MenuItem {
-                    icon.name: "view-calendar-month"
-                    text: i18n("In a month")
-                    onClicked: {
+                    readonly property date dateInAMonth: {
                         let date = new Date();
                         date.setMonth(date.getMonth() + 1);
-                        setDueDateMenu.setDate(date);
+                        return date;
                     }
+
+                    icon.name: "view-calendar-month"
+                    text: i18n("In a month (%1)").arg(dateInAMonth.toLocaleDateString(Qt.locale(), Locale.NarrowFormat))
+                    onClicked: setDueDateMenu.setDate(dateInAMonth);
                 }
             }
         }
