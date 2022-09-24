@@ -30,6 +30,13 @@ QQC2.ScrollView {
     readonly property int relatedIncidenceDelegateHeight: Kirigami.Units.gridUnit * 3
     readonly property alias scrollView: root
 
+    readonly property bool validIncidenceStart: root.incidenceData && !isNaN(root.incidenceData.startTime.getTime())
+    readonly property bool validIncidenceEnd: root.incidenceData && !isNaN(root.incidenceData.endTime.getTime())
+    readonly property bool validIncidenceStartOrEnd: validIncidenceStart || validIncidenceEnd
+    readonly property bool bothIncidenceStartAndEndValid: validIncidenceStart && validIncidenceEnd
+    readonly property bool sameIncidenceStartAndEndDate: root.incidenceData.startTime.toDateString() === root.incidenceData.endTime.toDateString()
+    readonly property bool sameIncidenceStartAndEndTime: root.incidenceData.startTime.toTimeString() === root.incidenceData.endTime.toTimeString()
+
     onIncidenceDataChanged: {
         incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', root, "incidence");
         incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidenceData.incidencePtr);
@@ -180,62 +187,65 @@ QQC2.ScrollView {
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
             text: i18n("<b>Date:</b>")
-            visible: !isNaN(root.incidenceData.startTime.getTime()) || !isNaN(root.incidenceData.endTime.getTime())
-        }
-        QQC2.Label {
-            Layout.alignment: Qt.AlignTop
-            Layout.fillWidth: true
-
-            text: if(root.incidenceData.startTime.toDateString() === root.incidenceData.endTime.toDateString()) {
-                return root.incidenceData.startTime.toLocaleDateString(Qt.locale());
-            } else if (!isNaN(root.incidenceData.startTime.getTime()) && !isNaN(root.incidenceData.endTime.getTime())) {
-                root.incidenceData.startTime.toLocaleDateString(Qt.locale()) + "–" + root.incidenceData.endTime.toLocaleDateString(Qt.locale())
-            } else if (isNaN(root.incidenceData.startTime.getTime()) && !isNaN(root.incidenceData.endTime.getTime())) {
-                return root.incidenceData.endTime.toLocaleDateString(Qt.locale())
-            } else if (isNaN(root.incidenceData.endTime.getTime()) && !isNaN(root.incidenceData.startTime.getTime())) {
-                return root.incidenceData.startTime.toLocaleDateString(Qt.locale())
-            }
-            wrapMode: Text.Wrap
-            visible: !isNaN(root.incidenceData.startTime.getTime()) || !isNaN(root.incidenceData.endTime.getTime())
-        }
-
-        QQC2.Label {
-            Layout.alignment: Qt.AlignTop
-            text: i18n("<b>Time:</b>")
-            visible: !root.incidenceData.allDay &&
-                root.incidenceData.startTime.toDateString() == root.incidenceData.endTime.toDateString() &&
-                (!isNaN(root.incidenceData.startTime.getTime()) || !isNaN(root.incidenceData.endTime.getTime()))
+            visible: root.validIncidenceStart || root.validIncidenceEnd
         }
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
 
             text: {
-                if(root.incidenceData.startTime.toTimeString() != root.incidenceData.endTime.toTimeString()) {
-                    root.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + "–" + root.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
-                } else if (root.incidenceData.startTime.toTimeString() == root.incidenceData.endTime.toTimeString()) {
-                    root.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                if(root.sameIncidenceStartAndEndDate || (root.validIncidenceStart && !root.validIncidenceEnd)) {
+                    return root.incidenceData.startTime.toLocaleDateString(Qt.locale());
+
+                } else if (!root.validIncidenceStart && root.validIncidenceEnd) {
+                    return root.incidenceData.endTime.toLocaleDateString(Qt.locale());
+
+                } else if (root.bothIncidenceStartAndEndValid) {
+                    const startDateString = root.incidenceData.startTime.toLocaleDateString(Qt.locale());
+                    const endDateString = root.incidenceData.endTime.toLocaleDateString(Qt.locale());
+                    return startDateString + "–" + endDateString;
+
                 }
             }
             wrapMode: Text.Wrap
-            visible: !root.incidenceData.allDay &&
-                root.incidenceData.startTime.toDateString() == root.incidenceData.endTime.toDateString() &&
-                (!isNaN(root.incidenceData.startTime.getTime()) || !isNaN(root.incidenceData.endTime.getTime()))
+            visible: root.validIncidenceStartOrEnd
+        }
+
+        QQC2.Label {
+            Layout.alignment: Qt.AlignTop
+            text: i18n("<b>Time:</b>")
+            visible: !root.incidenceData.allDay && root.sameIncidenceStartAndEndDate && root.validIncidenceStartOrEnd
+        }
+        QQC2.Label {
+            id: timeLabel
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+
+            text: {
+                const startTimeString = root.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
+
+                if(root.sameIncidenceStartAndEndTime) {
+                    return startTimeString;
+                }
+
+                const endTimeString = root.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
+                return startTimeString + "–" + endTimeString;
+            }
+            wrapMode: Text.Wrap
+            visible: !root.incidenceData.allDay && root.sameIncidenceStartAndEndDate && root.validIncidenceStartOrEnd
         }
 
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
             text: i18n("<b>Duration:</b>")
-            visible: root.incidenceData.durationString &&
-                (!isNaN(root.incidenceData.startTime.getTime()) || !isNaN(root.incidenceData.endTime.getTime()))
+            visible: root.incidenceData.durationString && root.validIncidenceStartOrEnd
         }
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
 
             text: root.incidenceData.durationString
-            visible: root.incidenceData.durationString &&
-                (!isNaN(root.incidenceData.startTime.getTime()) || !isNaN(root.incidenceData.endTime.getTime()))
+            visible: root.incidenceData.durationString && root.validIncidenceStartOrEnd
             wrapMode: Text.Wrap
         }
 
@@ -261,12 +271,13 @@ QQC2.ScrollView {
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
 
-            property date completionDate: root.incidenceWrapper.todoCompletionDt
+            readonly property date completionDate: root.incidenceWrapper.todoCompletionDt
+            readonly property bool validCompletionDate: isNaN(completionDate.getTime())
 
             text: completionDate.toLocaleString(Qt.locale())
             visible: root.incidenceWrapper.todoCompleted
             // HACK: For some reason, calling the todoCompletionDt always returns an invalid date once it is changed (???)
-            onVisibleChanged: if(visible && isNaN(completionDate.getTime())) { text = new Date().toLocaleString(Qt.locale()) }
+            onVisibleChanged: if(visible && !validCompletionDate) { text = new Date().toLocaleString(Qt.locale()) }
             wrapMode: Text.Wrap
         }
 
