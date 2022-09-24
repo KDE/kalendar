@@ -160,9 +160,21 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
         case TopMostParentSummary:
             return todo->summary();
         case TopMostParentDueDate: {
-            bool isOverdue = (todo->hasDueDate() && todo->dtDue().date() < QDate::currentDate() && todo->allDay())
-                || (todo->hasDueDate() && todo->dtDue() < QDateTime::currentDateTime() && !todo->allDay());
-            return isOverdue ? i18n("Overdue") : todo->hasDueDate() ? QLocale::system().toString(todo->dtDue().date()) : i18n("No set date");
+            if (!todo->hasDueDate()) {
+                return i18n("No set date");
+            }
+
+            const auto isOverdue =
+                (todo->allDay() && todo->dtDue().date() < QDate::currentDate()) || (!todo->allDay() && todo->dtDue() < QDateTime::currentDateTime());
+
+            if (isOverdue) {
+                return i18n("Overdue");
+            }
+
+            const auto dateInCurrentTZ = todo->dtDue().toLocalTime().date();
+            const auto isToday = dateInCurrentTZ == QDate::currentDate();
+
+            return isToday ? i18n("Today") : todo->dtDue().toString();
         }
         case TopMostParentPriority:
             return todo->priority();
