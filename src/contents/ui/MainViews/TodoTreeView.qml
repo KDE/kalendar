@@ -68,21 +68,24 @@ TreeListView {
         activeFocusOnTab: false
 
         contentItem: Kirigami.Heading {
+            readonly property bool dateSort: root.sortBy === Kalendar.TodoSortFilterProxyModel.DueDateColumn
+            readonly property date sectionDate: dateSort ? new Date(section) : null
+            readonly property bool sectionDateValid: dateSort && !isNaN(sectionDate.getTime());
+            readonly property bool isOverdue: dateSort && section === i18n("Overdue")
+            readonly property bool isToday: dateSort && section === i18n("Today")
+
             text: {
-                switch(sortBy) {
+                switch(root.sortBy) {
                     case Kalendar.TodoSortFilterProxyModel.PriorityColumn:
                         return section !== "--" ? i18n("Priority %1", section) : i18n("No set priority");
                     case Kalendar.TodoSortFilterProxyModel.DueDateColumn:
-                        let sectionDate = new Date(section);
-                        return !isNaN(sectionDate.getTime()) ? LabelUtils.todoDateTimeLabel(new Date(section), true, false) : section;
+                        // We sometimes return non-date strings from the model for overdue/no set due date
+                        return sectionDateValid ? LabelUtils.todoDateTimeLabel(sectionDate, true, false) : section;
                     case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
                     default:
                         return section;
                 }
-
             }
-            readonly property bool isOverdue: section === i18n("Overdue")
-            readonly property bool isToday: DateUtils.sameDay(new Date(section), new Date())
 
             level: 3
             font.weight: Font.Bold
