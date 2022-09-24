@@ -29,7 +29,7 @@ Kirigami.AbstractListItem {
     signal starMailRequested()
     signal contextMenuRequested()
 
-    property bool showSelected: (mouseArea.pressed === true || (root.highlighted === true && applicationWindow().isWidescreen))
+    property bool showSelected: (mouseArea.pressed === true || (root.highlighted === true && applicationWindow().wideScreen))
 
     background: Rectangle {
         color: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, root.showSelected ? 0.5 : hoverHandler.hovered ? 0.2 : 0)

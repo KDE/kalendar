@@ -13,7 +13,7 @@ import './private'
 Kirigami.ScrollablePage {
     id: folderView
     title: MailManager.selectedFolderName
-    readonly property int mode: KalendarApplication.Mail
+    readonly property int mode: Kalendar.KalendarApplication.Mail
 
     Connections {
         target: Kalendar.Filter

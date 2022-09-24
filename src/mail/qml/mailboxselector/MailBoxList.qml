@@ -103,7 +103,7 @@ ListView {
                     }
                 }
 
-                property bool showSelected: (controlRoot.pressed === true || (controlRoot.highlighted === true && applicationWindow().isWidescreen))
+                property bool showSelected: (controlRoot.pressed === true || (controlRoot.highlighted === true && applicationWindow().wideScreen))
 
                 background: Rectangle {
                     color: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, controlRoot.showSelected ? 0.5 : hoverHandler.hovered ? 0.2 : 0)
