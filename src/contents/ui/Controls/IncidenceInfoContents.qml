@@ -510,7 +510,7 @@ QQC2.ScrollView {
         }
 
         QQC2.Label {
-            Layout.alignment: QT.AlignTop
+            Layout.alignment: Qt.AlignTop
             text: i18n("<b>Google Meet:</b>")
             visible: root.incidenceWrapper.googleConferenceUrl
         }
