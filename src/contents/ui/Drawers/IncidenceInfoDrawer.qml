@@ -36,9 +36,10 @@ Kirigami.OverlayDrawer {
     contentItem: Loader {
         anchors.fill: parent
 
-        active: root.drawerOpen
+        active: root.drawerOpen && root.incidenceData !== null && root.incidenceData !== undefined
         sourceComponent: ColumnLayout {
             anchors.fill: parent
+            spacing: 0
 
             Kirigami.AbstractApplicationHeader {
                 Layout.fillWidth: true

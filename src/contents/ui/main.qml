@@ -515,8 +515,19 @@ Kirigami.ApplicationWindow {
         sourceComponent: IncidenceInfoDrawer {
             id: incidenceInfoDrawer
 
-            width: if(!Kirigami.Settings.isMobile) actualWidth
-            height: if(Kirigami.Settings.isMobile) applicationWindow().height * 0.6
+            readonly property int minWidth: Kirigami.Units.gridUnit * 15
+            readonly property int maxWidth: Kirigami.Units.gridUnit * 25
+            readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
+            property int actualWidth: {
+                if (Config.incidenceInfoDrawerDrawerWidth && Config.incidenceInfoDrawerDrawerWidth === -1) {
+                    return defaultWidth;
+                } else {
+                    return Config.incidenceInfoDrawerDrawerWidth;
+                }
+            }
+
+            width: Kirigami.Settings.isMobile ? parent.width : actualWidth
+            height: Kirigami.Settings.isMobile ? applicationWindow().height * 0.6 : parent.height
             bottomPadding: menuLoader.active ? menuLoader.height : 0
 
             modal: !root.wideScreen || !enabled
@@ -528,17 +539,6 @@ Kirigami.ApplicationWindow {
 
             onIncidenceDataChanged: root.openOccurrence = incidenceData;
             onVisibleChanged: visible ? root.openOccurrence = incidenceData : root.openOccurrence = null
-
-            readonly property int minWidth: Kirigami.Units.gridUnit * 15
-            readonly property int maxWidth: Kirigami.Units.gridUnit * 25
-            readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
-            property int actualWidth: {
-                if (Config.incidenceInfoDrawerDrawerWidth && Config.incidenceInfoDrawerDrawerWidth === -1) {
-                    return defaultWidth;
-                } else {
-                    return Config.incidenceInfoDrawerDrawerWidth;
-                }
-            }
 
             ResizerSeparator {
                 anchors.left: if(Qt.application.layoutDirection !== Qt.RightToLeft) parent.left
@@ -654,7 +654,7 @@ Kirigami.ApplicationWindow {
             y: positionBelowIncidenceItem && openingIncidenceItem ? incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
 
             width: Math.min(pageStack.currentItem.width, Kirigami.Units.gridUnit * 30)
-            height: Math.min(Kirigami.Units.gridUnit * 16, scrollView.contentHeight)
+            height: Math.min(Kirigami.Units.gridUnit * 16, implicitHeight)
 
             onIncidenceDataChanged: root.openOccurrence = incidenceData
             onVisibleChanged: {
@@ -664,6 +664,8 @@ Kirigami.ApplicationWindow {
                     reposition();
                 } else {
                     root.openOccurrence = null;
+                    // Unlike the drawer we are not going to reopen the popup without selecting an incidence
+                    incidenceData = null;
                 }
             }
         }

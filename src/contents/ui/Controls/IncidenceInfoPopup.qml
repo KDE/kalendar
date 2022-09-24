@@ -14,10 +14,8 @@ QQC2.Popup {
     id: root
 
     property var incidenceData
-    property alias scrollView: incidenceInfoContents.scrollView
 
-    contentWidth: availableWidth
-
+    padding: 0
     clip: false
 
     background: Kirigami.ShadowedRectangle {
@@ -35,11 +33,19 @@ QQC2.Popup {
         border.color: Kirigami.ColorUtils.tintWithAlpha(color, Kirigami.Theme.textColor, 0.2)
     }
 
-    contentItem: IncidenceInfoContents {
-        id: incidenceInfoContents
-        anchors.fill: parent
+    contentItem: Loader {
+        id: incidenceInfoContentsLoader
 
-        clip: true
-        incidenceData: root.incidenceData
+        anchors.fill: parent
+        active: root.visible && root.incidenceData !== null && root.incidenceData !== undefined
+        sourceComponent: IncidenceInfoContents {
+            id: incidenceInfoContents
+
+            anchors.fill: parent
+            contentPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+
+            clip: true
+            incidenceData: root.incidenceData
+        }
     }
 }

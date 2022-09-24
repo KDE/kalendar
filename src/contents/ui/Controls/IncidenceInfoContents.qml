@@ -26,6 +26,8 @@ QQC2.ScrollView {
     property var incidenceWrapper
     property var collectionData
 
+    property alias contentPadding: infoBody.padding
+
     readonly property var activeTags : Filter.tags
     readonly property int relatedIncidenceDelegateHeight: Kirigami.Units.gridUnit * 3
     readonly property alias scrollView: root
@@ -38,9 +40,13 @@ QQC2.ScrollView {
     readonly property bool sameIncidenceStartAndEndTime: root.incidenceData.startTime.toTimeString() === root.incidenceData.endTime.toTimeString()
 
     onIncidenceDataChanged: {
-        incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', root, "incidence");
-        incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidenceData.incidencePtr);
-        collectionData = CalendarManager.getCollectionDetails(incidenceWrapper.collectionId);
+        QQC2.ScrollBar.vertical.position = 0;
+
+        if(incidenceData) {
+            incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', root, "incidence");
+            incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidenceData.incidencePtr);
+            collectionData = CalendarManager.getCollectionDetails(incidenceWrapper.collectionId);
+        }
     }
 
     component HoverLabel: QQC2.Label {
@@ -60,7 +66,7 @@ QQC2.ScrollView {
     }
 
     contentWidth: availableWidth
-    contentHeight: infoBody.implicitHeight + (infoBody.padding * 2)
+    contentHeight: infoBody.height
     clip: true
 
     property real yScrollPos: QQC2.ScrollBar.vertical.position
@@ -74,12 +80,17 @@ QQC2.ScrollView {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: padding
+        anchors.leftMargin: padding
+        anchors.rightMargin: padding
+
         columns: 2
 
         RowLayout {
+            id: incidenceHeader
+
             Layout.columnSpan: 2
             Layout.fillWidth: true
+            Layout.topMargin: infoBody.padding
 
             Kirigami.Heading {
                 Layout.fillWidth: true
@@ -594,6 +605,12 @@ QQC2.ScrollView {
                     incidenceWrapper: modelData
                 }
             }
+        }
+
+        Item {
+            id: incidenceFooterPadding
+            Layout.fillWidth: true
+            Layout.preferredHeight: infoBody.padding
         }
     }
 }

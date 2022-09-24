@@ -121,6 +121,8 @@ QtObject {
 
         const incidenceInfoComponent = usingDrawer ? appMain.incidenceInfoDrawer : appMain.incidenceInfoPopup;
 
+        // HACK: Give it a chance to reset properly
+        incidenceInfoComponent.incidenceData = null;
         incidenceInfoComponent.incidenceData = modelData;
 
         if (!usingDrawer) {
