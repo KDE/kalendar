@@ -503,12 +503,11 @@ Kirigami.ApplicationWindow {
 
     contextDrawer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer : null
 
-    // Drawers inherit from popups too
-    readonly property QQC2.Popup incidenceInfoViewer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer :
+    readonly property var incidenceInfoViewer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer :
         incidenceInfoPopupEnabled ? incidenceInfoPopup :
         null
 
-    property bool incidenceInfoDrawerEnabled: Kirigami.Settings.isMobile
+    property bool incidenceInfoDrawerEnabled: Kirigami.Settings.isMobile || !Config.useIncidenceInfoPopup
     readonly property alias incidenceInfoDrawer: incidenceInfoDrawerLoader.item
     Loader {
         id: incidenceInfoDrawerLoader
@@ -528,14 +527,13 @@ Kirigami.ApplicationWindow {
             interactive: Kirigami.Settings.isMobile // Otherwise get weird bug where drawer gets dragged around despite no click
 
             onIncidenceDataChanged: root.openOccurrence = incidenceData;
-            onVisibleChanged: visible ?
-                root.openOccurrence = incidenceData : root.openOccurrence = null
+            onVisibleChanged: visible ? root.openOccurrence = incidenceData : root.openOccurrence = null
 
             readonly property int minWidth: Kirigami.Units.gridUnit * 15
             readonly property int maxWidth: Kirigami.Units.gridUnit * 25
             readonly property int defaultWidth: Kirigami.Units.gridUnit * 20
             property int actualWidth: {
-                if (Config.incidenceInfoDrawerDrawerWidth === -1) {
+                if (Config.incidenceInfoDrawerDrawerWidth && Config.incidenceInfoDrawerDrawerWidth === -1) {
                     return defaultWidth;
                 } else {
                     return Config.incidenceInfoDrawerDrawerWidth;
@@ -572,7 +570,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    property bool incidenceInfoPopupEnabled: !Kirigami.Settings.isMobile
+    property bool incidenceInfoPopupEnabled: !Kirigami.Settings.isMobile && Config.useIncidenceInfoPopup
     readonly property alias incidenceInfoPopup: incidenceInfoPopupLoader.item
     Loader {
         id: incidenceInfoPopupLoader
