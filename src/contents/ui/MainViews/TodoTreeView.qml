@@ -25,6 +25,7 @@ TreeListView {
             color: todoData.color,
             startTime: todoData.startTime,
             endTime: todoData.endTime,
+            allDay: todoData.allDay,
             durationString: todoData.durationString
         };
         KalendarUiUtils.setUpView(retainedTodoData);
