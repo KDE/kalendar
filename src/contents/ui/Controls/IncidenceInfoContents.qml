@@ -609,6 +609,7 @@ QQC2.ScrollView {
 
         Item {
             id: incidenceFooterPadding
+            Layout.columnSpan: 2
             Layout.fillWidth: true
             Layout.preferredHeight: infoBody.padding
         }
