@@ -656,7 +656,7 @@ Kirigami.ApplicationWindow {
             y: positionBelowIncidenceItem && openingIncidenceItem ? incidenceItemPosition.y + openingIncidenceItem.height : incidenceItemPosition.y - height;
 
             width: Math.min(pageStack.currentItem.width, Kirigami.Units.gridUnit * 30)
-            height: Math.min(Kirigami.Units.gridUnit * 50, scrollView.contentHeight)
+            height: Math.min(Kirigami.Units.gridUnit * 16, scrollView.contentHeight)
 
             onIncidenceDataChanged: root.openOccurrence = incidenceData
             onVisibleChanged: {
