@@ -194,7 +194,7 @@ QString TodoSortFilterProxyModel::todoDueDateDisplayString(const KCalendarCore::
     const auto includeTime = !todo->allDay() && format != DisplayDateOnly;
     const auto includeOverdue = todo->isOverdue() && format == DisplayDateTimeAndIfOverdue;
 
-    const auto todoDateTimeDue = todo->dtDue();
+    const auto todoDateTimeDue = todo->dtDue().toLocalTime();
     const auto todoDateDue = todoDateTimeDue.date();
     const auto todoTimeDueString =
         includeTime ? i18nc("Please retain space", " at %1", systemLocale.toString(todoDateTimeDue.time(), QLocale::NarrowFormat)) : QStringLiteral(" ");
