@@ -44,6 +44,7 @@ QHash<int, QByteArray> TodoSortFilterProxyModel::roleNames() const
     roleNames[TodoModel::SummaryRole] = "text";
     roleNames[Roles::StartTimeRole] = "startTime";
     roleNames[Roles::EndTimeRole] = "endTime";
+    roleNames[Roles::DisplayDueDateRole] = "displayDueDate";
     roleNames[Roles::LocationRole] = "location";
     roleNames[Roles::AllDayRole] = "allDay";
     roleNames[Roles::ColorRole] = "color";
@@ -99,6 +100,8 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
         return todoPtr->dtStart();
     } else if (role == Roles::EndTimeRole) {
         return todoPtr->dtDue();
+    } else if (role == Roles::DisplayDueDateRole) {
+        return todoDueDateDisplayString(todoPtr, DisplayDateTimeAndIfOverdue);
     } else if (role == Roles::LocationRole) {
         return todoPtr->location();
     } else if (role == Roles::AllDayRole) {
@@ -164,23 +167,56 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
                 return i18n("No set date");
             }
 
-            const auto isOverdue =
-                (todo->allDay() && todo->dtDue().date() < QDate::currentDate()) || (!todo->allDay() && todo->dtDue() < QDateTime::currentDateTime());
-
-            if (isOverdue) {
+            if (todo->isOverdue()) {
                 return i18n("Overdue");
             }
 
             const auto dateInCurrentTZ = todo->dtDue().toLocalTime().date();
             const auto isToday = dateInCurrentTZ == QDate::currentDate();
 
-            return isToday ? i18n("Today") : todo->dtDue().toString();
+            return isToday ? i18n("Today") : todoDueDateDisplayString(todo, DisplayDateOnly);
         }
         case TopMostParentPriority:
             return todo->priority();
         }
     }
     return QSortFilterProxyModel::data(index, role);
+}
+
+QString TodoSortFilterProxyModel::todoDueDateDisplayString(const KCalendarCore::Todo::Ptr todo,
+                                                           const TodoSortFilterProxyModel::DueDateDisplayFormat format) const
+{
+    if (!todo || !todo->hasDueDate()) {
+        return {};
+    }
+
+    const auto systemLocale = QLocale::system();
+    const auto includeTime = !todo->allDay() && format != DisplayDateOnly;
+    const auto includeOverdue = todo->isOverdue() && format == DisplayDateTimeAndIfOverdue;
+
+    const auto todoDateTimeDue = todo->dtDue();
+    const auto todoDateDue = todoDateTimeDue.date();
+    const auto todoTimeDueString =
+        includeTime ? i18nc("Please retain space", " at %1", systemLocale.toString(todoDateTimeDue.time(), QLocale::NarrowFormat)) : QStringLiteral(" ");
+    const auto todoOverdueString = includeOverdue ? i18nc("Please retain parenthesis and space", " (overdue)") : QString();
+
+    const auto currentDate = QDate::currentDate();
+    const auto dateFormat = todoDateDue.year() == currentDate.year() ? QStringLiteral("dddd dd MMMM") : QStringLiteral("dddd dd MMMM yyyy");
+
+    static constexpr char translationExplainer[] =
+        "No spaces -- the (optional) %1 string, which includes the time, includes this space"
+        " as does the %2 string which is the overdue string (also optional!)";
+
+    if (currentDate == todoDateDue) {
+        return i18nc(translationExplainer, "Today%1%2", todoTimeDueString, todoOverdueString);
+    } else if (currentDate.daysTo(todoDateDue) == 1) {
+        return i18nc(translationExplainer, "Tomorrow%1%2", todoTimeDueString, todoOverdueString);
+    } else if (currentDate.daysTo(todoDateDue) == -1) {
+        return i18nc(translationExplainer, "Yesterday%1%2", todoTimeDueString, todoOverdueString);
+    }
+
+    const auto dateDueString = systemLocale.toString(todoDateDue, dateFormat);
+    return dateDueString + todoTimeDueString + todoOverdueString;
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const

@@ -78,8 +78,6 @@ TreeListView {
                     case Kalendar.TodoSortFilterProxyModel.PriorityColumn:
                         return section !== "--" ? i18n("Priority %1", section) : i18n("No set priority");
                     case Kalendar.TodoSortFilterProxyModel.DueDateColumn:
-                        // We sometimes return non-date strings from the model for overdue/no set due date
-                        return sectionDateValid ? LabelUtils.todoDateTimeLabel(sectionDate, true, false) : section;
                     case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
                     default:
                         return section;
@@ -314,17 +312,22 @@ TreeListView {
 
                 RowLayout {
                     id: occurrenceLayout
+
                     Layout.row: 1
                     Layout.column: 1
                     Layout.fillWidth: true
-                    visible: !isNaN(model.endTime.getTime()) || model.recurs
+
+                    visible: dateLabel.visible || recurIcon.visible
 
                     QQC2.Label {
                         id: dateLabel
-                        text: LabelUtils.todoDateTimeLabel(model.endTime, model.allDay, model.checked)
+
+                        readonly property bool validEndDt: !isNaN(model.endTime.getTime())
+
+                        text: model.displayDueDate
                         color: model.isOverdue ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
                         font: Kirigami.Theme.smallFont
-                        visible: !isNaN(model.endTime.getTime())
+                        visible: validEndDt
                     }
                     Kirigami.Icon {
                         id: recurIcon

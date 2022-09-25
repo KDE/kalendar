@@ -29,9 +29,10 @@ class TodoSortFilterProxyModel : public QSortFilterProxyModel
                    showCompletedSubtodosInIncompleteChanged)
 
 public:
-    enum Roles { // Remember to update roles in todosortfilterproxymodel
+    enum Roles {
         StartTimeRole = TodoModel::CalendarRole + 1,
         EndTimeRole,
+        DisplayDueDateRole,
         LocationRole,
         AllDayRole,
         CompletedRole,
@@ -53,7 +54,7 @@ public:
         TreeDepthRole,
         TopMostParentSummary, // These three here are used to help us conserve the proper sections
         TopMostParentDueDate, // in the Kirigami TreeListView, which otherwise will create new
-        TopMostParentPriority // sections for subtasks
+        TopMostParentPriority, // sections for subtasks
     };
     Q_ENUM(Roles)
 
@@ -75,6 +76,12 @@ public:
         ShowIncompleteOnly,
     };
     Q_ENUM(ShowComplete)
+
+    enum DueDateDisplayFormat {
+        DisplayDateOnly,
+        DisplayDateTimeAndIfOverdue,
+    };
+    Q_ENUM(DueDateDisplayFormat)
 
     explicit TodoSortFilterProxyModel(QObject *parent = nullptr);
     ~TodoSortFilterProxyModel() override;
@@ -125,6 +132,8 @@ protected:
     void loadColors();
 
 private:
+    QString todoDueDateDisplayString(const KCalendarCore::Todo::Ptr todo, const DueDateDisplayFormat format) const;
+
     int compareStartDates(const QModelIndex &left, const QModelIndex &right) const;
     int compareDueDates(const QModelIndex &left, const QModelIndex &right) const;
     int compareCompletedDates(const QModelIndex &left, const QModelIndex &right) const;
