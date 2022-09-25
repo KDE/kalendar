@@ -68,8 +68,6 @@ TreeListView {
 
         contentItem: Kirigami.Heading {
             readonly property bool dateSort: root.sortBy === Kalendar.TodoSortFilterProxyModel.DueDateColumn
-            readonly property date sectionDate: dateSort ? new Date(section) : null
-            readonly property bool sectionDateValid: dateSort && !isNaN(sectionDate.getTime());
             readonly property bool isOverdue: dateSort && section === i18n("Overdue")
             readonly property bool isToday: dateSort && section === i18n("Today")
 
