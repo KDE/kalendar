@@ -485,11 +485,15 @@ int TodoSortFilterProxyModel::compareDueDates(const QModelIndex &left, const QMo
     } else if (!leftIsEmpty) { // Both have due dates
         const auto leftDateTime = leftTodo->dtDue();
         const auto rightDateTime = rightTodo->dtDue();
+        const auto leftOverdue = leftTodo->isOverdue();
+        const auto rightOverdue = rightTodo->isOverdue();
 
-        if (leftDateTime == rightDateTime) {
+        if (leftDateTime == rightDateTime && leftOverdue == rightOverdue) {
             return 0;
-        } else {
+        } else if (leftOverdue == rightOverdue) {
             return leftDateTime < rightDateTime ? -1 : 1;
+        } else {
+            return leftOverdue ? -1 : 1;
         }
     } else { // Neither has a due date
         return 0;
