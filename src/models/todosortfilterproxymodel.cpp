@@ -25,6 +25,10 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     QObject::connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &TodoSortFilterProxyModel::loadColors);
 
     loadColors();
+
+    m_dateRefreshTimer.setInterval(m_dateRefreshTimerInterval);
+    m_dateRefreshTimer.callOnTimeout(this, &TodoSortFilterProxyModel::updateDateLabels);
+    m_dateRefreshTimer.start();
 }
 
 TodoSortFilterProxyModel::~TodoSortFilterProxyModel()
@@ -64,9 +68,9 @@ QHash<int, QByteArray> TodoSortFilterProxyModel::roleNames() const
     roleNames[Roles::CategoriesRole] = "todoCategories"; // Simply 'categories' causes issues
     roleNames[Roles::CategoriesDisplayRole] = "categoriesDisplay";
     roleNames[Roles::TreeDepthRole] = "treeDepth";
-    roleNames[Roles::TopMostParentDueDate] = "topMostParentDueDate";
-    roleNames[Roles::TopMostParentSummary] = "topMostParentSummary";
-    roleNames[Roles::TopMostParentPriority] = "topMostParentPriority";
+    roleNames[Roles::TopMostParentDueDateRole] = "topMostParentDueDate";
+    roleNames[Roles::TopMostParentSummaryRole] = "topMostParentSummary";
+    roleNames[Roles::TopMostParentPriorityRole] = "topMostParentPriority";
 
     return roleNames;
 }
@@ -147,7 +151,7 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
         return todoPtr->categories();
     } else if (role == Roles::CategoriesDisplayRole) {
         return todoPtr->categories().join(i18nc("List separator", ", "));
-    } else if (role == Roles::TreeDepthRole || role == TopMostParentSummary || role == TopMostParentDueDate || role == TopMostParentPriority) {
+    } else if (role == Roles::TreeDepthRole || role == TopMostParentSummaryRole || role == TopMostParentDueDateRole || role == TopMostParentPriorityRole) {
         int depth = 0;
         auto idx = index;
         while (idx.parent().isValid()) {
@@ -160,9 +164,9 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
         switch (role) {
         case Roles::TreeDepthRole:
             return depth;
-        case TopMostParentSummary:
+        case TopMostParentSummaryRole:
             return todo->summary();
-        case TopMostParentDueDate: {
+        case TopMostParentDueDateRole: {
             if (!todo->hasDueDate()) {
                 return i18n("No set date");
             }
@@ -176,7 +180,7 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
 
             return isToday ? i18n("Today") : todoDueDateDisplayString(todo, DisplayDateOnly);
         }
-        case TopMostParentPriority:
+        case TopMostParentPriorityRole:
             return todo->priority();
         }
     }
@@ -217,6 +221,71 @@ QString TodoSortFilterProxyModel::todoDueDateDisplayString(const KCalendarCore::
 
     const auto dateDueString = systemLocale.toString(todoDateDue, dateFormat);
     return dateDueString + todoTimeDueString + todoOverdueString;
+}
+
+void TodoSortFilterProxyModel::updateDateLabels()
+{
+    if (rowCount() == 0 || !sourceModel()) {
+        return;
+    }
+
+    emitDateDataChanged({});
+    sortTodoModel();
+    m_lastDateRefreshDate = QDate::currentDate();
+}
+
+void TodoSortFilterProxyModel::emitDateDataChanged(const QModelIndex &idx)
+{
+    const auto idxRowCount = rowCount(idx);
+    const auto srcModel = sourceModel();
+
+    if (idxRowCount == 0) {
+        return;
+    }
+
+    const auto bottomRow = idxRowCount - 1;
+    const auto currentDate = QDate::currentDate();
+    const auto currentDateTime = QDateTime::currentDateTime();
+
+    const auto iterateOverChildren = [this, &idx, &srcModel, &currentDate, &currentDateTime](const int row) {
+        const auto childIdx = index(row, 0, idx);
+
+        const auto todo = childIdx.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+        const auto isOverdue = todo->isOverdue();
+        const auto dtDue = todo->dtDue();
+        const auto isRecentlyOverdue = isOverdue && currentDateTime.msecsTo(dtDue) >= -m_dateRefreshTimerInterval;
+
+        if (isRecentlyOverdue || m_lastDateRefreshDate != currentDate) {
+            Q_EMIT dataChanged(childIdx, childIdx, {DisplayDueDateRole, TopMostParentDueDateRole});
+
+            // For the proxy model to re-sort items into their correct section we also need to emit a
+            // dataChanged() signal for the column we are sorting by in the source model
+            const auto srcChildIdx = mapToSource(childIdx).siblingAtColumn(TodoModel::DueDateColumn);
+            Q_EMIT srcModel->dataChanged(srcChildIdx, srcChildIdx, {TodoModel::DueDateRole});
+        }
+
+        // We recursively do the same for children
+        emitDateDataChanged(childIdx);
+    };
+
+    // This is a workaround for weird sorting behaviour. If one of the items changes because it becomes
+    // overdue, for example, the way in which we emit dataChanged() signals of the sourceModel will
+    // dictate how the model gets sorted.
+    //
+    // Example: In a case where the sort is ascending (i.e. overdue at top), a 0 to rowCount() -1 sort
+    // will move the overdue item up by only one row due to how the QSortFilterProxyModel uses lessThan().
+    // If we go the opposite way then the QSFPM calls lessThan() on the overdue item more than once, moving
+    // it upwards.
+
+    if (m_sortAscending) {
+        for (auto i = bottomRow; i >= 0; --i) {
+            iterateOverChildren(i);
+        }
+    } else {
+        for (auto i = 0; i < idxRowCount; ++i) {
+            iterateOverChildren(i);
+        }
+    }
 }
 
 bool TodoSortFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &sourceParent) const
@@ -521,6 +590,13 @@ int TodoSortFilterProxyModel::compareDueDates(const QModelIndex &left, const QMo
         return 0;
     }
 
+    const auto leftOverdue = leftTodo->isOverdue();
+    const auto rightOverdue = rightTodo->isOverdue();
+
+    if (leftOverdue != rightOverdue) {
+        return leftOverdue ? -1 : 1;
+    }
+
     const bool leftIsEmpty = !leftTodo->hasDueDate();
     const bool rightIsEmpty = !rightTodo->hasDueDate();
 
@@ -530,15 +606,11 @@ int TodoSortFilterProxyModel::compareDueDates(const QModelIndex &left, const QMo
     } else if (!leftIsEmpty) { // Both have due dates
         const auto leftDateTime = leftTodo->dtDue();
         const auto rightDateTime = rightTodo->dtDue();
-        const auto leftOverdue = leftTodo->isOverdue();
-        const auto rightOverdue = rightTodo->isOverdue();
 
-        if (leftDateTime == rightDateTime && leftOverdue == rightOverdue) {
+        if (leftDateTime == rightDateTime) {
             return 0;
-        } else if (leftOverdue == rightOverdue) {
-            return leftDateTime < rightDateTime ? -1 : 1;
         } else {
-            return leftOverdue ? -1 : 1;
+            return leftDateTime < rightDateTime ? -1 : 1;
         }
     } else { // Neither has a due date
         return 0;

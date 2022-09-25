@@ -3,16 +3,17 @@
 
 #pragma once
 
-#include <QObject>
-#include <Akonadi/ETMCalendar>
-#include <CalendarSupport/KCalPrefs>
 #include <Akonadi/CalendarUtils>
+#include <Akonadi/ETMCalendar>
 #include <Akonadi/IncidenceTreeModel>
+#include <CalendarSupport/KCalPrefs>
 #include <EventViews/TodoModel>
 #include <KConfigWatcher>
 #include <KFormat>
 #include <KSharedConfig>
+#include <QObject>
 #include <QSortFilterProxyModel>
+#include <QTimer>
 
 class Filter;
 
@@ -52,9 +53,9 @@ public:
         CategoriesRole,
         CategoriesDisplayRole,
         TreeDepthRole,
-        TopMostParentSummary, // These three here are used to help us conserve the proper sections
-        TopMostParentDueDate, // in the Kirigami TreeListView, which otherwise will create new
-        TopMostParentPriority, // sections for subtasks
+        TopMostParentSummaryRole, // These three here are used to help us conserve the proper sections
+        TopMostParentDueDateRole, // in the Kirigami TreeListView, which otherwise will create new
+        TopMostParentPriorityRole, // sections for subtasks
     };
     Q_ENUM(Roles)
 
@@ -131,6 +132,10 @@ protected:
     void setColorCache(QHash<QString, QColor> colorCache);
     void loadColors();
 
+private Q_SLOTS:
+    void updateDateLabels();
+    void emitDateDataChanged(const QModelIndex &idx);
+
 private:
     QString todoDueDateDisplayString(const KCalendarCore::Todo::Ptr todo, const DueDateDisplayFormat format) const;
 
@@ -153,4 +158,7 @@ private:
     bool m_sortAscending = false;
     bool m_showCompletedSubtodosInIncomplete = true;
     KFormat m_format;
+    QTimer m_dateRefreshTimer;
+    int m_dateRefreshTimerInterval = 60000; // msecs
+    QDate m_lastDateRefreshDate = QDate::currentDate();
 };
