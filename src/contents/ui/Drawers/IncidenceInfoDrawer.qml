@@ -290,24 +290,27 @@ Kirigami.OverlayDrawer {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Time:</b>")
                         visible: !incidenceInfoDrawer.incidenceData.allDay &&
-                            incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() &&
-                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
+                            (incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() ||
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())))
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
 
                         text: {
-                            if(incidenceInfoDrawer.incidenceData.startTime.toTimeString() != incidenceInfoDrawer.incidenceData.endTime.toTimeString()) {
-                                incidenceInfoDrawer.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + "–" + incidenceInfoDrawer.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
-                            } else if (incidenceInfoDrawer.incidenceData.startTime.toTimeString() == incidenceInfoDrawer.incidenceData.endTime.toTimeString()) {
+                            if (incidenceInfoDrawer.incidenceData.startTime.toTimeString() == incidenceInfoDrawer.incidenceData.endTime.toTimeString() ||
+                                isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()) && !isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime())) {
                                 incidenceInfoDrawer.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                            } else if(!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) && !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())) {
+                                incidenceInfoDrawer.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) + "–" + incidenceInfoDrawer.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                            } else if(isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) && !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())) {
+                                incidenceInfoDrawer.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
                             }
                         }
                         wrapMode: Text.Wrap
                         visible: !incidenceInfoDrawer.incidenceData.allDay &&
-                            incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() &&
-                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
+                            (incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() ||
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())))
                     }
 
                     QQC2.Label {
