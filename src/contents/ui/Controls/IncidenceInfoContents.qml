@@ -198,24 +198,24 @@ QQC2.ScrollView {
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
             text: i18n("<b>Date:</b>")
-            visible: root.validIncidenceStart || root.validIncidenceEnd
+            visible: dateLabel.visible
         }
         QQC2.Label {
+            id: dateLabel
+
+            readonly property string startDateString: root.incidenceData.startTime.toLocaleDateString(Qt.locale())
+            readonly property string endDateString: root.incidenceData.endTime.toLocaleDateString(Qt.locale())
+
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
 
             text: {
                 if(root.sameIncidenceStartAndEndDate || (root.validIncidenceStart && !root.validIncidenceEnd)) {
-                    return root.incidenceData.startTime.toLocaleDateString(Qt.locale());
-
-                } else if (!root.validIncidenceStart && root.validIncidenceEnd) {
-                    return root.incidenceData.endTime.toLocaleDateString(Qt.locale());
-
+                    return startDateString;
                 } else if (root.bothIncidenceStartAndEndValid) {
-                    const startDateString = root.incidenceData.startTime.toLocaleDateString(Qt.locale());
-                    const endDateString = root.incidenceData.endTime.toLocaleDateString(Qt.locale());
-                    return startDateString + "–" + endDateString;
-
+                    return startDateString + " – " + endDateString;
+                } else if (root.validIncidenceEnd) {
+                    return endDateString;
                 }
             }
             wrapMode: Text.Wrap
@@ -225,25 +225,28 @@ QQC2.ScrollView {
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
             text: i18n("<b>Time:</b>")
-            visible: !root.incidenceData.allDay && root.sameIncidenceStartAndEndDate && root.validIncidenceStartOrEnd
+            visible: timeLabel.visible
         }
         QQC2.Label {
             id: timeLabel
+
+            readonly property string startTimeString: root.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+            readonly property string endTimeString: root.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
 
             text: {
-                const startTimeString = root.incidenceData.startTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
-
-                if(root.sameIncidenceStartAndEndTime) {
+                if(root.sameIncidenceStartAndEndTime || (root.validIncidenceStart && !root.validIncidenceEnd)) {
                     return startTimeString;
+                } else if (root.bothIncidenceStartAndEndValid) {
+                    return startTimeString + "–" + endTimeString;
+                } else if (root.validIncidenceEnd) {
+                    return endTimeString;
                 }
-
-                const endTimeString = root.incidenceData.endTime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
-                return startTimeString + "–" + endTimeString;
             }
             wrapMode: Text.Wrap
-            visible: !root.incidenceData.allDay && root.sameIncidenceStartAndEndDate && root.validIncidenceStartOrEnd
+            visible: !root.incidenceData.allDay && (root.sameIncidenceStartAndEndDate || root.validIncidenceStartOrEnd)
         }
 
         QQC2.Label {
