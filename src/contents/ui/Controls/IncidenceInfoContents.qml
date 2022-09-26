@@ -246,9 +246,7 @@ QQC2.ScrollView {
                 }
             }
             wrapMode: Text.Wrap
-            visible: !root.incidenceData.allDay &&
-                     ((root.sameIncidenceStartAndEndDate && root.bothIncidenceStartAndEndValid) ||
-                     root.validIncidenceStartOrEnd)
+            visible: !root.incidenceData.allDay && root.validIncidenceStartOrEnd
         }
 
         QQC2.Label {
