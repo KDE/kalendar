@@ -290,8 +290,7 @@ Kirigami.OverlayDrawer {
                         Layout.alignment: Qt.AlignTop
                         text: i18n("<b>Time:</b>")
                         visible: !incidenceInfoDrawer.incidenceData.allDay &&
-                            (incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() ||
-                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())))
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignTop
@@ -309,8 +308,7 @@ Kirigami.OverlayDrawer {
                         }
                         wrapMode: Text.Wrap
                         visible: !incidenceInfoDrawer.incidenceData.allDay &&
-                            (incidenceInfoDrawer.incidenceData.startTime.toDateString() == incidenceInfoDrawer.incidenceData.endTime.toDateString() ||
-                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime())))
+                            (!isNaN(incidenceInfoDrawer.incidenceData.startTime.getTime()) || !isNaN(incidenceInfoDrawer.incidenceData.endTime.getTime()))
                     }
 
                     QQC2.Label {
