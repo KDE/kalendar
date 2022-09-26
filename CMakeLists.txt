@@ -104,7 +104,7 @@ endif()
 
 ki18n_install(po)
 
-ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.97.0)
+ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.98.0)
 add_definitions(-DQT_STRICT_ITERATORS)
 add_subdirectory(src)
 
