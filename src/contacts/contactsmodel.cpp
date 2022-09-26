@@ -7,11 +7,9 @@
 #include <Akonadi/ContactsFilterProxyModel>
 #include <Akonadi/ContactsTreeModel>
 #include <Akonadi/EmailAddressSelectionModel>
-#include <KDescendantsProxyModel>
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <KContacts/Addressee>
-#include <KContacts/ContactGroup>
-
+#include <KDescendantsProxyModel>
 
 ContactsModel::ContactsModel(QObject *parent)
     : QSortFilterProxyModel(parent)

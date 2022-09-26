@@ -19,8 +19,6 @@
 #include "tagmanager.h"
 #include <Akonadi/AgentFilterProxyModel>
 #include <KAboutData>
-#include <KCalendarCore/MemoryCalendar>
-#include <KCalendarCore/VCalFormat>
 #include <KDBusService>
 #include <KLocalizedContext>
 #include <KLocalizedString>

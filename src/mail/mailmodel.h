@@ -5,7 +5,6 @@
 #pragma once
 
 #include <Akonadi/Item>
-#include <QItemSelectionModel>
 #include <QObject>
 #include <QSortFilterProxyModel>
 

@@ -10,7 +10,6 @@
 #include <KLocalizedString>
 #include <QDebug>
 #include <QRegularExpression>
-#include <QTextDocument>
 
 // We return a pair containing the trimmed string, as well as a boolean indicating whether the string was trimmed or not
 std::pair<QString, bool> PartModel::trim(const QString &text)

@@ -4,8 +4,6 @@
 #include "mailmanager.h"
 #include "mailmodel.h"
 
-#include <QTimer>
-
 // Akonadi
 #include <Akonadi/ChangeRecorder>
 #include <Akonadi/CollectionFilterProxyModel>

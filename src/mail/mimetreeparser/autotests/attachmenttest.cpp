@@ -5,7 +5,6 @@
 
 #include "setupenv.h"
 
-#include <QDebug>
 #include <QTest>
 
 using namespace MimeTreeParser;

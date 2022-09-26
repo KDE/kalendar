@@ -8,8 +8,6 @@
 #include <Akonadi/AgentInstanceModel>
 #include <Akonadi/AgentManager>
 #include <Akonadi/AgentTypeModel>
-#include <KContacts/Addressee>
-#include <KContacts/ContactGroup>
 
 #include <KWindowSystem>
 #include <QPointer>

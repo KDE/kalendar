@@ -3,9 +3,7 @@
 
 #include "mailplugin.h"
 
-#include <QAbstractListModel>
 #include <QQmlEngine>
-#include <QtQml>
 
 #include "contactimageprovider.h"
 #include "helper.h"

@@ -6,9 +6,6 @@
 
 #include <QStandardPaths>
 
-#include <QDir>
-#include <QFile>
-
 void MimeTreeParser::Test::setupEnv()
 {
     qputenv("LC_ALL", "en_US.UTF-8");

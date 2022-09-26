@@ -10,7 +10,6 @@
 
 #include "../filter.h"
 #include <Akonadi/EntityTreeModel>
-#include <KCalendarCore/MemoryCalendar>
 #include <KCalendarCore/OccurrenceIterator>
 #include <KConfigGroup>
 #include <KLocalizedString>

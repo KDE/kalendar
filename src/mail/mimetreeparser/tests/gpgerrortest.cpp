@@ -5,11 +5,8 @@
 
 #include <gpgme.h>
 
-#include <QDebug>
-#include <QDir>
 #include <QProcess>
 #include <QTest>
-#include <QtGlobal>
 #include <qobjectdefs.h>
 
 QByteArray readMailFromFile(const QString &mailFile)

@@ -6,7 +6,6 @@
 #include <QQuickAsyncImageProvider>
 
 #include <KContacts/Addressee>
-#include <QAtomicPointer>
 #include <QReadWriteLock>
 
 namespace Akonadi

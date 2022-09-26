@@ -29,8 +29,6 @@
 #include <Akonadi/SelectionProxyModel>
 #include <KCheckableProxyModel>
 #include <KConfigGroup>
-#include <KContacts/Addressee>
-#include <KContacts/ContactGroup>
 #include <KDescendantsProxyModel>
 #include <KLocalizedString>
 #include <KSelectionProxyModel>

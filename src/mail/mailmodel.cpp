@@ -10,7 +10,6 @@
 #include <KFormat>
 #include <KLocalizedString>
 #include <KMime/Message>
-#include <QQmlEngine>
 
 MailModel::MailModel(QObject *parent)
     : QSortFilterProxyModel(parent)

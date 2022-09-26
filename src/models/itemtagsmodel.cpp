@@ -4,7 +4,6 @@
 #include "kalendar_debug.h"
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
-#include <KCalendarCore/Incidence>
 #include <QMetaEnum>
 #include <models/itemtagsmodel.h>
 

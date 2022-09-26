@@ -5,7 +5,6 @@
 
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
-#include <KCalendarCore/Calendar>
 
 using namespace Akonadi::Quick;
 
