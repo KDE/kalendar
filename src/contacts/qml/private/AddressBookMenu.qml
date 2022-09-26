@@ -9,6 +9,7 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kalendar 1.0 as Kalendar
 import org.kde.kalendar.contact 1.0
+import org.kde.akonadi 1.0 as Akonadi
 
 QQC2.Menu {
     id: actionsPopup
@@ -16,6 +17,7 @@ QQC2.Menu {
 
     required property var collection
     required property var collectionDetails
+    required property Akonadi.AgentConfiguraion agentConfiguration
 
     QQC2.MenuItem {
         icon.name: "edit-entry"
@@ -50,19 +52,19 @@ QQC2.Menu {
     QQC2.MenuItem {
         icon.name: "settings-configure"
         text: i18nc("@action:inmenu", "Address book source settings…")
-        onClicked: Kalendar.AgentConfiguration.editIdentifier(collectionDetails.resource)
+        onClicked: actionsPopup.agentConfiguration.editIdentifier(collectionDetails.resource)
         visible: collectionDetails.isResource
     }
     QQC2.MenuItem {
         icon.name: "view-refresh"
         text: i18nc("@action:inmenu", "Update address book source")
-        onClicked: Kalendar.AgentConfiguration.restartIdentifier(collectionDetails.resource)
+        onClicked: actionsPopup.agentConfiguration.restartIdentifier(collectionDetails.resource)
         visible: collectionDetails.isResource
     }
     QQC2.MenuItem {
         icon.name: "edit-delete"
         text: i18nc("@action:inmenu", "Delete address source")
-        onClicked: Kalendar.AgentConfiguration.removeIdentifier(collectionDetails.resource)
+        onClicked: actionsPopup.agentConfiguration.removeIdentifier(collectionDetails.resource)
         visible: collectionDetails.isResource
     }
 }

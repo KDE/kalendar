@@ -9,6 +9,7 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kalendar 1.0 as Kalendar
 import org.kde.kalendar.contact 1.0
+import org.kde.akonadi 1.0 as Akonadi
 import './private'
 
 TapHandler {
@@ -16,6 +17,7 @@ TapHandler {
 
     property var collection
     property var collectionDetails
+    property Akonadi.AgentConfiguration agentConfiguration
 
     acceptedButtons: Kirigami.Settings.isMobile ? Qt.LeftButton | Qt.RightButton : Qt.RightButton
 
@@ -42,8 +44,10 @@ TapHandler {
     property Component addressBookActions: Component {
         AddressBookMenu {
             parent: handler.parent
+
             collection: handler.collection
             collectionDetails: handler.collectionDetails
+            agentConfiguration: calendarTapHandler.agentConfiguration
         }
     }
 }

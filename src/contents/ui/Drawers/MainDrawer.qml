@@ -10,6 +10,7 @@ import org.kde.kirigami 2.16 as Kirigami
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
 import org.kde.kalendar.mail 1.0
+import org.kde.akonadi 1.0
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
 import QtGraphicalEffects 1.12
@@ -334,15 +335,18 @@ Kirigami.OverlayDrawer {
             Layout.fillWidth: true
             Layout.fillHeight: true
             active: true
-            sourceComponent: mode === KalendarApplication.Mail ? mailView : calendarContactView
+            sourceComponent: mode === KalendarApplication.Mail ? mailView : calendarAddressBookComponent
         }
 
         Component {
-            id: calendarContactView
+            id: calendarAddressBookComponent
+
             QQC2.ScrollView {
-                id: calendarView
+                id: calendarAddressBookView
+
+                readonly property AgentConfiguration agentConfiguration: AgentConfiguration {}
+
                 implicitWidth: Kirigami.Units.gridUnit * 16
-                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                 contentWidth: availableWidth
                 clip: true
                 z: -2
@@ -354,6 +358,8 @@ Kirigami.OverlayDrawer {
                         easing.type: Easing.InOutQuad
                     }
                 }
+
+                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -510,7 +516,7 @@ Kirigami.OverlayDrawer {
                                     leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
                                     Connections {
-                                        target: AgentConfiguration
+                                        target: calendarAddressBookView.agentConfiguration
                                         property var collectionDetails: CalendarManager.getCollectionDetails(collectionId)
 
                                         function onAgentProgressChanged(agentData) {
@@ -560,6 +566,7 @@ Kirigami.OverlayDrawer {
                                     CalendarItemTapHandler {
                                         collectionId: model.collectionId
                                         collectionDetails: CalendarManager.getCollectionDetails(collectionId)
+                                        agentConfiguration: calendarAddressBookView.agentConfiguration
                                         enabled: mode !== KalendarApplication.Contact
                                     }
 
@@ -625,6 +632,7 @@ Kirigami.OverlayDrawer {
                                     CalendarItemTapHandler {
                                         collectionId: model.collectionId
                                         collectionDetails: CalendarManager.getCollectionDetails(collectionId)
+                                        agentConfiguration: calendarAddressBookView.agentConfiguration
                                         enabled: mode !== KalendarApplication.Contact
                                         onDeleteCalendar: mainDrawer.deleteCalendar(collectionId, collectionDetails)
                                     }
