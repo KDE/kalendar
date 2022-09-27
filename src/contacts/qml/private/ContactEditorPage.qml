@@ -198,6 +198,14 @@ Kirigami.ScrollablePage {
                 currentIndex: -1
             }
 
+            QQC2.TextField {
+                visible: displayAdvancedNameFields
+                Kirigami.FormData.label: i18n("Nicknames:")
+                onTextChanged: contactEditor.contact.nickName = text
+                text: contactEditor.contact.nickName
+                placeholderText: i18n("Alternative name")
+            }
+
             ColumnLayout {
                 id: phoneNumber
                 Layout.fillWidth: true
