@@ -90,7 +90,7 @@ Kirigami.ScrollablePage {
             Akonadi.CollectionComboBox {
                 id: addressBookComboBox
 
-                Kirigami.FormData.label: i18n("Address Book:")
+                Kirigami.FormData.label: i18n("Address book:")
                 Layout.fillWidth: true
                 enabled: mode === ContactEditor.CreateMode
 
@@ -148,6 +148,7 @@ Kirigami.ScrollablePage {
                     Layout.fillWidth: true
                     text: contactEditor.contact.formattedName
                     onTextChanged: contactEditor.contact.formattedName = text
+                    placeholderText: i18n("Contact name")
                 }
                 QQC2.Button {
                     icon.name: 'settings-configure'
@@ -158,53 +159,65 @@ Kirigami.ScrollablePage {
                 }
             }
             QQC2.ComboBox {
-                visible: displayAdvancedNameFields
-                Kirigami.FormData.label: i18n("Honorific prefixes:")
+                Kirigami.FormData.label: i18n("Honorific prefix:")
+
                 editable: true
                 model: [i18n('Dr.'), i18n("Miss"), i18n("Mr."), i18n("Mrs."), i18n("Ms."), i18n("Prof.")]
                 currentIndex: -1
                 editText: contactEditor.contact.prefix
                 onCurrentValueChanged: contactEditor.contact.prefix = currentValue
+
+                visible: displayAdvancedNameFields
             }
 
             QQC2.TextField {
-                visible: displayAdvancedNameFields
-                Kirigami.FormData.label: i18n("Given names:")
+                Kirigami.FormData.label: i18n("Given name:")
+
                 onTextChanged: contactEditor.contact.givenName = text
                 text: contactEditor.contact.givenName
+                placeholderText: i18n("First name or chosen name")
+                visible: displayAdvancedNameFields
             }
 
             QQC2.TextField {
-                visible: displayAdvancedNameFields
-                Kirigami.FormData.label: i18n("Additional names:")
+                Kirigami.FormData.label: i18n("Additional name:")
+
                 onTextChanged: contactEditor.contact.additionalName = text
                 text: contactEditor.contact.additionalName
+                placeholderText: i18n("Middle name or other name")
+                visible: displayAdvancedNameFields
             }
 
             QQC2.TextField {
-                visible: displayAdvancedNameFields
-                Kirigami.FormData.label: i18n("Family names:")
+                Kirigami.FormData.label: i18n("Family name:")
+
                 onTextChanged: contactEditor.contact.familyName = text
                 text: contactEditor.contact.familyName
+                placeholderText: i18n("Surname or last name")
+                visible: displayAdvancedNameFields
             }
 
             QQC2.ComboBox {
-                visible: displayAdvancedNameFields
-                Kirigami.FormData.label: i18n("Honorific suffixes:")
+                Kirigami.FormData.label: i18n("Honorific suffix:")
+
                 onCurrentValueChanged: contactEditor.contact.suffix = currentValue
                 editable: true
                 editText: contactEditor.contact.suffix
                 model: [i18n('I'), i18n("II"), i18n("III"), i18n("Jr."), i18n("Sr.")]
                 currentIndex: -1
+
+                visible: displayAdvancedNameFields
             }
 
             QQC2.TextField {
-                visible: displayAdvancedNameFields
-                Kirigami.FormData.label: i18n("Nicknames:")
+                Kirigami.FormData.label: i18n("Nickname:")
+
                 onTextChanged: contactEditor.contact.nickName = text
                 text: contactEditor.contact.nickName
                 placeholderText: i18n("Alternative name")
+                visible: displayAdvancedNameFields
             }
+
 
             ColumnLayout {
                 id: phoneNumber
@@ -245,7 +258,7 @@ Kirigami.ScrollablePage {
                         }
                         QQC2.TextField {
                             id: phoneField
-                            text: model.display 
+                            text: model.display
                             inputMethodHints: Qt.ImhDialableCharactersOnly
                             Layout.fillWidth: true
                             onTextChanged: model.display = text
