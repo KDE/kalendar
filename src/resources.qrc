@@ -56,6 +56,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="TodoCheckBox.qml">contents/ui/Controls/TodoCheckBox.qml</file>
     <file alias="IncidenceInfoContents.qml">contents/ui/Controls/IncidenceInfoContents.qml</file>
     <file alias="IncidenceInfoPopup.qml">contents/ui/Controls/IncidenceInfoPopup.qml</file>
+    <file alias="CalendarAddressbookSidebar.qml">contents/ui/Controls/CalendarAddressbookSidebar.qml</file>
 
     <file alias="LocationMap.qml">contents/ui/Location/LocationMap.qml</file>
 
