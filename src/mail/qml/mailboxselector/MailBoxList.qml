@@ -34,46 +34,43 @@ ListView {
                 spacing: 0
                 width: ListView.view.width
 
-                Item {
-                    Layout.topMargin: Kirigami.Units.largeSpacing
-                    visible: (model.kDescendantLevel === 1) && (model.index !== 0)
-                }
-
-                QQC2.ItemDelegate {
+                Kirigami.BasicListItem {
                     id: categoryHeader
-                    Layout.fillWidth: true
-                    topPadding: Kirigami.Units.largeSpacing
-                    bottomPadding: Kirigami.Units.largeSpacing
-                    leftPadding: Kirigami.Units.largeSpacing * (model.kDescendantLevel)
 
-                    property string displayText: model.display
+                    Layout.fillWidth: true
+                    Layout.topMargin: Kirigami.Units.largeSpacing * 2
+
+                    bottomPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Settings.isMobile ?
+                        (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                        (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
+
+                    label: model.display
+                    highlighted: visualFocus
+                    hoverEnabled: false
+                    separatorVisible: false
+
+                    labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
+                    labelItem.font.weight: Font.DemiBold
+
+                    leading: Kirigami.Icon {
+                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                        isMask: true
+                        color: categoryHeader.labelItem.color
+                        source: "folder-symbolic"
+                    }
+                    leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+
+                    trailing: Kirigami.Icon {
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
+                        isMask: true
+                        color: categoryHeader.labelItem.color
+                    }
 
                     onClicked: mailList.model.toggleChildren(index)
-
-                    contentItem: RowLayout {
-                        Kirigami.Icon {
-                            Layout.alignment: Qt.AlignVCenter
-                            visible: model.kDescendantLevel > 1
-                            source: "folder-symbolic"
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                            Layout.preferredWidth: Layout.preferredHeight
-                        }
-
-                        QQC2.Label {
-                            Layout.fillWidth: true
-
-                            color: Kirigami.Theme.disabledTextColor
-                            text: categoryHeader.displayText
-                            font.weight: Font.DemiBold
-                            elide: Text.ElideRight
-                        }
-
-                        Kirigami.Icon {
-                            implicitWidth: Kirigami.Units.iconSizes.small
-                            implicitHeight: Kirigami.Units.iconSizes.small
-                            source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                        }
-                    }
                 }
             }
         }
