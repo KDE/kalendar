@@ -334,8 +334,11 @@ Kirigami.OverlayDrawer {
         Loader {
             Layout.fillWidth: true
             Layout.fillHeight: true
+
             active: true
             sourceComponent: mode === KalendarApplication.Mail ? mailView : calendarAddressBookComponent
+
+            z: -3
         }
 
         Component {

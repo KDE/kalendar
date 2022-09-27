@@ -13,13 +13,11 @@ import './mailboxselector'
 
 QQC2.ScrollView {
     id: folderListView
+
     implicitWidth: Kirigami.Units.gridUnit * 16
-    Layout.fillWidth: true
-    Layout.fillHeight: true
-    Layout.topMargin: Kirigami.Units.largeSpacing * 2
-    QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
     contentWidth: availableWidth
-    clip: true
+
+    QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
     contentItem: MailBoxList { }
 
