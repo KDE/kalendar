@@ -41,9 +41,7 @@ ListView {
                     Layout.topMargin: Kirigami.Units.largeSpacing * 2
 
                     bottomPadding: Kirigami.Units.largeSpacing
-                    leftPadding: Kirigami.Settings.isMobile ?
-                        (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
-                        (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
+                    leftPadding: Kirigami.Units.largeSpacing * (model.kDescendantLevel )
 
                     label: model.display
                     highlighted: visualFocus
@@ -126,7 +124,7 @@ ListView {
                 }
 
                 contentItem: RowLayout {
-                    spacing: Kirigami.Units.smallSpacing
+                    spacing: Kirigami.Units.largeSpacing
 
                     Kirigami.Icon {
                         Layout.alignment: Qt.AlignVCenter
