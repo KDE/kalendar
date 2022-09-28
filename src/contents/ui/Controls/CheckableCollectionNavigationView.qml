@@ -16,9 +16,9 @@ import org.kde.kitemmodels 1.0
 QQC2.ScrollView {
     id: root
 
-    signal calendarCheckChanged
+    signal collectionCheckChanged
     signal closeParentDrawer
-    signal deleteCalendar(int collectionId, var collectionDetails)
+    signal deleteCollection(int collectionId, var collectionDetails)
 
     readonly property AgentConfiguration agentConfiguration: AgentConfiguration {}
     readonly property var activeTags: Filter.tags
@@ -106,8 +106,9 @@ QQC2.ScrollView {
         }
 
         Kirigami.BasicListItem {
-            id: calendarHeadingItem
-            property bool expanded: Config.calendarsSectionExpanded
+            id: collectionHeadingItem
+
+            readonly property bool expanded: Config.collectionsSectionExpanded
 
             separatorVisible: false
             hoverEnabled: false
@@ -116,9 +117,13 @@ QQC2.ScrollView {
             leading: Kirigami.Icon {
                 implicitWidth: Kirigami.Units.iconSizes.smallMedium
                 implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                source: "view-calendar"
+                source: if (mode === KalendarApplication.Contact) {
+                    return "view-pim-contacts";
+                } else {
+                    return "view-calendar";
+                }
                 isMask: true
-                color: calendarHeadingItem.labelItem.color
+                color: collectionHeadingItem.labelItem.color
             }
             text: if (mode === KalendarApplication.Contact) {
                 return i18n("Contacts");
@@ -131,20 +136,20 @@ QQC2.ScrollView {
             trailing: Kirigami.Icon {
                 implicitWidth: Kirigami.Units.iconSizes.small
                 implicitHeight: Kirigami.Units.iconSizes.small
-                source: calendarHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
+                source: collectionHeadingItem.expanded ? 'arrow-up' : 'arrow-down'
                 isMask: true
-                color: calendarHeadingItem.labelItem.color
+                color: collectionHeadingItem.labelItem.color
             }
             onClicked: {
-                Config.calendarsSectionExpanded = !Config.calendarsSectionExpanded;
+                Config.collectionsSectionExpanded = !Config.collectionsSectionExpanded;
                 Config.save();
             }
         }
 
         Repeater {
-            id: calendarList
+            id: collectionList
 
-            property var calendarModel: KDescendantsProxyModel {
+            property var collectionModel: KDescendantsProxyModel {
                 model: switch(root.mode) {
                 case KalendarApplication.Todo:
                     return CalendarManager.todoCollections;
@@ -155,7 +160,7 @@ QQC2.ScrollView {
                 }
             }
 
-            model: calendarHeadingItem.expanded ? calendarModel : []
+            model: collectionHeadingItem.expanded ? collectionModel : []
 
             delegate: DelegateChooser {
                 role: 'kDescendantExpandable'
@@ -163,7 +168,7 @@ QQC2.ScrollView {
                     roleValue: true
 
                     Kirigami.BasicListItem {
-                        id: calendarSourceItem
+                        id: collectionSourceItem
                         label: display
                         highlighted: visualFocus || incidenceDropArea.containsDrag
                         labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
@@ -180,7 +185,7 @@ QQC2.ScrollView {
                         leading: Kirigami.Icon {
                             implicitWidth: Kirigami.Units.iconSizes.smallMedium
                             implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                            color: calendarSourceItem.labelItem.color
+                            color: collectionSourceItem.labelItem.color
                             isMask: true
                             source: model.decoration
                         }
@@ -214,25 +219,25 @@ QQC2.ScrollView {
                                 implicitWidth: Kirigami.Units.iconSizes.small
                                 implicitHeight: Kirigami.Units.iconSizes.small
                                 source: model.kDescendantExpanded ? 'arrow-up' : 'arrow-down'
-                                color: calendarSourceItem.labelItem.color
+                                color: collectionSourceItem.labelItem.color
                                 isMask: true
                             }
                             ColoredCheckbox {
-                                id: calendarCheckbox
+                                id: collectionCheckbox
 
                                 Layout.fillHeight: true
                                 visible: model.checkState != null
                                 color: model.collectionColor ?? Kirigami.Theme.highlightedTextColor
                                 checked: model.checkState === 2
-                                onCheckedChanged: root.calendarCheckChanged()
+                                onCheckedChanged: root.collectionCheckChanged()
                                 onClicked: {
                                     model.checkState = model.checkState === 0 ? 2 : 0
-                                    calendarCheckChanged()
+                                    root.collectionCheckChanged()
                                 }
                             }
                         }
 
-                        onClicked: calendarList.model.toggleChildren(index)
+                        onClicked: collectionList.model.toggleChildren(index)
 
                         CalendarItemTapHandler {
                             collectionId: model.collectionId
@@ -244,12 +249,12 @@ QQC2.ScrollView {
                         DropArea {
                             id: incidenceDropArea
                             property var collectionDetails: CalendarManager.getCollectionDetails(model.collectionId)
-                            parent: calendarSourceItem.contentItem // Otherwise label elide breaks
+                            parent: collectionSourceItem.contentItem // Otherwise label elide breaks
                             anchors.fill: parent
                             z: 9999
                             enabled: collectionDetails.canCreate
                             onDropped: if(drop.source.objectName === "taskDelegate") {
-                                CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarSourceItemMouseArea.collectionId);
+                                CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, model.collectionId);
 
                                 const pos = mapToItem(applicationWindow().contentItem, x, y);
                                 drop.source.caughtX = pos.x;
@@ -263,7 +268,7 @@ QQC2.ScrollView {
                 DelegateChoice {
                     roleValue: false
                     Kirigami.BasicListItem {
-                        id: calendarItem
+                        id: collectionItem
                         label: display
                         labelItem.color: Kirigami.Theme.textColor
                         leftPadding: Kirigami.Settings.isMobile ?
@@ -281,15 +286,15 @@ QQC2.ScrollView {
                         leadingPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
                         trailing: ColoredCheckbox {
-                            id: calendarCheckbox
+                            id: collectionCheckbox
 
                             visible: model.checkState != null
                             color: model.collectionColor
                             checked: model.checkState === 2
-                            onCheckedChanged: root.calendarCheckChanged()
+                            onCheckedChanged: root.collectionCheckChanged()
                             onClicked: {
                                 model.checkState = model.checkState === 0 ? 2 : 0
-                                calendarCheckChanged()
+                                root.collectionCheckChanged()
                             }
                         }
 
@@ -305,18 +310,18 @@ QQC2.ScrollView {
                             collectionDetails: CalendarManager.getCollectionDetails(collectionId)
                             agentConfiguration: root.agentConfiguration
                             enabled: mode !== KalendarApplication.Contact
-                            onDeleteCalendar: root.deleteCalendar(collectionId, collectionDetails)
+                            onDeleteCalendar: root.deleteCollection(collectionId, collectionDetails)
                         }
 
                         DropArea {
                             id: incidenceDropArea
                             property var collectionDetails: CalendarManager.getCollectionDetails(model.collectionId)
-                            parent: calendarItem.contentItem // Otherwise label elide breaks
+                            parent: collectionItem.contentItem // Otherwise label elide breaks
                             anchors.fill: parent
                             z: 9999
                             enabled: collectionDetails.canCreate
                             onDropped: if(drop.source.objectName === "taskDelegate") {
-                                CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, calendarItemMouseArea.collectionId);
+                                CalendarManager.changeIncidenceCollection(drop.source.incidencePtr, model.collectionId);
 
                                 const pos = mapToItem(applicationWindow().contentItem, x, y);
                                 drop.source.caughtX = pos.x;

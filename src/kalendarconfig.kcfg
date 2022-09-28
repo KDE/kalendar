@@ -61,11 +61,11 @@ SPDX-License-Identifier: LGPL-2.0-or-later
 
     <group name="MainDrawer">
         <entry name="tagsSectionExpanded" type="Bool">
-            <label>Whether the "Tags" section of the mainDrawer.is expanded.</label>
+            <label>Whether the "Tags" section of the mainDrawer is expanded.</label>
             <default>true</default>
         </entry>
-        <entry name="calendarsSectionExpanded" type="Bool">
-            <label>Whether the "Tags" section of the mainDrawer.is expanded.</label>
+        <entry name="collectionsSectionExpanded" type="Bool">
+            <label>Whether the "Calendar" or "Contacts" section of the mainDrawer is expanded.</label>
             <default>true</default>
         </entry>
     </group>

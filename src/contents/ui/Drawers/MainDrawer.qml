@@ -353,10 +353,10 @@ Kirigami.OverlayDrawer {
         Component {
             id: calendarAddressBookComponent
 
-            CalendarAddressbookSidebar {
-                onCalendarCheckChanged: mainDrawer.calendarCheckChanged()
+            CheckableCollectionNavigationView {
+                onCollectionCheckChanged: mainDrawer.collectionCheckChanged()
                 onCloseParentDrawer: mainDrawer.close()
-                onDeleteCalendar: mainDrawer.deleteCalendar(collectionId, collectionDetails)
+                onDeleteCollection: mainDrawer.deleteCollection(collectionId, collectionDetails)
 
                 mode: mainDrawer.mode
                 parentDrawerModal: mainDrawer.modal
@@ -394,7 +394,7 @@ Kirigami.OverlayDrawer {
         }
     }
 
-    function calendarCheckChanged() {
+    function collectionCheckChanged() {
         if (mode & (KalendarApplication.Event | KalendarApplication.Todo)) {
             CalendarManager.save();
         }
