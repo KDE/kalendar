@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2022 Carl Schwan <carl@carlschwan.eu>
+# SPDX-FileCopyrightText: (C) 2022 Claudio Cambra <claudio.cambra@gmail.com>
 # SPDX-License-Identifier: BSD-2-Clause
 
 {
