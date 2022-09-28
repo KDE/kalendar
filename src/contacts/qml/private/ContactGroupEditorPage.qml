@@ -78,6 +78,7 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: i18n("Name:")
                 text: contactGroupEditor.name
                 onTextChanged: contactGroupEditor.name = text;
+                placeholderText: i18n("Contact group name")
             }
 
             ColumnLayout {
