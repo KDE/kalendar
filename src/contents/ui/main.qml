@@ -485,7 +485,6 @@ Kirigami.ApplicationWindow {
 
     globalDrawer: MainDrawer {
         id: mainDrawer
-        bottomPadding: menuLoader.active ? menuLoader.height : 0
         mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
 
         onDeleteCalendar: {
