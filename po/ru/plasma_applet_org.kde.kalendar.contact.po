@@ -1,0 +1,149 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kalendar package.
+#
+# Alexander Yavorsky <kekcuha@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kalendar\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-08 00:46+0000\n"
+"PO-Revision-Date: 2022-08-13 15:32+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 22.04.3\n"
+
+#: package/contents/ui/ContactPage.qml:49
+#, kde-format
+msgid "Return to Contact List"
+msgstr "Вернуться к списку контактов"
+
+#: package/contents/ui/ContactPage.qml:56
+#: package/contents/ui/ContactPage.qml:57
+#: package/contents/ui/ContactPage.qml:244
+#, kde-format
+msgid "Call"
+msgstr "Вызвать"
+
+#: package/contents/ui/ContactPage.qml:69
+#: package/contents/ui/ContactPage.qml:101
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: package/contents/ui/ContactPage.qml:88
+#: package/contents/ui/ContactPage.qml:89
+#, kde-format
+msgid "Send SMS"
+msgstr "Отправить SMS"
+
+#: package/contents/ui/ContactPage.qml:119
+#: package/contents/ui/ContactPage.qml:120
+#: package/contents/ui/ContactPage.qml:214
+#, kde-format
+msgid "Send Email"
+msgstr "Отправить письмо"
+
+#: package/contents/ui/ContactPage.qml:128
+#: package/contents/ui/ContactPage.qml:129
+#, kde-format
+msgid "Show QR Code"
+msgstr "Показать QR-код"
+
+#: package/contents/ui/ContactPage.qml:159
+#, kde-format
+msgid "Nickname: %1"
+msgstr "Псевдоним: %1"
+
+#: package/contents/ui/ContactPage.qml:182
+#, kde-format
+msgid "Address"
+msgid_plural "Addresses"
+msgstr[0] "Адреса"
+msgstr[1] "Адреса"
+msgstr[2] "Адреса"
+msgstr[3] "Адрес"
+
+#: package/contents/ui/ContactPage.qml:193
+#, kde-format
+msgctxt "%1 is the type of the address, e.g. home, work, ..."
+msgid "%1:"
+msgstr "%1:"
+
+#: package/contents/ui/ContactPage.qml:202
+#, kde-format
+msgid "Email Address"
+msgid_plural "Email Addresses"
+msgstr[0] "Адреса электронной почты"
+msgstr[1] "Адреса электронной почты"
+msgstr[2] "Адреса электронной почты"
+msgstr[3] "Адрес электронной почты"
+
+#: package/contents/ui/ContactPage.qml:232
+#, kde-format
+msgid "Phone number"
+msgid_plural "Phone numbers"
+msgstr[0] "Номера телефонов"
+msgstr[1] "Номера телефонов"
+msgstr[2] "Номера телефонов"
+msgstr[3] "Номер телефона"
+
+#: package/contents/ui/ContactsPage.qml:16
+#, kde-format
+msgid "Contacts"
+msgstr "Контакты"
+
+#: package/contents/ui/main.qml:15 package/contents/ui/main.qml:31
+#, kde-format
+msgid "Contact"
+msgstr "Контакт"
+
+#: package/contents/ui/QrCodePage.qml:21 package/contents/ui/QrCodePage.qml:52
+#, kde-format
+msgid "QR Code"
+msgstr "QR-код"
+
+#: package/contents/ui/QrCodePage.qml:35
+#, kde-format
+msgid "Return to Contact"
+msgstr "Вернуться к контакту"
+
+#: package/contents/ui/QrCodePage.qml:53
+#, kde-format
+msgid "Data Matrix"
+msgstr "Data Matrix"
+
+#: package/contents/ui/QrCodePage.qml:54
+#, kde-format
+msgctxt "Aztec barcode"
+msgid "Aztec"
+msgstr "Aztec"
+
+#: package/contents/ui/QrCodePage.qml:79
+#, kde-format
+msgid "Change the QR code type"
+msgstr "Сменить тип QR-кода"
+
+#: package/contents/ui/QrCodePage.qml:103
+#, kde-format
+msgid "Creating QR code failed"
+msgstr "Не удалось создать QR-код"
+
+#: package/contents/ui/QrCodePage.qml:112
+#, kde-format
+msgid "The QR code is too large to be displayed"
+msgstr "QR-код слишком велик для показа."
+
+#~ msgid "Code 39"
+#~ msgstr "Код 39"
+
+#~ msgid "Code 93"
+#~ msgstr "Код 93"
+
+#~ msgid "Code 128"
+#~ msgstr "Код 128"

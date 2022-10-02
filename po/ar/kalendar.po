@@ -1,0 +1,2959 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kalendar package.
+#
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kalendar\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:48+0000\n"
+"PO-Revision-Date: 2022-09-28 18:26+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "زايد السعيدي"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "zayed.alsaidi@gmail.com"
+
+#: calendarmanager.cpp:523
+#, kde-format
+msgid "Move occurrence(s)"
+msgstr "انقل التكرار(ات)"
+
+#: calendarmanager.cpp:528
+#, kde-format
+msgid ""
+"Unable to add the exception item to the calendar. No change will be done."
+msgstr "تعذّرت إضافة عنصر الاستثناء إلى التقويم. لن يجري أيّ تغيير."
+
+#: calendarmanager.cpp:568
+#, kde-format
+msgid "Delete task and its sub-tasks"
+msgstr "احذف المهمة وتفريعاتها"
+
+#: calendarmanager.cpp:571
+#, kde-format
+msgid "Delete task and make sub-tasks independent"
+msgstr "احذف المهمة واجعل تفريعاتها مستقلة"
+
+#: calendarmanager.cpp:734
+#, kde-format
+msgctxt "@title:window"
+msgid "Properties of Calendar %1"
+msgstr "خصائص تقويم %1"
+
+#: contacts/autotests/emailmodeltest.cpp:36 contacts/emailmodel.cpp:44
+#: contacts/qml/private/ContactPage.qml:276
+#, kde-format
+msgid "Home:"
+msgstr "المنزل:"
+
+#: contacts/contactgroupeditor.cpp:233
+#, kde-format
+msgid "No address book selected"
+msgstr "لم يُحدّد دفتر عناوين"
+
+#: contacts/contactgroupmodel.cpp:185
+#, kde-format
+msgid "The member with name <b>%1</b> is missing an email address"
+msgstr "الرّقم بالاسم <b>%1</b> ينقصه عنوان بريد إلكترونيّ"
+
+#: contacts/contactgroupmodel.cpp:228
+#, kde-format
+msgid "Contact does not exist any more"
+msgstr "لم يعد المتراسل موجودًا"
+
+#: contacts/contactgroupmodel.cpp:347
+#, kde-format
+msgctxt "contact's name"
+msgid "Name"
+msgstr "الاسم"
+
+#: contacts/contactgroupmodel.cpp:349
+#, kde-format
+msgctxt "contact's email address"
+msgid "EMail"
+msgstr "البريد الإلكترونيّ"
+
+#: contacts/contactmanager.cpp:176
+#, kde-format
+msgctxt "@title:window"
+msgid "Properties of Address Book %1"
+msgstr "خصائص دفتر العناوين %1"
+
+#: contacts/emailmodel.cpp:38
+#, kde-format
+msgid "Both:"
+msgstr "كليهما:"
+
+#: contacts/emailmodel.cpp:41
+#, kde-format
+msgid "Work:"
+msgstr "العمل:"
+
+#: contacts/emailmodel.cpp:46
+#, kde-format
+msgid "Other:"
+msgstr "أخرى:"
+
+#: contacts/qml/AddressBookCollectionHandler.qml:34
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose Address Book Color"
+msgstr "اختر لون دفتر العناوين"
+
+#: contacts/qml/ContactChooserPage.qml:22
+#, kde-format
+msgid "Done"
+msgstr "تمّ"
+
+#: contacts/qml/ContactChooserPage.qml:52
+#, kde-format
+msgid "Select Email Address"
+msgstr "اختر عنوان بريد إلكتروني"
+
+#: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
+#: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
+#: contents/ui/main.qml:450
+#, kde-format
+msgid "Contacts"
+msgstr "المتراسلون"
+
+#: contacts/qml/ContactView.qml:79
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit contact…"
+msgstr "حرّر المتراسل..."
+
+#: contacts/qml/ContactView.qml:94
+#: contacts/qml/private/DeleteContactAction.qml:16
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete contact"
+msgstr "احذف المتراسل"
+
+#: contacts/qml/ContactView.qml:112 contacts/qml/private/ContactsPage.qml:48
+#, kde-format
+msgid "No contacts"
+msgstr "بدون متراسلين"
+
+#: contacts/qml/private/AddressBookMenu.qml:24
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit address book…"
+msgstr "حرر دفتر العناوين…"
+
+#: contacts/qml/private/AddressBookMenu.qml:29
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Update address book"
+msgstr "حدّث دفتر العناوين"
+
+#: contacts/qml/private/AddressBookMenu.qml:34
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete address book"
+msgstr "أأحذف دفتر العناوين؟"
+
+#: contacts/qml/private/AddressBookMenu.qml:42
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Set address book colour…"
+msgstr "عين لون دفتر العناوين…"
+
+#: contacts/qml/private/AddressBookMenu.qml:54
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Address book source settings…"
+msgstr "إعدادات مصدر مصدر العناوين…"
+
+#: contacts/qml/private/AddressBookMenu.qml:60
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Update address book source"
+msgstr "حدث مصدر دفتر العناوين"
+
+#: contacts/qml/private/AddressBookMenu.qml:66
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete address source"
+msgstr "احذف مصدر العنوان"
+
+#: contacts/qml/private/ContactEditorPage.qml:53
+#, kde-format
+msgid "Add Contact"
+msgstr "أضف مراسلا"
+
+#: contacts/qml/private/ContactEditorPage.qml:55
+#, kde-format
+msgid "Edit Contact"
+msgstr "حرّر المتراسل"
+
+#: contacts/qml/private/ContactEditorPage.qml:93
+#, kde-format
+msgid "Address book:"
+msgstr "دفتر العناوين:"
+
+#: contacts/qml/private/ContactEditorPage.qml:144
+#: contacts/qml/private/ContactGroupEditorPage.qml:78
+#: contacts/qml/private/ContactPage.qml:164
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:934
+#, kde-format
+msgid "Name:"
+msgstr "الاسم:"
+
+#: contacts/qml/private/ContactEditorPage.qml:151
+#, kde-format
+msgid "Contact name"
+msgstr "اسم المتراسل"
+
+#: contacts/qml/private/ContactEditorPage.qml:162
+#, kde-format
+msgid "Honorific prefix:"
+msgstr "اللواحق التّشريفيّة:"
+
+#: contacts/qml/private/ContactEditorPage.qml:165
+#, kde-format
+msgid "Miss"
+msgstr "الآنسة"
+
+#: contacts/qml/private/ContactEditorPage.qml:165
+#, kde-format
+msgid "Mr."
+msgstr "السّيّد"
+
+#: contacts/qml/private/ContactEditorPage.qml:165
+#, kde-format
+msgid "Mrs."
+msgstr "السّيّدة"
+
+#: contacts/qml/private/ContactEditorPage.qml:165
+#, kde-format
+msgid "Ms."
+msgstr "الفاضلة"
+
+#: contacts/qml/private/ContactEditorPage.qml:165
+#, kde-format
+msgid "Prof."
+msgstr "البروفيسور"
+
+#: contacts/qml/private/ContactEditorPage.qml:174
+#, kde-format
+msgid "Given name:"
+msgstr "الاسم المُعطى:"
+
+#: contacts/qml/private/ContactEditorPage.qml:178
+#, kde-format
+msgid "First name or chosen name"
+msgstr "الاسم الأول أو اسم مختار"
+
+#: contacts/qml/private/ContactEditorPage.qml:183
+#, kde-format
+msgid "Additional name:"
+msgstr "أسماء إضافيّة:"
+
+#: contacts/qml/private/ContactEditorPage.qml:187
+#, kde-format
+msgid "Middle name or other name"
+msgstr "الاسم الأوسط أو اسم آخر"
+
+#: contacts/qml/private/ContactEditorPage.qml:192
+#, kde-format
+msgid "Family name:"
+msgstr "اسم العائلة:"
+
+#: contacts/qml/private/ContactEditorPage.qml:196
+#, kde-format
+msgid "Surname or last name"
+msgstr "اسم العائلة أو أخر اسم"
+
+#: contacts/qml/private/ContactEditorPage.qml:201
+#, kde-format
+msgid "Honorific suffix:"
+msgstr "اللواحق التّشريفيّة:"
+
+#: contacts/qml/private/ContactEditorPage.qml:206
+#, kde-format
+msgid "II"
+msgstr "الثّاني"
+
+#: contacts/qml/private/ContactEditorPage.qml:206
+#, kde-format
+msgid "III"
+msgstr "الثّالث"
+
+#: contacts/qml/private/ContactEditorPage.qml:206
+#, kde-format
+msgid "Jr."
+msgstr "الابن"
+
+#: contacts/qml/private/ContactEditorPage.qml:206
+#, kde-format
+msgid "Sr."
+msgstr "الأبّ"
+
+#: contacts/qml/private/ContactEditorPage.qml:213
+#: contacts/qml/private/ContactPage.qml:170
+#, kde-format
+msgid "Nickname:"
+msgstr "الاسم المستعار:"
+
+#: contacts/qml/private/ContactEditorPage.qml:217
+#, kde-format
+msgid "Alternative name"
+msgstr "اسم بديل"
+
+#: contacts/qml/private/ContactEditorPage.qml:225
+#, kde-format
+msgid "Phone:"
+msgstr "الهاتف:"
+
+#: contacts/qml/private/ContactEditorPage.qml:236
+#: contacts/qml/private/ContactEditorPage.qml:280
+#: contacts/qml/private/ContactEditorPage.qml:341
+#: contacts/qml/private/ContactEditorPage.qml:380
+#, kde-format
+msgid "Home"
+msgstr "المنزل"
+
+#: contacts/qml/private/ContactEditorPage.qml:237
+#: contacts/qml/private/ContactEditorPage.qml:281
+#: contacts/qml/private/ContactEditorPage.qml:342
+#: contacts/qml/private/ContactEditorPage.qml:381
+#, kde-format
+msgid "Work"
+msgstr "العمل"
+
+#: contacts/qml/private/ContactEditorPage.qml:238
+#: contacts/qml/private/ContactEditorPage.qml:282
+#, kde-format
+msgid "Messaging"
+msgstr "إرسال الرّسائل"
+
+#: contacts/qml/private/ContactEditorPage.qml:239
+#: contacts/qml/private/ContactEditorPage.qml:283
+#, kde-format
+msgid "Voice"
+msgstr "الصّوت"
+
+#: contacts/qml/private/ContactEditorPage.qml:240
+#: contacts/qml/private/ContactEditorPage.qml:284
+#, kde-format
+msgid "Fax"
+msgstr "فاكس"
+
+#: contacts/qml/private/ContactEditorPage.qml:241
+#: contacts/qml/private/ContactEditorPage.qml:285
+#, kde-format
+msgid "Cell"
+msgstr "خلية"
+
+#: contacts/qml/private/ContactEditorPage.qml:242
+#: contacts/qml/private/ContactEditorPage.qml:286
+#, kde-format
+msgid "Video"
+msgstr "فيديو"
+
+#: contacts/qml/private/ContactEditorPage.qml:243
+#: contacts/qml/private/ContactEditorPage.qml:287
+#, kde-format
+msgid "Mailbox"
+msgstr "صندوق البريد"
+
+#: contacts/qml/private/ContactEditorPage.qml:244
+#: contacts/qml/private/ContactEditorPage.qml:288
+#, kde-format
+msgid "Modem"
+msgstr "المودم"
+
+#: contacts/qml/private/ContactEditorPage.qml:245
+#: contacts/qml/private/ContactEditorPage.qml:289
+#, kde-format
+msgid "Car"
+msgstr "السيارة"
+
+#: contacts/qml/private/ContactEditorPage.qml:246
+#: contacts/qml/private/ContactEditorPage.qml:290
+#, kde-format
+msgid "ISDN"
+msgstr "ISDN"
+
+#: contacts/qml/private/ContactEditorPage.qml:247
+#: contacts/qml/private/ContactEditorPage.qml:291
+#, kde-format
+msgid "PCS"
+msgstr "PCS"
+
+#: contacts/qml/private/ContactEditorPage.qml:248
+#: contacts/qml/private/ContactEditorPage.qml:292
+#, kde-format
+msgid "Pager"
+msgstr "المنادي"
+
+#: contacts/qml/private/ContactEditorPage.qml:249
+#, kde-format
+msgid "Undefined"
+msgstr "غير معرّف"
+
+#: contacts/qml/private/ContactEditorPage.qml:304
+#, kde-format
+msgid "+33 7 55 23 68 67"
+msgstr "+33 7 55 23 68 67"
+
+#: contacts/qml/private/ContactEditorPage.qml:325
+#, kde-format
+msgid "E-mail:"
+msgstr "البريد الإلكترونيّ:"
+
+#: contacts/qml/private/ContactEditorPage.qml:343
+#, kde-format
+msgid "Other"
+msgstr "أخرى"
+
+#: contacts/qml/private/ContactEditorPage.qml:364
+#, kde-format
+msgid "Remove email"
+msgstr "أزِل البريد الإلكترونيّ"
+
+#: contacts/qml/private/ContactEditorPage.qml:382
+#, kde-format
+msgid "Both"
+msgstr "كليهما"
+
+#: contacts/qml/private/ContactEditorPage.qml:383
+#, kde-format
+msgid "Other…"
+msgstr "الآخرين..."
+
+#: contacts/qml/private/ContactEditorPage.qml:392
+#, kde-format
+msgid "user@example.org"
+msgstr "user@example.org"
+
+#: contacts/qml/private/ContactEditorPage.qml:401
+#, kde-format
+msgid "Add email"
+msgstr "أضف بريدًا إلكترونيًّا"
+
+#: contacts/qml/private/ContactEditorPage.qml:505
+#: contacts/qml/private/ContactGroupEditorPage.qml:155
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
+#, kde-format
+msgid "Save"
+msgstr "احفظ"
+
+#: contacts/qml/private/ContactEditorPage.qml:505
+#: contacts/qml/private/ContactGroupEditorPage.qml:155
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
+#, kde-format
+msgid "Add"
+msgstr "أضف"
+
+#: contacts/qml/private/ContactEditorPage.qml:549
+#: contacts/qml/private/ContactGroupEditorPage.qml:199
+#, kde-format
+msgid "Current changes"
+msgstr "التّغييرات الحاليّة"
+
+#: contacts/qml/private/ContactEditorPage.qml:554
+#: contacts/qml/private/ContactGroupEditorPage.qml:204
+#, kde-format
+msgid "External changes"
+msgstr "التغييرات الخارجية"
+
+#: contacts/qml/private/ContactGroupEditorPage.qml:62
+#, kde-format
+msgid "Address Book:"
+msgstr "دفتر العناوين:"
+
+#: contacts/qml/private/ContactGroupEditorPage.qml:81
+#, kde-format
+msgid "Contact group name"
+msgstr "اسم مجموعة المتراسلين"
+
+#: contacts/qml/private/ContactGroupEditorPage.qml:85
+#: contacts/qml/private/ContactGroupEditorPage.qml:109
+#, kde-format
+msgid "Members:"
+msgstr "الأعضاء:"
+
+#: contacts/qml/private/ContactGroupPage.qml:36
+#: contents/ui/Controls/IncidenceMouseArea.qml:66
+#: contents/ui/Drawers/IncidenceInfoDrawer.qml:91
+#, kde-format
+msgid "Edit"
+msgstr "حرّر"
+
+#: contacts/qml/private/ContactPage.qml:36
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr "حرّر"
+
+#: contacts/qml/private/ContactPage.qml:46
+#: contacts/qml/private/DeleteContactAction.qml:59
+#: contents/ui/Dialogs/DeleteCalendarPage.qml:71
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:114
+#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
+#: contents/ui/main.qml:874
+#, kde-format
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: contacts/qml/private/ContactPage.qml:96
+#, kde-format
+msgid "Call"
+msgstr "الاتصال"
+
+#: contacts/qml/private/ContactPage.qml:107
+#, kde-format
+msgid "Select number to call"
+msgstr "اختر رقما للاتصال به"
+
+#: contacts/qml/private/ContactPage.qml:115
+#, kde-format
+msgid "Send SMS"
+msgstr "أرسل رسالة نصية قصيرة"
+
+#: contacts/qml/private/ContactPage.qml:126
+#, kde-format
+msgid "Select number to send message to"
+msgstr "اختر رقماً لإرسال الرسالة إليه"
+
+#: contacts/qml/private/ContactPage.qml:134
+#, kde-format
+msgid "Send email"
+msgstr "أرسِل بريدًا إلكترونيًا"
+
+#: contacts/qml/private/ContactPage.qml:140
+#, kde-format
+msgid "Show QR Code"
+msgstr "أظهر صورة QR"
+
+#: contacts/qml/private/ContactPage.qml:158
+#, kde-format
+msgid "Contact information"
+msgstr "معلومات المتراسل"
+
+#: contacts/qml/private/ContactPage.qml:178
+#, kde-format
+msgid "Blog Feed:"
+msgstr "تغذية المدوّنة:"
+
+#: contacts/qml/private/ContactPage.qml:192
+#, kde-format
+msgid "Personal information"
+msgstr "المعلومات الشخصية"
+
+#: contacts/qml/private/ContactPage.qml:204
+#, kde-format
+msgid "Birthday:"
+msgstr "عيد الميلاد:"
+
+#: contacts/qml/private/ContactPage.qml:216
+#, kde-format
+msgid "Anniversary:"
+msgstr "السنويّة:"
+
+#: contacts/qml/private/ContactPage.qml:223
+#, kde-format
+msgid "Partner's name:"
+msgstr "اسم الشّريك:"
+
+#: contacts/qml/private/ContactPage.qml:235
+#, kde-format
+msgid "Phone Number"
+msgid_plural "Phone Numbers"
+msgstr[0] "رقم الهاتف:"
+msgstr[1] "رقم الهاتف"
+msgstr[2] "رقمي الهاتف"
+msgstr[3] "أرقام الهاتف"
+msgstr[4] "أرقام الهاتف"
+msgstr[5] "أرقام الهاتف"
+
+#: contacts/qml/private/ContactPage.qml:245
+#, kde-format
+msgctxt "Label for a phone number type"
+msgid "%1:"
+msgstr "‏%1:"
+
+#: contacts/qml/private/ContactPage.qml:267
+#, kde-format
+msgid "Address"
+msgid_plural "Addresses"
+msgstr[0] "العنوان"
+msgstr[1] "العنوان"
+msgstr[2] "العنوانيين"
+msgstr[3] "العناوين"
+msgstr[4] "العناوين"
+msgstr[5] "العناوين"
+
+#: contacts/qml/private/ContactPage.qml:276
+#, kde-format
+msgctxt "%1 is the type of the address, e.g. home, work, ..."
+msgid "%1:"
+msgstr "‏%1:"
+
+#: contacts/qml/private/ContactPage.qml:290
+#, kde-format
+msgid "Business Information"
+msgstr "معلومات العمل"
+
+#: contacts/qml/private/ContactPage.qml:297
+#, kde-format
+msgid "Organization:"
+msgstr "المنظّمة:"
+
+#: contacts/qml/private/ContactPage.qml:304
+#, kde-format
+msgid "Profession:"
+msgstr "المهنة:"
+
+#: contacts/qml/private/ContactPage.qml:311
+#, kde-format
+msgid "Title:"
+msgstr "العنوان:"
+
+#: contacts/qml/private/ContactPage.qml:318
+#, kde-format
+msgid "Department:"
+msgstr "القسم:"
+
+#: contacts/qml/private/ContactPage.qml:325
+#, kde-format
+msgid "Office:"
+msgstr "المكتب:"
+
+#: contacts/qml/private/ContactPage.qml:332
+#, kde-format
+msgid "Manager's name:"
+msgstr "اسم المدير:"
+
+#: contacts/qml/private/ContactPage.qml:339
+#, kde-format
+msgid "Assistants's name:"
+msgstr "اسم المساعد:"
+
+#: contacts/qml/private/ContactPage.qml:351
+#, kde-format
+msgid "Email Address"
+msgid_plural "Email Addresses"
+msgstr[0] "عنوان البريد الإلكترونيّ"
+msgstr[1] "عنوان البريد الإلكتروني"
+msgstr[2] "اختر عنوان بريد إلكتروني"
+msgstr[3] "اختر عنوان بريد إلكتروني"
+msgstr[4] "اختر عنوان بريد إلكتروني"
+msgstr[5] "اختر عنوان بريد إلكتروني"
+
+#: contacts/qml/private/DeleteContactAction.qml:42
+#, kde-format
+msgid "You won't be able to revert this action"
+msgstr "لن تتمكن من التراجع عن هذا الإجراء"
+
+#: contacts/qml/private/DeleteContactAction.qml:63
+#, kde-format
+msgid "Delete contact"
+msgstr "احذف المتراسل"
+
+#: contacts/qml/private/QrCodePage.qml:15
+#, kde-format
+msgid "QR Code"
+msgstr "رمز QR"
+
+#: contacts/qml/private/QrCodePage.qml:27
+#, kde-format
+msgid "Creating QR code failed"
+msgstr "فشل إنشاء باركود"
+
+#: contents/ui/Bars/FilterHeaderBar.qml:41
+#, kde-format
+msgid "Filtering by tags"
+msgstr "ترشيح بواسطة الوسوم"
+
+#: contents/ui/Bars/FilterHeaderBar.qml:42
+#, kde-format
+msgid "All Tasks"
+msgstr "كل المهام"
+
+#: contents/ui/Bars/FilterHeaderBar.qml:86
+#, kde-format
+msgid "Remove filtering tag"
+msgstr "أزل ترشيح الوسم"
+
+#: contents/ui/Controls/CalendarItemTapHandler.qml:36
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose Calendar Color"
+msgstr "اختر لون التقويم"
+
+#: contents/ui/Controls/CheckableCollectionNavigationView.qml:63
+#, kde-format
+msgid "Tags"
+msgstr "الوسوم"
+
+#: contents/ui/Controls/CheckableCollectionNavigationView.qml:131
+#: contents/ui/Settings/CalendarSettingsPage.qml:14
+#: contents/ui/Settings/SettingsPage.qml:24
+#: contents/ui/Settings/SourceSettingsPage.qml:18
+#, kde-format
+msgid "Calendars"
+msgstr "التقاويم"
+
+#: contents/ui/Controls/DateControls/DatePicker.qml:138
+#, kde-format
+msgctxt "%1 is month name, %2 is year"
+msgid "%1 %2"
+msgstr "%1 %2"
+
+#: contents/ui/Controls/DateControls/DatePicker.qml:182
+#, kde-format
+msgid "Days"
+msgstr "الأيام"
+
+#: contents/ui/Controls/DateControls/DatePicker.qml:190
+#, kde-format
+msgid "Months"
+msgstr "الأشهر"
+
+#: contents/ui/Controls/DateControls/DatePicker.qml:196
+#, kde-format
+msgid "Years"
+msgstr "السنوات"
+
+#: contents/ui/Controls/DateControls/TimePicker.qml:50
+#, kde-format
+msgid "Min. Interval:"
+msgstr "الفترة الدنيا:"
+
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:417
+#: kalendarapplication.cpp:279
+#, kde-format
+msgid "New Event…"
+msgstr "حدث جديد..."
+
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:423
+#: kalendarapplication.cpp:286
+#, kde-format
+msgid "New Task…"
+msgstr "مهمة جديدة…"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:133
+#, kde-format
+msgctxt "%1 is a percentage number"
+msgid "<b>%1%</b> Complete"
+msgstr "<b>%1٪</b>اكتمل"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:163
+#, kde-format
+msgid "<b>Calendar:</b>"
+msgstr "<b>التقويم:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:175
+#, kde-format
+msgid "<b>Tags:</b>"
+msgstr "<b>الوسوم:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:188
+#, kde-format
+msgid "Remove %1 tag"
+msgstr "أزل الوسم %1"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:200
+#, kde-format
+msgid "<b>Date:</b>"
+msgstr "<b>التاريخ:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:227
+#, kde-format
+msgid "<b>Time:</b>"
+msgstr "<b>الوقت:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:254
+#, kde-format
+msgid "<b>Duration:</b>"
+msgstr "<b>المدّة:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:268
+#, kde-format
+msgid "<b>Priority level:</b>"
+msgstr "<b>مستوى الأولويّة:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:280
+#, kde-format
+msgid "<b>Completed:</b>"
+msgstr "<b>اكتملت:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:300
+#, kde-format
+msgid "<b>Recurrence:</b>"
+msgstr "<b>التكرار:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:323
+#, kde-format
+msgid "Except on:"
+msgstr "باستثناء في:"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:353
+#, kde-format
+msgid "<b>Location:</b>"
+msgstr "<b>المكان:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:410
+#, kde-format
+msgid "Unable to find location."
+msgstr "تعذر العثور على الموقع."
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:445
+#, kde-format
+msgid "<b>Description:</b>"
+msgstr "<b>الوصف:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:461
+#, kde-format
+msgid "<b>Attachment:</b>"
+msgid_plural "<b>Attachments:</b>"
+msgstr[0] "<b>المرفقات:</b>"
+msgstr[1] "<b>المرفق:</b>"
+msgstr[2] "<b>المرفقان:</b>"
+msgstr[3] "<b>المرفقات:</b>"
+msgstr[4] "<b>المرفقات:</b>"
+msgstr[5] "<b>المرفقات:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:486
+#, kde-format
+msgid "<b>Reminders:</b>"
+msgstr "<b>التذكيرات:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:511
+#, kde-format
+msgid "<b>Organizer:</b>"
+msgstr "<b>المنظّم:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:528
+#, kde-format
+msgid "<b>Google Meet:</b>"
+msgstr "<b>غوغل مييت:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:540
+#, kde-format
+msgid "<b>Guests:</b>"
+msgstr "<b>الضيوف:</b>"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:574
+#, kde-format
+msgid "Super-task"
+msgstr "المهمة العامة"
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:599
+#, kde-format
+msgid "Sub-task"
+msgid_plural "Sub-tasks"
+msgstr[0] "مهمة فرعية"
+msgstr[1] "مهمة فرعية"
+msgstr[2] "مهمتين فرعية"
+msgstr[3] "مهام فرعية"
+msgstr[4] "مهمة فرعية"
+msgstr[5] "مهمة فرعية"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:61
+#, kde-format
+msgid "View"
+msgstr "العرض"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:72
+#: contents/ui/Dialogs/DeleteCalendarPage.qml:22
+#: contents/ui/Dialogs/DeleteCalendarPage.qml:65
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:28
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:108
+#: contents/ui/Drawers/IncidenceInfoDrawer.qml:97
+#: quick/qml/AgentConfigurationForm.qml:50
+#, kde-format
+msgid "Delete"
+msgstr "احذف"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:81
+#, kde-format
+msgid "Mark Task as Incomplete"
+msgstr "علّمه المهمة غير مكتملة"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:81
+#, kde-format
+msgid "Mark Task as Complete"
+msgstr "علّمه المهمة مكتملة"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:88
+#: contents/ui/Drawers/IncidenceInfoDrawer.qml:69
+#, kde-format
+msgid "Add Sub-Task"
+msgstr "أضف مهمة فرعية"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:99
+#, kde-format
+msgid "Set priority..."
+msgstr "عين الأولوية…"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:112
+#: contents/ui/Controls/IncidenceMouseArea.qml:184
+#, kde-format
+msgid "None"
+msgstr "بلا"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:117
+#, kde-format
+msgid "1 (highest priority)"
+msgstr "١ (أولوية قصوى)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:122
+#, kde-format
+msgid "2 (mid-high priority)"
+msgstr "٢ (أولوية مرتفعة-متوسطة)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:127
+#, kde-format
+msgid "3 (mid-high priority)"
+msgstr "٣ (أولوية مرتفعة-متوسطة)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:132
+#, kde-format
+msgid "4 (mid-high priority)"
+msgstr "٤ (أولوية مرتفعة-متوسطة)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:137
+#, kde-format
+msgid "5 (medium priority)"
+msgstr "٥ (أولوية متوسطة)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:142
+#, kde-format
+msgid "6 (mid-low priority)"
+msgstr "٦ (أولوية متوسطة-منخفضة)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:147
+#, kde-format
+msgid "7 (mid-low priority)"
+msgstr "٧ (أولوية متوسطة-منخفضة)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:152
+#, kde-format
+msgid "8 (mid-low priority)"
+msgstr "٨ (أولوية متوسطة-منخفضة)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:157
+#, kde-format
+msgid "9 (lowest priority)"
+msgstr "٩ (أولوية دنيا)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:163
+#, kde-format
+msgid "Set due date..."
+msgstr "عيّن تاريخ الاستحقاق..."
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:191
+#, kde-format
+msgid "Today (%1)"
+msgstr "اليوم (%1)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:202
+#, kde-format
+msgid "Tomorrow (%1)"
+msgstr "الغد (%1)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:212
+#, kde-format
+msgid "In a week (%1)"
+msgstr "في أسبوع (%1)"
+
+#: contents/ui/Controls/IncidenceMouseArea.qml:223
+#, kde-format
+msgid "In a month (%1)"
+msgstr "في شهر (%1)"
+
+#: contents/ui/Controls/Tag.qml:111
+#, kde-format
+msgid "Remove Tag"
+msgstr "أزل الوسم"
+
+#: contents/ui/Controls/TitleDateButton.qml:27
+#: contents/ui/Controls/TitleDateButton.qml:32
+#, kde-format
+msgctxt "%1 is month name, %2 is year"
+msgid "<b>%1</b> %2"
+msgstr "<b>%1</b> %2"
+
+#: contents/ui/Controls/TitleDateButton.qml:35
+#, kde-format
+msgctxt ""
+"%1 is the month and year of the range start, %2 is the same for range end"
+msgid "%1 - %2"
+msgstr "%1 - %2"
+
+#: contents/ui/Controls/TitleDateButton.qml:37
+#, kde-format
+msgctxt "%1 is month of range start, %2 is month + year of range end"
+msgid "<b>%1</b> - %2"
+msgstr "<b>%1</b> - %2"
+
+#: contents/ui/Delegates/ViewTitleDelegate.qml:31
+#, kde-format
+msgid "Expand Main Drawer"
+msgstr "وسع الدرج الرئيسي"
+
+#: contents/ui/Delegates/ViewTitleDelegate.qml:31
+#, kde-format
+msgid "Collapse Main Drawer"
+msgstr "اطوِ الدرج الرئيسي"
+
+#: contents/ui/Dialogs/CollectionPickerPage.qml:20
+#, kde-format
+msgid "Choose a Task Calendar"
+msgstr "اختر تقويم المهام"
+
+#: contents/ui/Dialogs/CollectionPickerPage.qml:22
+#, kde-format
+msgid "Choose a Calendar"
+msgstr "اختر تقويم"
+
+#: contents/ui/Dialogs/CollectionPickerPage.qml:24
+#, kde-format
+msgid "Choose an Address Book"
+msgstr "اختر دفتر العناوين"
+
+#: contents/ui/Dialogs/DeleteCalendarPage.qml:22
+#, kde-format
+msgid "Delete calendar"
+msgstr "احذف التّقويم"
+
+#: contents/ui/Dialogs/DeleteCalendarPage.qml:49
+#, kde-format
+msgid "Do you want to delete calendar: \"%1\"?"
+msgstr "أمتأكّد من حذف هذا التّقويم: \"%1\"؟"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:27
+#, kde-format
+msgctxt "%1 is the type of the incidence (e.g event, todo, journal entry)"
+msgid "Delete %1"
+msgstr "احذف %1"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:58
+#, kde-format
+msgid "Do you want to delete item: \"%1\"?"
+msgstr "هل تريد حذف العنصر: \"%1\"؟"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:60
+#, kde-format
+msgid ""
+"Item \"%1\" has sub-items. Do you want to delete all related items, or just "
+"the currently selected item?"
+msgstr ""
+"يملك العنصر : \"%1\" عناصر فرعية. هل تريد أن تحذف كل العناصر المتعلقة أم "
+"العنصر المحدد حاليا؟"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:62
+#, kde-format
+msgid ""
+"The calendar item \"%1\" recurs over multiple dates. This item also has sub-"
+"items.\n"
+"\n"
+"Do you want to delete the selected occurrence on %2, also future "
+"occurrences, or all of its occurrences?\n"
+"\n"
+"Deleting all will also delete sub-items!"
+msgstr ""
+"يتكرر عنصر التقويم \"%1\" خلال تواريخ متعددة. يحتوي هذا العنصر أيضًا على "
+"عناصر فرعية. \n"
+" \n"
+"هل تريد حذف التكرار المحدد على %2 ، أم أيضاً التكرارات المستقبلية ، أم كل "
+"تكراره؟ \n"
+" \n"
+"سيؤدي حذف الكل إلى حذف العناصر الفرعية أيضًا!"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:64
+#, kde-format
+msgid ""
+"The calendar item \"%1\" recurs over multiple dates. Do you want to delete "
+"the selected occurrence on %2, also future occurrences, or all of its "
+"occurrences?"
+msgstr ""
+"يتكرر عنصر التقويم \"%1\" خلال تواريخ متعددة. هل تريد حذف التكرار المحدد على "
+"%2، أم أيضًا التكرارات المستقبلية ، أم كل تكراراته؟"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:80
+#, kde-format
+msgid "Only Delete Current"
+msgstr "احذف الحالي فقط"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:87
+#, kde-format
+msgid "Also Delete Future"
+msgstr "احذف الحدوثات المستقبلية أيضًا"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:101
+#, kde-format
+msgid "Delete Only This"
+msgstr "احذف هذه فقط"
+
+#: contents/ui/Dialogs/DeleteIncidencePage.qml:108
+#, kde-format
+msgid "Delete All"
+msgstr "احذف الكل"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:41
+#, kde-format
+msgctxt "%1 is incidence type"
+msgid "Edit %1"
+msgstr "حرّر %1"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:42
+#, kde-format
+msgctxt "%1 is incidence type"
+msgid "Add %1"
+msgstr "أضف %1"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#, kde-format
+msgid "Invalid dates provided."
+msgstr "التواريخ المقدمة غير صحيحة."
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#, kde-format
+msgid "End date cannot be before start date."
+msgstr "لا يمكن أن يكون تاريخ الانتهاء قبل تاريخ البدء."
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:139
+#, kde-format
+msgid "Calendar:"
+msgstr "التقويم:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:160
+#, kde-format
+msgid "Summary:"
+msgstr "الملخّص:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:171
+#, kde-format
+msgid "Completion:"
+msgstr "الاكتمال:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:190
+#, kde-format
+msgid "Priority:"
+msgstr "الأولويّة:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:198
+#, kde-format
+msgid "Unassigned"
+msgstr "غير معينة"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:199
+#, kde-format
+msgid "1 (Highest Priority)"
+msgstr "١ (أولوية قصوى)"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:200
+#, kde-format
+msgid "2"
+msgstr "٢"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:201
+#, kde-format
+msgid "3"
+msgstr "٣"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:202
+#, kde-format
+msgid "4"
+msgstr "٤"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:203
+#, kde-format
+msgid "5 (Medium Priority)"
+msgstr "٥ (أولوية متوسطة)"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
+#, kde-format
+msgid "6"
+msgstr "٦"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:205
+#, kde-format
+msgid "7"
+msgstr "٧"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:206
+#, kde-format
+msgid "8"
+msgstr "٨"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:207
+#, kde-format
+msgid "9 (Lowest Priority)"
+msgstr "٩ (أولوية دنيا)"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
+#, kde-format
+msgid "All day"
+msgstr "طول اليوم"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:252
+#, kde-format
+msgid "Start:"
+msgstr "البدء:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#, kde-format
+msgid "Due:"
+msgstr "الاستحقاق:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#, kde-format
+msgid "End:"
+msgstr "الانتهاء:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:346
+#, kde-format
+msgid "Timezone:"
+msgstr "المنطقة الزمنية:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:365
+#, kde-format
+msgid "Repeat:"
+msgstr "كرّر:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:395
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
+#: contents/ui/KalendarUtils/labelutils.js:106
+#, kde-format
+msgid "Never"
+msgstr "أبدًا"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:396
+#, kde-format
+msgid "Daily"
+msgstr "يوميّا"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:397
+#, kde-format
+msgid "Weekly"
+msgstr "أسبوعيّا"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:398
+#, kde-format
+msgid "Monthly"
+msgstr "شهريّا"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:399
+#, kde-format
+msgid "Yearly"
+msgstr "سنويّا"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
+msgid "Custom"
+msgstr "مخصّص"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:431
+#, kde-format
+msgid "Every:"
+msgstr "كلّ:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:478
+#, kde-format
+msgid "day"
+msgid_plural "days"
+msgstr[0] "يوم"
+msgstr[1] "يوم"
+msgstr[2] "يومين"
+msgstr[3] "أيام"
+msgstr[4] "يوماً"
+msgstr[5] "يوم"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:479
+#, kde-format
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] "أسبوع"
+msgstr[1] "أسبوع"
+msgstr[2] "أسبوعين"
+msgstr[3] "أسابيع"
+msgstr[4] "أسبوعًا"
+msgstr[5] "أسبوع"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:480
+#, kde-format
+msgid "month"
+msgid_plural "months"
+msgstr[0] "شهر"
+msgstr[1] "شهر"
+msgstr[2] "شهرين"
+msgstr[3] "أشهر"
+msgstr[4] "شهرًا"
+msgstr[5] "شهر"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:481
+#, kde-format
+msgid "year"
+msgid_plural "years"
+msgstr[0] "سنة"
+msgstr[1] "سنة"
+msgstr[2] "سنتين"
+msgstr[3] "سنوات"
+msgstr[4] "سنة"
+msgstr[5] "سنة"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:551
+#, kde-format
+msgid "On:"
+msgstr "في:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:559
+#, kde-format
+msgctxt "%1 is the day number of month"
+msgid "The %1 of each month"
+msgstr "الـ%1 من كل شهر"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:571
+#, kde-format
+msgctxt "the weekOfMonth dayOfWeekString of each month"
+msgid "The %1 %2 of each month"
+msgstr "%2 ال%1 من كل شهر"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:582
+#, kde-format
+msgid "Ends:"
+msgstr "ينتهي:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
+#, kde-format
+msgid "On"
+msgstr "في"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:598
+#, kde-format
+msgid "After"
+msgstr "بعد"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:634
+#, kde-format
+msgid "occurrence"
+msgid_plural "occurrences"
+msgstr[0] "تكرار"
+msgstr[1] "تكرار واحد"
+msgstr[2] "تكرارين"
+msgstr[3] "تكرارات"
+msgstr[4] "تكراراً"
+msgstr[5] "تكرار"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:640
+#, kde-format
+msgid "Exceptions:"
+msgstr "الاستثناءات:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:646
+#, kde-format
+msgid "Add Recurrence Exception"
+msgstr "أضف استثناء للتكرار"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:689
+#, kde-format
+msgid "Location:"
+msgstr "المكان:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:698
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:774
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:941
+#, kde-format
+msgid "Optional"
+msgstr "اختياري"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:737
+#, kde-format
+msgid "Show map"
+msgstr "أظهر الخريطة"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:768
+#, kde-format
+msgid "Description:"
+msgstr "الوصف:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:789
+#, kde-format
+msgid "Tags:"
+msgstr "الوسوم:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:798
+#: models/todosortfilterproxymodel.cpp:153
+#, kde-format
+msgctxt "List separator"
+msgid ", "
+msgstr "، "
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#, kde-format
+msgid "Tap to set tags…"
+msgstr "اطرق لتعين وسم…"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#, kde-format
+msgid "Click to set tags…"
+msgstr "انقر لتعين وسم…"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:816
+#, kde-format
+msgid "Manage tags…"
+msgstr "أدِر الوسوم…"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
+#, kde-format
+msgid "Reminders:"
+msgstr "التذكيرات:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:885
+#, kde-format
+msgid "Add Reminder"
+msgstr "أضف تذكيراً"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
+#, kde-format
+msgid "Attendees:"
+msgstr "الحضور:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:959
+#, kde-format
+msgid "Email:"
+msgstr "البريد الإلكترونيّ:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:966
+#, kde-format
+msgid "Required"
+msgstr "مطلوب"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:975
+#, kde-format
+msgid "Status:"
+msgstr "الحالة:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
+#, kde-format
+msgid "Request RSVP"
+msgstr "اطلب الرجاء الرد"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#, kde-format
+msgid "Add Attendee"
+msgstr "أضف حضور"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1024
+#, kde-format
+msgid "Choose from Contacts"
+msgstr "اختر من المتراسلين"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
+#, kde-format
+msgid "Fill in Manually"
+msgstr "اكتب الحضور يدويا"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
+#, kde-format
+msgid "Attachments:"
+msgstr "المرفقات:"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1065
+#, kde-format
+msgid "Add Attachment"
+msgstr "أضف مرفقًا"
+
+#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
+#, kde-format
+msgid "Change incidence date"
+msgstr "غيّر تاريخ الحدوث"
+
+#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:47
+#, kde-format
+msgid ""
+"The item you are trying to change is a recurring item. Should the changes be "
+"applied only to this single occurrence, also to future items, or to all "
+"items in the recurrence?"
+msgstr ""
+"العنصر الذي تحاول تغييره هو عنصر يتكرّر. أيجب أن تُطبّق التغييرات على هذا "
+"الحدوث فقط، أو على العناصر المستقبليّة أيضًا، أو على كل العناصر في التكرار؟"
+
+#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:62
+#, kde-format
+msgid "Only This Item"
+msgstr "هذا العنصر فقط"
+
+#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:70
+#, kde-format
+msgid "Also Future Items"
+msgstr "العناصر المستقبليّة أيضًا"
+
+#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:78
+#, kde-format
+msgid "All Occurrences"
+msgstr "كل التكرارات"
+
+#: contents/ui/Dialogs/TagManagerPage.qml:13
+#, kde-format
+msgid "Manage Tags"
+msgstr "أدِر الوسوم"
+
+#: contents/ui/Dialogs/TagManagerPage.qml:17
+#, kde-format
+msgid "Delete Tag"
+msgstr "احذف الوسم"
+
+#: contents/ui/Dialogs/TagManagerPage.qml:25
+#, kde-format
+msgid "Are you sure you want to delete tag \"%1\"?"
+msgstr "أمتأكّد من حذف الوسم \"%1\"؟"
+
+#: contents/ui/Dialogs/TagManagerPage.qml:110
+#, kde-format
+msgid "Create a New Tag…"
+msgstr "أنشئ وسمًا جديدًا…"
+
+#: contents/ui/Dialogs/TagManagerPage.qml:134
+#, kde-format
+msgid "Quickly Add a New Tag."
+msgstr "أضف وسماً جديداً بسرعة."
+
+#: contents/ui/Drawers/IncidenceInfoDrawer.qml:82
+#, kde-format
+msgid "Mark Incomplete"
+msgstr "علّمه غير مكتمل"
+
+#: contents/ui/Drawers/IncidenceInfoDrawer.qml:82
+#, kde-format
+msgid "Mark Complete"
+msgstr "علّمه مكتمل"
+
+#: contents/ui/Drawers/MainDrawer.qml:84
+#, kde-format
+msgid "Kalendar"
+msgstr "التقويم"
+
+#: contents/ui/Drawers/MainDrawer.qml:128
+#: contents/ui/Drawers/MainDrawer.qml:269
+#, kde-format
+msgid "Undo: "
+msgstr "تراجع: "
+
+#: contents/ui/Drawers/MainDrawer.qml:136
+#: contents/ui/Drawers/MainDrawer.qml:274
+#, kde-format
+msgid "Redo: "
+msgstr "كرّر: "
+
+#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:347
+#, kde-format
+msgid "Configure"
+msgstr "اضبط"
+
+#: contents/ui/Drawers/MainDrawer.qml:269
+#, kde-format
+msgid "Undo"
+msgstr "تراجع"
+
+#: contents/ui/Drawers/MainDrawer.qml:274
+#, kde-format
+msgid "Redo"
+msgstr "كرّر"
+
+#: contents/ui/Drawers/MainDrawer.qml:285
+#, kde-format
+msgid "Settings"
+msgstr "إعدادات"
+
+#: contents/ui/Drawers/MainDrawer.qml:385
+#, kde-format
+msgid "View all tasks"
+msgstr "اعرض كل المهام"
+
+#: contents/ui/KalendarUtils/labelutils.js:33
+#, kde-format
+msgctxt "%1 is 2 or more"
+msgid "%1 days"
+msgstr "%1 يوم"
+
+#: contents/ui/KalendarUtils/labelutils.js:35
+#, kde-format
+msgid "1 day"
+msgstr "يوم واحد"
+
+#: contents/ui/KalendarUtils/labelutils.js:37
+#, kde-format
+msgctxt "%1 is 2 or mores"
+msgid "%1 hours"
+msgstr "%1 ساعة"
+
+#: contents/ui/KalendarUtils/labelutils.js:39
+#, kde-format
+msgid "1 hour"
+msgstr "ساعة واحدة"
+
+#: contents/ui/KalendarUtils/labelutils.js:41
+#, kde-format
+msgid "%1 minutes"
+msgstr "%1 دقيقة"
+
+#: contents/ui/KalendarUtils/labelutils.js:45
+#, kde-format
+msgid "%1 before start of event"
+msgstr "%1 قبل بدء الحدث"
+
+#: contents/ui/KalendarUtils/labelutils.js:47
+#, kde-format
+msgid "%1 after start of event"
+msgstr "%1 بعد بدء الحدث"
+
+#: contents/ui/KalendarUtils/labelutils.js:49
+#, kde-format
+msgid "On event start"
+msgstr "عند بدء الحدث"
+
+#: contents/ui/KalendarUtils/labelutils.js:54
+#, kde-format
+msgid "Every week"
+msgid_plural "Every %1 weeks"
+msgstr[0] "كل أسبوع"
+msgstr[1] "كل أسبوع"
+msgstr[2] "كل أسبوعين"
+msgstr[3] "كل %1 أسابيع"
+msgstr[4] "كل %1 أسبوعاً"
+msgstr[5] "كل %1 أسبوع"
+
+#: contents/ui/KalendarUtils/labelutils.js:57
+#, kde-format
+msgid "Every week on"
+msgid_plural "Every %1 weeks on"
+msgstr[0] "كل أسبوع عند"
+msgstr[1] "كل أسبوع عند"
+msgstr[2] "كل أسبوعين عند"
+msgstr[3] "كل %1 أسابيع عند"
+msgstr[4] "كل %1 أسبوعاً عند"
+msgstr[5] "كل %1 أسبوع عند"
+
+#: contents/ui/KalendarUtils/labelutils.js:90
+#: contents/ui/KalendarUtils/labelutils.js:129
+#, kde-format
+msgid "Every year on the %2 of %3"
+msgid_plural "Every %1 years on the %2 of %3"
+msgstr[0] "كل سنة في %2 من %3"
+msgstr[1] "كل سنة في %2 من %3"
+msgstr[2] "كل سنتين في %2 من %3"
+msgstr[3] "كل %1 سنوات في %2 من %3"
+msgstr[4] "كل %1 سنة في %2 من %3"
+msgstr[5] "كل %1 سنة في %2 من %3"
+
+#: contents/ui/KalendarUtils/labelutils.js:109
+#, kde-format
+msgid "Every minute"
+msgid_plural "Every %1 minutes"
+msgstr[0] "كلّ دقيقة"
+msgstr[1] "كلّ دقيقة"
+msgstr[2] "كلّ دقيقتين"
+msgstr[3] "كلّ %1دقائق"
+msgstr[4] "كلّ %1دقيقة"
+msgstr[5] "كلّ %1دقيقة"
+
+#: contents/ui/KalendarUtils/labelutils.js:112
+#, kde-format
+msgid "Every hour"
+msgid_plural "Every %1 hours"
+msgstr[0] "كل ساعة"
+msgstr[1] "كل ساعة"
+msgstr[2] "كلّ ساعتين"
+msgstr[3] "كلّ %1 ساعات"
+msgstr[4] "كلّ %1 ساعة"
+msgstr[5] "كلّ %1 ساعة"
+
+#: contents/ui/KalendarUtils/labelutils.js:115
+#, kde-format
+msgid "Every day"
+msgid_plural "Every %1 days"
+msgstr[0] "كل يوم"
+msgstr[1] "يومياً"
+msgstr[2] "كل يومين"
+msgstr[3] "كل %1 أيام"
+msgstr[4] "كل %1 يوماً"
+msgstr[5] "كل %1 يوم"
+
+#: contents/ui/KalendarUtils/labelutils.js:121
+#: contents/ui/KalendarUtils/labelutils.js:125
+#, kde-format
+msgid "Every month on the %2"
+msgid_plural "Every %1 months on the %2"
+msgstr[0] "كل شهر في %2"
+msgstr[1] "كل شهر في %2"
+msgstr[2] "كل شهرين في %2"
+msgstr[3] "كل %1 أشهر في %2"
+msgstr[4] "كل %1 شهراً في %2"
+msgstr[5] "كل %1 شهر في %2"
+
+#: contents/ui/KalendarUtils/labelutils.js:133
+#, kde-format
+msgid "Every year on the %2 day of the year"
+msgid_plural "Every %1 years on the %2 day of the year"
+msgstr[0] "كل سنة في اليوم %2 من السنة"
+msgstr[1] "كل سنة في اليوم %2 من السنة"
+msgstr[2] "كل سنتين في اليوم %2 من السنة"
+msgstr[3] "كل %1 سنوات في اليوم %2 من السنة"
+msgstr[4] "كل %1 سنة في اليوم %2 من السنة"
+msgstr[5] "كل %1 سنة في اليوم %2 من السنة"
+
+#: contents/ui/KalendarUtils/labelutils.js:139
+#, kde-format
+msgid "Complex recurrence rule"
+msgstr "قاعدة تكرار معقدة"
+
+#: contents/ui/KalendarUtils/labelutils.js:142
+#, kde-format
+msgid "Unknown"
+msgstr "مجهول"
+
+#: contents/ui/KalendarUtils/labelutils.js:150
+#, kde-format
+msgid "Never ends"
+msgstr "لا تنتهي"
+
+#: contents/ui/KalendarUtils/labelutils.js:152
+#, kde-format
+msgid "Ends on %1"
+msgstr "تنتهي في %1"
+
+#: contents/ui/KalendarUtils/labelutils.js:154
+#, kde-format
+msgid "Ends after %1 occurrences"
+msgstr "ينتهي بعد %1 تكرار"
+
+#: contents/ui/KalendarUtils/labelutils.js:213
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Highest priority)"
+msgstr "%1 (أولوية قصوى)"
+
+#: contents/ui/KalendarUtils/labelutils.js:215
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Mid-high priority)"
+msgstr "%1 (أولوية مرتفعة-متوسطة)"
+
+#: contents/ui/KalendarUtils/labelutils.js:217
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Medium priority)"
+msgstr "%1 (أولوية متوسطة)"
+
+#: contents/ui/KalendarUtils/labelutils.js:219
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Mid-low priority)"
+msgstr "%1 (أولوية متوسطة-منخفضة)"
+
+#: contents/ui/KalendarUtils/labelutils.js:221
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Lowest priority)"
+msgstr "%1 (أولوية دنيا)"
+
+#: contents/ui/KalendarUtils/labelutils.js:223
+#, kde-format
+msgid "No set priority level"
+msgstr "لم تعين الأولوية"
+
+#: contents/ui/Location/LocationMap.qml:51
+#, kde-format
+msgid "Return to Location"
+msgstr "ارجع للموقع"
+
+#: contents/ui/main.qml:315
+#, kde-format
+msgctxt "%1 is a number"
+msgid "%1 incidences were imported successfully."
+msgstr "نجح استيراد %1 حدوثات."
+
+#: contents/ui/main.qml:318 contents/ui/main.qml:333
+#, kde-format
+msgctxt "%1 is the error message"
+msgid "An error occurred importing incidences: %1"
+msgstr "حدث خطأ في استيراد حدوثات: %1"
+
+#: contents/ui/main.qml:330
+#, kde-format
+msgid "New calendar  created from imported file successfully."
+msgstr "نحج في إنشاء تقويم من الملف المستورد."
+
+#: contents/ui/main.qml:412 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/MainViews/TodoView.qml:53
+#, kde-format
+msgid "Create"
+msgstr "أنشئ"
+
+#: contents/ui/main.qml:432
+#, kde-format
+msgid "Month"
+msgstr "الشهر"
+
+#: contents/ui/main.qml:435
+#, kde-format
+msgid "Week"
+msgstr "الأسبوع"
+
+#: contents/ui/main.qml:438
+#, kde-format
+msgid "3 Days"
+msgstr "٣ الأيام"
+
+#: contents/ui/main.qml:441
+#, kde-format
+msgid "Day"
+msgstr "اليوم"
+
+#: contents/ui/main.qml:444
+#, kde-format
+msgid "Schedule"
+msgstr "الجدولة"
+
+#: contents/ui/main.qml:447 contents/ui/main.qml:1130
+#, kde-format
+msgid "Tasks"
+msgstr "المهامّ"
+
+#: contents/ui/main.qml:453 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
+#, kde-format
+msgid "Mail"
+msgstr "البريد"
+
+#: contents/ui/main.qml:813
+#, kde-format
+msgid "Import a calendar"
+msgstr "استيراد التقويم"
+
+#: contents/ui/main.qml:833
+#, kde-format
+msgid "Import Calendar"
+msgstr "استيراد التقويم"
+
+#: contents/ui/main.qml:841
+#, kde-format
+msgid ""
+"Would you like to merge this calendar file's events and tasks into one of "
+"your existing calendars, or would prefer to create a new calendar from this "
+"file?\n"
+" "
+msgstr ""
+"هل ترغب في دمج أحداث ومهام ملف التقويم هذا في أحد التقويمات الموجودة لديك، "
+"أم تفضل إنشاء تقويم جديد من هذا الملف؟ \n"
+" "
+
+#: contents/ui/main.qml:849
+#, kde-format
+msgid "Merge with existing calendar"
+msgstr "ادمج بالتقويم الموجود"
+
+#: contents/ui/main.qml:865
+#, kde-format
+msgid "Create new calendar"
+msgstr "أنشئ تقويمًا جديداً"
+
+#: contents/ui/main.qml:1071
+#, kde-format
+msgctxt "@action:inmenu open week view"
+msgid "Week"
+msgstr "الأسبوع"
+
+#: contents/ui/main.qml:1077
+#, kde-format
+msgctxt "@action:inmenu open 3 days view"
+msgid "3 Days"
+msgstr "٣ الأيام"
+
+#: contents/ui/main.qml:1083
+#, kde-format
+msgctxt "@action:inmenu open day view"
+msgid "Day"
+msgstr "اليوم"
+
+#: contents/ui/main.qml:1125
+#, kde-format
+msgid "Expand MainDrawer"
+msgstr "وسع الدرج الرئيسي"
+
+#: contents/ui/main.qml:1125
+#, kde-format
+msgid "Collapse MainDrawer"
+msgstr "اطوِ الدرج الرئيسي"
+
+#: contents/ui/MainViews/DayGridView.qml:193
+#, kde-format
+msgid "<b>Today</b>"
+msgstr "<b>اليوم</b>"
+
+#: contents/ui/MainViews/HourlyView.qml:108
+#, kde-format
+msgid "Previous Week"
+msgstr "الأسبوع السابق"
+
+#: contents/ui/MainViews/HourlyView.qml:115
+#, kde-format
+msgid "Next Week"
+msgstr "الأسبوع القادم"
+
+#: contents/ui/MainViews/HourlyView.qml:122
+#, kde-format
+msgid "Now"
+msgstr "الآن"
+
+#: contents/ui/MainViews/HourlyView.qml:406
+#, kde-format
+msgctxt "@action:button"
+msgid "Reset"
+msgstr "صفّر"
+
+#: contents/ui/MainViews/HourlyView.qml:419
+#, kde-format
+msgid "All day or Multi day"
+msgstr "كامل اليوم أو عدة أيام"
+
+#: contents/ui/MainViews/MonthView.qml:64
+#: contents/ui/MainViews/ScheduleView.qml:124
+#, kde-format
+msgid "Previous Month"
+msgstr "الشهر الماضي"
+
+#: contents/ui/MainViews/MonthView.qml:71
+#: contents/ui/MainViews/ScheduleView.qml:131
+#, kde-format
+msgid "Next Month"
+msgstr "الشهر القادم"
+
+#: contents/ui/MainViews/MonthView.qml:78
+#: contents/ui/MainViews/ScheduleView.qml:138
+#: contents/ui/MainViews/TodoTreeView.qml:72
+#: models/todosortfilterproxymodel.cpp:181
+#, kde-format
+msgid "Today"
+msgstr "اليوم"
+
+#: contents/ui/MainViews/ScheduleView.qml:388
+#, kde-format
+msgctxt "Date has no events or tasks set"
+msgid "Clear day."
+msgstr "امسح اليوم"
+
+#: contents/ui/MainViews/ScheduleView.qml:407
+#, kde-format
+msgid "Tap"
+msgstr "طَرق"
+
+#: contents/ui/MainViews/ScheduleView.qml:407
+#, kde-format
+msgid "Click"
+msgstr "نقر"
+
+#: contents/ui/MainViews/ScheduleView.qml:408
+#, kde-format
+msgid "Nothing on the books today. %1 to add something."
+msgstr "لا يوجد شيئا في الدفاتر اليوم. %1 لتضيف شيء."
+
+#: contents/ui/MainViews/ScheduleView.qml:526
+#, kde-format
+msgctxt "%1 is the name of the event"
+msgid "%1 (Day %2 of %3)"
+msgstr "%1 (اليوم %2 من %3)"
+
+#: contents/ui/MainViews/ScheduleView.qml:582
+#, kde-format
+msgid "Runs all day"
+msgstr "شغال بطول اليوم"
+
+#: contents/ui/MainViews/ScheduleView.qml:586
+#, kde-format
+msgctxt "Displays times between incidence start and end"
+msgid "%1 - %2"
+msgstr "%1 - %2"
+
+#: contents/ui/MainViews/ScheduleView.qml:589
+#, kde-format
+msgid "Starts at %1"
+msgstr "يبدأ في %1"
+
+#: contents/ui/MainViews/ScheduleView.qml:591
+#, kde-format
+msgid "Ends at %1"
+msgstr "ينتهي في %1"
+
+#: contents/ui/MainViews/ScheduleView.qml:593
+#, kde-format
+msgid "Runs All Day"
+msgstr "شغال بطول اليوم"
+
+#: contents/ui/MainViews/TodoTreeView.qml:71
+#: models/todosortfilterproxymodel.cpp:175
+#, kde-format
+msgid "Overdue"
+msgstr "تأخّرت"
+
+#: contents/ui/MainViews/TodoTreeView.qml:77
+#, kde-format
+msgid "Priority %1"
+msgstr "الأولويّة %1"
+
+#: contents/ui/MainViews/TodoTreeView.qml:77
+#, kde-format
+msgid "No set priority"
+msgstr "لم تعين الأولوية"
+
+#: contents/ui/MainViews/TodoTreeView.qml:104
+#, kde-format
+msgid "No task calendars enabled."
+msgstr "لم يمكن أي تقويم مهام."
+
+#: contents/ui/MainViews/TodoTreeView.qml:111
+#, kde-format
+msgid "Calendar is not enabled"
+msgstr "لم يمكّن التقويم"
+
+#: contents/ui/MainViews/TodoTreeView.qml:114
+#, kde-format
+msgid "Enable"
+msgstr "مكّن"
+
+#: contents/ui/MainViews/TodoTreeView.qml:123
+#, kde-format
+msgid "No tasks completed"
+msgstr "لا توجد مهام مكتملة"
+
+#: contents/ui/MainViews/TodoTreeView.qml:123
+#, kde-format
+msgid "No tasks left to complete"
+msgstr "لم يعد هناك مهام"
+
+#: contents/ui/MainViews/TodoView.qml:58 kalendarapplication.cpp:30
+#: kalendarapplication.cpp:33
+#, kde-format
+msgid "Sort"
+msgstr "افرز"
+
+#: contents/ui/MainViews/TodoView.qml:92
+#, kde-format
+msgid "Show Completed"
+msgstr "اعرض المكتملة"
+
+#: contents/ui/MainViews/TodoView.qml:100
+#, kde-format
+msgid "Completed Tasks in %1"
+msgstr "المهام المكتملة في %1"
+
+#: contents/ui/MainViews/TodoView.qml:100
+#, kde-format
+msgid "Completed Tasks"
+msgstr "المهام المكتملة"
+
+#: contents/ui/MainViews/TodoView.qml:148
+#, kde-format
+msgid "Create a New Task…"
+msgstr "أنشئ مهمة جديدة…"
+
+#: contents/ui/MainViews/TodoView.qml:189
+#: contents/ui/MainViews/TodoView.qml:190
+#, kde-format
+msgid "Quickly Add a New Task."
+msgstr "أضف مهمة جديدة بسرعة."
+
+#: contents/ui/Menus/CalendarItemMenu.qml:24
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit calendar…"
+msgstr "حرر التّقويم…"
+
+#: contents/ui/Menus/CalendarItemMenu.qml:29
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Update calendar"
+msgstr "حدّث التّقويم"
+
+#: contents/ui/Menus/CalendarItemMenu.qml:34
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete calendar"
+msgstr "احذف التّقويم"
+
+#: contents/ui/Menus/CalendarItemMenu.qml:42
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Set calendar colour…"
+msgstr "عين لون التقويم…"
+
+#: contents/ui/Menus/CalendarItemMenu.qml:54
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Calendar source settings…"
+msgstr "إعدادات مصدر التقويم…"
+
+#: contents/ui/Menus/CalendarItemMenu.qml:60
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Update calendar source"
+msgstr "حدث مصدر التقويم"
+
+#: contents/ui/Menus/CalendarItemMenu.qml:66
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete calendar source"
+msgstr "احذف مصدر التقويم"
+
+#: contents/ui/Menus/EditMenu.qml:28
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Undo"
+msgstr "تراجع"
+
+#: contents/ui/Menus/EditMenu.qml:38
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Redo"
+msgstr "كرّر"
+
+#: contents/ui/Menus/EditMenu.qml:51 contents/ui/Menus/WindowMenu.qml:79
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Cut"
+msgstr "قصّ"
+
+#: contents/ui/Menus/EditMenu.qml:61 contents/ui/Menus/WindowMenu.qml:88
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Copy"
+msgstr "انسخ"
+
+#: contents/ui/Menus/EditMenu.qml:71 contents/ui/Menus/WindowMenu.qml:97
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Paste"
+msgstr "ألصق"
+
+#: contents/ui/Menus/EditMenu.qml:81 contents/ui/Menus/WindowMenu.qml:106
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Delete"
+msgstr "احذف"
+
+#: contents/ui/Menus/EditMenu.qml:94 contents/ui/Menus/WindowMenu.qml:118
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Select All"
+msgstr "حدّد الكل"
+
+#: contents/ui/Menus/GlobalMenu.qml:19 contents/ui/Menus/WindowMenu.qml:17
+#, kde-format
+msgctxt "@action:menu"
+msgid "File"
+msgstr "ملف"
+
+#: contents/ui/Menus/GlobalMenu.qml:26 contents/ui/Menus/WindowMenu.qml:24
+#, kde-format
+msgctxt "@action:menu"
+msgid "Quit Kalendar"
+msgstr "أنه التقويم"
+
+#: contents/ui/Menus/GlobalMenu.qml:34 contents/ui/Menus/WindowMenu.qml:32
+#, kde-format
+msgctxt "@action:menu"
+msgid "Edit"
+msgstr "حرّر"
+
+#: contents/ui/Menus/GlobalMenu.qml:46 contents/ui/Menus/WindowMenu.qml:126
+#, kde-format
+msgctxt "@action:menu"
+msgid "View"
+msgstr "العرض"
+
+#: contents/ui/Menus/GlobalMenu.qml:84
+#, kde-format
+msgctxt "@action:menu"
+msgid "Sort Tasks"
+msgstr "افرز المهامّ"
+
+#: contents/ui/Menus/GlobalMenu.qml:131 contents/ui/Menus/WindowMenu.qml:202
+#, kde-format
+msgctxt "@action:menu"
+msgid "Go"
+msgstr "انتقل"
+
+#: contents/ui/Menus/GlobalMenu.qml:155 contents/ui/Menus/WindowMenu.qml:226
+#, kde-format
+msgctxt "@action:menu"
+msgid "Create"
+msgstr "أنشئ"
+
+#: contents/ui/Menus/GlobalMenu.qml:166 contents/ui/Menus/WindowMenu.qml:236
+#, kde-format
+msgctxt "@action:menu"
+msgid "Window"
+msgstr "النافذة"
+
+#: contents/ui/Menus/GlobalMenu.qml:169 contents/ui/Menus/WindowMenu.qml:239
+#, kde-format
+msgctxt "@action:menu"
+msgid "Exit Full Screen"
+msgstr "أنهِ ملء الشاشة"
+
+#: contents/ui/Menus/GlobalMenu.qml:169 contents/ui/Menus/WindowMenu.qml:239
+#, kde-format
+msgctxt "@action:menu"
+msgid "Enter Full Screen"
+msgstr "ادخل ملء الشاشة"
+
+#: contents/ui/Menus/GlobalMenu.qml:176 contents/ui/Menus/WindowMenu.qml:246
+#, kde-format
+msgctxt "@action:menu"
+msgid "Settings"
+msgstr "إعدادات"
+
+#: contents/ui/Menus/GlobalMenu.qml:195 contents/ui/Menus/WindowMenu.qml:268
+#, kde-format
+msgctxt "@action:menu"
+msgid "Help"
+msgstr "مساعدة"
+
+#: contents/ui/Menus/GlobalMenu.qml:203 contents/ui/Menus/WindowMenu.qml:276
+#, kde-format
+msgctxt "@action:menu"
+msgid "Kalendar Handbook"
+msgstr "كتيب التقويم"
+
+#: contents/ui/Menus/WindowMenu.qml:58
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Undo Text"
+msgstr "تراجع عن النص"
+
+#: contents/ui/Menus/WindowMenu.qml:67
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Redo Text"
+msgstr "أعِد النص"
+
+#: contents/ui/Menus/WindowMenu.qml:158
+#, kde-format
+msgid "Sort Tasks"
+msgstr "افرز المهامّ"
+
+#: contents/ui/Settings/CalendarSettingsPage.qml:138
+#, kde-format
+msgid "Change Calendar Color…"
+msgstr "غير لون التقويم…"
+
+#: contents/ui/Settings/CalendarSettingsPage.qml:148
+#, kde-format
+msgid "Choose Calendar Color"
+msgstr "اختر لون التقويم"
+
+#: contents/ui/Settings/GeneralSettingsPage.qml:11
+#, kde-format
+msgid "General"
+msgstr "عامّ"
+
+#: contents/ui/Settings/GeneralSettingsPage.qml:17
+#: contents/ui/Settings/ViewSettingsPage.qml:229
+#, kde-format
+msgid "Maps"
+msgstr "الخرائط"
+
+#: contents/ui/Settings/GeneralSettingsPage.qml:20
+#, kde-format
+msgid "Enable maps:"
+msgstr "مكن الخرائط:"
+
+#: contents/ui/Settings/GeneralSettingsPage.qml:32
+#: contents/ui/Settings/ViewSettingsPage.qml:242
+#, kde-format
+msgid "May cause crashing on some systems."
+msgstr "قد يتسبب في تعطل بعض الأنظمة."
+
+#: contents/ui/Settings/GeneralSettingsPage.qml:45
+#, kde-format
+msgid "Location marker:"
+msgstr "مُعَلِم الموقع:"
+
+#: contents/ui/Settings/GeneralSettingsPage.qml:50
+#: contents/ui/Settings/ViewSettingsPage.qml:261
+#, kde-format
+msgid "Circle (shows area of location)"
+msgstr "دائرة (تعرض مساحة الموقع)"
+
+#: contents/ui/Settings/GeneralSettingsPage.qml:56
+#: contents/ui/Settings/ViewSettingsPage.qml:268
+#, kde-format
+msgid "Pin (shows exact location)"
+msgstr "دبوس (تعرض الموقع بالضبط)"
+
+#: contents/ui/Settings/SettingsPage.qml:14
+#: contents/ui/Settings/ViewSettingsPage.qml:12
+#, kde-format
+msgid "Appearance"
+msgstr "المظهر"
+
+#: contents/ui/Settings/SettingsPage.qml:19
+#: contents/ui/Settings/SourceSettingsPage.qml:13
+#, kde-format
+msgid "Accounts"
+msgstr "الحسابات"
+
+#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:210
+#, kde-format
+msgid "About Kalendar"
+msgstr "عن التقويم"
+
+#: contents/ui/Settings/SourceSettingsPage.qml:19
+#, kde-format
+msgid "Add New Calendar Source…"
+msgstr "أضف مصدر تقويم جديد…"
+
+#: contents/ui/Settings/SourceSettingsPage.qml:26
+#, kde-format
+msgid "Contact Books"
+msgstr "دفاتر المتراسلون"
+
+#: contents/ui/Settings/SourceSettingsPage.qml:27
+#, kde-format
+msgid "Add New Address Book Source…"
+msgstr "أضف مصدر دفتر العناوين جديد…"
+
+#: contents/ui/Settings/SourceSettingsPage.qml:36
+#, kde-format
+msgid "Mail Accounts"
+msgstr "حسابات بريد"
+
+#: contents/ui/Settings/SourceSettingsPage.qml:37
+#, kde-format
+msgid "Add New mail account…"
+msgstr "أضف حساباً بريدياً جديداً…"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:21
+#, kde-format
+msgid "General settings"
+msgstr "إعدادات عامّة"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:25
+#, kde-format
+msgid "Use popup to show incidence information"
+msgstr "استخدم المنبثقة لإظهار معلومات الحدوث"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:36
+#, kde-format
+msgid "Show sub-tasks in calendar views"
+msgstr "أظهر المهام الفرعية في عرض التقويم"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:48
+#, kde-format
+msgid "Past event transparency:"
+msgstr "شفافية الأحداث الفائتة:"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:73
+#, kde-format
+msgid "Month View settings"
+msgstr "إعدادات عرض الشهر"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:84
+#, kde-format
+msgid "Weekday label alignment"
+msgstr "محاذاة تسمية يوم الأسبوع"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:91
+#, kde-format
+msgid "Left"
+msgstr "اليسار"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:98
+#, kde-format
+msgid "Center"
+msgstr "الوسط"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:105
+#, kde-format
+msgid "Right"
+msgstr "اليمين"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:122
+#, kde-format
+msgid "Weekday label length:"
+msgstr "طول تسمية يوم الأسبوع:"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:127
+#, kde-format
+msgid "Full name (Monday)"
+msgstr "الاسم الكامل (الجمعة)"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:134
+#, kde-format
+msgid "Abbreviated (Mon)"
+msgstr "مختصراً (جمع)"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:141
+#, kde-format
+msgid "Letter only (M)"
+msgstr "حرف فقط (ج)"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:148
+#, kde-format
+msgid "Show week numbers"
+msgstr "أظهر أرقام الأسبوع"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:160
+#, kde-format
+msgid "Grid border width (pixels):"
+msgstr "عرض حدود الشبكة (بكسل):"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:190
+#, kde-format
+msgid "Schedule View settings"
+msgstr "إعدادات عرض الجدول"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:193
+#, kde-format
+msgid "Show week headers"
+msgstr "اعرض ترويسات الأسبوع"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:210
+#, kde-format
+msgid "Tasks View settings"
+msgstr "إعدادات عرض المهام"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:213
+#, kde-format
+msgid "Show completed sub-tasks"
+msgstr "اعرض المهامّ الفرعية المكتملة"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:232
+#, kde-format
+msgid "Enable maps"
+msgstr "مكن الخرائط"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:253
+#, kde-format
+msgid "Location marker"
+msgstr "مُعَلِم الموقع"
+
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:270
+#: models/todosortfilterproxymodel.cpp:141
+#, kde-format
+msgid "Task"
+msgstr "المهمّة"
+
+#: kalendarapplication.cpp:82
+#, kde-format
+msgid "Tasks View"
+msgstr "عرض المهامّ"
+
+#: kalendarapplication.cpp:92 kalendarapplication.cpp:172
+#, kde-format
+msgid "Ctrl+6"
+msgstr "Ctrl+6"
+
+#: kalendarapplication.cpp:98
+#, kde-format
+msgid "Week View"
+msgstr "عرض الأسبوع"
+
+#: kalendarapplication.cpp:108
+#, kde-format
+msgid "Ctrl+2"
+msgstr "Ctrl+2"
+
+#: kalendarapplication.cpp:114
+#, kde-format
+msgid "3 Day View"
+msgstr "عرض ثلاثة أيام"
+
+#: kalendarapplication.cpp:124
+#, kde-format
+msgid "Ctrl+3"
+msgstr "Ctrl+3"
+
+#: kalendarapplication.cpp:130
+#, kde-format
+msgid "Day View"
+msgstr "عرض اليوم"
+
+#: kalendarapplication.cpp:140
+#, kde-format
+msgid "Ctrl+4"
+msgstr "Ctrl+4"
+
+#: kalendarapplication.cpp:146
+#, kde-format
+msgid "Schedule View"
+msgstr "عرض الجدولة"
+
+#: kalendarapplication.cpp:156
+#, kde-format
+msgid "Ctrl+5"
+msgstr "Ctrl+5"
+
+#: kalendarapplication.cpp:162
+#, kde-format
+msgid "Contacts View"
+msgstr "عرض المتراسلون"
+
+#: kalendarapplication.cpp:178
+#, kde-format
+msgid "Mail View"
+msgstr "عرض البريد"
+
+#: kalendarapplication.cpp:188
+#, kde-format
+msgid "Ctrl+7"
+msgstr "Ctrl+7"
+
+#: kalendarapplication.cpp:194
+#, kde-format
+msgid "Month View"
+msgstr "عرض الشهر"
+
+#: kalendarapplication.cpp:204
+#, kde-format
+msgid "Ctrl+1"
+msgstr "Ctrl+1"
+
+#: kalendarapplication.cpp:217
+#, kde-format
+msgid "Backwards"
+msgstr "للخلف"
+
+#: kalendarapplication.cpp:230
+#, kde-format
+msgid "Forwards"
+msgstr "للأمام"
+
+#: kalendarapplication.cpp:243
+#, kde-format
+msgid "To Today"
+msgstr "إلى اليوم"
+
+#: kalendarapplication.cpp:256
+#, kde-format
+msgid "To Date…"
+msgstr "إلى التاريخ…"
+
+#: kalendarapplication.cpp:269
+#, kde-format
+msgid "Show Menubar"
+msgstr "اعرض شريط القوائم"
+
+#: kalendarapplication.cpp:273
+#, kde-format
+msgid "Ctrl+M"
+msgstr "Ctrl+M"
+
+#: kalendarapplication.cpp:299
+#, kde-format
+msgid "Manage Tags…"
+msgstr "أدِر الوسوم…"
+
+#: kalendarapplication.cpp:312
+#, kde-format
+msgid "Import Calendar…"
+msgstr "استورِد تقويمًا…"
+
+#: kalendarapplication.cpp:344
+#, kde-format
+msgid "Alphabetically"
+msgstr "أبجديا"
+
+#: kalendarapplication.cpp:360
+#, kde-format
+msgid "By Due Date"
+msgstr "حسب تاريخ الاستحقاق"
+
+#: kalendarapplication.cpp:376
+#, kde-format
+msgid "By Priority Level"
+msgstr "حسب مستوى الأولوية"
+
+#: kalendarapplication.cpp:392
+#, kde-format
+msgid "Ascending order"
+msgstr "ترتيب تصاعدي"
+
+#: kalendarapplication.cpp:408
+#, kde-format
+msgid "Descending Order"
+msgstr "ترتيب تنازلي"
+
+#: kalendarapplication.cpp:424
+#, kde-format
+msgid "Show Completed Tasks"
+msgstr "اعرض المهامّ المكتملة"
+
+#: kalendarapplication.cpp:438
+#, kde-format
+msgid "Open Command Bar"
+msgstr "افتح شريط الأوامر"
+
+#: kalendarapplication.cpp:448
+#, kde-format
+msgid "Refresh All"
+msgstr "أنعش الكل"
+
+#: kalendarapplication.cpp:597 mail/qml/mailpartview/ErrorPart.qml:26
+#, kde-format
+msgid "An error occurred: %1"
+msgstr "حدث خطأ: %1"
+
+#: lib/colorproxymodel.cpp:98
+#, kde-format
+msgctxt "@item this is the default calendar"
+msgid "%1 (Offline)"
+msgstr "‏%1 (غير متّصل)"
+
+#: lib/colorproxymodel.cpp:101
+#, kde-format
+msgctxt "@item this is the default calendar"
+msgid "%1 (Default)"
+msgstr "%1 (المبدئيّ)"
+
+#: mail/contactimageprovider.cpp:126
+#, kde-format
+msgid "Image request has been cancelled"
+msgstr "طلب الصورة ألغي"
+
+#: mail/mailmodel.cpp:48
+#, kde-format
+msgctxt "displayed as subject when the subject of a mail is empty"
+msgid "No Subject"
+msgstr "لا موضوع"
+
+#: mail/mailmodel.cpp:49
+#, kde-format
+msgctxt "displayed when a mail has unknown sender, receiver or date"
+msgid "Unknown"
+msgstr "مجهول"
+
+#: mail/mime/attachmentmodel.cpp:223
+#, kde-format
+msgid "No keys were found in this attachment"
+msgstr "لا يوجد مفاتيح في المرفقات"
+
+#: mail/mime/attachmentmodel.cpp:226
+#, kde-format
+msgid "one key imported"
+msgid_plural "%1 keys imported"
+msgstr[0] "استورد مفتاح"
+msgstr[1] "استورد مفتاح واحد "
+msgstr[2] "استورد مفتاحين"
+msgstr[3] "استورد %1 مفاتيح"
+msgstr[4] "استورد %1 مفتاحاً"
+msgstr[5] "استورد %1 مفتاح"
+
+#: mail/mime/attachmentmodel.cpp:228
+#, kde-format
+msgid "one key was already imported"
+msgid_plural "%1 keys were already imported"
+msgstr[0] "استورد مفتاح بالفعل"
+msgstr[1] "استورد مفتاح واحد بالفعل"
+msgstr[2] "استورد مفتاحين بالفعل"
+msgstr[3] "استورد %1 مفاتيح بالفعل"
+msgstr[4] "استورد %1 مفتاحاً بالفعل"
+msgstr[5] "استورد %1 مفتاح بالفعل"
+
+#: mail/mime/mailtemplates.cpp:103
+#, kde-format
+msgid "fwd"
+msgstr "تمرير"
+
+#: mail/mime/mailtemplates.cpp:132
+#, kde-format
+msgid "re"
+msgstr "رد"
+
+#: mail/mime/partmodel.cpp:473
+#, kde-format
+msgid "No key available."
+msgstr "لا يوجد مفتاح"
+
+#: mail/mime/partmodel.cpp:475
+#, kde-format
+msgid "Wrong passphrase."
+msgstr "عبارة مرور خاطئة"
+
+#: mail/mimetreeparser/messagepart.cpp:618
+#: mail/mimetreeparser/messagepart.cpp:709
+#: mail/mimetreeparser/messagepart.cpp:783
+#, kde-format
+msgid "Wrong Crypto Plug-In."
+msgstr "ملحقة التّعمية خاطئة."
+
+#: mail/mimetreeparser/messagepart.cpp:857
+#, kde-format
+msgid "Could not decrypt the data: no key found for recipients."
+msgstr "تعذر فك تشفير البيانات: لم يعثر على مفتاح للمستلمين."
+
+#: mail/mimetreeparser/messagepart.cpp:862
+#, kde-format
+msgid "Could not decrypt the data."
+msgstr "تعذّر فكّ تعمية البيانات."
+
+#: mail/qml/ConversationViewer.qml:30
+#, kde-format
+msgid "Move to trash"
+msgstr "انقل إلى المهملات"
+
+#: mail/qml/FolderView.qml:43
+#, kde-format
+msgid "Don't Mark as Important"
+msgstr "لا تعلّمها مُهمّة"
+
+#: mail/qml/FolderView.qml:86
+#, kde-format
+msgid "No mailbox selected"
+msgstr "لم يُحدّد صندوق بريد"
+
+#: mail/qml/FolderView.qml:87
+#, kde-format
+msgid "Select a mailbox from the sidebar."
+msgstr "حدد صندوق بريد من الشريط الجانبي"
+
+#: mail/qml/FolderView.qml:94
+#, kde-format
+msgid "Mailbox is empty"
+msgstr "صندوق البريد فارغ"
+
+#: mail/qml/mailboxselector/MailBoxListPage.qml:16
+#, kde-format
+msgid "Mailboxes"
+msgstr "صناديق البريد"
+
+#: mail/qml/mailpartview/ICalPart.qml:29
+#, kde-format
+msgid "This mail contains an invitation"
+msgstr "هذا البريد يحوي دعوة"
+
+#: mail/qml/mailpartview/MailPart.qml:43
+#, kde-format
+msgid "sent by %1 on %2"
+msgstr "أرسلها %1 في %2"
+
+#: mail/qml/mailpartview/MailPartModel.qml:54
+#, kde-format
+msgid "This message has been signed using the key %1."
+msgstr "وُقّعت الرّسالة بالمفتاح %1."
+
+#: mail/qml/mailpartview/MailPartModel.qml:55
+#, kde-format
+msgid "The key details are not available."
+msgstr "تفاصيل المفتاح غير متوفّرة."
+
+#: mail/qml/mailpartview/MailPartModel.qml:57
+#, kde-format
+msgid "This message has been signed using the key %1 by %2."
+msgstr "وُقّعت الرّسالة بالمفتاح %1 بواسطة %2."
+
+#: mail/qml/mailpartview/MailPartModel.qml:59
+#, kde-format
+msgid "The key was revoked."
+msgstr "أُبطل المفتاح."
+
+#: mail/qml/mailpartview/MailPartModel.qml:62
+#, kde-format
+msgid "The key has expired."
+msgstr "انتهى المفتاح"
+
+#: mail/qml/mailpartview/MailPartModel.qml:65
+#, kde-format
+msgid "You are trusting this key."
+msgstr "أنت تثق في بهذا المفتاح."
+
+#: mail/qml/mailpartview/MailPartModel.qml:68
+#, kde-format
+msgid "The signature is invalid."
+msgstr "التوقيع غير صالح."
+
+#: mail/qml/mailpartview/MailPartModel.qml:90
+#, kde-format
+msgid "This message is encrypted but we don't have the key for it."
+msgstr "هذه الرسالة مشفرة لكن ليس لدينا مفتاحها."
+
+#: mail/qml/mailpartview/MailPartModel.qml:90
+#, kde-format
+msgid "This message is encrypted to the key: %1"
+msgstr "هذه الرّسالة معمّاة بالمفتاح: %1"
+
+#: mail/qml/mailpartview/MailPartView.qml:33
+#, kde-format
+msgid "Loading mail..."
+msgstr "يحمل البريد…"
+
+#: mail/qml/MailViewer.qml:150
+#, kde-format
+msgid "Save attachment"
+msgstr "احفظ المرفق"
+
+#: mail/qml/private/AttachmentDelegate.qml:57
+#, kde-format
+msgid "Import key"
+msgstr "استورد مفتاحًا"
+
+#: main.cpp:71
+#, kde-format
+msgctxt "@title"
+msgid "Kalendar"
+msgstr "التقويم"
+
+#: main.cpp:74
+#, kde-format
+msgid "Calendar Application"
+msgstr "تطبيق التقويم"
+
+#: main.cpp:78
+#, kde-format
+msgid "(c) KDE Community 2021"
+msgstr "(c)  مجتمع كدي 2021"
+
+#: main.cpp:79
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr "Carl Schwan"
+
+#: main.cpp:80 main.cpp:84
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer"
+msgstr "المشرف"
+
+#: main.cpp:83
+#, kde-format
+msgctxt "@info:credit"
+msgid "Clau Cambra"
+msgstr "Clau Cambra"
+
+#: main.cpp:87
+#, kde-format
+msgctxt "@info:credit"
+msgid "Felipe Kinoshita"
+msgstr "Felipe Kinoshita"
+
+#: main.cpp:88
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr "مطوّر"
+
+#: models/todosortfilterproxymodel.cpp:171
+#, kde-format
+msgid "No set date"
+msgstr "لم يعين تاريخ"
+
+#: models/todosortfilterproxymodel.cpp:204
+#, kde-format
+msgctxt "Please retain space"
+msgid " at %1"
+msgstr " عند %1"
+
+#: models/todosortfilterproxymodel.cpp:205
+#, kde-format
+msgctxt "Please retain parenthesis and space"
+msgid " (overdue)"
+msgstr " (تأخّرت)"
+
+#: quick/qml/AgentConfigurationForm.qml:36
+#, kde-format
+msgid "Configure %1"
+msgstr "اضبط %1"
+
+#: quick/qml/AgentConfigurationForm.qml:37
+#, kde-format
+msgid "Modify or delete this account agent."
+msgstr "عدّل أو احذف وكيل الحساب."
+
+#: quick/qml/AgentConfigurationForm.qml:42
+#, kde-format
+msgid "Modify"
+msgstr "عدّل"
+
+#: quick/qml/AgentConfigurationForm.qml:108
+#, kde-format
+msgid "Add Account"
+msgstr "أضف حسابًا"
+
+#~ msgctxt ""
+#~ "No space since the %1 string, which includes the time (or not), includes "
+#~ "this space"
+#~ msgid "Today%1(overdue)"
+#~ msgstr "(تأخّرت) اليوم%1"
+
+#~ msgctxt ""
+#~ "No space since the %1 string, which includes the time (or not), includes "
+#~ "this space"
+#~ msgid "Today%1"
+#~ msgstr "اليوم%1"
+
+#~ msgctxt ""
+#~ "No space since the %1 string, which includes the time (or not), includes "
+#~ "this space"
+#~ msgid "Tomorrow%1"
+#~ msgstr "الغد%1"
+
+#~ msgctxt ""
+#~ "No space since the %1 string, which includes the time (or not), includes "
+#~ "this space"
+#~ msgid "Yesterday%1(overdue)"
+#~ msgstr "(تأخّرت) أمس%1"
+
+#~ msgctxt ""
+#~ "No space since the %1 string, which includes the time (or not), includes "
+#~ "this space"
+#~ msgid "Yesterday"
+#~ msgstr "أمس"
+
+#~ msgid "Views"
+#~ msgstr "العرض"
+
+#~ msgid "Headers:"
+#~ msgstr "التّرويسات:"
+
+#~ msgid "Calendar Sources"
+#~ msgstr "مصادر التقويم"
+
+#~ msgid "Address Book Sources"
+#~ msgstr "مصادر دفتر العناوين"
+
+#~ msgid "Restart"
+#~ msgstr "أعد التّشغيل"
+
+#~ msgid "Remove"
+#~ msgstr "أزل"
+
+#~ msgid "Calendar"
+#~ msgstr "التّقويم"
+
+#, fuzzy
+#~| msgid "Return to Location"
+#~ msgid "Return to Contact List"
+#~ msgstr "ارجع للموقع"
+
+#, fuzzy
+#~| msgid "Email:"
+#~ msgid "Send Email"
+#~ msgstr "البريد الإلكترونيّ:"
+
+#, fuzzy
+#~| msgid "Return to Location"
+#~ msgid "Return to Contact"
+#~ msgstr "ارجع للموقع"

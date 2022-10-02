@@ -1,0 +1,142 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kalendar package.
+#
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kalendar\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-08 00:46+0000\n"
+"PO-Revision-Date: 2022-08-08 09:56+0200\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.3\n"
+
+#: package/contents/ui/ContactPage.qml:49
+#, kde-format
+msgid "Return to Contact List"
+msgstr "Naar contactenlijst terugkeren"
+
+#: package/contents/ui/ContactPage.qml:56
+#: package/contents/ui/ContactPage.qml:57
+#: package/contents/ui/ContactPage.qml:244
+#, kde-format
+msgid "Call"
+msgstr "Oproep"
+
+#: package/contents/ui/ContactPage.qml:69
+#: package/contents/ui/ContactPage.qml:101
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: package/contents/ui/ContactPage.qml:88
+#: package/contents/ui/ContactPage.qml:89
+#, kde-format
+msgid "Send SMS"
+msgstr "SMS verzenden"
+
+#: package/contents/ui/ContactPage.qml:119
+#: package/contents/ui/ContactPage.qml:120
+#: package/contents/ui/ContactPage.qml:214
+#, kde-format
+msgid "Send Email"
+msgstr "E-mail verzenden"
+
+#: package/contents/ui/ContactPage.qml:128
+#: package/contents/ui/ContactPage.qml:129
+#, kde-format
+msgid "Show QR Code"
+msgstr "QR-code tonen"
+
+#: package/contents/ui/ContactPage.qml:159
+#, kde-format
+msgid "Nickname: %1"
+msgstr "Schermnaam: %1"
+
+#: package/contents/ui/ContactPage.qml:182
+#, kde-format
+msgid "Address"
+msgid_plural "Addresses"
+msgstr[0] "Adres"
+msgstr[1] "Adressen"
+
+#: package/contents/ui/ContactPage.qml:193
+#, kde-format
+msgctxt "%1 is the type of the address, e.g. home, work, ..."
+msgid "%1:"
+msgstr "%1:"
+
+#: package/contents/ui/ContactPage.qml:202
+#, kde-format
+msgid "Email Address"
+msgid_plural "Email Addresses"
+msgstr[0] "E-mailadres"
+msgstr[1] "E-mailadressen"
+
+#: package/contents/ui/ContactPage.qml:232
+#, kde-format
+msgid "Phone number"
+msgid_plural "Phone numbers"
+msgstr[0] "Telefoonnummer"
+msgstr[1] "Telefoonnummers"
+
+#: package/contents/ui/ContactsPage.qml:16
+#, kde-format
+msgid "Contacts"
+msgstr "Contactpersonen"
+
+#: package/contents/ui/main.qml:15 package/contents/ui/main.qml:31
+#, kde-format
+msgid "Contact"
+msgstr "Contactpersoon"
+
+#: package/contents/ui/QrCodePage.qml:21 package/contents/ui/QrCodePage.qml:52
+#, kde-format
+msgid "QR Code"
+msgstr "QR-code"
+
+#: package/contents/ui/QrCodePage.qml:35
+#, kde-format
+msgid "Return to Contact"
+msgstr "Naar contacten terugkeren"
+
+#: package/contents/ui/QrCodePage.qml:53
+#, kde-format
+msgid "Data Matrix"
+msgstr "Gegevensmatrix"
+
+#: package/contents/ui/QrCodePage.qml:54
+#, kde-format
+msgctxt "Aztec barcode"
+msgid "Aztec"
+msgstr "Aztec"
+
+#: package/contents/ui/QrCodePage.qml:79
+#, kde-format
+msgid "Change the QR code type"
+msgstr "Het type QR-code wijzigen"
+
+#: package/contents/ui/QrCodePage.qml:103
+#, kde-format
+msgid "Creating QR code failed"
+msgstr "Aanmaken van QR-code is mislukt"
+
+#: package/contents/ui/QrCodePage.qml:112
+#, kde-format
+msgid "The QR code is too large to be displayed"
+msgstr "De QR-code is te groot om te worden getoond"
+
+#~ msgid "Code 39"
+#~ msgstr "Code 39"
+
+#~ msgid "Code 93"
+#~ msgstr "Code 93"
+
+#~ msgid "Code 128"
+#~ msgstr "Code 128"
