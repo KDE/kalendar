@@ -97,6 +97,12 @@ Kirigami.ApplicationWindow {
 
     Component.onCompleted: {
         KalendarUiUtils.appMain = root; // Most of our util functions use things defined here in main
+
+        if (Config.lastOpenedView === -1) {
+            Kirigami.Settings.isMobile ? scheduleViewAction.trigger() : monthViewAction.trigger();
+            return;
+        }
+
         switch (Config.lastOpenedView) {
             case Config.MonthView:
                 monthViewAction.trigger();
