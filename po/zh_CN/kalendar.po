@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-01 00:48+0000\n"
-"PO-Revision-Date: 2022-09-20 01:57\n"
+"PO-Revision-Date: 2022-10-02 15:50\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -215,10 +215,9 @@ msgid "Name:"
 msgstr "姓名："
 
 #: contacts/qml/private/ContactEditorPage.qml:151
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact name"
-msgstr "联系人"
+msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:162
 #, kde-format
@@ -823,10 +822,9 @@ msgid "<b>Organizer:</b>"
 msgstr "<b>组织者：</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:528
-#, fuzzy, kde-format
-#| msgid "<b>Guests:</b>"
+#, kde-format
 msgid "<b>Google Meet:</b>"
-msgstr "<b>客人：</b>"
+msgstr ""
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:540
 #, kde-format
@@ -938,22 +936,14 @@ msgid "Set due date..."
 msgstr ""
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "No space since the %1 string, which includes the time (or not), includes "
-#| "this space"
-#| msgid "Today%1"
+#, kde-format
 msgid "Today (%1)"
-msgstr "今天%1"
+msgstr ""
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:202
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "No space since the %1 string, which includes the time (or not), includes "
-#| "this space"
-#| msgid "Tomorrow%1"
+#, kde-format
 msgid "Tomorrow (%1)"
-msgstr "明天%1"
+msgstr ""
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
@@ -2352,16 +2342,14 @@ msgid "Show completed sub-tasks"
 msgstr "显示已完成的子任务"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:232
-#, fuzzy, kde-format
-#| msgid "Enable maps:"
+#, kde-format
 msgid "Enable maps"
-msgstr "启用地图："
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:253
-#, fuzzy, kde-format
-#| msgid "Location marker:"
+#, kde-format
 msgid "Location marker"
-msgstr "位置标记："
+msgstr ""
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:270
 #: models/todosortfilterproxymodel.cpp:141
@@ -2764,21 +2752,16 @@ msgid "No set date"
 msgstr "未设定日期"
 
 #: models/todosortfilterproxymodel.cpp:204
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 is the time, spaces included to allow use of 'empty' string when an "
-#| "event is allday and has no time"
-#| msgid " at %1 "
+#, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr " %1 "
+msgstr ""
 
 #: models/todosortfilterproxymodel.cpp:205
-#, fuzzy, kde-format
-#| msgid "(overdue)"
+#, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
-msgstr "(已过期)"
+msgstr ""
 
 #: quick/qml/AgentConfigurationForm.qml:36
 #, kde-format
@@ -2799,36 +2782,3 @@ msgstr ""
 #, kde-format
 msgid "Add Account"
 msgstr ""
-
-#~ msgctxt ""
-#~ "No space since the %1 string, which includes the time (or not), includes "
-#~ "this space"
-#~ msgid "Today%1(overdue)"
-#~ msgstr "今天%1(已过期)"
-
-#~ msgctxt ""
-#~ "No space since the %1 string, which includes the time (or not), includes "
-#~ "this space"
-#~ msgid "Today%1"
-#~ msgstr "今天%1"
-
-#~ msgctxt ""
-#~ "No space since the %1 string, which includes the time (or not), includes "
-#~ "this space"
-#~ msgid "Tomorrow%1"
-#~ msgstr "明天%1"
-
-#~ msgctxt ""
-#~ "No space since the %1 string, which includes the time (or not), includes "
-#~ "this space"
-#~ msgid "Yesterday%1(overdue)"
-#~ msgstr "昨天%1(已过期)"
-
-#~ msgctxt ""
-#~ "No space since the %1 string, which includes the time (or not), includes "
-#~ "this space"
-#~ msgid "Yesterday"
-#~ msgstr "昨天"
-
-#~ msgid "Views"
-#~ msgstr "视图"
