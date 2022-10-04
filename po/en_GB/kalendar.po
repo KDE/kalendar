@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:48+0000\n"
+"POT-Creation-Date: 2022-10-04 00:45+0000\n"
 "PO-Revision-Date: 2022-09-18 12:07+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -127,7 +127,7 @@ msgstr "Select Email Address"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:456
 #, kde-format
 msgid "Contacts"
 msgstr "Contacts"
@@ -515,7 +515,7 @@ msgstr "Edit"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:874
+#: contents/ui/main.qml:880
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel"
@@ -733,13 +733,13 @@ msgstr "Years"
 msgid "Min. Interval:"
 msgstr "Min. Interval:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:417
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
 #: kalendarapplication.cpp:279
 #, kde-format
 msgid "New Event…"
 msgstr "New Event…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:423
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:429
 #: kalendarapplication.cpp:286
 #, kde-format
 msgid "New Task…"
@@ -1535,7 +1535,7 @@ msgstr "Undo: "
 msgid "Redo: "
 msgstr "Redo: "
 
-#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:347
+#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:353
 #, kde-format
 msgid "Configure"
 msgstr "Configure"
@@ -1725,76 +1725,76 @@ msgstr "No set priority level"
 msgid "Return to Location"
 msgstr "Return to Location"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:321
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "%1 incidences were imported successfully."
 
-#: contents/ui/main.qml:318 contents/ui/main.qml:333
+#: contents/ui/main.qml:324 contents/ui/main.qml:339
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr "An error occurred importing incidences: %1"
 
-#: contents/ui/main.qml:330
+#: contents/ui/main.qml:336
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr "New calendar  created from imported file successfully."
 
-#: contents/ui/main.qml:412 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:53
 #, kde-format
 msgid "Create"
 msgstr "Create"
 
-#: contents/ui/main.qml:432
+#: contents/ui/main.qml:438
 #, kde-format
 msgid "Month"
 msgstr "Month"
 
-#: contents/ui/main.qml:435
+#: contents/ui/main.qml:441
 #, kde-format
 msgid "Week"
 msgstr "Week"
 
-#: contents/ui/main.qml:438
+#: contents/ui/main.qml:444
 #, kde-format
 msgid "3 Days"
 msgstr "3 Days"
 
-#: contents/ui/main.qml:441
+#: contents/ui/main.qml:447
 #, kde-format
 msgid "Day"
 msgstr "Day"
 
-#: contents/ui/main.qml:444
+#: contents/ui/main.qml:450
 #, kde-format
 msgid "Schedule"
 msgstr "Schedule"
 
-#: contents/ui/main.qml:447 contents/ui/main.qml:1130
+#: contents/ui/main.qml:453 contents/ui/main.qml:1136
 #, kde-format
 msgid "Tasks"
 msgstr "Tasks"
 
-#: contents/ui/main.qml:453 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, kde-format
 msgid "Mail"
 msgstr "Mail"
 
-#: contents/ui/main.qml:813
+#: contents/ui/main.qml:819
 #, kde-format
 msgid "Import a calendar"
 msgstr "Import a calendar"
 
-#: contents/ui/main.qml:833
+#: contents/ui/main.qml:839
 #, kde-format
 msgid "Import Calendar"
 msgstr "Import Calendar"
 
-#: contents/ui/main.qml:841
+#: contents/ui/main.qml:847
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1807,40 +1807,40 @@ msgstr ""
 "file?\n"
 " "
 
-#: contents/ui/main.qml:849
+#: contents/ui/main.qml:855
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Merge with existing calendar"
 
-#: contents/ui/main.qml:865
+#: contents/ui/main.qml:871
 #, kde-format
 msgid "Create new calendar"
 msgstr "Create new calendar"
 
-#: contents/ui/main.qml:1071
+#: contents/ui/main.qml:1077
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Week"
 
-#: contents/ui/main.qml:1077
+#: contents/ui/main.qml:1083
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "3 Days"
 
-#: contents/ui/main.qml:1083
+#: contents/ui/main.qml:1089
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
 msgstr "Day"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, kde-format
 msgid "Expand MainDrawer"
 msgstr "Expand MainDrawer"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, kde-format
 msgid "Collapse MainDrawer"
 msgstr "Collapse MainDrawer"

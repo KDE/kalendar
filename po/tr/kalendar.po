@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:48+0000\n"
+"POT-Creation-Date: 2022-10-04 00:45+0000\n"
 "PO-Revision-Date: 2022-09-28 11:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -126,7 +126,7 @@ msgstr "E-posta Adresi Seç"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:456
 #, kde-format
 msgid "Contacts"
 msgstr "Kişiler"
@@ -507,7 +507,7 @@ msgstr "Düzenle"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:874
+#: contents/ui/main.qml:880
 #, kde-format
 msgid "Cancel"
 msgstr "İptal"
@@ -725,13 +725,13 @@ msgstr "Yıl"
 msgid "Min. Interval:"
 msgstr "Dakika Aralığı:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:417
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
 #: kalendarapplication.cpp:279
 #, kde-format
 msgid "New Event…"
 msgstr "Yeni Etkinlik…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:423
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:429
 #: kalendarapplication.cpp:286
 #, kde-format
 msgid "New Task…"
@@ -1518,7 +1518,7 @@ msgstr "Geri al: "
 msgid "Redo: "
 msgstr "Yinele: "
 
-#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:347
+#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:353
 #, kde-format
 msgid "Configure"
 msgstr "Yapılandır"
@@ -1708,76 +1708,76 @@ msgstr "Öncelik düzeyi ayarlanmamış"
 msgid "Return to Location"
 msgstr "Konuma Dön"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:321
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "%1 olay başarıyla içe aktarıldı."
 
-#: contents/ui/main.qml:318 contents/ui/main.qml:333
+#: contents/ui/main.qml:324 contents/ui/main.qml:339
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr "Olaylar içe aktarılırken bir hata oluştu: %1"
 
-#: contents/ui/main.qml:330
+#: contents/ui/main.qml:336
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr "İçe aktarılan dosyadan yeni takvim başarıyla oluşturuldu."
 
-#: contents/ui/main.qml:412 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:53
 #, kde-format
 msgid "Create"
 msgstr "Oluştur"
 
-#: contents/ui/main.qml:432
+#: contents/ui/main.qml:438
 #, kde-format
 msgid "Month"
 msgstr "Ay"
 
-#: contents/ui/main.qml:435
+#: contents/ui/main.qml:441
 #, kde-format
 msgid "Week"
 msgstr "Hafta"
 
-#: contents/ui/main.qml:438
+#: contents/ui/main.qml:444
 #, kde-format
 msgid "3 Days"
 msgstr "3 Gün"
 
-#: contents/ui/main.qml:441
+#: contents/ui/main.qml:447
 #, kde-format
 msgid "Day"
 msgstr "Gün"
 
-#: contents/ui/main.qml:444
+#: contents/ui/main.qml:450
 #, kde-format
 msgid "Schedule"
 msgstr "Ajanda Görünümü"
 
-#: contents/ui/main.qml:447 contents/ui/main.qml:1130
+#: contents/ui/main.qml:453 contents/ui/main.qml:1136
 #, kde-format
 msgid "Tasks"
 msgstr "Görevler"
 
-#: contents/ui/main.qml:453 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, kde-format
 msgid "Mail"
 msgstr "Posta"
 
-#: contents/ui/main.qml:813
+#: contents/ui/main.qml:819
 #, kde-format
 msgid "Import a calendar"
 msgstr "Bir takvim içe aktar"
 
-#: contents/ui/main.qml:833
+#: contents/ui/main.qml:839
 #, kde-format
 msgid "Import Calendar"
 msgstr "Takvim İçe Aktar"
 
-#: contents/ui/main.qml:841
+#: contents/ui/main.qml:847
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1790,40 +1790,40 @@ msgstr ""
 "oluşturmak mı istersiniz?\n"
 " "
 
-#: contents/ui/main.qml:849
+#: contents/ui/main.qml:855
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Mevcut takvimle birleştir"
 
-#: contents/ui/main.qml:865
+#: contents/ui/main.qml:871
 #, kde-format
 msgid "Create new calendar"
 msgstr "Yeni takvim oluştur"
 
-#: contents/ui/main.qml:1071
+#: contents/ui/main.qml:1077
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Hafta"
 
-#: contents/ui/main.qml:1077
+#: contents/ui/main.qml:1083
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "3 Gün"
 
-#: contents/ui/main.qml:1083
+#: contents/ui/main.qml:1089
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
 msgstr "Gün"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, kde-format
 msgid "Expand MainDrawer"
 msgstr "Ana Çekmeceyi Genişlet"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, kde-format
 msgid "Collapse MainDrawer"
 msgstr "Ana Çekmeceyi Çökert"

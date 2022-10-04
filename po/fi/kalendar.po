@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:48+0000\n"
+"POT-Creation-Date: 2022-10-04 00:45+0000\n"
 "PO-Revision-Date: 2022-07-22 22:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -126,7 +126,7 @@ msgstr "Valitse sähköpostiosoite"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:456
 #, kde-format
 msgid "Contacts"
 msgstr "Yhteystiedot"
@@ -515,7 +515,7 @@ msgstr "Muokkaa"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:874
+#: contents/ui/main.qml:880
 #, kde-format
 msgid "Cancel"
 msgstr "Peru"
@@ -733,13 +733,13 @@ msgstr "Vuodet"
 msgid "Min. Interval:"
 msgstr "Vähimmäisväli:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:417
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
 #: kalendarapplication.cpp:279
 #, kde-format
 msgid "New Event…"
 msgstr "Uusi tapahtuma…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:423
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:429
 #: kalendarapplication.cpp:286
 #, kde-format
 msgid "New Task…"
@@ -1533,7 +1533,7 @@ msgstr "Kumoa:"
 msgid "Redo: "
 msgstr "Tee uudelleen:"
 
-#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:347
+#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:353
 #, kde-format
 msgid "Configure"
 msgstr "Asetukset"
@@ -1725,65 +1725,65 @@ msgstr "Ei asetettua etusijaisuutta"
 msgid "Return to Location"
 msgstr "Palaa sijaintiin"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:321
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "Tuotiin onnistuneesti %1 esiintymää."
 
-#: contents/ui/main.qml:318 contents/ui/main.qml:333
+#: contents/ui/main.qml:324 contents/ui/main.qml:339
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr "Esiintymiä tuotaessa tapahtui virhe: %1"
 
-#: contents/ui/main.qml:330
+#: contents/ui/main.qml:336
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr "Tuodusta tiedostosta luotiin onnistuneesti uusi kalenteri."
 
-#: contents/ui/main.qml:412 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:53
 #, kde-format
 msgid "Create"
 msgstr "Luo"
 
-#: contents/ui/main.qml:432
+#: contents/ui/main.qml:438
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Month"
 msgstr "Kuukaudet"
 
-#: contents/ui/main.qml:435
+#: contents/ui/main.qml:441
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgid "Week"
 msgstr "Viikoittain"
 
-#: contents/ui/main.qml:438
+#: contents/ui/main.qml:444
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "3 Days"
 msgstr "Päivät"
 
-#: contents/ui/main.qml:441
+#: contents/ui/main.qml:447
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "Day"
 msgstr "Päivät"
 
-#: contents/ui/main.qml:444
+#: contents/ui/main.qml:450
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Schedule"
 msgstr "Aikataulunäkymä"
 
-#: contents/ui/main.qml:447 contents/ui/main.qml:1130
+#: contents/ui/main.qml:453 contents/ui/main.qml:1136
 #, kde-format
 msgid "Tasks"
 msgstr "Tehtävät"
 
-#: contents/ui/main.qml:453 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
 #| msgctxt "contact's email address"
@@ -1791,17 +1791,17 @@ msgstr "Tehtävät"
 msgid "Mail"
 msgstr "Sähköposti"
 
-#: contents/ui/main.qml:813
+#: contents/ui/main.qml:819
 #, kde-format
 msgid "Import a calendar"
 msgstr "Tuo kalenteri"
 
-#: contents/ui/main.qml:833
+#: contents/ui/main.qml:839
 #, kde-format
 msgid "Import Calendar"
 msgstr "Tuo kalenteri"
 
-#: contents/ui/main.qml:841
+#: contents/ui/main.qml:847
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1813,43 +1813,43 @@ msgstr ""
 "olevaan kalenteriin vai luoda tiedostosta uuden kalenterin?\n"
 " "
 
-#: contents/ui/main.qml:849
+#: contents/ui/main.qml:855
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Yhdistä olemassa olevaan kalenteriin"
 
-#: contents/ui/main.qml:865
+#: contents/ui/main.qml:871
 #, kde-format
 msgid "Create new calendar"
 msgstr "Luo uusi kalenteri"
 
-#: contents/ui/main.qml:1071
+#: contents/ui/main.qml:1077
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Viikoittain"
 
-#: contents/ui/main.qml:1077
+#: contents/ui/main.qml:1083
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "Päivät"
 
-#: contents/ui/main.qml:1083
+#: contents/ui/main.qml:1089
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open day view"
 msgid "Day"
 msgstr "Päivät"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, kde-format
 msgid "Expand MainDrawer"
 msgstr "Avaa päälaatikko"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, kde-format
 msgid "Collapse MainDrawer"
 msgstr "Sulje päälaatikko"

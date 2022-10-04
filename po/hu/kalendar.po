@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:48+0000\n"
+"POT-Creation-Date: 2022-10-04 00:45+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -130,7 +130,7 @@ msgstr "Válasszon e-mail címet"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:456
 #, kde-format
 msgid "Contacts"
 msgstr "Névjegyek"
@@ -537,7 +537,7 @@ msgstr "Szerkesztés"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:874
+#: contents/ui/main.qml:880
 #, kde-format
 msgid "Cancel"
 msgstr "Mégsem"
@@ -760,13 +760,13 @@ msgstr "Év"
 msgid "Min. Interval:"
 msgstr "Min. időköz:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:417
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
 #: kalendarapplication.cpp:279
 #, kde-format
 msgid "New Event…"
 msgstr "Új esemény…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:423
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:429
 #: kalendarapplication.cpp:286
 #, kde-format
 msgid "New Task…"
@@ -1566,7 +1566,7 @@ msgstr "Visszavonás: "
 msgid "Redo: "
 msgstr "Újra: "
 
-#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:347
+#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:353
 #, kde-format
 msgid "Configure"
 msgstr "Beállítás"
@@ -1756,82 +1756,82 @@ msgstr "Nincs megadva prioritási szint"
 msgid "Return to Location"
 msgstr "Vissza a helyhez"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:321
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "%1 előfordulás sikeresen importálva."
 
-#: contents/ui/main.qml:318 contents/ui/main.qml:333
+#: contents/ui/main.qml:324 contents/ui/main.qml:339
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr "Hiba történr az előfordulások importálásakor: %1"
 
-#: contents/ui/main.qml:330
+#: contents/ui/main.qml:336
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr "Az új naptár sikeresen létrejött az importált fájlból."
 
-#: contents/ui/main.qml:412 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:53
 #, kde-format
 msgid "Create"
 msgstr "Létrehozás"
 
-#: contents/ui/main.qml:432
+#: contents/ui/main.qml:438
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Month"
 msgstr "Hónap"
 
-#: contents/ui/main.qml:435
+#: contents/ui/main.qml:441
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgid "Week"
 msgstr "Hetente"
 
-#: contents/ui/main.qml:438
+#: contents/ui/main.qml:444
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "3 Days"
 msgstr "Nap"
 
-#: contents/ui/main.qml:441
+#: contents/ui/main.qml:447
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "Day"
 msgstr "Nap"
 
-#: contents/ui/main.qml:444
+#: contents/ui/main.qml:450
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Schedule"
 msgstr "Ütemezés nézet"
 
-#: contents/ui/main.qml:447 contents/ui/main.qml:1130
+#: contents/ui/main.qml:453 contents/ui/main.qml:1136
 #, kde-format
 msgid "Tasks"
 msgstr "Feladatok"
 
-#: contents/ui/main.qml:453 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
 #| msgid "Day View"
 msgid "Mail"
 msgstr "Napi nézet"
 
-#: contents/ui/main.qml:813
+#: contents/ui/main.qml:819
 #, kde-format
 msgid "Import a calendar"
 msgstr "Naptár importálása"
 
-#: contents/ui/main.qml:833
+#: contents/ui/main.qml:839
 #, kde-format
 msgid "Import Calendar"
 msgstr "Naptár importálása"
 
-#: contents/ui/main.qml:841
+#: contents/ui/main.qml:847
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1843,44 +1843,44 @@ msgstr ""
 "naptárával, vagy inkább létrehoz egy új naptárt ebből a fájlból?\n"
 " "
 
-#: contents/ui/main.qml:849
+#: contents/ui/main.qml:855
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Összefésülés a meglévő naptárral"
 
-#: contents/ui/main.qml:865
+#: contents/ui/main.qml:871
 #, kde-format
 msgid "Create new calendar"
 msgstr "Új naptár létrehozása"
 
-#: contents/ui/main.qml:1071
+#: contents/ui/main.qml:1077
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Hetente"
 
-#: contents/ui/main.qml:1077
+#: contents/ui/main.qml:1083
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "Nap"
 
-#: contents/ui/main.qml:1083
+#: contents/ui/main.qml:1089
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open day view"
 msgid "Day"
 msgstr "Nap"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, fuzzy, kde-format
 #| msgid "Expand Sidebar"
 msgid "Expand MainDrawer"
 msgstr "Oldalsáv kinyitása"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, fuzzy, kde-format
 #| msgid "Collapse Sidebar"
 msgid "Collapse MainDrawer"

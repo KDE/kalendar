@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:48+0000\n"
+"POT-Creation-Date: 2022-10-04 00:45+0000\n"
 "PO-Revision-Date: 2022-07-14 00:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -132,7 +132,7 @@ msgstr "E-Mail-Adresse auswählen"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:456
 #, kde-format
 msgid "Contacts"
 msgstr "Kontakte"
@@ -538,7 +538,7 @@ msgstr "Bearbeiten"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:874
+#: contents/ui/main.qml:880
 #, kde-format
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -761,13 +761,13 @@ msgstr "Jahre"
 msgid "Min. Interval:"
 msgstr "Min. Intervall:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:417
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
 #: kalendarapplication.cpp:279
 #, kde-format
 msgid "New Event…"
 msgstr "Neuer Termin ..."
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:423
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:429
 #: kalendarapplication.cpp:286
 #, kde-format
 msgid "New Task…"
@@ -1556,7 +1556,7 @@ msgstr "Rückgängig: "
 msgid "Redo: "
 msgstr "Wiederholen: "
 
-#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:347
+#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:353
 #, kde-format
 msgid "Configure"
 msgstr "Einrichten"
@@ -1746,82 +1746,82 @@ msgstr "Keine Priorität festgelegt"
 msgid "Return to Location"
 msgstr "Zurück zum Ort springen"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:321
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "%1 Ereignisse wurden erfolgreich importiert."
 
-#: contents/ui/main.qml:318 contents/ui/main.qml:333
+#: contents/ui/main.qml:324 contents/ui/main.qml:339
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr ""
 
-#: contents/ui/main.qml:330
+#: contents/ui/main.qml:336
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr ""
 
-#: contents/ui/main.qml:412 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:53
 #, kde-format
 msgid "Create"
 msgstr "Erstellen"
 
-#: contents/ui/main.qml:432
+#: contents/ui/main.qml:438
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Month"
 msgstr "Monate"
 
-#: contents/ui/main.qml:435
+#: contents/ui/main.qml:441
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgid "Week"
 msgstr "Wöchentlich"
 
-#: contents/ui/main.qml:438
+#: contents/ui/main.qml:444
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "3 Days"
 msgstr "Tage"
 
-#: contents/ui/main.qml:441
+#: contents/ui/main.qml:447
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "Day"
 msgstr "Tage"
 
-#: contents/ui/main.qml:444
+#: contents/ui/main.qml:450
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Schedule"
 msgstr "Terminplanansicht"
 
-#: contents/ui/main.qml:447 contents/ui/main.qml:1130
+#: contents/ui/main.qml:453 contents/ui/main.qml:1136
 #, kde-format
 msgid "Tasks"
 msgstr "Aufgaben"
 
-#: contents/ui/main.qml:453 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
 #| msgid "Day View"
 msgid "Mail"
 msgstr "Tagesansicht"
 
-#: contents/ui/main.qml:813
+#: contents/ui/main.qml:819
 #, kde-format
 msgid "Import a calendar"
 msgstr "Einen Kalender importieren"
 
-#: contents/ui/main.qml:833
+#: contents/ui/main.qml:839
 #, kde-format
 msgid "Import Calendar"
 msgstr "Kalender importieren"
 
-#: contents/ui/main.qml:841
+#: contents/ui/main.qml:847
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1830,44 +1830,44 @@ msgid ""
 " "
 msgstr ""
 
-#: contents/ui/main.qml:849
+#: contents/ui/main.qml:855
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Mit bestehendem Kalender zusammenführen"
 
-#: contents/ui/main.qml:865
+#: contents/ui/main.qml:871
 #, kde-format
 msgid "Create new calendar"
 msgstr "Neuen Kalender hinzufügen"
 
-#: contents/ui/main.qml:1071
+#: contents/ui/main.qml:1077
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Wöchentlich"
 
-#: contents/ui/main.qml:1077
+#: contents/ui/main.qml:1083
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "Tage"
 
-#: contents/ui/main.qml:1083
+#: contents/ui/main.qml:1089
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open day view"
 msgid "Day"
 msgstr "Tage"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, fuzzy, kde-format
 #| msgid "Expand Sidebar"
 msgid "Expand MainDrawer"
 msgstr "Seitenleiste ausklappen"
 
-#: contents/ui/main.qml:1125
+#: contents/ui/main.qml:1131
 #, fuzzy, kde-format
 #| msgid "Collapse Sidebar"
 msgid "Collapse MainDrawer"
