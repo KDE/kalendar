@@ -51,22 +51,33 @@ QQC2.ComboBox {
      */
     property alias accessRightsFilter: collectionComboBoxModel.accessRightsFilter
 
-    /**
-     * Signal emitted when the selected collection changed
-     */
-    signal selectedCollectionChanged(var collection)
+    signal userSelectedCollection(var collection)
+
+    currentIndex: 0
+    onActivated: if (index > -1) {
+        const selectedModelIndex = collectionComboBoxModel.index(currentIndex, 0);
+        const selectedCollection = collectionComboBoxModel.data(selectedModelIndex, Akonadi.Collection.CollectionRole);
+        userSelectedCollection(selectedCollection);
+    }
 
     textRole: "display"
-    valueRole: "collectionColor"
+    valueRole: "collectionId"
 
     indicator: Rectangle {
         id: indicatorDot
+
+        // Make sure to check the currentValue property directly or risk listening to something that won't necessarily emit a changed() signal'
+        readonly property var selectedModelIndex: comboBox.currentValue > -1 ? comboBox.model.index(comboBox.currentIndex, 0) : null
+        readonly property var selectedCollectionColor: comboBox.currentValue > -1 ? comboBox.model.data(selectedModelIndex, Akonadi.Collection.CollectionColorRole) : null
+
         implicitHeight: comboBox.implicitHeight * 0.4
         implicitWidth: implicitHeight
+
         x: comboBox.mirrored ? comboBox.leftPadding : comboBox.width - (comboBox.leftPadding * 3) - Kirigami.Units.iconSizes.smallMedium
         y: comboBox.topPadding + (comboBox.availableHeight - height) / 2
+
         radius: width * 0.5
-        color: parent.currentValue
+        color: selectedCollectionColor
     }
 
     model: Akonadi.CollectionComboBoxModel {
@@ -81,14 +92,7 @@ QQC2.ComboBox {
             anchors.margins: Kirigami.Units.smallSpacing
             width: height
             radius: width * 0.5
-            color: collectionColor
-        }
-    }
-    currentIndex: 0
-    onCurrentIndexChanged: if (currentIndex !== -1) {
-        const collection = model.data(model.index(currentIndex, 0), Akonadi.Collection.CollectionRole);
-        if (collection) {
-            comboBox.selectedCollectionChanged(collection);
+            color: model.collectionColor
         }
     }
 

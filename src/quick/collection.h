@@ -28,9 +28,9 @@ public:
     };
     Q_ENUM(Right)
 
-
     enum Role {
         CollectionRole = Akonadi::EntityTreeModel::CollectionRole,
+        CollectionColorRole = Qt::BackgroundRole,
     };
     Q_ENUM(Role)
 };
