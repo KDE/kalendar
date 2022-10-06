@@ -139,7 +139,7 @@ MobileForm.FormCard {
                     enabled: root._configuration.availableAgents.flags(root._configuration.availableAgents.index(index, 0)) & Qt.ItemIsEnabled
                     onClicked: {
                         root._configuration.createNew(index);
-                        overlay.close();
+                        overlay.closeDialog();
                         overlay.destroy();
                     }
                 }
