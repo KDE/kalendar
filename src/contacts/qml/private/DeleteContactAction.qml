@@ -12,14 +12,7 @@ Kirigami.Action {
     property string name
     property var item
 
-    icon.name: "delete"
-    text: i18nc("@action:inmenu", "Delete contact")
-    onTriggered: {
-        const dialog = deleteContactConfirmationDialogComponent.createObject(applicationWindow())
-        dialog.open()
-    }
-
-    Component {
+    readonly property Component deleteContactConfirmationDialogComponent: Component {
         id: deleteContactConfirmationDialogComponent
         QQC2.Dialog {
             id: deleteContactConfirmationDialog
@@ -65,5 +58,12 @@ Kirigami.Action {
                 }
             }
         }
+    }
+
+    icon.name: "delete"
+    text: i18nc("@action:inmenu", "Delete contact")
+    onTriggered: {
+        const dialog = deleteContactConfirmationDialogComponent.createObject(applicationWindow())
+        dialog.open()
     }
 }
