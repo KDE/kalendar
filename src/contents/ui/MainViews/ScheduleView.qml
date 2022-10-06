@@ -147,7 +147,6 @@ Kirigami.Page {
     }
 
     padding: 0
-    bottomPadding: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
 
     PathView {
         id: pathView
@@ -222,18 +221,15 @@ Kirigami.Page {
                 ListView {
                     id: scheduleListView
 
-                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                     /* Spacing in this view works thus:
                      * 1. scheduleListView's spacing adds space between each day delegate component (including separators)
                      * 2. Weekly listSectionHeader has spacing of the day delegate column removed from bottom margin
                      * 3. Delegate's Separator's spacing gives same space (minus some adjustment) between it and dayGrid
                      */
-                    Layout.bottomMargin: Kirigami.Units.largeSpacing * 5
+                    spacing: Kirigami.Settings.isMobile ? Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
                     highlightRangeMode: ListView.ApplyRange
 
-                    onCountChanged: {
-                        if(root.initialMonth) root.moveToSelected();
-                    }
+                    onCountChanged: if(root.initialMonth) root.moveToSelected();
 
                     model: Kalendar.MultiDayIncidenceModel {
                        periodLength: 1
@@ -249,7 +245,7 @@ Kirigami.Page {
                         id: dayMouseArea
 
                         width: dayColumn.width
-                        height: dayColumn.height
+                        height: model.index === scheduleListView.count - 1 ? dayColumn.height + Kirigami.Units.largeSpacing : dayColumn.height
 
                         addDate: periodStartDate
                         onAddNewIncidence: addIncidence(type, addDate)
@@ -301,7 +297,7 @@ Kirigami.Page {
                                 id: weekHeading
 
                                 Layout.fillWidth: true
-                                Layout.bottomMargin: -dayColumn.spacing
+                                Layout.bottomMargin: -dayColumn.spacing // Remove default spacing, bring week header right down to day square
 
                                 text: {
                                     let nextDay = DateUtils.getLastDayOfWeek( DateUtils.nextWeek(periodStartDate) );
