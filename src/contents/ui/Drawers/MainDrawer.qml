@@ -28,21 +28,30 @@ Kirigami.OverlayDrawer {
     readonly property int collapsedWidth: menu.Layout.minimumWidth + Kirigami.Units.smallSpacing
     readonly property int expandedWidth: Kirigami.Units.gridUnit * 16
     property bool refuseModal: false
+    property int prevWindowWidth: applicationWindow().width
+    property int narrowWindowWidth: Kirigami.Units.gridUnit * 50
 
     Connections {
         target: applicationWindow()
         function onWidthChanged() {
             if(!Kirigami.Settings.isMobile) {
-                const prevCollapseState = mainDrawer.collapsed;
-
-                if(!Config.forceCollapsedMainDrawer) {
-                    mainDrawer.collapsed = applicationWindow().width < Kirigami.Units.gridUnit * 50
-                } // HACK: Workaround for incredibly glitchy behaviour caused by using wideScreen property
+                const currentWindowWidthNarrow = applicationWindow().width < narrowWindowWidth;
+                const prevWindowWidthNarrow = mainDrawer.prevWindowWidth < narrowWindowWidth;
+                const prevCollapsed = mainDrawer.collapsed;
 
                 // We don't want to go into modal when we are resizing the window to narrow and the drawer is collapsing
-                if(prevCollapseState !== mainDrawer.collapsed) {
-                    refuseModal = true;
+                if(currentWindowWidthNarrow && !prevWindowWidthNarrow) {
+                    mainDrawer.collapsed = true;
+                    refuseModal = !prevCollapsed;
+                } else if (!currentWindowWidthNarrow && prevWindowWidthNarrow) {
+                    if(!Config.forceCollapsedMainDrawer) {
+                        mainDrawer.collapsed = false;
+                    } else if(!mainDrawer.collapsed) {
+                        mainDrawer.collapsed = true;
+                    }
                 }
+
+                mainDrawer.prevWindowWidth = applicationWindow().width;
             }
         }
     }
@@ -57,7 +66,8 @@ Kirigami.OverlayDrawer {
     edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
     // Modal when mobile, or when the window is narrow and the drawer is expanded/being expanded
     modal: Kirigami.Settings.isMobile ||
-           (applicationWindow().width < Kirigami.Units.gridUnit * 50 && (!collapsed || width > collapsedWidth) && !refuseModal)
+           (applicationWindow().width < narrowWindowWidth && (!collapsed || width > collapsedWidth) && !refuseModal)
+    collapsed: !Kirigami.Settings.isMobile && (Config.forceCollapsedMainDrawer || narrowWindowWidth)
     onDrawerOpenChanged: {
         // We want the drawer to be open but collapsed if we close it when it is modal on desktop
         if(!Kirigami.Settings.isMobile && !drawerOpen) {
@@ -74,10 +84,7 @@ Kirigami.OverlayDrawer {
     onWidthChanged: if(width === collapsedWidth) refuseModal = false
     Behavior on width { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
 
-    Component.onCompleted: {
-        collapsed = Config.forceCollapsedMainDrawer // Fix crashing caused by setting on load
-        ContactManager.contactCollections; // Fix crashing because the contactCollections was created too late
-    }
+    Component.onCompleted: ContactManager.contactCollections; // Fix crashing because the contactCollections was created too late
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
