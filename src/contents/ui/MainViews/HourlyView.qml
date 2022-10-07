@@ -32,6 +32,8 @@ Kirigami.Page {
     readonly property bool isDark: KalendarUiUtils.darkMode
     property bool dragDropEnabled: true
 
+    property int allDayViewDelegateHeight: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+
     property int periodLength: 15
     property real scrollbarWidth: 0
     readonly property real dayWidth: ((root.width - hourLabelWidth - leftPadding - scrollbarWidth) / daysToShow) - gridLineWidth
@@ -344,7 +346,7 @@ Kirigami.Page {
                     readonly property int minHeight: Kirigami.Units.gridUnit *2
                     readonly property int maxHeight: pathView.height / 3
                     readonly property int lineHeight: viewLoader.multiDayLinesShown > 0 ?
-                        viewLoader.multiDayLinesShown * (Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing + root.incidenceSpacing) + Kirigami.Units.smallSpacing :
+                        viewLoader.multiDayLinesShown * (root.allDayViewDelegateHeight + root.incidenceSpacing) + Kirigami.Units.smallSpacing :
                         0
                     readonly property int defaultHeight: Math.min(lineHeight, maxHeight)
                     property int actualHeight: {
@@ -564,7 +566,7 @@ Kirigami.Page {
                                                                 id: dayGridViewIncidenceDelegate
                                                                 objectName: "dayGridViewIncidenceDelegate"
                                                                 dayWidth: root.dayWidth
-                                                                height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+                                                                height: root.allDayViewDelegateHeight
                                                                 parentViewSpacing: root.gridLineWidth
                                                                 horizontalSpacing: linesRepeater.spacing
                                                                 openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
