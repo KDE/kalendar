@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:45+0000\n"
+"POT-Creation-Date: 2022-10-07 00:47+0000\n"
 "PO-Revision-Date: 2022-07-22 22:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -138,7 +138,7 @@ msgid "Edit contact…"
 msgstr "Muokkaa yhteystietoa…"
 
 #: contacts/qml/ContactView.qml:94
-#: contacts/qml/private/DeleteContactAction.qml:16
+#: contacts/qml/private/DeleteContactAction.qml:64
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete contact"
@@ -511,7 +511,7 @@ msgid "Edit"
 msgstr "Muokkaa"
 
 #: contacts/qml/private/ContactPage.qml:46
-#: contacts/qml/private/DeleteContactAction.qml:59
+#: contacts/qml/private/DeleteContactAction.qml:52
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
@@ -653,12 +653,12 @@ msgid_plural "Email Addresses"
 msgstr[0] "Sähköpostiosoite"
 msgstr[1] "Sähköpostiosoitteet"
 
-#: contacts/qml/private/DeleteContactAction.qml:42
+#: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
 msgstr "Tätä toimintoa ei voi kumota"
 
-#: contacts/qml/private/DeleteContactAction.qml:63
+#: contacts/qml/private/DeleteContactAction.qml:56
 #, kde-format
 msgid "Delete contact"
 msgstr "Poista yhteystieto"
@@ -1905,57 +1905,57 @@ msgstr "Seuraava kuu"
 msgid "Today"
 msgstr "Tänään"
 
-#: contents/ui/MainViews/ScheduleView.qml:388
+#: contents/ui/MainViews/ScheduleView.qml:384
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Tyhjennä päivä."
 
 # *** TARKISTA: Oletus, että on %1 jonossa ”%1 to add something”.
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Tap"
 msgstr "napauttamalla"
 
 # *** TARKISTA: Oletus, että on %1 jonossa ”%1 to add something”.
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Click"
 msgstr "napsauttamalla"
 
-#: contents/ui/MainViews/ScheduleView.qml:408
+#: contents/ui/MainViews/ScheduleView.qml:404
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Ei mitään tiedossa tänään. Lisää jotakin %1."
 
-#: contents/ui/MainViews/ScheduleView.qml:526
+#: contents/ui/MainViews/ScheduleView.qml:522
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (päivä %2/%3)"
 
-#: contents/ui/MainViews/ScheduleView.qml:582
+#: contents/ui/MainViews/ScheduleView.qml:578
 #, kde-format
 msgid "Runs all day"
 msgstr "Koko päivän"
 
-#: contents/ui/MainViews/ScheduleView.qml:586
+#: contents/ui/MainViews/ScheduleView.qml:582
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1–%2"
 
-#: contents/ui/MainViews/ScheduleView.qml:589
+#: contents/ui/MainViews/ScheduleView.qml:585
 #, kde-format
 msgid "Starts at %1"
 msgstr "Alkaa %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:591
+#: contents/ui/MainViews/ScheduleView.qml:587
 #, kde-format
 msgid "Ends at %1"
 msgstr "Päättyy %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:593
+#: contents/ui/MainViews/ScheduleView.qml:589
 #, kde-format
 msgid "Runs All Day"
 msgstr "Koko päivä"

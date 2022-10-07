@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:45+0000\n"
+"POT-Creation-Date: 2022-10-07 00:47+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -145,7 +145,7 @@ msgid "Edit contact…"
 msgstr "Kontakti"
 
 #: contacts/qml/ContactView.qml:94
-#: contacts/qml/private/DeleteContactAction.qml:16
+#: contacts/qml/private/DeleteContactAction.qml:64
 #, fuzzy, kde-format
 #| msgid "Delete calendar"
 msgctxt "@action:inmenu"
@@ -535,7 +535,7 @@ msgid "Edit"
 msgstr "Rediģēt"
 
 #: contacts/qml/private/ContactPage.qml:46
-#: contacts/qml/private/DeleteContactAction.qml:59
+#: contacts/qml/private/DeleteContactAction.qml:52
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
@@ -684,12 +684,12 @@ msgstr[0] "Izvēlēties e-pasta adresi"
 msgstr[1] "Izvēlēties e-pasta adresi"
 msgstr[2] "Izvēlēties e-pasta adresi"
 
-#: contacts/qml/private/DeleteContactAction.qml:42
+#: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
 msgstr ""
 
-#: contacts/qml/private/DeleteContactAction.qml:63
+#: contacts/qml/private/DeleteContactAction.qml:56
 #, fuzzy, kde-format
 #| msgid "Delete calendar"
 msgid "Delete contact"
@@ -1945,55 +1945,55 @@ msgstr "Nākamais mēnesis"
 msgid "Today"
 msgstr "Šodien"
 
-#: contents/ui/MainViews/ScheduleView.qml:388
+#: contents/ui/MainViews/ScheduleView.qml:384
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Brīva diena."
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Tap"
 msgstr "Pieskarieties"
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Click"
 msgstr "Uzklikšķiniet"
 
-#: contents/ui/MainViews/ScheduleView.qml:408
+#: contents/ui/MainViews/ScheduleView.qml:404
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Šodien nekas nav ieplānots. %1, lai ko pievienotu."
 
-#: contents/ui/MainViews/ScheduleView.qml:526
+#: contents/ui/MainViews/ScheduleView.qml:522
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:582
+#: contents/ui/MainViews/ScheduleView.qml:578
 #, fuzzy, kde-format
 msgid "Runs all day"
 msgstr "Notiek visu dienu"
 
-#: contents/ui/MainViews/ScheduleView.qml:586
+#: contents/ui/MainViews/ScheduleView.qml:582
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 — %2"
 
-#: contents/ui/MainViews/ScheduleView.qml:589
+#: contents/ui/MainViews/ScheduleView.qml:585
 #, kde-format
 msgid "Starts at %1"
 msgstr "Sākas %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:591
+#: contents/ui/MainViews/ScheduleView.qml:587
 #, kde-format
 msgid "Ends at %1"
 msgstr "Beidzas %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:593
+#: contents/ui/MainViews/ScheduleView.qml:589
 #, fuzzy, kde-format
 msgid "Runs All Day"
 msgstr "Notiek visu dienu"

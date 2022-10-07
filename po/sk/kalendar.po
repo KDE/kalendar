@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:45+0000\n"
+"POT-Creation-Date: 2022-10-07 00:47+0000\n"
 "PO-Revision-Date: 2021-06-21 20:07+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -141,7 +141,7 @@ msgid "Edit contact…"
 msgstr "Mesiace"
 
 #: contacts/qml/ContactView.qml:94
-#: contacts/qml/private/DeleteContactAction.qml:16
+#: contacts/qml/private/DeleteContactAction.qml:64
 #, fuzzy, kde-format
 #| msgid "Add new Calendar"
 msgctxt "@action:inmenu"
@@ -526,7 +526,7 @@ msgid "Edit"
 msgstr "Upraviť"
 
 #: contacts/qml/private/ContactPage.qml:46
-#: contacts/qml/private/DeleteContactAction.qml:59
+#: contacts/qml/private/DeleteContactAction.qml:52
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
@@ -672,12 +672,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: contacts/qml/private/DeleteContactAction.qml:42
+#: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
 msgstr ""
 
-#: contacts/qml/private/DeleteContactAction.qml:63
+#: contacts/qml/private/DeleteContactAction.qml:56
 #, fuzzy, kde-format
 #| msgid "Add new Calendar"
 msgid "Delete contact"
@@ -1978,55 +1978,55 @@ msgstr "Mesiace"
 msgid "Today"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:388
+#: contents/ui/MainViews/ScheduleView.qml:384
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Tap"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Click"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:408
+#: contents/ui/MainViews/ScheduleView.qml:404
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:526
+#: contents/ui/MainViews/ScheduleView.qml:522
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:582
+#: contents/ui/MainViews/ScheduleView.qml:578
 #, kde-format
 msgid "Runs all day"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:586
+#: contents/ui/MainViews/ScheduleView.qml:582
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:589
+#: contents/ui/MainViews/ScheduleView.qml:585
 #, kde-format
 msgid "Starts at %1"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:591
+#: contents/ui/MainViews/ScheduleView.qml:587
 #, kde-format
 msgid "Ends at %1"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:593
+#: contents/ui/MainViews/ScheduleView.qml:589
 #, fuzzy, kde-format
 #| msgid "All day event:"
 msgid "Runs All Day"

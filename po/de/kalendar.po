@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:45+0000\n"
+"POT-Creation-Date: 2022-10-07 00:47+0000\n"
 "PO-Revision-Date: 2022-07-14 00:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -144,7 +144,7 @@ msgid "Edit contact…"
 msgstr "Kontakt bearbeiten ..."
 
 #: contacts/qml/ContactView.qml:94
-#: contacts/qml/private/DeleteContactAction.qml:16
+#: contacts/qml/private/DeleteContactAction.qml:64
 #, fuzzy, kde-format
 #| msgid "Delete calendar"
 msgctxt "@action:inmenu"
@@ -534,7 +534,7 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: contacts/qml/private/ContactPage.qml:46
-#: contacts/qml/private/DeleteContactAction.qml:59
+#: contacts/qml/private/DeleteContactAction.qml:52
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
@@ -680,12 +680,12 @@ msgid_plural "Email Addresses"
 msgstr[0] "E-Mail-Adresse auswählen"
 msgstr[1] "E-Mail-Adresse auswählen"
 
-#: contacts/qml/private/DeleteContactAction.qml:42
+#: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
 msgstr ""
 
-#: contacts/qml/private/DeleteContactAction.qml:63
+#: contacts/qml/private/DeleteContactAction.qml:56
 #, fuzzy, kde-format
 #| msgid "Delete calendar"
 msgid "Delete contact"
@@ -1924,55 +1924,55 @@ msgstr "Nächster Monat"
 msgid "Today"
 msgstr "Heute"
 
-#: contents/ui/MainViews/ScheduleView.qml:388
+#: contents/ui/MainViews/ScheduleView.qml:384
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Freier Tag."
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Tap"
 msgstr "Tippen"
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Click"
 msgstr "Klicken"
 
-#: contents/ui/MainViews/ScheduleView.qml:408
+#: contents/ui/MainViews/ScheduleView.qml:404
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Für heute steht nichts im Kalender, %1 um was hinzuzufügen."
 
-#: contents/ui/MainViews/ScheduleView.qml:526
+#: contents/ui/MainViews/ScheduleView.qml:522
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Tag %2 von %3)"
 
-#: contents/ui/MainViews/ScheduleView.qml:582
+#: contents/ui/MainViews/ScheduleView.qml:578
 #, kde-format
 msgid "Runs all day"
 msgstr "Ganztägig"
 
-#: contents/ui/MainViews/ScheduleView.qml:586
+#: contents/ui/MainViews/ScheduleView.qml:582
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/ScheduleView.qml:589
+#: contents/ui/MainViews/ScheduleView.qml:585
 #, kde-format
 msgid "Starts at %1"
 msgstr "Beginnt um %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:591
+#: contents/ui/MainViews/ScheduleView.qml:587
 #, kde-format
 msgid "Ends at %1"
 msgstr "Endet um %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:593
+#: contents/ui/MainViews/ScheduleView.qml:589
 #, kde-format
 msgid "Runs All Day"
 msgstr "Ganztägig"

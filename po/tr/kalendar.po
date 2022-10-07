@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:45+0000\n"
+"POT-Creation-Date: 2022-10-07 00:47+0000\n"
 "PO-Revision-Date: 2022-09-28 11:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -138,7 +138,7 @@ msgid "Edit contact…"
 msgstr "Kişiyi düzenle…"
 
 #: contacts/qml/ContactView.qml:94
-#: contacts/qml/private/DeleteContactAction.qml:16
+#: contacts/qml/private/DeleteContactAction.qml:64
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete contact"
@@ -503,7 +503,7 @@ msgid "Edit"
 msgstr "Düzenle"
 
 #: contacts/qml/private/ContactPage.qml:46
-#: contacts/qml/private/DeleteContactAction.qml:59
+#: contacts/qml/private/DeleteContactAction.qml:52
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
@@ -645,12 +645,12 @@ msgid_plural "Email Addresses"
 msgstr[0] "E-posta Adresi"
 msgstr[1] "E-posta Adresleri"
 
-#: contacts/qml/private/DeleteContactAction.qml:42
+#: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
 msgstr "Bu eylemi geri alamayacaksınız"
 
-#: contacts/qml/private/DeleteContactAction.qml:63
+#: contacts/qml/private/DeleteContactAction.qml:56
 #, kde-format
 msgid "Delete contact"
 msgstr "Kişiyi sil"
@@ -1879,55 +1879,55 @@ msgstr "Sonraki Ay"
 msgid "Today"
 msgstr "Bugün"
 
-#: contents/ui/MainViews/ScheduleView.qml:388
+#: contents/ui/MainViews/ScheduleView.qml:384
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Boş gün."
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Tap"
 msgstr "dokunun"
 
-#: contents/ui/MainViews/ScheduleView.qml:407
+#: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
 msgid "Click"
 msgstr "tıklayın"
 
-#: contents/ui/MainViews/ScheduleView.qml:408
+#: contents/ui/MainViews/ScheduleView.qml:404
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Programınızda bir şey görünmüyor. Eklemek için %1."
 
-#: contents/ui/MainViews/ScheduleView.qml:526
+#: contents/ui/MainViews/ScheduleView.qml:522
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (%2/%3 Gün)"
 
-#: contents/ui/MainViews/ScheduleView.qml:582
+#: contents/ui/MainViews/ScheduleView.qml:578
 #, kde-format
 msgid "Runs all day"
 msgstr "Tüm gün için"
 
-#: contents/ui/MainViews/ScheduleView.qml:586
+#: contents/ui/MainViews/ScheduleView.qml:582
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/ScheduleView.qml:589
+#: contents/ui/MainViews/ScheduleView.qml:585
 #, kde-format
 msgid "Starts at %1"
 msgstr "%1 tarihinde başlar"
 
-#: contents/ui/MainViews/ScheduleView.qml:591
+#: contents/ui/MainViews/ScheduleView.qml:587
 #, kde-format
 msgid "Ends at %1"
 msgstr "%1 tarihinde biter"
 
-#: contents/ui/MainViews/ScheduleView.qml:593
+#: contents/ui/MainViews/ScheduleView.qml:589
 #, kde-format
 msgid "Runs All Day"
 msgstr "Tüm Gün"
