@@ -145,7 +145,7 @@ Item {
                                                 anchors.fill: parent
                                                 addDate: gridItem.date
                                                 onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate)
-                                                onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
+                                                onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
 
                                                 DropArea {
                                                     id: incidenceDropArea
@@ -296,7 +296,7 @@ Item {
                                     }
 
                                     onAddNewIncidence: useGridSquareDate(type, applicationWindow().contentItem, this.mapToGlobal(clickX, clickY))
-                                    onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
+                                    onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
                                 }
 
                                 model: incidences

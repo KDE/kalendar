@@ -249,7 +249,7 @@ Kirigami.Page {
 
                         addDate: periodStartDate
                         onAddNewIncidence: addIncidence(type, addDate)
-                        onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
+                        onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
 
                         Rectangle {
                             id: backgroundRectangle

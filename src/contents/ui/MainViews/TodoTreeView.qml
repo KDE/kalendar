@@ -93,7 +93,7 @@ TreeListView {
         anchors.fill: parent
         enabled: !Kirigami.Settings.isMobile
         parent: background
-        onClicked: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
+        onClicked: KalendarUiUtils.appMain.incidenceInfoViewer.close()
         propagateComposedEvents: true
     }
 

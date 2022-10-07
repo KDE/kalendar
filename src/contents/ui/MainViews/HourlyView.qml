@@ -512,7 +512,7 @@ Kirigami.Page {
 
                                                                 addDate: parent.date
                                                                 onAddNewIncidence: root.addIncidence(type, addDate, false)
-                                                                onDeselect: KalendarUiUtils.appMain.incidenceInfoDrawer.close()
+                                                                onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
 
                                                                 DropArea {
                                                                     id: multiDayViewIncidenceDropArea
