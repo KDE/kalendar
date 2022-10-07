@@ -489,6 +489,7 @@ Kirigami.ApplicationWindow {
         source: Qt.resolvedUrl("qrc:/BottomToolBar.qml")
     }
 
+    property alias mainDrawer: mainDrawer
     globalDrawer: MainDrawer {
         id: mainDrawer
         mode: pageStack.currentItem ? pageStack.currentItem.mode : KalendarApplication.Event
@@ -1113,23 +1114,7 @@ Kirigami.ApplicationWindow {
 
             titleDelegate: RowLayout {
                 spacing: 0
-                QQC2.ToolButton {
-                    visible: !Kirigami.Settings.isMobile
-                    icon.name: mainDrawer.collapsed ? "sidebar-expand" : "sidebar-collapse"
-                    onClicked: {
-                        if(mainDrawer.collapsed && !wideScreen) { // Collapsed due to narrow window
-                            // We don't want to write to config as when narrow the button will only open the modal drawer
-                            mainDrawer.collapsed = !mainDrawer.collapsed;
-                        } else {
-                            Config.forceCollapsedMainDrawer = !Config.forceCollapsedMainDrawer;
-                            Config.save()
-                        }
-                    }
-
-                    QQC2.ToolTip.text: mainDrawer.collapsed ? i18n("Expand MainDrawer") : i18n("Collapse MainDrawer")
-                    QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-                }
+                MainDrawerToggleButton {}
                 Kirigami.Heading {
                     text: i18n("Tasks")
                 }
