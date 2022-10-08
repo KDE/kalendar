@@ -19,6 +19,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="RelatedIncidenceDelegate.qml">contents/ui/Delegates/RelatedIncidenceDelegate.qml</file>
 
     <file alias="DayGridView.qml">contents/ui/MainViews/DayGridView.qml</file>
+    <file alias="SwipeableMonthGridView.qml">contents/ui/MainViews/SwipeableMonthGridView.qml</file>
     <file alias="MonthView.qml">contents/ui/MainViews/MonthView.qml</file>
     <file alias="ScheduleView.qml">contents/ui/MainViews/ScheduleView.qml</file>
     <file alias="TodoTreeView.qml">contents/ui/MainViews/TodoTreeView.qml</file>
