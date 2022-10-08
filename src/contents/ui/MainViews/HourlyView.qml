@@ -27,7 +27,7 @@ Kirigami.Page {
     property int daysToShow: 7
     property bool dragDropEnabled: true
 
-    readonly property var internalHourlyView: swipeableViewLoader.item
+    readonly property var internalHourlyView: basicViewLoader.item
 
     readonly property var mode: switch(daysToShow) {
         case 1:
@@ -83,7 +83,25 @@ Kirigami.Page {
     Loader {
         id: swipeableViewLoader
         anchors.fill: parent
+        active: false
         sourceComponent: SwipeableInternalHourlyView {
+            anchors.fill: parent
+
+            daysToShow: root.daysToShow
+            dragDropEnabled: root.dragDropEnabled
+            startDate: root.startDate
+            currentDate: root.currentDate
+            openOccurrence: root.openOccurrence
+
+            onStartDateChanged: root.startDate = startDate
+        }
+    }
+
+    Loader {
+        id: basicViewLoader
+        anchors.fill: parent
+        active: true
+        sourceComponent: BasicInternalHourlyView {
             anchors.fill: parent
 
             daysToShow: root.daysToShow

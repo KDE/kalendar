@@ -26,6 +26,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="TodoTreeView.qml">contents/ui/MainViews/TodoTreeView.qml</file>
     <file alias="TodoView.qml">contents/ui/MainViews/TodoView.qml</file>
     <file alias="SwipeableInternalHourlyView.qml">contents/ui/MainViews/SwipeableInternalHourlyView.qml</file>
+    <file alias="BasicInternalHourlyView.qml">contents/ui/MainViews/BasicInternalHourlyView.qml</file>
     <file alias="HourlyView.qml">contents/ui/MainViews/HourlyView.qml</file>
     <file alias="LazyContactView.qml">contents/ui/MainViews/LazyContactView.qml</file>
     <file alias="LazyMailView.qml">contents/ui/MainViews/LazyMailView.qml</file>
