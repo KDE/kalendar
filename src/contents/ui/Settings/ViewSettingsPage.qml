@@ -75,8 +75,8 @@ Kirigami.ScrollablePage {
                 Controls.ButtonGroup {
                     id: weekdayLabelGroup
                     exclusive: true
-                    onClicked: {
-                        Config.weekdayLabelAlignment = button.value;
+                    onCheckedButtonChanged: {
+                        Config.weekdayLabelAlignment = checkedButton.value;
                         Config.save();
                     }
                 }
@@ -112,8 +112,8 @@ Kirigami.ScrollablePage {
                 Controls.ButtonGroup {
                     id: weekdayLabelLengthGroup
                     exclusive: true
-                    onClicked: {
-                        Config.weekdayLabelLength = button.value;
+                    onCheckedButtonChanged: {
+                        Config.weekdayLabelLength = checkedButton.value;
                         Config.save();
                     }
                 }
@@ -244,8 +244,8 @@ Kirigami.ScrollablePage {
                 Controls.ButtonGroup {
                     id: locationGroup
                     exclusive: true
-                    onClicked: {
-                        Config.locationMarker = button.value;
+                    onCheckedButtonChanged: {
+                        Config.locationMarker = checkedButton.value;
                         Config.save();
                     }
                 }
