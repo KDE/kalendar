@@ -12,17 +12,15 @@ import "dateutils.js" as DateUtils
 DayGridView {
     id: dayView
 
-    signal viewDatesChanged(date startDate, date firstDayOfMonth, int month, int year)
+    signal viewDatesChanged(date startDate, date firstDayOfMonth)
 
-    property bool isLarge: true
-    property bool isTiny: false
+    readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
+    readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
 
     function setToDate(date) {
         foregroundLoader.active = false;
 
-        month = date.getMonth();
-        year = date.getFullYear();
-        let firstDayOfMonth = new Date(year, month, 1);
+        firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
         let newDate = DateUtils.getFirstDayOfWeek(firstDayOfMonth)
 
         // Handling adding and subtracting months in Javascript can get *really* messy.
@@ -36,7 +34,7 @@ DayGridView {
         }
 
         startDate = newDate;
-        viewDatesChanged(startDate, firstDayOfMonth, month, year);
+        viewDatesChanged(startDate, firstDayOfMonth);
 
         foregroundLoader.active = true;
     }

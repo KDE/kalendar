@@ -19,10 +19,10 @@ Kirigami.Page {
     property date currentDate: new Date()
     property date firstDayOfMonth: DateUtils.getFirstDayOfMonth(currentDate)
     property date startDate: DateUtils.getFirstDayOfWeek(firstDayOfMonth)
-    property int month: startDate.month()
-    property int year: startDate.getFullYear()
-    readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
-    readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
+
+    readonly property int month: firstDayOfMonth.getMonth()
+    readonly property int year: firstDayOfMonth.getFullYear()
+
     readonly property int mode: Kalendar.KalendarApplication.Month
 
     property bool dragDropEnabled: true
@@ -35,18 +35,6 @@ Kirigami.Page {
         default:
             return swipeableViewLoader.item;
         }
-    }
-
-    function setToDate(date, isInitialMonth = false) {
-        dayGrid.setToDate(date, isInitialMonth);
-    }
-
-    padding: 0
-
-    background: Rectangle {
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        color: Kirigami.Theme.backgroundColor
     }
 
     readonly property Kirigami.Action previousAction: Kirigami.Action {
@@ -69,10 +57,24 @@ Kirigami.Page {
         shortcut: StandardKey.MoveToStartOfLine
         onTriggered: setToDate(new Date())
     }
+
+    function setToDate(date, isInitialMonth = false) {
+        initialMonth = isInitialMonth;
+        dayGrid.setToDate(date);
+    }
+
     actions {
         left: Qt.application.layoutDirection === Qt.RightToLeft ? nextAction : previousAction
         right: Qt.application.layoutDirection === Qt.RightToLeft ? previousAction : nextAction
         main: todayAction
+    }
+
+    padding: 0
+
+    background: Rectangle {
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        color: Kirigami.Theme.backgroundColor
     }
 
     Loader {
@@ -82,9 +84,6 @@ Kirigami.Page {
         sourceComponent: SwipeableMonthGridView {
             anchors.fill: parent
 
-            initialMonth: monthPage.initialMonth
-            isLarge: monthPage.isLarge
-            isTiny: monthPage.isTiny
             dragDropEnabled: monthPage.dragDropEnabled
             currentDate: monthPage.currentDate
             openOccurrence: monthPage.openOccurrence
@@ -92,8 +91,6 @@ Kirigami.Page {
             onViewDatesChanged: {
                 monthPage.startDate = startDate;
                 monthPage.firstDayOfMonth = firstDayOfMonth;
-                monthPage.month = month;
-                monthPage.year = year;
             }
         }
     }
@@ -105,8 +102,6 @@ Kirigami.Page {
         sourceComponent: BasicMonthGridView {
             anchors.fill: parent
 
-            isLarge: monthPage.isLarge
-            isTiny: monthPage.isTiny
             dragDropEnabled: monthPage.dragDropEnabled
             startDate: monthPage.startDate
             currentDate: monthPage.currentDate
@@ -115,8 +110,6 @@ Kirigami.Page {
             onViewDatesChanged: {
                 monthPage.startDate = startDate;
                 monthPage.firstDayOfMonth = firstDayOfMonth;
-                monthPage.month = month;
-                monthPage.year = year;
             }
         }
     }

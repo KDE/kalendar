@@ -12,26 +12,23 @@ import "dateutils.js" as DateUtils
 PathView {
     id: pathView
 
-    signal viewDatesChanged(date startDate, date firstDayOfMonth, int month, int year)
+    signal viewDatesChanged(date startDate, date firstDayOfMonth)
 
-    property bool initialMonth: true
-    property bool isLarge: true
-    property bool isTiny: false
     property bool dragDropEnabled: true
     property date currentDate: new Date()
+    property date startDate: DateUtils.getFirstDayOfWeek(DateUtils.getFirstDayOfMonth(currentDate))
     property var openOccurrence: null
 
-    function setToDate(date, isInitialMonth = false) {
-        initialMonth = isInitialMonth;
-        let monthDiff = date.getMonth() - pathView.currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - pathView.currentItem.firstDayOfMonth.getFullYear()))
-        let newIndex = pathView.currentIndex + monthDiff;
+    function setToDate(date) {
+        let monthDiff = date.getMonth() - currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - currentItem.firstDayOfMonth.getFullYear()))
+        let newIndex = currentIndex + monthDiff;
 
-        let firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
-        let lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+        let firstItemDate = model.data(model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+        let lastItemDate = model.data(model.index(model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
 
         while(firstItemDate >= date) {
-            pathView.model.addDates(false)
-            firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+            model.addDates(false)
+            firstItemDate = model.data(model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
             newIndex = 0;
         }
         if(firstItemDate < date && newIndex === 0) {
@@ -39,10 +36,12 @@ PathView {
         }
 
         while(lastItemDate <= date) {
-            pathView.model.addDates(true)
-            lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+            model.addDates(true)
+            lastItemDate = model.data(model.index(model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
         }
-        pathView.currentIndex = newIndex;
+        currentIndex = newIndex;
+
+        viewDatesChanged(currentItem.startDate, currentItem.firstDayOfMonth);
     }
 
     flickDeceleration: Kirigami.Units.longDuration
@@ -72,8 +71,6 @@ PathView {
         currentIndex = startIndex;
     }
     onCurrentIndexChanged: {
-        pathView.viewDatesChanged(currentItem.startDate, currentItem.firstDayOfMonth, currentItem.month, currentItem.year);
-
         if(currentIndex >= count - 2) {
             model.addDates(true);
         } else if (currentIndex <= 1) {
@@ -85,13 +82,13 @@ PathView {
     delegate: Loader {
         id: viewLoader
 
-        property date startDate: model.startDate
-        property date firstDayOfMonth: model.firstDay
-        property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
-        property int year: model.selectedYear
+        readonly property date startDate: model.startDate
+        readonly property date firstDayOfMonth: model.firstDay
+        readonly property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
+        readonly property int year: model.selectedYear
 
-        property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
-        property bool isCurrentItem: PathView.isCurrentItem
+        readonly property bool isNextOrCurrentItem: index >= pathView.currentIndex -1 && index <= pathView.currentIndex + 1
+        readonly property bool isCurrentItem: PathView.isCurrentItem
 
         active: isNextOrCurrentItem
         asynchronous: !isCurrentItem
@@ -100,15 +97,12 @@ PathView {
             width: pathView.width
             height: pathView.height
 
-            isLarge: pathView.isLarge
-            isTiny: pathView.isTiny
-
             isCurrentView: viewLoader.isCurrentItem
             dragDropEnabled: pathView.dragDropEnabled
 
             startDate: viewLoader.startDate
+            firstDayOfMonth: viewLoader.firstDayOfMonth
             currentDate: pathView.currentDate
-            month: viewLoader.month
 
             openOccurrence: pathView.openOccurrence
         }

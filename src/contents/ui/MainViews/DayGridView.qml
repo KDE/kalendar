@@ -21,17 +21,21 @@ Item {
     property int daysToShow: daysPerRow * 6
     property int daysPerRow: 7
     property double weekHeaderWidth: Kalendar.Config.showWeekNumbers ? Kirigami.Units.gridUnit * 1.5 : 0
-    property date currentDate
+
+    property date currentDate: new Date()
     // Getting the components once makes this faster when we need them repeatedly
-    property int currentDay: currentDate ? currentDate.getDate() : null
-    property int currentMonth: currentDate ? currentDate.getMonth() : null
-    property int currentYear: currentDate ? currentDate.getFullYear() : null
-    property date startDate
+    readonly property int currentDay: currentDate.getDate()
+    readonly property int currentMonth: currentDate.getMonth()
+    readonly property int currentYear:currentDate.getFullYear()
+
+    property date firstDayOfMonth: DateUtils.getFirstDayOfMonth(currentDate)
+    property date startDate: DateUtils.getFirstDayOfWeek(firstDayOfMonth)
+    readonly property int month: firstDayOfMonth.getMonth()
+
     property bool paintGrid: true
     property bool showDayIndicator: true
     property Component dayHeaderDelegate
     property Component weekHeaderDelegate
-    property int month
     property alias bgLoader: backgroundLoader.item
     property bool isCurrentView: true
     property bool dragDropEnabled: true

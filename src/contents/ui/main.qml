@@ -1094,7 +1094,6 @@ Kirigami.ApplicationWindow {
                     ]
                 }
             }
-            selectedDate: root.selectedDate
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
 
