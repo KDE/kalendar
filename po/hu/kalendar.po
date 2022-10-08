@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:47+0000\n"
+"POT-Creation-Date: 2022-10-08 00:48+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1891,28 +1891,28 @@ msgstr "Oldalsáv összecsukása"
 msgid "<b>Today</b>"
 msgstr "<b>Ma</b>"
 
-#: contents/ui/MainViews/HourlyView.qml:108
+#: contents/ui/MainViews/HourlyView.qml:110
 #, kde-format
 msgid "Previous Week"
 msgstr "Előző hét"
 
-#: contents/ui/MainViews/HourlyView.qml:115
+#: contents/ui/MainViews/HourlyView.qml:117
 #, kde-format
 msgid "Next Week"
 msgstr "Következő hét"
 
-#: contents/ui/MainViews/HourlyView.qml:122
+#: contents/ui/MainViews/HourlyView.qml:124
 #, kde-format
 msgid "Now"
 msgstr "Most"
 
-#: contents/ui/MainViews/HourlyView.qml:406
+#: contents/ui/MainViews/HourlyView.qml:410
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset"
 msgstr "Visszaállítás"
 
-#: contents/ui/MainViews/HourlyView.qml:419
+#: contents/ui/MainViews/HourlyView.qml:423
 #, kde-format
 msgid "All day or Multi day"
 msgstr "Minden nap, vagy több nap"

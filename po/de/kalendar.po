@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:47+0000\n"
+"POT-Creation-Date: 2022-10-08 00:48+0000\n"
 "PO-Revision-Date: 2022-07-14 00:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -1878,28 +1878,28 @@ msgstr "Seitenleiste einklappen"
 msgid "<b>Today</b>"
 msgstr "<b>Heute</b>"
 
-#: contents/ui/MainViews/HourlyView.qml:108
+#: contents/ui/MainViews/HourlyView.qml:110
 #, kde-format
 msgid "Previous Week"
 msgstr "Vorherige Woche"
 
-#: contents/ui/MainViews/HourlyView.qml:115
+#: contents/ui/MainViews/HourlyView.qml:117
 #, kde-format
 msgid "Next Week"
 msgstr "Nächste Woche"
 
-#: contents/ui/MainViews/HourlyView.qml:122
+#: contents/ui/MainViews/HourlyView.qml:124
 #, kde-format
 msgid "Now"
 msgstr "Jetzt"
 
-#: contents/ui/MainViews/HourlyView.qml:406
+#: contents/ui/MainViews/HourlyView.qml:410
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: contents/ui/MainViews/HourlyView.qml:419
+#: contents/ui/MainViews/HourlyView.qml:423
 #, kde-format
 msgid "All day or Multi day"
 msgstr ""

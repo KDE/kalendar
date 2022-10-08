@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:47+0000\n"
+"POT-Creation-Date: 2022-10-08 00:48+0000\n"
 "PO-Revision-Date: 2022-09-29 23:55+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -1833,28 +1833,28 @@ msgstr "Fechar a Área Principal"
 msgid "<b>Today</b>"
 msgstr "<b>Hoje</b>"
 
-#: contents/ui/MainViews/HourlyView.qml:108
+#: contents/ui/MainViews/HourlyView.qml:110
 #, kde-format
 msgid "Previous Week"
 msgstr "Semana Anterior"
 
-#: contents/ui/MainViews/HourlyView.qml:115
+#: contents/ui/MainViews/HourlyView.qml:117
 #, kde-format
 msgid "Next Week"
 msgstr "Semana Seguinte"
 
-#: contents/ui/MainViews/HourlyView.qml:122
+#: contents/ui/MainViews/HourlyView.qml:124
 #, kde-format
 msgid "Now"
 msgstr "Agora"
 
-#: contents/ui/MainViews/HourlyView.qml:406
+#: contents/ui/MainViews/HourlyView.qml:410
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset"
 msgstr "Reiniciar"
 
-#: contents/ui/MainViews/HourlyView.qml:419
+#: contents/ui/MainViews/HourlyView.qml:423
 #, kde-format
 msgid "All day or Multi day"
 msgstr "Todo o dia ou vários dias"

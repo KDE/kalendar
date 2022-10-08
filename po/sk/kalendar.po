@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:47+0000\n"
+"POT-Creation-Date: 2022-10-08 00:48+0000\n"
 "PO-Revision-Date: 2021-06-21 20:07+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -1928,30 +1928,30 @@ msgstr ""
 msgid "<b>Today</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/MainViews/HourlyView.qml:108
+#: contents/ui/MainViews/HourlyView.qml:110
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgid "Previous Week"
 msgstr "Predchádzajúci"
 
-#: contents/ui/MainViews/HourlyView.qml:115
+#: contents/ui/MainViews/HourlyView.qml:117
 #, fuzzy, kde-format
 #| msgid "Next"
 msgid "Next Week"
 msgstr "Nasledujúci"
 
-#: contents/ui/MainViews/HourlyView.qml:122
+#: contents/ui/MainViews/HourlyView.qml:124
 #, kde-format
 msgid "Now"
 msgstr ""
 
-#: contents/ui/MainViews/HourlyView.qml:406
+#: contents/ui/MainViews/HourlyView.qml:410
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset"
 msgstr ""
 
-#: contents/ui/MainViews/HourlyView.qml:419
+#: contents/ui/MainViews/HourlyView.qml:423
 #, kde-format
 msgid "All day or Multi day"
 msgstr ""
