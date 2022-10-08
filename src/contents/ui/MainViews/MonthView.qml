@@ -14,13 +14,13 @@ import "dateutils.js" as DateUtils
 Kirigami.Page {
     id: monthPage
 
-    property bool initialMonth
-    property var openOccurrence
-    property date startDate
-    property date currentDate
-    property date firstDayOfMonth
-    property int month
-    property int year
+    property bool initialMonth: true
+    property var openOccurrence: null
+    property date currentDate: new Date()
+    property date firstDayOfMonth: DateUtils.getFirstDayOfMonth(currentDate)
+    property date startDate: DateUtils.getFirstDayOfWeek(firstDayOfMonth)
+    property int month: startDate.month()
+    property int year: startDate.getFullYear()
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
     readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
     readonly property int mode: Kalendar.KalendarApplication.Month
@@ -78,6 +78,29 @@ Kirigami.Page {
             isLarge: monthPage.isLarge
             isTiny: monthPage.isTiny
             dragDropEnabled: monthPage.dragDropEnabled
+            currentDate: monthPage.currentDate
+            openOccurrence: monthPage.openOccurrence
+
+            onViewDatesChanged: {
+                monthPage.startDate = startDate;
+                monthPage.firstDayOfMonth = firstDayOfMonth;
+                monthPage.month = month;
+                monthPage.year = year;
+            }
+        }
+    }
+
+    Loader {
+        id: basicViewLoader
+        anchors.fill: parent
+        active: false
+        sourceComponent: BasicMonthGridView {
+            anchors.fill: parent
+
+            isLarge: monthPage.isLarge
+            isTiny: monthPage.isTiny
+            dragDropEnabled: monthPage.dragDropEnabled
+            startDate: monthPage.startDate
             currentDate: monthPage.currentDate
             openOccurrence: monthPage.openOccurrence
 

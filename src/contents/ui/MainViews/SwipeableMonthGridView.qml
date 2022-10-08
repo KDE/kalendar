@@ -96,65 +96,19 @@ PathView {
         active: isNextOrCurrentItem
         asynchronous: !isCurrentItem
         visible: status === Loader.Ready
-        sourceComponent: DayGridView {
-            id: dayView
-            objectName: "monthView"
+        sourceComponent: BasicMonthGridView {
             width: pathView.width
             height: pathView.height
+
+            isLarge: pathView.isLarge
+            isTiny: pathView.isTiny
+
             isCurrentView: viewLoader.isCurrentItem
             dragDropEnabled: pathView.dragDropEnabled
 
             startDate: viewLoader.startDate
             currentDate: pathView.currentDate
             month: viewLoader.month
-
-            dayHeaderDelegate: QQC2.Control {
-                Layout.maximumHeight: Kirigami.Units.gridUnit * 2
-                contentItem: Kirigami.Heading {
-                    text: {
-                        let longText = day.toLocaleString(Qt.locale(), "dddd");
-                        let midText = day.toLocaleString(Qt.locale(), "ddd");
-                        let shortText = midText.slice(0,1);
-                        switch(Kalendar.Config.weekdayLabelLength) {
-                            case Kalendar.Config.Full:
-                                let chosenFormat = "dddd"
-                                return pathView.isLarge ? longText : pathView.isTiny ? shortText : midText;
-                            case Kalendar.Config.Abbreviated:
-                                return pathView.isTiny ? shortText : midText;
-                            case Kalendar.Config.Letter:
-                            default:
-                                return shortText;
-                        }
-                    }
-                    level: 2
-                    leftPadding: Kirigami.Units.smallSpacing
-                    rightPadding: Kirigami.Units.smallSpacing
-                    horizontalAlignment: {
-                        switch(Kalendar.Config.weekdayLabelAlignment) {
-                            case Kalendar.Config.Left:
-                                return Text.AlignLeft;
-                            case Kalendar.Config.Center:
-                                return Text.AlignHCenter;
-                            case Kalendar.Config.Right:
-                                return Text.AlignRight;
-                            default:
-                                return Text.AlignHCenter;
-                        }
-                    }
-                }
-            }
-
-            weekHeaderDelegate: QQC2.Label {
-                padding: Kirigami.Units.smallSpacing
-                verticalAlignment: Qt.AlignTop
-                horizontalAlignment: Qt.AlignHCenter
-                text: DateUtils.getWeek(startDate, Qt.locale().firstDayOfWeek)
-                background: Rectangle {
-                    Kirigami.Theme.inherit: false
-                    Kirigami.Theme.colorSet: Kirigami.Theme.View
-                    color: Kirigami.Theme.backgroundColor
-                }
-            }
 
             openOccurrence: pathView.openOccurrence
         }

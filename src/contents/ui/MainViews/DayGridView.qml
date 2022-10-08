@@ -36,6 +36,8 @@ Item {
     property bool isCurrentView: true
     property bool dragDropEnabled: true
 
+    readonly property alias foregroundLoader: foregroundLoader
+
     //Internal
     property int numberOfLinesShown: 0
     property int numberOfRows: (daysToShow / daysPerRow)
