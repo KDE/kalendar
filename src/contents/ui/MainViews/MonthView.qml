@@ -27,7 +27,15 @@ Kirigami.Page {
 
     property bool dragDropEnabled: true
 
-    property alias dayGrid: swipeableViewLoader.item
+    readonly property var dayGrid: {
+        switch (Kalendar.Config.monthGridMode) {
+        case Kalendar.Config.BasicMonthGrid:
+            return basicViewLoader.item;
+        case Kalendar.Config.SwipeableMonthGrid:
+        default:
+            return swipeableViewLoader.item;
+        }
+    }
 
     function setToDate(date, isInitialMonth = false) {
         dayGrid.setToDate(date, isInitialMonth);
@@ -70,7 +78,7 @@ Kirigami.Page {
     Loader {
         id: swipeableViewLoader
         anchors.fill: parent
-        active: true
+        active: Kalendar.Config.monthGridMode === Kalendar.Config.SwipeableMonthGrid
         sourceComponent: SwipeableMonthGridView {
             anchors.fill: parent
 
@@ -93,7 +101,7 @@ Kirigami.Page {
     Loader {
         id: basicViewLoader
         anchors.fill: parent
-        active: false
+        active: Kalendar.Config.monthGridMode === Kalendar.Config.BasicMonthGrid
         sourceComponent: BasicMonthGridView {
             anchors.fill: parent
 

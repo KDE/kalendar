@@ -92,6 +92,19 @@ SPDX-License-Identifier: LGPL-2.0-or-later
         </entry>
     </group>
     <group name="MonthView">
+        <entry name="monthGridMode" type="Enum">
+            <label>Type of day grid view to be used internally in the month view"</label>
+            <choices>
+                <choice name="SwipeableMonthGrid">
+                    <label>Swipeable month grid</label>
+                </choice>
+                <choice name="BasicMonthGrid">
+                    <label>Basic month grid</label>
+                </choice>
+            </choices>
+            <default>SwipeableMonthGrid</default>
+        </entry>
+
         <entry name="weekdayLabelAlignment" type="Enum">
             <label>Alignment of week day header in month view.</label>
             <choices>
