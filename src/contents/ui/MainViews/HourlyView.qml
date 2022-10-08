@@ -27,7 +27,15 @@ Kirigami.Page {
     property int daysToShow: 7
     property bool dragDropEnabled: true
 
-    readonly property var internalHourlyView: basicViewLoader.item
+    readonly property var internalHourlyView: {
+        switch (Kalendar.Config.hourlyViewMode) {
+        case Kalendar.Config.BasicInternalHourlyView:
+            return basicViewLoader.item;
+        case Kalendar.Config.SwipeableInternalHourlyView:
+        default:
+            return swipeableViewLoader.item;
+        }
+    }
 
     readonly property var mode: switch(daysToShow) {
         case 1:
@@ -83,7 +91,7 @@ Kirigami.Page {
     Loader {
         id: swipeableViewLoader
         anchors.fill: parent
-        active: false
+        active: Kalendar.Config.hourlyViewMode === Kalendar.Config.SwipeableInternalHourlyView
         sourceComponent: SwipeableInternalHourlyView {
             anchors.fill: parent
 
@@ -100,7 +108,7 @@ Kirigami.Page {
     Loader {
         id: basicViewLoader
         anchors.fill: parent
-        active: true
+        active: Kalendar.Config.hourlyViewMode === Kalendar.Config.BasicInternalHourlyView
         sourceComponent: BasicInternalHourlyView {
             anchors.fill: parent
 

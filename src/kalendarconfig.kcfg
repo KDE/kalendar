@@ -149,6 +149,19 @@ SPDX-License-Identifier: LGPL-2.0-or-later
     </group>
 
     <group name="WeekView">
+        <entry name="hourlyViewMode" type="Enum">
+            <label>Type of day grid view to be used internally in the month view"</label>
+            <choices>
+                <choice name="SwipeableInternalHourlyView">
+                    <label>Swipeable internal week view</label>
+                </choice>
+                <choice name="BasicInternalHourlyView">
+                    <label>Basic internal week view</label>
+                </choice>
+            </choices>
+            <default>SwipeableMonthGrid</default>
+        </entry>
+
         <entry name="weekViewAllDayHeaderHeight" type="Int">
             <label>Set the height of the all-day header at the top of the week view."</label>
             <default>-1</default>

@@ -222,6 +222,51 @@ Kirigami.ScrollablePage {
             contentItem: ColumnLayout {
                 spacing: 0
                 MobileForm.FormCardHeader {
+                    title: i18n("Week view settings")
+                }
+
+                Controls.ButtonGroup {
+                    id: hourlyViewModeGroup
+                    exclusive: true
+                    onCheckedButtonChanged: {
+                        Config.hourlyViewMode = checkedButton.value;
+                        Config.save();
+                    }
+                }
+                MobileForm.FormSectionText {
+                    text: i18n("Week view mode")
+                }
+                ColumnLayout {
+                    spacing: 0
+                    Layout.fillWidth: true
+                    MobileForm.FormRadioDelegate {
+                        property int value: Config.SwipeableInternalHourlyView
+                        text: i18n("Swipeable week view")
+                        enabled: !Config.isHourlyViewModeImmutable
+                        checked: Config.monthGridMode === value
+                        Controls.ButtonGroup.group: hourlyViewModeGroup
+                    }
+                    MobileForm.FormRadioDelegate {
+                        property int value: Config.BasicInternalHourlyView
+                        text: i18n("Basic week view")
+                        enabled: !Config.isHourlyViewModeImmutable
+                        checked: Config.monthGridMode === value
+                        Controls.ButtonGroup.group: hourlyViewModeGroup
+                    }
+                    MobileForm.FormTextDelegate {
+                        text: i18n("Swipeable week view requires higher system performance.")
+                        visible: Config.hourlyViewMode === Config.SwipeableInternalHourlyView
+                    }
+                }
+            }
+        }
+
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            contentItem: ColumnLayout {
+                spacing: 0
+                MobileForm.FormCardHeader {
                     title: i18n("Schedule View settings")
                 }
                 MobileForm.FormCheckDelegate {
