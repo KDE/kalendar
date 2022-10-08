@@ -38,8 +38,8 @@ Kirigami.Page {
                             topPadding: 2 * Kirigami.Units.largeSpacing
                             background: Item {}
                             leftPadding: Kirigami.Settings.isMobile ?
-                                (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
-                                (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
+                            (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                            (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
                             hoverEnabled: false
 
                             separatorVisible: false
@@ -89,8 +89,8 @@ Kirigami.Page {
                             hoverEnabled: false
                             separatorVisible: false
                             leftPadding: Kirigami.Settings.isMobile ?
-                                (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
-                                (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
+                            (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :
+                            (Kirigami.Units.largeSpacing * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1))
 
                             trailing: ColoredCheckbox {
                                 color: model.collectionColor

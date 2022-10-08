@@ -16,7 +16,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             contentItem: ColumnLayout {
-	        spacing: 0
+                spacing: 0
                 MobileForm.FormCardHeader {
                     title: i18n("General settings")
                 }
@@ -68,7 +68,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             contentItem: ColumnLayout {
-	        spacing: 0
+                spacing: 0
                 MobileForm.FormCardHeader {
                     title: i18n("Month View settings")
                 }
@@ -83,8 +83,8 @@ Kirigami.ScrollablePage {
                 MobileForm.FormSectionText {
                     text: i18n("Weekday label alignment")
                 }
-		ColumnLayout {
-	            spacing: 0
+                ColumnLayout {
+                    spacing: 0
                     Layout.fillWidth: true
                     MobileForm.FormRadioDelegate {
                         property int value: Config.Left
@@ -143,7 +143,7 @@ Kirigami.ScrollablePage {
                     checked: Config.weekdayLabelLength === value
                     Controls.ButtonGroup.group: weekdayLabelLengthGroup
                 }
-                
+
                 MobileForm.FormCheckDelegate {
                     text: i18n("Show week numbers")
                     checked: Config.showWeekNumbers
@@ -185,7 +185,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             contentItem: ColumnLayout {
-	        spacing: 0
+                spacing: 0
                 MobileForm.FormCardHeader {
                     title: i18n("Schedule View settings")
                 }
@@ -205,7 +205,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             contentItem: ColumnLayout {
-	        spacing: 0
+                spacing: 0
                 MobileForm.FormCardHeader {
                     title: i18n("Tasks View settings")
                 }
@@ -219,12 +219,12 @@ Kirigami.ScrollablePage {
                     }
                 }
             }
-	}
+        }
         MobileForm.FormCard {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             contentItem: ColumnLayout {
-	        spacing: 0
+                spacing: 0
                 MobileForm.FormCardHeader {
                     title: i18n("Maps")
                 }
