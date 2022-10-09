@@ -13,6 +13,12 @@ MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
+    mRefreshTimer.callOnTimeout(this, [this] {
+        beginResetModel();
+        endResetModel();
+        Q_EMIT incidenceCountChanged();
+    });
+
     m_config = KalendarConfig::self();
     QObject::connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, [&]() {
         beginResetModel();
@@ -271,10 +277,7 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
     Q_EMIT modelChanged();
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
-            beginResetModel();
-            endResetModel();
-            Q_EMIT incidenceCountChanged();
-            mRefreshTimer.start(50);
+            mRefreshTimer.start(100);
         }
     };
     QObject::connect(model, &QAbstractItemModel::dataChanged, this, resetModel);

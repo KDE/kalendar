@@ -94,7 +94,7 @@ public:
     struct Occurrence {
         QDateTime start;
         QDateTime end;
-        QSharedPointer<KCalendarCore::Incidence> incidence;
+        KCalendarCore::Incidence::Ptr incidence;
         QColor color;
         qint64 collectionId;
         bool allDay;
@@ -120,7 +120,9 @@ private:
 
     QTimer mRefreshTimer;
 
-    QList<Occurrence> m_incidences;
+    // We need it to be ordered for the model
+    QVector<Occurrence> m_incidences;
+    QHash<uint, QPersistentModelIndex> m_occurrenceIndexHash;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
     Filter *mFilter;
@@ -128,6 +130,7 @@ private:
 };
 
 Q_DECLARE_METATYPE(IncidenceOccurrenceModel::Occurrence)
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif
