@@ -26,7 +26,7 @@ Kirigami.Page {
     property bool dragDropEnabled: true
     readonly property int mode: Kalendar.KalendarApplication.Schedule
 
-    readonly property var dayList: swipeableViewLoader.item
+    readonly property var dayList: basicViewLoader.item
 
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
@@ -46,12 +46,12 @@ Kirigami.Page {
         icon.name: "go-jump-today"
         text: i18n("Today")
         shortcut: StandardKey.MoveToStartOfLine
-        onTriggered: setToDate(new Date())
+        onTriggered: setToDate(new Date(), true)
     }
 
     function setToDate(date, isInitialMonth = false) {
         initialMonth = isInitialMonth;
-        dayList.setToDate(date);
+        dayList.setToDate(date, isInitialMonth);
     }
 
     Kirigami.Theme.inherit: false
@@ -72,7 +72,24 @@ Kirigami.Page {
     Loader {
         id: swipeableViewLoader
         anchors.fill: parent
+        active: false
         sourceComponent: SwipeableMonthListView {
+            anchors.fill: parent
+            initialMonth: root.initialMonth
+            openOccurrence: root.openOccurrence
+            currentDate: root.currentDate
+            startDate: root.startDate
+            dragDropEnabled: root.dragDropEnabled
+
+            onStartDateChanged: root.startDate = startDate
+        }
+    }
+
+    Loader {
+        id: basicViewLoader
+        anchors.fill: parent
+        active: true
+        sourceComponent: BasicMonthListView {
             anchors.fill: parent
             initialMonth: root.initialMonth
             openOccurrence: root.openOccurrence

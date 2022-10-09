@@ -1034,7 +1034,7 @@ Kirigami.ApplicationWindow {
                 titleDateButton.date: scheduleView.startDate
                 titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
             }
-            currentDate: root.selectedDate
+            currentDate: root.currentDate
             openOccurrence: root.openOccurrence
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
