@@ -269,6 +269,41 @@ Kirigami.ScrollablePage {
                 MobileForm.FormCardHeader {
                     title: i18n("Schedule View settings")
                 }
+
+                Controls.ButtonGroup {
+                    id: monthListModeGroup
+                    exclusive: true
+                    onCheckedButtonChanged: {
+                        Config.monthListMode = checkedButton.value;
+                        Config.save();
+                    }
+                }
+                MobileForm.FormSectionText {
+                    text: i18n("Schedule view mode")
+                }
+                ColumnLayout {
+                    spacing: 0
+                    Layout.fillWidth: true
+                    MobileForm.FormRadioDelegate {
+                        property int value: Config.SwipeableMonthList
+                        text: i18n("Swipeable schedule view")
+                        enabled: !Config.isMonthListModeImmutable
+                        checked: Config.monthListMode === value
+                        Controls.ButtonGroup.group: monthListModeGroup
+                    }
+                    MobileForm.FormRadioDelegate {
+                        property int value: Config.BasicMonthList
+                        text: i18n("Basic schedule view")
+                        enabled: !Config.isMonthListModeImmutable
+                        checked: Config.monthListMode === value
+                        Controls.ButtonGroup.group: monthListModeGroup
+                    }
+                    MobileForm.FormTextDelegate {
+                        text: i18n("Swipeable schedule view requires higher system performance.")
+                        visible: Config.monthListMode === Config.SwipeableMonthList
+                    }
+                }
+
                 MobileForm.FormCheckDelegate {
                     text: i18n("Show week headers")
                     checked: Config.showWeekHeaders

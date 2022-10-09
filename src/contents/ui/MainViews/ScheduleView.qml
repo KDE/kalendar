@@ -26,7 +26,15 @@ Kirigami.Page {
     property bool dragDropEnabled: true
     readonly property int mode: Kalendar.KalendarApplication.Schedule
 
-    readonly property var dayList: basicViewLoader.item
+    readonly property var dayList: {
+        switch (Kalendar.Config.monthListMode) {
+        case Kalendar.Config.BasicMonthList:
+            return basicViewLoader.item;
+        case Kalendar.Config.SwipeableMonthList:
+        default:
+            return swipeableViewLoader.item;
+        }
+    }
 
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
@@ -72,7 +80,7 @@ Kirigami.Page {
     Loader {
         id: swipeableViewLoader
         anchors.fill: parent
-        active: false
+        active: Kalendar.Config.monthListMode === Kalendar.Config.SwipeableMonthList
         sourceComponent: SwipeableMonthListView {
             anchors.fill: parent
             initialMonth: root.initialMonth
@@ -88,7 +96,7 @@ Kirigami.Page {
     Loader {
         id: basicViewLoader
         anchors.fill: parent
-        active: true
+        active: Kalendar.Config.monthListMode === Kalendar.Config.BasicMonthList
         sourceComponent: BasicMonthListView {
             anchors.fill: parent
             initialMonth: root.initialMonth

@@ -169,6 +169,19 @@ SPDX-License-Identifier: LGPL-2.0-or-later
     </group>
 
     <group name="ScheduleView">
+        <entry name="monthListMode" type="Enum">
+            <label>Type of day list view to be used internally in the schedule view"</label>
+            <choices>
+                <choice name="SwipeableMonthList">
+                    <label>Swipeable internal month list view</label>
+                </choice>
+                <choice name="BasicMonthList">
+                    <label>Basic internal month list view</label>
+                </choice>
+            </choices>
+            <default>SwipeableMonthList</default>
+        </entry>
+
         <entry name="showWeekHeaders" type="Bool">
             <label>Show week headers in schedule view.</label>
             <default>true</default>
