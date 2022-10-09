@@ -8,6 +8,7 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 import org.kde.akonadi 1.0
+import org.kde.kalendar.accounts 1.0
 
 MobileForm.FormCard {
     id: root
@@ -107,8 +108,17 @@ MobileForm.FormCard {
             id: addAccountDelegate
             text: i18n("Add Account")
             icon.name: "list-add"
-            onClicked: pageStack.pushDialogLayer(addAccountPage)
+            onClicked: if (mimetypes.includes(MimeTypes.mail)) {
+                pageStack.pushDialogLayer(addMailAccountPage)
+            } else {
+                pageStack.pushDialogLayer(addAccountPage)
+            }
         }
+    }
+
+    Component {
+        id: addMailAccountPage
+        AddAccountPage {}
     }
 
     Component {

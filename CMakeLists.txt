@@ -89,6 +89,9 @@ find_package(KF5 ${PIM_VERSION} REQUIRED COMPONENTS
     CalendarSupport
     EventViews
     MailCommon
+    MailTransport
+    MailTransportAkonadi
+    Ldap
     PimCommonAkonadi
 )
 
