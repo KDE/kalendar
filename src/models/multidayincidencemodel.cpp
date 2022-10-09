@@ -10,37 +10,17 @@
 #include <QBitArray>
 
 MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractListModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
-    mRefreshTimer.callOnTimeout(this, [this] {
-        beginResetModel();
-        endResetModel();
-        Q_EMIT incidenceCountChanged();
-    });
+    mRefreshTimer.setInterval(100);
+    mRefreshTimer.callOnTimeout(this, &MultiDayIncidenceModel::resetLayoutLines);
 
     m_config = KalendarConfig::self();
     QObject::connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, [&]() {
         beginResetModel();
         endResetModel();
     });
-}
-
-QModelIndex MultiDayIncidenceModel::index(int row, int column, const QModelIndex &parent) const
-{
-    if (!hasIndex(row, column, parent)) {
-        return {};
-    }
-
-    if (!parent.isValid()) {
-        return createIndex(row, column);
-    }
-    return {};
-}
-
-QModelIndex MultiDayIncidenceModel::parent(const QModelIndex &) const
-{
-    return {};
 }
 
 int MultiDayIncidenceModel::rowCount(const QModelIndex &parent) const
@@ -50,11 +30,6 @@ int MultiDayIncidenceModel::rowCount(const QModelIndex &parent) const
         return qMax(mSourceModel->length() / mPeriodLength, 1);
     }
     return 0;
-}
-
-int MultiDayIncidenceModel::columnCount(const QModelIndex &) const
-{
-    return 1;
 }
 
 static long long getDuration(const QDate &start, const QDate &end)
@@ -244,20 +219,41 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
     return result;
 }
 
+void MultiDayIncidenceModel::resetLayoutLines()
+{
+    beginResetModel();
+
+    m_laidOutLines.clear();
+
+    const auto numPeriods = rowCount({});
+    m_laidOutLines.reserve(numPeriods);
+
+    qDebug() << numPeriods;
+
+    for(int i = 0; i < numPeriods; ++i) {
+        const auto periodStart = mSourceModel->start().addDays(i * mPeriodLength);
+        const auto periodIncidenceLayout = layoutLines(periodStart);
+        m_laidOutLines.append(periodIncidenceLayout);
+    }
+
+    Q_EMIT incidenceCountChanged();
+    endResetModel();
+}
+
 QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
 {
-    if (!hasIndex(idx.row(), idx.column())) {
+    if (!hasIndex(idx.row(), idx.column()) || !mSourceModel || m_laidOutLines.empty()) {
         return {};
     }
-    if (!mSourceModel) {
-        return {};
-    }
-    const auto rowStart = mSourceModel->start().addDays(idx.row() * mPeriodLength);
+
     switch (role) {
     case PeriodStartDate:
+    {
+        const auto rowStart = mSourceModel->start().addDays(idx.row() * mPeriodLength);
         return rowStart.startOfDay();
+    }
     case Incidences:
-        return layoutLines(rowStart);
+        return m_laidOutLines.at(idx.row());
     default:
         Q_ASSERT(false);
         return {};
@@ -273,20 +269,61 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 {
     beginResetModel();
 
+    m_laidOutLines.clear();
     mSourceModel = model;
     Q_EMIT modelChanged();
+
+    endResetModel();
+
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
             mRefreshTimer.start(100);
         }
     };
-    QObject::connect(model, &QAbstractItemModel::dataChanged, this, resetModel);
+    QObject::connect(model, &QAbstractItemModel::dataChanged, this, &MultiDayIncidenceModel::slotSourceDataChanged);
     QObject::connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::modelReset, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsInserted, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
-    endResetModel();
+
+    mRefreshTimer.start(100);
+}
+
+void MultiDayIncidenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
+{
+    if(!upperLeft.isValid() || !bottomRight.isValid()) {
+        return;
+    }
+
+    const auto startRow = upperLeft.row();
+    const auto endRow = bottomRight.row();
+
+    for (int i = startRow; i <= endRow; ++i) {
+        const auto sourceModelIndex = mSourceModel->index(i);
+        const auto occurrence = sourceModelIndex.data(IncidenceOccurrenceModel::IncidenceOccurrence).value<IncidenceOccurrenceModel::Occurrence>();
+
+        const auto sourceModelStartDate = mSourceModel->start();
+        const auto startDaysFromSourceStart = sourceModelStartDate.daysTo(occurrence.start.date());
+        const auto endDaysFromSourceStart = sourceModelStartDate.daysTo(occurrence.end.date());
+
+        const auto firstPeriodOccurrenceAppears = startDaysFromSourceStart / mPeriodLength;
+        const auto lastPeriodOccurrenceAppears = endDaysFromSourceStart / mPeriodLength;
+
+        qDebug() << occurrence.incidence->summary() << firstPeriodOccurrenceAppears << lastPeriodOccurrenceAppears;
+
+        if(firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
+            continue;
+        }
+
+        for (int i = firstPeriodOccurrenceAppears; i <= lastPeriodOccurrenceAppears; ++i) {
+            const auto periodStart = mSourceModel->start().addDays(i * mPeriodLength);
+            const auto idx = index(i, 0);
+
+            m_laidOutLines.replace(i, layoutLines(periodStart));
+            Q_EMIT dataChanged(idx, idx);
+        }
+    }
 }
 
 int MultiDayIncidenceModel::periodLength() const

@@ -86,7 +86,7 @@ void IncidenceOccurrenceModel::updateQuery()
     }
     mEnd = mStart.addDays(mLength);
 
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::refreshView);
+    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::slotSourceDataChanged);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
@@ -146,11 +146,6 @@ void IncidenceOccurrenceModel::updateFromSource()
             }
         }
 
-        if(start.date() > mEnd || end.date() < mStart) {
-            qDebug() << "Skipping incidence:" << incidence->summary() << mStart << start << mEnd << end;
-            continue;
-        }
-
         const auto occurrenceHashKey = qHash(QString::number(start.toSecsSinceEpoch()) +
                                              QString::number(end.toSecsSinceEpoch()) +
                                              incidence->uid());
@@ -164,12 +159,6 @@ void IncidenceOccurrenceModel::updateFromSource()
         };
 
         if (m_occurrenceIndexHash.contains(occurrenceHashKey)) {
-            const auto existingOccurrenceIndex = m_occurrenceIndexHash.value(occurrenceHashKey);
-            const auto existingOccurrenceRow = existingOccurrenceIndex.row();
-
-            m_incidences.replace(existingOccurrenceRow, occurrence);
-            Q_EMIT dataChanged(existingOccurrenceIndex, existingOccurrenceIndex);
-
             deadKeysSet.remove(occurrenceHashKey);
         } else {
             const auto indexRow = m_incidences.count();
@@ -193,6 +182,66 @@ void IncidenceOccurrenceModel::updateFromSource()
         m_occurrenceIndexHash.remove(deadKey);
         m_incidences.removeAt(deadOccurrenceRow);
         endRemoveRows();
+    }
+}
+
+void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
+{
+    if (!m_coreCalendar || !upperLeft.isValid() || !bottomRight.isValid()) {
+        return;
+    }
+
+    const auto startRow = upperLeft.row();
+    const auto endRow = bottomRight.row();
+
+    for (int i = startRow; i <= endRow; ++i) {
+        const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0);
+        const auto incidenceItem = sourceModelIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
+
+        if(!incidenceItem.isValid() || !incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
+            continue;
+        }
+
+        const auto incidence = incidenceItem.payload<KCalendarCore::Incidence::Ptr>();
+        KCalendarCore::OccurrenceIterator occurrenceIterator{*m_coreCalendar, incidence, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
+
+        while (occurrenceIterator.hasNext()) {
+            occurrenceIterator.next();
+
+            auto start = occurrenceIterator.occurrenceStartDate();
+            const auto end = incidence->endDateForStart(start);
+
+            if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
+                KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
+
+                if (!start.isValid()) { // Todos are very likely not to have a set start date
+                    start = todo->dtDue();
+                }
+            }
+
+            const auto occurrenceHashKey = qHash(QString::number(start.toSecsSinceEpoch()) +
+                                                 QString::number(end.toSecsSinceEpoch()) +
+                                                 incidence->uid());
+
+            if(!m_occurrenceIndexHash.contains(occurrenceHashKey)) {
+                continue;
+            }
+
+            const Occurrence occurrence{
+                start,
+                end,
+                incidence,
+                getColor(incidence),
+                getCollectionId(incidence),
+                incidence->allDay(),
+            };
+
+            const auto existingOccurrenceIndex = m_occurrenceIndexHash.value(occurrenceHashKey);
+            const auto existingOccurrenceRow = existingOccurrenceIndex.row();
+
+            m_incidences.replace(existingOccurrenceRow, occurrence);
+            Q_EMIT dataChanged(existingOccurrenceIndex, existingOccurrenceIndex);
+        }
     }
 }
 

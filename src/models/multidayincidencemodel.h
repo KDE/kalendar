@@ -24,7 +24,7 @@ class Incidence;
  * The "incidences" roles provides a list of lists, where each list represents a visual line,
  * containing a number of events to display.
  */
-class MultiDayIncidenceModel : public QAbstractItemModel
+class MultiDayIncidenceModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
@@ -50,14 +50,8 @@ public:
     explicit MultiDayIncidenceModel(QObject *parent = nullptr);
     ~MultiDayIncidenceModel() override = default;
 
-    QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
     int rowCount(const QModelIndex &parent) const override;
-    int columnCount(const QModelIndex &parent) const override;
-
     QVariant data(const QModelIndex &index, int role) const override;
-
     QHash<int, QByteArray> roleNames() const override;
 
     IncidenceOccurrenceModel *model();
@@ -78,12 +72,18 @@ Q_SIGNALS:
 protected:
     void setIncidenceCount(int incidenceCount);
 
+private Q_SLOTS:
+    void resetLayoutLines();
+    void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
+
 private:
-    QTimer mRefreshTimer;
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
     QVariantList layoutLines(const QDate &rowStart) const;
+
+    QTimer mRefreshTimer;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
-    int mPeriodLength{7};
+    QVector<QVariantList> m_laidOutLines;
+    int mPeriodLength = 7;
     MultiDayIncidenceModel::Filters m_filters;
     KalendarConfig *m_config = nullptr;
 };

@@ -106,6 +106,9 @@ Q_SIGNALS:
     void filterChanged();
     void calendarChanged();
 
+private Q_SLOTS:
+    void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
+
 private:
     void refreshView();
     void updateFromSource();
