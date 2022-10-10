@@ -16,11 +16,12 @@ MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
     mRefreshTimer.setInterval(100);
     mRefreshTimer.callOnTimeout(this, &MultiDayIncidenceModel::resetLayoutLines);
 
+    m_updateLinesTimer.setSingleShot(true);
+    m_updateLinesTimer.setInterval(100);
+    m_updateLinesTimer.callOnTimeout(this, &MultiDayIncidenceModel::updateScheduledLayoutLines);
+
     m_config = KalendarConfig::self();
-    QObject::connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, [&]() {
-        beginResetModel();
-        endResetModel();
-    });
+    connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, &MultiDayIncidenceModel::resetLayoutLines);
 }
 
 int MultiDayIncidenceModel::rowCount(const QModelIndex &parent) const
@@ -221,6 +222,13 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
 
 void MultiDayIncidenceModel::resetLayoutLines()
 {
+    if(mSourceModel->calendar()->isLoading()) {
+        if(!mRefreshTimer.isActive()) {
+            mRefreshTimer.start(100);
+        }
+        return;
+    }
+
     beginResetModel();
 
     m_laidOutLines.clear();
@@ -228,15 +236,12 @@ void MultiDayIncidenceModel::resetLayoutLines()
     const auto numPeriods = rowCount({});
     m_laidOutLines.reserve(numPeriods);
 
-    qDebug() << numPeriods;
-
     for(int i = 0; i < numPeriods; ++i) {
         const auto periodStart = mSourceModel->start().addDays(i * mPeriodLength);
         const auto periodIncidenceLayout = layoutLines(periodStart);
         m_laidOutLines.append(periodIncidenceLayout);
     }
 
-    Q_EMIT incidenceCountChanged();
     endResetModel();
 }
 
@@ -283,9 +288,9 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
     QObject::connect(model, &QAbstractItemModel::dataChanged, this, &MultiDayIncidenceModel::slotSourceDataChanged);
     QObject::connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::modelReset, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::rowsInserted, this, resetModel);
+    QObject::connect(model, &QAbstractItemModel::rowsInserted, this, &MultiDayIncidenceModel::scheduleLayoutLinesUpdates);
     QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
+    QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, &MultiDayIncidenceModel::scheduleLayoutLinesUpdates);
 
     mRefreshTimer.start(100);
 }
@@ -299,8 +304,33 @@ void MultiDayIncidenceModel::slotSourceDataChanged(const QModelIndex &upperLeft,
     const auto startRow = upperLeft.row();
     const auto endRow = bottomRight.row();
 
-    for (int i = startRow; i <= endRow; ++i) {
-        const auto sourceModelIndex = mSourceModel->index(i);
+    scheduleLayoutLinesUpdates(upperLeft.parent(), startRow, endRow);
+}
+
+void MultiDayIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow)
+{
+    if (!mSourceModel) {
+        return;
+    }
+
+    // If we have no existing laid out lines it means we have not done an
+    // initial setup. Go do that, which will provide incidences anyway
+    if (m_laidOutLines.empty()) {
+        resetLayoutLines();
+        return;
+    }
+
+    // Don't bother if we are going for a full reset soon
+    if (mRefreshTimer.isActive()) {
+        return;
+    }
+
+    for (int i = sourceFirstRow; i <= sourceLastRow; ++i) {
+        if(m_linesToUpdate.count() == m_laidOutLines.count()) {
+            break;
+        }
+
+        const auto sourceModelIndex = mSourceModel->index(i, 0, sourceIndexParent);
         const auto occurrence = sourceModelIndex.data(IncidenceOccurrenceModel::IncidenceOccurrence).value<IncidenceOccurrenceModel::Occurrence>();
 
         const auto sourceModelStartDate = mSourceModel->start();
@@ -310,20 +340,37 @@ void MultiDayIncidenceModel::slotSourceDataChanged(const QModelIndex &upperLeft,
         const auto firstPeriodOccurrenceAppears = startDaysFromSourceStart / mPeriodLength;
         const auto lastPeriodOccurrenceAppears = endDaysFromSourceStart / mPeriodLength;
 
-        qDebug() << occurrence.incidence->summary() << firstPeriodOccurrenceAppears << lastPeriodOccurrenceAppears;
-
         if(firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
             continue;
         }
 
-        for (int i = firstPeriodOccurrenceAppears; i <= lastPeriodOccurrenceAppears; ++i) {
-            const auto periodStart = mSourceModel->start().addDays(i * mPeriodLength);
-            const auto idx = index(i, 0);
+        const auto lastRow = m_laidOutLines.count() - 1;
+        const auto minRow = qMin(qMax(static_cast<int>(firstPeriodOccurrenceAppears), 0), lastRow);
+        const auto maxRow = qMin(static_cast<int>(lastPeriodOccurrenceAppears), lastRow);
 
-            m_laidOutLines.replace(i, layoutLines(periodStart));
-            Q_EMIT dataChanged(idx, idx);
-        }
+        // We set the layout lines scheduled to redo
+        m_linesToUpdate.insert(minRow);
+        m_linesToUpdate.insert(maxRow);
     }
+
+    // Throttle how often we are changing the lines or the views will be slow
+    if (!m_updateLinesTimer.isActive()) {
+        m_updateLinesTimer.start(100);
+    }
+}
+
+void MultiDayIncidenceModel::updateScheduledLayoutLines()
+{
+    for (const auto lineIndex : m_linesToUpdate) {
+        const auto periodStart = mSourceModel->start().addDays(lineIndex * mPeriodLength);
+        const auto idx = index(lineIndex, 0);
+        const auto laidOutLine = layoutLines(periodStart);
+
+        m_laidOutLines.replace(lineIndex, laidOutLine);
+        Q_EMIT dataChanged(idx, idx);
+    }
+
+    m_linesToUpdate.clear();
 }
 
 int MultiDayIncidenceModel::periodLength() const

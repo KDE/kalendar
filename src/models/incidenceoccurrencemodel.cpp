@@ -87,7 +87,7 @@ void IncidenceOccurrenceModel::updateQuery()
     mEnd = mStart.addDays(mLength);
 
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::slotSourceDataChanged);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::refreshView);
+    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::slotSourceRowsInserted);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
     QObject::connect(m_coreCalendar.get(), &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::refreshView);
@@ -174,7 +174,7 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
     const auto endRow = bottomRight.row();
 
     for (int i = startRow; i <= endRow; ++i) {
-        const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0);
+        const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0, upperLeft.parent());
         const auto incidenceItem = sourceModelIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
 
         if(!incidenceItem.isValid() || !incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
@@ -210,6 +210,63 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
 
             m_incidences.replace(existingOccurrenceRow, occurrence);
             Q_EMIT dataChanged(existingOccurrenceIndex, existingOccurrenceIndex);
+        }
+    }
+}
+
+void IncidenceOccurrenceModel::slotSourceRowsInserted(const QModelIndex &parent, const int first, const int last)
+{
+    if (!m_coreCalendar) {
+        return;
+    }
+
+    for (int i = first; i <= last; ++i) {
+        const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0, parent);
+        const auto incidenceItem = sourceModelIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
+
+        if(!incidenceItem.isValid() || !incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
+            continue;
+        }
+
+        const auto incidence = incidenceItem.payload<KCalendarCore::Incidence::Ptr>();
+
+        if(!incidencePassesFilter(incidence)) {
+            continue;
+        }
+
+        KCalendarCore::OccurrenceIterator occurrenceIterator{*m_coreCalendar, incidence, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
+
+        while (occurrenceIterator.hasNext()) {
+            occurrenceIterator.next();
+
+            const auto occurrenceStartEnd = incidenceOccurrenceStartEnd(occurrenceIterator.occurrenceStartDate(), incidence);
+            const auto start = occurrenceStartEnd.first;
+            const auto end = occurrenceStartEnd.second;
+            const auto occurrenceHashKey = incidenceOccurrenceHash(start, end, incidence->uid());
+
+            if(m_occurrenceIndexHash.contains(occurrenceHashKey)) {
+                continue;
+            }
+
+            const Occurrence occurrence{
+                start,
+                end,
+                incidence,
+                getColor(incidence),
+                getCollectionId(incidence),
+                incidence->allDay(),
+            };
+
+            const auto indexRow = m_incidences.count();
+
+            beginInsertRows({}, indexRow, indexRow);
+            m_incidences.append(occurrence);
+            endInsertRows();
+
+            const auto occurrenceIndex = index(indexRow);
+            const QPersistentModelIndex persistentIndex(occurrenceIndex);
+
+            m_occurrenceIndexHash.insert(occurrenceHashKey, persistentIndex);
         }
     }
 }

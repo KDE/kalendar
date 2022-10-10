@@ -108,6 +108,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
+    void slotSourceRowsInserted(const QModelIndex &parent, const int first, const int last);
     void refreshView();
     void updateFromSource();
 

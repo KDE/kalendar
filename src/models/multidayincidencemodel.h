@@ -75,12 +75,16 @@ protected:
 private Q_SLOTS:
     void resetLayoutLines();
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
+    void scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow);
+    void updateScheduledLayoutLines();
 
 private:
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
     QVariantList layoutLines(const QDate &rowStart) const;
 
+    QSet<int> m_linesToUpdate;
     QTimer mRefreshTimer;
+    QTimer m_updateLinesTimer;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
     QVector<QVariantList> m_laidOutLines;
     int mPeriodLength = 7;
