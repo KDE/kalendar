@@ -105,14 +105,20 @@ void IncidenceOccurrenceModel::refreshView()
 
 void IncidenceOccurrenceModel::updateFromSource()
 {
-    if (!m_coreCalendar) {
+    if (!m_coreCalendar || mRefreshTimer.isActive()) {
+        return;
+    } else if (m_coreCalendar->isLoading()) {
+        // If calendar is still loading then just schedule a refresh later
+        refreshView();
         return;
     }
 
     load();
 
-    const auto existingOccurrenceKeys = m_occurrenceIndexHash.keys();
-    QSet deadKeysSet(existingOccurrenceKeys.cbegin(), existingOccurrenceKeys.cend());
+    beginResetModel();
+
+    m_incidences.clear();
+    m_occurrenceIndexHash.clear();
 
     KCalendarCore::OccurrenceIterator occurrenceIterator{*m_coreCalendar, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
 
@@ -137,36 +143,21 @@ void IncidenceOccurrenceModel::updateFromSource()
             incidence->allDay(),
         };
 
-        if (m_occurrenceIndexHash.contains(occurrenceHashKey)) {
-            deadKeysSet.remove(occurrenceHashKey);
-        } else {
-            const auto indexRow = m_incidences.count();
+        const auto indexRow = m_incidences.count();
+        m_incidences.append(occurrence);
 
-            beginInsertRows({}, indexRow, indexRow);
-            m_incidences.append(occurrence);
-            endInsertRows();
+        const auto occurrenceIndex = index(indexRow);
+        const QPersistentModelIndex persistentIndex(occurrenceIndex);
 
-            const auto occurrenceIndex = index(indexRow);
-            const QPersistentModelIndex persistentIndex(occurrenceIndex);
-
-            m_occurrenceIndexHash.insert(occurrenceHashKey, persistentIndex);
-        }
+        m_occurrenceIndexHash.insert(occurrenceHashKey, persistentIndex);
     }
 
-    for(const auto &deadKey : deadKeysSet) {
-        const auto deadOccurrenceIndex = m_occurrenceIndexHash.value(deadKey);
-        const auto deadOccurrenceRow = deadOccurrenceIndex.row();
-
-        beginRemoveRows({}, deadOccurrenceRow, deadOccurrenceRow);
-        m_occurrenceIndexHash.remove(deadKey);
-        m_incidences.removeAt(deadOccurrenceRow);
-        endRemoveRows();
-    }
+    endResetModel();
 }
 
 void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
 {
-    if (!m_coreCalendar || !upperLeft.isValid() || !bottomRight.isValid()) {
+    if (!m_coreCalendar || !upperLeft.isValid() || !bottomRight.isValid() || mRefreshTimer.isActive()) {
         return;
     }
 
@@ -216,7 +207,10 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
 
 void IncidenceOccurrenceModel::slotSourceRowsInserted(const QModelIndex &parent, const int first, const int last)
 {
-    if (!m_coreCalendar) {
+    if (!m_coreCalendar || mRefreshTimer.isActive()) {
+        return;
+    } else if (m_coreCalendar->isLoading()) {
+        mRefreshTimer.start(100);
         return;
     }
 
