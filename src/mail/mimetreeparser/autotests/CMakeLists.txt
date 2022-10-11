@@ -11,7 +11,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/modules/add_gpg_crypto_test.cmake)
 function(add_mimetreeparser_class_unittest _name _additionalSource)
     add_executable(${_name} ${_name}.cpp setupenv.cpp ${_additionalSource})
     target_link_libraries(${_name} PRIVATE
-        Qt5::Test
+        Qt::Test
         kalendar_mail_static
     )
     target_include_directories(${_name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
@@ -30,7 +30,7 @@ function(add_mimetreeparser_crypto_unittest _name)
         ${GPGME_INCLUDE_DIRS}
     )
     target_link_libraries(${_name} PRIVATE
-        Qt5::Test
+        Qt::Test
         kalendar_mail_static
     )
     add_gpg_crypto_test(${_name} mimetreeparser-${_name})

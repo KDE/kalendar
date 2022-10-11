@@ -15,13 +15,13 @@ include(ECMAddTests)
 add_executable(mimetreeparsertest mimetreeparsertest.cpp)
 add_gpg_crypto_test(mimetreeparsertest mimetreeparsertest)
 target_link_libraries(mimetreeparsertest PUBLIC
-    Qt5::Test
+    Qt::Test
     kalendar_mail_static
 )
 
 add_executable(gpgerrortest gpgerrortest.cpp)
 target_link_libraries(gpgerrortest PUBLIC
-    Qt5::Test
+    Qt::Test
     kalendar_mail_static
 )
 add_test(NAME gpgerrortest COMMAND $<TARGET_FILE:gpgerrortest>)

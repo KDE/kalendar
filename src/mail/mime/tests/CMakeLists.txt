@@ -11,6 +11,6 @@ add_executable(mailtemplatetest mailtemplatetest.cpp)
 
 add_gpg_crypto_test(mailtemplatetest mailtemplatetest)
 target_link_libraries(mailtemplatetest
-    Qt5::Test
+    Qt::Test
     kalendar_mail_static
 )

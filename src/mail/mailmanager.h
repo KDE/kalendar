@@ -1,8 +1,9 @@
 // SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
+#include "mailmodel.h"
+#include <Akonadi/CollectionFilterProxyModel>
 #include <QObject>
-
 namespace Akonadi
 {
 class CollectionFilterProxyModel;
@@ -10,8 +11,6 @@ class Session;
 }
 
 class QItemSelectionModel;
-
-class MailModel;
 
 /// Class responsible for exposing the email folder selected by the user
 class MailManager : public QObject

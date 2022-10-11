@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "mailmanager.h"
-#include "mailmodel.h"
 
 // Akonadi
 #include <Akonadi/ChangeRecorder>
-#include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <Akonadi/EntityTreeModel>
 #include <Akonadi/ItemFetchScope>
