@@ -2,31 +2,32 @@
 # This file is distributed under the same license as the kalendar package.
 #
 # Alexander Yavorsky <kekcuha@gmail.com>, 2022.
+# Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-08 00:48+0000\n"
-"PO-Revision-Date: 2022-09-29 22:19+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2022-10-10 15:48+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 22.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Александр Яворский"
+msgstr "Александр Яворский, Олеся Герасименко"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "kekcuha@gmail.com"
+msgstr "kekcuha@gmail.com, translation-team@basealt.ru"
 
 #: calendarmanager.cpp:523
 #, kde-format
@@ -100,7 +101,7 @@ msgstr "Свойства адресной книги %1"
 #: contacts/emailmodel.cpp:38
 #, kde-format
 msgid "Both:"
-msgstr ""
+msgstr "Оба варианта:"
 
 #: contacts/emailmodel.cpp:41
 #, kde-format
@@ -126,7 +127,7 @@ msgstr "Готово"
 #: contacts/qml/ContactChooserPage.qml:52
 #, kde-format
 msgid "Select Email Address"
-msgstr ""
+msgstr "Выберите адрес эл. почты"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
@@ -201,13 +202,12 @@ msgid "Add Contact"
 msgstr "Добавить контакт"
 
 #: contacts/qml/private/ContactEditorPage.qml:55
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Edit Contact"
-msgstr "Контакты"
+msgstr "Изменить контакт"
 
 #: contacts/qml/private/ContactEditorPage.qml:93
-#, kde-format
+#, fuzzy, kde-format
 msgid "Address book:"
 msgstr "Адресная книга:"
 
@@ -220,14 +220,14 @@ msgid "Name:"
 msgstr "Имя:"
 
 #: contacts/qml/private/ContactEditorPage.qml:151
-#, kde-format
+#, fuzzy, kde-format
 msgid "Contact name"
-msgstr "Имя контакта"
+msgstr "Контакты"
 
 #: contacts/qml/private/ContactEditorPage.qml:162
-#, kde-format
+#, fuzzy, kde-format
 msgid "Honorific prefix:"
-msgstr "Почтительное обращение:"
+msgstr "Почтительное обращение (в начале):"
 
 #: contacts/qml/private/ContactEditorPage.qml:165
 #, kde-format
@@ -255,9 +255,9 @@ msgid "Prof."
 msgstr "Проф."
 
 #: contacts/qml/private/ContactEditorPage.qml:174
-#, kde-format
+#, fuzzy, kde-format
 msgid "Given name:"
-msgstr "Имя:"
+msgstr "Имена:"
 
 #: contacts/qml/private/ContactEditorPage.qml:178
 #, kde-format
@@ -265,9 +265,9 @@ msgid "First name or chosen name"
 msgstr "Имя"
 
 #: contacts/qml/private/ContactEditorPage.qml:183
-#, kde-format
+#, fuzzy, kde-format
 msgid "Additional name:"
-msgstr "Дополнительное имя:"
+msgstr "Дополнительные имена:"
 
 #: contacts/qml/private/ContactEditorPage.qml:187
 #, kde-format
@@ -275,9 +275,9 @@ msgid "Middle name or other name"
 msgstr "Отчество или другое имя"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
-#, kde-format
+#, fuzzy, kde-format
 msgid "Family name:"
-msgstr "Фамилия:"
+msgstr "Фамилии:"
 
 #: contacts/qml/private/ContactEditorPage.qml:196
 #, kde-format
@@ -285,9 +285,9 @@ msgid "Surname or last name"
 msgstr "Фамилия"
 
 #: contacts/qml/private/ContactEditorPage.qml:201
-#, kde-format
+#, fuzzy, kde-format
 msgid "Honorific suffix:"
-msgstr "Почтительное обращение:"
+msgstr "Почтительное обращение (в конце):"
 
 #: contacts/qml/private/ContactEditorPage.qml:206
 #, kde-format
@@ -351,7 +351,7 @@ msgstr "Мгновенные сообщения"
 #: contacts/qml/private/ContactEditorPage.qml:283
 #, kde-format
 msgid "Voice"
-msgstr ""
+msgstr "Голос"
 
 #: contacts/qml/private/ContactEditorPage.qml:240
 #: contacts/qml/private/ContactEditorPage.qml:284
@@ -423,26 +423,24 @@ msgid "E-mail:"
 msgstr "Адрес эл. почты:"
 
 #: contacts/qml/private/ContactEditorPage.qml:343
-#, fuzzy, kde-format
-#| msgid "Other:"
+#, kde-format
 msgid "Other"
-msgstr "Другие:"
+msgstr "Другое"
 
 #: contacts/qml/private/ContactEditorPage.qml:364
-#, fuzzy, kde-format
+#, kde-format
 msgid "Remove email"
-msgstr "Удалить метку"
+msgstr "Удалить адрес электронной почты"
 
 #: contacts/qml/private/ContactEditorPage.qml:382
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Оба варианта"
 
 #: contacts/qml/private/ContactEditorPage.qml:383
-#, fuzzy, kde-format
-#| msgid "Other:"
+#, kde-format
 msgid "Other…"
-msgstr "Другие:"
+msgstr "Другое…"
 
 #: contacts/qml/private/ContactEditorPage.qml:392
 #, kde-format
@@ -481,9 +479,7 @@ msgid "External changes"
 msgstr "Внешние изменения"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:62
-#, fuzzy, kde-format
-#| msgid "Address"
-#| msgid_plural "Addresses"
+#, kde-format
 msgid "Address Book:"
 msgstr "Адресная книга:"
 
@@ -501,12 +497,12 @@ msgstr "Участники:"
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:91
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit"
 msgstr "Изменить"
 
 #: contacts/qml/private/ContactPage.qml:36
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Изменить"
@@ -517,12 +513,12 @@ msgstr "Изменить"
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
 #: contents/ui/main.qml:880
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cancel"
 msgstr "Отмена"
 
 #: contacts/qml/private/ContactPage.qml:96
-#, fuzzy, kde-format
+#, kde-format
 msgid "Call"
 msgstr "Вызов"
 
@@ -554,7 +550,7 @@ msgstr "Показать QR-код"
 #: contacts/qml/private/ContactPage.qml:158
 #, kde-format
 msgid "Contact information"
-msgstr ""
+msgstr "Контактная информация"
 
 #: contacts/qml/private/ContactPage.qml:178
 #, kde-format
@@ -564,7 +560,7 @@ msgstr "Блог:"
 #: contacts/qml/private/ContactPage.qml:192
 #, kde-format
 msgid "Personal information"
-msgstr ""
+msgstr "Личные данные"
 
 #: contacts/qml/private/ContactPage.qml:204
 #, kde-format
@@ -582,19 +578,16 @@ msgid "Partner's name:"
 msgstr "Супруг(а):"
 
 #: contacts/qml/private/ContactPage.qml:235
-#, fuzzy, kde-format
-#| msgid "Show week numbers"
+#, kde-format
 msgid "Phone Number"
 msgid_plural "Phone Numbers"
-msgstr[0] "Показывать номера недель"
-msgstr[1] "Показывать номера недель"
-msgstr[2] "Показывать номера недель"
-msgstr[3] "Показывать номера недель"
+msgstr[0] "Телефонные номера"
+msgstr[1] "Телефонные номера"
+msgstr[2] "Телефонные номера"
+msgstr[3] "Телефонный номер"
 
 #: contacts/qml/private/ContactPage.qml:245
-#, fuzzy, kde-format
-#| msgctxt "%1 is the type of the address, e.g. home, work, ..."
-#| msgid "%1:"
+#, kde-format
 msgctxt "Label for a phone number type"
 msgid "%1:"
 msgstr "%1:"
@@ -603,10 +596,10 @@ msgstr "%1:"
 #, kde-format
 msgid "Address"
 msgid_plural "Addresses"
-msgstr[0] "Адрес"
+msgstr[0] "Адреса"
 msgstr[1] "Адреса"
 msgstr[2] "Адреса"
-msgstr[3] ""
+msgstr[3] "Адрес"
 
 #: contacts/qml/private/ContactPage.qml:276
 #, kde-format
@@ -617,7 +610,7 @@ msgstr "%1:"
 #: contacts/qml/private/ContactPage.qml:290
 #, kde-format
 msgid "Business Information"
-msgstr ""
+msgstr "Рабочая информация"
 
 #: contacts/qml/private/ContactPage.qml:297
 #, kde-format
@@ -652,21 +645,21 @@ msgstr "Руководитель:"
 #: contacts/qml/private/ContactPage.qml:339
 #, kde-format
 msgid "Assistants's name:"
-msgstr ""
+msgstr "Помощник:"
 
 #: contacts/qml/private/ContactPage.qml:351
 #, kde-format
 msgid "Email Address"
 msgid_plural "Email Addresses"
-msgstr[0] "Адрес электронной почты"
+msgstr[0] "Адреса электронной почты"
 msgstr[1] "Адреса электронной почты"
 msgstr[2] "Адреса электронной почты"
-msgstr[3] ""
+msgstr[3] "Адрес электронной почты"
 
 #: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
-msgstr ""
+msgstr "Это действие будет нельзя отменить"
 
 #: contacts/qml/private/DeleteContactAction.qml:56
 #, kde-format
@@ -676,7 +669,7 @@ msgstr "Удалить контакт"
 #: contacts/qml/private/QrCodePage.qml:15
 #, kde-format
 msgid "QR Code"
-msgstr "QR Code"
+msgstr "QR-код"
 
 #: contacts/qml/private/QrCodePage.qml:27
 #, kde-format
@@ -686,7 +679,7 @@ msgstr "Не удалось создать QR-код"
 #: contents/ui/Bars/FilterHeaderBar.qml:41
 #, kde-format
 msgid "Filtering by tags"
-msgstr ""
+msgstr "Фильтр по меткам"
 
 #: contents/ui/Bars/FilterHeaderBar.qml:42
 #, kde-format
@@ -696,13 +689,13 @@ msgstr "Все задачи"
 #: contents/ui/Bars/FilterHeaderBar.qml:86
 #, kde-format
 msgid "Remove filtering tag"
-msgstr ""
+msgstr "Удалить метку фильтра"
 
 #: contents/ui/Controls/CalendarItemTapHandler.qml:36
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Calendar Color"
-msgstr ""
+msgstr "Выбор цвета календаря"
 
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:63
 #, kde-format
@@ -724,9 +717,9 @@ msgid "%1 %2"
 msgstr "%1 %2"
 
 #: contents/ui/Controls/DateControls/DatePicker.qml:182
-#, fuzzy, kde-format
+#, kde-format
 msgid "Days"
-msgstr "дней"
+msgstr "Дни"
 
 #: contents/ui/Controls/DateControls/DatePicker.qml:190
 #, kde-format
@@ -734,14 +727,14 @@ msgid "Months"
 msgstr "Месяцы"
 
 #: contents/ui/Controls/DateControls/DatePicker.qml:196
-#, fuzzy, kde-format
+#, kde-format
 msgid "Years"
-msgstr "лет"
+msgstr "Годы"
 
 #: contents/ui/Controls/DateControls/TimePicker.qml:50
 #, kde-format
 msgid "Min. Interval:"
-msgstr ""
+msgstr "Мин. интервал:"
 
 #: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
 #: kalendarapplication.cpp:279
@@ -756,10 +749,10 @@ msgid "New Task…"
 msgstr "Создать задачу…"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:133
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "%1 is a percentage number"
 msgid "<b>%1%</b> Complete"
-msgstr "% загружено"
+msgstr "<b>%1%</b> выполнено"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:163
 #, kde-format
@@ -772,22 +765,22 @@ msgid "<b>Tags:</b>"
 msgstr "<b>Метки:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:188
-#, fuzzy, kde-format
+#, kde-format
 msgid "Remove %1 tag"
-msgstr "Удалить метку"
+msgstr "Удалить метку (%1)"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:200
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Date:</b>"
 msgstr "<b>Дата:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:227
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Time:</b>"
 msgstr "<b>Время:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:254
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Duration:</b>"
 msgstr "<b>Длительность:</b>"
 
@@ -797,29 +790,29 @@ msgid "<b>Priority level:</b>"
 msgstr "<b>Приоритет:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:280
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Completed:</b>"
-msgstr "Завершено"
+msgstr "<b>Завершено:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:300
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Recurrence:</b>"
-msgstr "Повторение:"
+msgstr "<b>Повторение:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:323
 #, kde-format
 msgid "Except on:"
-msgstr ""
+msgstr "Кроме:"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:353
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Location:</b>"
-msgstr "Расположение:"
+msgstr "<b>Расположение:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:410
 #, kde-format
 msgid "Unable to find location."
-msgstr ""
+msgstr "Не удалось найти место."
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:445
 #, kde-format
@@ -841,13 +834,12 @@ msgid "<b>Reminders:</b>"
 msgstr "<b>Напоминания:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:511
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>Организатор:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:528
 #, fuzzy, kde-format
-#| msgid "<b>Guests:</b>"
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Гости:</b>"
 
@@ -859,7 +851,7 @@ msgstr "<b>Гости:</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:574
 #, kde-format
 msgid "Super-task"
-msgstr ""
+msgstr "Вышестоящая задача"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:599
 #, kde-format
@@ -882,19 +874,19 @@ msgstr "Вид"
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:108
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:97
 #: quick/qml/AgentConfigurationForm.qml:50
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete"
 msgstr "Удалить"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:81
 #, kde-format
 msgid "Mark Task as Incomplete"
-msgstr ""
+msgstr "Отметить задачу как незавершённую"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:81
 #, kde-format
 msgid "Mark Task as Complete"
-msgstr ""
+msgstr "Отметить задачу как завершённую"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:88
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:69
@@ -964,14 +956,14 @@ msgid "Set due date..."
 msgstr ""
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
-#, kde-format
+#, fuzzy, kde-format
 msgid "Today (%1)"
-msgstr "Сегодня (%1)"
+msgstr "Сегодня%1"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:202
 #, fuzzy, kde-format
 msgid "Tomorrow (%1)"
-msgstr "&Завтра"
+msgstr "Завтра%1"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
@@ -1009,31 +1001,29 @@ msgid "<b>%1</b> - %2"
 msgstr "<b>%1</b> - %2"
 
 #: contents/ui/Delegates/ViewTitleDelegate.qml:31
-#, fuzzy, kde-format
-#| msgid "Expand Sidebar"
+#, kde-format
 msgid "Expand Main Drawer"
 msgstr "Развернуть боковую панель"
 
 #: contents/ui/Delegates/ViewTitleDelegate.qml:31
-#, fuzzy, kde-format
-#| msgid "Collapse Sidebar"
+#, kde-format
 msgid "Collapse Main Drawer"
 msgstr "Свернуть боковую панель"
 
 #: contents/ui/Dialogs/CollectionPickerPage.qml:20
 #, kde-format
 msgid "Choose a Task Calendar"
-msgstr ""
+msgstr "Выберите календарь задач"
 
 #: contents/ui/Dialogs/CollectionPickerPage.qml:22
 #, kde-format
 msgid "Choose a Calendar"
-msgstr ""
+msgstr "Выберите календарь"
 
 #: contents/ui/Dialogs/CollectionPickerPage.qml:24
 #, kde-format
 msgid "Choose an Address Book"
-msgstr ""
+msgstr "Выберите адресную книгу"
 
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:22
 #, kde-format
@@ -1045,7 +1035,7 @@ msgstr ""
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:49
 #, kde-format
 msgid "Do you want to delete calendar: \"%1\"?"
-msgstr ""
+msgstr "Удалить календарь «%1»?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:27
 #, kde-format
@@ -1056,7 +1046,7 @@ msgstr "Удалить %1"
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:58
 #, kde-format
 msgid "Do you want to delete item: \"%1\"?"
-msgstr ""
+msgstr "Удалить запись: «%1»?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:60
 #, kde-format
@@ -1064,6 +1054,8 @@ msgid ""
 "Item \"%1\" has sub-items. Do you want to delete all related items, or just "
 "the currently selected item?"
 msgstr ""
+"У записи «%1» имеются подчинённые записи. Удалить только текущую выбранную "
+"запись или также и все связанные с ней записи?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:62
 #, kde-format
@@ -1076,6 +1068,13 @@ msgid ""
 "\n"
 "Deleting all will also delete sub-items!"
 msgstr ""
+"Для события «%1» календаря предусмотрены повторы в несколько дат. Кроме "
+"того, у этой записи имеются вложенные записи.\n"
+"\n"
+"Удалить выбранное событие %2, также последующие повторы или все записиэтого "
+"события?\n"
+"\n"
+"Удаление всего также приведёт к удалению вложенных записей."
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:64
 #, kde-format
@@ -1084,16 +1083,18 @@ msgid ""
 "the selected occurrence on %2, also future occurrences, or all of its "
 "occurrences?"
 msgstr ""
+"Для события «%1» календаря предусмотрены повторы в несколько дат. Удалить "
+"выбранное событие %2, также последующие повторы или все записиэтого события?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:80
 #, kde-format
 msgid "Only Delete Current"
-msgstr ""
+msgstr "Удалить только текущее событие"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:87
-#, fuzzy, kde-format
+#, kde-format
 msgid "Also Delete Future"
-msgstr "Также удалить &будущие"
+msgstr "Также удалить будущие"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:101
 #, kde-format
@@ -1101,18 +1102,18 @@ msgid "Delete Only This"
 msgstr "Только эту задачу"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:108
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete All"
 msgstr "Удалить все"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:41
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "%1 is incidence type"
 msgid "Edit %1"
 msgstr "Изменить %1"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:42
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "%1 is incidence type"
 msgid "Add %1"
 msgstr "Добавить %1"
@@ -1120,12 +1121,12 @@ msgstr "Добавить %1"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:126
 #, kde-format
 msgid "Invalid dates provided."
-msgstr ""
+msgstr "Указаны некорректные даты."
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:126
 #, kde-format
 msgid "End date cannot be before start date."
-msgstr ""
+msgstr "Дата окончания не может предшествовать дате начала."
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:139
 #, kde-format
@@ -1133,7 +1134,7 @@ msgid "Calendar:"
 msgstr "Календарь:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:160
-#, fuzzy, kde-format
+#, kde-format
 msgid "Summary:"
 msgstr "Краткое описание:"
 
@@ -1143,7 +1144,7 @@ msgid "Completion:"
 msgstr "Завершено:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:190
-#, fuzzy, kde-format
+#, kde-format
 msgid "Priority:"
 msgstr "Приоритет:"
 
@@ -1269,7 +1270,7 @@ msgstr "Периодичность:"
 msgid "day"
 msgid_plural "days"
 msgstr[0] "день"
-msgstr[1] "дней"
+msgstr[1] "дня"
 msgstr[2] "дней"
 msgstr[3] "день"
 
@@ -1277,10 +1278,10 @@ msgstr[3] "день"
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
-msgstr[0] "неделю"
+msgstr[0] "неделя"
 msgstr[1] "недели"
-msgstr[2] "недели"
-msgstr[3] "неделю"
+msgstr[2] "недель"
+msgstr[3] "неделя"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:480
 #, kde-format
@@ -1292,7 +1293,7 @@ msgstr[2] "месяцев"
 msgstr[3] "месяц"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:481
-#, fuzzy, kde-format
+#, kde-format
 msgid "year"
 msgid_plural "years"
 msgstr[0] "год"
@@ -1301,9 +1302,9 @@ msgstr[2] "лет"
 msgstr[3] "год"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:551
-#, fuzzy, kde-format
+#, kde-format
 msgid "On:"
-msgstr "%1 на %2"
+msgstr "Дата:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:559
 #, kde-format
@@ -1315,7 +1316,7 @@ msgstr "%1 числа каждого месяца"
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
-msgstr ""
+msgstr "%1 %2 каждого месяца"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:582
 #, kde-format
@@ -1323,9 +1324,9 @@ msgid "Ends:"
 msgstr "Закончить:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:597
-#, fuzzy, kde-format
+#, kde-format
 msgid "On"
-msgstr "Включить"
+msgstr "Дата"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:598
 #, kde-format
@@ -1336,10 +1337,10 @@ msgstr "После"
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
-msgstr[0] "повторения"
-msgstr[1] "повторений"
+msgstr[0] "повторение"
+msgstr[1] "повторения"
 msgstr[2] "повторений"
-msgstr[3] "повторения"
+msgstr[3] "повторение"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:640
 #, kde-format
@@ -1349,7 +1350,7 @@ msgstr "Исключения:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:646
 #, kde-format
 msgid "Add Recurrence Exception"
-msgstr "Добавить повторяющееся исключение"
+msgstr "Добавить исключение из повторения"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:689
 #, kde-format
@@ -1359,7 +1360,7 @@ msgstr "Расположение:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:698
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:774
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:941
-#, fuzzy, kde-format
+#, kde-format
 msgid "Optional"
 msgstr "Необязательно"
 
@@ -1388,12 +1389,12 @@ msgstr ", "
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:799
 #, kde-format
 msgid "Tap to set tags…"
-msgstr ""
+msgstr "Коснитесь для установки меток…"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:799
 #, kde-format
 msgid "Click to set tags…"
-msgstr ""
+msgstr "Нажмите для установки меток…"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:816
 #, kde-format
@@ -1421,19 +1422,19 @@ msgid "Email:"
 msgstr "Эл. почта:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:966
-#, fuzzy, kde-format
+#, kde-format
 msgid "Required"
 msgstr "Необходимо"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:975
-#, fuzzy, kde-format
+#, kde-format
 msgid "Status:"
 msgstr "Состояние:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
 #, kde-format
 msgid "Request RSVP"
-msgstr ""
+msgstr "Запросить ответ"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
@@ -1443,27 +1444,27 @@ msgstr "Добавить участника"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1024
 #, kde-format
 msgid "Choose from Contacts"
-msgstr ""
+msgstr "Выбрать из списка контактов"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
 #, kde-format
 msgid "Fill in Manually"
-msgstr ""
+msgstr "Заполнить вручную"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
-#, fuzzy, kde-format
+#, kde-format
 msgid "Attachments:"
 msgstr "Вложения:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1065
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add Attachment"
-msgstr "Добавление вложения"
+msgstr "Добавить вложение"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
 msgid "Change incidence date"
-msgstr ""
+msgstr "Изменить дату"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:47
 #, kde-format
@@ -1476,19 +1477,19 @@ msgstr ""
 "повтора, для всех будущих повторов или для всех повторов этого события?"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:62
-#, fuzzy, kde-format
+#, kde-format
 msgid "Only This Item"
-msgstr "Только &этот повтор"
+msgstr "Только эта запись"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:70
-#, fuzzy, kde-format
+#, kde-format
 msgid "Also Future Items"
-msgstr "&Будущие повторы"
+msgstr "И будущие записи"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:78
-#, fuzzy, kde-format
+#, kde-format
 msgid "All Occurrences"
-msgstr "&Все повторы"
+msgstr "Все записи события"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:13
 #, kde-format
@@ -1503,17 +1504,17 @@ msgstr "Удалить метку"
 #: contents/ui/Dialogs/TagManagerPage.qml:25
 #, kde-format
 msgid "Are you sure you want to delete tag \"%1\"?"
-msgstr ""
+msgstr "Удалить метку «%1»?"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:110
 #, kde-format
 msgid "Create a New Tag…"
-msgstr ""
+msgstr "Создать метку…"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:134
 #, kde-format
 msgid "Quickly Add a New Tag."
-msgstr ""
+msgstr "Быстро добавить новую метку."
 
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:82
 #, kde-format
@@ -1528,7 +1529,7 @@ msgstr "Выполнено"
 #: contents/ui/Drawers/MainDrawer.qml:84
 #, kde-format
 msgid "Kalendar"
-msgstr ""
+msgstr "Kalendar"
 
 #: contents/ui/Drawers/MainDrawer.qml:128
 #: contents/ui/Drawers/MainDrawer.qml:269
@@ -1568,21 +1569,21 @@ msgid "View all tasks"
 msgstr "Все задачи"
 
 #: contents/ui/KalendarUtils/labelutils.js:33
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "%1 is 2 or more"
 msgid "%1 days"
-msgstr "%1 дней"
+msgstr "%1 дн."
 
 #: contents/ui/KalendarUtils/labelutils.js:35
-#, fuzzy, kde-format
+#, kde-format
 msgid "1 day"
-msgstr "%1 день"
+msgstr "1 день"
 
 #: contents/ui/KalendarUtils/labelutils.js:37
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "%1 is 2 or mores"
 msgid "%1 hours"
-msgstr "%1 часа"
+msgstr "%1 ч."
 
 #: contents/ui/KalendarUtils/labelutils.js:39
 #, kde-format
@@ -1590,103 +1591,103 @@ msgid "1 hour"
 msgstr "1 час"
 
 #: contents/ui/KalendarUtils/labelutils.js:41
-#, fuzzy, kde-format
+#, kde-format
 msgid "%1 minutes"
-msgstr "%1 минуты"
+msgstr "%1 мин."
 
 #: contents/ui/KalendarUtils/labelutils.js:45
 #, kde-format
 msgid "%1 before start of event"
-msgstr ""
+msgstr "%1 до начала события"
 
 #: contents/ui/KalendarUtils/labelutils.js:47
 #, kde-format
 msgid "%1 after start of event"
-msgstr ""
+msgstr "%1 после начала события"
 
 #: contents/ui/KalendarUtils/labelutils.js:49
 #, kde-format
 msgid "On event start"
-msgstr ""
+msgstr "При начале события"
 
 #: contents/ui/KalendarUtils/labelutils.js:54
-#, fuzzy, kde-format
+#, kde-format
 msgid "Every week"
 msgid_plural "Every %1 weeks"
-msgstr[0] "каждую %1 неделю"
-msgstr[1] "каждые %1 недели"
-msgstr[2] "каждые %1 недель"
-msgstr[3] ""
+msgstr[0] "Каждую %1 неделю"
+msgstr[1] "Каждые %1 недели"
+msgstr[2] "Каждые %1 недель"
+msgstr[3] "Каждую неделю"
 
 #: contents/ui/KalendarUtils/labelutils.js:57
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Каждую %1 неделю в"
+msgstr[1] "Каждые %1 недели в"
+msgstr[2] "Каждые %1 недель в"
+msgstr[3] "Каждую неделю в"
 
 #: contents/ui/KalendarUtils/labelutils.js:90
 #: contents/ui/KalendarUtils/labelutils.js:129
-#, fuzzy, kde-format
+#, kde-format
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
-msgstr[0] "Повторяется каждый %1 год в %2 %3 %4"
-msgstr[1] "Повторяется каждые %1 года в %2 %3 %4"
-msgstr[2] "Повторяется каждые %1 лет в %2 %3 %4"
-msgstr[3] ""
+msgstr[0] "Каждый %1 год %2 %3"
+msgstr[1] "Каждые %1 года %2 %3"
+msgstr[2] "Каждые %1 лет %2 %3"
+msgstr[3] "Каждый год %2 %3"
 
 #: contents/ui/KalendarUtils/labelutils.js:109
-#, fuzzy, kde-format
+#, kde-format
 msgid "Every minute"
 msgid_plural "Every %1 minutes"
 msgstr[0] "Каждую %1 минуту"
 msgstr[1] "Каждые %1 минуты"
 msgstr[2] "Каждые %1 минут"
-msgstr[3] ""
+msgstr[3] "Каждую минуту"
 
 #: contents/ui/KalendarUtils/labelutils.js:112
 #, kde-format
 msgid "Every hour"
 msgid_plural "Every %1 hours"
-msgstr[0] ""
-msgstr[1] "Каждые 2 часа"
-msgstr[2] "Каждые 2 часа"
-msgstr[3] ""
+msgstr[0] "Каждый %1 час"
+msgstr[1] "Каждые %1 часа"
+msgstr[2] "Каждые %1 часов"
+msgstr[3] "Каждый час"
 
 #: contents/ui/KalendarUtils/labelutils.js:115
-#, fuzzy, kde-format
+#, kde-format
 msgid "Every day"
 msgid_plural "Every %1 days"
-msgstr[0] "каждый %1 день"
-msgstr[1] "каждые %1 дня"
-msgstr[2] "каждые %1 дней"
-msgstr[3] ""
+msgstr[0] "Каждый %1 день"
+msgstr[1] "Каждые %1 дня"
+msgstr[2] "Каждые %1 дней"
+msgstr[3] "Каждый день"
 
 #: contents/ui/KalendarUtils/labelutils.js:121
 #: contents/ui/KalendarUtils/labelutils.js:125
 #, kde-format
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Каждый %1 месяц %2"
+msgstr[1] "Каждые %1 месяца %2"
+msgstr[2] "Каждые %1 месяцев %2"
+msgstr[3] "Каждый месяц %2"
 
 #: contents/ui/KalendarUtils/labelutils.js:133
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
-msgstr[0] "Каждые %1 год в %2 день года"
+msgstr[0] "Каждый %1 год в %2 день года"
 msgstr[1] "Каждые %1 года в %2 день года"
 msgstr[2] "Каждые %1 лет в %2 день года"
-msgstr[3] "Каждые год в %2 день года"
+msgstr[3] "Каждый год в %2 день года"
 
 #: contents/ui/KalendarUtils/labelutils.js:139
 #, kde-format
 msgid "Complex recurrence rule"
-msgstr ""
+msgstr "Сложное правило повторения"
 
 #: contents/ui/KalendarUtils/labelutils.js:142
 #, kde-format
@@ -1696,74 +1697,74 @@ msgstr "Неизвестно"
 #: contents/ui/KalendarUtils/labelutils.js:150
 #, kde-format
 msgid "Never ends"
-msgstr ""
+msgstr "Никогда не завершается"
 
 #: contents/ui/KalendarUtils/labelutils.js:152
 #, kde-format
 msgid "Ends on %1"
-msgstr ""
+msgstr "Завершается %1"
 
 #: contents/ui/KalendarUtils/labelutils.js:154
 #, kde-format
 msgid "Ends after %1 occurrences"
-msgstr ""
+msgstr "Завершается после %1 повторов"
 
 #: contents/ui/KalendarUtils/labelutils.js:213
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Highest priority)"
-msgstr ""
+msgstr "%1 (высокий приоритет)"
 
 #: contents/ui/KalendarUtils/labelutils.js:215
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-high priority)"
-msgstr ""
+msgstr "%1 (средне-высокий приоритет)"
 
 #: contents/ui/KalendarUtils/labelutils.js:217
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Medium priority)"
-msgstr ""
+msgstr "%1 (средний приоритет)"
 
 #: contents/ui/KalendarUtils/labelutils.js:219
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-low priority)"
-msgstr ""
+msgstr "%1 (средне-низкий приоритет)"
 
 #: contents/ui/KalendarUtils/labelutils.js:221
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Lowest priority)"
-msgstr ""
+msgstr "%1 (низкий приоритет)"
 
 #: contents/ui/KalendarUtils/labelutils.js:223
 #, kde-format
 msgid "No set priority level"
-msgstr ""
+msgstr "Уровень приоритета не задан"
 
 #: contents/ui/Location/LocationMap.qml:51
 #, kde-format
 msgid "Return to Location"
-msgstr ""
+msgstr "Вернуться к расположению"
 
 #: contents/ui/main.qml:321
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
-msgstr "Успешно импортировано %1 событий."
+msgstr "События успешно импортированы (%1)."
 
 #: contents/ui/main.qml:324 contents/ui/main.qml:339
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
-msgstr ""
+msgstr "Ошибка при импорте событий: %1"
 
 #: contents/ui/main.qml:336
 #, kde-format
 msgid "New calendar  created from imported file successfully."
-msgstr ""
+msgstr "Из импортированного файла успешно создан новый календарь."
 
 #: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:53
@@ -1772,28 +1773,27 @@ msgid "Create"
 msgstr "Создать"
 
 #: contents/ui/main.qml:438
-#, kde-format
+#, fuzzy, kde-format
 msgid "Month"
-msgstr "Месяц"
+msgstr "Месяцы"
 
 #: contents/ui/main.qml:441
 #, fuzzy, kde-format
-#| msgid "Weekly"
 msgid "Week"
 msgstr "Еженедельно"
 
 #: contents/ui/main.qml:444
-#, kde-format
+#, fuzzy, kde-format
 msgid "3 Days"
-msgstr "3 дня"
+msgstr "Дни"
 
 #: contents/ui/main.qml:447
 #, fuzzy, kde-format
 msgid "Day"
-msgstr "дней"
+msgstr "Дни"
 
 #: contents/ui/main.qml:450
-#, kde-format
+#, fuzzy, kde-format
 msgid "Schedule"
 msgstr "Расписание"
 
@@ -1804,9 +1804,9 @@ msgstr "Задачи"
 
 #: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
-#, kde-format
+#, fuzzy, kde-format
 msgid "Mail"
-msgstr "Почта"
+msgstr "Адрес эл. почты"
 
 #: contents/ui/main.qml:819
 #, kde-format
@@ -1826,11 +1826,14 @@ msgid ""
 "file?\n"
 " "
 msgstr ""
+"Объединить события и задачи из этого файла календаря с одним из существующих "
+"календарей или создать из этого файла новый календарь?\n"
+" "
 
 #: contents/ui/main.qml:855
 #, kde-format
 msgid "Merge with existing calendar"
-msgstr ""
+msgstr "Объединить с существующим календарём"
 
 #: contents/ui/main.qml:871
 #, kde-format
@@ -1839,32 +1842,29 @@ msgstr "Создать календарь"
 
 #: contents/ui/main.qml:1077
 #, fuzzy, kde-format
-#| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Еженедельно"
 
 #: contents/ui/main.qml:1083
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
-msgstr "3 дня"
+msgstr "Дни"
 
 #: contents/ui/main.qml:1089
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
-msgstr "День"
+msgstr "Дни"
 
 #: contents/ui/main.qml:1131
-#, fuzzy, kde-format
-#| msgid "Expand Sidebar"
+#, kde-format
 msgid "Expand MainDrawer"
 msgstr "Развернуть боковую панель"
 
 #: contents/ui/main.qml:1131
-#, fuzzy, kde-format
-#| msgid "Collapse Sidebar"
+#, kde-format
 msgid "Collapse MainDrawer"
 msgstr "Свернуть боковую панель"
 
@@ -1897,7 +1897,7 @@ msgstr "Восстановить"
 #: contents/ui/MainViews/HourlyView.qml:423
 #, kde-format
 msgid "All day or Multi day"
-msgstr ""
+msgstr "Весь день или несколько дней"
 
 #: contents/ui/MainViews/MonthView.qml:64
 #: contents/ui/MainViews/ScheduleView.qml:124
@@ -1923,7 +1923,7 @@ msgstr "Сегодня"
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
-msgstr ""
+msgstr "Свободный день."
 
 #: contents/ui/MainViews/ScheduleView.qml:403
 #, kde-format
@@ -1938,7 +1938,7 @@ msgstr "Щелчок мышью"
 #: contents/ui/MainViews/ScheduleView.qml:404
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
-msgstr ""
+msgstr "На сегодня в планах ничего нет. %1, чтобы что-либо добавить."
 
 #: contents/ui/MainViews/ScheduleView.qml:522
 #, kde-format
@@ -1949,7 +1949,7 @@ msgstr "%1 (день %2 из %3)"
 #: contents/ui/MainViews/ScheduleView.qml:578
 #, kde-format
 msgid "Runs all day"
-msgstr ""
+msgstr "Продолжается весь день"
 
 #: contents/ui/MainViews/ScheduleView.qml:582
 #, kde-format
@@ -1970,7 +1970,7 @@ msgstr "Завершается в %1"
 #: contents/ui/MainViews/ScheduleView.qml:589
 #, kde-format
 msgid "Runs All Day"
-msgstr ""
+msgstr "Продолжается весь день"
 
 #: contents/ui/MainViews/TodoTreeView.qml:71
 #: models/todosortfilterproxymodel.cpp:175
@@ -1986,17 +1986,17 @@ msgstr "Приоритет %1"
 #: contents/ui/MainViews/TodoTreeView.qml:77
 #, kde-format
 msgid "No set priority"
-msgstr ""
+msgstr "Приоритет не задан"
 
 #: contents/ui/MainViews/TodoTreeView.qml:104
 #, kde-format
 msgid "No task calendars enabled."
-msgstr ""
+msgstr "Нет включённых календарей задач."
 
 #: contents/ui/MainViews/TodoTreeView.qml:111
 #, kde-format
 msgid "Calendar is not enabled"
-msgstr ""
+msgstr "Календарь не включён"
 
 #: contents/ui/MainViews/TodoTreeView.qml:114
 #, kde-format
@@ -2006,12 +2006,12 @@ msgstr "Включить"
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks completed"
-msgstr ""
+msgstr "Нет завершённых задач"
 
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks left to complete"
-msgstr ""
+msgstr "Не осталось задач для завершения"
 
 #: contents/ui/MainViews/TodoView.qml:58 kalendarapplication.cpp:30
 #: kalendarapplication.cpp:33
@@ -2027,7 +2027,7 @@ msgstr "Показать завершённые"
 #: contents/ui/MainViews/TodoView.qml:100
 #, kde-format
 msgid "Completed Tasks in %1"
-msgstr ""
+msgstr "Завершённые задачи в %1"
 
 #: contents/ui/MainViews/TodoView.qml:100
 #, kde-format
@@ -2043,7 +2043,7 @@ msgstr "Создать задачу…"
 #: contents/ui/MainViews/TodoView.qml:190
 #, kde-format
 msgid "Quickly Add a New Task."
-msgstr ""
+msgstr "Быстро добавить новую задачу."
 
 #: contents/ui/Menus/CalendarItemMenu.qml:24
 #, kde-format
@@ -2061,72 +2061,70 @@ msgstr "Обновить календарь"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete calendar"
-msgstr ""
-"Удаление календаря\n"
-"удаление календаря"
+msgstr "Удалить календарь"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:42
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set calendar colour…"
-msgstr ""
+msgstr "Установить цвет календаря…"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:54
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Calendar source settings…"
-msgstr ""
+msgstr "Параметры источника данных календаря…"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:60
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update calendar source"
-msgstr ""
+msgstr "Обновить источник данных календаря"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:66
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete calendar source"
-msgstr ""
+msgstr "Удалить источник данных календаря"
 
 #: contents/ui/Menus/EditMenu.qml:28
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "text editing menu action"
 msgid "Undo"
 msgstr "Отменить"
 
 #: contents/ui/Menus/EditMenu.qml:38
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "text editing menu action"
 msgid "Redo"
 msgstr "Повторить"
 
 #: contents/ui/Menus/EditMenu.qml:51 contents/ui/Menus/WindowMenu.qml:79
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "text editing menu action"
 msgid "Cut"
 msgstr "Вырезать"
 
 #: contents/ui/Menus/EditMenu.qml:61 contents/ui/Menus/WindowMenu.qml:88
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "text editing menu action"
 msgid "Copy"
 msgstr "Копировать"
 
 #: contents/ui/Menus/EditMenu.qml:71 contents/ui/Menus/WindowMenu.qml:97
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "text editing menu action"
 msgid "Paste"
 msgstr "Вставить"
 
 #: contents/ui/Menus/EditMenu.qml:81 contents/ui/Menus/WindowMenu.qml:106
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "text editing menu action"
 msgid "Delete"
 msgstr "Удалить"
 
 #: contents/ui/Menus/EditMenu.qml:94 contents/ui/Menus/WindowMenu.qml:118
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "text editing menu action"
 msgid "Select All"
 msgstr "Выделить все"
@@ -2293,12 +2291,12 @@ msgid "About Kalendar"
 msgstr "О программе Kalendar"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:19
-#, kde-format
+#, fuzzy, kde-format
 msgid "Add New Calendar Source…"
-msgstr "Добавить источник данных календаря…"
+msgstr "Добавить источник данных календаря"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:26
-#, kde-format
+#, fuzzy, kde-format
 msgid "Contact Books"
 msgstr "Контакты"
 
@@ -2343,9 +2341,9 @@ msgid "Month View settings"
 msgstr "Настройка просмотра по месяцам"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:84
-#, kde-format
+#, fuzzy, kde-format
 msgid "Weekday label alignment"
-msgstr "Показывать дни недели"
+msgstr "Выравнивание подписей дней недели:"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:91
 #, kde-format
@@ -2390,7 +2388,7 @@ msgstr "Показывать номера недель"
 #: contents/ui/Settings/ViewSettingsPage.qml:160
 #, kde-format
 msgid "Grid border width (pixels):"
-msgstr ""
+msgstr "Ширина рамки (в пикселах):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:190
 #, kde-format
@@ -2410,15 +2408,15 @@ msgstr "Параметры задач"
 #: contents/ui/Settings/ViewSettingsPage.qml:213
 #, kde-format
 msgid "Show completed sub-tasks"
-msgstr ""
+msgstr "Показывать завершённые подзадачи"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:232
-#, kde-format
+#, fuzzy, kde-format
 msgid "Enable maps"
-msgstr "Использовать карты"
+msgstr "Использовать карты:"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:253
-#, kde-format
+#, fuzzy, kde-format
 msgid "Location marker"
 msgstr "Указатель местоположения:"
 
@@ -2484,13 +2482,12 @@ msgid "Contacts View"
 msgstr "Контакты"
 
 #: kalendarapplication.cpp:178
-#, kde-format
+#, fuzzy, kde-format
 msgid "Mail View"
-msgstr "Просмотр почты"
+msgstr "День"
 
 #: kalendarapplication.cpp:188
 #, fuzzy, kde-format
-#| msgid "Ctrl+6"
 msgid "Ctrl+7"
 msgstr "Ctrl+6"
 
@@ -2577,7 +2574,7 @@ msgstr "Показывать завершённые задачи"
 #: kalendarapplication.cpp:438
 #, kde-format
 msgid "Open Command Bar"
-msgstr ""
+msgstr "Открыть панель команд"
 
 #: kalendarapplication.cpp:448
 #, kde-format
@@ -2613,7 +2610,7 @@ msgid "No Subject"
 msgstr ""
 
 #: mail/mailmodel.cpp:49
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -2689,9 +2686,9 @@ msgid "Don't Mark as Important"
 msgstr ""
 
 #: mail/qml/FolderView.qml:86
-#, kde-format
+#, fuzzy, kde-format
 msgid "No mailbox selected"
-msgstr ""
+msgstr "Не выбрано ни одной адресной книги"
 
 #: mail/qml/FolderView.qml:87
 #, kde-format
@@ -2699,14 +2696,14 @@ msgid "Select a mailbox from the sidebar."
 msgstr ""
 
 #: mail/qml/FolderView.qml:94
-#, kde-format
+#, fuzzy, kde-format
 msgid "Mailbox is empty"
-msgstr ""
+msgstr "Почтовый ящик"
 
 #: mail/qml/mailboxselector/MailBoxListPage.qml:16
-#, kde-format
+#, fuzzy, kde-format
 msgid "Mailboxes"
-msgstr ""
+msgstr "Почтовый ящик"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
@@ -2771,11 +2768,10 @@ msgstr ""
 #: mail/qml/MailViewer.qml:150
 #, fuzzy, kde-format
 msgid "Save attachment"
-msgstr "Добавление вложения"
+msgstr "Добавить вложение"
 
 #: mail/qml/private/AttachmentDelegate.qml:57
 #, fuzzy, kde-format
-#| msgid "Import Calendar"
 msgid "Import key"
 msgstr "Импорт календаря"
 
@@ -2783,10 +2779,10 @@ msgstr "Импорт календаря"
 #, kde-format
 msgctxt "@title"
 msgid "Kalendar"
-msgstr ""
+msgstr "Kalendar"
 
 #: main.cpp:74
-#, fuzzy, kde-format
+#, kde-format
 msgid "Calendar Application"
 msgstr "Программа с функциями календаря"
 
@@ -2817,7 +2813,7 @@ msgstr "Clau Cambra"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Felipe Kinoshita"
-msgstr ""
+msgstr "Felipe Kinoshita"
 
 #: main.cpp:88
 #, kde-format
@@ -2831,21 +2827,21 @@ msgid "No set date"
 msgstr "Дата не задана"
 
 #: models/todosortfilterproxymodel.cpp:204
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr " в %1"
+msgstr " в %1 "
 
 #: models/todosortfilterproxymodel.cpp:205
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
-msgstr " (просрочена)"
+msgstr "(просрочено)"
 
 #: quick/qml/AgentConfigurationForm.qml:36
-#, kde-format
+#, fuzzy, kde-format
 msgid "Configure %1"
-msgstr "Настроить %1"
+msgstr "Параметры"
 
 #: quick/qml/AgentConfigurationForm.qml:37
 #, kde-format
@@ -2860,42 +2856,35 @@ msgstr ""
 #: quick/qml/AgentConfigurationForm.qml:108
 #, fuzzy, kde-format
 msgid "Add Account"
-msgstr "Добавление вложения"
+msgstr "Добавить вложение"
 
-#, fuzzy
 #~ msgctxt ""
 #~ "No space since the %1 string, which includes the time (or not), includes "
 #~ "this space"
 #~ msgid "Today%1"
-#~ msgstr "Сегодня"
+#~ msgstr "Сегодня%1"
 
-#, fuzzy
 #~ msgctxt ""
 #~ "No space since the %1 string, which includes the time (or not), includes "
 #~ "this space"
 #~ msgid "Tomorrow%1"
-#~ msgstr "&Завтра"
+#~ msgstr "Завтра%1"
 
-#, fuzzy
 #~ msgctxt ""
 #~ "No space since the %1 string, which includes the time (or not), includes "
 #~ "this space"
 #~ msgid "Yesterday"
 #~ msgstr "Вчера"
 
-#, fuzzy
 #~ msgid "Views"
 #~ msgstr "Представления"
 
-#, fuzzy
 #~ msgid "Headers:"
-#~ msgstr "Заголовки"
+#~ msgstr "Заголовки:"
 
-#, fuzzy
 #~ msgid "Restart"
 #~ msgstr "Перезапустить"
 
-#, fuzzy
 #~ msgid "Remove"
 #~ msgstr "Удалить"
 
@@ -2903,6 +2892,23 @@ msgstr "Добавление вложения"
 #~ msgstr "Календарь"
 
 #, fuzzy
-#~| msgid "Send email"
 #~ msgid "Send Email"
 #~ msgstr "Отправить письмо"
+
+#~ msgctxt ""
+#~ "No space since the %1 string, which includes the time (or not), includes "
+#~ "this space"
+#~ msgid "Today%1(overdue)"
+#~ msgstr "Сегодня%1(просрочено)"
+
+#~ msgctxt ""
+#~ "No space since the %1 string, which includes the time (or not), includes "
+#~ "this space"
+#~ msgid "Yesterday%1(overdue)"
+#~ msgstr "Вчера%1(просрочено)"
+
+#~ msgid "Calendar Sources"
+#~ msgstr "Источники данных календаря"
+
+#~ msgid "Address Book Sources"
+#~ msgstr "Источники данных адресной книги"
