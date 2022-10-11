@@ -27,6 +27,7 @@
   <name xml:lang="pl">Kalendarz</name>
   <name xml:lang="pt">Kalendar</name>
   <name xml:lang="pt-BR">Kalendar</name>
+  <name xml:lang="ru">Kalendar</name>
   <name xml:lang="sk">Kalendar</name>
   <name xml:lang="sl">Kalendar</name>
   <name xml:lang="sv">Kalendar</name>
@@ -55,6 +56,7 @@
   <summary xml:lang="pl">Zarządzaj swoimi zadaniami i wydarzeniami szybko i z łatwością</summary>
   <summary xml:lang="pt">Faça a gestão das suas tarefas e eventos rápida e facilmente</summary>
   <summary xml:lang="pt-BR">Gerencie suas tarefas e eventos com velocidade e facilidade</summary>
+  <summary xml:lang="ru">Управляйте задачами и событиями легко и быстро</summary>
   <summary xml:lang="sl">Upravljajte vaše naloge in dogodke hitro in enostavno</summary>
   <summary xml:lang="sv">Hantera dina uppgifter och händelser snabbt och lätt</summary>
   <summary xml:lang="ta">உங்கள் நிகழ்வுகளையும் பணிகளையும் எளிதாகவும் விரைவாகவும் நிர்வகியுங்கள்</summary>
@@ -84,6 +86,7 @@
   <developer_name xml:lang="pl">Społeczność KDE, Clau Cambra oraz Carl Schwan</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE, Clau Cambra e Carl Schwan</developer_name>
   <developer_name xml:lang="pt-BR">Comunidade KDE, Clau Cambra e Carl Schwan</developer_name>
+  <developer_name xml:lang="ru">Сообщество KDE, Clau Cambra и Carl Schwan</developer_name>
   <developer_name xml:lang="sl">Skupnost KDE, Clau Cambra in Carl Schwan</developer_name>
   <developer_name xml:lang="sv">KDE-gemenskapen, Clau Cambra och Carl Schwan</developer_name>
   <developer_name xml:lang="tr">KDE Topluluğu, Clau Cambra ve Carl Schwan</developer_name>
@@ -108,6 +111,7 @@
     <p xml:lang="nl">Kalendar is een agenda-toepassing die u uw taken en afspraken laat beheren. Kalendar ondersteunt zowel lokale agenda's alsook een veelheid aan online agenda's: Nextcloud, Google® Calendar, Outlook®, Caldav en vele anderen.</p>
     <p xml:lang="pl">Kalendar jest aplikacją kalendarza, która umożliwia zarządzanie twoimi zadaniami i wydarzeniami. Kalendar obsługuje zarówno kalendarze lokalne, a także mnogość kalendarzy zdalnych: Nextcloud, Google® Calendar, Outlook®, Caldav i wiele innych.</p>
     <p xml:lang="pt">O Kalendar é uma aplicação de calendário que lhe permite gerir as suas tarefas e eventos. O Kalendar suporta tanto os calendários locais como uma variedade de calendários 'online': Nextcloud, Google® Calendar, Outlook®, Caldav e muitos outros.</p>
+    <p xml:lang="ru">Kalendar — программа с функциями календаря, позволяющая управлять задачами и событиями. Kalendar поддерживает как локальные календари, так и различные онлайн-календари: Nextcloud, Google® Calendar, Outlook®, Caldav и многие другие.</p>
     <p xml:lang="sl">Kalendar je aplikacija koledarja, ki vam dovoljuje upravljati vaše naloge in dogodke. Kalendar podpira tako lokalne koledarje kakor tudi različne spletne koledarje: Nextcloud, Google® Calendar, Outlook®, Caldav, in več drugih.</p>
     <p xml:lang="sv">Kalendar är ett kalenderprogram som tillåter dig att hantera dina uppgifter och händelser. Kalendar stöder både lokala kalendrar samt en mängd nätkalendrar: Nextcloud, Google® Calendar, Outlook®, Caldav, och många fler.</p>
     <p xml:lang="tr">Kalendar, görevlerinizi ve etkinliklerinizi yönetmenize izin veren bir takvim uygulamasıdır. Kalendar, hem yerel hem de birçok çevrimiçi takvimi destekler: Nextcloud, Google® Calendar, Outlook®, Caldav ve daha bir çoğu.</p>
@@ -130,6 +134,7 @@
     <p xml:lang="nl">Kalendar geeft u veel manieren om te interageren met uw afspraken. De maandweergave biedt een overzicht over de gehele maand; de weekweergave presenteert een gedetailleerde uur-voor-uur overzicht van uw week; en de planningweergavelijsten al uw komende afspraken zodat u gemakkelijk en snel vooruit kunt plannen.</p>
     <p xml:lang="pl">Kalendarz daje wiele sposobów do obsługi twoich wydarzeń. Widok miesiąca daje pogląd na cały miesiąc; widok tygodnia daje pogląd na tydzień godzina po godzinie; a widok harmonogramu zestawia wszystkie twoje nadchodzące wydarzenia tak, abyś mógł planować na przyszłość.</p>
     <p xml:lang="pt">O Kalendar oferece-lhe várias formas de interagir com os seus eventos. A vista mensal dá-lhe uma visão geral sobre todo o mês; a vista semanal apresenta-lhe uma visão geral hora-a-hora da sua semana e a área do horário mostra todos os seus próximos eventos, para que possa planear antecipadamente de forma rápida e simples.</p>
+    <p xml:lang="ru">Kalendar позволяет работать с событиями различным образом. Представление месяца предоставляет обзор всего месяца; представление недели предоставляет подробный почасовой обзор недели; представление расписания предоставляет перечень всех предстоящих событий, что позволяет легко и быстро составлять планы.</p>
     <p xml:lang="sl">Kalendar vam nudi veliko načinov za interakcijo z vašimi dogodki. Mesečni pogled zagotavlja pregled celotnega meseca; tedenski pogled predstavlja podrobni pregled uro po uro vašega tedna; in časovni pogled pogled navaja vse vaše prihajajoče dogodke, tako da lahko enostavno in hitro načrtujete plan za naprej.</p>
     <p xml:lang="sv">Kalendar ger dig många sätt att interagera med dina händelser. Månadsvyn tillhandahåller en översikt av hela månaden, veckovyn presenterar en detaljerad översikt av veckan timme för timme, och schemaläggningsvyn listar alla dina kommande händelser så att du enkelt och snabbt kan planera framåt.</p>
     <p xml:lang="tr">Kalendar, size etkinliklerinizi yönetmek için birçok kolay yol sunar. Ay görünümü, tüm ayın genel görünümünü sağlarken hafta görünümü, haftanızın saat saat ayrıntılı bir bakışını sunar. Ajanda görünümüyle tüm sıradaki etkinliklerinizi kolayca görebilir ve buna göre kolayca planlamanızı yapabilirsiniz.</p>
@@ -152,6 +157,7 @@
     <p xml:lang="nl">Een takenweergave is ook beschikbaar, waarmee u uw taken en subtaken met de krachtige boomstructuur weergave van Kalendar en zijn aanpasbare mogelijkheden voor filtering kunt beheren.</p>
     <p xml:lang="pl">Dostępny jest także widok zadań, co umożliwia zarządzanie zadaniami i ich podzadaniami, dzięki rozbudowanemu widokowi drzewa i możliwością dostosowania jego filtrowania.</p>
     <p xml:lang="pt">Também está disponível uma área de tarefas, tornando possível para si gerir as suas tarefas e sub-tarefas com a vista em árvore do Kalendar, bem como as suas capacidades personalizadas de filtragem.</p>
+    <p xml:lang="ru">Также доступно представление задач; иерархическое представление в Kalendar позволяет управлять задачами и подзадачами, используя настраиваемые фильтры.</p>
     <p xml:lang="sl">Na voljo je tudi pogled nalog, kar vam omogoča upravljanje nalog in podnalog z močnim drevesnim pogledom Kalendarja in njegovo prilagodljivo zmogljivost filtriranja.</p>
     <p xml:lang="sv">En uppgiftsvy är också tillgänglig, vilket gör det möjligt för dig att hantera dina uppgifter och deluppgifter med Kalendars kraftfulla trädvy och dess anpassningsbara filtreringsmöjligheter.</p>
     <p xml:lang="tr">Ayrıca bir görevler görünümü kullanımınıza açıktır. Bununla tüm görevlerinizi ve ilişkin alt görevlerinizi Kalendar'ın güçlü ağaç görünümü ve özelleştirilebilir süzme yetenekleriyle kolayca yönetebilirsiniz.</p>
@@ -175,6 +181,7 @@
     <p xml:lang="nl">Kalendar is gebouwd met het idee om bruikbaar te zijn op een bureaublad, op een mobiel en alles er tussenin.</p>
     <p xml:lang="pl">Kalendar został zbudowany z zamysłem bycia użytecznym na urządzeniach biurkowych, przenośnych i wszystkich innych.</p>
     <p xml:lang="pt">O Kalendar foi compilado com a ideia de ser útil em computadores pessoais, dispositivos móveis, entre outros.</p>
+    <p xml:lang="ru">Программа Kalendar возможно использовать на стационарном компьютере, мобильном телефоне, а также на всех промежуточных устройствах.</p>
     <p xml:lang="sl">Kalendar je bil izdelan z idejo, da je uporaben na namizju, na mobilnem telefonu in vse vmes.</p>
     <p xml:lang="sv">Kalender är byggd med idén att vara användbar på skrivbordsdatorer eller mobiler och allting däremellan.</p>
     <p xml:lang="tr">Kalendar, hem masaüstü hem taşınabilir aygıtlar hem de ikisinin arasındaki her şey dikkate alınarak geliştirilmiştir.</p>
@@ -211,6 +218,7 @@
       <caption xml:lang="nl">Maandweergave</caption>
       <caption xml:lang="pl">Widok miesiąca</caption>
       <caption xml:lang="pt">Vista Mensal</caption>
+      <caption xml:lang="ru">Месяц</caption>
       <caption xml:lang="sk">Mesačný pohľad</caption>
       <caption xml:lang="sl">Mesečni pogled</caption>
       <caption xml:lang="sv">Månadsvy</caption>
@@ -240,6 +248,7 @@
       <caption xml:lang="nl">Weekweergave</caption>
       <caption xml:lang="pl">Widok tygodnia</caption>
       <caption xml:lang="pt">Vista da Semana</caption>
+      <caption xml:lang="ru">Неделя</caption>
       <caption xml:lang="sl">Tedenski pogled</caption>
       <caption xml:lang="sv">Veckovy</caption>
       <caption xml:lang="ta">வாரக்காட்சி</caption>
@@ -268,6 +277,7 @@
       <caption xml:lang="nl">Periodieke transactie venster</caption>
       <caption xml:lang="pl">Widok harmonogramu</caption>
       <caption xml:lang="pt">Área de Calendarização</caption>
+      <caption xml:lang="ru">Расписание</caption>
       <caption xml:lang="sl">Časovni plan</caption>
       <caption xml:lang="sv">Schemaläggningsvy</caption>
       <caption xml:lang="ta">அட்டவணை காட்சி</caption>
@@ -296,6 +306,7 @@
       <caption xml:lang="nl">Taakweergave</caption>
       <caption xml:lang="pl">Widok zadań</caption>
       <caption xml:lang="pt">Vista das Tarefas</caption>
+      <caption xml:lang="ru">Задачи</caption>
       <caption xml:lang="sk">Pohľad úloh</caption>
       <caption xml:lang="sl">Pregled nalog</caption>
       <caption xml:lang="sv">Uppgiftsvy</caption>
@@ -325,6 +336,7 @@
       <caption xml:lang="nl">Mobiel</caption>
       <caption xml:lang="pl">Telefon komórkowy</caption>
       <caption xml:lang="pt">Telemóvel</caption>
+      <caption xml:lang="ru">Мобильный</caption>
       <caption xml:lang="sk">Mobil</caption>
       <caption xml:lang="sl">Mobilno</caption>
       <caption xml:lang="sv">Mobil</caption>
