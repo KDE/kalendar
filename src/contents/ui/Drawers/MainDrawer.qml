@@ -67,7 +67,8 @@ Kirigami.OverlayDrawer {
     // Modal when mobile, or when the window is narrow and the drawer is expanded/being expanded
     modal: Kirigami.Settings.isMobile ||
            (applicationWindow().width < narrowWindowWidth && (!collapsed || width > collapsedWidth) && !refuseModal)
-    collapsed: !Kirigami.Settings.isMobile && (Config.forceCollapsedMainDrawer || narrowWindowWidth)
+    collapsed: !Kirigami.Settings.isMobile &&
+               (Config.forceCollapsedMainDrawer || applicationWindow().width < narrowWindowWidth)
     onDrawerOpenChanged: {
         // We want the drawer to be open but collapsed if we close it when it is modal on desktop
         if(!Kirigami.Settings.isMobile && !drawerOpen) {
