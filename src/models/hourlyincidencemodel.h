@@ -67,11 +67,16 @@ Q_SIGNALS:
     void filtersChanged();
     void modelChanged();
 
+private Q_SLOTS:
+    void resetLayoutLines();
+
 private:
-    QTimer mRefreshTimer;
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDateTime &rowStart) const;
     QVariantList layoutLines(const QDateTime &rowStart) const;
+
+    QTimer mRefreshTimer;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
+    QVector<QVariantList> m_laidOutLines;
     int mPeriodLength{15}; // In minutes
     HourlyIncidenceModel::Filters m_filters;
     KalendarConfig *m_config = nullptr;

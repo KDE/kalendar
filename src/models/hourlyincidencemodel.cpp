@@ -10,6 +10,8 @@ HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
+    mRefreshTimer.setInterval(100);
+    mRefreshTimer.callOnTimeout(this, &HourlyIncidenceModel::resetLayoutLines);
 
     m_config = KalendarConfig::self();
     QObject::connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, [&]() {
@@ -311,9 +313,34 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
     return result;
 }
 
+void HourlyIncidenceModel::resetLayoutLines()
+{
+    if(mSourceModel->calendar()->isLoading()) {
+        if(!mRefreshTimer.isActive()) {
+            mRefreshTimer.start(100);
+        }
+        return;
+    }
+
+    beginResetModel();
+
+    m_laidOutLines.clear();
+
+    const auto numPeriods = rowCount({});
+    m_laidOutLines.reserve(numPeriods);
+
+    for(int i = 0; i < numPeriods; ++i) {
+        const auto periodStart = mSourceModel->start().addDays(i).startOfDay();
+        const auto periodIncidenceLayout = layoutLines(periodStart);
+        m_laidOutLines.append(periodIncidenceLayout);
+    }
+
+    endResetModel();
+}
+
 QVariant HourlyIncidenceModel::data(const QModelIndex &idx, int role) const
 {
-    if (!hasIndex(idx.row(), idx.column())) {
+    if (!hasIndex(idx.row(), idx.column()) || !mSourceModel || m_laidOutLines.empty()) {
         return {};
     }
     if (!mSourceModel) {
@@ -324,7 +351,7 @@ QVariant HourlyIncidenceModel::data(const QModelIndex &idx, int role) const
     case PeriodStartDateTime:
         return rowStart;
     case Incidences:
-        return layoutLines(rowStart);
+        return m_laidOutLines.at(idx.row());
     default:
         Q_ASSERT(false);
         return {};
@@ -339,12 +366,16 @@ IncidenceOccurrenceModel *HourlyIncidenceModel::model()
 void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 {
     beginResetModel();
+
+    m_laidOutLines.clear();
     mSourceModel = model;
+    Q_EMIT modelChanged();
+
+    endResetModel();
+
     auto resetModel = [this] {
         if (!mRefreshTimer.isActive()) {
-            beginResetModel();
-            endResetModel();
-            mRefreshTimer.start(50);
+            mRefreshTimer.start(100);
         }
     };
     QObject::connect(model, &QAbstractItemModel::dataChanged, this, resetModel);
@@ -353,7 +384,6 @@ void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
     QObject::connect(model, &QAbstractItemModel::rowsInserted, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
     QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
-    endResetModel();
 }
 
 int HourlyIncidenceModel::periodLength()
