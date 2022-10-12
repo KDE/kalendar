@@ -386,6 +386,84 @@ void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
     QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
 }
 
+void HourlyIncidenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
+{
+    if(!upperLeft.isValid() || !bottomRight.isValid()) {
+        return;
+    }
+
+    const auto startRow = upperLeft.row();
+    const auto endRow = bottomRight.row();
+
+    scheduleLayoutLinesUpdates(upperLeft.parent(), startRow, endRow);
+}
+
+void HourlyIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow)
+{
+    if (!mSourceModel) {
+        return;
+    }
+
+    // If we have no existing laid out lines it means we have not done an
+    // initial setup. Go do that, which will provide incidences anyway
+    if (m_laidOutLines.empty()) {
+        resetLayoutLines();
+        return;
+    }
+
+    // Don't bother if we are going for a full reset soon
+    if (mRefreshTimer.isActive()) {
+        return;
+    }
+
+    for (int i = sourceFirstRow; i <= sourceLastRow; ++i) {
+        if(m_linesToUpdate.count() == m_laidOutLines.count()) {
+            break;
+        }
+
+        const auto sourceModelIndex = mSourceModel->index(i, 0, sourceIndexParent);
+        const auto occurrence = sourceModelIndex.data(IncidenceOccurrenceModel::IncidenceOccurrence).value<IncidenceOccurrenceModel::Occurrence>();
+
+        const auto sourceModelStartDate = mSourceModel->start();
+        const auto startDaysFromSourceStart = sourceModelStartDate.daysTo(occurrence.start.date());
+        const auto endDaysFromSourceStart = sourceModelStartDate.daysTo(occurrence.end.date());
+
+        const auto firstPeriodOccurrenceAppears = startDaysFromSourceStart / mPeriodLength;
+        const auto lastPeriodOccurrenceAppears = endDaysFromSourceStart / mPeriodLength;
+
+        if(firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
+            continue;
+        }
+
+        const auto lastRow = m_laidOutLines.count() - 1;
+        const auto minRow = qMin(qMax(static_cast<int>(firstPeriodOccurrenceAppears), 0), lastRow);
+        const auto maxRow = qMin(static_cast<int>(lastPeriodOccurrenceAppears), lastRow);
+
+        // We set the layout lines scheduled to redo
+        m_linesToUpdate.insert(minRow);
+        m_linesToUpdate.insert(maxRow);
+    }
+
+    // Throttle how often we are changing the lines or the views will be slow
+    if (!m_updateLinesTimer.isActive()) {
+        m_updateLinesTimer.start(100);
+    }
+}
+
+void HourlyIncidenceModel::updateScheduledLayoutLines()
+{
+    for (const auto lineIndex : m_linesToUpdate) {
+        const auto periodStart = mSourceModel->start().addDays(lineIndex).startOfDay();
+        const auto idx = index(lineIndex, 0);
+        const auto laidOutLine = layoutLines(periodStart);
+
+        m_laidOutLines.replace(lineIndex, laidOutLine);
+        Q_EMIT dataChanged(idx, idx);
+    }
+
+    m_linesToUpdate.clear();
+}
+
 int HourlyIncidenceModel::periodLength()
 {
     return mPeriodLength;
