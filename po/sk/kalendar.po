@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-08 00:48+0000\n"
+"POT-Creation-Date: 2022-10-13 00:47+0000\n"
 "PO-Revision-Date: 2021-06-21 20:07+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -530,7 +530,7 @@ msgstr "Upraviť"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:880
+#: contents/ui/main.qml:881
 #, kde-format
 msgid "Cancel"
 msgstr ""
@@ -1020,6 +1020,16 @@ msgstr ""
 msgid "In a month (%1)"
 msgstr ""
 
+#: contents/ui/Controls/MainDrawerToggleButton.qml:25
+#, kde-format
+msgid "Expand Main Drawer"
+msgstr ""
+
+#: contents/ui/Controls/MainDrawerToggleButton.qml:25
+#, kde-format
+msgid "Collapse Main Drawer"
+msgstr ""
+
 #: contents/ui/Controls/Tag.qml:111
 #, fuzzy, kde-format
 #| msgid "Remove"
@@ -1047,16 +1057,6 @@ msgstr ""
 msgctxt "%1 is month of range start, %2 is month + year of range end"
 msgid "<b>%1</b> - %2"
 msgstr "Kalendár:"
-
-#: contents/ui/Delegates/ViewTitleDelegate.qml:31
-#, kde-format
-msgid "Expand Main Drawer"
-msgstr ""
-
-#: contents/ui/Delegates/ViewTitleDelegate.qml:31
-#, kde-format
-msgid "Collapse Main Drawer"
-msgstr ""
 
 #: contents/ui/Dialogs/CollectionPickerPage.qml:20
 #, kde-format
@@ -1577,46 +1577,46 @@ msgstr "Umiestnenie:"
 msgid "Mark Complete"
 msgstr "Umiestnenie:"
 
-#: contents/ui/Drawers/MainDrawer.qml:84
+#: contents/ui/Drawers/MainDrawer.qml:117
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Kalendar"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:128
-#: contents/ui/Drawers/MainDrawer.qml:269
+#: contents/ui/Drawers/MainDrawer.qml:161
+#: contents/ui/Drawers/MainDrawer.qml:302
 #, kde-format
 msgid "Undo: "
 msgstr ""
 
-#: contents/ui/Drawers/MainDrawer.qml:136
-#: contents/ui/Drawers/MainDrawer.qml:274
+#: contents/ui/Drawers/MainDrawer.qml:169
+#: contents/ui/Drawers/MainDrawer.qml:307
 #, kde-format
 msgid "Redo: "
 msgstr ""
 
-#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:353
+#: contents/ui/Drawers/MainDrawer.qml:178 contents/ui/main.qml:353
 #, kde-format
 msgid "Configure"
 msgstr ""
 
-#: contents/ui/Drawers/MainDrawer.qml:269
+#: contents/ui/Drawers/MainDrawer.qml:302
 #, kde-format
 msgid "Undo"
 msgstr ""
 
-#: contents/ui/Drawers/MainDrawer.qml:274
+#: contents/ui/Drawers/MainDrawer.qml:307
 #, kde-format
 msgid "Redo"
 msgstr ""
 
-#: contents/ui/Drawers/MainDrawer.qml:285
+#: contents/ui/Drawers/MainDrawer.qml:318
 #, kde-format
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: contents/ui/Drawers/MainDrawer.qml:385
+#: contents/ui/Drawers/MainDrawer.qml:418
 #, kde-format
 msgid "View all tasks"
 msgstr ""
@@ -1847,7 +1847,7 @@ msgstr "Dni"
 msgid "Schedule"
 msgstr ""
 
-#: contents/ui/main.qml:453 contents/ui/main.qml:1136
+#: contents/ui/main.qml:453 contents/ui/main.qml:1119
 #, kde-format
 msgid "Tasks"
 msgstr ""
@@ -1859,19 +1859,19 @@ msgstr ""
 msgid "Mail"
 msgstr "Mesiace"
 
-#: contents/ui/main.qml:819
+#: contents/ui/main.qml:820
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Import a calendar"
 msgstr "O programe Kalendar"
 
-#: contents/ui/main.qml:839
+#: contents/ui/main.qml:840
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Import Calendar"
 msgstr "O programe Kalendar"
 
-#: contents/ui/main.qml:847
+#: contents/ui/main.qml:848
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1880,12 +1880,12 @@ msgid ""
 " "
 msgstr ""
 
-#: contents/ui/main.qml:855
+#: contents/ui/main.qml:856
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr ""
 
-#: contents/ui/main.qml:871
+#: contents/ui/main.qml:872
 #, fuzzy, kde-format
 #| msgid "Add new Calendar"
 msgid "Create new calendar"
@@ -1912,125 +1912,115 @@ msgctxt "@action:inmenu open day view"
 msgid "Day"
 msgstr "Dni"
 
-#: contents/ui/main.qml:1131
-#, kde-format
-msgid "Expand MainDrawer"
-msgstr ""
-
-#: contents/ui/main.qml:1131
-#, kde-format
-msgid "Collapse MainDrawer"
-msgstr ""
-
-#: contents/ui/MainViews/DayGridView.qml:193
-#, fuzzy, kde-format
-#| msgid "<b>Title</b>:"
-msgid "<b>Today</b>"
-msgstr "<b>Názov</b>:"
-
-#: contents/ui/MainViews/HourlyView.qml:110
-#, fuzzy, kde-format
-#| msgid "Previous"
-msgid "Previous Week"
-msgstr "Predchádzajúci"
-
-#: contents/ui/MainViews/HourlyView.qml:117
-#, fuzzy, kde-format
-#| msgid "Next"
-msgid "Next Week"
-msgstr "Nasledujúci"
-
-#: contents/ui/MainViews/HourlyView.qml:124
-#, kde-format
-msgid "Now"
-msgstr ""
-
-#: contents/ui/MainViews/HourlyView.qml:410
+#: contents/ui/MainViews/BasicInternalHourlyView.qml:248
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset"
 msgstr ""
 
-#: contents/ui/MainViews/HourlyView.qml:423
+#: contents/ui/MainViews/BasicInternalHourlyView.qml:261
 #, kde-format
 msgid "All day or Multi day"
 msgstr ""
 
-#: contents/ui/MainViews/MonthView.qml:64
-#: contents/ui/MainViews/ScheduleView.qml:124
-#, fuzzy, kde-format
-#| msgid "Previous"
-msgid "Previous Month"
-msgstr "Predchádzajúci"
-
-#: contents/ui/MainViews/MonthView.qml:71
-#: contents/ui/MainViews/ScheduleView.qml:131
-#, fuzzy, kde-format
-#| msgid "Months"
-msgid "Next Month"
-msgstr "Mesiace"
-
-#: contents/ui/MainViews/MonthView.qml:78
-#: contents/ui/MainViews/ScheduleView.qml:138
-#: contents/ui/MainViews/TodoTreeView.qml:72
-#: models/todosortfilterproxymodel.cpp:181
-#, kde-format
-msgid "Today"
-msgstr ""
-
-#: contents/ui/MainViews/ScheduleView.qml:384
+#: contents/ui/MainViews/BasicMonthListView.qml:262
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:281
 #, kde-format
 msgid "Tap"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:281
 #, kde-format
 msgid "Click"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:404
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:522
+#: contents/ui/MainViews/BasicMonthListView.qml:400
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:578
+#: contents/ui/MainViews/BasicMonthListView.qml:456
 #, kde-format
 msgid "Runs all day"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:582
+#: contents/ui/MainViews/BasicMonthListView.qml:460
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:585
+#: contents/ui/MainViews/BasicMonthListView.qml:463
 #, kde-format
 msgid "Starts at %1"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:587
+#: contents/ui/MainViews/BasicMonthListView.qml:465
 #, kde-format
 msgid "Ends at %1"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:589
+#: contents/ui/MainViews/BasicMonthListView.qml:467
 #, fuzzy, kde-format
 #| msgid "All day event:"
 msgid "Runs All Day"
 msgstr "Celodenná udalosť:"
+
+#: contents/ui/MainViews/DayGridView.qml:199
+#, fuzzy, kde-format
+#| msgid "<b>Title</b>:"
+msgid "<b>Today</b>"
+msgstr "<b>Názov</b>:"
+
+#: contents/ui/MainViews/HourlyView.qml:52
+#, fuzzy, kde-format
+#| msgid "Previous"
+msgid "Previous Week"
+msgstr "Predchádzajúci"
+
+#: contents/ui/MainViews/HourlyView.qml:59
+#, fuzzy, kde-format
+#| msgid "Next"
+msgid "Next Week"
+msgstr "Nasledujúci"
+
+#: contents/ui/MainViews/HourlyView.qml:66
+#, kde-format
+msgid "Now"
+msgstr ""
+
+#: contents/ui/MainViews/MonthView.qml:42
+#: contents/ui/MainViews/ScheduleView.qml:41
+#, fuzzy, kde-format
+#| msgid "Previous"
+msgid "Previous Month"
+msgstr "Predchádzajúci"
+
+#: contents/ui/MainViews/MonthView.qml:49
+#: contents/ui/MainViews/ScheduleView.qml:48
+#, fuzzy, kde-format
+#| msgid "Months"
+msgid "Next Month"
+msgstr "Mesiace"
+
+#: contents/ui/MainViews/MonthView.qml:56
+#: contents/ui/MainViews/ScheduleView.qml:55
+#: contents/ui/MainViews/TodoTreeView.qml:72
+#: models/todosortfilterproxymodel.cpp:181
+#, kde-format
+msgid "Today"
+msgstr ""
 
 #: contents/ui/MainViews/TodoTreeView.qml:71
 #: models/todosortfilterproxymodel.cpp:175
@@ -2323,7 +2313,7 @@ msgid "General"
 msgstr "Všeobecné"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:17
-#: contents/ui/Settings/ViewSettingsPage.qml:229
+#: contents/ui/Settings/ViewSettingsPage.qml:344
 #, kde-format
 msgid "Maps"
 msgstr ""
@@ -2334,7 +2324,7 @@ msgid "Enable maps:"
 msgstr ""
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:32
-#: contents/ui/Settings/ViewSettingsPage.qml:242
+#: contents/ui/Settings/ViewSettingsPage.qml:357
 #, kde-format
 msgid "May cause crashing on some systems."
 msgstr ""
@@ -2346,13 +2336,13 @@ msgid "Location marker:"
 msgstr "Umiestnenie:"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:50
-#: contents/ui/Settings/ViewSettingsPage.qml:261
+#: contents/ui/Settings/ViewSettingsPage.qml:376
 #, kde-format
 msgid "Circle (shows area of location)"
 msgstr ""
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:56
-#: contents/ui/Settings/ViewSettingsPage.qml:268
+#: contents/ui/Settings/ViewSettingsPage.qml:383
 #, kde-format
 msgid "Pin (shows exact location)"
 msgstr ""
@@ -2427,88 +2417,157 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:73
 #, fuzzy, kde-format
 #| msgid "Months"
-msgid "Month View settings"
+msgid "Month view settings"
 msgstr "Mesiace"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:84
+#: contents/ui/Settings/ViewSettingsPage.qml:85
+#, fuzzy, kde-format
+#| msgid "Months"
+msgid "Month view mode"
+msgstr "Mesiace"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
-msgid "Weekday label alignment"
+msgid "Swipeable month grid"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:91
+#: contents/ui/Settings/ViewSettingsPage.qml:99
 #, kde-format
-msgid "Left"
-msgstr ""
-
-#: contents/ui/Settings/ViewSettingsPage.qml:98
-#, kde-format
-msgid "Center"
+msgid "Basic month grid"
 msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:105
 #, kde-format
+msgid "Swipeable month grid requires higher system performance."
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:119
+#, kde-format
+msgid "Weekday label alignment"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:126
+#, kde-format
+msgid "Left"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:133
+#, kde-format
+msgid "Center"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:140
+#, kde-format
 msgid "Right"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:122
+#: contents/ui/Settings/ViewSettingsPage.qml:157
 #, kde-format
 msgid "Weekday label length:"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:127
+#: contents/ui/Settings/ViewSettingsPage.qml:162
 #, kde-format
 msgid "Full name (Monday)"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:134
+#: contents/ui/Settings/ViewSettingsPage.qml:169
 #, kde-format
 msgid "Abbreviated (Mon)"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:141
+#: contents/ui/Settings/ViewSettingsPage.qml:176
 #, kde-format
 msgid "Letter only (M)"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:148
+#: contents/ui/Settings/ViewSettingsPage.qml:183
 #, kde-format
 msgid "Show week numbers"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:160
+#: contents/ui/Settings/ViewSettingsPage.qml:195
 #, kde-format
 msgid "Grid border width (pixels):"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:190
+#: contents/ui/Settings/ViewSettingsPage.qml:225
+#, fuzzy, kde-format
+#| msgid "Months"
+msgid "Week view settings"
+msgstr "Mesiace"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:237
+#, fuzzy, kde-format
+#| msgid "Months"
+msgid "Week view mode"
+msgstr "Mesiace"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:244
+#, kde-format
+msgid "Swipeable week view"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:251
+#, kde-format
+msgid "Basic week view"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:257
+#, kde-format
+msgid "Swipeable week view requires higher system performance."
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:270
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Schedule View settings"
 msgstr "Mesiace"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:193
+#: contents/ui/Settings/ViewSettingsPage.qml:282
+#, fuzzy, kde-format
+#| msgid "Months"
+msgid "Schedule view mode"
+msgstr "Mesiace"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:289
+#, kde-format
+msgid "Swipeable schedule view"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:296
+#, kde-format
+msgid "Basic schedule view"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:302
+#, kde-format
+msgid "Swipeable schedule view requires higher system performance."
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:308
 #, kde-format
 msgid "Show week headers"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:210
+#: contents/ui/Settings/ViewSettingsPage.qml:325
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Tasks View settings"
 msgstr "Mesiace"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:213
+#: contents/ui/Settings/ViewSettingsPage.qml:328
 #, fuzzy, kde-format
 #| msgid "Location:"
 msgid "Show completed sub-tasks"
 msgstr "Umiestnenie:"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:232
+#: contents/ui/Settings/ViewSettingsPage.qml:347
 #, kde-format
 msgid "Enable maps"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:253
+#: contents/ui/Settings/ViewSettingsPage.qml:368
 #, fuzzy, kde-format
 #| msgid "Location:"
 msgid "Location marker"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-08 00:48+0000\n"
+"POT-Creation-Date: 2022-10-13 00:47+0000\n"
 "PO-Revision-Date: 2022-06-28 14:22+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -507,7 +507,7 @@ msgstr ""
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:880
+#: contents/ui/main.qml:881
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušit"
@@ -966,6 +966,16 @@ msgstr ""
 msgid "In a month (%1)"
 msgstr ""
 
+#: contents/ui/Controls/MainDrawerToggleButton.qml:25
+#, kde-format
+msgid "Expand Main Drawer"
+msgstr "Rozbalit hlavní šuplík"
+
+#: contents/ui/Controls/MainDrawerToggleButton.qml:25
+#, kde-format
+msgid "Collapse Main Drawer"
+msgstr "Sbalit hlavní šuplík"
+
 #: contents/ui/Controls/Tag.qml:111
 #, kde-format
 msgid "Remove Tag"
@@ -990,16 +1000,6 @@ msgstr "%1 - %2"
 msgctxt "%1 is month of range start, %2 is month + year of range end"
 msgid "<b>%1</b> - %2"
 msgstr "<b>%1</b> - %2"
-
-#: contents/ui/Delegates/ViewTitleDelegate.qml:31
-#, kde-format
-msgid "Expand Main Drawer"
-msgstr "Rozbalit hlavní šuplík"
-
-#: contents/ui/Delegates/ViewTitleDelegate.qml:31
-#, kde-format
-msgid "Collapse Main Drawer"
-msgstr "Sbalit hlavní šuplík"
 
 #: contents/ui/Dialogs/CollectionPickerPage.qml:20
 #, kde-format
@@ -1499,44 +1499,44 @@ msgstr "Označit jako nedokončené"
 msgid "Mark Complete"
 msgstr "Označit jako dokončené"
 
-#: contents/ui/Drawers/MainDrawer.qml:84
+#: contents/ui/Drawers/MainDrawer.qml:117
 #, kde-format
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:128
-#: contents/ui/Drawers/MainDrawer.qml:269
+#: contents/ui/Drawers/MainDrawer.qml:161
+#: contents/ui/Drawers/MainDrawer.qml:302
 #, kde-format
 msgid "Undo: "
 msgstr "Zpět: "
 
-#: contents/ui/Drawers/MainDrawer.qml:136
-#: contents/ui/Drawers/MainDrawer.qml:274
+#: contents/ui/Drawers/MainDrawer.qml:169
+#: contents/ui/Drawers/MainDrawer.qml:307
 #, kde-format
 msgid "Redo: "
 msgstr "Znovu: "
 
-#: contents/ui/Drawers/MainDrawer.qml:145 contents/ui/main.qml:353
+#: contents/ui/Drawers/MainDrawer.qml:178 contents/ui/main.qml:353
 #, kde-format
 msgid "Configure"
 msgstr "Nastavit"
 
-#: contents/ui/Drawers/MainDrawer.qml:269
+#: contents/ui/Drawers/MainDrawer.qml:302
 #, kde-format
 msgid "Undo"
 msgstr "Zpět"
 
-#: contents/ui/Drawers/MainDrawer.qml:274
+#: contents/ui/Drawers/MainDrawer.qml:307
 #, kde-format
 msgid "Redo"
 msgstr "Znovu"
 
-#: contents/ui/Drawers/MainDrawer.qml:285
+#: contents/ui/Drawers/MainDrawer.qml:318
 #, kde-format
 msgid "Settings"
 msgstr "Nastavení"
 
-#: contents/ui/Drawers/MainDrawer.qml:385
+#: contents/ui/Drawers/MainDrawer.qml:418
 #, kde-format
 msgid "View all tasks"
 msgstr "Zobrazit všechny úlohy"
@@ -1762,7 +1762,7 @@ msgstr ""
 msgid "Schedule"
 msgstr "Rozvrh"
 
-#: contents/ui/main.qml:453 contents/ui/main.qml:1136
+#: contents/ui/main.qml:453 contents/ui/main.qml:1119
 #, kde-format
 msgid "Tasks"
 msgstr "Úkoly"
@@ -1773,17 +1773,17 @@ msgstr "Úkoly"
 msgid "Mail"
 msgstr "Pošta"
 
-#: contents/ui/main.qml:819
+#: contents/ui/main.qml:820
 #, kde-format
 msgid "Import a calendar"
 msgstr "Importovat kalendář"
 
-#: contents/ui/main.qml:839
+#: contents/ui/main.qml:840
 #, kde-format
 msgid "Import Calendar"
 msgstr "Importovat kalendář"
 
-#: contents/ui/main.qml:847
+#: contents/ui/main.qml:848
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1792,12 +1792,12 @@ msgid ""
 " "
 msgstr ""
 
-#: contents/ui/main.qml:855
+#: contents/ui/main.qml:856
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Sloučit se stávajícím kalendářem"
 
-#: contents/ui/main.qml:871
+#: contents/ui/main.qml:872
 #, kde-format
 msgid "Create new calendar"
 msgstr "Vytvořit nový kalendář"
@@ -1820,119 +1820,109 @@ msgctxt "@action:inmenu open day view"
 msgid "Day"
 msgstr ""
 
-#: contents/ui/main.qml:1131
-#, kde-format
-msgid "Expand MainDrawer"
-msgstr "Rozbalit hlavní šuplík"
-
-#: contents/ui/main.qml:1131
-#, kde-format
-msgid "Collapse MainDrawer"
-msgstr "Sbalit hlavní šuplík"
-
-#: contents/ui/MainViews/DayGridView.qml:193
-#, kde-format
-msgid "<b>Today</b>"
-msgstr "<b>Dnes</b>"
-
-#: contents/ui/MainViews/HourlyView.qml:110
-#, kde-format
-msgid "Previous Week"
-msgstr "Předchozí týden"
-
-#: contents/ui/MainViews/HourlyView.qml:117
-#, kde-format
-msgid "Next Week"
-msgstr "Příští týden"
-
-#: contents/ui/MainViews/HourlyView.qml:124
-#, kde-format
-msgid "Now"
-msgstr "Nyní"
-
-#: contents/ui/MainViews/HourlyView.qml:410
+#: contents/ui/MainViews/BasicInternalHourlyView.qml:248
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset"
 msgstr "Obnovit"
 
-#: contents/ui/MainViews/HourlyView.qml:423
+#: contents/ui/MainViews/BasicInternalHourlyView.qml:261
 #, kde-format
 msgid "All day or Multi day"
 msgstr ""
 
-#: contents/ui/MainViews/MonthView.qml:64
-#: contents/ui/MainViews/ScheduleView.qml:124
-#, kde-format
-msgid "Previous Month"
-msgstr "Předchozí měsíc"
-
-#: contents/ui/MainViews/MonthView.qml:71
-#: contents/ui/MainViews/ScheduleView.qml:131
-#, kde-format
-msgid "Next Month"
-msgstr "Příští měsíc"
-
-#: contents/ui/MainViews/MonthView.qml:78
-#: contents/ui/MainViews/ScheduleView.qml:138
-#: contents/ui/MainViews/TodoTreeView.qml:72
-#: models/todosortfilterproxymodel.cpp:181
-#, kde-format
-msgid "Today"
-msgstr "Dnes"
-
-#: contents/ui/MainViews/ScheduleView.qml:384
+#: contents/ui/MainViews/BasicMonthListView.qml:262
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Vyprázdnit den."
 
-#: contents/ui/MainViews/ScheduleView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:281
 #, kde-format
 msgid "Tap"
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:281
 #, kde-format
 msgid "Click"
 msgstr "Kliknutí"
 
-#: contents/ui/MainViews/ScheduleView.qml:404
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr ""
 
-#: contents/ui/MainViews/ScheduleView.qml:522
+#: contents/ui/MainViews/BasicMonthListView.qml:400
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Den %2 z %3)"
 
-#: contents/ui/MainViews/ScheduleView.qml:578
+#: contents/ui/MainViews/BasicMonthListView.qml:456
 #, kde-format
 msgid "Runs all day"
 msgstr "Běží celý den"
 
-#: contents/ui/MainViews/ScheduleView.qml:582
+#: contents/ui/MainViews/BasicMonthListView.qml:460
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/ScheduleView.qml:585
+#: contents/ui/MainViews/BasicMonthListView.qml:463
 #, kde-format
 msgid "Starts at %1"
 msgstr "Začíná v %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:587
+#: contents/ui/MainViews/BasicMonthListView.qml:465
 #, kde-format
 msgid "Ends at %1"
 msgstr "Končí v %1"
 
-#: contents/ui/MainViews/ScheduleView.qml:589
+#: contents/ui/MainViews/BasicMonthListView.qml:467
 #, kde-format
 msgid "Runs All Day"
 msgstr "Běží celý den"
+
+#: contents/ui/MainViews/DayGridView.qml:199
+#, kde-format
+msgid "<b>Today</b>"
+msgstr "<b>Dnes</b>"
+
+#: contents/ui/MainViews/HourlyView.qml:52
+#, kde-format
+msgid "Previous Week"
+msgstr "Předchozí týden"
+
+#: contents/ui/MainViews/HourlyView.qml:59
+#, kde-format
+msgid "Next Week"
+msgstr "Příští týden"
+
+#: contents/ui/MainViews/HourlyView.qml:66
+#, kde-format
+msgid "Now"
+msgstr "Nyní"
+
+#: contents/ui/MainViews/MonthView.qml:42
+#: contents/ui/MainViews/ScheduleView.qml:41
+#, kde-format
+msgid "Previous Month"
+msgstr "Předchozí měsíc"
+
+#: contents/ui/MainViews/MonthView.qml:49
+#: contents/ui/MainViews/ScheduleView.qml:48
+#, kde-format
+msgid "Next Month"
+msgstr "Příští měsíc"
+
+#: contents/ui/MainViews/MonthView.qml:56
+#: contents/ui/MainViews/ScheduleView.qml:55
+#: contents/ui/MainViews/TodoTreeView.qml:72
+#: models/todosortfilterproxymodel.cpp:181
+#, kde-format
+msgid "Today"
+msgstr "Dnes"
 
 #: contents/ui/MainViews/TodoTreeView.qml:71
 #: models/todosortfilterproxymodel.cpp:175
@@ -2202,7 +2192,7 @@ msgid "General"
 msgstr "Obecné"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:17
-#: contents/ui/Settings/ViewSettingsPage.qml:229
+#: contents/ui/Settings/ViewSettingsPage.qml:344
 #, kde-format
 msgid "Maps"
 msgstr "Mapy"
@@ -2213,7 +2203,7 @@ msgid "Enable maps:"
 msgstr "Povolit mapy:"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:32
-#: contents/ui/Settings/ViewSettingsPage.qml:242
+#: contents/ui/Settings/ViewSettingsPage.qml:357
 #, kde-format
 msgid "May cause crashing on some systems."
 msgstr ""
@@ -2224,13 +2214,13 @@ msgid "Location marker:"
 msgstr "Značka umístění:"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:50
-#: contents/ui/Settings/ViewSettingsPage.qml:261
+#: contents/ui/Settings/ViewSettingsPage.qml:376
 #, kde-format
 msgid "Circle (shows area of location)"
 msgstr "Kruh (zobrazí oblast polohy)"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:56
-#: contents/ui/Settings/ViewSettingsPage.qml:268
+#: contents/ui/Settings/ViewSettingsPage.qml:383
 #, kde-format
 msgid "Pin (shows exact location)"
 msgstr "Bod (zobrazí přesné místo)"
@@ -2298,86 +2288,158 @@ msgid "Past event transparency:"
 msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:73
-#, kde-format
-msgid "Month View settings"
+#, fuzzy, kde-format
+#| msgid "Month View settings"
+msgid "Month view settings"
 msgstr "Nastavení měsíčního přehledu"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:84
+#: contents/ui/Settings/ViewSettingsPage.qml:85
+#, fuzzy, kde-format
+#| msgid "Month View"
+msgid "Month view mode"
+msgstr "Pohled na měsíc"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:92
+#, kde-format
+msgid "Swipeable month grid"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:99
+#, kde-format
+msgid "Basic month grid"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:105
+#, kde-format
+msgid "Swipeable month grid requires higher system performance."
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:119
 #, kde-format
 msgid "Weekday label alignment"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:91
+#: contents/ui/Settings/ViewSettingsPage.qml:126
 #, kde-format
 msgid "Left"
 msgstr "Vlevo"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:98
+#: contents/ui/Settings/ViewSettingsPage.qml:133
 #, kde-format
 msgid "Center"
 msgstr "Střed"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:105
+#: contents/ui/Settings/ViewSettingsPage.qml:140
 #, kde-format
 msgid "Right"
 msgstr "Vpravo"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:122
+#: contents/ui/Settings/ViewSettingsPage.qml:157
 #, kde-format
 msgid "Weekday label length:"
 msgstr "Délka názvu dne:"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:127
+#: contents/ui/Settings/ViewSettingsPage.qml:162
 #, kde-format
 msgid "Full name (Monday)"
 msgstr "Celý název (Pondělí)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:134
+#: contents/ui/Settings/ViewSettingsPage.qml:169
 #, kde-format
 msgid "Abbreviated (Mon)"
 msgstr "Zkrácené (Po)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:141
+#: contents/ui/Settings/ViewSettingsPage.qml:176
 #, kde-format
 msgid "Letter only (M)"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:148
+#: contents/ui/Settings/ViewSettingsPage.qml:183
 #, kde-format
 msgid "Show week numbers"
 msgstr "Zobrazovat čísla týdnů"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:160
+#: contents/ui/Settings/ViewSettingsPage.qml:195
 #, kde-format
 msgid "Grid border width (pixels):"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:190
+#: contents/ui/Settings/ViewSettingsPage.qml:225
+#, fuzzy, kde-format
+#| msgid "Tasks View settings"
+msgid "Week view settings"
+msgstr "Nastavení pohledu úkolů"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:237
+#, fuzzy, kde-format
+#| msgid "Week View"
+msgid "Week view mode"
+msgstr "Týdenní pohled"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:244
+#, kde-format
+msgid "Swipeable week view"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:251
+#, kde-format
+msgid "Basic week view"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:257
+#, kde-format
+msgid "Swipeable week view requires higher system performance."
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:270
 #, kde-format
 msgid "Schedule View settings"
 msgstr "Nastavení přehledu plánu"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:193
+#: contents/ui/Settings/ViewSettingsPage.qml:282
+#, fuzzy, kde-format
+#| msgid "Schedule View"
+msgid "Schedule view mode"
+msgstr "Pohled na plánování"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:289
+#, fuzzy, kde-format
+#| msgid "Schedule View"
+msgid "Swipeable schedule view"
+msgstr "Pohled na plánování"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:296
+#, fuzzy, kde-format
+#| msgid "Schedule View"
+msgid "Basic schedule view"
+msgstr "Pohled na plánování"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:302
+#, kde-format
+msgid "Swipeable schedule view requires higher system performance."
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:308
 #, kde-format
 msgid "Show week headers"
 msgstr "Ukázat záhlaví týdne"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:210
+#: contents/ui/Settings/ViewSettingsPage.qml:325
 #, kde-format
 msgid "Tasks View settings"
 msgstr "Nastavení pohledu úkolů"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:213
+#: contents/ui/Settings/ViewSettingsPage.qml:328
 #, kde-format
 msgid "Show completed sub-tasks"
 msgstr "Zobrazit dokončené podúlohy"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:232
+#: contents/ui/Settings/ViewSettingsPage.qml:347
 #, kde-format
 msgid "Enable maps"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:253
+#: contents/ui/Settings/ViewSettingsPage.qml:368
 #, kde-format
 msgid "Location marker"
 msgstr ""
@@ -2817,3 +2879,9 @@ msgstr "Změnit"
 #, kde-format
 msgid "Add Account"
 msgstr "Přidat účet"
+
+#~ msgid "Expand MainDrawer"
+#~ msgstr "Rozbalit hlavní šuplík"
+
+#~ msgid "Collapse MainDrawer"
+#~ msgstr "Sbalit hlavní šuplík"
