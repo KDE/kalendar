@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:47+0000\n"
+"POT-Creation-Date: 2022-10-14 00:47+0000\n"
 "PO-Revision-Date: 2022-09-28 21:47+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -24,12 +24,12 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xavier.besnard@neuf.fr"
 
-#: calendarmanager.cpp:523
+#: calendarmanager.cpp:537
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Déplacer la (les) récurrence(s)"
 
-#: calendarmanager.cpp:528
+#: calendarmanager.cpp:542
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
@@ -37,17 +37,17 @@ msgstr ""
 "Impossible d'ajouter un élément d'exception au calendrier. Aucun changement "
 "ne sera fait."
 
-#: calendarmanager.cpp:568
+#: calendarmanager.cpp:582
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Supprimer la tâche et ses sous-tâches"
 
-#: calendarmanager.cpp:571
+#: calendarmanager.cpp:585
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Supprimer la tâche et rendre indépendante ses sous-tâches"
 
-#: calendarmanager.cpp:734
+#: calendarmanager.cpp:748
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -208,7 +208,7 @@ msgstr "Carnet d'adresses :"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:934
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:948
 #, kde-format
 msgid "Name:"
 msgstr "Nom :"
@@ -1101,335 +1101,335 @@ msgctxt "%1 is incidence type"
 msgid "Add %1"
 msgstr "Ajouter %1"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "Invalid dates provided."
 msgstr "Fourniture de dates non valables."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "End date cannot be before start date."
 msgstr "La date de fin ne peut être antérieure à la date de début."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:139
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:146
 #, kde-format
 msgid "Calendar:"
 msgstr "Calendrier :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:160
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:174
 #, kde-format
 msgid "Summary:"
 msgstr "Résumé :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:171
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:185
 #, kde-format
 msgid "Completion:"
 msgstr "Achèvement :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:190
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
 #, kde-format
 msgid "Priority:"
 msgstr "Priorité :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:198
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:212
 #, kde-format
 msgid "Unassigned"
 msgstr "Non assigné"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:199
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:213
 #, kde-format
 msgid "1 (Highest Priority)"
 msgstr "1 (Priorité la plus haute)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:200
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:214
 #, kde-format
 msgid "2"
 msgstr "2"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:201
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:215
 #, kde-format
 msgid "3"
 msgstr "3"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:202
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:216
 #, kde-format
 msgid "4"
 msgstr "4"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:203
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:217
 #, kde-format
 msgid "5 (Medium Priority)"
 msgstr "5 (Priorité moyenne)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:218
 #, kde-format
 msgid "6"
 msgstr "6"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:205
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:219
 #, kde-format
 msgid "7"
 msgstr "7"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:206
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
 #, kde-format
 msgid "8"
 msgstr "8"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:207
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:221
 #, kde-format
 msgid "9 (Lowest Priority)"
 msgstr "9 (Priorité la plus faible)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:234
 #, kde-format
 msgid "All day"
 msgstr "Toute la journée"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:252
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:266
 #, kde-format
 msgid "Start:"
 msgstr "Date de début :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
 #, kde-format
 msgid "Due:"
 msgstr "Échéance :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
 #, kde-format
 msgid "End:"
 msgstr "Date de fin :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:346
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:360
 #, kde-format
 msgid "Timezone:"
 msgstr "Fuseau horaire :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:365
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:379
 #, kde-format
 msgid "Repeat:"
 msgstr "Répétition :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:395
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:409
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:610
 #: contents/ui/KalendarUtils/labelutils.js:106
 #, kde-format
 msgid "Never"
 msgstr "Jamais"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:396
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:410
 #, kde-format
 msgid "Daily"
 msgstr "Quotidiennement"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:397
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:411
 #, kde-format
 msgid "Weekly"
 msgstr "Hebdomadaire"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:398
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:412
 #, kde-format
 msgid "Monthly"
 msgstr "Mensuellement"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:399
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:413
 #, kde-format
 msgid "Yearly"
 msgstr "annuellement"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:414
 #, kde-format
 msgid "Custom"
 msgstr "Personnalisé"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:431
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:445
 #, kde-format
 msgid "Every:"
 msgstr "Chaque :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:478
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:492
 #, kde-format
 msgid "day"
 msgid_plural "days"
 msgstr[0] "jour"
 msgstr[1] "jours"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:479
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:493
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
 msgstr[0] "semaine"
 msgstr[1] "semaines"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:480
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:494
 #, kde-format
 msgid "month"
 msgid_plural "months"
 msgstr[0] "mois"
 msgstr[1] "mois"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:481
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:495
 #, kde-format
 msgid "year"
 msgid_plural "years"
 msgstr[0] "année"
 msgstr[1] "années"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:551
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:565
 #, kde-format
 msgid "On:"
 msgstr "Sur :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:559
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:573
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
 msgstr "Le %1 de chaque mois"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:571
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:585
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
 msgstr "Le %1 %2 de chaque mois"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:582
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
 #, kde-format
 msgid "Ends:"
 msgstr "Se termine :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:611
 #, kde-format
 msgid "On"
 msgstr "Sur"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:598
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:612
 #, kde-format
 msgid "After"
 msgstr "Après"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:634
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:648
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
 msgstr[0] "occurrence"
 msgstr[1] "occurrences"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:640
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:654
 #, kde-format
 msgid "Exceptions:"
 msgstr "Exceptions :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:646
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:660
 #, kde-format
 msgid "Add Recurrence Exception"
 msgstr "Ajouter une exception à la périodicité"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:689
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:703
 #, kde-format
 msgid "Location:"
 msgstr "Emplacement :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:698
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:774
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:941
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:712
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:788
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:955
 #, kde-format
 msgid "Optional"
 msgstr "Optionnel"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:737
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:751
 #, kde-format
 msgid "Show map"
 msgstr "Afficher la carte"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:768
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:782
 #, kde-format
 msgid "Description:"
 msgstr "Description :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:789
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:803
 #, kde-format
 msgid "Tags:"
 msgstr "Étiquettes :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:798
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:812
 #: models/todosortfilterproxymodel.cpp:153
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ","
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Tap to set tags…"
 msgstr "Tapoter pour définir les étiquettes..."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Click to set tags…"
 msgstr "Cliquez pour définir des étiquettes..."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:816
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:830
 #, kde-format
 msgid "Manage tags…"
 msgstr "Gérer les étiquettes…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:841
 #, kde-format
 msgid "Reminders:"
 msgstr "Rappels :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:885
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
 #, kde-format
 msgid "Add Reminder"
 msgstr "Ajouter un rappel"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:913
 #, kde-format
 msgid "Attendees:"
 msgstr "Participants :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:959
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:973
 #, kde-format
 msgid "Email:"
 msgstr "Courriel :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:966
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:980
 #, kde-format
 msgid "Required"
 msgstr "Nécessaire"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:975
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:989
 #, kde-format
 msgid "Status:"
 msgstr "État :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
 msgid "Request RSVP"
 msgstr "Requête « RSVP »"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1027
 #, kde-format
 msgid "Add Attendee"
 msgstr "Ajouter un participant"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1024
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1038
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Sélectionnez à partir des contacts"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Remplissez manuellement"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1056
 #, kde-format
 msgid "Attachments:"
 msgstr "Pièces jointes :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1065
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1079
 #, kde-format
 msgid "Add Attachment"
 msgstr "Ajouter une pièce jointe"

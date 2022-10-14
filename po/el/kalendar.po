@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:47+0000\n"
+"POT-Creation-Date: 2022-10-14 00:47+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -27,30 +27,30 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sstavra@gmail.com"
 
-#: calendarmanager.cpp:523
+#: calendarmanager.cpp:537
 #, fuzzy, kde-format
 #| msgid "occurrence"
 #| msgid_plural "occurrences"
 msgid "Move occurrence(s)"
 msgstr "εμφάνιση"
 
-#: calendarmanager.cpp:528
+#: calendarmanager.cpp:542
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr ""
 
-#: calendarmanager.cpp:568
+#: calendarmanager.cpp:582
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Διαγραφή εργασίας και υπο-εργασιών"
 
-#: calendarmanager.cpp:571
+#: calendarmanager.cpp:585
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Διαγραφή εργασίας και ανεξαρτητοποίηση υπο-εργασιών"
 
-#: calendarmanager.cpp:734
+#: calendarmanager.cpp:748
 #, fuzzy, kde-format
 #| msgid "Import Calendar"
 msgctxt "@title:window"
@@ -227,7 +227,7 @@ msgstr "Επιλογή χρώματος ημερολογίου"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:934
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:948
 #, kde-format
 msgid "Name:"
 msgstr "Όνομα:"
@@ -1167,335 +1167,335 @@ msgctxt "%1 is incidence type"
 msgid "Add %1"
 msgstr "Προσθήκη %1"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "Invalid dates provided."
 msgstr "Δόθηκαν μη έγκυρες ημερομηνίες."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "End date cannot be before start date."
 msgstr "Η ημερομηνία λήξης δεν μπορεί να είναι πριν την ημερομηνία έναρξης."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:139
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:146
 #, kde-format
 msgid "Calendar:"
 msgstr "Ημερολόγιο:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:160
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:174
 #, kde-format
 msgid "Summary:"
 msgstr "Περίληψη:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:171
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:185
 #, kde-format
 msgid "Completion:"
 msgstr "Συμπλήρωση:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:190
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
 #, kde-format
 msgid "Priority:"
 msgstr "Προτεραιότητα:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:198
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:212
 #, kde-format
 msgid "Unassigned"
 msgstr "Χωρίς ανάθεση"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:199
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:213
 #, kde-format
 msgid "1 (Highest Priority)"
 msgstr "1 (Η υψηλότερη προτεραιότητα)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:200
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:214
 #, kde-format
 msgid "2"
 msgstr "2"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:201
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:215
 #, kde-format
 msgid "3"
 msgstr "3"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:202
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:216
 #, kde-format
 msgid "4"
 msgstr "4"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:203
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:217
 #, kde-format
 msgid "5 (Medium Priority)"
 msgstr "5 (Μέση προτεραιότητα)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:218
 #, kde-format
 msgid "6"
 msgstr "6"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:205
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:219
 #, kde-format
 msgid "7"
 msgstr "7"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:206
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
 #, kde-format
 msgid "8"
 msgstr "8"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:207
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:221
 #, kde-format
 msgid "9 (Lowest Priority)"
 msgstr "9 (Η χαμηλότερη προτεραιότητα)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:234
 #, kde-format
 msgid "All day"
 msgstr "Όλη την ημέρα"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:252
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:266
 #, kde-format
 msgid "Start:"
 msgstr "Έναρξη:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
 #, kde-format
 msgid "Due:"
 msgstr "Έως:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
 #, kde-format
 msgid "End:"
 msgstr "Λήξη:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:346
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:360
 #, kde-format
 msgid "Timezone:"
 msgstr "Ζώνη ώρας:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:365
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:379
 #, kde-format
 msgid "Repeat:"
 msgstr "Επανάληψη:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:395
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:409
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:610
 #: contents/ui/KalendarUtils/labelutils.js:106
 #, kde-format
 msgid "Never"
 msgstr "Ποτέ"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:396
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:410
 #, kde-format
 msgid "Daily"
 msgstr "Καθημερινό"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:397
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:411
 #, kde-format
 msgid "Weekly"
 msgstr "Εβδομαδιαίο"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:398
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:412
 #, kde-format
 msgid "Monthly"
 msgstr "Μηνιαίο"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:399
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:413
 #, kde-format
 msgid "Yearly"
 msgstr "Ετήσιο"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:414
 #, kde-format
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:431
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:445
 #, kde-format
 msgid "Every:"
 msgstr "Κάθε:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:478
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:492
 #, kde-format
 msgid "day"
 msgid_plural "days"
 msgstr[0] "ημέρα"
 msgstr[1] "ημέρες"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:479
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:493
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
 msgstr[0] "εβδομάδα"
 msgstr[1] "εβδομάδες"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:480
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:494
 #, kde-format
 msgid "month"
 msgid_plural "months"
 msgstr[0] "μήνα"
 msgstr[1] "μήνες"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:481
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:495
 #, kde-format
 msgid "year"
 msgid_plural "years"
 msgstr[0] "έτος"
 msgstr[1] "έτη"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:551
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:565
 #, kde-format
 msgid "On:"
 msgstr "Την:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:559
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:573
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
 msgstr "Την %1 κάθε μήνα"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:571
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:585
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
 msgstr "Την %1 %2 κάθε μήνα"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:582
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
 #, kde-format
 msgid "Ends:"
 msgstr "Τελειώνει:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:611
 #, kde-format
 msgid "On"
 msgstr "Την"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:598
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:612
 #, kde-format
 msgid "After"
 msgstr "Μετά από"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:634
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:648
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
 msgstr[0] "εμφάνιση"
 msgstr[1] "εμφανίσεις"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:640
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:654
 #, kde-format
 msgid "Exceptions:"
 msgstr "Εξαιρέσεις:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:646
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:660
 #, kde-format
 msgid "Add Recurrence Exception"
 msgstr "Προσθήκη εξαίρεσης επανεμφάνισης"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:689
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:703
 #, kde-format
 msgid "Location:"
 msgstr "Τοποθεσία:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:698
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:774
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:941
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:712
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:788
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:955
 #, kde-format
 msgid "Optional"
 msgstr "Προαιρετικό"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:737
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:751
 #, kde-format
 msgid "Show map"
 msgstr "Εμφάνιση χάρτη"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:768
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:782
 #, kde-format
 msgid "Description:"
 msgstr "Περιγραφή:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:789
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:803
 #, kde-format
 msgid "Tags:"
 msgstr "Ετικέτες:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:798
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:812
 #: models/todosortfilterproxymodel.cpp:153
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ", "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Tap to set tags…"
 msgstr "Χτυπήστε για να ρυθμίσετε ετικέτες…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Click to set tags…"
 msgstr "Κάνετε κλικ για να ρυθμίσετε ετικέτες…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:816
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:830
 #, kde-format
 msgid "Manage tags…"
 msgstr "Διαχείριση ετικετών…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:841
 #, kde-format
 msgid "Reminders:"
 msgstr "Υπενθυμίσεις:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:885
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
 #, kde-format
 msgid "Add Reminder"
 msgstr "Προσθήκη υπενθύμισης"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:913
 #, kde-format
 msgid "Attendees:"
 msgstr "Συμμετέχοντες:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:959
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:973
 #, kde-format
 msgid "Email:"
 msgstr "Ηλ. αλληλογραφία:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:966
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:980
 #, kde-format
 msgid "Required"
 msgstr "Απαιτείται"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:975
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:989
 #, kde-format
 msgid "Status:"
 msgstr "Κατάσταση:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
 msgid "Request RSVP"
 msgstr "Αίτηση RSVP"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1027
 #, kde-format
 msgid "Add Attendee"
 msgstr "Προσθήκη συμμετέχοντα"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1024
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1038
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Επιλογή από τις επαφές"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Εισαγωγή στοιχείων χειροκίνητα"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1056
 #, kde-format
 msgid "Attachments:"
 msgstr "Συνημμένα:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1065
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1079
 #, kde-format
 msgid "Add Attachment"
 msgstr "Προσθήκη συνημμένου"

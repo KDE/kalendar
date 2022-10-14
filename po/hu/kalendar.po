@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:47+0000\n"
+"POT-Creation-Date: 2022-10-14 00:47+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -27,28 +27,28 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "ulysses@fsf.hu"
 
-#: calendarmanager.cpp:523
+#: calendarmanager.cpp:537
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Előfordulások áthelyezése"
 
-#: calendarmanager.cpp:528
+#: calendarmanager.cpp:542
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr "Nem sikerült hozzáadni a kivételt a naptárhoz. Nem történik módosítás."
 
-#: calendarmanager.cpp:568
+#: calendarmanager.cpp:582
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Feladat és részfeladatai törlése"
 
-#: calendarmanager.cpp:571
+#: calendarmanager.cpp:585
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Feladat törlése, részfeladatok függetlenné tétele"
 
-#: calendarmanager.cpp:734
+#: calendarmanager.cpp:748
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -230,7 +230,7 @@ msgstr "Naptárszín kiválasztása"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:934
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:948
 #, kde-format
 msgid "Name:"
 msgstr "Név:"
@@ -1150,335 +1150,335 @@ msgctxt "%1 is incidence type"
 msgid "Add %1"
 msgstr "%1 hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "Invalid dates provided."
 msgstr "Érvénytelen dátumok."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:126
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "End date cannot be before start date."
 msgstr "A záró dátum nem lehet korábbi, mint a kezdő dátum."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:139
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:146
 #, kde-format
 msgid "Calendar:"
 msgstr "Naptár:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:160
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:174
 #, kde-format
 msgid "Summary:"
 msgstr "Összefoglaló:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:171
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:185
 #, kde-format
 msgid "Completion:"
 msgstr "Befejezettség:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:190
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
 #, kde-format
 msgid "Priority:"
 msgstr "Prioritás:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:198
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:212
 #, kde-format
 msgid "Unassigned"
 msgstr "Nincs hozzárendelve"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:199
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:213
 #, kde-format
 msgid "1 (Highest Priority)"
 msgstr "1 (legmagasabb prioritás)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:200
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:214
 #, kde-format
 msgid "2"
 msgstr "2"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:201
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:215
 #, kde-format
 msgid "3"
 msgstr "3"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:202
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:216
 #, kde-format
 msgid "4"
 msgstr "4"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:203
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:217
 #, kde-format
 msgid "5 (Medium Priority)"
 msgstr "5 (közepes prioritás)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:218
 #, kde-format
 msgid "6"
 msgstr "6"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:205
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:219
 #, kde-format
 msgid "7"
 msgstr "7"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:206
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
 #, kde-format
 msgid "8"
 msgstr "8"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:207
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:221
 #, kde-format
 msgid "9 (Lowest Priority)"
 msgstr "9 (legalacsonyabb prioritás)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:234
 #, kde-format
 msgid "All day"
 msgstr "Egész napos"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:252
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:266
 #, kde-format
 msgid "Start:"
 msgstr "Kezdés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
 #, kde-format
 msgid "Due:"
 msgstr "Határidő:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
 #, kde-format
 msgid "End:"
 msgstr "Befejezés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:346
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:360
 #, kde-format
 msgid "Timezone:"
 msgstr "Időzóna:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:365
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:379
 #, kde-format
 msgid "Repeat:"
 msgstr "Ismétlődés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:395
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:409
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:610
 #: contents/ui/KalendarUtils/labelutils.js:106
 #, kde-format
 msgid "Never"
 msgstr "Soha"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:396
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:410
 #, kde-format
 msgid "Daily"
 msgstr "Naponta"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:397
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:411
 #, kde-format
 msgid "Weekly"
 msgstr "Hetente"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:398
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:412
 #, kde-format
 msgid "Monthly"
 msgstr "Havonta"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:399
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:413
 #, kde-format
 msgid "Yearly"
 msgstr "Évente"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:414
 #, kde-format
 msgid "Custom"
 msgstr "Egyéni"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:431
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:445
 #, kde-format
 msgid "Every:"
 msgstr "Minden:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:478
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:492
 #, kde-format
 msgid "day"
 msgid_plural "days"
 msgstr[0] "napon"
 msgstr[1] "napon"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:479
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:493
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
 msgstr[0] "héten"
 msgstr[1] "héten"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:480
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:494
 #, kde-format
 msgid "month"
 msgid_plural "months"
 msgstr[0] "hónapban"
 msgstr[1] "hónapban"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:481
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:495
 #, kde-format
 msgid "year"
 msgid_plural "years"
 msgstr[0] "évben"
 msgstr[1] "évben"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:551
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:565
 #, kde-format
 msgid "On:"
 msgstr "Ekkor:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:559
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:573
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
 msgstr "Minden hónap %1. napján"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:571
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:585
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
 msgstr "Minden hónap %1. hetének %2. napja"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:582
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
 #, kde-format
 msgid "Ends:"
 msgstr "Befejeződés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:611
 #, kde-format
 msgid "On"
 msgstr "Ekkor"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:598
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:612
 #, kde-format
 msgid "After"
 msgstr "Után"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:634
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:648
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
 msgstr[0] "előfordulás"
 msgstr[1] "előfordulás"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:640
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:654
 #, kde-format
 msgid "Exceptions:"
 msgstr "Kivételek:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:646
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:660
 #, kde-format
 msgid "Add Recurrence Exception"
 msgstr "Ismétlődési kivétel hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:689
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:703
 #, kde-format
 msgid "Location:"
 msgstr "Hely:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:698
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:774
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:941
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:712
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:788
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:955
 #, kde-format
 msgid "Optional"
 msgstr "Opcionális"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:737
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:751
 #, kde-format
 msgid "Show map"
 msgstr "Térkép megjelenítése"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:768
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:782
 #, kde-format
 msgid "Description:"
 msgstr "Leírás:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:789
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:803
 #, kde-format
 msgid "Tags:"
 msgstr "Címkék:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:798
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:812
 #: models/todosortfilterproxymodel.cpp:153
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ", "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Tap to set tags…"
 msgstr "Koppintson címkék megadásához…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:799
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Click to set tags…"
 msgstr "Kattintson címkék megadásához…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:816
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:830
 #, kde-format
 msgid "Manage tags…"
 msgstr "Címkék kezelése…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:841
 #, kde-format
 msgid "Reminders:"
 msgstr "Emlékeztetők:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:885
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
 #, kde-format
 msgid "Add Reminder"
 msgstr "Emlékeztető hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:913
 #, kde-format
 msgid "Attendees:"
 msgstr "Résztvevők:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:959
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:973
 #, kde-format
 msgid "Email:"
 msgstr "E-mail:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:966
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:980
 #, kde-format
 msgid "Required"
 msgstr "Kötelező"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:975
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:989
 #, kde-format
 msgid "Status:"
 msgstr "Állapot:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
 msgid "Request RSVP"
 msgstr "Választ kérek"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1027
 #, kde-format
 msgid "Add Attendee"
 msgstr "Résztvevő hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1024
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1038
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Kiválasztás a névjegyekből"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Kitöltés kézzel"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1056
 #, kde-format
 msgid "Attachments:"
 msgstr "Mellékletek:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1065
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1079
 #, kde-format
 msgid "Add Attachment"
 msgstr "Melléklet hozzáadása"
