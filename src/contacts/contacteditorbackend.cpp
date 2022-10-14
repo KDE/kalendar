@@ -223,6 +223,7 @@ void ContactEditorBackend::storeContact(KContacts::Addressee &contact, ContactMe
 {
     // TODO custom fields group description support
     // metaData.setCustomFieldDescriptions(d->mCustomFieldsWidget->localCustomFieldDescriptions());
+    Q_UNUSED(contact)
 
     metaData.setDisplayNameMode(m_addressee->displayType());
 }
