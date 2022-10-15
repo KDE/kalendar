@@ -21,3 +21,6 @@ Dependencies:
     'pim/mailcommon' : '@same'
     'pim/pimcommon' : '@same'
     'frameworks/kirigami' : '@latest'
+
+Options:
+  require-passing-tests-on: ['Linux']
