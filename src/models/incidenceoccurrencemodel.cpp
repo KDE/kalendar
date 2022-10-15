@@ -119,6 +119,7 @@ void IncidenceOccurrenceModel::scheduleReset()
 void IncidenceOccurrenceModel::resetFromSource()
 {
     if (!m_coreCalendar) {
+        qCWarning(KALENDAR_LOG) << "Not resetting IOC from source as no core calendar set.";
         return;
     }
 

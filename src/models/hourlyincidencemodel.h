@@ -9,7 +9,6 @@
 #include <QList>
 #include <QSharedPointer>
 #include <QTimer>
-#include <kalendarconfig.h>
 
 namespace KCalendarCore
 {
@@ -21,12 +20,13 @@ class Incidence;
  * The "incidences" roles provides a list of lists, where each list represents a visual line,
  * containing a number of events to display.
  */
-class HourlyIncidenceModel : public QAbstractItemModel
+class HourlyIncidenceModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
     Q_PROPERTY(HourlyIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
     Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(bool showSubTodos READ showSubTodos WRITE setShowSubTodos NOTIFY showSubTodosChanged)
 
 public:
     enum Filter {
@@ -46,26 +46,26 @@ public:
     ~HourlyIncidenceModel() override = default;
 
     QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
     int rowCount(const QModelIndex &parent) const override;
-    int columnCount(const QModelIndex &parent) const override;
-
     QVariant data(const QModelIndex &index, int role) const override;
-
     QHash<int, QByteArray> roleNames() const override;
 
-    IncidenceOccurrenceModel *model();
-    void setModel(IncidenceOccurrenceModel *model);
-    int periodLength();
-    void setPeriodLength(int periodLength);
-    HourlyIncidenceModel::Filters filters();
-    void setFilters(HourlyIncidenceModel::Filters filters);
+    IncidenceOccurrenceModel *model() const;
+    int periodLength() const;
+    HourlyIncidenceModel::Filters filters() const;
+    bool showSubTodos() const;
 
 Q_SIGNALS:
     void periodLengthChanged();
     void filtersChanged();
     void modelChanged();
+    void showSubTodosChanged();
+
+public Q_SLOTS:
+    void setModel(IncidenceOccurrenceModel *model);
+    void setPeriodLength(int periodLength);
+    void setFilters(HourlyIncidenceModel::Filters filters);
+    void setShowSubTodos(const bool showSubTodos);
 
 private Q_SLOTS:
     void resetLayoutLines();
@@ -84,7 +84,7 @@ private:
     QVector<QVariantList> m_laidOutLines;
     int mPeriodLength{15}; // In minutes
     HourlyIncidenceModel::Filters m_filters;
-    KalendarConfig *m_config = nullptr;
+    bool m_showSubTodos = true;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(HourlyIncidenceModel::Filters)

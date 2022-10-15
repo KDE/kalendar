@@ -12,7 +12,6 @@
 #include <QList>
 #include <QSharedPointer>
 #include <QTimer>
-#include <kalendarconfig.h>
 
 namespace KCalendarCore
 {
@@ -31,6 +30,7 @@ class MultiDayIncidenceModel : public QAbstractListModel
     Q_PROPERTY(MultiDayIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
     Q_PROPERTY(int incidenceCount READ incidenceCount NOTIFY incidenceCountChanged)
     Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(bool showSubTodos READ showSubTodos WRITE setShowSubTodos NOTIFY showSubTodosChanged)
 
 public:
     enum Filter {
@@ -54,20 +54,24 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    IncidenceOccurrenceModel *model();
-    void setModel(IncidenceOccurrenceModel *model);
+    IncidenceOccurrenceModel *model() const;
     int periodLength() const;
-    void setPeriodLength(int periodLength);
-    MultiDayIncidenceModel::Filters filters();
-    void setFilters(MultiDayIncidenceModel::Filters filters);
-    bool incidencePassesFilter(const QModelIndex &idx) const;
-    Q_INVOKABLE int incidenceCount();
+    MultiDayIncidenceModel::Filters filters() const;
+    bool showSubTodos() const;
+    int incidenceCount() const;
 
 Q_SIGNALS:
     void periodLengthChanged();
     void filtersChanged();
     void incidenceCountChanged();
     void modelChanged();
+    void showSubTodosChanged();
+
+public Q_SLOTS:
+    void setModel(IncidenceOccurrenceModel *model);
+    void setPeriodLength(int periodLength);
+    void setFilters(MultiDayIncidenceModel::Filters filters);
+    void setShowSubTodos(const bool showSubTodos);
 
 protected:
     void setIncidenceCount(int incidenceCount);
@@ -77,6 +81,7 @@ private Q_SLOTS:
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
     void scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow);
     void updateScheduledLayoutLines();
+    bool incidencePassesFilter(const QModelIndex &idx) const;
 
 private:
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
@@ -89,7 +94,7 @@ private:
     QVector<QVariantList> m_laidOutLines;
     int mPeriodLength = 7;
     MultiDayIncidenceModel::Filters m_filters;
-    KalendarConfig *m_config = nullptr;
+    bool m_showSubTodos = true;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(MultiDayIncidenceModel::Filters)

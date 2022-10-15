@@ -7,17 +7,11 @@
 #include <cmath>
 
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractListModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
     mRefreshTimer.setInterval(100);
     mRefreshTimer.callOnTimeout(this, &HourlyIncidenceModel::resetLayoutLines);
-
-    m_config = KalendarConfig::self();
-    QObject::connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, [&]() {
-        beginResetModel();
-        endResetModel();
-    });
 }
 
 QModelIndex HourlyIncidenceModel::index(int row, int column, const QModelIndex &parent) const
@@ -32,11 +26,6 @@ QModelIndex HourlyIncidenceModel::index(int row, int column, const QModelIndex &
     return {};
 }
 
-QModelIndex HourlyIncidenceModel::parent(const QModelIndex &) const
-{
-    return {};
-}
-
 int HourlyIncidenceModel::rowCount(const QModelIndex &parent) const
 {
     // Number of weeks
@@ -44,11 +33,6 @@ int HourlyIncidenceModel::rowCount(const QModelIndex &parent) const
         return qMax(mSourceModel->length(), 1);
     }
     return 0;
-}
-
-int HourlyIncidenceModel::columnCount(const QModelIndex &) const
-{
-    return 1;
 }
 
 static double getDuration(const QDateTime &start, const QDateTime &end, int periodLength)
@@ -84,7 +68,7 @@ QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const Q
             continue;
         }
 
-        if (!m_config->showSubtodosInCalendarViews()
+        if (!m_showSubTodos
             && !srcIdx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
             continue;
         }
@@ -358,7 +342,7 @@ QVariant HourlyIncidenceModel::data(const QModelIndex &idx, int role) const
     }
 }
 
-IncidenceOccurrenceModel *HourlyIncidenceModel::model()
+IncidenceOccurrenceModel *HourlyIncidenceModel::model() const
 {
     return mSourceModel;
 }
@@ -464,7 +448,7 @@ void HourlyIncidenceModel::updateScheduledLayoutLines()
     m_linesToUpdate.clear();
 }
 
-int HourlyIncidenceModel::periodLength()
+int HourlyIncidenceModel::periodLength() const
 {
     return mPeriodLength;
 }
@@ -474,7 +458,7 @@ void HourlyIncidenceModel::setPeriodLength(int periodLength)
     mPeriodLength = periodLength;
 }
 
-HourlyIncidenceModel::Filters HourlyIncidenceModel::filters()
+HourlyIncidenceModel::Filters HourlyIncidenceModel::filters() const
 {
     return m_filters;
 }
@@ -485,6 +469,23 @@ void HourlyIncidenceModel::setFilters(HourlyIncidenceModel::Filters filters)
     m_filters = filters;
     Q_EMIT filtersChanged();
     endResetModel();
+}
+
+bool HourlyIncidenceModel::showSubTodos() const
+{
+    return m_showSubTodos;
+}
+
+void HourlyIncidenceModel::setShowSubTodos(const bool showSubTodos)
+{
+    if (showSubTodos == m_showSubTodos) {
+        return;
+    }
+
+    m_showSubTodos = showSubTodos;
+    Q_EMIT showSubTodosChanged();
+
+    resetLayoutLines();
 }
 
 QHash<int, QByteArray> HourlyIncidenceModel::roleNames() const

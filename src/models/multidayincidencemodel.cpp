@@ -19,9 +19,6 @@ MultiDayIncidenceModel::MultiDayIncidenceModel(QObject *parent)
     m_updateLinesTimer.setSingleShot(true);
     m_updateLinesTimer.setInterval(100);
     m_updateLinesTimer.callOnTimeout(this, &MultiDayIncidenceModel::updateScheduledLayoutLines);
-
-    m_config = KalendarConfig::self();
-    connect(m_config, &KalendarConfig::showSubtodosInCalendarViewsChanged, this, &MultiDayIncidenceModel::resetLayoutLines);
 }
 
 int MultiDayIncidenceModel::rowCount(const QModelIndex &parent) const
@@ -265,7 +262,7 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
     }
 }
 
-IncidenceOccurrenceModel *MultiDayIncidenceModel::model()
+IncidenceOccurrenceModel *MultiDayIncidenceModel::model() const
 {
     return mSourceModel;
 }
@@ -285,12 +282,12 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
             mRefreshTimer.start(100);
         }
     };
-    QObject::connect(model, &QAbstractItemModel::dataChanged, this, &MultiDayIncidenceModel::slotSourceDataChanged);
-    QObject::connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::modelReset, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::rowsInserted, this, &MultiDayIncidenceModel::scheduleLayoutLinesUpdates);
-    QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, &MultiDayIncidenceModel::scheduleLayoutLinesUpdates);
+    connect(model, &QAbstractItemModel::dataChanged, this, &MultiDayIncidenceModel::slotSourceDataChanged);
+    connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);
+    connect(model, &QAbstractItemModel::modelReset, this, resetModel);
+    connect(model, &QAbstractItemModel::rowsInserted, this, &MultiDayIncidenceModel::scheduleLayoutLinesUpdates);
+    connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
+    connect(model, &QAbstractItemModel::rowsRemoved, this, &MultiDayIncidenceModel::scheduleLayoutLinesUpdates);
 
     mRefreshTimer.start(100);
 }
@@ -383,7 +380,7 @@ void MultiDayIncidenceModel::setPeriodLength(int periodLength)
     mPeriodLength = periodLength;
 }
 
-MultiDayIncidenceModel::Filters MultiDayIncidenceModel::filters()
+MultiDayIncidenceModel::Filters MultiDayIncidenceModel::filters() const
 {
     return m_filters;
 }
@@ -396,9 +393,26 @@ void MultiDayIncidenceModel::setFilters(MultiDayIncidenceModel::Filters filters)
     endResetModel();
 }
 
+bool MultiDayIncidenceModel::showSubTodos() const
+{
+    return m_showSubTodos;
+}
+
+void MultiDayIncidenceModel::setShowSubTodos(const bool showSubTodos)
+{
+    if (showSubTodos == m_showSubTodos) {
+        return;
+    }
+
+    m_showSubTodos = showSubTodos;
+    Q_EMIT showSubTodosChanged();
+
+    resetLayoutLines();
+}
+
 bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
 {
-    if (!m_filters && m_config->showSubtodosInCalendarViews()) {
+    if (!m_filters && m_showSubTodos) {
         return true;
     }
     bool include = false;
@@ -418,7 +432,7 @@ bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
         }
     }
 
-    if (!m_config->showSubtodosInCalendarViews()
+    if (!m_showSubTodos
         && idx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
         include = true;
     }
@@ -426,7 +440,7 @@ bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
     return include;
 }
 
-int MultiDayIncidenceModel::incidenceCount()
+int MultiDayIncidenceModel::incidenceCount() const
 {
     int count = 0;
 
