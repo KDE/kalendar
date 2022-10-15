@@ -75,21 +75,12 @@ public:
     ~IncidenceOccurrenceModel() override = default;
 
     int rowCount(const QModelIndex &parent = {}) const override;
-
     QVariant data(const QModelIndex &index, int role) const override;
 
-    void updateQuery();
     Akonadi::ETMCalendar::Ptr calendar() const;
-    void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
-
-    void setStart(const QDate &start);
     QDate start() const;
-    void setLength(int length);
     int length() const;
     Filter *filter() const;
-    void setFilter(Filter *filter);
-
-    void load();
 
     struct Occurrence {
         QDateTime start;
@@ -106,11 +97,20 @@ Q_SIGNALS:
     void filterChanged();
     void calendarChanged();
 
+public Q_SLOTS:
+    void setStart(const QDate &start);
+    void setLength(int length);
+    void setFilter(Filter *filter);
+    void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
+
 private Q_SLOTS:
+    void load();
+    void refreshView();
+    void updateQuery();
+    void updateFromSource();
+
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
     void slotSourceRowsInserted(const QModelIndex &parent, const int first, const int last);
-    void refreshView();
-    void updateFromSource();
 
 private:
     static std::pair<QDateTime, QDateTime> incidenceOccurrenceStartEnd(const QDateTime &ocStart, const KCalendarCore::Incidence::Ptr &incidence);
