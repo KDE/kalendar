@@ -36,6 +36,8 @@ public:
 
     bool addTestTodo(const IncidenceOccurrenceModel &model)
     {
+        const auto modelRowCount = model.rowCount();
+
         QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
         QSignalSpy createFinished(m_calendar->incidenceChanger(), &Akonadi::IncidenceChanger::createFinished);
 
@@ -45,7 +47,7 @@ public:
                createFinished.wait(3000) &&
                loadingChanged.wait(3000) &&
                !model.loading() &&
-               model.rowCount() == m_expectedIncidenceCount + 1;
+               model.rowCount() == modelRowCount + 1;
     }
 
 public Q_SLOTS:
@@ -119,6 +121,7 @@ private Q_SLOTS:
         m_testTodo->setDtDue(m_now.addDays(1));
         m_testTodo->setPriority(1);
         m_testTodo->setCategories(m_testTag);
+        m_testTodo->setUid(QStringLiteral("__test_todo__"));
 
         m_testFilter.setTags({m_testTag});
     }
@@ -212,6 +215,7 @@ private Q_SLOTS:
         IncidenceOccurrenceModel model;
         QAbstractItemModelTester modelTester(&model);
         QVERIFY(standardSetupModel(model));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
 
         // Test that the data function gives us the event info we have in our calendar file
         const auto index = model.index(0, 0);
@@ -257,6 +261,7 @@ private Q_SLOTS:
         IncidenceOccurrenceModel model;
         QAbstractItemModelTester modelTester(&model);
         QVERIFY(standardSetupModel(model));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
 
         // Let's not use the addTestTodo helper so we get information on where exactly things broke
         // We want to make sure that we get both the final loadingChanged signal as well as the model's
@@ -282,6 +287,7 @@ private Q_SLOTS:
         IncidenceOccurrenceModel model;
         QAbstractItemModelTester modelTester(&model);
         QVERIFY(standardSetupModel(model));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
 
         // First add the test todo...
         QVERIFY(addTestTodo(model));
@@ -289,11 +295,14 @@ private Q_SLOTS:
         // Then remove it and verify the incidence occurrence model reflects the change
         QSignalSpy deleteFinished(m_calendar.data(), &Akonadi::ETMCalendar::deleteFinished);
         QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
-        m_calendar->deleteIncidence(m_testTodo);
-        QVERIFY(deleteFinished.wait(5000));
+
+        resetCalendar();
 
         QVERIFY(loadingChanged.wait(3000));
+        // Should only load once, but we are beholden to the sourceModel's behaviour
+        loadingChanged.wait(3000);
         QVERIFY(!model.loading());
+
         QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
     }
 
@@ -304,6 +313,7 @@ private Q_SLOTS:
         IncidenceOccurrenceModel model;
         QAbstractItemModelTester modelTester(&model);
         QVERIFY(standardSetupModel(model));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
 
         // First add the test todo...
         QVERIFY(addTestTodo(model));
@@ -324,7 +334,6 @@ private Q_SLOTS:
         QVERIFY(loadingChanged.wait(3000));
         QVERIFY(!model.loading());
 
-
         // FIXME: Currently the model emits more dataChanged signals than needed
         QVERIFY(dataChanged.count() > 0);
         const auto dataChangedSignalEmitted = dataChanged.first();
@@ -340,6 +349,7 @@ private Q_SLOTS:
         IncidenceOccurrenceModel model;
         QAbstractItemModelTester modelTester(&model);
         QVERIFY(standardSetupModel(model));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
 
         QVERIFY(addTestTodo(model));
 
@@ -358,6 +368,7 @@ private Q_SLOTS:
         IncidenceOccurrenceModel model;
         QAbstractItemModelTester modelTester(&model);
         QVERIFY(standardSetupModel(model));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
 
         QVERIFY(addTestTodo(model));
 

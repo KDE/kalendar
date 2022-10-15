@@ -8,7 +8,7 @@ include(ECMAddTests)
 
 set( KDEPIMLIBS_RUN_ISOLATED_TESTS TRUE )
 
-enable_testing()
+enable_testing(true)
 
 include_directories(${kalendar_CURRENT_BINARY_DIR})
 include_directories(${kalendar_BINARY_DIR})
