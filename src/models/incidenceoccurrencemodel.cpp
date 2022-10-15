@@ -20,26 +20,27 @@ IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_coreCalendar(nullptr)
 {
-    mRefreshTimer.setSingleShot(true);
-    QObject::connect(&mRefreshTimer, &QTimer::timeout, this, &IncidenceOccurrenceModel::updateFromSource);
+    m_resetThrottlingTimer.setSingleShot(true);
+    QObject::connect(&m_resetThrottlingTimer, &QTimer::timeout, this, &IncidenceOccurrenceModel::resetFromSource);
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup rColorsConfig(config, "Resources Colors");
     m_colorWatcher = KConfigWatcher::create(config);
 
     // This is quite slow; would be nice to find a quicker way
-    QObject::connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &IncidenceOccurrenceModel::updateFromSource);
-
-    load();
+    connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &IncidenceOccurrenceModel::resetFromSource);
 }
 
 void IncidenceOccurrenceModel::setStart(const QDate &start)
 {
-    if (start != mStart) {
-        mStart = start;
-        updateQuery();
-        Q_EMIT startChanged();
+    if(start == mStart) {
+        return;
     }
+
+    mStart = start;
+    Q_EMIT startChanged();
+
+    mEnd = mStart.addDays(mLength);
 }
 
 QDate IncidenceOccurrenceModel::start() const
@@ -53,8 +54,10 @@ void IncidenceOccurrenceModel::setLength(int length)
         return;
     }
     mLength = length;
-    updateQuery();
     Q_EMIT lengthChanged();
+
+    mEnd = mStart.addDays(mLength);
+    scheduleReset();
 }
 
 int IncidenceOccurrenceModel::length() const
@@ -70,57 +73,72 @@ Filter *IncidenceOccurrenceModel::filter() const
 void IncidenceOccurrenceModel::setFilter(Filter *filter)
 {
     mFilter = filter;
-    updateQuery();
     Q_EMIT filterChanged();
+
+    scheduleReset();
 }
 
-void IncidenceOccurrenceModel::updateQuery()
+bool IncidenceOccurrenceModel::loading() const
+{
+    return m_loading;
+}
+
+void IncidenceOccurrenceModel::setLoading(const bool loading)
+{
+    if(loading == m_loading) {
+        return;
+    }
+
+    m_loading = loading;
+    Q_EMIT loadingChanged();
+}
+
+int IncidenceOccurrenceModel::resetThrottleInterval() const
+{
+    return m_resetThrottleInterval;
+}
+
+void IncidenceOccurrenceModel::setResetThrottleInterval(const int resetThrottleInterval)
+{
+    if(resetThrottleInterval == m_resetThrottleInterval) {
+        return;
+    }
+
+    m_resetThrottleInterval = resetThrottleInterval;
+    Q_EMIT resetThrottleIntervalChanged();
+}
+
+void IncidenceOccurrenceModel::scheduleReset()
+{
+    if (!m_resetThrottlingTimer.isActive()) {
+        // Instant update, but then only refresh every interval at most.
+        m_resetThrottlingTimer.start(m_resetThrottleInterval);
+    }
+}
+
+void IncidenceOccurrenceModel::resetFromSource()
 {
     if (!m_coreCalendar) {
         return;
     }
 
-    if (!mLength || !mStart.isValid()) {
-        refreshView();
-        return;
-    }
-    mEnd = mStart.addDays(mLength);
+    setLoading(true);
 
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::slotSourceDataChanged);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::slotSourceRowsInserted);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::refreshView);
-    QObject::connect(m_coreCalendar.get(), &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::refreshView);
-
-    refreshView();
-}
-
-void IncidenceOccurrenceModel::refreshView()
-{
-    if (!mRefreshTimer.isActive()) {
-        // Instant update, but then only refresh every 100ms max.
-        mRefreshTimer.start(100);
-    }
-}
-
-void IncidenceOccurrenceModel::updateFromSource()
-{
-    if (!m_coreCalendar || mRefreshTimer.isActive()) {
-        return;
-    } else if (m_coreCalendar->isLoading()) {
+    if (m_resetThrottlingTimer.isActive() || m_coreCalendar->isLoading()) {
         // If calendar is still loading then just schedule a refresh later
-        refreshView();
+        // If refresh timer already active this won't restart it
+        scheduleReset();
         return;
     }
 
-    load();
+    loadColors();
 
     beginResetModel();
 
     m_incidences.clear();
     m_occurrenceIndexHash.clear();
 
-    KCalendarCore::OccurrenceIterator occurrenceIterator{*m_coreCalendar, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
+    KCalendarCore::OccurrenceIterator occurrenceIterator(*m_coreCalendar, QDateTime(mStart, {0, 0, 0}), QDateTime(mEnd, {12, 59, 59}));
 
     while (occurrenceIterator.hasNext()) {
         occurrenceIterator.next();
@@ -153,13 +171,17 @@ void IncidenceOccurrenceModel::updateFromSource()
     }
 
     endResetModel();
+
+    setLoading(false);
 }
 
 void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
 {
-    if (!m_coreCalendar || !upperLeft.isValid() || !bottomRight.isValid() || mRefreshTimer.isActive()) {
+    if (!m_coreCalendar || !upperLeft.isValid() || !bottomRight.isValid() || m_resetThrottlingTimer.isActive()) {
         return;
     }
+
+    setLoading(true);
 
     const auto startRow = upperLeft.row();
     const auto endRow = bottomRight.row();
@@ -203,16 +225,20 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
             Q_EMIT dataChanged(existingOccurrenceIndex, existingOccurrenceIndex);
         }
     }
+
+    setLoading(false);
 }
 
 void IncidenceOccurrenceModel::slotSourceRowsInserted(const QModelIndex &parent, const int first, const int last)
 {
-    if (!m_coreCalendar || mRefreshTimer.isActive()) {
+    if (!m_coreCalendar || m_resetThrottlingTimer.isActive()) {
         return;
     } else if (m_coreCalendar->isLoading()) {
-        mRefreshTimer.start(100);
+        m_resetThrottlingTimer.start(m_resetThrottleInterval);
         return;
     }
+
+    setLoading(true);
 
     for (int i = first; i <= last; ++i) {
         const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0, parent);
@@ -263,6 +289,8 @@ void IncidenceOccurrenceModel::slotSourceRowsInserted(const QModelIndex &parent,
             m_occurrenceIndexHash.insert(occurrenceHashKey, persistentIndex);
         }
     }
+
+    setLoading(false);
 }
 
 int IncidenceOccurrenceModel::rowCount(const QModelIndex &parent) const
@@ -397,8 +425,16 @@ void IncidenceOccurrenceModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
         return;
     }
     m_coreCalendar = calendar;
-    updateQuery();
+
+    connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::slotSourceDataChanged);
+    connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::slotSourceRowsInserted);
+    connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::scheduleReset);
+    connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::scheduleReset);
+    connect(m_coreCalendar.get(), &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::scheduleReset);
+
     Q_EMIT calendarChanged();
+
+    scheduleReset();
 }
 
 Akonadi::ETMCalendar::Ptr IncidenceOccurrenceModel::calendar() const
@@ -406,7 +442,7 @@ Akonadi::ETMCalendar::Ptr IncidenceOccurrenceModel::calendar() const
     return m_coreCalendar;
 }
 
-void IncidenceOccurrenceModel::load()
+void IncidenceOccurrenceModel::loadColors()
 {
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup rColorsConfig(config, "Resources Colors");

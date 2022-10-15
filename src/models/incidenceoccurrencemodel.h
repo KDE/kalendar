@@ -43,6 +43,8 @@ class IncidenceOccurrenceModel : public QAbstractListModel
     Q_PROPERTY(int length READ length WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(Filter *filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
+    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
+    Q_PROPERTY(int resetThrottleInterval READ resetThrottleInterval WRITE setResetThrottleInterval NOTIFY resetThrottleIntervalChanged)
 
 public:
     enum Roles {
@@ -81,6 +83,8 @@ public:
     QDate start() const;
     int length() const;
     Filter *filter() const;
+    bool loading() const;
+    int resetThrottleInterval() const;
 
     struct Occurrence {
         QDateTime start;
@@ -96,21 +100,25 @@ Q_SIGNALS:
     void lengthChanged();
     void filterChanged();
     void calendarChanged();
+    void loadingChanged();
+    void resetThrottleIntervalChanged();
 
 public Q_SLOTS:
     void setStart(const QDate &start);
     void setLength(int length);
     void setFilter(Filter *filter);
     void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
+    void setResetThrottleInterval(const int resetThrottleInterval);
 
 private Q_SLOTS:
-    void load();
-    void refreshView();
-    void updateQuery();
-    void updateFromSource();
+    void loadColors();
+    void scheduleReset();
+    void resetFromSource();
 
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
     void slotSourceRowsInserted(const QModelIndex &parent, const int first, const int last);
+
+    void setLoading(const bool loading);
 
 private:
     static std::pair<QDateTime, QDateTime> incidenceOccurrenceStartEnd(const QDateTime &ocStart, const KCalendarCore::Incidence::Ptr &incidence);
@@ -126,10 +134,11 @@ private:
     int mLength{0};
     Akonadi::ETMCalendar::Ptr m_coreCalendar;
 
-    QTimer mRefreshTimer;
+    QTimer m_resetThrottlingTimer;
+    int m_resetThrottleInterval = 100;
 
-    // We need it to be ordered for the model
-    QVector<Occurrence> m_incidences;
+    bool m_loading = false;
+    QVector<Occurrence> m_incidences; // We need incidences to be in a preditable order for the model
     QHash<uint, QPersistentModelIndex> m_occurrenceIndexHash;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
