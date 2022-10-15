@@ -21,6 +21,7 @@ public:
     IncidenceOccurrenceModelTest() = default;
     ~IncidenceOccurrenceModelTest() override = default;
 
+public Q_SLOTS:
     void checkAllItems(KCheckableProxyModel *model, const QModelIndex &parent = QModelIndex())
     {
         const int rowCount = model->rowCount(parent);
@@ -34,65 +35,145 @@ public:
         }
     }
 
-Q_SIGNALS:
-    void calendarLoaded();
+    void resetCalendar()
+    {
+        QSignalSpy deleteFinished(m_calendar.data(), &Akonadi::ETMCalendar::deleteFinished);
+
+        if(const auto todoExists = m_calendar->todo(m_testTodo->uid())) {
+            m_calendar->deleteIncidence(m_testTodo);
+            deleteFinished.wait(2000);
+        }
+    }
 
 private:
-    Akonadi::ETMCalendar::Ptr calendar;
-    IncidenceOccurrenceModel model;
-    QAbstractItemModelTester modelTester = QAbstractItemModelTester(&model);
-    QTimer loadedCheckTimer;
-    QDateTime now = QDate(2022, 01, 10).startOfDay();
+    Akonadi::ETMCalendar::Ptr m_calendar;
+    KCalendarCore::Todo::Ptr m_testTodo;
+    Akonadi::Collection m_testCollection;
+    QString m_testTag;
+    QDateTime m_now = QDate(2022, 01, 10).startOfDay();
+
+    // Our test calendar file has an event that recurs every day.
+    // This event is an all-day event that covers two full days.
+    // Since we are checking for 7 days, we should have an instance of this event m_expectedIncidenceCount times.
+    const int m_expectedIncidenceCount = 8;
 
 private Q_SLOTS:
     void initTestCase()
     {
         AkonadiTest::checkTestIsIsolated();
 
-        calendar.reset(new Akonadi::ETMCalendar);
-        QSignalSpy collectionsAdded(calendar.data(), &Akonadi::ETMCalendar::collectionsAdded);
+        m_calendar.reset(new Akonadi::ETMCalendar);
+        QSignalSpy collectionsAdded(m_calendar.data(), &Akonadi::ETMCalendar::collectionsAdded);
         QVERIFY(collectionsAdded.wait(10000));
 
-        loadedCheckTimer.setInterval(300);
-        loadedCheckTimer.setSingleShot(true);
-        connect(&loadedCheckTimer, &QTimer::timeout, this, [&]() {
-            if (!calendar->isLoading()) {
-                Q_EMIT calendarLoaded();
-            } else {
-                loadedCheckTimer.start();
-            }
-        });
+        QSignalSpy calendarChanged(m_calendar.data(), &Akonadi::ETMCalendar::calendarChanged);
+        QVERIFY(calendarChanged.wait(10000));
+        checkAllItems(m_calendar->checkableProxyModel());
 
-        QSignalSpy loaded(this, &IncidenceOccurrenceModelTest::calendarLoaded);
-        loaded.wait(10000);
-        checkAllItems(calendar->checkableProxyModel());
+        QVERIFY(!m_calendar->isLoading());
+        QVERIFY(m_calendar->items().count() > 0);
+
+        // Grab the collection we are using for testing
+        const auto firstCollectionAddedEmitted = collectionsAdded.first();
+        const auto collectionsList = firstCollectionAddedEmitted.first().value<Akonadi::Collection::List>();
+        m_testCollection = collectionsList.first();
+        QVERIFY(m_testCollection.isValid());
+
+        m_testTag = QStringLiteral("Tag 2");
+
+        m_testTodo.reset(new KCalendarCore::Todo);
+        m_testTodo->setSummary(QStringLiteral("Test todo"));
+        m_testTodo->setCompleted(true);
+        m_testTodo->setDtStart(m_now.addDays(1));
+        m_testTodo->setDtDue(m_now.addDays(1));
+        m_testTodo->setPriority(1);
+        m_testTodo->setCategories(m_testTag);
+    }
+
+    void testModelProperties()
+    {
+        resetCalendar();
+
+        IncidenceOccurrenceModel model;
+        QSignalSpy startChanged(&model, &IncidenceOccurrenceModel::startChanged);
+        QSignalSpy lengthChanged(&model, &IncidenceOccurrenceModel::lengthChanged);
+        QSignalSpy calendarChanged(&model, &IncidenceOccurrenceModel::calendarChanged);
+
+        model.setStart(m_now.date());
+        QCOMPARE(model.start(), m_now.date());
+        QCOMPARE(startChanged.count(), 1);
+
+        model.setLength(7);
+        QCOMPARE(model.length(), 7);
+        QCOMPARE(lengthChanged.count(), 1);
+
+        model.setCalendar(m_calendar);
+        QCOMPARE(model.calendar(), m_calendar);
+        QCOMPARE(calendarChanged.count(), 1);
+    }
+
+    void testLoadingSignalling()
+    {
+        resetCalendar();
+
+        IncidenceOccurrenceModel model;
+        QAbstractItemModelTester modelTester(&model);
+
+        QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
+
+        // Setting each of these props triggers a reset to be scheduled,
+        // but until a calendar is set nothing should happen. Let's check.
+        // Wait for at least the time it takes for the throttler to let a reset happen
+        const auto signalWaitTime = model.resetThrottleInterval() + 1; // To be safe
+        model.setStart(m_now.date());
+        model.setLength(7);
+        QVERIFY(!loadingChanged.wait(signalWaitTime));
+        QCOMPARE(loadingChanged.count(), 0);
+        QVERIFY(!model.loading());
+
+        // We now set the calendar so we expect loading state to change.
+        // The model does not do things asynchronously, so by the time we
+        // get a signal both the loading start and the loading end change
+        // signals have been emitted
+        model.setCalendar(m_calendar);
+        QVERIFY(loadingChanged.wait(signalWaitTime + 3000));
+        QCOMPARE(loadingChanged.count(), 2);
+        QVERIFY(!model.loading());
     }
 
     void testAddCalendar()
     {
-        QVERIFY(!calendar->isLoading());
-        QVERIFY(calendar->items().count() > 0);
+        resetCalendar();
 
-        QSignalSpy fetchFinished(&model, &QAbstractItemModel::modelReset);
+        IncidenceOccurrenceModel model;
+        QAbstractItemModelTester modelTester(&model);
+        QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
 
-        model.setStart(now.date());
-        QCOMPARE(model.start(), now.date());
+        model.setStart(m_now.date());
         model.setLength(7);
-        QCOMPARE(model.length(), 7);
-        model.setCalendar(calendar);
-        QCOMPARE(model.calendar()->id(), calendar->id());
+        model.setCalendar(m_calendar);
 
-        fetchFinished.wait(10000);
-        // Our test calendar file has an event that recurs every day of the week.
-        // Since we are checking for 7 days, we should have an instance of this event
-        // 7 times.
-        QCOMPARE(model.rowCount(), 7);
+        QVERIFY(loadingChanged.wait(3000));
+        QCOMPARE(loadingChanged.count(), 2);
+        QVERIFY(!model.loading());
+
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
     }
 
     void testData()
     {
-        // Check everything is still there from the previous test
-        QCOMPARE(model.rowCount(), 7);
+        resetCalendar();
+
+        IncidenceOccurrenceModel model;
+        QAbstractItemModelTester modelTester(&model);
+        QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
+
+        model.setStart(m_now.date());
+        model.setLength(7);
+        model.setCalendar(m_calendar);
+
+        QVERIFY(loadingChanged.wait(3000));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
 
         // Test that the data function gives us the event info we have in our calendar file
         const auto index = model.index(0, 0);
@@ -101,7 +182,7 @@ private Q_SLOTS:
         QCOMPARE(index.data(IncidenceOccurrenceModel::Location).toString(), QStringLiteral("Testing land"));
 
         // It's an all day event
-        QDateTime eventStartTimeToday(now.date().startOfDay());
+        QDateTime eventStartTimeToday(m_now.date().startOfDay());
         QCOMPARE(index.data(IncidenceOccurrenceModel::StartTime).toDateTime().toMSecsSinceEpoch(), eventStartTimeToday.toMSecsSinceEpoch());
         QCOMPARE(index.data(IncidenceOccurrenceModel::EndTime).toDateTime().toMSecsSinceEpoch(), eventStartTimeToday.addDays(1).toMSecsSinceEpoch());
 
@@ -117,7 +198,7 @@ private Q_SLOTS:
 
         // CalendarManager generates the colors for different collections so let's skip that check, since it will give invalid
 
-        QVERIFY(index.data(IncidenceOccurrenceModel::CollectionId).canConvert<qlonglong>());
+        QVERIFY(index.data(IncidenceOccurrenceModel::CollectionId).canConvert<Akonadi::Collection::Id>());
 
         QVERIFY(!index.data(IncidenceOccurrenceModel::TodoCompleted).toBool()); // An event should always return false for this
         QVERIFY(!index.data(IncidenceOccurrenceModel::IsOverdue).toBool());
@@ -133,56 +214,79 @@ private Q_SLOTS:
 
     void testNewIncidenceAdded()
     {
-        // Check everything is still there from the previous test
-        QCOMPARE(model.rowCount(), 7);
+        resetCalendar();
 
-        const auto collectionId = model.index(0, 0).data(IncidenceOccurrenceModel::CollectionId).toLongLong();
-        const auto collection = calendar->collection(collectionId);
-        QVERIFY(collection.isValid());
+        IncidenceOccurrenceModel model;
+        QAbstractItemModelTester modelTester(&model);
+        QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
 
-        KCalendarCore::Todo::Ptr todo(new KCalendarCore::Todo);
-        todo->setSummary(QStringLiteral("Test todo"));
-        todo->setCompleted(true);
-        todo->setDtStart(now.addDays(1));
-        todo->setDtDue(now.addDays(1));
-        todo->setPriority(1);
-        todo->setCategories(QStringLiteral("Tag 2"));
+        model.setStart(m_now.date());
+        model.setLength(7);
+        model.setCalendar(m_calendar);
 
-        QSignalSpy createFinished(calendar->incidenceChanger(), &Akonadi::IncidenceChanger::createFinished);
-        QVERIFY(calendar->incidenceChanger()->createIncidence(todo, collection) != -1);
+        QVERIFY(loadingChanged.wait(3000));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
+
+        QSignalSpy createFinished(m_calendar->incidenceChanger(), &Akonadi::IncidenceChanger::createFinished);
+        QVERIFY(m_calendar->incidenceChanger()->createIncidence(m_testTodo, m_testCollection) != -1);
         QVERIFY(createFinished.wait(5000));
+        QVERIFY(loadingChanged.wait(3000));
 
-        QSignalSpy loaded(this, &IncidenceOccurrenceModelTest::calendarLoaded);
-        loadedCheckTimer.start();
-        loaded.wait(10000);
-
-        QCOMPARE(model.rowCount(), 8);
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount + 1);
     }
 
     void testTodoData()
     {
-        QCOMPARE(model.rowCount(), 8);
+        resetCalendar();
 
-        QModelIndex todoIndex;
+        IncidenceOccurrenceModel model;
+        QAbstractItemModelTester modelTester(&model);
+        QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
 
-        for (int i = 0; i < model.rowCount(); ++i) {
-            const auto index = model.index(i, 0);
-            if (index.data(IncidenceOccurrenceModel::IncidenceType).toInt() == KCalendarCore::Incidence::TypeTodo) {
-                todoIndex = index;
-            }
-        }
+        model.setStart(m_now.date());
+        model.setLength(7);
+        model.setCalendar(m_calendar);
 
+        QVERIFY(loadingChanged.wait(3000));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
+
+        QSignalSpy createFinished(m_calendar->incidenceChanger(), &Akonadi::IncidenceChanger::createFinished);
+        QVERIFY(m_calendar->incidenceChanger()->createIncidence(m_testTodo, m_testCollection) != -1);
+        QVERIFY(createFinished.wait(5000));
+        QVERIFY(loadingChanged.wait(3000));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount + 1);
+
+        const auto todoIndex = model.index(model.rowCount() - 1, 0);
         QVERIFY(todoIndex.data(IncidenceOccurrenceModel::TodoCompleted).toBool());
 
-        bool shouldBeOverDue = todoIndex.data(IncidenceOccurrenceModel::EndTime).toDateTime() > QDateTime::currentDateTime();
+        const auto shouldBeOverDue = todoIndex.data(IncidenceOccurrenceModel::EndTime).toDateTime() > QDateTime::currentDateTime();
         QCOMPARE(todoIndex.data(IncidenceOccurrenceModel::IsOverdue).toBool(), shouldBeOverDue);
         QCOMPARE(todoIndex.data(IncidenceOccurrenceModel::Priority).toInt(), 1);
     }
 
     void testFilter()
     {
+        resetCalendar();
+
+        IncidenceOccurrenceModel model;
+        QAbstractItemModelTester modelTester(&model);
+        QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
+
+        model.setStart(m_now.date());
+        model.setLength(7);
+        model.setCalendar(m_calendar);
+
+        QVERIFY(loadingChanged.wait(3000));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount);
+
+        QSignalSpy createFinished(m_calendar->incidenceChanger(), &Akonadi::IncidenceChanger::createFinished);
+        QVERIFY(m_calendar->incidenceChanger()->createIncidence(m_testTodo, m_testCollection) != -1);
+        QVERIFY(createFinished.wait(5000));
+        QVERIFY(loadingChanged.wait(3000));
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount + 1);
+
         Filter filter;
-        filter.setTags(QStringList(QStringLiteral("Tag 2")));
+        filter.setTags({m_testTag});
 
         QSignalSpy fetchFinished(&model, &QAbstractItemModel::modelReset);
         model.setFilter(&filter);
@@ -193,7 +297,7 @@ private Q_SLOTS:
 
         model.setFilter({});
         fetchFinished.wait(10000);
-        QCOMPARE(model.rowCount(), 8);
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount + 1);
     }
 };
 
