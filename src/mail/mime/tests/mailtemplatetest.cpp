@@ -593,7 +593,7 @@ private Q_SLOTS:
 
         QCOMPARE(result->contentType()->mimeType(), QByteArray{"multipart/alternative"});
 
-        QCOMPARE(result->attachments().size(), 0);
+        QCOMPARE(result->attachments().size(), 1);
 
         QCOMPARE(result->contents().size(), 2);
         QVERIFY(result->contents()[0]->contentType()->isMimeType("text/plain"));
