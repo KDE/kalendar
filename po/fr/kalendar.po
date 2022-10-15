@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-14 00:47+0000\n"
-"PO-Revision-Date: 2022-09-28 21:47+0200\n"
+"PO-Revision-Date: 2022-10-14 10:42+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -2287,16 +2287,14 @@ msgid "Past event transparency:"
 msgstr "Transparence de l'évènement précédent :"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:73
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
 msgstr "Configuration de l'affichage par mois"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:85
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "Affichage par mois"
+msgstr "Mode d'affichage par mois"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
@@ -2306,7 +2304,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:99
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "Grille basique en mois"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:105
 #, kde-format
@@ -2364,16 +2362,14 @@ msgid "Grid border width (pixels):"
 msgstr "Largeur de la bordure de la grille (pixels) :"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:225
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "Configuration de l'affichage des tâches"
+msgstr "Configuration de l'affichage en semaines"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:237
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "Affichage en semaine"
+msgstr "Mode d'affichage en semaines"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
@@ -2383,7 +2379,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:251
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "Affichage basique en semaines"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:257
 #, kde-format
@@ -2396,10 +2392,9 @@ msgid "Schedule View settings"
 msgstr "Configuration de l'affichage par agenda"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:282
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "Affichage par planning"
+msgstr "Mode d'affichage en planning"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:289
 #, fuzzy, kde-format
@@ -2408,10 +2403,9 @@ msgid "Swipeable schedule view"
 msgstr "Affichage par planning"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:296
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "Affichage par planning"
+msgstr "Affichage basique en planning"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:302
 #, kde-format

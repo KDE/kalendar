@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-14 00:47+0000\n"
-"PO-Revision-Date: 2022-09-29 09:22+0200\n"
+"PO-Revision-Date: 2022-10-14 09:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.1.1\n"
 
 #, kde-format
@@ -2321,31 +2321,29 @@ msgid "Past event transparency:"
 msgstr "Transparentnost preteklega dogodka:"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:73
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
 msgstr "Nastavitve mesečnega pogleda"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:85
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "Mesečni pregled"
+msgstr "Način mesečnega pregleda"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "Odstranljiva mreža mesecev"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:99
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "Osnovna mreža mesecev"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:105
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
-msgstr ""
+msgstr "Odstranljiva mreža mesecev zahteva zmogljivejši sistem."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:119
 #, kde-format
@@ -2398,31 +2396,29 @@ msgid "Grid border width (pixels):"
 msgstr "Širina roba mreže (v pikslih):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:225
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "Nastavitve pogleda nalog"
+msgstr "Nastavitve pogleda tednov"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:237
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "Tedenski pogled"
+msgstr "Način tedenskega pogleda"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "Odstranljiv tedenski pogled"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:251
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "Osnovni tedenski pogled"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:257
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
-msgstr ""
+msgstr "Odstranljiv tedenski pogled zahteva zmogljivejši sistem."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:270
 #, kde-format
@@ -2430,27 +2426,24 @@ msgid "Schedule View settings"
 msgstr "Nastavitve pregleda časovnice"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:282
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "Pregled časovnice"
+msgstr "Način pogleda časovnice"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:289
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "Pregled časovnice"
+msgstr "Odstranljivi pogled časovnice"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:296
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "Pregled časovnice"
+msgstr "Osnovni pogled časovnice"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:302
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
-msgstr ""
+msgstr "Odstranljivi pogled časovnice zahteva zmogljivejši sistem."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:308
 #, kde-format
