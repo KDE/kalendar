@@ -133,7 +133,7 @@ private:
     QHash<uint, QPersistentModelIndex> m_occurrenceIndexHash;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
-    Filter *mFilter;
+    Filter *mFilter = nullptr;
     KFormat m_format;
 };
 
