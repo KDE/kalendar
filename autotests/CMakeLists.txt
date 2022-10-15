@@ -2,6 +2,12 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
+
+include(ECMMarkAsTest)
+include(ECMAddTests)
+
+set( KDEPIMLIBS_RUN_ISOLATED_TESTS TRUE )
+
 enable_testing()
 
 include_directories(${kalendar_CURRENT_BINARY_DIR})
