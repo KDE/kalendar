@@ -600,7 +600,6 @@ private Q_SLOTS:
         //
         // Check the result of QVERIFY(KMime::isAttachment(result->contents()[1])); if
         // it is true then this confirms that result->attachments() is misreporting
-        QEXPECT_FAIL("", "Should be recognised as an attachment", TestFailMode::Continue);
         QCOMPARE(result->attachments().count(), 1);
 
         QCOMPARE(result->contents().size(), 2);
