@@ -370,7 +370,7 @@ bool TodoSortFilterProxyModel::hasAcceptedChildren(int row, const QModelIndex &s
     return false;
 }
 
-Akonadi::ETMCalendar::Ptr TodoSortFilterProxyModel::calendar()
+Akonadi::ETMCalendar::Ptr TodoSortFilterProxyModel::calendar() const
 {
     return m_calendar;
 }
@@ -385,7 +385,7 @@ void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar::Ptr &calendar)
     endResetModel();
 }
 
-Akonadi::IncidenceChanger *TodoSortFilterProxyModel::incidenceChanger()
+Akonadi::IncidenceChanger *TodoSortFilterProxyModel::incidenceChanger() const
 {
     return m_lastSetChanger;
 }
@@ -398,7 +398,7 @@ void TodoSortFilterProxyModel::setIncidenceChanger(Akonadi::IncidenceChanger *ch
     Q_EMIT incidenceChangerChanged();
 }
 
-void TodoSortFilterProxyModel::setColorCache(QHash<QString, QColor> colorCache)
+void TodoSortFilterProxyModel::setColorCache(const QHash<QString, QColor> colorCache)
 {
     m_colors = colorCache;
 }

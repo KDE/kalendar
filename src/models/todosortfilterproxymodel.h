@@ -91,11 +91,12 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     bool filterAcceptsRow(int row, const QModelIndex &sourceParent) const override;
+
     bool filterAcceptsRowCheck(int row, const QModelIndex &sourceParent) const;
     bool hasAcceptedChildren(int row, const QModelIndex &sourceParent) const;
 
-    Akonadi::ETMCalendar::Ptr calendar();
-    Akonadi::IncidenceChanger *incidenceChanger();
+    Akonadi::ETMCalendar::Ptr calendar() const;
+    Akonadi::IncidenceChanger *incidenceChanger() const;
     int showCompleted() const;
     Filter *filterObject() const;
     int sortBy() const;
@@ -128,15 +129,15 @@ public Q_SLOTS:
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 
-    QHash<QString, QColor> colorCache();
-    void setColorCache(QHash<QString, QColor> colorCache);
-    void loadColors();
-
 private Q_SLOTS:
+    void setColorCache(const QHash<QString, QColor> colorCache);
+
+    void loadColors();
     void updateDateLabels();
     void emitDateDataChanged(const QModelIndex &idx);
 
 private:
+    QHash<QString, QColor> colorCache() const;
     QString todoDueDateDisplayString(const KCalendarCore::Todo::Ptr todo, const DueDateDisplayFormat format) const;
 
     int compareStartDates(const QModelIndex &left, const QModelIndex &right) const;
