@@ -20,7 +20,8 @@ ListView {
     Connections {
         target: root.sourceModel
 
-        function onFilterMapAboutToChange() {
+        // NOTE: This is Kalendar and TodoSortFilterProxyModel-specific
+        function onFilterObjectAboutToChange() {
             // This is a must to prevent the KDescendantsProxyModel from crashing
             for(let i = 0; i < descendantsModel.rowCount(); i++) {
                 descendantsModel.expandChildren(i);

@@ -8,11 +8,12 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
     const QString todoMimeType = QStringLiteral("application/x-vnd.akonadi.calendar.todo");
-    m_todoTreeModel = new Akonadi::IncidenceTreeModel(QStringList() << todoMimeType, this);
+    m_todoTreeModel.reset(new Akonadi::IncidenceTreeModel(QStringList() << todoMimeType, this));
+
     const auto pref = EventViews::PrefsPtr(new EventViews::Prefs);
-    m_baseTodoModel = new TodoModel(pref, this);
-    m_baseTodoModel->setSourceModel(m_todoTreeModel);
-    setSourceModel(m_baseTodoModel);
+    m_baseTodoModel.reset(new TodoModel(pref, this));
+    m_baseTodoModel->setSourceModel(m_todoTreeModel.data());
+    setSourceModel(m_baseTodoModel.data());
 
     setDynamicSortFilter(true);
     setSortCaseSensitivity(Qt::CaseInsensitive);
@@ -21,7 +22,6 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup rColorsConfig(config, "Resources Colors");
     m_colorWatcher = KConfigWatcher::create(config);
-
     QObject::connect(m_colorWatcher.data(), &KConfigWatcher::configChanged, this, &TodoSortFilterProxyModel::loadColors);
 
     loadColors();
@@ -29,12 +29,6 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     m_dateRefreshTimer.setInterval(m_dateRefreshTimerInterval);
     m_dateRefreshTimer.callOnTimeout(this, &TodoSortFilterProxyModel::updateDateLabels);
     m_dateRefreshTimer.start();
-}
-
-TodoSortFilterProxyModel::~TodoSortFilterProxyModel()
-{
-    delete m_baseTodoModel;
-    delete m_todoTreeModel;
 }
 
 int TodoSortFilterProxyModel::columnCount(const QModelIndex &) const
@@ -316,15 +310,15 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
     const QModelIndex sourceIndex = sourceModel()->index(row, 0, sourceParent);
     Q_ASSERT(sourceIndex.isValid());
 
-    if (m_filterMap == nullptr) {
+    if (m_filterObject == nullptr) {
         return QSortFilterProxyModel::filterAcceptsRow(row, sourceParent);
     }
 
     bool acceptRow = true;
 
-    if (m_filterMap->collectionId() > -1) {
+    if (m_filterObject->collectionId() > -1) {
         const auto collectionId = sourceIndex.data(TodoModel::TodoRole).value<Akonadi::Item>().parentCollection().id();
-        acceptRow = acceptRow && collectionId == m_filterMap->collectionId();
+        acceptRow = acceptRow && collectionId == m_filterObject->collectionId();
     }
 
     switch (m_showCompleted) {
@@ -338,8 +332,8 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
         break;
     }
 
-    if (!m_filterMap->tags().isEmpty()) {
-        const auto tags = m_filterMap->tags();
+    if (!m_filterObject->tags().isEmpty()) {
+        const auto tags = m_filterObject->tags();
         bool containsTag = false;
         for (const auto &tag : tags) {
             const auto todoPtr = sourceIndex.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
@@ -440,44 +434,50 @@ void TodoSortFilterProxyModel::setShowCompleted(int showCompleted)
     sortTodoModel();
 }
 
-Filter *TodoSortFilterProxyModel::filterMap() const
+Filter *TodoSortFilterProxyModel::filterObject() const
 {
-    return m_filterMap;
+    return m_filterObject;
 }
 
-void TodoSortFilterProxyModel::setFilterMap(Filter *filterMap)
+void TodoSortFilterProxyModel::setFilterObject(Filter *filterObject)
 {
-    if (m_filterMap == filterMap) {
+    if (m_filterObject == filterObject) {
         return;
     }
 
-    if (m_filterMap) {
-        disconnect(m_filterMap, nullptr, this, nullptr);
+    if (m_filterObject) {
+        disconnect(m_filterObject, nullptr, this, nullptr);
     }
 
-    Q_EMIT filterMapAboutToChange();
-
+    Q_EMIT filterObjectAboutToChange();
     Q_EMIT layoutAboutToBeChanged();
-    m_filterMap = filterMap;
-    Q_EMIT filterMapChanged();
+    m_filterObject = filterObject;
+    Q_EMIT filterObjectChanged();
 
-    if (!m_filterMap->name().isEmpty()) {
-        const auto name = m_filterMap->name();
-        setFilterFixedString(name);
-    }
-    invalidateFilter();
-    connect(m_filterMap, &Filter::nameChanged, this, [this]() {
-        Q_EMIT filterMapAboutToChange();
-        setFilterFixedString(m_filterMap->name());
+    const auto nameFilter = m_filterObject->name();
+    const auto handleFilterNameChange = [this] {
+        Q_EMIT filterObjectAboutToChange();
+        setFilterFixedString(m_filterObject->name());
         Q_EMIT layoutChanged();
-    });
-    auto handleFilterChange = [this]() {
-        Q_EMIT filterMapAboutToChange();
+        Q_EMIT filterObjectChanged();
+    };
+    const auto handleFilterObjectChange = [this] {
+        Q_EMIT filterObjectAboutToChange();
         invalidateFilter();
         Q_EMIT layoutChanged();
+        Q_EMIT filterObjectChanged();
     };
-    connect(m_filterMap, &Filter::tagsChanged, this, handleFilterChange);
-    connect(m_filterMap, &Filter::collectionIdChanged, this, handleFilterChange);
+
+    connect(m_filterObject, &Filter::nameChanged, this, handleFilterNameChange);
+    connect(m_filterObject, &Filter::tagsChanged, this, handleFilterObjectChange);
+    connect(m_filterObject, &Filter::collectionIdChanged, this, handleFilterObjectChange);
+
+    if (!nameFilter.isEmpty()) {
+        setFilterFixedString(nameFilter);
+    }
+
+    invalidateFilter();
+
     Q_EMIT layoutChanged();
 
     sortTodoModel();
@@ -489,7 +489,7 @@ void TodoSortFilterProxyModel::sortTodoModel()
     QSortFilterProxyModel::sort(m_sortColumn, order);
 }
 
-void TodoSortFilterProxyModel::filterTodoName(QString name, int showCompleted)
+void TodoSortFilterProxyModel::filterTodoName(const QString &name, const int showCompleted)
 {
     Q_EMIT layoutAboutToBeChanged();
     setFilterFixedString(name);

@@ -22,7 +22,7 @@ class TodoSortFilterProxyModel : public QSortFilterProxyModel
     Q_OBJECT
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger READ incidenceChanger WRITE setIncidenceChanger NOTIFY incidenceChangerChanged)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar WRITE setCalendar NOTIFY calendarChanged)
-    Q_PROPERTY(Filter *filterMap READ filterMap WRITE setFilterMap NOTIFY filterMapChanged)
+    Q_PROPERTY(Filter *filterObject READ filterObject WRITE setFilterObject NOTIFY filterObjectChanged)
     Q_PROPERTY(int showCompleted READ showCompleted WRITE setShowCompleted NOTIFY showCompletedChanged)
     Q_PROPERTY(int sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(bool sortAscending READ sortAscending WRITE setSortAscending NOTIFY sortAscendingChanged)
@@ -85,7 +85,7 @@ public:
     Q_ENUM(DueDateDisplayFormat)
 
     explicit TodoSortFilterProxyModel(QObject *parent = nullptr);
-    ~TodoSortFilterProxyModel() override;
+    ~TodoSortFilterProxyModel() = default;
 
     int columnCount(const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;
@@ -95,35 +95,35 @@ public:
     bool hasAcceptedChildren(int row, const QModelIndex &sourceParent) const;
 
     Akonadi::ETMCalendar::Ptr calendar();
-    void setCalendar(Akonadi::ETMCalendar::Ptr &calendar);
     Akonadi::IncidenceChanger *incidenceChanger();
-    void setIncidenceChanger(Akonadi::IncidenceChanger *changer);
-
     int showCompleted() const;
-    void setShowCompleted(int showCompleted);
-    Filter *filterMap() const;
-    void setFilterMap(Filter *filterMap);
-
+    Filter *filterObject() const;
     int sortBy() const;
-    void setSortBy(int sortBy);
     bool sortAscending() const;
-    void setSortAscending(bool sortAscending);
     bool showCompletedSubtodosInIncomplete() const;
-    void setShowCompletedSubtodosInIncomplete(bool showCompletedSubtodosInIncomplete);
-
-    void sortTodoModel();
-    Q_INVOKABLE void filterTodoName(QString name, int showCompleted = ShowAll);
 
 Q_SIGNALS:
     void calendarChanged();
-    void filterMapAboutToChange();
-    void filterMapChanged();
+    void filterObjectAboutToChange();
+    void filterObjectChanged();
     void showCompletedChanged();
     void sortByChanged();
     void sortAscendingChanged();
     void badData();
     void showCompletedSubtodosInIncompleteChanged();
     void incidenceChangerChanged();
+
+public Q_SLOTS:
+    void setCalendar(Akonadi::ETMCalendar::Ptr &calendar);
+    void setIncidenceChanger(Akonadi::IncidenceChanger *changer);
+    void setFilterObject(Filter *filterObject);
+    void setShowCompleted(const int showCompleted);
+    void setSortBy(const int sortBy);
+    void setSortAscending(const bool sortAscending);
+    void setShowCompletedSubtodosInIncomplete(const bool showCompletedSubtodosInIncomplete);
+
+    void sortTodoModel();
+    void filterTodoName(const QString &name, const int showCompleted = ShowAll);
 
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
@@ -146,14 +146,14 @@ private:
     int compareCompletion(const QModelIndex &left, const QModelIndex &right) const;
 
     Akonadi::ETMCalendar::Ptr m_calendar;
-    Akonadi::IncidenceTreeModel *m_todoTreeModel = nullptr;
-    TodoModel *m_baseTodoModel = nullptr;
+    QScopedPointer<Akonadi::IncidenceTreeModel> m_todoTreeModel;
+    QScopedPointer<TodoModel> m_baseTodoModel;
     Akonadi::IncidenceChanger *m_lastSetChanger = nullptr;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
     int m_showCompleted = ShowComplete::ShowAll;
     int m_showCompletedStore; // For when searches happen
-    Filter *m_filterMap = nullptr;
+    Filter *m_filterObject = nullptr;
     int m_sortColumn = DueDateColumn;
     bool m_sortAscending = false;
     bool m_showCompletedSubtodosInIncomplete = true;
