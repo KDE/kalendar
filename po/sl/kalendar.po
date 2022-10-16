@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-14 00:47+0000\n"
+"POT-Creation-Date: 2022-10-16 00:47+0000\n"
 "PO-Revision-Date: 2022-10-14 09:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
-"%100<=4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.1.1\n"
 
 #, kde-format
@@ -1864,55 +1864,55 @@ msgstr "Ponastavi"
 msgid "All day or Multi day"
 msgstr "Ves dan ali več dni"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:262
+#: contents/ui/MainViews/BasicMonthListView.qml:263
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Počisti dan."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Tap"
 msgstr "Tapni"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Click"
 msgstr "Klikni"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:283
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Ni zabeleženega za danes. %1 da bi kaj dodali."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:400
+#: contents/ui/MainViews/BasicMonthListView.qml:401
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Dan %2 od %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:456
+#: contents/ui/MainViews/BasicMonthListView.qml:457
 #, kde-format
 msgid "Runs all day"
 msgstr "Se odvija cel dan"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:460
+#: contents/ui/MainViews/BasicMonthListView.qml:461
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Starts at %1"
 msgstr "Se začne ob %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:465
+#: contents/ui/MainViews/BasicMonthListView.qml:466
 #, kde-format
 msgid "Ends at %1"
 msgstr "Se konča ob %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:467
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Runs All Day"
 msgstr "Se odvija cel dan"
@@ -2470,7 +2470,7 @@ msgstr "Omogoči zemljevide"
 msgid "Location marker"
 msgstr "Označevalnik lokacije"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:270
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
 #: models/todosortfilterproxymodel.cpp:141
 #, kde-format
 msgid "Task"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-14 00:47+0000\n"
+"POT-Creation-Date: 2022-10-16 00:47+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1905,57 +1905,57 @@ msgstr "Επαναφορά"
 msgid "All day or Multi day"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:262
+#: contents/ui/MainViews/BasicMonthListView.qml:263
 #, fuzzy, kde-format
 #| msgid "Clear day."
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Καθαρισμός ημέρας."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Tap"
 msgstr "Χτύπημα"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Click"
 msgstr "Κλικ"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:283
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Τίποτε στα βιβλία σήμερα. Με %1 θα προσθέσετε κάτι."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:400
+#: contents/ui/MainViews/BasicMonthListView.qml:401
 #, fuzzy, kde-format
 #| msgid "%1 (Day %2 of %3)"
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Ημέρα %2 από %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:456
+#: contents/ui/MainViews/BasicMonthListView.qml:457
 #, kde-format
 msgid "Runs all day"
 msgstr "Εκτελείται όλη την ημέρα"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:460
+#: contents/ui/MainViews/BasicMonthListView.qml:461
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Starts at %1"
 msgstr "Αρχίζει την %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:465
+#: contents/ui/MainViews/BasicMonthListView.qml:466
 #, kde-format
 msgid "Ends at %1"
 msgstr "Τελειώνει την %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:467
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Runs All Day"
 msgstr "Εκτελείται όλη την ημέρα"
@@ -2542,7 +2542,7 @@ msgstr "Ενεργοποίηση χαρτών:"
 msgid "Location marker"
 msgstr "Δείκτης τοποθεσίας:"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:270
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
 #: models/todosortfilterproxymodel.cpp:141
 #, kde-format
 msgid "Task"

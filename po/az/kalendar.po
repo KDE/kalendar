@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-14 00:47+0000\n"
+"POT-Creation-Date: 2022-10-16 00:47+0000\n"
 "PO-Revision-Date: 2022-07-06 14:45+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -1857,55 +1857,55 @@ msgstr "Sıfırla"
 msgid "All day or Multi day"
 msgstr "Bütün günlər və ya bir neçə gün"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:262
+#: contents/ui/MainViews/BasicMonthListView.qml:263
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Günü təmizləyin."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Tap"
 msgstr "Toxunun"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Click"
 msgstr "Vurun"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:283
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Bu gün qeydlərdə heç nə yoxdur. əlavə etmək üçün %1."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:400
+#: contents/ui/MainViews/BasicMonthListView.qml:401
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (%3-n %2)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:456
+#: contents/ui/MainViews/BasicMonthListView.qml:457
 #, kde-format
 msgid "Runs all day"
 msgstr "Bütöv gün davam edir"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:460
+#: contents/ui/MainViews/BasicMonthListView.qml:461
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Starts at %1"
 msgstr "Başlayır: %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:465
+#: contents/ui/MainViews/BasicMonthListView.qml:466
 #, kde-format
 msgid "Ends at %1"
 msgstr "Sonlanır: %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:467
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Runs All Day"
 msgstr "Bütöv gün davam edir"
@@ -2475,7 +2475,7 @@ msgstr "Xəritələri aktiv edin:"
 msgid "Location marker"
 msgstr "Məkan nişanı:"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:270
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
 #: models/todosortfilterproxymodel.cpp:141
 #, kde-format
 msgid "Task"

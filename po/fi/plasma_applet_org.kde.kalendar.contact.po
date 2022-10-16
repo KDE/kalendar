@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-08 00:46+0000\n"
-"PO-Revision-Date: 2022-07-22 22:17+0300\n"
+"PO-Revision-Date: 2022-08-22 21:39+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -33,7 +33,7 @@ msgstr "Soita"
 #: package/contents/ui/ContactPage.qml:101
 #, kde-format
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: package/contents/ui/ContactPage.qml:88
 #: package/contents/ui/ContactPage.qml:89

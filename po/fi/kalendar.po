@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-14 00:47+0000\n"
-"PO-Revision-Date: 2022-07-22 22:17+0300\n"
+"POT-Creation-Date: 2022-10-16 00:47+0000\n"
+"PO-Revision-Date: 2022-08-22 21:39+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -1855,57 +1855,57 @@ msgstr "Alusta"
 msgid "All day or Multi day"
 msgstr "Koko päivä tai useampi päivä"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:262
+#: contents/ui/MainViews/BasicMonthListView.qml:263
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Tyhjennä päivä."
 
 # *** TARKISTA: Oletus, että on %1 jonossa ”%1 to add something”.
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Tap"
 msgstr "napauttamalla"
 
 # *** TARKISTA: Oletus, että on %1 jonossa ”%1 to add something”.
-#: contents/ui/MainViews/BasicMonthListView.qml:281
+#: contents/ui/MainViews/BasicMonthListView.qml:282
 #, kde-format
 msgid "Click"
 msgstr "napsauttamalla"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:283
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Ei mitään tiedossa tänään. Lisää jotakin %1."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:400
+#: contents/ui/MainViews/BasicMonthListView.qml:401
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (päivä %2/%3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:456
+#: contents/ui/MainViews/BasicMonthListView.qml:457
 #, kde-format
 msgid "Runs all day"
 msgstr "Koko päivän"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:460
+#: contents/ui/MainViews/BasicMonthListView.qml:461
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1–%2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Starts at %1"
 msgstr "Alkaa %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:465
+#: contents/ui/MainViews/BasicMonthListView.qml:466
 #, kde-format
 msgid "Ends at %1"
 msgstr "Päättyy %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:467
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Runs All Day"
 msgstr "Koko päivä"
@@ -2270,10 +2270,9 @@ msgid "About Kalendar"
 msgstr "Tietoa Kalendarista"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:19
-#, fuzzy, kde-format
-#| msgid "Add New Calendar Source"
+#, kde-format
 msgid "Add New Calendar Source…"
-msgstr "Lisää uusi kalenterilähde"
+msgstr "Lisää uusi kalenterilähde…"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:26
 #, fuzzy, kde-format
@@ -2477,7 +2476,7 @@ msgstr "Ota käyttöön kartat:"
 msgid "Location marker"
 msgstr "Sijaintimerkki:"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:270
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
 #: models/todosortfilterproxymodel.cpp:141
 #, kde-format
 msgid "Task"
@@ -2539,16 +2538,14 @@ msgid "Contacts View"
 msgstr "Yhteystietonäkymä"
 
 #: kalendarapplication.cpp:178
-#, fuzzy, kde-format
-#| msgid "Day View"
+#, kde-format
 msgid "Mail View"
-msgstr "Päivänäkymä"
+msgstr "Postinäkymä"
 
 #: kalendarapplication.cpp:188
-#, fuzzy, kde-format
-#| msgid "Ctrl+6"
+#, kde-format
 msgid "Ctrl+7"
-msgstr "Ctrl+6"
+msgstr "Ctrl+7"
 
 #: kalendarapplication.cpp:194
 #, kde-format
@@ -2666,11 +2663,10 @@ msgstr ""
 #, kde-format
 msgctxt "displayed as subject when the subject of a mail is empty"
 msgid "No Subject"
-msgstr ""
+msgstr "Ei aihetta"
 
 #: mail/mailmodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -2678,58 +2674,58 @@ msgstr "Tuntematon"
 #: mail/mime/attachmentmodel.cpp:223
 #, kde-format
 msgid "No keys were found in this attachment"
-msgstr ""
+msgstr "Liitteestä ei löytynyt avaimia."
 
 #: mail/mime/attachmentmodel.cpp:226
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "tuotiin yksi avain"
+msgstr[1] "tuotiin %1 avainta"
 
 #: mail/mime/attachmentmodel.cpp:228
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "yksi avain oli jo tuotu"
+msgstr[1] "%1 avainta oli jo tuotu"
 
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
 msgid "fwd"
-msgstr ""
+msgstr "fwd"
 
 #: mail/mime/mailtemplates.cpp:132
 #, kde-format
 msgid "re"
-msgstr ""
+msgstr "re"
 
 #: mail/mime/partmodel.cpp:473
 #, kde-format
 msgid "No key available."
-msgstr ""
+msgstr "Avainta ei ole saatavilla."
 
 #: mail/mime/partmodel.cpp:475
 #, kde-format
 msgid "Wrong passphrase."
-msgstr ""
+msgstr "Väärä salasana."
 
 #: mail/mimetreeparser/messagepart.cpp:618
 #: mail/mimetreeparser/messagepart.cpp:709
 #: mail/mimetreeparser/messagepart.cpp:783
 #, kde-format
 msgid "Wrong Crypto Plug-In."
-msgstr ""
+msgstr "Väärä salauslaajennus."
 
 #: mail/mimetreeparser/messagepart.cpp:857
 #, kde-format
 msgid "Could not decrypt the data: no key found for recipients."
-msgstr ""
+msgstr "Datan salausta ei voitu purkaa: vastaanottajille ei löytynyt avaimia."
 
 #: mail/mimetreeparser/messagepart.cpp:862
 #, kde-format
 msgid "Could not decrypt the data."
-msgstr ""
+msgstr "Salausta ei saanut puretuksi."
 
 #: mail/qml/ConversationViewer.qml:30
 #, kde-format
@@ -2739,7 +2735,7 @@ msgstr ""
 #: mail/qml/FolderView.qml:43
 #, kde-format
 msgid "Don't Mark as Important"
-msgstr ""
+msgstr "Älä merkitse tärkeäksi"
 
 #: mail/qml/FolderView.qml:86
 #, fuzzy, kde-format
@@ -2767,57 +2763,57 @@ msgstr "Postilaatikko"
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
 msgid "This mail contains an invitation"
-msgstr ""
+msgstr "Tämä viesti sisältää kutsun"
 
 #: mail/qml/mailpartview/MailPart.qml:43
 #, kde-format
 msgid "sent by %1 on %2"
-msgstr ""
+msgstr "lähettänyt %1 %2"
 
 #: mail/qml/mailpartview/MailPartModel.qml:54
 #, kde-format
 msgid "This message has been signed using the key %1."
-msgstr ""
+msgstr "Viesti on allekirjoitettu avaimella %1."
 
 #: mail/qml/mailpartview/MailPartModel.qml:55
 #, kde-format
 msgid "The key details are not available."
-msgstr ""
+msgstr "Avaimen tietoja ei ole saatavilla."
 
 #: mail/qml/mailpartview/MailPartModel.qml:57
 #, kde-format
 msgid "This message has been signed using the key %1 by %2."
-msgstr ""
+msgstr "Viesti on allekirjoitettu käyttäjän %2 avaimella %1."
 
 #: mail/qml/mailpartview/MailPartModel.qml:59
 #, kde-format
 msgid "The key was revoked."
-msgstr ""
+msgstr "Avain on peruttu."
 
 #: mail/qml/mailpartview/MailPartModel.qml:62
 #, kde-format
 msgid "The key has expired."
-msgstr ""
+msgstr "Avain on vanhentunut."
 
 #: mail/qml/mailpartview/MailPartModel.qml:65
 #, kde-format
 msgid "You are trusting this key."
-msgstr ""
+msgstr "Luotat tähän avaimeen."
 
 #: mail/qml/mailpartview/MailPartModel.qml:68
 #, kde-format
 msgid "The signature is invalid."
-msgstr ""
+msgstr "Allekirjoitus on virheellinen."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted but we don't have the key for it."
-msgstr ""
+msgstr "Viesti on salattu, mutta sille ei vielä ole avainta."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted to the key: %1"
-msgstr ""
+msgstr "Viesti on salattu avaimella: %1"
 
 #: mail/qml/mailpartview/MailPartView.qml:33
 #, kde-format
@@ -2825,16 +2821,14 @@ msgid "Loading mail..."
 msgstr ""
 
 #: mail/qml/MailViewer.qml:150
-#, fuzzy, kde-format
-#| msgid "Add Attachment"
+#, kde-format
 msgid "Save attachment"
-msgstr "Lisää liite"
+msgstr "Tallenna liite"
 
 #: mail/qml/private/AttachmentDelegate.qml:57
-#, fuzzy, kde-format
-#| msgid "Import Calendar"
+#, kde-format
 msgid "Import key"
-msgstr "Tuo kalenteri"
+msgstr "Tuo avain"
 
 #: main.cpp:71
 #, kde-format
