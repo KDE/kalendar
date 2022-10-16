@@ -110,7 +110,6 @@ Q_SIGNALS:
     void showCompletedChanged();
     void sortByChanged();
     void sortAscendingChanged();
-    void badData();
     void showCompletedSubtodosInIncompleteChanged();
     void incidenceChangerChanged();
 

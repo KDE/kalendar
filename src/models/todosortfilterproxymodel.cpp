@@ -377,12 +377,11 @@ Akonadi::ETMCalendar::Ptr TodoSortFilterProxyModel::calendar() const
 
 void TodoSortFilterProxyModel::setCalendar(Akonadi::ETMCalendar::Ptr &calendar)
 {
-    beginResetModel();
+    // No need to manually emit beginResetModel(), source model does it for us
     m_calendar = calendar;
     m_todoTreeModel->setSourceModel(calendar->model());
     m_baseTodoModel->setCalendar(m_calendar);
     Q_EMIT calendarChanged();
-    endResetModel();
 }
 
 Akonadi::IncidenceChanger *TodoSortFilterProxyModel::incidenceChanger() const
