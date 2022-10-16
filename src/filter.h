@@ -3,6 +3,9 @@
 
 #include <QObject>
 
+/**
+ * This class is used to enable cross-compatible filtering of data in models.
+ */
 class Filter : public QObject
 {
     Q_OBJECT
@@ -15,11 +18,11 @@ public:
     QStringList tags() const;
     QString name() const;
 
-    void setCollectionId(qint64 collectionId);
-    void setTags(QStringList tags);
+public Q_SLOTS:
+    void setCollectionId(const qint64 collectionId);
+    void setTags(const QStringList tags);
     void setName(const QString &name);
 
-public Q_SLOTS:
     void toggleFilterTag(const QString tagName);
     void reset();
     void removeTag(const QString &tagName);
