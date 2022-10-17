@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:47+0000\n"
+"POT-Creation-Date: 2022-10-17 00:47+0000\n"
 "PO-Revision-Date: 2022-08-22 21:39+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1370,7 +1370,7 @@ msgid "Tags:"
 msgstr "Tunnisteet:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:812
-#: models/todosortfilterproxymodel.cpp:153
+#: models/todosortfilterproxymodel.cpp:147
 #, kde-format
 msgctxt "List separator"
 msgid ", "
@@ -1945,13 +1945,13 @@ msgstr "Seuraava kuu"
 #: contents/ui/MainViews/MonthView.qml:56
 #: contents/ui/MainViews/ScheduleView.qml:55
 #: contents/ui/MainViews/TodoTreeView.qml:72
-#: models/todosortfilterproxymodel.cpp:181
+#: models/todosortfilterproxymodel.cpp:175
 #, kde-format
 msgid "Today"
 msgstr "Tänään"
 
 #: contents/ui/MainViews/TodoTreeView.qml:71
-#: models/todosortfilterproxymodel.cpp:175
+#: models/todosortfilterproxymodel.cpp:169
 #, kde-format
 msgid "Overdue"
 msgstr "Myöhässä"
@@ -2477,7 +2477,7 @@ msgid "Location marker"
 msgstr "Sijaintimerkki:"
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
-#: models/todosortfilterproxymodel.cpp:141
+#: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
 msgstr "Tehtävä"
@@ -2876,12 +2876,12 @@ msgctxt "@info:credit"
 msgid "Developer"
 msgstr "Kehittäjä"
 
-#: models/todosortfilterproxymodel.cpp:171
+#: models/todosortfilterproxymodel.cpp:165
 #, kde-format
 msgid "No set date"
 msgstr "Ei asetettua päivää"
 
-#: models/todosortfilterproxymodel.cpp:204
+#: models/todosortfilterproxymodel.cpp:198
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the time, spaces included to allow use of 'empty' string when an "
@@ -2891,7 +2891,7 @@ msgctxt "Please retain space"
 msgid " at %1"
 msgstr " %1"
 
-#: models/todosortfilterproxymodel.cpp:205
+#: models/todosortfilterproxymodel.cpp:199
 #, fuzzy, kde-format
 #| msgid "(overdue)"
 msgctxt "Please retain parenthesis and space"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:47+0000\n"
+"POT-Creation-Date: 2022-10-17 00:47+0000\n"
 "PO-Revision-Date: 2021-06-21 20:07+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -1424,7 +1424,7 @@ msgid "Tags:"
 msgstr ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:812
-#: models/todosortfilterproxymodel.cpp:153
+#: models/todosortfilterproxymodel.cpp:147
 #, kde-format
 msgctxt "List separator"
 msgid ", "
@@ -2017,13 +2017,13 @@ msgstr "Mesiace"
 #: contents/ui/MainViews/MonthView.qml:56
 #: contents/ui/MainViews/ScheduleView.qml:55
 #: contents/ui/MainViews/TodoTreeView.qml:72
-#: models/todosortfilterproxymodel.cpp:181
+#: models/todosortfilterproxymodel.cpp:175
 #, kde-format
 msgid "Today"
 msgstr ""
 
 #: contents/ui/MainViews/TodoTreeView.qml:71
-#: models/todosortfilterproxymodel.cpp:175
+#: models/todosortfilterproxymodel.cpp:169
 #, kde-format
 msgid "Overdue"
 msgstr ""
@@ -2574,7 +2574,7 @@ msgid "Location marker"
 msgstr "Umiestnenie:"
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
-#: models/todosortfilterproxymodel.cpp:141
+#: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
 msgstr ""
@@ -2986,19 +2986,19 @@ msgctxt "@info:credit"
 msgid "Developer"
 msgstr "Vývojár"
 
-#: models/todosortfilterproxymodel.cpp:171
+#: models/todosortfilterproxymodel.cpp:165
 #, kde-format
 msgid "No set date"
 msgstr ""
 
-#: models/todosortfilterproxymodel.cpp:204
+#: models/todosortfilterproxymodel.cpp:198
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "Please retain space"
 msgid " at %1"
 msgstr "Upraviť"
 
-#: models/todosortfilterproxymodel.cpp:205
+#: models/todosortfilterproxymodel.cpp:199
 #, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
