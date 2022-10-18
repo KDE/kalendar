@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:47+0000\n"
+"POT-Creation-Date: 2022-10-18 00:45+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -27,30 +27,30 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sstavra@gmail.com"
 
-#: calendarmanager.cpp:537
+#: calendarmanager.cpp:545
 #, fuzzy, kde-format
 #| msgid "occurrence"
 #| msgid_plural "occurrences"
 msgid "Move occurrence(s)"
 msgstr "εμφάνιση"
 
-#: calendarmanager.cpp:542
+#: calendarmanager.cpp:550
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr ""
 
-#: calendarmanager.cpp:582
+#: calendarmanager.cpp:590
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Διαγραφή εργασίας και υπο-εργασιών"
 
-#: calendarmanager.cpp:585
+#: calendarmanager.cpp:593
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Διαγραφή εργασίας και ανεξαρτητοποίηση υπο-εργασιών"
 
-#: calendarmanager.cpp:748
+#: calendarmanager.cpp:756
 #, fuzzy, kde-format
 #| msgid "Import Calendar"
 msgctxt "@title:window"

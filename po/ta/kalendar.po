@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:47+0000\n"
+"POT-Creation-Date: 2022-10-18 00:45+0000\n"
 "PO-Revision-Date: 2022-10-13 21:41+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -27,28 +27,28 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Kde-l10n-ta@kde.org"
 
-#: calendarmanager.cpp:537
+#: calendarmanager.cpp:545
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "நிகழ்வுகளை நகர்த்தல்"
 
-#: calendarmanager.cpp:542
+#: calendarmanager.cpp:550
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr "விதிவிலக்கை நாள்காட்டியில் சேர்க்க முடியவில்லை. எம்மாற்றமும் மேற்கொள்ளப்படாது."
 
-#: calendarmanager.cpp:582
+#: calendarmanager.cpp:590
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "பணியையும் அதில் சார்ந்த பணிகளையும் நீக்குவது"
 
-#: calendarmanager.cpp:585
+#: calendarmanager.cpp:593
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "பணியை நீக்கி அதில் சார்ந்த பணிகளை தனிப்பட அமைத்தல்"
 
-#: calendarmanager.cpp:748
+#: calendarmanager.cpp:756
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"

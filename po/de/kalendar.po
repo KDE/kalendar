@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:47+0000\n"
+"POT-Creation-Date: 2022-10-18 00:45+0000\n"
 "PO-Revision-Date: 2022-10-13 13:29+0200\n"
 "Last-Translator: Frank Steinmetzger <dev-kde@felsenfleischer.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -28,12 +28,12 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-i18n-de@kde.org"
 
-#: calendarmanager.cpp:537
+#: calendarmanager.cpp:545
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Vorkommen verschieben"
 
-#: calendarmanager.cpp:542
+#: calendarmanager.cpp:550
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
@@ -41,17 +41,17 @@ msgstr ""
 "Es ist nicht möglich, diese Ausnahme in den Kalender aufzunehmen. Es werden "
 "keine Änderungen durchgeführt."
 
-#: calendarmanager.cpp:582
+#: calendarmanager.cpp:590
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Aufgaben und dessen Unteraufgaben löschen"
 
-#: calendarmanager.cpp:585
+#: calendarmanager.cpp:593
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Aufgabe löschen und Unteraufgaben verselbständigen"
 
-#: calendarmanager.cpp:748
+#: calendarmanager.cpp:756
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
