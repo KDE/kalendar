@@ -55,7 +55,7 @@ private:
     const QDateTime m_now = QDate(2022, 01, 10).startOfDay();
 
     // Our test calendar file has two todos, with sub-todos
-    static constexpr auto m_expectedTopLevelTodoCount = 6;
+    static constexpr auto m_expectedTopLevelTodoCount = 2;
 
 private Q_SLOTS:
     void initTestCase()
@@ -155,25 +155,6 @@ private Q_SLOTS:
 
         model.setCalendar(m_calendar);
         QCOMPARE(modelReset.count(), 1);
-
-        QCOMPARE(model.rowCount(), m_expectedTopLevelTodoCount);
-    }
-
-    void testData()
-    {
-        resetCalendar();
-
-        TodoSortFilterProxyModel model;
-        QAbstractItemModelTester modelTester(&model);
-        QSignalSpy modelReset(&model, &QAbstractItemModel::modelReset);
-
-        model.setCalendar(m_calendar);
-        QCOMPARE(modelReset.count(), 1);
-
-        for(int i = 0; i < model.rowCount(); i++) {
-            const auto index = model.index(i, 0);
-            qDebug() << index.data(TodoModel::SummaryRole);
-        }
 
         QCOMPARE(model.rowCount(), m_expectedTopLevelTodoCount);
     }
