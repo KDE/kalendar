@@ -18,7 +18,7 @@
 #include <QStandardPaths>
 #include <QUrl>
 
-#include <qstringliteral.h>
+#include <QStringLiteral>
 
 QString sizeHuman(float size)
 {

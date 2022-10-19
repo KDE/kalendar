@@ -5,7 +5,7 @@
 
 #include "../mimetreeparser/objecttreeparser.h"
 #include "htmlutils.h"
-#include <qstringliteral.h>
+#include <QStringLiteral>
 
 #include <KLocalizedString>
 #include <QDebug>
