@@ -22,6 +22,7 @@
   <name xml:lang="hu">Kalendar</name>
   <name xml:lang="id">Kalendar</name>
   <name xml:lang="it">Kalendar</name>
+  <name xml:lang="ka">Kalendar</name>
   <name xml:lang="ko">Kalendar</name>
   <name xml:lang="nl">Kalendar</name>
   <name xml:lang="pl">Kalendarz</name>
@@ -52,6 +53,7 @@
   <summary xml:lang="hu">Kezelje feladatait és eseményeit gyorsan és könnyedén</summary>
   <summary xml:lang="id">Kelola tugas dan acaramu dengan cepat dan mudah</summary>
   <summary xml:lang="it">Gestisci le tue attività e gli eventi con velocità e facilità</summary>
+  <summary xml:lang="ka">მართეთ თქვენი დავალებები და მოვლენები Kalendar-თან ერთად სწრაფად და იოლად</summary>
   <summary xml:lang="nl">Uw taken en afspraken beheren met snelheid en gemak</summary>
   <summary xml:lang="pl">Zarządzaj swoimi zadaniami i wydarzeniami szybko i z łatwością</summary>
   <summary xml:lang="pt">Faça a gestão das suas tarefas e eventos rápida e facilmente</summary>
@@ -215,6 +217,7 @@
       <caption xml:lang="hu">Havi nézet</caption>
       <caption xml:lang="id">Tampilan Bulan</caption>
       <caption xml:lang="it">Vista mensile</caption>
+      <caption xml:lang="ka">თვის ხედი</caption>
       <caption xml:lang="nl">Maandweergave</caption>
       <caption xml:lang="pl">Widok miesiąca</caption>
       <caption xml:lang="pt">Vista Mensal</caption>
@@ -245,6 +248,7 @@
       <caption xml:lang="hu">Heti nézet</caption>
       <caption xml:lang="id">Tampilan Pekan</caption>
       <caption xml:lang="it">Vista settimanale</caption>
+      <caption xml:lang="ka">კვირის ხედი</caption>
       <caption xml:lang="nl">Weekweergave</caption>
       <caption xml:lang="pl">Widok tygodnia</caption>
       <caption xml:lang="pt">Vista da Semana</caption>
@@ -274,6 +278,7 @@
       <caption xml:lang="hu">Ütemezés nézet</caption>
       <caption xml:lang="id">Tampilan Jadwal</caption>
       <caption xml:lang="it">Vista delle pianificazioni</caption>
+      <caption xml:lang="ka">განრიგის ხედი</caption>
       <caption xml:lang="nl">Periodieke transactie venster</caption>
       <caption xml:lang="pl">Widok harmonogramu</caption>
       <caption xml:lang="pt">Área de Calendarização</caption>
@@ -303,6 +308,7 @@
       <caption xml:lang="hu">Feladat nézet</caption>
       <caption xml:lang="id">Tampilan Tugas</caption>
       <caption xml:lang="it">Vista delle attività</caption>
+      <caption xml:lang="ka">დავალების ხედი</caption>
       <caption xml:lang="nl">Taakweergave</caption>
       <caption xml:lang="pl">Widok zadań</caption>
       <caption xml:lang="pt">Vista das Tarefas</caption>
@@ -333,6 +339,7 @@
       <caption xml:lang="hu">Mobil</caption>
       <caption xml:lang="id">Ponsel</caption>
       <caption xml:lang="it">Mobile</caption>
+      <caption xml:lang="ka">მობაილი</caption>
       <caption xml:lang="nl">Mobiel</caption>
       <caption xml:lang="pl">Telefon komórkowy</caption>
       <caption xml:lang="pt">Telemóvel</caption>
