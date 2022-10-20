@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-18 00:45+0000\n"
-"PO-Revision-Date: 2022-10-02 15:50\n"
+"PO-Revision-Date: 2022-10-19 13:23\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2257,16 +2257,14 @@ msgid "Past event transparency:"
 msgstr "过去事件透明度："
 
 #: contents/ui/Settings/ViewSettingsPage.qml:73
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
-msgstr "月视图设置"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:85
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "月视图"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
@@ -2334,16 +2332,14 @@ msgid "Grid border width (pixels):"
 msgstr "网格线宽度 (像素)："
 
 #: contents/ui/Settings/ViewSettingsPage.qml:225
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "任务视图设置"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:237
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "周视图"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
@@ -2841,9 +2837,3 @@ msgstr ""
 #, kde-format
 msgid "Add Account"
 msgstr ""
-
-#~ msgid "Expand MainDrawer"
-#~ msgstr "展开主抽屉栏"
-
-#~ msgid "Collapse MainDrawer"
-#~ msgstr "收起主抽屉栏"
