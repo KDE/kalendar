@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-18 00:45+0000\n"
-"PO-Revision-Date: 2022-10-14 10:42+0200\n"
+"PO-Revision-Date: 2022-10-20 16:57+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2299,7 +2299,7 @@ msgstr "Mode d'affichage par mois"
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "Grille des mois avec balayage"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:99
 #, kde-format
@@ -2310,6 +2310,8 @@ msgstr "Grille basique en mois"
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
 msgstr ""
+"La grille des mois avec balayage nécessite de plus grandes performances du "
+"système."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:119
 #, kde-format
@@ -2374,7 +2376,7 @@ msgstr "Mode d'affichage en semaines"
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "Grille des semaines avec balayage"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:251
 #, kde-format
@@ -2385,6 +2387,8 @@ msgstr "Affichage basique en semaines"
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
 msgstr ""
+"La grille des semaines avec balayage nécessite de plus grandes performances "
+"du système."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:270
 #, kde-format
@@ -2397,10 +2401,9 @@ msgid "Schedule view mode"
 msgstr "Mode d'affichage en planning"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:289
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "Affichage par planning"
+msgstr "Grille de planning avec balayage"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:296
 #, kde-format
@@ -2411,6 +2414,8 @@ msgstr "Affichage basique en planning"
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
 msgstr ""
+"La grille de planning avec balayage nécessite de plus grandes performances "
+"du système."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:308
 #, kde-format
