@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-18 00:45+0000\n"
-"PO-Revision-Date: 2022-09-28 18:26+0400\n"
+"PO-Revision-Date: 2022-10-22 19:20+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2356,31 +2356,29 @@ msgid "Past event transparency:"
 msgstr "شفافية الأحداث الفائتة:"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:73
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
 msgstr "إعدادات عرض الشهر"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:85
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "عرض الشهر"
+msgstr "نمط عرض الشهر"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "شبكة الشهر قابلة للتمرير"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:99
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "شبكة الشهر بسيطة"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:105
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
-msgstr ""
+msgstr "تحتاج شبكة الشهر القابلة للتمرير إلى أداء عالي من النظام."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:119
 #, kde-format
@@ -2433,31 +2431,29 @@ msgid "Grid border width (pixels):"
 msgstr "عرض حدود الشبكة (بكسل):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:225
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "إعدادات عرض المهام"
+msgstr "إعدادات عرض الأسبوع"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:237
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "عرض الأسبوع"
+msgstr "نمط عرض الأسبوع"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "عرض أسبوع قابل للتمرير"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:251
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "عرض أسبوع بسيط"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:257
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
-msgstr ""
+msgstr "يحتاج عرض الأسبوع القابل للتمرير إلى أداء عالي من النظام."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:270
 #, kde-format
@@ -2465,27 +2461,24 @@ msgid "Schedule View settings"
 msgstr "إعدادات عرض الجدول"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:282
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "عرض الجدولة"
+msgstr "نمط عرض الجدولة"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:289
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "عرض الجدولة"
+msgstr "عرض جدولة قابل للتمرير"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:296
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "عرض الجدولة"
+msgstr "عرض الجدولة بسيط"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:302
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
-msgstr ""
+msgstr "يحتاج عرض الجدولة القابل للتمرير إلى أداء عالي من النظام."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:308
 #, kde-format
