@@ -23,7 +23,7 @@ QQC2.ScrollView {
     property date currentDate: new Date()
     property date startDate: DateUtils.getFirstDayOfMonth(currentDate)
 
-    readonly property int daysInMonth: new Date(startDate.getFullYear(), startDate.getMonth(), 0).getDate()
+    readonly property int daysInMonth: new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0).getDate()
     readonly property int month: startDate.getMonth()
     readonly property int year: startDate.getFullYear()
 
@@ -179,11 +179,13 @@ QQC2.ScrollView {
                     Layout.bottomMargin: -dayColumn.spacing // Remove default spacing, bring week header right down to day square
 
                     text: {
-                        let nextDay = DateUtils.getLastDayOfWeek( DateUtils.nextWeek(periodStartDate) );
-                        if (nextDay.getMonth() !== periodStartDate.getMonth()) {
-                            nextDay = new Date(nextDay.getFullYear(), nextDay.getMonth(), 0);
-                        }
+                        const daysToWeekEnd = 6;
 
+                        const nextDayMaxDiff = (periodStartDate.getDate() - (model.index + 1)) + daysToWeekEnd;
+                        const nextDayMaxDate = periodStartDate.getDate() + nextDayMaxDiff;
+                        const nextDayDate = Math.min(nextDayMaxDate, scrollView.daysInMonth);
+
+                        const nextDay = new Date(periodStartDate.getFullYear(), periodStartDate.getMonth(), nextDayDate);
                         return periodStartDate.toLocaleDateString(Qt.locale(), "dddd <b>dd</b>") + "–" + nextDay.toLocaleDateString(Qt.locale(), "dddd <b>dd</b> MMMM");
                     }
                     visible: Kalendar.Config.showWeekHeaders &&
