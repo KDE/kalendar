@@ -198,7 +198,7 @@ Kirigami.Page {
 
             property date startDate: model.startDate
             property date firstDayOfMonth: model.firstDay
-            property int daysInMonth: new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth(), 0).getDate()
+            property int daysInMonth: new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0).getDate()
             property int month: model.selectedMonth - 1 // Convert QDateTime month to JS month
             property int year: model.selectedYear
 
@@ -301,11 +301,13 @@ Kirigami.Page {
                                 Layout.bottomMargin: -dayColumn.spacing // Remove default spacing, bring week header right down to day square
 
                                 text: {
-                                    let nextDay = DateUtils.getLastDayOfWeek( DateUtils.nextWeek(periodStartDate) );
-                                    if (nextDay.getMonth() !== periodStartDate.getMonth()) {
-                                        nextDay = new Date(nextDay.getFullYear(), nextDay.getMonth(), 0);
-                                    }
+                                    const daysToWeekEnd = 6;
 
+                                    const nextDayMaxDiff = (periodStartDate.getDate() - (model.index + 1)) + daysToWeekEnd;
+                                    const nextDayMaxDate = periodStartDate.getDate() + nextDayMaxDiff;
+                                    const nextDayDate = Math.min(nextDayMaxDate, viewLoader.daysInMonth);
+
+                                    const nextDay = new Date(periodStartDate.getFullYear(), periodStartDate.getMonth(), nextDayDate);
                                     return periodStartDate.toLocaleDateString(Qt.locale(), "dddd <b>dd</b>") + "–" + nextDay.toLocaleDateString(Qt.locale(), "dddd <b>dd</b> MMMM");
                                 }
                                 visible: Kalendar.Config.showWeekHeaders &&
