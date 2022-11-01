@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-18 00:45+0000\n"
+"POT-Creation-Date: 2022-11-01 00:47+0000\n"
 "PO-Revision-Date: 2022-09-23 10:01+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1856,55 +1856,55 @@ msgstr "Wyzeruj"
 msgid "All day or Multi day"
 msgstr "Całodniowe lub wielodniowe"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:263
+#: contents/ui/MainViews/BasicMonthListView.qml:265
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Wyczyść dzień."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:284
 #, kde-format
 msgid "Tap"
 msgstr "Stuknięcie"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:284
 #, kde-format
 msgid "Click"
 msgstr "Kliknięcie"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:283
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "W księgach nie ma dzisiaj niczego. %1 aby coś dodać."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:401
+#: contents/ui/MainViews/BasicMonthListView.qml:403
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Dzień %2 w %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:457
+#: contents/ui/MainViews/BasicMonthListView.qml:459
 #, kde-format
 msgid "Runs all day"
 msgstr "Całodniowe"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:461
+#: contents/ui/MainViews/BasicMonthListView.qml:463
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:466
 #, kde-format
 msgid "Starts at %1"
 msgstr "Zaczyna się o %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:466
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Ends at %1"
 msgstr "Kończy się o %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:470
 #, kde-format
 msgid "Runs All Day"
 msgstr "Całodniowe"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-18 00:45+0000\n"
+"POT-Creation-Date: 2022-11-01 00:47+0000\n"
 "PO-Revision-Date: 2022-10-13 21:41+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1828,55 +1828,55 @@ msgstr "மீட்டமை"
 msgid "All day or Multi day"
 msgstr "முழு நாளோ பல நாட்களோ"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:263
+#: contents/ui/MainViews/BasicMonthListView.qml:265
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "நிகழ்வுகளற்ற நாள்."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:284
 #, kde-format
 msgid "Tap"
 msgstr "தட்டுங்கள்"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:282
+#: contents/ui/MainViews/BasicMonthListView.qml:284
 #, kde-format
 msgid "Click"
 msgstr "கிளிக் செய்யுங்கள்"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:283
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "இன்ற ஏதுமில்லை. எதையாவது சேர்க்க %1."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:401
+#: contents/ui/MainViews/BasicMonthListView.qml:403
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (%3இல் %2வது நாள்)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:457
+#: contents/ui/MainViews/BasicMonthListView.qml:459
 #, kde-format
 msgid "Runs all day"
 msgstr "முழு நாள் நடைபெறும்"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:461
+#: contents/ui/MainViews/BasicMonthListView.qml:463
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:466
 #, kde-format
 msgid "Starts at %1"
 msgstr "%1 தொடங்கும்"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:466
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Ends at %1"
 msgstr "%1 முடியும்"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:470
 #, kde-format
 msgid "Runs All Day"
 msgstr "முழு நாள் நடைபெறும்"
