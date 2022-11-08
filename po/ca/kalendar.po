@@ -2880,9 +2880,3 @@ msgstr "Modifica"
 #, kde-format
 msgid "Add Account"
 msgstr "Afegeix un compte"
-
-#~ msgid "Expand MainDrawer"
-#~ msgstr "Expandeix el calaix principal"
-
-#~ msgid "Collapse MainDrawer"
-#~ msgstr "Redueix el calaix principal"

@@ -133,12 +133,3 @@ msgstr "Ha fallat la creació del codi QR"
 #, kde-format
 msgid "The QR code is too large to be displayed"
 msgstr "El codi QR és massa gran per a mostrar-se"
-
-#~ msgid "Code 39"
-#~ msgstr "Code 39"
-
-#~ msgid "Code 93"
-#~ msgstr "Code 93"
-
-#~ msgid "Code 128"
-#~ msgstr "Code 128"
