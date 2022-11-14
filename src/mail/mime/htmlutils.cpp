@@ -187,7 +187,7 @@ QString HtmlUtils::linkify(const QString &in)
                     || linkify_pmatch(out, x2, QStringLiteral("&lt;"))) {
                     break;
                 }
-                if (brackets.keys().contains(out.at(x2))) {
+                if (brackets.contains(out.at(x2))) {
                     ++brackets[out.at(x2)];
                 }
             }
@@ -202,7 +202,7 @@ QString HtmlUtils::linkify(const QString &in)
                 if (linkify_isOneOf(pre.at(cutoff), QStringLiteral(")]}")) && brackets[pre.at(cutoff)] - brackets[openingBracket[pre.at(cutoff)]] <= 0) {
                     break; // in theory, there could be == above, but these are urls, not math ;)
                 }
-                if (brackets.keys().contains(pre.at(cutoff))) {
+                if (brackets.contains(pre.at(cutoff))) {
                     --brackets[pre.at(cutoff)];
                 }
             }

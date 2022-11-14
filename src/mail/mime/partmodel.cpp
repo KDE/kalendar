@@ -101,7 +101,7 @@ public:
     void findEncapsulated(const MimeTreeParser::EncapsulatedRfc822MessagePart::Ptr &e)
     {
         mEncapsulatedParts[e.data()] = mParser->collectContentParts(e);
-        for (auto subPart : mEncapsulatedParts[e.data()]) {
+        for (const auto &subPart : std::as_const(mEncapsulatedParts[e.data()])) {
             checkPart(subPart);
             mParents[subPart.data()] = e.data();
             if (auto encapsulatedSub = subPart.dynamicCast<MimeTreeParser::EncapsulatedRfc822MessagePart>()) {
@@ -158,13 +158,13 @@ public:
         isTrimmed = false;
 
         const auto parts = mParser->collectContentParts();
-        for (auto part : parts) {
+        for (const auto &part : parts) {
             checkPart(part);
             if (auto encapsulatedPart = part.dynamicCast<MimeTreeParser::EncapsulatedRfc822MessagePart>()) {
                 findEncapsulated(encapsulatedPart);
             }
         }
-        for (auto part : parts) {
+        for (const auto &part : parts) {
             if (mMimeTypeCache[part.data()] == "text/calendar") {
                 mParts.prepend(part);
             } else {
@@ -489,7 +489,7 @@ QModelIndex PartModel::parent(const QModelIndex &index) const
 {
     if (index.isValid()) {
         if (auto indexPart = static_cast<MimeTreeParser::MessagePart *>(index.internalPointer())) {
-            for (const auto &part : d->mParts) {
+            for (const auto &part : std::as_const(d->mParts)) {
                 if (part.data() == indexPart) {
                     return QModelIndex();
                 }

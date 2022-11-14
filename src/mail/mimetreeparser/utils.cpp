@@ -7,7 +7,8 @@ using namespace MimeTreeParser;
 
 KMime::Content *MimeTreeParser::findTypeInDirectChildren(KMime::Content *content, const QByteArray &mimeType)
 {
-    for (const auto child : content->contents()) {
+    const auto contents = content->contents();
+    for (const auto child : contents) {
         if ((!child->contentType()->isEmpty()) && (mimeType == child->contentType()->mimeType())) {
             return child;
         }

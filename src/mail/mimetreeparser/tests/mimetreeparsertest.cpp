@@ -553,7 +553,8 @@ private Q_SLOTS:
     {
         MimeTreeParser::ObjectTreeParser otp;
         otp.parseObjectTree(readMailFromFile(QLatin1String("cid-links-forwarded-inline.mbox")));
-        auto part = otp.collectContentParts()[0];
+        const auto parts = otp.collectContentParts();
+        auto part = parts[0];
         QVERIFY(part->header("references"));
         QCOMPARE(part->header("references")->asUnicodeString(), QStringLiteral("<a1777ec781546ccc5dcd4918a5e4e03d@info>"));
     }
@@ -678,7 +679,7 @@ private Q_SLOTS:
 
         part = partList[1].dynamicCast<MimeTreeParser::MessagePart>();
         QVERIFY(bool(part));
-        QCOMPARE(part->text(), QStringLiteral(""));
+        QCOMPARE(part->text(), QString());
         QCOMPARE(part->charset(), QStringLiteral("ISO-8859-1").toLocal8Bit());
         QCOMPARE(part->signatures().size(), 1);
         QCOMPARE(part->signatures()[0]->partMetaData()->isGoodSignature, true);

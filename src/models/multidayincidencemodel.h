@@ -59,6 +59,7 @@ public:
     MultiDayIncidenceModel::Filters filters() const;
     bool showSubTodos() const;
     int incidenceCount() const;
+    bool incidencePassesFilter(const QModelIndex &idx) const;
 
 Q_SIGNALS:
     void periodLengthChanged();
@@ -81,7 +82,6 @@ private Q_SLOTS:
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
     void scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow);
     void updateScheduledLayoutLines();
-    bool incidencePassesFilter(const QModelIndex &idx) const;
 
 private:
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;

@@ -141,7 +141,7 @@ ContactGroupModel::~ContactGroupModel() = default;
 
 void ContactGroupModel::loadContactGroup(const KContacts::ContactGroup &contactGroup)
 {
-    Q_EMIT beginResetModel();
+    beginResetModel();
 
     d->mMembers.clear();
     d->mGroup = contactGroup;
@@ -168,7 +168,7 @@ void ContactGroupModel::loadContactGroup(const KContacts::ContactGroup &contactG
 
     d->normalizeMemberList();
 
-    Q_EMIT endResetModel();
+    endResetModel();
 }
 
 bool ContactGroupModel::storeContactGroup(KContacts::ContactGroup &group) const

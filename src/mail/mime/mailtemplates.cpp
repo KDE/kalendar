@@ -143,7 +143,8 @@ static QString replySubject(const QString &s)
     // The standandard prefix (latin for "in re", in matter of)
     const auto localPrefix = QStringLiteral("RE:");
     QStringList replyPrefixes;
-    for (const auto &prefix : getReplyPrefixes()) {
+    const auto simpleReplyPrefixes = getReplyPrefixes();
+    for (const auto &prefix : simpleReplyPrefixes) {
         replyPrefixes << prefix + QStringLiteral("\\s*:");
         replyPrefixes << prefix + QStringLiteral("\\[.+\\]:");
         replyPrefixes << prefix + QStringLiteral("\\d+:");
@@ -468,8 +469,8 @@ static RecipientMailboxes getRecipients(const KMime::Types::Mailbox::List &from,
         recipients = replyToList;
 
         // strip all possible mailing list addresses from the list of Reply-To addresses
-        for (const KMime::Types::Mailbox &mailbox : mailingListAddresses) {
-            for (const KMime::Types::Mailbox &recipient : recipients) {
+        for (const KMime::Types::Mailbox &mailbox : std::as_const(mailingListAddresses)) {
+            for (const KMime::Types::Mailbox &recipient : std::as_const(recipients)) {
                 if (mailbox == recipient) {
                     recipients.removeAll(recipient);
                 }
@@ -603,8 +604,8 @@ void MailTemplates::reply(const KMime::Message::Ptr &origMsg,
     // On $datetime you wrote:
     auto dateHeader = static_cast<const KMime::Headers::Date *>(part->header(KMime::Headers::Date::staticType()));
     const QDateTime date = dateHeader ? dateHeader->dateTime() : QDateTime{};
-    const auto dateTimeString =
-        QStringLiteral("%1 %2").arg(definedLocale.toString(date.date(), QLocale::LongFormat)).arg(definedLocale.toString(date.time(), QLocale::LongFormat));
+    const QString dateTimeString =
+        definedLocale.toString(date.date(), QLocale::LongFormat) + QLatin1Char(' ') + definedLocale.toString(date.time(), QLocale::LongFormat);
     const auto onDateYouWroteLine = QStringLiteral("On %1 you wrote:\n").arg(dateTimeString);
     plainBody.append(onDateYouWroteLine);
     htmlBody.append(plainToHtml(onDateYouWroteLine));
@@ -800,15 +801,18 @@ static KMime::Types::Mailbox::List stringListToMailboxes(const QStringList &list
 static void setRecipients(KMime::Message &message, const Recipients &recipients)
 {
     message.to(true)->clear();
-    for (const auto &mb : stringListToMailboxes(recipients.to)) {
+    const auto toRecipients = stringListToMailboxes(recipients.to);
+    for (const auto &mb : toRecipients) {
         message.to()->addAddress(mb);
     }
     message.cc(true)->clear();
-    for (const auto &mb : stringListToMailboxes(recipients.cc)) {
+    const auto ccRecipients = stringListToMailboxes(recipients.cc);
+    for (const auto &mb : ccRecipients) {
         message.cc()->addAddress(mb);
     }
     message.bcc(true)->clear();
-    for (const auto &mb : stringListToMailboxes(recipients.bcc)) {
+    const auto bccRecipients = stringListToMailboxes(recipients.bcc);
+    for (const auto &mb : bccRecipients) {
         message.bcc()->addAddress(mb);
     }
 }
@@ -837,7 +841,7 @@ KMime::Message::Ptr MailTemplates::createMessage(KMime::Message::Ptr existingMes
 
     mail->date()->setDateTime(QDateTime::currentDateTime());
     mail->userAgent()->fromUnicodeString(
-        QStringLiteral("%1/%2(%3)").arg(QString::fromLocal8Bit("Kalendar")).arg(QStringLiteral("0.1")).arg(QSysInfo::prettyProductName()),
+        QStringLiteral("%1/%2(%3)").arg(QString::fromLocal8Bit("Kalendar"), QStringLiteral("0.1"), QSysInfo::prettyProductName()),
         "utf-8");
 
     setRecipients(*mail, {to, cc, bcc});
@@ -880,7 +884,7 @@ KMime::Message::Ptr MailTemplates::createMessage(KMime::Message::Ptr existingMes
             bodyPart->contentTransferEncoding()->setEncoding(KMime::Headers::CE7Bit);
             bodyPart->setPreamble("This is a multi-part message in MIME format.\n");
             bodyPart->addContent(createBodyPart(body, htmlBody));
-            for (const auto &attachment : allAttachments) {
+            for (const auto &attachment : std::as_const(allAttachments)) {
                 // Just always encode attachments base64 so it's safe for binary data,
                 // except when it's another message or an ascii armored key
                 static QSet<QString> noEncodingRequired{QStringLiteral("message/rfc822"), QStringLiteral("application/pgp-keys")};
@@ -930,7 +934,7 @@ MailTemplates::createIMipMessage(const QString &from, const Recipients &recipien
 
     // Set the headers
     message->userAgent()->fromUnicodeString(
-        QStringLiteral("%1/%2(%3)").arg(QString::fromLocal8Bit("Kalendar")).arg(QStringLiteral("0.1")).arg(QSysInfo::prettyProductName()),
+        QStringLiteral("%1/%2(%3)").arg(QString::fromLocal8Bit("Kalendar"), QStringLiteral("0.1"), QSysInfo::prettyProductName()),
         "utf-8");
     message->from()->fromUnicodeString(from, "utf-8");
 

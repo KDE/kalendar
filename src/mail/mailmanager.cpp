@@ -102,8 +102,6 @@ MailManager::MailManager(QObject *parent)
             disconnect(Akonadi::ServerManager::self(), &Akonadi::ServerManager::stateChanged, this, nullptr);
         });
     }
-    Q_EMIT folderModelChanged();
-    Q_EMIT loadingChanged();
 }
 
 MailModel *MailManager::folderModel() const

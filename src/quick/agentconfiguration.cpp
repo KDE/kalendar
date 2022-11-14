@@ -31,7 +31,7 @@ Akonadi::AgentFilterProxyModel *AgentConfiguration::availableAgents()
 
     auto agentInstanceModel = new AgentTypeModel(this);
     m_availableAgents = new AgentFilterProxyModel(this);
-    for (const auto &mimetype : m_mimetypes) {
+    for (const auto &mimetype : std::as_const(m_mimetypes)) {
         m_availableAgents->addMimeTypeFilter(mimetype);
     }
     m_availableAgents->setSourceModel(agentInstanceModel);
@@ -47,7 +47,7 @@ Akonadi::AgentFilterProxyModel *AgentConfiguration::runningAgents()
 
     auto agentInstanceModel = new AgentInstanceModel(this);
     m_runningAgents = new AgentFilterProxyModel(this);
-    for (const auto &mimetype : m_mimetypes) {
+    for (const auto &mimetype : std::as_const(m_mimetypes)) {
         m_runningAgents->addMimeTypeFilter(mimetype);
     }
     m_runningAgents->setSourceModel(agentInstanceModel);

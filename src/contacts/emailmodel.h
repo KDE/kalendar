@@ -35,7 +35,7 @@ public:
     void loadContact(const KContacts::Addressee &contact);
     void storeContact(KContacts::Addressee &contact) const;
 
-    Q_INVOKABLE void addEmail(const QString &email, Type type);
+    Q_INVOKABLE void addEmail(const QString &email, EmailModel::Type type);
     Q_INVOKABLE void deleteEmail(int row);
 
 Q_SIGNALS:

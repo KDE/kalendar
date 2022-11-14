@@ -150,13 +150,13 @@ static QString internalSaveAttachmentToDisk(const QModelIndex &index, const QStr
         // Fallback name should we end up with an empty name
         if (name.isEmpty()) {
             fname = path + QStringLiteral("unnamed");
-            while (QFileInfo{fname}.exists()) {
+            while (QFileInfo::exists(fname)) {
                 fname = fname + QStringLiteral("_1");
             }
         }
 
         // A file with that name already exists, we assume it's the right file
-        if (QFileInfo{fname}.exists()) {
+        if (QFileInfo::exists(fname)) {
             return fname;
         }
         QFile f(fname);
@@ -179,7 +179,7 @@ static QString internalSaveAttachmentToDisk(const QModelIndex &index, const QStr
 
 bool AttachmentModel::saveAttachmentToDisk(const QModelIndex &index)
 {
-    auto downloadDir = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    QString downloadDir = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
     if (downloadDir.isEmpty()) {
         downloadDir = QStringLiteral("~");
     }
@@ -196,7 +196,7 @@ bool AttachmentModel::saveAttachmentToDisk(const QModelIndex &index)
 
 bool AttachmentModel::openAttachment(const QModelIndex &index)
 {
-    auto downloadDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QStringLiteral("/kalendar/");
+    QString downloadDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QStringLiteral("/kalendar/");
     QDir{}.mkpath(downloadDir);
     const auto filePath = internalSaveAttachmentToDisk(index, downloadDir, true);
     if (!filePath.isEmpty()) {

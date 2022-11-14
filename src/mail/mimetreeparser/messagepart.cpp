@@ -30,7 +30,7 @@ MessagePart::MessagePart(ObjectTreeParser *otp, const QString &text, KMime::Cont
 
 MessagePart::~MessagePart()
 {
-    for (auto n : mNodesToDelete) {
+    for (auto n : std::as_const(mNodesToDelete)) {
         delete n;
     }
 }
@@ -520,7 +520,7 @@ AlternativeMessagePart::AlternativeMessagePart(ObjectTreeParser *otp, KMime::Con
         if (data) {
             QString htmlContent;
             const auto parts = data->contents();
-            for (auto p : data->contents()) {
+            for (auto p : parts) {
                 if ((!p->contentType()->isEmpty()) && (p->contentType()->mimeType() == "text/html")) {
                     htmlContent += MimeMessagePart(mOtp, p, true).text();
                 } else if (KMime::isAttachment(p)) {

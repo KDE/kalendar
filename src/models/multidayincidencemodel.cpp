@@ -358,7 +358,7 @@ void MultiDayIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourc
 
 void MultiDayIncidenceModel::updateScheduledLayoutLines()
 {
-    for (const auto lineIndex : m_linesToUpdate) {
+    for (const auto lineIndex : std::as_const(m_linesToUpdate)) {
         const auto periodStart = mSourceModel->start().addDays(lineIndex * mPeriodLength);
         const auto idx = index(lineIndex, 0);
         const auto laidOutLine = layoutLines(periodStart);

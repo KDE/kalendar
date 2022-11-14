@@ -11,7 +11,8 @@
 
 static KMime::Content *getSubpart(KMime::Content *msg, const QByteArray &mimeType)
 {
-    for (const auto c : msg->contents()) {
+    const auto contents = msg->contents();
+    for (const auto c : contents) {
         if (c->contentType(false)->mimeType() == mimeType) {
             return c;
         }

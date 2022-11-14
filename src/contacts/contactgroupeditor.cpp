@@ -169,7 +169,7 @@ void ContactGroupEditorPrivate::setupMonitor()
     mMonitor->ignoreSession(Session::defaultSession());
 
     QObject::connect(mMonitor, &Monitor::itemChanged, mParent, [this](const Akonadi::Item &, const QSet<QByteArray> &) {
-        mParent->itemChanged();
+        Q_EMIT mParent->itemChanged();
     });
 }
 

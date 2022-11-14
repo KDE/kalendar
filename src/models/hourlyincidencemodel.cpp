@@ -436,7 +436,7 @@ void HourlyIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourceI
 
 void HourlyIncidenceModel::updateScheduledLayoutLines()
 {
-    for (const auto lineIndex : m_linesToUpdate) {
+    for (const auto lineIndex : std::as_const(m_linesToUpdate)) {
         const auto periodStart = mSourceModel->start().addDays(lineIndex).startOfDay();
         const auto idx = index(lineIndex, 0);
         const auto laidOutLine = layoutLines(periodStart);

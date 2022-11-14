@@ -119,7 +119,8 @@ static void print(QTextStream &stream, KMime::Content *node, const QString prefi
         subType = node->contentType()->subType();
     }
     stream << prefix << "! " << mediaType << subType << " isAttachment: " << KMime::isAttachment(node) << "\n";
-    for (const auto nodeContent : node->contents()) {
+    const auto contents = node->contents();
+    for (const auto nodeContent : contents) {
         print(stream, nodeContent, prefix + QLatin1String(" "));
     }
 }
@@ -127,7 +128,8 @@ static void print(QTextStream &stream, KMime::Content *node, const QString prefi
 static void print(QTextStream &stream, const MessagePart &messagePart, const QByteArray pre = {})
 {
     stream << pre << "# " << messagePart.metaObject()->className() << " isAttachment: " << messagePart.isAttachment() << "\n";
-    for (const auto &subPart : messagePart.subParts()) {
+    const auto subParts = messagePart.subParts();
+    for (const auto &subPart : subParts) {
         print(stream, *subPart, pre + " ");
     }
 }
@@ -162,7 +164,8 @@ static KMime::Content *find(KMime::Content *node, const std::function<bool(KMime
     if (select(node)) {
         return node;
     }
-    for (const auto nodeContent : node->contents()) {
+    const auto contents = node->contents();
+    for (const auto nodeContent : contents) {
         if (const auto content = find(nodeContent, select)) {
             return content;
         }

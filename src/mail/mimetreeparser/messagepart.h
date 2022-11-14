@@ -39,11 +39,11 @@ using Crypto::CryptoProtocol::UnknownProtocol;
 class MessagePart : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool attachment READ isAttachment)
-    Q_PROPERTY(bool root READ isRoot)
-    Q_PROPERTY(bool isHtml READ isHtml)
-    Q_PROPERTY(QString plaintextContent READ plaintextContent)
-    Q_PROPERTY(QString htmlContent READ htmlContent)
+    Q_PROPERTY(bool attachment READ isAttachment CONSTANT)
+    Q_PROPERTY(bool root READ isRoot CONSTANT)
+    Q_PROPERTY(bool isHtml READ isHtml CONSTANT)
+    Q_PROPERTY(QString plaintextContent READ plaintextContent CONSTANT)
+    Q_PROPERTY(QString htmlContent READ htmlContent CONSTANT)
 public:
     enum Disposition { Inline, Attachment, Invalid };
     typedef QSharedPointer<MessagePart> Ptr;
@@ -262,7 +262,7 @@ private:
 class EncryptedMessagePart : public MessagePart
 {
     Q_OBJECT
-    Q_PROPERTY(bool isEncrypted READ isEncrypted)
+    Q_PROPERTY(bool isEncrypted READ isEncrypted CONSTANT)
 public:
     typedef QSharedPointer<EncryptedMessagePart> Ptr;
     EncryptedMessagePart(ObjectTreeParser *otp,
@@ -302,7 +302,7 @@ protected:
 class SignedMessagePart : public MessagePart
 {
     Q_OBJECT
-    Q_PROPERTY(bool isSigned READ isSigned)
+    Q_PROPERTY(bool isSigned READ isSigned CONSTANT)
 public:
     typedef QSharedPointer<SignedMessagePart> Ptr;
     SignedMessagePart(ObjectTreeParser *otp, const CryptoProtocol protocol, KMime::Content *node, KMime::Content *signedData, bool parseAfterDecryption = true);

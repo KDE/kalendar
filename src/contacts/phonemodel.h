@@ -48,7 +48,7 @@ public:
     void loadContact(const KContacts::Addressee &contact);
     void storeContact(KContacts::Addressee &contact) const;
 
-    Q_INVOKABLE void addPhoneNumber(const QString &phoneNumber, Type type);
+    Q_INVOKABLE void addPhoneNumber(const QString &phoneNumber, PhoneModel::Type type);
     Q_INVOKABLE void deletePhoneNumber(int row);
 
 Q_SIGNALS:

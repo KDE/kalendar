@@ -116,7 +116,7 @@ gpgme_error_t gpgme_passphrase(void *hook, const char *uid_hint, const char *pas
     QFile file;
     file.open(fd, QIODevice::WriteOnly);
     // FIXME hardcoded as a test
-    auto passphrase = QByteArray{"test1"} + QByteArray{"\n"};
+    QByteArray passphrase = QByteArray{"test1"} + QByteArray{"\n"};
     file.write(passphrase);
     file.close();
 
