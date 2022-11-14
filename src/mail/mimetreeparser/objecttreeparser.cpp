@@ -493,7 +493,7 @@ const QTextCodec *ObjectTreeParser::codecFor(KMime::Content *node) const
         charset = "utf-8";
     }
     if (!charset.isEmpty()) {
-        if (auto c = KCharsets::charsets()->codecForName(QLatin1String(charset))) {
+        if (auto c = QTextCodec::codecForName(charset)) {
             return c;
         };
     }
