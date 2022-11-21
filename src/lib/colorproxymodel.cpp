@@ -12,11 +12,11 @@
 #include <Akonadi/EntityDisplayAttribute>
 #include <CalendarSupport/KCalPrefs>
 #include <KConfigGroup>
+#include <KContacts/Addressee>
+#include <KContacts/ContactGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <QRandomGenerator>
-#include <KContacts/Addressee>
-#include <KContacts/ContactGroup>
 
 namespace
 {
@@ -30,12 +30,8 @@ static bool hasCompatibleMimeTypes(const Akonadi::Collection &collection)
     static QStringList goodMimeTypes;
 
     if (goodMimeTypes.isEmpty()) {
-        goodMimeTypes << QStringLiteral("text/calendar")
-                      << KCalendarCore::Event::eventMimeType()
-                      << KCalendarCore::Todo::todoMimeType()
-                      << KContacts::Addressee::mimeType()
-                      << KContacts::ContactGroup::mimeType()
-                      << KCalendarCore::Journal::journalMimeType();
+        goodMimeTypes << QStringLiteral("text/calendar") << KCalendarCore::Event::eventMimeType() << KCalendarCore::Todo::todoMimeType()
+                      << KContacts::Addressee::mimeType() << KContacts::ContactGroup::mimeType() << KCalendarCore::Journal::journalMimeType();
     }
 
     for (int i = 0; i < goodMimeTypes.count(); ++i) {

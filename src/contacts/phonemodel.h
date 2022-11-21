@@ -18,24 +18,24 @@ public:
         SupportSmsRole,
     };
 
-     enum Type {
-         Home = 1, /**< Home number */
-         Work = 2, /**< Office number */
-         Msg = 4, /**< Messaging */
-         Pref = 8, /**< Preferred number */
-         Voice = 16, /**< Voice */
-         Fax = 32, /**< Fax machine */
-         Cell = 64, /**< Cell phone */
-         Video = 128, /**< Video phone */
-         Bbs = 256, /**< Mailbox */
-         Modem = 512, /**< Modem */
-         Car = 1024, /**< Car phone */
-         Isdn = 2048, /**< ISDN connection */
-         Pcs = 4096, /**< Personal Communication Service*/
-         Pager = 8192, /**< Pager */
-         // TODO add Text and textphone support vcard4
-         Undefined = 16384, /**< Undefined number type */
-     };
+    enum Type {
+        Home = 1, /**< Home number */
+        Work = 2, /**< Office number */
+        Msg = 4, /**< Messaging */
+        Pref = 8, /**< Preferred number */
+        Voice = 16, /**< Voice */
+        Fax = 32, /**< Fax machine */
+        Cell = 64, /**< Cell phone */
+        Video = 128, /**< Video phone */
+        Bbs = 256, /**< Mailbox */
+        Modem = 512, /**< Modem */
+        Car = 1024, /**< Car phone */
+        Isdn = 2048, /**< ISDN connection */
+        Pcs = 4096, /**< Personal Communication Service*/
+        Pager = 8192, /**< Pager */
+        // TODO add Text and textphone support vcard4
+        Undefined = 16384, /**< Undefined number type */
+    };
     Q_ENUM(Type)
 
     PhoneModel(QObject *parent = nullptr);

@@ -39,7 +39,7 @@ public Q_SLOTS:
     {
         QSignalSpy deleteFinished(m_calendar.data(), &Akonadi::ETMCalendar::deleteFinished);
 
-        if(const auto todoExists = m_calendar->todo(m_testTodo->uid())) {
+        if (const auto todoExists = m_calendar->todo(m_testTodo->uid())) {
             m_calendar->deleteIncidence(m_testTodo);
             deleteFinished.wait(2000);
         }

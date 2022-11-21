@@ -29,9 +29,7 @@ public:
         model.setLength(m_testModelLength);
         model.setCalendar(m_calendar);
 
-        return loadingChanged.wait(3000) &&
-               !model.loading() &&
-               model.rowCount() == m_expectedIncidenceCount;
+        return loadingChanged.wait(3000) && !model.loading() && model.rowCount() == m_expectedIncidenceCount;
     }
 
     bool addTestTodo(const IncidenceOccurrenceModel &model)
@@ -43,11 +41,7 @@ public:
 
         const auto createResult = m_calendar->incidenceChanger()->createIncidence(m_testTodo, m_testCollection);
 
-        return createResult != -1 &&
-               createFinished.wait(3000) &&
-               loadingChanged.wait(3000) &&
-               !model.loading() &&
-               model.rowCount() == modelRowCount + 1;
+        return createResult != -1 && createFinished.wait(3000) && loadingChanged.wait(3000) && !model.loading() && model.rowCount() == modelRowCount + 1;
     }
 
 public Q_SLOTS:
@@ -68,7 +62,7 @@ public Q_SLOTS:
     {
         QSignalSpy deleteFinished(m_calendar.data(), &Akonadi::ETMCalendar::deleteFinished);
 
-        if(const auto todoExists = m_calendar->todo(m_testTodo->uid())) {
+        if (const auto todoExists = m_calendar->todo(m_testTodo->uid())) {
             m_calendar->deleteIncidence(m_testTodo);
             deleteFinished.wait(2000);
         }

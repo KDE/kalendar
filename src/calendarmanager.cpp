@@ -29,10 +29,10 @@
 #include <Akonadi/EntityDisplayAttribute>
 #include <Akonadi/EntityRightsFilterModel>
 #include <Akonadi/EntityTreeModel>
+#include <Akonadi/History>
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/ItemMoveJob>
 #include <Akonadi/Monitor>
-#include <Akonadi/History>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
 #include <EventViews/Prefs>

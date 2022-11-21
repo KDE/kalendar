@@ -219,8 +219,8 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
 
 void MultiDayIncidenceModel::resetLayoutLines()
 {
-    if(mSourceModel->calendar()->isLoading()) {
-        if(!mRefreshTimer.isActive()) {
+    if (mSourceModel->calendar()->isLoading()) {
+        if (!mRefreshTimer.isActive()) {
             mRefreshTimer.start(100);
         }
         return;
@@ -233,7 +233,7 @@ void MultiDayIncidenceModel::resetLayoutLines()
     const auto numPeriods = rowCount({});
     m_laidOutLines.reserve(numPeriods);
 
-    for(int i = 0; i < numPeriods; ++i) {
+    for (int i = 0; i < numPeriods; ++i) {
         const auto periodStart = mSourceModel->start().addDays(i * mPeriodLength);
         const auto periodIncidenceLayout = layoutLines(periodStart);
         m_laidOutLines.append(periodIncidenceLayout);
@@ -249,8 +249,7 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
     }
 
     switch (role) {
-    case PeriodStartDate:
-    {
+    case PeriodStartDate: {
         const auto rowStart = mSourceModel->start().addDays(idx.row() * mPeriodLength);
         return rowStart.startOfDay();
     }
@@ -294,7 +293,7 @@ void MultiDayIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 
 void MultiDayIncidenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
 {
-    if(!upperLeft.isValid() || !bottomRight.isValid()) {
+    if (!upperLeft.isValid() || !bottomRight.isValid()) {
         return;
     }
 
@@ -323,7 +322,7 @@ void MultiDayIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourc
     }
 
     for (int i = sourceFirstRow; i <= sourceLastRow; ++i) {
-        if(m_linesToUpdate.count() == m_laidOutLines.count()) {
+        if (m_linesToUpdate.count() == m_laidOutLines.count()) {
             break;
         }
 
@@ -337,7 +336,7 @@ void MultiDayIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourc
         const auto firstPeriodOccurrenceAppears = startDaysFromSourceStart / mPeriodLength;
         const auto lastPeriodOccurrenceAppears = endDaysFromSourceStart / mPeriodLength;
 
-        if(firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
+        if (firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
             continue;
         }
 
@@ -432,8 +431,7 @@ bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
         }
     }
 
-    if (!m_showSubTodos
-        && idx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
+    if (!m_showSubTodos && idx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
         include = true;
     }
 

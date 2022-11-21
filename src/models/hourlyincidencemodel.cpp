@@ -68,8 +68,7 @@ QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const Q
             continue;
         }
 
-        if (!m_showSubTodos
-            && !srcIdx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
+        if (!m_showSubTodos && !srcIdx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
             continue;
         }
         // qCWarning(KALENDAR_LOG) << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
@@ -299,8 +298,8 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
 
 void HourlyIncidenceModel::resetLayoutLines()
 {
-    if(mSourceModel->calendar()->isLoading()) {
-        if(!mRefreshTimer.isActive()) {
+    if (mSourceModel->calendar()->isLoading()) {
+        if (!mRefreshTimer.isActive()) {
             mRefreshTimer.start(100);
         }
         return;
@@ -313,7 +312,7 @@ void HourlyIncidenceModel::resetLayoutLines()
     const auto numPeriods = rowCount({});
     m_laidOutLines.reserve(numPeriods);
 
-    for(int i = 0; i < numPeriods; ++i) {
+    for (int i = 0; i < numPeriods; ++i) {
         const auto periodStart = mSourceModel->start().addDays(i).startOfDay();
         const auto periodIncidenceLayout = layoutLines(periodStart);
         m_laidOutLines.append(periodIncidenceLayout);
@@ -372,7 +371,7 @@ void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 
 void HourlyIncidenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
 {
-    if(!upperLeft.isValid() || !bottomRight.isValid()) {
+    if (!upperLeft.isValid() || !bottomRight.isValid()) {
         return;
     }
 
@@ -401,7 +400,7 @@ void HourlyIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourceI
     }
 
     for (int i = sourceFirstRow; i <= sourceLastRow; ++i) {
-        if(m_linesToUpdate.count() == m_laidOutLines.count()) {
+        if (m_linesToUpdate.count() == m_laidOutLines.count()) {
             break;
         }
 
@@ -415,7 +414,7 @@ void HourlyIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourceI
         const auto firstPeriodOccurrenceAppears = startDaysFromSourceStart / mPeriodLength;
         const auto lastPeriodOccurrenceAppears = endDaysFromSourceStart / mPeriodLength;
 
-        if(firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
+        if (firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
             continue;
         }
 

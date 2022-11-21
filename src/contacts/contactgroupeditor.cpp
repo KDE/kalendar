@@ -191,7 +191,6 @@ void ContactGroupEditor::loadContactGroup(const Akonadi::Item &item)
         Q_ASSERT_X(false, "ContactGroupEditor::loadContactGroup", "You are calling loadContactGroup in CreateMode!");
     }
 
-
     auto job = new ItemFetchJob(item);
     job->fetchScope().fetchFullPayload();
     job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);

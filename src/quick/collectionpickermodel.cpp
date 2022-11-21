@@ -15,9 +15,9 @@
 #include <Akonadi/Monitor>
 #include <Akonadi/Session>
 
-#include <QAbstractItemModel>
 #include "colorproxymodel.h"
 #include "sortedcollectionproxymodel.h"
+#include <QAbstractItemModel>
 
 using namespace Akonadi::Quick;
 

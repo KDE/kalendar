@@ -73,7 +73,6 @@ QHash<int, QByteArray> PhoneModel::roleNames() const
     };
 }
 
-
 void PhoneModel::addPhoneNumber(const QString &phoneNumber, Type type)
 {
     beginInsertRows({}, m_phoneNumbers.count(), m_phoneNumbers.count());

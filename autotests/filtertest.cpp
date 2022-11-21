@@ -3,8 +3,8 @@
 
 #include "../src/filter.h"
 
-#include <QTest>
 #include <QSignalSpy>
+#include <QTest>
 
 class FilterTest : public QObject
 {
@@ -17,9 +17,7 @@ public:
 private:
     static constexpr qint64 m_testCollectionId = 1;
     const QString m_testName = QStringLiteral("name");
-    const QStringList m_testTags {QStringLiteral("tag-1"),
-                                  QStringLiteral("tag-2"),
-                                  QStringLiteral("tag-3")};
+    const QStringList m_testTags{QStringLiteral("tag-1"), QStringLiteral("tag-2"), QStringLiteral("tag-3")};
 
 private Q_SLOTS:
     void initTestCase()

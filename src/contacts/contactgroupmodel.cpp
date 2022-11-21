@@ -221,7 +221,6 @@ QVariant ContactGroupModel::data(const QModelIndex &index, int role) const
 
     const GroupMember &member = d->mMembers[index.row()];
 
-
     switch (role) {
     case Qt::DisplayRole:
         if (member.loadingError) {
@@ -268,9 +267,9 @@ QVariant ContactGroupModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> ContactGroupModel::roleNames() const
 {
     return {
-        { Qt::DisplayRole, QByteArray("display") },
-        { EmailRole,QByteArray("email") },
-        { IconNameRole, QByteArray("iconName") },
+        {Qt::DisplayRole, QByteArray("display")},
+        {EmailRole, QByteArray("email")},
+        {IconNameRole, QByteArray("iconName")},
     };
 }
 

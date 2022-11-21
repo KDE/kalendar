@@ -33,7 +33,7 @@ IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
 
 void IncidenceOccurrenceModel::setStart(const QDate &start)
 {
-    if(start == mStart) {
+    if (start == mStart) {
         return;
     }
 
@@ -85,7 +85,7 @@ bool IncidenceOccurrenceModel::loading() const
 
 void IncidenceOccurrenceModel::setLoading(const bool loading)
 {
-    if(loading == m_loading) {
+    if (loading == m_loading) {
         return;
     }
 
@@ -100,7 +100,7 @@ int IncidenceOccurrenceModel::resetThrottleInterval() const
 
 void IncidenceOccurrenceModel::setResetThrottleInterval(const int resetThrottleInterval)
 {
-    if(resetThrottleInterval == m_resetThrottleInterval) {
+    if (resetThrottleInterval == m_resetThrottleInterval) {
         return;
     }
 
@@ -145,7 +145,7 @@ void IncidenceOccurrenceModel::resetFromSource()
         occurrenceIterator.next();
         const auto incidence = occurrenceIterator.incidence();
 
-        if(!incidencePassesFilter(incidence)) {
+        if (!incidencePassesFilter(incidence)) {
             continue;
         }
 
@@ -191,7 +191,7 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
         const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0, upperLeft.parent());
         const auto incidenceItem = sourceModelIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
 
-        if(!incidenceItem.isValid() || !incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
+        if (!incidenceItem.isValid() || !incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
             continue;
         }
 
@@ -206,7 +206,7 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
             const auto end = occurrenceStartEnd.second;
             const auto occurrenceHashKey = incidenceOccurrenceHash(start, end, incidence->uid());
 
-            if(!m_occurrenceIndexHash.contains(occurrenceHashKey)) {
+            if (!m_occurrenceIndexHash.contains(occurrenceHashKey)) {
                 continue;
             }
 
@@ -245,13 +245,13 @@ void IncidenceOccurrenceModel::slotSourceRowsInserted(const QModelIndex &parent,
         const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0, parent);
         const auto incidenceItem = sourceModelIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
 
-        if(!incidenceItem.isValid() || !incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
+        if (!incidenceItem.isValid() || !incidenceItem.hasPayload<KCalendarCore::Incidence::Ptr>()) {
             continue;
         }
 
         const auto incidence = incidenceItem.payload<KCalendarCore::Incidence::Ptr>();
 
-        if(!incidencePassesFilter(incidence)) {
+        if (!incidencePassesFilter(incidence)) {
             continue;
         }
 
@@ -265,7 +265,7 @@ void IncidenceOccurrenceModel::slotSourceRowsInserted(const QModelIndex &parent,
             const auto end = occurrenceStartEnd.second;
             const auto occurrenceHashKey = incidenceOccurrenceHash(start, end, incidence->uid());
 
-            if(m_occurrenceIndexHash.contains(occurrenceHashKey)) {
+            if (m_occurrenceIndexHash.contains(occurrenceHashKey)) {
                 continue;
             }
 
@@ -356,8 +356,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
         return occurrence.start;
     case EndTime:
         return occurrence.end;
-    case Duration:
-    {
+    case Duration: {
         const KCalendarCore::Duration duration(occurrence.start, occurrence.end);
         return QVariant::fromValue(duration);
     }
@@ -473,14 +472,12 @@ std::pair<QDateTime, QDateTime> IncidenceOccurrenceModel::incidenceOccurrenceSta
 
 uint IncidenceOccurrenceModel::incidenceOccurrenceHash(const QDateTime &ocStart, const QDateTime &ocEnd, const QString &incidenceUid)
 {
-    return qHash(QString::number(ocStart.toSecsSinceEpoch()) +
-                 QString::number(ocEnd.toSecsSinceEpoch()) +
-                 incidenceUid);
+    return qHash(QString::number(ocStart.toSecsSinceEpoch()) + QString::number(ocEnd.toSecsSinceEpoch()) + incidenceUid);
 }
 
 bool IncidenceOccurrenceModel::incidencePassesFilter(const KCalendarCore::Incidence::Ptr &incidence)
 {
-    if(!mFilter || mFilter->tags().empty()) {
+    if (!mFilter || mFilter->tags().empty()) {
         return true;
     }
 

@@ -13,7 +13,8 @@ class ContactGroupModel;
 #include <Akonadi/ItemMonitor>
 #include <KContacts/ContactGroup>
 
-class ContactGroupWrapper : public QObject, public Akonadi::ItemMonitor {
+class ContactGroupWrapper : public QObject, public Akonadi::ItemMonitor
+{
     Q_OBJECT
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(Akonadi::Item item READ item WRITE setItem NOTIFY akonadiItemChanged)

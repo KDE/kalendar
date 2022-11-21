@@ -88,10 +88,10 @@ void ContactEditorBackend::setupMonitor()
 
 void ContactEditorBackend::fetchItem()
 {
-     auto job = new Akonadi::ItemFetchJob(m_item);
-     job->fetchScope().fetchFullPayload();
-     job->fetchScope().fetchAttribute<ContactMetaDataAttribute>();
-     job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+    auto job = new Akonadi::ItemFetchJob(m_item);
+    job->fetchScope().fetchFullPayload();
+    job->fetchScope().fetchAttribute<ContactMetaDataAttribute>();
+    job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
 
     connect(job, &Akonadi::ItemFetchJob::result, this, [this](KJob *job) {
         itemFetchDone(job);

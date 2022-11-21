@@ -119,7 +119,7 @@ public:
         }
 
         auto preprocessPlaintext = [&](const QString &text) {
-            // We always do rich text (so we get highlighted links and stuff). 
+            // We always do rich text (so we get highlighted links and stuff).
             // NOTE: this inserts non-breaking spaces instead of regular spaces.
             const auto html = Qt::convertFromPlainText(text);
             if (trimMail) {

@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include <QSortFilterProxyModel>
 #include <Akonadi/EntityTreeModel>
+#include <QSortFilterProxyModel>
 
 /// Contacts model with an email addreess
 class ContactsModel : public QSortFilterProxyModel

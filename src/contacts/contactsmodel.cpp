@@ -87,7 +87,7 @@ QVariant ContactsModel::data(const QModelIndex &idx, int role) const
 QHash<int, QByteArray> ContactsModel::roleNames() const
 {
     auto roles = QSortFilterProxyModel::roleNames();
-    roles[EmailRole] = "email"; 
-    roles[GidRole] = "gid"; 
+    roles[EmailRole] = "email";
+    roles[GidRole] = "gid";
     return roles;
 }

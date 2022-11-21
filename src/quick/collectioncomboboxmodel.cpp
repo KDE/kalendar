@@ -18,8 +18,8 @@
 
 #include <KDescendantsProxyModel>
 
-#include <QAbstractItemModel>
 #include "colorproxymodel.h"
+#include <QAbstractItemModel>
 
 using namespace Akonadi::Quick;
 

@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <QObject>
 #include <Akonadi/ETMCalendar>
+#include <QObject>
 
 #include <KConfigWatcher>
 #include <KFormat>

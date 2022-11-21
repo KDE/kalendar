@@ -5,6 +5,7 @@
 #include "addresseewrapper.h"
 #include "addressmodel.h"
 #include "contactcollectionmodel.h"
+#include "contactconfig.h"
 #include "contacteditorbackend.h"
 #include "contactgroupeditor.h"
 #include "contactgroupwrapper.h"
@@ -12,7 +13,6 @@
 #include "contactsmodel.h"
 #include "emailmodel.h"
 #include "globalcontactmodel.h"
-#include "contactconfig.h"
 
 #include <QQmlEngine>
 
