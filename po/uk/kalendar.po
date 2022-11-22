@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-01 00:47+0000\n"
+"POT-Creation-Date: 2022-11-22 00:46+0000\n"
 "PO-Revision-Date: 2022-10-13 11:59+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -61,7 +61,7 @@ msgstr "Властивості календаря %1"
 msgid "Home:"
 msgstr "Домашня:"
 
-#: contacts/contactgroupeditor.cpp:233
+#: contacts/contactgroupeditor.cpp:232
 #, kde-format
 msgid "No address book selected"
 msgstr "Немає вибраної адресної книги"
@@ -71,18 +71,18 @@ msgstr "Немає вибраної адресної книги"
 msgid "The member with name <b>%1</b> is missing an email address"
 msgstr "Для учасника з іменем <b>%1</b> не вказано адреси електронної пошти"
 
-#: contacts/contactgroupmodel.cpp:228
+#: contacts/contactgroupmodel.cpp:227
 #, kde-format
 msgid "Contact does not exist any more"
 msgstr "Запису контакту вже не існує"
 
-#: contacts/contactgroupmodel.cpp:347
+#: contacts/contactgroupmodel.cpp:346
 #, kde-format
 msgctxt "contact's name"
 msgid "Name"
 msgstr "Ім’я"
 
-#: contacts/contactgroupmodel.cpp:349
+#: contacts/contactgroupmodel.cpp:348
 #, kde-format
 msgctxt "contact's email address"
 msgid "EMail"
@@ -2473,7 +2473,7 @@ msgstr "Увімкнути мапи"
 msgid "Location marker"
 msgstr "Позначка місця"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2639,13 +2639,13 @@ msgstr "Освіжити усі"
 msgid "An error occurred: %1"
 msgstr "Сталася помилка: %1"
 
-#: lib/colorproxymodel.cpp:98
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (поза мережею)"
 
-#: lib/colorproxymodel.cpp:101
+#: lib/colorproxymodel.cpp:97
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

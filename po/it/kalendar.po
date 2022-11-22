@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-01 00:47+0000\n"
+"POT-Creation-Date: 2022-11-22 00:46+0000\n"
 "PO-Revision-Date: 2022-10-14 12:17+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -62,7 +62,7 @@ msgstr "Proprietà del calendario %1"
 msgid "Home:"
 msgstr "Casa:"
 
-#: contacts/contactgroupeditor.cpp:233
+#: contacts/contactgroupeditor.cpp:232
 #, kde-format
 msgid "No address book selected"
 msgstr "Nessuna rubrica selezionata"
@@ -72,18 +72,18 @@ msgstr "Nessuna rubrica selezionata"
 msgid "The member with name <b>%1</b> is missing an email address"
 msgstr "Il membro con nome <b>%1</b> non ha un indirizzo di posta elettronica"
 
-#: contacts/contactgroupmodel.cpp:228
+#: contacts/contactgroupmodel.cpp:227
 #, kde-format
 msgid "Contact does not exist any more"
 msgstr "Il contatto non esiste più"
 
-#: contacts/contactgroupmodel.cpp:347
+#: contacts/contactgroupmodel.cpp:346
 #, kde-format
 msgctxt "contact's name"
 msgid "Name"
 msgstr "Nome"
 
-#: contacts/contactgroupmodel.cpp:349
+#: contacts/contactgroupmodel.cpp:348
 #, kde-format
 msgctxt "contact's email address"
 msgid "EMail"
@@ -2441,7 +2441,7 @@ msgstr "Abilita mappe"
 msgid "Location marker"
 msgstr "Marcatore di posizione"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2607,13 +2607,13 @@ msgstr "Aggiorna tutti"
 msgid "An error occurred: %1"
 msgstr "Si è verificato un errore: %1"
 
-#: lib/colorproxymodel.cpp:98
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Non in linea)"
 
-#: lib/colorproxymodel.cpp:101
+#: lib/colorproxymodel.cpp:97
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

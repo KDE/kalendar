@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-01 00:47+0000\n"
+"POT-Creation-Date: 2022-11-22 00:46+0000\n"
 "PO-Revision-Date: 2022-08-22 21:39+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -60,7 +60,7 @@ msgstr "Kalenterin %1 ominaisuudet"
 msgid "Home:"
 msgstr "Koti:"
 
-#: contacts/contactgroupeditor.cpp:233
+#: contacts/contactgroupeditor.cpp:232
 #, kde-format
 msgid "No address book selected"
 msgstr "Osoitekirjaa ei ole valittu"
@@ -70,18 +70,18 @@ msgstr "Osoitekirjaa ei ole valittu"
 msgid "The member with name <b>%1</b> is missing an email address"
 msgstr "Jäseneltä <b>%1</b> puuttuu sähköpostiosoite"
 
-#: contacts/contactgroupmodel.cpp:228
+#: contacts/contactgroupmodel.cpp:227
 #, kde-format
 msgid "Contact does not exist any more"
 msgstr "Yhteystietoa ei enää ole olemassa"
 
-#: contacts/contactgroupmodel.cpp:347
+#: contacts/contactgroupmodel.cpp:346
 #, kde-format
 msgctxt "contact's name"
 msgid "Name"
 msgstr "Nimi"
 
-#: contacts/contactgroupmodel.cpp:349
+#: contacts/contactgroupmodel.cpp:348
 #, kde-format
 msgctxt "contact's email address"
 msgid "EMail"
@@ -2476,7 +2476,7 @@ msgstr "Ota käyttöön kartat:"
 msgid "Location marker"
 msgstr "Sijaintimerkki:"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2642,13 +2642,13 @@ msgstr "Virkistä kaikki"
 msgid "An error occurred: %1"
 msgstr "Sattui virhe: %1"
 
-#: lib/colorproxymodel.cpp:98
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (ei verkossa)"
 
-#: lib/colorproxymodel.cpp:101
+#: lib/colorproxymodel.cpp:97
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-01 00:47+0000\n"
+"POT-Creation-Date: 2022-11-22 00:46+0000\n"
 "PO-Revision-Date: 2022-09-28 17:02+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -62,7 +62,7 @@ msgstr "Egenskaper för kalender %1"
 msgid "Home:"
 msgstr "Hem:"
 
-#: contacts/contactgroupeditor.cpp:233
+#: contacts/contactgroupeditor.cpp:232
 #, kde-format
 msgid "No address book selected"
 msgstr "Ingen adressbok vald"
@@ -72,18 +72,18 @@ msgstr "Ingen adressbok vald"
 msgid "The member with name <b>%1</b> is missing an email address"
 msgstr "Medlemmen vid namn <b>%1</b> saknar e-postadress"
 
-#: contacts/contactgroupmodel.cpp:228
+#: contacts/contactgroupmodel.cpp:227
 #, kde-format
 msgid "Contact does not exist any more"
 msgstr "Kontakten finns inte längre"
 
-#: contacts/contactgroupmodel.cpp:347
+#: contacts/contactgroupmodel.cpp:346
 #, kde-format
 msgctxt "contact's name"
 msgid "Name"
 msgstr "Namn"
 
-#: contacts/contactgroupmodel.cpp:349
+#: contacts/contactgroupmodel.cpp:348
 #, kde-format
 msgctxt "contact's email address"
 msgid "EMail"
@@ -2443,7 +2443,7 @@ msgstr "Aktivera kartor"
 msgid "Location marker"
 msgstr "Platsmarkör"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2609,13 +2609,13 @@ msgstr "Uppdatera alla"
 msgid "An error occurred: %1"
 msgstr "Ett fel uppstod: %1"
 
-#: lib/colorproxymodel.cpp:98
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (nerkopplad)"
 
-#: lib/colorproxymodel.cpp:101
+#: lib/colorproxymodel.cpp:97
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

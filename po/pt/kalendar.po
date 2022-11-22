@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-01 00:47+0000\n"
+"POT-Creation-Date: 2022-11-22 00:46+0000\n"
 "PO-Revision-Date: 2022-10-13 12:04+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -60,7 +60,7 @@ msgstr "Propriedades do Calendário %1"
 msgid "Home:"
 msgstr "Residência:"
 
-#: contacts/contactgroupeditor.cpp:233
+#: contacts/contactgroupeditor.cpp:232
 #, kde-format
 msgid "No address book selected"
 msgstr "Nenhum livro de endereços seleccionado"
@@ -70,18 +70,18 @@ msgstr "Nenhum livro de endereços seleccionado"
 msgid "The member with name <b>%1</b> is missing an email address"
 msgstr "O membro com o nome <b>%1</b> não tem um endereço de e-mail"
 
-#: contacts/contactgroupmodel.cpp:228
+#: contacts/contactgroupmodel.cpp:227
 #, kde-format
 msgid "Contact does not exist any more"
 msgstr "O contacto já não existe mais"
 
-#: contacts/contactgroupmodel.cpp:347
+#: contacts/contactgroupmodel.cpp:346
 #, kde-format
 msgctxt "contact's name"
 msgid "Name"
 msgstr "Nome"
 
-#: contacts/contactgroupmodel.cpp:349
+#: contacts/contactgroupmodel.cpp:348
 #, kde-format
 msgctxt "contact's email address"
 msgid "EMail"
@@ -2436,7 +2436,7 @@ msgstr "Activar os mapas"
 msgid "Location marker"
 msgstr "Marcador de localização"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2602,13 +2602,13 @@ msgstr "Actualizar Tudo"
 msgid "An error occurred: %1"
 msgstr "Ocorreu um erro: %1"
 
-#: lib/colorproxymodel.cpp:98
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Desligado)"
 
-#: lib/colorproxymodel.cpp:101
+#: lib/colorproxymodel.cpp:97
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"
