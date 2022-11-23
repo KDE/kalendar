@@ -452,7 +452,6 @@ QQC2.ScrollView {
 
             textFormat: Text.MarkdownText
             text: root.incidenceWrapper.description.replace(LabelUtils.urlRegexp, (match) => `[${match}](${match})`)
-            onLinkActivated: Qt.openUrlExternally(link)
             visible: root.incidenceWrapper.description
         }
 
