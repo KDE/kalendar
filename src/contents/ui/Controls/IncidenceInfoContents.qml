@@ -106,10 +106,24 @@ QQC2.ScrollView {
             Kirigami.Icon {
                 source: "appointment-recurring"
                 visible: root.incidenceWrapper.recurrenceData.type
+                HoverHandler {
+                    id: recurringHover
+                }
+                QQC2.ToolTip {
+                    visible: recurringHover.hovered
+                    text: i18n("This event is recurring")
+                }
             }
             Kirigami.Icon {
                 source: "appointment-reminder"
                 visible: root.incidenceWrapper.remindersModel.rowCount() > 0
+                HoverHandler {
+                    id: reminderHover
+                }
+                QQC2.ToolTip {
+                    visible: reminderHover.hovered
+                    text: i18np("This event has reminder", "This event has reminders", root.incidenceWrapper.remindersModel.rowCount())
+                }
             }
         }
         Rectangle {
