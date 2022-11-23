@@ -381,6 +381,11 @@ QQC2.ScrollView {
                                                 Layout.fillHeight: true
                                                 source: modelData.incidenceTypeIcon
                                                 isMask: true
+                                                Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+                                                Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+                                                Layout.maximumWidth: Kirigami.Units.iconSizes.medium
+                                                Layout.maximumHeight: Kirigami.Units.iconSizes.medium
+
                                                 color: incidenceCard.isOpenOccurrence ?
                                                     (LabelUtils.isDarkColor(modelData.color) ? "white" : "black") :
                                                     cardContents.textColor
