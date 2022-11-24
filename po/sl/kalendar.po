@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:46+0000\n"
+"POT-Creation-Date: 2022-11-24 00:46+0000\n"
 "PO-Revision-Date: 2022-10-14 09:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -744,78 +744,92 @@ msgstr "Nov dogodek…"
 msgid "New Task…"
 msgstr "Nova naloga…"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:133
+#: contents/ui/Controls/IncidenceInfoContents.qml:114
+#, kde-format
+msgid "This event is recurring"
+msgstr ""
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:125
+#, kde-format
+msgid "This event has reminder"
+msgid_plural "This event has reminders"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
 msgctxt "%1 is a percentage number"
 msgid "<b>%1%</b> Complete"
 msgstr "<b>%1%</b> dokončano"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:163
+#: contents/ui/Controls/IncidenceInfoContents.qml:177
 #, kde-format
 msgid "<b>Calendar:</b>"
 msgstr "<b>Koledar:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:175
+#: contents/ui/Controls/IncidenceInfoContents.qml:189
 #, kde-format
 msgid "<b>Tags:</b>"
 msgstr "<b>Oznake:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:188
+#: contents/ui/Controls/IncidenceInfoContents.qml:202
 #, kde-format
 msgid "Remove %1 tag"
 msgstr "Odstrani oznako %1"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:200
+#: contents/ui/Controls/IncidenceInfoContents.qml:214
 #, kde-format
 msgid "<b>Date:</b>"
 msgstr "<b>Datum:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:227
+#: contents/ui/Controls/IncidenceInfoContents.qml:241
 #, kde-format
 msgid "<b>Time:</b>"
 msgstr "<b>Čas:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:254
+#: contents/ui/Controls/IncidenceInfoContents.qml:268
 #, kde-format
 msgid "<b>Duration:</b>"
 msgstr "<b>Trajanje:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:268
+#: contents/ui/Controls/IncidenceInfoContents.qml:282
 #, kde-format
 msgid "<b>Priority level:</b>"
 msgstr "<b>Raven prednosti:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:280
+#: contents/ui/Controls/IncidenceInfoContents.qml:294
 #, kde-format
 msgid "<b>Completed:</b>"
 msgstr "<b>Dokončano:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:300
+#: contents/ui/Controls/IncidenceInfoContents.qml:314
 #, kde-format
 msgid "<b>Recurrence:</b>"
 msgstr "<b>Opis:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:323
+#: contents/ui/Controls/IncidenceInfoContents.qml:337
 #, kde-format
 msgid "Except on:"
 msgstr "Razen na:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:353
+#: contents/ui/Controls/IncidenceInfoContents.qml:367
 #, kde-format
 msgid "<b>Location:</b>"
 msgstr "<b>Kraj:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:410
+#: contents/ui/Controls/IncidenceInfoContents.qml:424
 #, kde-format
 msgid "Unable to find location."
 msgstr "Ni mogoče najti lokacije."
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:445
+#: contents/ui/Controls/IncidenceInfoContents.qml:459
 #, kde-format
 msgid "<b>Description:</b>"
 msgstr "<b>Opis:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:461
+#: contents/ui/Controls/IncidenceInfoContents.qml:474
 #, kde-format
 msgid "<b>Attachment:</b>"
 msgid_plural "<b>Attachments:</b>"
@@ -824,32 +838,32 @@ msgstr[1] "<b>Prilogi:</b>"
 msgstr[2] "<b>Priloge:</b>"
 msgstr[3] "<b>Priloge:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:486
+#: contents/ui/Controls/IncidenceInfoContents.qml:499
 #, kde-format
 msgid "<b>Reminders:</b>"
 msgstr "<b>Opomniki:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:511
+#: contents/ui/Controls/IncidenceInfoContents.qml:524
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>Organizator:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:528
+#: contents/ui/Controls/IncidenceInfoContents.qml:541
 #, kde-format
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Google Meet:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:540
+#: contents/ui/Controls/IncidenceInfoContents.qml:553
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>Gostje:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:574
+#: contents/ui/Controls/IncidenceInfoContents.qml:587
 #, kde-format
 msgid "Super-task"
 msgstr "Nadrejena naloga"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:599
+#: contents/ui/Controls/IncidenceInfoContents.qml:612
 #, kde-format
 msgid "Sub-task"
 msgid_plural "Sub-tasks"
@@ -1885,34 +1899,34 @@ msgstr "Klikni"
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Ni zabeleženega za danes. %1 da bi kaj dodali."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:408
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Dan %2 od %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:459
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Runs all day"
 msgstr "Se odvija cel dan"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:466
+#: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgid "Starts at %1"
 msgstr "Se začne ob %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:473
 #, kde-format
 msgid "Ends at %1"
 msgstr "Se konča ob %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:470
+#: contents/ui/MainViews/BasicMonthListView.qml:475
 #, kde-format
 msgid "Runs All Day"
 msgstr "Se odvija cel dan"

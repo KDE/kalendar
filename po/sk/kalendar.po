@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:46+0000\n"
+"POT-Creation-Date: 2022-11-24 00:46+0000\n"
 "PO-Revision-Date: 2021-06-21 20:07+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -769,91 +769,104 @@ msgstr "Upraviť udalosť"
 msgid "New Task…"
 msgstr "Upraviť udalosť"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:133
+#: contents/ui/Controls/IncidenceInfoContents.qml:114
+#, kde-format
+msgid "This event is recurring"
+msgstr ""
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:125
+#, kde-format
+msgid "This event has reminder"
+msgid_plural "This event has reminders"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, fuzzy, kde-format
 #| msgid "Calendar:"
 msgctxt "%1 is a percentage number"
 msgid "<b>%1%</b> Complete"
 msgstr "Kalendár:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:163
+#: contents/ui/Controls/IncidenceInfoContents.qml:177
 #, fuzzy, kde-format
 #| msgid "Calendar:"
 msgid "<b>Calendar:</b>"
 msgstr "Kalendár:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:175
+#: contents/ui/Controls/IncidenceInfoContents.qml:189
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Tags:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:188
+#: contents/ui/Controls/IncidenceInfoContents.qml:202
 #, fuzzy, kde-format
 #| msgid "Remove"
 msgid "Remove %1 tag"
 msgstr "Odstrániť"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:200
+#: contents/ui/Controls/IncidenceInfoContents.qml:214
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Date:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:227
+#: contents/ui/Controls/IncidenceInfoContents.qml:241
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Time:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:254
+#: contents/ui/Controls/IncidenceInfoContents.qml:268
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Duration:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:268
+#: contents/ui/Controls/IncidenceInfoContents.qml:282
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Priority level:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:280
+#: contents/ui/Controls/IncidenceInfoContents.qml:294
 #, fuzzy, kde-format
 #| msgid "Calendar:"
 msgid "<b>Completed:</b>"
 msgstr "Kalendár:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:300
+#: contents/ui/Controls/IncidenceInfoContents.qml:314
 #, fuzzy, kde-format
 #| msgid "Description:"
 msgid "<b>Recurrence:</b>"
 msgstr "Popis:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:323
+#: contents/ui/Controls/IncidenceInfoContents.qml:337
 #, fuzzy, kde-format
 #| msgid "Description:"
 msgid "Except on:"
 msgstr "Popis:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:353
+#: contents/ui/Controls/IncidenceInfoContents.qml:367
 #, fuzzy, kde-format
 #| msgid "Description:"
 msgid "<b>Location:</b>"
 msgstr "Popis:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:410
+#: contents/ui/Controls/IncidenceInfoContents.qml:424
 #, kde-format
 msgid "Unable to find location."
 msgstr ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:445
+#: contents/ui/Controls/IncidenceInfoContents.qml:459
 #, fuzzy, kde-format
 #| msgid "Description:"
 msgid "<b>Description:</b>"
 msgstr "Popis:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:461
+#: contents/ui/Controls/IncidenceInfoContents.qml:474
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Attachment:</b>"
@@ -862,36 +875,36 @@ msgstr[0] "<b>Názov</b>:"
 msgstr[1] "<b>Názov</b>:"
 msgstr[2] "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:486
+#: contents/ui/Controls/IncidenceInfoContents.qml:499
 #, fuzzy, kde-format
 #| msgid "Calendar:"
 msgid "<b>Reminders:</b>"
 msgstr "Kalendár:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:511
+#: contents/ui/Controls/IncidenceInfoContents.qml:524
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Organizer:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:528
+#: contents/ui/Controls/IncidenceInfoContents.qml:541
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:540
+#: contents/ui/Controls/IncidenceInfoContents.qml:553
 #, fuzzy, kde-format
 #| msgid "<b>Title</b>:"
 msgid "<b>Guests:</b>"
 msgstr "<b>Názov</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:574
+#: contents/ui/Controls/IncidenceInfoContents.qml:587
 #, kde-format
 msgid "Super-task"
 msgstr ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:599
+#: contents/ui/Controls/IncidenceInfoContents.qml:612
 #, fuzzy, kde-format
 #| msgid "Add attendee"
 msgid "Sub-task"
@@ -1944,34 +1957,34 @@ msgstr ""
 msgid "Nothing on the books today. %1 to add something."
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:408
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:459
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Runs all day"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:466
+#: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgid "Starts at %1"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:473
 #, kde-format
 msgid "Ends at %1"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:470
+#: contents/ui/MainViews/BasicMonthListView.qml:475
 #, fuzzy, kde-format
 #| msgid "All day event:"
 msgid "Runs All Day"

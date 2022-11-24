@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:46+0000\n"
+"POT-Creation-Date: 2022-11-24 00:46+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -770,111 +770,123 @@ msgstr "Νέο γεγονός…"
 msgid "New Task…"
 msgstr "Νέα εργασία…"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:133
+#: contents/ui/Controls/IncidenceInfoContents.qml:114
+#, kde-format
+msgid "This event is recurring"
+msgstr ""
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:125
+#, kde-format
+msgid "This event has reminder"
+msgid_plural "This event has reminders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
 msgctxt "%1 is a percentage number"
 msgid "<b>%1%</b> Complete"
 msgstr "<b>%1%</b> Συμπληρωμένο"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:163
+#: contents/ui/Controls/IncidenceInfoContents.qml:177
 #, kde-format
 msgid "<b>Calendar:</b>"
 msgstr "<b>Ημερολόγιο:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:175
+#: contents/ui/Controls/IncidenceInfoContents.qml:189
 #, kde-format
 msgid "<b>Tags:</b>"
 msgstr "<b>Ετικέτες:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:188
+#: contents/ui/Controls/IncidenceInfoContents.qml:202
 #, kde-format
 msgid "Remove %1 tag"
 msgstr "Αφαίρεση %1 ετικέτας"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:200
+#: contents/ui/Controls/IncidenceInfoContents.qml:214
 #, kde-format
 msgid "<b>Date:</b>"
 msgstr "<b>Ημερομηνία:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:227
+#: contents/ui/Controls/IncidenceInfoContents.qml:241
 #, kde-format
 msgid "<b>Time:</b>"
 msgstr "<b>Ώρα:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:254
+#: contents/ui/Controls/IncidenceInfoContents.qml:268
 #, kde-format
 msgid "<b>Duration:</b>"
 msgstr "<b>Διάρκεια:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:268
+#: contents/ui/Controls/IncidenceInfoContents.qml:282
 #, kde-format
 msgid "<b>Priority level:</b>"
 msgstr "<b>Επίπεδο προτεραιότητας:</b>:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:280
+#: contents/ui/Controls/IncidenceInfoContents.qml:294
 #, kde-format
 msgid "<b>Completed:</b>"
 msgstr "<b>Πλήρες:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:300
+#: contents/ui/Controls/IncidenceInfoContents.qml:314
 #, kde-format
 msgid "<b>Recurrence:</b>"
 msgstr "<b>Επανεμφάνιση:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:323
+#: contents/ui/Controls/IncidenceInfoContents.qml:337
 #, kde-format
 msgid "Except on:"
 msgstr "Εκτός την:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:353
+#: contents/ui/Controls/IncidenceInfoContents.qml:367
 #, kde-format
 msgid "<b>Location:</b>"
 msgstr "<b>Τοποθεσία:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:410
+#: contents/ui/Controls/IncidenceInfoContents.qml:424
 #, kde-format
 msgid "Unable to find location."
 msgstr "Αδυναμία εύρεσης τοποθεσίας."
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:445
+#: contents/ui/Controls/IncidenceInfoContents.qml:459
 #, kde-format
 msgid "<b>Description:</b>"
 msgstr "<b>Περιγραφή:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:461
+#: contents/ui/Controls/IncidenceInfoContents.qml:474
 #, kde-format
 msgid "<b>Attachment:</b>"
 msgid_plural "<b>Attachments:</b>"
 msgstr[0] "<b>Συνημμένο:</b>"
 msgstr[1] "<b>Συνημμένα:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:486
+#: contents/ui/Controls/IncidenceInfoContents.qml:499
 #, kde-format
 msgid "<b>Reminders:</b>"
 msgstr "<b>Υπενθυμίσεις:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:511
+#: contents/ui/Controls/IncidenceInfoContents.qml:524
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>Βοηθός διαχείρισης χρόνου:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:528
+#: contents/ui/Controls/IncidenceInfoContents.qml:541
 #, fuzzy, kde-format
 #| msgid "<b>Guests:</b>"
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Φιλοξενούμενοι:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:540
+#: contents/ui/Controls/IncidenceInfoContents.qml:553
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>Φιλοξενούμενοι:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:574
+#: contents/ui/Controls/IncidenceInfoContents.qml:587
 #, kde-format
 msgid "Super-task"
 msgstr ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:599
+#: contents/ui/Controls/IncidenceInfoContents.qml:612
 #, fuzzy, kde-format
 #| msgid "Add Sub-Task"
 msgid "Sub-task"
@@ -1927,35 +1939,35 @@ msgstr "Κλικ"
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Τίποτε στα βιβλία σήμερα. Με %1 θα προσθέσετε κάτι."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:408
 #, fuzzy, kde-format
 #| msgid "%1 (Day %2 of %3)"
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Ημέρα %2 από %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:459
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Runs all day"
 msgstr "Εκτελείται όλη την ημέρα"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:466
+#: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgid "Starts at %1"
 msgstr "Αρχίζει την %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:473
 #, kde-format
 msgid "Ends at %1"
 msgstr "Τελειώνει την %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:470
+#: contents/ui/MainViews/BasicMonthListView.qml:475
 #, kde-format
 msgid "Runs All Day"
 msgstr "Εκτελείται όλη την ημέρα"
