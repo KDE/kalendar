@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-01 00:47+0000\n"
+"POT-Creation-Date: 2022-11-24 02:26+0000\n"
 "PO-Revision-Date: 2022-10-13 13:29+0200\n"
 "Last-Translator: Frank Steinmetzger <dev-kde@felsenfleischer.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -814,40 +814,40 @@ msgstr "Ort kann nicht gefunden werden."
 msgid "<b>Description:</b>"
 msgstr "<b>Beschreibung:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:461
+#: contents/ui/Controls/IncidenceInfoContents.qml:460
 #, kde-format
 msgid "<b>Attachment:</b>"
 msgid_plural "<b>Attachments:</b>"
 msgstr[0] "<b>Anhang:</b>"
 msgstr[1] "<b>Anhänge:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:486
+#: contents/ui/Controls/IncidenceInfoContents.qml:485
 #, kde-format
 msgid "<b>Reminders:</b>"
 msgstr "<b>Erinnerungen:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:511
+#: contents/ui/Controls/IncidenceInfoContents.qml:510
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>Veranstalter:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:528
+#: contents/ui/Controls/IncidenceInfoContents.qml:527
 #, fuzzy, kde-format
 #| msgid "<b>Guests:</b>"
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Gäste:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:540
+#: contents/ui/Controls/IncidenceInfoContents.qml:539
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>Gäste:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:574
+#: contents/ui/Controls/IncidenceInfoContents.qml:573
 #, kde-format
 msgid "Super-task"
 msgstr "Übergeordnete Aufgabe"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:599
+#: contents/ui/Controls/IncidenceInfoContents.qml:598
 #, kde-format
 msgid "Sub-task"
 msgid_plural "Sub-tasks"
@@ -1862,34 +1862,34 @@ msgstr "Klicken"
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Für heute steht nichts im Kalender, %1 um was hinzuzufügen."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:403
+#: contents/ui/MainViews/BasicMonthListView.qml:408
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Tag %2 von %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:459
+#: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Runs all day"
 msgstr "Ganztägig"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:463
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:466
+#: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgid "Starts at %1"
 msgstr "Beginnt um %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:473
 #, kde-format
 msgid "Ends at %1"
 msgstr "Endet um %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:470
+#: contents/ui/MainViews/BasicMonthListView.qml:475
 #, kde-format
 msgid "Runs All Day"
 msgstr "Ganztägig"
