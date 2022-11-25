@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 00:46+0000\n"
-"PO-Revision-Date: 2022-10-13 12:33+0200\n"
+"PO-Revision-Date: 2022-11-24 09:21+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -744,14 +744,14 @@ msgstr "Tasca nova…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "Aquest esdeveniment és repetitiu"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aquest esdeveniment té un recordatori"
+msgstr[1] "Aquest esdeveniment té recordatoris"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
@@ -2892,9 +2892,3 @@ msgstr "Modifica"
 #, kde-format
 msgid "Add Account"
 msgstr "Afegeix un compte"
-
-#~ msgid "Expand MainDrawer"
-#~ msgstr "Expandeix el calaix principal"
-
-#~ msgid "Collapse MainDrawer"
-#~ msgstr "Redueix el calaix principal"

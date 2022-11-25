@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 00:46+0000\n"
-"PO-Revision-Date: 2022-10-22 19:20+0400\n"
+"PO-Revision-Date: 2022-11-24 09:54+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -753,18 +753,18 @@ msgstr "مهمة جديدة…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "هذا الحدث متكرر"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "هذا الحدث لديه تذكير"
+msgstr[1] "هذا الحدث لديه تذكير"
+msgstr[2] "هذا الحدث لديه تذكيران"
+msgstr[3] "هذا الحدث لديه تذكيرات"
+msgstr[4] "هذا الحدث لديه تذكيرات"
+msgstr[5] "هذا الحدث لديه تذكيرات"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
