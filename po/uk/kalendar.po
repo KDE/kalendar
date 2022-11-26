@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 00:46+0000\n"
-"PO-Revision-Date: 2022-10-13 11:59+0300\n"
+"PO-Revision-Date: 2022-11-25 09:16+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -747,16 +747,16 @@ msgstr "Створити завдання…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "Ця подія повторюється"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Для цієї події встановлено нагадування"
+msgstr[1] "Для цієї події встановлено нагадування"
+msgstr[2] "Для цієї події встановлено нагадування"
+msgstr[3] "Для цієї події встановлено нагадування"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
