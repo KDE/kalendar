@@ -703,47 +703,61 @@ Kirigami.ScrollablePage {
                     Kirigami.FormData.label: i18n("Location:")
                     Layout.fillWidth: true
 
-                    QQC2.TextField {
+                    QQC2.ComboBox {
                         id: locationField
 
-                        property bool typed: false
+                        function openOrCloseLocationsPopup() {
+                            if (locationsModel.count > 0 && locationTextField.text !== ""){
+                                popup.open();
+                            } else {
+                                popup.close();
+                            }
+                        }
 
                         Layout.fillWidth: true
-                        placeholderText: i18n("Optional")
-                        text: root.incidenceWrapper.location
-                        onTextChanged: root.incidenceWrapper.location = text
-                        Keys.onPressed: locationsMenu.open()
+                        editable: true
+
+                        contentItem: QQC2.TextField {
+                            id: locationTextField
+
+                            topPadding: 0
+                            bottomPadding: 0
+                            leftPadding: 0
+                            rightPadding: locationField.indicator.width + locationField.spacing
+
+                            placeholderText: i18n("Optional")
+                            text: root.incidenceWrapper.location
+                            onTextChanged: {
+                                root.incidenceWrapper.location = text;
+                                queryUpdateTimer.restart();
+                            }
+
+                            Keys.onPressed: locationField.openOrCloseLocationsPopup()
+
+                            Timer {
+                                id: queryUpdateTimer
+                                interval: 300
+                                onTriggered: locationsModel.query = root.incidenceWrapper.location;
+                            }
+                        }
+
+                        model: GeocodeModel {
+                            id: locationsModel
+                            plugin: Plugin { name: "osm" }
+                            autoUpdate: true
+                            onLocationsChanged: locationField.openOrCloseLocationsPopup()
+                        }
+                        delegate: Kirigami.BasicListItem {
+                            text: locationData.address.text
+                            onClicked: root.incidenceWrapper.location = locationData.address.text
+                        }
 
                         QQC2.BusyIndicator {
                             height: parent.height
                             anchors.right: parent.right
+                            anchors.rightMargin: parent.indicator.width
                             running: locationsModel.status === GeocodeModel.Loading
                             visible: locationsModel.status === GeocodeModel.Loading
-                        }
-
-                        QQC2.Menu {
-                            id: locationsMenu
-                            width: parent.width
-                            y: parent.height // Y is relative to parent
-                            focus: false
-
-                            Repeater {
-                                model: GeocodeModel {
-                                    id: locationsModel
-                                    plugin: locationPlugin
-                                    query: root.incidenceWrapper.location
-                                    autoUpdate: true
-                                }
-                                delegate: QQC2.MenuItem {
-                                    text: locationData.address.text
-                                    onClicked: root.incidenceWrapper.location = locationData.address.text
-                                }
-                            }
-
-                            Plugin {
-                                id: locationPlugin
-                                name: "osm"
-                            }
                         }
                     }
                     QQC2.CheckBox {
