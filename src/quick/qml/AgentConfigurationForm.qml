@@ -58,45 +58,19 @@ MobileForm.FormCard {
                     }
                 }
 
+                leadingPadding: Kirigami.Units.largeSpacing
+                leading: Kirigami.Icon {
+                    source: model.decoration
+                    implicitWidth: Kirigami.Units.iconSizes.medium
+                    implicitHeight: Kirigami.Units.iconSizes.medium
+                }
+                
+                text: model.display
+                description: model.statusMessage
+
                 onClicked: {
                     dialogLoader.active = true;
                     dialogLoader.item.open();
-                }
-
-                contentItem: RowLayout {
-                    Kirigami.Icon {
-                        source: model.decoration
-                        Layout.rightMargin: Kirigami.Units.largeSpacing
-                        implicitWidth: Kirigami.Units.iconSizes.medium
-                        implicitHeight: Kirigami.Units.iconSizes.medium
-                    }
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        spacing: Kirigami.Units.smallSpacing
-
-                        QQC2.Label {
-                            Layout.fillWidth: true
-                            text: model.display
-                            elide: Text.ElideRight
-                            wrapMode: Text.Wrap
-                            maximumLineCount: 2
-                            color: Kirigami.Theme.textColor
-                        }
-
-                        QQC2.Label {
-                            Layout.fillWidth: true
-                            text: model.statusMessage
-                            color: Kirigami.Theme.disabledTextColor
-                            font: Kirigami.Theme.smallFont
-                            elide: Text.ElideRight
-                        }
-                    }
-
-                    MobileForm.FormArrow {
-                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                        direction: MobileForm.FormArrow.Right
-                    }
                 }
             }
         }
