@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-24 00:46+0000\n"
+"POT-Creation-Date: 2022-11-27 00:47+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -228,7 +228,7 @@ msgstr "캘린더"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:948
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:962
 #, kde-format
 msgid "Name:"
 msgstr "이름:"
@@ -1422,110 +1422,110 @@ msgstr "반복되는 예외 추가"
 msgid "Location:"
 msgstr "위치:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:712
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:788
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:955
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:728
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:802
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:969
 #, kde-format
 msgid "Optional"
 msgstr "선택 사항"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:751
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:765
 #, kde-format
 msgid "Show map"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:782
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:796
 #, kde-format
 msgid "Description:"
 msgstr "설명:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:803
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:817
 #, kde-format
 msgid "Tags:"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:812
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:826
 #: models/todosortfilterproxymodel.cpp:147
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
 #, kde-format
 msgid "Tap to set tags…"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
 #, kde-format
 msgid "Click to set tags…"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:830
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:844
 #, kde-format
 msgid "Manage tags…"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:841
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:855
 #, kde-format
 msgid "Reminders:"
 msgstr "미리 알림:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:899
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:913
 #, fuzzy, kde-format
 #| msgid "Add reminder"
 msgid "Add Reminder"
 msgstr "미리 알림 추가"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:913
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:927
 #, kde-format
 msgid "Attendees:"
 msgstr "참석자:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:973
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:987
 #, kde-format
 msgid "Email:"
 msgstr "이메일:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:980
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:994
 #, kde-format
 msgid "Required"
 msgstr "필요함"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:989
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1003
 #, kde-format
 msgid "Status:"
 msgstr "상태:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1027
 #, kde-format
 msgid "Request RSVP"
 msgstr "RSVP 요청"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1027
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1041
 #, fuzzy, kde-format
 #| msgid "Add attendee"
 msgid "Add Attendee"
 msgstr "참석자 추가"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1038
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1052
 #, fuzzy, kde-format
 #| msgid "Choose from contacts"
 msgid "Choose from Contacts"
 msgstr "연락처에서 선택"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1056
 #, fuzzy, kde-format
 #| msgid "Fill in manually"
 msgid "Fill in Manually"
 msgstr "직접 입력"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1056
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1070
 #, kde-format
 msgid "Attachments:"
 msgstr "첨부:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1079
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1093
 #, fuzzy, kde-format
 #| msgid "Add attachment"
 msgid "Add Attachment"
