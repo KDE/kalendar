@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 02:26+0000\n"
-"PO-Revision-Date: 2022-09-28 17:02+0200\n"
+"PO-Revision-Date: 2022-11-27 21:21+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -2287,31 +2287,29 @@ msgid "Past event transparency:"
 msgstr "Genomskinlighet för tidigare händelser:"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:73
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
 msgstr "Inställningar av månadsvy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:85
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "Månadsvy"
+msgstr "Månadsvisningsläge"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "Svepbart månadsrutnät"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:99
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "Enkelt månadsrutnät"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:105
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
-msgstr ""
+msgstr "Svepbart månadsrutnät kräver högre systemprestanda."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:119
 #, kde-format
@@ -2364,31 +2362,29 @@ msgid "Grid border width (pixels):"
 msgstr "Kantbredd för rutnät (bildpunkter):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:225
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "Inställningar av uppgiftsvy"
+msgstr "Inställningar av veckovy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:237
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "Veckovy"
+msgstr "Veckovisningsläge"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "Svepbart veckovy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:251
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "Enkel veckovy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:257
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
-msgstr ""
+msgstr "Svepbar veckovy kräver högre systemprestanda."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:270
 #, kde-format
@@ -2396,27 +2392,24 @@ msgid "Schedule View settings"
 msgstr "Inställningar av schemaläggningsvy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:282
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "Schemaläggningsvy"
+msgstr "Schemaläggningsvisningsläge"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:289
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "Schemaläggningsvy"
+msgstr "Svepbar schemaläggningsvy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:296
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "Schemaläggningsvy"
+msgstr "Enkel schemaläggningsvy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:302
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
-msgstr ""
+msgstr "Svepbar schemaläggningsvy kräver högre systemprestanda."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:308
 #, kde-format
