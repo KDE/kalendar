@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-27 00:47+0000\n"
+"POT-Creation-Date: 2022-11-28 00:49+0000\n"
 "PO-Revision-Date: 2022-11-25 09:16+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -2921,7 +2921,7 @@ msgstr "Змінити або вилучити агент цього облік�
 msgid "Modify"
 msgstr "Змінити"
 
-#: quick/qml/AgentConfigurationForm.qml:108
+#: quick/qml/AgentConfigurationForm.qml:82
 #, kde-format
 msgid "Add Account"
 msgstr "Додати обліковий запис"

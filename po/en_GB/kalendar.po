@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-27 00:47+0000\n"
+"POT-Creation-Date: 2022-11-28 00:49+0000\n"
 "PO-Revision-Date: 2022-09-18 12:07+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -2912,7 +2912,7 @@ msgstr ""
 msgid "Modify"
 msgstr ""
 
-#: quick/qml/AgentConfigurationForm.qml:108
+#: quick/qml/AgentConfigurationForm.qml:82
 #, fuzzy, kde-format
 #| msgid "Accounts"
 msgid "Add Account"

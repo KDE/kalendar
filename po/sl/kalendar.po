@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-27 00:47+0000\n"
+"POT-Creation-Date: 2022-11-28 00:49+0000\n"
 "PO-Revision-Date: 2022-11-25 11:20+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2918,7 +2918,7 @@ msgstr "Spremeni ali zbriši agenta tega računa."
 msgid "Modify"
 msgstr "Spremeni"
 
-#: quick/qml/AgentConfigurationForm.qml:108
+#: quick/qml/AgentConfigurationForm.qml:82
 #, kde-format
 msgid "Add Account"
 msgstr "Dodaj račun"
