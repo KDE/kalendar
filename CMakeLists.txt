@@ -78,6 +78,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     WindowSystem
     XmlGui
 )
+find_package(KF5KirigamiAddons 0.6 REQUIRED)
 find_package(Gpgme REQUIRED)
 set_package_properties(KF5QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME

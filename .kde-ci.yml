@@ -21,6 +21,7 @@ Dependencies:
     'pim/mailcommon' : '@same'
     'pim/pimcommon' : '@same'
     'frameworks/kirigami' : '@latest'
+    'libraries/kirigami-addons': '@latest'
 
 Options:
   require-passing-tests-on: ['Linux']
