@@ -354,7 +354,7 @@ Column {
                                                     anchors.fill: parent
 
                                                     addDate: parent.date
-                                                    onAddNewIncidence: viewColumn.addIncidence(type, addDate, false)
+                                                    onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate)
                                                     onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
 
                                                     DropArea {
