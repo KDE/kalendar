@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:49+0000\n"
-"PO-Revision-Date: 2022-10-14 12:17+0200\n"
+"PO-Revision-Date: 2022-11-24 14:18+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -742,14 +742,14 @@ msgstr "Nuova attività…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "L'evento è ricorrente"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Questo evento ha promemoria"
+msgstr[1] "Questo evento ha promemoria"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
