@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:49+0000\n"
-"PO-Revision-Date: 2022-11-19 14:49\n"
+"PO-Revision-Date: 2022-12-01 06:53\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -845,13 +845,13 @@ msgstr "<b>客人：</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:587
 #, kde-format
 msgid "Super-task"
-msgstr ""
+msgstr "父任务"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:612
 #, kde-format
 msgid "Sub-task"
 msgid_plural "Sub-tasks"
-msgstr[0] ""
+msgstr[0] "子任务"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:61
 #, kde-format
@@ -944,27 +944,27 @@ msgstr "9 (最低优先级)"
 #: contents/ui/Controls/IncidenceMouseArea.qml:163
 #, kde-format
 msgid "Set due date..."
-msgstr ""
+msgstr "设置截止日期..."
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
 #, kde-format
 msgid "Today (%1)"
-msgstr ""
+msgstr "今天 (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:202
 #, kde-format
 msgid "Tomorrow (%1)"
-msgstr ""
+msgstr "明天 (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
 msgid "In a week (%1)"
-msgstr ""
+msgstr "一周内 (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:223
 #, kde-format
 msgid "In a month (%1)"
-msgstr ""
+msgstr "一月内 (%1)"
 
 #: contents/ui/Controls/MainDrawerToggleButton.qml:25
 #, kde-format
@@ -1717,27 +1717,27 @@ msgstr "创建"
 #: contents/ui/main.qml:438
 #, kde-format
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #: contents/ui/main.qml:441
 #, kde-format
 msgid "Week"
-msgstr ""
+msgstr "周"
 
 #: contents/ui/main.qml:444
 #, kde-format
 msgid "3 Days"
-msgstr ""
+msgstr "三日"
 
 #: contents/ui/main.qml:447
 #, kde-format
 msgid "Day"
-msgstr ""
+msgstr "一日"
 
 #: contents/ui/main.qml:450
 #, kde-format
 msgid "Schedule"
-msgstr ""
+msgstr "日程"
 
 #: contents/ui/main.qml:453 contents/ui/main.qml:1119
 #, kde-format
@@ -1748,7 +1748,7 @@ msgstr "任务"
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, kde-format
 msgid "Mail"
-msgstr ""
+msgstr "邮件"
 
 #: contents/ui/main.qml:820
 #, kde-format
@@ -1786,19 +1786,19 @@ msgstr "新建日历"
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
-msgstr ""
+msgstr "周"
 
 #: contents/ui/main.qml:1083
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
-msgstr ""
+msgstr "三日"
 
 #: contents/ui/main.qml:1089
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
-msgstr ""
+msgstr "一日"
 
 #: contents/ui/MainViews/BasicInternalHourlyView.qml:248
 #, kde-format
@@ -1815,7 +1815,7 @@ msgstr "全天或多天"
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
-msgstr ""
+msgstr "无事之日。"
 
 #: contents/ui/MainViews/BasicMonthListView.qml:284
 #, kde-format
@@ -1830,7 +1830,7 @@ msgstr "点击"
 #: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
-msgstr ""
+msgstr "今日无事被记录，此处%1以添加。"
 
 #: contents/ui/MainViews/BasicMonthListView.qml:408
 #, kde-format
@@ -1908,42 +1908,42 @@ msgstr "今日"
 #: models/todosortfilterproxymodel.cpp:169
 #, kde-format
 msgid "Overdue"
-msgstr ""
+msgstr "已过期"
 
 #: contents/ui/MainViews/TodoTreeView.qml:77
 #, kde-format
 msgid "Priority %1"
-msgstr ""
+msgstr "优先级 %1"
 
 #: contents/ui/MainViews/TodoTreeView.qml:77
 #, kde-format
 msgid "No set priority"
-msgstr ""
+msgstr "未指定优先级"
 
 #: contents/ui/MainViews/TodoTreeView.qml:104
 #, kde-format
 msgid "No task calendars enabled."
-msgstr ""
+msgstr "没有被启用的任务日历。"
 
 #: contents/ui/MainViews/TodoTreeView.qml:111
 #, kde-format
 msgid "Calendar is not enabled"
-msgstr ""
+msgstr "日历未启用"
 
 #: contents/ui/MainViews/TodoTreeView.qml:114
 #, kde-format
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks completed"
-msgstr ""
+msgstr "没有已完成的任务。"
 
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks left to complete"
-msgstr ""
+msgstr "没有未完成的任务"
 
 #: contents/ui/MainViews/TodoView.qml:58 kalendarapplication.cpp:30
 #: kalendarapplication.cpp:33
@@ -1954,28 +1954,28 @@ msgstr "排序"
 #: contents/ui/MainViews/TodoView.qml:92
 #, kde-format
 msgid "Show Completed"
-msgstr ""
+msgstr "显示已完成任务"
 
 #: contents/ui/MainViews/TodoView.qml:100
 #, kde-format
 msgid "Completed Tasks in %1"
-msgstr ""
+msgstr "%1 中的已完成任务"
 
 #: contents/ui/MainViews/TodoView.qml:100
 #, kde-format
 msgid "Completed Tasks"
-msgstr ""
+msgstr "已完成任务"
 
 #: contents/ui/MainViews/TodoView.qml:148
 #, kde-format
 msgid "Create a New Task…"
-msgstr ""
+msgstr "创建新任务…"
 
 #: contents/ui/MainViews/TodoView.qml:189
 #: contents/ui/MainViews/TodoView.qml:190
 #, kde-format
 msgid "Quickly Add a New Task."
-msgstr ""
+msgstr "快速添加新任务。"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:24
 #, kde-format
@@ -2143,18 +2143,18 @@ msgstr "Kalendar 手册"
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Undo Text"
-msgstr ""
+msgstr "撤销文本"
 
 #: contents/ui/Menus/WindowMenu.qml:67
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Redo Text"
-msgstr ""
+msgstr "重做文本"
 
 #: contents/ui/Menus/WindowMenu.qml:158
 #, kde-format
 msgid "Sort Tasks"
-msgstr ""
+msgstr "任务排序"
 
 #: contents/ui/Settings/CalendarSettingsPage.qml:138
 #, kde-format
@@ -2209,13 +2209,13 @@ msgstr "点 (显示确切位置)"
 #: contents/ui/Settings/ViewSettingsPage.qml:12
 #, kde-format
 msgid "Appearance"
-msgstr ""
+msgstr "外观"
 
 #: contents/ui/Settings/SettingsPage.qml:19
 #: contents/ui/Settings/SourceSettingsPage.qml:13
 #, kde-format
 msgid "Accounts"
-msgstr ""
+msgstr "账户"
 
 #: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:210
 #, kde-format
@@ -2225,7 +2225,7 @@ msgstr "关于 Kalendar"
 #: contents/ui/Settings/SourceSettingsPage.qml:19
 #, kde-format
 msgid "Add New Calendar Source…"
-msgstr ""
+msgstr "添加新日历源..."
 
 #: contents/ui/Settings/SourceSettingsPage.qml:26
 #, kde-format
@@ -2410,18 +2410,18 @@ msgstr "显示已完成的子任务"
 #: contents/ui/Settings/ViewSettingsPage.qml:347
 #, kde-format
 msgid "Enable maps"
-msgstr ""
+msgstr "启用地图"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:368
 #, kde-format
 msgid "Location marker"
-msgstr ""
+msgstr "位置标记"
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
-msgstr ""
+msgstr "任务"
 
 #: kalendarapplication.cpp:82
 #, kde-format
@@ -2466,7 +2466,7 @@ msgstr "Ctrl+4"
 #: kalendarapplication.cpp:146
 #, kde-format
 msgid "Schedule View"
-msgstr ""
+msgstr "日程视图"
 
 #: kalendarapplication.cpp:156
 #, kde-format
@@ -2481,7 +2481,7 @@ msgstr ""
 #: kalendarapplication.cpp:178
 #, kde-format
 msgid "Mail View"
-msgstr ""
+msgstr "邮件视图"
 
 #: kalendarapplication.cpp:188
 #, kde-format
@@ -2501,22 +2501,22 @@ msgstr "Ctrl+1"
 #: kalendarapplication.cpp:217
 #, kde-format
 msgid "Backwards"
-msgstr ""
+msgstr "后退"
 
 #: kalendarapplication.cpp:230
 #, kde-format
 msgid "Forwards"
-msgstr ""
+msgstr "前进"
 
 #: kalendarapplication.cpp:243
 #, kde-format
 msgid "To Today"
-msgstr ""
+msgstr "转到今天"
 
 #: kalendarapplication.cpp:256
 #, kde-format
 msgid "To Date…"
-msgstr ""
+msgstr "转到日期…"
 
 #: kalendarapplication.cpp:269
 #, kde-format
@@ -2576,7 +2576,7 @@ msgstr "打开命令栏"
 #: kalendarapplication.cpp:448
 #, kde-format
 msgid "Refresh All"
-msgstr ""
+msgstr "刷新全部"
 
 #: kalendarapplication.cpp:597 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
@@ -2598,36 +2598,36 @@ msgstr "%1 (默认)"
 #: mail/contactimageprovider.cpp:126
 #, kde-format
 msgid "Image request has been cancelled"
-msgstr ""
+msgstr "图像请求已被取消"
 
 #: mail/mailmodel.cpp:48
 #, kde-format
 msgctxt "displayed as subject when the subject of a mail is empty"
 msgid "No Subject"
-msgstr ""
+msgstr "无主题"
 
 #: mail/mailmodel.cpp:49
 #, kde-format
 msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: mail/mime/attachmentmodel.cpp:223
 #, kde-format
 msgid "No keys were found in this attachment"
-msgstr ""
+msgstr "未在附件中找到密钥"
 
 #: mail/mime/attachmentmodel.cpp:226
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
-msgstr[0] ""
+msgstr[0] "已导入 %1 个密钥"
 
 #: mail/mime/attachmentmodel.cpp:228
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"
-msgstr[0] ""
+msgstr[0] "%1 个密钥已经导入过了"
 
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format

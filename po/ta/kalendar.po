@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:49+0000\n"
-"PO-Revision-Date: 2022-10-13 21:41+0530\n"
+"PO-Revision-Date: 2022-12-01 21:47+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -740,14 +740,14 @@ msgstr "புதிய பணி…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "இந்நிகழ்வு மீளநிகழ்வது"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "இந்நிகழ்வு நினைவூட்டலைக் கொண்டது"
+msgstr[1] "இந்நிகழ்வு நினைவூட்டல்களைக் கொண்டது"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
