@@ -26,8 +26,8 @@ Kirigami.ScrollablePage {
                     checked: Config.useIncidenceInfoPopup
                     enabled: !Config.isUseIncidenceInfoPopupImmutable && !Kirigami.Settings.isMobile
                     visible: !Kirigami.Settings.isMobile
-                    onClicked: {
-                        Config.useIncidenceInfoPopup = !Config.useIncidenceInfoPopup;
+                    onCheckedChanged: {
+                        Config.useIncidenceInfoPopup = checked;
                         Config.save();
                     }
                 }
@@ -36,8 +36,8 @@ Kirigami.ScrollablePage {
                     text: i18n("Show sub-tasks in calendar views")
                     checked: Config.showSubtodosInCalendarViews
                     enabled: !Config.isShowSubtodosInCalendarViewsImmutable
-                    onClicked: {
-                        Config.showSubtodosInCalendarViews = !Config.showSubtodosInCalendarViews;
+                    onCheckedChanged: {
+                        Config.showSubtodosInCalendarViews = checked;
                         Config.save();
                     }
                 }
@@ -183,8 +183,8 @@ Kirigami.ScrollablePage {
                     text: i18n("Show week numbers")
                     checked: Config.showWeekNumbers
                     enabled: !Config.isShowWeekNumbersImmutable
-                    onClicked: {
-                        Config.showWeekNumbers = !Config.showWeekNumbers;
+                    onCheckedChanged: {
+                        Config.showWeekNumbers = checked;
                         Config.save();
                     }
                 }
@@ -308,8 +308,8 @@ Kirigami.ScrollablePage {
                     text: i18n("Show week headers")
                     checked: Config.showWeekHeaders
                     enabled: !Config.isShowWeekHeadersImmutable
-                    onClicked: {
-                        Config.showWeekHeaders = !Config.showWeekHeaders;
+                    onCheckedChanged: {
+                        Config.showWeekHeaders = checked;
                         Config.save();
                     }
                 }
@@ -328,8 +328,8 @@ Kirigami.ScrollablePage {
                     text: i18n("Show completed sub-tasks")
                     checked: Config.showCompletedSubtodos
                     enabled: !Config.isShowCompletedSubtodosImmutable
-                    onClicked: {
-                        Config.showCompletedSubtodos = !Config.showCompletedSubtodos;
+                    onCheckedChanged: {
+                        Config.showCompletedSubtodos = checked;
                         Config.save();
                     }
                 }
@@ -348,8 +348,8 @@ Kirigami.ScrollablePage {
 
                     checked: Config.enableMaps
                     enabled: !Config.isEnableMapsImmutable
-                    onClicked: {
-                        Config.enableMaps = !Config.enableMaps;
+                    onCheckedChanged: {
+                        Config.enableMaps = checked;
                         Config.save();
                     }
                 }
