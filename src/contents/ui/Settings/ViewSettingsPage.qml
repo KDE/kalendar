@@ -33,9 +33,21 @@ Kirigami.ScrollablePage {
                 }
 
                 MobileForm.FormSwitchDelegate {
+                    text: i18n("Show tasks in calendar views")
+                    checked: Config.showTodosInCalendarViews
+                    enabled: !Config.isShowTodosInCalendarViewsImmutable
+                    onClicked: {
+                        Config.showTodosInCalendarViews = !Config.showTodosInCalendarViews;
+                        Config.save();
+                    }
+                }
+
+                MobileForm.FormSwitchDelegate {
                     text: i18n("Show sub-tasks in calendar views")
-                    checked: Config.showSubtodosInCalendarViews
-                    enabled: !Config.isShowSubtodosInCalendarViewsImmutable
+                    checked: Config.showSubtodosInCalendarViews &&
+                             Config.showTodosInCalendarViews
+                    enabled: !Config.isShowSubtodosInCalendarViewsImmutable &&
+                             Config.showTodosInCalendarViews
                     onCheckedChanged: {
                         Config.showSubtodosInCalendarViews = checked;
                         Config.save();

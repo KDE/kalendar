@@ -26,6 +26,7 @@ class HourlyIncidenceModel : public QAbstractListModel
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
     Q_PROPERTY(HourlyIncidenceModel::Filters filters READ filters WRITE setFilters NOTIFY filtersChanged)
     Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(bool showTodos READ showTodos WRITE setShowTodos NOTIFY showTodosChanged)
     Q_PROPERTY(bool showSubTodos READ showSubTodos WRITE setShowSubTodos NOTIFY showSubTodosChanged)
 
 public:
@@ -53,18 +54,21 @@ public:
     IncidenceOccurrenceModel *model() const;
     int periodLength() const;
     HourlyIncidenceModel::Filters filters() const;
+    bool showTodos() const;
     bool showSubTodos() const;
 
 Q_SIGNALS:
     void periodLengthChanged();
     void filtersChanged();
     void modelChanged();
+    void showTodosChanged();
     void showSubTodosChanged();
 
 public Q_SLOTS:
     void setModel(IncidenceOccurrenceModel *model);
     void setPeriodLength(int periodLength);
     void setFilters(HourlyIncidenceModel::Filters filters);
+    void setShowTodos(const bool showTodos);
     void setShowSubTodos(const bool showSubTodos);
 
 private Q_SLOTS:
@@ -84,6 +88,7 @@ private:
     QVector<QVariantList> m_laidOutLines;
     int mPeriodLength{15}; // In minutes
     HourlyIncidenceModel::Filters m_filters;
+    bool m_showTodos = true;
     bool m_showSubTodos = true;
 };
 

@@ -242,6 +242,7 @@ Item {
             Repeater {
                 model: Kalendar.MultiDayIncidenceModel {
                     periodLength: 7
+                    showTodos: Kalendar.Config.showTodosInCalendarViews
                     showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
                     model: Kalendar.IncidenceOccurrenceModel {
                         start: root.startDate

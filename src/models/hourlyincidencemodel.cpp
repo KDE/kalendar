@@ -68,7 +68,13 @@ QList<QModelIndex> HourlyIncidenceModel::sortedIncidencesFromSourceModel(const Q
             continue;
         }
 
-        if (!m_showSubTodos && !srcIdx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
+        const auto incidencePtr = srcIdx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>();
+        const auto incidenceIsTodo = incidencePtr->type() == Incidence::TypeTodo;
+        if (!m_showTodos && incidenceIsTodo) {
+            continue;
+        }
+
+        if (m_showTodos && incidenceIsTodo && !m_showSubTodos && !incidencePtr->relatedTo().isEmpty()) {
             continue;
         }
         // qCWarning(KALENDAR_LOG) << "found " << srcIdx.data(IncidenceOccurrenceModel::StartTime).toDateTime() <<
@@ -468,6 +474,23 @@ void HourlyIncidenceModel::setFilters(HourlyIncidenceModel::Filters filters)
     m_filters = filters;
     Q_EMIT filtersChanged();
     endResetModel();
+}
+
+bool HourlyIncidenceModel::showTodos() const
+{
+    return m_showTodos;
+}
+
+void HourlyIncidenceModel::setShowTodos(const bool showTodos)
+{
+    if (showTodos == m_showTodos) {
+        return;
+    }
+
+    m_showTodos = showTodos;
+    Q_EMIT showTodosChanged();
+
+    resetLayoutLines();
 }
 
 bool HourlyIncidenceModel::showSubTodos() const

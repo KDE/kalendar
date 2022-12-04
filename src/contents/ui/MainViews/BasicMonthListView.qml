@@ -109,6 +109,7 @@ QQC2.ScrollView {
 
         model: Kalendar.MultiDayIncidenceModel {
            periodLength: 1
+           showTodos: Kalendar.Config.showTodosInCalendarViews
            showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
            model: Kalendar.IncidenceOccurrenceModel {
                start: scrollView.startDate

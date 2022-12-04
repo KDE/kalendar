@@ -280,6 +280,7 @@ Column {
                     model: Kalendar.MultiDayIncidenceModel {
                         periodLength: viewColumn.daysToShow
                         filters: Kalendar.MultiDayIncidenceModel.AllDayOnly | Kalendar.MultiDayIncidenceModel.MultiDayOnly
+                        showTodos: Kalendar.Config.showTodosInCalendarViews
                         showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
                         model: Kalendar.IncidenceOccurrenceModel {
                             start: viewColumn.startDate
@@ -623,6 +624,7 @@ Column {
                         model: Kalendar.HourlyIncidenceModel {
                            periodLength: viewColumn.periodLength
                            filters: Kalendar.MultiDayIncidenceModel.AllDayOnly | Kalendar.MultiDayIncidenceModel.MultiDayOnly
+                           showTodos: Kalendar.Config.showTodosInCalendarViews
                            showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
                            model: Kalendar.IncidenceOccurrenceModel {
                                start: viewColumn.startDate

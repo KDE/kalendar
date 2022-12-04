@@ -392,6 +392,23 @@ void MultiDayIncidenceModel::setFilters(MultiDayIncidenceModel::Filters filters)
     endResetModel();
 }
 
+bool MultiDayIncidenceModel::showTodos() const
+{
+    return m_showTodos;
+}
+
+void MultiDayIncidenceModel::setShowTodos(const bool showTodos)
+{
+    if (showTodos == m_showTodos) {
+        return;
+    }
+
+    m_showTodos = showTodos;
+    Q_EMIT showTodosChanged();
+
+    resetLayoutLines();
+}
+
 bool MultiDayIncidenceModel::showSubTodos() const
 {
     return m_showSubTodos;
@@ -411,12 +428,16 @@ void MultiDayIncidenceModel::setShowSubTodos(const bool showSubTodos)
 
 bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
 {
-    if (!m_filters && m_showSubTodos) {
+    if (!m_filters && m_showTodos && m_showSubTodos) {
         return true;
     }
-    bool include = false;
+
+    bool include = true;
 
     if (m_filters) {
+        // Start out assuming the worst, filter everything out
+        include = false;
+
         const auto start = idx.data(IncidenceOccurrenceModel::StartTime).toDateTime().date();
 
         if (m_filters.testFlag(AllDayOnly) && idx.data(IncidenceOccurrenceModel::AllDay).toBool()) {
@@ -426,13 +447,18 @@ bool MultiDayIncidenceModel::incidencePassesFilter(const QModelIndex &idx) const
         if (m_filters.testFlag(NoStartDateOnly) && !start.isValid()) {
             include = true;
         }
+
         if (m_filters.testFlag(MultiDayOnly) && idx.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>().asDays() >= 1) {
             include = true;
         }
     }
 
-    if (!m_showSubTodos && idx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>()->relatedTo().isEmpty()) {
-        include = true;
+    const auto incidencePtr = idx.data(IncidenceOccurrenceModel::IncidencePtr).value<KCalendarCore::Incidence::Ptr>();
+    const auto incidenceIsTodo = incidencePtr->type() == Incidence::TypeTodo;
+    if (!m_showTodos && incidenceIsTodo) {
+        include = false;
+    } else if (m_showTodos && incidenceIsTodo && !m_showSubTodos && !incidencePtr->relatedTo().isEmpty()) {
+        include = false;
     }
 
     return include;
