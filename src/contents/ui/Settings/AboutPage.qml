@@ -4,8 +4,9 @@
 import QtQuick 2.15
 import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kalendar 1.0
+import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
-Kirigami.AboutPage {
+MobileForm.AboutPage {
     objectName: "aboutPage"
     aboutData: AboutType.aboutData
 }
