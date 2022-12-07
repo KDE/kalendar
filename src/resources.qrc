@@ -68,7 +68,6 @@ SPDX-License-Identifier: CC0-1.0
 
     <file alias="SettingsPage.qml">contents/ui/Settings/SettingsPage.qml</file>
     <file alias="AboutPage.qml">contents/ui/Settings/AboutPage.qml</file>
-    <file alias="GeneralSettingsPage.qml">contents/ui/Settings/GeneralSettingsPage.qml</file>
     <file alias="ViewSettingsPage.qml">contents/ui/Settings/ViewSettingsPage.qml</file>
     <file alias="SourceSettingsPage.qml">contents/ui/Settings/SourceSettingsPage.qml</file>
     <file alias="CalendarSettingsPage.qml">contents/ui/Settings/CalendarSettingsPage.qml</file>

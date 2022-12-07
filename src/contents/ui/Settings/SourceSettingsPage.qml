@@ -11,6 +11,8 @@ import org.kde.akonadi 1.0
 Kirigami.ScrollablePage {
     id: sourcesSettingsPage
     title: i18n("Accounts")
+    leftPadding: 0
+    rightPadding: 0
 
     ColumnLayout {
         AgentConfigurationForm {

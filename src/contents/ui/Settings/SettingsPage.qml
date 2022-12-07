@@ -10,25 +10,25 @@ import org.kde.kalendar 1.0
 Kirigami.CategorizedSettings {
     objectName: "settingsPage"
     actions: [
-    Kirigami.SettingAction {
-        text: i18n("Appearance")
-        icon.name: "preferences-desktop-theme-global"
-        page: Qt.resolvedUrl("ViewSettingsPage.qml")
-    },
-    Kirigami.SettingAction {
-        text: i18n("Accounts")
-        icon.name: "preferences-system-users"
-        page: Qt.resolvedUrl("SourceSettingsPage.qml")
-    },
-    Kirigami.SettingAction {
-        text: i18n("Calendars")
-        icon.name: "korganizer"
-        page: Qt.resolvedUrl("CalendarSettingsPage.qml")
-    },
-    Kirigami.SettingAction {
-        text: i18n("About Kalendar")
-        icon.name: "help-about"
-        page: Qt.resolvedUrl("AboutPage.qml")
-    }
+        Kirigami.SettingAction {
+            text: i18n("Appearance")
+            icon.name: "preferences-desktop-theme-global"
+            page: Qt.resolvedUrl("ViewSettingsPage.qml")
+        },
+        Kirigami.SettingAction {
+            text: i18n("Accounts")
+            icon.name: "preferences-system-users"
+            page: Qt.resolvedUrl("SourceSettingsPage.qml")
+        },
+        Kirigami.SettingAction {
+            text: i18n("Calendars")
+            icon.name: "korganizer"
+            page: Qt.resolvedUrl("CalendarSettingsPage.qml")
+        },
+        Kirigami.SettingAction {
+            text: i18n("About Kalendar")
+            icon.name: "help-about"
+            page: Qt.resolvedUrl("AboutPage.qml")
+        }
     ]
 }
