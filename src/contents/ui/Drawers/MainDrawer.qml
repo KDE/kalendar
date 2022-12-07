@@ -156,23 +156,24 @@ Kirigami.OverlayDrawer {
                     Layout.fillHeight: true
                     overflowIconName: "application-menu"
 
-                    actions: [
-                        Kirigami.Action {
-                            icon.name: "edit-undo"
-                            text: CalendarManager.undoRedoData.undoAvailable ?
-                                i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : undoAction.text
-                            shortcut: undoAction.shortcut
-                            enabled: CalendarManager.undoRedoData.undoAvailable
-                            onTriggered: CalendarManager.undoAction();
-                        },
-                        Kirigami.Action {
-                            icon.name: KalendarApplication.iconName(redoAction.icon)
-                            text: CalendarManager.undoRedoData.redoAvailable ?
-                                i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : redoAction.text
-                            shortcut: redoAction.shortcut
-                            enabled: CalendarManager.undoRedoData.redoAvailable
-                            onTriggered: CalendarManager.redoAction();
-                        },
+                    property var hamburgerActions: switch (applicationWindow().mode) {
+                        case KalendarApplication.Mail:
+                            return mailApplication.hamburgerActions;
+                        case KalendarApplication.Contact:
+                            return contactApplication.hamburgerActions;
+                        case KalendarApplication.Event:
+                        case KalendarApplication.Todo:
+                        case KalendarApplication.ThreeDay:
+                        case KalendarApplication.Day:
+                        case KalendarApplication.Week:
+                        case KalendarApplication.Month:
+                        case KalendarApplication.Schedule:
+                            return calendarApplication.hamburgerActions;
+                        default:
+                            return undefined;
+                    }
+
+                    property list<QQC2.Action> appActions: [
                         KActionFromAction {
                             kalendarAction: "toggle_menubar"
                         },
@@ -189,18 +190,6 @@ Kirigami.OverlayDrawer {
                                 kalendarAction: "options_configure"
                             }
                         },
-                        KActionFromAction {
-                            kalendarAction: "import_calendar"
-                        },
-                        KActionFromAction {
-                            text: switch(root.mode) {
-                            case KalendarApplication.Contact:
-                                return i18n('Refresh All Address Books')
-                            default:
-                                return i18n('Refresh All Calendars')
-                            }
-                            kalendarAction: "refresh_all"
-                        },
                         Kirigami.Action {
                             icon.name: KalendarApplication.iconName(quitAction.icon)
                             text: quitAction.text
@@ -209,6 +198,17 @@ Kirigami.OverlayDrawer {
                             visible: !Kirigami.Settings.isMobile
                         }
                     ]
+
+                    actions: []
+                    onHamburgerActionsChanged: {
+                        actions = []
+                        for (let action in hamburgerActions) {
+                            actions.push(hamburgerActions[action])
+                        }
+                        for (let action in appActions) {
+                            actions.push(appActions[action])
+                        }
+                    }
 
                     Component.onCompleted: {
                         for (let i in actions) {

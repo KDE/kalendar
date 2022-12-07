@@ -3,9 +3,6 @@
 
 import Qt.labs.platform 1.1 as Labs
 import QtQuick 2.15
-import QtQuick.Controls 2.12 as QQC2
-import QtQuick.Layouts 1.10
-import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar.components 1.0
 
 Labs.Menu {
