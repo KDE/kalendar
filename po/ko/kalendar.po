@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-28 00:49+0000\n"
+"POT-Creation-Date: 2022-12-08 00:46+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -26,6 +26,54 @@ msgstr "박신조"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name"
+
+#: calendar/qml/CalendarApplication.qml:16
+#: contents/ui/Drawers/MainDrawer.qml:304
+#, kde-format
+msgid "Undo: "
+msgstr "실행 취소: "
+
+#: calendar/qml/CalendarApplication.qml:24
+#: contents/ui/Drawers/MainDrawer.qml:309
+#, kde-format
+msgid "Redo: "
+msgstr "다시 실행: "
+
+#: calendar/qml/CalendarApplication.qml:33
+#, fuzzy, kde-format
+#| msgid "About Kalendar"
+msgid "Refresh All Calendars"
+msgstr "Kalendar 정보"
+
+#: calendar/qml/private/GlobalMenuBar.qml:40
+#, fuzzy, kde-format
+#| msgid "Completion:"
+msgctxt "@action:menu"
+msgid "Sort Tasks"
+msgstr "자동 완성:"
+
+#: calendar/qml/private/GlobalMenuBar.qml:82
+#: calendar/qml/private/MenuBar.qml:84
+#, kde-format
+msgctxt "@action:menu"
+msgid "Go"
+msgstr ""
+
+#: calendar/qml/private/GlobalMenuBar.qml:106
+#: calendar/qml/private/MenuBar.qml:108
+#: contacts/qml/private/GlobalMenuBar.qml:19
+#: contacts/qml/private/MenuBar.qml:25 mail/qml/private/GlobalMenuBar.qml:55
+#: mail/qml/private/MenuBar.qml:18
+#, kde-format
+msgctxt "@action:menu"
+msgid "Create"
+msgstr ""
+
+#: calendar/qml/private/MenuBar.qml:45
+#, fuzzy, kde-format
+#| msgid "Completion:"
+msgid "Sort Tasks"
+msgstr "자동 완성:"
 
 #: calendarmanager.cpp:545
 #, fuzzy, kde-format
@@ -56,6 +104,141 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
 msgstr "Kalendar 정보"
+
+#: components/qml/EditMenu.qml:13 components/qml/NativeEditMenu.qml:11
+#, fuzzy, kde-format
+#| msgid "Edit"
+msgctxt "@action:menu"
+msgid "Edit"
+msgstr "편집"
+
+#: components/qml/EditMenu.qml:39
+#, fuzzy, kde-format
+#| msgid "Undo: "
+msgctxt "text editing menu action"
+msgid "Undo Text"
+msgstr "실행 취소: "
+
+#: components/qml/EditMenu.qml:48
+#, fuzzy, kde-format
+#| msgid "Redo: "
+msgctxt "text editing menu action"
+msgid "Redo Text"
+msgstr "다시 실행: "
+
+#: components/qml/EditMenu.qml:60 components/qml/NativeEditMenu.qml:63
+#: mail/qml/private/EditMenu.qml:49
+#, fuzzy, kde-format
+#| msgid "Custom"
+msgctxt "text editing menu action"
+msgid "Cut"
+msgstr "사용자 정의"
+
+#: components/qml/EditMenu.qml:69 components/qml/NativeEditMenu.qml:73
+#: mail/qml/private/EditMenu.qml:59
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Copy"
+msgstr ""
+
+#: components/qml/EditMenu.qml:78 components/qml/NativeEditMenu.qml:83
+#: mail/qml/private/EditMenu.qml:69
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Paste"
+msgstr ""
+
+#: components/qml/EditMenu.qml:87 components/qml/NativeEditMenu.qml:93
+#: mail/qml/private/EditMenu.qml:79
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "text editing menu action"
+msgid "Delete"
+msgstr "삭제"
+
+#: components/qml/EditMenu.qml:99 components/qml/NativeEditMenu.qml:106
+#: mail/qml/private/EditMenu.qml:92
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Select All"
+msgstr ""
+
+#: components/qml/FileMenu.qml:12 components/qml/NativeFileMenu.qml:10
+#, kde-format
+msgctxt "@action:menu"
+msgid "File"
+msgstr ""
+
+#: components/qml/FileMenu.qml:19 components/qml/NativeFileMenu.qml:16
+#, fuzzy, kde-format
+#| msgid "About Kalendar"
+msgctxt "@action:menu"
+msgid "Quit Kalendar"
+msgstr "Kalendar 정보"
+
+#: components/qml/HelpMenu.qml:9 components/qml/NativeHelpMenu.qml:8
+#, kde-format
+msgctxt "@action:menu"
+msgid "Help"
+msgstr ""
+
+#: components/qml/HelpMenu.qml:17 components/qml/NativeHelpMenu.qml:16
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Kalendar"
+msgctxt "@action:menu"
+msgid "Kalendar Handbook"
+msgstr "Kalendar"
+
+#: components/qml/NativeEditMenu.qml:40 mail/qml/private/EditMenu.qml:26
+#, fuzzy, kde-format
+#| msgid "Undo"
+msgctxt "text editing menu action"
+msgid "Undo"
+msgstr "실행 취소"
+
+#: components/qml/NativeEditMenu.qml:50 mail/qml/private/EditMenu.qml:36
+#, fuzzy, kde-format
+#| msgid "Redo"
+msgctxt "text editing menu action"
+msgid "Redo"
+msgstr "다시 실행"
+
+#: components/qml/NativeSettingsMenu.qml:8 components/qml/SettingsMenu.qml:9
+#, fuzzy, kde-format
+#| msgid "Settings"
+msgctxt "@action:menu"
+msgid "Settings"
+msgstr "설정"
+
+#: components/qml/NativeViewMenu.qml:12 components/qml/ViewMenu.qml:9
+#: mail/qml/private/GlobalMenuBar.qml:19
+#, fuzzy, kde-format
+#| msgid "View"
+msgctxt "@action:menu"
+msgid "View"
+msgstr "보기"
+
+#: components/qml/NativeWindowMenu.qml:12 components/qml/WindowMenu.qml:12
+#: mail/qml/private/GlobalMenuBar.qml:62
+#, kde-format
+msgctxt "@action:menu"
+msgid "Window"
+msgstr ""
+
+#: components/qml/NativeWindowMenu.qml:15 components/qml/WindowMenu.qml:15
+#: mail/qml/private/GlobalMenuBar.qml:65
+#, kde-format
+msgctxt "@action:menu"
+msgid "Exit Full Screen"
+msgstr ""
+
+#: components/qml/NativeWindowMenu.qml:15 components/qml/WindowMenu.qml:15
+#: mail/qml/private/GlobalMenuBar.qml:65
+#, kde-format
+msgctxt "@action:menu"
+msgid "Enter Full Screen"
+msgstr ""
 
 #: contacts/autotests/emailmodeltest.cpp:36 contacts/emailmodel.cpp:44
 #: contacts/qml/private/ContactPage.qml:276
@@ -120,6 +303,12 @@ msgctxt "@title:window"
 msgid "Choose Address Book Color"
 msgstr "캘린더"
 
+#: contacts/qml/ContactApplication.qml:16
+#, fuzzy, kde-format
+#| msgid "About Kalendar"
+msgid "Refresh All Address Books"
+msgstr "Kalendar 정보"
+
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
 msgid "Done"
@@ -133,19 +322,19 @@ msgstr "이메일 주소 선택"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:456
+#: contents/ui/main.qml:465
 #, kde-format
 msgid "Contacts"
 msgstr "연락처"
 
-#: contacts/qml/ContactView.qml:79
+#: contacts/qml/ContactView.qml:81
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgctxt "@action:inmenu"
 msgid "Edit contact…"
 msgstr "연락처"
 
-#: contacts/qml/ContactView.qml:94
+#: contacts/qml/ContactView.qml:96
 #: contacts/qml/private/DeleteContactAction.qml:64
 #, fuzzy, kde-format
 #| msgid "Add new Calendar"
@@ -153,7 +342,7 @@ msgctxt "@action:inmenu"
 msgid "Delete contact"
 msgstr "새 캘린더 추가"
 
-#: contacts/qml/ContactView.qml:112 contacts/qml/private/ContactsPage.qml:48
+#: contacts/qml/ContactView.qml:114 contacts/qml/private/ContactsPage.qml:48
 #, kde-format
 msgid "No contacts"
 msgstr "연락처 없음"
@@ -535,7 +724,7 @@ msgstr "편집"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:881
+#: contents/ui/main.qml:919
 #, kde-format
 msgid "Cancel"
 msgstr "취소"
@@ -756,15 +945,15 @@ msgstr "년"
 msgid "Min. Interval:"
 msgstr "최소 간격:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
-#: kalendarapplication.cpp:279
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:432
+#: kalendarapplication.cpp:295
 #, fuzzy, kde-format
 #| msgid "New event"
 msgid "New Event…"
 msgstr "새 이벤트"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:429
-#: kalendarapplication.cpp:286
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:438
+#: kalendarapplication.cpp:302
 #, fuzzy, kde-format
 #| msgid "New todo"
 msgid "New Task…"
@@ -1603,46 +1792,34 @@ msgstr "완료되지 않은 것으로 표시"
 msgid "Mark Complete"
 msgstr "완료된 것으로 표시"
 
-#: contents/ui/Drawers/MainDrawer.qml:117
+#: contents/ui/Drawers/MainDrawer.qml:119
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Kalendar"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:161
-#: contents/ui/Drawers/MainDrawer.qml:302
-#, kde-format
-msgid "Undo: "
-msgstr "실행 취소: "
-
-#: contents/ui/Drawers/MainDrawer.qml:169
-#: contents/ui/Drawers/MainDrawer.qml:307
-#, kde-format
-msgid "Redo: "
-msgstr "다시 실행: "
-
-#: contents/ui/Drawers/MainDrawer.qml:178 contents/ui/main.qml:353
+#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:362
 #, kde-format
 msgid "Configure"
 msgstr ""
 
-#: contents/ui/Drawers/MainDrawer.qml:302
+#: contents/ui/Drawers/MainDrawer.qml:304
 #, kde-format
 msgid "Undo"
 msgstr "실행 취소"
 
-#: contents/ui/Drawers/MainDrawer.qml:307
+#: contents/ui/Drawers/MainDrawer.qml:309
 #, kde-format
 msgid "Redo"
 msgstr "다시 실행"
 
-#: contents/ui/Drawers/MainDrawer.qml:318
+#: contents/ui/Drawers/MainDrawer.qml:320
 #, kde-format
 msgid "Settings"
 msgstr "설정"
 
-#: contents/ui/Drawers/MainDrawer.qml:418
+#: contents/ui/Drawers/MainDrawer.qml:420
 #, fuzzy, kde-format
 #| msgid "New todo"
 msgid "View all tasks"
@@ -1806,84 +1983,86 @@ msgstr "<b>우선 순위:</b>"
 msgid "Return to Location"
 msgstr ""
 
-#: contents/ui/main.qml:321
+#: contents/ui/main.qml:330
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr ""
 
-#: contents/ui/main.qml:324 contents/ui/main.qml:339
+#: contents/ui/main.qml:333 contents/ui/main.qml:348
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr ""
 
-#: contents/ui/main.qml:336
+#: contents/ui/main.qml:345
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr ""
 
-#: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
-#: contents/ui/MainViews/TodoView.qml:53
+#: contents/ui/main.qml:427 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/MainViews/TodoView.qml:54
 #, kde-format
 msgid "Create"
 msgstr ""
 
-#: contents/ui/main.qml:438
+#: contents/ui/main.qml:447
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Month"
 msgstr "개월"
 
-#: contents/ui/main.qml:441
+#: contents/ui/main.qml:450
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgid "Week"
 msgstr "매주"
 
-#: contents/ui/main.qml:444
+#: contents/ui/main.qml:453
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "3 Days"
 msgstr "일"
 
-#: contents/ui/main.qml:447
+#: contents/ui/main.qml:456
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "Day"
 msgstr "일"
 
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:459
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Schedule"
 msgstr "일정 보기"
 
-#: contents/ui/main.qml:453 contents/ui/main.qml:1119
+#: contents/ui/main.qml:462 contents/ui/main.qml:1157
 #, kde-format
 msgid "Tasks"
 msgstr ""
 
-#: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: contents/ui/main.qml:468 kalendarapplication.cpp:31
+#: kalendarapplication.cpp:36
+#: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Mail"
 msgstr "월간 보기"
 
-#: contents/ui/main.qml:820
+#: contents/ui/main.qml:858
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Import a calendar"
 msgstr "Kalendar 정보"
 
-#: contents/ui/main.qml:840
+#: contents/ui/main.qml:878
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Import Calendar"
 msgstr "Kalendar 정보"
 
-#: contents/ui/main.qml:848
+#: contents/ui/main.qml:886
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1892,32 +2071,32 @@ msgid ""
 " "
 msgstr ""
 
-#: contents/ui/main.qml:856
+#: contents/ui/main.qml:894
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr ""
 
-#: contents/ui/main.qml:872
+#: contents/ui/main.qml:910
 #, fuzzy, kde-format
 #| msgid "Add new Calendar"
 msgid "Create new calendar"
 msgstr "새 캘린더 추가"
 
-#: contents/ui/main.qml:1077
+#: contents/ui/main.qml:1115
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "매주"
 
-#: contents/ui/main.qml:1083
+#: contents/ui/main.qml:1121
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "일"
 
-#: contents/ui/main.qml:1089
+#: contents/ui/main.qml:1127
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open day view"
@@ -2081,37 +2260,37 @@ msgstr "할 일을 완료되지 않은 것으로 표시"
 msgid "No tasks left to complete"
 msgstr "할 일을 완료되지 않은 것으로 표시"
 
-#: contents/ui/MainViews/TodoView.qml:58 kalendarapplication.cpp:30
-#: kalendarapplication.cpp:33
+#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:30
+#: kalendarapplication.cpp:35
 #, kde-format
 msgid "Sort"
 msgstr ""
 
-#: contents/ui/MainViews/TodoView.qml:92
+#: contents/ui/MainViews/TodoView.qml:93
 #, fuzzy, kde-format
 #| msgid "Mark complete"
 msgid "Show Completed"
 msgstr "완료된 것으로 표시"
 
-#: contents/ui/MainViews/TodoView.qml:100
+#: contents/ui/MainViews/TodoView.qml:101
 #, fuzzy, kde-format
 #| msgid "Completion:"
 msgid "Completed Tasks in %1"
 msgstr "자동 완성:"
 
-#: contents/ui/MainViews/TodoView.qml:100
+#: contents/ui/MainViews/TodoView.qml:101
 #, fuzzy, kde-format
 #| msgid "Completion:"
 msgid "Completed Tasks"
 msgstr "자동 완성:"
 
-#: contents/ui/MainViews/TodoView.qml:148
+#: contents/ui/MainViews/TodoView.qml:149
 #, kde-format
 msgid "Create a New Task…"
 msgstr ""
 
-#: contents/ui/MainViews/TodoView.qml:189
 #: contents/ui/MainViews/TodoView.qml:190
+#: contents/ui/MainViews/TodoView.qml:191
 #, kde-format
 msgid "Quickly Add a New Task."
 msgstr ""
@@ -2164,157 +2343,6 @@ msgstr "새 캘린더 추가"
 msgctxt "@action:inmenu"
 msgid "Delete calendar source"
 msgstr "새 캘린더 추가"
-
-#: contents/ui/Menus/EditMenu.qml:28
-#, fuzzy, kde-format
-#| msgid "Undo"
-msgctxt "text editing menu action"
-msgid "Undo"
-msgstr "실행 취소"
-
-#: contents/ui/Menus/EditMenu.qml:38
-#, fuzzy, kde-format
-#| msgid "Redo"
-msgctxt "text editing menu action"
-msgid "Redo"
-msgstr "다시 실행"
-
-#: contents/ui/Menus/EditMenu.qml:51 contents/ui/Menus/WindowMenu.qml:79
-#, fuzzy, kde-format
-#| msgid "Custom"
-msgctxt "text editing menu action"
-msgid "Cut"
-msgstr "사용자 정의"
-
-#: contents/ui/Menus/EditMenu.qml:61 contents/ui/Menus/WindowMenu.qml:88
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Copy"
-msgstr ""
-
-#: contents/ui/Menus/EditMenu.qml:71 contents/ui/Menus/WindowMenu.qml:97
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Paste"
-msgstr ""
-
-#: contents/ui/Menus/EditMenu.qml:81 contents/ui/Menus/WindowMenu.qml:106
-#, fuzzy, kde-format
-#| msgid "Delete"
-msgctxt "text editing menu action"
-msgid "Delete"
-msgstr "삭제"
-
-#: contents/ui/Menus/EditMenu.qml:94 contents/ui/Menus/WindowMenu.qml:118
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Select All"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:19 contents/ui/Menus/WindowMenu.qml:17
-#, kde-format
-msgctxt "@action:menu"
-msgid "File"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:26 contents/ui/Menus/WindowMenu.qml:24
-#, fuzzy, kde-format
-#| msgid "About Kalendar"
-msgctxt "@action:menu"
-msgid "Quit Kalendar"
-msgstr "Kalendar 정보"
-
-#: contents/ui/Menus/GlobalMenu.qml:34 contents/ui/Menus/WindowMenu.qml:32
-#, fuzzy, kde-format
-#| msgid "Edit"
-msgctxt "@action:menu"
-msgid "Edit"
-msgstr "편집"
-
-#: contents/ui/Menus/GlobalMenu.qml:46 contents/ui/Menus/WindowMenu.qml:126
-#, fuzzy, kde-format
-#| msgid "View"
-msgctxt "@action:menu"
-msgid "View"
-msgstr "보기"
-
-#: contents/ui/Menus/GlobalMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Completion:"
-msgctxt "@action:menu"
-msgid "Sort Tasks"
-msgstr "자동 완성:"
-
-#: contents/ui/Menus/GlobalMenu.qml:131 contents/ui/Menus/WindowMenu.qml:202
-#, kde-format
-msgctxt "@action:menu"
-msgid "Go"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:155 contents/ui/Menus/WindowMenu.qml:226
-#, kde-format
-msgctxt "@action:menu"
-msgid "Create"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:166 contents/ui/Menus/WindowMenu.qml:236
-#, kde-format
-msgctxt "@action:menu"
-msgid "Window"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:169 contents/ui/Menus/WindowMenu.qml:239
-#, kde-format
-msgctxt "@action:menu"
-msgid "Exit Full Screen"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:169 contents/ui/Menus/WindowMenu.qml:239
-#, kde-format
-msgctxt "@action:menu"
-msgid "Enter Full Screen"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:176 contents/ui/Menus/WindowMenu.qml:246
-#, fuzzy, kde-format
-#| msgid "Settings"
-msgctxt "@action:menu"
-msgid "Settings"
-msgstr "설정"
-
-#: contents/ui/Menus/GlobalMenu.qml:195 contents/ui/Menus/WindowMenu.qml:268
-#, kde-format
-msgctxt "@action:menu"
-msgid "Help"
-msgstr ""
-
-#: contents/ui/Menus/GlobalMenu.qml:203 contents/ui/Menus/WindowMenu.qml:276
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Kalendar"
-msgctxt "@action:menu"
-msgid "Kalendar Handbook"
-msgstr "Kalendar"
-
-#: contents/ui/Menus/WindowMenu.qml:58
-#, fuzzy, kde-format
-#| msgid "Undo: "
-msgctxt "text editing menu action"
-msgid "Undo Text"
-msgstr "실행 취소: "
-
-#: contents/ui/Menus/WindowMenu.qml:67
-#, fuzzy, kde-format
-#| msgid "Redo: "
-msgctxt "text editing menu action"
-msgid "Redo Text"
-msgstr "다시 실행: "
-
-#: contents/ui/Menus/WindowMenu.qml:158
-#, fuzzy, kde-format
-#| msgid "Completion:"
-msgid "Sort Tasks"
-msgstr "자동 완성:"
 
 #: contents/ui/Settings/CalendarSettingsPage.qml:138
 #, kde-format
@@ -2378,7 +2406,7 @@ msgstr ""
 msgid "Accounts"
 msgstr "계정"
 
-#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:210
+#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:226
 #, kde-format
 msgid "About Kalendar"
 msgstr "Kalendar 정보"
@@ -2600,175 +2628,193 @@ msgstr "위치:"
 msgid "Task"
 msgstr ""
 
-#: kalendarapplication.cpp:82
+#: kalendarapplication.cpp:32 kalendarapplication.cpp:37
+#, fuzzy, kde-format
+#| msgid "Contacts"
+msgid "Contact"
+msgstr "연락처"
+
+#: kalendarapplication.cpp:98
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Tasks View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:92 kalendarapplication.cpp:172
+#: kalendarapplication.cpp:108 kalendarapplication.cpp:188
 #, kde-format
 msgid "Ctrl+6"
 msgstr ""
 
-#: kalendarapplication.cpp:98
+#: kalendarapplication.cpp:114
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Week View"
 msgstr "일정 보기"
 
-#: kalendarapplication.cpp:108
-#, kde-format
-msgid "Ctrl+2"
-msgstr ""
-
-#: kalendarapplication.cpp:114
-#, fuzzy, kde-format
-#| msgid "Month view"
-msgid "3 Day View"
-msgstr "월간 보기"
-
 #: kalendarapplication.cpp:124
 #, kde-format
-msgid "Ctrl+3"
+msgid "Ctrl+2"
 msgstr ""
 
 #: kalendarapplication.cpp:130
 #, fuzzy, kde-format
 #| msgid "Month view"
-msgid "Day View"
+msgid "3 Day View"
 msgstr "월간 보기"
 
 #: kalendarapplication.cpp:140
 #, kde-format
-msgid "Ctrl+4"
+msgid "Ctrl+3"
 msgstr ""
 
 #: kalendarapplication.cpp:146
+#, fuzzy, kde-format
+#| msgid "Month view"
+msgid "Day View"
+msgstr "월간 보기"
+
+#: kalendarapplication.cpp:156
+#, kde-format
+msgid "Ctrl+4"
+msgstr ""
+
+#: kalendarapplication.cpp:162
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Schedule View"
 msgstr "일정 보기"
 
-#: kalendarapplication.cpp:156
+#: kalendarapplication.cpp:172
 #, kde-format
 msgid "Ctrl+5"
 msgstr ""
 
-#: kalendarapplication.cpp:162
+#: kalendarapplication.cpp:178
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contacts View"
 msgstr "연락처"
 
-#: kalendarapplication.cpp:178
+#: kalendarapplication.cpp:194
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Mail View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:188
+#: kalendarapplication.cpp:204
 #, kde-format
 msgid "Ctrl+7"
 msgstr ""
 
-#: kalendarapplication.cpp:194
+#: kalendarapplication.cpp:210
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Month View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:204
+#: kalendarapplication.cpp:220
 #, kde-format
 msgid "Ctrl+1"
 msgstr ""
 
-#: kalendarapplication.cpp:217
+#: kalendarapplication.cpp:233
 #, kde-format
 msgid "Backwards"
 msgstr ""
 
-#: kalendarapplication.cpp:230
+#: kalendarapplication.cpp:246
 #, kde-format
 msgid "Forwards"
 msgstr ""
 
-#: kalendarapplication.cpp:243
+#: kalendarapplication.cpp:259
 #, fuzzy, kde-format
 #| msgid "Today"
 msgid "To Today"
 msgstr "오늘"
 
-#: kalendarapplication.cpp:256
+#: kalendarapplication.cpp:272
 #, kde-format
 msgid "To Date…"
 msgstr ""
 
-#: kalendarapplication.cpp:269
+#: kalendarapplication.cpp:285
 #, kde-format
 msgid "Show Menubar"
 msgstr ""
 
-#: kalendarapplication.cpp:273
+#: kalendarapplication.cpp:289
 #, kde-format
 msgid "Ctrl+M"
 msgstr ""
 
-#: kalendarapplication.cpp:299
+#: kalendarapplication.cpp:309
+#, fuzzy, kde-format
+#| msgid "New todo"
+msgid "New Mail…"
+msgstr "새 할 일"
+
+#: kalendarapplication.cpp:316
+#, fuzzy, kde-format
+#| msgid "New event"
+msgid "New Contact…"
+msgstr "새 이벤트"
+
+#: kalendarapplication.cpp:329
 #, kde-format
 msgid "Manage Tags…"
 msgstr ""
 
-#: kalendarapplication.cpp:312
+#: kalendarapplication.cpp:342
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Import Calendar…"
 msgstr "Kalendar 정보"
 
-#: kalendarapplication.cpp:344
+#: kalendarapplication.cpp:374
 #, kde-format
 msgid "Alphabetically"
 msgstr ""
 
-#: kalendarapplication.cpp:360
+#: kalendarapplication.cpp:390
 #, kde-format
 msgid "By Due Date"
 msgstr ""
 
-#: kalendarapplication.cpp:376
+#: kalendarapplication.cpp:406
 #, fuzzy, kde-format
 #| msgid "<b>Priority level:</b>"
 msgid "By Priority Level"
 msgstr "<b>우선 순위:</b>"
 
-#: kalendarapplication.cpp:392
+#: kalendarapplication.cpp:422
 #, kde-format
 msgid "Ascending order"
 msgstr ""
 
-#: kalendarapplication.cpp:408
+#: kalendarapplication.cpp:438
 #, kde-format
 msgid "Descending Order"
 msgstr ""
 
-#: kalendarapplication.cpp:424
+#: kalendarapplication.cpp:454
 #, fuzzy, kde-format
 #| msgid "Mark complete"
 msgid "Show Completed Tasks"
 msgstr "완료된 것으로 표시"
 
-#: kalendarapplication.cpp:438
+#: kalendarapplication.cpp:468
 #, kde-format
 msgid "Open Command Bar"
 msgstr ""
 
-#: kalendarapplication.cpp:448
+#: kalendarapplication.cpp:478
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Refresh All"
 msgstr "Kalendar 정보"
 
-#: kalendarapplication.cpp:597 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:631 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr ""
@@ -2862,7 +2908,7 @@ msgstr ""
 msgid "Move to trash"
 msgstr ""
 
-#: mail/qml/FolderView.qml:43
+#: mail/qml/FolderView.qml:48
 #, kde-format
 msgid "Don't Mark as Important"
 msgstr ""

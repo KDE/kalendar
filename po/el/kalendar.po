@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-28 00:49+0000\n"
+"POT-Creation-Date: 2022-12-08 00:46+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -26,6 +26,52 @@ msgstr "Stelios"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sstavra@gmail.com"
+
+#: calendar/qml/CalendarApplication.qml:16
+#: contents/ui/Drawers/MainDrawer.qml:304
+#, kde-format
+msgid "Undo: "
+msgstr "Αναίρεση: "
+
+#: calendar/qml/CalendarApplication.qml:24
+#: contents/ui/Drawers/MainDrawer.qml:309
+#, kde-format
+msgid "Redo: "
+msgstr "Επανάληψη: "
+
+#: calendar/qml/CalendarApplication.qml:33
+#, fuzzy, kde-format
+#| msgid "Import Calendar"
+msgid "Refresh All Calendars"
+msgstr "Εισαγωγή ημερολογίου"
+
+#: calendar/qml/private/GlobalMenuBar.qml:40
+#, kde-format
+msgctxt "@action:menu"
+msgid "Sort Tasks"
+msgstr "Ταξινόμηση εργασιών"
+
+#: calendar/qml/private/GlobalMenuBar.qml:82
+#: calendar/qml/private/MenuBar.qml:84
+#, kde-format
+msgctxt "@action:menu"
+msgid "Go"
+msgstr "Μετάβαση"
+
+#: calendar/qml/private/GlobalMenuBar.qml:106
+#: calendar/qml/private/MenuBar.qml:108
+#: contacts/qml/private/GlobalMenuBar.qml:19
+#: contacts/qml/private/MenuBar.qml:25 mail/qml/private/GlobalMenuBar.qml:55
+#: mail/qml/private/MenuBar.qml:18
+#, kde-format
+msgctxt "@action:menu"
+msgid "Create"
+msgstr "Δημιουργία"
+
+#: calendar/qml/private/MenuBar.qml:45
+#, kde-format
+msgid "Sort Tasks"
+msgstr "Ταξινόμηση εργασιών"
 
 #: calendarmanager.cpp:545
 #, fuzzy, kde-format
@@ -56,6 +102,129 @@ msgstr "Διαγραφή εργασίας και ανεξαρτητοποίησ�
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
 msgstr "Εισαγωγή ημερολογίου"
+
+#: components/qml/EditMenu.qml:13 components/qml/NativeEditMenu.qml:11
+#, kde-format
+msgctxt "@action:menu"
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: components/qml/EditMenu.qml:39
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Undo Text"
+msgstr "Αναίρεση κειμένου"
+
+#: components/qml/EditMenu.qml:48
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Redo Text"
+msgstr "Επανάληψη κειμένου"
+
+#: components/qml/EditMenu.qml:60 components/qml/NativeEditMenu.qml:63
+#: mail/qml/private/EditMenu.qml:49
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Cut"
+msgstr "Αποκοπή"
+
+#: components/qml/EditMenu.qml:69 components/qml/NativeEditMenu.qml:73
+#: mail/qml/private/EditMenu.qml:59
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: components/qml/EditMenu.qml:78 components/qml/NativeEditMenu.qml:83
+#: mail/qml/private/EditMenu.qml:69
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Paste"
+msgstr "Επικόλληση"
+
+#: components/qml/EditMenu.qml:87 components/qml/NativeEditMenu.qml:93
+#: mail/qml/private/EditMenu.qml:79
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: components/qml/EditMenu.qml:99 components/qml/NativeEditMenu.qml:106
+#: mail/qml/private/EditMenu.qml:92
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Select All"
+msgstr "Επιλογή όλων"
+
+#: components/qml/FileMenu.qml:12 components/qml/NativeFileMenu.qml:10
+#, kde-format
+msgctxt "@action:menu"
+msgid "File"
+msgstr "Αρχείο"
+
+#: components/qml/FileMenu.qml:19 components/qml/NativeFileMenu.qml:16
+#, kde-format
+msgctxt "@action:menu"
+msgid "Quit Kalendar"
+msgstr "Έξοδος από το Kalendar"
+
+#: components/qml/HelpMenu.qml:9 components/qml/NativeHelpMenu.qml:8
+#, kde-format
+msgctxt "@action:menu"
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: components/qml/HelpMenu.qml:17 components/qml/NativeHelpMenu.qml:16
+#, kde-format
+msgctxt "@action:menu"
+msgid "Kalendar Handbook"
+msgstr "Το εγχειρίδιο του Kalendar"
+
+#: components/qml/NativeEditMenu.qml:40 mail/qml/private/EditMenu.qml:26
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Undo"
+msgstr "Αναίρεση"
+
+#: components/qml/NativeEditMenu.qml:50 mail/qml/private/EditMenu.qml:36
+#, kde-format
+msgctxt "text editing menu action"
+msgid "Redo"
+msgstr "Επανάληψη"
+
+#: components/qml/NativeSettingsMenu.qml:8 components/qml/SettingsMenu.qml:9
+#, kde-format
+msgctxt "@action:menu"
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: components/qml/NativeViewMenu.qml:12 components/qml/ViewMenu.qml:9
+#: mail/qml/private/GlobalMenuBar.qml:19
+#, kde-format
+msgctxt "@action:menu"
+msgid "View"
+msgstr "Προβολή"
+
+#: components/qml/NativeWindowMenu.qml:12 components/qml/WindowMenu.qml:12
+#: mail/qml/private/GlobalMenuBar.qml:62
+#, kde-format
+msgctxt "@action:menu"
+msgid "Window"
+msgstr "Παράθυρο"
+
+#: components/qml/NativeWindowMenu.qml:15 components/qml/WindowMenu.qml:15
+#: mail/qml/private/GlobalMenuBar.qml:65
+#, kde-format
+msgctxt "@action:menu"
+msgid "Exit Full Screen"
+msgstr "Έξοδος από πλήρη οθόνη"
+
+#: components/qml/NativeWindowMenu.qml:15 components/qml/WindowMenu.qml:15
+#: mail/qml/private/GlobalMenuBar.qml:65
+#, kde-format
+msgctxt "@action:menu"
+msgid "Enter Full Screen"
+msgstr "Είσοδος σε πλήρη οθόνη"
 
 #: contacts/autotests/emailmodeltest.cpp:36 contacts/emailmodel.cpp:44
 #: contacts/qml/private/ContactPage.qml:276
@@ -120,6 +289,12 @@ msgctxt "@title:window"
 msgid "Choose Address Book Color"
 msgstr "Επιλογή χρώματος ημερολογίου"
 
+#: contacts/qml/ContactApplication.qml:16
+#, fuzzy, kde-format
+#| msgid "Import Calendar"
+msgid "Refresh All Address Books"
+msgstr "Εισαγωγή ημερολογίου"
+
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
 msgid "Done"
@@ -132,19 +307,19 @@ msgstr "Επιλογή διεύθυνσης αλληλογραφίας"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:456
+#: contents/ui/main.qml:465
 #, kde-format
 msgid "Contacts"
 msgstr "Επαφές"
 
-#: contacts/qml/ContactView.qml:79
+#: contacts/qml/ContactView.qml:81
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgctxt "@action:inmenu"
 msgid "Edit contact…"
 msgstr "Επαφές"
 
-#: contacts/qml/ContactView.qml:94
+#: contacts/qml/ContactView.qml:96
 #: contacts/qml/private/DeleteContactAction.qml:64
 #, fuzzy, kde-format
 #| msgid "Create new calendar"
@@ -152,7 +327,7 @@ msgctxt "@action:inmenu"
 msgid "Delete contact"
 msgstr "Δημιουργία νέου ημερολογίου"
 
-#: contacts/qml/ContactView.qml:112 contacts/qml/private/ContactsPage.qml:48
+#: contacts/qml/ContactView.qml:114 contacts/qml/private/ContactsPage.qml:48
 #, kde-format
 msgid "No contacts"
 msgstr "Χωρίς επαφές"
@@ -534,7 +709,7 @@ msgstr "Επεξεργασία"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:881
+#: contents/ui/main.qml:919
 #, kde-format
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -758,14 +933,14 @@ msgstr "Έτη"
 msgid "Min. Interval:"
 msgstr "Ελάχ. διάστημα:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
-#: kalendarapplication.cpp:279
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:432
+#: kalendarapplication.cpp:295
 #, kde-format
 msgid "New Event…"
 msgstr "Νέο γεγονός…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:429
-#: kalendarapplication.cpp:286
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:438
+#: kalendarapplication.cpp:302
 #, kde-format
 msgid "New Task…"
 msgstr "Νέα εργασία…"
@@ -1579,44 +1754,32 @@ msgstr "Να σημειωθεί ως ασυμπλήρωτο"
 msgid "Mark Complete"
 msgstr "Να σημειωθεί ως συμπληρωμένο"
 
-#: contents/ui/Drawers/MainDrawer.qml:117
+#: contents/ui/Drawers/MainDrawer.qml:119
 #, kde-format
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:161
-#: contents/ui/Drawers/MainDrawer.qml:302
-#, kde-format
-msgid "Undo: "
-msgstr "Αναίρεση: "
-
-#: contents/ui/Drawers/MainDrawer.qml:169
-#: contents/ui/Drawers/MainDrawer.qml:307
-#, kde-format
-msgid "Redo: "
-msgstr "Επανάληψη: "
-
-#: contents/ui/Drawers/MainDrawer.qml:178 contents/ui/main.qml:353
+#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:362
 #, kde-format
 msgid "Configure"
 msgstr "Διαμόρφωση"
 
-#: contents/ui/Drawers/MainDrawer.qml:302
+#: contents/ui/Drawers/MainDrawer.qml:304
 #, kde-format
 msgid "Undo"
 msgstr "Αναίρεση"
 
-#: contents/ui/Drawers/MainDrawer.qml:307
+#: contents/ui/Drawers/MainDrawer.qml:309
 #, kde-format
 msgid "Redo"
 msgstr "Επανάληψη"
 
-#: contents/ui/Drawers/MainDrawer.qml:318
+#: contents/ui/Drawers/MainDrawer.qml:320
 #, kde-format
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: contents/ui/Drawers/MainDrawer.qml:418
+#: contents/ui/Drawers/MainDrawer.qml:420
 #, kde-format
 msgid "View all tasks"
 msgstr "Προβολή όλων των εργασιών"
@@ -1786,83 +1949,85 @@ msgstr "Δεν ρυθμίστηκε επίπεδο προτεραιότητας"
 msgid "Return to Location"
 msgstr "Επιστροφή στην τοποθεσία"
 
-#: contents/ui/main.qml:321
+#: contents/ui/main.qml:330
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "%1 περιστατικά εισήχθησαν επιτυχώς."
 
-#: contents/ui/main.qml:324 contents/ui/main.qml:339
+#: contents/ui/main.qml:333 contents/ui/main.qml:348
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr "Παρουσιάστηκε σφάλμα στην εισαγωγή περιστατικών: %1"
 
-#: contents/ui/main.qml:336
+#: contents/ui/main.qml:345
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr "Νέο ημερολόγιο δημιουργήθηκε επιτυχώς από το εισηγμένο αρχείο."
 
-#: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
-#: contents/ui/MainViews/TodoView.qml:53
+#: contents/ui/main.qml:427 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/MainViews/TodoView.qml:54
 #, kde-format
 msgid "Create"
 msgstr "Δημιουργία"
 
-#: contents/ui/main.qml:438
+#: contents/ui/main.qml:447
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Month"
 msgstr "Μήνες"
 
-#: contents/ui/main.qml:441
+#: contents/ui/main.qml:450
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgid "Week"
 msgstr "Εβδομαδιαίο"
 
-#: contents/ui/main.qml:444
+#: contents/ui/main.qml:453
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "3 Days"
 msgstr "Ημέρες"
 
-#: contents/ui/main.qml:447
+#: contents/ui/main.qml:456
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "Day"
 msgstr "Ημέρες"
 
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:459
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Schedule"
 msgstr "Προβολή χρονοπρογραμματισμού"
 
-#: contents/ui/main.qml:453 contents/ui/main.qml:1119
+#: contents/ui/main.qml:462 contents/ui/main.qml:1157
 #, kde-format
 msgid "Tasks"
 msgstr "Εργασίες"
 
-#: contents/ui/main.qml:459 mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: contents/ui/main.qml:468 kalendarapplication.cpp:31
+#: kalendarapplication.cpp:36
+#: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
 #| msgid "Tasks View"
 msgid "Mail"
 msgstr "Προβολή εργασιών"
 
-#: contents/ui/main.qml:820
+#: contents/ui/main.qml:858
 #, fuzzy, kde-format
 #| msgid "Import Calendar"
 msgid "Import a calendar"
 msgstr "Εισαγωγή ημερολογίου"
 
-#: contents/ui/main.qml:840
+#: contents/ui/main.qml:878
 #, kde-format
 msgid "Import Calendar"
 msgstr "Εισαγωγή ημερολογίου"
 
-#: contents/ui/main.qml:848
+#: contents/ui/main.qml:886
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -1875,31 +2040,31 @@ msgstr ""
 "ένα νέο ημερολόγιο από αυτό το αρχείο;\n"
 " "
 
-#: contents/ui/main.qml:856
+#: contents/ui/main.qml:894
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Συγχώνευση με υπάρχον ημερολόγιο"
 
-#: contents/ui/main.qml:872
+#: contents/ui/main.qml:910
 #, kde-format
 msgid "Create new calendar"
 msgstr "Δημιουργία νέου ημερολογίου"
 
-#: contents/ui/main.qml:1077
+#: contents/ui/main.qml:1115
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Εβδομαδιαίο"
 
-#: contents/ui/main.qml:1083
+#: contents/ui/main.qml:1121
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "Ημέρες"
 
-#: contents/ui/main.qml:1089
+#: contents/ui/main.qml:1127
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open day view"
@@ -2058,34 +2223,34 @@ msgstr "Καμιά εργασία συμπληρωμένη"
 msgid "No tasks left to complete"
 msgstr "Δεν απέμειναν εργασίες για συμπλήρωση"
 
-#: contents/ui/MainViews/TodoView.qml:58 kalendarapplication.cpp:30
-#: kalendarapplication.cpp:33
+#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:30
+#: kalendarapplication.cpp:35
 #, kde-format
 msgid "Sort"
 msgstr "Ταξινόμηση"
 
-#: contents/ui/MainViews/TodoView.qml:92
+#: contents/ui/MainViews/TodoView.qml:93
 #, kde-format
 msgid "Show Completed"
 msgstr "Εμφάνιση συμπληρωμένων"
 
-#: contents/ui/MainViews/TodoView.qml:100
+#: contents/ui/MainViews/TodoView.qml:101
 #, kde-format
 msgid "Completed Tasks in %1"
 msgstr "Συμπληρωμένες εργασίες την %1"
 
-#: contents/ui/MainViews/TodoView.qml:100
+#: contents/ui/MainViews/TodoView.qml:101
 #, kde-format
 msgid "Completed Tasks"
 msgstr "Συμπληρωμένες εργασίες"
 
-#: contents/ui/MainViews/TodoView.qml:148
+#: contents/ui/MainViews/TodoView.qml:149
 #, kde-format
 msgid "Create a New Task…"
 msgstr "Δημιουργία νέας εργασίας…"
 
-#: contents/ui/MainViews/TodoView.qml:189
 #: contents/ui/MainViews/TodoView.qml:190
+#: contents/ui/MainViews/TodoView.qml:191
 #, kde-format
 msgid "Quickly Add a New Task."
 msgstr "Γρήγορη προσθήκη νέας εργασίας."
@@ -2138,143 +2303,6 @@ msgstr "Δημιουργία νέου ημερολογίου"
 msgctxt "@action:inmenu"
 msgid "Delete calendar source"
 msgstr "Δημιουργία νέου ημερολογίου"
-
-#: contents/ui/Menus/EditMenu.qml:28
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Undo"
-msgstr "Αναίρεση"
-
-#: contents/ui/Menus/EditMenu.qml:38
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Redo"
-msgstr "Επανάληψη"
-
-#: contents/ui/Menus/EditMenu.qml:51 contents/ui/Menus/WindowMenu.qml:79
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Cut"
-msgstr "Αποκοπή"
-
-#: contents/ui/Menus/EditMenu.qml:61 contents/ui/Menus/WindowMenu.qml:88
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Copy"
-msgstr "Αντιγραφή"
-
-#: contents/ui/Menus/EditMenu.qml:71 contents/ui/Menus/WindowMenu.qml:97
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Paste"
-msgstr "Επικόλληση"
-
-#: contents/ui/Menus/EditMenu.qml:81 contents/ui/Menus/WindowMenu.qml:106
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Delete"
-msgstr "Διαγραφή"
-
-#: contents/ui/Menus/EditMenu.qml:94 contents/ui/Menus/WindowMenu.qml:118
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Select All"
-msgstr "Επιλογή όλων"
-
-#: contents/ui/Menus/GlobalMenu.qml:19 contents/ui/Menus/WindowMenu.qml:17
-#, kde-format
-msgctxt "@action:menu"
-msgid "File"
-msgstr "Αρχείο"
-
-#: contents/ui/Menus/GlobalMenu.qml:26 contents/ui/Menus/WindowMenu.qml:24
-#, kde-format
-msgctxt "@action:menu"
-msgid "Quit Kalendar"
-msgstr "Έξοδος από το Kalendar"
-
-#: contents/ui/Menus/GlobalMenu.qml:34 contents/ui/Menus/WindowMenu.qml:32
-#, kde-format
-msgctxt "@action:menu"
-msgid "Edit"
-msgstr "Επεξεργασία"
-
-#: contents/ui/Menus/GlobalMenu.qml:46 contents/ui/Menus/WindowMenu.qml:126
-#, kde-format
-msgctxt "@action:menu"
-msgid "View"
-msgstr "Προβολή"
-
-#: contents/ui/Menus/GlobalMenu.qml:84
-#, kde-format
-msgctxt "@action:menu"
-msgid "Sort Tasks"
-msgstr "Ταξινόμηση εργασιών"
-
-#: contents/ui/Menus/GlobalMenu.qml:131 contents/ui/Menus/WindowMenu.qml:202
-#, kde-format
-msgctxt "@action:menu"
-msgid "Go"
-msgstr "Μετάβαση"
-
-#: contents/ui/Menus/GlobalMenu.qml:155 contents/ui/Menus/WindowMenu.qml:226
-#, kde-format
-msgctxt "@action:menu"
-msgid "Create"
-msgstr "Δημιουργία"
-
-#: contents/ui/Menus/GlobalMenu.qml:166 contents/ui/Menus/WindowMenu.qml:236
-#, kde-format
-msgctxt "@action:menu"
-msgid "Window"
-msgstr "Παράθυρο"
-
-#: contents/ui/Menus/GlobalMenu.qml:169 contents/ui/Menus/WindowMenu.qml:239
-#, kde-format
-msgctxt "@action:menu"
-msgid "Exit Full Screen"
-msgstr "Έξοδος από πλήρη οθόνη"
-
-#: contents/ui/Menus/GlobalMenu.qml:169 contents/ui/Menus/WindowMenu.qml:239
-#, kde-format
-msgctxt "@action:menu"
-msgid "Enter Full Screen"
-msgstr "Είσοδος σε πλήρη οθόνη"
-
-#: contents/ui/Menus/GlobalMenu.qml:176 contents/ui/Menus/WindowMenu.qml:246
-#, kde-format
-msgctxt "@action:menu"
-msgid "Settings"
-msgstr "Ρυθμίσεις"
-
-#: contents/ui/Menus/GlobalMenu.qml:195 contents/ui/Menus/WindowMenu.qml:268
-#, kde-format
-msgctxt "@action:menu"
-msgid "Help"
-msgstr "Βοήθεια"
-
-#: contents/ui/Menus/GlobalMenu.qml:203 contents/ui/Menus/WindowMenu.qml:276
-#, kde-format
-msgctxt "@action:menu"
-msgid "Kalendar Handbook"
-msgstr "Το εγχειρίδιο του Kalendar"
-
-#: contents/ui/Menus/WindowMenu.qml:58
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Undo Text"
-msgstr "Αναίρεση κειμένου"
-
-#: contents/ui/Menus/WindowMenu.qml:67
-#, kde-format
-msgctxt "text editing menu action"
-msgid "Redo Text"
-msgstr "Επανάληψη κειμένου"
-
-#: contents/ui/Menus/WindowMenu.qml:158
-#, kde-format
-msgid "Sort Tasks"
-msgstr "Ταξινόμηση εργασιών"
 
 #: contents/ui/Settings/CalendarSettingsPage.qml:138
 #, kde-format
@@ -2337,7 +2365,7 @@ msgstr ""
 msgid "Accounts"
 msgstr "Λογαριασμοί"
 
-#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:210
+#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:226
 #, kde-format
 msgid "About Kalendar"
 msgstr "Σχετικά με το Kalendar"
@@ -2560,170 +2588,188 @@ msgstr "Δείκτης τοποθεσίας:"
 msgid "Task"
 msgstr "Εργασία"
 
-#: kalendarapplication.cpp:82
+#: kalendarapplication.cpp:32 kalendarapplication.cpp:37
+#, fuzzy, kde-format
+#| msgid "Contacts"
+msgid "Contact"
+msgstr "Επαφές"
+
+#: kalendarapplication.cpp:98
 #, kde-format
 msgid "Tasks View"
 msgstr "Προβολή εργασιών"
 
-#: kalendarapplication.cpp:92 kalendarapplication.cpp:172
+#: kalendarapplication.cpp:108 kalendarapplication.cpp:188
 #, fuzzy, kde-format
 #| msgid "Ctrl+4"
 msgid "Ctrl+6"
 msgstr "Ctrl+4"
 
-#: kalendarapplication.cpp:98
+#: kalendarapplication.cpp:114
 #, kde-format
 msgid "Week View"
 msgstr "Προβολή εβδομάδας"
 
-#: kalendarapplication.cpp:108
+#: kalendarapplication.cpp:124
 #, kde-format
 msgid "Ctrl+2"
 msgstr "Ctrl+2"
 
-#: kalendarapplication.cpp:114
+#: kalendarapplication.cpp:130
 #, fuzzy, kde-format
 #| msgid "Tasks View"
 msgid "3 Day View"
 msgstr "Προβολή εργασιών"
 
-#: kalendarapplication.cpp:124
+#: kalendarapplication.cpp:140
 #, kde-format
 msgid "Ctrl+3"
 msgstr "Ctrl+3"
 
-#: kalendarapplication.cpp:130
+#: kalendarapplication.cpp:146
 #, fuzzy, kde-format
 #| msgid "Tasks View"
 msgid "Day View"
 msgstr "Προβολή εργασιών"
 
-#: kalendarapplication.cpp:140
+#: kalendarapplication.cpp:156
 #, kde-format
 msgid "Ctrl+4"
 msgstr "Ctrl+4"
 
-#: kalendarapplication.cpp:146
+#: kalendarapplication.cpp:162
 #, kde-format
 msgid "Schedule View"
 msgstr "Προβολή χρονοπρογραμματισμού"
 
-#: kalendarapplication.cpp:156
+#: kalendarapplication.cpp:172
 #, fuzzy, kde-format
 #| msgid "Ctrl+4"
 msgid "Ctrl+5"
 msgstr "Ctrl+4"
 
-#: kalendarapplication.cpp:162
+#: kalendarapplication.cpp:178
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contacts View"
 msgstr "Επαφές"
 
-#: kalendarapplication.cpp:178
+#: kalendarapplication.cpp:194
 #, fuzzy, kde-format
 #| msgid "Tasks View"
 msgid "Mail View"
 msgstr "Προβολή εργασιών"
 
-#: kalendarapplication.cpp:188
+#: kalendarapplication.cpp:204
 #, fuzzy, kde-format
 #| msgid "Ctrl+4"
 msgid "Ctrl+7"
 msgstr "Ctrl+4"
 
-#: kalendarapplication.cpp:194
+#: kalendarapplication.cpp:210
 #, kde-format
 msgid "Month View"
 msgstr "Προβολή μήνα"
 
-#: kalendarapplication.cpp:204
+#: kalendarapplication.cpp:220
 #, kde-format
 msgid "Ctrl+1"
 msgstr "Ctrl+1"
 
-#: kalendarapplication.cpp:217
+#: kalendarapplication.cpp:233
 #, kde-format
 msgid "Backwards"
 msgstr "Προς τα πίσω"
 
-#: kalendarapplication.cpp:230
+#: kalendarapplication.cpp:246
 #, kde-format
 msgid "Forwards"
 msgstr "Προς τα εμπρός"
 
-#: kalendarapplication.cpp:243
+#: kalendarapplication.cpp:259
 #, kde-format
 msgid "To Today"
 msgstr "Έως σήμερα"
 
-#: kalendarapplication.cpp:256
+#: kalendarapplication.cpp:272
 #, kde-format
 msgid "To Date…"
 msgstr "Έως ημερομηνία…"
 
-#: kalendarapplication.cpp:269
+#: kalendarapplication.cpp:285
 #, kde-format
 msgid "Show Menubar"
 msgstr "Εμφάνιση γραμμής μενού"
 
-#: kalendarapplication.cpp:273
+#: kalendarapplication.cpp:289
 #, kde-format
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: kalendarapplication.cpp:299
+#: kalendarapplication.cpp:309
+#, fuzzy, kde-format
+#| msgid "New Task…"
+msgid "New Mail…"
+msgstr "Νέα εργασία…"
+
+#: kalendarapplication.cpp:316
+#, fuzzy, kde-format
+#| msgid "New Event…"
+msgid "New Contact…"
+msgstr "Νέο γεγονός…"
+
+#: kalendarapplication.cpp:329
 #, kde-format
 msgid "Manage Tags…"
 msgstr "Διαχείριση ετικετών…"
 
-#: kalendarapplication.cpp:312
+#: kalendarapplication.cpp:342
 #, kde-format
 msgid "Import Calendar…"
 msgstr "Εισαγωγή ημερολογίου…"
 
-#: kalendarapplication.cpp:344
+#: kalendarapplication.cpp:374
 #, kde-format
 msgid "Alphabetically"
 msgstr "Αλφαβητικά"
 
-#: kalendarapplication.cpp:360
+#: kalendarapplication.cpp:390
 #, kde-format
 msgid "By Due Date"
 msgstr "Με ημερομηνία λήξης"
 
-#: kalendarapplication.cpp:376
+#: kalendarapplication.cpp:406
 #, kde-format
 msgid "By Priority Level"
 msgstr "Με επίπεδο προτεραιότητας"
 
-#: kalendarapplication.cpp:392
+#: kalendarapplication.cpp:422
 #, kde-format
 msgid "Ascending order"
 msgstr "Αύξουσα σειρά"
 
-#: kalendarapplication.cpp:408
+#: kalendarapplication.cpp:438
 #, kde-format
 msgid "Descending Order"
 msgstr "Φθίνουσα σειρά"
 
-#: kalendarapplication.cpp:424
+#: kalendarapplication.cpp:454
 #, kde-format
 msgid "Show Completed Tasks"
 msgstr "Εμφάνιση συμπληρωμένων εργασιών"
 
-#: kalendarapplication.cpp:438
+#: kalendarapplication.cpp:468
 #, kde-format
 msgid "Open Command Bar"
 msgstr "Άνοιγμα γραμμής εντολών"
 
-#: kalendarapplication.cpp:448
+#: kalendarapplication.cpp:478
 #, fuzzy, kde-format
 #| msgid "Import Calendar"
 msgid "Refresh All"
 msgstr "Εισαγωγή ημερολογίου"
 
-#: kalendarapplication.cpp:597 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:631 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr "Παρουσιάστηκε σφάλμα: %1"
@@ -2819,7 +2865,7 @@ msgstr ""
 msgid "Move to trash"
 msgstr ""
 
-#: mail/qml/FolderView.qml:43
+#: mail/qml/FolderView.qml:48
 #, kde-format
 msgid "Don't Mark as Important"
 msgstr ""
