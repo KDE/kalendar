@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-08 00:46+0000\n"
-"PO-Revision-Date: 2022-12-01 21:47+0530\n"
+"PO-Revision-Date: 2022-12-08 21:34+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.11.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,10 +40,9 @@ msgid "Redo: "
 msgstr "மீளச்செய்: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "அனைத்தையும் புதுப்பி"
+msgstr "அனைத்து நாள்காட்டிகளையும் புதுப்பி"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -284,11 +283,9 @@ msgid "Choose Address Book Color"
 msgstr "முகவரிப்புத்தகத்தின் நிறத்தைத் தேர்ந்தெடுப்பது"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "%1 என்ற முகவரிப்புத்தகத்தின் பண்புகள்"
+msgstr "அனைத்து முகவரிப்புத்தகங்களையும் புதுப்பி"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2482,10 +2479,9 @@ msgid "Task"
 msgstr "பணியை"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "தொடர்புகள்"
+msgstr "தொடர்பு"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2593,16 +2589,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "புதிய பணி…"
+msgstr "புதிய அஞ்சல்…"
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "புதிய நிகழ்வு…"
+msgstr "புதிய தொடர்பு…"
 
 #: kalendarapplication.cpp:329
 #, kde-format

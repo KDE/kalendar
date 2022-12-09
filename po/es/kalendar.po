@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-08 00:46+0000\n"
-"PO-Revision-Date: 2022-11-25 12:44+0100\n"
+"PO-Revision-Date: 2022-12-08 12:07+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.11.80\n"
+"X-Generator: Lokalize 22.11.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -42,10 +42,9 @@ msgid "Redo: "
 msgstr "Rehacer: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Actualizar todo"
+msgstr "Actualizar todos los calendarios"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -289,11 +288,9 @@ msgid "Choose Address Book Color"
 msgstr "Escoger el color para la libreta de direcciones"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "Propiedades de la libreta de direcciones %1"
+msgstr "Actualizar todas las libretas de direcciones"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2492,10 +2489,9 @@ msgid "Task"
 msgstr "Tarea"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Contactos"
+msgstr "Contacto"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2603,16 +2599,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "Nueva tarea..."
+msgstr "Nuevo mensaje de correo..."
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "Nuevo evento..."
+msgstr "Nuevo contacto..."
 
 #: kalendarapplication.cpp:329
 #, kde-format

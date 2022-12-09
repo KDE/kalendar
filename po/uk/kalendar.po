@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-08 00:46+0000\n"
-"PO-Revision-Date: 2022-11-25 09:16+0200\n"
+"PO-Revision-Date: 2022-12-08 06:59+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -41,10 +41,9 @@ msgid "Redo: "
 msgstr "Повторити: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Освіжити усі"
+msgstr "Освіжити усі календарі"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -285,11 +284,9 @@ msgid "Choose Address Book Color"
 msgstr "Виберіть колір адресної книги"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "Властивості адресної книги %1"
+msgstr "Освіжити усі адресні книги"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2523,10 +2520,9 @@ msgid "Task"
 msgstr "Завдання"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Контакти"
+msgstr "Контакт"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2634,16 +2630,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "Створити завдання…"
+msgstr "Створити повідомлення…"
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "Нова подія…"
+msgstr "Створити контакт…"
 
 #: kalendarapplication.cpp:329
 #, kde-format

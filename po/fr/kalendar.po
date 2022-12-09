@@ -37,10 +37,9 @@ msgid "Redo: "
 msgstr "Refaire :"
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Tout rafraîchir"
+msgstr "Actualiser tous les agendas"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format

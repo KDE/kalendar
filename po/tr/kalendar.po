@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-08 00:46+0000\n"
-"PO-Revision-Date: 2022-11-24 16:42+0300\n"
+"PO-Revision-Date: 2022-12-08 18:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -40,10 +40,9 @@ msgid "Redo: "
 msgstr "Yinele: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Tümünü Yenile"
+msgstr "Tüm Takvimleri Yenile"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -284,11 +283,9 @@ msgid "Choose Address Book Color"
 msgstr "Adres Defteri Rengi Seç"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "%1 Adres Defteri Özellikleri"
+msgstr "Tüm Adres Defterlerini Yenile"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2483,10 +2480,9 @@ msgid "Task"
 msgstr "Görev"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Kişiler"
+msgstr "Kişi"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2594,16 +2590,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "Yeni Görev…"
+msgstr "Yeni Posta…"
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "Yeni Etkinlik…"
+msgstr "Yeni Kişi…"
 
 #: kalendarapplication.cpp:329
 #, kde-format
