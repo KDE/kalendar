@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-08 00:46+0000\n"
-"PO-Revision-Date: 2022-11-23 20:23+0100\n"
+"PO-Revision-Date: 2022-12-10 11:15+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -41,10 +41,9 @@ msgid "Redo: "
 msgstr "Przywróć: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Odśwież wszystkie"
+msgstr "Odśwież wszystkie kalendarze"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -287,11 +286,9 @@ msgid "Choose Address Book Color"
 msgstr "Wybór barwy książki adresowej"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "Właściwości książki adresowej %1"
+msgstr "Odśwież wszystkie książki adresowe"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -922,15 +919,15 @@ msgstr "Nowe zadanie..."
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "To wydarzenie powtarza się"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "To wydarzenie ma przypomnienie"
+msgstr[1] "Te wydarzenia mają przypomnienia"
+msgstr[2] "Te wydarzenia mają przypomnienia"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
@@ -2504,10 +2501,9 @@ msgid "Task"
 msgstr "Zadanie"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Kontakty"
+msgstr "Kontakt"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2615,16 +2611,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "Nowe zadanie..."
+msgstr "Nowa wiadomość…"
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "Nowe wydarzenie..."
+msgstr "Nowy kontakt…"
 
 #: kalendarapplication.cpp:329
 #, kde-format
