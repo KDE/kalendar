@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-08 00:46+0000\n"
+"POT-Creation-Date: 2022-12-12 00:48+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -913,7 +913,7 @@ msgstr ""
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:131
 #: contents/ui/Settings/CalendarSettingsPage.qml:14
 #: contents/ui/Settings/SettingsPage.qml:24
-#: contents/ui/Settings/SourceSettingsPage.qml:18
+#: contents/ui/Settings/SourceSettingsPage.qml:20
 #, kde-format
 msgid "Calendars"
 msgstr "캘린더"
@@ -2114,57 +2114,57 @@ msgstr ""
 msgid "All day or Multi day"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:265
+#: contents/ui/MainViews/BasicMonthListView.qml:266
 #, fuzzy, kde-format
 #| msgid "Clear day."
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "아무것도 없는 날입니다."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Tap"
 msgstr "탭"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Click"
 msgstr "클릭"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:286
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "오늘은 아무것도 없습니다. 추가하려면 %1하십시오."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:408
+#: contents/ui/MainViews/BasicMonthListView.qml:409
 #, fuzzy, kde-format
 #| msgid "%1 (Day %2 of %3)"
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1(%3일 중 %2일)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:465
 #, kde-format
 msgid "Runs all day"
 msgstr "종일 행사"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:469
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:471
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgid "Starts at %1"
 msgstr "%1에 시작"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:473
+#: contents/ui/MainViews/BasicMonthListView.qml:474
 #, kde-format
 msgid "Ends at %1"
 msgstr "%1에 종료"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, fuzzy, kde-format
 #| msgid "Runs all day"
 msgid "Runs All Day"
@@ -2354,46 +2354,6 @@ msgstr ""
 msgid "Choose Calendar Color"
 msgstr ""
 
-#: contents/ui/Settings/GeneralSettingsPage.qml:11
-#, kde-format
-msgid "General"
-msgstr "일반"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:17
-#: contents/ui/Settings/ViewSettingsPage.qml:344
-#, kde-format
-msgid "Maps"
-msgstr ""
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:20
-#, kde-format
-msgid "Enable maps:"
-msgstr ""
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:32
-#: contents/ui/Settings/ViewSettingsPage.qml:357
-#, kde-format
-msgid "May cause crashing on some systems."
-msgstr ""
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:45
-#, fuzzy, kde-format
-#| msgid "Location:"
-msgid "Location marker:"
-msgstr "위치:"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:50
-#: contents/ui/Settings/ViewSettingsPage.qml:376
-#, kde-format
-msgid "Circle (shows area of location)"
-msgstr ""
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:56
-#: contents/ui/Settings/ViewSettingsPage.qml:383
-#, kde-format
-msgid "Pin (shows exact location)"
-msgstr ""
-
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
 #, kde-format
@@ -2411,216 +2371,242 @@ msgstr "계정"
 msgid "About Kalendar"
 msgstr "Kalendar 정보"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:19
+#: contents/ui/Settings/SourceSettingsPage.qml:21
 #, fuzzy, kde-format
 #| msgid "Add new calendar"
 msgid "Add New Calendar Source…"
 msgstr "새 캘린더 추가"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:26
+#: contents/ui/Settings/SourceSettingsPage.qml:28
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact Books"
 msgstr "연락처"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:27
+#: contents/ui/Settings/SourceSettingsPage.qml:29
 #, fuzzy, kde-format
 #| msgid "Add new calendar"
 msgid "Add New Address Book Source…"
 msgstr "새 캘린더 추가"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:36
+#: contents/ui/Settings/SourceSettingsPage.qml:38
 #, fuzzy, kde-format
 #| msgid "Accounts"
 msgid "Mail Accounts"
 msgstr "계정"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:37
+#: contents/ui/Settings/SourceSettingsPage.qml:39
 #, kde-format
 msgid "Add New mail account…"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:21
+#: contents/ui/Settings/ViewSettingsPage.qml:24
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "General settings"
 msgstr "월간 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:25
+#: contents/ui/Settings/ViewSettingsPage.qml:28
 #, kde-format
 msgid "Use popup to show incidence information"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:36
+#: contents/ui/Settings/ViewSettingsPage.qml:39
+#, fuzzy, kde-format
+#| msgid "Calendars"
+msgid "Show tasks in calendar views"
+msgstr "캘린더"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
 msgid "Show sub-tasks in calendar views"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:48
+#: contents/ui/Settings/ViewSettingsPage.qml:63
 #, kde-format
-msgid "Past event transparency:"
+msgid "Past event transparency"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:73
+#: contents/ui/Settings/ViewSettingsPage.qml:88
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Month view settings"
 msgstr "월간 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:85
+#: contents/ui/Settings/ViewSettingsPage.qml:100
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Month view mode"
 msgstr "월간 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:92
+#: contents/ui/Settings/ViewSettingsPage.qml:107
 #, kde-format
 msgid "Swipeable month grid"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:99
+#: contents/ui/Settings/ViewSettingsPage.qml:114
 #, kde-format
 msgid "Basic month grid"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:105
+#: contents/ui/Settings/ViewSettingsPage.qml:120
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:119
+#: contents/ui/Settings/ViewSettingsPage.qml:135
 #, kde-format
 msgid "Weekday label alignment"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:126
+#: contents/ui/Settings/ViewSettingsPage.qml:142
 #, kde-format
 msgid "Left"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:133
+#: contents/ui/Settings/ViewSettingsPage.qml:149
 #, kde-format
 msgid "Center"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:140
+#: contents/ui/Settings/ViewSettingsPage.qml:156
 #, kde-format
 msgid "Right"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:157
+#: contents/ui/Settings/ViewSettingsPage.qml:174
 #, kde-format
 msgid "Weekday label length:"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:162
+#: contents/ui/Settings/ViewSettingsPage.qml:179
 #, kde-format
 msgid "Full name (Monday)"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:169
+#: contents/ui/Settings/ViewSettingsPage.qml:186
 #, kde-format
 msgid "Abbreviated (Mon)"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:176
+#: contents/ui/Settings/ViewSettingsPage.qml:194
 #, kde-format
 msgid "Letter only (M)"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:183
+#: contents/ui/Settings/ViewSettingsPage.qml:203
 #, kde-format
 msgid "Show week numbers"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:195
+#: contents/ui/Settings/ViewSettingsPage.qml:217
 #, kde-format
 msgid "Grid border width (pixels):"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:225
+#: contents/ui/Settings/ViewSettingsPage.qml:247
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Week view settings"
 msgstr "월간 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:237
+#: contents/ui/Settings/ViewSettingsPage.qml:259
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Week view mode"
 msgstr "일정 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:244
+#: contents/ui/Settings/ViewSettingsPage.qml:266
 #, kde-format
 msgid "Swipeable week view"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:251
+#: contents/ui/Settings/ViewSettingsPage.qml:273
 #, kde-format
 msgid "Basic week view"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:257
+#: contents/ui/Settings/ViewSettingsPage.qml:279
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:270
+#: contents/ui/Settings/ViewSettingsPage.qml:292
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Schedule View settings"
 msgstr "일정 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:282
+#: contents/ui/Settings/ViewSettingsPage.qml:304
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Schedule view mode"
 msgstr "일정 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:289
+#: contents/ui/Settings/ViewSettingsPage.qml:311
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Swipeable schedule view"
 msgstr "일정 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:296
+#: contents/ui/Settings/ViewSettingsPage.qml:318
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Basic schedule view"
 msgstr "일정 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:302
+#: contents/ui/Settings/ViewSettingsPage.qml:324
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:308
+#: contents/ui/Settings/ViewSettingsPage.qml:333
 #, kde-format
 msgid "Show week headers"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:325
+#: contents/ui/Settings/ViewSettingsPage.qml:350
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Tasks View settings"
 msgstr "월간 보기"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:328
+#: contents/ui/Settings/ViewSettingsPage.qml:353
 #, fuzzy, kde-format
 #| msgid "Mark complete"
 msgid "Show completed sub-tasks"
 msgstr "완료된 것으로 표시"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:347
+#: contents/ui/Settings/ViewSettingsPage.qml:369
+#, kde-format
+msgid "Maps"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:373
 #, kde-format
 msgid "Enable maps"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:368
+#: contents/ui/Settings/ViewSettingsPage.qml:380
+#, kde-format
+msgid "May cause crashing on some systems."
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:392
 #, fuzzy, kde-format
 #| msgid "Location:"
 msgid "Location marker"
 msgstr "위치:"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:400
+#, kde-format
+msgid "Circle (shows area of location)"
+msgstr ""
+
+#: contents/ui/Settings/ViewSettingsPage.qml:407
+#, kde-format
+msgid "Pin (shows exact location)"
+msgstr ""
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
@@ -3090,6 +3076,14 @@ msgstr ""
 #| msgid "Accounts"
 msgid "Add Account"
 msgstr "계정"
+
+#~ msgid "General"
+#~ msgstr "일반"
+
+#, fuzzy
+#~| msgid "Location:"
+#~ msgid "Location marker:"
+#~ msgstr "위치:"
 
 #, fuzzy
 #~| msgid "Today"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-08 00:46+0000\n"
+"POT-Creation-Date: 2022-12-12 00:48+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -902,7 +902,7 @@ msgstr "Ετικέτες"
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:131
 #: contents/ui/Settings/CalendarSettingsPage.qml:14
 #: contents/ui/Settings/SettingsPage.qml:24
-#: contents/ui/Settings/SourceSettingsPage.qml:18
+#: contents/ui/Settings/SourceSettingsPage.qml:20
 #, kde-format
 msgid "Calendars"
 msgstr "Ημερολόγια"
@@ -2082,57 +2082,57 @@ msgstr "Επαναφορά"
 msgid "All day or Multi day"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:265
+#: contents/ui/MainViews/BasicMonthListView.qml:266
 #, fuzzy, kde-format
 #| msgid "Clear day."
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Καθαρισμός ημέρας."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Tap"
 msgstr "Χτύπημα"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Click"
 msgstr "Κλικ"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:286
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Τίποτε στα βιβλία σήμερα. Με %1 θα προσθέσετε κάτι."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:408
+#: contents/ui/MainViews/BasicMonthListView.qml:409
 #, fuzzy, kde-format
 #| msgid "%1 (Day %2 of %3)"
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Ημέρα %2 από %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:465
 #, kde-format
 msgid "Runs all day"
 msgstr "Εκτελείται όλη την ημέρα"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:469
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:471
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgid "Starts at %1"
 msgstr "Αρχίζει την %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:473
+#: contents/ui/MainViews/BasicMonthListView.qml:474
 #, kde-format
 msgid "Ends at %1"
 msgstr "Τελειώνει την %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgid "Runs All Day"
 msgstr "Εκτελείται όλη την ημέρα"
@@ -2314,45 +2314,6 @@ msgstr "Αλλαγή χρώματος ημερολογίου…"
 msgid "Choose Calendar Color"
 msgstr "Επιλογή χρώματος ημερολογίου"
 
-#: contents/ui/Settings/GeneralSettingsPage.qml:11
-#, kde-format
-msgid "General"
-msgstr "Γενικά"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:17
-#: contents/ui/Settings/ViewSettingsPage.qml:344
-#, kde-format
-msgid "Maps"
-msgstr "Χάρτες"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:20
-#, kde-format
-msgid "Enable maps:"
-msgstr "Ενεργοποίηση χαρτών:"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:32
-#: contents/ui/Settings/ViewSettingsPage.qml:357
-#, kde-format
-msgid "May cause crashing on some systems."
-msgstr "Ίσως προκαλέσει κατάρρευση σε κάποια συστήματα."
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:45
-#, kde-format
-msgid "Location marker:"
-msgstr "Δείκτης τοποθεσίας:"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:50
-#: contents/ui/Settings/ViewSettingsPage.qml:376
-#, kde-format
-msgid "Circle (shows area of location)"
-msgstr "Κύκλος (δείχνει την περιοχή της τοποθεσίας)"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:56
-#: contents/ui/Settings/ViewSettingsPage.qml:383
-#, kde-format
-msgid "Pin (shows exact location)"
-msgstr "Καρφίτσα (δείχνει την ακριβή τοποθεσία)"
-
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
 #, kde-format
@@ -2370,217 +2331,243 @@ msgstr "Λογαριασμοί"
 msgid "About Kalendar"
 msgstr "Σχετικά με το Kalendar"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:19
+#: contents/ui/Settings/SourceSettingsPage.qml:21
 #, fuzzy, kde-format
 #| msgid "Add New Calendar Source"
 msgid "Add New Calendar Source…"
 msgstr "Προσθήκη νέας πηγής ημερολογίου"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:26
+#: contents/ui/Settings/SourceSettingsPage.qml:28
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact Books"
 msgstr "Επαφές"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:27
+#: contents/ui/Settings/SourceSettingsPage.qml:29
 #, fuzzy, kde-format
 #| msgid "Add New Calendar Source…"
 msgid "Add New Address Book Source…"
 msgstr "Προσθήκη νέας πηγής ημερολογίου…"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:36
+#: contents/ui/Settings/SourceSettingsPage.qml:38
 #, fuzzy, kde-format
 #| msgid "Accounts"
 msgid "Mail Accounts"
 msgstr "Λογαριασμοί"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:37
+#: contents/ui/Settings/SourceSettingsPage.qml:39
 #, kde-format
 msgid "Add New mail account…"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:21
+#: contents/ui/Settings/ViewSettingsPage.qml:24
 #, fuzzy, kde-format
 #| msgid "Month View settings"
 msgid "General settings"
 msgstr "Ρυθμίσεις προβολής μήνα"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:25
+#: contents/ui/Settings/ViewSettingsPage.qml:28
 #, kde-format
 msgid "Use popup to show incidence information"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:36
+#: contents/ui/Settings/ViewSettingsPage.qml:39
+#, fuzzy, kde-format
+#| msgid "No task calendars enabled."
+msgid "Show tasks in calendar views"
+msgstr "Ημερολόγια εργασιών δεν έχουν ενεργοποιηθεί."
+
+#: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
 msgid "Show sub-tasks in calendar views"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:48
+#: contents/ui/Settings/ViewSettingsPage.qml:63
 #, kde-format
-msgid "Past event transparency:"
+msgid "Past event transparency"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:73
+#: contents/ui/Settings/ViewSettingsPage.qml:88
 #, fuzzy, kde-format
 #| msgid "Month View settings"
 msgid "Month view settings"
 msgstr "Ρυθμίσεις προβολής μήνα"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:85
+#: contents/ui/Settings/ViewSettingsPage.qml:100
 #, fuzzy, kde-format
 #| msgid "Month View"
 msgid "Month view mode"
 msgstr "Προβολή μήνα"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:92
+#: contents/ui/Settings/ViewSettingsPage.qml:107
 #, kde-format
 msgid "Swipeable month grid"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:99
+#: contents/ui/Settings/ViewSettingsPage.qml:114
 #, kde-format
 msgid "Basic month grid"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:105
+#: contents/ui/Settings/ViewSettingsPage.qml:120
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:119
+#: contents/ui/Settings/ViewSettingsPage.qml:135
 #, fuzzy, kde-format
 #| msgid "Weekday label alignment:"
 msgid "Weekday label alignment"
 msgstr "Στοίχιση ετικέτας καθημερινής:"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:126
+#: contents/ui/Settings/ViewSettingsPage.qml:142
 #, kde-format
 msgid "Left"
 msgstr "Αριστερά"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:133
+#: contents/ui/Settings/ViewSettingsPage.qml:149
 #, kde-format
 msgid "Center"
 msgstr "Κέντρο"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:140
+#: contents/ui/Settings/ViewSettingsPage.qml:156
 #, kde-format
 msgid "Right"
 msgstr "Δεξιά"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:157
+#: contents/ui/Settings/ViewSettingsPage.qml:174
 #, kde-format
 msgid "Weekday label length:"
 msgstr "Μήκος ετικέτας καθημερινής:"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:162
+#: contents/ui/Settings/ViewSettingsPage.qml:179
 #, kde-format
 msgid "Full name (Monday)"
 msgstr "Πλήρες όνομα (Δευτέρα)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:169
+#: contents/ui/Settings/ViewSettingsPage.qml:186
 #, kde-format
 msgid "Abbreviated (Mon)"
 msgstr "Σύντμηση (Δε)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:176
+#: contents/ui/Settings/ViewSettingsPage.qml:194
 #, kde-format
 msgid "Letter only (M)"
 msgstr "Αρχικό γράμμα μόνο (Δ)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:183
+#: contents/ui/Settings/ViewSettingsPage.qml:203
 #, kde-format
 msgid "Show week numbers"
 msgstr "Εμφάνιση αριθμών εβδομάδας"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:195
+#: contents/ui/Settings/ViewSettingsPage.qml:217
 #, kde-format
 msgid "Grid border width (pixels):"
 msgstr "Πλάτος πλαισίου πλέγματος (εικονοστοιχεία):"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:225
+#: contents/ui/Settings/ViewSettingsPage.qml:247
 #, fuzzy, kde-format
 #| msgid "Month View settings"
 msgid "Week view settings"
 msgstr "Ρυθμίσεις προβολής μήνα"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:237
+#: contents/ui/Settings/ViewSettingsPage.qml:259
 #, fuzzy, kde-format
 #| msgid "Week View"
 msgid "Week view mode"
 msgstr "Προβολή εβδομάδας"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:244
+#: contents/ui/Settings/ViewSettingsPage.qml:266
 #, kde-format
 msgid "Swipeable week view"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:251
+#: contents/ui/Settings/ViewSettingsPage.qml:273
 #, kde-format
 msgid "Basic week view"
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:257
+#: contents/ui/Settings/ViewSettingsPage.qml:279
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:270
+#: contents/ui/Settings/ViewSettingsPage.qml:292
 #, kde-format
 msgid "Schedule View settings"
 msgstr "Ρυθμίσεις προβολής χρονοπρογραμματισμού"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:282
+#: contents/ui/Settings/ViewSettingsPage.qml:304
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Schedule view mode"
 msgstr "Προβολή χρονοπρογραμματισμού"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:289
+#: contents/ui/Settings/ViewSettingsPage.qml:311
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Swipeable schedule view"
 msgstr "Προβολή χρονοπρογραμματισμού"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:296
+#: contents/ui/Settings/ViewSettingsPage.qml:318
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Basic schedule view"
 msgstr "Προβολή χρονοπρογραμματισμού"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:302
+#: contents/ui/Settings/ViewSettingsPage.qml:324
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
 msgstr ""
 
-#: contents/ui/Settings/ViewSettingsPage.qml:308
+#: contents/ui/Settings/ViewSettingsPage.qml:333
 #, kde-format
 msgid "Show week headers"
 msgstr "Εμφάνιση επικεφαλίδας εβδομάδας"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:325
+#: contents/ui/Settings/ViewSettingsPage.qml:350
 #, fuzzy, kde-format
 #| msgid "Month View settings"
 msgid "Tasks View settings"
 msgstr "Ρυθμίσεις προβολής μήνα"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:328
+#: contents/ui/Settings/ViewSettingsPage.qml:353
 #, fuzzy, kde-format
 #| msgid "Show Completed Tasks"
 msgid "Show completed sub-tasks"
 msgstr "Εμφάνιση συμπληρωμένων εργασιών"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:347
+#: contents/ui/Settings/ViewSettingsPage.qml:369
+#, kde-format
+msgid "Maps"
+msgstr "Χάρτες"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:373
 #, fuzzy, kde-format
 #| msgid "Enable maps:"
 msgid "Enable maps"
 msgstr "Ενεργοποίηση χαρτών:"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:368
+#: contents/ui/Settings/ViewSettingsPage.qml:380
+#, kde-format
+msgid "May cause crashing on some systems."
+msgstr "Ίσως προκαλέσει κατάρρευση σε κάποια συστήματα."
+
+#: contents/ui/Settings/ViewSettingsPage.qml:392
 #, fuzzy, kde-format
 #| msgid "Location marker:"
 msgid "Location marker"
 msgstr "Δείκτης τοποθεσίας:"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:400
+#, kde-format
+msgid "Circle (shows area of location)"
+msgstr "Κύκλος (δείχνει την περιοχή της τοποθεσίας)"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:407
+#, kde-format
+msgid "Pin (shows exact location)"
+msgstr "Καρφίτσα (δείχνει την ακριβή τοποθεσία)"
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
@@ -3052,6 +3039,15 @@ msgstr ""
 #| msgid "Accounts"
 msgid "Add Account"
 msgstr "Λογαριασμοί"
+
+#~ msgid "General"
+#~ msgstr "Γενικά"
+
+#~ msgid "Enable maps:"
+#~ msgstr "Ενεργοποίηση χαρτών:"
+
+#~ msgid "Location marker:"
+#~ msgstr "Δείκτης τοποθεσίας:"
 
 #, fuzzy
 #~| msgid "Expand Sidebar"

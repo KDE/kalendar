@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-08 00:46+0000\n"
+"POT-Creation-Date: 2022-12-12 00:48+0000\n"
 "PO-Revision-Date: 2022-12-09 08:16+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -869,7 +869,7 @@ msgstr "Etichette"
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:131
 #: contents/ui/Settings/CalendarSettingsPage.qml:14
 #: contents/ui/Settings/SettingsPage.qml:24
-#: contents/ui/Settings/SourceSettingsPage.qml:18
+#: contents/ui/Settings/SourceSettingsPage.qml:20
 #, kde-format
 msgid "Calendars"
 msgstr "Calendari"
@@ -2006,55 +2006,55 @@ msgstr "Ripristina"
 msgid "All day or Multi day"
 msgstr "Tutto il giorno o più giorni"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:265
+#: contents/ui/MainViews/BasicMonthListView.qml:266
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Giornata vuota."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Tap"
 msgstr "Tocco"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:285
 #, kde-format
 msgid "Click"
 msgstr "Clic"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:286
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Nessun evento previsto per oggi. %1 per aggiungere qualcosa."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:408
+#: contents/ui/MainViews/BasicMonthListView.qml:409
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Giorno %2 di %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:465
 #, kde-format
 msgid "Runs all day"
 msgstr "Dura tutto il giorno"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:469
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:471
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgid "Starts at %1"
 msgstr "Inizia alle %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:473
+#: contents/ui/MainViews/BasicMonthListView.qml:474
 #, kde-format
 msgid "Ends at %1"
 msgstr "Finisce alle %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgid "Runs All Day"
 msgstr "Dura tutto il giorno"
@@ -2224,45 +2224,6 @@ msgstr "Modifica il colore del calendario…"
 msgid "Choose Calendar Color"
 msgstr "Scegli il colore del calendario"
 
-#: contents/ui/Settings/GeneralSettingsPage.qml:11
-#, kde-format
-msgid "General"
-msgstr "Generale"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:17
-#: contents/ui/Settings/ViewSettingsPage.qml:344
-#, kde-format
-msgid "Maps"
-msgstr "Mappe"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:20
-#, kde-format
-msgid "Enable maps:"
-msgstr "Abilita mappe:"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:32
-#: contents/ui/Settings/ViewSettingsPage.qml:357
-#, kde-format
-msgid "May cause crashing on some systems."
-msgstr "Può causare arresti inattesi su alcuni sistemi."
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:45
-#, kde-format
-msgid "Location marker:"
-msgstr "Marcatore di posizione:"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:50
-#: contents/ui/Settings/ViewSettingsPage.qml:376
-#, kde-format
-msgid "Circle (shows area of location)"
-msgstr "Cerchio (mostra l'area della posizione)"
-
-#: contents/ui/Settings/GeneralSettingsPage.qml:56
-#: contents/ui/Settings/ViewSettingsPage.qml:383
-#, kde-format
-msgid "Pin (shows exact location)"
-msgstr "Puntina (mostra la posizione esatta)"
-
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
 #, kde-format
@@ -2280,204 +2241,231 @@ msgstr "Account"
 msgid "About Kalendar"
 msgstr "Informazioni su Kalendar"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:19
+#: contents/ui/Settings/SourceSettingsPage.qml:21
 #, kde-format
 msgid "Add New Calendar Source…"
 msgstr "Aggiungi nuova fonte di calendario…"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:26
+#: contents/ui/Settings/SourceSettingsPage.qml:28
 #, kde-format
 msgid "Contact Books"
 msgstr "Rubriche"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:27
+#: contents/ui/Settings/SourceSettingsPage.qml:29
 #, kde-format
 msgid "Add New Address Book Source…"
 msgstr "Aggiungi nuova fonte della rubrica..."
 
-#: contents/ui/Settings/SourceSettingsPage.qml:36
+#: contents/ui/Settings/SourceSettingsPage.qml:38
 #, kde-format
 msgid "Mail Accounts"
 msgstr "Account di posta"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:37
+#: contents/ui/Settings/SourceSettingsPage.qml:39
 #, kde-format
 msgid "Add New mail account…"
 msgstr "Aggiungi nuova account di posta…"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:21
+#: contents/ui/Settings/ViewSettingsPage.qml:24
 #, kde-format
 msgid "General settings"
 msgstr "Impostazioni generali"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:25
+#: contents/ui/Settings/ViewSettingsPage.qml:28
 #, kde-format
 msgid "Use popup to show incidence information"
 msgstr "Usa la finestra a comparsa per mostrare le informazioni sull'incidenza"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:36
+#: contents/ui/Settings/ViewSettingsPage.qml:39
+#, fuzzy, kde-format
+#| msgid "Show sub-tasks in calendar views"
+msgid "Show tasks in calendar views"
+msgstr "Mostra le sotto-attività nelle viste del calendario"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
 msgid "Show sub-tasks in calendar views"
 msgstr "Mostra le sotto-attività nelle viste del calendario"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:48
-#, kde-format
-msgid "Past event transparency:"
+#: contents/ui/Settings/ViewSettingsPage.qml:63
+#, fuzzy, kde-format
+#| msgid "Past event transparency:"
+msgid "Past event transparency"
 msgstr "Trasparenza degli eventi passati:"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:73
+#: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
 msgid "Month view settings"
 msgstr "Impostazioni della vista mensile"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:85
+#: contents/ui/Settings/ViewSettingsPage.qml:100
 #, kde-format
 msgid "Month view mode"
 msgstr "Modalità vista mensile"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:92
+#: contents/ui/Settings/ViewSettingsPage.qml:107
 #, kde-format
 msgid "Swipeable month grid"
 msgstr "Griglia mensile scorrevole"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:99
+#: contents/ui/Settings/ViewSettingsPage.qml:114
 #, kde-format
 msgid "Basic month grid"
 msgstr "Griglia mensile di base"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:105
+#: contents/ui/Settings/ViewSettingsPage.qml:120
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
 msgstr ""
 "La griglia mensile scorrevole richiede prestazioni di sistema più elevate."
 
-#: contents/ui/Settings/ViewSettingsPage.qml:119
+#: contents/ui/Settings/ViewSettingsPage.qml:135
 #, kde-format
 msgid "Weekday label alignment"
 msgstr "Allineamento delle etichette dei giorni della settimana"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:126
+#: contents/ui/Settings/ViewSettingsPage.qml:142
 #, kde-format
 msgid "Left"
 msgstr "Sinistra"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:133
+#: contents/ui/Settings/ViewSettingsPage.qml:149
 #, kde-format
 msgid "Center"
 msgstr "Centro"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:140
+#: contents/ui/Settings/ViewSettingsPage.qml:156
 #, kde-format
 msgid "Right"
 msgstr "Destra"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:157
+#: contents/ui/Settings/ViewSettingsPage.qml:174
 #, kde-format
 msgid "Weekday label length:"
 msgstr "Lunghezza delle etichette dei giorni della settimana"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:162
+#: contents/ui/Settings/ViewSettingsPage.qml:179
 #, kde-format
 msgid "Full name (Monday)"
 msgstr "Nome completo (Lunedì)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:169
+#: contents/ui/Settings/ViewSettingsPage.qml:186
 #, kde-format
 msgid "Abbreviated (Mon)"
 msgstr "Abbreviato (Lun)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:176
+#: contents/ui/Settings/ViewSettingsPage.qml:194
 #, kde-format
 msgid "Letter only (M)"
 msgstr "Solo lettera (L)"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:183
+#: contents/ui/Settings/ViewSettingsPage.qml:203
 #, kde-format
 msgid "Show week numbers"
 msgstr "Mostra i numeri di settimana"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:195
+#: contents/ui/Settings/ViewSettingsPage.qml:217
 #, kde-format
 msgid "Grid border width (pixels):"
 msgstr "Larghezza dei bordi della griglia (pixel):"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:225
+#: contents/ui/Settings/ViewSettingsPage.qml:247
 #, kde-format
 msgid "Week view settings"
 msgstr "Impostazioni della vista settimanale"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:237
+#: contents/ui/Settings/ViewSettingsPage.qml:259
 #, kde-format
 msgid "Week view mode"
 msgstr "Modalità vista settimanale"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:244
+#: contents/ui/Settings/ViewSettingsPage.qml:266
 #, kde-format
 msgid "Swipeable week view"
 msgstr "Vista settimanale scorrevole"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:251
+#: contents/ui/Settings/ViewSettingsPage.qml:273
 #, kde-format
 msgid "Basic week view"
 msgstr "Vista settimanale di base"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:257
+#: contents/ui/Settings/ViewSettingsPage.qml:279
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
 msgstr ""
 "La vista settimanale scorrevole richiede prestazioni di sistema più elevate."
 
-#: contents/ui/Settings/ViewSettingsPage.qml:270
+#: contents/ui/Settings/ViewSettingsPage.qml:292
 #, kde-format
 msgid "Schedule View settings"
 msgstr "Impostazioni della vista delle pianificazioni"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:282
+#: contents/ui/Settings/ViewSettingsPage.qml:304
 #, kde-format
 msgid "Schedule view mode"
 msgstr "Modalità vista delle pianificazioni"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:289
+#: contents/ui/Settings/ViewSettingsPage.qml:311
 #, kde-format
 msgid "Swipeable schedule view"
 msgstr "Vista delle pianificazioni scorrevole"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:296
+#: contents/ui/Settings/ViewSettingsPage.qml:318
 #, kde-format
 msgid "Basic schedule view"
 msgstr "Vista delle pianificazioni di base"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:302
+#: contents/ui/Settings/ViewSettingsPage.qml:324
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
 msgstr ""
 "La vista della pianificazione scorrevole richiede prestazioni di sistema più "
 "elevate."
 
-#: contents/ui/Settings/ViewSettingsPage.qml:308
+#: contents/ui/Settings/ViewSettingsPage.qml:333
 #, kde-format
 msgid "Show week headers"
 msgstr "Mostra le intestazioni delle settimane"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:325
+#: contents/ui/Settings/ViewSettingsPage.qml:350
 #, kde-format
 msgid "Tasks View settings"
 msgstr "Impostazioni della vista delle attività"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:328
+#: contents/ui/Settings/ViewSettingsPage.qml:353
 #, kde-format
 msgid "Show completed sub-tasks"
 msgstr "Mostra le sotto-attività completate"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:347
+#: contents/ui/Settings/ViewSettingsPage.qml:369
+#, kde-format
+msgid "Maps"
+msgstr "Mappe"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:373
 #, kde-format
 msgid "Enable maps"
 msgstr "Abilita mappe"
 
-#: contents/ui/Settings/ViewSettingsPage.qml:368
+#: contents/ui/Settings/ViewSettingsPage.qml:380
+#, kde-format
+msgid "May cause crashing on some systems."
+msgstr "Può causare arresti inattesi su alcuni sistemi."
+
+#: contents/ui/Settings/ViewSettingsPage.qml:392
 #, kde-format
 msgid "Location marker"
 msgstr "Marcatore di posizione"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:400
+#, kde-format
+msgid "Circle (shows area of location)"
+msgstr "Cerchio (mostra l'area della posizione)"
+
+#: contents/ui/Settings/ViewSettingsPage.qml:407
+#, kde-format
+msgid "Pin (shows exact location)"
+msgstr "Puntina (mostra la posizione esatta)"
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
 #: models/todosortfilterproxymodel.cpp:135
@@ -2928,6 +2916,15 @@ msgstr "Modifica"
 #, kde-format
 msgid "Add Account"
 msgstr "Aggiungi account"
+
+#~ msgid "General"
+#~ msgstr "Generale"
+
+#~ msgid "Enable maps:"
+#~ msgstr "Abilita mappe:"
+
+#~ msgid "Location marker:"
+#~ msgstr "Marcatore di posizione:"
 
 #~ msgid "Expand MainDrawer"
 #~ msgstr "Espandi il cassetto principale"
