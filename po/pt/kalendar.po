@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-11-28 15:14+0000\n"
+"PO-Revision-Date: 2022-12-12 16:36+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -38,10 +38,9 @@ msgid "Redo: "
 msgstr "Refazer: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Actualizar Tudo"
+msgstr "Actualizar Todos os Calendários"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -284,11 +283,9 @@ msgid "Choose Address Book Color"
 msgstr "Escolher a Cor do Livro de Endereços"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "Propriedades do Livro de Endereços %1"
+msgstr "Actualizar Todos os Livros de Endereços"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2278,10 +2275,9 @@ msgid "Use popup to show incidence information"
 msgstr "Usar uma janela para mostrar a informação da incidência"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Mostrar as sub-tarefas nas áreas do calendário"
+msgstr "Mostrar as tarefas nas áreas do calendário"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2289,10 +2285,9 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Mostrar as sub-tarefas nas áreas do calendário"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Transparência dos eventos passados:"
+msgstr "Transparência dos eventos passados"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
@@ -2472,10 +2467,9 @@ msgid "Task"
 msgstr "Tarefa"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Contactos"
+msgstr "Contacto"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2583,16 +2577,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "Nova Tarefa…"
+msgstr "Novo E-Mail…"
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "Novo Evento…"
+msgstr "Novo Contacto…"
 
 #: kalendarapplication.cpp:329
 #, kde-format
@@ -2918,12 +2910,3 @@ msgstr "Modificar"
 #, kde-format
 msgid "Add Account"
 msgstr "Adicionar uma Conta"
-
-#~ msgid "General"
-#~ msgstr "Geral"
-
-#~ msgid "Enable maps:"
-#~ msgstr "Activar os mapas:"
-
-#~ msgid "Location marker:"
-#~ msgstr "Marcador de localização:"

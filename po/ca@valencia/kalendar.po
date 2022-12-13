@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-12-08 17:01+0100\n"
+"PO-Revision-Date: 2022-12-12 09:39+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -2281,10 +2281,9 @@ msgstr ""
 "Utilitza una finestra emergent per a mostrar informació de la incidència"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Mostra les subtasques en les vistes de calendari"
+msgstr "Mostra les tasques en les vistes de calendari"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2292,10 +2291,9 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Mostra les subtasques en les vistes de calendari"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Transparència dels esdeveniments passats:"
+msgstr "Transparència dels esdeveniments passats"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
@@ -2923,12 +2921,3 @@ msgstr "Modifica"
 #, kde-format
 msgid "Add Account"
 msgstr "Afig un compte"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Enable maps:"
-#~ msgstr "Activa els mapes:"
-
-#~ msgid "Location marker:"
-#~ msgstr "Marcador d'ubicació:"
