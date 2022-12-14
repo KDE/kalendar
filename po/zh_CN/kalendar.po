@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-12-01 06:53\n"
+"PO-Revision-Date: 2022-12-13 12:22\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -40,10 +40,9 @@ msgid "Redo: "
 msgstr "重做："
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "刷新全部"
+msgstr ""
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -284,10 +283,9 @@ msgid "Choose Address Book Color"
 msgstr ""
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "刷新全部"
+msgstr ""
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2247,10 +2245,9 @@ msgid "Use popup to show incidence information"
 msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "在日历视图中显示子任务"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2258,10 +2255,9 @@ msgid "Show sub-tasks in calendar views"
 msgstr "在日历视图中显示子任务"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "过去事件透明度："
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
@@ -2440,10 +2436,9 @@ msgid "Task"
 msgstr "任务"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "联系人"
+msgstr ""
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2551,16 +2546,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "新建任务..."
+msgstr ""
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "新建事件..."
+msgstr ""
 
 #: kalendarapplication.cpp:329
 #, kde-format
@@ -2882,12 +2875,3 @@ msgstr ""
 #, kde-format
 msgid "Add Account"
 msgstr ""
-
-#~ msgid "General"
-#~ msgstr "常规"
-
-#~ msgid "Enable maps:"
-#~ msgstr "启用地图："
-
-#~ msgid "Location marker:"
-#~ msgstr "位置标记："

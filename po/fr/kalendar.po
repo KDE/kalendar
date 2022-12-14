@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-12-11 20:33+0100\n"
+"PO-Revision-Date: 2022-12-12 20:46+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -2276,10 +2276,9 @@ msgstr ""
 "l'incidence"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Afficher les sous-tâches dans les affichages d'agenda"
+msgstr "Afficher les tâches dans les affichages d'agenda"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2287,10 +2286,9 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Afficher les sous-tâches dans les affichages d'agenda"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Transparence de l'évènement précédent :"
+msgstr "Transparence pour les évènements précédents"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
