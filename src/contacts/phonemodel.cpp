@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "phonemodel.h"
-#include <kcontacts/phonenumber.h>
+#include <KContacts/PhoneNumber>
 
 PhoneModel::PhoneModel(QObject *parent)
     : QAbstractListModel(parent)

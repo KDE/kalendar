@@ -10,6 +10,7 @@ AddresseeWrapper::AddresseeWrapper(QObject *parent)
     , Akonadi::ItemMonitor()
     , m_addressesModel(new AddressModel(this))
     , m_emailModel(new EmailModel(this))
+    , m_imppModel(new ImppModel(this))
     , m_phoneModel(new PhoneModel(this))
 {
     Akonadi::ItemFetchScope scope;
@@ -25,6 +26,10 @@ AddresseeWrapper::AddresseeWrapper(QObject *parent)
 
     connect(m_phoneModel, &PhoneModel::changed, this, [this](const KContacts::PhoneNumber::List &phoneNumbers) {
         m_addressee.setPhoneNumbers(phoneNumbers);
+    });
+
+    connect(m_imppModel, &ImppModel::changed, this, [this](const KContacts::Impp::List &impps) {
+        m_addressee.setImppList(impps);
     });
 }
 
@@ -68,6 +73,11 @@ AddressModel *AddresseeWrapper::addressesModel() const
     return m_addressesModel;
 }
 
+ImppModel *AddresseeWrapper::imppModel() const
+{
+    return m_imppModel;
+}
+
 void AddresseeWrapper::setAddresseeItem(const Akonadi::Item &addresseeItem)
 {
     Akonadi::ItemMonitor::setItem(addresseeItem);
@@ -109,6 +119,7 @@ void AddresseeWrapper::setAddressee(const KContacts::Addressee &addressee)
     m_addressesModel->setAddresses(addressee.addresses());
     m_emailModel->loadContact(addressee);
     m_phoneModel->loadContact(addressee);
+    m_imppModel->loadContact(addressee);
     notifyDataChanged();
 }
 

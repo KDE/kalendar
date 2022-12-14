@@ -10,13 +10,12 @@
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemMonitor>
 #include <KContacts/Addressee>
-#include <QObject>
 #include <kcontacts/addressee.h>
-#include <qobjectdefs.h>
 
 #include "addressmodel.h"
 
 #include "emailmodel.h"
+#include "imppmodel.h"
 #include "phonemodel.h"
 
 /// This class is a QObject wrapper for a KContact::Adressee
@@ -46,6 +45,9 @@ class AddresseeWrapper : public QObject, public Akonadi::ItemMonitor
 
     // Address
     Q_PROPERTY(AddressModel *addressesModel READ addressesModel CONSTANT)
+
+    // Impp
+    Q_PROPERTY(ImppModel *imppModel READ imppModel CONSTANT)
 
     // Personal information
     Q_PROPERTY(QDateTime birthday READ birthday WRITE setBirthday NOTIFY birthdayChanged)
@@ -114,6 +116,7 @@ public:
     KContacts::Picture photo() const;
 
     AddressModel *addressesModel() const;
+    ImppModel *imppModel() const;
 
     EmailModel *emailModel() const;
     PhoneModel *phoneModel() const;
@@ -205,6 +208,7 @@ private:
     Akonadi::Collection m_collection; // For when we want to edit, this is temporary
     AddressModel *m_addressesModel;
     EmailModel *m_emailModel;
+    ImppModel *m_imppModel;
     PhoneModel *m_phoneModel;
     DisplayType m_displayType;
 };
