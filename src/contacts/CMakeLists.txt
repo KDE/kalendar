@@ -1,17 +1,20 @@
 # SPDX-FileCopyrightText: 2022 Carl Schwan <carl@carlschwan.eu>
 # SPDX-License-Identifier: BSD-2-Clause
 
-ecm_add_qml_module(kalendar_contact_plugin URI "org.kde.kalendar.contact" VERSION 1.0)
+### Static lib
 
-target_sources(kalendar_contact_plugin PRIVATE
-    contactplugin.cpp
-    contactplugin.h
+add_library(kalendar_contact_static STATIC)
+
+target_link_libraries(kalendar_contact_static PUBLIC kalendar_lib)
+target_sources(kalendar_contact_static PUBLIC
     addresseewrapper.cpp
     addresseewrapper.h
     addressmodel.cpp
     addressmodel.h
     phonemodel.h
     phonemodel.cpp
+    imppmodel.h
+    imppmodel.cpp
     emailmodel.h
     emailmodel.cpp
     globalcontactmodel.cpp
@@ -35,6 +38,23 @@ target_sources(kalendar_contact_plugin PRIVATE
     attributes/contactmetadataattribute_p.h
     attributes/contactmetadataattribute.cpp
     attributes/attributeregistrar.cpp
+)
+
+ecm_qt_declare_logging_category(kalendar_contact_static
+    HEADER kalendar_contact_debug.h
+    IDENTIFIER KALENDAR_LOG
+    CATEGORY_NAME org.kde.kalendar.contact
+    DESCRIPTION "kalendar contact"
+    EXPORT KALENDAR
+)
+
+### QML plugin
+
+ecm_add_qml_module(kalendar_contact_plugin URI "org.kde.kalendar.contact" VERSION 1.0)
+
+target_sources(kalendar_contact_plugin PRIVATE
+    contactplugin.cpp
+    contactplugin.h
     resources.qrc
 )
 
@@ -64,15 +84,7 @@ ecm_target_qml_sources(kalendar_contact_plugin
     qml/private/DeleteContactAction.qml
 )
 
-ecm_qt_declare_logging_category(kalendar_contact_plugin
-    HEADER kalendar_contact_debug.h
-    IDENTIFIER KALENDAR_LOG
-    CATEGORY_NAME org.kde.kalendar.contact
-    DESCRIPTION "kalendar contact"
-    EXPORT KALENDAR
-)
-
-target_link_libraries(kalendar_contact_plugin PRIVATE kalendar_lib)
+target_link_libraries(kalendar_contact_plugin PRIVATE kalendar_contact_static)
 
 ecm_qt_install_logging_categories(
     EXPORT KALENDAR

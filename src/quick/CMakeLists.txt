@@ -21,6 +21,7 @@ target_sources(akonadi_quick_plugin PRIVATE
 
 ecm_target_qml_sources(akonadi_quick_plugin SOURCES
     qml/CollectionComboBox.qml
+    qml/MobileCollectionComboBox.qml
     qml/AgentConfigurationForm.qml
 )
 
