@@ -36,6 +36,10 @@
 #include <QQuickWindow>
 #include <QUrl>
 
+#ifdef WITH_WAYLAND
+#include "pointergestureswayland.h"
+#endif
+
 using namespace KCalendarCore;
 
 static void raiseWindow(QWindow *window)
@@ -138,6 +142,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<TimeZoneListModel>("org.kde.kalendar", 1, 0, "TimeZoneListModel");
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
     qmlRegisterType<InfiniteCalendarViewModel>("org.kde.kalendar", 1, 0, "InfiniteCalendarViewModel");
+
+#ifdef WITH_WAYLAND
+    qmlRegisterType<PointerGesturesWayland>("org.kde.kalendar", 1, 0, "PointerGesturesWayland");
+#endif
 
     qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/KalendarUiUtils.qml")), "org.kde.kalendar.utils", 1, 0, "KalendarUiUtils");
 
