@@ -11,7 +11,7 @@ class PointerGestures : public QWaylandClientExtensionTemplate<PointerGestures>,
 {
 public:
     PointerGestures()
-        : QWaylandClientExtensionTemplate<PointerGestures>(1)
+        : QWaylandClientExtensionTemplate<PointerGestures>(3)
     {
     }
 };
@@ -25,12 +25,13 @@ public:
         : QObject(parent)
         , zwp_pointer_gesture_swipe_v1(object)
     {
+        qWarning() << "Creating SwipeGesture";
     }
 
 Q_SIGNALS:
     void gestureBegin(uint32_t serial, uint32_t time, uint32_t fingers);
-    void gestureUpdate(wl_fixed_t dx, wl_fixed_t dy);
-    void gestureENd(uint32_t serial, uint32_t time, int32_t cancelled);
+    void gestureUpdate(uint32_t time, wl_fixed_t dx, wl_fixed_t dy);
+    void gestureEnd(uint32_t serial, uint32_t time, int32_t cancelled);
 
 private:
     virtual void zwp_pointer_gesture_swipe_v1_begin(uint32_t serial, uint32_t time, struct ::wl_surface *surface, uint32_t fingers) override
@@ -42,13 +43,13 @@ private:
     virtual void zwp_pointer_gesture_swipe_v1_update(uint32_t time, wl_fixed_t dx, wl_fixed_t dy) override
     {
         qWarning() << "Gesture updated" << time << dx << dy;
-        Q_EMIT gestureBegin(time, dx, dy);
+        Q_EMIT gestureUpdate(time, dx, dy);
     }
 
     virtual void zwp_pointer_gesture_swipe_v1_end(uint32_t serial, uint32_t time, int32_t cancelled) override
     {
-        qWarning() << "Gesture updated" << serial << time << cancelled;
-        Q_EMIT gestureBegin(serial, time, cancelled);
+        qWarning() << "Gesture end" << serial << time << cancelled;
+        Q_EMIT gestureEnd(serial, time, cancelled);
     }
 };
 
@@ -56,6 +57,9 @@ PointerGesturesWayland::PointerGesturesWayland(QObject *parent)
     : QObject(parent)
 {
     m_pointerGestures = new PointerGestures();
+    connect(m_pointerGestures, &PointerGestures::activeChanged, this, [this]() {
+        init();
+    });
 }
 
 void PointerGesturesWayland::init()

@@ -34,7 +34,6 @@ Kirigami.ApplicationWindow {
     readonly property var contactApplication: ContactApplication {}
 
     PointerGesturesWayland {
-        Component.onCompleted: init();
     }
 
     property date currentDate: new Date()
