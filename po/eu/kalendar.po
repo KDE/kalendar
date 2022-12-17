@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-12-08 21:59+0100\n"
+"PO-Revision-Date: 2022-12-17 09:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2278,10 +2278,9 @@ msgid "Use popup to show incidence information"
 msgstr "Erabili gainerakorra intzidentziaren informazioa erakusteko"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Erakutsi azpi-zereginak egutegi ikuspegietan"
+msgstr "Erakutsi zereginak egutegi ikuspegietan"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2289,10 +2288,9 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Erakutsi azpi-zereginak egutegi ikuspegietan"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Iragandako ekitaldien gardentasuna:"
+msgstr "Iraganeko ekitaldien gardentasuna:"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
