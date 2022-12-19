@@ -41,8 +41,7 @@ msgid "Redo: "
 msgstr "Wiederholen: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All Calendars"
+#, kde-format
 msgid "Refresh All Calendars"
 msgstr "Alle Kalender aktualisieren"
 
