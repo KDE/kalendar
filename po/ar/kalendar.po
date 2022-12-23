@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-11-24 09:54+0400\n"
+"PO-Revision-Date: 2022-12-22 10:39+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -41,10 +41,9 @@ msgid "Redo: "
 msgstr "كرّر: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "أنعش الكل"
+msgstr "أنعش كل التقاويم"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -285,11 +284,9 @@ msgid "Choose Address Book Color"
 msgstr "اختر لون دفتر العناوين"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "خصائص دفتر العناوين %1"
+msgstr "أنعش كل دفاتر العناوين"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2352,10 +2349,9 @@ msgid "Use popup to show incidence information"
 msgstr "استخدم المنبثقة لإظهار معلومات الحدوث"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "أظهر المهام الفرعية في عرض التقويم"
+msgstr "أظهر المهام  في عرض التقويم"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2363,10 +2359,9 @@ msgid "Show sub-tasks in calendar views"
 msgstr "أظهر المهام الفرعية في عرض التقويم"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "شفافية الأحداث الفائتة:"
+msgstr "شفافية الأحداث الفائتة"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
@@ -2545,10 +2540,9 @@ msgid "Task"
 msgstr "المهمّة"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "المتراسلون"
+msgstr "المتراسل"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2656,16 +2650,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "مهمة جديدة…"
+msgstr "رسالة جديدة…"
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "حدث جديد..."
+msgstr "متراسل جديد…"
 
 #: kalendarapplication.cpp:329
 #, kde-format
