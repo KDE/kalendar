@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-09-18 12:07+0100\n"
+"PO-Revision-Date: 2022-12-31 16:30+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: English <kde-i18n-doc@kde.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,10 +40,9 @@ msgid "Redo: "
 msgstr "Redo: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Refresh All"
+msgstr "Refresh All Calendars"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -285,11 +284,9 @@ msgid "Choose Address Book Color"
 msgstr "Choose Address Book Colour"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "Properties of Address Book %1"
+msgstr "Refresh All Address Books"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -379,10 +376,9 @@ msgid "Edit Contact"
 msgstr "Edit Contact"
 
 #: contacts/qml/private/ContactEditorPage.qml:93
-#, fuzzy, kde-format
-#| msgid "Address Book:"
+#, kde-format
 msgid "Address book:"
-msgstr "Address Book:"
+msgstr "Address book:"
 
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
@@ -393,16 +389,14 @@ msgid "Name:"
 msgstr "Name:"
 
 #: contacts/qml/private/ContactEditorPage.qml:151
-#, fuzzy, kde-format
-#| msgid "Contacts View"
+#, kde-format
 msgid "Contact name"
-msgstr "Contacts View"
+msgstr "Contact name"
 
 #: contacts/qml/private/ContactEditorPage.qml:162
-#, fuzzy, kde-format
-#| msgid "Honorific prefixes:"
+#, kde-format
 msgid "Honorific prefix:"
-msgstr "Honorific prefixes:"
+msgstr "Honorific prefix:"
 
 #: contacts/qml/private/ContactEditorPage.qml:165
 #, kde-format
@@ -430,43 +424,39 @@ msgid "Prof."
 msgstr "Prof."
 
 #: contacts/qml/private/ContactEditorPage.qml:174
-#, fuzzy, kde-format
-#| msgid "Given names:"
+#, kde-format
 msgid "Given name:"
-msgstr "Given names:"
+msgstr "Given name:"
 
 #: contacts/qml/private/ContactEditorPage.qml:178
 #, kde-format
 msgid "First name or chosen name"
-msgstr ""
+msgstr "First name or chosen name"
 
 #: contacts/qml/private/ContactEditorPage.qml:183
-#, fuzzy, kde-format
-#| msgid "Additional names:"
+#, kde-format
 msgid "Additional name:"
-msgstr "Additional names:"
+msgstr "Additional name:"
 
 #: contacts/qml/private/ContactEditorPage.qml:187
 #, kde-format
 msgid "Middle name or other name"
-msgstr ""
+msgstr "Middle name or other name"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
-#, fuzzy, kde-format
-#| msgid "Family names:"
+#, kde-format
 msgid "Family name:"
-msgstr "Family names:"
+msgstr "Family name:"
 
 #: contacts/qml/private/ContactEditorPage.qml:196
 #, kde-format
 msgid "Surname or last name"
-msgstr ""
+msgstr "Surname or last name"
 
 #: contacts/qml/private/ContactEditorPage.qml:201
-#, fuzzy, kde-format
-#| msgid "Honorific suffixes:"
+#, kde-format
 msgid "Honorific suffix:"
-msgstr "Honorific suffixes:"
+msgstr "Honorific suffix:"
 
 #: contacts/qml/private/ContactEditorPage.qml:206
 #, kde-format
@@ -497,7 +487,7 @@ msgstr "Nickname:"
 #: contacts/qml/private/ContactEditorPage.qml:217
 #, kde-format
 msgid "Alternative name"
-msgstr ""
+msgstr "Alternative name"
 
 #: contacts/qml/private/ContactEditorPage.qml:225
 #, kde-format
@@ -665,7 +655,7 @@ msgstr "Address Book:"
 #: contacts/qml/private/ContactGroupEditorPage.qml:81
 #, kde-format
 msgid "Contact group name"
-msgstr ""
+msgstr "Contact group name"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:85
 #: contacts/qml/private/ContactGroupEditorPage.qml:109
@@ -924,14 +914,14 @@ msgstr "New Task…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "This event is recurring"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "This event has reminder"
+msgstr[1] "This event has reminders"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
@@ -1022,10 +1012,9 @@ msgid "<b>Organizer:</b>"
 msgstr "<b>Organiser:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:541
-#, fuzzy, kde-format
-#| msgid "<b>Guests:</b>"
+#, kde-format
 msgid "<b>Google Meet:</b>"
-msgstr "<b>Guests:</b>"
+msgstr "<b>Google Meet:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:553
 #, kde-format
@@ -1135,35 +1124,27 @@ msgstr "9 (lowest priority)"
 #: contents/ui/Controls/IncidenceMouseArea.qml:163
 #, kde-format
 msgid "Set due date..."
-msgstr ""
+msgstr "Set due date..."
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "No space since the %1 string, which includes the time (or not), includes "
-#| "this space"
-#| msgid "Today%1"
+#, kde-format
 msgid "Today (%1)"
-msgstr "Today%1"
+msgstr "Today (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:202
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "No space since the %1 string, which includes the time (or not), includes "
-#| "this space"
-#| msgid "Tomorrow%1"
+#, kde-format
 msgid "Tomorrow (%1)"
-msgstr "Tomorrow%1"
+msgstr "Tomorrow (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
 msgid "In a week (%1)"
-msgstr ""
+msgstr "In a week (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:223
 #, kde-format
 msgid "In a month (%1)"
-msgstr ""
+msgstr "In a month (%1)"
 
 #: contents/ui/Controls/MainDrawerToggleButton.qml:25
 #, kde-format
@@ -2246,7 +2227,7 @@ msgstr "Choose Calendar Colour"
 #: contents/ui/Settings/ViewSettingsPage.qml:12
 #, kde-format
 msgid "Appearance"
-msgstr ""
+msgstr "Appearance"
 
 #: contents/ui/Settings/SettingsPage.qml:19
 #: contents/ui/Settings/SourceSettingsPage.qml:13
@@ -2260,16 +2241,14 @@ msgid "About Kalendar"
 msgstr "About Kalendar"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:21
-#, fuzzy, kde-format
-#| msgid "Add New Calendar Source"
+#, kde-format
 msgid "Add New Calendar Source…"
-msgstr "Add New Calendar Source"
+msgstr "Add New Calendar Source…"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:28
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact Books"
-msgstr "Contacts"
+msgstr "Contact Books"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:29
 #, kde-format
@@ -2277,15 +2256,14 @@ msgid "Add New Address Book Source…"
 msgstr "Add New Address Book Source…"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:38
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgid "Mail Accounts"
-msgstr "Accounts"
+msgstr "Mail Accounts"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:39
 #, kde-format
 msgid "Add New mail account…"
-msgstr ""
+msgstr "Add New mail account…"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:24
 #, kde-format
@@ -2298,10 +2276,9 @@ msgid "Use popup to show incidence information"
 msgstr "Use popup to show incidence information"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Show sub-tasks in calendar views"
+msgstr "Show tasks in calendar views"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2309,43 +2286,39 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Show sub-tasks in calendar views"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Past event transparency:"
+msgstr "Past event transparency"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
-msgstr "Month View settings"
+msgstr "Month view settings"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:100
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "Month View"
+msgstr "Month view mode"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:107
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "Swipeable month grid"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:114
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "Basic month grid"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:120
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
-msgstr ""
+msgstr "Swipeable month grid requires higher system performance."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:135
-#, fuzzy, kde-format
-#| msgid "Weekday label alignment:"
+#, kde-format
 msgid "Weekday label alignment"
-msgstr "Weekday label alignment:"
+msgstr "Weekday label alignment"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:142
 #, kde-format
@@ -2393,31 +2366,29 @@ msgid "Grid border width (pixels):"
 msgstr "Grid border width (pixels):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:247
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "Tasks View settings"
+msgstr "Week view settings"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:259
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "Week View"
+msgstr "Week view mode"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:266
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "Swipeable week view"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:273
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "Basic week view"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:279
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
-msgstr ""
+msgstr "Swipeable week view requires higher system performance."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:292
 #, kde-format
@@ -2425,27 +2396,24 @@ msgid "Schedule View settings"
 msgstr "Schedule View settings"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:304
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "Schedule View"
+msgstr "Schedule view mode"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:311
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "Schedule View"
+msgstr "Swipeable schedule view"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:318
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "Schedule View"
+msgstr "Basic schedule view"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:324
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
-msgstr ""
+msgstr "Swipeable schedule view requires higher system performance."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:333
 #, kde-format
@@ -2468,10 +2436,9 @@ msgid "Maps"
 msgstr "Maps"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:373
-#, fuzzy, kde-format
-#| msgid "Enable maps:"
+#, kde-format
 msgid "Enable maps"
-msgstr "Enable maps:"
+msgstr "Enable maps"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:380
 #, kde-format
@@ -2479,10 +2446,9 @@ msgid "May cause crashing on some systems."
 msgstr "May cause crashing on some systems."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:392
-#, fuzzy, kde-format
-#| msgid "Location marker:"
+#, kde-format
 msgid "Location marker"
-msgstr "Location marker:"
+msgstr "Location marker"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:400
 #, kde-format
@@ -2501,10 +2467,9 @@ msgid "Task"
 msgstr "Task"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Contacts"
+msgstr "Contact"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2612,16 +2577,14 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "New Task…"
+msgstr "New Mail…"
 
 #: kalendarapplication.cpp:316
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "New Event…"
+msgstr "New Contact…"
 
 #: kalendarapplication.cpp:329
 #, kde-format
@@ -2915,43 +2878,36 @@ msgid "No set date"
 msgstr "No set date"
 
 #: models/todosortfilterproxymodel.cpp:198
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 is the time, spaces included to allow use of 'empty' string when an "
-#| "event is allday and has no time"
-#| msgid " at %1 "
+#, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr " at %1 "
+msgstr " at %1"
 
 #: models/todosortfilterproxymodel.cpp:199
-#, fuzzy, kde-format
-#| msgid "(overdue)"
+#, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
-msgstr "(overdue)"
+msgstr " (overdue)"
 
 #: quick/qml/AgentConfigurationForm.qml:36
-#, fuzzy, kde-format
-#| msgid "Configure"
+#, kde-format
 msgid "Configure %1"
-msgstr "Configure"
+msgstr "Configure %1"
 
 #: quick/qml/AgentConfigurationForm.qml:37
 #, kde-format
 msgid "Modify or delete this account agent."
-msgstr ""
+msgstr "Modify or delete this account agent."
 
 #: quick/qml/AgentConfigurationForm.qml:42
 #, kde-format
 msgid "Modify"
-msgstr ""
+msgstr "Modify"
 
 #: quick/qml/AgentConfigurationForm.qml:82
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgid "Add Account"
-msgstr "Accounts"
+msgstr "Add Account"
 
 #~ msgid "General"
 #~ msgstr "General"
