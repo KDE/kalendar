@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
-# Vit Pelcak <vpelcak@suse.cz>, 2021, 2022.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 02:26+0000\n"
-"PO-Revision-Date: 2022-06-28 14:22+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2022-11-08 16:42+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -91,7 +91,7 @@ msgstr "E-Mail"
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Address Book %1"
-msgstr ""
+msgstr "Vlastnosti knihy adres %1"
 
 #: contacts/emailmodel.cpp:38
 #, kde-format
@@ -112,7 +112,7 @@ msgstr "Jiné:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Address Book Color"
-msgstr ""
+msgstr "Vyberte barvu knihy adres"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -135,14 +135,14 @@ msgstr "Kontakty"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit contact…"
-msgstr ""
+msgstr "Upravit kontakt…"
 
 #: contacts/qml/ContactView.qml:94
 #: contacts/qml/private/DeleteContactAction.qml:64
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete contact"
-msgstr ""
+msgstr "Smazat kontakt"
 
 #: contacts/qml/ContactView.qml:112 contacts/qml/private/ContactsPage.qml:48
 #, kde-format
@@ -153,43 +153,43 @@ msgstr "Žádné kontakty"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit address book…"
-msgstr ""
+msgstr "Upravit knihu adres..."
 
 #: contacts/qml/private/AddressBookMenu.qml:29
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update address book"
-msgstr ""
+msgstr "Aktualizovat knihu adres"
 
 #: contacts/qml/private/AddressBookMenu.qml:34
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete address book"
-msgstr ""
+msgstr "Smazat knihu adres"
 
 #: contacts/qml/private/AddressBookMenu.qml:42
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set address book colour…"
-msgstr ""
+msgstr "Nastavit barvu knihy adres..."
 
 #: contacts/qml/private/AddressBookMenu.qml:54
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Address book source settings…"
-msgstr ""
+msgstr "Nastavení zdroje knihy adres..."
 
 #: contacts/qml/private/AddressBookMenu.qml:60
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update address book source"
-msgstr ""
+msgstr "Aktualizovat zdroj knihy adres"
 
 #: contacts/qml/private/AddressBookMenu.qml:66
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete address source"
-msgstr ""
+msgstr "Smazat zdroj adres"
 
 #: contacts/qml/private/ContactEditorPage.qml:53
 #, kde-format
@@ -204,7 +204,7 @@ msgstr "Upravit kontakt"
 #: contacts/qml/private/ContactEditorPage.qml:93
 #, kde-format
 msgid "Address book:"
-msgstr ""
+msgstr "Kniha adres:"
 
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
@@ -217,12 +217,12 @@ msgstr "Název:"
 #: contacts/qml/private/ContactEditorPage.qml:151
 #, kde-format
 msgid "Contact name"
-msgstr ""
+msgstr "Jméno kontaktu"
 
 #: contacts/qml/private/ContactEditorPage.qml:162
 #, kde-format
 msgid "Honorific prefix:"
-msgstr ""
+msgstr "Čestný titul před jménem:"
 
 #: contacts/qml/private/ContactEditorPage.qml:165
 #, kde-format
@@ -257,32 +257,32 @@ msgstr "Jméno:"
 #: contacts/qml/private/ContactEditorPage.qml:178
 #, kde-format
 msgid "First name or chosen name"
-msgstr ""
+msgstr "Jméno nebo zvolené jméno"
 
 #: contacts/qml/private/ContactEditorPage.qml:183
 #, kde-format
 msgid "Additional name:"
-msgstr ""
+msgstr "Další jméno:"
 
 #: contacts/qml/private/ContactEditorPage.qml:187
 #, kde-format
 msgid "Middle name or other name"
-msgstr ""
+msgstr "Prostřední nebo jiné jméno"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Family name:"
-msgstr ""
+msgstr "Příjmení:"
 
 #: contacts/qml/private/ContactEditorPage.qml:196
 #, kde-format
 msgid "Surname or last name"
-msgstr ""
+msgstr "Příjmení nebo poslední jméno"
 
 #: contacts/qml/private/ContactEditorPage.qml:201
 #, kde-format
 msgid "Honorific suffix:"
-msgstr ""
+msgstr "Čestný titul za jménem:"
 
 #: contacts/qml/private/ContactEditorPage.qml:206
 #, kde-format
@@ -481,7 +481,7 @@ msgstr "Kniha adres:"
 #: contacts/qml/private/ContactGroupEditorPage.qml:81
 #, kde-format
 msgid "Contact group name"
-msgstr ""
+msgstr "Název skupiny kontaktů"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:85
 #: contacts/qml/private/ContactGroupEditorPage.qml:109
@@ -500,7 +500,7 @@ msgstr "Upravit"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
-msgstr ""
+msgstr "Upravit"
 
 #: contacts/qml/private/ContactPage.qml:46
 #: contacts/qml/private/DeleteContactAction.qml:52
@@ -848,9 +848,9 @@ msgstr ""
 #, kde-format
 msgid "Sub-task"
 msgid_plural "Sub-tasks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Podúloha"
+msgstr[1] "Podúlohy"
+msgstr[2] "Podúlohy"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:61
 #, kde-format
@@ -949,12 +949,12 @@ msgstr ""
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
 #, kde-format
 msgid "Today (%1)"
-msgstr ""
+msgstr "Dnes (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:202
 #, kde-format
 msgid "Tomorrow (%1)"
-msgstr ""
+msgstr "Zítra (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
@@ -1286,7 +1286,7 @@ msgstr "Zapnuto:"
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
-msgstr ""
+msgstr "%1 z každého měsíce"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:585
 #, kde-format
@@ -1755,7 +1755,7 @@ msgstr "3 dny"
 #: contents/ui/main.qml:447
 #, kde-format
 msgid "Day"
-msgstr ""
+msgstr "Den"
 
 #: contents/ui/main.qml:450
 #, kde-format
@@ -1806,19 +1806,19 @@ msgstr "Vytvořit nový kalendář"
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
-msgstr ""
+msgstr "Týden"
 
 #: contents/ui/main.qml:1083
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
-msgstr ""
+msgstr "3 dny"
 
 #: contents/ui/main.qml:1089
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
-msgstr ""
+msgstr "Den"
 
 #: contents/ui/MainViews/BasicInternalHourlyView.qml:248
 #, kde-format
@@ -2245,7 +2245,7 @@ msgstr "O aplikaci Kalendar"
 #: contents/ui/Settings/SourceSettingsPage.qml:19
 #, kde-format
 msgid "Add New Calendar Source…"
-msgstr ""
+msgstr "Přidat nový zdroj kalendáře..."
 
 #: contents/ui/Settings/SourceSettingsPage.qml:26
 #, kde-format
@@ -2288,16 +2288,14 @@ msgid "Past event transparency:"
 msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:73
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
 msgstr "Nastavení měsíčního přehledu"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:85
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "Pohled na měsíc"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
@@ -2317,7 +2315,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:119
 #, kde-format
 msgid "Weekday label alignment"
-msgstr ""
+msgstr "Zarovnání názvu dne"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:126
 #, kde-format
@@ -2365,16 +2363,14 @@ msgid "Grid border width (pixels):"
 msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:225
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "Nastavení pohledu úkolů"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:237
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "Týdenní pohled"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
@@ -2397,22 +2393,19 @@ msgid "Schedule View settings"
 msgstr "Nastavení přehledu plánu"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:282
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "Pohled na plánování"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:289
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "Pohled na plánování"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:296
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "Pohled na plánování"
+msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:302
 #, kde-format
@@ -2437,12 +2430,12 @@ msgstr "Zobrazit dokončené podúlohy"
 #: contents/ui/Settings/ViewSettingsPage.qml:347
 #, kde-format
 msgid "Enable maps"
-msgstr ""
+msgstr "Povolit mapy"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:368
 #, kde-format
 msgid "Location marker"
-msgstr ""
+msgstr "Značka umístění"
 
 #: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
 #: models/todosortfilterproxymodel.cpp:135
@@ -2513,7 +2506,7 @@ msgstr ""
 #: kalendarapplication.cpp:188
 #, kde-format
 msgid "Ctrl+7"
-msgstr ""
+msgstr "Ctrl+7"
 
 #: kalendarapplication.cpp:194
 #, kde-format
@@ -2725,7 +2718,7 @@ msgstr ""
 #: mail/qml/mailboxselector/MailBoxListPage.qml:16
 #, kde-format
 msgid "Mailboxes"
-msgstr ""
+msgstr "Poštovní schránky"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
@@ -2740,32 +2733,32 @@ msgstr ""
 #: mail/qml/mailpartview/MailPartModel.qml:54
 #, kde-format
 msgid "This message has been signed using the key %1."
-msgstr ""
+msgstr "Zpráva byla podepsána pomocí klíče %1."
 
 #: mail/qml/mailpartview/MailPartModel.qml:55
 #, kde-format
 msgid "The key details are not available."
-msgstr ""
+msgstr "Podrobnosti klíče nejsou nedostupné."
 
 #: mail/qml/mailpartview/MailPartModel.qml:57
 #, kde-format
 msgid "This message has been signed using the key %1 by %2."
-msgstr ""
+msgstr "Zprávu podepsali %2 klíčem %1."
 
 #: mail/qml/mailpartview/MailPartModel.qml:59
 #, kde-format
 msgid "The key was revoked."
-msgstr ""
+msgstr "Klíč byl odvolán."
 
 #: mail/qml/mailpartview/MailPartModel.qml:62
 #, kde-format
 msgid "The key has expired."
-msgstr ""
+msgstr "Platnost klíče uplynula."
 
 #: mail/qml/mailpartview/MailPartModel.qml:65
 #, kde-format
 msgid "You are trusting this key."
-msgstr ""
+msgstr "Věříte tomuto klíči."
 
 #: mail/qml/mailpartview/MailPartModel.qml:68
 #, kde-format
@@ -2790,7 +2783,7 @@ msgstr ""
 #: mail/qml/MailViewer.qml:150
 #, kde-format
 msgid "Save attachment"
-msgstr ""
+msgstr "Uložit přílohu"
 
 #: mail/qml/private/AttachmentDelegate.qml:57
 #, kde-format
@@ -2852,13 +2845,13 @@ msgstr ""
 #, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr ""
+msgstr " v %1"
 
 #: models/todosortfilterproxymodel.cpp:199
 #, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
-msgstr ""
+msgstr " (zpoždění)"
 
 #: quick/qml/AgentConfigurationForm.qml:36
 #, kde-format
@@ -2879,9 +2872,3 @@ msgstr "Změnit"
 #, kde-format
 msgid "Add Account"
 msgstr "Přidat účet"
-
-#~ msgid "Expand MainDrawer"
-#~ msgstr "Rozbalit hlavní šuplík"
-
-#~ msgid "Collapse MainDrawer"
-#~ msgstr "Sbalit hlavní šuplík"
