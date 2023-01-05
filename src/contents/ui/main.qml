@@ -34,7 +34,9 @@ Kirigami.ApplicationWindow {
     readonly property var contactApplication: ContactApplication {}
 
     PointerGesturesWayland {
+        id: pointergestureswayland
     }
+
 
     property date currentDate: new Date()
     Timer {

@@ -46,7 +46,27 @@ Column {
     readonly property real gridLineWidth: 1.0
     readonly property real hourLabelWidth: hourLabelMetrics.boundingRect(new Date(0,0,0,0,0,0,0).toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)).width +
         Kirigami.Units.largeSpacing * 2.5
-    readonly property real periodHeight: Kirigami.Units.gridUnit
+
+    property real zoom: 1.0
+    readonly property real periodHeight: Kirigami.Units.gridUnit * zoom
+
+    Connections {
+        target: pointergestureswayland
+        function onPinchGestureStarted() {
+            pointergestureswayland.startZoom = viewColumn.zoom;
+        }
+
+        function onPinchZoomChanged(zoom) {
+            console.error(viewColumn.zoom)
+            if (zoom > 2.0) {
+                zoom = 2.0;
+            }
+            if (zoom < 0.75) {
+                zoom = 0.75;
+            }
+            viewColumn.zoom = zoom;
+        }
+    }
 
     property int multiDayLinesShown: 0
     property bool isCurrentItem: true

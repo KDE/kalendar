@@ -53,6 +53,8 @@ set(kalendar_SRCS
     models/timezonelistmodel.h
     models/todosortfilterproxymodel.cpp
     models/todosortfilterproxymodel.h
+    pointergestureswayland.cpp
+    pointergestureswayland.h
     resources.qrc
 )
 qt_add_dbus_adaptor(kalendar_SRCS org.kde.calendar.Calendar.xml kalendarapplication.h KalendarApplication)
@@ -74,7 +76,6 @@ if(UNIX AND NOT APPLE)
 
     target_sources(kalendar PRIVATE ${wayland_SRCS})
     target_link_libraries(kalendar PRIVATE Wayland::Client Qt::WaylandClient Qt::GuiPrivate)
-    target_sources(kalendar PUBLIC pointergestureswayland.cpp pointergestureswayland.h)
     target_compile_definitions(kalendar PRIVATE -DWITH_WAYLAND=1)
 endif()
 

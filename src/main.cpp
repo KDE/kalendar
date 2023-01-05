@@ -16,6 +16,7 @@
 #include "models/multidayincidencemodel.h"
 #include "models/timezonelistmodel.h"
 #include "models/todosortfilterproxymodel.h"
+#include "pointergestureswayland.h"
 #include "tagmanager.h"
 #include <Akonadi/AgentFilterProxyModel>
 #include <KAboutData>
@@ -35,10 +36,6 @@
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QUrl>
-
-#ifdef WITH_WAYLAND
-#include "pointergestureswayland.h"
-#endif
 
 using namespace KCalendarCore;
 
@@ -142,11 +139,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<TimeZoneListModel>("org.kde.kalendar", 1, 0, "TimeZoneListModel");
     qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
     qmlRegisterType<InfiniteCalendarViewModel>("org.kde.kalendar", 1, 0, "InfiniteCalendarViewModel");
-
-#ifdef WITH_WAYLAND
     qmlRegisterType<PointerGesturesWayland>("org.kde.kalendar", 1, 0, "PointerGesturesWayland");
-#endif
-
     qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/KalendarUiUtils.qml")), "org.kde.kalendar.utils", 1, 0, "KalendarUiUtils");
 
     qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
