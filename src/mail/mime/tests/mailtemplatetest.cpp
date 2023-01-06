@@ -90,7 +90,7 @@ private Q_SLOTS:
         });
         QTRY_VERIFY(result);
         QCOMPARE(normalize(removeFirstLine(QString::fromUtf8(result->body()))), normalize(QString::fromUtf8(msg->body())));
-        QCOMPARE(result->to()->addresses(), {{"konqi@example.org"}});
+        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"konqi@example.org"}});
         QCOMPARE(result->subject()->asUnicodeString(), QLatin1String{"RE: A random subject with alternative contenttype"});
     }
 
@@ -213,7 +213,7 @@ private Q_SLOTS:
         auto content = removeFirstLine(QString::fromUtf8(result->body()));
         QVERIFY(!content.isEmpty());
         QCOMPARE(unquote(content), QLatin1String("test"));
-        QCOMPARE(result->to()->addresses(), {{"from@example.org"}});
+        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"from@example.org"}});
         auto l = QVector<QByteArray>{{"to1@example.org"}, {"to2@example.org"}, {"cc1@example.org"}, {"cc2@example.org"}};
         QCOMPARE(result->cc()->addresses(), l);
     }
@@ -234,7 +234,7 @@ private Q_SLOTS:
             },
             me);
         QTRY_VERIFY(result);
-        QCOMPARE(result->to()->addresses(), {{"from@example.org"}});
+        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"from@example.org"}});
         auto l = QVector<QByteArray>{{"to2@example.org"}, {"cc1@example.org"}, {"cc2@example.org"}};
         QCOMPARE(result->cc()->addresses(), l);
     }
@@ -628,8 +628,8 @@ private Q_SLOTS:
             me);
         QTRY_VERIFY(result);
         QCOMPARE(result->subject()->asUnicodeString(), QLatin1String{"RE: This is the subject"});
-        QCOMPARE(result->to()->addresses(), {{"jane@doe.com"}});
-        QCOMPARE(result->cc()->addresses(), {{"john@doe.com"}});
+        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"jane@doe.com"}});
+        QCOMPARE(result->cc()->addresses(), QVector<QByteArray>{{"john@doe.com"}});
         QCOMPARE(result->inReplyTo()->asUnicodeString(), QLatin1String{"<03db3530-0000-0000-95a2-8a148f00000@example.com>"});
         QCOMPARE(result->references()->asUnicodeString(),
                  QLatin1String{"<dbe9d22b-0a3f-cb1e-e883-8a148f00000@example.com> <03db3530-0000-0000-95a2-8a148f00000@example.com>"});
