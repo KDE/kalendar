@@ -32,7 +32,7 @@ static QString resolveEntities(const QString &in)
             else if (type == QLatin1String("apos"))
                 out += QLatin1Char('\'');
             else if (type == QLatin1String("nbsp"))
-                out += 0xa0;
+                out += QChar(0xa0);
         } else {
             out += in[i];
         }

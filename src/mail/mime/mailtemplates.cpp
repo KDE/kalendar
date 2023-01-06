@@ -239,16 +239,16 @@ QString plainToHtml(const QString &body)
 // FIXME strip signature works partially for HTML mails
 static QString stripSignature(const QString &msg)
 {
-    // Following RFC 3676, only > before --
-    // I prefer to not delete a SB instead of delete good mail content.
     // We expect no CRLF from the ObjectTreeParser. The regex won't handle it.
     if (msg.contains(QStringLiteral("\r\n"))) {
         qWarning() << "Message contains CRLF, but shouldn't: " << msg;
         Q_ASSERT(false);
     }
-    const QRegExp sbDelimiterSearch(QLatin1String("(^|\n)[> ]*-- \n"));
+    // Following RFC 3676, only > before --
+    // I prefer to not delete a SB instead of delete good mail content.
+    static const QRegularExpression sbDelimiterSearch(QStringLiteral("(^|\n)[> ]*-- \n"));
     // The regular expression to look for prefix change
-    const QRegExp commonReplySearch(QLatin1String("^[ ]*>"));
+    static const QRegularExpression commonReplySearch(QStringLiteral("^[ ]*>"));
 
     QString res = msg;
     int posDeletingStart = 1; // to start looking at 0
@@ -260,7 +260,7 @@ static QString stripSignature(const QString &msg)
         int posNewLine = -1;
 
         // Look for the SB beginning
-        int posSignatureBlock = res.indexOf(QLatin1Char('-'), posDeletingStart);
+        const int posSignatureBlock = res.indexOf(QLatin1Char('-'), posDeletingStart);
         // The prefix before "-- "$
         if (res.at(posDeletingStart) == QLatin1Char('\n')) {
             ++posDeletingStart;
@@ -364,10 +364,10 @@ QString quotedPlainText(const QString &selection, const QString &fromDisplayStri
 {
     QString content = selection;
     // Remove blank lines at the beginning:
-    const int firstNonWS = content.indexOf(QRegExp(QLatin1String("\\S")));
+    const int firstNonWS = content.indexOf(QRegularExpression(QStringLiteral("\\S")));
     const int lineStart = content.lastIndexOf(QLatin1Char('\n'), firstNonWS);
     if (lineStart >= 0) {
-        content.remove(0, static_cast<unsigned int>(lineStart));
+        content.remove(0, lineStart);
     }
 
     const auto quoteString = QStringLiteral("> ");
@@ -419,10 +419,11 @@ static KMime::Types::Mailbox::List getMailingListAddresses(const KMime::Headers:
     KMime::Types::Mailbox::List mailingListAddresses;
     const QString listPost = asUnicodeString(listPostHeader);
     if (listPost.contains(QStringLiteral("mailto:"), Qt::CaseInsensitive)) {
-        QRegExp rx(QStringLiteral("<mailto:([^@>]+)@([^>]+)>"), Qt::CaseInsensitive);
-        if (rx.indexIn(listPost, 0) != -1) { // matched
+        static const QRegularExpression rx{QStringLiteral("<\\s*mailto\\s*:([^@>]+@[^>]+)>"), QRegularExpression::CaseInsensitiveOption};
+        const auto match = rx.match(listPost);
+        if (match.hasMatch()) {
             KMime::Types::Mailbox mailbox;
-            mailbox.fromUnicodeString(rx.cap(1) + QLatin1Char('@') + rx.cap(2));
+            mailbox.fromUnicodeString(match.captured(1));
             mailingListAddresses << mailbox;
         }
     }
