@@ -19,6 +19,7 @@ ecm_qt_export_logging_category(
 )
 
 add_library(kalendar_calendar_static STATIC ${kalendar_calendar_SRCS})
+set_target_properties(kalendar_calendar_static PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(kalendar_calendar_static PUBLIC kalendar_lib)
 
 ecm_add_qml_module(kalendar_calendar_plugin URI "org.kde.kalendar.calendar" VERSION 1.0)

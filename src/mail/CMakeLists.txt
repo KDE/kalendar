@@ -56,6 +56,7 @@ ecm_qt_export_logging_category(
 )
 
 add_library(kalendar_mail_static STATIC ${kalendar_mail_SRCS})
+set_target_properties(kalendar_mail_static PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(kalendar_mail_static PUBLIC kalendar_lib KF5::MailCommon KF5::AkonadiMime)
 
 ecm_add_qml_module(kalendar_mail_plugin URI "org.kde.kalendar.mail" VERSION 1.0)
