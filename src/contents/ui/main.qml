@@ -25,7 +25,7 @@ Kirigami.ApplicationWindow {
 
     width: Kirigami.Units.gridUnit * 65
 
-    minimumWidth: Kirigami.Units.gridUnit * 25
+    minimumWidth: Kirigami.Units.gridUnit * 15
     minimumHeight: Kirigami.Units.gridUnit * 20
     onClosing: KalendarApplication.saveWindowGeometry(root)
 
@@ -531,7 +531,7 @@ Kirigami.ApplicationWindow {
     footer: Loader {
         id: bottomLoader
         active: Kirigami.Settings.isMobile
-        visible: pageStack.currentItem && pageStack.currentItem.objectName !== "settingsPage"
+        visible: pageStack.currentItem && pageStack.layers.currentItem.objectName !== "settingsPage"
 
         sourceComponent: BottomToolBar {}
     }
