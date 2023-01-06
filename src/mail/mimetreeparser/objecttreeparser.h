@@ -18,6 +18,8 @@ namespace KMime
 class Content;
 }
 
+class QTextCodec;
+
 namespace MimeTreeParser
 {
 
