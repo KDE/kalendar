@@ -379,7 +379,7 @@ private Q_SLOTS:
         QCOMPARE(result->subject(false)->asUnicodeString(), QLatin1String{"FW: Html Hello (inlin)"});
         QCOMPARE(result->to()->addresses(), {});
         QCOMPARE(result->cc()->addresses(), {});
-        const QVector references{QByteArray{"a1777ec781546ccc5dcd4918a5e4e03d@info"}, QByteArray{"46b164308eb6056361c866932a740a3c@info"}};
+        const QVector<QByteArray> references{QByteArray{"a1777ec781546ccc5dcd4918a5e4e03d@info"}, QByteArray{"46b164308eb6056361c866932a740a3c@info"}};
         QCOMPARE(result->references()->identifiers(), references);
         QCOMPARE(result->inReplyTo()->identifiers(), {});
     }
