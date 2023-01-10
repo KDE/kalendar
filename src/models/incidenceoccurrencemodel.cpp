@@ -9,6 +9,7 @@
 #include "kalendar_debug.h"
 
 #include "../filter.h"
+#include "../utils.h"
 #include <Akonadi/EntityTreeModel>
 #include <KCalendarCore/OccurrenceIterator>
 #include <KConfigGroup>
@@ -362,12 +363,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     }
     case DurationString: {
         const KCalendarCore::Duration duration(occurrence.start, occurrence.end);
-
-        if (duration.asSeconds() == 0) {
-            return QString();
-        }
-
-        return m_format.formatSpelloutDuration(duration.asSeconds() * 1000);
+        return Utils::formatSpelloutDuration(duration, m_format, occurrence.allDay);
     }
     case Recurs:
         return incidence->recurs();

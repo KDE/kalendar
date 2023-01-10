@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "kalendar_debug.h"
+#include "utils.h"
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
@@ -449,12 +450,7 @@ KCalendarCore::Duration IncidenceWrapper::duration() const
 
 QString IncidenceWrapper::durationDisplayString() const
 {
-    const auto dur = duration();
-    if (dur.asSeconds() == 0) {
-        return QString();
-    } else {
-        return m_format.formatSpelloutDuration(dur.asSeconds() * 1000);
-    }
+    return Utils::formatSpelloutDuration(duration(), m_format, allDay());
 }
 
 bool IncidenceWrapper::allDay() const

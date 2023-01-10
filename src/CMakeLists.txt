@@ -54,6 +54,8 @@ set(kalendar_SRCS
     models/todosortfilterproxymodel.cpp
     models/todosortfilterproxymodel.h
     resources.qrc
+    utils.h
+    utils.cpp
 )
 qt_add_dbus_adaptor(kalendar_SRCS org.kde.calendar.Calendar.xml kalendarapplication.h KalendarApplication)
 set_source_files_properties(models/todosortfilterproxymodel.cpp PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)

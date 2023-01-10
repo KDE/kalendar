@@ -28,18 +28,22 @@ set (commonAkonadiTest_LIBS
 set(filterTest_SRCS
     filtertest.cpp
     ../src/filter.cpp
+    ../src/utils.cpp
 )
 
 set(incidenceOccurrenceModelTest_SRCS
     incidenceoccurrencemodeltest.cpp
     ../src/models/incidenceoccurrencemodel.cpp
     ../src/filter.cpp
+    ../src/utils.cpp
+    ../src/utils.h
 )
 
 set(todoSortFilterProxyModelTest_SRCS
     todosortfilterproxymodeltest.cpp
     ../src/models/todosortfilterproxymodel.cpp
     ../src/filter.cpp
+    ../src/utils.cpp
 )
 
 ecm_qt_declare_logging_category(incidenceOccurrenceModelTest_SRCS HEADER kalendar_debug.h IDENTIFIER KALENDAR_LOG CATEGORY_NAME org.kde.kalendar DESCRIPTION "kalendar" EXPORT KALENDAR)
