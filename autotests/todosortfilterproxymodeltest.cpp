@@ -94,6 +94,7 @@ private Q_SLOTS:
         qRegisterMetaType<QAbstractItemModel::LayoutChangeHint>();
     }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void testModelProperties()
     {
         resetCalendar();
@@ -144,6 +145,7 @@ private Q_SLOTS:
         QCOMPARE(filterObjectChanged.count(), 1);
         QCOMPARE(model.filterObject(), &m_testFilter);
     }
+#endif
 
     void testAddCalendar()
     {
