@@ -4,6 +4,7 @@
 #include "../src/models/incidenceoccurrencemodel.h"
 
 #include "../src/filter.h"
+#include "../src/utils.h"
 #include <Akonadi/IncidenceChanger>
 #include <KCalendarCore/Incidence>
 #include <KCheckableProxyModel>
@@ -225,7 +226,7 @@ private Q_SLOTS:
         const auto duration = index.data(IncidenceOccurrenceModel::Duration).value<KCalendarCore::Duration>();
         QCOMPARE(duration.asDays(), 1);
         KFormat format;
-        QCOMPARE(index.data(IncidenceOccurrenceModel::DurationString).toString(), format.formatSpelloutDuration(duration.asSeconds() * 1000));
+        QCOMPARE(index.data(IncidenceOccurrenceModel::DurationString).toString(), Utils::formatSpelloutDuration(duration, format, true));
 
         QVERIFY(index.data(IncidenceOccurrenceModel::Recurs).toBool());
         QVERIFY(index.data(IncidenceOccurrenceModel::HasReminders).toBool());
