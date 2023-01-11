@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
-# Vit Pelcak <vit@pelcak.org>, 2021, 2022.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-12 00:48+0000\n"
-"PO-Revision-Date: 2022-11-08 16:42+0100\n"
+"POT-Creation-Date: 2023-01-11 00:58+0000\n"
+"PO-Revision-Date: 2023-01-05 11:33+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1387,7 +1387,7 @@ msgstr "Konec:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:360
 #, kde-format
 msgid "Timezone:"
-msgstr "Časová zóna:"
+msgstr "Časové pásmo:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:379
 #, kde-format
@@ -2462,7 +2462,7 @@ msgstr "Kruh (zobrazí oblast polohy)"
 msgid "Pin (shows exact location)"
 msgstr "Bod (zobrazí přesné místo)"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:409
+#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:405
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
