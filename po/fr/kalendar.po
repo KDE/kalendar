@@ -1,18 +1,19 @@
 # Xavier Besnard <xavier.besnard@neuf.fr>, 2021, 2022.
+# Xavier BESNARD <xavier.besnard]neuf.fr>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-11 00:58+0000\n"
-"PO-Revision-Date: 2022-12-12 20:46+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2023-01-09 16:37+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2698,12 +2699,12 @@ msgstr[1] "%1 clés ont déjà été importées"
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
 msgid "fwd"
-msgstr "transf"
+msgstr "transférer"
 
 #: mail/mime/mailtemplates.cpp:132
 #, kde-format
 msgid "re"
-msgstr "rép"
+msgstr "répondre"
 
 #: mail/mime/partmodel.cpp:473
 #, kde-format
