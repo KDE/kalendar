@@ -395,7 +395,7 @@ QVariant CalendarManager::getIncidenceSubclassed(KCalendarCore::Incidence::Ptr i
 
 QVariantMap CalendarManager::undoRedoData()
 {
-    if (!m_changer->history()) {
+    if (!m_changer || !m_changer->history()) {
         return {
             {QStringLiteral("undoAvailable"), false},
             {QStringLiteral("redoAvailable"), false},
