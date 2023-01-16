@@ -94,7 +94,7 @@ private Q_SLOTS:
         for (int i = start; i <= end; ++i) {
             // qCDebug(KORGANIZER_LOG) << "checking " << i << parent << mCheckableProxy->index(i, 0, parent).data().toString();
             const QModelIndex index = mCheckableProxy->index(i, 0, parent);
-            QMetaObject::invokeMethod(this, "setCheckState", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(QPersistentModelIndex, index));
+            QMetaObject::invokeMethod(this, "setCheckState", Qt::QueuedConnection, Q_ARG(QPersistentModelIndex, index));
         }
     }
 
