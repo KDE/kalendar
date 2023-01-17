@@ -182,7 +182,7 @@ msgstr "Establix el color de la llibreta d'adreces…"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Address book source settings…"
-msgstr "Configuració de la font de la llibreta d'adreces…"
+msgstr "Configureu la font de la llibreta d'adreces…"
 
 #: contacts/qml/private/AddressBookMenu.qml:60
 #, kde-format
@@ -1474,7 +1474,7 @@ msgstr "Totes les ocurrències"
 #: contents/ui/Dialogs/TagManagerPage.qml:13
 #, kde-format
 msgid "Manage Tags"
-msgstr "Gestió de les etiquetes"
+msgstr "Gestioneu les etiquetes"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:17
 #, kde-format
@@ -2028,7 +2028,7 @@ msgstr "Establix el color del calendari…"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Calendar source settings…"
-msgstr "Configuració de la font de calendari…"
+msgstr "Configureu la font de calendari…"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:60
 #, kde-format
@@ -2294,7 +2294,7 @@ msgstr "Transparència dels esdeveniments passats:"
 #: contents/ui/Settings/ViewSettingsPage.qml:73
 #, kde-format
 msgid "Month view settings"
-msgstr "Configuració de la vista mensual"
+msgstr "Configureu la vista mensual"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:85
 #, kde-format
@@ -2371,7 +2371,7 @@ msgstr "Amplària de la vora de la quadrícula (píxels):"
 #: contents/ui/Settings/ViewSettingsPage.qml:225
 #, kde-format
 msgid "Week view settings"
-msgstr "Configuració de la vista de setmana"
+msgstr "Configureu la vista de setmana"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:237
 #, kde-format
@@ -2398,7 +2398,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:270
 #, kde-format
 msgid "Schedule View settings"
-msgstr "Configuració de la vista de planificació"
+msgstr "Configureu la vista de planificació"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:282
 #, kde-format
@@ -2430,7 +2430,7 @@ msgstr "Mostra les capçaleres de la setmana"
 #: contents/ui/Settings/ViewSettingsPage.qml:325
 #, kde-format
 msgid "Tasks View settings"
-msgstr "Configuració de la vista tasques"
+msgstr "Configureu la vista tasques"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:328
 #, kde-format
