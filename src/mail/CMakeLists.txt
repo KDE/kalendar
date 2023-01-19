@@ -38,6 +38,23 @@ set(kalendar_mail_SRCS
     mime/mailtemplates.cpp
     mime/messageparser.cpp
     mime/partmodel.cpp
+
+    crypto.h
+    mimetreeparser/messagepart.h
+    mimetreeparser/bodypartformatter.h
+    mimetreeparser/bodypartformatterbasefactory.h
+    mimetreeparser/bodypartformatterbasefactory.h
+    mimetreeparser/cryptohelper.h
+    mimetreeparser/messagepart.h
+    mimetreeparser/objecttreeparser.h
+    mimetreeparser/utils.h
+    mime/attachmentmodel.h
+    mime/htmlutils.h
+    mime/mailcrypto.h
+    mime/mailtemplates.h
+    mime/messageparser.h
+    mime/partmodel.h
+
 )
 
 ecm_qt_declare_logging_category(kalendar_mail_SRCS
