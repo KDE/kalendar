@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 02:26+0000\n"
-"PO-Revision-Date: 2022-10-14 03:40+0200\n"
+"PO-Revision-Date: 2023-01-19 16:11+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,29 +31,29 @@ msgstr "Temuri.doghonadze@gmail.com"
 #: calendarmanager.cpp:545
 #, kde-format
 msgid "Move occurrence(s)"
-msgstr ""
+msgstr "აღმოჩენების გადაადგილება"
 
 #: calendarmanager.cpp:550
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
-msgstr ""
+msgstr "კალენდარში გამონაკლისის ჩამატების შეცდომა. ცვლილებები არ შეტანილა."
 
 #: calendarmanager.cpp:590
 #, kde-format
 msgid "Delete task and its sub-tasks"
-msgstr ""
+msgstr "ამოცანისა და მისი ქვეამოცანების წაშლა"
 
 #: calendarmanager.cpp:593
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
-msgstr ""
+msgstr "ამოცანის წაშლა და მისი ქვეამოცანების დამოუკიდებელ ამოცანებად გარდაქმნა"
 
 #: calendarmanager.cpp:756
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
-msgstr ""
+msgstr "კალენდარის (%1) თვისებები"
 
 #: contacts/autotests/emailmodeltest.cpp:36 contacts/emailmodel.cpp:44
 #: contacts/qml/private/ContactPage.qml:276
@@ -64,12 +64,12 @@ msgstr "საწყისი:"
 #: contacts/contactgroupeditor.cpp:233
 #, kde-format
 msgid "No address book selected"
-msgstr ""
+msgstr "მისამართების წიგნი არჩეული არაა"
 
 #: contacts/contactgroupmodel.cpp:185
 #, kde-format
 msgid "The member with name <b>%1</b> is missing an email address"
-msgstr ""
+msgstr "წევრს სახელით <b>%1</b>ელფოტის მისამართი მითითებული არ აქვს"
 
 #: contacts/contactgroupmodel.cpp:228
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "ელ-ფოსტა"
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Address Book %1"
-msgstr ""
+msgstr "მისამართების წიგნის თვისებები: %1"
 
 #: contacts/emailmodel.cpp:38
 #, kde-format
@@ -113,7 +113,7 @@ msgstr "სხვა:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Address Book Color"
-msgstr ""
+msgstr "აირჩიეთ მისამართების წიგნის ფერი"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -172,25 +172,25 @@ msgstr "მისამართების წიგნის წაშლა"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set address book colour…"
-msgstr ""
+msgstr "დააყენეთ მისამართების წიგნის ფერი…"
 
 #: contacts/qml/private/AddressBookMenu.qml:54
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Address book source settings…"
-msgstr ""
+msgstr "მისამართების წიგნის წყაროს მორგება…"
 
 #: contacts/qml/private/AddressBookMenu.qml:60
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update address book source"
-msgstr ""
+msgstr "მისამართების წიგნის წყაროს განახლება"
 
 #: contacts/qml/private/AddressBookMenu.qml:66
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete address source"
-msgstr ""
+msgstr "მისამართის წყაროს წაშლა"
 
 #: contacts/qml/private/ContactEditorPage.qml:53
 #, kde-format
@@ -223,7 +223,7 @@ msgstr "კონტაქტის სახელი"
 #: contacts/qml/private/ContactEditorPage.qml:162
 #, kde-format
 msgid "Honorific prefix:"
-msgstr ""
+msgstr "საპატიო პრეფიქსი:"
 
 #: contacts/qml/private/ContactEditorPage.qml:165
 #, kde-format
@@ -258,7 +258,7 @@ msgstr "მეტსახელები:"
 #: contacts/qml/private/ContactEditorPage.qml:178
 #, kde-format
 msgid "First name or chosen name"
-msgstr ""
+msgstr "სახელი ან მეტსახელი"
 
 #: contacts/qml/private/ContactEditorPage.qml:183
 #, kde-format
@@ -268,7 +268,7 @@ msgstr "დამატებითი სახელი:"
 #: contacts/qml/private/ContactEditorPage.qml:187
 #, kde-format
 msgid "Middle name or other name"
-msgstr ""
+msgstr "შუა სახელი ან მეტსახელი"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
@@ -278,12 +278,12 @@ msgstr "საოჯახო სახელი:"
 #: contacts/qml/private/ContactEditorPage.qml:196
 #, kde-format
 msgid "Surname or last name"
-msgstr ""
+msgstr "გვარი"
 
 #: contacts/qml/private/ContactEditorPage.qml:201
 #, kde-format
 msgid "Honorific suffix:"
-msgstr ""
+msgstr "საპატიო სუფიქსი:"
 
 #: contacts/qml/private/ContactEditorPage.qml:206
 #, kde-format
@@ -551,7 +551,7 @@ msgstr "საკონტაქტო ინფორმაცია"
 #: contacts/qml/private/ContactPage.qml:178
 #, kde-format
 msgid "Blog Feed:"
-msgstr ""
+msgstr "ბლოგის ლენტა:"
 
 #: contacts/qml/private/ContactPage.qml:192
 #, kde-format
@@ -649,7 +649,7 @@ msgstr[1] "ელ-ფოსტის მისამართი"
 #: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
-msgstr ""
+msgstr "ამ მოქმედების დაბრუნებას ვერ შეძლებთ"
 
 #: contacts/qml/private/DeleteContactAction.qml:56
 #, kde-format
@@ -669,7 +669,7 @@ msgstr "QR კოდის შექმნის შეცდომა"
 #: contents/ui/Bars/FilterHeaderBar.qml:41
 #, kde-format
 msgid "Filtering by tags"
-msgstr ""
+msgstr "ჭდეებით გაფილტვრა"
 
 #: contents/ui/Bars/FilterHeaderBar.qml:42
 #, kde-format
@@ -679,13 +679,13 @@ msgstr "ყველა დავალება"
 #: contents/ui/Bars/FilterHeaderBar.qml:86
 #, kde-format
 msgid "Remove filtering tag"
-msgstr ""
+msgstr "ფილტრის ჭდის წაშლა"
 
 #: contents/ui/Controls/CalendarItemTapHandler.qml:36
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Calendar Color"
-msgstr ""
+msgstr "აირჩიეთ კალენდარის ფერი"
 
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:63
 #, kde-format
@@ -724,7 +724,7 @@ msgstr "წელი"
 #: contents/ui/Controls/DateControls/TimePicker.qml:50
 #, kde-format
 msgid "Min. Interval:"
-msgstr ""
+msgstr "მინ. ინტერვალი:"
 
 #: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:423
 #: kalendarapplication.cpp:279
@@ -757,7 +757,7 @@ msgstr "<b>ჭდეები:</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:188
 #, kde-format
 msgid "Remove %1 tag"
-msgstr ""
+msgstr "%1 ჭდის წაშლა"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:200
 #, kde-format
@@ -787,12 +787,12 @@ msgstr "<b>დასრულდა:</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:300
 #, kde-format
 msgid "<b>Recurrence:</b>"
-msgstr ""
+msgstr "<b>გამეორება:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:323
 #, kde-format
 msgid "Except on:"
-msgstr ""
+msgstr "გარდა:"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:353
 #, kde-format
@@ -802,7 +802,7 @@ msgstr "<b>მდებარეობა:</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:410
 #, kde-format
 msgid "Unable to find location."
-msgstr ""
+msgstr "მდებარეობა ვერ ვოპოვე."
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:445
 #, kde-format
@@ -819,22 +819,22 @@ msgstr[1] "<b>მიმაგრება:</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:485
 #, kde-format
 msgid "<b>Reminders:</b>"
-msgstr ""
+msgstr "<b>შემხსენებლები:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:510
 #, kde-format
 msgid "<b>Organizer:</b>"
-msgstr ""
+msgstr "<b>ორგანიზატორები:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:527
 #, kde-format
 msgid "<b>Google Meet:</b>"
-msgstr ""
+msgstr "<b>Google Meet:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:539
 #, kde-format
 msgid "<b>Guests:</b>"
-msgstr ""
+msgstr "<b>სტუმრები:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:573
 #, kde-format
@@ -867,23 +867,23 @@ msgstr "წაშლა"
 #: contents/ui/Controls/IncidenceMouseArea.qml:81
 #, kde-format
 msgid "Mark Task as Incomplete"
-msgstr ""
+msgstr "ამოცანის დაუსრულებლად მონიშვნა"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:81
 #, kde-format
 msgid "Mark Task as Complete"
-msgstr ""
+msgstr "ამოცანის დასრულებულად მონიშვნა"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:88
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:69
 #, kde-format
 msgid "Add Sub-Task"
-msgstr ""
+msgstr "ქვეამოცანის დამატება"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:99
 #, kde-format
 msgid "Set priority..."
-msgstr ""
+msgstr "პრიორიტეტის დაყენება..."
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:112
 #: contents/ui/Controls/IncidenceMouseArea.qml:184
@@ -894,52 +894,52 @@ msgstr "არაფერი"
 #: contents/ui/Controls/IncidenceMouseArea.qml:117
 #, kde-format
 msgid "1 (highest priority)"
-msgstr ""
+msgstr "1 (უმაღლესი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:122
 #, kde-format
 msgid "2 (mid-high priority)"
-msgstr ""
+msgstr "2 (შუა მაღალი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:127
 #, kde-format
 msgid "3 (mid-high priority)"
-msgstr ""
+msgstr "3 (შუა მაღალი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:132
 #, kde-format
 msgid "4 (mid-high priority)"
-msgstr ""
+msgstr "4 (შუა მაღალი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:137
 #, kde-format
 msgid "5 (medium priority)"
-msgstr ""
+msgstr "5 (საშუალო პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:142
 #, kde-format
 msgid "6 (mid-low priority)"
-msgstr ""
+msgstr "6 (შუა დაბალი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:147
 #, kde-format
 msgid "7 (mid-low priority)"
-msgstr ""
+msgstr "7 (შუა დაბალი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:152
 #, kde-format
 msgid "8 (mid-low priority)"
-msgstr ""
+msgstr "8 (შუა დაბალი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:157
 #, kde-format
 msgid "9 (lowest priority)"
-msgstr ""
+msgstr "9 (ყველაზე დაბალი პრიორიტეტი)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:163
 #, kde-format
 msgid "Set due date..."
-msgstr ""
+msgstr "დააყენეთ ვადა..."
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
 #, kde-format
@@ -954,22 +954,22 @@ msgstr "ხვალ (%1)"
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
 msgid "In a week (%1)"
-msgstr ""
+msgstr "კვირაში(%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:223
 #, kde-format
 msgid "In a month (%1)"
-msgstr ""
+msgstr "თვეში (%1)"
 
 #: contents/ui/Controls/MainDrawerToggleButton.qml:25
 #, kde-format
 msgid "Expand Main Drawer"
-msgstr ""
+msgstr "მთავარი უჯრის ამოკეცვა"
 
 #: contents/ui/Controls/MainDrawerToggleButton.qml:25
 #, kde-format
 msgid "Collapse Main Drawer"
-msgstr ""
+msgstr "მთავარი უჯრის ჩაკეცვა"
 
 #: contents/ui/Controls/Tag.qml:111
 #, kde-format
@@ -999,17 +999,17 @@ msgstr "<b>%1</b> - %2"
 #: contents/ui/Dialogs/CollectionPickerPage.qml:20
 #, kde-format
 msgid "Choose a Task Calendar"
-msgstr ""
+msgstr "აირჩიეთ ამოცანის კალენდარი"
 
 #: contents/ui/Dialogs/CollectionPickerPage.qml:22
 #, kde-format
 msgid "Choose a Calendar"
-msgstr ""
+msgstr "აირჩიეთ კალენდარი"
 
 #: contents/ui/Dialogs/CollectionPickerPage.qml:24
 #, kde-format
 msgid "Choose an Address Book"
-msgstr ""
+msgstr "აირჩიეთ მისამართები"
 
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:22
 #, kde-format
@@ -1019,7 +1019,7 @@ msgstr "კალენდრის წაშლა"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:49
 #, kde-format
 msgid "Do you want to delete calendar: \"%1\"?"
-msgstr ""
+msgstr "მართლა გნებავთ %1 კალენდრის წაშლა?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:27
 #, kde-format
@@ -1030,7 +1030,7 @@ msgstr "%1-ის წაშლა"
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:58
 #, kde-format
 msgid "Do you want to delete item: \"%1\"?"
-msgstr ""
+msgstr "გსურთ წაშალოთ \"%1\"?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:60
 #, kde-format
@@ -1062,17 +1062,17 @@ msgstr ""
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:80
 #, kde-format
 msgid "Only Delete Current"
-msgstr ""
+msgstr "მხოლოდ მიმდინარის წაშლა"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:87
 #, kde-format
 msgid "Also Delete Future"
-msgstr ""
+msgstr "მიმდინარეც წაიშლება"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:101
 #, kde-format
 msgid "Delete Only This"
-msgstr ""
+msgstr "მხოლოდ ამის წაშლა"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:108
 #, kde-format
@@ -1094,12 +1094,12 @@ msgstr "%1-ის დამატება"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "Invalid dates provided."
-msgstr ""
+msgstr "მითითებული თარიღები არასწორია."
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:133
 #, kde-format
 msgid "End date cannot be before start date."
-msgstr ""
+msgstr "დასრულების თარიღი არ შეიძლება დაწყების თარიღამდე იყოს."
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:146
 #, kde-format
@@ -1114,7 +1114,7 @@ msgstr "შეჯამება:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:185
 #, kde-format
 msgid "Completion:"
-msgstr ""
+msgstr "დასრულება:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:204
 #, kde-format
@@ -1129,7 +1129,7 @@ msgstr "მიუნიჭებელი"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:213
 #, kde-format
 msgid "1 (Highest Priority)"
-msgstr ""
+msgstr "1 (უმაღლესი პრიორიტეტი)"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:214
 #, kde-format
@@ -1149,7 +1149,7 @@ msgstr "4"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:217
 #, kde-format
 msgid "5 (Medium Priority)"
-msgstr ""
+msgstr "5 (საშუალო პრიორიტეტი)"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:218
 #, kde-format
@@ -1169,7 +1169,7 @@ msgstr "8"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:221
 #, kde-format
 msgid "9 (Lowest Priority)"
-msgstr ""
+msgstr "9 (ყველაზე დაბალი პრიორიტეტი)"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:234
 #, kde-format
@@ -1269,19 +1269,19 @@ msgstr[1] "წელი"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:565
 #, kde-format
 msgid "On:"
-msgstr ""
+msgstr "დრო:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:573
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
-msgstr ""
+msgstr "ყოველი თვის %1"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:585
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
-msgstr ""
+msgstr "%1 ყოველი თვის %2"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:596
 #, kde-format
@@ -1291,7 +1291,7 @@ msgstr "მთავრდება:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:611
 #, kde-format
 msgid "On"
-msgstr ""
+msgstr "ჩართული"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:612
 #, kde-format
@@ -1302,8 +1302,8 @@ msgstr "შემდეგ"
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "შემთხვევა"
+msgstr[1] "შემთხვევა"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:654
 #, kde-format
@@ -1313,7 +1313,7 @@ msgstr "გამონაკლისები:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:660
 #, kde-format
 msgid "Add Recurrence Exception"
-msgstr ""
+msgstr "გამეორებადი გამონაკლისის დამატება"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:703
 #, kde-format
@@ -1330,7 +1330,7 @@ msgstr "არასავალდებულო"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:751
 #, kde-format
 msgid "Show map"
-msgstr ""
+msgstr "რუკის ჩვენება"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:782
 #, kde-format
@@ -1352,27 +1352,27 @@ msgstr ", "
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Tap to set tags…"
-msgstr ""
+msgstr "ჭდეების დასაყენებლად დაატყაპუნეთ…"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Click to set tags…"
-msgstr ""
+msgstr "ჭდეების დასამატებლად დააწკაპუნეთ…"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:830
 #, kde-format
 msgid "Manage tags…"
-msgstr ""
+msgstr "ჭდეების მართვა…"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:841
 #, kde-format
 msgid "Reminders:"
-msgstr ""
+msgstr "შეხსენებები:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:899
 #, kde-format
 msgid "Add Reminder"
-msgstr ""
+msgstr "შეხსენების დამატება"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:913
 #, kde-format
@@ -1397,22 +1397,22 @@ msgstr "მდგომარეობა:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
 msgid "Request RSVP"
-msgstr ""
+msgstr "RSVP-ის მოთხოვნა"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1027
 #, kde-format
 msgid "Add Attendee"
-msgstr ""
+msgstr "დამსწრის დამატება"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1038
 #, kde-format
 msgid "Choose from Contacts"
-msgstr ""
+msgstr "აირჩიეთ კონტაქტებიდან"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1042
 #, kde-format
 msgid "Fill in Manually"
-msgstr ""
+msgstr "შეავსეთ ხელით"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1056
 #, kde-format
@@ -1440,22 +1440,22 @@ msgstr ""
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:62
 #, kde-format
 msgid "Only This Item"
-msgstr ""
+msgstr "მხოლოდ ეს ჩანაწერი"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:70
 #, kde-format
 msgid "Also Future Items"
-msgstr ""
+msgstr "მომავალი ჩანაწერებიც"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:78
 #, kde-format
 msgid "All Occurrences"
-msgstr ""
+msgstr "ყველა შემთხვევა"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:13
 #, kde-format
 msgid "Manage Tags"
-msgstr ""
+msgstr "ჭდეების მართვა"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:17
 #, kde-format
@@ -1465,27 +1465,27 @@ msgstr "ჭდის წაშლა"
 #: contents/ui/Dialogs/TagManagerPage.qml:25
 #, kde-format
 msgid "Are you sure you want to delete tag \"%1\"?"
-msgstr ""
+msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ ჭდე \"%1\" ?"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:110
 #, kde-format
 msgid "Create a New Tag…"
-msgstr ""
+msgstr "ახალი ჭდის შექმნა…"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:134
 #, kde-format
 msgid "Quickly Add a New Tag."
-msgstr ""
+msgstr "ახალი ჭდის სწრაფი დამატება."
 
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:82
 #, kde-format
 msgid "Mark Incomplete"
-msgstr ""
+msgstr "დაუსრულებლად მონიშვნა"
 
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:82
 #, kde-format
 msgid "Mark Complete"
-msgstr ""
+msgstr "დასრულებულად მონიშვნა"
 
 #: contents/ui/Drawers/MainDrawer.qml:117
 #, kde-format
@@ -1496,13 +1496,13 @@ msgstr "Kalendar"
 #: contents/ui/Drawers/MainDrawer.qml:302
 #, kde-format
 msgid "Undo: "
-msgstr ""
+msgstr "გაუქმება: "
 
 #: contents/ui/Drawers/MainDrawer.qml:169
 #: contents/ui/Drawers/MainDrawer.qml:307
 #, kde-format
 msgid "Redo: "
-msgstr ""
+msgstr "გამეორება: "
 
 #: contents/ui/Drawers/MainDrawer.qml:178 contents/ui/main.qml:353
 #, kde-format
@@ -1527,7 +1527,7 @@ msgstr "&მორგება"
 #: contents/ui/Drawers/MainDrawer.qml:418
 #, kde-format
 msgid "View all tasks"
-msgstr ""
+msgstr "ყველა ამოცანის ნახვა"
 
 #: contents/ui/KalendarUtils/labelutils.js:33
 #, kde-format
@@ -1559,17 +1559,17 @@ msgstr "%1 წუთი"
 #: contents/ui/KalendarUtils/labelutils.js:45
 #, kde-format
 msgid "%1 before start of event"
-msgstr ""
+msgstr "მოვლენის დაწყებამდე დარჩენილია %1"
 
 #: contents/ui/KalendarUtils/labelutils.js:47
 #, kde-format
 msgid "%1 after start of event"
-msgstr ""
+msgstr "მოვლენის დაწყებიდან გასულია %1"
 
 #: contents/ui/KalendarUtils/labelutils.js:49
 #, kde-format
 msgid "On event start"
-msgstr ""
+msgstr "მოვლენის დაწყებისას"
 
 #: contents/ui/KalendarUtils/labelutils.js:54
 #, kde-format
@@ -1647,7 +1647,7 @@ msgstr "არასდროს სრულდება"
 #: contents/ui/KalendarUtils/labelutils.js:152
 #, kde-format
 msgid "Ends on %1"
-msgstr ""
+msgstr "სრულდება: %1"
 
 #: contents/ui/KalendarUtils/labelutils.js:154
 #, kde-format
@@ -1658,41 +1658,41 @@ msgstr ""
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Highest priority)"
-msgstr ""
+msgstr "%1 (უმაღლესი პრიორიტეტი)"
 
 #: contents/ui/KalendarUtils/labelutils.js:215
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-high priority)"
-msgstr ""
+msgstr "%1 (შუა მაღალი პრიორიტეტი)"
 
 #: contents/ui/KalendarUtils/labelutils.js:217
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Medium priority)"
-msgstr ""
+msgstr "%1 (საშუალო პრიორიტეტი)"
 
 #: contents/ui/KalendarUtils/labelutils.js:219
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-low priority)"
-msgstr ""
+msgstr "%1 (შუა დაბალი პრიორიტეტი)"
 
 #: contents/ui/KalendarUtils/labelutils.js:221
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Lowest priority)"
-msgstr ""
+msgstr "%1 (ყველაზე დაბალი პრიორიტეტი)"
 
 #: contents/ui/KalendarUtils/labelutils.js:223
 #, kde-format
 msgid "No set priority level"
-msgstr ""
+msgstr "პრიორიტეტი დაყენებული არაა"
 
 #: contents/ui/Location/LocationMap.qml:51
 #, kde-format
 msgid "Return to Location"
-msgstr ""
+msgstr "მდებარეობაზე დაბრუნება"
 
 #: contents/ui/main.qml:321
 #, kde-format
@@ -1775,12 +1775,12 @@ msgstr ""
 #: contents/ui/main.qml:856
 #, kde-format
 msgid "Merge with existing calendar"
-msgstr ""
+msgstr "არსებულ კალენდარში შერწყმა"
 
 #: contents/ui/main.qml:872
 #, kde-format
 msgid "Create new calendar"
-msgstr ""
+msgstr "ახალი კალენდარის შექმნა"
 
 #: contents/ui/main.qml:1077
 #, kde-format
@@ -1809,13 +1809,13 @@ msgstr "საწყის მნიშვნელობებზე დაბ�
 #: contents/ui/MainViews/BasicInternalHourlyView.qml:261
 #, kde-format
 msgid "All day or Multi day"
-msgstr ""
+msgstr "ყველა ან ბევრი დღე"
 
 #: contents/ui/MainViews/BasicMonthListView.qml:265
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
-msgstr ""
+msgstr "სუფთა დღე."
 
 #: contents/ui/MainViews/BasicMonthListView.qml:284
 #, kde-format
@@ -1867,17 +1867,17 @@ msgstr ""
 #: contents/ui/MainViews/DayGridView.qml:199
 #, kde-format
 msgid "<b>Today</b>"
-msgstr ""
+msgstr "<b>დღეს</b>"
 
 #: contents/ui/MainViews/HourlyView.qml:52
 #, kde-format
 msgid "Previous Week"
-msgstr ""
+msgstr "წინა კვირა"
 
 #: contents/ui/MainViews/HourlyView.qml:59
 #, kde-format
 msgid "Next Week"
-msgstr ""
+msgstr "შემდეგი კვირა"
 
 #: contents/ui/MainViews/HourlyView.qml:66
 #, kde-format
@@ -1908,17 +1908,17 @@ msgstr "დღეს"
 #: models/todosortfilterproxymodel.cpp:169
 #, kde-format
 msgid "Overdue"
-msgstr ""
+msgstr "ვადაგადაცილებული"
 
 #: contents/ui/MainViews/TodoTreeView.qml:77
 #, kde-format
 msgid "Priority %1"
-msgstr ""
+msgstr "პრიორიტეტი %1"
 
 #: contents/ui/MainViews/TodoTreeView.qml:77
 #, kde-format
 msgid "No set priority"
-msgstr ""
+msgstr "პრიორიტეტი დაყენებული არაა"
 
 #: contents/ui/MainViews/TodoTreeView.qml:104
 #, kde-format
@@ -1928,7 +1928,7 @@ msgstr ""
 #: contents/ui/MainViews/TodoTreeView.qml:111
 #, kde-format
 msgid "Calendar is not enabled"
-msgstr ""
+msgstr "კალენდარი ჩართული არაა"
 
 #: contents/ui/MainViews/TodoTreeView.qml:114
 #, kde-format
@@ -1938,7 +1938,7 @@ msgstr "ჩართვა"
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks completed"
-msgstr ""
+msgstr "ამოცანები დასრულებული არაა"
 
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
@@ -1964,12 +1964,12 @@ msgstr ""
 #: contents/ui/MainViews/TodoView.qml:100
 #, kde-format
 msgid "Completed Tasks"
-msgstr ""
+msgstr "დასრულებული ამოცანები"
 
 #: contents/ui/MainViews/TodoView.qml:148
 #, kde-format
 msgid "Create a New Task…"
-msgstr ""
+msgstr "ახალი ამოცანის შექმნა…"
 
 #: contents/ui/MainViews/TodoView.qml:189
 #: contents/ui/MainViews/TodoView.qml:190
@@ -1981,13 +1981,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit calendar…"
-msgstr ""
+msgstr "კალენდარის ჩასწორება…"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:29
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update calendar"
-msgstr ""
+msgstr "კალენდარის განახლება"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:34
 #, kde-format
@@ -1999,25 +1999,25 @@ msgstr "კალენდრის წაშლა"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set calendar colour…"
-msgstr ""
+msgstr "კალენდარის ფერის დაყენება…"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:54
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Calendar source settings…"
-msgstr ""
+msgstr "კალენდარის წყაროს მორგება…"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:60
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update calendar source"
-msgstr ""
+msgstr "კალენდარის წყაროს განახლება"
 
 #: contents/ui/Menus/CalendarItemMenu.qml:66
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete calendar source"
-msgstr ""
+msgstr "კალენდარის წყაროს წაშლა"
 
 #: contents/ui/Menus/EditMenu.qml:28
 #, kde-format
@@ -2143,13 +2143,13 @@ msgstr "Kalendar-ის სახელმძღვანელო"
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Undo Text"
-msgstr ""
+msgstr "ტექსტის გაუქმება"
 
 #: contents/ui/Menus/WindowMenu.qml:67
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Redo Text"
-msgstr ""
+msgstr "ტექსტის დაბრუნება"
 
 #: contents/ui/Menus/WindowMenu.qml:158
 #, kde-format
@@ -2159,12 +2159,12 @@ msgstr "&დალაგება"
 #: contents/ui/Settings/CalendarSettingsPage.qml:138
 #, kde-format
 msgid "Change Calendar Color…"
-msgstr ""
+msgstr "კალენდარის ფერის შეცვლა…"
 
 #: contents/ui/Settings/CalendarSettingsPage.qml:148
 #, kde-format
 msgid "Choose Calendar Color"
-msgstr ""
+msgstr "აირჩიეთ კალენდარის ფერი"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:11
 #, kde-format
@@ -2180,7 +2180,7 @@ msgstr "რუკები"
 #: contents/ui/Settings/GeneralSettingsPage.qml:20
 #, kde-format
 msgid "Enable maps:"
-msgstr ""
+msgstr "რუკების ჩართვა:"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:32
 #: contents/ui/Settings/ViewSettingsPage.qml:357
@@ -2191,7 +2191,7 @@ msgstr ""
 #: contents/ui/Settings/GeneralSettingsPage.qml:45
 #, kde-format
 msgid "Location marker:"
-msgstr ""
+msgstr "მდებარეობის მარკერი:"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:50
 #: contents/ui/Settings/ViewSettingsPage.qml:376
@@ -2225,17 +2225,17 @@ msgstr "Kalendar-ის შესახებ"
 #: contents/ui/Settings/SourceSettingsPage.qml:19
 #, kde-format
 msgid "Add New Calendar Source…"
-msgstr ""
+msgstr "ახალი კალენდარის წყაროს დამატება…"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:26
 #, kde-format
 msgid "Contact Books"
-msgstr ""
+msgstr "კონტაქტების წიგნები"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:27
 #, kde-format
 msgid "Add New Address Book Source…"
-msgstr ""
+msgstr "ახალი მისამართების წიგნის წყაროს დამატება…"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:36
 #, kde-format
@@ -2360,7 +2360,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:251
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "კვირის ზოგადი გადახედვა"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:257
 #, kde-format
@@ -2446,7 +2446,7 @@ msgstr "Ctrl+2"
 #: kalendarapplication.cpp:114
 #, kde-format
 msgid "3 Day View"
-msgstr ""
+msgstr "სამი დღის ხედი"
 
 #: kalendarapplication.cpp:124
 #, kde-format
@@ -2511,7 +2511,7 @@ msgstr "წინ"
 #: kalendarapplication.cpp:243
 #, kde-format
 msgid "To Today"
-msgstr ""
+msgstr "დღემდე"
 
 #: kalendarapplication.cpp:256
 #, kde-format
@@ -2536,7 +2536,7 @@ msgstr "ჭდეების მართვა…"
 #: kalendarapplication.cpp:312
 #, kde-format
 msgid "Import Calendar…"
-msgstr ""
+msgstr "კალენდარის შემოტანა…"
 
 #: kalendarapplication.cpp:344
 #, kde-format
@@ -2598,7 +2598,7 @@ msgstr "%1 (ნაგულისხმები)"
 #: mail/contactimageprovider.cpp:126
 #, kde-format
 msgid "Image request has been cancelled"
-msgstr ""
+msgstr "გამოსახულების მოთხოვნა გაუქმდა"
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -2621,25 +2621,25 @@ msgstr ""
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "შემოტანილია 1 გასაღები"
+msgstr[1] "შემოტანილია %1 გასაღები"
 
 #: mail/mime/attachmentmodel.cpp:228
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 გასაღები უკვე შემოტანილია"
+msgstr[1] "%1 გასაღები უკვე შემოტანილია"
 
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
 msgid "fwd"
-msgstr ""
+msgstr "გადგზ"
 
 #: mail/mime/mailtemplates.cpp:132
 #, kde-format
 msgid "re"
-msgstr ""
+msgstr "პას"
 
 #: mail/mime/partmodel.cpp:473
 #, kde-format
@@ -2666,7 +2666,7 @@ msgstr ""
 #: mail/mimetreeparser/messagepart.cpp:862
 #, kde-format
 msgid "Could not decrypt the data."
-msgstr ""
+msgstr "მონაცემების გაშიფვრის შეცდომა."
 
 #: mail/qml/ConversationViewer.qml:30
 #, kde-format
@@ -2676,12 +2676,12 @@ msgstr "ნაგავში მოთავსება"
 #: mail/qml/FolderView.qml:43
 #, kde-format
 msgid "Don't Mark as Important"
-msgstr ""
+msgstr "არ მონიშნო, როგორც მნიშვნელოვანი"
 
 #: mail/qml/FolderView.qml:86
 #, kde-format
 msgid "No mailbox selected"
-msgstr ""
+msgstr "საფოსტო ყუთი არჩეული არაა"
 
 #: mail/qml/FolderView.qml:87
 #, kde-format
@@ -2701,7 +2701,7 @@ msgstr "საფოსტო ყუთები"
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
 msgid "This mail contains an invitation"
-msgstr ""
+msgstr "ეს ელფოსტა მოსაწვევს შეიცავს"
 
 #: mail/qml/mailpartview/MailPart.qml:43
 #, kde-format
@@ -2741,7 +2741,7 @@ msgstr "თქვენ ენდობით ამ გასაღებს."
 #: mail/qml/mailpartview/MailPartModel.qml:68
 #, kde-format
 msgid "The signature is invalid."
-msgstr ""
+msgstr "ხელმოწერა არასწორია."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
@@ -2817,19 +2817,19 @@ msgstr "პროგრამისტი"
 #: models/todosortfilterproxymodel.cpp:165
 #, kde-format
 msgid "No set date"
-msgstr ""
+msgstr "თარიღი დაყენებული არაა"
 
 #: models/todosortfilterproxymodel.cpp:198
 #, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr ""
+msgstr " %1-ზე"
 
 #: models/todosortfilterproxymodel.cpp:199
 #, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
-msgstr ""
+msgstr " (გადაცილებული)"
 
 #: quick/qml/AgentConfigurationForm.qml:36
 #, kde-format
@@ -2839,7 +2839,7 @@ msgstr "%1-ის მორგება"
 #: quick/qml/AgentConfigurationForm.qml:37
 #, kde-format
 msgid "Modify or delete this account agent."
-msgstr ""
+msgstr "ამ ანგარიშის აგენტის შეცვლა ან წაშლა."
 
 #: quick/qml/AgentConfigurationForm.qml:42
 #, kde-format
