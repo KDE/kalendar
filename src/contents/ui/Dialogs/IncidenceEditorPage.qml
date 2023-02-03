@@ -743,7 +743,17 @@ Kirigami.ScrollablePage {
 
                         model: GeocodeModel {
                             id: locationsModel
-                            plugin: Plugin { name: "osm" }
+                            plugin: Plugin {
+                                name: "osm"
+                                PluginParameter {
+                                    name: "osm.useragent"
+                                    value: Application.name + "/" + Application.version + " (kde-pim@kde.org)"
+                                }
+                                PluginParameter {
+                                    name: "osm.mapping.providersrepository.address"
+                                    value: "https://autoconfig.kde.org/qtlocation/"
+                                }
+                            }
                             autoUpdate: true
                             onLocationsChanged: locationField.openOrCloseLocationsPopup()
                         }

@@ -35,6 +35,14 @@ Map {
     plugin: Plugin {
         id: mapPlugin
         name: "osm"
+        PluginParameter {
+            name: "osm.useragent"
+            value: Application.name + "/" + Application.version + " (kde-pim@kde.org)"
+        }
+        PluginParameter {
+            name: "osm.mapping.providersrepository.address"
+            value: "https://autoconfig.kde.org/qtlocation/"
+        }
     }
     onCopyrightLinkActivated: {
         Qt.openUrlExternally(link)
