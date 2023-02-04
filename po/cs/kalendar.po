@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-11 00:58+0000\n"
-"PO-Revision-Date: 2023-01-05 11:33+0100\n"
+"POT-Creation-Date: 2023-02-04 01:00+0000\n"
+"PO-Revision-Date: 2023-02-03 17:00+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -42,7 +42,7 @@ msgstr "Znovu: "
 #: calendar/qml/CalendarApplication.qml:33
 #, kde-format
 msgid "Refresh All Calendars"
-msgstr ""
+msgstr "Obnovit všechny kalendáře"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -285,7 +285,7 @@ msgstr "Vyberte barvu knihy adres"
 #: contacts/qml/ContactApplication.qml:16
 #, kde-format
 msgid "Refresh All Address Books"
-msgstr ""
+msgstr "Obnovit všechny knihy adres"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -382,7 +382,7 @@ msgstr "Kniha adres:"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:962
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:972
 #, kde-format
 msgid "Name:"
 msgstr "Název:"
@@ -824,7 +824,7 @@ msgstr[2] "E-mailové adresy"
 #: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
-msgstr ""
+msgstr "Tento krok nelze vrátit"
 
 #: contacts/qml/private/DeleteContactAction.qml:56
 #, kde-format
@@ -854,7 +854,7 @@ msgstr "Všechny úlohy"
 #: contents/ui/Bars/FilterHeaderBar.qml:86
 #, kde-format
 msgid "Remove filtering tag"
-msgstr ""
+msgstr "Odstranit značku filtrování"
 
 #: contents/ui/Controls/CalendarItemTapHandler.qml:36
 #, kde-format
@@ -916,15 +916,15 @@ msgstr "Nová úloha…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:114
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "Tato událost se opakuje"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:125
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Tato událost má upomínku"
+msgstr[1] "Tato událost má upomínky"
+msgstr[2] "Tato událost má upomínky"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:147
 #, kde-format
@@ -1018,7 +1018,7 @@ msgstr "<b>Organizátor:</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:541
 #, kde-format
 msgid "<b>Google Meet:</b>"
-msgstr ""
+msgstr "<b>Google Meet:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:553
 #, kde-format
@@ -1028,7 +1028,7 @@ msgstr "<b>Hosti:</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:587
 #, kde-format
 msgid "Super-task"
-msgstr ""
+msgstr "Super-úloha"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:612
 #, kde-format
@@ -1057,12 +1057,12 @@ msgstr "Smazat"
 #: contents/ui/Controls/IncidenceMouseArea.qml:81
 #, kde-format
 msgid "Mark Task as Incomplete"
-msgstr ""
+msgstr "Označit úlohu jako nedokončenou"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:81
 #, kde-format
 msgid "Mark Task as Complete"
-msgstr ""
+msgstr "Označit úlohu jako dokončenou"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:88
 #: contents/ui/Drawers/IncidenceInfoDrawer.qml:69
@@ -1130,7 +1130,7 @@ msgstr "9 (nejnižší priorita)"
 #: contents/ui/Controls/IncidenceMouseArea.qml:163
 #, kde-format
 msgid "Set due date..."
-msgstr ""
+msgstr "Nastavit datum dokončení..."
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
 #, kde-format
@@ -1145,12 +1145,12 @@ msgstr "Zítra (%1)"
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
 msgid "In a week (%1)"
-msgstr ""
+msgstr "Za týden (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:223
 #, kde-format
 msgid "In a month (%1)"
-msgstr ""
+msgstr "Za měsíc (%1)"
 
 #: contents/ui/Controls/MainDrawerToggleButton.qml:25
 #, kde-format
@@ -1229,6 +1229,8 @@ msgid ""
 "Item \"%1\" has sub-items. Do you want to delete all related items, or just "
 "the currently selected item?"
 msgstr ""
+"Položka \"%1\" má podpoložky. Přejete si smazat všechny relevantní položky "
+"nebo jenom právě vybranou položku?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:62
 #, kde-format
@@ -1519,105 +1521,105 @@ msgid "Location:"
 msgstr "Umístění:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:728
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:802
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:969
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:812
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:979
 #, kde-format
 msgid "Optional"
 msgstr "Volitelné"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:765
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:775
 #, kde-format
 msgid "Show map"
 msgstr "Ukázat zobrazení"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:796
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:806
 #, kde-format
 msgid "Description:"
 msgstr "Popis:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:817
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
 #, kde-format
 msgid "Tags:"
 msgstr "Značky:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:826
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:836
 #: models/todosortfilterproxymodel.cpp:147
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ", "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:837
 #, kde-format
 msgid "Tap to set tags…"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:837
 #, kde-format
 msgid "Click to set tags…"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:844
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:854
 #, kde-format
 msgid "Manage tags…"
 msgstr "Spravovat značky…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:855
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:865
 #, kde-format
 msgid "Reminders:"
 msgstr "Připomenutí:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:913
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:923
 #, kde-format
 msgid "Add Reminder"
 msgstr "Přidat upomínku"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:927
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:937
 #, kde-format
 msgid "Attendees:"
 msgstr "Účastníci:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:987
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:997
 #, kde-format
 msgid "Email:"
 msgstr "E-mail:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:994
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1004
 #, kde-format
 msgid "Required"
 msgstr "Požadováno"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1003
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
 msgid "Status:"
 msgstr "Stav:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1027
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1037
 #, kde-format
 msgid "Request RSVP"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1041
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1051
 #, kde-format
 msgid "Add Attendee"
 msgstr "Přidat účastníka"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1052
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1062
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Vybrat z kontaktů"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1056
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1066
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Vyplnit ručně"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1070
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1080
 #, kde-format
 msgid "Attachments:"
 msgstr "Přílohy:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1093
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1103
 #, kde-format
 msgid "Add Attachment"
 msgstr "Přidat přílohu"
@@ -1812,8 +1814,8 @@ msgstr[2] "Každých %1 dní"
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
 msgstr[0] ""
-msgstr[1] "Opakuje se každé %1 měsíce v %2 %3"
-msgstr[2] "Opakuje se každých %1 měsíců v %2 %3"
+msgstr[1] ""
+msgstr[2] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:133
 #, kde-format
@@ -1883,7 +1885,7 @@ msgstr "%1 (Nejnižší priorita)"
 msgid "No set priority level"
 msgstr "Nastavit úroveň priorita"
 
-#: contents/ui/Location/LocationMap.qml:51
+#: contents/ui/Location/LocationMap.qml:59
 #, kde-format
 msgid "Return to Location"
 msgstr "Vrátit na pozici"
@@ -1939,7 +1941,7 @@ msgstr "Rozvrh"
 #: contents/ui/main.qml:462 contents/ui/main.qml:1157
 #, kde-format
 msgid "Tasks"
-msgstr "Úkoly"
+msgstr "Úlohy"
 
 #: contents/ui/main.qml:468 kalendarapplication.cpp:31
 #: kalendarapplication.cpp:36
@@ -2119,7 +2121,7 @@ msgstr "Žádná nastavená priorita"
 #: contents/ui/MainViews/TodoTreeView.qml:104
 #, kde-format
 msgid "No task calendars enabled."
-msgstr ""
+msgstr "Kalendář s úlohami není povolen."
 
 #: contents/ui/MainViews/TodoTreeView.qml:111
 #, kde-format
@@ -2134,12 +2136,12 @@ msgstr "Povolit"
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks completed"
-msgstr ""
+msgstr "Nebyla dokončena žádná úloha"
 
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks left to complete"
-msgstr ""
+msgstr "Žádné úlohy není třeba dokončit"
 
 #: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:30
 #: kalendarapplication.cpp:35
@@ -2201,7 +2203,7 @@ msgstr "Nastavit barvu kalendáře..."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Calendar source settings…"
-msgstr ""
+msgstr "Nastavení zdroje kalendáře..."
 
 #: contents/ui/Menus/CalendarItemMenu.qml:60
 #, kde-format
@@ -2280,7 +2282,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:39
 #, kde-format
 msgid "Show tasks in calendar views"
-msgstr ""
+msgstr "Zobrazit úlohy v pohledech kalendáře"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2581,12 +2583,12 @@ msgstr "Ctrl+M"
 #: kalendarapplication.cpp:309
 #, kde-format
 msgid "New Mail…"
-msgstr ""
+msgstr "Nový e-mail..."
 
 #: kalendarapplication.cpp:316
 #, kde-format
 msgid "New Contact…"
-msgstr ""
+msgstr "Nový kontakt…"
 
 #: kalendarapplication.cpp:329
 #, kde-format
@@ -2681,9 +2683,9 @@ msgstr ""
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "naimportován jeden klíč"
+msgstr[1] "naimportovány %1 klíče"
+msgstr[2] "naimportováno %1 klíčů"
 
 #: mail/mime/attachmentmodel.cpp:228
 #, kde-format
@@ -2696,12 +2698,12 @@ msgstr[2] ""
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
 msgid "fwd"
-msgstr ""
+msgstr "přep"
 
 #: mail/mime/mailtemplates.cpp:132
 #, kde-format
 msgid "re"
-msgstr ""
+msgstr "odp"
 
 #: mail/mime/partmodel.cpp:473
 #, kde-format
@@ -2711,7 +2713,7 @@ msgstr ""
 #: mail/mime/partmodel.cpp:475
 #, kde-format
 msgid "Wrong passphrase."
-msgstr ""
+msgstr "Špatné heslo."
 
 #: mail/mimetreeparser/messagepart.cpp:618
 #: mail/mimetreeparser/messagepart.cpp:709
@@ -2753,7 +2755,7 @@ msgstr ""
 #: mail/qml/FolderView.qml:94
 #, kde-format
 msgid "Mailbox is empty"
-msgstr ""
+msgstr "Schránka je prázdná"
 
 #: mail/qml/mailboxselector/MailBoxListPage.qml:16
 #, kde-format
@@ -2818,7 +2820,7 @@ msgstr ""
 #: mail/qml/mailpartview/MailPartView.qml:33
 #, kde-format
 msgid "Loading mail..."
-msgstr ""
+msgstr "Odesílám poštu..."
 
 #: mail/qml/MailViewer.qml:150
 #, kde-format
