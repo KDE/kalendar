@@ -699,8 +699,12 @@ Column {
 
                                                             const startOffset = posDate.getTime() - drop.source.occurrenceDate.getTime();
 
-                                                            KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, drop.source.occurrenceDate, drop.source);
+                                                            if (DateUtils.sameDay(drop.source.occurrenceDate, posDate)
+                                                                && DateUtils.sameTime(drop.source.occurrenceDate, posDate)) {
+                                                                return;
+                                                            }
 
+                                                            KalendarUiUtils.setUpIncidenceDateChange(incidenceWrapper, startOffset, startOffset, drop.source.occurrenceDate, drop.source);
                                                         } else if(drop.source.objectName === "multiDayIncidenceDelegateBackgroundBackground") {
                                                             incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 

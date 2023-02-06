@@ -149,6 +149,9 @@ QQC2.ScrollView {
                 anchors.fill: parent
                 z: 9999
                 onDropped: if(scrollView.isCurrentItem) {
+                    if (DateUtils.sameDay(dayMouseArea.addDate, drop.source.occurrenceDate)) {
+                        return;
+                    }
                     scrollView.savedYScrollPos = scrollView.QQC2.ScrollBar.vertical.visualPosition;
 
                     const pos = mapToItem(scrollView, backgroundRectangle.x, backgroundRectangle.y);
