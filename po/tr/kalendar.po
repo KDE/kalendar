@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 02:26+0000\n"
-"PO-Revision-Date: 2022-10-18 06:04+0300\n"
+"PO-Revision-Date: 2023-02-05 16:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1373,7 +1373,7 @@ msgstr "Ayarlamak için tıkla…"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:830
 #, kde-format
 msgid "Manage tags…"
-msgstr "Etiketleri yönet…"
+msgstr "Etiketleri Yönet…"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:841
 #, kde-format
@@ -1573,7 +1573,7 @@ msgstr "%1 dakika"
 #: contents/ui/KalendarUtils/labelutils.js:45
 #, kde-format
 msgid "%1 before start of event"
-msgstr "etkinlik öncesi %1"
+msgstr "etkinlikten %1 önce"
 
 #: contents/ui/KalendarUtils/labelutils.js:47
 #, kde-format
