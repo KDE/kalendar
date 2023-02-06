@@ -158,6 +158,9 @@ Item {
                                                     anchors.fill: parent
                                                     z: 9999
                                                     onDropped: if(root.isCurrentView) {
+                                                        if (DateUtils.sameDay(backgroundDayMouseArea.addDate, drop.source.occurrenceDate)) {
+                                                            return;
+                                                        }
                                                         const pos = mapToItem(root, backgroundRectangle.x, backgroundRectangle.y);
                                                         drop.source.caughtX = pos.x + root.listViewSpacing;
                                                         drop.source.caughtY = root.showDayIndicator ?
