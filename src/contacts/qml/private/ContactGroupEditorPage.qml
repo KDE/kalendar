@@ -71,7 +71,7 @@ Kirigami.ScrollablePage {
 
                 mimeTypeFilter: [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup]
                 accessRightsFilter: Akonadi.Collection.CanCreateItem
-                onSelectedCollectionChanged: contactGroupEditor.setDefaultAddressBook(collection)
+                onUserSelectedCollection: contactGroupEditor.setDefaultAddressBook(collection)
             }
 
             QQC2.TextField {
