@@ -659,6 +659,9 @@ int TodoSortFilterProxyModel::comparePriorities(const QModelIndex &left, const Q
     const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
     Q_ASSERT(leftTodo);
     Q_ASSERT(rightTodo);
+    if (m_sortAscending && leftTodo->priority() == 0) {
+        return 1;
+    }
     if (!leftTodo || !rightTodo || leftTodo->priority() == rightTodo->priority()) {
         return 0;
     } else if (leftTodo->priority() < rightTodo->priority()) {
