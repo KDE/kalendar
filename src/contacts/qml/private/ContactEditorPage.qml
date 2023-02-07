@@ -102,7 +102,7 @@ Kirigami.ScrollablePage {
 
                 mimeTypeFilter: [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup]
                 accessRightsFilter: Akonadi.Collection.CanCreateItem
-                onSelectedCollectionChanged: contactEditor.setDefaultAddressBook(collection)
+                onUserSelectedCollection: contactEditor.setDefaultAddressBook(collection)
             }
 
             //Controls.Button {
