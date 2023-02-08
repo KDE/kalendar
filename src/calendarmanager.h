@@ -64,6 +64,7 @@ public:
     QVariantMap undoRedoData();
 
     Q_INVOKABLE Akonadi::Item incidenceItem(KCalendarCore::Incidence::Ptr incidence) const;
+    Q_INVOKABLE IncidenceWrapper *incidenceWrapper(KCalendarCore::Incidence::Ptr incidence) const;
     Akonadi::Item incidenceItem(const QString &uid) const;
     KCalendarCore::Incidence::List childIncidences(const QString &uid) const;
 

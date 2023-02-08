@@ -416,6 +416,13 @@ Akonadi::Item CalendarManager::incidenceItem(KCalendarCore::Incidence::Ptr incid
     return m_calendar->item(incidence);
 }
 
+IncidenceWrapper *CalendarManager::incidenceWrapper(KCalendarCore::Incidence::Ptr incidence) const
+{
+    auto wrapper = new IncidenceWrapper();
+    wrapper->setIncidenceItem(m_calendar->item(incidence));
+    return wrapper;
+}
+
 Akonadi::Item CalendarManager::incidenceItem(const QString &uid) const
 {
     return incidenceItem(m_calendar->incidence(uid));

@@ -156,8 +156,7 @@ QQC2.ScrollView {
                     drop.source.caughtY = pos.y + dayColumn.spacing + Kirigami.Units.largeSpacing;
                     drop.source.caught = true;
 
-                    const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', incidenceDropArea, "incidence");
-                    incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
+                    const incidenceWrapper = Kalendar.CalendarManager.incidenceWrapper(drop.source.incidencePtr);
 
                     let sameTimeOnDate = new Date(dayMouseArea.addDate);
                     sameTimeOnDate = new Date(sameTimeOnDate.setHours(drop.source.occurrenceDate.getHours(), drop.source.occurrenceDate.getMinutes()));
