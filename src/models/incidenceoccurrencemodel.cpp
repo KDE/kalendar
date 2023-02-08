@@ -17,6 +17,25 @@
 #include <KSharedConfig>
 #include <QMetaEnum>
 
+namespace {
+std::pair<QDateTime, QDateTime> incidenceOccurrenceStartEnd(const QDateTime &ocStart, const KCalendarCore::Incidence::Ptr &incidence)
+{
+    auto start = ocStart;
+    const auto end = incidence->endDateForStart(start);
+
+    if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
+        KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
+
+        if (!start.isValid()) { // Todos are very likely not to have a set start date
+            start = todo->dtDue();
+        }
+    }
+
+    return {start, end};
+}
+}
+
+
 IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_coreCalendar(nullptr)
@@ -466,22 +485,6 @@ void IncidenceOccurrenceModel::loadColors()
         const QColor color = rColorsConfig.readEntry(key, QColor("blue"));
         m_colors[key] = color;
     }
-}
-
-std::pair<QDateTime, QDateTime> IncidenceOccurrenceModel::incidenceOccurrenceStartEnd(const QDateTime &ocStart, const KCalendarCore::Incidence::Ptr &incidence)
-{
-    auto start = ocStart;
-    const auto end = incidence->endDateForStart(start);
-
-    if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
-        KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
-
-        if (!start.isValid()) { // Todos are very likely not to have a set start date
-            start = todo->dtDue();
-        }
-    }
-
-    return {start, end};
 }
 
 uint IncidenceOccurrenceModel::incidenceOccurrenceHash(const QDateTime &ocStart, const QDateTime &ocEnd, const QString &incidenceUid)
