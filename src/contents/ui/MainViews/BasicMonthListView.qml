@@ -108,16 +108,16 @@ QQC2.ScrollView {
         onCountChanged: if(scrollView.initialMonth) scrollView.moveToSelected()
 
         model: Kalendar.MultiDayIncidenceModel {
-           periodLength: 1
-           showTodos: Kalendar.Config.showTodosInCalendarViews
-           showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
-           model: Kalendar.IncidenceOccurrenceModel {
-               start: scrollView.startDate
-               length: scrollView.daysInMonth
-               calendar: Kalendar.CalendarManager.calendar
-               filter: Kalendar.Filter
-           }
-       }
+            periodLength: 1
+            showTodos: Kalendar.Config.showTodosInCalendarViews
+            showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
+            model: Kalendar.IncidenceOccurrenceModel {
+                start: scrollView.startDate
+                length: scrollView.daysInMonth
+                calendar: Kalendar.CalendarManager.calendar
+                filter: Kalendar.Filter
+            }
+        }
 
         delegate: DayMouseArea {
             id: dayMouseArea
