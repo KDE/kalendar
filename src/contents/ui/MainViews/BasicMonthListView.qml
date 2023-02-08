@@ -122,8 +122,12 @@ QQC2.ScrollView {
         delegate: DayMouseArea {
             id: dayMouseArea
 
+            required property int index
+            required property var periodStartDate
+            required property var incidences
+
             width: dayColumn.width
-            height: model.index === scheduleListView.count - 1 ? dayColumn.height + Kirigami.Units.largeSpacing : dayColumn.height
+            height: index === scheduleListView.count - 1 ? dayColumn.height + Kirigami.Units.largeSpacing : dayColumn.height
 
             addDate: periodStartDate
             onAddNewIncidence: addIncidence(type, addDate)
@@ -181,7 +185,7 @@ QQC2.ScrollView {
                     text: {
                         const daysToWeekEnd = 6;
 
-                        const nextDayMaxDiff = (periodStartDate.getDate() - (model.index + 1)) + daysToWeekEnd;
+                        const nextDayMaxDiff = (periodStartDate.getDate() - (incidenceDropArea.index + 1)) + daysToWeekEnd;
                         const nextDayMaxDate = periodStartDate.getDate() + nextDayMaxDiff;
                         const nextDayDate = Math.min(nextDayMaxDate, scrollView.daysInMonth);
 
@@ -190,7 +194,7 @@ QQC2.ScrollView {
                     }
                     visible: Kalendar.Config.showWeekHeaders &&
                         periodStartDate !== undefined &&
-                        (periodStartDate.getDay() === Qt.locale().firstDayOfWeek || index === 0)
+                        (periodStartDate.getDay() === Qt.locale().firstDayOfWeek || incidenceDropArea.index === 0)
                 }
 
                 Kirigami.Separator {
