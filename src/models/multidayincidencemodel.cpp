@@ -244,9 +244,8 @@ void MultiDayIncidenceModel::resetLayoutLines()
 
 QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
 {
-    if (!hasIndex(idx.row(), idx.column()) || !mSourceModel || m_laidOutLines.empty()) {
-        return {};
-    }
+    Q_ASSERT(checkIndex(idx));
+    Q_ASSERT(mSourceModel);
 
     switch (role) {
     case PeriodStartDate: {
@@ -254,6 +253,9 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &idx, int role) const
         return rowStart.startOfDay();
     }
     case Incidences:
+        if (m_laidOutLines.empty()) {
+            return false;
+        }
         return m_laidOutLines.at(idx.row());
     default:
         Q_ASSERT(false);

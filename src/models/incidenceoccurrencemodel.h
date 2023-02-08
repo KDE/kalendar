@@ -93,6 +93,11 @@ public:
         QColor color;
         qint64 collectionId;
         bool allDay;
+
+        bool isValid() const
+        {
+            return start.isValid() && end.isValid();
+        };
     };
 
 Q_SIGNALS:
@@ -128,7 +133,6 @@ private:
     QColor getColor(const KCalendarCore::Incidence::Ptr &incidence);
     qint64 getCollectionId(const KCalendarCore::Incidence::Ptr &incidence);
 
-    QSharedPointer<QAbstractItemModel> mSourceModel;
     QDate mStart;
     QDate mEnd;
     int mLength{0};

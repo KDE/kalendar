@@ -149,7 +149,6 @@ void IncidenceOccurrenceModel::resetFromSource()
         if (!incidencePassesFilter(incidence)) {
             continue;
         }
-
         const auto occurrenceStartEnd = incidenceOccurrenceStartEnd(occurrenceIterator.occurrenceStartDate(), incidence);
         const auto start = occurrenceStartEnd.first;
         const auto end = occurrenceStartEnd.second;
@@ -165,10 +164,8 @@ void IncidenceOccurrenceModel::resetFromSource()
 
         const auto indexRow = m_incidences.count();
         m_incidences.append(occurrence);
-
         const auto occurrenceIndex = index(indexRow);
         const QPersistentModelIndex persistentIndex(occurrenceIndex);
-
         m_occurrenceIndexHash.insert(occurrenceHashKey, persistentIndex);
     }
 
@@ -179,7 +176,12 @@ void IncidenceOccurrenceModel::resetFromSource()
 
 void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
 {
-    if (!m_coreCalendar || !upperLeft.isValid() || !bottomRight.isValid() || m_resetThrottlingTimer.isActive()) {
+    Q_ASSERT(checkIndex(upperLeft, QAbstractItemModel::CheckIndexOption::IndexIsValid));
+    Q_ASSERT(checkIndex(bottomRight, QAbstractItemModel::CheckIndexOption::IndexIsValid));
+
+    qDebug() << upperLeft << bottomRight;
+
+    if (!m_coreCalendar || m_resetThrottlingTimer.isActive()) {
         return;
     }
 
@@ -197,19 +199,14 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
         }
 
         const auto incidence = incidenceItem.payload<KCalendarCore::Incidence::Ptr>();
+
         KCalendarCore::OccurrenceIterator occurrenceIterator{*m_coreCalendar, incidence, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
 
         while (occurrenceIterator.hasNext()) {
             occurrenceIterator.next();
 
-            const auto occurrenceStartEnd = incidenceOccurrenceStartEnd(occurrenceIterator.occurrenceStartDate(), incidence);
-            const auto start = occurrenceStartEnd.first;
-            const auto end = occurrenceStartEnd.second;
+            const auto [start, end] = incidenceOccurrenceStartEnd(occurrenceIterator.occurrenceStartDate(), incidence);
             const auto occurrenceHashKey = incidenceOccurrenceHash(start, end, incidence->uid());
-
-            if (!m_occurrenceIndexHash.contains(occurrenceHashKey)) {
-                continue;
-            }
 
             const Occurrence occurrence{
                 start,
@@ -221,7 +218,24 @@ void IncidenceOccurrenceModel::slotSourceDataChanged(const QModelIndex &upperLef
             };
 
             const auto existingOccurrenceIndex = m_occurrenceIndexHash.value(occurrenceHashKey);
-            const auto existingOccurrenceRow = existingOccurrenceIndex.row();
+            auto existingOccurrenceRow = existingOccurrenceIndex.row();
+
+            if (!checkIndex(existingOccurrenceIndex, QAbstractItemModel::CheckIndexOption::IndexIsValid)) {
+                existingOccurrenceRow = -1;
+                for (int i = 0; i < m_incidences.count(); i++) {
+                    const auto occurrence = m_incidences.at(i);
+                    if (occurrence.start == start && occurrence.end == end && occurrence.incidence->uid() == incidence->uid()) {
+                        existingOccurrenceRow = i;
+                        break;
+                    }
+                }
+
+                if (existingOccurrenceRow == -1) {
+                    continue;
+                }
+
+                qDebug() << "replace" << existingOccurrenceRow;
+            }
 
             m_incidences.replace(existingOccurrenceRow, occurrence);
             Q_EMIT dataChanged(existingOccurrenceIndex, existingOccurrenceIndex);
@@ -278,6 +292,8 @@ void IncidenceOccurrenceModel::slotSourceRowsInserted(const QModelIndex &parent,
                 getCollectionId(incidence),
                 incidence->allDay(),
             };
+
+            Q_ASSERT(occurrence.isValid());
 
             const auto indexRow = m_incidences.count();
 
@@ -423,8 +439,10 @@ void IncidenceOccurrenceModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
     m_coreCalendar = calendar;
 
     connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::slotSourceDataChanged);
+    connect(m_coreCalendar->model(), &QAbstractItemModel::layoutChanged, this, &IncidenceOccurrenceModel::scheduleReset);
     connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::slotSourceRowsInserted);
     connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::scheduleReset);
+    connect(m_coreCalendar->model(), &QAbstractItemModel::rowsMoved, this, &IncidenceOccurrenceModel::scheduleReset);
     connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::scheduleReset);
     connect(m_coreCalendar.get(), &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::scheduleReset);
 
@@ -445,7 +463,7 @@ void IncidenceOccurrenceModel::loadColors()
     const QStringList colorKeyList = rColorsConfig.keyList();
 
     for (const QString &key : colorKeyList) {
-        QColor color = rColorsConfig.readEntry(key, QColor("blue"));
+        const QColor color = rColorsConfig.readEntry(key, QColor("blue"));
         m_colors[key] = color;
     }
 }
