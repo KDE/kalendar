@@ -17,6 +17,27 @@
 #include <KSharedConfig>
 #include <QMetaEnum>
 
+QDateTime incidenceEnd(const KCalendarCore::Incidence::Ptr &incidence)
+{
+    if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeEvent) {
+        KCalendarCore::Event::Ptr event = incidence.staticCast<KCalendarCore::Event>();
+        return event->dtEnd();
+    } else if (incidence->type() == KCalendarCore::Incidence::IncidenceType::TypeTodo) {
+        KCalendarCore::Todo::Ptr todo = incidence.staticCast<KCalendarCore::Todo>();
+        return todo->dtDue();
+    }
+    return {};
+}
+
+QDateTime incidenceStart(const KCalendarCore::Incidence::Ptr &incidence)
+{
+    auto start = incidence->dtStart();
+    if (!start.isValid()) {
+        return incidenceEnd(incidence);
+    }
+    return start;
+}
+
 IncidenceOccurrenceModel::IncidenceOccurrenceModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_coreCalendar(nullptr)
@@ -135,44 +156,139 @@ void IncidenceOccurrenceModel::resetFromSource()
 
     loadColors();
 
-    beginResetModel();
+    QList<Occurrence> newIncidences;
 
-    m_incidences.clear();
-    m_occurrenceIndexHash.clear();
+    QMap<QByteArray, KCalendarCore::Incidence::Ptr> recurringIncidences;
+    QMultiMap<QByteArray, KCalendarCore::Incidence::Ptr> exceptions;
+    QMap<QByteArray, Akonadi::Item> items;
 
-    KCalendarCore::OccurrenceIterator occurrenceIterator(*m_coreCalendar, QDateTime(mStart, {0, 0, 0}), QDateTime(mEnd, {12, 59, 59}));
+    for (int i = 0; i < m_coreCalendar->model()->rowCount(); ++i) {
+        const auto sourceModelIndex = m_coreCalendar->model()->index(i, 0, {});
+        const auto item = sourceModelIndex.data(Akonadi::EntityTreeModel::ItemRole).value<Akonadi::Item>();
 
-    while (occurrenceIterator.hasNext()) {
-        occurrenceIterator.next();
-        const auto incidence = occurrenceIterator.incidence();
+        Q_ASSERT(item.isValid());
+        Q_ASSERT(item.hasPayload<KCalendarCore::Incidence::Ptr>());
 
-        if (!incidencePassesFilter(incidence)) {
-            continue;
+        const auto incidence = item.payload<KCalendarCore::Incidence::Ptr>();
+
+        // Collect recurring events and add the rest immediately
+        if (incidence->recurs()) {
+            recurringIncidences.insert(incidence->uid().toLatin1(), incidence);
+            items.insert(incidence->instanceIdentifier().toLatin1(), item);
+        } else if (incidence->recurrenceId().isValid()) {
+            exceptions.insert(incidence->uid().toLatin1(), incidence);
+            items.insert(incidence->instanceIdentifier().toLatin1(), item);
+        } else {
+            const auto end = incidenceEnd(incidence);
+
+            if (incidence->dtStart().date() < mEnd && end.date() >= mStart) {
+                newIncidences.append({
+                    incidence->dtStart(),
+                    end,
+                    incidence,
+                    getColor(incidence),
+                    getCollectionId(incidence),
+                    incidence->allDay(),
+                });
+            }
         }
 
-        const auto occurrenceStartEnd = incidenceOccurrenceStartEnd(occurrenceIterator.occurrenceStartDate(), incidence);
-        const auto start = occurrenceStartEnd.first;
-        const auto end = occurrenceStartEnd.second;
-        const auto occurrenceHashKey = incidenceOccurrenceHash(start, end, incidence->uid());
-        const Occurrence occurrence{
-            start,
-            end,
-            incidence,
-            getColor(incidence),
-            getCollectionId(incidence),
-            incidence->allDay(),
-        };
+        // Process all recurring events and their exceptions.
+        for (const auto &uid : recurringIncidences.keys()) {
+            KCalendarCore::MemoryCalendar calendar{QTimeZone::systemTimeZone()};
+            calendar.addIncidence(recurringIncidences.value(uid));
+            for (const auto &incidence : exceptions.values(uid)) {
+                calendar.addIncidence(incidence);
+            }
 
-        const auto indexRow = m_incidences.count();
-        m_incidences.append(occurrence);
+            KCalendarCore::OccurrenceIterator occurrenceIterator{calendar, QDateTime{mStart, {0, 0, 0}}, QDateTime{mEnd, {12, 59, 59}}};
+            while (occurrenceIterator.hasNext()) {
+                occurrenceIterator.next();
+                const auto incidence = occurrenceIterator.incidence();
+                Q_ASSERT(incidence);
+                const auto item = items.value(incidence->instanceIdentifier().toLatin1());
 
-        const auto occurrenceIndex = index(indexRow);
-        const QPersistentModelIndex persistentIndex(occurrenceIndex);
+                const auto [start, end] = incidenceOccurrenceStartEnd(occurrenceIterator.occurrenceStartDate(), incidence);
 
-        m_occurrenceIndexHash.insert(occurrenceHashKey, persistentIndex);
+                if (start.date() < mEnd && end.date() >= mStart) {
+                    newIncidences.append({
+                        start,
+                        end,
+                        incidence,
+                        getColor(incidence),
+                        getCollectionId(incidence),
+                        incidence->allDay(),
+                    });
+                }
+            }
+        }
+
+        // Process all exceptions that had no main event present in the current query
+        for (const auto &uid : exceptions.keys()) {
+            const auto incidence = exceptions.value(uid);
+            Q_ASSERT(incidence);
+
+            const auto event = items.value(incidence->instanceIdentifier().toLatin1());
+            const auto start = incidenceStart(incidence);
+            const auto end = incidenceEnd(incidence);
+
+            if (start.date() < mEnd && end.date() >= mStart) {
+                newIncidences.append({
+                    start,
+                    end,
+                    incidence,
+                    getColor(incidence),
+                    getCollectionId(incidence),
+                    incidence->allDay(),
+                });
+            }
+        }
     }
 
-    endResetModel();
+    {
+        auto it = std::begin(m_incidences);
+        while (it != std::end(m_incidences)) {
+            const auto event = *it;
+            auto itToRemove = std::find_if(std::begin(newIncidences), std::end(newIncidences), [&](const auto &e) {
+                Q_ASSERT(e.incidence);
+                Q_ASSERT(event.incidence);
+                return e.incidence->uid() == event.incidence->uid() && e.start == event.start;
+            });
+            // Can't find the vevent in newEvents anymore, so remove from list
+            if (itToRemove == std::end(newIncidences)) {
+                // Removed item
+                const int startIndex = std::distance(std::begin(m_incidences), it);
+                qDebug() << "remove" << event.incidence->summary();
+                beginRemoveRows({}, startIndex, startIndex);
+                it = m_incidences.erase(it);
+                endRemoveRows();
+            } else {
+                it++;
+            }
+        }
+    }
+
+    for (auto newIt = std::cbegin(newIncidences); newIt != std::cend(newIncidences); newIt++) {
+        const auto event = *newIt;
+        auto it = std::find_if(std::cbegin(m_incidences), std::cend(m_incidences), [&](const auto &e) {
+            Q_ASSERT(e.incidence);
+            return e.incidence->uid() == event.incidence->uid() && e.start == event.start;
+        });
+        if (it == std::cend(m_incidences)) {
+            // New event
+            const int startIndex = std::distance(std::cbegin(newIncidences), newIt);
+            qDebug() << "insert" << event.incidence->summary() << startIndex;
+            beginInsertRows({}, startIndex, startIndex);
+            m_incidences.insert(startIndex, event);
+            endInsertRows();
+        } else {
+            if (*(newIt->incidence) != *(it->incidence)) {
+                const int startIndex = std::distance(std::cbegin(m_incidences), it);
+                m_incidences[startIndex] = event;
+                Q_EMIT dataChanged(index(startIndex, 0), index(startIndex, 0), {});
+            }
+        }
+    }
 
     setLoading(false);
 }
@@ -347,6 +463,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     const auto incidence = occurrence.incidence;
 
     switch (role) {
+    case Qt::DisplayRole:
     case Summary:
         return incidence->summary();
     case Description:
@@ -422,8 +539,8 @@ void IncidenceOccurrenceModel::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
     }
     m_coreCalendar = calendar;
 
-    connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::slotSourceDataChanged);
-    connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::slotSourceRowsInserted);
+    connect(m_coreCalendar->model(), &QAbstractItemModel::dataChanged, this, &IncidenceOccurrenceModel::scheduleReset);
+    connect(m_coreCalendar->model(), &QAbstractItemModel::rowsInserted, this, &IncidenceOccurrenceModel::scheduleReset);
     connect(m_coreCalendar->model(), &QAbstractItemModel::rowsRemoved, this, &IncidenceOccurrenceModel::scheduleReset);
     connect(m_coreCalendar->model(), &QAbstractItemModel::modelReset, this, &IncidenceOccurrenceModel::scheduleReset);
     connect(m_coreCalendar.get(), &Akonadi::ETMCalendar::collectionsRemoved, this, &IncidenceOccurrenceModel::scheduleReset);
