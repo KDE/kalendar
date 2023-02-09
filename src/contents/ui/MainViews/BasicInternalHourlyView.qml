@@ -305,7 +305,7 @@ Column {
                                 id: dayDelegate
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
-                                readonly property date startDate: periodStartDate
+                                readonly property date startDate: model.periodStartDate
 
                                 QQC2.ScrollView {
                                     id: linesListViewScrollView
