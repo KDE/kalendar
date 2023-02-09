@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-24 02:26+0000\n"
-"PO-Revision-Date: 2023-01-19 16:11+0100\n"
+"PO-Revision-Date: 2023-02-08 08:08+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1427,7 +1427,7 @@ msgstr "მიმაგრების დამატება"
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
 msgid "Change incidence date"
-msgstr ""
+msgstr "ინციდენტის თარიღის შეცვლა"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:47
 #, kde-format
@@ -1582,16 +1582,16 @@ msgstr[1] "ყოველ %1 კვირაში"
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ყოველკვირა, დრო"
+msgstr[1] "ყოველ %1 კვირაში, დრო"
 
 #: contents/ui/KalendarUtils/labelutils.js:90
 #: contents/ui/KalendarUtils/labelutils.js:129
 #, kde-format
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ყოველ წელს, %3-ის %2-ზე"
+msgstr[1] "ყოველ %1 წელში, %3-ის %2-ზე"
 
 #: contents/ui/KalendarUtils/labelutils.js:109
 #, kde-format
@@ -1619,20 +1619,20 @@ msgstr[1] "ყოველ %1 დღეში"
 #, kde-format
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ყოველთვე, %2-ზე"
+msgstr[1] "ყოველ %1 თვეში, %2-ზე"
 
 #: contents/ui/KalendarUtils/labelutils.js:133
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ყოველ წელს, წლის %2-ზე"
+msgstr[1] "ყოველ %1 წელში, წლის %2-ზე"
 
 #: contents/ui/KalendarUtils/labelutils.js:139
 #, kde-format
 msgid "Complex recurrence rule"
-msgstr ""
+msgstr "გამეორების რთული წესი"
 
 #: contents/ui/KalendarUtils/labelutils.js:142
 #, kde-format
@@ -1652,7 +1652,7 @@ msgstr "სრულდება: %1"
 #: contents/ui/KalendarUtils/labelutils.js:154
 #, kde-format
 msgid "Ends after %1 occurrences"
-msgstr ""
+msgstr "სრულდება %1 გამეორების შემდეგ"
 
 #: contents/ui/KalendarUtils/labelutils.js:213
 #, kde-format
@@ -1698,18 +1698,18 @@ msgstr "მდებარეობაზე დაბრუნება"
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
-msgstr ""
+msgstr "%1 ინციდენტის შემოტანა წარმატებულია."
 
 #: contents/ui/main.qml:324 contents/ui/main.qml:339
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
-msgstr ""
+msgstr "შეცდომა ინციდენტის შემოტანისას: %1"
 
 #: contents/ui/main.qml:336
 #, kde-format
 msgid "New calendar  created from imported file successfully."
-msgstr ""
+msgstr "შემოტანილი ფაილიდან ახალი კალენდარი წარმატებით შეიქმნა."
 
 #: contents/ui/main.qml:418 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:53
@@ -1836,12 +1836,12 @@ msgstr ""
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
-msgstr ""
+msgstr "%1 (%2-ე დღე %3-დან)"
 
 #: contents/ui/MainViews/BasicMonthListView.qml:464
 #, kde-format
 msgid "Runs all day"
-msgstr ""
+msgstr "გაშვებულია მთელი დღე"
 
 #: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
@@ -1852,17 +1852,17 @@ msgstr "%1 - %2"
 #: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgid "Starts at %1"
-msgstr ""
+msgstr "გაშვების დრო %1"
 
 #: contents/ui/MainViews/BasicMonthListView.qml:473
 #, kde-format
 msgid "Ends at %1"
-msgstr ""
+msgstr "დასრულების დრო %1"
 
 #: contents/ui/MainViews/BasicMonthListView.qml:475
 #, kde-format
 msgid "Runs All Day"
-msgstr ""
+msgstr "გაშვებულია მთელი დღე"
 
 #: contents/ui/MainViews/DayGridView.qml:199
 #, kde-format
@@ -1923,7 +1923,7 @@ msgstr "პრიორიტეტი დაყენებული არა�
 #: contents/ui/MainViews/TodoTreeView.qml:104
 #, kde-format
 msgid "No task calendars enabled."
-msgstr ""
+msgstr "ამოცანის კალენდარები ჩართული არაა."
 
 #: contents/ui/MainViews/TodoTreeView.qml:111
 #, kde-format
@@ -1943,7 +1943,7 @@ msgstr "ამოცანები დასრულებული არა�
 #: contents/ui/MainViews/TodoTreeView.qml:123
 #, kde-format
 msgid "No tasks left to complete"
-msgstr ""
+msgstr "დასასრულებელი ამოცანების გარშემო"
 
 #: contents/ui/MainViews/TodoView.qml:58 kalendarapplication.cpp:30
 #: kalendarapplication.cpp:33
@@ -1959,7 +1959,7 @@ msgstr "დასრულებულების ჩვენება"
 #: contents/ui/MainViews/TodoView.qml:100
 #, kde-format
 msgid "Completed Tasks in %1"
-msgstr ""
+msgstr "ამოცანები %1-ში დასრულდა"
 
 #: contents/ui/MainViews/TodoView.qml:100
 #, kde-format
@@ -1975,7 +1975,7 @@ msgstr "ახალი ამოცანის შექმნა…"
 #: contents/ui/MainViews/TodoView.qml:190
 #, kde-format
 msgid "Quickly Add a New Task."
-msgstr ""
+msgstr "ახალი ამოცანის სწრაფად დამატება."
 
 #: contents/ui/Menus/CalendarItemMenu.qml:24
 #, kde-format
@@ -2186,7 +2186,7 @@ msgstr "რუკების ჩართვა:"
 #: contents/ui/Settings/ViewSettingsPage.qml:357
 #, kde-format
 msgid "May cause crashing on some systems."
-msgstr ""
+msgstr "შეიძლება ზოგიერთი სისტემის ავარია გამოიწვიოს."
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:45
 #, kde-format
@@ -2197,13 +2197,13 @@ msgstr "მდებარეობის მარკერი:"
 #: contents/ui/Settings/ViewSettingsPage.qml:376
 #, kde-format
 msgid "Circle (shows area of location)"
-msgstr ""
+msgstr "წრე (აჩვენებს მდებარეობის ადგილს)"
 
 #: contents/ui/Settings/GeneralSettingsPage.qml:56
 #: contents/ui/Settings/ViewSettingsPage.qml:383
 #, kde-format
 msgid "Pin (shows exact location)"
-msgstr ""
+msgstr "სარჭი (ზუსტი მდებარეობის ჩვენება)"
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2255,12 +2255,12 @@ msgstr "ზოგადი პარამეტრები"
 #: contents/ui/Settings/ViewSettingsPage.qml:25
 #, kde-format
 msgid "Use popup to show incidence information"
-msgstr ""
+msgstr "ინციდენტის ინფორმაციის საჩვენებლად მხტუნარას გამოყენება"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:36
 #, kde-format
 msgid "Show sub-tasks in calendar views"
-msgstr ""
+msgstr "კალენდარის ხედებში ქვეამოცანების ჩვენება"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:48
 #, kde-format
@@ -2280,12 +2280,12 @@ msgstr "თვის ხედის რეჟიმი"
 #: contents/ui/Settings/ViewSettingsPage.qml:92
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "გასმადი თვის ბადე"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:99
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "ძირითადი თვის ბადე"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:105
 #, kde-format
@@ -2295,7 +2295,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:119
 #, kde-format
 msgid "Weekday label alignment"
-msgstr ""
+msgstr "კვირის დღის ჭდის სწორება"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:126
 #, kde-format
@@ -2315,22 +2315,22 @@ msgstr "მ&არჯვენა"
 #: contents/ui/Settings/ViewSettingsPage.qml:157
 #, kde-format
 msgid "Weekday label length:"
-msgstr ""
+msgstr "კვირის დღის ჭდის სიგრძე:"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:162
 #, kde-format
 msgid "Full name (Monday)"
-msgstr ""
+msgstr "სრული სახელი (ორშაბათი)"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:169
 #, kde-format
 msgid "Abbreviated (Mon)"
-msgstr ""
+msgstr "შემოკლებული(ორშ)"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:176
 #, kde-format
 msgid "Letter only (M)"
-msgstr ""
+msgstr "მხოლოდ პირველი ასო (ო)"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:183
 #, kde-format
@@ -2340,7 +2340,7 @@ msgstr "კვირის რიცხვის ჩვენება"
 #: contents/ui/Settings/ViewSettingsPage.qml:195
 #, kde-format
 msgid "Grid border width (pixels):"
-msgstr ""
+msgstr "ბადის საზღვრის სიგანე (პიქსელებში):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:225
 #, kde-format
@@ -2355,7 +2355,7 @@ msgstr "კვირის ხედის რეჟიმი"
 #: contents/ui/Settings/ViewSettingsPage.qml:244
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "გასამდი კვირის ხედ"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:251
 #, kde-format
@@ -2370,7 +2370,7 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:270
 #, kde-format
 msgid "Schedule View settings"
-msgstr ""
+msgstr "განრიგის ხედის მორგება"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:282
 #, kde-format
@@ -2395,17 +2395,17 @@ msgstr ""
 #: contents/ui/Settings/ViewSettingsPage.qml:308
 #, kde-format
 msgid "Show week headers"
-msgstr ""
+msgstr "კვირის თავსართების ჩვენება"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:325
 #, kde-format
 msgid "Tasks View settings"
-msgstr ""
+msgstr "ამოცანის ხედის მორგება"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:328
 #, kde-format
 msgid "Show completed sub-tasks"
-msgstr ""
+msgstr "დასრულებული ქვეამოცანების ჩვენება"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:347
 #, kde-format
@@ -2516,7 +2516,7 @@ msgstr "დღემდე"
 #: kalendarapplication.cpp:256
 #, kde-format
 msgid "To Date…"
-msgstr ""
+msgstr "თარიღამდე…"
 
 #: kalendarapplication.cpp:269
 #, kde-format
@@ -2546,7 +2546,7 @@ msgstr "ანბანის მიხედვით"
 #: kalendarapplication.cpp:360
 #, kde-format
 msgid "By Due Date"
-msgstr ""
+msgstr "გასული თარიღით"
 
 #: kalendarapplication.cpp:376
 #, kde-format
@@ -2556,17 +2556,17 @@ msgstr "პრიორიტეტის დონის მიხედვი�
 #: kalendarapplication.cpp:392
 #, kde-format
 msgid "Ascending order"
-msgstr ""
+msgstr "აღმავალი წყობით"
 
 #: kalendarapplication.cpp:408
 #, kde-format
 msgid "Descending Order"
-msgstr ""
+msgstr "დაღმავალი წყობით"
 
 #: kalendarapplication.cpp:424
 #, kde-format
 msgid "Show Completed Tasks"
-msgstr ""
+msgstr "დასრულებული ამოცანების ჩვენება"
 
 #: kalendarapplication.cpp:438
 #, kde-format
@@ -2615,7 +2615,7 @@ msgstr "უცნობი"
 #: mail/mime/attachmentmodel.cpp:223
 #, kde-format
 msgid "No keys were found in this attachment"
-msgstr ""
+msgstr "ამ მიმაგრებულ ფაილში გასაღებები ვერ ვიპოვე"
 
 #: mail/mime/attachmentmodel.cpp:226
 #, kde-format
@@ -2661,7 +2661,7 @@ msgstr "კრიპტოს არასწორი დამატება.
 #: mail/mimetreeparser/messagepart.cpp:857
 #, kde-format
 msgid "Could not decrypt the data: no key found for recipients."
-msgstr ""
+msgstr "მონაცემების გაშიფვრის შეცდომა: მიმღებებისთვის გასაღები ვერ ვიპოვე."
 
 #: mail/mimetreeparser/messagepart.cpp:862
 #, kde-format
@@ -2686,7 +2686,7 @@ msgstr "საფოსტო ყუთი არჩეული არაა"
 #: mail/qml/FolderView.qml:87
 #, kde-format
 msgid "Select a mailbox from the sidebar."
-msgstr ""
+msgstr "გვერდითი პანელიდან საფოსტო ყუთის არჩევა."
 
 #: mail/qml/FolderView.qml:94
 #, kde-format
@@ -2706,22 +2706,22 @@ msgstr "ეს ელფოსტა მოსაწვევს შეიცა
 #: mail/qml/mailpartview/MailPart.qml:43
 #, kde-format
 msgid "sent by %1 on %2"
-msgstr ""
+msgstr "გაგზავნილია %1-ის მიერ. თარიღი %2"
 
 #: mail/qml/mailpartview/MailPartModel.qml:54
 #, kde-format
 msgid "This message has been signed using the key %1."
-msgstr ""
+msgstr "ეს შეტყობინება ხელმოწერილია გასაღებით %1."
 
 #: mail/qml/mailpartview/MailPartModel.qml:55
 #, kde-format
 msgid "The key details are not available."
-msgstr ""
+msgstr "გასაღების დეტალები ხელმიუწვდომელია."
 
 #: mail/qml/mailpartview/MailPartModel.qml:57
 #, kde-format
 msgid "This message has been signed using the key %1 by %2."
-msgstr ""
+msgstr "ეს შეტყობინება ხელმოწერილია გასაღებით %1, %2-ის მიერ."
 
 #: mail/qml/mailpartview/MailPartModel.qml:59
 #, kde-format
@@ -2746,12 +2746,12 @@ msgstr "ხელმოწერა არასწორია."
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted but we don't have the key for it."
-msgstr ""
+msgstr "შეტყობინება დაშიფრულია, მაგრამ მისი გასაღები არ გვაქვს."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted to the key: %1"
-msgstr ""
+msgstr "შეტყობინება დაშიფრულია ამ გასაღებამდე: %1"
 
 #: mail/qml/mailpartview/MailPartView.qml:33
 #, kde-format
