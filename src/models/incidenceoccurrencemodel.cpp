@@ -42,6 +42,7 @@ void IncidenceOccurrenceModel::setStart(const QDate &start)
     Q_EMIT startChanged();
 
     mEnd = mStart.addDays(mLength);
+    scheduleReset();
 }
 
 QDate IncidenceOccurrenceModel::start() const
