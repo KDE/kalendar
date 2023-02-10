@@ -85,7 +85,6 @@ void AgentConfiguration::editIdentifier(const QString &resourceIdentifier)
 void AgentConfiguration::setupEdit(Akonadi::AgentInstance instance)
 {
     if (instance.isValid()) {
-        KWindowSystem::allowExternalProcessWindowActivation();
         QPointer<AgentConfigurationDialog> dlg(new AgentConfigurationDialog(instance, nullptr));
         dlg->exec();
         delete dlg;
