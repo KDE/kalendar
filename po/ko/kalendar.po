@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-24 02:26+0000\n"
+"POT-Creation-Date: 2023-02-10 02:53+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1924,63 +1924,63 @@ msgstr ""
 msgid "All day or Multi day"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:265
+#: contents/ui/MainViews/BasicMonthListView.qml:268
 #, fuzzy, kde-format
 #| msgid "Clear day."
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "아무것도 없는 날입니다."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:287
 #, kde-format
 msgid "Tap"
 msgstr "탭"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:287
 #, kde-format
 msgid "Click"
 msgstr "클릭"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:288
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "오늘은 아무것도 없습니다. 추가하려면 %1하십시오."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:408
+#: contents/ui/MainViews/BasicMonthListView.qml:411
 #, fuzzy, kde-format
 #| msgid "%1 (Day %2 of %3)"
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1(%3일 중 %2일)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:467
 #, kde-format
 msgid "Runs all day"
 msgstr "종일 행사"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:471
+#: contents/ui/MainViews/BasicMonthListView.qml:474
 #, kde-format
 msgid "Starts at %1"
 msgstr "%1에 시작"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:473
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgid "Ends at %1"
 msgstr "%1에 종료"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:478
 #, fuzzy, kde-format
 #| msgid "Runs all day"
 msgid "Runs All Day"
 msgstr "종일 행사"
 
-#: contents/ui/MainViews/DayGridView.qml:199
+#: contents/ui/MainViews/DayGridView.qml:202
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>오늘</b>"
@@ -2583,7 +2583,7 @@ msgstr ""
 msgid "Location marker"
 msgstr "위치:"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:411
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"

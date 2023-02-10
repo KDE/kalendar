@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-24 02:26+0000\n"
+"POT-Creation-Date: 2023-02-10 02:53+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -1895,60 +1895,60 @@ msgstr "Atiestatīt"
 msgid "All day or Multi day"
 msgstr "Pilnas dienas vai vairāku dienu"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:265
+#: contents/ui/MainViews/BasicMonthListView.qml:268
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Brīva diena."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:287
 #, kde-format
 msgid "Tap"
 msgstr "Pieskarieties"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:287
 #, kde-format
 msgid "Click"
 msgstr "Uzklikšķiniet"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:288
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Šodien nekas nav ieplānots. %1, lai ko pievienotu."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:408
+#: contents/ui/MainViews/BasicMonthListView.qml:411
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:467
 #, fuzzy, kde-format
 msgid "Runs all day"
 msgstr "Notiek visu dienu"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 — %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:471
+#: contents/ui/MainViews/BasicMonthListView.qml:474
 #, kde-format
 msgid "Starts at %1"
 msgstr "Sākas %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:473
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgid "Ends at %1"
 msgstr "Beidzas %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:478
 #, fuzzy, kde-format
 msgid "Runs All Day"
 msgstr "Notiek visu dienu"
 
-#: contents/ui/MainViews/DayGridView.qml:199
+#: contents/ui/MainViews/DayGridView.qml:202
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>Šodien</b>"
@@ -2511,7 +2511,7 @@ msgstr "Iespējot kartes:"
 msgid "Location marker"
 msgstr "Veids, kā parāda atrašanās vietu:"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:411
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"

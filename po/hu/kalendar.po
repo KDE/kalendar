@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-24 02:26+0000\n"
+"POT-Creation-Date: 2023-02-10 02:53+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1885,60 +1885,60 @@ msgstr "Visszaállítás"
 msgid "All day or Multi day"
 msgstr "Minden nap, vagy több nap"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:265
+#: contents/ui/MainViews/BasicMonthListView.qml:268
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Nap kiürítése."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:287
 #, kde-format
 msgid "Tap"
 msgstr "Koppintson"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:284
+#: contents/ui/MainViews/BasicMonthListView.qml:287
 #, kde-format
 msgid "Click"
 msgstr "Kattintson"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:288
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Nincs semmi a mai napra. %1 a hozzáadáshoz."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:408
+#: contents/ui/MainViews/BasicMonthListView.qml:411
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (%2 / %3 nap)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:464
+#: contents/ui/MainViews/BasicMonthListView.qml:467
 #, kde-format
 msgid "Runs all day"
 msgstr "Egész napos"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:471
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:471
+#: contents/ui/MainViews/BasicMonthListView.qml:474
 #, kde-format
 msgid "Starts at %1"
 msgstr "Kezdés: %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:473
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgid "Ends at %1"
 msgstr "Befejezés: %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:478
 #, kde-format
 msgid "Runs All Day"
 msgstr "Egész napos"
 
-#: contents/ui/MainViews/DayGridView.qml:199
+#: contents/ui/MainViews/DayGridView.qml:202
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>Ma</b>"
@@ -2504,7 +2504,7 @@ msgstr "Térképek bekapcsolása:"
 msgid "Location marker"
 msgstr "Helyjelölő:"
 
-#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:410
+#: incidencewrapper.cpp:140 models/incidenceoccurrencemodel.cpp:411
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
