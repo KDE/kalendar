@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 01:00+0000\n"
+"POT-Creation-Date: 2023-02-10 00:59+0000\n"
 "PO-Revision-Date: 2022-12-16 11:02+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2006,60 +2006,60 @@ msgstr "Ripristina"
 msgid "All day or Multi day"
 msgstr "Tutto il giorno o più giorni"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:266
+#: contents/ui/MainViews/BasicMonthListView.qml:269
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Giornata vuota."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:288
 #, kde-format
 msgid "Tap"
 msgstr "Tocco"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:288
 #, kde-format
 msgid "Click"
 msgstr "Clic"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:286
+#: contents/ui/MainViews/BasicMonthListView.qml:289
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Nessun evento previsto per oggi. %1 per aggiungere qualcosa."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:409
+#: contents/ui/MainViews/BasicMonthListView.qml:412
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Giorno %2 di %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:465
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Runs all day"
 msgstr "Dura tutto il giorno"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:469
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:472
+#: contents/ui/MainViews/BasicMonthListView.qml:475
 #, kde-format
 msgid "Starts at %1"
 msgstr "Inizia alle %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:474
+#: contents/ui/MainViews/BasicMonthListView.qml:477
 #, kde-format
 msgid "Ends at %1"
 msgstr "Finisce alle %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:476
+#: contents/ui/MainViews/BasicMonthListView.qml:479
 #, kde-format
 msgid "Runs All Day"
 msgstr "Dura tutto il giorno"
 
-#: contents/ui/MainViews/DayGridView.qml:199
+#: contents/ui/MainViews/DayGridView.qml:202
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>Oggi</b>"
@@ -2465,7 +2465,7 @@ msgstr "Cerchio (mostra l'area della posizione)"
 msgid "Pin (shows exact location)"
 msgstr "Puntina (mostra la posizione esatta)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:405
+#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:406
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 01:00+0000\n"
+"POT-Creation-Date: 2023-02-10 00:59+0000\n"
 "PO-Revision-Date: 2023-01-24 06:57+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -1986,60 +1986,60 @@ msgstr "საწყის მნიშვნელობებზე დაბ�
 msgid "All day or Multi day"
 msgstr "ყველა ან ბევრი დღე"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:266
+#: contents/ui/MainViews/BasicMonthListView.qml:269
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "სუფთა დღე."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:288
 #, kde-format
 msgid "Tap"
 msgstr "დააჭირეთ"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:285
+#: contents/ui/MainViews/BasicMonthListView.qml:288
 #, kde-format
 msgid "Click"
 msgstr "წკაპი"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:286
+#: contents/ui/MainViews/BasicMonthListView.qml:289
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr ""
 
-#: contents/ui/MainViews/BasicMonthListView.qml:409
+#: contents/ui/MainViews/BasicMonthListView.qml:412
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (%2-ე დღე %3-დან)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:465
+#: contents/ui/MainViews/BasicMonthListView.qml:468
 #, kde-format
 msgid "Runs all day"
 msgstr "გაშვებულია მთელი დღე"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:469
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:472
+#: contents/ui/MainViews/BasicMonthListView.qml:475
 #, kde-format
 msgid "Starts at %1"
 msgstr "გაშვების დრო %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:474
+#: contents/ui/MainViews/BasicMonthListView.qml:477
 #, kde-format
 msgid "Ends at %1"
 msgstr "დასრულების დრო %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:476
+#: contents/ui/MainViews/BasicMonthListView.qml:479
 #, kde-format
 msgid "Runs All Day"
 msgstr "გაშვებულია მთელი დღე"
 
-#: contents/ui/MainViews/DayGridView.qml:199
+#: contents/ui/MainViews/DayGridView.qml:202
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>დღეს</b>"
@@ -2441,7 +2441,7 @@ msgstr "წრე (აჩვენებს მდებარეობის �
 msgid "Pin (shows exact location)"
 msgstr "სარჭი (ზუსტი მდებარეობის ჩვენება)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:405
+#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:406
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
