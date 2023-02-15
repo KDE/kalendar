@@ -490,7 +490,7 @@ const QTextCodec *ObjectTreeParser::codecFor(KMime::Content *node) const
     if (!charset.isEmpty()) {
         if (auto c = KCharsets::charsets()->codecForName(QLatin1String(charset))) {
             return c;
-        }
+        };
     }
     // no charset means us-ascii (RFC 2045), so using local encoding should
     // be okay
