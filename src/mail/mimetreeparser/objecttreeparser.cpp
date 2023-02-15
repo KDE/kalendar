@@ -10,13 +10,15 @@
 
 #include "bodypartformatterbasefactory.h"
 
+#include "mimetreeparser_debug.h"
+
 #include "bodypartformatter.h"
+#include "utils.h"
 
 #include <KMime/Message>
 
 #include <KCharsets>
 #include <QByteArray>
-#include <QDebug>
 #include <QMimeDatabase>
 #include <QRegularExpression>
 #include <QTextCodec>
