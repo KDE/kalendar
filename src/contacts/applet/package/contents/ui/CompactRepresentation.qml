@@ -16,9 +16,6 @@ MouseArea {
         || plasmoid.location === PlasmaCore.Types.BottomEdge
         || plasmoid.location === PlasmaCore.Types.LeftEdge)
 
-    Layout.maximumWidth: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1
-    Layout.maximumHeight: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1
-
     acceptedButtons: Qt.LeftButton
 
     onClicked: plasmoid.expanded = !plasmoid.expanded;
