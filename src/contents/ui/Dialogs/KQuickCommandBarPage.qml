@@ -15,7 +15,12 @@ QQC2.Dialog {
     height: 400
     y: 50
     onClosed: parent.active = false
-    onOpened: searchField.forceActiveFocus()
+
+    onOpened: {
+        searchField.forceActiveFocus();
+        searchField.text = KalendarApplication.actionsModel.filterString; // set the previous searched text on reopening
+        searchField.selectAll(); // select entire text
+    }
 
     header: T.Control {
         implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
