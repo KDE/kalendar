@@ -2,12 +2,14 @@
 # SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 # SPDX-License-Identifier: CC0-1.0
 
-build*/
+# Ignore the following files
 *.kate-swp
 *.kdev4
-CMakeLists.txt.user
-.clang-format
+/build*/
+CMakeLists.txt.user*
+/.clang-format
+/compile_commands.json
+.cache
 CMakeCache.txt
 CMakeFiles
 Testing/
-.cache
