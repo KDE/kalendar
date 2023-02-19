@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2021, 2022.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-10 00:59+0000\n"
-"PO-Revision-Date: 2022-12-10 11:15+0100\n"
+"PO-Revision-Date: 2023-02-18 08:31+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2296,10 +2296,9 @@ msgid "Use popup to show incidence information"
 msgstr "Użyj okna wysuwnego, aby pokazać szczegóły wystąpienia"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Pokaż podzadania w widokach kalendarza"
+msgstr "Pokaż zadania w widokach kalendarza"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2307,10 +2306,9 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Pokaż podzadania w widokach kalendarza"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Przezroczystość poprzedniego wydarzenia:"
+msgstr "Przezroczystość poprzedniego wydarzenia"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
