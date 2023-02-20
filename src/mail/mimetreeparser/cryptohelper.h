@@ -24,7 +24,7 @@ enum PGPBlockType {
 class Block
 {
 public:
-    Block(const QByteArray &m);
+    explicit Block(const QByteArray &m);
 
     Block(const QByteArray &m, PGPBlockType t);
 

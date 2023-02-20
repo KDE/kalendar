@@ -23,7 +23,7 @@ struct GroupMember {
 class ContactGroupModelPrivate
 {
 public:
-    ContactGroupModelPrivate(ContactGroupModel *parent)
+    explicit ContactGroupModelPrivate(ContactGroupModel *parent)
         : mParent(parent)
     {
     }

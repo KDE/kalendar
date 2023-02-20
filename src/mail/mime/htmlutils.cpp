@@ -117,12 +117,11 @@ QString HtmlUtils::linkify(const QString &in)
 {
     QString out = in;
     int x1, x2;
-    bool isUrl, isAtStyle;
     QString linked, link, href;
 
     for (int n = 0; n < (int)out.length(); ++n) {
-        isUrl = false;
-        isAtStyle = false;
+        bool isUrl = false;
+        bool isAtStyle = false;
         x1 = n;
 
         if (linkify_pmatch(out, n, QStringLiteral("xmpp:"))) {
