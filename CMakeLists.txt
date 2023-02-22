@@ -91,6 +91,7 @@ find_package(KF5 ${PIM_VERSION} REQUIRED COMPONENTS
     EventViews
     MailCommon
     PimCommonAkonadi
+    AkonadiMime
 )
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
