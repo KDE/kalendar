@@ -23,7 +23,10 @@ QQC2.ComboBox {
     inputMethodHints: Qt.ImhTime
 
     onEditTextChanged: {
-        if (activeFocus && !popupTimePicker.visible) { // Need to check for activeFocus or on load the text gets reset to 00:00
+        if (activeFocus && !popupTimePicker.visible) {
+            if (editText.length === 4 && editText[1] === ":") {
+                editText = "0" + editText;
+            }
             const dateFromTime = Date.fromLocaleTimeString(Qt.locale(), editText, Locale.NarrowFormat);
             if(!isNaN(dateFromTime.getTime())) {
                 newTimeChosen(dateFromTime.getHours(), dateFromTime.getMinutes());
