@@ -2878,7 +2878,7 @@ msgstr "تطبيق التقويم"
 #: main.cpp:78
 #, kde-format
 msgid "(c) KDE Community 2021"
-msgstr "(c)  مجتمع كدي 2021"
+msgstr "(c)  مجتمع كِيدِي 2021"
 
 #: main.cpp:79
 #, kde-format
