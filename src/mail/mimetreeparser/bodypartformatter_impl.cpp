@@ -145,7 +145,7 @@ public:
             _mp->setIsEncrypted(true);
             // PartMetaData *messagePart(_mp->partMetaData());
             // if (!part.source()->decryptMessage()) {
-            isEncrypted = true;
+            // isEncrypted = true;
             signTestNode = nullptr; // PENDING(marc) to be abs. sure, we'd need to have to look at the content
             // } else {
             //     _mp->startDecryption();
