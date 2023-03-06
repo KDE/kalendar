@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-10 00:59+0000\n"
+"POT-Creation-Date: 2023-03-06 00:48+0000\n"
 "PO-Revision-Date: 2022-10-10 15:48+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -390,7 +390,7 @@ msgstr "Адресная книга:"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:972
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
 #, kde-format
 msgid "Name:"
 msgstr "Имя:"
@@ -1420,7 +1420,7 @@ msgstr "Повтор:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:409
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:610
-#: contents/ui/KalendarUtils/labelutils.js:106
+#: contents/ui/KalendarUtils/labelutils.js:109
 #, kde-format
 msgid "Never"
 msgstr "Никогда"
@@ -1446,6 +1446,7 @@ msgid "Yearly"
 msgstr "Ежегодно"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:414
+#: contents/ui/KalendarUtils/labelutils.js:45
 #, kde-format
 msgid "Custom"
 msgstr "Пользовательский"
@@ -1549,7 +1550,7 @@ msgstr "Расположение:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:728
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:812
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:979
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1075
 #, kde-format
 msgid "Optional"
 msgstr "Необязательно"
@@ -1596,57 +1597,89 @@ msgstr "Редактор меток…"
 msgid "Reminders:"
 msgstr "Напоминания:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:923
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:985
+#, fuzzy, kde-format
+#| msgid "%1 minutes"
+msgid "minutes"
+msgstr "%1 мин."
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:986
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or mores"
+#| msgid "%1 hours"
+msgid "hours"
+msgstr "%1 ч."
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:987
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or more"
+#| msgid "%1 days"
+msgid "days"
+msgstr "%1 дн."
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
+#, fuzzy, kde-format
+#| msgid "%1 before start of event"
+msgid "before start of event"
+msgstr "%1 до начала события"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
+#, fuzzy, kde-format
+#| msgid "%1 after start of event"
+msgid "after start of event"
+msgstr "%1 после начала события"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format
 msgid "Add Reminder"
 msgstr "Добавить напоминание"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:937
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1033
 #, kde-format
 msgid "Attendees:"
 msgstr "Участники"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:997
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1093
 #, kde-format
 msgid "Email:"
 msgstr "Эл. почта:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1004
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1100
 #, kde-format
 msgid "Required"
 msgstr "Необходимо"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1109
 #, kde-format
 msgid "Status:"
 msgstr "Состояние:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1037
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1133
 #, kde-format
 msgid "Request RSVP"
 msgstr "Запросить ответ"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1051
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1147
 #, kde-format
 msgid "Add Attendee"
 msgstr "Добавить участника"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1062
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1158
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Выбрать из списка контактов"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1066
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1162
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Заполнить вручную"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1080
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1176
 #, kde-format
 msgid "Attachments:"
 msgstr "Вложения:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1103
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1199
 #, kde-format
 msgid "Add Attachment"
 msgstr "Добавить вложение"
@@ -1773,22 +1806,22 @@ msgstr "1 час"
 msgid "%1 minutes"
 msgstr "%1 мин."
 
-#: contents/ui/KalendarUtils/labelutils.js:45
+#: contents/ui/KalendarUtils/labelutils.js:48
 #, kde-format
 msgid "%1 before start of event"
 msgstr "%1 до начала события"
 
-#: contents/ui/KalendarUtils/labelutils.js:47
+#: contents/ui/KalendarUtils/labelutils.js:50
 #, kde-format
 msgid "%1 after start of event"
 msgstr "%1 после начала события"
 
-#: contents/ui/KalendarUtils/labelutils.js:49
+#: contents/ui/KalendarUtils/labelutils.js:52
 #, kde-format
 msgid "On event start"
 msgstr "При начале события"
 
-#: contents/ui/KalendarUtils/labelutils.js:54
+#: contents/ui/KalendarUtils/labelutils.js:57
 #, kde-format
 msgid "Every week"
 msgid_plural "Every %1 weeks"
@@ -1797,7 +1830,7 @@ msgstr[1] "Каждые %1 недели"
 msgstr[2] "Каждые %1 недель"
 msgstr[3] "Каждую неделю"
 
-#: contents/ui/KalendarUtils/labelutils.js:57
+#: contents/ui/KalendarUtils/labelutils.js:60
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
@@ -1806,8 +1839,8 @@ msgstr[1] "Каждые %1 недели в"
 msgstr[2] "Каждые %1 недель в"
 msgstr[3] "Каждую неделю в"
 
-#: contents/ui/KalendarUtils/labelutils.js:90
-#: contents/ui/KalendarUtils/labelutils.js:129
+#: contents/ui/KalendarUtils/labelutils.js:93
+#: contents/ui/KalendarUtils/labelutils.js:132
 #, kde-format
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
@@ -1816,7 +1849,7 @@ msgstr[1] "Каждые %1 года %2 %3"
 msgstr[2] "Каждые %1 лет %2 %3"
 msgstr[3] "Каждый год %2 %3"
 
-#: contents/ui/KalendarUtils/labelutils.js:109
+#: contents/ui/KalendarUtils/labelutils.js:112
 #, kde-format
 msgid "Every minute"
 msgid_plural "Every %1 minutes"
@@ -1825,7 +1858,7 @@ msgstr[1] "Каждые %1 минуты"
 msgstr[2] "Каждые %1 минут"
 msgstr[3] "Каждую минуту"
 
-#: contents/ui/KalendarUtils/labelutils.js:112
+#: contents/ui/KalendarUtils/labelutils.js:115
 #, kde-format
 msgid "Every hour"
 msgid_plural "Every %1 hours"
@@ -1834,7 +1867,7 @@ msgstr[1] "Каждые %1 часа"
 msgstr[2] "Каждые %1 часов"
 msgstr[3] "Каждый час"
 
-#: contents/ui/KalendarUtils/labelutils.js:115
+#: contents/ui/KalendarUtils/labelutils.js:118
 #, kde-format
 msgid "Every day"
 msgid_plural "Every %1 days"
@@ -1843,8 +1876,8 @@ msgstr[1] "Каждые %1 дня"
 msgstr[2] "Каждые %1 дней"
 msgstr[3] "Каждый день"
 
-#: contents/ui/KalendarUtils/labelutils.js:121
-#: contents/ui/KalendarUtils/labelutils.js:125
+#: contents/ui/KalendarUtils/labelutils.js:124
+#: contents/ui/KalendarUtils/labelutils.js:128
 #, kde-format
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
@@ -1853,7 +1886,7 @@ msgstr[1] "Каждые %1 месяца %2"
 msgstr[2] "Каждые %1 месяцев %2"
 msgstr[3] "Каждый месяц %2"
 
-#: contents/ui/KalendarUtils/labelutils.js:133
+#: contents/ui/KalendarUtils/labelutils.js:136
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
@@ -1862,62 +1895,62 @@ msgstr[1] "Каждые %1 года в %2 день года"
 msgstr[2] "Каждые %1 лет в %2 день года"
 msgstr[3] "Каждый год в %2 день года"
 
-#: contents/ui/KalendarUtils/labelutils.js:139
+#: contents/ui/KalendarUtils/labelutils.js:142
 #, kde-format
 msgid "Complex recurrence rule"
 msgstr "Сложное правило повторения"
 
-#: contents/ui/KalendarUtils/labelutils.js:142
+#: contents/ui/KalendarUtils/labelutils.js:145
 #, kde-format
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: contents/ui/KalendarUtils/labelutils.js:150
+#: contents/ui/KalendarUtils/labelutils.js:153
 #, kde-format
 msgid "Never ends"
 msgstr "Никогда не завершается"
 
-#: contents/ui/KalendarUtils/labelutils.js:152
+#: contents/ui/KalendarUtils/labelutils.js:155
 #, kde-format
 msgid "Ends on %1"
 msgstr "Завершается %1"
 
-#: contents/ui/KalendarUtils/labelutils.js:154
+#: contents/ui/KalendarUtils/labelutils.js:157
 #, kde-format
 msgid "Ends after %1 occurrences"
 msgstr "Завершается после %1 повторов"
 
-#: contents/ui/KalendarUtils/labelutils.js:213
+#: contents/ui/KalendarUtils/labelutils.js:216
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Highest priority)"
 msgstr "%1 (высокий приоритет)"
 
-#: contents/ui/KalendarUtils/labelutils.js:215
+#: contents/ui/KalendarUtils/labelutils.js:218
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-high priority)"
 msgstr "%1 (средне-высокий приоритет)"
 
-#: contents/ui/KalendarUtils/labelutils.js:217
+#: contents/ui/KalendarUtils/labelutils.js:220
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Medium priority)"
 msgstr "%1 (средний приоритет)"
 
-#: contents/ui/KalendarUtils/labelutils.js:219
+#: contents/ui/KalendarUtils/labelutils.js:222
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-low priority)"
 msgstr "%1 (средне-низкий приоритет)"
 
-#: contents/ui/KalendarUtils/labelutils.js:221
+#: contents/ui/KalendarUtils/labelutils.js:224
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Lowest priority)"
 msgstr "%1 (низкий приоритет)"
 
-#: contents/ui/KalendarUtils/labelutils.js:223
+#: contents/ui/KalendarUtils/labelutils.js:226
 #, kde-format
 msgid "No set priority level"
 msgstr "Уровень приоритета не задан"

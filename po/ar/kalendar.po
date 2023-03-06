@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-10 00:59+0000\n"
+"POT-Creation-Date: 2023-03-06 00:48+0000\n"
 "PO-Revision-Date: 2022-12-22 10:39+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -383,7 +383,7 @@ msgstr "دفتر العناوين:"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:972
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
 #, kde-format
 msgid "Name:"
 msgstr "الاسم:"
@@ -1423,7 +1423,7 @@ msgstr "كرّر:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:409
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:610
-#: contents/ui/KalendarUtils/labelutils.js:106
+#: contents/ui/KalendarUtils/labelutils.js:109
 #, kde-format
 msgid "Never"
 msgstr "أبدًا"
@@ -1449,6 +1449,7 @@ msgid "Yearly"
 msgstr "سنويّا"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:414
+#: contents/ui/KalendarUtils/labelutils.js:45
 #, kde-format
 msgid "Custom"
 msgstr "مخصّص"
@@ -1562,7 +1563,7 @@ msgstr "المكان:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:728
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:812
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:979
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1075
 #, kde-format
 msgid "Optional"
 msgstr "اختياري"
@@ -1609,57 +1610,89 @@ msgstr "أدِر الوسوم…"
 msgid "Reminders:"
 msgstr "التذكيرات:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:923
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:985
+#, fuzzy, kde-format
+#| msgid "%1 minutes"
+msgid "minutes"
+msgstr "%1 دقيقة"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:986
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or mores"
+#| msgid "%1 hours"
+msgid "hours"
+msgstr "%1 ساعة"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:987
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or more"
+#| msgid "%1 days"
+msgid "days"
+msgstr "%1 يوم"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
+#, fuzzy, kde-format
+#| msgid "%1 before start of event"
+msgid "before start of event"
+msgstr "%1 قبل بدء الحدث"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
+#, fuzzy, kde-format
+#| msgid "%1 after start of event"
+msgid "after start of event"
+msgstr "%1 بعد بدء الحدث"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format
 msgid "Add Reminder"
 msgstr "أضف تذكيراً"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:937
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1033
 #, kde-format
 msgid "Attendees:"
 msgstr "الحضور:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:997
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1093
 #, kde-format
 msgid "Email:"
 msgstr "البريد الإلكترونيّ:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1004
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1100
 #, kde-format
 msgid "Required"
 msgstr "مطلوب"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1109
 #, kde-format
 msgid "Status:"
 msgstr "الحالة:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1037
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1133
 #, kde-format
 msgid "Request RSVP"
 msgstr "اطلب الرجاء الرد"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1051
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1147
 #, kde-format
 msgid "Add Attendee"
 msgstr "أضف حضور"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1062
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1158
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "اختر من المتراسلين"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1066
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1162
 #, kde-format
 msgid "Fill in Manually"
 msgstr "اكتب الحضور يدويا"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1080
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1176
 #, kde-format
 msgid "Attachments:"
 msgstr "المرفقات:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1103
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1199
 #, kde-format
 msgid "Add Attachment"
 msgstr "أضف مرفقًا"
@@ -1786,22 +1819,22 @@ msgstr "ساعة واحدة"
 msgid "%1 minutes"
 msgstr "%1 دقيقة"
 
-#: contents/ui/KalendarUtils/labelutils.js:45
+#: contents/ui/KalendarUtils/labelutils.js:48
 #, kde-format
 msgid "%1 before start of event"
 msgstr "%1 قبل بدء الحدث"
 
-#: contents/ui/KalendarUtils/labelutils.js:47
+#: contents/ui/KalendarUtils/labelutils.js:50
 #, kde-format
 msgid "%1 after start of event"
 msgstr "%1 بعد بدء الحدث"
 
-#: contents/ui/KalendarUtils/labelutils.js:49
+#: contents/ui/KalendarUtils/labelutils.js:52
 #, kde-format
 msgid "On event start"
 msgstr "عند بدء الحدث"
 
-#: contents/ui/KalendarUtils/labelutils.js:54
+#: contents/ui/KalendarUtils/labelutils.js:57
 #, kde-format
 msgid "Every week"
 msgid_plural "Every %1 weeks"
@@ -1812,7 +1845,7 @@ msgstr[3] "كل %1 أسابيع"
 msgstr[4] "كل %1 أسبوعاً"
 msgstr[5] "كل %1 أسبوع"
 
-#: contents/ui/KalendarUtils/labelutils.js:57
+#: contents/ui/KalendarUtils/labelutils.js:60
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
@@ -1823,8 +1856,8 @@ msgstr[3] "كل %1 أسابيع عند"
 msgstr[4] "كل %1 أسبوعاً عند"
 msgstr[5] "كل %1 أسبوع عند"
 
-#: contents/ui/KalendarUtils/labelutils.js:90
-#: contents/ui/KalendarUtils/labelutils.js:129
+#: contents/ui/KalendarUtils/labelutils.js:93
+#: contents/ui/KalendarUtils/labelutils.js:132
 #, kde-format
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
@@ -1835,7 +1868,7 @@ msgstr[3] "كل %1 سنوات في %2 من %3"
 msgstr[4] "كل %1 سنة في %2 من %3"
 msgstr[5] "كل %1 سنة في %2 من %3"
 
-#: contents/ui/KalendarUtils/labelutils.js:109
+#: contents/ui/KalendarUtils/labelutils.js:112
 #, kde-format
 msgid "Every minute"
 msgid_plural "Every %1 minutes"
@@ -1846,7 +1879,7 @@ msgstr[3] "كلّ %1دقائق"
 msgstr[4] "كلّ %1دقيقة"
 msgstr[5] "كلّ %1دقيقة"
 
-#: contents/ui/KalendarUtils/labelutils.js:112
+#: contents/ui/KalendarUtils/labelutils.js:115
 #, kde-format
 msgid "Every hour"
 msgid_plural "Every %1 hours"
@@ -1857,7 +1890,7 @@ msgstr[3] "كلّ %1 ساعات"
 msgstr[4] "كلّ %1 ساعة"
 msgstr[5] "كلّ %1 ساعة"
 
-#: contents/ui/KalendarUtils/labelutils.js:115
+#: contents/ui/KalendarUtils/labelutils.js:118
 #, kde-format
 msgid "Every day"
 msgid_plural "Every %1 days"
@@ -1868,8 +1901,8 @@ msgstr[3] "كل %1 أيام"
 msgstr[4] "كل %1 يوماً"
 msgstr[5] "كل %1 يوم"
 
-#: contents/ui/KalendarUtils/labelutils.js:121
-#: contents/ui/KalendarUtils/labelutils.js:125
+#: contents/ui/KalendarUtils/labelutils.js:124
+#: contents/ui/KalendarUtils/labelutils.js:128
 #, kde-format
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
@@ -1880,7 +1913,7 @@ msgstr[3] "كل %1 أشهر في %2"
 msgstr[4] "كل %1 شهراً في %2"
 msgstr[5] "كل %1 شهر في %2"
 
-#: contents/ui/KalendarUtils/labelutils.js:133
+#: contents/ui/KalendarUtils/labelutils.js:136
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
@@ -1891,62 +1924,62 @@ msgstr[3] "كل %1 سنوات في اليوم %2 من السنة"
 msgstr[4] "كل %1 سنة في اليوم %2 من السنة"
 msgstr[5] "كل %1 سنة في اليوم %2 من السنة"
 
-#: contents/ui/KalendarUtils/labelutils.js:139
+#: contents/ui/KalendarUtils/labelutils.js:142
 #, kde-format
 msgid "Complex recurrence rule"
 msgstr "قاعدة تكرار معقدة"
 
-#: contents/ui/KalendarUtils/labelutils.js:142
+#: contents/ui/KalendarUtils/labelutils.js:145
 #, kde-format
 msgid "Unknown"
 msgstr "مجهول"
 
-#: contents/ui/KalendarUtils/labelutils.js:150
+#: contents/ui/KalendarUtils/labelutils.js:153
 #, kde-format
 msgid "Never ends"
 msgstr "لا تنتهي"
 
-#: contents/ui/KalendarUtils/labelutils.js:152
+#: contents/ui/KalendarUtils/labelutils.js:155
 #, kde-format
 msgid "Ends on %1"
 msgstr "تنتهي في %1"
 
-#: contents/ui/KalendarUtils/labelutils.js:154
+#: contents/ui/KalendarUtils/labelutils.js:157
 #, kde-format
 msgid "Ends after %1 occurrences"
 msgstr "ينتهي بعد %1 تكرار"
 
-#: contents/ui/KalendarUtils/labelutils.js:213
+#: contents/ui/KalendarUtils/labelutils.js:216
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Highest priority)"
 msgstr "%1 (أولوية قصوى)"
 
-#: contents/ui/KalendarUtils/labelutils.js:215
+#: contents/ui/KalendarUtils/labelutils.js:218
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-high priority)"
 msgstr "%1 (أولوية مرتفعة-متوسطة)"
 
-#: contents/ui/KalendarUtils/labelutils.js:217
+#: contents/ui/KalendarUtils/labelutils.js:220
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Medium priority)"
 msgstr "%1 (أولوية متوسطة)"
 
-#: contents/ui/KalendarUtils/labelutils.js:219
+#: contents/ui/KalendarUtils/labelutils.js:222
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-low priority)"
 msgstr "%1 (أولوية متوسطة-منخفضة)"
 
-#: contents/ui/KalendarUtils/labelutils.js:221
+#: contents/ui/KalendarUtils/labelutils.js:224
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Lowest priority)"
 msgstr "%1 (أولوية دنيا)"
 
-#: contents/ui/KalendarUtils/labelutils.js:223
+#: contents/ui/KalendarUtils/labelutils.js:226
 #, kde-format
 msgid "No set priority level"
 msgstr "لم تعين الأولوية"

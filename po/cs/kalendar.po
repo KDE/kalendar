@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-10 00:59+0000\n"
+"POT-Creation-Date: 2023-03-06 00:48+0000\n"
 "PO-Revision-Date: 2023-02-03 17:00+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -382,7 +382,7 @@ msgstr "Kniha adres:"
 #: contacts/qml/private/ContactEditorPage.qml:144
 #: contacts/qml/private/ContactGroupEditorPage.qml:78
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:972
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
 #, kde-format
 msgid "Name:"
 msgstr "Název:"
@@ -1398,7 +1398,7 @@ msgstr "Opakovat:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:409
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:610
-#: contents/ui/KalendarUtils/labelutils.js:106
+#: contents/ui/KalendarUtils/labelutils.js:109
 #, kde-format
 msgid "Never"
 msgstr "Nikdy"
@@ -1424,6 +1424,7 @@ msgid "Yearly"
 msgstr "Ročně"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:414
+#: contents/ui/KalendarUtils/labelutils.js:45
 #, kde-format
 msgid "Custom"
 msgstr "Vlastní"
@@ -1522,7 +1523,7 @@ msgstr "Umístění:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:728
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:812
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:979
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1075
 #, kde-format
 msgid "Optional"
 msgstr "Volitelné"
@@ -1569,57 +1570,89 @@ msgstr "Spravovat značky…"
 msgid "Reminders:"
 msgstr "Připomenutí:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:923
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:985
+#, fuzzy, kde-format
+#| msgid "%1 minutes"
+msgid "minutes"
+msgstr "%1 minut"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:986
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or mores"
+#| msgid "%1 hours"
+msgid "hours"
+msgstr "%1 hodin"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:987
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or more"
+#| msgid "%1 days"
+msgid "days"
+msgstr "%1 dny"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
+#, fuzzy, kde-format
+#| msgid "%1 before start of event"
+msgid "before start of event"
+msgstr "%1 před zahájením události"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
+#, fuzzy, kde-format
+#| msgid "%1 after start of event"
+msgid "after start of event"
+msgstr "%1 po zahájení události"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format
 msgid "Add Reminder"
 msgstr "Přidat upomínku"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:937
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1033
 #, kde-format
 msgid "Attendees:"
 msgstr "Účastníci:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:997
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1093
 #, kde-format
 msgid "Email:"
 msgstr "E-mail:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1004
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1100
 #, kde-format
 msgid "Required"
 msgstr "Požadováno"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1109
 #, kde-format
 msgid "Status:"
 msgstr "Stav:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1037
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1133
 #, kde-format
 msgid "Request RSVP"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1051
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1147
 #, kde-format
 msgid "Add Attendee"
 msgstr "Přidat účastníka"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1062
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1158
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Vybrat z kontaktů"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1066
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1162
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Vyplnit ručně"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1080
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1176
 #, kde-format
 msgid "Attachments:"
 msgstr "Přílohy:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1103
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1199
 #, kde-format
 msgid "Add Attachment"
 msgstr "Přidat přílohu"
@@ -1744,22 +1777,22 @@ msgstr "1 hodina"
 msgid "%1 minutes"
 msgstr "%1 minut"
 
-#: contents/ui/KalendarUtils/labelutils.js:45
+#: contents/ui/KalendarUtils/labelutils.js:48
 #, kde-format
 msgid "%1 before start of event"
 msgstr "%1 před zahájením události"
 
-#: contents/ui/KalendarUtils/labelutils.js:47
+#: contents/ui/KalendarUtils/labelutils.js:50
 #, kde-format
 msgid "%1 after start of event"
 msgstr "%1 po zahájení události"
 
-#: contents/ui/KalendarUtils/labelutils.js:49
+#: contents/ui/KalendarUtils/labelutils.js:52
 #, kde-format
 msgid "On event start"
 msgstr "Při započetí události"
 
-#: contents/ui/KalendarUtils/labelutils.js:54
+#: contents/ui/KalendarUtils/labelutils.js:57
 #, kde-format
 msgid "Every week"
 msgid_plural "Every %1 weeks"
@@ -1767,7 +1800,7 @@ msgstr[0] "Každý týden"
 msgstr[1] "Každé %1 týdny"
 msgstr[2] "Každých %1 týdnů"
 
-#: contents/ui/KalendarUtils/labelutils.js:57
+#: contents/ui/KalendarUtils/labelutils.js:60
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
@@ -1775,8 +1808,8 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: contents/ui/KalendarUtils/labelutils.js:90
-#: contents/ui/KalendarUtils/labelutils.js:129
+#: contents/ui/KalendarUtils/labelutils.js:93
+#: contents/ui/KalendarUtils/labelutils.js:132
 #, kde-format
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
@@ -1784,7 +1817,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: contents/ui/KalendarUtils/labelutils.js:109
+#: contents/ui/KalendarUtils/labelutils.js:112
 #, kde-format
 msgid "Every minute"
 msgid_plural "Every %1 minutes"
@@ -1792,7 +1825,7 @@ msgstr[0] "Každou minutu"
 msgstr[1] "Každé %1 minuty"
 msgstr[2] "Každých %1 minut"
 
-#: contents/ui/KalendarUtils/labelutils.js:112
+#: contents/ui/KalendarUtils/labelutils.js:115
 #, kde-format
 msgid "Every hour"
 msgid_plural "Every %1 hours"
@@ -1800,7 +1833,7 @@ msgstr[0] "Každou hodinu"
 msgstr[1] "Každé %1 hodiny"
 msgstr[2] "Každých %1 hodin"
 
-#: contents/ui/KalendarUtils/labelutils.js:115
+#: contents/ui/KalendarUtils/labelutils.js:118
 #, kde-format
 msgid "Every day"
 msgid_plural "Every %1 days"
@@ -1808,8 +1841,8 @@ msgstr[0] "Každý den"
 msgstr[1] "Každé %1 dny"
 msgstr[2] "Každých %1 dní"
 
-#: contents/ui/KalendarUtils/labelutils.js:121
-#: contents/ui/KalendarUtils/labelutils.js:125
+#: contents/ui/KalendarUtils/labelutils.js:124
+#: contents/ui/KalendarUtils/labelutils.js:128
 #, kde-format
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
@@ -1817,7 +1850,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: contents/ui/KalendarUtils/labelutils.js:133
+#: contents/ui/KalendarUtils/labelutils.js:136
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
@@ -1825,62 +1858,62 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: contents/ui/KalendarUtils/labelutils.js:139
+#: contents/ui/KalendarUtils/labelutils.js:142
 #, kde-format
 msgid "Complex recurrence rule"
 msgstr "Komplexní pravidlo opakování"
 
-#: contents/ui/KalendarUtils/labelutils.js:142
+#: contents/ui/KalendarUtils/labelutils.js:145
 #, kde-format
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: contents/ui/KalendarUtils/labelutils.js:150
+#: contents/ui/KalendarUtils/labelutils.js:153
 #, kde-format
 msgid "Never ends"
 msgstr "Nikdy nekončí"
 
-#: contents/ui/KalendarUtils/labelutils.js:152
+#: contents/ui/KalendarUtils/labelutils.js:155
 #, kde-format
 msgid "Ends on %1"
 msgstr "Končí %1"
 
-#: contents/ui/KalendarUtils/labelutils.js:154
+#: contents/ui/KalendarUtils/labelutils.js:157
 #, kde-format
 msgid "Ends after %1 occurrences"
 msgstr "Končí po %1 výskytech"
 
-#: contents/ui/KalendarUtils/labelutils.js:213
+#: contents/ui/KalendarUtils/labelutils.js:216
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Highest priority)"
 msgstr "%1 (Nejvyšší priorita)"
 
-#: contents/ui/KalendarUtils/labelutils.js:215
+#: contents/ui/KalendarUtils/labelutils.js:218
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-high priority)"
 msgstr "%1 (Středně-vysoká priorita)"
 
-#: contents/ui/KalendarUtils/labelutils.js:217
+#: contents/ui/KalendarUtils/labelutils.js:220
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Medium priority)"
 msgstr "%1 (Střední priorita)"
 
-#: contents/ui/KalendarUtils/labelutils.js:219
+#: contents/ui/KalendarUtils/labelutils.js:222
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-low priority)"
 msgstr "%1 (Středně-nízká priorita)"
 
-#: contents/ui/KalendarUtils/labelutils.js:221
+#: contents/ui/KalendarUtils/labelutils.js:224
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Lowest priority)"
 msgstr "%1 (Nejnižší priorita)"
 
-#: contents/ui/KalendarUtils/labelutils.js:223
+#: contents/ui/KalendarUtils/labelutils.js:226
 #, kde-format
 msgid "No set priority level"
 msgstr "Nastavit úroveň priorita"
