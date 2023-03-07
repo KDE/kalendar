@@ -16,6 +16,7 @@ public:
         TypeRole = Qt::UserRole + 1,
         TypeValueRole,
         DefaultRole,
+        EmailRole,
     };
     enum Type { Unknown = 0, Home = 1, Work = 2, Other = 4 };
     Q_ENUM(Type);
