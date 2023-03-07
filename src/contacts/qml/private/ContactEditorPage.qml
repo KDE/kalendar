@@ -21,7 +21,7 @@ Kirigami.ScrollablePage {
     property bool displayAdvancedNameFields: false
     property bool saving: false
 
-    property ContactEditor contactEditor: ContactEditor {
+    readonly property ContactEditor contactEditor: ContactEditor {
         id: contactEditor
         mode: ContactEditor.CreateMode
         onFinished: root.closeDialog()
@@ -533,22 +533,33 @@ Kirigami.ScrollablePage {
         }
     }
 
-    footer: QQC2.DialogButtonBox {
-        standardButtons: QQC2.DialogButtonBox.Cancel
 
-        QQC2.Button {
-            icon.name: mode === ContactEditor.EditMode ? "document-save" : "list-add"
-            text: mode === ContactEditor.EditMode ? i18n("Save") : i18n("Add")
-            enabled: contactEditor.contact.formattedName.length > 0
-            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+    footer: ColumnLayout {
+        spacing: 0
+
+        Kirigami.Separator {
+            Layout.fillWidth: true
         }
 
-        onRejected: {
-            ContactConfig.lastUsedAddressBookCollection = addressBookComboBox.defaultCollectionId;
-            ContactConfig.save();
-            root.closeDialog();
+        QQC2.DialogButtonBox {
+            Layout.fillWidth: true
+
+            standardButtons: QQC2.DialogButtonBox.Cancel
+
+            QQC2.Button {
+                icon.name: mode === ContactEditor.EditMode ? "document-save" : "list-add"
+                text: mode === ContactEditor.EditMode ? i18n("Save") : i18n("Add")
+                enabled: contactEditor.contact.formattedName.length > 0
+                QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+            }
+
+            onRejected: {
+                ContactConfig.lastUsedAddressBookCollection = addressBookComboBox.defaultCollectionId;
+                ContactConfig.save();
+                root.closeDialog();
+            }
+            onAccepted: submitAction.trigger();
         }
-        onAccepted: submitAction.trigger();
     }
 
     property QQC2.Dialog itemChangedExternallySheet: QQC2.Dialog {
