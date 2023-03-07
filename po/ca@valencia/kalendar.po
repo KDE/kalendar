@@ -1,16 +1,16 @@
 # Translation of kalendar.po to Catalan (Valencian)
-# Copyright (C) 2021-2022 This_file_is_part_of_KDE
+# Copyright (C) 2021-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2021, 2022.
-# Josep M. Ferrer <txemaq@gmail.com>, 2021, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2022-12-12 09:39+0100\n"
+"PO-Revision-Date: 2023-03-06 11:05+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1572,36 +1572,29 @@ msgid "Reminders:"
 msgstr "Recordatoris:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 minuts"
+msgstr "minuts"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 hores"
+msgstr "hores"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:987
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or more"
-#| msgid "%1 days"
+#, kde-format
 msgid "days"
-msgstr "%1 dies"
+msgstr "dies"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "%1 abans de començar l'esdeveniment"
+msgstr "abans de començar l'esdeveniment"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "%1 després de començar l'esdeveniment"
+msgstr "després de començar l'esdeveniment"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format

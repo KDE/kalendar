@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2021, 2022.
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2022-12-12 12:27+0100\n"
+"PO-Revision-Date: 2023-03-06 10:32+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Freek de Kruijf - 2022"
+msgstr "Freek de Kruijf - 2022-2023"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -1566,17 +1566,14 @@ msgid "Reminders:"
 msgstr "Herinneringen:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 minuten"
+msgstr "minuten"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 uren"
+msgstr "uren"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:987
 #, kde-format
@@ -1584,16 +1581,14 @@ msgid "days"
 msgstr "dagen"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "%1 voor het begin van de afspraak"
+msgstr "voor het begin van de gebeurtenis"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "%1 na het begin van de afspraak"
+msgstr "na het begin van de gebeurtenis"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2022-12-12 16:36+0000\n"
+"PO-Revision-Date: 2023-03-06 15:04+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -1567,36 +1567,29 @@ msgid "Reminders:"
 msgstr "Chamadas de atenção:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 minutos"
+msgstr "minutos"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 horas"
+msgstr "horas"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:987
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or more"
-#| msgid "%1 days"
+#, kde-format
 msgid "days"
-msgstr "%1 dias"
+msgstr "dias"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "%1 antes do início do evento"
+msgstr "antes do início do evento"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "%1 após o início do evento"
+msgstr "após o início do evento"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format

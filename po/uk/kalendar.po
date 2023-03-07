@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2022-12-12 16:34+0200\n"
+"PO-Revision-Date: 2023-03-06 08:27+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1589,17 +1589,14 @@ msgid "Reminders:"
 msgstr "Нагадування:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 хвилин"
+msgstr "хвилин"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 годин"
+msgstr "годин"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:987
 #, kde-format
@@ -1607,16 +1604,14 @@ msgid "days"
 msgstr "днів"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "%1 до початку події"
+msgstr "до початку події"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "%1 після початку події"
+msgstr "після початку події"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format
