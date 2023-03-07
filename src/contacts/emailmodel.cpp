@@ -32,6 +32,7 @@ QVariant EmailModel::data(const QModelIndex &idx, int role) const
     const auto email = m_emails[idx.row()];
     switch (role) {
     case Qt::DisplayRole:
+    case EmailRole:
         return email.mail();
     case TypeRole:
         if (email.type() & KContacts::Email::Home & KContacts::Email::Work) {
@@ -58,6 +59,7 @@ bool EmailModel::setData(const QModelIndex &index, const QVariant &value, int ro
     auto email = m_emails[index.row()];
     switch (role) {
     case Qt::DisplayRole:
+    case EmailRole:
         email.setEmail(value.toString());
         m_emails.replace(index.row(), email);
         Q_EMIT changed(m_emails);
@@ -81,6 +83,7 @@ QHash<int, QByteArray> EmailModel::roleNames() const
 {
     return {
         {Qt::DisplayRole, QByteArrayLiteral("display")},
+        {EmailRole, QByteArrayLiteral("email")},
         {TypeRole, QByteArrayLiteral("type")},
         {TypeValueRole, QByteArrayLiteral("typeValue")},
         {DefaultRole, QByteArrayLiteral("default")},

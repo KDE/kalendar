@@ -32,6 +32,7 @@ QVariant PhoneModel::data(const QModelIndex &idx, int role) const
     const auto phone = m_phoneNumbers[idx.row()];
     switch (role) {
     case Qt::DisplayRole:
+    case PhoneNumberRole:
         return phone.number();
     case TypeRole:
         return phone.typeLabel();
@@ -51,6 +52,7 @@ bool PhoneModel::setData(const QModelIndex &index, const QVariant &value, int ro
     auto phoneNumber = m_phoneNumbers[index.row()];
     switch (role) {
     case Qt::DisplayRole:
+    case PhoneNumberRole:
         phoneNumber.setNumber(value.toString());
         Q_EMIT changed(m_phoneNumbers);
         return true;
@@ -67,6 +69,7 @@ QHash<int, QByteArray> PhoneModel::roleNames() const
 {
     return {
         {Qt::DisplayRole, QByteArrayLiteral("display")},
+        {PhoneNumberRole, QByteArrayLiteral("phoneNumber")},
         {TypeRole, QByteArrayLiteral("type")},
         {TypeValueRole, QByteArrayLiteral("typeValue")},
         {DefaultRole, QByteArrayLiteral("default")},

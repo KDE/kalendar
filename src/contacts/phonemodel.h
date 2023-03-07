@@ -16,6 +16,7 @@ public:
         TypeValueRole,
         DefaultRole,
         SupportSmsRole,
+        PhoneNumberRole,
     };
 
     enum Type {

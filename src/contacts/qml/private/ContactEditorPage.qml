@@ -469,7 +469,7 @@ Kirigami.ScrollablePage {
 
                         required property int index
                         required property string url
-                        required property string model
+                        required property var model
 
                         background: Item {}
                         Layout.fillWidth: true
@@ -480,7 +480,7 @@ Kirigami.ScrollablePage {
                                 text: imppDelegate.url
                                 inputMethodHints: Qt.ImhEmailCharactersOnly
                                 Layout.fillWidth: true
-                                onTextChanged: imppDelegate.model.display = text
+                                onTextChanged: imppDelegate.model.url = text
                             }
 
                             QQC2.Button {

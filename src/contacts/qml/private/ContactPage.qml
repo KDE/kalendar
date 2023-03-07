@@ -7,6 +7,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
+import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
 Kirigami.ScrollablePage {
     id: page
@@ -16,7 +17,6 @@ Kirigami.ScrollablePage {
 
     leftPadding: 0
     rightPadding: 0
-    topPadding: 0
 
     property AddresseeWrapper addressee: AddresseeWrapper {
         id: addressee
@@ -52,8 +52,6 @@ Kirigami.ScrollablePage {
             }
         }
     }
-
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
 
     function callNumber(number) {
         Qt.openUrlExternally("tel:" + number)
@@ -149,224 +147,274 @@ Kirigami.ScrollablePage {
     }
 
     ColumnLayout {
-        Kirigami.FormLayout {
-            id: contactForm
-            twinFormLayouts: [addreseesForm, phoneForm, contactForm, businessForm]
+        MobileForm.FormCard {
             Layout.fillWidth: true
-            Item {
-                Kirigami.FormData.isSection: true
-                Kirigami.FormData.label: i18n("Contact information")
-            }
+            Layout.topMargin: Kirigami.Units.largeSpacing
 
-            QQC2.Label {
-                visible: text !== ""
-                text: addressee.formattedName
-                Kirigami.FormData.label: i18n("Name:")
-            }
+            contentItem: ColumnLayout {
+                spacing: 0
 
-            QQC2.Label {
-                visible: text !== ""
-                text: addressee.nickName
-                Kirigami.FormData.label: i18n("Nickname:")
-            }
+                MobileForm.FormCardHeader {
+                    title: i18n("Contact information")
+                }
 
-            QQC2.Label {
-                id: blogFeed
-                visible: addressee.blogFeed + '' !== ''
-                // We do not always have the year
-                text: `<a href="${addressee.blogFeed}">${addressee.blogFeed}</a>`
-                Kirigami.FormData.label: i18n("Blog Feed:")
-                MouseArea {
-                    id: area
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
+                MobileForm.FormTextDelegate {
+                    visible: description !== ""
+                    description: addressee.formattedName
+                    text: i18n("Name:")
+                }
+
+                MobileForm.FormTextDelegate {
+                    visible: description !== ""
+                    description: addressee.nickName
+                    text: i18n("Nickname:")
+                }
+
+                MobileForm.FormButtonDelegate {
+                    id: blogFeed
+                    visible: addressee.blogFeed + '' !== ''
+                    text: i18n("Blog Feed:")
+                    // We do not always have the year
+                    description: `<a href="${addressee.blogFeed}">${addressee.blogFeed}</a>`
                     onClicked: Qt.openUrlExternally(addressee.blogFeed)
-                    onPressed: Qt.openUrlExternally(addressee.blogFeed)
                 }
-            }
-
-            Item {
-                visible: birthday.visible || anniversary.visible || spousesName.visible
-                Kirigami.FormData.isSection: true
-                Kirigami.FormData.label: i18n("Personal information")
-            }
-
-            QQC2.Label {
-                id: birthday
-                visible: text !== ""
-                // We do not always have the year
-                text: if (addressee.birthday.getFullYear() === 0) {
-                    return Qt.formatDate(addressee.birthday, i18nc('Day month format', 'dd.MM.'))
-                } else {
-                    return addressee.birthday.toLocaleDateString()
-                }
-                Kirigami.FormData.label: i18n("Birthday:")
-            }
-
-            QQC2.Label {
-                id: anniversary
-                visible: text !== ""
-                // We do not always have the year
-                text: if (addressee.anniversary.getFullYear() === 0) {
-                    return Qt.formatDate(addressee.anniversary, i18nc('Day month format', 'dd.MM.'))
-                } else {
-                    return addressee.anniversary.toLocaleDateString()
-                }
-                Kirigami.FormData.label: i18n("Anniversary:")
-            }
-
-            QQC2.Label {
-                id: spousesName
-                visible: text !== ""
-                text: addressee.spousesName
-                Kirigami.FormData.label: i18n("Partner's name:")
             }
         }
 
-        Kirigami.FormLayout {
-            id: phoneForm
-            twinFormLayouts: [emailForm, contactForm, businessForm]
+        MobileForm.FormCard {
             Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            visible: birthday.visible || anniversary.visible || spousesName.visible
 
-            Item {
-                visible: phoneRepeater.count > 0
-                Kirigami.FormData.isSection: true
-                Kirigami.FormData.label: i18np("Phone Number", "Phone Numbers", addressee.phoneModel.count)
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
+                    title: i18n("Personal information")
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: birthday
+                    visible: description !== ""
+                    text: i18n("Birthday:")
+                    // We do not always have the year
+                    description: if (addressee.birthday.getFullYear() === 0) {
+                        return Qt.formatDate(addressee.birthday, i18nc('Day month format', 'dd.MM.'))
+                    } else {
+                        return addressee.birthday.toLocaleDateString()
+                    }
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: anniversary
+                    visible: description !== ""
+                    // We do not always have the year
+                    description: if (addressee.anniversary.getFullYear() === 0) {
+                        return Qt.formatDate(addressee.anniversary, i18nc('Day month format', 'dd.MM.'))
+                    } else {
+                        return addressee.anniversary.toLocaleDateString()
+                    }
+                    text: i18n("Anniversary:")
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: spousesName
+                    visible: description !== ""
+                    description: addressee.spousesName
+                    text: i18n("Partner's name:")
+                }
             }
+        }
 
-            Repeater {
-                id: phoneRepeater
-                model: addressee.phoneModel
-                QQC2.Label {
-                    visible: text !== ""
-                    text: `<a href="tel:${model.display}">${model.display}</a>`
-                    onLinkActivated: Qt.openUrlExternally(link)
-                    Kirigami.FormData.label: i18nc("Label for a phone number type", "%1:", model.type)
-                    Kirigami.FormData.labelAlignment: Qt.AlignTop
-                    MouseArea {
-                        id: area
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: Qt.openUrlExternally(`tel:${model.display}`)
-                        onPressed: Qt.openUrlExternally(`tel:${model.display}`)
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+
+            visible: phoneRepeater.count > 0
+
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
+                    title: i18np("Phone Number", "Phone Numbers", addressee.phoneModel.count)
+                }
+
+                Repeater {
+                    id: phoneRepeater
+
+                    model: addressee.phoneModel
+                    delegate: MobileForm.FormButtonDelegate {
+                        required property string phoneNumber
+                        required property string type
+
+                        visible: text.length > 0
+                        text: i18nc("Label for a phone number type", "%1:", type)
+                        description: phoneNumber
+                        onClicked: Qt.openUrlExternally(link)
                     }
                 }
             }
         }
 
-        Kirigami.FormLayout {
-            id: addreseesForm
-            twinFormLayouts: [emailForm, phoneForm, contactForm, businessForm]
+        MobileForm.FormCard {
             Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
 
-            Item {
-                visible: addressesRepeater.count > 0
-                Kirigami.FormData.isSection: true
-                Kirigami.FormData.label: i18np("Address", "Addresses", addressesRepeater.count)
-            }
+            visible: addressesRepeater.count > 0
 
-            Repeater {
-                id: addressesRepeater
-                model: addressee.addressesModel
-                QQC2.Label {
-                    visible: text !== ""
-                    text: model.formattedAddress
-                    Kirigami.FormData.label: model.typeLabel ? i18nc("%1 is the type of the address, e.g. home, work, ...", "%1:", model.typeLabel) : i18n("Home:")
-                    Kirigami.FormData.labelAlignment: Qt.AlignTop
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
+                    title: i18np("Address", "Addresses", addressesRepeater.count)
+                }
+
+
+                Repeater {
+                    id: addressesRepeater
+                    model: addressee.addressesModel
+
+                    delegate: MobileForm.FormTextDelegate {
+                        required property string formattedAddress
+                        required property string typeLabel
+
+                        visible: text.length > 0
+
+                        text: typeLabel ? i18nc("%1 is the type of the address, e.g. home, work, ...", "%1:", typeLabel) : i18n("Home:")
+                        description: formattedAddress
+                    }
                 }
             }
         }
 
-        Kirigami.FormLayout {
-            id: businessForm
-            twinFormLayouts: [emailForm, addreseesForm, contactForm, phoneForm]
+        MobileForm.FormCard {
             Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
 
-            Item {
-                Kirigami.FormData.isSection: true
-                visible: organization.visible || profession.visible || title.visible || department.visible || office.visible || managersName.visible || assistantsName.visible
-                Kirigami.FormData.label: i18n("Business Information")
-            }
+            visible: imppRepeater.count > 0
 
-            QQC2.Label {
-                id: organization
-                visible: text !== ""
-                text: addressee.organization
-                Kirigami.FormData.label: i18n("Organization:")
-            }
+            contentItem: ColumnLayout {
+                spacing: 0
 
-            QQC2.Label {
-                id: profession
-                visible: text !== ""
-                text: addressee.profession
-                Kirigami.FormData.label: i18n("Profession:")
-            }
+                MobileForm.FormCardHeader {
+                    title: i18n("Instant Messaging")
+                }
 
-            QQC2.Label {
-                id: title
-                visible: text.trim() !== ""
-                text: addressee.title
-                Kirigami.FormData.label: i18n("Title:")
-            }
+                Repeater {
+                    id: imppRepeater
 
-            QQC2.Label {
-                id: department
-                visible: text !== ""
-                text: addressee.department
-                Kirigami.FormData.label: i18n("Department:")
-            }
+                    model: addressee.imppModel
+                    delegate: MobileForm.FormButtonDelegate {
+                        id: imppDelegate
 
-            QQC2.Label {
-                id: office
-                visible: text !== ""
-                text: addressee.office
-                Kirigami.FormData.label: i18n("Office:")
-            }
+                        required property string url
+                        readonly property var parts: url.split(':')
+                        readonly property string protocol: parts.length > 0 ? parts[0] : ''
+                        readonly property string address: parts.length > 0 ? parts.slice(1, parts.length).join(':') : ''
+                        readonly property bool isMatrix: protocol === 'matrix'
 
-            QQC2.Label {
-                id: managersName
-                visible: text !== ""
-                text: addressee.managersName
-                Kirigami.FormData.label: i18n("Manager's name:")
-            }
+                        visible: text !== ""
+                        text: i18nc("Label for a messaging protocol", "%1:", isMatrix ? 'Matrix' : protocol)
+                        description: address
 
-            QQC2.Label {
-                id: assistantsName
-                visible: text !== ""
-                text: addressee.assistantsName
-                Kirigami.FormData.label: i18n("Assistants's name:")
+                        onClicked: Qt.openUrlExternally(parent.url)
+                    }
+                }
             }
         }
 
-        Kirigami.FormLayout {
-            id: emailForm
-            twinFormLayouts: [addreseesForm, phoneForm, contactForm, businessForm]
+        MobileForm.FormCard {
             Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
 
-            Item {
-                Kirigami.FormData.isSection: true
-                visible: emailRepeater.count > 0
-                Kirigami.FormData.label: i18np("Email Address", "Email Addresses", emailRepeater.count > 0)
+            visible: addressee.organization.length > 0
+                || addressee.profession.length > 0
+                || addressee.title.length > 0
+                || addressee.department.length > 0
+                || addressee.office.length > 0
+                || addressee.managersName.length > 0
+                || addressee.assistantsName.length > 0
+
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
+                    title: i18n("Business Information")
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: organization
+                    visible: description.length > 0
+                    text: i18n("Organization:")
+                    description: addressee.organization
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: profession
+                    visible: description.length > 0
+                    text: i18n("Profession:")
+                    description: addressee.profession
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: title
+                    visible: description !== ''
+                    text: i18n("Title:")
+                    description: addressee.title
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: department
+                    visible: description !== ''
+                    text: i18n("Department:")
+                    description: addressee.department
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: office
+                    visible: description.length > 0
+                    text: i18n("Office:")
+                    description: addressee.office
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: managersName
+                    visible: description.length > 0
+                    text: i18n("Manager's name:")
+                    description: addressee.managersName
+                }
+
+                MobileForm.FormTextDelegate {
+                    id: assistantsName
+                    visible: description.length > 0
+                    text: i18n("Assistants's name:")
+                    description: addressee.assistantsName
+                }
             }
+        }
 
-            Repeater {
-                id: emailRepeater
-                model: addressee.emailModel
-                QQC2.Label {
-                    visible: text !== ""
-                    text: `<a href="mailto:${model.display}">${model.display}</a>`
-                    onLinkActivated: Qt.openUrlExternally(link)
-                    Kirigami.FormData.label: model.type
-                    Kirigami.FormData.labelAlignment: Qt.AlignTop
-                    MouseArea {
-                        id: area
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: Qt.openUrlExternally(`mailto:${model.display}`)
-                        onPressed: Qt.openUrlExternally(`mailto:${model.display}`)
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+
+            visible: imppRepeater.count > 0
+
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
+                    title: i18np("Email Address", "Email Addresses", emailRepeater.count > 0)
+                }
+
+                Repeater {
+                    id: emailRepeater
+
+                    model: addressee.emailModel
+                    delegate: MobileForm.FormButtonDelegate {
+                        required property string email
+
+                        text: email
+                        onClicked: Qt.openUrlExternally(`mailto:${email}`)
                     }
                 }
             }

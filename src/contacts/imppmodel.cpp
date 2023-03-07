@@ -50,7 +50,7 @@ bool ImppModel::setData(const QModelIndex &index, const QVariant &value, int rol
 {
     auto impp = m_impps[index.row()];
     switch (role) {
-    case Qt::DisplayRole:
+    case UrlRole:
         impp.setAddress(QUrl(value.toString()));
         m_impps.replace(index.row(), impp);
         Q_EMIT changed(m_impps);
