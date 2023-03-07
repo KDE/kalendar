@@ -75,8 +75,7 @@ QVariant ContactsModel::data(const QModelIndex &idx, int role) const
             if (!item.hasPayload<KContacts::Addressee>()) {
                 return {};
             }
-            const auto contact = item.payload<KContacts::Addressee>();
-            return contact.uid();
+            return item.id();
         }
         return {};
     }

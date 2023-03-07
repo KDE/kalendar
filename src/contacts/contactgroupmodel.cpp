@@ -379,11 +379,11 @@ void ContactGroupModel::removeContact(int row)
     endRemoveRows();
 }
 
-void ContactGroupModel::addContactFromReference(const QString &gid, const QString &email)
+void ContactGroupModel::addContactFromReference(const QString &uid, const QString &email)
 {
     GroupMember member;
     member.isReference = true;
-    member.reference.setGid(gid);
+    member.reference.setUid(uid);
     beginInsertRows({}, d->mMembers.count(), d->mMembers.count());
     d->mMembers.append(member);
     endInsertRows();
