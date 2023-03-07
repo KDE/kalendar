@@ -27,7 +27,7 @@ private Q_SLOTS:
         imppModel.loadContact(addressee);
 
         QCOMPARE(imppModel.rowCount(), 2);
-        QCOMPARE(imppModel.data(imppModel.index(2, 0), ImppModel::UrlRole).toString(), QStringLiteral("matrix:@carl2:kde.org"));
+        QCOMPARE(imppModel.data(imppModel.index(1, 0), ImppModel::UrlRole).toString(), QStringLiteral("matrix:@carl2:kde.org"));
     }
 };
 
