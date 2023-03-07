@@ -64,6 +64,8 @@ MobileForm.FormComboBoxDelegate {
     textRole: "display"
     valueRole: "collectionId"
 
+    spacing: Kirigami.Units.smallSpacing
+
     indicator: Rectangle {
         id: indicatorDot
 
@@ -71,10 +73,10 @@ MobileForm.FormComboBoxDelegate {
         readonly property var selectedModelIndex: comboBox.currentValue > -1 ? comboBox.model.index(comboBox.currentIndex, 0) : null
         readonly property var selectedCollectionColor: comboBox.currentValue > -1 ? comboBox.model.data(selectedModelIndex, Akonadi.Collection.CollectionColorRole) : null
 
-        implicitHeight: comboBox.implicitHeight * 0.4
+        implicitHeight: comboBox.implicitHeight * 0.2
         implicitWidth: implicitHeight
 
-        x: comboBox.mirrored ? comboBox.leftPadding : comboBox.width - (comboBox.leftPadding * 3) - Kirigami.Units.iconSizes.smallMedium
+        x: comboBox.mirrored ? comboBox.leftPadding : comboBox.leftPadding + comboBox.availableWidth + comboBox.spacing
         y: comboBox.topPadding + (comboBox.availableHeight - height) / 2
 
         radius: width * 0.5
