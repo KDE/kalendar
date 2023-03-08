@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2023-02-05 16:24+0300\n"
+"PO-Revision-Date: 2023-03-06 13:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1567,36 +1567,29 @@ msgid "Reminders:"
 msgstr "Anımsatıcılar:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 dakika"
+msgstr "dakika"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 saat"
+msgstr "saat"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:987
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or more"
-#| msgid "%1 days"
+#, kde-format
 msgid "days"
-msgstr "%1 gün"
+msgstr "gün"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "etkinlikten %1 önce"
+msgstr "etkinlik başlangıcı öncesi"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "etkinlik sonrası %1"
+msgstr "etkinlik başlangıcı sonrası"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format

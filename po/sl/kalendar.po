@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
 #
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2021, 2022.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2022-12-13 06:59+0100\n"
+"PO-Revision-Date: 2023-03-07 06:03+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
@@ -1589,36 +1589,29 @@ msgid "Reminders:"
 msgstr "Opomniki:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 minut"
+msgstr "minut"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 ur"
+msgstr "ur"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:987
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or more"
-#| msgid "%1 days"
+#, kde-format
 msgid "days"
-msgstr "%1 dni"
+msgstr "dni"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "%1 do začetka dogodka"
+msgstr "do začetka dogodka"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "%1 po začetku dogodka"
+msgstr "po začetku dogodka"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format
