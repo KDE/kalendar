@@ -78,9 +78,6 @@ public Q_SLOTS:
     void setShowTodos(const bool showTodos);
     void setShowSubTodos(const bool showSubTodos);
 
-protected:
-    void setIncidenceCount(int incidenceCount);
-
 private Q_SLOTS:
     void resetLayoutLines();
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);

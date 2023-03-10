@@ -318,7 +318,6 @@ public:
     QString htmlContent() const Q_DECL_OVERRIDE;
 
 private:
-    void verifySignature(const QByteArray &text, const QByteArray &signature);
     void setVerificationResult(const Crypto::VerificationResult &result, const QByteArray &signedData);
     bool mParseAfterDecryption{true};
 
