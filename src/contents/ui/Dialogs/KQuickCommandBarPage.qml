@@ -80,6 +80,12 @@ QQC2.Dialog {
                     root.close()
                 }
             }
+            Kirigami.PlaceholderMessage {
+                anchors.centerIn: parent
+                text: i18n("No results found")
+                visible: actionList.count === 0
+                width: parent.width - Kirigami.Units.gridUnit * 4
+            }
         }
     }
 }
