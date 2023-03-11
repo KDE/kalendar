@@ -13,7 +13,6 @@ QQC2.Dialog {
     modal: true
     width: 700
     height: 400
-    y: 50
     onClosed: parent.active = false
 
     onOpened: {
