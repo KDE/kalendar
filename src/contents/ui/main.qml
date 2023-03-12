@@ -265,6 +265,12 @@ Kirigami.ApplicationWindow {
             })
         }
 
+        function onCreateNewContactGroup() {
+            pageStack.pushDialogLayer(Qt.resolvedUrl("ContactGroupEditorPage.qml"), {
+                mode: ContactGroupEditor.CreateMode,
+            })
+        }
+
         function onUndo() {
             CalendarManager.undoAction();
         }
