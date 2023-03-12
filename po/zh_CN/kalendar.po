@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2023-02-24 12:44\n"
+"PO-Revision-Date: 2023-03-11 04:55\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/kalendar/kalendar.pot\n"
-"X-Crowdin-File-ID: 25514\n"
+"X-Crowdin-File: /kf5-stable/messages/kalendar/kalendar.pot\n"
+"X-Crowdin-File-ID: 26924\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,9 +40,10 @@ msgid "Redo: "
 msgstr "重做："
 
 #: calendar/qml/CalendarApplication.qml:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Refresh All"
 msgid "Refresh All Calendars"
-msgstr ""
+msgstr "刷新全部"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -283,9 +284,10 @@ msgid "Choose Address Book Color"
 msgstr ""
 
 #: contacts/qml/ContactApplication.qml:16
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Refresh All"
 msgid "Refresh All Address Books"
-msgstr ""
+msgstr "刷新全部"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2278,9 +2280,10 @@ msgid "Use popup to show incidence information"
 msgstr ""
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show sub-tasks in calendar views"
 msgid "Show tasks in calendar views"
-msgstr ""
+msgstr "在日历视图中显示子任务"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2288,9 +2291,10 @@ msgid "Show sub-tasks in calendar views"
 msgstr "在日历视图中显示子任务"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Past event transparency:"
 msgid "Past event transparency"
-msgstr ""
+msgstr "过去事件透明度："
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
@@ -2469,9 +2473,10 @@ msgid "Task"
 msgstr "任务"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Contacts"
 msgid "Contact"
-msgstr ""
+msgstr "联系人"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2579,14 +2584,16 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:309
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New Task…"
 msgid "New Mail…"
-msgstr ""
+msgstr "新建任务..."
 
 #: kalendarapplication.cpp:316
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New Event…"
 msgid "New Contact…"
-msgstr ""
+msgstr "新建事件..."
 
 #: kalendarapplication.cpp:329
 #, kde-format
@@ -2908,3 +2915,12 @@ msgstr ""
 #, kde-format
 msgid "Add Account"
 msgstr ""
+
+#~ msgid "General"
+#~ msgstr "常规"
+
+#~ msgid "Enable maps:"
+#~ msgstr "启用地图："
+
+#~ msgid "Location marker:"
+#~ msgstr "位置标记："
