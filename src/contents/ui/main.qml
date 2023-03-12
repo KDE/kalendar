@@ -259,6 +259,12 @@ Kirigami.ApplicationWindow {
             KalendarUiUtils.setUpAdd(IncidenceWrapper.TypeTodo);
         }
 
+        function onCreateNewContact() {
+            pageStack.pushDialogLayer(Qt.resolvedUrl("ContactEditorPage.qml"), {
+                mode: ContactEditor.CreateMode,
+            })
+        }
+
         function onUndo() {
             CalendarManager.undoAction();
         }
