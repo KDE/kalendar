@@ -77,7 +77,7 @@ void ImppModel::addImpp(const QUrl &impp)
     Q_EMIT changed(m_impps);
 }
 
-void ImppModel::deleteImpp(int row)
+void ImppModel::deleteImpp(const int row)
 {
     if (!hasIndex(row, 0)) {
         return;

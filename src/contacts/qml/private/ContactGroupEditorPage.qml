@@ -103,7 +103,7 @@ Kirigami.ScrollablePage {
                     id: repeater
                     model: contactGroupEditor.groupModel
                     MobileForm.AbstractFormDelegate {
-                        background: Item {}
+                        background: null
                         contentItem: RowLayout {
                             QQC2.TextField {
                                 text: model.display
@@ -125,7 +125,7 @@ Kirigami.ScrollablePage {
                 }
 
                 MobileForm.AbstractFormDelegate {
-                    background: Item {}
+                    background: null
                     contentItem: RowLayout {
                         QQC2.ComboBox {
                             property string gid: null
