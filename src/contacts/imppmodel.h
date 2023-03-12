@@ -5,7 +5,6 @@
 
 #include <KContacts/Addressee>
 #include <QAbstractListModel>
-#include <kcontacts/addressee.h>
 
 class ImppModel : public QAbstractListModel
 {
@@ -30,7 +29,7 @@ public:
     void storeContact(KContacts::Addressee &contact) const;
 
     Q_INVOKABLE void addImpp(const QUrl &address);
-    Q_INVOKABLE void deleteImpp(int row);
+    Q_INVOKABLE void deleteImpp(const int row);
 
 Q_SIGNALS:
     void changed(const KContacts::Impp::List &impps);
