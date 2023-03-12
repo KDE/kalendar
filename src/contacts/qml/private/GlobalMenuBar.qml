@@ -21,6 +21,10 @@ Labs.MenuBar {
         NativeMenuItemFromAction {
             kalendarAction: 'create_contact'
         }
+        NativeMenuItemFromAction {
+            kalendarAction: 'create_contact_group'
+        }
+
     }
 
     NativeWindowMenu {}

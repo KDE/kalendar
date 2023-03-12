@@ -27,6 +27,10 @@ QQC2.MenuBar {
         KActionFromAction {
             kalendarAction: "create_contact"
         }
+        KActionFromAction {
+            kalendarAction: "create_contact_group"
+        }
+
     }
 
     WindowMenu {}

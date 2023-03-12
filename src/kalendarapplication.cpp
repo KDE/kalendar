@@ -317,6 +317,13 @@ void KalendarApplication::setupActions()
         action->setIcon(QIcon::fromTheme(QStringLiteral("contact-new-symbolic")));
     }
 
+    actionName = QLatin1String("create_contact_group");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto action = mContactCollection.addAction(actionName, this, &KalendarApplication::createNewContactGroup);
+        action->setText(i18n("New Contact Group…"));
+        action->setIcon(QIcon::fromTheme(QStringLiteral("contact-new-symbolic")));
+    }
+
     actionName = QLatin1String("options_configure");
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::preferences(this, &KalendarApplication::openSettings, this);

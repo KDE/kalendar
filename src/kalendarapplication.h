@@ -79,6 +79,7 @@ Q_SIGNALS:
     void createNewEvent();
     void createNewMail();
     void createNewContact();
+    void createNewContactGroup();
     void createNewTodo();
     void windowChanged();
     void openSettings();

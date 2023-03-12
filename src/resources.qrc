@@ -44,6 +44,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="CollectionPickerPage.qml">contents/ui/Dialogs/CollectionPickerPage.qml</file>
     <file alias="RecurringIncidenceChangePage.qml">contents/ui/Dialogs/RecurringIncidenceChangePage.qml</file>
     <file alias="ContactEditorPage.qml">contacts/qml/private/ContactEditorPage.qml</file>
+    <file alias="ContactGroupEditorPage.qml">contacts/qml/private/ContactGroupEditorPage.qml</file>
 
     <file alias="DatePicker.qml">contents/ui/Controls/DateControls/DatePicker.qml</file>
     <file alias="TimePicker.qml">contents/ui/Controls/DateControls/TimePicker.qml</file>
