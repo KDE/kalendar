@@ -19,7 +19,7 @@ Labs.MenuBar {
         title: i18nc("@action:menu", "Create")
 
         NativeMenuItemFromAction {
-            kalendarAction: 'create_mail'
+            kalendarAction: 'create_contact'
         }
     }
 
