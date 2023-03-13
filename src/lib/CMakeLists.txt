@@ -4,13 +4,12 @@
 
 
 add_library(kalendar_lib STATIC)
-target_sources(kalendar_lib PUBLIC
+target_sources(kalendar_lib PRIVATE
     colorproxymodel.cpp
     sortedcollectionproxymodel.cpp
     colorproxymodel.h
     sortedcollectionproxymodel.h
 )
-target_sources(kalendar_lib PRIVATE ${kalendar_lib_SRCS})
 set_property(TARGET kalendar_lib PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 target_include_directories(kalendar_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
