@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include "contactmetadata.h"
 #include <Akonadi/Collection>
 #include <Akonadi/Item>
 #include <QObject>

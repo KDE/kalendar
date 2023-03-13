@@ -3,7 +3,6 @@
 
 #include "contactplugin.h"
 #include "addresseewrapper.h"
-#include "addressmodel.h"
 #include "contactcollectionmodel.h"
 #include "contactconfig.h"
 #include "contacteditorbackend.h"
