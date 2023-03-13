@@ -40,7 +40,7 @@ void MessageParser::setItem(const Akonadi::Item &item)
     connect(job, &Akonadi::ItemFetchJob::result, this, [this](KJob *job) {
         auto fetchJob = qobject_cast<Akonadi::ItemFetchJob *>(job);
         const auto items = fetchJob->items();
-        if (items.count() == 0) {
+        if (items.isEmpty()) {
             qWarning() << "Empty fetch job result";
             return;
         }
