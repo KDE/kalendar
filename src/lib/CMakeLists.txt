@@ -2,14 +2,14 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-set(kalendar_lib_SRCS
+
+add_library(kalendar_lib STATIC)
+target_sources(kalendar_lib PUBLIC
     colorproxymodel.cpp
     sortedcollectionproxymodel.cpp
     colorproxymodel.h
     sortedcollectionproxymodel.h
 )
-
-add_library(kalendar_lib STATIC)
 target_sources(kalendar_lib PRIVATE ${kalendar_lib_SRCS})
 set_property(TARGET kalendar_lib PROPERTY POSITION_INDEPENDENT_CODE ON)
 
