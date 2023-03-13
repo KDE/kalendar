@@ -5,7 +5,6 @@
 #include "attachmentmodel.h"
 
 #include "../mimetreeparser/objecttreeparser.h"
-#include "mailcrypto.h"
 #include <QString>
 
 #include <KLocalizedString>
