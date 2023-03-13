@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2021, 2022.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2022-12-16 11:02+0100\n"
+"POT-Creation-Date: 2023-03-13 00:49+0000\n"
+"PO-Revision-Date: 2023-03-08 13:59+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -224,8 +224,8 @@ msgctxt "@action:menu"
 msgid "Enter Full Screen"
 msgstr "Schermo intero"
 
-#: contacts/autotests/emailmodeltest.cpp:36 contacts/emailmodel.cpp:44
-#: contacts/qml/private/ContactPage.qml:276
+#: contacts/autotests/emailmodeltest.cpp:36 contacts/emailmodel.cpp:45
+#: contacts/qml/private/ContactPage.qml:283
 #, kde-format
 msgid "Home:"
 msgstr "Casa:"
@@ -263,17 +263,17 @@ msgctxt "@title:window"
 msgid "Properties of Address Book %1"
 msgstr "Proprietà della rubrica %1"
 
-#: contacts/emailmodel.cpp:38
+#: contacts/emailmodel.cpp:39
 #, kde-format
 msgid "Both:"
 msgstr "Entrambi:"
 
-#: contacts/emailmodel.cpp:41
+#: contacts/emailmodel.cpp:42
 #, kde-format
 msgid "Work:"
 msgstr "Lavoro:"
 
-#: contacts/emailmodel.cpp:46
+#: contacts/emailmodel.cpp:47
 #, kde-format
 msgid "Other:"
 msgstr "Altro:"
@@ -366,302 +366,325 @@ msgctxt "@action:inmenu"
 msgid "Delete address source"
 msgstr "Elimina la fonte dell'indirizzo"
 
-#: contacts/qml/private/ContactEditorPage.qml:53
+#: contacts/qml/private/ContactEditorPage.qml:54
 #, kde-format
 msgid "Add Contact"
 msgstr "Aggiungi contatto"
 
-#: contacts/qml/private/ContactEditorPage.qml:55
+#: contacts/qml/private/ContactEditorPage.qml:56
 #, kde-format
 msgid "Edit Contact"
 msgstr "Modifica contatto"
 
-#: contacts/qml/private/ContactEditorPage.qml:93
+#: contacts/qml/private/ContactEditorPage.qml:99
 #, kde-format
 msgid "Address book:"
 msgstr "Rubrica:"
 
-#: contacts/qml/private/ContactEditorPage.qml:144
-#: contacts/qml/private/ContactGroupEditorPage.qml:78
+#: contacts/qml/private/ContactEditorPage.qml:156
+#: contacts/qml/private/ContactEditorPage.qml:163
+#, fuzzy, kde-format
+#| msgctxt "contact's name"
+#| msgid "Name"
+msgid "Name"
+msgstr "Nome"
+
+#: contacts/qml/private/ContactEditorPage.qml:167
+#, kde-format
+msgid "Contact name"
+msgstr "Nome del contatto"
+
+#: contacts/qml/private/ContactEditorPage.qml:186
+#, fuzzy, kde-format
+#| msgid "Honorific prefix:"
+msgid "Honorific prefix"
+msgstr "Prefisso onorifico:"
+
+#: contacts/qml/private/ContactEditorPage.qml:189
+#, kde-format
+msgid "Miss"
+msgstr "Sig.rina"
+
+#: contacts/qml/private/ContactEditorPage.qml:189
+#, kde-format
+msgid "Mr."
+msgstr "Sig."
+
+#: contacts/qml/private/ContactEditorPage.qml:189
+#, kde-format
+msgid "Mrs."
+msgstr "Sig.ra"
+
+#: contacts/qml/private/ContactEditorPage.qml:189
+#, kde-format
+msgid "Ms."
+msgstr "Sig.ra"
+
+#: contacts/qml/private/ContactEditorPage.qml:189
+#, kde-format
+msgid "Prof."
+msgstr "Prof."
+
+#: contacts/qml/private/ContactEditorPage.qml:198
+#, fuzzy, kde-format
+#| msgid "Given name:"
+msgid "Given name"
+msgstr "Nome:"
+
+#: contacts/qml/private/ContactEditorPage.qml:201
+#, kde-format
+msgid "First name or chosen name"
+msgstr "Nome o nome scelto"
+
+#: contacts/qml/private/ContactEditorPage.qml:207
+#, fuzzy, kde-format
+#| msgid "Additional name:"
+msgid "Additional name"
+msgstr "Nome aggiuntivo:"
+
+#: contacts/qml/private/ContactEditorPage.qml:210
+#, kde-format
+msgid "Middle name or other name"
+msgstr "Secondo nome o altro nome"
+
+#: contacts/qml/private/ContactEditorPage.qml:216
+#, kde-format
+msgid "Family name:"
+msgstr "Nome della famiglia:"
+
+#: contacts/qml/private/ContactEditorPage.qml:219
+#, kde-format
+msgid "Surname or last name"
+msgstr "Cognome"
+
+#: contacts/qml/private/ContactEditorPage.qml:225
+#, fuzzy, kde-format
+#| msgid "Honorific suffix:"
+msgid "Honorific suffix"
+msgstr "Suffisso onorifico:"
+
+#: contacts/qml/private/ContactEditorPage.qml:229
+#, kde-format
+msgid "II"
+msgstr "II"
+
+#: contacts/qml/private/ContactEditorPage.qml:229
+#, kde-format
+msgid "III"
+msgstr "III"
+
+#: contacts/qml/private/ContactEditorPage.qml:229
+#, kde-format
+msgid "Jr."
+msgstr "Jr."
+
+#: contacts/qml/private/ContactEditorPage.qml:229
+#, kde-format
+msgid "Sr."
+msgstr "Sr."
+
+#: contacts/qml/private/ContactEditorPage.qml:236
+#, fuzzy, kde-format
+#| msgid "Nickname:"
+msgid "Nickname"
+msgstr "Soprannome:"
+
+#: contacts/qml/private/ContactEditorPage.qml:239
+#, kde-format
+msgid "Alternative name"
+msgstr "Nome alternativo"
+
+#: contacts/qml/private/ContactEditorPage.qml:252
+#, fuzzy, kde-format
+#| msgid "Phone:"
+msgid "Phone"
+msgstr "Telefono:"
+
+#: contacts/qml/private/ContactEditorPage.qml:264
+#: contacts/qml/private/ContactEditorPage.qml:310
+#: contacts/qml/private/ContactEditorPage.qml:378
+#: contacts/qml/private/ContactEditorPage.qml:420
+#, kde-format
+msgid "Home"
+msgstr "Casa"
+
+#: contacts/qml/private/ContactEditorPage.qml:265
+#: contacts/qml/private/ContactEditorPage.qml:311
+#: contacts/qml/private/ContactEditorPage.qml:379
+#: contacts/qml/private/ContactEditorPage.qml:421
+#, kde-format
+msgid "Work"
+msgstr "Lavoro"
+
+#: contacts/qml/private/ContactEditorPage.qml:266
+#: contacts/qml/private/ContactEditorPage.qml:312
+#, kde-format
+msgid "Messaging"
+msgstr "Messaggistica"
+
+#: contacts/qml/private/ContactEditorPage.qml:267
+#: contacts/qml/private/ContactEditorPage.qml:313
+#, kde-format
+msgid "Voice"
+msgstr "Voce"
+
+#: contacts/qml/private/ContactEditorPage.qml:268
+#: contacts/qml/private/ContactEditorPage.qml:314
+#, kde-format
+msgid "Fax"
+msgstr "Fax"
+
+#: contacts/qml/private/ContactEditorPage.qml:269
+#: contacts/qml/private/ContactEditorPage.qml:315
+#, kde-format
+msgid "Cell"
+msgstr "Cellulare"
+
+#: contacts/qml/private/ContactEditorPage.qml:270
+#: contacts/qml/private/ContactEditorPage.qml:316
+#, kde-format
+msgid "Video"
+msgstr "Video"
+
+#: contacts/qml/private/ContactEditorPage.qml:271
+#: contacts/qml/private/ContactEditorPage.qml:317
+#, kde-format
+msgid "Mailbox"
+msgstr "Casella"
+
+#: contacts/qml/private/ContactEditorPage.qml:272
+#: contacts/qml/private/ContactEditorPage.qml:318
+#, kde-format
+msgid "Modem"
+msgstr "Modem"
+
+#: contacts/qml/private/ContactEditorPage.qml:273
+#: contacts/qml/private/ContactEditorPage.qml:319
+#, kde-format
+msgid "Car"
+msgstr "Automobile"
+
+#: contacts/qml/private/ContactEditorPage.qml:274
+#: contacts/qml/private/ContactEditorPage.qml:320
+#, kde-format
+msgid "ISDN"
+msgstr "ISDN"
+
+#: contacts/qml/private/ContactEditorPage.qml:275
+#: contacts/qml/private/ContactEditorPage.qml:321
+#, kde-format
+msgid "PCS"
+msgstr "PCS"
+
+#: contacts/qml/private/ContactEditorPage.qml:276
+#: contacts/qml/private/ContactEditorPage.qml:322
+#, kde-format
+msgid "Pager"
+msgstr "Cercapersone"
+
+#: contacts/qml/private/ContactEditorPage.qml:277
+#, kde-format
+msgid "Undefined"
+msgstr "Non definito"
+
+#: contacts/qml/private/ContactEditorPage.qml:334
+#, kde-format
+msgid "+33 7 55 23 68 67"
+msgstr "+33 7 55 23 68 67"
+
+#: contacts/qml/private/ContactEditorPage.qml:361
+#, fuzzy, kde-format
+#| msgid "E-mail:"
+msgid "E-mail"
+msgstr "Posta elettronica:"
+
+#: contacts/qml/private/ContactEditorPage.qml:380
+#, kde-format
+msgid "Other"
+msgstr "Altro"
+
+#: contacts/qml/private/ContactEditorPage.qml:401
+#, kde-format
+msgid "Remove email"
+msgstr "Rimuovi indirizzo di posta elettronica"
+
+#: contacts/qml/private/ContactEditorPage.qml:422
+#, kde-format
+msgid "Both"
+msgstr "Entrambi"
+
+#: contacts/qml/private/ContactEditorPage.qml:423
+#, kde-format
+msgid "Other…"
+msgstr "Altro…"
+
+#: contacts/qml/private/ContactEditorPage.qml:432
+#, kde-format
+msgid "user@example.org"
+msgstr "utente@esempio.com"
+
+#: contacts/qml/private/ContactEditorPage.qml:441
+#, kde-format
+msgid "Add email"
+msgstr "Aggiungi indirizzo"
+
+#: contacts/qml/private/ContactEditorPage.qml:461
+#, kde-format
+msgid "Instant Messenger"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:502
+#, kde-format
+msgid "protocol:person@example.com"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:551
+#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
+#, kde-format
+msgid "Save"
+msgstr "Salva"
+
+#: contacts/qml/private/ContactEditorPage.qml:551
+#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
+#, kde-format
+msgid "Add"
+msgstr "Aggiungi"
+
+#: contacts/qml/private/ContactEditorPage.qml:596
+#: contacts/qml/private/ContactGroupEditorPage.qml:223
+#, kde-format
+msgid "Current changes"
+msgstr "Modifiche attuali"
+
+#: contacts/qml/private/ContactEditorPage.qml:601
+#: contacts/qml/private/ContactGroupEditorPage.qml:228
+#, kde-format
+msgid "External changes"
+msgstr "Modifiche esterne"
+
+#: contacts/qml/private/ContactGroupEditorPage.qml:66
+#, kde-format
+msgid "Address Book:"
+msgstr "Rubrica:"
+
+#: contacts/qml/private/ContactGroupEditorPage.qml:84
 #: contacts/qml/private/ContactPage.qml:164
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
 #, kde-format
 msgid "Name:"
 msgstr "Nome:"
 
-#: contacts/qml/private/ContactEditorPage.qml:151
-#, kde-format
-msgid "Contact name"
-msgstr "Nome del contatto"
-
-#: contacts/qml/private/ContactEditorPage.qml:162
-#, kde-format
-msgid "Honorific prefix:"
-msgstr "Prefisso onorifico:"
-
-#: contacts/qml/private/ContactEditorPage.qml:165
-#, kde-format
-msgid "Miss"
-msgstr "Sig.rina"
-
-#: contacts/qml/private/ContactEditorPage.qml:165
-#, kde-format
-msgid "Mr."
-msgstr "Sig."
-
-#: contacts/qml/private/ContactEditorPage.qml:165
-#, kde-format
-msgid "Mrs."
-msgstr "Sig.ra"
-
-#: contacts/qml/private/ContactEditorPage.qml:165
-#, kde-format
-msgid "Ms."
-msgstr "Sig.ra"
-
-#: contacts/qml/private/ContactEditorPage.qml:165
-#, kde-format
-msgid "Prof."
-msgstr "Prof."
-
-#: contacts/qml/private/ContactEditorPage.qml:174
-#, kde-format
-msgid "Given name:"
-msgstr "Nome:"
-
-#: contacts/qml/private/ContactEditorPage.qml:178
-#, kde-format
-msgid "First name or chosen name"
-msgstr "Nome o nome scelto"
-
-#: contacts/qml/private/ContactEditorPage.qml:183
-#, kde-format
-msgid "Additional name:"
-msgstr "Nome aggiuntivo:"
-
-#: contacts/qml/private/ContactEditorPage.qml:187
-#, kde-format
-msgid "Middle name or other name"
-msgstr "Secondo nome o altro nome"
-
-#: contacts/qml/private/ContactEditorPage.qml:192
-#, kde-format
-msgid "Family name:"
-msgstr "Nome della famiglia:"
-
-#: contacts/qml/private/ContactEditorPage.qml:196
-#, kde-format
-msgid "Surname or last name"
-msgstr "Cognome"
-
-#: contacts/qml/private/ContactEditorPage.qml:201
-#, kde-format
-msgid "Honorific suffix:"
-msgstr "Suffisso onorifico:"
-
-#: contacts/qml/private/ContactEditorPage.qml:206
-#, kde-format
-msgid "II"
-msgstr "II"
-
-#: contacts/qml/private/ContactEditorPage.qml:206
-#, kde-format
-msgid "III"
-msgstr "III"
-
-#: contacts/qml/private/ContactEditorPage.qml:206
-#, kde-format
-msgid "Jr."
-msgstr "Jr."
-
-#: contacts/qml/private/ContactEditorPage.qml:206
-#, kde-format
-msgid "Sr."
-msgstr "Sr."
-
-#: contacts/qml/private/ContactEditorPage.qml:213
-#: contacts/qml/private/ContactPage.qml:170
-#, kde-format
-msgid "Nickname:"
-msgstr "Soprannome:"
-
-#: contacts/qml/private/ContactEditorPage.qml:217
-#, kde-format
-msgid "Alternative name"
-msgstr "Nome alternativo"
-
-#: contacts/qml/private/ContactEditorPage.qml:225
-#, kde-format
-msgid "Phone:"
-msgstr "Telefono:"
-
-#: contacts/qml/private/ContactEditorPage.qml:236
-#: contacts/qml/private/ContactEditorPage.qml:280
-#: contacts/qml/private/ContactEditorPage.qml:341
-#: contacts/qml/private/ContactEditorPage.qml:380
-#, kde-format
-msgid "Home"
-msgstr "Casa"
-
-#: contacts/qml/private/ContactEditorPage.qml:237
-#: contacts/qml/private/ContactEditorPage.qml:281
-#: contacts/qml/private/ContactEditorPage.qml:342
-#: contacts/qml/private/ContactEditorPage.qml:381
-#, kde-format
-msgid "Work"
-msgstr "Lavoro"
-
-#: contacts/qml/private/ContactEditorPage.qml:238
-#: contacts/qml/private/ContactEditorPage.qml:282
-#, kde-format
-msgid "Messaging"
-msgstr "Messaggistica"
-
-#: contacts/qml/private/ContactEditorPage.qml:239
-#: contacts/qml/private/ContactEditorPage.qml:283
-#, kde-format
-msgid "Voice"
-msgstr "Voce"
-
-#: contacts/qml/private/ContactEditorPage.qml:240
-#: contacts/qml/private/ContactEditorPage.qml:284
-#, kde-format
-msgid "Fax"
-msgstr "Fax"
-
-#: contacts/qml/private/ContactEditorPage.qml:241
-#: contacts/qml/private/ContactEditorPage.qml:285
-#, kde-format
-msgid "Cell"
-msgstr "Cellulare"
-
-#: contacts/qml/private/ContactEditorPage.qml:242
-#: contacts/qml/private/ContactEditorPage.qml:286
-#, kde-format
-msgid "Video"
-msgstr "Video"
-
-#: contacts/qml/private/ContactEditorPage.qml:243
-#: contacts/qml/private/ContactEditorPage.qml:287
-#, kde-format
-msgid "Mailbox"
-msgstr "Casella"
-
-#: contacts/qml/private/ContactEditorPage.qml:244
-#: contacts/qml/private/ContactEditorPage.qml:288
-#, kde-format
-msgid "Modem"
-msgstr "Modem"
-
-#: contacts/qml/private/ContactEditorPage.qml:245
-#: contacts/qml/private/ContactEditorPage.qml:289
-#, kde-format
-msgid "Car"
-msgstr "Automobile"
-
-#: contacts/qml/private/ContactEditorPage.qml:246
-#: contacts/qml/private/ContactEditorPage.qml:290
-#, kde-format
-msgid "ISDN"
-msgstr "ISDN"
-
-#: contacts/qml/private/ContactEditorPage.qml:247
-#: contacts/qml/private/ContactEditorPage.qml:291
-#, kde-format
-msgid "PCS"
-msgstr "PCS"
-
-#: contacts/qml/private/ContactEditorPage.qml:248
-#: contacts/qml/private/ContactEditorPage.qml:292
-#, kde-format
-msgid "Pager"
-msgstr "Cercapersone"
-
-#: contacts/qml/private/ContactEditorPage.qml:249
-#, kde-format
-msgid "Undefined"
-msgstr "Non definito"
-
-#: contacts/qml/private/ContactEditorPage.qml:304
-#, kde-format
-msgid "+33 7 55 23 68 67"
-msgstr "+33 7 55 23 68 67"
-
-#: contacts/qml/private/ContactEditorPage.qml:325
-#, kde-format
-msgid "E-mail:"
-msgstr "Posta elettronica:"
-
-#: contacts/qml/private/ContactEditorPage.qml:343
-#, kde-format
-msgid "Other"
-msgstr "Altro"
-
-#: contacts/qml/private/ContactEditorPage.qml:364
-#, kde-format
-msgid "Remove email"
-msgstr "Rimuovi indirizzo di posta elettronica"
-
-#: contacts/qml/private/ContactEditorPage.qml:382
-#, kde-format
-msgid "Both"
-msgstr "Entrambi"
-
-#: contacts/qml/private/ContactEditorPage.qml:383
-#, kde-format
-msgid "Other…"
-msgstr "Altro…"
-
-#: contacts/qml/private/ContactEditorPage.qml:392
-#, kde-format
-msgid "user@example.org"
-msgstr "utente@esempio.com"
-
-#: contacts/qml/private/ContactEditorPage.qml:401
-#, kde-format
-msgid "Add email"
-msgstr "Aggiungi indirizzo"
-
-#: contacts/qml/private/ContactEditorPage.qml:505
-#: contacts/qml/private/ContactGroupEditorPage.qml:155
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
-#, kde-format
-msgid "Save"
-msgstr "Salva"
-
-#: contacts/qml/private/ContactEditorPage.qml:505
-#: contacts/qml/private/ContactGroupEditorPage.qml:155
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
-#, kde-format
-msgid "Add"
-msgstr "Aggiungi"
-
-#: contacts/qml/private/ContactEditorPage.qml:549
-#: contacts/qml/private/ContactGroupEditorPage.qml:199
-#, kde-format
-msgid "Current changes"
-msgstr "Modifiche attuali"
-
-#: contacts/qml/private/ContactEditorPage.qml:554
-#: contacts/qml/private/ContactGroupEditorPage.qml:204
-#, kde-format
-msgid "External changes"
-msgstr "Modifiche esterne"
-
-#: contacts/qml/private/ContactGroupEditorPage.qml:62
-#, kde-format
-msgid "Address Book:"
-msgstr "Rubrica:"
-
-#: contacts/qml/private/ContactGroupEditorPage.qml:81
+#: contacts/qml/private/ContactGroupEditorPage.qml:87
 #, kde-format
 msgid "Contact group name"
 msgstr "Nome del gruppo di contatti"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:85
-#: contacts/qml/private/ContactGroupEditorPage.qml:109
-#, kde-format
-msgid "Members:"
+#: contacts/qml/private/ContactGroupEditorPage.qml:99
+#, fuzzy, kde-format
+#| msgid "Members:"
+msgid "Members"
 msgstr "Membri:"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
@@ -687,32 +710,32 @@ msgstr "Modifica"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: contacts/qml/private/ContactPage.qml:96
+#: contacts/qml/private/ContactPage.qml:94
 #, kde-format
 msgid "Call"
 msgstr "Chiama"
 
-#: contacts/qml/private/ContactPage.qml:107
+#: contacts/qml/private/ContactPage.qml:105
 #, kde-format
 msgid "Select number to call"
 msgstr "Seleziona il numero da chiamare"
 
-#: contacts/qml/private/ContactPage.qml:115
+#: contacts/qml/private/ContactPage.qml:113
 #, kde-format
 msgid "Send SMS"
 msgstr "Invia SMS"
 
-#: contacts/qml/private/ContactPage.qml:126
+#: contacts/qml/private/ContactPage.qml:124
 #, kde-format
 msgid "Select number to send message to"
 msgstr "Seleziona il numero a cui inviare il messaggio"
 
-#: contacts/qml/private/ContactPage.qml:134
+#: contacts/qml/private/ContactPage.qml:132
 #, kde-format
 msgid "Send email"
 msgstr "Invia messaggio di posta"
 
-#: contacts/qml/private/ContactPage.qml:140
+#: contacts/qml/private/ContactPage.qml:138
 #, kde-format
 msgid "Show QR Code"
 msgstr "Mostra il codice QR"
@@ -722,98 +745,117 @@ msgstr "Mostra il codice QR"
 msgid "Contact information"
 msgstr "Informazioni di contatto"
 
-#: contacts/qml/private/ContactPage.qml:178
+#: contacts/qml/private/ContactPage.qml:170
+#, kde-format
+msgid "Nickname:"
+msgstr "Soprannome:"
+
+#: contacts/qml/private/ContactPage.qml:176
 #, kde-format
 msgid "Blog Feed:"
 msgstr "Fonte del blog:"
 
-#: contacts/qml/private/ContactPage.qml:192
+#: contacts/qml/private/ContactPage.qml:193
 #, kde-format
 msgid "Personal information"
 msgstr "Informazioni personali"
 
-#: contacts/qml/private/ContactPage.qml:204
+#: contacts/qml/private/ContactPage.qml:199
 #, kde-format
 msgid "Birthday:"
 msgstr "Compleanno:"
 
-#: contacts/qml/private/ContactPage.qml:216
+#: contacts/qml/private/ContactPage.qml:217
 #, kde-format
 msgid "Anniversary:"
 msgstr "Anniversario:"
 
-#: contacts/qml/private/ContactPage.qml:223
+#: contacts/qml/private/ContactPage.qml:224
 #, kde-format
 msgid "Partner's name:"
 msgstr "Nome del compagno/a:"
 
-#: contacts/qml/private/ContactPage.qml:235
+#: contacts/qml/private/ContactPage.qml:239
 #, kde-format
 msgid "Phone Number"
 msgid_plural "Phone Numbers"
 msgstr[0] "Numero di telefono"
 msgstr[1] "Numeri di telefono"
 
-#: contacts/qml/private/ContactPage.qml:245
+#: contacts/qml/private/ContactPage.qml:251
 #, kde-format
 msgctxt "Label for a phone number type"
 msgid "%1:"
 msgstr "%1:"
 
-#: contacts/qml/private/ContactPage.qml:267
+#: contacts/qml/private/ContactPage.qml:269
 #, kde-format
 msgid "Address"
 msgid_plural "Addresses"
 msgstr[0] "Indirizzo"
 msgstr[1] "Indirizzi"
 
-#: contacts/qml/private/ContactPage.qml:276
+#: contacts/qml/private/ContactPage.qml:283
 #, kde-format
 msgctxt "%1 is the type of the address, e.g. home, work, ..."
 msgid "%1:"
 msgstr "%1:"
 
-#: contacts/qml/private/ContactPage.qml:290
+#: contacts/qml/private/ContactPage.qml:300
+#, fuzzy, kde-format
+#| msgid "Messaging"
+msgid "Instant Messaging"
+msgstr "Messaggistica"
+
+#: contacts/qml/private/ContactPage.qml:317
+#, fuzzy, kde-format
+#| msgctxt "Label for a phone number type"
+#| msgid "%1:"
+msgctxt "Label for a messaging protocol"
+msgid "%1:"
+msgstr "%1:"
+
+#: contacts/qml/private/ContactPage.qml:342
 #, kde-format
 msgid "Business Information"
 msgstr "Informazioni lavorative"
 
-#: contacts/qml/private/ContactPage.qml:297
+#: contacts/qml/private/ContactPage.qml:348
 #, kde-format
 msgid "Organization:"
 msgstr "Organizzazione:"
 
-#: contacts/qml/private/ContactPage.qml:304
+#: contacts/qml/private/ContactPage.qml:355
 #, kde-format
 msgid "Profession:"
 msgstr "Professione:"
 
-#: contacts/qml/private/ContactPage.qml:311
+#: contacts/qml/private/ContactPage.qml:362
 #, kde-format
 msgid "Title:"
 msgstr "Titolo:"
 
-#: contacts/qml/private/ContactPage.qml:318
+#: contacts/qml/private/ContactPage.qml:369
 #, kde-format
 msgid "Department:"
 msgstr "Reparto:"
 
-#: contacts/qml/private/ContactPage.qml:325
+#: contacts/qml/private/ContactPage.qml:376
 #, kde-format
 msgid "Office:"
 msgstr "Ufficio:"
 
-#: contacts/qml/private/ContactPage.qml:332
+#: contacts/qml/private/ContactPage.qml:383
 #, kde-format
 msgid "Manager's name:"
 msgstr "Nome del dirigente:"
 
-#: contacts/qml/private/ContactPage.qml:339
+#: contacts/qml/private/ContactPage.qml:390
 #, kde-format
 msgid "Assistants's name:"
 msgstr "Nome degli assistenti:"
 
-#: contacts/qml/private/ContactPage.qml:351
+#: contacts/qml/private/ContactPage.qml:406
 #, kde-format
 msgid "Email Address"
 msgid_plural "Email Addresses"
@@ -1569,17 +1611,14 @@ msgid "Reminders:"
 msgstr "Promemoria:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 minuti"
+msgstr "minuti"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 ore"
+msgstr "ore"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:987
 #, kde-format
@@ -1587,16 +1626,14 @@ msgid "days"
 msgstr "giorni"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "%1 prima dell'inizio dell'evento"
+msgstr "prima dell'inizio dell'evento"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "%1 dopo l'inizio dell'evento"
+msgstr "dopo l'inizio dell'evento"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
 #, kde-format
