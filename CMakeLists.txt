@@ -52,6 +52,8 @@ ecm_setup_version(${PROJECT_VERSION}
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/config-kalendar.h"
 )
 
+set(KF_MAJOR_VERSION ${QT_MAJOR_VERSION})
+
 ################# Find dependencies #################
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS
     Core
@@ -63,7 +65,12 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS
     QuickControls2
     QuickTest
 )
-find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat REQUIRED)
+endif()
+
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     CalendarCore
     ConfigWidgets
     Contacts
@@ -78,21 +85,20 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     WindowSystem
     XmlGui
 )
-find_package(KF5KirigamiAddons 0.7.2 REQUIRED)
+find_package(KF${QT_MAJOR_VERSION}KirigamiAddons 0.7.2 REQUIRED)
 find_package(Gpgme REQUIRED)
-set_package_properties(KF5QQC2DesktopStyle PROPERTIES
+set_package_properties(KF${QT_MAJOR_VERSION}QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
 )
-find_package(KF5 ${PIM_VERSION} REQUIRED COMPONENTS
-    Akonadi
-    AkonadiCalendar
-    AkonadiContact
-    CalendarSupport
-    EventViews
-    MailCommon
-    PimCommonAkonadi
-    AkonadiMime
-)
+
+find_package(KPim${QT_MAJOR_VERSION}Akonadi ${PIM_VERSION} REQUIRED)
+find_package(KPim${QT_MAJOR_VERSION}AkonadiCalendar ${PIM_VERSION} REQUIRED)
+find_package(KPim${QT_MAJOR_VERSION}AkonadiContact ${PIM_VERSION} REQUIRED)
+find_package(KPim${QT_MAJOR_VERSION}CalendarSupport ${PIM_VERSION} REQUIRED)
+find_package(KPim${QT_MAJOR_VERSION}EventViews ${PIM_VERSION} REQUIRED)
+find_package(KPim${QT_MAJOR_VERSION}MailCommon ${PIM_VERSION} REQUIRED)
+find_package(KF5PimCommonAkonadi ${PIM_VERSION} REQUIRED)
+find_package(KPim${QT_MAJOR_VERSION}AkonadiMime ${PIM_VERSION} REQUIRED)
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 

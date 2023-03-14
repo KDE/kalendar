@@ -73,21 +73,21 @@ ecm_qt_declare_logging_category(kalendar
 
 set(kalendar_LIBS
     kalendar_lib
-    KF5::DBusAddons
-    KF5::CalendarCore
-    KF5::AkonadiCore
-    KF5::AkonadiCalendar
-    KF5::AkonadiContact
-    KF5::AkonadiAgentBase
-    KF5::AkonadiXml
-    KF5::CalendarSupport
-    KF5::WindowSystem
-    KF5::ConfigWidgets
-    KF5::AkonadiWidgets
-    KF5::Contacts
-    KF5::ItemModels
-    KF5::XmlGui
-    KF5::EventViews
+    KF${QT_MAJOR_VERSION}::DBusAddons
+    KF${QT_MAJOR_VERSION}::CalendarCore
+    KPim${QT_MAJOR_VERSION}::AkonadiCore
+    KPim${QT_MAJOR_VERSION}::AkonadiCalendar
+    KPim${QT_MAJOR_VERSION}::AkonadiContact
+    KPim${QT_MAJOR_VERSION}::AkonadiAgentBase
+    KPim${QT_MAJOR_VERSION}::AkonadiXml
+    KPim${QT_MAJOR_VERSION}::CalendarSupport
+    KF${QT_MAJOR_VERSION}::WindowSystem
+    KF${QT_MAJOR_VERSION}::ConfigWidgets
+    KPim${QT_MAJOR_VERSION}::AkonadiWidgets
+    KF${QT_MAJOR_VERSION}::Contacts
+    KF${QT_MAJOR_VERSION}::ItemModels
+    KF${QT_MAJOR_VERSION}::XmlGui
+    KPim${QT_MAJOR_VERSION}::EventViews
     )
 
 target_link_libraries(kalendar

@@ -17,12 +17,12 @@ include_directories(${kalendar_BINARY_DIR}/src)
 set (commonAkonadiTest_LIBS
     Qt::Test
     Qt::Core
-    KF5::ConfigCore
-    KF5::CalendarCore
-    KF5::CalendarSupport
-    KF5::AkonadiCore
-    KF5::AkonadiCalendar
-    KF5::EventViews
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::CalendarCore
+    KPim${QT_MAJOR_VERSION}::CalendarSupport
+    KPim${QT_MAJOR_VERSION}::AkonadiCore
+    KPim${QT_MAJOR_VERSION}::AkonadiCalendar
+    KPim${QT_MAJOR_VERSION}::EventViews
 )
 
 set(filterTest_SRCS

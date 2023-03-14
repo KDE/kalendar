@@ -6,6 +6,7 @@
 add_library(kalendar_contact_static STATIC)
 
 target_link_libraries(kalendar_contact_static PUBLIC kalendar_lib)
+set_target_properties(kalendar_contact_static PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_sources(kalendar_contact_static PUBLIC
     addresseewrapper.cpp
     addresseewrapper.h

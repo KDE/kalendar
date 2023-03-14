@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux', 'FreeBSD']
+- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
   'require':
     'frameworks/extra-cmake-modules': '@latest'
     'frameworks/qqc2-desktop-style': '@latest'
@@ -22,6 +22,27 @@ Dependencies:
     'pim/pimcommon' : '@same'
     'frameworks/kirigami' : '@latest'
     'libraries/kirigami-addons': '@latest'
+
+- 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
+  'require':
+    'frameworks/extra-cmake-modules': '@latest-kf6'
+    'frameworks/qqc2-desktop-style': '@latest-kf6'
+    'frameworks/kcalendarcore' : '@latest-kf6'
+    'frameworks/kconfigwidgets' : '@latest-kf6'
+    'frameworks/kwindowsystem' : '@latest-kf6'
+    'frameworks/kxmlgui' : '@latest-kf6'
+    'frameworks/kcontacts' : '@latest-kf6'
+    'pim/akonadi' : '@same'
+    'pim/akonadi-calendar' : '@same'
+    'pim/calendarsupport' : '@same'
+    'pim/kcalutils' : '@same'
+    'pim/kmime' : '@same'
+    'pim/eventviews' : '@same'
+    'pim/kdepim-runtime' : '@same'
+    'pim/mailcommon' : '@same'
+    'pim/pimcommon' : '@same'
+    'frameworks/kirigami' : '@latest-kf6'
+    'libraries/kirigami-addons': '@latest-kf6'
 
 Options:
   require-passing-tests-on: ['Linux']
