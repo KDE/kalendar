@@ -32,6 +32,9 @@ Kirigami.ScrollablePage {
         onItemChangedExternally: itemChangedExternallySheet.open()
     }
 
+    function isNotEmptyStr(str) {
+        return str.trim().length > 0;
+    }
     QQC2.Action {
         id: submitAction
         enabled: contactEditor.contact.formattedName.length > 0
@@ -349,7 +352,7 @@ Kirigami.ScrollablePage {
                         QQC2.Button {
                             icon.name: "list-add"
                             implicitWidth: implicitHeight
-                            enabled: toAddPhone.text.length > 0
+                            enabled: isNotEmptyStr(toAddPhone.text)
                             onClicked: {
                                 contactEditor.contact.phoneModel.addPhoneNumber(toAddPhone.text, newPhoneTypeCombo.currentValue)
                                 toAddPhone.text = '';
@@ -446,7 +449,7 @@ Kirigami.ScrollablePage {
                         QQC2.Button {
                             icon.name: "list-add"
                             implicitWidth: implicitHeight
-                            enabled: toAddEmail.text.length > 0
+                            enabled: isNotEmptyStr(toAddEmail.text)
                             QQC2.ToolTip {
                                 text: i18n("Add email")
                             }
@@ -517,7 +520,7 @@ Kirigami.ScrollablePage {
                         QQC2.Button {
                             icon.name: "list-add"
                             implicitWidth: implicitHeight
-                            enabled: toAddImpp.text.length > 0
+                            enabled: isNotEmptyStr(toAddImpp.text)
                             onClicked: {
                                 contactEditor.contact.imppModel.addImpp(toAddImpp.text);
                                 toAddImpp.text = "";
