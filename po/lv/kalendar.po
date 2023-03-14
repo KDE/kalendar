@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:49+0000\n"
+"POT-Creation-Date: 2023-03-14 00:47+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2822,12 +2822,12 @@ msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: mail/mime/attachmentmodel.cpp:223
+#: mail/mime/attachmentmodel.cpp:222
 #, kde-format
 msgid "No keys were found in this attachment"
 msgstr ""
 
-#: mail/mime/attachmentmodel.cpp:226
+#: mail/mime/attachmentmodel.cpp:225
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
@@ -2835,7 +2835,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: mail/mime/attachmentmodel.cpp:228
+#: mail/mime/attachmentmodel.cpp:227
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"

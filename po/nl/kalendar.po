@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:49+0000\n"
-"PO-Revision-Date: 2023-03-06 10:32+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0000\n"
+"PO-Revision-Date: 2023-03-13 11:57+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -382,9 +382,7 @@ msgstr "Adresboek:"
 
 #: contacts/qml/private/ContactEditorPage.qml:156
 #: contacts/qml/private/ContactEditorPage.qml:163
-#, fuzzy, kde-format
-#| msgctxt "contact's name"
-#| msgid "Name"
+#, kde-format
 msgid "Name"
 msgstr "Naam"
 
@@ -394,10 +392,9 @@ msgid "Contact name"
 msgstr "Naam van contactpersoon"
 
 #: contacts/qml/private/ContactEditorPage.qml:186
-#, fuzzy, kde-format
-#| msgid "Honorific prefix:"
+#, kde-format
 msgid "Honorific prefix"
-msgstr "Titel-voorvoegsel:"
+msgstr "Titel-voorvoegsel"
 
 #: contacts/qml/private/ContactEditorPage.qml:189
 #, kde-format
@@ -425,10 +422,9 @@ msgid "Prof."
 msgstr "Prof."
 
 #: contacts/qml/private/ContactEditorPage.qml:198
-#, fuzzy, kde-format
-#| msgid "Given name:"
+#, kde-format
 msgid "Given name"
-msgstr "Voornaam:"
+msgstr "Voornaam"
 
 #: contacts/qml/private/ContactEditorPage.qml:201
 #, kde-format
@@ -436,10 +432,9 @@ msgid "First name or chosen name"
 msgstr "Eerste naam of voornaam"
 
 #: contacts/qml/private/ContactEditorPage.qml:207
-#, fuzzy, kde-format
-#| msgid "Additional name:"
+#, kde-format
 msgid "Additional name"
-msgstr "Extra naam:"
+msgstr "Extra naam"
 
 #: contacts/qml/private/ContactEditorPage.qml:210
 #, kde-format
@@ -457,10 +452,9 @@ msgid "Surname or last name"
 msgstr "Achternaam of laatste naam"
 
 #: contacts/qml/private/ContactEditorPage.qml:225
-#, fuzzy, kde-format
-#| msgid "Honorific suffix:"
+#, kde-format
 msgid "Honorific suffix"
-msgstr "Titel-achtervoegsel:"
+msgstr "Titel-voorvoegsel"
 
 #: contacts/qml/private/ContactEditorPage.qml:229
 #, kde-format
@@ -483,10 +477,9 @@ msgid "Sr."
 msgstr "Sr."
 
 #: contacts/qml/private/ContactEditorPage.qml:236
-#, fuzzy, kde-format
-#| msgid "Nickname:"
+#, kde-format
 msgid "Nickname"
-msgstr "Schermnaam:"
+msgstr "Schermnaam"
 
 #: contacts/qml/private/ContactEditorPage.qml:239
 #, kde-format
@@ -494,10 +487,9 @@ msgid "Alternative name"
 msgstr "Alternatieve naam"
 
 #: contacts/qml/private/ContactEditorPage.qml:252
-#, fuzzy, kde-format
-#| msgid "Phone:"
+#, kde-format
 msgid "Phone"
-msgstr "Telefoon:"
+msgstr "Telefoon"
 
 #: contacts/qml/private/ContactEditorPage.qml:264
 #: contacts/qml/private/ContactEditorPage.qml:310
@@ -592,10 +584,9 @@ msgid "+33 7 55 23 68 67"
 msgstr "+33 7 55 23 68 67"
 
 #: contacts/qml/private/ContactEditorPage.qml:361
-#, fuzzy, kde-format
-#| msgid "E-mail:"
+#, kde-format
 msgid "E-mail"
-msgstr "E-mailadres:"
+msgstr "E-mail"
 
 #: contacts/qml/private/ContactEditorPage.qml:380
 #, kde-format
@@ -630,12 +621,12 @@ msgstr "E-mail toevoegen"
 #: contacts/qml/private/ContactEditorPage.qml:461
 #, kde-format
 msgid "Instant Messenger"
-msgstr ""
+msgstr "Instant-messenger"
 
 #: contacts/qml/private/ContactEditorPage.qml:502
 #, kde-format
 msgid "protocol:person@example.com"
-msgstr ""
+msgstr "protocol:persoon@voorbeeld.nl"
 
 #: contacts/qml/private/ContactEditorPage.qml:551
 #: contacts/qml/private/ContactGroupEditorPage.qml:179
@@ -681,10 +672,9 @@ msgid "Contact group name"
 msgstr "Naam van contactgroep"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:99
-#, fuzzy, kde-format
-#| msgid "Members:"
+#, kde-format
 msgid "Members"
-msgstr "Leden:"
+msgstr "Leden"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
@@ -801,15 +791,12 @@ msgid "%1:"
 msgstr "%1:"
 
 #: contacts/qml/private/ContactPage.qml:300
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgid "Instant Messaging"
-msgstr "Messaging"
+msgstr "Instant Messaging"
 
 #: contacts/qml/private/ContactPage.qml:317
-#, fuzzy, kde-format
-#| msgctxt "Label for a phone number type"
-#| msgid "%1:"
+#, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
 msgstr "%1:"
@@ -2737,12 +2724,12 @@ msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: mail/mime/attachmentmodel.cpp:223
+#: mail/mime/attachmentmodel.cpp:222
 #, kde-format
 msgid "No keys were found in this attachment"
 msgstr "Er zijn geen sleutels in deze bijlage gevonden"
 
-#: mail/mime/attachmentmodel.cpp:226
+#: mail/mime/attachmentmodel.cpp:225
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
@@ -2750,7 +2737,7 @@ msgstr[0] "één sleutel geïmporteerd"
 msgstr[1] ""
 "<para><emphasis strong='true'>%1 sleutels geïmporteerd:</emphasis></para>"
 
-#: mail/mime/attachmentmodel.cpp:228
+#: mail/mime/attachmentmodel.cpp:227
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"

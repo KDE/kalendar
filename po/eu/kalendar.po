@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:49+0000\n"
+"POT-Creation-Date: 2023-03-14 00:47+0000\n"
 "PO-Revision-Date: 2022-12-17 09:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque\n"
@@ -2753,19 +2753,19 @@ msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: mail/mime/attachmentmodel.cpp:223
+#: mail/mime/attachmentmodel.cpp:222
 #, kde-format
 msgid "No keys were found in this attachment"
 msgstr "Eranskin honetan ez da gakorik aurkitu"
 
-#: mail/mime/attachmentmodel.cpp:226
+#: mail/mime/attachmentmodel.cpp:225
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
 msgstr[0] "gako bat inportatu da"
 msgstr[1] "%1 gako inportatu dira"
 
-#: mail/mime/attachmentmodel.cpp:228
+#: mail/mime/attachmentmodel.cpp:227
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"

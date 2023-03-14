@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:49+0000\n"
+"POT-Creation-Date: 2023-03-14 00:47+0000\n"
 "PO-Revision-Date: 2023-01-07 14:24+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -2762,12 +2762,12 @@ msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Neznáme"
 
-#: mail/mime/attachmentmodel.cpp:223
+#: mail/mime/attachmentmodel.cpp:222
 #, kde-format
 msgid "No keys were found in this attachment"
 msgstr "V tejto prílohe neboli nájdené žiadne kľúče"
 
-#: mail/mime/attachmentmodel.cpp:226
+#: mail/mime/attachmentmodel.cpp:225
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
@@ -2775,7 +2775,7 @@ msgstr[0] "jeden kľúč importovaný"
 msgstr[1] "%1 kľúče importované"
 msgstr[2] "%1 kľúčov importovaných"
 
-#: mail/mime/attachmentmodel.cpp:228
+#: mail/mime/attachmentmodel.cpp:227
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"
