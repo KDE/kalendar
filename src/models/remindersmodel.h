@@ -22,7 +22,6 @@ class RemindersModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(KCalendarCore::Incidence::Ptr incidencePtr READ incidencePtr WRITE setIncidencePtr NOTIFY incidencePtrChanged)
     Q_PROPERTY(KCalendarCore::Alarm::List alarms READ alarms NOTIFY alarmsChanged)
-    Q_PROPERTY(QVariantMap dataroles READ dataroles CONSTANT)
 
 public:
     enum Roles {
@@ -36,10 +35,9 @@ public:
     explicit RemindersModel(QObject *parent = nullptr, KCalendarCore::Incidence::Ptr incidencePtr = nullptr);
     ~RemindersModel() override = default;
 
-    KCalendarCore::Incidence::Ptr incidencePtr();
+    KCalendarCore::Incidence::Ptr incidencePtr() const;
     void setIncidencePtr(KCalendarCore::Incidence::Ptr incidence);
-    KCalendarCore::Alarm::List alarms();
-    QVariantMap dataroles();
+    KCalendarCore::Alarm::List alarms() const;
 
     QVariant data(const QModelIndex &idx, int role) const override;
     bool setData(const QModelIndex &idx, const QVariant &value, int role) override;
@@ -47,7 +45,7 @@ public:
     int rowCount(const QModelIndex &parent = {}) const override;
 
     Q_INVOKABLE void addAlarm();
-    Q_INVOKABLE void deleteAlarm(int row);
+    Q_INVOKABLE void deleteAlarm(const int row);
 
 Q_SIGNALS:
     void incidencePtrChanged();
