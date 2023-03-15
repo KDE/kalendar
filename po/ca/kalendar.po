@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 00:47+0000\n"
+"POT-Creation-Date: 2023-03-15 00:47+0000\n"
 "PO-Revision-Date: 2023-03-13 09:38+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -303,7 +303,7 @@ msgstr "Seleccioneu una adreça de correu electrònic"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:465
+#: contents/ui/main.qml:477
 #, kde-format
 msgid "Contacts"
 msgstr "Contactes"
@@ -368,290 +368,290 @@ msgctxt "@action:inmenu"
 msgid "Delete address source"
 msgstr "Suprimeix la font de la llibreta d'adreces"
 
-#: contacts/qml/private/ContactEditorPage.qml:54
+#: contacts/qml/private/ContactEditorPage.qml:57
 #, kde-format
 msgid "Add Contact"
 msgstr "Afegeix un contacte"
 
-#: contacts/qml/private/ContactEditorPage.qml:56
+#: contacts/qml/private/ContactEditorPage.qml:59
 #, kde-format
 msgid "Edit Contact"
 msgstr "Edita el contacte"
 
-#: contacts/qml/private/ContactEditorPage.qml:99
+#: contacts/qml/private/ContactEditorPage.qml:102
 #, kde-format
 msgid "Address book:"
 msgstr "Llibreta d'adreces:"
 
-#: contacts/qml/private/ContactEditorPage.qml:156
-#: contacts/qml/private/ContactEditorPage.qml:163
+#: contacts/qml/private/ContactEditorPage.qml:159
+#: contacts/qml/private/ContactEditorPage.qml:166
 #, kde-format
 msgid "Name"
 msgstr "Nom"
 
-#: contacts/qml/private/ContactEditorPage.qml:167
+#: contacts/qml/private/ContactEditorPage.qml:170
 #, kde-format
 msgid "Contact name"
 msgstr "Nom del contacte"
 
-#: contacts/qml/private/ContactEditorPage.qml:186
+#: contacts/qml/private/ContactEditorPage.qml:189
 #, kde-format
 msgid "Honorific prefix"
 msgstr "Prefix honorífic"
 
-#: contacts/qml/private/ContactEditorPage.qml:189
+#: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Miss"
 msgstr "Sra."
 
-#: contacts/qml/private/ContactEditorPage.qml:189
+#: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Mr."
 msgstr "Sr."
 
-#: contacts/qml/private/ContactEditorPage.qml:189
+#: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Mrs."
 msgstr "Sra."
 
-#: contacts/qml/private/ContactEditorPage.qml:189
+#: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Ms."
 msgstr "Sra."
 
-#: contacts/qml/private/ContactEditorPage.qml:189
+#: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Prof."
 msgstr "Prof."
 
-#: contacts/qml/private/ContactEditorPage.qml:198
+#: contacts/qml/private/ContactEditorPage.qml:201
 #, kde-format
 msgid "Given name"
 msgstr "Nom de pila"
 
-#: contacts/qml/private/ContactEditorPage.qml:201
+#: contacts/qml/private/ContactEditorPage.qml:204
 #, kde-format
 msgid "First name or chosen name"
 msgstr "Nom de pila"
 
-#: contacts/qml/private/ContactEditorPage.qml:207
+#: contacts/qml/private/ContactEditorPage.qml:210
 #, kde-format
 msgid "Additional name"
 msgstr "Noms addicionals"
 
-#: contacts/qml/private/ContactEditorPage.qml:210
+#: contacts/qml/private/ContactEditorPage.qml:213
 #, kde-format
 msgid "Middle name or other name"
 msgstr "Segon nom"
 
-#: contacts/qml/private/ContactEditorPage.qml:216
+#: contacts/qml/private/ContactEditorPage.qml:219
 #, kde-format
 msgid "Family name:"
 msgstr "Cognoms:"
 
-#: contacts/qml/private/ContactEditorPage.qml:219
+#: contacts/qml/private/ContactEditorPage.qml:222
 #, kde-format
 msgid "Surname or last name"
 msgstr "Cognoms"
 
-#: contacts/qml/private/ContactEditorPage.qml:225
+#: contacts/qml/private/ContactEditorPage.qml:228
 #, kde-format
 msgid "Honorific suffix"
 msgstr "Sufix honorífic"
 
-#: contacts/qml/private/ContactEditorPage.qml:229
+#: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: contacts/qml/private/ContactEditorPage.qml:229
+#: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: contacts/qml/private/ContactEditorPage.qml:229
+#: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
 msgid "Jr."
 msgstr "Jr."
 
-#: contacts/qml/private/ContactEditorPage.qml:229
+#: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
 msgid "Sr."
 msgstr "Sr."
 
-#: contacts/qml/private/ContactEditorPage.qml:236
+#: contacts/qml/private/ContactEditorPage.qml:239
 #, kde-format
 msgid "Nickname"
 msgstr "Sobrenom"
 
-#: contacts/qml/private/ContactEditorPage.qml:239
+#: contacts/qml/private/ContactEditorPage.qml:242
 #, kde-format
 msgid "Alternative name"
 msgstr "Nom alternatiu"
 
-#: contacts/qml/private/ContactEditorPage.qml:252
+#: contacts/qml/private/ContactEditorPage.qml:255
 #, kde-format
 msgid "Phone"
 msgstr "Telèfon"
 
-#: contacts/qml/private/ContactEditorPage.qml:264
-#: contacts/qml/private/ContactEditorPage.qml:310
-#: contacts/qml/private/ContactEditorPage.qml:378
-#: contacts/qml/private/ContactEditorPage.qml:420
+#: contacts/qml/private/ContactEditorPage.qml:267
+#: contacts/qml/private/ContactEditorPage.qml:313
+#: contacts/qml/private/ContactEditorPage.qml:381
+#: contacts/qml/private/ContactEditorPage.qml:423
 #, kde-format
 msgid "Home"
 msgstr "Inici"
 
-#: contacts/qml/private/ContactEditorPage.qml:265
-#: contacts/qml/private/ContactEditorPage.qml:311
-#: contacts/qml/private/ContactEditorPage.qml:379
-#: contacts/qml/private/ContactEditorPage.qml:421
+#: contacts/qml/private/ContactEditorPage.qml:268
+#: contacts/qml/private/ContactEditorPage.qml:314
+#: contacts/qml/private/ContactEditorPage.qml:382
+#: contacts/qml/private/ContactEditorPage.qml:424
 #, kde-format
 msgid "Work"
 msgstr "Feina"
 
-#: contacts/qml/private/ContactEditorPage.qml:266
-#: contacts/qml/private/ContactEditorPage.qml:312
+#: contacts/qml/private/ContactEditorPage.qml:269
+#: contacts/qml/private/ContactEditorPage.qml:315
 #, kde-format
 msgid "Messaging"
 msgstr "Missatgeria"
 
-#: contacts/qml/private/ContactEditorPage.qml:267
-#: contacts/qml/private/ContactEditorPage.qml:313
+#: contacts/qml/private/ContactEditorPage.qml:270
+#: contacts/qml/private/ContactEditorPage.qml:316
 #, kde-format
 msgid "Voice"
 msgstr "Veu"
 
-#: contacts/qml/private/ContactEditorPage.qml:268
-#: contacts/qml/private/ContactEditorPage.qml:314
+#: contacts/qml/private/ContactEditorPage.qml:271
+#: contacts/qml/private/ContactEditorPage.qml:317
 #, kde-format
 msgid "Fax"
 msgstr "Fax"
 
-#: contacts/qml/private/ContactEditorPage.qml:269
-#: contacts/qml/private/ContactEditorPage.qml:315
+#: contacts/qml/private/ContactEditorPage.qml:272
+#: contacts/qml/private/ContactEditorPage.qml:318
 #, kde-format
 msgid "Cell"
 msgstr "Mòbil"
 
-#: contacts/qml/private/ContactEditorPage.qml:270
-#: contacts/qml/private/ContactEditorPage.qml:316
+#: contacts/qml/private/ContactEditorPage.qml:273
+#: contacts/qml/private/ContactEditorPage.qml:319
 #, kde-format
 msgid "Video"
 msgstr "Vídeo"
 
-#: contacts/qml/private/ContactEditorPage.qml:271
-#: contacts/qml/private/ContactEditorPage.qml:317
+#: contacts/qml/private/ContactEditorPage.qml:274
+#: contacts/qml/private/ContactEditorPage.qml:320
 #, kde-format
 msgid "Mailbox"
 msgstr "Bústia"
 
-#: contacts/qml/private/ContactEditorPage.qml:272
-#: contacts/qml/private/ContactEditorPage.qml:318
+#: contacts/qml/private/ContactEditorPage.qml:275
+#: contacts/qml/private/ContactEditorPage.qml:321
 #, kde-format
 msgid "Modem"
 msgstr "Mòdem"
 
-#: contacts/qml/private/ContactEditorPage.qml:273
-#: contacts/qml/private/ContactEditorPage.qml:319
+#: contacts/qml/private/ContactEditorPage.qml:276
+#: contacts/qml/private/ContactEditorPage.qml:322
 #, kde-format
 msgid "Car"
 msgstr "Cotxe"
 
-#: contacts/qml/private/ContactEditorPage.qml:274
-#: contacts/qml/private/ContactEditorPage.qml:320
+#: contacts/qml/private/ContactEditorPage.qml:277
+#: contacts/qml/private/ContactEditorPage.qml:323
 #, kde-format
 msgid "ISDN"
 msgstr "XDSI"
 
-#: contacts/qml/private/ContactEditorPage.qml:275
-#: contacts/qml/private/ContactEditorPage.qml:321
+#: contacts/qml/private/ContactEditorPage.qml:278
+#: contacts/qml/private/ContactEditorPage.qml:324
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: contacts/qml/private/ContactEditorPage.qml:276
-#: contacts/qml/private/ContactEditorPage.qml:322
+#: contacts/qml/private/ContactEditorPage.qml:279
+#: contacts/qml/private/ContactEditorPage.qml:325
 #, kde-format
 msgid "Pager"
 msgstr "Cercapersones"
 
-#: contacts/qml/private/ContactEditorPage.qml:277
+#: contacts/qml/private/ContactEditorPage.qml:280
 #, kde-format
 msgid "Undefined"
 msgstr "Sense definir"
 
-#: contacts/qml/private/ContactEditorPage.qml:334
+#: contacts/qml/private/ContactEditorPage.qml:337
 #, kde-format
 msgid "+33 7 55 23 68 67"
 msgstr "+33 7 55 23 68 67"
 
-#: contacts/qml/private/ContactEditorPage.qml:361
+#: contacts/qml/private/ContactEditorPage.qml:364
 #, kde-format
 msgid "E-mail"
 msgstr "Correu electrònic"
 
-#: contacts/qml/private/ContactEditorPage.qml:380
+#: contacts/qml/private/ContactEditorPage.qml:383
 #, kde-format
 msgid "Other"
 msgstr "Altres"
 
-#: contacts/qml/private/ContactEditorPage.qml:401
+#: contacts/qml/private/ContactEditorPage.qml:404
 #, kde-format
 msgid "Remove email"
 msgstr "Elimina el correu electrònic"
 
-#: contacts/qml/private/ContactEditorPage.qml:422
+#: contacts/qml/private/ContactEditorPage.qml:425
 #, kde-format
 msgid "Both"
 msgstr "Ambdós"
 
-#: contacts/qml/private/ContactEditorPage.qml:423
+#: contacts/qml/private/ContactEditorPage.qml:426
 #, kde-format
 msgid "Other…"
 msgstr "Altres…"
 
-#: contacts/qml/private/ContactEditorPage.qml:432
+#: contacts/qml/private/ContactEditorPage.qml:435
 #, kde-format
 msgid "user@example.org"
 msgstr "usuari@exemple.cat"
 
-#: contacts/qml/private/ContactEditorPage.qml:441
+#: contacts/qml/private/ContactEditorPage.qml:444
 #, kde-format
 msgid "Add email"
 msgstr "Afegeix un correu electrònic"
 
-#: contacts/qml/private/ContactEditorPage.qml:461
+#: contacts/qml/private/ContactEditorPage.qml:464
 #, kde-format
 msgid "Instant Messenger"
 msgstr "Missatgeria instantània"
 
-#: contacts/qml/private/ContactEditorPage.qml:502
+#: contacts/qml/private/ContactEditorPage.qml:505
 #, kde-format
 msgid "protocol:person@example.com"
 msgstr "protocol:persona@exemple.cat"
 
-#: contacts/qml/private/ContactEditorPage.qml:551
+#: contacts/qml/private/ContactEditorPage.qml:554
 #: contacts/qml/private/ContactGroupEditorPage.qml:179
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Save"
 msgstr "Desa"
 
-#: contacts/qml/private/ContactEditorPage.qml:551
+#: contacts/qml/private/ContactEditorPage.qml:554
 #: contacts/qml/private/ContactGroupEditorPage.qml:179
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Add"
 msgstr "Afegeix"
 
-#: contacts/qml/private/ContactEditorPage.qml:596
+#: contacts/qml/private/ContactEditorPage.qml:599
 #: contacts/qml/private/ContactGroupEditorPage.qml:223
 #, kde-format
 msgid "Current changes"
 msgstr "Canvis actuals"
 
-#: contacts/qml/private/ContactEditorPage.qml:601
+#: contacts/qml/private/ContactEditorPage.qml:604
 #: contacts/qml/private/ContactGroupEditorPage.qml:228
 #, kde-format
 msgid "External changes"
@@ -697,7 +697,7 @@ msgstr "Edita"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:919
+#: contents/ui/main.qml:931
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -931,13 +931,13 @@ msgstr "Anys"
 msgid "Min. Interval:"
 msgstr "Interval mín.:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:432
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:444
 #: kalendarapplication.cpp:295
 #, kde-format
 msgid "New Event…"
 msgstr "Esdeveniment nou…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:438
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:450
 #: kalendarapplication.cpp:302
 #, kde-format
 msgid "New Task…"
@@ -1750,7 +1750,7 @@ msgstr "Marca com a finalitzada"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:362
+#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:374
 #, kde-format
 msgid "Configure"
 msgstr "Configura"
@@ -1940,60 +1940,60 @@ msgstr "No hi ha establert cap nivell de prioritat"
 msgid "Return to Location"
 msgstr "Retorna a la ubicació"
 
-#: contents/ui/main.qml:330
+#: contents/ui/main.qml:342
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "S'han importat amb èxit %1 incidències."
 
-#: contents/ui/main.qml:333 contents/ui/main.qml:348
+#: contents/ui/main.qml:345 contents/ui/main.qml:360
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr "S'ha produït un error en importar les incidències: %1"
 
-#: contents/ui/main.qml:345
+#: contents/ui/main.qml:357
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr "S'ha creat un calendari nou a partir del fitxer importat correctament."
 
-#: contents/ui/main.qml:427 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:439 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
 #, kde-format
 msgid "Create"
 msgstr "Crea"
 
-#: contents/ui/main.qml:447
+#: contents/ui/main.qml:459
 #, kde-format
 msgid "Month"
 msgstr "Mes"
 
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:462
 #, kde-format
 msgid "Week"
 msgstr "Setmana"
 
-#: contents/ui/main.qml:453
+#: contents/ui/main.qml:465
 #, kde-format
 msgid "3 Days"
 msgstr "3 dies"
 
-#: contents/ui/main.qml:456
+#: contents/ui/main.qml:468
 #, kde-format
 msgid "Day"
 msgstr "Dia"
 
-#: contents/ui/main.qml:459
+#: contents/ui/main.qml:471
 #, kde-format
 msgid "Schedule"
 msgstr "Planificació"
 
-#: contents/ui/main.qml:462 contents/ui/main.qml:1157
+#: contents/ui/main.qml:474 contents/ui/main.qml:1169
 #, kde-format
 msgid "Tasks"
 msgstr "Tasques"
 
-#: contents/ui/main.qml:468 kalendarapplication.cpp:31
+#: contents/ui/main.qml:480 kalendarapplication.cpp:31
 #: kalendarapplication.cpp:36
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
@@ -2001,17 +2001,17 @@ msgstr "Tasques"
 msgid "Mail"
 msgstr "Correu"
 
-#: contents/ui/main.qml:858
+#: contents/ui/main.qml:870
 #, kde-format
 msgid "Import a calendar"
 msgstr "Importa un calendari"
 
-#: contents/ui/main.qml:878
+#: contents/ui/main.qml:890
 #, kde-format
 msgid "Import Calendar"
 msgstr "Importa un calendari"
 
-#: contents/ui/main.qml:886
+#: contents/ui/main.qml:898
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -2024,29 +2024,29 @@ msgstr ""
 "partir d'aquest fitxer?\n"
 " "
 
-#: contents/ui/main.qml:894
+#: contents/ui/main.qml:906
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Fusiona amb el calendari existent"
 
-#: contents/ui/main.qml:910
+#: contents/ui/main.qml:922
 #, kde-format
 msgid "Create new calendar"
 msgstr "Crea un calendari nou"
 
-#: contents/ui/main.qml:1115
+#: contents/ui/main.qml:1127
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Setmana"
 
-#: contents/ui/main.qml:1121
+#: contents/ui/main.qml:1133
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "3 dies"
 
-#: contents/ui/main.qml:1127
+#: contents/ui/main.qml:1139
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
@@ -2650,57 +2650,63 @@ msgstr "Correu nou…"
 msgid "New Contact…"
 msgstr "Contacte nou…"
 
-#: kalendarapplication.cpp:329
+#: kalendarapplication.cpp:323
+#, fuzzy, kde-format
+#| msgid "New Contact…"
+msgid "New Contact Group…"
+msgstr "Contacte nou…"
+
+#: kalendarapplication.cpp:336
 #, kde-format
 msgid "Manage Tags…"
 msgstr "Gestiona les etiquetes…"
 
-#: kalendarapplication.cpp:342
+#: kalendarapplication.cpp:349
 #, kde-format
 msgid "Import Calendar…"
 msgstr "Importa un calendari…"
 
-#: kalendarapplication.cpp:374
+#: kalendarapplication.cpp:381
 #, kde-format
 msgid "Alphabetically"
 msgstr "Alfabèticament"
 
-#: kalendarapplication.cpp:390
+#: kalendarapplication.cpp:397
 #, kde-format
 msgid "By Due Date"
 msgstr "Per la data de venciment"
 
-#: kalendarapplication.cpp:406
+#: kalendarapplication.cpp:413
 #, kde-format
 msgid "By Priority Level"
 msgstr "Pel nivell de prioritat"
 
-#: kalendarapplication.cpp:422
+#: kalendarapplication.cpp:429
 #, kde-format
 msgid "Ascending order"
 msgstr "Ordre ascendent"
 
-#: kalendarapplication.cpp:438
+#: kalendarapplication.cpp:445
 #, kde-format
 msgid "Descending Order"
 msgstr "Ordre descendent"
 
-#: kalendarapplication.cpp:454
+#: kalendarapplication.cpp:461
 #, kde-format
 msgid "Show Completed Tasks"
 msgstr "Mostra les tasques completades"
 
-#: kalendarapplication.cpp:468
+#: kalendarapplication.cpp:475
 #, kde-format
 msgid "Open Command Bar"
 msgstr "Obre la barra d'ordres"
 
-#: kalendarapplication.cpp:478
+#: kalendarapplication.cpp:485
 #, kde-format
 msgid "Refresh All"
 msgstr "Actualitza-ho tot"
 
-#: kalendarapplication.cpp:631 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:638 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr "S'ha produït un error: %1"
