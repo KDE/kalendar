@@ -9,14 +9,9 @@ RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Incidence::Ptr in
     : QAbstractListModel(parent)
     , m_incidence(incidencePtr)
 {
-    for (int i = 0; i < QMetaEnum::fromType<RemindersModel::Roles>().keyCount(); i++) {
-        const int value = QMetaEnum::fromType<RemindersModel::Roles>().value(i);
-        const QString key = QLatin1String(roleNames().value(value));
-        m_dataRoles[key] = value;
-    }
 }
 
-KCalendarCore::Incidence::Ptr RemindersModel::incidencePtr()
+KCalendarCore::Incidence::Ptr RemindersModel::incidencePtr() const
 {
     return m_incidence;
 }
@@ -32,14 +27,9 @@ void RemindersModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
     Q_EMIT layoutChanged();
 }
 
-KCalendarCore::Alarm::List RemindersModel::alarms()
+KCalendarCore::Alarm::List RemindersModel::alarms() const
 {
     return m_incidence->alarms();
-}
-
-QVariantMap RemindersModel::dataroles()
-{
-    return m_dataRoles;
 }
 
 QVariant RemindersModel::data(const QModelIndex &idx, int role) const
@@ -130,7 +120,7 @@ void RemindersModel::addAlarm()
     Q_EMIT layoutChanged();
 }
 
-void RemindersModel::deleteAlarm(int row)
+void RemindersModel::deleteAlarm(const int row)
 {
     if (!hasIndex(row, 0)) {
         return;
