@@ -11,6 +11,7 @@ import org.kde.kitemmodels 1.0
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
+import org.kde.kalendar.calendar 1.0
 import org.kde.akonadi 1.0 as Akonadi
 import "labelutils.js" as LabelUtils
 
@@ -874,142 +875,9 @@ Kirigami.ScrollablePage {
                         model: root.incidenceWrapper.remindersModel
                         // All of the alarms are handled within the delegates.
 
-                        delegate: RowLayout {
-                            id: reminderRow
-                            Layout.fillWidth: true
-
-                            property bool customReminder: false
-
-                            QQC2.ComboBox {
-                                // There is also a chance here to add a feature for the user to pick reminder type.
-                                Layout.fillWidth: true
-                                enabled: !customReminder
-                                visible: !customReminder
-
-                                property var selectedIndex: 0
-
-                                displayText: LabelUtils.secondsToReminderLabel(startOffset)
-                                
-                                onCurrentValueChanged: if (currentValue === "Custom") {
-                                    reminderRow.customReminder = true
-                                } else {
-                                    root.incidenceWrapper.remindersModel.setData (
-                                        root.incidenceWrapper.remindersModel.index(index, 0),
-                                        currentValue,
-                                        root.incidenceWrapper.remindersModel.dataroles.startOffset
-                                    )
-                                }
-                                onCountChanged: selectedIndex = currentIndex // Gets called *just* before modelChanged
-                                onModelChanged: currentIndex = selectedIndex
-
-                                model: [0, // We times by -1 to make times be before incidence
-                                        -1 * 5 * 60, // 5 minutes
-                                        -1 * 10 * 60,
-                                        -1 * 15 * 60,
-                                        -1 * 30 * 60,
-                                        -1 * 45 * 60,
-                                        -1 * 1 * 60 * 60, // 1 hour
-                                        -1 * 2 * 60 * 60,
-                                        -1 * 1 * 24 * 60 * 60, // 1 day
-                                        -1 * 2 * 24 * 60 * 60,
-                                        -1 * 5 * 24 * 60 * 60,
-                                        "Custom"] // Custom reminder
-                                        // All these times are in seconds.
-                                delegate: Kirigami.BasicListItem {
-                                    text: LabelUtils.secondsToReminderLabel(modelData)
-                                }
-
-                                popup.z: 1000
-                            }
-
-                            Kirigami.FormLayout {
-                                id: customReminderLayout
-                                Layout.fillWidth: true
-
-                                Layout.leftMargin: Kirigami.Units.largeSpacing
-                                visible: reminderRow.customReminder
-
-                                function valueInSeconds() {
-                                    let val = 0
-                                    switch (customReminderUnitCombobox.currentIndex) {
-                                        case 0:
-                                            val = customReminderSpinbox.value * 60
-                                            break
-                                        case 1:
-                                            val = customReminderSpinbox.value * 60 * 60
-                                            break
-                                        case 2:
-                                            val = customReminderSpinbox.value * 60 * 60 * 24
-                                            break
-                                    }
-                                    switch (customReminderTypeBox.currentIndex) {
-                                        case 0:
-                                            if (val > 0) val = val * -1
-                                            break
-                                        case 1:
-                                            if (val < 0) val = val * -1
-                                            break
-                                    }
-                                    return val
-                                }
-
-                                function addCustomReminder() {
-                                    if (!reminderRow.customReminder){
-                                        return;
-                                    }
-
-                                    root.incidenceWrapper.remindersModel.setData (
-                                        root.incidenceWrapper.remindersModel.index(index, 0),
-                                        valueInSeconds(),
-                                        root.incidenceWrapper.remindersModel.dataroles.startOffset
-                                    )
-                                }
-
-                                RowLayout {
-                                    Layout.fillWidth: true
-
-                                    QQC2.SpinBox {
-                                        id: customReminderSpinbox
-                                        Layout.fillWidth: true
-
-                                        from: 1
-                                        onValueChanged: customReminderLayout.addCustomReminder()
-                                    }
-
-                                    QQC2.ComboBox {
-                                        id: customReminderUnitCombobox
-                                        Layout.fillWidth: true
-
-                                        currentIndex: 0
-                                        model: [
-                                            i18n("minutes"),
-                                            i18n("hours"),
-                                            i18n("days")
-                                        ]
-                                        onCurrentValueChanged: customReminderLayout.addCustomReminder()
-
-                                        popup.z: 1000
-                                    }
-
-                                    QQC2.ComboBox {
-                                        id: customReminderTypeBox
-                                        Layout.fillWidth: true
-                                        
-                                        model: [
-                                            i18n("before start of event"),
-                                            i18n("after start of event")
-                                        ]
-                                        onCurrentValueChanged: customReminderLayout.addCustomReminder()
-
-                                        popup.z: 1000
-                                    }
-                                } 
-                            }
-                            
-                            QQC2.Button {
-                                icon.name: "edit-delete-remove"
-                                onClicked: root.incidenceWrapper.remindersModel.deleteAlarm(model.index);
-                            }
+                        delegate: ReminderDelegate {
+                            isTodo: incidenceForm.isTodo
+                            remindersModel: root.incidenceWrapper.remindersModel
                         }
                     }
 

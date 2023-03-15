@@ -121,6 +121,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", kalendarApplication);
+    qmlRegisterUncreatableType<RemindersModel>("org.kde.kalendar", 1, 0, "RemindersModel", QStringLiteral("ENUM"));
 
     qmlRegisterSingletonType<Filter>("org.kde.kalendar", 1, 0, "Filter", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)

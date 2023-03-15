@@ -27,10 +27,13 @@ ecm_add_qml_module(kalendar_calendar_plugin URI "org.kde.kalendar.calendar" VERS
 target_sources(kalendar_calendar_plugin PRIVATE
     calendarplugin.cpp
     calendarplugin.h
+    utils.h
+    utils.cpp
 )
 
 ecm_target_qml_sources(kalendar_calendar_plugin SOURCES
     qml/CalendarApplication.qml
+    qml/incidenceeditor/ReminderDelegate.qml
 )
 
 ecm_target_qml_sources(kalendar_calendar_plugin
