@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 03:07+0000\n"
+"POT-Creation-Date: 2023-03-15 02:47+0000\n"
 "PO-Revision-Date: 2023-03-11 04:55\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -301,7 +301,7 @@ msgstr "选择电子邮件地址"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:465
+#: contents/ui/main.qml:477
 #, kde-format
 msgid "Contacts"
 msgstr "联系人"
@@ -698,7 +698,7 @@ msgstr ""
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:919
+#: contents/ui/main.qml:931
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
@@ -929,13 +929,13 @@ msgstr "年"
 msgid "Min. Interval:"
 msgstr "分钟间隔："
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:432
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:444
 #: kalendarapplication.cpp:295
 #, kde-format
 msgid "New Event…"
 msgstr "新建事件..."
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:438
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:450
 #: kalendarapplication.cpp:302
 #, kde-format
 msgid "New Task…"
@@ -1737,7 +1737,7 @@ msgstr "标记为已完成"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:362
+#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:374
 #, kde-format
 msgid "Configure"
 msgstr "配置"
@@ -1919,60 +1919,60 @@ msgstr "未指定优先级"
 msgid "Return to Location"
 msgstr "复位"
 
-#: contents/ui/main.qml:330
+#: contents/ui/main.qml:342
 #, kde-format
 msgctxt "%1 is a number"
 msgid "%1 incidences were imported successfully."
 msgstr "成功导入 %1 个事件。"
 
-#: contents/ui/main.qml:333 contents/ui/main.qml:348
+#: contents/ui/main.qml:345 contents/ui/main.qml:360
 #, kde-format
 msgctxt "%1 is the error message"
 msgid "An error occurred importing incidences: %1"
 msgstr "导入事件时出错：%1"
 
-#: contents/ui/main.qml:345
+#: contents/ui/main.qml:357
 #, kde-format
 msgid "New calendar  created from imported file successfully."
 msgstr "从导入文件新建日历成功。"
 
-#: contents/ui/main.qml:427 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:439 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
 #, kde-format
 msgid "Create"
 msgstr "创建"
 
-#: contents/ui/main.qml:447
+#: contents/ui/main.qml:459
 #, kde-format
 msgid "Month"
 msgstr "月"
 
-#: contents/ui/main.qml:450
+#: contents/ui/main.qml:462
 #, kde-format
 msgid "Week"
 msgstr "周"
 
-#: contents/ui/main.qml:453
+#: contents/ui/main.qml:465
 #, kde-format
 msgid "3 Days"
 msgstr "三日"
 
-#: contents/ui/main.qml:456
+#: contents/ui/main.qml:468
 #, kde-format
 msgid "Day"
 msgstr "一日"
 
-#: contents/ui/main.qml:459
+#: contents/ui/main.qml:471
 #, kde-format
 msgid "Schedule"
 msgstr "日程"
 
-#: contents/ui/main.qml:462 contents/ui/main.qml:1157
+#: contents/ui/main.qml:474 contents/ui/main.qml:1169
 #, kde-format
 msgid "Tasks"
 msgstr "任务"
 
-#: contents/ui/main.qml:468 kalendarapplication.cpp:31
+#: contents/ui/main.qml:480 kalendarapplication.cpp:31
 #: kalendarapplication.cpp:36
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
@@ -1980,17 +1980,17 @@ msgstr "任务"
 msgid "Mail"
 msgstr "邮件"
 
-#: contents/ui/main.qml:858
+#: contents/ui/main.qml:870
 #, kde-format
 msgid "Import a calendar"
 msgstr "导入日历"
 
-#: contents/ui/main.qml:878
+#: contents/ui/main.qml:890
 #, kde-format
 msgid "Import Calendar"
 msgstr "导入日历"
 
-#: contents/ui/main.qml:886
+#: contents/ui/main.qml:898
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -2002,29 +2002,29 @@ msgstr ""
 "历？\n"
 " "
 
-#: contents/ui/main.qml:894
+#: contents/ui/main.qml:906
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "合并入已有日历"
 
-#: contents/ui/main.qml:910
+#: contents/ui/main.qml:922
 #, kde-format
 msgid "Create new calendar"
 msgstr "新建日历"
 
-#: contents/ui/main.qml:1115
+#: contents/ui/main.qml:1127
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "周"
 
-#: contents/ui/main.qml:1121
+#: contents/ui/main.qml:1133
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "三日"
 
-#: contents/ui/main.qml:1127
+#: contents/ui/main.qml:1139
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
@@ -2627,57 +2627,63 @@ msgstr "新建任务..."
 msgid "New Contact…"
 msgstr "新建事件..."
 
-#: kalendarapplication.cpp:329
+#: kalendarapplication.cpp:323
+#, fuzzy, kde-format
+#| msgid "New Event…"
+msgid "New Contact Group…"
+msgstr "新建事件..."
+
+#: kalendarapplication.cpp:336
 #, kde-format
 msgid "Manage Tags…"
 msgstr "管理标签..."
 
-#: kalendarapplication.cpp:342
+#: kalendarapplication.cpp:349
 #, kde-format
 msgid "Import Calendar…"
 msgstr "导入日历..."
 
-#: kalendarapplication.cpp:374
+#: kalendarapplication.cpp:381
 #, kde-format
 msgid "Alphabetically"
 msgstr "按字母顺序"
 
-#: kalendarapplication.cpp:390
+#: kalendarapplication.cpp:397
 #, kde-format
 msgid "By Due Date"
 msgstr "按到期日期"
 
-#: kalendarapplication.cpp:406
+#: kalendarapplication.cpp:413
 #, kde-format
 msgid "By Priority Level"
 msgstr "按优先级"
 
-#: kalendarapplication.cpp:422
+#: kalendarapplication.cpp:429
 #, kde-format
 msgid "Ascending order"
 msgstr "升序"
 
-#: kalendarapplication.cpp:438
+#: kalendarapplication.cpp:445
 #, kde-format
 msgid "Descending Order"
 msgstr "降序"
 
-#: kalendarapplication.cpp:454
+#: kalendarapplication.cpp:461
 #, kde-format
 msgid "Show Completed Tasks"
 msgstr "显示已完成的任务"
 
-#: kalendarapplication.cpp:468
+#: kalendarapplication.cpp:475
 #, kde-format
 msgid "Open Command Bar"
 msgstr "打开命令栏"
 
-#: kalendarapplication.cpp:478
+#: kalendarapplication.cpp:485
 #, kde-format
 msgid "Refresh All"
 msgstr "刷新全部"
 
-#: kalendarapplication.cpp:631 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:638 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr "发生错误：%1"
