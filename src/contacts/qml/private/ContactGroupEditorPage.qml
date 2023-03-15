@@ -18,6 +18,10 @@ Kirigami.ScrollablePage {
 
     onItemChanged: contactGroupEditor.loadContactGroup(item)
 
+    function isNotEmptyStr(str) {
+        return str.trim().length > 0;
+    }
+
     property ContactGroupEditor contactGroupEditor: ContactGroupEditor {
         id: contactGroupEditor
         mode: ContactGroupEditor.CreateMode
@@ -177,7 +181,7 @@ Kirigami.ScrollablePage {
         QQC2.Button {
             icon.name: mode === ContactGroupEditor.EditMode ? "document-save" : "list-add"
             text: mode === ContactGroupEditor.EditMode ? i18n("Save") : i18n("Add")
-            enabled: contactGroupEditor.name.length > 0
+            enabled: isNotEmptyStr(contactGroupEditor.name)
             QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
         }
 
