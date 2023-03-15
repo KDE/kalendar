@@ -6,6 +6,7 @@ import org.kde.kirigami 2.15 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import QtLocation 5.15
+import org.kde.kalendar.calendar 1.0 as Calendar
 import "labelutils.js" as LabelUtils
 
 import org.kde.kalendar 1.0
@@ -322,7 +323,7 @@ QQC2.ScrollView {
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
 
-                text: LabelUtils.recurrenceToString(root.incidenceWrapper.recurrenceData)
+                text: Calendar.Utils.recurrenceToString(root.incidenceWrapper.recurrenceData)
                 wrapMode: Text.Wrap
             }
 
