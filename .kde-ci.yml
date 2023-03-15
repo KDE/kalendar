@@ -19,7 +19,6 @@ Dependencies:
     'pim/eventviews' : '@same'
     'pim/kdepim-runtime' : '@same'
     'pim/mailcommon' : '@same'
-    'pim/pimcommon' : '@same'
     'frameworks/kirigami' : '@latest'
     'libraries/kirigami-addons': '@latest'
 
@@ -40,7 +39,6 @@ Dependencies:
     'pim/eventviews' : '@same'
     'pim/kdepim-runtime' : '@same'
     'pim/mailcommon' : '@same'
-    'pim/pimcommon' : '@same'
     'frameworks/kirigami' : '@latest-kf6'
     'libraries/kirigami-addons': '@latest-kf6'
 

@@ -97,7 +97,6 @@ find_package(KPim${QT_MAJOR_VERSION}AkonadiContact ${PIM_VERSION} REQUIRED)
 find_package(KPim${QT_MAJOR_VERSION}CalendarSupport ${PIM_VERSION} REQUIRED)
 find_package(KPim${QT_MAJOR_VERSION}EventViews ${PIM_VERSION} REQUIRED)
 find_package(KPim${QT_MAJOR_VERSION}MailCommon ${PIM_VERSION} REQUIRED)
-find_package(KPim${KF_MAJOR_VERSION}PimCommonAkonadi ${PIM_VERSION} REQUIRED)
 find_package(KPim${QT_MAJOR_VERSION}AkonadiMime ${PIM_VERSION} REQUIRED)
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
