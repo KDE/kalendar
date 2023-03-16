@@ -420,13 +420,8 @@ Kirigami.ApplicationWindow {
     Loader {
         id: kcommandbarLoader
         active: false
-        readonly property point centreOfScreen : Qt.point(root.x+root.width/2, root.y+root.height/2)
-        // map this point to the loader's coordinate system
-        readonly property point centreOfScreenInLoader : kcommandbarLoader.mapFromGlobal(centreOfScreen)
         source: 'qrc:/KQuickCommandBarPage.qml'
         onActiveChanged: if (active) {
-            item.x = Math.round(centreOfScreenInLoader.x - item.width/2)
-            item.y = Math.round(centreOfScreenInLoader.y - item.height/2)
             item.open()
         }
     }

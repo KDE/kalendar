@@ -10,11 +10,21 @@ import QtQuick.Templates 2.15 as T
 
 QQC2.Dialog {
     id: root
-    modal: true
-    width: 700
-    height: 400
-    onClosed: parent.active = false
 
+    parent: applicationWindow().overlay
+    modal: true
+
+    width: Math.min(700, parent.width)
+    height: 400
+
+    leftPadding: 0
+    rightPadding: 0
+    bottomPadding: 0
+    topPadding: 0
+
+    anchors.centerIn: applicationWindow().overlay
+
+    onClosed: parent.active = false
     onOpened: {
         searchField.forceActiveFocus();
         searchField.text = KalendarApplication.actionsModel.filterString; // set the previous searched text on reopening
@@ -50,12 +60,6 @@ QQC2.Dialog {
             }
         }
     }
-
-
-    leftPadding: 0
-    rightPadding: 0
-    bottomPadding: 0
-    topPadding: 0
 
     QQC2.ScrollView {
         anchors.fill: parent
