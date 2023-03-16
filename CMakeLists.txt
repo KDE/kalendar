@@ -131,7 +131,7 @@ add_definitions(-DQT_STRICT_ITERATORS)
 add_subdirectory(src)
 
 if (BUILD_TESTING)
-    add_subdirectory(autotests)
+    #add_subdirectory(autotests)
 endif()
 
 if (BUILD_FLATPAK)

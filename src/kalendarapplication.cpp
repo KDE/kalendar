@@ -7,8 +7,8 @@
 #include "kalendarapplication.h"
 
 #include "calendaradaptor.h"
+#include "commandbarfiltermodel.h"
 #include "kalendar_debug.h"
-#include "models/commandbarfiltermodel.h"
 #include <KAuthorized>
 #include <KConfigGroup>
 #include <KFormat>
@@ -16,10 +16,8 @@
 #include <KSharedConfig>
 #include <KShortcutsDialog>
 #include <KWindowConfig>
-#include <KWindowSystem>
 #include <QGuiApplication>
 #include <QMenu>
-#include <QQuickWindow>
 #include <QSortFilterProxyModel>
 #include <vector>
 
@@ -347,12 +345,6 @@ void KalendarApplication::setupActions()
         auto importIcalAction = mCollection.addAction(actionName, this, &KalendarApplication::importCalendar);
         importIcalAction->setText(i18n("Import Calendar…"));
         importIcalAction->setIcon(QIcon::fromTheme(QStringLiteral("document-import-ocal")));
-        connect(this, &KalendarApplication::importStarted, this, [importIcalAction]() {
-            importIcalAction->setEnabled(false);
-        });
-        connect(this, &KalendarApplication::importFinished, this, [importIcalAction]() {
-            importIcalAction->setEnabled(true);
-        });
     }
 
     actionName = QLatin1String("file_quit");
@@ -604,48 +596,6 @@ QSortFilterProxyModel *KalendarApplication::actionsModel()
     return m_proxyModel;
 }
 
-void KalendarApplication::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
-{
-    m_calendar = calendar;
-}
-
-void KalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId)
-{
-    if (!m_calendar) {
-        return;
-    }
-
-    auto importer = new Akonadi::ICalImporter(m_calendar->incidenceChanger());
-    bool jobStarted;
-
-    if (merge) {
-        connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &KalendarApplication::importFinished);
-        connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &KalendarApplication::importIntoExistingFinished);
-        auto collection = m_calendar->collection(collectionId);
-        jobStarted = importer->importIntoExistingResource(url, collection);
-    } else {
-        connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &KalendarApplication::importFinished);
-        connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &KalendarApplication::importIntoNewFinished);
-        jobStarted = importer->importIntoNewResource(url.path());
-    }
-
-    if (jobStarted) {
-        Q_EMIT importStarted();
-    } else {
-        // empty error message means user canceled.
-        if (!importer->errorMessage().isEmpty()) {
-            qCDebug(KALENDAR_LOG) << i18n("An error occurred: %1", importer->errorMessage());
-            m_importErrorMessage = importer->errorMessage();
-            Q_EMIT importErrorMessageChanged();
-        }
-    }
-}
-
-QString KalendarApplication::importErrorMessage()
-{
-    return m_importErrorMessage;
-}
-
 void KalendarApplication::saveWindowGeometry(QQuickWindow *window)
 {
     KConfig dataResource(QStringLiteral("data"), KConfig::SimpleConfig, QStandardPaths::AppDataLocation);
@@ -657,66 +607,9 @@ void KalendarApplication::saveWindowGeometry(QQuickWindow *window)
 
 void KalendarApplication::showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken)
 {
-    const auto incidence = m_calendar->incidence(uid);
-    if (!incidence) {
-        return;
-    }
-
-    const auto collection = m_calendar->item(incidence).parentCollection();
-    const auto incidenceEnd = incidence->endDateForStart(occurrence);
-    KFormat format;
-    KCalendarCore::Duration duration(occurrence, incidenceEnd);
-
-    KSharedConfig::Ptr config = KSharedConfig::openConfig();
-    KConfigGroup rColorsConfig(config, "Resources Colors");
-    const QStringList colorKeyList = rColorsConfig.keyList();
-
-    QColor incidenceColor;
-
-    for (const QString &key : colorKeyList) {
-        if (key == QString::number(collection.id())) {
-            incidenceColor = rColorsConfig.readEntry(key, QColor("blue"));
-        }
-    }
-
-    auto incidenceData = QVariantMap{
-        {QStringLiteral("text"), incidence->summary()},
-        {QStringLiteral("description"), incidence->description()},
-        {QStringLiteral("location"), incidence->location()},
-        {QStringLiteral("startTime"), occurrence},
-        {QStringLiteral("endTime"), incidenceEnd},
-        {QStringLiteral("allDay"), incidence->allDay()},
-        {QStringLiteral("todoCompleted"), false},
-        {QStringLiteral("priority"), incidence->priority()},
-        {QStringLiteral("durationString"), duration.asSeconds() > 0 ? format.formatSpelloutDuration(duration.asSeconds() * 1000) : QString()},
-        {QStringLiteral("recurs"), incidence->recurs()},
-        {QStringLiteral("hasReminders"), incidence->alarms().length() > 0},
-        {QStringLiteral("isOverdue"), false},
-        {QStringLiteral("isReadOnly"), collection.rights().testFlag(Akonadi::Collection::ReadOnly)},
-        {QStringLiteral("color"), QVariant::fromValue(incidenceColor)},
-        {QStringLiteral("collectionId"), collection.id()},
-        {QStringLiteral("incidenceId"), uid},
-        {QStringLiteral("incidenceType"), incidence->type()},
-        {QStringLiteral("incidenceTypeStr"), incidence->typeStr()},
-        {QStringLiteral("incidenceTypeIcon"), incidence->iconName()},
-        {QStringLiteral("incidencePtr"), QVariant::fromValue(incidence)},
-    };
-
-    if (incidence->type() == KCalendarCore::Incidence::TypeTodo) {
-        const auto todo = incidence.staticCast<KCalendarCore::Todo>();
-        incidenceData[QStringLiteral("todoCompleted")] = todo->isCompleted();
-        incidenceData[QStringLiteral("isOverdue")] = todo->isOverdue();
-    }
-
-    Q_EMIT openIncidence(incidenceData, occurrence);
-
-    KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
-    QWindow *window = QGuiApplication::topLevelWindows().isEmpty() ? nullptr : QGuiApplication::topLevelWindows().at(0);
-    if (window) {
-        KWindowSystem::activateWindow(window);
-        window->raise();
-    }
+    Q_EMIT showIncidenceByUidRequested(uid, occurrence, xdgActivationToken);
 }
+
 #ifndef UNITY_CMAKE_SUPPORT
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif

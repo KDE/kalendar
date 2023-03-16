@@ -2,8 +2,36 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 set(kalendar_calendar_SRCS
-    remindersmodel.h
-    remindersmodel.cpp
+    calendarmanager.cpp
+    calendarmanager.h
+    filter.cpp
+    filter.h
+    incidencewrapper.cpp
+    incidencewrapper.h
+    models/attachmentsmodel.cpp
+    models/attachmentsmodel.h
+    models/attendeesmodel.cpp
+    models/attendeesmodel.h
+    models/hourlyincidencemodel.cpp
+    models/hourlyincidencemodel.h
+    models/incidenceoccurrencemodel.cpp
+    models/incidenceoccurrencemodel.h
+    models/infinitecalendarviewmodel.cpp
+    models/infinitecalendarviewmodel.h
+    models/itemtagsmodel.cpp
+    models/itemtagsmodel.h
+    models/monthmodel.cpp
+    models/monthmodel.h
+    models/multidayincidencemodel.cpp
+    models/multidayincidencemodel.h
+    models/recurrenceexceptionsmodel.cpp
+    models/recurrenceexceptionsmodel.h
+    models/remindersmodel.h
+    models/remindersmodel.cpp
+    models/timezonelistmodel.cpp
+    models/timezonelistmodel.h
+    models/todosortfilterproxymodel.cpp
+    models/todosortfilterproxymodel.h
     utils.h
     utils.cpp
 )
@@ -44,6 +72,12 @@ ecm_target_qml_sources(kalendar_calendar_plugin
     PRIVATE PATH private SOURCES
     qml/private/MenuBar.qml
     qml/private/GlobalMenuBar.qml
+)
+
+ecm_target_qml_sources(kalendar_calendar_plugin
+    PRIVATE PATH private/import SOURCES
+    qml/private/import/ImportHandler.qml
+    qml/private/import/ImportFileDialog.qml
 )
 
 target_link_libraries(kalendar_calendar_plugin PUBLIC kalendar_calendar_static)

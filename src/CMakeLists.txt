@@ -14,43 +14,13 @@ add_executable(kalendar)
 set(kalendar_SRCS
     about.cpp
     about.h
-    models/actionsmodel.cpp
-    models/actionsmodel.h
-    models/attachmentsmodel.cpp
-    models/attachmentsmodel.h
-    models/attendeesmodel.cpp
-    models/attendeesmodel.h
-    calendarmanager.cpp
-    calendarmanager.h
-    filter.cpp
-    filter.h
-    models/commandbarfiltermodel.cpp
-    models/commandbarfiltermodel.h
-    models/hourlyincidencemodel.cpp
-    models/hourlyincidencemodel.h
-    models/incidenceoccurrencemodel.cpp
-    models/incidenceoccurrencemodel.h
-    incidencewrapper.cpp
-    incidencewrapper.h
-    models/infinitecalendarviewmodel.cpp
-    models/infinitecalendarviewmodel.h
-    models/itemtagsmodel.cpp
-    models/itemtagsmodel.h
+    actionsmodel.h
+    actionsmodel.cpp
+    commandbarfiltermodel.cpp
+    commandbarfiltermodel.h
     kalendarapplication.cpp
     kalendarapplication.h
     main.cpp
-    models/monthmodel.cpp
-    models/monthmodel.h
-    models/multidayincidencemodel.cpp
-    models/multidayincidencemodel.h
-    models/recurrenceexceptionsmodel.cpp
-    models/recurrenceexceptionsmodel.h
-    tagmanager.cpp
-    tagmanager.h
-    models/timezonelistmodel.cpp
-    models/timezonelistmodel.h
-    models/todosortfilterproxymodel.cpp
-    models/todosortfilterproxymodel.h
     resources.qrc
     utils.h
     utils.cpp

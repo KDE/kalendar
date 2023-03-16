@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "tagmanager.h"
-#include "kalendar_debug.h"
+#include "akonadi_quick_debug.h"
 
 #include <Akonadi/TagCreateJob>
 #include <Akonadi/TagDeleteJob>
@@ -78,7 +78,7 @@ void TagManager::createTag(const QString &name)
     auto job = new Akonadi::TagCreateJob(tag, this);
     connect(job, &Akonadi::TagCreateJob::finished, this, [=](KJob *job) {
         if (job->error())
-            qCDebug(KALENDAR_LOG) << "Error occurred creating tag";
+            qCDebug(AKONADI_QUICK_LOG) << "Error occurred creating tag";
     });
 }
 
@@ -87,7 +87,7 @@ void TagManager::deleteTag(Akonadi::Tag tag)
     auto job = new Akonadi::TagDeleteJob(tag);
     connect(job, &Akonadi::TagDeleteJob::result, this, [=](KJob *job) {
         if (job->error())
-            qCDebug(KALENDAR_LOG) << "Error occurred renaming tag";
+            qCDebug(AKONADI_QUICK_LOG) << "Error occurred renaming tag";
     });
 }
 
@@ -97,6 +97,6 @@ void TagManager::renameTag(Akonadi::Tag tag, const QString &newName)
     auto job = new Akonadi::TagModifyJob(tag);
     connect(job, &Akonadi::TagModifyJob::result, this, [=](KJob *job) {
         if (job->error())
-            qCDebug(KALENDAR_LOG) << "Error occurred renaming tag";
+            qCDebug(AKONADI_QUICK_LOG) << "Error occurred renaming tag";
     });
 }

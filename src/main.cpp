@@ -2,21 +2,9 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 #include "about.h"
 #include "akonadi/collectionfilterproxymodel.h"
-#include "calendarmanager.h"
 #include "config-kalendar.h"
-#include "filter.h"
-#include "incidencewrapper.h"
 #include "kalendarapplication.h"
 #include "kalendarconfig.h"
-#include "models/hourlyincidencemodel.h"
-#include "models/incidenceoccurrencemodel.h"
-#include "models/infinitecalendarviewmodel.h"
-#include "models/itemtagsmodel.h"
-#include "models/monthmodel.h"
-#include "models/multidayincidencemodel.h"
-#include "models/timezonelistmodel.h"
-#include "models/todosortfilterproxymodel.h"
-#include "tagmanager.h"
 #include <Akonadi/AgentFilterProxyModel>
 #include <KAboutData>
 #include <KDBusService>
@@ -97,7 +85,6 @@ int main(int argc, char *argv[])
 
     auto config = KalendarConfig::self();
     auto kalendarApplication = new KalendarApplication;
-    kalendarApplication->setCalendar(CalendarManager::instance()->calendar());
 
     KDBusService service(KDBusService::Unique);
     service.connect(&service,
@@ -113,40 +100,15 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    auto tagManager = new TagManager(&engine);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", CalendarManager::instance());
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", kalendarApplication);
 
-    qmlRegisterSingletonType<Filter>("org.kde.kalendar", 1, 0, "Filter", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-        return new Filter;
-    });
-
-    qmlRegisterType<IncidenceWrapper>("org.kde.kalendar", 1, 0, "IncidenceWrapper");
-    qmlRegisterType<AttendeesModel>("org.kde.kalendar", 1, 0, "AttendeesModel");
-    qmlRegisterType<MultiDayIncidenceModel>("org.kde.kalendar", 1, 0, "MultiDayIncidenceModel");
-    qmlRegisterType<IncidenceOccurrenceModel>("org.kde.kalendar", 1, 0, "IncidenceOccurrenceModel");
-    qmlRegisterType<TodoSortFilterProxyModel>("org.kde.kalendar", 1, 0, "TodoSortFilterProxyModel");
-    qmlRegisterType<ItemTagsModel>("org.kde.kalendar", 1, 0, "ItemTagsModel");
-    qmlRegisterType<HourlyIncidenceModel>("org.kde.kalendar", 1, 0, "HourlyIncidenceModel");
-    qmlRegisterType<TimeZoneListModel>("org.kde.kalendar", 1, 0, "TimeZoneListModel");
-    qmlRegisterType<MonthModel>("org.kde.kalendar", 1, 0, "MonthModel");
-    qmlRegisterType<InfiniteCalendarViewModel>("org.kde.kalendar", 1, 0, "InfiniteCalendarViewModel");
-
-    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/KalendarUiUtils.qml")), "org.kde.kalendar.utils", 1, 0, "KalendarUiUtils");
-
-    qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
-    qRegisterMetaType<QAbstractProxyModel *>("QAbstractProxyModel*");
-    qRegisterMetaType<Akonadi::AgentFilterProxyModel *>();
-    qRegisterMetaType<Akonadi::CollectionFilterProxyModel *>();
-    qRegisterMetaType<QAction *>();
-
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+
+    qRegisterMetaType<QAbstractProxyModel *>("QAbstractProxyModel*");
+    qRegisterMetaType<QAction *>();
 
     if (engine.rootObjects().isEmpty()) {
         return -1;

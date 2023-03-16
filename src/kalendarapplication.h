@@ -4,8 +4,8 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 #pragma once
+#include "actionsmodel.h"
 #include "kalendarconfig.h"
-#include "models/actionsmodel.h"
 
 #include <Akonadi/ETMCalendar>
 #include <Akonadi/ICalImporter>
@@ -24,7 +24,6 @@ class KalendarApplication : public QObject
 
     Q_PROPERTY(QWindow *window READ window WRITE setWindow NOTIFY windowChanged)
     Q_PROPERTY(QSortFilterProxyModel *actionsModel READ actionsModel CONSTANT)
-    Q_PROPERTY(QString importErrorMessage READ importErrorMessage NOTIFY importErrorMessageChanged)
 
 public:
     enum Mode {
@@ -51,9 +50,6 @@ public:
     void setWindow(QWindow *window);
 
     QSortFilterProxyModel *actionsModel();
-    void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
-    Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId = -1);
-    QString importErrorMessage();
 
     // D-Bus interface
     void showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken);
@@ -97,13 +93,9 @@ Q_SIGNALS:
     void todoViewOrderDescending();
     void todoViewShowCompleted();
     void openKCommandBarAction();
-    void importStarted();
-    void importFinished();
-    void importIntoExistingFinished(bool success, int total);
-    void importIntoNewFinished(bool success);
-    void importErrorMessageChanged();
     void refreshAll();
     void openIncidence(const QVariantMap incidenceData, const QDateTime occurrence);
+    void showIncidenceByUidRequested(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken);
 
 private:
     KActionCollection mCollection;
@@ -117,6 +109,4 @@ private:
     KalCommandBarModel *m_actionModel = nullptr;
     QSortFilterProxyModel *m_proxyModel = nullptr;
     KalendarConfig *m_config = nullptr;
-    Akonadi::ETMCalendar::Ptr m_calendar;
-    QString m_importErrorMessage;
 };

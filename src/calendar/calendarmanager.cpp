@@ -12,7 +12,7 @@
 #include "kalendarconfig.h"
 
 // Akonadi
-#include "kalendar_debug.h"
+#include "kalendar_calendar_debug.h"
 
 #include <Akonadi/AgentFilterProxyModel>
 #include <Akonadi/AgentInstanceModel>
@@ -37,8 +37,10 @@
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
 #include <KLocalizedString>
+#include <KWindowSystem>
 #include <QApplication>
 #include <QPointer>
+#include <QQuickWindow>
 #include <models/todosortfilterproxymodel.h>
 
 #include <colorproxymodel.h>
@@ -517,7 +519,7 @@ void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, i
             // All occurrences
             KCalendarCore::Incidence::Ptr oldIncidence(incidenceWrapper->incidencePtr()->clone());
             setNewDates(incidenceWrapper->incidencePtr());
-            qCDebug(KALENDAR_LOG) << incidenceWrapper->incidenceStart();
+            qCDebug(KALENDAR_CALENDAR_LOG) << incidenceWrapper->incidenceStart();
             m_changer->modifyIncidence(item, oldIncidence);
             break;
         }
@@ -534,7 +536,7 @@ void CalendarManager::updateIncidenceDates(IncidenceWrapper *incidenceWrapper, i
                 m_changer->createIncidence(newIncidence, m_calendar->collection(incidenceWrapper->collectionId()));
                 m_changer->endAtomicOperation();
             } else {
-                qCDebug(KALENDAR_LOG) << i18n("Unable to add the exception item to the calendar. No change will be done.");
+                qCDebug(KALENDAR_CALENDAR_LOG) << i18n("Unable to add the exception item to the calendar. No change will be done.");
             }
             break;
         }
@@ -682,7 +684,7 @@ void CalendarManager::setCollectionColor(qint64 collectionId, const QColor &colo
     auto modifyJob = new Akonadi::CollectionModifyJob(collection);
     connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [this, collectionId, color](KJob *job) {
         if (job->error()) {
-            qCWarning(KALENDAR_LOG) << "Error occurred modifying collection color: " << job->errorString();
+            qCWarning(KALENDAR_CALENDAR_LOG) << "Error occurred modifying collection color: " << job->errorString();
         } else {
             m_baseModel->setColor(collectionId, color);
         }
@@ -723,7 +725,7 @@ void CalendarManager::deleteCollection(qint64 collectionId)
         auto job = new Akonadi::CollectionDeleteJob(collection, this);
         connect(job, &Akonadi::CollectionDeleteJob::result, this, [](KJob *job) {
             if (job->error()) {
-                qCWarning(KALENDAR_LOG) << "Error occurred deleting collection: " << job->errorString();
+                qCWarning(KALENDAR_CALENDAR_LOG) << "Error occurred deleting collection: " << job->errorString();
             }
         });
         return;
@@ -756,6 +758,68 @@ void CalendarManager::toggleCollection(qint64 collectionId)
         const auto checkStateToSet = collectionChecked ? Qt::Unchecked : Qt::Checked;
         m_calendar->checkableProxyModel()->setData(collectionIndex, checkStateToSet, Qt::CheckStateRole);
     }
+}
+
+void CalendarManager::showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken) const
+    auto incidence = m_calendar->incidence(uid);
+if (!incidence) {
+    return;
+}
+
+const auto collection = m_calendar->item(incidence).parentCollection();
+const auto incidenceEnd = incidence->endDateForStart(occurrence);
+KFormat format;
+KCalendarCore::Duration duration(occurrence, incidenceEnd);
+
+KSharedConfig::Ptr config = KSharedConfig::openConfig();
+KConfigGroup rColorsConfig(config, "Resources Colors");
+const QStringList colorKeyList = rColorsConfig.keyList();
+
+QColor incidenceColor;
+
+for (const QString &key : colorKeyList) {
+    if (key == QString::number(collection.id())) {
+        incidenceColor = rColorsConfig.readEntry(key, QColor("blue"));
+    }
+}
+
+auto incidenceData = QVariantMap{
+    {QStringLiteral("text"), incidence->summary()},
+    {QStringLiteral("description"), incidence->description()},
+    {QStringLiteral("location"), incidence->location()},
+    {QStringLiteral("startTime"), occurrence},
+    {QStringLiteral("endTime"), incidenceEnd},
+    {QStringLiteral("allDay"), incidence->allDay()},
+    {QStringLiteral("todoCompleted"), false},
+    {QStringLiteral("priority"), incidence->priority()},
+    {QStringLiteral("durationString"), duration.asSeconds() > 0 ? format.formatSpelloutDuration(duration.asSeconds() * 1000) : QString()},
+    {QStringLiteral("recurs"), incidence->recurs()},
+    {QStringLiteral("hasReminders"), incidence->alarms().length() > 0},
+    {QStringLiteral("isOverdue"), false},
+    {QStringLiteral("isReadOnly"), collection.rights().testFlag(Akonadi::Collection::ReadOnly)},
+    {QStringLiteral("color"), QVariant::fromValue(incidenceColor)},
+    {QStringLiteral("collectionId"), collection.id()},
+    {QStringLiteral("incidenceId"), uid},
+    {QStringLiteral("incidenceType"), incidence->type()},
+    {QStringLiteral("incidenceTypeStr"), incidence->typeStr()},
+    {QStringLiteral("incidenceTypeIcon"), incidence->iconName()},
+    {QStringLiteral("incidencePtr"), QVariant::fromValue(incidence)},
+};
+
+if (incidence->type() == KCalendarCore::Incidence::TypeTodo) {
+    const auto todo = incidence.staticCast<KCalendarCore::Todo>();
+    incidenceData[QStringLiteral("todoCompleted")] = todo->isCompleted();
+    incidenceData[QStringLiteral("isOverdue")] = todo->isOverdue();
+}
+
+Q_EMIT openIncidence(incidenceData, occurrence);
+
+KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
+QWindow *window = QGuiApplication::topLevelWindows().isEmpty() ? nullptr : QGuiApplication::topLevelWindows().at(0);
+if (window) {
+    KWindowSystem::activateWindow(window);
+    window->raise();
+}
 }
 
 #ifndef UNITY_CMAKE_SUPPORT
