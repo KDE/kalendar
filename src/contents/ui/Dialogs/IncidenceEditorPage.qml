@@ -11,7 +11,7 @@ import org.kde.kitemmodels 1.0
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
-import org.kde.kalendar.calendar 1.0
+import org.kde.kalendar.calendar 1.0 as Calendar
 import org.kde.akonadi 1.0 as Akonadi
 import "labelutils.js" as LabelUtils
 
@@ -201,27 +201,12 @@ Kirigami.ScrollablePage {
                     }
                 }
 
-                QQC2.ComboBox {
-                    Kirigami.FormData.label: i18n("Priority:")
-
-                    Layout.fillWidth: true
+                Calendar.PriorityComboBox {
                     currentIndex: root.incidenceWrapper.priority
                     onCurrentValueChanged: root.incidenceWrapper.priority = currentValue
-                    textRole: "display"
-                    valueRole: "value"
-                    model: [
-                        {display: i18n("Unassigned"), value: 0},
-                        {display: i18n("1 (Highest Priority)"), value: 1},
-                        {display: i18n("2"), value: 2},
-                        {display: i18n("3"), value: 3},
-                        {display: i18n("4"), value: 4},
-                        {display: i18n("5 (Medium Priority)"), value: 5},
-                        {display: i18n("6"), value: 6},
-                        {display: i18n("7"), value: 7},
-                        {display: i18n("8"), value: 8},
-                        {display: i18n("9 (Lowest Priority)"), value: 9}
-                    ]
-                    visible: incidenceForm.isTodo
+                    isTodo: incidenceForm.isTodo
+
+                    Layout.fillWidth: true
                 }
 
                 Kirigami.Separator {
@@ -872,12 +857,12 @@ Kirigami.ScrollablePage {
 
                         Layout.fillWidth: true
 
-                        model: RemindersModel {
+                        model: Calendar.RemindersModel {
                             id: remindersModel
                             incidence: root.incidenceWrapper.incidencePtr
                         }
 
-                        delegate: ReminderDelegate {
+                        delegate: Calendar.ReminderDelegate {
                             isTodo: incidenceForm.isTodo
                             remindersModel: remindersRepeater.model
                         }

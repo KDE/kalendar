@@ -37,6 +37,7 @@ target_sources(kalendar_calendar_plugin PRIVATE
 ecm_target_qml_sources(kalendar_calendar_plugin SOURCES
     qml/CalendarApplication.qml
     qml/incidenceeditor/ReminderDelegate.qml
+    qml/incidenceeditor/PriorityComboBox.qml
 )
 
 ecm_target_qml_sources(kalendar_calendar_plugin
