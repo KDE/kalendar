@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 00:47+0000\n"
-"PO-Revision-Date: 2023-03-14 05:05+0100\n"
+"POT-Creation-Date: 2023-03-16 01:01+0000\n"
+"PO-Revision-Date: 2023-03-15 06:37+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -629,49 +629,49 @@ msgid "protocol:person@example.com"
 msgstr "protocol:person@example.com"
 
 #: contacts/qml/private/ContactEditorPage.qml:554
-#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Save"
 msgstr "შენახვა"
 
 #: contacts/qml/private/ContactEditorPage.qml:554
-#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Add"
 msgstr "დამატება"
 
 #: contacts/qml/private/ContactEditorPage.qml:599
-#: contacts/qml/private/ContactGroupEditorPage.qml:223
+#: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr "მიმდინარე ცვლილებები"
 
 #: contacts/qml/private/ContactEditorPage.qml:604
-#: contacts/qml/private/ContactGroupEditorPage.qml:228
+#: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
 msgstr "გარე ცვლილებები"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:66
+#: contacts/qml/private/ContactGroupEditorPage.qml:70
 #, kde-format
 msgid "Address Book:"
 msgstr "მისამართების წიგნი:"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:84
+#: contacts/qml/private/ContactGroupEditorPage.qml:88
 #: contacts/qml/private/ContactPage.qml:164
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
 #, kde-format
 msgid "Name:"
 msgstr "სახელი:"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:87
+#: contacts/qml/private/ContactGroupEditorPage.qml:91
 #, kde-format
 msgid "Contact group name"
 msgstr "კონტაქტების ჯგუფის სახელი"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:99
+#: contacts/qml/private/ContactGroupEditorPage.qml:103
 #, kde-format
 msgid "Members"
 msgstr "წევრები"
@@ -1252,6 +1252,8 @@ msgid ""
 "Item \"%1\" has sub-items. Do you want to delete all related items, or just "
 "the currently selected item?"
 msgstr ""
+"ჩანაწერს \"%1\" ქვეჩანაწერები გააჩნია. მართლა გნებავთ ყველა შესაბამისი "
+"ჩანაწერის წაშლა, თუ მხოლოდ მონიშნულის?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:62
 #, kde-format
@@ -2060,7 +2062,7 @@ msgstr "წკაპი"
 #: contents/ui/MainViews/BasicMonthListView.qml:289
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
-msgstr ""
+msgstr "დღეს დაგეგმილი არაფერია. დასამატებლად %1."
 
 #: contents/ui/MainViews/BasicMonthListView.qml:412
 #, kde-format
@@ -2623,10 +2625,9 @@ msgid "New Contact…"
 msgstr "ახალი კონტაქტი…"
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "ახალი კონტაქტი…"
+msgstr "კონტაქტების ახალი ჯგუფი…"
 
 #: kalendarapplication.cpp:336
 #, kde-format

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 00:47+0000\n"
+"POT-Creation-Date: 2023-03-16 01:01+0000\n"
 "PO-Revision-Date: 2023-01-07 14:24+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -637,49 +637,49 @@ msgid "protocol:person@example.com"
 msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:554
-#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Save"
 msgstr "Uložiť"
 
 #: contacts/qml/private/ContactEditorPage.qml:554
-#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Add"
 msgstr "Pridať"
 
 #: contacts/qml/private/ContactEditorPage.qml:599
-#: contacts/qml/private/ContactGroupEditorPage.qml:223
+#: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr "Aktuálne zmeny"
 
 #: contacts/qml/private/ContactEditorPage.qml:604
-#: contacts/qml/private/ContactGroupEditorPage.qml:228
+#: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
 msgstr "Externé zmeny"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:66
+#: contacts/qml/private/ContactGroupEditorPage.qml:70
 #, kde-format
 msgid "Address Book:"
 msgstr "Adresár:"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:84
+#: contacts/qml/private/ContactGroupEditorPage.qml:88
 #: contacts/qml/private/ContactPage.qml:164
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
 #, kde-format
 msgid "Name:"
 msgstr "Názov:"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:87
+#: contacts/qml/private/ContactGroupEditorPage.qml:91
 #, kde-format
 msgid "Contact group name"
 msgstr "Názov skupiny kontaktov"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:99
+#: contacts/qml/private/ContactGroupEditorPage.qml:103
 #, fuzzy, kde-format
 #| msgid "Members:"
 msgid "Members"

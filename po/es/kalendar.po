@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 00:47+0000\n"
-"PO-Revision-Date: 2023-03-13 03:22+0100\n"
+"POT-Creation-Date: 2023-03-16 01:01+0000\n"
+"PO-Revision-Date: 2023-03-15 16:26+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -633,49 +633,49 @@ msgid "protocol:person@example.com"
 msgstr "protocolo:persona@ejemplo.com"
 
 #: contacts/qml/private/ContactEditorPage.qml:554
-#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Save"
 msgstr "Guardar"
 
 #: contacts/qml/private/ContactEditorPage.qml:554
-#: contacts/qml/private/ContactGroupEditorPage.qml:179
+#: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:52
 #, kde-format
 msgid "Add"
 msgstr "Añadir"
 
 #: contacts/qml/private/ContactEditorPage.qml:599
-#: contacts/qml/private/ContactGroupEditorPage.qml:223
+#: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr "Cambios actuales"
 
 #: contacts/qml/private/ContactEditorPage.qml:604
-#: contacts/qml/private/ContactGroupEditorPage.qml:228
+#: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
 msgstr "Cambios externos"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:66
+#: contacts/qml/private/ContactGroupEditorPage.qml:70
 #, kde-format
 msgid "Address Book:"
 msgstr "Libreta de direcciones:"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:84
+#: contacts/qml/private/ContactGroupEditorPage.qml:88
 #: contacts/qml/private/ContactPage.qml:164
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
 #, kde-format
 msgid "Name:"
 msgstr "Nombre:"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:87
+#: contacts/qml/private/ContactGroupEditorPage.qml:91
 #, kde-format
 msgid "Contact group name"
 msgstr "Nombre del grupo de contactos"
 
-#: contacts/qml/private/ContactGroupEditorPage.qml:99
+#: contacts/qml/private/ContactGroupEditorPage.qml:103
 #, kde-format
 msgid "Members"
 msgstr "Miembros"
@@ -2650,10 +2650,9 @@ msgid "New Contact…"
 msgstr "Nuevo contacto..."
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "Nuevo contacto..."
+msgstr "Nuevo grupo de contactos..."
 
 #: kalendarapplication.cpp:336
 #, kde-format
