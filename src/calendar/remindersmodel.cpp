@@ -1,42 +1,44 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-#include "kalendar_debug.h"
+#include "remindersmodel.h"
+#include "kalendar_calendar_debug.h"
 #include <QMetaEnum>
-#include <models/remindersmodel.h>
 
-RemindersModel::RemindersModel(QObject *parent, KCalendarCore::Incidence::Ptr incidencePtr)
+RemindersModel::RemindersModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_incidence(incidencePtr)
 {
 }
 
-KCalendarCore::Incidence::Ptr RemindersModel::incidencePtr() const
+KCalendarCore::Incidence::Ptr RemindersModel::incidence() const
 {
     return m_incidence;
 }
 
-void RemindersModel::setIncidencePtr(KCalendarCore::Incidence::Ptr incidence)
+void RemindersModel::setIncidence(KCalendarCore::Incidence::Ptr incidence)
 {
     if (m_incidence == incidence) {
         return;
     }
     m_incidence = incidence;
-    Q_EMIT incidencePtrChanged();
+    Q_EMIT incidenceChanged();
     Q_EMIT alarmsChanged();
     Q_EMIT layoutChanged();
 }
 
 KCalendarCore::Alarm::List RemindersModel::alarms() const
 {
+    if (!m_incidence) {
+        return {};
+    }
     return m_incidence->alarms();
 }
 
 QVariant RemindersModel::data(const QModelIndex &idx, int role) const
 {
-    if (!hasIndex(idx.row(), idx.column())) {
-        return {};
-    }
+    Q_ASSERT(m_incidence);
+    Q_ASSERT(checkIndex(idx, QAbstractItemModel::CheckIndexOption::IndexIsValid));
+
     auto alarm = m_incidence->alarms()[idx.row()];
     switch (role) {
     case TypeRole:
@@ -48,13 +50,16 @@ QVariant RemindersModel::data(const QModelIndex &idx, int role) const
     case EndOffsetRole:
         return alarm->endOffset().asSeconds();
     default:
-        qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }
 
 bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int role)
 {
+    Q_ASSERT(m_incidence);
+    Q_ASSERT(checkIndex(idx, QAbstractItemModel::CheckIndexOption::IndexIsValid));
+
     if (!idx.isValid()) {
         return false;
     }
@@ -83,7 +88,7 @@ bool RemindersModel::setData(const QModelIndex &idx, const QVariant &value, int 
         break;
     }
     default:
-        qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return false;
     }
     Q_EMIT dataChanged(idx, idx);
@@ -102,18 +107,23 @@ QHash<int, QByteArray> RemindersModel::roleNames() const
 
 int RemindersModel::rowCount(const QModelIndex &) const
 {
+    if (!m_incidence) {
+        return 0;
+    }
     return m_incidence->alarms().size();
 }
 
 void RemindersModel::addAlarm()
 {
+    Q_ASSERT(m_incidence);
+
     KCalendarCore::Alarm::Ptr alarm(new KCalendarCore::Alarm(m_incidence.get()));
     alarm->setEnabled(true);
     alarm->setType(KCalendarCore::Alarm::Display);
     alarm->setText(m_incidence->summary());
     alarm->setStartOffset(0);
 
-    qCDebug(KALENDAR_LOG) << alarm->parentUid();
+    qCDebug(KALENDAR_CALENDAR_LOG) << alarm->parentUid();
 
     m_incidence->addAlarm(alarm);
     Q_EMIT alarmsChanged();
@@ -122,6 +132,8 @@ void RemindersModel::addAlarm()
 
 void RemindersModel::deleteAlarm(const int row)
 {
+    Q_ASSERT(m_incidence);
+
     if (!hasIndex(row, 0)) {
         return;
     }

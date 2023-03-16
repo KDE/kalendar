@@ -2,11 +2,14 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "calendarplugin.h"
+#include "remindersmodel.h"
 #include "utils.h"
 
 #include <QAbstractListModel>
 #include <QQmlEngine>
 #include <QtQml>
+
+Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
 
 void CalendarPlugin::registerTypes(const char *uri)
 {
@@ -17,5 +20,7 @@ void CalendarPlugin::registerTypes(const char *uri)
         Q_UNUSED(scriptEngine)
         return new Utils;
     });
+    qmlRegisterType<RemindersModel>(uri, 1, 0, "RemindersModel");
     qmlRegisterModule(uri, 1, 0);
+    qRegisterMetaType<KCalendarCore::Incidence::Ptr>();
 }

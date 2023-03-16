@@ -1,7 +1,10 @@
 # SPDX-FileCopyrightText: 2022 Carl Schwan <carl@carlschwan.eu>
 # SPDX-License-Identifier: BSD-2-Clause
 
-set(kalendar_calendar_SRCS)
+set(kalendar_calendar_SRCS
+    remindersmodel.h
+    remindersmodel.cpp
+)
 
 ecm_qt_declare_logging_category(kalendar_calendar_SRCS
     HEADER kalendar_calendar_debug.h

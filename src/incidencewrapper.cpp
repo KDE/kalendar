@@ -12,10 +12,6 @@ IncidenceWrapper::IncidenceWrapper(QObject *parent)
     : QObject(parent)
     , Akonadi::ItemMonitor()
 {
-    // Change incidence pointer in remindersmodel if changed here
-    connect(this, &IncidenceWrapper::incidencePtrChanged, &m_remindersModel, [=](KCalendarCore::Incidence::Ptr incidencePtr) {
-        m_remindersModel.setIncidencePtr(incidencePtr);
-    });
     connect(this, &IncidenceWrapper::incidencePtrChanged, &m_attendeesModel, [=](KCalendarCore::Incidence::Ptr incidencePtr) {
         m_attendeesModel.setIncidencePtr(incidencePtr);
     });
@@ -79,7 +75,6 @@ void IncidenceWrapper::notifyDataChanged()
     Q_EMIT durationDisplayStringChanged();
     Q_EMIT allDayChanged();
     Q_EMIT priorityChanged();
-    Q_EMIT remindersModelChanged();
     Q_EMIT organizerChanged();
     Q_EMIT attendeesModelChanged();
     Q_EMIT recurrenceDataChanged();
@@ -616,11 +611,6 @@ QVariantMap IncidenceWrapper::organizer()
 KCalendarCore::Attendee::List IncidenceWrapper::attendees() const
 {
     return m_incidence->attendees();
-}
-
-RemindersModel *IncidenceWrapper::remindersModel()
-{
-    return &m_remindersModel;
 }
 
 AttendeesModel *IncidenceWrapper::attendeesModel()
