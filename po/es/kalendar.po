@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:47+0000\n"
-"PO-Revision-Date: 2023-03-13 21:08+0100\n"
+"PO-Revision-Date: 2023-03-15 16:26+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -2650,10 +2650,9 @@ msgid "New Contact…"
 msgstr "Nuevo contacto..."
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "Nuevo contacto..."
+msgstr "Nuevo grupo de contactos..."
 
 #: kalendarapplication.cpp:336
 #, kde-format

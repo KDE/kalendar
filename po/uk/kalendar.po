@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:47+0000\n"
-"PO-Revision-Date: 2023-03-13 19:37+0200\n"
+"PO-Revision-Date: 2023-03-15 07:59+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -2681,10 +2681,9 @@ msgid "New Contact…"
 msgstr "Створити контакт…"
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "Створити контакт…"
+msgstr "Створити групу контактів…"
 
 #: kalendarapplication.cpp:336
 #, kde-format
