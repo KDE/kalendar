@@ -45,8 +45,6 @@ set(kalendar_SRCS
     models/multidayincidencemodel.h
     models/recurrenceexceptionsmodel.cpp
     models/recurrenceexceptionsmodel.h
-    models/remindersmodel.cpp
-    models/remindersmodel.h
     tagmanager.cpp
     tagmanager.h
     models/timezonelistmodel.cpp

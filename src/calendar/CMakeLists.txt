@@ -2,8 +2,11 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 set(kalendar_calendar_SRCS
-        utils.h
-        utils.cpp)
+    remindersmodel.h
+    remindersmodel.cpp
+    utils.h
+    utils.cpp
+)
 
 ecm_qt_declare_logging_category(kalendar_calendar_SRCS
     HEADER kalendar_calendar_debug.h

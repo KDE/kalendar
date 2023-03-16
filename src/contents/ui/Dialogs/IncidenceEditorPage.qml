@@ -872,12 +872,14 @@ Kirigami.ScrollablePage {
 
                         Layout.fillWidth: true
 
-                        model: root.incidenceWrapper.remindersModel
-                        // All of the alarms are handled within the delegates.
+                        model: RemindersModel {
+                            id: remindersModel
+                            incidence: root.incidenceWrapper.incidencePtr
+                        }
 
                         delegate: ReminderDelegate {
                             isTodo: incidenceForm.isTodo
-                            remindersModel: root.incidenceWrapper.remindersModel
+                            remindersModel: remindersRepeater.model
                         }
                     }
 
@@ -887,7 +889,7 @@ Kirigami.ScrollablePage {
                         text: i18n("Add Reminder")
                         Layout.fillWidth: true
 
-                        onClicked: root.incidenceWrapper.remindersModel.addAlarm();
+                        onClicked: remindersModel.addAlarm();
                     }
                 }
 
