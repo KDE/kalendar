@@ -45,6 +45,8 @@ QVariant RemindersModel::data(const QModelIndex &idx, int role) const
         return alarm->type();
     case TimeRole:
         return alarm->time();
+    case SummaryRole:
+        return alarm->text();
     case StartOffsetRole:
         return alarm->startOffset().asSeconds();
     case EndOffsetRole:
