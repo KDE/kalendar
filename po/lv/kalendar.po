@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 01:01+0000\n"
+"POT-Creation-Date: 2023-03-17 00:58+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -47,6 +47,50 @@ msgstr "Atcelt atsaukšanu:"
 msgid "Refresh All Calendars"
 msgstr "Atjaunināt visus kalendārus"
 
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
+#, fuzzy, kde-format
+#| msgid "Custom"
+msgctxt "Custom reminder"
+msgid "Custom"
+msgstr "Pielāgots"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
+#, fuzzy, kde-format
+#| msgid "%1 minutes"
+msgid "minutes"
+msgstr "%1 minūtes"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:154
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or mores"
+#| msgid "%1 hours"
+msgid "hours"
+msgstr "%1 stundas"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:155
+#, fuzzy, kde-format
+#| msgctxt "%1 is 2 or more"
+#| msgid "%1 days"
+msgid "days"
+msgstr "%1 dienas"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:167
+#, fuzzy, kde-format
+#| msgid "%1 before start of event"
+msgid "before start of event"
+msgstr "%1 pirms pasākuma sākuma"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:168
+#, fuzzy, kde-format
+#| msgid "%1 after start of event"
+msgid "after start of event"
+msgstr "%1 pēc pasākuma sākuma"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
+#, kde-format
+msgid "Remove"
+msgstr "Noņemt"
+
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
 msgctxt "@action:menu"
@@ -74,6 +118,48 @@ msgstr "Radīt"
 #, kde-format
 msgid "Sort Tasks"
 msgstr "Kārtot uzdevumus"
+
+#: calendar/utils.cpp:19
+#, kde-format
+msgctxt "%1 is 2 or more"
+msgid "%1 days"
+msgstr "%1 dienas"
+
+#: calendar/utils.cpp:21
+#, kde-format
+msgid "1 day"
+msgstr "1 dienu"
+
+#: calendar/utils.cpp:23
+#, kde-format
+msgctxt "%1 is 2 or mores"
+msgid "%1 hours"
+msgstr "%1 stundas"
+
+#: calendar/utils.cpp:25
+#, kde-format
+msgid "1 hour"
+msgstr "1 stundu"
+
+#: calendar/utils.cpp:27
+#, kde-format
+msgid "%1 minutes"
+msgstr "%1 minūtes"
+
+#: calendar/utils.cpp:40
+#, kde-format
+msgid "%1 before start of event"
+msgstr "%1 pirms pasākuma sākuma"
+
+#: calendar/utils.cpp:42
+#, kde-format
+msgid "%1 after start of event"
+msgstr "%1 pēc pasākuma sākuma"
+
+#: calendar/utils.cpp:44
+#, kde-format
+msgid "On event start"
+msgstr "Pasākuma sākumā"
 
 #: calendarmanager.cpp:545
 #, kde-format
@@ -515,172 +601,182 @@ msgstr "Vārds:"
 msgid "Alternative name"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:255
+#: contacts/qml/private/ContactEditorPage.qml:250
+#, kde-format
+msgid "Blog Feed"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:253
+#, kde-format
+msgid "https://planet.kde.org/"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:265
 #, kde-format
 msgid "Phone"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:267
-#: contacts/qml/private/ContactEditorPage.qml:313
-#: contacts/qml/private/ContactEditorPage.qml:381
-#: contacts/qml/private/ContactEditorPage.qml:423
+#: contacts/qml/private/ContactEditorPage.qml:277
+#: contacts/qml/private/ContactEditorPage.qml:323
+#: contacts/qml/private/ContactEditorPage.qml:391
+#: contacts/qml/private/ContactEditorPage.qml:433
 #, kde-format
 msgid "Home"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:268
-#: contacts/qml/private/ContactEditorPage.qml:314
-#: contacts/qml/private/ContactEditorPage.qml:382
-#: contacts/qml/private/ContactEditorPage.qml:424
-#, kde-format
-msgid "Work"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:269
-#: contacts/qml/private/ContactEditorPage.qml:315
-#, kde-format
-msgid "Messaging"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:270
-#: contacts/qml/private/ContactEditorPage.qml:316
-#, kde-format
-msgid "Voice"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:271
-#: contacts/qml/private/ContactEditorPage.qml:317
-#, kde-format
-msgid "Fax"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:272
-#: contacts/qml/private/ContactEditorPage.qml:318
-#, kde-format
-msgid "Cell"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:273
-#: contacts/qml/private/ContactEditorPage.qml:319
-#, kde-format
-msgid "Video"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:274
-#: contacts/qml/private/ContactEditorPage.qml:320
-#, kde-format
-msgid "Mailbox"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:275
-#: contacts/qml/private/ContactEditorPage.qml:321
-#, kde-format
-msgid "Modem"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:276
-#: contacts/qml/private/ContactEditorPage.qml:322
-#, kde-format
-msgid "Car"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:277
-#: contacts/qml/private/ContactEditorPage.qml:323
-#, kde-format
-msgid "ISDN"
-msgstr ""
-
 #: contacts/qml/private/ContactEditorPage.qml:278
 #: contacts/qml/private/ContactEditorPage.qml:324
+#: contacts/qml/private/ContactEditorPage.qml:392
+#: contacts/qml/private/ContactEditorPage.qml:434
 #, kde-format
-msgid "PCS"
+msgid "Work"
 msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:279
 #: contacts/qml/private/ContactEditorPage.qml:325
 #, kde-format
-msgid "Pager"
+msgid "Messaging"
 msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:280
+#: contacts/qml/private/ContactEditorPage.qml:326
+#, kde-format
+msgid "Voice"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:281
+#: contacts/qml/private/ContactEditorPage.qml:327
+#, kde-format
+msgid "Fax"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:282
+#: contacts/qml/private/ContactEditorPage.qml:328
+#, kde-format
+msgid "Cell"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:283
+#: contacts/qml/private/ContactEditorPage.qml:329
+#, kde-format
+msgid "Video"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:284
+#: contacts/qml/private/ContactEditorPage.qml:330
+#, kde-format
+msgid "Mailbox"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:285
+#: contacts/qml/private/ContactEditorPage.qml:331
+#, kde-format
+msgid "Modem"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:286
+#: contacts/qml/private/ContactEditorPage.qml:332
+#, kde-format
+msgid "Car"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:287
+#: contacts/qml/private/ContactEditorPage.qml:333
+#, kde-format
+msgid "ISDN"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:288
+#: contacts/qml/private/ContactEditorPage.qml:334
+#, kde-format
+msgid "PCS"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:289
+#: contacts/qml/private/ContactEditorPage.qml:335
+#, kde-format
+msgid "Pager"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:290
 #, kde-format
 msgid "Undefined"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:337
+#: contacts/qml/private/ContactEditorPage.qml:347
 #, kde-format
 msgid "+33 7 55 23 68 67"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:364
+#: contacts/qml/private/ContactEditorPage.qml:374
 #, fuzzy, kde-format
 #| msgid "Email:"
 msgid "E-mail"
 msgstr "E-pasts:"
 
-#: contacts/qml/private/ContactEditorPage.qml:383
+#: contacts/qml/private/ContactEditorPage.qml:393
 #, kde-format
 msgid "Other"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:404
+#: contacts/qml/private/ContactEditorPage.qml:414
 #, fuzzy, kde-format
 #| msgid "Remove Tag"
 msgid "Remove email"
 msgstr "Noņemt atzīmi"
 
-#: contacts/qml/private/ContactEditorPage.qml:425
+#: contacts/qml/private/ContactEditorPage.qml:435
 #, kde-format
 msgid "Both"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:426
+#: contacts/qml/private/ContactEditorPage.qml:436
 #, kde-format
 msgid "Other…"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:435
+#: contacts/qml/private/ContactEditorPage.qml:445
 #, kde-format
 msgid "user@example.org"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:444
+#: contacts/qml/private/ContactEditorPage.qml:454
 #, fuzzy, kde-format
 #| msgid "Add Reminder"
 msgid "Add email"
 msgstr "Pievienot atgādinājumu"
 
-#: contacts/qml/private/ContactEditorPage.qml:464
+#: contacts/qml/private/ContactEditorPage.qml:474
 #, kde-format
 msgid "Instant Messenger"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:505
+#: contacts/qml/private/ContactEditorPage.qml:515
 #, kde-format
 msgid "protocol:person@example.com"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:554
+#: contacts/qml/private/ContactEditorPage.qml:565
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Save"
 msgstr "Saglabāt"
 
-#: contacts/qml/private/ContactEditorPage.qml:554
+#: contacts/qml/private/ContactEditorPage.qml:565
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:52
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Add"
 msgstr "Pievienot"
 
-#: contacts/qml/private/ContactEditorPage.qml:599
+#: contacts/qml/private/ContactEditorPage.qml:610
 #: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:604
+#: contacts/qml/private/ContactEditorPage.qml:615
 #: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
@@ -694,7 +790,7 @@ msgstr "Izvēlēties kalendār krāsu"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:88
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1068
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:936
 #, kde-format
 msgid "Name:"
 msgstr "Vārds:"
@@ -984,12 +1080,12 @@ msgstr "Jauns pasākums..."
 msgid "New Task…"
 msgstr "Jauns uzdevums..."
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:114
+#: contents/ui/Controls/IncidenceInfoContents.qml:115
 #, kde-format
 msgid "This event is recurring"
 msgstr ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:125
+#: contents/ui/Controls/IncidenceInfoContents.qml:126
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
@@ -997,78 +1093,78 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:147
+#: contents/ui/Controls/IncidenceInfoContents.qml:148
 #, kde-format
 msgctxt "%1 is a percentage number"
 msgid "<b>%1%</b> Complete"
 msgstr "Izpildīti <b>%1%</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:177
+#: contents/ui/Controls/IncidenceInfoContents.qml:178
 #, kde-format
 msgid "<b>Calendar:</b>"
 msgstr "<b>Kalendārs:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:189
+#: contents/ui/Controls/IncidenceInfoContents.qml:190
 #, kde-format
 msgid "<b>Tags:</b>"
 msgstr "<b>Atzīmes:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:202
+#: contents/ui/Controls/IncidenceInfoContents.qml:203
 #, kde-format
 msgid "Remove %1 tag"
 msgstr "Noņemt atzīmi %1"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:214
+#: contents/ui/Controls/IncidenceInfoContents.qml:215
 #, kde-format
 msgid "<b>Date:</b>"
 msgstr "<b>Datums:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:241
+#: contents/ui/Controls/IncidenceInfoContents.qml:242
 #, kde-format
 msgid "<b>Time:</b>"
 msgstr "<b>Laiks:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:268
+#: contents/ui/Controls/IncidenceInfoContents.qml:269
 #, kde-format
 msgid "<b>Duration:</b>"
 msgstr "<b>Ilgums:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:282
+#: contents/ui/Controls/IncidenceInfoContents.qml:283
 #, kde-format
 msgid "<b>Priority level:</b>"
 msgstr "<b>Prioritātes līmenis:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:294
+#: contents/ui/Controls/IncidenceInfoContents.qml:295
 #, kde-format
 msgid "<b>Completed:</b>"
 msgstr "<b>Pabeigts:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:314
+#: contents/ui/Controls/IncidenceInfoContents.qml:315
 #, kde-format
 msgid "<b>Recurrence:</b>"
 msgstr "<b>Atkārtot:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:337
+#: contents/ui/Controls/IncidenceInfoContents.qml:338
 #, kde-format
 msgid "Except on:"
 msgstr "Izņemot:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:367
+#: contents/ui/Controls/IncidenceInfoContents.qml:368
 #, kde-format
 msgid "<b>Location:</b>"
 msgstr "<b>Atrašanās vieta/saite:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:424
+#: contents/ui/Controls/IncidenceInfoContents.qml:425
 #, kde-format
 msgid "Unable to find location."
 msgstr "Atrašanās vieta nav atrasta."
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:459
+#: contents/ui/Controls/IncidenceInfoContents.qml:460
 #, kde-format
 msgid "<b>Description:</b>"
 msgstr "Apraksts:"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:474
+#: contents/ui/Controls/IncidenceInfoContents.qml:475
 #, kde-format
 msgid "<b>Attachment:</b>"
 msgid_plural "<b>Attachments:</b>"
@@ -1076,33 +1172,33 @@ msgstr[0] "<b>Pielikumi:</b>"
 msgstr[1] "<b>Pielikums:</b>"
 msgstr[2] "<b>Pielikumi:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:499
+#: contents/ui/Controls/IncidenceInfoContents.qml:500
 #, kde-format
 msgid "<b>Reminders:</b>"
 msgstr "<b>Atgādinājumi:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:524
+#: contents/ui/Controls/IncidenceInfoContents.qml:525
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:541
+#: contents/ui/Controls/IncidenceInfoContents.qml:542
 #, fuzzy, kde-format
 #| msgid "<b>Guests:</b>"
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Viesi:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:553
+#: contents/ui/Controls/IncidenceInfoContents.qml:554
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>Viesi:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:587
+#: contents/ui/Controls/IncidenceInfoContents.qml:588
 #, kde-format
 msgid "Super-task"
 msgstr ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:612
+#: contents/ui/Controls/IncidenceInfoContents.qml:613
 #, fuzzy, kde-format
 #| msgid "Add Sub-Task"
 msgid "Sub-task"
@@ -1359,167 +1455,166 @@ msgstr "Dzēst tikai šo"
 msgid "Delete All"
 msgstr "Dzēst visu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:41
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:42
 #, kde-format
 msgctxt "%1 is incidence type"
 msgid "Edit %1"
 msgstr "Rediģēt %1 "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:42
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:43
 #, kde-format
 msgctxt "%1 is incidence type"
 msgid "Add %1"
 msgstr "Pievienot %1"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:134
 #, kde-format
 msgid "Invalid dates provided."
 msgstr "Doti spēkā neesoši datumi."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:133
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:134
 #, kde-format
 msgid "End date cannot be before start date."
 msgstr "Beigu datums nevar atrasties pirms sākuma datuma."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:146
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:147
 #, kde-format
 msgid "Calendar:"
 msgstr "Kalendārs:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:174
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:175
 #, kde-format
 msgid "Summary:"
 msgstr "Kopsavilkums:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:185
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:186
 #, kde-format
 msgid "Completion:"
 msgstr "Izpildījums:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:204
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:205
 #, kde-format
 msgid "Priority:"
 msgstr "Prioritāte:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:212
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:213
 #, kde-format
 msgid "Unassigned"
 msgstr "Nav norādīta"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:213
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:214
 #, kde-format
 msgid "1 (Highest Priority)"
 msgstr "1 (Augstākā prioritāte)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:214
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:215
 #, kde-format
 msgid "2"
 msgstr "2"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:215
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:216
 #, kde-format
 msgid "3"
 msgstr "3"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:216
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:217
 #, kde-format
 msgid "4"
 msgstr "4"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:217
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:218
 #, kde-format
 msgid "5 (Medium Priority)"
 msgstr "5 (Vidēja prioritāte)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:218
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:219
 #, kde-format
 msgid "6"
 msgstr "6"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:219
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
 #, kde-format
 msgid "7"
 msgstr "7"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:221
 #, kde-format
 msgid "8"
 msgstr "8"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:221
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:222
 #, kde-format
 msgid "9 (Lowest Priority)"
 msgstr "9 (Zemākā prioritāte)"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:234
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:235
 #, kde-format
 msgid "All day"
 msgstr "Visa diena"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:266
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:267
 #, kde-format
 msgid "Start:"
 msgstr "Sākums:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:314
 #, kde-format
 msgid "Due:"
 msgstr ""
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:313
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:314
 #, kde-format
 msgid "End:"
 msgstr "Beidzas:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:360
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:361
 #, kde-format
 msgid "Timezone:"
 msgstr "Laika zona:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:379
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:380
 #, kde-format
 msgid "Repeat:"
 msgstr "Atkārtot:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:409
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:610
-#: contents/ui/KalendarUtils/labelutils.js:109
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:410
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:611
+#: contents/ui/KalendarUtils/labelutils.js:82
 #, kde-format
 msgid "Never"
 msgstr "Nekad"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:410
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:411
 #, kde-format
 msgid "Daily"
 msgstr "Katru dienu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:411
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:412
 #, kde-format
 msgid "Weekly"
 msgstr "Katru nedēļu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:412
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:413
 #, kde-format
 msgid "Monthly"
 msgstr "Katru mēnesi"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:413
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:414
 #, kde-format
 msgid "Yearly"
 msgstr "Katru gadu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:414
-#: contents/ui/KalendarUtils/labelutils.js:45
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
 #, kde-format
 msgid "Custom"
 msgstr "Pielāgots"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:445
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:446
 #, kde-format
 msgid "Every:"
 msgstr "Katru:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:492
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:493
 #, kde-format
 msgid "day"
 msgid_plural "days"
@@ -1527,7 +1622,7 @@ msgstr[0] "dienu"
 msgstr[1] "dienu"
 msgstr[2] "dienas"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:493
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:494
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
@@ -1535,7 +1630,7 @@ msgstr[0] "nedēļu"
 msgstr[1] "nedēļu"
 msgstr[2] "nedēļas"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:494
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:495
 #, kde-format
 msgid "month"
 msgid_plural "months"
@@ -1543,7 +1638,7 @@ msgstr[0] "mēnešu"
 msgstr[1] "mēnesi"
 msgstr[2] "mēnešus"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:495
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:496
 #, kde-format
 msgid "year"
 msgid_plural "years"
@@ -1551,39 +1646,39 @@ msgstr[0] "gadu"
 msgstr[1] "gadu"
 msgstr[2] "gadus"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:565
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:566
 #, kde-format
 msgid "On:"
 msgstr "Datums:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:573
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:574
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
 msgstr "Katru %1 mēneša dienu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:585
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:586
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
 msgstr "Katra menēša %1 nedēļas %2 dienu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
 #, kde-format
 msgid "Ends:"
 msgstr "Beidzas:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:611
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:612
 #, kde-format
 msgid "On"
 msgstr "Datumā"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:612
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:613
 #, kde-format
 msgid "After"
 msgstr "Pēc"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:648
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:649
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
@@ -1591,156 +1686,129 @@ msgstr[0] "reižu"
 msgstr[1] "reizi"
 msgstr[2] "reizes"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:654
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:655
 #, kde-format
 msgid "Exceptions:"
 msgstr "Izņēmumi:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:660
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:661
 #, kde-format
 msgid "Add Recurrence Exception"
 msgstr "Pievienot atkārtošanās izņēmumu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:703
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:704
 #, kde-format
 msgid "Location:"
 msgstr "Vieta:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:728
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:812
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1075
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:729
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:943
 #, kde-format
 msgid "Optional"
 msgstr "Nav obligāts"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:775
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:776
 #, kde-format
 msgid "Show map"
 msgstr "Rādīt karti"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:806
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:807
 #, kde-format
 msgid "Description:"
 msgstr "Apraksts: "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:827
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:828
 #, kde-format
 msgid "Tags:"
 msgstr "Atzīmes:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:836
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:837
 #: models/todosortfilterproxymodel.cpp:147
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ", "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:837
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:838
 #, kde-format
 msgid "Tap to set tags…"
 msgstr "Pieskarieties lai pievienotu atzīmes..."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:837
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:838
 #, kde-format
 msgid "Click to set tags…"
 msgstr "Uzspiediet, lai pievienotu atzīmes..."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:854
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:855
 #, kde-format
 msgid "Manage tags…"
 msgstr "Pārvaldīt atzīmes..."
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:865
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:866
 #, kde-format
 msgid "Reminders:"
 msgstr "Atgādinājumi:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:985
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
-msgid "minutes"
-msgstr "%1 minūtes"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:986
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
-msgid "hours"
-msgstr "%1 stundas"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:987
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or more"
-#| msgid "%1 days"
-msgid "days"
-msgstr "%1 dienas"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:999
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
-msgid "before start of event"
-msgstr "%1 pirms pasākuma sākuma"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1000
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
-msgid "after start of event"
-msgstr "%1 pēc pasākuma sākuma"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1019
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:887
 #, kde-format
 msgid "Add Reminder"
 msgstr "Pievienot atgādinājumu"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1033
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:901
 #, kde-format
 msgid "Attendees:"
 msgstr "Dalībnieki:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1093
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:961
 #, kde-format
 msgid "Email:"
 msgstr "E-pasts:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1100
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:968
 #, kde-format
 msgid "Required"
 msgstr "Nepieciešams:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1109
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:977
 #, kde-format
 msgid "Status:"
 msgstr "Statuss:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1133
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1001
 #, kde-format
 msgid "Request RSVP"
 msgstr "Pieprasīt RSVP"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1147
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1015
 #, kde-format
 msgid "Add Attendee"
 msgstr "Pievienot dalībnieku"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1158
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1026
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Izvēlēties no kontaktiem"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1162
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1030
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Pievienot manuāli"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1176
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1044
 #, kde-format
 msgid "Attachments:"
 msgstr "Pielikumi:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1199
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1067
 #, kde-format
 msgid "Add Attachment"
 msgstr "Pievienot pielikumu"
+
+#: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
+#, kde-format
+msgid "No results found"
+msgstr ""
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
@@ -1835,49 +1903,7 @@ msgstr "Iestatījumi"
 msgid "View all tasks"
 msgstr "Apskatīt visus uzdevumus"
 
-#: contents/ui/KalendarUtils/labelutils.js:33
-#, kde-format
-msgctxt "%1 is 2 or more"
-msgid "%1 days"
-msgstr "%1 dienas"
-
-#: contents/ui/KalendarUtils/labelutils.js:35
-#, kde-format
-msgid "1 day"
-msgstr "1 dienu"
-
-#: contents/ui/KalendarUtils/labelutils.js:37
-#, kde-format
-msgctxt "%1 is 2 or mores"
-msgid "%1 hours"
-msgstr "%1 stundas"
-
-#: contents/ui/KalendarUtils/labelutils.js:39
-#, kde-format
-msgid "1 hour"
-msgstr "1 stundu"
-
-#: contents/ui/KalendarUtils/labelutils.js:41
-#, kde-format
-msgid "%1 minutes"
-msgstr "%1 minūtes"
-
-#: contents/ui/KalendarUtils/labelutils.js:48
-#, kde-format
-msgid "%1 before start of event"
-msgstr "%1 pirms pasākuma sākuma"
-
-#: contents/ui/KalendarUtils/labelutils.js:50
-#, kde-format
-msgid "%1 after start of event"
-msgstr "%1 pēc pasākuma sākuma"
-
-#: contents/ui/KalendarUtils/labelutils.js:52
-#, kde-format
-msgid "On event start"
-msgstr "Pasākuma sākumā"
-
-#: contents/ui/KalendarUtils/labelutils.js:57
+#: contents/ui/KalendarUtils/labelutils.js:30
 #, kde-format
 msgid "Every week"
 msgid_plural "Every %1 weeks"
@@ -1885,7 +1911,7 @@ msgstr[0] "Katras %1 nedēļas"
 msgstr[1] "Katru %1 nedēļu"
 msgstr[2] "Katras %1 nedēļas"
 
-#: contents/ui/KalendarUtils/labelutils.js:60
+#: contents/ui/KalendarUtils/labelutils.js:33
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
@@ -1893,8 +1919,8 @@ msgstr[0] "Katras %1 nedēļas"
 msgstr[1] "Katru %1 nedēļu"
 msgstr[2] "Katras %1 nedēļas"
 
-#: contents/ui/KalendarUtils/labelutils.js:93
-#: contents/ui/KalendarUtils/labelutils.js:132
+#: contents/ui/KalendarUtils/labelutils.js:66
+#: contents/ui/KalendarUtils/labelutils.js:105
 #, kde-format
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
@@ -1902,7 +1928,7 @@ msgstr[0] "Katru %1 gadu %2 %3"
 msgstr[1] "Katra %1 gada %2 %3"
 msgstr[2] "Katru %1 gadu %2 %3"
 
-#: contents/ui/KalendarUtils/labelutils.js:112
+#: contents/ui/KalendarUtils/labelutils.js:85
 #, kde-format
 msgid "Every minute"
 msgid_plural "Every %1 minutes"
@@ -1910,7 +1936,7 @@ msgstr[0] "Katru %1 minūti"
 msgstr[1] "Katru %1 minūti"
 msgstr[2] "Katras %1 minūtes"
 
-#: contents/ui/KalendarUtils/labelutils.js:115
+#: contents/ui/KalendarUtils/labelutils.js:88
 #, kde-format
 msgid "Every hour"
 msgid_plural "Every %1 hours"
@@ -1918,7 +1944,7 @@ msgstr[0] "Katru %1 stundu"
 msgstr[1] "Katru %1 stundu"
 msgstr[2] "Katras %1 stundas"
 
-#: contents/ui/KalendarUtils/labelutils.js:118
+#: contents/ui/KalendarUtils/labelutils.js:91
 #, kde-format
 msgid "Every day"
 msgid_plural "Every %1 days"
@@ -1926,8 +1952,8 @@ msgstr[0] "Katru %1 dienu"
 msgstr[1] "Katru %1 dienu"
 msgstr[2] "Katras %1 dienas"
 
-#: contents/ui/KalendarUtils/labelutils.js:124
-#: contents/ui/KalendarUtils/labelutils.js:128
+#: contents/ui/KalendarUtils/labelutils.js:97
+#: contents/ui/KalendarUtils/labelutils.js:101
 #, kde-format
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
@@ -1935,7 +1961,7 @@ msgstr[0] "Katra %1 mēneša %2. datumā"
 msgstr[1] "Katra %1 mēneša %2. datumā"
 msgstr[2] "Katru %1 mēnešu %2. datumā"
 
-#: contents/ui/KalendarUtils/labelutils.js:136
+#: contents/ui/KalendarUtils/labelutils.js:109
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
@@ -1943,62 +1969,62 @@ msgstr[0] "Katra %1 gada %2. dienā"
 msgstr[1] "Katra %1 gada %2. dienā"
 msgstr[2] "Katru %1 gadu %2. dienā"
 
-#: contents/ui/KalendarUtils/labelutils.js:142
+#: contents/ui/KalendarUtils/labelutils.js:115
 #, kde-format
 msgid "Complex recurrence rule"
 msgstr "Sarežģīts atkārtošanās cikls"
 
-#: contents/ui/KalendarUtils/labelutils.js:145
+#: contents/ui/KalendarUtils/labelutils.js:118
 #, kde-format
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: contents/ui/KalendarUtils/labelutils.js:153
+#: contents/ui/KalendarUtils/labelutils.js:126
 #, kde-format
 msgid "Never ends"
 msgstr "Nekad nebeidzas"
 
-#: contents/ui/KalendarUtils/labelutils.js:155
+#: contents/ui/KalendarUtils/labelutils.js:128
 #, kde-format
 msgid "Ends on %1"
 msgstr "Beidzas %1"
 
-#: contents/ui/KalendarUtils/labelutils.js:157
+#: contents/ui/KalendarUtils/labelutils.js:130
 #, kde-format
 msgid "Ends after %1 occurrences"
 msgstr "Beidzas pēc %1 atkārtojuma reizēm"
 
-#: contents/ui/KalendarUtils/labelutils.js:216
+#: contents/ui/KalendarUtils/labelutils.js:189
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Highest priority)"
 msgstr "%1 (Augstākā prioritāte)"
 
-#: contents/ui/KalendarUtils/labelutils.js:218
+#: contents/ui/KalendarUtils/labelutils.js:191
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-high priority)"
 msgstr "%1 (Vidēji augsta pritoritāte)"
 
-#: contents/ui/KalendarUtils/labelutils.js:220
+#: contents/ui/KalendarUtils/labelutils.js:193
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Medium priority)"
 msgstr "%1 (Vidēja prioritāte)"
 
-#: contents/ui/KalendarUtils/labelutils.js:222
+#: contents/ui/KalendarUtils/labelutils.js:195
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Mid-low priority)"
 msgstr "%1 (Vidēji zema prioritāte)"
 
-#: contents/ui/KalendarUtils/labelutils.js:224
+#: contents/ui/KalendarUtils/labelutils.js:197
 #, kde-format
 msgctxt "%1 is the priority level number"
 msgid "%1 (Lowest priority)"
 msgstr "%1 (Zemākā prioritāte)"
 
-#: contents/ui/KalendarUtils/labelutils.js:226
+#: contents/ui/KalendarUtils/labelutils.js:199
 #, kde-format
 msgid "No set priority level"
 msgstr "Nav atzīmēta prioritāte"
@@ -3136,9 +3162,6 @@ msgstr "Pievienot pielikumu"
 
 #~ msgid "Restart"
 #~ msgstr "Atjaunināt"
-
-#~ msgid "Remove"
-#~ msgstr "Noņemt"
 
 #~ msgid "Calendar"
 #~ msgstr "Kalendārs"
