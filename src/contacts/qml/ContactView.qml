@@ -28,13 +28,13 @@ Kirigami.ScrollablePage {
         text: i18n('Create')
         Kirigami.Action {
             text: i18n('New Contact')
-            onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("private/ContactEditorPage.qml"), {
+            onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("./private/contact_editor/ContactEditorPage.qml"), {
                 mode: ContactEditor.CreateMode,
             })
         }
         Kirigami.Action {
             text: i18n('New Contact Group')
-            onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("private/ContactGroupEditorPage.qml"), {
+            onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("./private/ContactGroupEditorPage.qml"), {
                 mode: ContactGroupEditor.CreateMode,
             })
         }
