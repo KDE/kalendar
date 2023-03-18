@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-17 03:16+0000\n"
-"PO-Revision-Date: 2023-03-14 04:31+0100\n"
+"PO-Revision-Date: 2023-03-17 05:45+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -46,11 +46,10 @@ msgid "Refresh All Calendars"
 msgstr "ყველა კალენდარის განახლება"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Custom"
+#, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
-msgstr "სხვა"
+msgstr "ხელით მითითება"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
@@ -78,10 +77,9 @@ msgid "after start of event"
 msgstr "მოვლენის დაწყებიდან გასულია"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
-#, fuzzy, kde-format
-#| msgid "Remove Tag"
+#, kde-format
 msgid "Remove"
-msgstr "ჭდის წაშლა"
+msgstr "წაშლა"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -567,15 +565,14 @@ msgid "Alternative name"
 msgstr "ალტერნატიული სახელი"
 
 #: contacts/qml/private/ContactEditorPage.qml:247
-#, fuzzy, kde-format
-#| msgid "Blog Feed:"
+#, kde-format
 msgid "Blog Feed"
-msgstr "ბლოგის ლენტა:"
+msgstr "ბლოგის ლენტა"
 
 #: contacts/qml/private/ContactEditorPage.qml:250
 #, kde-format
 msgid "https://planet.kde.org/"
-msgstr ""
+msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/ContactEditorPage.qml:262
 #, kde-format
@@ -1343,6 +1340,8 @@ msgid ""
 "Item \"%1\" has sub-items. Do you want to delete all related items, or just "
 "the currently selected item?"
 msgstr ""
+"ჩანაწერს \"%1\" ქვეჩანაწერები გააჩნია. მართლა გნებავთ ყველა შესაბამისი "
+"ჩანაწერის წაშლა, თუ მხოლოდ მონიშნულის?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:62
 #, kde-format
@@ -1732,7 +1731,7 @@ msgstr "მიმაგრების დამატება"
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
 msgid "No results found"
-msgstr ""
+msgstr "შედეგების გარეშე"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
@@ -2088,7 +2087,7 @@ msgstr "წკაპი"
 #: contents/ui/MainViews/BasicMonthListView.qml:289
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
-msgstr ""
+msgstr "დღეს დაგეგმილი არაფერია. დასამატებლად %1."
 
 #: contents/ui/MainViews/BasicMonthListView.qml:412
 #, kde-format
@@ -2651,10 +2650,9 @@ msgid "New Contact…"
 msgstr "ახალი კონტაქტი…"
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "ახალი კონტაქტი…"
+msgstr "კონტაქტების ახალი ჯგუფი…"
 
 #: kalendarapplication.cpp:336
 #, kde-format
