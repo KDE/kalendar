@@ -75,7 +75,8 @@ msgid "after start of event"
 msgstr "après le début de l'évènement"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove"
 msgid "Remove"
 msgstr "Supprimer"
 
