@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-17 00:58+0000\n"
-"PO-Revision-Date: 2023-03-15 20:50+0100\n"
+"PO-Revision-Date: 2023-03-18 07:53+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -43,8 +43,7 @@ msgid "Refresh All Calendars"
 msgstr "Actualiser tous les agendas"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Custom"
+#, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Personnalisé"
@@ -565,15 +564,14 @@ msgid "Alternative name"
 msgstr "Autre nom"
 
 #: contacts/qml/private/ContactEditorPage.qml:250
-#, fuzzy, kde-format
-#| msgid "Blog Feed:"
+#, kde-format
 msgid "Blog Feed"
-msgstr "Flux de blogue :"
+msgstr "Fil de blog"
 
 #: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "https://planet.kde.org/"
-msgstr ""
+msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/ContactEditorPage.qml:265
 #, kde-format
@@ -1742,7 +1740,7 @@ msgstr "Ajouter une pièce jointe"
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
 msgid "No results found"
-msgstr ""
+msgstr "Aucun résultat trouvé"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
