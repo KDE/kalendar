@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-17 00:58+0000\n"
-"PO-Revision-Date: 2023-03-08 14:30+0100\n"
+"PO-Revision-Date: 2023-03-17 15:19+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -45,8 +45,7 @@ msgid "Refresh All Calendars"
 msgstr "Obnovit všechny kalendáře"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Custom"
+#, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Vlastní"
@@ -77,10 +76,9 @@ msgid "after start of event"
 msgstr "po zahájení události"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
-#, fuzzy, kde-format
-#| msgid "Remove Tag"
+#, kde-format
 msgid "Remove"
-msgstr "Odstranit značku"
+msgstr "Odstranit"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -459,13 +457,12 @@ msgstr "Upravit kontakt"
 msgid "Address book:"
 msgstr "Kniha adres:"
 
+# Tohle vypadá na název vlastnosti. Jméno bycvh nechal pro lidi a zvířata.
 #: contacts/qml/private/ContactEditorPage.qml:159
 #: contacts/qml/private/ContactEditorPage.qml:166
-#, fuzzy, kde-format
-#| msgctxt "contact's name"
-#| msgid "Name"
+#, kde-format
 msgid "Name"
-msgstr "Jméno"
+msgstr "Název"
 
 #: contacts/qml/private/ContactEditorPage.qml:170
 #, kde-format
@@ -473,10 +470,9 @@ msgid "Contact name"
 msgstr "Jméno kontaktu"
 
 #: contacts/qml/private/ContactEditorPage.qml:189
-#, fuzzy, kde-format
-#| msgid "Honorific prefix:"
+#, kde-format
 msgid "Honorific prefix"
-msgstr "Čestný titul před jménem:"
+msgstr "Čestný titul před jménem"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
@@ -504,10 +500,9 @@ msgid "Prof."
 msgstr "Prof."
 
 #: contacts/qml/private/ContactEditorPage.qml:201
-#, fuzzy, kde-format
-#| msgid "Given name:"
+#, kde-format
 msgid "Given name"
-msgstr "Jméno:"
+msgstr "Jméno"
 
 #: contacts/qml/private/ContactEditorPage.qml:204
 #, kde-format
@@ -515,10 +510,9 @@ msgid "First name or chosen name"
 msgstr "Jméno nebo zvolené jméno"
 
 #: contacts/qml/private/ContactEditorPage.qml:210
-#, fuzzy, kde-format
-#| msgid "Additional name:"
+#, kde-format
 msgid "Additional name"
-msgstr "Další jméno:"
+msgstr "Další jméno"
 
 #: contacts/qml/private/ContactEditorPage.qml:213
 #, kde-format
@@ -536,10 +530,9 @@ msgid "Surname or last name"
 msgstr "Příjmení nebo poslední jméno"
 
 #: contacts/qml/private/ContactEditorPage.qml:228
-#, fuzzy, kde-format
-#| msgid "Honorific suffix:"
+#, kde-format
 msgid "Honorific suffix"
-msgstr "Čestný titul za jménem:"
+msgstr "Čestný titul za jménem"
 
 #: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
@@ -562,10 +555,9 @@ msgid "Sr."
 msgstr "St."
 
 #: contacts/qml/private/ContactEditorPage.qml:239
-#, fuzzy, kde-format
-#| msgid "Nickname:"
+#, kde-format
 msgid "Nickname"
-msgstr "Přezdívka:"
+msgstr "Přezdívka"
 
 #: contacts/qml/private/ContactEditorPage.qml:242
 #, kde-format
@@ -573,21 +565,19 @@ msgid "Alternative name"
 msgstr "Alternativní název"
 
 #: contacts/qml/private/ContactEditorPage.qml:250
-#, fuzzy, kde-format
-#| msgid "Blog Feed:"
+#, kde-format
 msgid "Blog Feed"
-msgstr "Kanál blogu:"
+msgstr "Kanál blogu"
 
 #: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "https://planet.kde.org/"
-msgstr ""
+msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/ContactEditorPage.qml:265
-#, fuzzy, kde-format
-#| msgid "Phone:"
+#, kde-format
 msgid "Phone"
-msgstr "Telefon:"
+msgstr "Telefon"
 
 #: contacts/qml/private/ContactEditorPage.qml:277
 #: contacts/qml/private/ContactEditorPage.qml:323
@@ -682,10 +672,9 @@ msgid "+33 7 55 23 68 67"
 msgstr "+33 7 55 23 68 67"
 
 #: contacts/qml/private/ContactEditorPage.qml:374
-#, fuzzy, kde-format
-#| msgid "E-mail:"
+#, kde-format
 msgid "E-mail"
-msgstr "E-mail:"
+msgstr "E-mail"
 
 #: contacts/qml/private/ContactEditorPage.qml:393
 #, kde-format
@@ -720,12 +709,12 @@ msgstr "Přidat e-mail"
 #: contacts/qml/private/ContactEditorPage.qml:474
 #, kde-format
 msgid "Instant Messenger"
-msgstr ""
+msgstr "Internetový komunikátor"
 
 #: contacts/qml/private/ContactEditorPage.qml:515
 #, kde-format
 msgid "protocol:person@example.com"
-msgstr ""
+msgstr "protokol:franta@priklad.cz"
 
 #: contacts/qml/private/ContactEditorPage.qml:565
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
@@ -771,10 +760,9 @@ msgid "Contact group name"
 msgstr "Název skupiny kontaktů"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:103
-#, fuzzy, kde-format
-#| msgid "Members:"
+#, kde-format
 msgid "Members"
-msgstr "Členové:"
+msgstr "Členové"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
@@ -893,15 +881,12 @@ msgid "%1:"
 msgstr "%1:"
 
 #: contacts/qml/private/ContactPage.qml:300
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgid "Instant Messaging"
-msgstr "Zprávy"
+msgstr "Instant Messaging"
 
 #: contacts/qml/private/ContactPage.qml:317
-#, fuzzy, kde-format
-#| msgctxt "Label for a phone number type"
-#| msgid "%1:"
+#, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
 msgstr "%1:"
@@ -1760,7 +1745,7 @@ msgstr "Přidat přílohu"
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
 msgid "No results found"
-msgstr ""
+msgstr "Nenalezeny žádné výsledky"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
@@ -2687,10 +2672,9 @@ msgid "New Contact…"
 msgstr "Nový kontakt…"
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "Nový kontakt…"
+msgstr "Nová skupina kontaktů..."
 
 #: kalendarapplication.cpp:336
 #, kde-format
