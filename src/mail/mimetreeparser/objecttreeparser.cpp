@@ -14,7 +14,6 @@
 
 #include <KMime/Message>
 
-#include <KCharsets>
 #include <QByteArray>
 #include <QDebug>
 #include <QMimeDatabase>

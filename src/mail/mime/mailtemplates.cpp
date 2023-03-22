@@ -15,7 +15,6 @@
 #include <QTextDocument>
 #include <QUuid>
 
-#include <KCodecs/KCharsets>
 #include <KMime/Types>
 
 #include "../mimetreeparser/objecttreeparser.h"
