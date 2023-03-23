@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-#include "kalendar_debug.h"
+#include "kalendar_calendar_debug.h"
 #include "utils.h"
 #include <KLocalizedString>
 #include <QBitArray>
@@ -100,7 +100,7 @@ void IncidenceWrapper::setIncidenceItem(const Akonadi::Item &incidenceItem)
         Q_EMIT incidenceItemChanged();
         Q_EMIT collectionIdChanged();
     } else {
-        qCWarning(KALENDAR_LOG) << "This is not an incidence item.";
+        qCWarning(KALENDAR_CALENDAR_LOG) << "This is not an incidence item.";
     }
 }
 
@@ -348,7 +348,7 @@ void IncidenceWrapper::setIncidenceEnd(const QDateTime &incidenceEnd, bool respe
         KCalendarCore::Todo::Ptr todo = m_incidence.staticCast<KCalendarCore::Todo>();
         todo->setDtDue(end);
     } else {
-        qCWarning(KALENDAR_LOG) << "Unknown incidence type";
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown incidence type";
     }
     Q_EMIT incidenceEndChanged();
     Q_EMIT incidenceEndDateDisplayChanged();
@@ -816,7 +816,7 @@ void IncidenceWrapper::setRegularRecurrence(IncidenceWrapper::RecurrenceInterval
         Q_EMIT recurrenceDataChanged();
         return;
     default:
-        qCWarning(KALENDAR_LOG) << "Unknown interval for recurrence" << interval;
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown interval for recurrence" << interval;
         return;
     }
 }
@@ -843,7 +843,7 @@ void IncidenceWrapper::clearRecurrences()
 void IncidenceWrapper::itemChanged(const Akonadi::Item &item)
 {
     if (item.hasPayload<KCalendarCore::Incidence::Ptr>()) {
-        qCDebug(KALENDAR_LOG) << item.payload<KCalendarCore::Incidence::Ptr>()->summary() << item.parentCollection().id();
+        qCDebug(KALENDAR_CALENDAR_LOG) << item.payload<KCalendarCore::Incidence::Ptr>()->summary() << item.parentCollection().id();
         setIncidenceItem(item);
     }
 }

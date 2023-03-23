@@ -94,7 +94,6 @@ Q_SIGNALS:
     void todoViewShowCompleted();
     void openKCommandBarAction();
     void refreshAll();
-    void openIncidence(const QVariantMap incidenceData, const QDateTime occurrence);
     void showIncidenceByUidRequested(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken);
 
 private:

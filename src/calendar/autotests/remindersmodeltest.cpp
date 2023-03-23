@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2023 Carl Schwan <carl@carlschwan.eu>
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
-#include "../remindersmodel.h"
+#include "../models/remindersmodel.h"
 #include <QObject>
 #include <QtTest/QtTest>
 

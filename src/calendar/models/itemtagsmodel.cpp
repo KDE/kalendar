@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-#include "kalendar_debug.h"
+#include "kalendar_calendar_debug.h"
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <QMetaEnum>
@@ -48,7 +48,7 @@ QVariant ItemTagsModel::data(const QModelIndex &idx, int role) const
     case IdRole:
         return tag.id();
     default:
-        qCWarning(KALENDAR_LOG) << "Unknown role for item tag:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown role for item tag:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }

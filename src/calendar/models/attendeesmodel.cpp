@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "attendeesmodel.h"
-#include "kalendar_debug.h"
+#include "kalendar_calendar_debug.h"
 #include <KContacts/Addressee>
 #include <KLocalizedString>
 #include <QMetaEnum>
@@ -52,7 +52,7 @@ QVariant AttendeeStatusModel::data(const QModelIndex &idx, int role) const
     case ValueRole:
         return value;
     default:
-        qCWarning(KALENDAR_LOG) << "Unknown role for attendee:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown role for attendee:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }
@@ -165,7 +165,7 @@ QVariant AttendeesModel::data(const QModelIndex &idx, int role) const
     case UidRole:
         return attendee.uid();
     default:
-        qCWarning(KALENDAR_LOG) << "Unknown role for attendee:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown role for attendee:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return {};
     }
 }
@@ -234,7 +234,7 @@ bool AttendeesModel::setData(const QModelIndex &idx, const QVariant &value, int 
         break;
     }
     default:
-        qCWarning(KALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Unknown role for incidence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
         return false;
     }
     m_incidence->setAttendees(currentAttendees);

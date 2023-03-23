@@ -105,6 +105,7 @@ Q_SIGNALS:
     void updateIncidenceDatesCompleted();
     void collectionColorsChanged();
     void incidenceAdded();
+    void openIncidence(const QVariantMap incidenceData, const QDateTime occurrence);
 
 private:
     Akonadi::ETMCalendar::Ptr m_calendar = nullptr;

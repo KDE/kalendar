@@ -3,6 +3,7 @@
 
 #include "calendarplugin.h"
 #include "calendarmanager.h"
+#include "config.h"
 #include "filter.h"
 #include "incidencewrapper.h"
 #include "models/hourlyincidencemodel.h"
@@ -11,20 +12,24 @@
 #include "models/itemtagsmodel.h"
 #include "models/monthmodel.h"
 #include "models/multidayincidencemodel.h"
+#include "models/remindersmodel.h"
 #include "models/timezonelistmodel.h"
 #include "models/todosortfilterproxymodel.h"
-#include "remindersmodel.h"
 #include "utils.h"
 
 #include <QAbstractListModel>
 #include <QQmlEngine>
 #include <QtQml>
 
-Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
-
 void CalendarPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QByteArray("org.kde.kalendar.calendar"));
+
+    qmlRegisterSingletonType<Config>(uri, 1, 0, "Config", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return Config::self();
+    });
 
     qmlRegisterSingletonType<Utils>(uri, 1, 0, "Utils", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)

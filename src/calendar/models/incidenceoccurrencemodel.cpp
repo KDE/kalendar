@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "incidenceoccurrencemodel.h"
-#include "kalendar_debug.h"
+#include "kalendar_calendar_debug.h"
 
 #include "../filter.h"
 #include "../utils.h"
@@ -122,7 +122,7 @@ void IncidenceOccurrenceModel::scheduleReset()
 void IncidenceOccurrenceModel::resetFromSource()
 {
     if (!m_coreCalendar) {
-        qCWarning(KALENDAR_LOG) << "Not resetting IOC from source as no core calendar set.";
+        qCWarning(KALENDAR_CALENDAR_LOG) << "Not resetting IOC from source as no core calendar set.";
         return;
     }
 

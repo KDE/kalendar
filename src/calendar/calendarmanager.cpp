@@ -9,11 +9,11 @@
 //  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
 
 #include "calendarmanager.h"
-#include "kalendarconfig.h"
 
-// Akonadi
+#include "config.h"
 #include "kalendar_calendar_debug.h"
 
+// Akonadi
 #include <Akonadi/AgentFilterProxyModel>
 #include <Akonadi/AgentInstanceModel>
 #include <Akonadi/AgentManager>
@@ -146,14 +146,15 @@ CalendarManager::CalendarManager(QObject *parent)
         qApp->exit(-1);
         return;
     }
+    auto calendarConfig = Config::self();
 
     auto colorProxy = new ColorProxyModel(this);
     colorProxy->setObjectName(QStringLiteral("Show calendar colors"));
     colorProxy->setDynamicSortFilter(true);
-    colorProxy->setStandardCollectionId(KalendarConfig::self()->lastUsedEventCollection());
+    colorProxy->setStandardCollectionId(calendarConfig->lastUsedEventCollection());
 
-    connect(KalendarConfig::self(), &KalendarConfig::lastUsedEventCollectionChanged, this, [colorProxy]() {
-        colorProxy->setStandardCollectionId(KalendarConfig::self()->lastUsedEventCollection());
+    connect(calendarConfig, &Config::lastUsedEventCollectionChanged, this, [calendarConfig, colorProxy]() {
+        colorProxy->setStandardCollectionId(calendarConfig->lastUsedEventCollection());
     });
     m_baseModel = colorProxy;
 
@@ -341,7 +342,7 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 {
     // Checks if default collection accepts this type of incidence
     auto mimeType = incidenceWrapper->incidencePtr()->mimeType();
-    Akonadi::Collection collection = m_calendar->collection(KalendarConfig::self()->lastUsedEventCollection());
+    Akonadi::Collection collection = m_calendar->collection(Config::self()->lastUsedEventCollection());
     bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
     bool hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
     if (collection.isValid() && supportsMimeType && hasRights) {
@@ -627,7 +628,7 @@ void CalendarManager::changeIncidenceCollection(Akonadi::Item item, qint64 colle
     auto job = new Akonadi::ItemMoveJob(item, newCollection);
     // Add some type of check here?
     connect(job, &KJob::result, job, [this, job, item, collectionId]() {
-        qCDebug(KALENDAR_LOG) << job->error();
+        qCDebug(KALENDAR_CALENDAR_LOG) << job->error();
 
         if (!job->error()) {
             const auto allChildren = m_calendar->childIncidences(item.id());
@@ -760,66 +761,67 @@ void CalendarManager::toggleCollection(qint64 collectionId)
     }
 }
 
-void CalendarManager::showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken) const
+void CalendarManager::showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken)
+{
     auto incidence = m_calendar->incidence(uid);
-if (!incidence) {
-    return;
-}
-
-const auto collection = m_calendar->item(incidence).parentCollection();
-const auto incidenceEnd = incidence->endDateForStart(occurrence);
-KFormat format;
-KCalendarCore::Duration duration(occurrence, incidenceEnd);
-
-KSharedConfig::Ptr config = KSharedConfig::openConfig();
-KConfigGroup rColorsConfig(config, "Resources Colors");
-const QStringList colorKeyList = rColorsConfig.keyList();
-
-QColor incidenceColor;
-
-for (const QString &key : colorKeyList) {
-    if (key == QString::number(collection.id())) {
-        incidenceColor = rColorsConfig.readEntry(key, QColor("blue"));
+    if (!incidence) {
+        return;
     }
-}
 
-auto incidenceData = QVariantMap{
-    {QStringLiteral("text"), incidence->summary()},
-    {QStringLiteral("description"), incidence->description()},
-    {QStringLiteral("location"), incidence->location()},
-    {QStringLiteral("startTime"), occurrence},
-    {QStringLiteral("endTime"), incidenceEnd},
-    {QStringLiteral("allDay"), incidence->allDay()},
-    {QStringLiteral("todoCompleted"), false},
-    {QStringLiteral("priority"), incidence->priority()},
-    {QStringLiteral("durationString"), duration.asSeconds() > 0 ? format.formatSpelloutDuration(duration.asSeconds() * 1000) : QString()},
-    {QStringLiteral("recurs"), incidence->recurs()},
-    {QStringLiteral("hasReminders"), incidence->alarms().length() > 0},
-    {QStringLiteral("isOverdue"), false},
-    {QStringLiteral("isReadOnly"), collection.rights().testFlag(Akonadi::Collection::ReadOnly)},
-    {QStringLiteral("color"), QVariant::fromValue(incidenceColor)},
-    {QStringLiteral("collectionId"), collection.id()},
-    {QStringLiteral("incidenceId"), uid},
-    {QStringLiteral("incidenceType"), incidence->type()},
-    {QStringLiteral("incidenceTypeStr"), incidence->typeStr()},
-    {QStringLiteral("incidenceTypeIcon"), incidence->iconName()},
-    {QStringLiteral("incidencePtr"), QVariant::fromValue(incidence)},
-};
+    const auto collection = m_calendar->item(incidence).parentCollection();
+    const auto incidenceEnd = incidence->endDateForStart(occurrence);
+    KFormat format;
+    KCalendarCore::Duration duration(occurrence, incidenceEnd);
 
-if (incidence->type() == KCalendarCore::Incidence::TypeTodo) {
-    const auto todo = incidence.staticCast<KCalendarCore::Todo>();
-    incidenceData[QStringLiteral("todoCompleted")] = todo->isCompleted();
-    incidenceData[QStringLiteral("isOverdue")] = todo->isOverdue();
-}
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup rColorsConfig(config, "Resources Colors");
+    const QStringList colorKeyList = rColorsConfig.keyList();
 
-Q_EMIT openIncidence(incidenceData, occurrence);
+    QColor incidenceColor;
 
-KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
-QWindow *window = QGuiApplication::topLevelWindows().isEmpty() ? nullptr : QGuiApplication::topLevelWindows().at(0);
-if (window) {
-    KWindowSystem::activateWindow(window);
-    window->raise();
-}
+    for (const QString &key : colorKeyList) {
+        if (key == QString::number(collection.id())) {
+            incidenceColor = rColorsConfig.readEntry(key, QColor("blue"));
+        }
+    }
+
+    auto incidenceData = QVariantMap{
+        {QStringLiteral("text"), incidence->summary()},
+        {QStringLiteral("description"), incidence->description()},
+        {QStringLiteral("location"), incidence->location()},
+        {QStringLiteral("startTime"), occurrence},
+        {QStringLiteral("endTime"), incidenceEnd},
+        {QStringLiteral("allDay"), incidence->allDay()},
+        {QStringLiteral("todoCompleted"), false},
+        {QStringLiteral("priority"), incidence->priority()},
+        {QStringLiteral("durationString"), duration.asSeconds() > 0 ? format.formatSpelloutDuration(duration.asSeconds() * 1000) : QString()},
+        {QStringLiteral("recurs"), incidence->recurs()},
+        {QStringLiteral("hasReminders"), incidence->alarms().length() > 0},
+        {QStringLiteral("isOverdue"), false},
+        {QStringLiteral("isReadOnly"), collection.rights().testFlag(Akonadi::Collection::ReadOnly)},
+        {QStringLiteral("color"), QVariant::fromValue(incidenceColor)},
+        {QStringLiteral("collectionId"), collection.id()},
+        {QStringLiteral("incidenceId"), uid},
+        {QStringLiteral("incidenceType"), incidence->type()},
+        {QStringLiteral("incidenceTypeStr"), incidence->typeStr()},
+        {QStringLiteral("incidenceTypeIcon"), incidence->iconName()},
+        {QStringLiteral("incidencePtr"), QVariant::fromValue(incidence)},
+    };
+
+    if (incidence->type() == KCalendarCore::Incidence::TypeTodo) {
+        const auto todo = incidence.staticCast<KCalendarCore::Todo>();
+        incidenceData[QStringLiteral("todoCompleted")] = todo->isCompleted();
+        incidenceData[QStringLiteral("isOverdue")] = todo->isOverdue();
+    }
+
+    Q_EMIT openIncidence(incidenceData, occurrence);
+
+    KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
+    QWindow *window = QGuiApplication::topLevelWindows().isEmpty() ? nullptr : QGuiApplication::topLevelWindows().at(0);
+    if (window) {
+        KWindowSystem::activateWindow(window);
+        window->raise();
+    }
 }
 
 #ifndef UNITY_CMAKE_SUPPORT

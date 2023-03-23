@@ -18,6 +18,7 @@
 #include <KWindowConfig>
 #include <QGuiApplication>
 #include <QMenu>
+#include <QQuickWindow>
 #include <QSortFilterProxyModel>
 #include <vector>
 
