@@ -457,28 +457,28 @@ Kirigami.ApplicationWindow {
         switch (pageStack.currentItem.mode) {
             case KalendarApplication.Month:
                 return i18n("Month");
-                break;
+
             case KalendarApplication.Week:
                 return i18n("Week");
-                break;
+
             case KalendarApplication.ThreeDay:
                 return i18n("3 Days");
-                break;
+
             case KalendarApplication.Day:
                 return i18n("Day");
-                break;
+
             case KalendarApplication.Schedule:
                 return i18n("Schedule");
-                break;
+
             case KalendarApplication.Todo:
                 return i18n("Tasks");
-                break;
+
             case KalendarApplication.Contact:
                 return i18n("Contacts");
-                break;
+
             case KalendarApplication.Mail:
                 return i18n("Mail");
-                break;
+
             default:
                 // Should not happen
                 return 'Kalendar';
