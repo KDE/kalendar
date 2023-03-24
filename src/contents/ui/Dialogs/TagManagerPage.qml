@@ -60,6 +60,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         text: model.display
                         visible: !delegateLayout.editMode
+                        wrapMode: Text.Wrap
                     }
                     QQC2.ToolButton {
                         icon.name: "edit-rename"
@@ -81,6 +82,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         text: model.display
                         visible: delegateLayout.editMode
+                        wrapMode: Text.Wrap
                     }
                     QQC2.ToolButton {
                         icon.name: "gtk-apply"
