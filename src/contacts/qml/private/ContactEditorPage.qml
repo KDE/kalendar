@@ -262,6 +262,86 @@ Kirigami.ScrollablePage {
                 spacing: 0
 
                 MobileForm.FormCardHeader {
+                    title: i18n("Business Information")
+                }
+
+                MobileForm.FormTextFieldDelegate {
+                    id: organizationId
+                    label: i18n("Organization")
+                    text: contactEditor.contact.organization
+                    onTextEdited: contactEditor.contact.organization = text
+                    placeholderText: i18nc("Placeholder value for name of Organization","KDE")
+                }
+
+                MobileForm.FormDelegateSeparator {}
+
+                MobileForm.FormTextFieldDelegate {
+                    id: professionId
+                    label: i18n("Profession")
+                    text: contactEditor.contact.profession
+                    onTextEdited: contactEditor.contact.profession = text
+                    placeholderText: i18nc("Placeholder value for name of Profession","Software Developer")
+                }
+
+                MobileForm.FormDelegateSeparator {}
+
+                MobileForm.FormTextFieldDelegate {
+                    id: titleId
+                    label: i18n("Title")
+                    text: contactEditor.contact.title
+                    onTextEdited: contactEditor.contact.title = text
+                    placeholderText: i18nc("Placeholder value for Title","SDE-1")
+                }
+
+                MobileForm.FormDelegateSeparator {}
+
+                MobileForm.FormTextFieldDelegate {
+                    id: deptId
+                    label: i18n("Department")
+                    text: contactEditor.contact.department
+                    onTextEdited: contactEditor.contact.department = text
+                    placeholderText: i18nc("Placeholder value for name of Department","Kalendar-Team")
+                }
+
+                MobileForm.FormDelegateSeparator {}
+
+                MobileForm.FormTextFieldDelegate {
+                    id: officeId
+                    label: i18n("Office")
+                    text: contactEditor.contact.office
+                    onTextEdited: contactEditor.contact.office = text
+                    placeholderText: i18nc("Placeholder value for Office","Tech Wing, 4th Floor")
+                }
+
+                MobileForm.FormDelegateSeparator {}
+
+                MobileForm.FormTextFieldDelegate {
+                    id: managersNameId
+                    label: i18n("Manager's Name")
+                    text: contactEditor.contact.managersName
+                    onTextEdited: contactEditor.contact.managersName = text
+                    placeholderText: i18nc("Placeholder value for Manager's Name","Bob")
+                }
+
+                MobileForm.FormDelegateSeparator {}
+
+                MobileForm.FormTextFieldDelegate {
+                    id: assistantsNameId
+                    label: i18n("Assistant's Name")
+                    text: contactEditor.contact.assistantsName
+                    onTextEdited: contactEditor.contact.assistantsName = text
+                    placeholderText: i18nc("Placeholder value for Assistants's Name","Jill")
+                }
+            }
+        }
+
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
                     title: i18n("Phone")
                 }
 
@@ -482,6 +562,8 @@ Kirigami.ScrollablePage {
 
                         required property int index
                         required property string url
+
+
                         required property var model
 
                         background: Item {}
