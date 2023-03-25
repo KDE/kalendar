@@ -170,6 +170,8 @@ public:
     // Invokable since we don't want expensive data bindings when any of the
     // fields change, instead generate it on demand
     Q_INVOKABLE QString qrCodeData() const;
+    Q_INVOKABLE void updatePhoto(const KContacts::Picture &loadedPhoto);
+    Q_INVOKABLE KContacts::Picture preparePhoto(const QUrl &path) const;
 
     void notifyDataChanged();
 Q_SIGNALS:
