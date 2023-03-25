@@ -373,6 +373,25 @@ Kirigami.ScrollablePage {
                 spacing: 0
 
                 MobileForm.FormCardHeader {
+                    title: i18n("Personal Information")
+                }
+
+                MobileForm.FormTextFieldDelegate {
+                    id: spousesName
+                    label: i18n("Spouse's Name")
+                    text: contactEditor.contact.spousesName 
+                    onTextEdited: contactEditor.contact.spousesName = text
+                }
+            }
+        }
+
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
                     title: i18n("Phone")
                 }
 
