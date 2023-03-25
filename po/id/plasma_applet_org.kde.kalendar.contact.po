@@ -1,0 +1,133 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kalendar package.
+# Linerly <linerly@protonmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kalendar\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-08 00:46+0000\n"
+"PO-Revision-Date: 2023-03-22 00:52+0700\n"
+"Last-Translator: Linerly <linerly@protonmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.12.3\n"
+
+#: package/contents/ui/ContactPage.qml:49
+#, kde-format
+msgid "Return to Contact List"
+msgstr "Kembali ke Daftar Kontak"
+
+#: package/contents/ui/ContactPage.qml:56
+#: package/contents/ui/ContactPage.qml:57
+#: package/contents/ui/ContactPage.qml:244
+#, kde-format
+msgid "Call"
+msgstr "Panggil"
+
+#: package/contents/ui/ContactPage.qml:69
+#: package/contents/ui/ContactPage.qml:101
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: package/contents/ui/ContactPage.qml:88
+#: package/contents/ui/ContactPage.qml:89
+#, kde-format
+msgid "Send SMS"
+msgstr "Kirim SMS"
+
+#: package/contents/ui/ContactPage.qml:119
+#: package/contents/ui/ContactPage.qml:120
+#: package/contents/ui/ContactPage.qml:214
+#, kde-format
+msgid "Send Email"
+msgstr "Kirim Surel"
+
+#: package/contents/ui/ContactPage.qml:128
+#: package/contents/ui/ContactPage.qml:129
+#, kde-format
+msgid "Show QR Code"
+msgstr "Tampilkan Kode QR"
+
+#: package/contents/ui/ContactPage.qml:159
+#, kde-format
+msgid "Nickname: %1"
+msgstr "Nama panggilan: %1"
+
+#: package/contents/ui/ContactPage.qml:182
+#, kde-format
+msgid "Address"
+msgid_plural "Addresses"
+msgstr[0] "Alamat"
+msgstr[1] "Alamat"
+
+#: package/contents/ui/ContactPage.qml:193
+#, kde-format
+msgctxt "%1 is the type of the address, e.g. home, work, ..."
+msgid "%1:"
+msgstr "%1:"
+
+#: package/contents/ui/ContactPage.qml:202
+#, kde-format
+msgid "Email Address"
+msgid_plural "Email Addresses"
+msgstr[0] "Alamat Surel"
+msgstr[1] "Alamat Surel"
+
+#: package/contents/ui/ContactPage.qml:232
+#, kde-format
+msgid "Phone number"
+msgid_plural "Phone numbers"
+msgstr[0] "Nomor telepon"
+msgstr[1] "Nomor telepon"
+
+#: package/contents/ui/ContactsPage.qml:16
+#, kde-format
+msgid "Contacts"
+msgstr "Kontak"
+
+#: package/contents/ui/main.qml:15 package/contents/ui/main.qml:31
+#, kde-format
+msgid "Contact"
+msgstr "Kontak"
+
+#: package/contents/ui/QrCodePage.qml:21 package/contents/ui/QrCodePage.qml:52
+#, kde-format
+msgid "QR Code"
+msgstr "Kode QR"
+
+#: package/contents/ui/QrCodePage.qml:35
+#, kde-format
+msgid "Return to Contact"
+msgstr "Kembali ke Kontak"
+
+#: package/contents/ui/QrCodePage.qml:53
+#, kde-format
+msgid "Data Matrix"
+msgstr "Matriks Data"
+
+#: package/contents/ui/QrCodePage.qml:54
+#, kde-format
+msgctxt "Aztec barcode"
+msgid "Aztec"
+msgstr "Aztec"
+
+#: package/contents/ui/QrCodePage.qml:79
+#, kde-format
+msgid "Change the QR code type"
+msgstr "Ubah jenis kode QR"
+
+#: package/contents/ui/QrCodePage.qml:103
+#, kde-format
+msgid "Creating QR code failed"
+msgstr "Gagal membuat kode QR"
+
+#: package/contents/ui/QrCodePage.qml:112
+#, kde-format
+msgid "The QR code is too large to be displayed"
+msgstr "Kode QR terlalu besar untuk ditampilkan"
