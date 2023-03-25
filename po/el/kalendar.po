@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 00:58+0000\n"
+"POT-Creation-Date: 2023-03-25 00:47+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1864,12 +1864,12 @@ msgstr "Διαγραφή ετικέτας"
 msgid "Are you sure you want to delete tag \"%1\"?"
 msgstr "Θέλετε πράγματι να διαγράψετε την ετικέτα «%1»;"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:110
+#: contents/ui/Dialogs/TagManagerPage.qml:112
 #, kde-format
 msgid "Create a New Tag…"
 msgstr "Δημιουργία νέας ετικέτας…"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:134
+#: contents/ui/Dialogs/TagManagerPage.qml:136
 #, kde-format
 msgid "Quickly Add a New Tag."
 msgstr "Γρήγορη προσθήκη νέας ετικέτας."

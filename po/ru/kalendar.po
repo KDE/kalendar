@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 00:58+0000\n"
+"POT-Creation-Date: 2023-03-25 00:47+0000\n"
 "PO-Revision-Date: 2022-10-10 15:48+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -1836,12 +1836,12 @@ msgstr "Удалить метку"
 msgid "Are you sure you want to delete tag \"%1\"?"
 msgstr "Удалить метку «%1»?"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:110
+#: contents/ui/Dialogs/TagManagerPage.qml:112
 #, kde-format
 msgid "Create a New Tag…"
 msgstr "Создать метку…"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:134
+#: contents/ui/Dialogs/TagManagerPage.qml:136
 #, kde-format
 msgid "Quickly Add a New Tag."
 msgstr "Быстро добавить новую метку."

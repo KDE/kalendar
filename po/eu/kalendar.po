@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 00:58+0000\n"
+"POT-Creation-Date: 2023-03-25 00:47+0000\n"
 "PO-Revision-Date: 2022-12-17 09:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque\n"
@@ -1814,12 +1814,12 @@ msgstr "Ezabatu etiketa"
 msgid "Are you sure you want to delete tag \"%1\"?"
 msgstr "Ziur zaude «%1» etiketa ezabatu nahi duzula?"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:110
+#: contents/ui/Dialogs/TagManagerPage.qml:112
 #, kde-format
 msgid "Create a New Tag…"
 msgstr "Sortu etiketa berria..."
 
-#: contents/ui/Dialogs/TagManagerPage.qml:134
+#: contents/ui/Dialogs/TagManagerPage.qml:136
 #, kde-format
 msgid "Quickly Add a New Tag."
 msgstr "Azkar gehitu etiketa berri bat."

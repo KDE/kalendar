@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 00:58+0000\n"
+"POT-Creation-Date: 2023-03-25 00:47+0000\n"
 "PO-Revision-Date: 2023-03-20 11:39+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -1788,12 +1788,12 @@ msgstr "Apagar a Marca"
 msgid "Are you sure you want to delete tag \"%1\"?"
 msgstr "Deseja realmente apagar a marca \"%1\"?"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:110
+#: contents/ui/Dialogs/TagManagerPage.qml:112
 #, kde-format
 msgid "Create a New Tag…"
 msgstr "Criar uma Nova Marca…"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:134
+#: contents/ui/Dialogs/TagManagerPage.qml:136
 #, kde-format
 msgid "Quickly Add a New Tag."
 msgstr "Adicionar Rapidamente uma Nova Marca."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 00:58+0000\n"
+"POT-Creation-Date: 2023-03-25 00:47+0000\n"
 "PO-Revision-Date: 2023-03-19 12:53+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1788,12 +1788,12 @@ msgstr "குறிச்சொல்லை நீக்குவது"
 msgid "Are you sure you want to delete tag \"%1\"?"
 msgstr "\"%1\" என்ற குறிச்சொல்லை உறுதியாக நீக்க வேண்டுமா?"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:110
+#: contents/ui/Dialogs/TagManagerPage.qml:112
 #, kde-format
 msgid "Create a New Tag…"
 msgstr "புதிய குறிச்சொல்லை உருவாக்கு…"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:134
+#: contents/ui/Dialogs/TagManagerPage.qml:136
 #, kde-format
 msgid "Quickly Add a New Tag."
 msgstr "புதிய குறிச்சொல்லை எளிதில் சேர்க்கும்."

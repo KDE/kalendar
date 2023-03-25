@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 00:58+0000\n"
+"POT-Creation-Date: 2023-03-25 00:47+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -1853,12 +1853,12 @@ msgstr "Dzēst atzīmi"
 msgid "Are you sure you want to delete tag \"%1\"?"
 msgstr "Vai Jūs tiešām vēlaties izdzēst atzīmi \"%1\"?"
 
-#: contents/ui/Dialogs/TagManagerPage.qml:110
+#: contents/ui/Dialogs/TagManagerPage.qml:112
 #, kde-format
 msgid "Create a New Tag…"
 msgstr "Izveidot jaunu atzīmi..."
 
-#: contents/ui/Dialogs/TagManagerPage.qml:134
+#: contents/ui/Dialogs/TagManagerPage.qml:136
 #, kde-format
 msgid "Quickly Add a New Tag."
 msgstr "Ātri izveidot jaunu atzīmi."
