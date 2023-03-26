@@ -270,7 +270,7 @@ Kirigami.ScrollablePage {
                     label: i18n("Organization")
                     text: contactEditor.contact.organization
                     onTextEdited: contactEditor.contact.organization = text
-                    placeholderText: i18nc("Placeholder value for name of Organization","KDE")
+                    placeholderText: i18nc("Placeholder value for name of Organization", "KDE")
                 }
 
                 MobileForm.FormDelegateSeparator {}
@@ -280,7 +280,7 @@ Kirigami.ScrollablePage {
                     label: i18n("Profession")
                     text: contactEditor.contact.profession
                     onTextEdited: contactEditor.contact.profession = text
-                    placeholderText: i18nc("Placeholder value for name of Profession","Software Developer")
+                    placeholderText: i18nc("Placeholder value for name of Profession", "Software Developer")
                 }
 
                 MobileForm.FormDelegateSeparator {}
@@ -290,7 +290,7 @@ Kirigami.ScrollablePage {
                     label: i18n("Title")
                     text: contactEditor.contact.title
                     onTextEdited: contactEditor.contact.title = text
-                    placeholderText: i18nc("Placeholder value for Title","SDE-1")
+                    placeholderText: i18nc("Placeholder value for Title", "SDE-1")
                 }
 
                 MobileForm.FormDelegateSeparator {}
@@ -300,7 +300,7 @@ Kirigami.ScrollablePage {
                     label: i18n("Department")
                     text: contactEditor.contact.department
                     onTextEdited: contactEditor.contact.department = text
-                    placeholderText: i18nc("Placeholder value for name of Department","Kalendar-Team")
+                    placeholderText: i18nc("Placeholder value for name of Department", "Kalendar-Team")
                 }
 
                 MobileForm.FormDelegateSeparator {}
@@ -310,7 +310,7 @@ Kirigami.ScrollablePage {
                     label: i18n("Office")
                     text: contactEditor.contact.office
                     onTextEdited: contactEditor.contact.office = text
-                    placeholderText: i18nc("Placeholder value for Office","Tech Wing, 4th Floor")
+                    placeholderText: i18nc("Placeholder value for Office", "Tech Wing, 4th Floor")
                 }
 
                 MobileForm.FormDelegateSeparator {}
@@ -320,7 +320,7 @@ Kirigami.ScrollablePage {
                     label: i18n("Manager's Name")
                     text: contactEditor.contact.managersName
                     onTextEdited: contactEditor.contact.managersName = text
-                    placeholderText: i18nc("Placeholder value for Manager's Name","Bob")
+                    placeholderText: i18nc("Placeholder value for Manager's Name", "Bob")
                 }
 
                 MobileForm.FormDelegateSeparator {}
@@ -330,7 +330,7 @@ Kirigami.ScrollablePage {
                     label: i18n("Assistant's Name")
                     text: contactEditor.contact.assistantsName
                     onTextEdited: contactEditor.contact.assistantsName = text
-                    placeholderText: i18nc("Placeholder value for Assistants's Name","Jill")
+                    placeholderText: i18nc("Placeholder value for Assistants's Name", "Jill")
                 }
             }
         }
@@ -562,8 +562,6 @@ Kirigami.ScrollablePage {
 
                         required property int index
                         required property string url
-
-
                         required property var model
 
                         background: Item {}
