@@ -12,3 +12,9 @@ ecm_add_test(imppmodeltest.cpp
     LINK_LIBRARIES kalendar_contact_static Qt::Test
     NAME_PREFIX "kalendar-contact-"
 )
+
+ecm_add_test(addressmodeltest.cpp
+    TEST_NAME addressmodeltest
+    LINK_LIBRARIES kalendar_contact_static Qt::Test
+    NAME_PREFIX "kalendar-contact-"
+)
