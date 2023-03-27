@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-25 00:47+0000\n"
+"POT-Creation-Date: 2023-03-27 00:50+0000\n"
 "PO-Revision-Date: 2023-03-19 12:53+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -43,6 +43,61 @@ msgstr "மீளச்செய்: "
 #, kde-format
 msgid "Refresh All Calendars"
 msgstr "அனைத்து நாள்காட்டிகளையும் புதுப்பி"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:18
+#, kde-format
+msgid "Priority:"
+msgstr "முக்கியத்துவம்:"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:21
+#, kde-format
+msgid "Unassigned"
+msgstr "அமைக்கப்படவில்லை"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:22
+#, kde-format
+msgid "1 (Highest Priority)"
+msgstr "1 (அதிகப்படி முக்கியத்துவம்)"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:23
+#, kde-format
+msgid "2"
+msgstr "2"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:24
+#, kde-format
+msgid "3"
+msgstr "3"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:25
+#, kde-format
+msgid "4"
+msgstr "4"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:26
+#, kde-format
+msgid "5 (Medium Priority)"
+msgstr "5 (நடுத்தர முக்கியத்துவம்)"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:27
+#, kde-format
+msgid "6"
+msgstr "6"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:28
+#, kde-format
+msgid "7"
+msgstr "7"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:29
+#, kde-format
+msgid "8"
+msgstr "8"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:30
+#, kde-format
+msgid "9 (Lowest Priority)"
+msgstr "9 (குறைவான முக்கியத்துவம்)"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
 #, kde-format
@@ -574,168 +629,261 @@ msgid "https://planet.kde.org/"
 msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/ContactEditorPage.qml:265
+#: contacts/qml/private/ContactPage.qml:342
+#, kde-format
+msgid "Business Information"
+msgstr "வேலை விவரங்கள்"
+
+#: contacts/qml/private/ContactEditorPage.qml:270
+#, fuzzy, kde-format
+#| msgid "Organization:"
+msgid "Organization"
+msgstr "நிறுவனம்:"
+
+#: contacts/qml/private/ContactEditorPage.qml:273
+#, kde-format
+msgctxt "Placeholder value for name of Organization"
+msgid "KDE"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:280
+#, fuzzy, kde-format
+#| msgid "Profession:"
+msgid "Profession"
+msgstr "பணி:"
+
+#: contacts/qml/private/ContactEditorPage.qml:283
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Developer"
+msgctxt "Placeholder value for name of Profession"
+msgid "Software Developer"
+msgstr "நிரலாளர்"
+
+#: contacts/qml/private/ContactEditorPage.qml:290
+#, fuzzy, kde-format
+#| msgid "Title:"
+msgid "Title"
+msgstr "பொறுப்பு:"
+
+#: contacts/qml/private/ContactEditorPage.qml:293
+#, kde-format
+msgctxt "Placeholder value for Title"
+msgid "SDE-1"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:300
+#, fuzzy, kde-format
+#| msgid "Department:"
+msgid "Department"
+msgstr "பிரிவு:"
+
+#: contacts/qml/private/ContactEditorPage.qml:303
+#, fuzzy, kde-format
+#| msgid "Kalendar"
+msgctxt "Placeholder value for name of Department"
+msgid "Kalendar-Team"
+msgstr "காலென்டர்"
+
+#: contacts/qml/private/ContactEditorPage.qml:310
+#, fuzzy, kde-format
+#| msgid "Office:"
+msgid "Office"
+msgstr "அலுவலகம்:"
+
+#: contacts/qml/private/ContactEditorPage.qml:313
+#, kde-format
+msgctxt "Placeholder value for Office"
+msgid "Tech Wing, 4th Floor"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:320
+#, fuzzy, kde-format
+#| msgid "Manager's name:"
+msgid "Manager's Name"
+msgstr "மேலாளரின் பெயர்:"
+
+#: contacts/qml/private/ContactEditorPage.qml:323
+#, kde-format
+msgctxt "Placeholder value for Manager's Name"
+msgid "Bob"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:330
+#, fuzzy, kde-format
+#| msgid "Assistants's name:"
+msgid "Assistant's Name"
+msgstr "உதவியாளரின் பெயர்:"
+
+#: contacts/qml/private/ContactEditorPage.qml:333
+#, kde-format
+msgctxt "Placeholder value for Assistants's Name"
+msgid "Jill"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:345
 #, kde-format
 msgid "Phone"
 msgstr "தொலைபேசி"
 
-#: contacts/qml/private/ContactEditorPage.qml:277
-#: contacts/qml/private/ContactEditorPage.qml:323
-#: contacts/qml/private/ContactEditorPage.qml:391
-#: contacts/qml/private/ContactEditorPage.qml:433
+#: contacts/qml/private/ContactEditorPage.qml:357
+#: contacts/qml/private/ContactEditorPage.qml:403
+#: contacts/qml/private/ContactEditorPage.qml:471
+#: contacts/qml/private/ContactEditorPage.qml:513
 #, kde-format
 msgid "Home"
 msgstr "வீடு"
 
-#: contacts/qml/private/ContactEditorPage.qml:278
-#: contacts/qml/private/ContactEditorPage.qml:324
-#: contacts/qml/private/ContactEditorPage.qml:392
-#: contacts/qml/private/ContactEditorPage.qml:434
+#: contacts/qml/private/ContactEditorPage.qml:358
+#: contacts/qml/private/ContactEditorPage.qml:404
+#: contacts/qml/private/ContactEditorPage.qml:472
+#: contacts/qml/private/ContactEditorPage.qml:514
 #, kde-format
 msgid "Work"
 msgstr "வேலை"
 
-#: contacts/qml/private/ContactEditorPage.qml:279
-#: contacts/qml/private/ContactEditorPage.qml:325
+#: contacts/qml/private/ContactEditorPage.qml:359
+#: contacts/qml/private/ContactEditorPage.qml:405
 #, kde-format
 msgid "Messaging"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:280
-#: contacts/qml/private/ContactEditorPage.qml:326
+#: contacts/qml/private/ContactEditorPage.qml:360
+#: contacts/qml/private/ContactEditorPage.qml:406
 #, kde-format
 msgid "Voice"
 msgstr "குரலழைப்பு"
 
-#: contacts/qml/private/ContactEditorPage.qml:281
-#: contacts/qml/private/ContactEditorPage.qml:327
+#: contacts/qml/private/ContactEditorPage.qml:361
+#: contacts/qml/private/ContactEditorPage.qml:407
 #, kde-format
 msgid "Fax"
 msgstr "தொலைநகல்"
 
-#: contacts/qml/private/ContactEditorPage.qml:282
-#: contacts/qml/private/ContactEditorPage.qml:328
+#: contacts/qml/private/ContactEditorPage.qml:362
+#: contacts/qml/private/ContactEditorPage.qml:408
 #, kde-format
 msgid "Cell"
 msgstr "செல்பேசி"
 
-#: contacts/qml/private/ContactEditorPage.qml:283
-#: contacts/qml/private/ContactEditorPage.qml:329
+#: contacts/qml/private/ContactEditorPage.qml:363
+#: contacts/qml/private/ContactEditorPage.qml:409
 #, kde-format
 msgid "Video"
 msgstr "காணொளி"
 
-#: contacts/qml/private/ContactEditorPage.qml:284
-#: contacts/qml/private/ContactEditorPage.qml:330
+#: contacts/qml/private/ContactEditorPage.qml:364
+#: contacts/qml/private/ContactEditorPage.qml:410
 #, kde-format
 msgid "Mailbox"
 msgstr "அஞ்சல்பெட்டி"
 
-#: contacts/qml/private/ContactEditorPage.qml:285
-#: contacts/qml/private/ContactEditorPage.qml:331
+#: contacts/qml/private/ContactEditorPage.qml:365
+#: contacts/qml/private/ContactEditorPage.qml:411
 #, kde-format
 msgid "Modem"
 msgstr "இணக்கி"
 
-#: contacts/qml/private/ContactEditorPage.qml:286
-#: contacts/qml/private/ContactEditorPage.qml:332
+#: contacts/qml/private/ContactEditorPage.qml:366
+#: contacts/qml/private/ContactEditorPage.qml:412
 #, kde-format
 msgid "Car"
 msgstr "வண்டி"
 
-#: contacts/qml/private/ContactEditorPage.qml:287
-#: contacts/qml/private/ContactEditorPage.qml:333
+#: contacts/qml/private/ContactEditorPage.qml:367
+#: contacts/qml/private/ContactEditorPage.qml:413
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: contacts/qml/private/ContactEditorPage.qml:288
-#: contacts/qml/private/ContactEditorPage.qml:334
+#: contacts/qml/private/ContactEditorPage.qml:368
+#: contacts/qml/private/ContactEditorPage.qml:414
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: contacts/qml/private/ContactEditorPage.qml:289
-#: contacts/qml/private/ContactEditorPage.qml:335
+#: contacts/qml/private/ContactEditorPage.qml:369
+#: contacts/qml/private/ContactEditorPage.qml:415
 #, kde-format
 msgid "Pager"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:290
+#: contacts/qml/private/ContactEditorPage.qml:370
 #, kde-format
 msgid "Undefined"
 msgstr "வேறு"
 
-#: contacts/qml/private/ContactEditorPage.qml:347
+#: contacts/qml/private/ContactEditorPage.qml:427
 #, kde-format
 msgid "+33 7 55 23 68 67"
 msgstr "+33 7 55 23 68 67"
 
-#: contacts/qml/private/ContactEditorPage.qml:374
+#: contacts/qml/private/ContactEditorPage.qml:454
 #, kde-format
 msgid "E-mail"
 msgstr "மின்னஞ்சல்"
 
-#: contacts/qml/private/ContactEditorPage.qml:393
+#: contacts/qml/private/ContactEditorPage.qml:473
 #, kde-format
 msgid "Other"
 msgstr "மற்றது"
 
-#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:494
 #, kde-format
 msgid "Remove email"
 msgstr "மின்னஞ்சல் முகவரியை நீக்கு"
 
-#: contacts/qml/private/ContactEditorPage.qml:435
+#: contacts/qml/private/ContactEditorPage.qml:515
 #, kde-format
 msgid "Both"
 msgstr "இரண்டும்"
 
-#: contacts/qml/private/ContactEditorPage.qml:436
+#: contacts/qml/private/ContactEditorPage.qml:516
 #, kde-format
 msgid "Other…"
 msgstr "வேறு…"
 
-#: contacts/qml/private/ContactEditorPage.qml:445
+#: contacts/qml/private/ContactEditorPage.qml:525
 #, kde-format
 msgid "user@example.org"
 msgstr "user@example.org"
 
-#: contacts/qml/private/ContactEditorPage.qml:454
+#: contacts/qml/private/ContactEditorPage.qml:534
 #, kde-format
 msgid "Add email"
 msgstr "மின்னஞ்சலை சேர்"
 
-#: contacts/qml/private/ContactEditorPage.qml:474
+#: contacts/qml/private/ContactEditorPage.qml:554
 #, kde-format
 msgid "Instant Messenger"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:515
+#: contacts/qml/private/ContactEditorPage.qml:595
 #, kde-format
 msgid "protocol:person@example.com"
 msgstr "protocol:person@example.com"
 
-#: contacts/qml/private/ContactEditorPage.qml:565
+#: contacts/qml/private/ContactEditorPage.qml:645
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Save"
 msgstr "சேமி"
 
-#: contacts/qml/private/ContactEditorPage.qml:565
+#: contacts/qml/private/ContactEditorPage.qml:645
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Add"
 msgstr "சேர்"
 
-#: contacts/qml/private/ContactEditorPage.qml:610
+#: contacts/qml/private/ContactEditorPage.qml:690
 #: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr "தற்போதைய மாற்றங்கள்"
 
-#: contacts/qml/private/ContactEditorPage.qml:615
+#: contacts/qml/private/ContactEditorPage.qml:695
 #: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
@@ -748,7 +896,7 @@ msgstr "முகவரிப்புத்தகம்:"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:88
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:936
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:923
 #, kde-format
 msgid "Name:"
 msgstr "பெயர்:"
@@ -887,11 +1035,6 @@ msgstr ""
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
 msgstr "%1:"
-
-#: contacts/qml/private/ContactPage.qml:342
-#, kde-format
-msgid "Business Information"
-msgstr "வேலை விவரங்கள்"
 
 #: contacts/qml/private/ContactPage.qml:348
 #, kde-format
@@ -1429,310 +1572,255 @@ msgstr "தலைப்பு:"
 msgid "Completion:"
 msgstr "நிறைவு:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:205
-#, kde-format
-msgid "Priority:"
-msgstr "முக்கியத்துவம்:"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:213
-#, kde-format
-msgid "Unassigned"
-msgstr "அமைக்கப்படவில்லை"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:214
-#, kde-format
-msgid "1 (Highest Priority)"
-msgstr "1 (அதிகப்படி முக்கியத்துவம்)"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:215
-#, kde-format
-msgid "2"
-msgstr "2"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:216
-#, kde-format
-msgid "3"
-msgstr "3"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:217
-#, kde-format
-msgid "4"
-msgstr "4"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:218
-#, kde-format
-msgid "5 (Medium Priority)"
-msgstr "5 (நடுத்தர முக்கியத்துவம்)"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:219
-#, kde-format
-msgid "6"
-msgstr "6"
-
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:220
-#, kde-format
-msgid "7"
-msgstr "7"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:221
-#, kde-format
-msgid "8"
-msgstr "8"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:222
-#, kde-format
-msgid "9 (Lowest Priority)"
-msgstr "9 (குறைவான முக்கியத்துவம்)"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:235
 #, kde-format
 msgid "All day"
 msgstr "முழு நாளும்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:267
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:252
 #, kde-format
 msgid "Start:"
 msgstr "துவக்கம்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:314
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
 #, kde-format
 msgid "Due:"
 msgstr "உரிய நேரம்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:314
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
 #, kde-format
 msgid "End:"
 msgstr "முடிவு:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:361
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:346
 #, kde-format
 msgid "Timezone:"
 msgstr "நேரமண்டலம்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:380
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:365
 #, kde-format
 msgid "Repeat:"
 msgstr "மீளநிகழ்வது:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:410
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:611
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:395
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
 #: contents/ui/KalendarUtils/labelutils.js:82
 #, kde-format
 msgid "Never"
 msgstr "ஒருபோதும் வேண்டாம்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:411
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:396
 #, kde-format
 msgid "Daily"
 msgstr "ஒவ்வொரு நாளும்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:412
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:397
 #, kde-format
 msgid "Weekly"
 msgstr "ஒவ்வொரு வாரமும்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:413
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:398
 #, kde-format
 msgid "Monthly"
 msgstr "ஒவ்வொரு மாதமும்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:414
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:399
 #, kde-format
 msgid "Yearly"
 msgstr "ஒவ்வொரு ஆண்டும்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
 #, kde-format
 msgid "Custom"
 msgstr "வேறு"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:446
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format
 msgid "Every:"
 msgstr "ஒவ்வொரு:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:493
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:478
 #, kde-format
 msgid "day"
 msgid_plural "days"
 msgstr[0] "நாள்"
 msgstr[1] "நாட்கள்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:494
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:479
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
 msgstr[0] "வாரம்"
 msgstr[1] "வாரங்கள்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:495
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:480
 #, kde-format
 msgid "month"
 msgid_plural "months"
 msgstr[0] "மாதம்"
 msgstr[1] "மாதங்கள்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:496
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:481
 #, kde-format
 msgid "year"
 msgid_plural "years"
 msgstr[0] "ஆண்டு"
 msgstr[1] "ஆண்டுகள்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:566
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:551
 #, kde-format
 msgid "On:"
 msgstr "இந்நாளில்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:574
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:559
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
 msgstr "ஒவ்வொரு மாத‍த்தின் %1"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:586
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:571
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
 msgstr "ஒவ்வொரு மாத‍த்தின் %1 %2"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:582
 #, kde-format
 msgid "Ends:"
 msgstr "முடிவது:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:612
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
 #, kde-format
 msgid "On"
 msgstr "குறிப்பிட்ட நேரத்தில்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:613
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:598
 #, kde-format
 msgid "After"
 msgstr "நிகழ்வுகளுக்கு பிறகு"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:649
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:634
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
 msgstr[0] "நிகழ்வு"
 msgstr[1] "நிகழ்வுகள்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:655
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:640
 #, kde-format
 msgid "Exceptions:"
 msgstr "விதிவிலக்குகள்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:661
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:646
 #, kde-format
 msgid "Add Recurrence Exception"
 msgstr "மறுநிகழ்வுக்கான விதிவிலக்கை சேர்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:704
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:689
 #, kde-format
 msgid "Location:"
 msgstr "இடம்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:729
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:943
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:714
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:798
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:930
 #, kde-format
 msgid "Optional"
 msgstr "கட்டாயமில்லை"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:776
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:761
 #, kde-format
 msgid "Show map"
 msgstr "நிலப்படத்தை காட்டு"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:807
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:792
 #, kde-format
 msgid "Description:"
 msgstr "விவரணம்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:828
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Tags:"
 msgstr "குறிச்சொற்கள்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:837
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:822
 #: models/todosortfilterproxymodel.cpp:147
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ", "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:838
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:823
 #, kde-format
 msgid "Tap to set tags…"
 msgstr "குறிச்சொற்களை அமைக்க தட்டுங்கள்…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:838
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:823
 #, kde-format
 msgid "Click to set tags…"
 msgstr "குறிச்சொற்களை அமைக்க கிளிக் செய்யுங்கள்…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:855
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:840
 #, kde-format
 msgid "Manage tags…"
 msgstr "குறிச்சொற்களை நிர்வகி…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:866
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:851
 #, kde-format
 msgid "Reminders:"
 msgstr "நினைவூட்டல்கள்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:887
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:874
 #, kde-format
 msgid "Add Reminder"
 msgstr "நினைவூட்டலை சேர்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:901
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:888
 #, kde-format
 msgid "Attendees:"
 msgstr "பங்கேற்போர்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:961
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:948
 #, kde-format
 msgid "Email:"
 msgstr "மின்னஞ்சல்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:968
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:955
 #, kde-format
 msgid "Required"
 msgstr "கட்டாயம் வரவேண்டும்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:977
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:964
 #, kde-format
 msgid "Status:"
 msgstr "நிலை:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1001
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:988
 #, kde-format
 msgid "Request RSVP"
 msgstr "RSVP கோரு"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1015
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1002
 #, kde-format
 msgid "Add Attendee"
 msgstr "பங்கேற்பவரை சேர்"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1026
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "தொடர்புகளிலிருந்து தேர்ந்தெடு"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1030
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1017
 #, kde-format
 msgid "Fill in Manually"
 msgstr "கைமுறையாக நிரப்பு"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1044
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1031
 #, kde-format
 msgid "Attachments:"
 msgstr "உடனிணைப்புகள்:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1067
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1054
 #, kde-format
 msgid "Add Attachment"
 msgstr "உடனிணைப்பை சேர்"
@@ -2538,7 +2626,7 @@ msgstr "வட்டம் (உள்ள வட்டாரத்தை கா�
 msgid "Pin (shows exact location)"
 msgstr "குண்டூசி (துல்லியமான இடத்தை காட்டும்)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"

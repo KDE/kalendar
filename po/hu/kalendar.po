@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-25 00:47+0000\n"
+"POT-Creation-Date: 2023-03-27 00:50+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -44,6 +44,61 @@ msgstr "Újra: "
 #| msgid "Refresh All Calendars"
 msgid "Refresh All Calendars"
 msgstr "Összes naptár frissítése"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:18
+#, kde-format
+msgid "Priority:"
+msgstr "Prioritás:"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:21
+#, kde-format
+msgid "Unassigned"
+msgstr "Nincs hozzárendelve"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:22
+#, kde-format
+msgid "1 (Highest Priority)"
+msgstr "1 (legmagasabb prioritás)"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:23
+#, kde-format
+msgid "2"
+msgstr "2"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:24
+#, kde-format
+msgid "3"
+msgstr "3"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:25
+#, kde-format
+msgid "4"
+msgstr "4"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:26
+#, kde-format
+msgid "5 (Medium Priority)"
+msgstr "5 (közepes prioritás)"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:27
+#, kde-format
+msgid "6"
+msgstr "6"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:28
+#, kde-format
+msgid "7"
+msgstr "7"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:29
+#, kde-format
+msgid "8"
+msgstr "8"
+
+#: calendar/qml/incidenceeditor/PriorityComboBox.qml:30
+#, kde-format
+msgid "9 (Lowest Priority)"
+msgstr "9 (legalacsonyabb prioritás)"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
 #, fuzzy, kde-format
@@ -610,171 +665,258 @@ msgid "https://planet.kde.org/"
 msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:265
+#: contacts/qml/private/ContactPage.qml:342
+#, kde-format
+msgid "Business Information"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:270
+#, kde-format
+msgid "Organization"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:273
+#, kde-format
+msgctxt "Placeholder value for name of Organization"
+msgid "KDE"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:280
+#, kde-format
+msgid "Profession"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:283
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Developer"
+msgctxt "Placeholder value for name of Profession"
+msgid "Software Developer"
+msgstr "Fejlesztő"
+
+#: contacts/qml/private/ContactEditorPage.qml:290
+#, kde-format
+msgid "Title"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:293
+#, kde-format
+msgctxt "Placeholder value for Title"
+msgid "SDE-1"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:300
+#, kde-format
+msgid "Department"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:303
+#, fuzzy, kde-format
+#| msgid "Kalendar"
+msgctxt "Placeholder value for name of Department"
+msgid "Kalendar-Team"
+msgstr "Kalendar"
+
+#: contacts/qml/private/ContactEditorPage.qml:310
+#, kde-format
+msgid "Office"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:313
+#, kde-format
+msgctxt "Placeholder value for Office"
+msgid "Tech Wing, 4th Floor"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:320
+#, fuzzy, kde-format
+#| msgid "Manage Tags"
+msgid "Manager's Name"
+msgstr "Címkék kezelése"
+
+#: contacts/qml/private/ContactEditorPage.qml:323
+#, kde-format
+msgctxt "Placeholder value for Manager's Name"
+msgid "Bob"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:330
+#, kde-format
+msgid "Assistant's Name"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:333
+#, kde-format
+msgctxt "Placeholder value for Assistants's Name"
+msgid "Jill"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:345
 #, kde-format
 msgid "Phone"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:277
-#: contacts/qml/private/ContactEditorPage.qml:323
-#: contacts/qml/private/ContactEditorPage.qml:391
-#: contacts/qml/private/ContactEditorPage.qml:433
+#: contacts/qml/private/ContactEditorPage.qml:357
+#: contacts/qml/private/ContactEditorPage.qml:403
+#: contacts/qml/private/ContactEditorPage.qml:471
+#: contacts/qml/private/ContactEditorPage.qml:513
 #, kde-format
 msgid "Home"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:278
-#: contacts/qml/private/ContactEditorPage.qml:324
-#: contacts/qml/private/ContactEditorPage.qml:392
-#: contacts/qml/private/ContactEditorPage.qml:434
+#: contacts/qml/private/ContactEditorPage.qml:358
+#: contacts/qml/private/ContactEditorPage.qml:404
+#: contacts/qml/private/ContactEditorPage.qml:472
+#: contacts/qml/private/ContactEditorPage.qml:514
 #, kde-format
 msgid "Work"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:279
-#: contacts/qml/private/ContactEditorPage.qml:325
+#: contacts/qml/private/ContactEditorPage.qml:359
+#: contacts/qml/private/ContactEditorPage.qml:405
 #, kde-format
 msgid "Messaging"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:280
-#: contacts/qml/private/ContactEditorPage.qml:326
+#: contacts/qml/private/ContactEditorPage.qml:360
+#: contacts/qml/private/ContactEditorPage.qml:406
 #, kde-format
 msgid "Voice"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:281
-#: contacts/qml/private/ContactEditorPage.qml:327
+#: contacts/qml/private/ContactEditorPage.qml:361
+#: contacts/qml/private/ContactEditorPage.qml:407
 #, kde-format
 msgid "Fax"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:282
-#: contacts/qml/private/ContactEditorPage.qml:328
+#: contacts/qml/private/ContactEditorPage.qml:362
+#: contacts/qml/private/ContactEditorPage.qml:408
 #, kde-format
 msgid "Cell"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:283
-#: contacts/qml/private/ContactEditorPage.qml:329
+#: contacts/qml/private/ContactEditorPage.qml:363
+#: contacts/qml/private/ContactEditorPage.qml:409
 #, kde-format
 msgid "Video"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:284
-#: contacts/qml/private/ContactEditorPage.qml:330
+#: contacts/qml/private/ContactEditorPage.qml:364
+#: contacts/qml/private/ContactEditorPage.qml:410
 #, kde-format
 msgid "Mailbox"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:285
-#: contacts/qml/private/ContactEditorPage.qml:331
+#: contacts/qml/private/ContactEditorPage.qml:365
+#: contacts/qml/private/ContactEditorPage.qml:411
 #, kde-format
 msgid "Modem"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:286
-#: contacts/qml/private/ContactEditorPage.qml:332
+#: contacts/qml/private/ContactEditorPage.qml:366
+#: contacts/qml/private/ContactEditorPage.qml:412
 #, kde-format
 msgid "Car"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:287
-#: contacts/qml/private/ContactEditorPage.qml:333
+#: contacts/qml/private/ContactEditorPage.qml:367
+#: contacts/qml/private/ContactEditorPage.qml:413
 #, kde-format
 msgid "ISDN"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:288
-#: contacts/qml/private/ContactEditorPage.qml:334
+#: contacts/qml/private/ContactEditorPage.qml:368
+#: contacts/qml/private/ContactEditorPage.qml:414
 #, kde-format
 msgid "PCS"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:289
-#: contacts/qml/private/ContactEditorPage.qml:335
+#: contacts/qml/private/ContactEditorPage.qml:369
+#: contacts/qml/private/ContactEditorPage.qml:415
 #, kde-format
 msgid "Pager"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:290
+#: contacts/qml/private/ContactEditorPage.qml:370
 #, kde-format
 msgid "Undefined"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:347
+#: contacts/qml/private/ContactEditorPage.qml:427
 #, kde-format
 msgid "+33 7 55 23 68 67"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:374
+#: contacts/qml/private/ContactEditorPage.qml:454
 #, fuzzy, kde-format
 #| msgid "Email:"
 msgid "E-mail"
 msgstr "E-mail:"
 
-#: contacts/qml/private/ContactEditorPage.qml:393
+#: contacts/qml/private/ContactEditorPage.qml:473
 #, kde-format
 msgid "Other"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:494
 #, fuzzy, kde-format
 #| msgid "Remove Tag"
 msgid "Remove email"
 msgstr "Címke eltávolítása"
 
-#: contacts/qml/private/ContactEditorPage.qml:435
+#: contacts/qml/private/ContactEditorPage.qml:515
 #, kde-format
 msgid "Both"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:436
+#: contacts/qml/private/ContactEditorPage.qml:516
 #, kde-format
 msgid "Other…"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:445
+#: contacts/qml/private/ContactEditorPage.qml:525
 #, kde-format
 msgid "user@example.org"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:454
+#: contacts/qml/private/ContactEditorPage.qml:534
 #, fuzzy, kde-format
 #| msgid "Add Reminder"
 msgid "Add email"
 msgstr "Emlékeztető hozzáadása"
 
-#: contacts/qml/private/ContactEditorPage.qml:474
+#: contacts/qml/private/ContactEditorPage.qml:554
 #, kde-format
 msgid "Instant Messenger"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:515
+#: contacts/qml/private/ContactEditorPage.qml:595
 #, kde-format
 msgid "protocol:person@example.com"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:565
+#: contacts/qml/private/ContactEditorPage.qml:645
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Save"
 msgstr "Mentés"
 
-#: contacts/qml/private/ContactEditorPage.qml:565
+#: contacts/qml/private/ContactEditorPage.qml:645
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: contacts/qml/private/ContactEditorPage.qml:610
+#: contacts/qml/private/ContactEditorPage.qml:690
 #: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:615
+#: contacts/qml/private/ContactEditorPage.qml:695
 #: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
@@ -788,7 +930,7 @@ msgstr "Naptárszín kiválasztása"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:88
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:936
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:923
 #, kde-format
 msgid "Name:"
 msgstr "Név:"
@@ -931,11 +1073,6 @@ msgstr ""
 #, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
-msgstr ""
-
-#: contacts/qml/private/ContactPage.qml:342
-#, kde-format
-msgid "Business Information"
 msgstr ""
 
 #: contacts/qml/private/ContactPage.qml:348
@@ -1490,310 +1627,255 @@ msgstr "Összefoglaló:"
 msgid "Completion:"
 msgstr "Befejezettség:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:205
-#, kde-format
-msgid "Priority:"
-msgstr "Prioritás:"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:213
-#, kde-format
-msgid "Unassigned"
-msgstr "Nincs hozzárendelve"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:214
-#, kde-format
-msgid "1 (Highest Priority)"
-msgstr "1 (legmagasabb prioritás)"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:215
-#, kde-format
-msgid "2"
-msgstr "2"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:216
-#, kde-format
-msgid "3"
-msgstr "3"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:217
-#, kde-format
-msgid "4"
-msgstr "4"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:218
-#, kde-format
-msgid "5 (Medium Priority)"
-msgstr "5 (közepes prioritás)"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:219
-#, kde-format
-msgid "6"
-msgstr "6"
-
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:220
-#, kde-format
-msgid "7"
-msgstr "7"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:221
-#, kde-format
-msgid "8"
-msgstr "8"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:222
-#, kde-format
-msgid "9 (Lowest Priority)"
-msgstr "9 (legalacsonyabb prioritás)"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:235
 #, kde-format
 msgid "All day"
 msgstr "Egész napos"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:267
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:252
 #, kde-format
 msgid "Start:"
 msgstr "Kezdés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:314
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
 #, kde-format
 msgid "Due:"
 msgstr "Határidő:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:314
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
 #, kde-format
 msgid "End:"
 msgstr "Befejezés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:361
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:346
 #, kde-format
 msgid "Timezone:"
 msgstr "Időzóna:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:380
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:365
 #, kde-format
 msgid "Repeat:"
 msgstr "Ismétlődés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:410
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:611
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:395
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
 #: contents/ui/KalendarUtils/labelutils.js:82
 #, kde-format
 msgid "Never"
 msgstr "Soha"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:411
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:396
 #, kde-format
 msgid "Daily"
 msgstr "Naponta"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:412
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:397
 #, kde-format
 msgid "Weekly"
 msgstr "Hetente"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:413
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:398
 #, kde-format
 msgid "Monthly"
 msgstr "Havonta"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:414
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:399
 #, kde-format
 msgid "Yearly"
 msgstr "Évente"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
 #, kde-format
 msgid "Custom"
 msgstr "Egyéni"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:446
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format
 msgid "Every:"
 msgstr "Minden:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:493
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:478
 #, kde-format
 msgid "day"
 msgid_plural "days"
 msgstr[0] "napon"
 msgstr[1] "napon"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:494
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:479
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
 msgstr[0] "héten"
 msgstr[1] "héten"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:495
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:480
 #, kde-format
 msgid "month"
 msgid_plural "months"
 msgstr[0] "hónapban"
 msgstr[1] "hónapban"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:496
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:481
 #, kde-format
 msgid "year"
 msgid_plural "years"
 msgstr[0] "évben"
 msgstr[1] "évben"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:566
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:551
 #, kde-format
 msgid "On:"
 msgstr "Ekkor:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:574
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:559
 #, kde-format
 msgctxt "%1 is the day number of month"
 msgid "The %1 of each month"
 msgstr "Minden hónap %1. napján"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:586
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:571
 #, kde-format
 msgctxt "the weekOfMonth dayOfWeekString of each month"
 msgid "The %1 %2 of each month"
 msgstr "Minden hónap %1. hetének %2. napja"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:582
 #, kde-format
 msgid "Ends:"
 msgstr "Befejeződés:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:612
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
 #, kde-format
 msgid "On"
 msgstr "Ekkor"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:613
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:598
 #, kde-format
 msgid "After"
 msgstr "Után"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:649
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:634
 #, kde-format
 msgid "occurrence"
 msgid_plural "occurrences"
 msgstr[0] "előfordulás"
 msgstr[1] "előfordulás"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:655
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:640
 #, kde-format
 msgid "Exceptions:"
 msgstr "Kivételek:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:661
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:646
 #, kde-format
 msgid "Add Recurrence Exception"
 msgstr "Ismétlődési kivétel hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:704
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:689
 #, kde-format
 msgid "Location:"
 msgstr "Hely:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:729
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:943
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:714
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:798
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:930
 #, kde-format
 msgid "Optional"
 msgstr "Opcionális"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:776
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:761
 #, kde-format
 msgid "Show map"
 msgstr "Térkép megjelenítése"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:807
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:792
 #, kde-format
 msgid "Description:"
 msgstr "Leírás:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:828
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
 #, kde-format
 msgid "Tags:"
 msgstr "Címkék:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:837
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:822
 #: models/todosortfilterproxymodel.cpp:147
 #, kde-format
 msgctxt "List separator"
 msgid ", "
 msgstr ", "
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:838
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:823
 #, kde-format
 msgid "Tap to set tags…"
 msgstr "Koppintson címkék megadásához…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:838
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:823
 #, kde-format
 msgid "Click to set tags…"
 msgstr "Kattintson címkék megadásához…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:855
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:840
 #, kde-format
 msgid "Manage tags…"
 msgstr "Címkék kezelése…"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:866
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:851
 #, kde-format
 msgid "Reminders:"
 msgstr "Emlékeztetők:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:887
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:874
 #, kde-format
 msgid "Add Reminder"
 msgstr "Emlékeztető hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:901
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:888
 #, kde-format
 msgid "Attendees:"
 msgstr "Résztvevők:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:961
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:948
 #, kde-format
 msgid "Email:"
 msgstr "E-mail:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:968
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:955
 #, kde-format
 msgid "Required"
 msgstr "Kötelező"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:977
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:964
 #, kde-format
 msgid "Status:"
 msgstr "Állapot:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1001
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:988
 #, kde-format
 msgid "Request RSVP"
 msgstr "Választ kérek"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1015
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1002
 #, kde-format
 msgid "Add Attendee"
 msgstr "Résztvevő hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1026
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Kiválasztás a névjegyekből"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1030
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1017
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Kitöltés kézzel"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1044
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1031
 #, kde-format
 msgid "Attachments:"
 msgstr "Mellékletek:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1067
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1054
 #, kde-format
 msgid "Add Attachment"
 msgstr "Melléklet hozzáadása"
@@ -2622,7 +2704,7 @@ msgstr "Kör (a helyszín környéke)"
 msgid "Pin (shows exact location)"
 msgstr "Kitűző (a pontos helyszín)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
