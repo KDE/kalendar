@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:50+0000\n"
-"PO-Revision-Date: 2023-03-20 11:39+0000\n"
+"PO-Revision-Date: 2023-03-27 23:06+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-POFile-SpellExtra: RSVP Kalendar Schwan Clau mín Seg Mín Felipe\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-POFile-SpellExtra: Kinoshita QR Azteca Blog Men Jr PCS Pager Srt enc\n"
-"X-POFile-SpellExtra: resp Meet\n"
+"X-POFile-SpellExtra: resp Meet SDE\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -635,91 +635,81 @@ msgid "Business Information"
 msgstr "Informação de Negócios"
 
 #: contacts/qml/private/ContactEditorPage.qml:270
-#, fuzzy, kde-format
-#| msgid "Organization:"
+#, kde-format
 msgid "Organization"
-msgstr "Organização:"
+msgstr "Organização"
 
 #: contacts/qml/private/ContactEditorPage.qml:273
 #, kde-format
 msgctxt "Placeholder value for name of Organization"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: contacts/qml/private/ContactEditorPage.qml:280
-#, fuzzy, kde-format
-#| msgid "Profession:"
+#, kde-format
 msgid "Profession"
-msgstr "Profissão:"
+msgstr "Profissão"
 
 #: contacts/qml/private/ContactEditorPage.qml:283
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Developer"
+#, kde-format
 msgctxt "Placeholder value for name of Profession"
 msgid "Software Developer"
-msgstr "desenvolvimento"
+msgstr "Desenvolvimento de 'Software'"
 
 #: contacts/qml/private/ContactEditorPage.qml:290
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgid "Title"
-msgstr "Título:"
+msgstr "Título"
 
 #: contacts/qml/private/ContactEditorPage.qml:293
 #, kde-format
 msgctxt "Placeholder value for Title"
 msgid "SDE-1"
-msgstr ""
+msgstr "SDE-1"
 
 #: contacts/qml/private/ContactEditorPage.qml:300
-#, fuzzy, kde-format
-#| msgid "Department:"
+#, kde-format
 msgid "Department"
-msgstr "Departamento:"
+msgstr "Departamento"
 
 #: contacts/qml/private/ContactEditorPage.qml:303
-#, fuzzy, kde-format
-#| msgid "Kalendar"
+#, kde-format
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
-msgstr "Kalendar"
+msgstr "Equipa do Kalendar"
 
 #: contacts/qml/private/ContactEditorPage.qml:310
-#, fuzzy, kde-format
-#| msgid "Office:"
+#, kde-format
 msgid "Office"
-msgstr "Escritório:"
+msgstr "Escritório"
 
 #: contacts/qml/private/ContactEditorPage.qml:313
 #, kde-format
 msgctxt "Placeholder value for Office"
 msgid "Tech Wing, 4th Floor"
-msgstr ""
+msgstr "Ala Técnica, 4º Andar"
 
 #: contacts/qml/private/ContactEditorPage.qml:320
-#, fuzzy, kde-format
-#| msgid "Manager's name:"
+#, kde-format
 msgid "Manager's Name"
-msgstr "Nome do gestor:"
+msgstr "Nome do Gestor"
 
 #: contacts/qml/private/ContactEditorPage.qml:323
 #, kde-format
 msgctxt "Placeholder value for Manager's Name"
 msgid "Bob"
-msgstr ""
+msgstr "Pedro"
 
 #: contacts/qml/private/ContactEditorPage.qml:330
-#, fuzzy, kde-format
-#| msgid "Assistants's name:"
+#, kde-format
 msgid "Assistant's Name"
-msgstr "Nome dos assistentes:"
+msgstr "Nome do Assistente"
 
 #: contacts/qml/private/ContactEditorPage.qml:333
 #, kde-format
 msgctxt "Placeholder value for Assistants's Name"
 msgid "Jill"
-msgstr ""
+msgstr "Maria"
 
 #: contacts/qml/private/ContactEditorPage.qml:345
 #, kde-format
