@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:50+0000\n"
-"PO-Revision-Date: 2023-03-19 05:19+0100\n"
+"PO-Revision-Date: 2023-03-28 07:11+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -636,91 +636,81 @@ msgid "Business Information"
 msgstr "ბიზნესის ინფორმაცია"
 
 #: contacts/qml/private/ContactEditorPage.qml:270
-#, fuzzy, kde-format
-#| msgid "Organization:"
+#, kde-format
 msgid "Organization"
-msgstr "ორგანიზაცია:"
+msgstr "ორგანიზაცია"
 
 #: contacts/qml/private/ContactEditorPage.qml:273
 #, kde-format
 msgctxt "Placeholder value for name of Organization"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: contacts/qml/private/ContactEditorPage.qml:280
-#, fuzzy, kde-format
-#| msgid "Profession:"
+#, kde-format
 msgid "Profession"
-msgstr "პროფესია:"
+msgstr "პროფესია"
 
 #: contacts/qml/private/ContactEditorPage.qml:283
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Developer"
+#, kde-format
 msgctxt "Placeholder value for name of Profession"
 msgid "Software Developer"
 msgstr "პროგრამისტი"
 
 #: contacts/qml/private/ContactEditorPage.qml:290
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgid "Title"
-msgstr "სათაური:"
+msgstr "სათაური"
 
 #: contacts/qml/private/ContactEditorPage.qml:293
 #, kde-format
 msgctxt "Placeholder value for Title"
 msgid "SDE-1"
-msgstr ""
+msgstr "SDE-1"
 
 #: contacts/qml/private/ContactEditorPage.qml:300
-#, fuzzy, kde-format
-#| msgid "Department:"
+#, kde-format
 msgid "Department"
-msgstr "დეპარტამენტი:"
+msgstr "დეპარტამენტი"
 
 #: contacts/qml/private/ContactEditorPage.qml:303
-#, fuzzy, kde-format
-#| msgid "Kalendar"
+#, kde-format
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
-msgstr "Kalendar"
+msgstr "Kalendar-Team"
 
 #: contacts/qml/private/ContactEditorPage.qml:310
-#, fuzzy, kde-format
-#| msgid "Office:"
+#, kde-format
 msgid "Office"
-msgstr "ოფისი:"
+msgstr "ოფისი"
 
 #: contacts/qml/private/ContactEditorPage.qml:313
 #, kde-format
 msgctxt "Placeholder value for Office"
 msgid "Tech Wing, 4th Floor"
-msgstr ""
+msgstr "ტექნიკური ფრთა, მეოთხე სართული"
 
 #: contacts/qml/private/ContactEditorPage.qml:320
-#, fuzzy, kde-format
-#| msgid "Manager's name:"
+#, kde-format
 msgid "Manager's Name"
-msgstr "მმართველის სახელი:"
+msgstr "მმართველის სახელი"
 
 #: contacts/qml/private/ContactEditorPage.qml:323
 #, kde-format
 msgctxt "Placeholder value for Manager's Name"
 msgid "Bob"
-msgstr ""
+msgstr "ბობი"
 
 #: contacts/qml/private/ContactEditorPage.qml:330
-#, fuzzy, kde-format
-#| msgid "Assistants's name:"
+#, kde-format
 msgid "Assistant's Name"
-msgstr "დამხმარის სახელი:"
+msgstr "დამხმარის სახელი"
 
 #: contacts/qml/private/ContactEditorPage.qml:333
 #, kde-format
 msgctxt "Placeholder value for Assistants's Name"
 msgid "Jill"
-msgstr ""
+msgstr "ჯილი"
 
 #: contacts/qml/private/ContactEditorPage.qml:345
 #, kde-format
@@ -1497,6 +1487,12 @@ msgid ""
 "\n"
 "Deleting all will also delete sub-items!"
 msgstr ""
+"კალენდარის ჩანაწერი \"%1\" ერთზე მეტ თარიღშია. მას ასევე გააჩნია "
+"ქვეჩანაწერები.\n"
+"\n"
+"გნებავთ წაშალოთ მონიშნული შემთხვევა %2-ზე და მისი ყველა მომავალი გამოჩენა?\n"
+"\n"
+"მისი წაშლა ქვეჩანაწერებსაც ზედ მიაყოლებს!"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:64
 #, kde-format
@@ -1505,6 +1501,8 @@ msgid ""
 "the selected occurrence on %2, also future occurrences, or all of its "
 "occurrences?"
 msgstr ""
+"კალენდარის ჩანაწერი \"%1\" მრავალ თარიღზე ჩანს. გნებავთ წაშალოთ %2-ზე მისი "
+"გამოჩენა, მისი მომავალში გამოჩენების გარეშე?"
 
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:80
 #, kde-format
@@ -1833,6 +1831,8 @@ msgid ""
 "applied only to this single occurrence, also to future items, or to all "
 "items in the recurrence?"
 msgstr ""
+"ჩანაწერი, რომლის შეცვლასაც ცდილობთ, განმეორებადია. გნებავთ, რომ თქვენი "
+"ცვლილებები გადატარდეს მხოლოდ ერთ გამოჩენაზე, თუ მომავალშიც?"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:62
 #, kde-format
@@ -2116,6 +2116,9 @@ msgid ""
 "file?\n"
 " "
 msgstr ""
+"გნებავთ ამ კალენდარის ფაილის მოვლენები და ამოცანები ერთ-ერთ თქვენს არსებულ "
+"კალენდარში შეიტანოთ, თუ გირჩევნიათ, ამ ფაილიდან ახალი კალენდარი შექმნათ?\n"
+" "
 
 #: contents/ui/main.qml:906
 #, kde-format
