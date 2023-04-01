@@ -15,7 +15,7 @@ public:
     struct Item {
         QString groupName;
         QAction *action = nullptr;
-        int score;
+        int score = 0;
     };
 
     /**
