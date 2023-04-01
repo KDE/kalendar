@@ -8,15 +8,20 @@
 #include <Akonadi/AgentManager>
 #include <Akonadi/AttributeFactory>
 #include <Akonadi/CollectionColorAttribute>
+#include <Akonadi/CollectionModifyJob>
 #include <Akonadi/CollectionUtils>
 #include <Akonadi/EntityDisplayAttribute>
 #include <CalendarSupport/KCalPrefs>
+#include <KCalendarCore/Event>
+#include <KCalendarCore/Journal>
+#include <KCalendarCore/Todo>
 #include <KConfigGroup>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <QRandomGenerator>
+#include <qcolor.h>
 
 namespace
 {
@@ -50,14 +55,6 @@ ColorProxyModel::ColorProxyModel(QObject *parent)
 {
     // Needed to read colorattribute of collections for incidence colors
     Akonadi::AttributeFactory::registerAttribute<Akonadi::CollectionColorAttribute>();
-
-    // Used to get color settings from KOrganizer as fallback
-    const auto korganizerrc = KSharedConfig::openConfig(QStringLiteral("korganizerrc"));
-    const auto skel = new KCoreConfigSkeleton(korganizerrc);
-    mEventViewsPrefs = EventViews::PrefsPtr(new EventViews::Prefs(skel));
-    mEventViewsPrefs->readConfig();
-
-    load();
 }
 
 QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
@@ -127,7 +124,7 @@ QHash<int, QByteArray> ColorProxyModel::roleNames() const
 
 QColor ColorProxyModel::getCollectionColor(Akonadi::Collection collection) const
 {
-    const QString id = QString::number(collection.id());
+    const auto id = collection.id();
     auto supportsMimeType = collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.event"))
         || collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.todo"))
         || collection.contentMimeTypes().contains(QLatin1String("application/x-vnd.akonadi.calendar.journal"))
@@ -146,44 +143,46 @@ QColor ColorProxyModel::getCollectionColor(Akonadi::Collection collection) const
         const auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
         if (colorAttr && colorAttr->color().isValid()) {
             colorCache[id] = colorAttr->color();
-            save();
             return colorAttr->color();
         }
     }
 
-    QColor korgColor = mEventViewsPrefs->resourceColorKnown(id);
-    if (korgColor.isValid()) {
-        colorCache[id] = korgColor;
-        save();
-        return korgColor;
-    }
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
+    KConfigGroup resourcesColorsConfig(config, "Resources Colors");
+    const QStringList colorKeyList = resourcesColorsConfig.keyList();
 
     QColor color;
-    color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
-    colorCache[id] = color;
-    save();
+    for (const QString &key : colorKeyList) {
+        if (key.toLongLong() == id) {
+            color = resourcesColorsConfig.readEntry(key, QColor("blue"));
+        }
+    }
+
+    if (!color.isValid()) {
+        QColor color;
+        color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
+        colorCache[id] = color;
+    }
+
+    auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);
+    colorAttr->setColor(color);
+
+    auto modifyJob = new Akonadi::CollectionModifyJob(collection);
+    connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [](KJob *job) {
+        if (job->error()) {
+            qWarning() << "Error occurred modifying collection color: " << job->errorString();
+        }
+    });
 
     return color;
 }
 
-void ColorProxyModel::load()
+QColor ColorProxyModel::color(Akonadi::Collection::Id collectionId) const
 {
-    KSharedConfig::Ptr config = KSharedConfig::openConfig();
-    KConfigGroup rColorsConfig(config, "Resources Colors");
-    const QStringList colorKeyList = rColorsConfig.keyList();
-
-    for (const QString &key : colorKeyList) {
-        QColor color = rColorsConfig.readEntry(key, QColor("blue"));
-        colorCache[key] = color;
-    }
+    return colorCache[collectionId];
 }
 
-void ColorProxyModel::save() const
+void ColorProxyModel::setColor(Akonadi::Collection::Id collectionId, const QColor &color)
 {
-    KSharedConfig::Ptr config = KSharedConfig::openConfig();
-    KConfigGroup rColorsConfig(config, "Resources Colors");
-    for (auto it = colorCache.constBegin(); it != colorCache.constEnd(); ++it) {
-        rColorsConfig.writeEntry(it.key(), it.value(), KConfigBase::Notify | KConfigBase::Normal);
-    }
-    config->sync();
+    colorCache[collectionId] = color;
 }

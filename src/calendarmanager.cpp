@@ -35,7 +35,6 @@
 #include <Akonadi/Monitor>
 #include <CalendarSupport/KCalPrefs>
 #include <CalendarSupport/Utils>
-#include <EventViews/Prefs>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
 #include <KLocalizedString>
@@ -672,7 +671,7 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     collectionDetails[QLatin1String("id")] = collection.id();
     collectionDetails[QLatin1String("name")] = collection.name();
     collectionDetails[QLatin1String("displayName")] = collection.displayName();
-    collectionDetails[QLatin1String("color")] = m_baseModel->colorCache[QString::number(collection.id())];
+    collectionDetails[QLatin1String("color")] = m_baseModel->color(collection.id());
     collectionDetails[QLatin1String("count")] = collection.statistics().count();
     collectionDetails[QLatin1String("isResource")] = Akonadi::CollectionUtils::isResource(collection);
     collectionDetails[QLatin1String("resource")] = collection.resource();
@@ -697,8 +696,7 @@ void CalendarManager::setCollectionColor(qint64 collectionId, const QColor &colo
         if (job->error()) {
             qCWarning(KALENDAR_LOG) << "Error occurred modifying collection color: " << job->errorString();
         } else {
-            m_baseModel->colorCache[QString::number(collectionId)] = color;
-            m_baseModel->save();
+            m_baseModel->setColor(collectionId, color);
         }
     });
 }

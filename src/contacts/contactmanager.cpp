@@ -184,7 +184,7 @@ QVariantMap ContactManager::getCollectionDetails(const Akonadi::Collection &coll
     collectionDetails[QLatin1String("id")] = collection.id();
     collectionDetails[QLatin1String("name")] = collection.name();
     collectionDetails[QLatin1String("displayName")] = collection.displayName();
-    collectionDetails[QLatin1String("color")] = m_colorProxy->colorCache[QString::number(collection.id())];
+    collectionDetails[QLatin1String("color")] = m_colorProxy->color(collection.id());
     collectionDetails[QLatin1String("count")] = collection.statistics().count();
     collectionDetails[QLatin1String("isResource")] = Akonadi::CollectionUtils::isResource(collection);
     collectionDetails[QLatin1String("resource")] = collection.resource();
@@ -206,8 +206,7 @@ void ContactManager::setCollectionColor(Akonadi::Collection collection, const QC
         if (job->error()) {
             qCWarning(KALENDAR_LOG) << "Error occurred modifying collection color: " << job->errorString();
         } else {
-            m_colorProxy->colorCache[QString::number(collection.id())] = color;
-            m_colorProxy->save();
+            m_colorProxy->setColor(collection.id(), color);
         }
     });
 }

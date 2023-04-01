@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Akonadi/EntityTreeModel>
-#include <EventViews/Prefs>
+#include <QColor>
 #include <QSortFilterProxyModel>
 
 /// Despite the name, this handles the presentation of collections including display text and icons, not just colors.
@@ -24,11 +24,10 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     QHash<int, QByteArray> roleNames() const override;
     QColor getCollectionColor(Akonadi::Collection collection) const;
-    void load();
-    void save() const;
-    mutable QHash<QString, QColor> colorCache;
+    QColor color(Akonadi::Collection::Id collectionId) const;
+    void setColor(Akonadi::Collection::Id collectionId, const QColor &color);
 
 private:
     mutable bool mInitDefaultCalendar;
-    EventViews::PrefsPtr mEventViewsPrefs;
+    mutable QHash<Akonadi::Collection::Id, QColor> colorCache;
 };
