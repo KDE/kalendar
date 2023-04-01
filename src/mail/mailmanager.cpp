@@ -19,8 +19,6 @@
 #include <QApplication>
 #include <QtCore/QItemSelectionModel>
 
-#include <KItemModels/KDescendantsProxyModel>
-
 MailManager::MailManager(QObject *parent)
     : QObject(parent)
     , m_loading(true)
