@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:50+0000\n"
+"POT-Creation-Date: 2023-04-02 00:48+0000\n"
 "PO-Revision-Date: 2023-03-31 11:24+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
-"%100<=4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
@@ -206,28 +206,28 @@ msgstr "%1 po začetku dogodka"
 msgid "On event start"
 msgstr "Ob začetku dogodka"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:544
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Preseli pojav(e)"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:549
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr "Ni mogoče dodati izjem v koledar. Nobene spremembe ne bo."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:589
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Zbriši nalogo in njene pod-naloge"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:592
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Zbriši nalogo in napravi pod-naloge neodvisne"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:754
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -2840,13 +2840,13 @@ msgstr "Osveži vse"
 msgid "An error occurred: %1"
 msgstr "Prišlo je do napake: %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:91
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Nepovezano)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

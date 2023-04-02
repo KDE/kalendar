@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:50+0000\n"
+"POT-Creation-Date: 2023-04-02 00:48+0000\n"
 "PO-Revision-Date: 2023-03-27 13:26+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -205,28 +205,28 @@ msgstr "etkinlik sonrası %1"
 msgid "On event start"
 msgstr "Etkinlik başlangıcında"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:544
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Oluşları taşı"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:549
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr "Takvime istisna ögesi eklenemiyor. Bir değişiklik yapılmayacak."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:589
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Görevleri ve alt görevleri sil"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:592
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Görevi sil ve alt görevleri bağımsız yap"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:754
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -2803,13 +2803,13 @@ msgstr "Tümünü Yenile"
 msgid "An error occurred: %1"
 msgstr "Bir hata oluştu: %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:91
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Çevrimdışı)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:50+0000\n"
+"POT-Creation-Date: 2023-04-02 00:48+0000\n"
 "PO-Revision-Date: 2023-03-28 15:24+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -203,12 +203,12 @@ msgstr "%1 après le début de l'évènement"
 msgid "On event start"
 msgstr "Au début de l'évènement"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:544
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Déplacer la (les) récurrence(s)"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:549
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
@@ -216,17 +216,17 @@ msgstr ""
 "Impossible d'ajouter un élément d'exception au calendrier. Aucun changement "
 "ne sera fait."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:589
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Supprimer la tâche et ses sous-tâches"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:592
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Supprimer la tâche et rendre indépendante ses sous-tâches"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:754
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -2811,13 +2811,13 @@ msgstr "Tout rafraîchir"
 msgid "An error occurred: %1"
 msgstr "Une erreur est survenue : %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:91
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Déconnecté)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

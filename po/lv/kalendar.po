@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:50+0000\n"
+"POT-Creation-Date: 2023-04-02 00:48+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -216,28 +216,28 @@ msgstr "%1 pēc pasākuma sākuma"
 msgid "On event start"
 msgstr "Pasākuma sākumā"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:544
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Pārvietot reizi(es)"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:549
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr "Nevar pievienot izņēmumu. Nekas netiks mainīts."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:589
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Dzēst uzdevumu un tā apakšuzdevumus"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:592
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Dzēst uzdevumu un padarīt tā apakšuzdevumus par atsevišķiem uzdevumiem"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:754
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -2906,13 +2906,13 @@ msgstr "Atjaunināt visus kalendārus"
 msgid "An error occurred: %1"
 msgstr "Radusies kļūda: %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:91
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Bezsaistē)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

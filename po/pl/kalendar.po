@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:50+0000\n"
-"PO-Revision-Date: 2023-03-12 09:21+0100\n"
+"POT-Creation-Date: 2023-04-02 00:48+0000\n"
+"PO-Revision-Date: 2023-04-01 09:05+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -101,8 +101,7 @@ msgid "9 (Lowest Priority)"
 msgstr "9 (Najniższy priorytet)"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Custom"
+#, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Własny"
@@ -207,12 +206,12 @@ msgstr "%1 po rozpoczęciu wydarzenia"
 msgid "On event start"
 msgstr "Na rozpoczęcie wydarzenia"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:544
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Przenieś wystąpienie(a)"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:549
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
@@ -220,17 +219,17 @@ msgstr ""
 "Nie można dodać elementu wyjątku do kalendarza. Nie zostanie wprowadzona "
 "żadna zmiana."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:589
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Usuń zadanie i jego wszystkiego podzadania"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:592
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Usuń zadanie i uczyń podzadania niezależnymi"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:754
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -518,9 +517,7 @@ msgstr "Książka adresowa:"
 
 #: contacts/qml/private/ContactEditorPage.qml:159
 #: contacts/qml/private/ContactEditorPage.qml:166
-#, fuzzy, kde-format
-#| msgctxt "contact's name"
-#| msgid "Name"
+#, kde-format
 msgid "Name"
 msgstr "Nazwa"
 
@@ -530,10 +527,9 @@ msgid "Contact name"
 msgstr "Nazwa kontaktu"
 
 #: contacts/qml/private/ContactEditorPage.qml:189
-#, fuzzy, kde-format
-#| msgid "Honorific prefix:"
+#, kde-format
 msgid "Honorific prefix"
-msgstr "Przedrostek uprzejmościowy:"
+msgstr "Przedrostek uprzejmościowy"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
@@ -561,10 +557,9 @@ msgid "Prof."
 msgstr "Prof."
 
 #: contacts/qml/private/ContactEditorPage.qml:201
-#, fuzzy, kde-format
-#| msgid "Given name:"
+#, kde-format
 msgid "Given name"
-msgstr "Imię:"
+msgstr "Imię"
 
 #: contacts/qml/private/ContactEditorPage.qml:204
 #, kde-format
@@ -572,10 +567,9 @@ msgid "First name or chosen name"
 msgstr "Pierwsze imię lub wybrane imię"
 
 #: contacts/qml/private/ContactEditorPage.qml:210
-#, fuzzy, kde-format
-#| msgid "Additional name:"
+#, kde-format
 msgid "Additional name"
-msgstr "Drugie imię:"
+msgstr "Drugie imię"
 
 #: contacts/qml/private/ContactEditorPage.qml:213
 #, kde-format
@@ -593,10 +587,9 @@ msgid "Surname or last name"
 msgstr "Nazwisko"
 
 #: contacts/qml/private/ContactEditorPage.qml:228
-#, fuzzy, kde-format
-#| msgid "Honorific suffix:"
+#, kde-format
 msgid "Honorific suffix"
-msgstr "Przyrostek uprzejmościowy:"
+msgstr "Przyrostek uprzejmościowy"
 
 #: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
@@ -619,26 +612,24 @@ msgid "Sr."
 msgstr "Senior"
 
 #: contacts/qml/private/ContactEditorPage.qml:239
-#, fuzzy, kde-format
-#| msgid "Nickname:"
+#, kde-format
 msgid "Nickname"
-msgstr "Pseudonim:"
+msgstr "Pseudonim"
 
 #: contacts/qml/private/ContactEditorPage.qml:242
 #, kde-format
 msgid "Alternative name"
-msgstr "Nazwa alternatywna"
+msgstr "Nazwa zamienna"
 
 #: contacts/qml/private/ContactEditorPage.qml:250
-#, fuzzy, kde-format
-#| msgid "Blog Feed:"
+#, kde-format
 msgid "Blog Feed"
-msgstr "Kanał bloga:"
+msgstr "Kanał bloga"
 
 #: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "https://planet.kde.org/"
-msgstr ""
+msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/ContactEditorPage.qml:265
 #: contacts/qml/private/ContactPage.qml:342
@@ -734,10 +725,9 @@ msgid "Jill"
 msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:345
-#, fuzzy, kde-format
-#| msgid "Phone:"
+#, kde-format
 msgid "Phone"
-msgstr "Telefon:"
+msgstr "Telefon"
 
 #: contacts/qml/private/ContactEditorPage.qml:357
 #: contacts/qml/private/ContactEditorPage.qml:403
@@ -832,10 +822,9 @@ msgid "+33 7 55 23 68 67"
 msgstr "+33 7 55 23 68 67"
 
 #: contacts/qml/private/ContactEditorPage.qml:454
-#, fuzzy, kde-format
-#| msgid "E-mail:"
+#, kde-format
 msgid "E-mail"
-msgstr "E-mail:"
+msgstr "E-mail"
 
 #: contacts/qml/private/ContactEditorPage.qml:473
 #, kde-format
@@ -870,12 +859,12 @@ msgstr "Dodaj adres e-mail"
 #: contacts/qml/private/ContactEditorPage.qml:554
 #, kde-format
 msgid "Instant Messenger"
-msgstr ""
+msgstr "Wiadomości"
 
 #: contacts/qml/private/ContactEditorPage.qml:595
 #, kde-format
 msgid "protocol:person@example.com"
-msgstr ""
+msgstr "protokół:osoba@przyklad.com"
 
 #: contacts/qml/private/ContactEditorPage.qml:645
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
@@ -921,10 +910,9 @@ msgid "Contact group name"
 msgstr "Nazwa grupy kontaktów"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:103
-#, fuzzy, kde-format
-#| msgid "Members:"
+#, kde-format
 msgid "Members"
-msgstr "Członkowie:"
+msgstr "Członkowie"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
@@ -1043,15 +1031,12 @@ msgid "%1:"
 msgstr "%1:"
 
 #: contacts/qml/private/ContactPage.qml:300
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgid "Instant Messaging"
 msgstr "Wiadomości"
 
 #: contacts/qml/private/ContactPage.qml:317
-#, fuzzy, kde-format
-#| msgctxt "Label for a phone number type"
-#| msgid "%1:"
+#, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
 msgstr "%1:"
@@ -1857,7 +1842,7 @@ msgstr "Dodaj załącznik"
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
 msgid "No results found"
-msgstr ""
+msgstr "Nie ma żadnych wyników"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
@@ -2790,10 +2775,9 @@ msgid "New Contact…"
 msgstr "Nowy kontakt…"
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "Nowy kontakt…"
+msgstr "Nowy grupa kontaktów…"
 
 #: kalendarapplication.cpp:336
 #, kde-format
@@ -2850,13 +2834,13 @@ msgstr "Odśwież wszystkie"
 msgid "An error occurred: %1"
 msgstr "Wystąpił błąd: %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:91
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Niedostępny)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

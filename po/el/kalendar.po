@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:50+0000\n"
+"POT-Creation-Date: 2023-04-02 00:48+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -212,30 +212,30 @@ msgstr "%1 μετά την έναρξη του γεγονότος"
 msgid "On event start"
 msgstr "Στην έναρξη του γεγονότος"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:544
 #, fuzzy, kde-format
 #| msgid "occurrence"
 #| msgid_plural "occurrences"
 msgid "Move occurrence(s)"
 msgstr "εμφάνιση"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:549
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr ""
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:589
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Διαγραφή εργασίας και υπο-εργασιών"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:592
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Διαγραφή εργασίας και ανεξαρτητοποίηση υπο-εργασιών"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:754
 #, fuzzy, kde-format
 #| msgid "Import Calendar"
 msgctxt "@title:window"
@@ -2937,13 +2937,13 @@ msgstr "Εισαγωγή ημερολογίου"
 msgid "An error occurred: %1"
 msgstr "Παρουσιάστηκε σφάλμα: %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:91
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Εκτός σύνδεσης)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:94
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"
