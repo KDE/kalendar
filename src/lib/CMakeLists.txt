@@ -31,5 +31,6 @@ target_link_libraries(kalendar_lib PUBLIC
     KF${QT_MAJOR_VERSION}::ConfigWidgets
     KF${QT_MAJOR_VERSION}::Contacts
     KF${QT_MAJOR_VERSION}::ItemModels
-    KPim${QT_MAJOR_VERSION}::EventViews
+    KPim${QT_MAJOR_VERSION}::CalendarSupport
+    KPim${QT_MAJOR_VERSION}::CalendarUtils
 )

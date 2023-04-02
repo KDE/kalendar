@@ -85,7 +85,6 @@ set(kalendar_LIBS
     KF${QT_MAJOR_VERSION}::Contacts
     KF${QT_MAJOR_VERSION}::ItemModels
     KF${QT_MAJOR_VERSION}::XmlGui
-    KPim${QT_MAJOR_VERSION}::EventViews
     )
 
 target_link_libraries(kalendar
