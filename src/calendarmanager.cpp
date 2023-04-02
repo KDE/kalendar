@@ -227,7 +227,6 @@ CalendarManager::CalendarManager(QObject *parent)
     m_viewCollectionModel->setSourceModel(collectionFilter);
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
-    m_viewCollectionModel->setExcludeVirtualCollections(true);
     m_viewCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     m_viewCollectionModel->sort(0, Qt::AscendingOrder);
 
