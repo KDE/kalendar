@@ -22,7 +22,6 @@ set (commonAkonadiTest_LIBS
     KPim${QT_MAJOR_VERSION}::CalendarSupport
     KPim${QT_MAJOR_VERSION}::AkonadiCore
     KPim${QT_MAJOR_VERSION}::AkonadiCalendar
-    KPim${QT_MAJOR_VERSION}::EventViews
 )
 
 set(filterTest_SRCS

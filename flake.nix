@@ -52,7 +52,6 @@
             libsForQt5.kmime
             libsForQt5.kpackage
             libsForQt5.kio
-            libsForQt5.eventviews
             libsForQt5.calendarsupport
             libsForQt5.messagelib
             libsForQt5.mailcommon
