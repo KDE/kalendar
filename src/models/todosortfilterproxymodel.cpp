@@ -10,7 +10,7 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     const QString todoMimeType = QStringLiteral("application/x-vnd.akonadi.calendar.todo");
     m_todoTreeModel.reset(new Akonadi::IncidenceTreeModel(QStringList() << todoMimeType, this));
 
-    m_baseTodoModel.reset(new TodoModel(this));
+    m_baseTodoModel.reset(new Akonadi::TodoModel(this));
     m_baseTodoModel->setSourceModel(m_todoTreeModel.data());
     setSourceModel(m_baseTodoModel.data());
 
@@ -38,7 +38,7 @@ int TodoSortFilterProxyModel::columnCount(const QModelIndex &) const
 QHash<int, QByteArray> TodoSortFilterProxyModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames = QSortFilterProxyModel::roleNames();
-    roleNames[TodoModel::SummaryRole] = "text";
+    roleNames[Akonadi::TodoModel::SummaryRole] = "text";
     roleNames[Roles::StartTimeRole] = "startTime";
     roleNames[Roles::EndTimeRole] = "endTime";
     roleNames[Roles::DisplayDueDateRole] = "displayDueDate";
@@ -80,7 +80,7 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
     }
     Q_ASSERT(sourceIndex.isValid());
 
-    auto todoItem = sourceIndex.data(TodoModel::TodoRole).value<Akonadi::Item>();
+    auto todoItem = sourceIndex.data(Akonadi::TodoModel::TodoRole).value<Akonadi::Item>();
 
     if (!todoItem.isValid()) {
         return {};
@@ -152,7 +152,7 @@ QVariant TodoSortFilterProxyModel::data(const QModelIndex &index, int role) cons
             depth++;
         }
 
-        auto todo = idx.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+        auto todo = idx.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
 
         switch (role) {
         case Roles::TreeDepthRole:
@@ -243,7 +243,7 @@ void TodoSortFilterProxyModel::emitDateDataChanged(const QModelIndex &idx)
     const auto iterateOverChildren = [this, &idx, &srcModel, &currentDate, &currentDateTime](const int row) {
         const auto childIdx = index(row, 0, idx);
 
-        const auto todo = childIdx.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+        const auto todo = childIdx.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
         const auto isOverdue = todo->isOverdue();
         const auto dtDue = todo->dtDue();
         const auto isRecentlyOverdue = isOverdue && currentDateTime.msecsTo(dtDue) >= -m_dateRefreshTimerInterval;
@@ -253,8 +253,8 @@ void TodoSortFilterProxyModel::emitDateDataChanged(const QModelIndex &idx)
 
             // For the proxy model to re-sort items into their correct section we also need to emit a
             // dataChanged() signal for the column we are sorting by in the source model
-            const auto srcChildIdx = mapToSource(childIdx).siblingAtColumn(TodoModel::DueDateColumn);
-            Q_EMIT srcModel->dataChanged(srcChildIdx, srcChildIdx, {TodoModel::DueDateRole});
+            const auto srcChildIdx = mapToSource(childIdx).siblingAtColumn(Akonadi::TodoModel::DueDateColumn);
+            Q_EMIT srcModel->dataChanged(srcChildIdx, srcChildIdx, {Akonadi::TodoModel::DueDateRole});
         }
 
         // We recursively do the same for children
@@ -316,16 +316,16 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
     bool acceptRow = true;
 
     if (m_filterObject->collectionId() > -1) {
-        const auto collectionId = sourceIndex.data(TodoModel::TodoRole).value<Akonadi::Item>().parentCollection().id();
+        const auto collectionId = sourceIndex.data(Akonadi::TodoModel::TodoRole).value<Akonadi::Item>().parentCollection().id();
         acceptRow = acceptRow && collectionId == m_filterObject->collectionId();
     }
 
     switch (m_showCompleted) {
     case ShowComplete::ShowCompleteOnly:
-        acceptRow = acceptRow && sourceIndex.data(TodoModel::PercentRole).toInt() == 100;
+        acceptRow = acceptRow && sourceIndex.data(Akonadi::TodoModel::PercentRole).toInt() == 100;
         break;
     case ShowComplete::ShowIncompleteOnly:
-        acceptRow = acceptRow && sourceIndex.data(TodoModel::PercentRole).toInt() < 100;
+        acceptRow = acceptRow && sourceIndex.data(Akonadi::TodoModel::PercentRole).toInt() < 100;
     case ShowComplete::ShowAll:
     default:
         break;
@@ -335,7 +335,7 @@ bool TodoSortFilterProxyModel::filterAcceptsRowCheck(int row, const QModelIndex 
         const auto tags = m_filterObject->tags();
         bool containsTag = false;
         for (const auto &tag : tags) {
-            const auto todoPtr = sourceIndex.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+            const auto todoPtr = sourceIndex.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
             if (todoPtr->categories().contains(tag)) {
                 containsTag = true;
                 break;
@@ -504,13 +504,13 @@ void TodoSortFilterProxyModel::filterTodoName(const QString &name, const int sho
 
 int TodoSortFilterProxyModel::compareStartDates(const QModelIndex &left, const QModelIndex &right) const
 {
-    Q_ASSERT(left.column() == TodoModel::StartDateColumn);
-    Q_ASSERT(right.column() == TodoModel::StartDateColumn);
+    Q_ASSERT(left.column() == Akonadi::TodoModel::StartDateColumn);
+    Q_ASSERT(right.column() == Akonadi::TodoModel::StartDateColumn);
 
     // The start date column is a QString, so fetch the to-do.
     // We can't compare QStrings because it won't work if the format is MM/DD/YYYY
-    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
-    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto leftTodo = left.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
 
     if (!leftTodo || !rightTodo) {
         return 0;
@@ -538,11 +538,11 @@ int TodoSortFilterProxyModel::compareStartDates(const QModelIndex &left, const Q
 
 int TodoSortFilterProxyModel::compareCompletedDates(const QModelIndex &left, const QModelIndex &right) const
 {
-    Q_ASSERT(left.column() == TodoModel::CompletedDateColumn);
-    Q_ASSERT(right.column() == TodoModel::CompletedDateColumn);
+    Q_ASSERT(left.column() == Akonadi::TodoModel::CompletedDateColumn);
+    Q_ASSERT(right.column() == Akonadi::TodoModel::CompletedDateColumn);
 
-    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
-    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto leftTodo = left.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
 
     if (!leftTodo || !rightTodo) {
         return 0;
@@ -574,13 +574,13 @@ int TodoSortFilterProxyModel::compareCompletedDates(const QModelIndex &left, con
  */
 int TodoSortFilterProxyModel::compareDueDates(const QModelIndex &left, const QModelIndex &right) const
 {
-    Q_ASSERT(left.column() == TodoModel::DueDateColumn);
-    Q_ASSERT(right.column() == TodoModel::DueDateColumn);
+    Q_ASSERT(left.column() == Akonadi::TodoModel::DueDateColumn);
+    Q_ASSERT(right.column() == Akonadi::TodoModel::DueDateColumn);
 
     // The due date column is a QString, so fetch the to-do.
     // We can't compare QStrings because it won't work if the format is MM/DD/YYYY
-    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
-    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto leftTodo = left.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
     Q_ASSERT(leftTodo);
     Q_ASSERT(rightTodo);
 
@@ -621,16 +621,16 @@ int TodoSortFilterProxyModel::compareDueDates(const QModelIndex &left, const QMo
  */
 int TodoSortFilterProxyModel::compareCompletion(const QModelIndex &left, const QModelIndex &right) const
 {
-    Q_ASSERT(left.column() == TodoModel::PercentColumn);
-    Q_ASSERT(right.column() == TodoModel::PercentColumn);
+    Q_ASSERT(left.column() == Akonadi::TodoModel::PercentColumn);
+    Q_ASSERT(right.column() == Akonadi::TodoModel::PercentColumn);
 
     const int leftValue = sourceModel()->data(left).toInt();
     const int rightValue = sourceModel()->data(right).toInt();
 
     if (leftValue == 100 && rightValue == 100) {
         // Break ties with the completion date.
-        const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
-        const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+        const auto leftTodo = left.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+        const auto rightTodo = right.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
         Q_ASSERT(leftTodo);
         Q_ASSERT(rightTodo);
         if (!leftTodo || !rightTodo) {
@@ -654,8 +654,8 @@ int TodoSortFilterProxyModel::comparePriorities(const QModelIndex &left, const Q
     Q_ASSERT(left.isValid());
     Q_ASSERT(right.isValid());
 
-    const auto leftTodo = left.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
-    const auto rightTodo = right.data(TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto leftTodo = left.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
+    const auto rightTodo = right.data(Akonadi::TodoModel::TodoPtrRole).value<KCalendarCore::Todo::Ptr>();
     Q_ASSERT(leftTodo);
     Q_ASSERT(rightTodo);
     // Todos with no priority have a priority of 0 -- push these to list end in ascending order
@@ -679,8 +679,8 @@ bool TodoSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
 
     // To-dos without due date should appear last when sorting ascending,
     // so you can see the most urgent tasks first. (bug #174763)
-    if (right.column() == TodoModel::DueDateColumn) {
-        QModelIndex leftDueDateIndex = left.sibling(left.row(), TodoModel::DueDateColumn); // Prevent possible assert fail
+    if (right.column() == Akonadi::TodoModel::DueDateColumn) {
+        QModelIndex leftDueDateIndex = left.sibling(left.row(), Akonadi::TodoModel::DueDateColumn); // Prevent possible assert fail
 
         const int comparison = compareDueDates(leftDueDateIndex, right);
 
@@ -689,19 +689,19 @@ bool TodoSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
         } else {
             // Due dates are equal, but the user still expects sorting by importance
             // Fallback to the PriorityColumn
-            QModelIndex leftPriorityIndex = left.sibling(left.row(), TodoModel::PriorityColumn);
-            QModelIndex rightPriorityIndex = right.sibling(right.row(), TodoModel::PriorityColumn);
+            QModelIndex leftPriorityIndex = left.sibling(left.row(), Akonadi::TodoModel::PriorityColumn);
+            QModelIndex rightPriorityIndex = right.sibling(right.row(), Akonadi::TodoModel::PriorityColumn);
             const int fallbackComparison = comparePriorities(leftPriorityIndex, rightPriorityIndex);
 
             if (fallbackComparison != 0) {
                 return fallbackComparison == 1;
             }
         }
-    } else if (right.column() == TodoModel::StartDateColumn) {
+    } else if (right.column() == Akonadi::TodoModel::StartDateColumn) {
         return compareStartDates(left, right) == -1;
-    } else if (right.column() == TodoModel::CompletedDateColumn) {
+    } else if (right.column() == Akonadi::TodoModel::CompletedDateColumn) {
         return compareCompletedDates(left, right) == -1;
-    } else if (right.column() == TodoModel::PriorityColumn) {
+    } else if (right.column() == Akonadi::TodoModel::PriorityColumn) {
         const int comparison = comparePriorities(left, right);
 
         if (comparison != 0) {
@@ -709,15 +709,15 @@ bool TodoSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
         } else {
             // Priorities are equal, but the user still expects sorting by importance
             // Fallback to the DueDateColumn
-            QModelIndex leftDueDateIndex = left.sibling(left.row(), TodoModel::DueDateColumn);
-            QModelIndex rightDueDateIndex = right.sibling(right.row(), TodoModel::DueDateColumn);
+            QModelIndex leftDueDateIndex = left.sibling(left.row(), Akonadi::TodoModel::DueDateColumn);
+            QModelIndex rightDueDateIndex = right.sibling(right.row(), Akonadi::TodoModel::DueDateColumn);
             const int fallbackComparison = compareDueDates(leftDueDateIndex, rightDueDateIndex);
 
             if (fallbackComparison != 0) {
                 return fallbackComparison == 1;
             }
         }
-    } else if (right.column() == TodoModel::PercentColumn) {
+    } else if (right.column() == Akonadi::TodoModel::PercentColumn) {
         const int comparison = compareCompletion(left, right);
         if (comparison != 0) {
             return comparison == -1;
@@ -729,8 +729,8 @@ bool TodoSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelInd
         // Fixes to-dos jumping around when you have calendar A selected, and then check/uncheck
         // a calendar B with no to-dos. No to-do is added/removed because calendar B is empty,
         // but you see the existing to-dos switching places.
-        QModelIndex leftSummaryIndex = left.sibling(left.row(), TodoModel::SummaryColumn);
-        QModelIndex rightSummaryIndex = right.sibling(right.row(), TodoModel::SummaryColumn);
+        QModelIndex leftSummaryIndex = left.sibling(left.row(), Akonadi::TodoModel::SummaryColumn);
+        QModelIndex rightSummaryIndex = right.sibling(right.row(), Akonadi::TodoModel::SummaryColumn);
 
         // This patch is not about fallingback to the SummaryColumn for sorting.
         // It's about avoiding jumping due to random reasons.
