@@ -6,6 +6,7 @@
 #include "contactmanager.h"
 
 #include "contactcollectionmodel.h"
+#include "contactconfig.h"
 #include "globalcontactmodel.h"
 #include "kalendar_contact_debug.h"
 #include <Akonadi/AgentManager>
@@ -55,10 +56,17 @@ ContactManager::ContactManager(QObject *parent)
     m_checkableProxyModel->setSelectionModel(m_collectionSelectionModel);
     m_checkableProxyModel->setSourceModel(m_collectionTree);
 
+    auto contactConfig = new ContactConfig(this);
+    contactConfig->lastUsedAddressBookCollection();
+
     m_colorProxy = new ColorProxyModel(this);
     m_colorProxy->setSourceModel(m_checkableProxyModel);
     m_colorProxy->setObjectName(QStringLiteral("Show contact colors"));
     m_colorProxy->setDynamicSortFilter(true);
+    m_colorProxy->setStandardCollectionId(contactConfig->lastUsedAddressBookCollection());
+    connect(contactConfig, &ContactConfig::lastUsedAddressBookCollectionChanged, this, [this, contactConfig]() {
+        m_colorProxy->setStandardCollectionId(contactConfig->lastUsedAddressBookCollection());
+    });
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral("kalendarrc"));
     m_collectionSelectionModelStateSaver = new Akonadi::ETMViewStateSaver(this);

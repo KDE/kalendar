@@ -78,7 +78,6 @@ set(kalendar_LIBS
     KPim${QT_MAJOR_VERSION}::AkonadiContact
     KPim${QT_MAJOR_VERSION}::AkonadiAgentBase
     KPim${QT_MAJOR_VERSION}::AkonadiXml
-    KPim${QT_MAJOR_VERSION}::CalendarSupport
     KF${QT_MAJOR_VERSION}::WindowSystem
     KF${QT_MAJOR_VERSION}::ConfigWidgets
     KPim${QT_MAJOR_VERSION}::AkonadiWidgets

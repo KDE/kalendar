@@ -11,7 +11,6 @@
 #include <Akonadi/CollectionModifyJob>
 #include <Akonadi/CollectionUtils>
 #include <Akonadi/EntityDisplayAttribute>
-#include <CalendarSupport/KCalPrefs>
 #include <KCalendarCore/Event>
 #include <KCalendarCore/Journal>
 #include <KCalendarCore/Todo>
@@ -20,16 +19,12 @@
 #include <KContacts/ContactGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
+#include <QColor>
+#include <QFont>
 #include <QRandomGenerator>
-#include <qcolor.h>
 
 namespace
 {
-bool isStandardCalendar(Akonadi::Collection::Id id)
-{
-    return id == CalendarSupport::KCalPrefs::instance()->defaultCalendarId();
-}
-
 static bool hasCompatibleMimeTypes(const Akonadi::Collection &collection)
 {
     static QStringList goodMimeTypes;
@@ -73,13 +68,9 @@ QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
         }
     } else if (role == Qt::FontRole) {
         const Akonadi::Collection collection = Akonadi::CollectionUtils::fromIndex(index);
-        if (!collection.contentMimeTypes().isEmpty() && isStandardCalendar(collection.id()) && collection.rights() & Akonadi::Collection::CanCreateItem) {
+        if (!collection.contentMimeTypes().isEmpty() && collection.id() == m_standardCollectionId && collection.rights() & Akonadi::Collection::CanCreateItem) {
             auto font = qvariant_cast<QFont>(QSortFilterProxyModel::data(index, Qt::FontRole));
             font.setBold(true);
-            if (!mInitDefaultCalendar) {
-                mInitDefaultCalendar = true;
-                CalendarSupport::KCalPrefs::instance()->setDefaultCalendarId(collection.id());
-            }
             return font;
         }
     } else if (role == Qt::DisplayRole) {
@@ -90,7 +81,7 @@ QVariant ColorProxyModel::data(const QModelIndex &index, int role) const
         if (!instance.isOnline() && !collection.isVirtual()) {
             return i18nc("@item this is the default calendar", "%1 (Offline)", collection.displayName());
         }
-        if (colId == CalendarSupport::KCalPrefs::instance()->defaultCalendarId()) {
+        if (colId == m_standardCollectionId) {
             return i18nc("@item this is the default calendar", "%1 (Default)", collection.displayName());
         }
     } else if (role == Qt::BackgroundRole) {
@@ -185,4 +176,9 @@ QColor ColorProxyModel::color(Akonadi::Collection::Id collectionId) const
 void ColorProxyModel::setColor(Akonadi::Collection::Id collectionId, const QColor &color)
 {
     colorCache[collectionId] = color;
+}
+
+void ColorProxyModel::setStandardCollectionId(Akonadi::Collection::Id standardCollectionId)
+{
+    m_standardCollectionId = standardCollectionId;
 }

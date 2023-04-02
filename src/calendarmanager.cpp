@@ -9,6 +9,7 @@
 //  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
 
 #include "calendarmanager.h"
+#include "kalendarconfig.h"
 
 // Akonadi
 #include "kalendar_debug.h"
@@ -33,8 +34,6 @@
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/ItemMoveJob>
 #include <Akonadi/Monitor>
-#include <CalendarSupport/KCalPrefs>
-#include <CalendarSupport/Utils>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
 #include <KLocalizedString>
@@ -60,11 +59,6 @@ static Akonadi::EntityTreeModel *findEtm(QAbstractItemModel *model)
         }
     }
     return qobject_cast<Akonadi::EntityTreeModel *>(model);
-}
-
-bool isStandardCalendar(Akonadi::Collection::Id id)
-{
-    return id == CalendarSupport::KCalPrefs::instance()->defaultCalendarId();
 }
 
 /**
@@ -133,16 +127,6 @@ protected:
         }
         return true;
     }
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override
-    {
-        if (role == Qt::ToolTipRole) {
-            const Akonadi::Collection col = Akonadi::CollectionUtils::fromIndex(index);
-            return CalendarSupport::toolTipString(col);
-        }
-
-        return QSortFilterProxyModel::data(index, role);
-    }
 };
 
 Q_GLOBAL_STATIC(CalendarManager, calendarManagerGlobalInstance)
@@ -164,6 +148,11 @@ CalendarManager::CalendarManager(QObject *parent)
     auto colorProxy = new ColorProxyModel(this);
     colorProxy->setObjectName(QStringLiteral("Show calendar colors"));
     colorProxy->setDynamicSortFilter(true);
+    colorProxy->setStandardCollectionId(KalendarConfig::self()->lastUsedEventCollection());
+
+    connect(KalendarConfig::self(), &KalendarConfig::lastUsedEventCollectionChanged, this, [colorProxy]() {
+        colorProxy->setStandardCollectionId(KalendarConfig::self()->lastUsedEventCollection());
+    });
     m_baseModel = colorProxy;
 
     // Hide collections that are not required
@@ -350,7 +339,7 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 {
     // Checks if default collection accepts this type of incidence
     auto mimeType = incidenceWrapper->incidencePtr()->mimeType();
-    Akonadi::Collection collection = m_calendar->collection(CalendarSupport::KCalPrefs::instance()->defaultCalendarId());
+    Akonadi::Collection collection = m_calendar->collection(KalendarConfig::self()->lastUsedEventCollection());
     bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
     bool hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
     if (collection.isValid() && supportsMimeType && hasRights) {

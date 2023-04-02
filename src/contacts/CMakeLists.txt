@@ -41,6 +41,8 @@ target_sources(kalendar_contact_static PUBLIC
     attributes/attributeregistrar.cpp
 )
 
+kconfig_add_kcfg_files(kalendar_contact_static GENERATE_MOC contactconfig.kcfgc)
+
 ecm_qt_declare_logging_category(kalendar_contact_static
     HEADER kalendar_contact_debug.h
     IDENTIFIER KALENDAR_LOG
@@ -58,8 +60,6 @@ target_sources(kalendar_contact_plugin PRIVATE
     contactplugin.h
     resources.qrc
 )
-
-kconfig_add_kcfg_files(kalendar_contact_plugin GENERATE_MOC contactconfig.kcfgc)
 
 ecm_target_qml_sources(kalendar_contact_plugin SOURCES
     qml/ContactChooserPage.qml

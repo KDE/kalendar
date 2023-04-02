@@ -19,7 +19,6 @@ set (commonAkonadiTest_LIBS
     Qt::Core
     KF${QT_MAJOR_VERSION}::ConfigCore
     KF${QT_MAJOR_VERSION}::CalendarCore
-    KPim${QT_MAJOR_VERSION}::CalendarSupport
     KPim${QT_MAJOR_VERSION}::AkonadiCore
     KPim${QT_MAJOR_VERSION}::AkonadiCalendar
 )

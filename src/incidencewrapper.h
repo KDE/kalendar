@@ -13,8 +13,6 @@
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemMonitor>
-#include <CalendarSupport/KCalPrefs>
-#include <CalendarSupport/Utils>
 #include <KCalUtils/RecurrenceActions>
 #include <KFormat>
 #include <QByteArray>
