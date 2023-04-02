@@ -10,8 +10,7 @@ TodoSortFilterProxyModel::TodoSortFilterProxyModel(QObject *parent)
     const QString todoMimeType = QStringLiteral("application/x-vnd.akonadi.calendar.todo");
     m_todoTreeModel.reset(new Akonadi::IncidenceTreeModel(QStringList() << todoMimeType, this));
 
-    const auto pref = EventViews::PrefsPtr(new EventViews::Prefs);
-    m_baseTodoModel.reset(new TodoModel(pref, this));
+    m_baseTodoModel.reset(new TodoModel(this));
     m_baseTodoModel->setSourceModel(m_todoTreeModel.data());
     setSourceModel(m_baseTodoModel.data());
 

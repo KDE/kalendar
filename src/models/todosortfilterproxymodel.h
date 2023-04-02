@@ -6,7 +6,6 @@
 #include <Akonadi/CalendarUtils>
 #include <Akonadi/ETMCalendar>
 #include <Akonadi/IncidenceTreeModel>
-#include <CalendarSupport/KCalPrefs>
 #include <EventViews/TodoModel>
 #include <KConfigWatcher>
 #include <KFormat>
