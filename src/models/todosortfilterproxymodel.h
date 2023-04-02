@@ -6,7 +6,7 @@
 #include <Akonadi/CalendarUtils>
 #include <Akonadi/ETMCalendar>
 #include <Akonadi/IncidenceTreeModel>
-#include <EventViews/TodoModel>
+#include <Akonadi/TodoModel>
 #include <KConfigWatcher>
 #include <KFormat>
 #include <KSharedConfig>
@@ -30,7 +30,7 @@ class TodoSortFilterProxyModel : public QSortFilterProxyModel
 
 public:
     enum Roles {
-        StartTimeRole = TodoModel::CalendarRole + 1,
+        StartTimeRole = Akonadi::TodoModel::CalendarRole + 1,
         EndTimeRole,
         DisplayDueDateRole,
         LocationRole,
@@ -59,14 +59,14 @@ public:
     Q_ENUM(Roles)
 
     enum BaseTodoModelColumns {
-        SummaryColumn = TodoModel::SummaryColumn,
-        PriorityColumn = TodoModel::PriorityColumn,
-        PercentColumn = TodoModel::PercentColumn,
-        StartDateColumn = TodoModel::StartDateColumn,
-        DueDateColumn = TodoModel::DueDateColumn,
-        CategoriesColumn = TodoModel::CategoriesColumn,
-        DescriptionColumn = TodoModel::DescriptionColumn,
-        CalendarColumn = TodoModel::CalendarColumn,
+        SummaryColumn = Akonadi::TodoModel::SummaryColumn,
+        PriorityColumn = Akonadi::TodoModel::PriorityColumn,
+        PercentColumn = Akonadi::TodoModel::PercentColumn,
+        StartDateColumn = Akonadi::TodoModel::StartDateColumn,
+        DueDateColumn = Akonadi::TodoModel::DueDateColumn,
+        CategoriesColumn = Akonadi::TodoModel::CategoriesColumn,
+        DescriptionColumn = Akonadi::TodoModel::DescriptionColumn,
+        CalendarColumn = Akonadi::TodoModel::CalendarColumn,
     };
     Q_ENUM(BaseTodoModelColumns)
 
@@ -146,7 +146,7 @@ private:
 
     Akonadi::ETMCalendar::Ptr m_calendar;
     QScopedPointer<Akonadi::IncidenceTreeModel> m_todoTreeModel;
-    QScopedPointer<TodoModel> m_baseTodoModel;
+    QScopedPointer<Akonadi::TodoModel> m_baseTodoModel;
     Akonadi::IncidenceChanger *m_lastSetChanger = nullptr;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
