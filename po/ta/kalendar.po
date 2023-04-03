@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 04:20+0000\n"
-"PO-Revision-Date: 2023-03-19 12:53+0530\n"
+"PO-Revision-Date: 2023-04-02 16:57+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.03.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -598,7 +598,7 @@ msgstr "வேலை"
 #: contacts/qml/private/ContactEditorPage.qml:325
 #, kde-format
 msgid "Messaging"
-msgstr ""
+msgstr "குறுஞ்செய்தி"
 
 #: contacts/qml/private/ContactEditorPage.qml:280
 #: contacts/qml/private/ContactEditorPage.qml:326
