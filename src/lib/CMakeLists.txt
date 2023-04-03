@@ -26,8 +26,6 @@ target_link_libraries(kalendar_lib PUBLIC
     KPim${QT_MAJOR_VERSION}::AkonadiCore
     KPim${QT_MAJOR_VERSION}::AkonadiCalendar
     KPim${QT_MAJOR_VERSION}::AkonadiContact
-    KPim${QT_MAJOR_VERSION}::AkonadiAgentBase
-    KPim${QT_MAJOR_VERSION}::AkonadiXml
     KF${QT_MAJOR_VERSION}::ConfigWidgets
     KF${QT_MAJOR_VERSION}::Contacts
     KF${QT_MAJOR_VERSION}::ItemModels
