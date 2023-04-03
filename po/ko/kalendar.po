@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-02 00:48+0000\n"
+"POT-Creation-Date: 2023-04-03 00:47+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -219,30 +219,30 @@ msgstr "이벤트 시작 %1 후"
 msgid "On event start"
 msgstr "이벤트 시작 시"
 
-#: calendarmanager.cpp:544
+#: calendarmanager.cpp:532
 #, fuzzy, kde-format
 #| msgid "occurrence"
 #| msgid_plural "occurrences"
 msgid "Move occurrence(s)"
 msgstr "회"
 
-#: calendarmanager.cpp:549
+#: calendarmanager.cpp:537
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr ""
 
-#: calendarmanager.cpp:589
+#: calendarmanager.cpp:577
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr ""
 
-#: calendarmanager.cpp:592
+#: calendarmanager.cpp:580
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr ""
 
-#: calendarmanager.cpp:754
+#: calendarmanager.cpp:742
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgctxt "@title:window"
@@ -418,7 +418,7 @@ msgctxt "contact's email address"
 msgid "EMail"
 msgstr ""
 
-#: contacts/contactmanager.cpp:176
+#: contacts/contactmanager.cpp:184
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgctxt "@title:window"
@@ -1213,14 +1213,14 @@ msgid "Min. Interval:"
 msgstr "최소 간격:"
 
 #: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:444
-#: kalendarapplication.cpp:295
+#: kalendarapplication.cpp:294
 #, fuzzy, kde-format
 #| msgid "New event"
 msgid "New Event…"
 msgstr "새 이벤트"
 
 #: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:450
-#: kalendarapplication.cpp:302
+#: kalendarapplication.cpp:301
 #, fuzzy, kde-format
 #| msgid "New todo"
 msgid "New Task…"
@@ -1843,7 +1843,7 @@ msgid "Tags:"
 msgstr ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:822
-#: models/todosortfilterproxymodel.cpp:147
+#: models/todosortfilterproxymodel.cpp:146
 #, kde-format
 msgctxt "List separator"
 msgid ", "
@@ -2213,8 +2213,8 @@ msgstr "일정 보기"
 msgid "Tasks"
 msgstr ""
 
-#: contents/ui/main.qml:480 kalendarapplication.cpp:31
-#: kalendarapplication.cpp:36
+#: contents/ui/main.qml:480 kalendarapplication.cpp:30
+#: kalendarapplication.cpp:35
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
@@ -2380,13 +2380,13 @@ msgstr "다음 달"
 #: contents/ui/MainViews/MonthView.qml:56
 #: contents/ui/MainViews/ScheduleView.qml:55
 #: contents/ui/MainViews/TodoTreeView.qml:72
-#: models/todosortfilterproxymodel.cpp:175
+#: models/todosortfilterproxymodel.cpp:174
 #, kde-format
 msgid "Today"
 msgstr "오늘"
 
 #: contents/ui/MainViews/TodoTreeView.qml:71
-#: models/todosortfilterproxymodel.cpp:169
+#: models/todosortfilterproxymodel.cpp:168
 #, kde-format
 msgid "Overdue"
 msgstr ""
@@ -2432,8 +2432,8 @@ msgstr "할 일을 완료되지 않은 것으로 표시"
 msgid "No tasks left to complete"
 msgstr "할 일을 완료되지 않은 것으로 표시"
 
-#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:30
-#: kalendarapplication.cpp:35
+#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:29
+#: kalendarapplication.cpp:34
 #, kde-format
 msgid "Sort"
 msgstr ""
@@ -2538,7 +2538,7 @@ msgstr ""
 msgid "Accounts"
 msgstr "계정"
 
-#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:226
+#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:225
 #, kde-format
 msgid "About Kalendar"
 msgstr "Kalendar 정보"
@@ -2781,215 +2781,215 @@ msgid "Pin (shows exact location)"
 msgstr ""
 
 #: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
-#: models/todosortfilterproxymodel.cpp:135
+#: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"
 msgstr ""
 
-#: kalendarapplication.cpp:32 kalendarapplication.cpp:37
+#: kalendarapplication.cpp:31 kalendarapplication.cpp:36
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact"
 msgstr "연락처"
 
-#: kalendarapplication.cpp:98
+#: kalendarapplication.cpp:97
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Tasks View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:108 kalendarapplication.cpp:188
+#: kalendarapplication.cpp:107 kalendarapplication.cpp:187
 #, kde-format
 msgid "Ctrl+6"
 msgstr ""
 
-#: kalendarapplication.cpp:114
+#: kalendarapplication.cpp:113
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Week View"
 msgstr "일정 보기"
 
-#: kalendarapplication.cpp:124
+#: kalendarapplication.cpp:123
 #, kde-format
 msgid "Ctrl+2"
 msgstr ""
 
-#: kalendarapplication.cpp:130
+#: kalendarapplication.cpp:129
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "3 Day View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:140
+#: kalendarapplication.cpp:139
 #, kde-format
 msgid "Ctrl+3"
 msgstr ""
 
-#: kalendarapplication.cpp:146
+#: kalendarapplication.cpp:145
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Day View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:156
+#: kalendarapplication.cpp:155
 #, kde-format
 msgid "Ctrl+4"
 msgstr ""
 
-#: kalendarapplication.cpp:162
+#: kalendarapplication.cpp:161
 #, fuzzy, kde-format
 #| msgid "Schedule view"
 msgid "Schedule View"
 msgstr "일정 보기"
 
-#: kalendarapplication.cpp:172
+#: kalendarapplication.cpp:171
 #, kde-format
 msgid "Ctrl+5"
 msgstr ""
 
-#: kalendarapplication.cpp:178
+#: kalendarapplication.cpp:177
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contacts View"
 msgstr "연락처"
 
-#: kalendarapplication.cpp:194
+#: kalendarapplication.cpp:193
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Mail View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:204
+#: kalendarapplication.cpp:203
 #, kde-format
 msgid "Ctrl+7"
 msgstr ""
 
-#: kalendarapplication.cpp:210
+#: kalendarapplication.cpp:209
 #, fuzzy, kde-format
 #| msgid "Month view"
 msgid "Month View"
 msgstr "월간 보기"
 
-#: kalendarapplication.cpp:220
+#: kalendarapplication.cpp:219
 #, kde-format
 msgid "Ctrl+1"
 msgstr ""
 
-#: kalendarapplication.cpp:233
+#: kalendarapplication.cpp:232
 #, kde-format
 msgid "Backwards"
 msgstr ""
 
-#: kalendarapplication.cpp:246
+#: kalendarapplication.cpp:245
 #, kde-format
 msgid "Forwards"
 msgstr ""
 
-#: kalendarapplication.cpp:259
+#: kalendarapplication.cpp:258
 #, fuzzy, kde-format
 #| msgid "Today"
 msgid "To Today"
 msgstr "오늘"
 
-#: kalendarapplication.cpp:272
+#: kalendarapplication.cpp:271
 #, kde-format
 msgid "To Date…"
 msgstr ""
 
-#: kalendarapplication.cpp:285
+#: kalendarapplication.cpp:284
 #, kde-format
 msgid "Show Menubar"
 msgstr ""
 
-#: kalendarapplication.cpp:289
+#: kalendarapplication.cpp:288
 #, kde-format
 msgid "Ctrl+M"
 msgstr ""
 
-#: kalendarapplication.cpp:309
+#: kalendarapplication.cpp:308
 #, fuzzy, kde-format
 #| msgid "New todo"
 msgid "New Mail…"
 msgstr "새 할 일"
 
-#: kalendarapplication.cpp:316
+#: kalendarapplication.cpp:315
 #, fuzzy, kde-format
 #| msgid "New event"
 msgid "New Contact…"
 msgstr "새 이벤트"
 
-#: kalendarapplication.cpp:323
+#: kalendarapplication.cpp:322
 #, fuzzy, kde-format
 #| msgid "New event"
 msgid "New Contact Group…"
 msgstr "새 이벤트"
 
-#: kalendarapplication.cpp:336
+#: kalendarapplication.cpp:335
 #, kde-format
 msgid "Manage Tags…"
 msgstr ""
 
-#: kalendarapplication.cpp:349
+#: kalendarapplication.cpp:348
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Import Calendar…"
 msgstr "Kalendar 정보"
 
-#: kalendarapplication.cpp:381
+#: kalendarapplication.cpp:380
 #, kde-format
 msgid "Alphabetically"
 msgstr ""
 
-#: kalendarapplication.cpp:397
+#: kalendarapplication.cpp:396
 #, kde-format
 msgid "By Due Date"
 msgstr ""
 
-#: kalendarapplication.cpp:413
+#: kalendarapplication.cpp:412
 #, fuzzy, kde-format
 #| msgid "<b>Priority level:</b>"
 msgid "By Priority Level"
 msgstr "<b>우선 순위:</b>"
 
-#: kalendarapplication.cpp:429
+#: kalendarapplication.cpp:428
 #, kde-format
 msgid "Ascending order"
 msgstr ""
 
-#: kalendarapplication.cpp:445
+#: kalendarapplication.cpp:444
 #, kde-format
 msgid "Descending Order"
 msgstr ""
 
-#: kalendarapplication.cpp:461
+#: kalendarapplication.cpp:460
 #, fuzzy, kde-format
 #| msgid "Mark complete"
 msgid "Show Completed Tasks"
 msgstr "완료된 것으로 표시"
 
-#: kalendarapplication.cpp:475
+#: kalendarapplication.cpp:474
 #, kde-format
 msgid "Open Command Bar"
 msgstr ""
 
-#: kalendarapplication.cpp:485
+#: kalendarapplication.cpp:484
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Refresh All"
 msgstr "Kalendar 정보"
 
-#: kalendarapplication.cpp:638 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:637 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr ""
 
-#: lib/colorproxymodel.cpp:91
+#: lib/colorproxymodel.cpp:82
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1(오프라인)"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:85
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"
@@ -3216,19 +3216,19 @@ msgctxt "@info:credit"
 msgid "Developer"
 msgstr "개발자"
 
-#: models/todosortfilterproxymodel.cpp:165
+#: models/todosortfilterproxymodel.cpp:164
 #, kde-format
 msgid "No set date"
 msgstr ""
 
-#: models/todosortfilterproxymodel.cpp:198
+#: models/todosortfilterproxymodel.cpp:197
 #, fuzzy, kde-format
 #| msgid "Ends at %1"
 msgctxt "Please retain space"
 msgid " at %1"
 msgstr "%1에 종료"
 
-#: models/todosortfilterproxymodel.cpp:199
+#: models/todosortfilterproxymodel.cpp:198
 #, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"

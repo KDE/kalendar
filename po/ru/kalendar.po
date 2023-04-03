@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-02 00:48+0000\n"
+"POT-Creation-Date: 2023-04-03 00:47+0000\n"
 "PO-Revision-Date: 2022-10-10 15:48+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -216,12 +216,12 @@ msgstr "%1 после начала события"
 msgid "On event start"
 msgstr "При начале события"
 
-#: calendarmanager.cpp:544
+#: calendarmanager.cpp:532
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Перемещение повторений"
 
-#: calendarmanager.cpp:549
+#: calendarmanager.cpp:537
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
@@ -229,17 +229,17 @@ msgstr ""
 "Невозможно добавить элемент исключения в календарь. Изменения не будут "
 "выполнены."
 
-#: calendarmanager.cpp:589
+#: calendarmanager.cpp:577
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Удалить задачу и её вложенные подзадачи"
 
-#: calendarmanager.cpp:592
+#: calendarmanager.cpp:580
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Удалить задачу, но сохранить её вложенные подзадачи"
 
-#: calendarmanager.cpp:754
+#: calendarmanager.cpp:742
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -402,7 +402,7 @@ msgctxt "contact's email address"
 msgid "EMail"
 msgstr "Адрес эл. почты"
 
-#: contacts/contactmanager.cpp:176
+#: contacts/contactmanager.cpp:184
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Address Book %1"
@@ -1191,13 +1191,13 @@ msgid "Min. Interval:"
 msgstr "Мин. интервал:"
 
 #: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:444
-#: kalendarapplication.cpp:295
+#: kalendarapplication.cpp:294
 #, kde-format
 msgid "New Event…"
 msgstr "Создать событие…"
 
 #: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:450
-#: kalendarapplication.cpp:302
+#: kalendarapplication.cpp:301
 #, kde-format
 msgid "New Task…"
 msgstr "Создать задачу…"
@@ -1793,7 +1793,7 @@ msgid "Tags:"
 msgstr "Метки:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:822
-#: models/todosortfilterproxymodel.cpp:147
+#: models/todosortfilterproxymodel.cpp:146
 #, kde-format
 msgctxt "List separator"
 msgid ", "
@@ -2166,8 +2166,8 @@ msgstr "Расписание"
 msgid "Tasks"
 msgstr "Задачи"
 
-#: contents/ui/main.qml:480 kalendarapplication.cpp:31
-#: kalendarapplication.cpp:36
+#: contents/ui/main.qml:480 kalendarapplication.cpp:30
+#: kalendarapplication.cpp:35
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
@@ -2323,13 +2323,13 @@ msgstr "Следующий месяц"
 #: contents/ui/MainViews/MonthView.qml:56
 #: contents/ui/MainViews/ScheduleView.qml:55
 #: contents/ui/MainViews/TodoTreeView.qml:72
-#: models/todosortfilterproxymodel.cpp:175
+#: models/todosortfilterproxymodel.cpp:174
 #, kde-format
 msgid "Today"
 msgstr "Сегодня"
 
 #: contents/ui/MainViews/TodoTreeView.qml:71
-#: models/todosortfilterproxymodel.cpp:169
+#: models/todosortfilterproxymodel.cpp:168
 #, kde-format
 msgid "Overdue"
 msgstr "Просроченные"
@@ -2369,8 +2369,8 @@ msgstr "Нет завершённых задач"
 msgid "No tasks left to complete"
 msgstr "Не осталось задач для завершения"
 
-#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:30
-#: kalendarapplication.cpp:35
+#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:29
+#: kalendarapplication.cpp:34
 #, kde-format
 msgid "Sort"
 msgstr "Сортировка"
@@ -2465,7 +2465,7 @@ msgstr "Внешний вид"
 msgid "Accounts"
 msgstr "Учётные записи"
 
-#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:226
+#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:225
 #, kde-format
 msgid "About Kalendar"
 msgstr "О программе Kalendar"
@@ -2700,202 +2700,202 @@ msgid "Pin (shows exact location)"
 msgstr "Булавка (точное местоположение)"
 
 #: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
-#: models/todosortfilterproxymodel.cpp:135
+#: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"
 msgstr "Задача"
 
-#: kalendarapplication.cpp:32 kalendarapplication.cpp:37
+#: kalendarapplication.cpp:31 kalendarapplication.cpp:36
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact"
 msgstr "Контакты"
 
-#: kalendarapplication.cpp:98
+#: kalendarapplication.cpp:97
 #, kde-format
 msgid "Tasks View"
 msgstr "Задачи"
 
-#: kalendarapplication.cpp:108 kalendarapplication.cpp:188
+#: kalendarapplication.cpp:107 kalendarapplication.cpp:187
 #, kde-format
 msgid "Ctrl+6"
 msgstr "Ctrl+6"
 
-#: kalendarapplication.cpp:114
+#: kalendarapplication.cpp:113
 #, kde-format
 msgid "Week View"
 msgstr "Неделя"
 
-#: kalendarapplication.cpp:124
+#: kalendarapplication.cpp:123
 #, kde-format
 msgid "Ctrl+2"
 msgstr "Ctrl+2"
 
-#: kalendarapplication.cpp:130
+#: kalendarapplication.cpp:129
 #, kde-format
 msgid "3 Day View"
 msgstr "Режим просмотра «3 дня»"
 
-#: kalendarapplication.cpp:140
+#: kalendarapplication.cpp:139
 #, kde-format
 msgid "Ctrl+3"
 msgstr "Ctrl+3"
 
-#: kalendarapplication.cpp:146
+#: kalendarapplication.cpp:145
 #, kde-format
 msgid "Day View"
 msgstr "День"
 
-#: kalendarapplication.cpp:156
+#: kalendarapplication.cpp:155
 #, kde-format
 msgid "Ctrl+4"
 msgstr "Ctrl+4"
 
-#: kalendarapplication.cpp:162
+#: kalendarapplication.cpp:161
 #, kde-format
 msgid "Schedule View"
 msgstr "Расписание"
 
-#: kalendarapplication.cpp:172
+#: kalendarapplication.cpp:171
 #, kde-format
 msgid "Ctrl+5"
 msgstr "Ctrl+5"
 
-#: kalendarapplication.cpp:178
+#: kalendarapplication.cpp:177
 #, kde-format
 msgid "Contacts View"
 msgstr "Контакты"
 
-#: kalendarapplication.cpp:194
+#: kalendarapplication.cpp:193
 #, fuzzy, kde-format
 msgid "Mail View"
 msgstr "День"
 
-#: kalendarapplication.cpp:204
+#: kalendarapplication.cpp:203
 #, fuzzy, kde-format
 msgid "Ctrl+7"
 msgstr "Ctrl+6"
 
-#: kalendarapplication.cpp:210
+#: kalendarapplication.cpp:209
 #, kde-format
 msgid "Month View"
 msgstr "Месяц"
 
-#: kalendarapplication.cpp:220
+#: kalendarapplication.cpp:219
 #, kde-format
 msgid "Ctrl+1"
 msgstr "Ctrl+1"
 
-#: kalendarapplication.cpp:233
+#: kalendarapplication.cpp:232
 #, kde-format
 msgid "Backwards"
 msgstr "Назад"
 
-#: kalendarapplication.cpp:246
+#: kalendarapplication.cpp:245
 #, kde-format
 msgid "Forwards"
 msgstr "Обычное"
 
-#: kalendarapplication.cpp:259
+#: kalendarapplication.cpp:258
 #, kde-format
 msgid "To Today"
 msgstr "К сегодняшней дате"
 
-#: kalendarapplication.cpp:272
+#: kalendarapplication.cpp:271
 #, kde-format
 msgid "To Date…"
 msgstr "К заданной дате…"
 
-#: kalendarapplication.cpp:285
+#: kalendarapplication.cpp:284
 #, kde-format
 msgid "Show Menubar"
 msgstr "Показывать строку меню"
 
-#: kalendarapplication.cpp:289
+#: kalendarapplication.cpp:288
 #, kde-format
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: kalendarapplication.cpp:309
+#: kalendarapplication.cpp:308
 #, fuzzy, kde-format
 #| msgid "New Task…"
 msgid "New Mail…"
 msgstr "Создать задачу…"
 
-#: kalendarapplication.cpp:316
+#: kalendarapplication.cpp:315
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact…"
 msgstr "Создать событие…"
 
-#: kalendarapplication.cpp:323
+#: kalendarapplication.cpp:322
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact Group…"
 msgstr "Создать событие…"
 
-#: kalendarapplication.cpp:336
+#: kalendarapplication.cpp:335
 #, kde-format
 msgid "Manage Tags…"
 msgstr "Редактор меток…"
 
-#: kalendarapplication.cpp:349
+#: kalendarapplication.cpp:348
 #, kde-format
 msgid "Import Calendar…"
 msgstr "Импорт календаря..."
 
-#: kalendarapplication.cpp:381
+#: kalendarapplication.cpp:380
 #, kde-format
 msgid "Alphabetically"
 msgstr "По алфавиту"
 
-#: kalendarapplication.cpp:397
+#: kalendarapplication.cpp:396
 #, kde-format
 msgid "By Due Date"
 msgstr "По дате завершения"
 
-#: kalendarapplication.cpp:413
+#: kalendarapplication.cpp:412
 #, kde-format
 msgid "By Priority Level"
 msgstr "По приоритету"
 
-#: kalendarapplication.cpp:429
+#: kalendarapplication.cpp:428
 #, kde-format
 msgid "Ascending order"
 msgstr "По возрастанию"
 
-#: kalendarapplication.cpp:445
+#: kalendarapplication.cpp:444
 #, kde-format
 msgid "Descending Order"
 msgstr "По убыванию"
 
-#: kalendarapplication.cpp:461
+#: kalendarapplication.cpp:460
 #, kde-format
 msgid "Show Completed Tasks"
 msgstr "Показывать завершённые задачи"
 
-#: kalendarapplication.cpp:475
+#: kalendarapplication.cpp:474
 #, kde-format
 msgid "Open Command Bar"
 msgstr "Открыть панель команд"
 
-#: kalendarapplication.cpp:485
+#: kalendarapplication.cpp:484
 #, kde-format
 msgid "Refresh All"
 msgstr "Обновить все"
 
-#: kalendarapplication.cpp:638 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:637 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr "Произошла ошибка: %1"
 
-#: lib/colorproxymodel.cpp:91
+#: lib/colorproxymodel.cpp:82
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (не в сети)"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:85
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"
@@ -3124,18 +3124,18 @@ msgctxt "@info:credit"
 msgid "Developer"
 msgstr "Разработчик"
 
-#: models/todosortfilterproxymodel.cpp:165
+#: models/todosortfilterproxymodel.cpp:164
 #, kde-format
 msgid "No set date"
 msgstr "Дата не задана"
 
-#: models/todosortfilterproxymodel.cpp:198
+#: models/todosortfilterproxymodel.cpp:197
 #, fuzzy, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
 msgstr " в %1 "
 
-#: models/todosortfilterproxymodel.cpp:199
+#: models/todosortfilterproxymodel.cpp:198
 #, fuzzy, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
