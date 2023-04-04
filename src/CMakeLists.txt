@@ -73,14 +73,14 @@ set(kalendar_LIBS
     kalendar_lib
     KF${QT_MAJOR_VERSION}::DBusAddons
     KF${QT_MAJOR_VERSION}::CalendarCore
-    KPim${QT_MAJOR_VERSION}::AkonadiCore
-    KPim${QT_MAJOR_VERSION}::AkonadiCalendar
-    KPim${QT_MAJOR_VERSION}::AkonadiContact
-    KPim${QT_MAJOR_VERSION}::AkonadiAgentBase
-    KPim${QT_MAJOR_VERSION}::AkonadiXml
+    KPim6::AkonadiCore
+    KPim6::AkonadiCalendar
+    KPim6::AkonadiContact
+    KPim6::AkonadiAgentBase
+    KPim6::AkonadiXml
     KF${QT_MAJOR_VERSION}::WindowSystem
     KF${QT_MAJOR_VERSION}::ConfigWidgets
-    KPim${QT_MAJOR_VERSION}::AkonadiWidgets
+    KPim6::AkonadiWidgets
     KF${QT_MAJOR_VERSION}::Contacts
     KF${QT_MAJOR_VERSION}::ItemModels
     KF${QT_MAJOR_VERSION}::XmlGui

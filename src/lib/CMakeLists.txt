@@ -23,13 +23,13 @@ target_link_libraries(kalendar_lib PUBLIC
     KF${QT_MAJOR_VERSION}::I18n
     KF${QT_MAJOR_VERSION}::CoreAddons
     KF${QT_MAJOR_VERSION}::CalendarCore
-    KPim${QT_MAJOR_VERSION}::AkonadiCore
-    KPim${QT_MAJOR_VERSION}::AkonadiCalendar
-    KPim${QT_MAJOR_VERSION}::AkonadiContact
-    KPim${QT_MAJOR_VERSION}::AkonadiAgentBase
-    KPim${QT_MAJOR_VERSION}::AkonadiXml
+    KPim6::AkonadiCore
+    KPim6::AkonadiCalendar
+    KPim6::AkonadiContact
+    KPim6::AkonadiAgentBase
+    KPim6::AkonadiXml
     KF${QT_MAJOR_VERSION}::ConfigWidgets
     KF${QT_MAJOR_VERSION}::Contacts
     KF${QT_MAJOR_VERSION}::ItemModels
-    KPim${QT_MAJOR_VERSION}::CalendarUtils
+    KPim6::CalendarUtils
 )
