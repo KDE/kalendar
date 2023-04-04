@@ -7,6 +7,9 @@
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build-${presetName}",
             "installDir": "$env{KF6}",
+	    "cacheVariables": {
+                 "BUILD_WITH_QT6": "ON"
+	    },
             "hidden": true
         },
 	{
