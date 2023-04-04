@@ -2,24 +2,6 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
-  'require':
-    'frameworks/extra-cmake-modules': '@latest'
-    'frameworks/qqc2-desktop-style': '@latest'
-    'frameworks/kcalendarcore' : '@latest'
-    'frameworks/kconfigwidgets' : '@latest'
-    'frameworks/kwindowsystem' : '@latest'
-    'frameworks/kxmlgui' : '@latest'
-    'frameworks/kcontacts' : '@latest'
-    'pim/akonadi' : '@same'
-    'pim/calendarsupport' : '@same'
-    'pim/kcalutils' : '@same'
-    'pim/kmime' : '@same'
-    'pim/kdepim-runtime' : '@same'
-    'pim/mailcommon' : '@same'
-    'frameworks/kirigami' : '@latest'
-    'libraries/kirigami-addons': '@latest'
-
 - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
