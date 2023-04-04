@@ -12,8 +12,8 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 
 project(kalendar VERSION ${RELEASE_SERVICE_VERSION})
 
-set(KF_MAJOR_VERSION "5")
-set(QT_MIN_VERSION "5.15.2")
+set(KF_MAJOR_VERSION "6")
+set(QT_MIN_VERSION "6.4.0")
 set(KF_MIN_VERSION "5.96.0")
 set(PIM_VERSION "5.21.0")
 
@@ -81,11 +81,9 @@ find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
     QuickTest
 )
 
-if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(Qt6Core5Compat REQUIRED)
-endif()
+find_package(Qt6Core5Compat REQUIRED)
 
-find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     CalendarCore
     ConfigWidgets
     Contacts
@@ -100,7 +98,7 @@ find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     WindowSystem
     XmlGui
 )
-find_package(KF${QT_MAJOR_VERSION}KirigamiAddons 0.7.2 REQUIRED)
+find_package(KF6KirigamiAddons 0.7.2 REQUIRED)
 find_package(Gpgme REQUIRED)
 set_package_properties(KF${QT_MAJOR_VERSION}QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
