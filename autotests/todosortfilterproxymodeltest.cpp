@@ -94,59 +94,6 @@ private Q_SLOTS:
         qRegisterMetaType<QAbstractItemModel::LayoutChangeHint>();
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    void testModelProperties()
-    {
-        resetCalendar();
-
-        TodoSortFilterProxyModel model;
-        QAbstractItemModelTester modelTester(&model);
-
-        QSignalSpy calendarChanged(&model, &TodoSortFilterProxyModel::calendarChanged);
-        QSignalSpy incidenceChangerChanged(&model, &TodoSortFilterProxyModel::incidenceChangerChanged);
-        QSignalSpy showCompletedChanged(&model, &TodoSortFilterProxyModel::showCompletedChanged);
-        QSignalSpy sortByChanged(&model, &TodoSortFilterProxyModel::sortByChanged);
-        QSignalSpy sortAscendingChanged(&model, &TodoSortFilterProxyModel::sortAscendingChanged);
-        QSignalSpy showCompletedSubtodosInIncompleteChanged(&model, &TodoSortFilterProxyModel::showCompletedSubtodosInIncompleteChanged);
-        QSignalSpy filterObjectAboutToChange(&model, &TodoSortFilterProxyModel::filterObjectAboutToChange);
-        QSignalSpy filterObjectChanged(&model, &TodoSortFilterProxyModel::filterObjectChanged);
-
-        model.setCalendar(m_calendar);
-        QCOMPARE(calendarChanged.count(), 1);
-        QCOMPARE(model.calendar(), m_calendar);
-
-        const auto incidenceChanger = m_calendar->incidenceChanger();
-        model.setIncidenceChanger(incidenceChanger);
-        QCOMPARE(incidenceChangerChanged.count(), 1);
-        QCOMPARE(model.incidenceChanger(), incidenceChanger);
-
-        const auto showComplete = TodoSortFilterProxyModel::ShowCompleteOnly;
-        model.setShowCompleted(showComplete);
-        QCOMPARE(showCompletedChanged.count(), 1);
-        QCOMPARE(model.showCompleted(), showComplete);
-
-        const auto sortBy = TodoSortFilterProxyModel::PriorityColumn;
-        model.setSortBy(sortBy);
-        QCOMPARE(sortByChanged.count(), 1);
-        QCOMPARE(model.sortBy(), sortBy);
-
-        const auto sortAscending = !model.sortAscending();
-        model.setSortAscending(sortAscending);
-        QCOMPARE(sortAscendingChanged.count(), 1);
-        QCOMPARE(model.sortAscending(), sortAscending);
-
-        const auto showCompletedSubtodosInIncomplete = !model.showCompletedSubtodosInIncomplete();
-        model.setShowCompletedSubtodosInIncomplete(showCompletedSubtodosInIncomplete);
-        QCOMPARE(showCompletedSubtodosInIncompleteChanged.count(), 1);
-        QCOMPARE(model.showCompletedSubtodosInIncomplete(), showCompletedSubtodosInIncomplete);
-
-        model.setFilterObject(&m_testFilter);
-        QCOMPARE(filterObjectAboutToChange.count(), 1);
-        QCOMPARE(filterObjectChanged.count(), 1);
-        QCOMPARE(model.filterObject(), &m_testFilter);
-    }
-#endif
-
     void testAddCalendar()
     {
         resetCalendar();
