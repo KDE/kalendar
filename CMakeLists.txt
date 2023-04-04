@@ -67,7 +67,7 @@ ecm_setup_version(${PROJECT_VERSION}
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/config-kalendar.h"
 )
 
-set(KF_MAJOR_VERSION ${QT_MAJOR_VERSION})
+set(KF_MAJOR_VERSION 6)
 
 ################# Find dependencies #################
 find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
@@ -100,7 +100,7 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
 )
 find_package(KF6KirigamiAddons 0.7.2 REQUIRED)
 find_package(Gpgme REQUIRED)
-set_package_properties(KF${QT_MAJOR_VERSION}QQC2DesktopStyle PROPERTIES
+set_package_properties(KF6QQC2DesktopStyle PROPERTIES
     TYPE RUNTIME
 )
 

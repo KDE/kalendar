@@ -17,8 +17,8 @@ include_directories(${kalendar_BINARY_DIR}/src)
 set (commonAkonadiTest_LIBS
     Qt::Test
     Qt::Core
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::CalendarCore
+    KF6::ConfigCore
+    KF6::CalendarCore
     KPim6::AkonadiCore
     KPim6::AkonadiCalendar
 )

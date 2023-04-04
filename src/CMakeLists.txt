@@ -71,19 +71,19 @@ ecm_qt_declare_logging_category(kalendar
 
 set(kalendar_LIBS
     kalendar_lib
-    KF${QT_MAJOR_VERSION}::DBusAddons
-    KF${QT_MAJOR_VERSION}::CalendarCore
+    KF6::DBusAddons
+    KF6::CalendarCore
     KPim6::AkonadiCore
     KPim6::AkonadiCalendar
     KPim6::AkonadiContact
     KPim6::AkonadiAgentBase
     KPim6::AkonadiXml
-    KF${QT_MAJOR_VERSION}::WindowSystem
-    KF${QT_MAJOR_VERSION}::ConfigWidgets
+    KF6::WindowSystem
+    KF6::ConfigWidgets
     KPim6::AkonadiWidgets
-    KF${QT_MAJOR_VERSION}::Contacts
-    KF${QT_MAJOR_VERSION}::ItemModels
-    KF${QT_MAJOR_VERSION}::XmlGui
+    KF6::Contacts
+    KF6::ItemModels
+    KF6::XmlGui
     )
 
 target_link_libraries(kalendar

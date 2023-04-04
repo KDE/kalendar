@@ -20,16 +20,16 @@ target_link_libraries(kalendar_lib PUBLIC
     Qt::Quick
     Qt::QuickControls2
     Qt::Svg
-    KF${QT_MAJOR_VERSION}::I18n
-    KF${QT_MAJOR_VERSION}::CoreAddons
-    KF${QT_MAJOR_VERSION}::CalendarCore
+    KF6::I18n
+    KF6::CoreAddons
+    KF6::CalendarCore
     KPim6::AkonadiCore
     KPim6::AkonadiCalendar
     KPim6::AkonadiContact
     KPim6::AkonadiAgentBase
     KPim6::AkonadiXml
-    KF${QT_MAJOR_VERSION}::ConfigWidgets
-    KF${QT_MAJOR_VERSION}::Contacts
-    KF${QT_MAJOR_VERSION}::ItemModels
+    KF6::ConfigWidgets
+    KF6::Contacts
+    KF6::ItemModels
     KPim6::CalendarUtils
 )

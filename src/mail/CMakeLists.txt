@@ -74,7 +74,7 @@ ecm_qt_export_logging_category(
 
 add_library(kalendar_mail_static STATIC ${kalendar_mail_SRCS})
 set_target_properties(kalendar_mail_static PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(kalendar_mail_static PUBLIC kalendar_lib KPim6::MailCommon KPim6::AkonadiMime KF${QT_MAJOR_VERSION}::Codecs)
+target_link_libraries(kalendar_mail_static PUBLIC kalendar_lib KPim6::MailCommon KPim6::AkonadiMime KF6::Codecs)
 
 if(QT_MAJOR_VERSION STREQUAL "6")
     target_link_libraries(kalendar_mail_static PUBLIC Qt::Core5Compat)
