@@ -55,8 +55,8 @@ Q_SIGNALS:
     void scaleChanged();
 
 private:
-    QVector<QDate> m_startDates;
-    QVector<QDate> m_firstDayOfMonthDates;
+    QList<QDate> m_startDates;
+    QList<QDate> m_firstDayOfMonthDates;
     QStringList m_hourlyViewLocalisedHourLabels;
     QLocale m_locale;
     int m_datesToAdd = 10;

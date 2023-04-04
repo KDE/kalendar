@@ -36,7 +36,7 @@ class CalendarManager : public QObject
     Q_PROPERTY(QAbstractProxyModel *collections READ collections CONSTANT)
     Q_PROPERTY(QAbstractItemModel *todoCollections READ todoCollections CONSTANT)
     Q_PROPERTY(QAbstractItemModel *viewCollections READ viewCollections CONSTANT)
-    Q_PROPERTY(QVector<qint64> enabledTodoCollections READ enabledTodoCollections NOTIFY enabledTodoCollectionsChanged)
+    Q_PROPERTY(QList<qint64> enabledTodoCollections READ enabledTodoCollections NOTIFY enabledTodoCollectionsChanged)
     Q_PROPERTY(Akonadi::CollectionFilterProxyModel *allCalendars READ allCalendars CONSTANT)
     Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar READ calendar CONSTANT)
     Q_PROPERTY(Akonadi::IncidenceChanger *incidenceChanger READ incidenceChanger CONSTANT)
@@ -54,7 +54,7 @@ public:
     QAbstractProxyModel *collections();
     QAbstractItemModel *todoCollections();
     QAbstractItemModel *viewCollections();
-    QVector<qint64> enabledTodoCollections();
+    QList<qint64> enabledTodoCollections();
     void refreshEnabledTodoCollections();
 
     Q_INVOKABLE void save();
@@ -119,7 +119,7 @@ private:
     Akonadi::EntityRightsFilterModel *m_todoRightsFilterModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_todoViewCollectionModel = nullptr;
     Akonadi::CollectionFilterProxyModel *m_viewCollectionModel = nullptr;
-    QVector<qint64> m_enabledTodoCollections;
+    QList<qint64> m_enabledTodoCollections;
     KConfigWatcher::Ptr m_colorWatcher;
     Akonadi::SearchCollectionHelper mSearchCollectionHelper;
 };

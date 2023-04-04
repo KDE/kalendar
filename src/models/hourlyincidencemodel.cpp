@@ -209,7 +209,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
         int startMinutesFromDayStart;
         int endMinutesFromDayStart;
     };
-    QVector<PotentialMover> potentialMovers;
+    QList<PotentialMover> potentialMovers;
 
     // Calculate the width and x position of each incidence rectangle
     for (int i = 0; i < result.length(); i++) {

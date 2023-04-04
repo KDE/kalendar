@@ -90,7 +90,7 @@ private Q_SLOTS:
         });
         QTRY_VERIFY(result);
         QCOMPARE(normalize(removeFirstLine(QString::fromUtf8(result->body()))), normalize(QString::fromUtf8(msg->body())));
-        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"konqi@example.org"}});
+        QCOMPARE(result->to()->addresses(), QList<QByteArray>{{"konqi@example.org"}});
         QCOMPARE(result->subject()->asUnicodeString(), QLatin1String{"RE: A random subject with alternative contenttype"});
     }
 
@@ -213,8 +213,8 @@ private Q_SLOTS:
         auto content = removeFirstLine(QString::fromUtf8(result->body()));
         QVERIFY(!content.isEmpty());
         QCOMPARE(unquote(content), QLatin1String("test"));
-        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"from@example.org"}});
-        auto l = QVector<QByteArray>{{"to1@example.org"}, {"to2@example.org"}, {"cc1@example.org"}, {"cc2@example.org"}};
+        QCOMPARE(result->to()->addresses(), QList<QByteArray>{{"from@example.org"}});
+        auto l = QList<QByteArray>{{"to1@example.org"}, {"to2@example.org"}, {"cc1@example.org"}, {"cc2@example.org"}};
         QCOMPARE(result->cc()->addresses(), l);
     }
 
@@ -234,8 +234,8 @@ private Q_SLOTS:
             },
             me);
         QTRY_VERIFY(result);
-        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"from@example.org"}});
-        auto l = QVector<QByteArray>{{"to2@example.org"}, {"cc1@example.org"}, {"cc2@example.org"}};
+        QCOMPARE(result->to()->addresses(), QList<QByteArray>{{"from@example.org"}});
+        auto l = QList<QByteArray>{{"to2@example.org"}, {"cc1@example.org"}, {"cc2@example.org"}};
         QCOMPARE(result->cc()->addresses(), l);
     }
 
@@ -256,9 +256,9 @@ private Q_SLOTS:
             me);
         QTRY_VERIFY(result);
 
-        auto to = QVector<QByteArray>{{"to1@example.org"}, {"to2@example.org"}};
+        auto to = QList<QByteArray>{{"to1@example.org"}, {"to2@example.org"}};
         QCOMPARE(result->to()->addresses(), to);
-        auto cc = QVector<QByteArray>{{"cc1@example.org"}, {"cc2@example.org"}};
+        auto cc = QList<QByteArray>{{"cc1@example.org"}, {"cc2@example.org"}};
         QCOMPARE(result->cc()->addresses(), cc);
     }
 
@@ -279,9 +279,9 @@ private Q_SLOTS:
             me);
         QTRY_VERIFY(result);
 
-        auto to = QVector<QByteArray>{{"list@example.org"}};
+        auto to = QList<QByteArray>{{"list@example.org"}};
         QCOMPARE(result->to()->addresses(), to);
-        auto cc = QVector<QByteArray>{{"to@example.org"}, {"cc1@example.org"}};
+        auto cc = QList<QByteArray>{{"to@example.org"}, {"cc1@example.org"}};
         QCOMPARE(result->cc()->addresses(), cc);
     }
 
@@ -379,7 +379,7 @@ private Q_SLOTS:
         QCOMPARE(result->subject(false)->asUnicodeString(), QLatin1String{"FW: Html Hello (inlin)"});
         QCOMPARE(result->to()->addresses(), {});
         QCOMPARE(result->cc()->addresses(), {});
-        const QVector<QByteArray> references{QByteArray{"a1777ec781546ccc5dcd4918a5e4e03d@info"}, QByteArray{"46b164308eb6056361c866932a740a3c@info"}};
+        const QList<QByteArray> references{QByteArray{"a1777ec781546ccc5dcd4918a5e4e03d@info"}, QByteArray{"46b164308eb6056361c866932a740a3c@info"}};
         QCOMPARE(result->references()->identifiers(), references);
         QCOMPARE(result->inReplyTo()->identifiers(), {});
     }
@@ -628,8 +628,8 @@ private Q_SLOTS:
             me);
         QTRY_VERIFY(result);
         QCOMPARE(result->subject()->asUnicodeString(), QLatin1String{"RE: This is the subject"});
-        QCOMPARE(result->to()->addresses(), QVector<QByteArray>{{"jane@doe.com"}});
-        QCOMPARE(result->cc()->addresses(), QVector<QByteArray>{{"john@doe.com"}});
+        QCOMPARE(result->to()->addresses(), QList<QByteArray>{{"jane@doe.com"}});
+        QCOMPARE(result->cc()->addresses(), QList<QByteArray>{{"john@doe.com"}});
         QCOMPARE(result->inReplyTo()->asUnicodeString(), QLatin1String{"<03db3530-0000-0000-95a2-8a148f00000@example.com>"});
         QCOMPARE(result->references()->asUnicodeString(),
                  QLatin1String{"<dbe9d22b-0a3f-cb1e-e883-8a148f00000@example.com> <03db3530-0000-0000-95a2-8a148f00000@example.com>"});

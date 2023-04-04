@@ -119,13 +119,13 @@ private Q_SLOTS:
         QCOMPARE(part->signatureState(), MimeTreeParser::KMMsgFullySigned);
         auto contentAttachmentList = otp.collectAttachmentParts();
         QCOMPARE(contentAttachmentList.size(), 2);
-        //     QCOMPARE(contentAttachmentList[0]->availableContents(), QVector<QByteArray>() << "text/plain");
+        //     QCOMPARE(contentAttachmentList[0]->availableContents(), QList<QByteArray>() << "text/plain");
         // QCOMPARE(contentAttachmentList[0]->content().size(), 1);
         QCOMPARE(contentAttachmentList[0]->encryptions().size(), 1);
         QCOMPARE(contentAttachmentList[0]->signatures().size(), 1);
         QCOMPARE(contentAttachmentList[0]->encryptionState(), MimeTreeParser::KMMsgFullyEncrypted);
         QCOMPARE(contentAttachmentList[0]->signatureState(), MimeTreeParser::KMMsgFullySigned);
-        //     QCOMPARE(contentAttachmentList[1]->availableContents(), QVector<QByteArray>() << "image/png");
+        //     QCOMPARE(contentAttachmentList[1]->availableContents(), QList<QByteArray>() << "image/png");
         //     QCOMPARE(contentAttachmentList[1]->content().size(), 1);
         QCOMPARE(contentAttachmentList[1]->encryptions().size(), 0);
         QCOMPARE(contentAttachmentList[1]->signatures().size(), 0);

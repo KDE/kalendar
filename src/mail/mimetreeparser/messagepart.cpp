@@ -230,7 +230,7 @@ void MessagePart::appendSubPart(const MessagePart::Ptr &messagePart)
     mBlocks.append(messagePart);
 }
 
-const QVector<MessagePart::Ptr> &MessagePart::subParts() const
+const QList<MessagePart::Ptr> &MessagePart::subParts() const
 {
     return mBlocks;
 }
@@ -240,9 +240,9 @@ bool MessagePart::hasSubParts() const
     return !mBlocks.isEmpty();
 }
 
-QVector<SignedMessagePart *> MessagePart::signatures() const
+QList<SignedMessagePart *> MessagePart::signatures() const
 {
-    QVector<SignedMessagePart *> list;
+    QList<SignedMessagePart *> list;
     if (auto sig = dynamic_cast<SignedMessagePart *>(const_cast<MessagePart *>(this))) {
         list << sig;
     }
@@ -256,9 +256,9 @@ QVector<SignedMessagePart *> MessagePart::signatures() const
     return list;
 }
 
-QVector<EncryptedMessagePart *> MessagePart::encryptions() const
+QList<EncryptedMessagePart *> MessagePart::encryptions() const
 {
-    QVector<EncryptedMessagePart *> list;
+    QList<EncryptedMessagePart *> list;
     if (auto sig = dynamic_cast<EncryptedMessagePart *>(const_cast<MessagePart *>(this))) {
         list << sig;
     }

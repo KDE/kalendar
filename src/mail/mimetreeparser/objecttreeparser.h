@@ -61,9 +61,9 @@ public:
     void parseObjectTree(const QByteArray &mimeMessage);
     MessagePartPtr parsedPart() const;
     KMime::Content *find(const std::function<bool(KMime::Content *)> &select);
-    QVector<MessagePartPtr> collectContentParts();
-    QVector<MessagePartPtr> collectContentParts(MessagePart::Ptr start);
-    QVector<MessagePartPtr> collectAttachmentParts();
+    QList<MessagePartPtr> collectContentParts();
+    QList<MessagePartPtr> collectContentParts(MessagePart::Ptr start);
+    QList<MessagePartPtr> collectAttachmentParts();
 
     /** Decrypt parts and verify signatures */
     void decryptAndVerify();
@@ -82,9 +82,9 @@ private:
      * top-level content.
      */
     MessagePartPtr parseObjectTreeInternal(KMime::Content *node, bool mOnlyOneMimePart);
-    QVector<MessagePartPtr> processType(KMime::Content *node, const QByteArray &mediaType, const QByteArray &subType);
+    QList<MessagePartPtr> processType(KMime::Content *node, const QByteArray &mediaType, const QByteArray &subType);
 
-    QVector<MessagePartPtr> defaultHandling(KMime::Content *node);
+    QList<MessagePartPtr> defaultHandling(KMime::Content *node);
 
     const QTextCodec *codecFor(KMime::Content *node) const;
 

@@ -92,7 +92,7 @@ private:
     QTimer mRefreshTimer;
     QTimer m_updateLinesTimer;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
-    QVector<QVariantList> m_laidOutLines;
+    QList<QVariantList> m_laidOutLines;
     int mPeriodLength = 7;
     MultiDayIncidenceModel::Filters m_filters;
     bool m_showTodos = true;

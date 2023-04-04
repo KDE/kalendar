@@ -15,7 +15,7 @@ KalCommandBarModel::KalCommandBarModel(QObject *parent)
 {
 }
 
-void fillRows(QVector<KalCommandBarModel::Item> &rows, const QString &title, const QList<QAction *> &actions, std::unordered_set<QAction *> &uniqueActions)
+void fillRows(QList<KalCommandBarModel::Item> &rows, const QString &title, const QList<QAction *> &actions, std::unordered_set<QAction *> &uniqueActions)
 {
     for (const auto &action : actions) {
         // We don't want disabled actions
@@ -44,13 +44,13 @@ void fillRows(QVector<KalCommandBarModel::Item> &rows, const QString &title, con
     }
 }
 
-void KalCommandBarModel::refresh(const QVector<ActionGroup> &actionGroups)
+void KalCommandBarModel::refresh(const QList<ActionGroup> &actionGroups)
 {
     int totalActions = std::accumulate(actionGroups.begin(), actionGroups.end(), 0, [](int a, const ActionGroup &ag) {
         return a + ag.actions.count();
     });
 
-    QVector<Item> temp_rows;
+    QList<Item> temp_rows;
     std::unordered_set<QAction *> uniqueActions;
     temp_rows.reserve(totalActions);
     int actionGroupIdx = 0;

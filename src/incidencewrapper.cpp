@@ -479,7 +479,7 @@ KCalendarCore::Recurrence *IncidenceWrapper::recurrence() const
 QVariantMap IncidenceWrapper::recurrenceData()
 {
     QBitArray weekDaysBits = m_incidence->recurrence()->days();
-    QVector<bool> weekDaysBools(7);
+    QList<bool> weekDaysBools(7);
 
     for (int i = 0; i < weekDaysBits.size(); i++) {
         weekDaysBools[i] = weekDaysBits[i];

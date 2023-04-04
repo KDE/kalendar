@@ -138,7 +138,7 @@ private:
     int m_resetThrottleInterval = 100;
 
     bool m_loading = false;
-    QVector<Occurrence> m_incidences; // We need incidences to be in a preditable order for the model
+    QList<Occurrence> m_incidences; // We need incidences to be in a preditable order for the model
     QHash<uint, QPersistentModelIndex> m_occurrenceIndexHash;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;

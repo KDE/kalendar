@@ -4,7 +4,7 @@
 #pragma once
 
 #include <QAbstractListModel>
-#include <QVector>
+#include <QList>
 
 class TimeZoneListModel : public QAbstractListModel
 {
@@ -24,5 +24,5 @@ public:
     Q_INVOKABLE int getTimeZoneRow(const QByteArray &timeZone);
 
 private:
-    QVector<QByteArray> m_timeZones;
+    QList<QByteArray> m_timeZones;
 };

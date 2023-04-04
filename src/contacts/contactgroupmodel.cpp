@@ -124,7 +124,7 @@ public:
     }
 
     ContactGroupModel *const mParent;
-    QVector<GroupMember> mMembers;
+    QList<GroupMember> mMembers;
     KContacts::ContactGroup mGroup;
     QString mLastErrorMessage;
     bool mIsEditing;

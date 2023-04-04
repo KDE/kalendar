@@ -46,7 +46,7 @@ public:
 
     AttachmentModel *q;
     std::shared_ptr<MimeTreeParser::ObjectTreeParser> mParser;
-    QVector<MimeTreeParser::MessagePartPtr> mAttachments;
+    QList<MimeTreeParser::MessagePartPtr> mAttachments;
 };
 
 AttachmentModelPrivate::AttachmentModelPrivate(AttachmentModel *q_ptr, const std::shared_ptr<MimeTreeParser::ObjectTreeParser> &parser)

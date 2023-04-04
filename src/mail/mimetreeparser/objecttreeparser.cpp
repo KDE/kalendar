@@ -30,12 +30,12 @@ using namespace MimeTreeParser;
  * Filter to avoid evaluating a subtree.
  * Select parts to include it in the result set. Selecting a part in a branch will keep any parent parts from being selected.
  */
-static QVector<MessagePart::Ptr>
+static QList<MessagePart::Ptr>
 collect(MessagePart::Ptr start, const std::function<bool(const MessagePartPtr &)> &evaluateSubtree, const std::function<bool(const MessagePartPtr &)> &select)
 {
     MessagePartPtr ptr = start.dynamicCast<MessagePart>();
     Q_ASSERT(ptr);
-    QVector<MessagePart::Ptr> list;
+    QList<MessagePart::Ptr> list;
     if (evaluateSubtree(ptr)) {
         for (const auto &p : ptr->subParts()) {
             list << ::collect(p, evaluateSubtree, select);
@@ -83,7 +83,7 @@ QString ObjectTreeParser::htmlContent()
 {
     QString content;
     if (mParsedPart) {
-        QVector<MessagePart::Ptr> contentParts = ::collect(
+        QList<MessagePart::Ptr> contentParts = ::collect(
             mParsedPart,
             [](const MessagePartPtr &) {
                 return true;
@@ -176,12 +176,12 @@ KMime::Content *ObjectTreeParser::find(const std::function<bool(KMime::Content *
     return ::find(mTopLevelContent, select);
 }
 
-QVector<MessagePartPtr> ObjectTreeParser::collectContentParts()
+QList<MessagePartPtr> ObjectTreeParser::collectContentParts()
 {
     return collectContentParts(mParsedPart);
 }
 
-QVector<MessagePart::Ptr> ObjectTreeParser::collectContentParts(MessagePart::Ptr start)
+QList<MessagePart::Ptr> ObjectTreeParser::collectContentParts(MessagePart::Ptr start)
 {
     return ::collect(
         start,
@@ -230,9 +230,9 @@ QVector<MessagePart::Ptr> ObjectTreeParser::collectContentParts(MessagePart::Ptr
         });
 }
 
-QVector<MessagePart::Ptr> ObjectTreeParser::collectAttachmentParts()
+QList<MessagePart::Ptr> ObjectTreeParser::collectAttachmentParts()
 {
-    QVector<MessagePart::Ptr> contentParts = ::collect(
+    QList<MessagePart::Ptr> contentParts = ::collect(
         mParsedPart,
         [](const MessagePartPtr &) {
             return true;
@@ -282,7 +282,7 @@ void ObjectTreeParser::decryptAndVerify()
 
 void ObjectTreeParser::importCertificates()
 {
-    QVector<MessagePart::Ptr> contentParts = ::collect(
+    QList<MessagePart::Ptr> contentParts = ::collect(
         mParsedPart,
         [](const MessagePartPtr &) {
             return true;
@@ -366,7 +366,7 @@ MessagePartPtr ObjectTreeParser::parsedPart() const
  * and let them generate a list of parts.
  * If the formatter generated a list of parts, then those are taken, otherwise we move on to the next match.
  */
-QVector<MessagePartPtr> ObjectTreeParser::processType(KMime::Content *node, const QByteArray &mediaType, const QByteArray &subType)
+QList<MessagePartPtr> ObjectTreeParser::processType(KMime::Content *node, const QByteArray &mediaType, const QByteArray &subType)
 {
     static MimeTreeParser::BodyPartFormatterBaseFactory factory;
     const auto sub = factory.subtypeRegistry(mediaType.constData());
@@ -434,7 +434,7 @@ MessagePart::Ptr ObjectTreeParser::parseObjectTreeInternal(KMime::Content *node,
     return parsedPart;
 }
 
-QVector<MessagePart::Ptr> ObjectTreeParser::defaultHandling(KMime::Content *node)
+QList<MessagePart::Ptr> ObjectTreeParser::defaultHandling(KMime::Content *node)
 {
     if (node->contentType()->mimeType() == QByteArrayLiteral("application/octet-stream")
         && (node->contentType()->name().endsWith(QLatin1String("p7m")) || node->contentType()->name().endsWith(QLatin1String("p7s"))

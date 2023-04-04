@@ -4,7 +4,7 @@
 #pragma once
 
 #include <QAbstractTableModel>
-#include <QVector>
+#include <QList>
 
 class QAction;
 
@@ -41,7 +41,7 @@ public:
      * If you are using last Used actions functionality, make sure
      * to set the last used actions before calling this function
      */
-    void refresh(const QVector<ActionGroup> &actionGroups);
+    void refresh(const QList<ActionGroup> &actionGroups);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override
     {
@@ -94,7 +94,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    QVector<Item> m_rows;
+    QList<Item> m_rows;
 
     /**
      * Last triggered actions by user

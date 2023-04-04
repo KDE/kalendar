@@ -44,7 +44,7 @@ public:
 class MultiPartRelatedBodyPartFormatter : public MimeTreeParser::Interface::BodyPartFormatter
 {
 public:
-    QVector<MessagePart::Ptr> processList(ObjectTreeParser *objectTreeParser, KMime::Content *node) const Q_DECL_OVERRIDE
+    QList<MessagePart::Ptr> processList(ObjectTreeParser *objectTreeParser, KMime::Content *node) const Q_DECL_OVERRIDE
     {
         if (node->contents().isEmpty()) {
             return {};
@@ -54,7 +54,7 @@ public:
         // https://tools.ietf.org/html/rfc2387#section-4
 
         // We want to display attachments even if displayed inline.
-        QVector<MessagePart::Ptr> list;
+        QList<MessagePart::Ptr> list;
         list.append(MimeMessagePart::Ptr(new MimeMessagePart(objectTreeParser, node->contents().at(0), true)));
         for (int i = 1; i < node->contents().size(); i++) {
             auto p = node->contents().at(i);

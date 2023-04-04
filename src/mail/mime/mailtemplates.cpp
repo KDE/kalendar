@@ -215,7 +215,7 @@ KMime::Content *createMultipartAlternativeContent(const QString &plainBody, cons
     return multipartAlternative;
 }
 
-KMime::Content *createMultipartMixedContent(QVector<KMime::Content *> contents)
+KMime::Content *createMultipartMixedContent(QList<KMime::Content *> contents)
 {
     KMime::Content *multiPartMixed = new KMime::Content();
     multiPartMixed->contentType()->setMimeType("multipart/mixed");
@@ -664,7 +664,7 @@ void MailTemplates::forward(const KMime::Message::Ptr &origMsg, const std::funct
         KMime::Message::Ptr tmpForwardedMessage;
         auto attachments = otp.collectAttachmentParts();
         if (!attachments.isEmpty()) {
-            QVector<KMime::Content *> contents = {recreatedMsg};
+            QList<KMime::Content *> contents = {recreatedMsg};
             for (const auto &attachment : attachments) {
                 // Copy the node, to avoid deleting the parts node.
                 auto c = new KMime::Content;

@@ -17,7 +17,7 @@ MessagePart::Ptr BodyPartFormatter::process(ObjectTreeParser *otp, KMime::Conten
     return {};
 }
 
-QVector<MessagePart::Ptr> BodyPartFormatter::processList(ObjectTreeParser *otp, KMime::Content *node) const
+QList<MessagePart::Ptr> BodyPartFormatter::processList(ObjectTreeParser *otp, KMime::Content *node) const
 {
     if (auto p = process(otp, node)) {
         return {p};

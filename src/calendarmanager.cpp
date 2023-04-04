@@ -276,7 +276,7 @@ QAbstractItemModel *CalendarManager::viewCollections()
     return m_viewCollectionModel;
 }
 
-QVector<qint64> CalendarManager::enabledTodoCollections()
+QList<qint64> CalendarManager::enabledTodoCollections()
 {
     return m_enabledTodoCollections;
 }
