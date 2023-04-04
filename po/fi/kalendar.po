@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 04:20+0000\n"
-"PO-Revision-Date: 2023-03-08 23:00+0200\n"
+"PO-Revision-Date: 2023-03-29 23:05+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -45,8 +45,7 @@ msgid "Refresh All Calendars"
 msgstr "Virkistä kaikki kalenterit"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Custom"
+#, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Mukautettu"
@@ -460,9 +459,7 @@ msgstr "Osoitekirja:"
 
 #: contacts/qml/private/ContactEditorPage.qml:159
 #: contacts/qml/private/ContactEditorPage.qml:166
-#, fuzzy, kde-format
-#| msgctxt "contact's name"
-#| msgid "Name"
+#, kde-format
 msgid "Name"
 msgstr "Nimi"
 
@@ -472,10 +469,9 @@ msgid "Contact name"
 msgstr "Yhteystiedon nimi"
 
 #: contacts/qml/private/ContactEditorPage.qml:189
-#, fuzzy, kde-format
-#| msgid "Honorific prefix:"
+#, kde-format
 msgid "Honorific prefix"
-msgstr "Kunnioittava etuliite:"
+msgstr "Kunnioittava etuliite"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
@@ -504,10 +500,9 @@ msgid "Prof."
 msgstr "professori"
 
 #: contacts/qml/private/ContactEditorPage.qml:201
-#, fuzzy, kde-format
-#| msgid "Given name:"
+#, kde-format
 msgid "Given name"
-msgstr "Etunimi:"
+msgstr "Etunimi"
 
 #: contacts/qml/private/ContactEditorPage.qml:204
 #, kde-format
@@ -515,10 +510,9 @@ msgid "First name or chosen name"
 msgstr "Etu- tai valittu nimi"
 
 #: contacts/qml/private/ContactEditorPage.qml:210
-#, fuzzy, kde-format
-#| msgid "Additional name:"
+#, kde-format
 msgid "Additional name"
-msgstr "Lisänimi:"
+msgstr "Lisänimi"
 
 #: contacts/qml/private/ContactEditorPage.qml:213
 #, kde-format
@@ -536,10 +530,9 @@ msgid "Surname or last name"
 msgstr "Suku- tai viimeinen nimi"
 
 #: contacts/qml/private/ContactEditorPage.qml:228
-#, fuzzy, kde-format
-#| msgid "Honorific suffix:"
+#, kde-format
 msgid "Honorific suffix"
-msgstr "Kunnioittava jälkiliite:"
+msgstr "Kunnioittava jälkiliite"
 
 #: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
@@ -562,10 +555,9 @@ msgid "Sr."
 msgstr "vanh."
 
 #: contacts/qml/private/ContactEditorPage.qml:239
-#, fuzzy, kde-format
-#| msgid "Nickname:"
+#, kde-format
 msgid "Nickname"
-msgstr "Kutsumanimi:"
+msgstr "Kutsumanimi"
 
 #: contacts/qml/private/ContactEditorPage.qml:242
 #, kde-format
@@ -573,21 +565,19 @@ msgid "Alternative name"
 msgstr "Vaihtoehtoinen nimi"
 
 #: contacts/qml/private/ContactEditorPage.qml:250
-#, fuzzy, kde-format
-#| msgid "Blog Feed:"
+#, kde-format
 msgid "Blog Feed"
-msgstr "Blogisyöte:"
+msgstr "Blogisyöte"
 
 #: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "https://planet.kde.org/"
-msgstr ""
+msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/ContactEditorPage.qml:265
-#, fuzzy, kde-format
-#| msgid "Phone:"
+#, kde-format
 msgid "Phone"
-msgstr "Puhelin:"
+msgstr "Puhelin"
 
 #: contacts/qml/private/ContactEditorPage.qml:277
 #: contacts/qml/private/ContactEditorPage.qml:323
@@ -682,10 +672,9 @@ msgid "+33 7 55 23 68 67"
 msgstr "+358 050 236 867"
 
 #: contacts/qml/private/ContactEditorPage.qml:374
-#, fuzzy, kde-format
-#| msgid "E-mail:"
+#, kde-format
 msgid "E-mail"
-msgstr "Sähköposti:"
+msgstr "Sähköposti"
 
 #: contacts/qml/private/ContactEditorPage.qml:393
 #, kde-format
@@ -720,12 +709,12 @@ msgstr "Lisää sähköposti"
 #: contacts/qml/private/ContactEditorPage.qml:474
 #, kde-format
 msgid "Instant Messenger"
-msgstr ""
+msgstr "Pikaviestin"
 
 #: contacts/qml/private/ContactEditorPage.qml:515
 #, kde-format
 msgid "protocol:person@example.com"
-msgstr ""
+msgstr "yhteyskäytäntö:käyttäjä@esimerkki.fi"
 
 #: contacts/qml/private/ContactEditorPage.qml:565
 #: contacts/qml/private/ContactGroupEditorPage.qml:179
@@ -771,10 +760,9 @@ msgid "Contact group name"
 msgstr "Yhteystietoryhmän nimi"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:99
-#, fuzzy, kde-format
-#| msgid "Members:"
+#, kde-format
 msgid "Members"
-msgstr "Jäsenet:"
+msgstr "Jäsenet"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
@@ -891,15 +879,12 @@ msgid "%1:"
 msgstr "%1:"
 
 #: contacts/qml/private/ContactPage.qml:300
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgid "Instant Messaging"
-msgstr "Tekstiviestit"
+msgstr "Pikaviestintä"
 
 #: contacts/qml/private/ContactPage.qml:317
-#, fuzzy, kde-format
-#| msgctxt "Label for a phone number type"
-#| msgid "%1:"
+#, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
 msgstr "%1:"
@@ -1755,7 +1740,7 @@ msgstr "Lisää liite"
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
 msgid "No results found"
-msgstr ""
+msgstr "Tuloksia ei löytynyt"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
@@ -2684,10 +2669,9 @@ msgid "New Contact…"
 msgstr "Uusi yhteystieto…"
 
 #: kalendarapplication.cpp:323
-#, fuzzy, kde-format
-#| msgid "New Contact…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "Uusi yhteystieto…"
+msgstr "Uusi yhteystietoryhmä…"
 
 #: kalendarapplication.cpp:336
 #, kde-format
