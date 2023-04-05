@@ -76,8 +76,6 @@ set(kalendar_LIBS
     KPim6::AkonadiCore
     KPim6::AkonadiCalendar
     KPim6::AkonadiContact
-    KPim6::AkonadiAgentBase
-    KPim6::AkonadiXml
     KF6::WindowSystem
     KF6::ConfigWidgets
     KPim6::AkonadiWidgets
