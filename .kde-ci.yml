@@ -12,7 +12,7 @@ Dependencies:
     'frameworks/kxmlgui' : '@latest'
     'frameworks/kcontacts' : '@latest'
     'pim/akonadi' : '@same'
-    'pim/calendarsupport' : '@same'
+    'pim/akonadi-calendar' : '@same'
     'pim/kcalutils' : '@same'
     'pim/kmime' : '@same'
     'pim/kdepim-runtime' : '@same'
