@@ -56,6 +56,7 @@
         "Description[tr]": "Kişi listesi",
         "Description[uk]": "Список контактів",
         "Description[x-test]": "xxContact listxx",
+        "Description[zh_CN]": "联系人列表",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
@@ -88,6 +89,7 @@
         "Name[tr]": "Kişi",
         "Name[uk]": "Контакт",
         "Name[x-test]": "xxContactxx",
+        "Name[zh_CN]": "联系我们",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
