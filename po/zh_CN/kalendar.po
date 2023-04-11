@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-03 00:47+0000\n"
-"PO-Revision-Date: 2023-03-27 12:00\n"
+"PO-Revision-Date: 2023-04-10 14:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -42,7 +42,7 @@ msgstr "重做："
 #: calendar/qml/CalendarApplication.qml:33
 #, kde-format
 msgid "Refresh All Calendars"
-msgstr ""
+msgstr "刷新全部日历"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:18
 #, kde-format
@@ -103,37 +103,37 @@ msgstr "9 (最低优先级)"
 #, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
-msgstr ""
+msgstr "自定义"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
 msgid "minutes"
-msgstr ""
+msgstr " 分钟"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:154
 #, kde-format
 msgid "hours"
-msgstr ""
+msgstr " 小时"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:155
 #, kde-format
 msgid "days"
-msgstr ""
+msgstr " 天"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:167
 #, kde-format
 msgid "before start of event"
-msgstr ""
+msgstr "事件开始前"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:168
 #, kde-format
 msgid "after start of event"
-msgstr ""
+msgstr "事件开始后"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
 #, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "删除"
 
 #: calendar/qml/private/GlobalMenuBar.qml:40
 #, kde-format
@@ -208,7 +208,7 @@ msgstr "事件开始时"
 #: calendarmanager.cpp:532
 #, kde-format
 msgid "Move occurrence(s)"
-msgstr ""
+msgstr "移动重现"
 
 #: calendarmanager.cpp:537
 #, kde-format
@@ -359,22 +359,22 @@ msgstr "进入全屏"
 #: contacts/qml/private/ContactPage.qml:283
 #, kde-format
 msgid "Home:"
-msgstr ""
+msgstr "首页："
 
 #: contacts/contactgroupeditor.cpp:232
 #, kde-format
 msgid "No address book selected"
-msgstr ""
+msgstr "未选择地址簿"
 
 #: contacts/contactgroupmodel.cpp:185
 #, kde-format
 msgid "The member with name <b>%1</b> is missing an email address"
-msgstr ""
+msgstr "姓名为 <b>%1</b> 的成员缺少电子邮件地址"
 
 #: contacts/contactgroupmodel.cpp:227
 #, kde-format
 msgid "Contact does not exist any more"
-msgstr ""
+msgstr "联系人不存在"
 
 #: contacts/contactgroupmodel.cpp:346
 #, kde-format
@@ -392,33 +392,33 @@ msgstr "电子邮件"
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Address Book %1"
-msgstr ""
+msgstr "地址簿文件夹 %1 的属性"
 
 #: contacts/emailmodel.cpp:39
 #, kde-format
 msgid "Both:"
-msgstr ""
+msgstr "同时："
 
 #: contacts/emailmodel.cpp:42
 #, kde-format
 msgid "Work:"
-msgstr ""
+msgstr "工作："
 
 #: contacts/emailmodel.cpp:47
 #, kde-format
 msgid "Other:"
-msgstr ""
+msgstr "其他："
 
 #: contacts/qml/AddressBookCollectionHandler.qml:34
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Address Book Color"
-msgstr ""
+msgstr "选择地址簿颜色"
 
 #: contacts/qml/ContactApplication.qml:16
 #, kde-format
 msgid "Refresh All Address Books"
-msgstr ""
+msgstr "刷新所有地址簿"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -441,14 +441,14 @@ msgstr "联系人"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit contact…"
-msgstr ""
+msgstr "编辑联系人"
 
 #: contacts/qml/ContactView.qml:96
 #: contacts/qml/private/DeleteContactAction.qml:64
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete contact"
-msgstr ""
+msgstr "删除联系人"
 
 #: contacts/qml/ContactView.qml:114 contacts/qml/private/ContactsPage.qml:48
 #, kde-format
@@ -459,114 +459,114 @@ msgstr "无联系人"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit address book…"
-msgstr ""
+msgstr "编辑地址簿"
 
 #: contacts/qml/private/AddressBookMenu.qml:29
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update address book"
-msgstr ""
+msgstr "更新地址簿"
 
 #: contacts/qml/private/AddressBookMenu.qml:34
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete address book"
-msgstr ""
+msgstr "删除地址簿"
 
 #: contacts/qml/private/AddressBookMenu.qml:42
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set address book colour…"
-msgstr ""
+msgstr "设置地址簿颜色"
 
 #: contacts/qml/private/AddressBookMenu.qml:54
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Address book source settings…"
-msgstr ""
+msgstr "地址簿源设置"
 
 #: contacts/qml/private/AddressBookMenu.qml:60
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Update address book source"
-msgstr ""
+msgstr "更新地址簿源"
 
 #: contacts/qml/private/AddressBookMenu.qml:66
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete address source"
-msgstr ""
+msgstr "删除地址簿源"
 
 #: contacts/qml/private/ContactEditorPage.qml:57
 #, kde-format
 msgid "Add Contact"
-msgstr ""
+msgstr "添加联系人"
 
 #: contacts/qml/private/ContactEditorPage.qml:59
 #, kde-format
 msgid "Edit Contact"
-msgstr ""
+msgstr "编辑联系人"
 
 #: contacts/qml/private/ContactEditorPage.qml:102
 #, kde-format
 msgid "Address book:"
-msgstr ""
+msgstr "地址簿："
 
 #: contacts/qml/private/ContactEditorPage.qml:159
 #: contacts/qml/private/ContactEditorPage.qml:166
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "姓名"
 
 #: contacts/qml/private/ContactEditorPage.qml:170
 #, kde-format
 msgid "Contact name"
-msgstr ""
+msgstr "联系人姓名"
 
 #: contacts/qml/private/ContactEditorPage.qml:189
 #, kde-format
 msgid "Honorific prefix"
-msgstr ""
+msgstr "敬称前缀："
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Miss"
-msgstr ""
+msgstr "小姐"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Mr."
-msgstr ""
+msgstr "先生"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Mrs."
-msgstr ""
+msgstr "夫人"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Ms."
-msgstr ""
+msgstr "女士"
 
 #: contacts/qml/private/ContactEditorPage.qml:192
 #, kde-format
 msgid "Prof."
-msgstr ""
+msgstr "教授"
 
 #: contacts/qml/private/ContactEditorPage.qml:201
 #, kde-format
 msgid "Given name"
-msgstr ""
+msgstr "名字"
 
 #: contacts/qml/private/ContactEditorPage.qml:204
 #, kde-format
 msgid "First name or chosen name"
-msgstr ""
+msgstr "名字和姓氏"
 
 #: contacts/qml/private/ContactEditorPage.qml:210
 #, kde-format
 msgid "Additional name"
-msgstr ""
+msgstr "其他姓名"
 
 #: contacts/qml/private/ContactEditorPage.qml:213
 #, kde-format
@@ -586,17 +586,17 @@ msgstr ""
 #: contacts/qml/private/ContactEditorPage.qml:228
 #, kde-format
 msgid "Honorific suffix"
-msgstr ""
+msgstr "敬称后缀："
 
 #: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
 msgid "II"
-msgstr ""
+msgstr "II"
 
 #: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
 msgid "III"
-msgstr ""
+msgstr "III"
 
 #: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
@@ -611,33 +611,33 @@ msgstr ""
 #: contacts/qml/private/ContactEditorPage.qml:239
 #, kde-format
 msgid "Nickname"
-msgstr ""
+msgstr "昵称"
 
 #: contacts/qml/private/ContactEditorPage.qml:242
 #, kde-format
 msgid "Alternative name"
-msgstr ""
+msgstr "替代名称"
 
 #: contacts/qml/private/ContactEditorPage.qml:250
 #, kde-format
 msgid "Blog Feed"
-msgstr ""
+msgstr "博客订阅"
 
 #: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "https://planet.kde.org/"
-msgstr ""
+msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/ContactEditorPage.qml:265
 #: contacts/qml/private/ContactPage.qml:342
 #, kde-format
 msgid "Business Information"
-msgstr ""
+msgstr "商业信息"
 
 #: contacts/qml/private/ContactEditorPage.qml:270
 #, kde-format
 msgid "Organization"
-msgstr ""
+msgstr "组织"
 
 #: contacts/qml/private/ContactEditorPage.qml:273
 #, kde-format
@@ -648,15 +648,13 @@ msgstr ""
 #: contacts/qml/private/ContactEditorPage.qml:280
 #, kde-format
 msgid "Profession"
-msgstr ""
+msgstr "职业"
 
 #: contacts/qml/private/ContactEditorPage.qml:283
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Developer"
+#, kde-format
 msgctxt "Placeholder value for name of Profession"
 msgid "Software Developer"
-msgstr "开发者"
+msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:290
 #, kde-format
@@ -675,11 +673,10 @@ msgid "Department"
 msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:303
-#, fuzzy, kde-format
-#| msgid "Kalendar"
+#, kde-format
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
-msgstr "Kalendar"
+msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:310
 #, kde-format
@@ -693,10 +690,9 @@ msgid "Tech Wing, 4th Floor"
 msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:320
-#, fuzzy, kde-format
-#| msgid "Manage Tags"
+#, kde-format
 msgid "Manager's Name"
-msgstr "管理标签"
+msgstr ""
 
 #: contacts/qml/private/ContactEditorPage.qml:323
 #, kde-format
@@ -718,7 +714,7 @@ msgstr ""
 #: contacts/qml/private/ContactEditorPage.qml:345
 #, kde-format
 msgid "Phone"
-msgstr ""
+msgstr "电话"
 
 #: contacts/qml/private/ContactEditorPage.qml:357
 #: contacts/qml/private/ContactEditorPage.qml:403
@@ -815,7 +811,7 @@ msgstr ""
 #: contacts/qml/private/ContactEditorPage.qml:454
 #, kde-format
 msgid "E-mail"
-msgstr ""
+msgstr "电子邮件"
 
 #: contacts/qml/private/ContactEditorPage.qml:473
 #, kde-format
@@ -850,12 +846,12 @@ msgstr ""
 #: contacts/qml/private/ContactEditorPage.qml:554
 #, kde-format
 msgid "Instant Messenger"
-msgstr ""
+msgstr "即时通讯工具"
 
 #: contacts/qml/private/ContactEditorPage.qml:595
 #, kde-format
 msgid "protocol:person@example.com"
-msgstr ""
+msgstr "协议:person@example.com"
 
 #: contacts/qml/private/ContactEditorPage.qml:645
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
@@ -903,7 +899,7 @@ msgstr ""
 #: contacts/qml/private/ContactGroupEditorPage.qml:103
 #, kde-format
 msgid "Members"
-msgstr ""
+msgstr "成员"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
@@ -966,128 +962,128 @@ msgstr ""
 #: contacts/qml/private/ContactPage.qml:170
 #, kde-format
 msgid "Nickname:"
-msgstr ""
+msgstr "昵称："
 
 #: contacts/qml/private/ContactPage.qml:176
 #, kde-format
 msgid "Blog Feed:"
-msgstr ""
+msgstr "博客源："
 
 #: contacts/qml/private/ContactPage.qml:193
 #, kde-format
 msgid "Personal information"
-msgstr ""
+msgstr "个人信息"
 
 #: contacts/qml/private/ContactPage.qml:199
 #, kde-format
 msgid "Birthday:"
-msgstr ""
+msgstr "生日："
 
 #: contacts/qml/private/ContactPage.qml:217
 #, kde-format
 msgid "Anniversary:"
-msgstr ""
+msgstr "纪念日："
 
 #: contacts/qml/private/ContactPage.qml:224
 #, kde-format
 msgid "Partner's name:"
-msgstr ""
+msgstr "搭档姓名："
 
 #: contacts/qml/private/ContactPage.qml:239
 #, kde-format
 msgid "Phone Number"
 msgid_plural "Phone Numbers"
-msgstr[0] ""
+msgstr[0] "电话号码"
 
 #: contacts/qml/private/ContactPage.qml:251
 #, kde-format
 msgctxt "Label for a phone number type"
 msgid "%1:"
-msgstr ""
+msgstr "%1："
 
 #: contacts/qml/private/ContactPage.qml:269
 #, kde-format
 msgid "Address"
 msgid_plural "Addresses"
-msgstr[0] ""
+msgstr[0] "地址"
 
 #: contacts/qml/private/ContactPage.qml:283
 #, kde-format
 msgctxt "%1 is the type of the address, e.g. home, work, ..."
 msgid "%1:"
-msgstr ""
+msgstr "%1："
 
 #: contacts/qml/private/ContactPage.qml:300
 #, kde-format
 msgid "Instant Messaging"
-msgstr ""
+msgstr "即时通讯"
 
 #: contacts/qml/private/ContactPage.qml:317
 #, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
-msgstr ""
+msgstr "%1："
 
 #: contacts/qml/private/ContactPage.qml:348
 #, kde-format
 msgid "Organization:"
-msgstr ""
+msgstr "组织："
 
 #: contacts/qml/private/ContactPage.qml:355
 #, kde-format
 msgid "Profession:"
-msgstr ""
+msgstr "职业："
 
 #: contacts/qml/private/ContactPage.qml:362
 #, kde-format
 msgid "Title:"
-msgstr ""
+msgstr "头衔："
 
 #: contacts/qml/private/ContactPage.qml:369
 #, kde-format
 msgid "Department:"
-msgstr ""
+msgstr "部门："
 
 #: contacts/qml/private/ContactPage.qml:376
 #, kde-format
 msgid "Office:"
-msgstr ""
+msgstr "办公室："
 
 #: contacts/qml/private/ContactPage.qml:383
 #, kde-format
 msgid "Manager's name:"
-msgstr ""
+msgstr "经理姓名："
 
 #: contacts/qml/private/ContactPage.qml:390
 #, kde-format
 msgid "Assistants's name:"
-msgstr ""
+msgstr "助手姓名："
 
 #: contacts/qml/private/ContactPage.qml:406
 #, kde-format
 msgid "Email Address"
 msgid_plural "Email Addresses"
-msgstr[0] ""
+msgstr[0] "邮箱地址"
 
 #: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
 msgid "You won't be able to revert this action"
-msgstr ""
+msgstr "您将无法恢复此操作"
 
 #: contacts/qml/private/DeleteContactAction.qml:56
 #, kde-format
 msgid "Delete contact"
-msgstr ""
+msgstr "删除联系人"
 
 #: contacts/qml/private/QrCodePage.qml:15
 #, kde-format
 msgid "QR Code"
-msgstr ""
+msgstr "二维码"
 
 #: contacts/qml/private/QrCodePage.qml:27
 #, kde-format
 msgid "Creating QR code failed"
-msgstr ""
+msgstr "创建二维码失败"
 
 #: contents/ui/Bars/FilterHeaderBar.qml:41
 #, kde-format
@@ -1164,13 +1160,13 @@ msgstr "新建任务..."
 #: contents/ui/Controls/IncidenceInfoContents.qml:115
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "此事件正在循环"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:126
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
+msgstr[0] "此事件有提醒物"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:148
 #, kde-format
@@ -1191,7 +1187,7 @@ msgstr "<b>标签：</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:203
 #, kde-format
 msgid "Remove %1 tag"
-msgstr ""
+msgstr "移除 %1 标签"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:215
 #, kde-format
@@ -1262,7 +1258,7 @@ msgstr "<b>组织者：</b>"
 #: contents/ui/Controls/IncidenceInfoContents.qml:542
 #, kde-format
 msgid "<b>Google Meet:</b>"
-msgstr ""
+msgstr "<b>Google Meeting：</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:554
 #, kde-format
@@ -1441,7 +1437,7 @@ msgstr "选择日历"
 #: contents/ui/Dialogs/CollectionPickerPage.qml:24
 #, kde-format
 msgid "Choose an Address Book"
-msgstr ""
+msgstr "选择地址簿"
 
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:22
 #, kde-format
@@ -1669,12 +1665,12 @@ msgstr "结束："
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:597
 #, kde-format
 msgid "On"
-msgstr ""
+msgstr "在"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:598
 #, kde-format
 msgid "After"
-msgstr ""
+msgstr "之后"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:634
 #, kde-format
@@ -1804,12 +1800,12 @@ msgstr "添加附件"
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
 msgid "No results found"
-msgstr ""
+msgstr "未找到结果"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
 msgid "Change incidence date"
-msgstr ""
+msgstr "更改事件发生日期"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:47
 #, kde-format
@@ -1818,21 +1814,23 @@ msgid ""
 "applied only to this single occurrence, also to future items, or to all "
 "items in the recurrence?"
 msgstr ""
+"您正试图更改一个重现项目。想要更改仅对单次重现生效，或是对未来重现生效，还是"
+"对所有重现生效？"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:62
 #, kde-format
 msgid "Only This Item"
-msgstr ""
+msgstr "只有本次"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:70
 #, kde-format
 msgid "Also Future Items"
-msgstr ""
+msgstr "只有未来"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:78
 #, kde-format
 msgid "All Occurrences"
-msgstr ""
+msgstr "全部事件"
 
 #: contents/ui/Dialogs/TagManagerPage.qml:13
 #, kde-format
@@ -1909,70 +1907,70 @@ msgstr[0] "每 %1 周"
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
-msgstr[0] ""
+msgstr[0] "每 %1 周"
 
 #: contents/ui/KalendarUtils/labelutils.js:66
 #: contents/ui/KalendarUtils/labelutils.js:105
 #, kde-format
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
-msgstr[0] ""
+msgstr[0] "每 %1 年的 %2 %3"
 
 #: contents/ui/KalendarUtils/labelutils.js:85
 #, kde-format
 msgid "Every minute"
 msgid_plural "Every %1 minutes"
-msgstr[0] ""
+msgstr[0] "每 %1 分钟"
 
 #: contents/ui/KalendarUtils/labelutils.js:88
 #, kde-format
 msgid "Every hour"
 msgid_plural "Every %1 hours"
-msgstr[0] ""
+msgstr[0] "每 %1 小时"
 
 #: contents/ui/KalendarUtils/labelutils.js:91
 #, kde-format
 msgid "Every day"
 msgid_plural "Every %1 days"
-msgstr[0] ""
+msgstr[0] "每 %1 天"
 
 #: contents/ui/KalendarUtils/labelutils.js:97
 #: contents/ui/KalendarUtils/labelutils.js:101
 #, kde-format
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
-msgstr[0] ""
+msgstr[0] "每 %1 个月在 %2"
 
 #: contents/ui/KalendarUtils/labelutils.js:109
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
-msgstr[0] ""
+msgstr[0] "每 %1 年的第 %2 天"
 
 #: contents/ui/KalendarUtils/labelutils.js:115
 #, kde-format
 msgid "Complex recurrence rule"
-msgstr ""
+msgstr "复杂的重复规则"
 
 #: contents/ui/KalendarUtils/labelutils.js:118
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: contents/ui/KalendarUtils/labelutils.js:126
 #, kde-format
 msgid "Never ends"
-msgstr ""
+msgstr "永不结束"
 
 #: contents/ui/KalendarUtils/labelutils.js:128
 #, kde-format
 msgid "Ends on %1"
-msgstr ""
+msgstr "结束于 %1"
 
 #: contents/ui/KalendarUtils/labelutils.js:130
 #, kde-format
 msgid "Ends after %1 occurrences"
-msgstr ""
+msgstr "在 %1 次事件后结束"
 
 #: contents/ui/KalendarUtils/labelutils.js:189
 #, kde-format
@@ -2379,22 +2377,22 @@ msgstr "添加新日历源..."
 #: contents/ui/Settings/SourceSettingsPage.qml:28
 #, kde-format
 msgid "Contact Books"
-msgstr ""
+msgstr "通讯簿"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:29
 #, kde-format
 msgid "Add New Address Book Source…"
-msgstr ""
+msgstr "添加新地址簿源"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:38
 #, kde-format
 msgid "Mail Accounts"
-msgstr ""
+msgstr "邮件账号"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:39
 #, kde-format
 msgid "Add New mail account…"
-msgstr ""
+msgstr "添加新邮件账户"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:24
 #, kde-format
@@ -2404,12 +2402,12 @@ msgstr "通用设置"
 #: contents/ui/Settings/ViewSettingsPage.qml:28
 #, kde-format
 msgid "Use popup to show incidence information"
-msgstr ""
+msgstr "使用弹出窗口显示事件信息"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
 #, kde-format
 msgid "Show tasks in calendar views"
-msgstr ""
+msgstr "在日历视图中显示任务"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2419,37 +2417,37 @@ msgstr "在日历视图中显示子任务"
 #: contents/ui/Settings/ViewSettingsPage.qml:63
 #, kde-format
 msgid "Past event transparency"
-msgstr ""
+msgstr "过去事件透明度"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
 #, kde-format
 msgid "Month view settings"
-msgstr ""
+msgstr "月视图设置"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:100
 #, kde-format
 msgid "Month view mode"
-msgstr ""
+msgstr "月视图模式"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:107
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "可滑动月份网格"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:114
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "基本月份网格"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:120
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
-msgstr ""
+msgstr "可滑动月份网格需要更高的系统性能。"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:135
 #, kde-format
 msgid "Weekday label alignment"
-msgstr ""
+msgstr "每周日期标签对齐"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:142
 #, kde-format
@@ -2469,27 +2467,27 @@ msgstr "右对齐"
 #: contents/ui/Settings/ViewSettingsPage.qml:174
 #, kde-format
 msgid "Weekday label length:"
-msgstr ""
+msgstr "每周日期标签长度"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:179
 #, kde-format
 msgid "Full name (Monday)"
-msgstr ""
+msgstr "全称 (Monday)"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:186
 #, kde-format
 msgid "Abbreviated (Mon)"
-msgstr ""
+msgstr "缩略名 (Mon)"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:194
 #, kde-format
 msgid "Letter only (M)"
-msgstr ""
+msgstr "一个字 (M)"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:203
 #, kde-format
 msgid "Show week numbers"
-msgstr ""
+msgstr "显示周数"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:217
 #, kde-format
@@ -2499,57 +2497,57 @@ msgstr "网格线宽度 (像素)："
 #: contents/ui/Settings/ViewSettingsPage.qml:247
 #, kde-format
 msgid "Week view settings"
-msgstr ""
+msgstr "周视图设置"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:259
 #, kde-format
 msgid "Week view mode"
-msgstr ""
+msgstr "周视图模式"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:266
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "可滑动的周视图"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:273
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "基本树视图"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:279
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
-msgstr ""
+msgstr "可滑动周视图需要更高的系统性能。"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:292
 #, kde-format
 msgid "Schedule View settings"
-msgstr ""
+msgstr "计划视图设置"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:304
 #, kde-format
 msgid "Schedule view mode"
-msgstr ""
+msgstr "计划视图模式"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:311
 #, kde-format
 msgid "Swipeable schedule view"
-msgstr ""
+msgstr "可滑动日历视图"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:318
 #, kde-format
 msgid "Basic schedule view"
-msgstr ""
+msgstr "基本日历视图"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:324
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
-msgstr ""
+msgstr "可滑动日历视图需要更高的系统性能。"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:333
 #, kde-format
 msgid "Show week headers"
-msgstr ""
+msgstr "显示周标题"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:350
 #, kde-format
@@ -2600,7 +2598,7 @@ msgstr "任务"
 #: kalendarapplication.cpp:31 kalendarapplication.cpp:36
 #, kde-format
 msgid "Contact"
-msgstr ""
+msgstr "联系人"
 
 #: kalendarapplication.cpp:97
 #, kde-format
@@ -2655,7 +2653,7 @@ msgstr "Ctrl+5"
 #: kalendarapplication.cpp:177
 #, kde-format
 msgid "Contacts View"
-msgstr ""
+msgstr "联系人视图"
 
 #: kalendarapplication.cpp:193
 #, kde-format
@@ -2710,17 +2708,17 @@ msgstr "Ctrl+M"
 #: kalendarapplication.cpp:308
 #, kde-format
 msgid "New Mail…"
-msgstr ""
+msgstr "新邮件"
 
 #: kalendarapplication.cpp:315
 #, kde-format
 msgid "New Contact…"
-msgstr ""
+msgstr "新建联系人"
 
 #: kalendarapplication.cpp:322
 #, kde-format
 msgid "New Contact Group…"
-msgstr ""
+msgstr "新建联系人组"
 
 #: kalendarapplication.cpp:335
 #, kde-format
@@ -2826,99 +2824,99 @@ msgstr[0] "%1 个密钥已经导入过了"
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
 msgid "fwd"
-msgstr ""
+msgstr "转发"
 
 #: mail/mime/mailtemplates.cpp:132
 #, kde-format
 msgid "re"
-msgstr ""
+msgstr "回复"
 
 #: mail/mime/partmodel.cpp:473
 #, kde-format
 msgid "No key available."
-msgstr ""
+msgstr "无可用密钥"
 
 #: mail/mime/partmodel.cpp:475
 #, kde-format
 msgid "Wrong passphrase."
-msgstr ""
+msgstr "密码错误"
 
 #: mail/mimetreeparser/messagepart.cpp:618
 #: mail/mimetreeparser/messagepart.cpp:709
 #: mail/mimetreeparser/messagepart.cpp:783
 #, kde-format
 msgid "Wrong Crypto Plug-In."
-msgstr ""
+msgstr "错误的加密插件"
 
 #: mail/mimetreeparser/messagepart.cpp:857
 #, kde-format
 msgid "Could not decrypt the data: no key found for recipients."
-msgstr ""
+msgstr "无法解密数据：找不到收件人的密钥"
 
 #: mail/mimetreeparser/messagepart.cpp:862
 #, kde-format
 msgid "Could not decrypt the data."
-msgstr ""
+msgstr "无法解密数据"
 
 #: mail/qml/ConversationViewer.qml:30
 #, kde-format
 msgid "Move to trash"
-msgstr ""
+msgstr "移入回收站"
 
 #: mail/qml/FolderView.qml:48
 #, kde-format
 msgid "Don't Mark as Important"
-msgstr ""
+msgstr "不标为重要"
 
 #: mail/qml/FolderView.qml:86
 #, kde-format
 msgid "No mailbox selected"
-msgstr ""
+msgstr "未选择邮箱"
 
 #: mail/qml/FolderView.qml:87
 #, kde-format
 msgid "Select a mailbox from the sidebar."
-msgstr ""
+msgstr "从侧边栏选择一个邮箱"
 
 #: mail/qml/FolderView.qml:94
 #, kde-format
 msgid "Mailbox is empty"
-msgstr ""
+msgstr "邮箱为空"
 
 #: mail/qml/mailboxselector/MailBoxListPage.qml:16
 #, kde-format
 msgid "Mailboxes"
-msgstr ""
+msgstr "邮箱"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
 msgid "This mail contains an invitation"
-msgstr ""
+msgstr "此邮件包含一个邀请"
 
 #: mail/qml/mailpartview/MailPart.qml:43
 #, kde-format
 msgid "sent by %1 on %2"
-msgstr ""
+msgstr "由 %1 发于 %2"
 
 #: mail/qml/mailpartview/MailPartModel.qml:54
 #, kde-format
 msgid "This message has been signed using the key %1."
-msgstr ""
+msgstr "此消息已使用密钥 %1 签名"
 
 #: mail/qml/mailpartview/MailPartModel.qml:55
 #, kde-format
 msgid "The key details are not available."
-msgstr ""
+msgstr "无法获取密钥详情"
 
 #: mail/qml/mailpartview/MailPartModel.qml:57
 #, kde-format
 msgid "This message has been signed using the key %1 by %2."
-msgstr ""
+msgstr "此消息已由 %2 使用密钥 %1 签名"
 
 #: mail/qml/mailpartview/MailPartModel.qml:59
 #, kde-format
 msgid "The key was revoked."
-msgstr ""
+msgstr "此密钥已被吊销"
 
 #: mail/qml/mailpartview/MailPartModel.qml:62
 #, kde-format
