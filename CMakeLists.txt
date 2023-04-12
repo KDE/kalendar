@@ -109,7 +109,7 @@ find_package(KPim6AkonadiCalendar ${AKONADICALENDAR_LIB_VERSION} REQUIRED)
 find_package(KPim6AkonadiContact ${AKONADICONTACT_LIB_VERSION} REQUIRED)
 find_package(KPim6AkonadiMime ${AKONADIMIME_LIB_VERSION} REQUIRED)
 find_package(KPim6CalendarUtils ${CALENDARUTILS_LIB_VERSION} REQUIRED)
-find_package(KPim6IdentityManagement ${IDENTITYMANAGEMENT_LIB_VERSION} REQUIRED)
+find_package(KPim6IdentityManagementWidgets ${IDENTITYMANAGEMENT_LIB_VERSION} REQUIRED)
 find_package(KPim6MailCommon ${MAILCOMMON_LIB_VERSION} REQUIRED)
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
