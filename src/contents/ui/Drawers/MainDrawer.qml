@@ -415,7 +415,7 @@ Kirigami.OverlayDrawer {
             id: textMetrics
         }
 
-        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing
+        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing * 2
         icon: "show-all-effects"
         label: i18n("View all tasks")
         labelItem.color: Kirigami.Theme.textColor
