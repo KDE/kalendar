@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-03 00:47+0000\n"
+"POT-Creation-Date: 2023-04-20 00:49+0000\n"
 "PO-Revision-Date: 2022-12-17 09:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque\n"
@@ -509,170 +509,197 @@ msgctxt "@action:inmenu"
 msgid "Delete address source"
 msgstr "Ezabatu helbidearen sorburua"
 
-#: contacts/qml/private/ContactEditorPage.qml:57
+#: contacts/qml/private/ContactEditorPage.qml:60
 #, kde-format
 msgid "Add Contact"
 msgstr "Gehitu kontaktua"
 
-#: contacts/qml/private/ContactEditorPage.qml:59
+#: contacts/qml/private/ContactEditorPage.qml:62
 #, kde-format
 msgid "Edit Contact"
 msgstr "Editatu kontaktua"
 
-#: contacts/qml/private/ContactEditorPage.qml:102
+#: contacts/qml/private/ContactEditorPage.qml:94
+#, fuzzy, kde-format
+#| msgctxt "text editing menu action"
+#| msgid "Select All"
+msgid "Select a file"
+msgstr "Hautatu denak"
+
+#: contacts/qml/private/ContactEditorPage.qml:95
+#, kde-format
+msgid "Images files (*.png *.jpeg *.jpg)"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:110
+#, kde-format
+msgid "Photo"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:153
+#, kde-format
+msgid "Add Profile Picture"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:153
+#, kde-format
+msgid "Update Profile Picture"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
 msgid "Address book:"
 msgstr "Helbide-liburua:"
 
-#: contacts/qml/private/ContactEditorPage.qml:159
-#: contacts/qml/private/ContactEditorPage.qml:166
+#: contacts/qml/private/ContactEditorPage.qml:190
+#: contacts/qml/private/ContactEditorPage.qml:197
 #, fuzzy, kde-format
 #| msgctxt "contact's name"
 #| msgid "Name"
 msgid "Name"
 msgstr "Izena"
 
-#: contacts/qml/private/ContactEditorPage.qml:170
+#: contacts/qml/private/ContactEditorPage.qml:201
 #, kde-format
 msgid "Contact name"
 msgstr "Kontaktuen izena"
 
-#: contacts/qml/private/ContactEditorPage.qml:189
+#: contacts/qml/private/ContactEditorPage.qml:220
 #, fuzzy, kde-format
 #| msgid "Honorific prefix:"
 msgid "Honorific prefix"
 msgstr "Ohorezko aurrizkiak:"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Miss"
 msgstr "Andereño"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Mr."
 msgstr "jn."
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Mrs."
 msgstr "and."
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Ms."
 msgstr "adño."
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Prof."
 msgstr "irak."
 
-#: contacts/qml/private/ContactEditorPage.qml:201
+#: contacts/qml/private/ContactEditorPage.qml:232
 #, fuzzy, kde-format
 #| msgid "Given name:"
 msgid "Given name"
 msgstr "Erabilitako izena:"
 
-#: contacts/qml/private/ContactEditorPage.qml:204
+#: contacts/qml/private/ContactEditorPage.qml:235
 #, kde-format
 msgid "First name or chosen name"
 msgstr "Lehen izena edo aukeratutako izena"
 
-#: contacts/qml/private/ContactEditorPage.qml:210
+#: contacts/qml/private/ContactEditorPage.qml:241
 #, fuzzy, kde-format
 #| msgid "Additional name:"
 msgid "Additional name"
 msgstr "Izen osagarriak:"
 
-#: contacts/qml/private/ContactEditorPage.qml:213
+#: contacts/qml/private/ContactEditorPage.qml:244
 #, kde-format
 msgid "Middle name or other name"
 msgstr "Erdiko izena edo beste izen bat"
 
-#: contacts/qml/private/ContactEditorPage.qml:219
+#: contacts/qml/private/ContactEditorPage.qml:250
 #, kde-format
 msgid "Family name:"
 msgstr "Abizenak:"
 
-#: contacts/qml/private/ContactEditorPage.qml:222
+#: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "Surname or last name"
 msgstr "Abizenak"
 
-#: contacts/qml/private/ContactEditorPage.qml:228
+#: contacts/qml/private/ContactEditorPage.qml:259
 #, fuzzy, kde-format
 #| msgid "Honorific suffix:"
 msgid "Honorific suffix"
 msgstr "Ohorezko atzizkiak:"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "Jr."
 msgstr "jr."
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "Sr."
 msgstr "sr."
 
-#: contacts/qml/private/ContactEditorPage.qml:239
+#: contacts/qml/private/ContactEditorPage.qml:270
 #, fuzzy, kde-format
 #| msgid "Nickname:"
 msgid "Nickname"
 msgstr "Goitizena:"
 
-#: contacts/qml/private/ContactEditorPage.qml:242
+#: contacts/qml/private/ContactEditorPage.qml:273
 #, kde-format
 msgid "Alternative name"
 msgstr "Ordezko izena"
 
-#: contacts/qml/private/ContactEditorPage.qml:250
+#: contacts/qml/private/ContactEditorPage.qml:281
 #, fuzzy, kde-format
 #| msgid "Blog Feed:"
 msgid "Blog Feed"
 msgstr "Blog-jarioa:"
 
-#: contacts/qml/private/ContactEditorPage.qml:253
+#: contacts/qml/private/ContactEditorPage.qml:284
 #, kde-format
 msgid "https://planet.kde.org/"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:265
+#: contacts/qml/private/ContactEditorPage.qml:296
 #: contacts/qml/private/ContactPage.qml:342
 #, kde-format
 msgid "Business Information"
 msgstr "Negozioko informazioa"
 
-#: contacts/qml/private/ContactEditorPage.qml:270
+#: contacts/qml/private/ContactEditorPage.qml:301
 #, fuzzy, kde-format
 #| msgid "Organization:"
 msgid "Organization"
 msgstr "Erakundea:"
 
-#: contacts/qml/private/ContactEditorPage.qml:273
+#: contacts/qml/private/ContactEditorPage.qml:304
 #, kde-format
 msgctxt "Placeholder value for name of Organization"
 msgid "KDE"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:280
+#: contacts/qml/private/ContactEditorPage.qml:311
 #, fuzzy, kde-format
 #| msgid "Profession:"
 msgid "Profession"
 msgstr "Lanbidea:"
 
-#: contacts/qml/private/ContactEditorPage.qml:283
+#: contacts/qml/private/ContactEditorPage.qml:314
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "Developer"
@@ -680,232 +707,243 @@ msgctxt "Placeholder value for name of Profession"
 msgid "Software Developer"
 msgstr "Garatzailea"
 
-#: contacts/qml/private/ContactEditorPage.qml:290
+#: contacts/qml/private/ContactEditorPage.qml:321
 #, fuzzy, kde-format
 #| msgid "Title:"
 msgid "Title"
 msgstr "Titulua:"
 
-#: contacts/qml/private/ContactEditorPage.qml:293
+#: contacts/qml/private/ContactEditorPage.qml:324
 #, kde-format
 msgctxt "Placeholder value for Title"
 msgid "SDE-1"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:300
+#: contacts/qml/private/ContactEditorPage.qml:331
 #, fuzzy, kde-format
 #| msgid "Department:"
 msgid "Department"
 msgstr "Saila:"
 
-#: contacts/qml/private/ContactEditorPage.qml:303
+#: contacts/qml/private/ContactEditorPage.qml:334
 #, fuzzy, kde-format
 #| msgid "Kalendar"
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
 msgstr "Kalendar"
 
-#: contacts/qml/private/ContactEditorPage.qml:310
+#: contacts/qml/private/ContactEditorPage.qml:341
 #, fuzzy, kde-format
 #| msgid "Office:"
 msgid "Office"
 msgstr "Bulegoa:"
 
-#: contacts/qml/private/ContactEditorPage.qml:313
+#: contacts/qml/private/ContactEditorPage.qml:344
 #, kde-format
 msgctxt "Placeholder value for Office"
 msgid "Tech Wing, 4th Floor"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:320
+#: contacts/qml/private/ContactEditorPage.qml:351
 #, fuzzy, kde-format
 #| msgid "Manager's name:"
 msgid "Manager's Name"
 msgstr "Kudeatzailearen izena:"
 
-#: contacts/qml/private/ContactEditorPage.qml:323
+#: contacts/qml/private/ContactEditorPage.qml:354
 #, kde-format
 msgctxt "Placeholder value for Manager's Name"
 msgid "Bob"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:330
+#: contacts/qml/private/ContactEditorPage.qml:361
 #, fuzzy, kde-format
 #| msgid "Assistants's name:"
 msgid "Assistant's Name"
 msgstr "Laguntzailearen izena:"
 
-#: contacts/qml/private/ContactEditorPage.qml:333
+#: contacts/qml/private/ContactEditorPage.qml:364
 #, kde-format
 msgctxt "Placeholder value for Assistants's Name"
 msgid "Jill"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:345
+#: contacts/qml/private/ContactEditorPage.qml:376
+#, fuzzy, kde-format
+#| msgid "Personal information"
+msgid "Personal Information"
+msgstr "Norbanakoaren informazioa"
+
+#: contacts/qml/private/ContactEditorPage.qml:381
+#, kde-format
+msgid "Spouse's Name"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:395
 #, fuzzy, kde-format
 #| msgid "Phone:"
 msgid "Phone"
 msgstr "Telefonoa:"
 
-#: contacts/qml/private/ContactEditorPage.qml:357
-#: contacts/qml/private/ContactEditorPage.qml:403
-#: contacts/qml/private/ContactEditorPage.qml:471
-#: contacts/qml/private/ContactEditorPage.qml:513
+#: contacts/qml/private/ContactEditorPage.qml:407
+#: contacts/qml/private/ContactEditorPage.qml:453
+#: contacts/qml/private/ContactEditorPage.qml:521
+#: contacts/qml/private/ContactEditorPage.qml:563
 #, kde-format
 msgid "Home"
 msgstr "Etxea"
 
-#: contacts/qml/private/ContactEditorPage.qml:358
-#: contacts/qml/private/ContactEditorPage.qml:404
-#: contacts/qml/private/ContactEditorPage.qml:472
-#: contacts/qml/private/ContactEditorPage.qml:514
+#: contacts/qml/private/ContactEditorPage.qml:408
+#: contacts/qml/private/ContactEditorPage.qml:454
+#: contacts/qml/private/ContactEditorPage.qml:522
+#: contacts/qml/private/ContactEditorPage.qml:564
 #, kde-format
 msgid "Work"
 msgstr "Lanekoa"
 
-#: contacts/qml/private/ContactEditorPage.qml:359
-#: contacts/qml/private/ContactEditorPage.qml:405
+#: contacts/qml/private/ContactEditorPage.qml:409
+#: contacts/qml/private/ContactEditorPage.qml:455
 #, kde-format
 msgid "Messaging"
 msgstr "Mezularitza"
 
-#: contacts/qml/private/ContactEditorPage.qml:360
-#: contacts/qml/private/ContactEditorPage.qml:406
+#: contacts/qml/private/ContactEditorPage.qml:410
+#: contacts/qml/private/ContactEditorPage.qml:456
 #, kde-format
 msgid "Voice"
 msgstr "Ahotsa"
 
-#: contacts/qml/private/ContactEditorPage.qml:361
-#: contacts/qml/private/ContactEditorPage.qml:407
+#: contacts/qml/private/ContactEditorPage.qml:411
+#: contacts/qml/private/ContactEditorPage.qml:457
 #, kde-format
 msgid "Fax"
 msgstr "Faxa"
 
-#: contacts/qml/private/ContactEditorPage.qml:362
-#: contacts/qml/private/ContactEditorPage.qml:408
+#: contacts/qml/private/ContactEditorPage.qml:412
+#: contacts/qml/private/ContactEditorPage.qml:458
 #, kde-format
 msgid "Cell"
 msgstr "Mugikorra"
 
-#: contacts/qml/private/ContactEditorPage.qml:363
-#: contacts/qml/private/ContactEditorPage.qml:409
+#: contacts/qml/private/ContactEditorPage.qml:413
+#: contacts/qml/private/ContactEditorPage.qml:459
 #, kde-format
 msgid "Video"
 msgstr "Bideoa"
 
-#: contacts/qml/private/ContactEditorPage.qml:364
-#: contacts/qml/private/ContactEditorPage.qml:410
+#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:460
 #, kde-format
 msgid "Mailbox"
 msgstr "Postontzia"
 
-#: contacts/qml/private/ContactEditorPage.qml:365
-#: contacts/qml/private/ContactEditorPage.qml:411
+#: contacts/qml/private/ContactEditorPage.qml:415
+#: contacts/qml/private/ContactEditorPage.qml:461
 #, kde-format
 msgid "Modem"
 msgstr "Modema"
 
-#: contacts/qml/private/ContactEditorPage.qml:366
-#: contacts/qml/private/ContactEditorPage.qml:412
+#: contacts/qml/private/ContactEditorPage.qml:416
+#: contacts/qml/private/ContactEditorPage.qml:462
 #, kde-format
 msgid "Car"
 msgstr "Autoa"
 
-#: contacts/qml/private/ContactEditorPage.qml:367
-#: contacts/qml/private/ContactEditorPage.qml:413
+#: contacts/qml/private/ContactEditorPage.qml:417
+#: contacts/qml/private/ContactEditorPage.qml:463
 #, kde-format
 msgid "ISDN"
 msgstr "RDSI (ISDN)"
 
-#: contacts/qml/private/ContactEditorPage.qml:368
-#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:418
+#: contacts/qml/private/ContactEditorPage.qml:464
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: contacts/qml/private/ContactEditorPage.qml:369
-#: contacts/qml/private/ContactEditorPage.qml:415
+#: contacts/qml/private/ContactEditorPage.qml:419
+#: contacts/qml/private/ContactEditorPage.qml:465
 #, kde-format
 msgid "Pager"
 msgstr "Bilagailua"
 
-#: contacts/qml/private/ContactEditorPage.qml:370
+#: contacts/qml/private/ContactEditorPage.qml:420
 #, kde-format
 msgid "Undefined"
 msgstr "Definitu gabe"
 
-#: contacts/qml/private/ContactEditorPage.qml:427
+#: contacts/qml/private/ContactEditorPage.qml:477
 #, kde-format
 msgid "+33 7 55 23 68 67"
 msgstr "+33 7 55 23 68 67"
 
-#: contacts/qml/private/ContactEditorPage.qml:454
+#: contacts/qml/private/ContactEditorPage.qml:504
 #, fuzzy, kde-format
 #| msgid "E-mail:"
 msgid "E-mail"
 msgstr "E-posta:"
 
-#: contacts/qml/private/ContactEditorPage.qml:473
+#: contacts/qml/private/ContactEditorPage.qml:523
 #, kde-format
 msgid "Other"
 msgstr "Bestelakoa"
 
-#: contacts/qml/private/ContactEditorPage.qml:494
+#: contacts/qml/private/ContactEditorPage.qml:544
 #, kde-format
 msgid "Remove email"
 msgstr "Kendu e-posta"
 
-#: contacts/qml/private/ContactEditorPage.qml:515
+#: contacts/qml/private/ContactEditorPage.qml:565
 #, kde-format
 msgid "Both"
 msgstr "Biak"
 
-#: contacts/qml/private/ContactEditorPage.qml:516
+#: contacts/qml/private/ContactEditorPage.qml:566
 #, kde-format
 msgid "Other…"
 msgstr "Bestelakoa..."
 
-#: contacts/qml/private/ContactEditorPage.qml:525
+#: contacts/qml/private/ContactEditorPage.qml:575
 #, kde-format
 msgid "user@example.org"
 msgstr "erabiltzailea@adibidea.org"
 
-#: contacts/qml/private/ContactEditorPage.qml:534
+#: contacts/qml/private/ContactEditorPage.qml:584
 #, kde-format
 msgid "Add email"
 msgstr "Gehitu e-posta"
 
-#: contacts/qml/private/ContactEditorPage.qml:554
+#: contacts/qml/private/ContactEditorPage.qml:604
 #, kde-format
 msgid "Instant Messenger"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:595
+#: contacts/qml/private/ContactEditorPage.qml:645
 #, kde-format
 msgid "protocol:person@example.com"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:645
+#: contacts/qml/private/ContactEditorPage.qml:694
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Save"
 msgstr "Gorde"
 
-#: contacts/qml/private/ContactEditorPage.qml:645
+#: contacts/qml/private/ContactEditorPage.qml:694
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Add"
 msgstr "Gehitu"
 
-#: contacts/qml/private/ContactEditorPage.qml:690
+#: contacts/qml/private/ContactEditorPage.qml:739
 #: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr "Uneko aldaketak"
 
-#: contacts/qml/private/ContactEditorPage.qml:695
+#: contacts/qml/private/ContactEditorPage.qml:744
 #: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
