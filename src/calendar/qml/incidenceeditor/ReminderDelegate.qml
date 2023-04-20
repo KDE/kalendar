@@ -87,7 +87,7 @@ RowLayout {
         delegate: Kirigami.BasicListItem {
             required property string modelData
 
-            text: Calendar.Utils.secondsToReminderLabel(modelData)
+            text: modelData === "Custom" ? i18n("Custom") : Calendar.Utils.secondsToReminderLabel(modelData)
         }
 
         popup.z: 1000
