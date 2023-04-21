@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
+"POT-Creation-Date: 2023-04-21 00:49+0000\n"
 "PO-Revision-Date: 2023-03-22 00:50+0700\n"
 "Last-Translator: Linerly <linerly@protonmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -104,6 +104,12 @@ msgstr ""
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Kustom"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
+msgid "Custom"
+msgstr ""
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
@@ -1665,11 +1671,6 @@ msgstr ""
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:399
 #, kde-format
 msgid "Yearly"
-msgstr ""
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
 msgstr ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
+"POT-Creation-Date: 2023-04-21 00:49+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -104,6 +104,12 @@ msgstr "9 (legalacsonyabb prioritás)"
 #, fuzzy, kde-format
 #| msgid "Custom"
 msgctxt "Custom reminder"
+msgid "Custom"
+msgstr "Egyéni"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
 msgid "Custom"
 msgstr "Egyéni"
 
@@ -1720,11 +1726,6 @@ msgstr "Havonta"
 #, kde-format
 msgid "Yearly"
 msgstr "Évente"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "Egyéni"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format

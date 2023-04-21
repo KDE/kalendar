@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
+"POT-Creation-Date: 2023-04-21 00:49+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -107,6 +107,12 @@ msgstr "9(가장 낮음)"
 #, fuzzy, kde-format
 #| msgid "Custom"
 msgctxt "Custom reminder"
+msgid "Custom"
+msgstr "사용자 정의"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
 msgid "Custom"
 msgstr "사용자 정의"
 
@@ -1763,11 +1769,6 @@ msgstr "매월"
 #, kde-format
 msgid "Yearly"
 msgstr "매년"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "사용자 정의"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
-"PO-Revision-Date: 2023-03-27 08:37+0300\n"
+"POT-Creation-Date: 2023-04-21 00:49+0000\n"
+"PO-Revision-Date: 2023-04-20 08:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -105,6 +105,12 @@ msgstr "9 (найнижчий пріоритет)"
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Нетипове"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
+msgid "Custom"
+msgstr "Нетиповий"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
@@ -509,31 +515,29 @@ msgid "Edit Contact"
 msgstr "Редагувати контакт"
 
 #: contacts/qml/private/ContactEditorPage.qml:94
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "Позначити все"
+msgstr "Виберіть файл"
 
 #: contacts/qml/private/ContactEditorPage.qml:95
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "файли зображень (*.png *.jpeg *.jpg)"
 
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "Фото"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "Додавання зображення профілю"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "Оновлення зображення профілю"
 
 #: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
@@ -740,15 +744,14 @@ msgid "Jill"
 msgstr "Олена"
 
 #: contacts/qml/private/ContactEditorPage.qml:376
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
 msgstr "Особиста інформація"
 
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "Ім'я чоловіка/дружини"
 
 #: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
@@ -1668,11 +1671,6 @@ msgstr "Щомісяця"
 #, kde-format
 msgid "Yearly"
 msgstr "Щорічно"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "Нетиповий"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
-"PO-Revision-Date: 2023-03-27 10:26+0200\n"
+"POT-Creation-Date: 2023-04-21 00:49+0000\n"
+"PO-Revision-Date: 2023-04-20 09:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -105,6 +105,12 @@ msgstr "9 (prioritat més baixa)"
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
 #, kde-format
 msgctxt "Custom reminder"
+msgid "Custom"
+msgstr "Personalitzat"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
 msgid "Custom"
 msgstr "Personalitzat"
 
@@ -512,31 +518,29 @@ msgid "Edit Contact"
 msgstr "Edita el contacte"
 
 #: contacts/qml/private/ContactEditorPage.qml:94
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "Selecciona-ho tot"
+msgstr "Seleccioneu un fitxer"
 
 #: contacts/qml/private/ContactEditorPage.qml:95
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "Fitxers d'imatge (*png *.jpeg *.jpg)"
 
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "Foto"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "Afegeix una imatge de perfil"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "Actualitza la imatge de perfil"
 
 #: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
@@ -743,15 +747,14 @@ msgid "Jill"
 msgstr "Carme"
 
 #: contacts/qml/private/ContactEditorPage.qml:376
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
 msgstr "Informació personal"
 
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "Nom del cònjuge"
 
 #: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
@@ -1660,11 +1663,6 @@ msgstr "Mensualment"
 #, kde-format
 msgid "Yearly"
 msgstr "Anualment"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "Personalitzat"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format

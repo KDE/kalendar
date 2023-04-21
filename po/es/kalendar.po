@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
-"PO-Revision-Date: 2023-03-27 19:46+0200\n"
+"POT-Creation-Date: 2023-04-21 00:49+0000\n"
+"PO-Revision-Date: 2023-04-20 04:49+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.80\n"
+"X-Generator: Lokalize 23.03.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -106,6 +106,12 @@ msgstr "9 (prioridad más baja)"
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Personalizado"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
+msgid "Custom"
+msgstr "Personalizada"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
@@ -513,31 +519,29 @@ msgid "Edit Contact"
 msgstr "Editar contacto"
 
 #: contacts/qml/private/ContactEditorPage.qml:94
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "Seleccionar todo"
+msgstr "Seleccione un archivo"
 
 #: contacts/qml/private/ContactEditorPage.qml:95
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "Archivos de imágenes (*.png *.jpeg *.jpg)"
 
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "Foto"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "Añadir imagen de perfil"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "Actualizar imagen de perfil"
 
 #: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
@@ -744,15 +748,14 @@ msgid "Jill"
 msgstr "Susana"
 
 #: contacts/qml/private/ContactEditorPage.qml:376
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
 msgstr "Información personal"
 
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "Nombre del cónyuge"
 
 #: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
@@ -1661,11 +1664,6 @@ msgstr "Cada mes"
 #, kde-format
 msgid "Yearly"
 msgstr "Cada año"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "Personalizada"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format
