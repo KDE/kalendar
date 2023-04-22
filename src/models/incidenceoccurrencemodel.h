@@ -114,15 +114,10 @@ private Q_SLOTS:
     void loadColors();
     void scheduleReset();
     void resetFromSource();
-
-    void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
-    void slotSourceRowsInserted(const QModelIndex &parent, const int first, const int last);
-
     void setLoading(const bool loading);
 
 private:
     static std::pair<QDateTime, QDateTime> incidenceOccurrenceStartEnd(const QDateTime &ocStart, const KCalendarCore::Incidence::Ptr &incidence);
-    static uint incidenceOccurrenceHash(const QDateTime &ocStart, const QDateTime &ocEnd, const QString &incidenceUid);
     bool incidencePassesFilter(const KCalendarCore::Incidence::Ptr &incidence);
 
     QColor getColor(const KCalendarCore::Incidence::Ptr &incidence);
@@ -139,7 +134,6 @@ private:
 
     bool m_loading = false;
     QVector<Occurrence> m_incidences; // We need incidences to be in a preditable order for the model
-    QHash<uint, QPersistentModelIndex> m_occurrenceIndexHash;
     QHash<QString, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
     Filter *mFilter = nullptr;
