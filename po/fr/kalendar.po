@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-21 00:49+0000\n"
-"PO-Revision-Date: 2023-03-28 15:24+0200\n"
+"PO-Revision-Date: 2023-04-21 09:07+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -514,31 +514,29 @@ msgid "Edit Contact"
 msgstr "Modifier un contact"
 
 #: contacts/qml/private/ContactEditorPage.qml:94
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "Tout sélectionner"
+msgstr "Sélectionner un fichier"
 
 #: contacts/qml/private/ContactEditorPage.qml:95
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "Fichiers d'image (*png *.jpeg *.jpg)"
 
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "Photo"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "Ajouter une image de profil"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "Mettre à jour une image de profil"
 
 #: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
@@ -745,15 +743,14 @@ msgid "Jill"
 msgstr "Jill"
 
 #: contacts/qml/private/ContactEditorPage.qml:376
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
 msgstr "Informations personnelles "
 
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "Nom du conjoint"
 
 #: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
