@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-21 00:49+0000\n"
+"POT-Creation-Date: 2023-04-24 00:49+0000\n"
 "PO-Revision-Date: 2023-03-27 23:06+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -528,7 +528,7 @@ msgstr ""
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "Fotografia"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
@@ -745,10 +745,9 @@ msgid "Jill"
 msgstr "Maria"
 
 #: contacts/qml/private/ContactEditorPage.qml:376
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
-msgstr "Dados pessoais"
+msgstr "Dados Pessoais"
 
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
@@ -2657,7 +2656,7 @@ msgstr "Círculo (mostra a área da localização)"
 msgid "Pin (shows exact location)"
 msgstr "Pino (mostra a localização exacta)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"

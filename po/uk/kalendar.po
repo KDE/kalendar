@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-21 00:49+0000\n"
+"POT-Creation-Date: 2023-04-24 00:49+0000\n"
 "PO-Revision-Date: 2023-04-20 08:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -2693,7 +2693,7 @@ msgstr "Окіл (показує область місця)"
 msgid "Pin (shows exact location)"
 msgstr "Пришпилити (показує точне місце)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"

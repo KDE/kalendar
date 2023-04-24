@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-21 00:49+0000\n"
-"PO-Revision-Date: 2023-04-01 09:05+0200\n"
+"POT-Creation-Date: 2023-04-24 00:49+0000\n"
+"PO-Revision-Date: 2023-04-23 12:34+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -517,31 +517,29 @@ msgid "Edit Contact"
 msgstr "Edytuj kontakt"
 
 #: contacts/qml/private/ContactEditorPage.qml:94
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "Zaznacz wszystko"
+msgstr "Wybierz plik"
 
 #: contacts/qml/private/ContactEditorPage.qml:95
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "Pliki obrazów (*.png *.jpeg *.jpg)"
 
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "Zdjęcie"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "Dodaj zdjęcie profilowe"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "Uaktualnij zdjęcie profilowe"
 
 #: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
@@ -671,102 +669,91 @@ msgid "Business Information"
 msgstr "Szczegóły pracownicze"
 
 #: contacts/qml/private/ContactEditorPage.qml:301
-#, fuzzy, kde-format
-#| msgid "Organization:"
+#, kde-format
 msgid "Organization"
-msgstr "Organizacja:"
+msgstr "Organizacja"
 
 #: contacts/qml/private/ContactEditorPage.qml:304
 #, kde-format
 msgctxt "Placeholder value for name of Organization"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: contacts/qml/private/ContactEditorPage.qml:311
-#, fuzzy, kde-format
-#| msgid "Profession:"
+#, kde-format
 msgid "Profession"
-msgstr "Zawód:"
+msgstr "Zawód"
 
 #: contacts/qml/private/ContactEditorPage.qml:314
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Developer"
+#, kde-format
 msgctxt "Placeholder value for name of Profession"
 msgid "Software Developer"
 msgstr "Programista"
 
 #: contacts/qml/private/ContactEditorPage.qml:321
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgid "Title"
-msgstr "Tytuł:"
+msgstr "Tytuł"
 
 #: contacts/qml/private/ContactEditorPage.qml:324
 #, kde-format
 msgctxt "Placeholder value for Title"
 msgid "SDE-1"
-msgstr ""
+msgstr "SDE-1"
 
 #: contacts/qml/private/ContactEditorPage.qml:331
-#, fuzzy, kde-format
-#| msgid "Department:"
+#, kde-format
 msgid "Department"
-msgstr "Dział:"
+msgstr "Dział"
 
 #: contacts/qml/private/ContactEditorPage.qml:334
-#, fuzzy, kde-format
-#| msgid "Kalendar"
+#, kde-format
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
-msgstr "Kalendarz"
+msgstr "Zespół Kalendarza"
 
 #: contacts/qml/private/ContactEditorPage.qml:341
-#, fuzzy, kde-format
-#| msgid "Office:"
+#, kde-format
 msgid "Office"
-msgstr "Biuro:"
+msgstr "Biuro"
 
 #: contacts/qml/private/ContactEditorPage.qml:344
 #, kde-format
 msgctxt "Placeholder value for Office"
 msgid "Tech Wing, 4th Floor"
-msgstr ""
+msgstr "Skrzydło Techniczne, 4-te piętro"
 
 #: contacts/qml/private/ContactEditorPage.qml:351
-#, fuzzy, kde-format
-#| msgid "Manager's name:"
+#, kde-format
 msgid "Manager's Name"
-msgstr "Nazwa kierownika:"
+msgstr "Nazwa dyrektora"
 
 #: contacts/qml/private/ContactEditorPage.qml:354
 #, kde-format
 msgctxt "Placeholder value for Manager's Name"
 msgid "Bob"
-msgstr ""
+msgstr "Kuba"
 
 #: contacts/qml/private/ContactEditorPage.qml:361
-#, fuzzy, kde-format
-#| msgid "Assistants's name:"
+#, kde-format
 msgid "Assistant's Name"
-msgstr "Nazwa asystenta:"
+msgstr "Nazwa asystenta"
 
 #: contacts/qml/private/ContactEditorPage.qml:364
 #, kde-format
 msgctxt "Placeholder value for Assistants's Name"
 msgid "Jill"
-msgstr ""
+msgstr "Jill"
 
 #: contacts/qml/private/ContactEditorPage.qml:376
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
-msgstr "Dane osobowe"
+msgstr "Informacje osobiste"
 
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "Nazwisko małżonki/małżonka"
 
 #: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
@@ -2687,7 +2674,7 @@ msgstr "Okrąg (pokazuje obszar położenia)"
 msgid "Pin (shows exact location)"
 msgstr "Przypnij (pokazuje dokładne położenie)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"

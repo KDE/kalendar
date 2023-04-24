@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-21 00:49+0000\n"
-"PO-Revision-Date: 2023-04-02 16:57+0530\n"
+"POT-Creation-Date: 2023-04-24 00:49+0000\n"
+"PO-Revision-Date: 2023-04-23 17:01+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.90\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -514,31 +514,29 @@ msgid "Edit Contact"
 msgstr "தொடர்பை திருத்து"
 
 #: contacts/qml/private/ContactEditorPage.qml:94
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "அனைத்தையும் தேர்ந்தெடு"
+msgstr "கோப்பைத் தேர்ந்தெடுப்பது"
 
 #: contacts/qml/private/ContactEditorPage.qml:95
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "படக்கோப்புகள் (*.png *.jpeg *.jpg)"
 
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "படம்"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "பயனர் படத்தைச் சேர்"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "பயனர் படத்தை மாற்று"
 
 #: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
@@ -745,15 +743,14 @@ msgid "Jill"
 msgstr "சல்மான்"
 
 #: contacts/qml/private/ContactEditorPage.qml:376
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
 msgstr "தனிப்பட்ட விவரங்கள்"
 
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "துணைவரின் பெயர்"
 
 #: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
@@ -2655,7 +2652,7 @@ msgstr "வட்டம் (உள்ள வட்டாரத்தை கா�
 msgid "Pin (shows exact location)"
 msgstr "குண்டூசி (துல்லியமான இடத்தை காட்டும்)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"
