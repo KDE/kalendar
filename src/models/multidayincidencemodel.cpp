@@ -219,7 +219,7 @@ QVariantList MultiDayIncidenceModel::layoutLines(const QDate &rowStart) const
 
 void MultiDayIncidenceModel::resetLayoutLines()
 {
-    if (mSourceModel->calendar()->isLoading()) {
+    if (!mSourceModel->calendar() || mSourceModel->calendar()->isLoading()) {
         if (!mRefreshTimer.isActive()) {
             mRefreshTimer.start(100);
         }
