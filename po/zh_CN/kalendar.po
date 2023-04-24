@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 04:20+0000\n"
+"POT-Creation-Date: 2023-04-24 03:14+0000\n"
 "PO-Revision-Date: 2023-04-16 12:34\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2511,7 +2511,7 @@ msgstr "圆 (显示位置区域)"
 msgid "Pin (shows exact location)"
 msgstr "点 (显示确切位置)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:282
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
