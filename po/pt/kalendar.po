@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-24 00:49+0000\n"
-"PO-Revision-Date: 2023-03-27 23:06+0100\n"
+"PO-Revision-Date: 2023-04-23 12:49+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-POFile-SpellExtra: RSVP Kalendar Schwan Clau mín Seg Mín Felipe\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-POFile-SpellExtra: Kinoshita QR Azteca Blog Men Jr PCS Pager Srt enc\n"
-"X-POFile-SpellExtra: resp Meet SDE\n"
+"X-POFile-SpellExtra: resp Meet SDE jpg\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -514,16 +514,14 @@ msgid "Edit Contact"
 msgstr "Editar o Contacto"
 
 #: contacts/qml/private/ContactEditorPage.qml:94
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "Seleccionar Tudo"
+msgstr "Seleccionar um ficheiro"
 
 #: contacts/qml/private/ContactEditorPage.qml:95
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "Ficheiros de imagens (*.png *.jpeg *.jpg)"
 
 #: contacts/qml/private/ContactEditorPage.qml:110
 #, kde-format
@@ -533,12 +531,12 @@ msgstr "Fotografia"
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "Adicionar uma Fotografia ao Perfil"
 
 #: contacts/qml/private/ContactEditorPage.qml:153
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "Actualizar a Fotografia do Perfil"
 
 #: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
@@ -752,7 +750,7 @@ msgstr "Dados Pessoais"
 #: contacts/qml/private/ContactEditorPage.qml:381
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "Nome do Cônjuge"
 
 #: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
