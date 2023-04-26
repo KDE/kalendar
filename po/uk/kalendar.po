@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-24 03:14+0000\n"
+"POT-Creation-Date: 2023-04-26 02:49+0000\n"
 "PO-Revision-Date: 2023-03-17 14:18+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -50,6 +50,12 @@ msgstr "Освіжити усі календарі"
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Нетипове"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
+#, kde-format
+msgid "Custom"
+msgstr "Нетиповий"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
@@ -1552,11 +1558,6 @@ msgstr "Щомісяця"
 #, kde-format
 msgid "Yearly"
 msgstr "Щорічно"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
-#, kde-format
-msgid "Custom"
-msgstr "Нетиповий"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:446
 #, kde-format

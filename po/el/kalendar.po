@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-24 03:14+0000\n"
+"POT-Creation-Date: 2023-04-26 02:49+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -49,6 +49,12 @@ msgstr "Εισαγωγή ημερολογίου"
 #, fuzzy, kde-format
 #| msgid "Custom"
 msgctxt "Custom reminder"
+msgid "Custom"
+msgstr "Προσαρμοσμένο"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
+#, kde-format
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
@@ -1615,11 +1621,6 @@ msgstr "Μηνιαίο"
 #, kde-format
 msgid "Yearly"
 msgstr "Ετήσιο"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
-#, kde-format
-msgid "Custom"
-msgstr "Προσαρμοσμένο"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:446
 #, kde-format

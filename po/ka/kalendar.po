@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-24 03:14+0000\n"
+"POT-Creation-Date: 2023-04-26 02:49+0000\n"
 "PO-Revision-Date: 2023-03-25 02:43+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -50,6 +50,12 @@ msgstr "ყველა კალენდარის განახლებ�
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "ხელით მითითება"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
+#, kde-format
+msgid "Custom"
+msgstr "სხვა"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
@@ -1539,11 +1545,6 @@ msgstr "თვეში ერთხელ"
 #, kde-format
 msgid "Yearly"
 msgstr "წლიურად"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:415
-#, kde-format
-msgid "Custom"
-msgstr "სხვა"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:446
 #, kde-format
