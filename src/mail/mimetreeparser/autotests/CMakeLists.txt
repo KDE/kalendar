@@ -20,11 +20,7 @@ endfunction()
 
 function(add_mimetreeparser_crypto_unittest _name)
     add_executable(${_name} ${_name}.cpp setupenv.cpp)
-    if (QT_MAJOR_VERSION STREQUAL "6")
-        target_link_libraries(${_name} PRIVATE QGpgmeQt6 Qt6::Core5Compat)
-    else()
-        target_link_libraries(${_name} PRIVATE Gpgme::Gpgme)
-    endif()
+    target_link_libraries(${_name} PRIVATE QGpgmeQt6 Qt6::Core5Compat)
     target_include_directories(${_name} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/..
         ${GPGME_INCLUDE_DIRS}
