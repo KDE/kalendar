@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the kalendar package.
 #
 # Alexander Yavorsky <kekcuha@gmail.com>, 2022, 2023.
-# Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
+# Olesya Gerasimenko <translation-team@basealt.ru>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-26 02:49+0000\n"
-"PO-Revision-Date: 2023-04-15 14:21+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2023-04-26 10:18+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -372,11 +372,9 @@ msgid "Choose Address Book Color"
 msgstr "Выбор цвета адресной книги"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "Свойства адресной книги %1"
+msgstr "Обновить все адресные книги"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -2397,13 +2395,12 @@ msgstr "Основные параметры"
 #: contents/ui/Settings/ViewSettingsPage.qml:28
 #, kde-format
 msgid "Use popup to show incidence information"
-msgstr ""
+msgstr "Использовать всплывающее окно для показа сведений о событии"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Показывать вложенные задачи в календаре"
+msgstr "Показывать задачи в календаре"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2411,42 +2408,39 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Показывать вложенные задачи в календаре"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Прозрачность прошедших событий:"
+msgstr "Прозрачность прошедших событий"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
-msgstr "Настройка просмотра по месяцам"
+msgstr "Параметры просмотра месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:100
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "Месяц"
+msgstr "Режим просмотра месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:107
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "Прокручиваемая таблица месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:114
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "Базовая таблица месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:120
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
-msgstr ""
+msgstr "Прокручиваемая таблица месяца задействует больше ресурсов системы."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:135
-#, fuzzy, kde-format
+#, kde-format
 msgid "Weekday label alignment"
-msgstr "Выравнивание подписей дней недели:"
+msgstr "Выравнивание подписей дней недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:142
 #, kde-format
@@ -2494,59 +2488,54 @@ msgid "Grid border width (pixels):"
 msgstr "Ширина рамки (в пикселах):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:247
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "Параметры задач"
+msgstr "Параметры просмотра недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:259
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "Неделя"
+msgstr "Режим просмотра недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:266
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "Прокручиваемая панель недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:273
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "Базовая панель недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:279
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
-msgstr ""
+msgstr "Прокручиваемая панель недели задействует больше ресурсов системы."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:292
 #, kde-format
 msgid "Schedule View settings"
-msgstr "Параметры расписания"
+msgstr "Параметры просмотра расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:304
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "Расписание"
+msgstr "Режим просмотра расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:311
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "Расписание"
+msgstr "Прокручиваемая панель расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:318
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "Расписание"
+msgstr "Базовая панель расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:324
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
-msgstr ""
+msgstr "Прокручиваемая панель расписания задействует больше ресурсов системы."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:333
 #, kde-format
@@ -2556,7 +2545,7 @@ msgstr "Показывать заголовки недель"
 #: contents/ui/Settings/ViewSettingsPage.qml:350
 #, kde-format
 msgid "Tasks View settings"
-msgstr "Параметры задач"
+msgstr "Параметры просмотра задач"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:353
 #, kde-format
@@ -2569,9 +2558,9 @@ msgid "Maps"
 msgstr "Карты"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:373
-#, fuzzy, kde-format
+#, kde-format
 msgid "Enable maps"
-msgstr "Использовать карты:"
+msgstr "Включить карты"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:380
 #, kde-format
@@ -2579,9 +2568,9 @@ msgid "May cause crashing on some systems."
 msgstr "На некоторых системах может приводить к аварийному завершению."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:392
-#, fuzzy, kde-format
+#, kde-format
 msgid "Location marker"
-msgstr "Указатель местоположения:"
+msgstr "Указатель местоположения"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:400
 #, kde-format
@@ -2600,10 +2589,9 @@ msgid "Task"
 msgstr "Задача"
 
 #: kalendarapplication.cpp:32 kalendarapplication.cpp:37
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Контакты"
+msgstr "Контакт"
 
 #: kalendarapplication.cpp:98
 #, kde-format
@@ -2661,9 +2649,9 @@ msgid "Contacts View"
 msgstr "Контакты"
 
 #: kalendarapplication.cpp:194
-#, fuzzy, kde-format
+#, kde-format
 msgid "Mail View"
-msgstr "День"
+msgstr "Почта"
 
 #: kalendarapplication.cpp:204
 #, kde-format
@@ -2795,7 +2783,7 @@ msgstr "%1 (по умолчанию)"
 #: mail/contactimageprovider.cpp:126
 #, kde-format
 msgid "Image request has been cancelled"
-msgstr ""
+msgstr "Запрос изображения был отменён"
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -2804,7 +2792,7 @@ msgid "No Subject"
 msgstr "Тема отсутствует"
 
 #: mail/mailmodel.cpp:49
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -2812,35 +2800,35 @@ msgstr "Неизвестно"
 #: mail/mime/attachmentmodel.cpp:223
 #, kde-format
 msgid "No keys were found in this attachment"
-msgstr ""
+msgstr "В этом вложении не найдены ключи"
 
 #: mail/mime/attachmentmodel.cpp:226
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "импортирован %1 ключ"
+msgstr[1] "импортированы %1 ключа"
+msgstr[2] "импортированы %1 ключей"
+msgstr[3] "импортирован один ключ"
 
 #: mail/mime/attachmentmodel.cpp:228
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "уже импортирован %1 ключ"
+msgstr[1] "уже импортированы %1 ключа"
+msgstr[2] "уже импортированы %1 ключей"
+msgstr[3] "уже импортирован один ключ"
 
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
 msgid "fwd"
-msgstr ""
+msgstr "fwd"
 
 #: mail/mime/mailtemplates.cpp:132
 #, kde-format
 msgid "re"
-msgstr ""
+msgstr "re"
 
 #: mail/mime/partmodel.cpp:473
 #, kde-format
@@ -2862,12 +2850,12 @@ msgstr "Неверный модуль шифрования."
 #: mail/mimetreeparser/messagepart.cpp:857
 #, kde-format
 msgid "Could not decrypt the data: no key found for recipients."
-msgstr ""
+msgstr "Не удалось расшифровать данные: не найден ключ для получателей."
 
 #: mail/mimetreeparser/messagepart.cpp:862
 #, kde-format
 msgid "Could not decrypt the data."
-msgstr ""
+msgstr "Не удалось расшифровать данные."
 
 #: mail/qml/ConversationViewer.qml:30
 #, kde-format
@@ -2877,7 +2865,7 @@ msgstr "Удалить в корзину"
 #: mail/qml/FolderView.qml:48
 #, kde-format
 msgid "Don't Mark as Important"
-msgstr ""
+msgstr "Не отмечать как важное"
 
 #: mail/qml/FolderView.qml:86
 #, kde-format
@@ -2937,37 +2925,37 @@ msgstr "Срок действия ключа истёк."
 #: mail/qml/mailpartview/MailPartModel.qml:65
 #, kde-format
 msgid "You are trusting this key."
-msgstr ""
+msgstr "Вы доверяете этому ключу."
 
 #: mail/qml/mailpartview/MailPartModel.qml:68
 #, kde-format
 msgid "The signature is invalid."
-msgstr ""
+msgstr "Недопустимая подпись."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted but we don't have the key for it."
-msgstr ""
+msgstr "Это письмо зашифровано, но для него нет ключа."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted to the key: %1"
-msgstr ""
+msgstr "Это письмо зашифровано следующим ключом: %1"
 
 #: mail/qml/mailpartview/MailPartView.qml:33
 #, kde-format
 msgid "Loading mail..."
-msgstr ""
+msgstr "Загрузка почты…"
 
 #: mail/qml/MailViewer.qml:150
-#, fuzzy, kde-format
+#, kde-format
 msgid "Save attachment"
-msgstr "Добавить вложение"
+msgstr "Сохранить вложение"
 
 #: mail/qml/private/AttachmentDelegate.qml:57
-#, fuzzy, kde-format
+#, kde-format
 msgid "Import key"
-msgstr "Импорт календаря"
+msgstr "Импорт ключа"
 
 #: main.cpp:71
 #, kde-format
@@ -3021,36 +3009,36 @@ msgid "No set date"
 msgstr "Дата не задана"
 
 #: models/todosortfilterproxymodel.cpp:198
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr " в %1 "
+msgstr " в %1"
 
 #: models/todosortfilterproxymodel.cpp:199
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
-msgstr "(просрочено)"
+msgstr " (просрочено)"
 
 #: quick/qml/AgentConfigurationForm.qml:36
-#, fuzzy, kde-format
+#, kde-format
 msgid "Configure %1"
-msgstr "Параметры"
+msgstr "Настроить %1"
 
 #: quick/qml/AgentConfigurationForm.qml:37
 #, kde-format
 msgid "Modify or delete this account agent."
-msgstr ""
+msgstr "Изменить или удалить агент этой учётной записи."
 
 #: quick/qml/AgentConfigurationForm.qml:42
 #, kde-format
 msgid "Modify"
-msgstr ""
+msgstr "Изменить"
 
 #: quick/qml/AgentConfigurationForm.qml:82
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add Account"
-msgstr "Добавить вложение"
+msgstr "Добавить учётную запись"
 
 #~ msgid "General"
 #~ msgstr "Общие"
