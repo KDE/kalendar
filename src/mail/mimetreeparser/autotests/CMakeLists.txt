@@ -9,7 +9,7 @@ include(ECMAddTests)
 include(${CMAKE_SOURCE_DIR}/cmake/modules/add_gpg_crypto_test.cmake)
 
 function(add_mimetreeparser_class_unittest _name _additionalSource)
-    add_executable(${_name} ${_name}.cpp setupenv.cpp ${_additionalSource})
+    add_executable(${_name} ${_name}.cpp setupenv.cpp setupenv.h ${_additionalSource})
     target_link_libraries(${_name} PRIVATE
         Qt::Test
         kalendar_mail_static
@@ -19,7 +19,7 @@ function(add_mimetreeparser_class_unittest _name _additionalSource)
 endfunction()
 
 function(add_mimetreeparser_crypto_unittest _name)
-    add_executable(${_name} ${_name}.cpp setupenv.cpp)
+    add_executable(${_name} ${_name}.cpp setupenv.cpp setupenv.h)
     target_link_libraries(${_name} PRIVATE QGpgmeQt6 Qt6::Core5Compat)
     target_include_directories(${_name} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/..

@@ -29,7 +29,8 @@ set(kalendar_mail_SRCS
     mimetreeparser/bodypartformatterbasefactory.cpp
     mimetreeparser/cryptohelper.cpp
     mimetreeparser/messagepart.cpp
-    mimetreeparser/mimetreeparser_debug.cpp
+    mimetreeparser/mimetreeparser_debug.cpp 
+    mimetreeparser/mimetreeparser_debug.h
     mimetreeparser/objecttreeparser.cpp
     mimetreeparser/utils.cpp
     mime/attachmentmodel.cpp
