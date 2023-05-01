@@ -32,6 +32,7 @@ public:
     QString selectedFolderName() const;
 
     Q_INVOKABLE void loadMailCollection(const QModelIndex &index);
+    Q_INVOKABLE void moveToTrash(Akonadi::Item item);
 
 Q_SIGNALS:
     void loadingChanged();
