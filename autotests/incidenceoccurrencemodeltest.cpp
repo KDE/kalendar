@@ -263,7 +263,7 @@ private Q_SLOTS:
         // row inserted signal.
         QSignalSpy createFinished(m_calendar->incidenceChanger(), &Akonadi::IncidenceChanger::createFinished);
         QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
-        QSignalSpy rowsInserted(&model, &IncidenceOccurrenceModel::rowsInserted);
+        QSignalSpy modelReset(&model, &IncidenceOccurrenceModel::modelReset);
 
         QVERIFY(m_calendar->incidenceChanger()->createIncidence(m_testTodo, m_testCollection) != -1);
         QVERIFY(createFinished.wait(5000));
@@ -271,7 +271,7 @@ private Q_SLOTS:
         QVERIFY(loadingChanged.wait(3000));
         QVERIFY(!model.loading());
 
-        QCOMPARE(rowsInserted.count(), 1);
+        QCOMPARE(modelReset.count(), 1);
         QCOMPARE(model.rowCount(), m_expectedIncidenceCount + 1);
     }
 
@@ -321,7 +321,7 @@ private Q_SLOTS:
         // Then try modifying it
         QSignalSpy modifyFinished(m_calendar.data(), &Akonadi::ETMCalendar::modifyFinished);
         QSignalSpy loadingChanged(&model, &IncidenceOccurrenceModel::loadingChanged);
-        QSignalSpy dataChanged(&model, &IncidenceOccurrenceModel::dataChanged);
+        QSignalSpy modelReset(&model, &IncidenceOccurrenceModel::modelReset);
 
         m_calendar->modifyIncidence(todoClone);
         QVERIFY(modifyFinished.wait(3000));
@@ -330,11 +330,8 @@ private Q_SLOTS:
         QVERIFY(!model.loading());
 
         // FIXME: Currently the model emits more dataChanged signals than needed
-        QVERIFY(dataChanged.count() > 0);
-        const auto dataChangedSignalEmitted = dataChanged.first();
-        const auto dataChangedIndex = dataChangedSignalEmitted.first().toModelIndex();
-        QVERIFY(dataChangedIndex.isValid());
-        QCOMPARE(dataChangedIndex.data(IncidenceOccurrenceModel::Summary).toString(), newSummary);
+        QCOMPARE(modelReset.count(), 1);
+        QCOMPARE(model.rowCount(), m_expectedIncidenceCount + 1);
     }
 
     void testTodoData()
