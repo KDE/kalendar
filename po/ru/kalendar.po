@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kalendar package.
 #
-# Alexander Yavorsky <kekcuha@gmail.com>, 2022.
-# Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2022, 2023.
+# Olesya Gerasimenko <translation-team@basealt.ru>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-03 00:47+0000\n"
-"PO-Revision-Date: 2022-10-10 15:48+0300\n"
+"POT-Creation-Date: 2023-04-24 00:49+0000\n"
+"PO-Revision-Date: 2023-04-26 10:18+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -42,10 +42,9 @@ msgid "Redo: "
 msgstr "Повторить: "
 
 #: calendar/qml/CalendarApplication.qml:33
-#, fuzzy, kde-format
-#| msgid "Refresh All"
+#, kde-format
 msgid "Refresh All Calendars"
-msgstr "Обновить все"
+msgstr "Обновить все календари"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:18
 #, kde-format
@@ -103,43 +102,41 @@ msgid "9 (Lowest Priority)"
 msgstr "9 (минимальный приоритет)"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Custom"
+#, kde-format
 msgctxt "Custom reminder"
+msgid "Custom"
+msgstr "Другое"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
 msgid "Custom"
 msgstr "Пользовательский"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
-#, fuzzy, kde-format
-#| msgid "%1 minutes"
+#, kde-format
 msgid "minutes"
-msgstr "%1 мин."
+msgstr "мин."
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:154
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or mores"
-#| msgid "%1 hours"
+#, kde-format
 msgid "hours"
-msgstr "%1 ч."
+msgstr "час"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:155
-#, fuzzy, kde-format
-#| msgctxt "%1 is 2 or more"
-#| msgid "%1 days"
+#, kde-format
 msgid "days"
-msgstr "%1 дн."
+msgstr "дн."
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:167
-#, fuzzy, kde-format
-#| msgid "%1 before start of event"
+#, kde-format
 msgid "before start of event"
-msgstr "%1 до начала события"
+msgstr "до начала события"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:168
-#, fuzzy, kde-format
-#| msgid "%1 after start of event"
+#, kde-format
 msgid "after start of event"
-msgstr "%1 после начала события"
+msgstr "после начала события"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
 #, kde-format
@@ -430,11 +427,9 @@ msgid "Choose Address Book Color"
 msgstr "Выбор цвета адресной книги"
 
 #: contacts/qml/ContactApplication.qml:16
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Properties of Address Book %1"
+#, kde-format
 msgid "Refresh All Address Books"
-msgstr "Свойства адресной книги %1"
+msgstr "Обновить все адресные книги"
 
 #: contacts/qml/ContactChooserPage.qml:22
 #, kde-format
@@ -513,399 +508,418 @@ msgctxt "@action:inmenu"
 msgid "Delete address source"
 msgstr "Удалить источник данных адресной книги"
 
-#: contacts/qml/private/ContactEditorPage.qml:57
+#: contacts/qml/private/ContactEditorPage.qml:60
 #, kde-format
 msgid "Add Contact"
 msgstr "Добавить контакт"
 
-#: contacts/qml/private/ContactEditorPage.qml:59
+#: contacts/qml/private/ContactEditorPage.qml:62
 #, kde-format
 msgid "Edit Contact"
 msgstr "Изменить контакт"
 
-#: contacts/qml/private/ContactEditorPage.qml:102
+#: contacts/qml/private/ContactEditorPage.qml:94
 #, fuzzy, kde-format
+msgid "Select a file"
+msgstr "Выделить все"
+
+#: contacts/qml/private/ContactEditorPage.qml:95
+#, kde-format
+msgid "Images files (*.png *.jpeg *.jpg)"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:110
+#, kde-format
+msgid "Photo"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:153
+#, kde-format
+msgid "Add Profile Picture"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:153
+#, kde-format
+msgid "Update Profile Picture"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:167
+#, kde-format
 msgid "Address book:"
 msgstr "Адресная книга:"
 
-#: contacts/qml/private/ContactEditorPage.qml:159
-#: contacts/qml/private/ContactEditorPage.qml:166
-#, fuzzy, kde-format
-#| msgctxt "contact's name"
-#| msgid "Name"
+#: contacts/qml/private/ContactEditorPage.qml:190
+#: contacts/qml/private/ContactEditorPage.qml:197
+#, kde-format
 msgid "Name"
 msgstr "Имя"
 
-#: contacts/qml/private/ContactEditorPage.qml:170
-#, fuzzy, kde-format
+#: contacts/qml/private/ContactEditorPage.qml:201
+#, kde-format
 msgid "Contact name"
-msgstr "Контакты"
+msgstr "Имя контакта"
 
-#: contacts/qml/private/ContactEditorPage.qml:189
-#, fuzzy, kde-format
+#: contacts/qml/private/ContactEditorPage.qml:220
+#, kde-format
 msgid "Honorific prefix"
-msgstr "Почтительное обращение (в начале):"
+msgstr "Почтительное обращение (в начале)"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Miss"
 msgstr "Г-жа"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Mr."
 msgstr "Г-н"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Mrs."
 msgstr "Г-жа"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Ms."
 msgstr "Г-жа"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Prof."
 msgstr "Проф."
 
-#: contacts/qml/private/ContactEditorPage.qml:201
-#, fuzzy, kde-format
+#: contacts/qml/private/ContactEditorPage.qml:232
+#, kde-format
 msgid "Given name"
-msgstr "Имена:"
+msgstr "Имя"
 
-#: contacts/qml/private/ContactEditorPage.qml:204
+#: contacts/qml/private/ContactEditorPage.qml:235
 #, kde-format
 msgid "First name or chosen name"
 msgstr "Имя"
 
-#: contacts/qml/private/ContactEditorPage.qml:210
-#, fuzzy, kde-format
+#: contacts/qml/private/ContactEditorPage.qml:241
+#, kde-format
 msgid "Additional name"
-msgstr "Дополнительные имена:"
+msgstr "Дополнительное имя"
 
-#: contacts/qml/private/ContactEditorPage.qml:213
+#: contacts/qml/private/ContactEditorPage.qml:244
 #, kde-format
 msgid "Middle name or other name"
 msgstr "Отчество или другое имя"
 
-#: contacts/qml/private/ContactEditorPage.qml:219
-#, fuzzy, kde-format
+#: contacts/qml/private/ContactEditorPage.qml:250
+#, kde-format
 msgid "Family name:"
-msgstr "Фамилии:"
+msgstr "Фамилия"
 
-#: contacts/qml/private/ContactEditorPage.qml:222
+#: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "Surname or last name"
 msgstr "Фамилия"
 
-#: contacts/qml/private/ContactEditorPage.qml:228
-#, fuzzy, kde-format
+#: contacts/qml/private/ContactEditorPage.qml:259
+#, kde-format
 msgid "Honorific suffix"
-msgstr "Почтительное обращение (в конце):"
+msgstr "Почтительное обращение (в конце)"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "Jr."
 msgstr "мл."
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "Sr."
 msgstr "ст."
 
-#: contacts/qml/private/ContactEditorPage.qml:239
-#, fuzzy, kde-format
-#| msgid "Nickname:"
+#: contacts/qml/private/ContactEditorPage.qml:270
+#, kde-format
 msgid "Nickname"
-msgstr "Псевдоним:"
+msgstr "Псевдоним"
 
-#: contacts/qml/private/ContactEditorPage.qml:242
+#: contacts/qml/private/ContactEditorPage.qml:273
 #, kde-format
 msgid "Alternative name"
 msgstr "Альтернативное имя"
 
-#: contacts/qml/private/ContactEditorPage.qml:250
-#, fuzzy, kde-format
-#| msgid "Blog Feed:"
+#: contacts/qml/private/ContactEditorPage.qml:281
+#, kde-format
 msgid "Blog Feed"
-msgstr "Блог:"
+msgstr "Блог"
 
-#: contacts/qml/private/ContactEditorPage.qml:253
+#: contacts/qml/private/ContactEditorPage.qml:284
 #, kde-format
 msgid "https://planet.kde.org/"
-msgstr ""
+msgstr "https://planet.kde.org/"
 
-#: contacts/qml/private/ContactEditorPage.qml:265
+#: contacts/qml/private/ContactEditorPage.qml:296
 #: contacts/qml/private/ContactPage.qml:342
 #, kde-format
 msgid "Business Information"
 msgstr "Рабочая информация"
 
-#: contacts/qml/private/ContactEditorPage.qml:270
+#: contacts/qml/private/ContactEditorPage.qml:301
 #, fuzzy, kde-format
-#| msgid "Organization:"
 msgid "Organization"
 msgstr "Организация:"
 
-#: contacts/qml/private/ContactEditorPage.qml:273
+#: contacts/qml/private/ContactEditorPage.qml:304
 #, kde-format
 msgctxt "Placeholder value for name of Organization"
 msgid "KDE"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:280
+#: contacts/qml/private/ContactEditorPage.qml:311
 #, fuzzy, kde-format
-#| msgid "Profession:"
 msgid "Profession"
 msgstr "Профессия:"
 
-#: contacts/qml/private/ContactEditorPage.qml:283
+#: contacts/qml/private/ContactEditorPage.qml:314
 #, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Developer"
 msgctxt "Placeholder value for name of Profession"
 msgid "Software Developer"
 msgstr "Разработчик"
 
-#: contacts/qml/private/ContactEditorPage.qml:290
+#: contacts/qml/private/ContactEditorPage.qml:321
 #, fuzzy, kde-format
-#| msgid "Title:"
 msgid "Title"
 msgstr "Должность:"
 
-#: contacts/qml/private/ContactEditorPage.qml:293
+#: contacts/qml/private/ContactEditorPage.qml:324
 #, kde-format
 msgctxt "Placeholder value for Title"
 msgid "SDE-1"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:300
+#: contacts/qml/private/ContactEditorPage.qml:331
 #, fuzzy, kde-format
-#| msgid "Department:"
 msgid "Department"
 msgstr "Отдел:"
 
-#: contacts/qml/private/ContactEditorPage.qml:303
+#: contacts/qml/private/ContactEditorPage.qml:334
 #, fuzzy, kde-format
-#| msgid "Kalendar"
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
 msgstr "Kalendar"
 
-#: contacts/qml/private/ContactEditorPage.qml:310
+#: contacts/qml/private/ContactEditorPage.qml:341
 #, fuzzy, kde-format
-#| msgid "Office:"
 msgid "Office"
 msgstr "Место работы:"
 
-#: contacts/qml/private/ContactEditorPage.qml:313
+#: contacts/qml/private/ContactEditorPage.qml:344
 #, kde-format
 msgctxt "Placeholder value for Office"
 msgid "Tech Wing, 4th Floor"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:320
+#: contacts/qml/private/ContactEditorPage.qml:351
 #, fuzzy, kde-format
-#| msgid "Manager's name:"
 msgid "Manager's Name"
 msgstr "Руководитель:"
 
-#: contacts/qml/private/ContactEditorPage.qml:323
+#: contacts/qml/private/ContactEditorPage.qml:354
 #, kde-format
 msgctxt "Placeholder value for Manager's Name"
 msgid "Bob"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:330
+#: contacts/qml/private/ContactEditorPage.qml:361
 #, fuzzy, kde-format
-#| msgid "Assistants's name:"
 msgid "Assistant's Name"
 msgstr "Помощник:"
 
-#: contacts/qml/private/ContactEditorPage.qml:333
+#: contacts/qml/private/ContactEditorPage.qml:364
 #, kde-format
 msgctxt "Placeholder value for Assistants's Name"
 msgid "Jill"
 msgstr ""
 
-#: contacts/qml/private/ContactEditorPage.qml:345
+#: contacts/qml/private/ContactEditorPage.qml:376
 #, fuzzy, kde-format
-#| msgid "Phone:"
-msgid "Phone"
-msgstr "Телефон:"
+msgid "Personal Information"
+msgstr "Личные данные"
 
-#: contacts/qml/private/ContactEditorPage.qml:357
-#: contacts/qml/private/ContactEditorPage.qml:403
-#: contacts/qml/private/ContactEditorPage.qml:471
-#: contacts/qml/private/ContactEditorPage.qml:513
+#: contacts/qml/private/ContactEditorPage.qml:381
+#, kde-format
+msgid "Spouse's Name"
+msgstr ""
+
+#: contacts/qml/private/ContactEditorPage.qml:395
+#, kde-format
+msgid "Phone"
+msgstr "Телефон"
+
+#: contacts/qml/private/ContactEditorPage.qml:407
+#: contacts/qml/private/ContactEditorPage.qml:453
+#: contacts/qml/private/ContactEditorPage.qml:521
+#: contacts/qml/private/ContactEditorPage.qml:563
 #, kde-format
 msgid "Home"
 msgstr "Дом"
 
-#: contacts/qml/private/ContactEditorPage.qml:358
-#: contacts/qml/private/ContactEditorPage.qml:404
-#: contacts/qml/private/ContactEditorPage.qml:472
-#: contacts/qml/private/ContactEditorPage.qml:514
+#: contacts/qml/private/ContactEditorPage.qml:408
+#: contacts/qml/private/ContactEditorPage.qml:454
+#: contacts/qml/private/ContactEditorPage.qml:522
+#: contacts/qml/private/ContactEditorPage.qml:564
 #, kde-format
 msgid "Work"
 msgstr "Работа"
 
-#: contacts/qml/private/ContactEditorPage.qml:359
-#: contacts/qml/private/ContactEditorPage.qml:405
+#: contacts/qml/private/ContactEditorPage.qml:409
+#: contacts/qml/private/ContactEditorPage.qml:455
 #, kde-format
 msgid "Messaging"
 msgstr "Мгновенные сообщения"
 
-#: contacts/qml/private/ContactEditorPage.qml:360
-#: contacts/qml/private/ContactEditorPage.qml:406
+#: contacts/qml/private/ContactEditorPage.qml:410
+#: contacts/qml/private/ContactEditorPage.qml:456
 #, kde-format
 msgid "Voice"
 msgstr "Голос"
 
-#: contacts/qml/private/ContactEditorPage.qml:361
-#: contacts/qml/private/ContactEditorPage.qml:407
+#: contacts/qml/private/ContactEditorPage.qml:411
+#: contacts/qml/private/ContactEditorPage.qml:457
 #, kde-format
 msgid "Fax"
 msgstr "Факс"
 
-#: contacts/qml/private/ContactEditorPage.qml:362
-#: contacts/qml/private/ContactEditorPage.qml:408
+#: contacts/qml/private/ContactEditorPage.qml:412
+#: contacts/qml/private/ContactEditorPage.qml:458
 #, kde-format
 msgid "Cell"
 msgstr "Мобильный"
 
-#: contacts/qml/private/ContactEditorPage.qml:363
-#: contacts/qml/private/ContactEditorPage.qml:409
+#: contacts/qml/private/ContactEditorPage.qml:413
+#: contacts/qml/private/ContactEditorPage.qml:459
 #, kde-format
 msgid "Video"
 msgstr "Видео"
 
-#: contacts/qml/private/ContactEditorPage.qml:364
-#: contacts/qml/private/ContactEditorPage.qml:410
+#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:460
 #, kde-format
 msgid "Mailbox"
 msgstr "Почтовый ящик"
 
-#: contacts/qml/private/ContactEditorPage.qml:365
-#: contacts/qml/private/ContactEditorPage.qml:411
+#: contacts/qml/private/ContactEditorPage.qml:415
+#: contacts/qml/private/ContactEditorPage.qml:461
 #, kde-format
 msgid "Modem"
 msgstr "Модем"
 
-#: contacts/qml/private/ContactEditorPage.qml:366
-#: contacts/qml/private/ContactEditorPage.qml:412
+#: contacts/qml/private/ContactEditorPage.qml:416
+#: contacts/qml/private/ContactEditorPage.qml:462
 #, kde-format
 msgid "Car"
 msgstr "Автомобиль"
 
-#: contacts/qml/private/ContactEditorPage.qml:367
-#: contacts/qml/private/ContactEditorPage.qml:413
+#: contacts/qml/private/ContactEditorPage.qml:417
+#: contacts/qml/private/ContactEditorPage.qml:463
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: contacts/qml/private/ContactEditorPage.qml:368
-#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:418
+#: contacts/qml/private/ContactEditorPage.qml:464
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: contacts/qml/private/ContactEditorPage.qml:369
-#: contacts/qml/private/ContactEditorPage.qml:415
+#: contacts/qml/private/ContactEditorPage.qml:419
+#: contacts/qml/private/ContactEditorPage.qml:465
 #, kde-format
 msgid "Pager"
 msgstr "Пейджер"
 
-#: contacts/qml/private/ContactEditorPage.qml:370
+#: contacts/qml/private/ContactEditorPage.qml:420
 #, kde-format
 msgid "Undefined"
 msgstr "Не определено"
 
-#: contacts/qml/private/ContactEditorPage.qml:427
+#: contacts/qml/private/ContactEditorPage.qml:477
 #, kde-format
 msgid "+33 7 55 23 68 67"
 msgstr "+7 900 123-45-56"
 
-#: contacts/qml/private/ContactEditorPage.qml:454
-#, fuzzy, kde-format
-#| msgid "E-mail:"
+#: contacts/qml/private/ContactEditorPage.qml:504
+#, kde-format
 msgid "E-mail"
-msgstr "Адрес эл. почты:"
+msgstr "Адрес эл. почты"
 
-#: contacts/qml/private/ContactEditorPage.qml:473
+#: contacts/qml/private/ContactEditorPage.qml:523
 #, kde-format
 msgid "Other"
 msgstr "Другое"
 
-#: contacts/qml/private/ContactEditorPage.qml:494
+#: contacts/qml/private/ContactEditorPage.qml:544
 #, kde-format
 msgid "Remove email"
 msgstr "Удалить адрес электронной почты"
 
-#: contacts/qml/private/ContactEditorPage.qml:515
+#: contacts/qml/private/ContactEditorPage.qml:565
 #, kde-format
 msgid "Both"
 msgstr "Оба варианта"
 
-#: contacts/qml/private/ContactEditorPage.qml:516
+#: contacts/qml/private/ContactEditorPage.qml:566
 #, kde-format
 msgid "Other…"
 msgstr "Другое…"
 
-#: contacts/qml/private/ContactEditorPage.qml:525
+#: contacts/qml/private/ContactEditorPage.qml:575
 #, kde-format
 msgid "user@example.org"
 msgstr "user@example.org"
 
-#: contacts/qml/private/ContactEditorPage.qml:534
+#: contacts/qml/private/ContactEditorPage.qml:584
 #, kde-format
 msgid "Add email"
 msgstr "Добавить адрес электронной почты"
 
-#: contacts/qml/private/ContactEditorPage.qml:554
+#: contacts/qml/private/ContactEditorPage.qml:604
 #, kde-format
 msgid "Instant Messenger"
-msgstr ""
-
-#: contacts/qml/private/ContactEditorPage.qml:595
-#, kde-format
-msgid "protocol:person@example.com"
-msgstr ""
+msgstr "Мгновенные сообщения"
 
 #: contacts/qml/private/ContactEditorPage.qml:645
+#, kde-format
+msgid "protocol:person@example.com"
+msgstr "протокол:имя@сайт.рф"
+
+#: contacts/qml/private/ContactEditorPage.qml:694
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Save"
 msgstr "Сохранить"
 
-#: contacts/qml/private/ContactEditorPage.qml:645
+#: contacts/qml/private/ContactEditorPage.qml:694
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Add"
 msgstr "Добавить"
 
-#: contacts/qml/private/ContactEditorPage.qml:690
+#: contacts/qml/private/ContactEditorPage.qml:739
 #: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr "Текущие изменения"
 
-#: contacts/qml/private/ContactEditorPage.qml:695
+#: contacts/qml/private/ContactEditorPage.qml:744
 #: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
@@ -926,13 +940,12 @@ msgstr "Имя:"
 #: contacts/qml/private/ContactGroupEditorPage.qml:91
 #, kde-format
 msgid "Contact group name"
-msgstr ""
+msgstr "Название группы контактов"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:103
-#, fuzzy, kde-format
-#| msgid "Members:"
+#, kde-format
 msgid "Members"
-msgstr "Участники:"
+msgstr "Участники"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
@@ -1053,15 +1066,12 @@ msgid "%1:"
 msgstr "%1:"
 
 #: contacts/qml/private/ContactPage.qml:300
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgid "Instant Messaging"
 msgstr "Мгновенные сообщения"
 
 #: contacts/qml/private/ContactPage.qml:317
-#, fuzzy, kde-format
-#| msgctxt "Label for a phone number type"
-#| msgid "%1:"
+#, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
 msgstr "%1:"
@@ -1205,16 +1215,16 @@ msgstr "Создать задачу…"
 #: contents/ui/Controls/IncidenceInfoContents.qml:115
 #, kde-format
 msgid "This event is recurring"
-msgstr ""
+msgstr "Это повторяющееся событие"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:126
 #, kde-format
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Для этого события установлены напоминания"
+msgstr[1] "Для этого события установлены напоминания"
+msgstr[2] "Для этого события установлены напоминания"
+msgstr[3] "Для этого события установлено напоминание"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:148
 #, kde-format
@@ -1307,9 +1317,9 @@ msgid "<b>Organizer:</b>"
 msgstr "<b>Организатор:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:542
-#, fuzzy, kde-format
+#, kde-format
 msgid "<b>Google Meet:</b>"
-msgstr "<b>Гости:</b>"
+msgstr "<b>Google Meet:</b>"
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:554
 #, kde-format
@@ -1421,27 +1431,27 @@ msgstr "9 (минимальный)"
 #: contents/ui/Controls/IncidenceMouseArea.qml:163
 #, kde-format
 msgid "Set due date..."
-msgstr ""
+msgstr "Задать крайний срок…"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:191
-#, fuzzy, kde-format
+#, kde-format
 msgid "Today (%1)"
-msgstr "Сегодня%1"
+msgstr "Сегодня (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:202
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tomorrow (%1)"
-msgstr "Завтра%1"
+msgstr "Завтра (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:212
 #, kde-format
 msgid "In a week (%1)"
-msgstr ""
+msgstr "На этой неделе (%1)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:223
 #, kde-format
 msgid "In a month (%1)"
-msgstr ""
+msgstr "В этом месяце (%1)"
 
 #: contents/ui/Controls/MainDrawerToggleButton.qml:25
 #, kde-format
@@ -1668,11 +1678,6 @@ msgstr "Ежемесячно"
 msgid "Yearly"
 msgstr "Ежегодно"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "Пользовательский"
-
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format
 msgid "Every:"
@@ -1877,7 +1882,7 @@ msgstr "Добавить вложение"
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
 msgid "No results found"
-msgstr ""
+msgstr "Ничего не найдено"
 
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
 #, kde-format
@@ -2137,27 +2142,27 @@ msgid "Create"
 msgstr "Создать"
 
 #: contents/ui/main.qml:459
-#, fuzzy, kde-format
+#, kde-format
 msgid "Month"
-msgstr "Месяцы"
+msgstr "Месяц"
 
 #: contents/ui/main.qml:462
-#, fuzzy, kde-format
+#, kde-format
 msgid "Week"
-msgstr "Еженедельно"
+msgstr "Неделя"
 
 #: contents/ui/main.qml:465
-#, fuzzy, kde-format
+#, kde-format
 msgid "3 Days"
-msgstr "Дни"
+msgstr "3 дня"
 
 #: contents/ui/main.qml:468
-#, fuzzy, kde-format
+#, kde-format
 msgid "Day"
-msgstr "Дни"
+msgstr "День"
 
 #: contents/ui/main.qml:471
-#, fuzzy, kde-format
+#, kde-format
 msgid "Schedule"
 msgstr "Расписание"
 
@@ -2170,9 +2175,9 @@ msgstr "Задачи"
 #: kalendarapplication.cpp:35
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
-#, fuzzy, kde-format
+#, kde-format
 msgid "Mail"
-msgstr "Адрес эл. почты"
+msgstr "Почта"
 
 #: contents/ui/main.qml:870
 #, kde-format
@@ -2207,22 +2212,22 @@ msgid "Create new calendar"
 msgstr "Создать календарь"
 
 #: contents/ui/main.qml:1127
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
-msgstr "Еженедельно"
+msgstr "Неделя"
 
 #: contents/ui/main.qml:1133
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
-msgstr "Дни"
+msgstr "3 дня"
 
 #: contents/ui/main.qml:1139
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
-msgstr "Дни"
+msgstr "День"
 
 #: contents/ui/MainViews/BasicInternalHourlyView.qml:248
 #, kde-format
@@ -2471,14 +2476,14 @@ msgid "About Kalendar"
 msgstr "О программе Kalendar"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:21
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add New Calendar Source…"
-msgstr "Добавить источник данных календаря"
+msgstr "Добавить источник данных календаря…"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:28
-#, fuzzy, kde-format
+#, kde-format
 msgid "Contact Books"
-msgstr "Контакты"
+msgstr "Записные книги"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:29
 #, kde-format
@@ -2503,13 +2508,12 @@ msgstr "Основные параметры"
 #: contents/ui/Settings/ViewSettingsPage.qml:28
 #, kde-format
 msgid "Use popup to show incidence information"
-msgstr ""
+msgstr "Использовать всплывающее окно для показа сведений о событии"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:39
-#, fuzzy, kde-format
-#| msgid "Show sub-tasks in calendar views"
+#, kde-format
 msgid "Show tasks in calendar views"
-msgstr "Показывать вложенные задачи в календаре"
+msgstr "Показывать задачи в календаре"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:49
 #, kde-format
@@ -2517,42 +2521,39 @@ msgid "Show sub-tasks in calendar views"
 msgstr "Показывать вложенные задачи в календаре"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:63
-#, fuzzy, kde-format
-#| msgid "Past event transparency:"
+#, kde-format
 msgid "Past event transparency"
-msgstr "Прозрачность прошедших событий:"
+msgstr "Прозрачность прошедших событий"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:88
-#, fuzzy, kde-format
-#| msgid "Month View settings"
+#, kde-format
 msgid "Month view settings"
-msgstr "Настройка просмотра по месяцам"
+msgstr "Параметры просмотра месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:100
-#, fuzzy, kde-format
-#| msgid "Month View"
+#, kde-format
 msgid "Month view mode"
-msgstr "Месяц"
+msgstr "Режим просмотра месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:107
 #, kde-format
 msgid "Swipeable month grid"
-msgstr ""
+msgstr "Прокручиваемая таблица месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:114
 #, kde-format
 msgid "Basic month grid"
-msgstr ""
+msgstr "Базовая таблица месяца"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:120
 #, kde-format
 msgid "Swipeable month grid requires higher system performance."
-msgstr ""
+msgstr "Прокручиваемая таблица месяца задействует больше ресурсов системы."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:135
-#, fuzzy, kde-format
+#, kde-format
 msgid "Weekday label alignment"
-msgstr "Выравнивание подписей дней недели:"
+msgstr "Выравнивание подписей дней недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:142
 #, kde-format
@@ -2600,59 +2601,54 @@ msgid "Grid border width (pixels):"
 msgstr "Ширина рамки (в пикселах):"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:247
-#, fuzzy, kde-format
-#| msgid "Tasks View settings"
+#, kde-format
 msgid "Week view settings"
-msgstr "Параметры задач"
+msgstr "Параметры просмотра недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:259
-#, fuzzy, kde-format
-#| msgid "Week View"
+#, kde-format
 msgid "Week view mode"
-msgstr "Неделя"
+msgstr "Режим просмотра недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:266
 #, kde-format
 msgid "Swipeable week view"
-msgstr ""
+msgstr "Прокручиваемая панель недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:273
 #, kde-format
 msgid "Basic week view"
-msgstr ""
+msgstr "Базовая панель недели"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:279
 #, kde-format
 msgid "Swipeable week view requires higher system performance."
-msgstr ""
+msgstr "Прокручиваемая панель недели задействует больше ресурсов системы."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:292
 #, kde-format
 msgid "Schedule View settings"
-msgstr "Параметры расписания"
+msgstr "Параметры просмотра расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:304
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Schedule view mode"
-msgstr "Расписание"
+msgstr "Режим просмотра расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:311
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Swipeable schedule view"
-msgstr "Расписание"
+msgstr "Прокручиваемая панель расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:318
-#, fuzzy, kde-format
-#| msgid "Schedule View"
+#, kde-format
 msgid "Basic schedule view"
-msgstr "Расписание"
+msgstr "Базовая панель расписания"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:324
 #, kde-format
 msgid "Swipeable schedule view requires higher system performance."
-msgstr ""
+msgstr "Прокручиваемая панель расписания задействует больше ресурсов системы."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:333
 #, kde-format
@@ -2662,7 +2658,7 @@ msgstr "Показывать заголовки недель"
 #: contents/ui/Settings/ViewSettingsPage.qml:350
 #, kde-format
 msgid "Tasks View settings"
-msgstr "Параметры задач"
+msgstr "Параметры просмотра задач"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:353
 #, kde-format
@@ -2675,9 +2671,9 @@ msgid "Maps"
 msgstr "Карты"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:373
-#, fuzzy, kde-format
+#, kde-format
 msgid "Enable maps"
-msgstr "Использовать карты:"
+msgstr "Включить карты"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:380
 #, kde-format
@@ -2685,9 +2681,9 @@ msgid "May cause crashing on some systems."
 msgstr "На некоторых системах может приводить к аварийному завершению."
 
 #: contents/ui/Settings/ViewSettingsPage.qml:392
-#, fuzzy, kde-format
+#, kde-format
 msgid "Location marker"
-msgstr "Указатель местоположения:"
+msgstr "Указатель местоположения"
 
 #: contents/ui/Settings/ViewSettingsPage.qml:400
 #, kde-format
@@ -2699,17 +2695,16 @@ msgstr "Круг (область местоположения)"
 msgid "Pin (shows exact location)"
 msgstr "Булавка (точное местоположение)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"
 msgstr "Задача"
 
 #: kalendarapplication.cpp:31 kalendarapplication.cpp:36
-#, fuzzy, kde-format
-#| msgid "Contacts"
+#, kde-format
 msgid "Contact"
-msgstr "Контакты"
+msgstr "Контакт"
 
 #: kalendarapplication.cpp:97
 #, kde-format
@@ -2767,14 +2762,14 @@ msgid "Contacts View"
 msgstr "Контакты"
 
 #: kalendarapplication.cpp:193
-#, fuzzy, kde-format
+#, kde-format
 msgid "Mail View"
-msgstr "День"
+msgstr "Почта"
 
 #: kalendarapplication.cpp:203
-#, fuzzy, kde-format
+#, kde-format
 msgid "Ctrl+7"
-msgstr "Ctrl+6"
+msgstr "Ctrl+7"
 
 #: kalendarapplication.cpp:209
 #, kde-format
@@ -2817,22 +2812,19 @@ msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
 #: kalendarapplication.cpp:308
-#, fuzzy, kde-format
-#| msgid "New Task…"
+#, kde-format
 msgid "New Mail…"
-msgstr "Создать задачу…"
+msgstr "Создать письмо…"
 
 #: kalendarapplication.cpp:315
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact…"
-msgstr "Создать событие…"
+msgstr "Создать контакт…"
 
 #: kalendarapplication.cpp:322
-#, fuzzy, kde-format
-#| msgid "New Event…"
+#, kde-format
 msgid "New Contact Group…"
-msgstr "Создать событие…"
+msgstr "Создать группу контактов…"
 
 #: kalendarapplication.cpp:335
 #, kde-format
@@ -2904,16 +2896,16 @@ msgstr "%1 (по умолчанию)"
 #: mail/contactimageprovider.cpp:126
 #, kde-format
 msgid "Image request has been cancelled"
-msgstr ""
+msgstr "Запрос изображения был отменён"
 
 #: mail/mailmodel.cpp:48
 #, kde-format
 msgctxt "displayed as subject when the subject of a mail is empty"
 msgid "No Subject"
-msgstr ""
+msgstr "Тема отсутствует"
 
 #: mail/mailmodel.cpp:49
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -2921,45 +2913,45 @@ msgstr "Неизвестно"
 #: mail/mime/attachmentmodel.cpp:222
 #, kde-format
 msgid "No keys were found in this attachment"
-msgstr ""
+msgstr "В этом вложении не найдены ключи"
 
 #: mail/mime/attachmentmodel.cpp:225
 #, kde-format
 msgid "one key imported"
 msgid_plural "%1 keys imported"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "импортирован %1 ключ"
+msgstr[1] "импортированы %1 ключа"
+msgstr[2] "импортированы %1 ключей"
+msgstr[3] "импортирован один ключ"
 
 #: mail/mime/attachmentmodel.cpp:227
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "уже импортирован %1 ключ"
+msgstr[1] "уже импортированы %1 ключа"
+msgstr[2] "уже импортированы %1 ключей"
+msgstr[3] "уже импортирован один ключ"
 
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
 msgid "fwd"
-msgstr ""
+msgstr "fwd"
 
 #: mail/mime/mailtemplates.cpp:132
 #, kde-format
 msgid "re"
-msgstr ""
+msgstr "re"
 
 #: mail/mime/partmodel.cpp:473
 #, kde-format
 msgid "No key available."
-msgstr ""
+msgstr "Нет ни одного ключа."
 
 #: mail/mime/partmodel.cpp:475
 #, kde-format
 msgid "Wrong passphrase."
-msgstr ""
+msgstr "Неверный пароль."
 
 #: mail/mimetreeparser/messagepart.cpp:618
 #: mail/mimetreeparser/messagepart.cpp:709
@@ -2971,12 +2963,12 @@ msgstr "Неверный модуль шифрования."
 #: mail/mimetreeparser/messagepart.cpp:857
 #, kde-format
 msgid "Could not decrypt the data: no key found for recipients."
-msgstr ""
+msgstr "Не удалось расшифровать данные: не найден ключ для получателей."
 
 #: mail/mimetreeparser/messagepart.cpp:862
 #, kde-format
 msgid "Could not decrypt the data."
-msgstr ""
+msgstr "Не удалось расшифровать данные."
 
 #: mail/qml/ConversationViewer.qml:30
 #, kde-format
@@ -2986,97 +2978,97 @@ msgstr "Удалить в корзину"
 #: mail/qml/FolderView.qml:48
 #, kde-format
 msgid "Don't Mark as Important"
-msgstr ""
+msgstr "Не отмечать как важное"
 
 #: mail/qml/FolderView.qml:86
-#, fuzzy, kde-format
+#, kde-format
 msgid "No mailbox selected"
-msgstr "Не выбрано ни одной адресной книги"
+msgstr "Не выбрано ни одного почтового ящика"
 
 #: mail/qml/FolderView.qml:87
 #, kde-format
 msgid "Select a mailbox from the sidebar."
-msgstr ""
+msgstr "Выберите почтовый ящик на боковой панели."
 
 #: mail/qml/FolderView.qml:94
-#, fuzzy, kde-format
+#, kde-format
 msgid "Mailbox is empty"
-msgstr "Почтовый ящик"
+msgstr "Почтовый ящик пуст"
 
 #: mail/qml/mailboxselector/MailBoxListPage.qml:16
-#, fuzzy, kde-format
+#, kde-format
 msgid "Mailboxes"
-msgstr "Почтовый ящик"
+msgstr "Почтовые ящики"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
 msgid "This mail contains an invitation"
-msgstr ""
+msgstr "Это письмо содержит приглашение"
 
 #: mail/qml/mailpartview/MailPart.qml:43
 #, kde-format
 msgid "sent by %1 on %2"
-msgstr ""
+msgstr "отправлено %1 %2"
 
 #: mail/qml/mailpartview/MailPartModel.qml:54
 #, kde-format
 msgid "This message has been signed using the key %1."
-msgstr ""
+msgstr "Это сообщение подписано ключом %1."
 
 #: mail/qml/mailpartview/MailPartModel.qml:55
 #, kde-format
 msgid "The key details are not available."
-msgstr ""
+msgstr "Информация о ключе недоступна."
 
 #: mail/qml/mailpartview/MailPartModel.qml:57
 #, kde-format
 msgid "This message has been signed using the key %1 by %2."
-msgstr ""
+msgstr "Это сообщение подписано %1 ключом %2."
 
 #: mail/qml/mailpartview/MailPartModel.qml:59
 #, kde-format
 msgid "The key was revoked."
-msgstr ""
+msgstr "Ключ отозван."
 
 #: mail/qml/mailpartview/MailPartModel.qml:62
 #, kde-format
 msgid "The key has expired."
-msgstr ""
+msgstr "Срок действия ключа истёк."
 
 #: mail/qml/mailpartview/MailPartModel.qml:65
 #, kde-format
 msgid "You are trusting this key."
-msgstr ""
+msgstr "Вы доверяете этому ключу."
 
 #: mail/qml/mailpartview/MailPartModel.qml:68
 #, kde-format
 msgid "The signature is invalid."
-msgstr ""
+msgstr "Недопустимая подпись."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted but we don't have the key for it."
-msgstr ""
+msgstr "Это письмо зашифровано, но для него нет ключа."
 
 #: mail/qml/mailpartview/MailPartModel.qml:90
 #, kde-format
 msgid "This message is encrypted to the key: %1"
-msgstr ""
+msgstr "Это письмо зашифровано следующим ключом: %1"
 
 #: mail/qml/mailpartview/MailPartView.qml:33
 #, kde-format
 msgid "Loading mail..."
-msgstr ""
+msgstr "Загрузка почты…"
 
 #: mail/qml/MailViewer.qml:150
-#, fuzzy, kde-format
+#, kde-format
 msgid "Save attachment"
-msgstr "Добавить вложение"
+msgstr "Сохранить вложение"
 
 #: mail/qml/private/AttachmentDelegate.qml:57
-#, fuzzy, kde-format
+#, kde-format
 msgid "Import key"
-msgstr "Импорт календаря"
+msgstr "Импорт ключа"
 
 #: main.cpp:71
 #, kde-format
@@ -3130,36 +3122,36 @@ msgid "No set date"
 msgstr "Дата не задана"
 
 #: models/todosortfilterproxymodel.cpp:197
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr " в %1 "
+msgstr " в %1"
 
 #: models/todosortfilterproxymodel.cpp:198
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Please retain parenthesis and space"
 msgid " (overdue)"
-msgstr "(просрочено)"
+msgstr " (просрочено)"
 
 #: quick/qml/AgentConfigurationForm.qml:36
-#, fuzzy, kde-format
+#, kde-format
 msgid "Configure %1"
-msgstr "Параметры"
+msgstr "Настроить %1"
 
 #: quick/qml/AgentConfigurationForm.qml:37
 #, kde-format
 msgid "Modify or delete this account agent."
-msgstr ""
+msgstr "Изменить или удалить агент этой учётной записи."
 
 #: quick/qml/AgentConfigurationForm.qml:42
 #, kde-format
 msgid "Modify"
-msgstr ""
+msgstr "Изменить"
 
 #: quick/qml/AgentConfigurationForm.qml:82
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add Account"
-msgstr "Добавить вложение"
+msgstr "Добавить учётную запись"
 
 #~ msgid "General"
 #~ msgstr "Общие"

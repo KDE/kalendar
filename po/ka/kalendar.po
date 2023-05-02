@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-03 00:47+0000\n"
-"PO-Revision-Date: 2023-03-28 07:11+0200\n"
+"POT-Creation-Date: 2023-04-24 00:49+0000\n"
+"PO-Revision-Date: 2023-04-21 07:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -105,6 +105,12 @@ msgstr "9 (ყველაზე დაბალი პრიორიტეტ�
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "განსხვავებული"
+
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
+#, kde-format
+msgid "Custom"
+msgstr "სხვა"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
 #, kde-format
@@ -498,383 +504,418 @@ msgctxt "@action:inmenu"
 msgid "Delete address source"
 msgstr "მისამართის წყაროს წაშლა"
 
-#: contacts/qml/private/ContactEditorPage.qml:57
+#: contacts/qml/private/ContactEditorPage.qml:60
 #, kde-format
 msgid "Add Contact"
 msgstr "კონტაქტის დამატება"
 
-#: contacts/qml/private/ContactEditorPage.qml:59
+#: contacts/qml/private/ContactEditorPage.qml:62
 #, kde-format
 msgid "Edit Contact"
 msgstr "კოტაქტის ჩასწორება"
 
-#: contacts/qml/private/ContactEditorPage.qml:102
+#: contacts/qml/private/ContactEditorPage.qml:94
+#, kde-format
+msgid "Select a file"
+msgstr "აირჩიეთ ფაილი"
+
+#: contacts/qml/private/ContactEditorPage.qml:95
+#, kde-format
+msgid "Images files (*.png *.jpeg *.jpg)"
+msgstr "გამოსახულებები (*.png *.jpg *.jpeg)"
+
+#: contacts/qml/private/ContactEditorPage.qml:110
+#, kde-format
+msgid "Photo"
+msgstr "ფოტო"
+
+#: contacts/qml/private/ContactEditorPage.qml:153
+#, kde-format
+msgid "Add Profile Picture"
+msgstr "პროფილის სურათის დამატება"
+
+#: contacts/qml/private/ContactEditorPage.qml:153
+#, kde-format
+msgid "Update Profile Picture"
+msgstr "პროფილის სურათის განახლება"
+
+#: contacts/qml/private/ContactEditorPage.qml:167
 #, kde-format
 msgid "Address book:"
 msgstr "მისამართების წიგნი:"
 
-#: contacts/qml/private/ContactEditorPage.qml:159
-#: contacts/qml/private/ContactEditorPage.qml:166
+#: contacts/qml/private/ContactEditorPage.qml:190
+#: contacts/qml/private/ContactEditorPage.qml:197
 #, kde-format
 msgid "Name"
 msgstr "სახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:170
+#: contacts/qml/private/ContactEditorPage.qml:201
 #, kde-format
 msgid "Contact name"
 msgstr "კონტაქტის სახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:189
+#: contacts/qml/private/ContactEditorPage.qml:220
 #, kde-format
 msgid "Honorific prefix"
 msgstr "საპატიო პრეფიქსი"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Miss"
 msgstr "ქნ"
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Mr."
 msgstr "ბნ."
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Mrs."
 msgstr "ქნ."
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Ms."
 msgstr "ქნ."
 
-#: contacts/qml/private/ContactEditorPage.qml:192
+#: contacts/qml/private/ContactEditorPage.qml:223
 #, kde-format
 msgid "Prof."
 msgstr "პროფ."
 
-#: contacts/qml/private/ContactEditorPage.qml:201
+#: contacts/qml/private/ContactEditorPage.qml:232
 #, kde-format
 msgid "Given name"
 msgstr "მინიჭებული სახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:204
+#: contacts/qml/private/ContactEditorPage.qml:235
 #, kde-format
 msgid "First name or chosen name"
 msgstr "სახელი ან მეტსახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:210
+#: contacts/qml/private/ContactEditorPage.qml:241
 #, kde-format
 msgid "Additional name"
 msgstr "დამატებითი სახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:213
+#: contacts/qml/private/ContactEditorPage.qml:244
 #, kde-format
 msgid "Middle name or other name"
 msgstr "შუა სახელი ან მეტსახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:219
+#: contacts/qml/private/ContactEditorPage.qml:250
 #, kde-format
 msgid "Family name:"
 msgstr "საოჯახო სახელი:"
 
-#: contacts/qml/private/ContactEditorPage.qml:222
+#: contacts/qml/private/ContactEditorPage.qml:253
 #, kde-format
 msgid "Surname or last name"
 msgstr "გვარი"
 
-#: contacts/qml/private/ContactEditorPage.qml:228
+#: contacts/qml/private/ContactEditorPage.qml:259
 #, kde-format
 msgid "Honorific suffix"
 msgstr "საპატიო სუფიქსი"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "Jr."
 msgstr "უმც."
 
-#: contacts/qml/private/ContactEditorPage.qml:232
+#: contacts/qml/private/ContactEditorPage.qml:263
 #, kde-format
 msgid "Sr."
 msgstr "უფრ."
 
-#: contacts/qml/private/ContactEditorPage.qml:239
+#: contacts/qml/private/ContactEditorPage.qml:270
 #, kde-format
 msgid "Nickname"
 msgstr "მეტსახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:242
+#: contacts/qml/private/ContactEditorPage.qml:273
 #, kde-format
 msgid "Alternative name"
 msgstr "ალტერნატიული სახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:250
+#: contacts/qml/private/ContactEditorPage.qml:281
 #, kde-format
 msgid "Blog Feed"
 msgstr "ბლოგის ლენტა"
 
-#: contacts/qml/private/ContactEditorPage.qml:253
+#: contacts/qml/private/ContactEditorPage.qml:284
 #, kde-format
 msgid "https://planet.kde.org/"
 msgstr "https://planet.kde.org/"
 
-#: contacts/qml/private/ContactEditorPage.qml:265
+#: contacts/qml/private/ContactEditorPage.qml:296
 #: contacts/qml/private/ContactPage.qml:342
 #, kde-format
 msgid "Business Information"
 msgstr "ბიზნესის ინფორმაცია"
 
-#: contacts/qml/private/ContactEditorPage.qml:270
+#: contacts/qml/private/ContactEditorPage.qml:301
 #, kde-format
 msgid "Organization"
 msgstr "ორგანიზაცია"
 
-#: contacts/qml/private/ContactEditorPage.qml:273
+#: contacts/qml/private/ContactEditorPage.qml:304
 #, kde-format
 msgctxt "Placeholder value for name of Organization"
 msgid "KDE"
 msgstr "KDE"
 
-#: contacts/qml/private/ContactEditorPage.qml:280
+#: contacts/qml/private/ContactEditorPage.qml:311
 #, kde-format
 msgid "Profession"
 msgstr "პროფესია"
 
-#: contacts/qml/private/ContactEditorPage.qml:283
+#: contacts/qml/private/ContactEditorPage.qml:314
 #, kde-format
 msgctxt "Placeholder value for name of Profession"
 msgid "Software Developer"
 msgstr "პროგრამისტი"
 
-#: contacts/qml/private/ContactEditorPage.qml:290
+#: contacts/qml/private/ContactEditorPage.qml:321
 #, kde-format
 msgid "Title"
 msgstr "სათაური"
 
-#: contacts/qml/private/ContactEditorPage.qml:293
+#: contacts/qml/private/ContactEditorPage.qml:324
 #, kde-format
 msgctxt "Placeholder value for Title"
 msgid "SDE-1"
 msgstr "SDE-1"
 
-#: contacts/qml/private/ContactEditorPage.qml:300
+#: contacts/qml/private/ContactEditorPage.qml:331
 #, kde-format
 msgid "Department"
 msgstr "დეპარტამენტი"
 
-#: contacts/qml/private/ContactEditorPage.qml:303
+#: contacts/qml/private/ContactEditorPage.qml:334
 #, kde-format
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
 msgstr "Kalendar-Team"
 
-#: contacts/qml/private/ContactEditorPage.qml:310
+#: contacts/qml/private/ContactEditorPage.qml:341
 #, kde-format
 msgid "Office"
 msgstr "ოფისი"
 
-#: contacts/qml/private/ContactEditorPage.qml:313
+#: contacts/qml/private/ContactEditorPage.qml:344
 #, kde-format
 msgctxt "Placeholder value for Office"
 msgid "Tech Wing, 4th Floor"
 msgstr "ტექნიკური ფრთა, მეოთხე სართული"
 
-#: contacts/qml/private/ContactEditorPage.qml:320
+#: contacts/qml/private/ContactEditorPage.qml:351
 #, kde-format
 msgid "Manager's Name"
 msgstr "მმართველის სახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:323
+#: contacts/qml/private/ContactEditorPage.qml:354
 #, kde-format
 msgctxt "Placeholder value for Manager's Name"
 msgid "Bob"
 msgstr "ბობი"
 
-#: contacts/qml/private/ContactEditorPage.qml:330
+#: contacts/qml/private/ContactEditorPage.qml:361
 #, kde-format
 msgid "Assistant's Name"
 msgstr "დამხმარის სახელი"
 
-#: contacts/qml/private/ContactEditorPage.qml:333
+#: contacts/qml/private/ContactEditorPage.qml:364
 #, kde-format
 msgctxt "Placeholder value for Assistants's Name"
 msgid "Jill"
 msgstr "ჯილი"
 
-#: contacts/qml/private/ContactEditorPage.qml:345
+#: contacts/qml/private/ContactEditorPage.qml:376
+#, kde-format
+msgid "Personal Information"
+msgstr "პირადი ინფორმაცია"
+
+#: contacts/qml/private/ContactEditorPage.qml:381
+#, kde-format
+msgid "Spouse's Name"
+msgstr "მეუღლის სახელი"
+
+#: contacts/qml/private/ContactEditorPage.qml:395
 #, kde-format
 msgid "Phone"
 msgstr "ტელეფონი"
 
-#: contacts/qml/private/ContactEditorPage.qml:357
-#: contacts/qml/private/ContactEditorPage.qml:403
-#: contacts/qml/private/ContactEditorPage.qml:471
-#: contacts/qml/private/ContactEditorPage.qml:513
+#: contacts/qml/private/ContactEditorPage.qml:407
+#: contacts/qml/private/ContactEditorPage.qml:453
+#: contacts/qml/private/ContactEditorPage.qml:521
+#: contacts/qml/private/ContactEditorPage.qml:563
 #, kde-format
 msgid "Home"
 msgstr "საწყისი"
 
-#: contacts/qml/private/ContactEditorPage.qml:358
-#: contacts/qml/private/ContactEditorPage.qml:404
-#: contacts/qml/private/ContactEditorPage.qml:472
-#: contacts/qml/private/ContactEditorPage.qml:514
+#: contacts/qml/private/ContactEditorPage.qml:408
+#: contacts/qml/private/ContactEditorPage.qml:454
+#: contacts/qml/private/ContactEditorPage.qml:522
+#: contacts/qml/private/ContactEditorPage.qml:564
 #, kde-format
 msgid "Work"
 msgstr "სამუშაო"
 
-#: contacts/qml/private/ContactEditorPage.qml:359
-#: contacts/qml/private/ContactEditorPage.qml:405
+#: contacts/qml/private/ContactEditorPage.qml:409
+#: contacts/qml/private/ContactEditorPage.qml:455
 #, kde-format
 msgid "Messaging"
 msgstr "შეტყობინებები"
 
-#: contacts/qml/private/ContactEditorPage.qml:360
-#: contacts/qml/private/ContactEditorPage.qml:406
+#: contacts/qml/private/ContactEditorPage.qml:410
+#: contacts/qml/private/ContactEditorPage.qml:456
 #, kde-format
 msgid "Voice"
 msgstr "ხმა"
 
-#: contacts/qml/private/ContactEditorPage.qml:361
-#: contacts/qml/private/ContactEditorPage.qml:407
+#: contacts/qml/private/ContactEditorPage.qml:411
+#: contacts/qml/private/ContactEditorPage.qml:457
 #, kde-format
 msgid "Fax"
 msgstr "ფაქსი"
 
-#: contacts/qml/private/ContactEditorPage.qml:362
-#: contacts/qml/private/ContactEditorPage.qml:408
+#: contacts/qml/private/ContactEditorPage.qml:412
+#: contacts/qml/private/ContactEditorPage.qml:458
 #, kde-format
 msgid "Cell"
 msgstr "უჯრედი"
 
-#: contacts/qml/private/ContactEditorPage.qml:363
-#: contacts/qml/private/ContactEditorPage.qml:409
+#: contacts/qml/private/ContactEditorPage.qml:413
+#: contacts/qml/private/ContactEditorPage.qml:459
 #, kde-format
 msgid "Video"
 msgstr "ვიდეო"
 
-#: contacts/qml/private/ContactEditorPage.qml:364
-#: contacts/qml/private/ContactEditorPage.qml:410
+#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:460
 #, kde-format
 msgid "Mailbox"
 msgstr "საფოსტო ყუთი"
 
-#: contacts/qml/private/ContactEditorPage.qml:365
-#: contacts/qml/private/ContactEditorPage.qml:411
+#: contacts/qml/private/ContactEditorPage.qml:415
+#: contacts/qml/private/ContactEditorPage.qml:461
 #, kde-format
 msgid "Modem"
 msgstr "მოდემი"
 
-#: contacts/qml/private/ContactEditorPage.qml:366
-#: contacts/qml/private/ContactEditorPage.qml:412
+#: contacts/qml/private/ContactEditorPage.qml:416
+#: contacts/qml/private/ContactEditorPage.qml:462
 #, kde-format
 msgid "Car"
 msgstr "მანქანა"
 
-#: contacts/qml/private/ContactEditorPage.qml:367
-#: contacts/qml/private/ContactEditorPage.qml:413
+#: contacts/qml/private/ContactEditorPage.qml:417
+#: contacts/qml/private/ContactEditorPage.qml:463
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: contacts/qml/private/ContactEditorPage.qml:368
-#: contacts/qml/private/ContactEditorPage.qml:414
+#: contacts/qml/private/ContactEditorPage.qml:418
+#: contacts/qml/private/ContactEditorPage.qml:464
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: contacts/qml/private/ContactEditorPage.qml:369
-#: contacts/qml/private/ContactEditorPage.qml:415
+#: contacts/qml/private/ContactEditorPage.qml:419
+#: contacts/qml/private/ContactEditorPage.qml:465
 #, kde-format
 msgid "Pager"
 msgstr "პეიჯერი"
 
-#: contacts/qml/private/ContactEditorPage.qml:370
+#: contacts/qml/private/ContactEditorPage.qml:420
 #, kde-format
 msgid "Undefined"
 msgstr "გაურკვეველი"
 
-#: contacts/qml/private/ContactEditorPage.qml:427
+#: contacts/qml/private/ContactEditorPage.qml:477
 #, kde-format
 msgid "+33 7 55 23 68 67"
 msgstr "+33 7 55 23 68 67"
 
-#: contacts/qml/private/ContactEditorPage.qml:454
+#: contacts/qml/private/ContactEditorPage.qml:504
 #, kde-format
 msgid "E-mail"
 msgstr "ელფოსტა"
 
-#: contacts/qml/private/ContactEditorPage.qml:473
+#: contacts/qml/private/ContactEditorPage.qml:523
 #, kde-format
 msgid "Other"
 msgstr "სხვა"
 
-#: contacts/qml/private/ContactEditorPage.qml:494
+#: contacts/qml/private/ContactEditorPage.qml:544
 #, kde-format
 msgid "Remove email"
 msgstr "ელფოსტის წაშლა"
 
-#: contacts/qml/private/ContactEditorPage.qml:515
+#: contacts/qml/private/ContactEditorPage.qml:565
 #, kde-format
 msgid "Both"
 msgstr "ორივე"
 
-#: contacts/qml/private/ContactEditorPage.qml:516
+#: contacts/qml/private/ContactEditorPage.qml:566
 #, kde-format
 msgid "Other…"
 msgstr "სხვა…"
 
-#: contacts/qml/private/ContactEditorPage.qml:525
+#: contacts/qml/private/ContactEditorPage.qml:575
 #, kde-format
 msgid "user@example.org"
 msgstr "user@example.org"
 
-#: contacts/qml/private/ContactEditorPage.qml:534
+#: contacts/qml/private/ContactEditorPage.qml:584
 #, kde-format
 msgid "Add email"
 msgstr "ელფოსტის დამატება"
 
-#: contacts/qml/private/ContactEditorPage.qml:554
+#: contacts/qml/private/ContactEditorPage.qml:604
 #, kde-format
 msgid "Instant Messenger"
 msgstr "მყისი შეტყობინებები"
 
-#: contacts/qml/private/ContactEditorPage.qml:595
+#: contacts/qml/private/ContactEditorPage.qml:645
 #, kde-format
 msgid "protocol:person@example.com"
 msgstr "protocol:person@example.com"
 
-#: contacts/qml/private/ContactEditorPage.qml:645
+#: contacts/qml/private/ContactEditorPage.qml:694
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Save"
 msgstr "შენახვა"
 
-#: contacts/qml/private/ContactEditorPage.qml:645
+#: contacts/qml/private/ContactEditorPage.qml:694
 #: contacts/qml/private/ContactGroupEditorPage.qml:183
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:53
 #, kde-format
 msgid "Add"
 msgstr "დამატება"
 
-#: contacts/qml/private/ContactEditorPage.qml:690
+#: contacts/qml/private/ContactEditorPage.qml:739
 #: contacts/qml/private/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr "მიმდინარე ცვლილებები"
 
-#: contacts/qml/private/ContactEditorPage.qml:695
+#: contacts/qml/private/ContactEditorPage.qml:744
 #: contacts/qml/private/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
@@ -1617,11 +1658,6 @@ msgstr "თვეში ერთხელ"
 #, kde-format
 msgid "Yearly"
 msgstr "წლიურად"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "სხვა"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:431
 #, kde-format
@@ -2614,7 +2650,7 @@ msgstr "წრე (აჩვენებს მდებარეობის �
 msgid "Pin (shows exact location)"
 msgstr "სარჭი (ზუსტი მდებარეობის ჩვენება)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:406
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"

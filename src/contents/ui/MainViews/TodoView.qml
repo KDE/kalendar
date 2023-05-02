@@ -151,7 +151,7 @@ Kirigami.ScrollablePage {
             id: textMetrics
         }
 
-        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing + 1 // To align with 'Show all' button in mainDrawer
+        implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing * 2 + 1 // To align with 'Show all' button in mainDrawer
 
         background: Rectangle {
             Kirigami.Theme.inherit: false
@@ -189,6 +189,7 @@ Kirigami.ScrollablePage {
             icon.name: "list-add"
             text: i18n("Quickly Add a New Task.")
             tooltip: i18n("Quickly Add a New Task.")
+            enabled: addField.text !== ""
             onTriggered: addField.addTodo()
         }
         onAccepted: addField.addTodo()

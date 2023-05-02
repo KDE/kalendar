@@ -4,6 +4,7 @@
 #include "addresseewrapper.h"
 #include "kalendar_contact_debug.h"
 #include <KContacts/VCardConverter>
+#include <QGuiApplication>
 
 AddresseeWrapper::AddresseeWrapper(QObject *parent)
     : QObject(parent)
@@ -209,6 +210,25 @@ QString AddresseeWrapper::qrCodeData() const
     addr.setPhoto(KContacts::Picture());
     addr.setLogo(KContacts::Picture());
     return QString::fromUtf8(converter.createVCard(addr));
+}
+
+void AddresseeWrapper::updatePhoto(const KContacts::Picture &loadedPhoto)
+{
+    m_addressee.setPhoto(loadedPhoto);
+    Q_EMIT photoChanged();
+}
+
+KContacts::Picture AddresseeWrapper::preparePhoto(const QUrl &path) const
+{
+    const QImage image(path.toLocalFile());
+    // Scale the photo down to make sure contacts are not taking too
+    // long time to load their photos
+    constexpr auto unscaledWidth = 200;
+    const auto scaleFactor = dynamic_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
+    const auto avatarSize = int(unscaledWidth * scaleFactor);
+    const QSize size(avatarSize, avatarSize);
+
+    return KContacts::Picture(image.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 QString AddresseeWrapper::note() const

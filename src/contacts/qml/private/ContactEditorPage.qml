@@ -6,6 +6,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import Qt.labs.platform 1.1
+import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
@@ -20,6 +21,8 @@ Kirigami.ScrollablePage {
 
     property bool displayAdvancedNameFields: false
     property bool saving: false
+
+    property var loadedPhoto: contactEditor.contact.photo
 
     readonly property ContactEditor contactEditor: ContactEditor {
         id: contactEditor
@@ -61,14 +64,6 @@ Kirigami.ScrollablePage {
 
     enabled: !contactEditor.isReadOnly
 
-    //property FileDialog fileDialog: FileDialog {
-    //    id: fileDialog
-
-    //    onAccepted: {
-    //        root.pendingPhoto = ContactController.preparePhoto(currentFile)
-    //    }
-    //}
-
     header: QQC2.Control {
         id: errorContainer
         property bool displayError: false
@@ -89,7 +84,77 @@ Kirigami.ScrollablePage {
     leftPadding: 0
     rightPadding: 0
 
+    Loader {
+        id: photoUploadLoader
+
+        active: false
+        onLoaded: item.open();
+
+        sourceComponent: FileDialog {
+            title: i18n("Select a file")
+            nameFilters: [i18n("Images files (*.png *.jpeg *.jpg)")]
+            folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
+            onAccepted: {
+                if (currentFile) {
+                    root.loadedPhoto = contactEditor.contact.preparePhoto(currentFile);
+                    contactEditor.contact.updatePhoto(root.loadedPhoto);
+                }
+                photoUploadLoader.active = false;
+            }
+            onRejected: photoUploadLoader.active = false
+        }
+    }
+
     ColumnLayout {
+        QQC2.RoundButton {
+            Kirigami.FormData.label: i18n("Photo")
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+            // Square button
+            implicitWidth: Kirigami.Units.gridUnit * 5
+            implicitHeight: implicitWidth
+
+            contentItem: Item {
+                // Doesn't like to be scaled when being the direct contentItem
+                Kirigami.Icon {
+                    anchors {
+                        fill: parent
+                        margins: Kirigami.Units.smallSpacing
+                    }
+
+                    layer {
+                        enabled: true
+                        effect: OpacityMask {
+                            maskSource: mask
+                        }
+                    }
+
+                    source: if (root.loadedPhoto.isEmpty) {
+                        return "edit-image-face-add"
+                    } else if (root.loadedPhoto.isIntern) {
+                        return root.loadedPhoto.data
+                    } else {
+                        return root.loadedPhoto.url
+                    }
+                }
+
+                Rectangle {
+                    id: mask
+                    anchors.fill: parent
+                    visible: false
+                    radius: height
+                }
+            }
+
+            onClicked: photoUploadLoader.active = true
+        }
+
+        QQC2.Label {
+            text: root.loadedPhoto.isEmpty ? i18n("Add Profile Picture") : i18n("Update Profile Picture")
+            color: Kirigami.Theme.disabledTextColor
+            Layout.alignment: Qt.AlignHCenter
+        }
+
         MobileForm.FormCard {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
@@ -114,40 +179,6 @@ Kirigami.ScrollablePage {
                     onUserSelectedCollection: contactEditor.setDefaultAddressBook(collection)
                 }
 
-                //QQC2.Button {
-                //    Kirigami.FormData.label: i18n("Photo")
-
-                //    // Square button
-                //    implicitWidth: Kirigami.Units.gridUnit * 5
-                //    implicitHeight: implicitWidth
-
-                //    contentItem: Item {
-                //        // Doesn't like to be scaled when being the direct contentItem
-                //        Kirigami.Icon {
-                //            anchors.fill: parent
-                //            anchors.margins: Kirigami.Units.smallSpacing
-
-                //            Connections {
-                //                target: root
-                //                function onSave() {
-                //                    addressee.photo = root.pendingPhoto
-                //                }
-                //            }
-
-                //            source: {
-                //                if (root.pendingPhoto.isEmpty) {
-                //                    return "user-identity"
-                //                } else if (root.pendingPhoto.isIntern) {
-                //                    return root.pendingPhoto.data
-                //                } else {
-                //                    return root.pendingPhoto.url
-                //                }
-                //            }
-                //        }
-                //    }
-
-                //    onClicked: fileDialog.open()
-                //}
 
                 MobileForm.FormDelegateSeparator { above: addressBookComboBox; below: nameDelegate }
 
@@ -331,6 +362,25 @@ Kirigami.ScrollablePage {
                     text: contactEditor.contact.assistantsName
                     onTextEdited: contactEditor.contact.assistantsName = text
                     placeholderText: i18nc("Placeholder value for Assistants's Name", "Jill")
+                }
+            }
+        }
+
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
+                    title: i18n("Personal Information")
+                }
+
+                MobileForm.FormTextFieldDelegate {
+                    id: spousesName
+                    label: i18n("Spouse's Name")
+                    text: contactEditor.contact.spousesName 
+                    onTextEdited: contactEditor.contact.spousesName = text
                 }
             }
         }
@@ -626,7 +676,6 @@ Kirigami.ScrollablePage {
         }
 
     }
-
 
     footer: ColumnLayout {
         spacing: 0
