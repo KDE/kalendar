@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-24 00:49+0000\n"
+"POT-Creation-Date: 2023-05-02 00:49+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2750,7 +2750,7 @@ msgstr "Aplis (norāda aptuvenu atrašanās vietu)"
 msgid "Pin (shows exact location)"
 msgstr "(norāda precīzu atrašanās vietu)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:293
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"
