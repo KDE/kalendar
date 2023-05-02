@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-26 02:49+0000\n"
+"POT-Creation-Date: 2023-05-02 02:52+0000\n"
 "PO-Revision-Date: 2022-07-06 14:45+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -2603,7 +2603,7 @@ msgstr "Dairə (məkandakı sahəni göstərir)"
 msgid "Pin (shows exact location)"
 msgstr "Sancaq (dəqiqi yeri göstərir)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:282
+#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:293
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
