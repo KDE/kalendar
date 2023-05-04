@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 02:52+0000\n"
+"POT-Creation-Date: 2023-05-04 02:56+0000\n"
 "PO-Revision-Date: 2023-03-25 02:43+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2908,47 +2908,47 @@ msgstr "მიმაგრებული ფაილის შენახვ�
 msgid "Import key"
 msgstr "გასაღების შემოტანა"
 
-#: main.cpp:71
+#: main.cpp:70
 #, kde-format
 msgctxt "@title"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Calendar Application"
 msgstr "კალენდრის აპლიკაცია"
 
-#: main.cpp:78
+#: main.cpp:77
 #, kde-format
 msgid "(c) KDE Community 2021"
 msgstr "(c) KDE Community 2021"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: main.cpp:80 main.cpp:84
+#: main.cpp:79 main.cpp:83
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer"
 msgstr "წამყვანი პროგრამისტი"
 
-#: main.cpp:83
+#: main.cpp:82
 #, kde-format
 msgctxt "@info:credit"
 msgid "Clau Cambra"
 msgstr "კლაუ კამბრა"
 
-#: main.cpp:87
+#: main.cpp:86
 #, kde-format
 msgctxt "@info:credit"
 msgid "Felipe Kinoshita"
 msgstr "Felipe Kinoshita"
 
-#: main.cpp:88
+#: main.cpp:87
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
