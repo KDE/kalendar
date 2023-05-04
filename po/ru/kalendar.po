@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 00:49+0000\n"
+"POT-Creation-Date: 2023-05-04 00:48+0000\n"
 "PO-Revision-Date: 2023-04-26 10:18+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -3070,47 +3070,47 @@ msgstr "Сохранить вложение"
 msgid "Import key"
 msgstr "Импорт ключа"
 
-#: main.cpp:71
+#: main.cpp:70
 #, kde-format
 msgctxt "@title"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Calendar Application"
 msgstr "Программа с функциями календаря"
 
-#: main.cpp:78
+#: main.cpp:77
 #, kde-format
 msgid "(c) KDE Community 2021"
 msgstr "© Сообщество KDE, 2021"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwa"
 
-#: main.cpp:80 main.cpp:84
+#: main.cpp:79 main.cpp:83
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer"
 msgstr "Сопровождающий"
 
-#: main.cpp:83
+#: main.cpp:82
 #, kde-format
 msgctxt "@info:credit"
 msgid "Clau Cambra"
 msgstr "Clau Cambra"
 
-#: main.cpp:87
+#: main.cpp:86
 #, kde-format
 msgctxt "@info:credit"
 msgid "Felipe Kinoshita"
 msgstr "Felipe Kinoshita"
 
-#: main.cpp:88
+#: main.cpp:87
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
