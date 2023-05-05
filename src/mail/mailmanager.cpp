@@ -8,6 +8,7 @@
 #include <Akonadi/EntityMimeTypeFilterModel>
 #include <Akonadi/EntityTreeModel>
 #include <Akonadi/ItemFetchScope>
+#include <Akonadi/ItemMoveJob>
 #include <Akonadi/MessageModel>
 #include <Akonadi/Monitor>
 #include <Akonadi/SelectionProxyModel>
@@ -16,6 +17,7 @@
 #include <KDescendantsProxyModel>
 #include <KMime/Message>
 #include <MailCommon/FolderCollectionMonitor>
+#include <MailCommon/MailKernel>
 #include <QApplication>
 #include <QtCore/QItemSelectionModel>
 
@@ -100,6 +102,7 @@ MailManager::MailManager(QObject *parent)
             disconnect(Akonadi::ServerManager::self(), &Akonadi::ServerManager::stateChanged, this, nullptr);
         });
     }
+    CommonKernel->initFolders();
 }
 
 MailModel *MailManager::folderModel() const
@@ -134,4 +137,15 @@ Akonadi::Session *MailManager::session() const
 QString MailManager::selectedFolderName() const
 {
     return m_selectedFolderName;
+}
+
+void MailManager::moveToTrash(Akonadi::Item item)
+{
+    auto collection = qvariant_cast<Akonadi::Collection>(
+        foldersModel()->data(m_collectionSelectionModel->selection().indexes()[0], Akonadi::EntityTreeModel::CollectionRole));
+    auto trash = CommonKernel->trashCollectionFromResource(collection);
+    if (!trash.isValid()) {
+        trash = CommonKernel->trashCollectionFolder();
+    }
+    auto job = new Akonadi::ItemMoveJob(item, trash);
 }

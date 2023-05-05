@@ -18,3 +18,9 @@ ecm_add_test(addressmodeltest.cpp
     LINK_LIBRARIES kalendar_contact_static Qt::Test
     NAME_PREFIX "kalendar-contact-"
 )
+
+ecm_add_test(phonemodeltest.cpp
+    TEST_NAME phonemodeltest
+    LINK_LIBRARIES kalendar_contact_static Qt::Test
+    NAME_PREFIX "kalendar-contact-"
+)

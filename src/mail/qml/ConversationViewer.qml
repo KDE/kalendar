@@ -29,7 +29,10 @@ Kirigami.ScrollablePage {
         Kirigami.Action {
             text: i18n("Move to trash")
             iconName: "albumfolder-user-trash"
-            // TODO implement move to trash
+            onTriggered: {
+                MailManager.moveToTrash(root.item);
+                applicationWindow().pageStack.pop();
+            }
         }
     ]
 

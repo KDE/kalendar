@@ -31,7 +31,6 @@
 #include <QDir>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QQmlDebuggingEnabler>
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QUrl>
@@ -110,7 +109,6 @@ int main(int argc, char *argv[])
                     });
 
     QQmlApplicationEngine engine;
-    QQmlDebuggingEnabler enabler;
 
     auto tagManager = new TagManager(&engine);
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);

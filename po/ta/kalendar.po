@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-24 00:49+0000\n"
+"POT-Creation-Date: 2023-05-04 00:48+0000\n"
 "PO-Revision-Date: 2023-04-23 17:01+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -2652,7 +2652,7 @@ msgstr "வட்டம் (உள்ள வட்டாரத்தை கா�
 msgid "Pin (shows exact location)"
 msgstr "குண்டூசி (துல்லியமான இடத்தை காட்டும்)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:282
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:293
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"
@@ -3023,47 +3023,47 @@ msgstr "உடனிணைப்பை சேமி"
 msgid "Import key"
 msgstr "சாவியை இறக்குமதி செய்"
 
-#: main.cpp:71
+#: main.cpp:70
 #, kde-format
 msgctxt "@title"
 msgid "Kalendar"
 msgstr "காலென்டர்"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Calendar Application"
 msgstr "நாள்காட்டிச் செயலி"
 
-#: main.cpp:78
+#: main.cpp:77
 #, kde-format
 msgid "(c) KDE Community 2021"
 msgstr "(c) கே.டீ.யீ. 2021"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "கார்ல் ஷுவான்"
 
-#: main.cpp:80 main.cpp:84
+#: main.cpp:79 main.cpp:83
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer"
 msgstr "பராமரிப்பாளர்"
 
-#: main.cpp:83
+#: main.cpp:82
 #, kde-format
 msgctxt "@info:credit"
 msgid "Clau Cambra"
 msgstr "க்லாவ் காம்பிரா"
 
-#: main.cpp:87
+#: main.cpp:86
 #, kde-format
 msgctxt "@info:credit"
 msgid "Felipe Kinoshita"
 msgstr "ஃபெலிபே கினோஷ்டா"
 
-#: main.cpp:88
+#: main.cpp:87
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"

@@ -216,16 +216,27 @@ QColor IncidenceOccurrenceModel::getColor(const KCalendarCore::Incidence::Ptr &i
 
 QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
 {
-    if (!hasIndex(idx.row(), idx.column())) {
-        return {};
-    }
+    Q_ASSERT(hasIndex(idx.row(), idx.column()));
 
     const auto occurrence = m_incidences.at(idx.row());
     const auto incidence = occurrence.incidence;
 
     switch (role) {
+    case Qt::DisplayRole:
+    case Qt::EditRole:
     case Summary:
         return incidence->summary();
+    case Qt::DecorationRole:
+        switch (incidence->type()) {
+        case KCalendarCore::IncidenceBase::TypeTodo:
+            return QIcon::fromTheme(QStringLiteral("view-pim-tasks"));
+        case KCalendarCore::IncidenceBase::TypeEvent:
+            return QIcon::fromTheme(QStringLiteral("view-pim-calendar"));
+        case KCalendarCore::IncidenceBase::TypeJournal:
+            return QIcon::fromTheme(QStringLiteral("view-pim-journal"));
+        default:
+            Q_UNREACHABLE();
+        }
     case Description:
         return incidence->description();
     case Location:
@@ -286,9 +297,16 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
         return QVariant::fromValue(incidence);
     case IncidenceOccurrence:
         return QVariant::fromValue(occurrence);
-    default:
-        qCWarning(KALENDAR_LOG) << "Unknown role for occurrence:" << QMetaEnum::fromType<Roles>().valueToKey(role);
+    case Qt::ToolTipRole:
+    case Qt::StatusTipRole:
+    case Qt::WhatsThisRole:
+    case Qt::SizeHintRole:
+    case Qt::TextAlignmentRole:
+    case Qt::CheckStateRole:
+    case -1:
         return {};
+    default:
+        Q_UNREACHABLE();
     }
 }
 
