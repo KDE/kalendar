@@ -11,21 +11,25 @@ Kirigami.CategorizedSettings {
     objectName: "settingsPage"
     actions: [
         Kirigami.SettingAction {
+            actionName: "appearance"
             text: i18n("Appearance")
             icon.name: "preferences-desktop-theme-global"
             page: Qt.resolvedUrl("ViewSettingsPage.qml")
         },
         Kirigami.SettingAction {
+            actionName: "accounts"
             text: i18n("Accounts")
             icon.name: "preferences-system-users"
             page: Qt.resolvedUrl("SourceSettingsPage.qml")
         },
         Kirigami.SettingAction {
+            actionName: "calendars"
             text: i18n("Calendars")
             icon.name: "korganizer"
             page: Qt.resolvedUrl("CalendarSettingsPage.qml")
         },
         Kirigami.SettingAction {
+            actionName: "about"
             text: i18n("About Kalendar")
             icon.name: "help-about"
             page: Qt.resolvedUrl("AboutPage.qml")

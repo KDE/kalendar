@@ -38,22 +38,22 @@ MobileForm.FormCard {
                         standardButtons: Kirigami.Dialog.NoButton
 
                         customFooterActions: [
-                        Kirigami.Action {
-                            text: i18n("Modify")
-                            iconName: "edit-entry"
-                            onTriggered: {
-                                root._configuration.edit(model.index);
-                                dialog.close();
+                            Kirigami.Action {
+                                text: i18n("Modify")
+                                icon.name: "edit-entry"
+                                onTriggered: {
+                                    root._configuration.edit(model.index);
+                                    dialog.close();
+                                }
+                            },
+                            Kirigami.Action {
+                                text: i18n("Delete")
+                                icon.name: "delete"
+                                onTriggered: {
+                                    root._configuration.remove(model.index);
+                                    dialog.close();
+                                }
                             }
-                        },
-                        Kirigami.Action {
-                            text: i18n("Delete")
-                            iconName: "delete"
-                            onTriggered: {
-                                root._configuration.remove(model.index);
-                                dialog.close();
-                            }
-                        }
                         ]
                     }
                 }
@@ -64,7 +64,7 @@ MobileForm.FormCard {
                     implicitWidth: Kirigami.Units.iconSizes.medium
                     implicitHeight: Kirigami.Units.iconSizes.medium
                 }
-                
+
                 text: model.display
                 description: model.statusMessage
 
