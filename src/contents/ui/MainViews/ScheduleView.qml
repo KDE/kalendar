@@ -15,6 +15,7 @@ import "labelutils.js" as LabelUtils
 Kirigami.Page {
     id: root
 
+    required property QQC2.Action createEventAction
     property bool initialMonth: true
     property var openOccurrence
     property date currentDate: new Date()
@@ -69,11 +70,7 @@ Kirigami.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
-    actions {
-        left: Qt.application.layoutDirection === Qt.RightToLeft ? nextAction : previousAction
-        right: Qt.application.layoutDirection === Qt.RightToLeft ? previousAction : nextAction
-        main: todayAction
-    }
+    actions: [previousAction, nextAction, todayAction]
 
     padding: 0
 

@@ -23,7 +23,7 @@ Kirigami.ScrollablePage {
         }
     }
 
-    actions.main: Kirigami.Action {
+    actions: Kirigami.Action {
         icon.name: 'contact-new-symbolic'
         text: i18n('Create')
         Kirigami.Action {

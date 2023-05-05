@@ -11,7 +11,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kirigami 2.19 as Kirigami
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 
 Control {
     id: root

@@ -100,10 +100,6 @@ Item {
 
                 QQC2.Tumbler {
                     id: hourView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.row: 2
-                    Layout.column: 0
                     wrap: true
 
                     model: 24
@@ -125,6 +121,11 @@ Item {
                         }
                     }
 
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.row: 2
+                    Layout.column: 0
+
                     MouseArea {
                         anchors.fill: parent
                         onWheel: timePicker.wheelHandler(parent, wheel)
@@ -132,32 +133,26 @@ Item {
                 }
 
                 Kirigami.Heading {
-                    Layout.row: 2
-                    Layout.column: 1
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     text: ":"
+                    Layout.row: 2
+                    Layout.column: 1
                 }
 
                 QQC2.Tumbler {
                     id: minuteView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    wrap: true
 
                     property int selectedIndex: 0
 
-                    // We don't want our selected time to get reset when we update minuteMultiples, on which the model depends
-                    Connections { // Gets called before model regen
-                        target: timePicker
-                        onMinuteMultiplesAboutToChange: minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples
-                        onMinutesChanged: minuteView.currentIndex = minutes / timePicker.minuteMultiples
-                    }
-                    onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples
+                    wrap: true
+
                     currentIndex: timePicker.minutes
                     onCurrentIndexChanged: timePicker.minutes = currentIndex * timePicker.minuteMultiples
 
-                    model: (60 / timePicker.minuteMultiples) // So we can adjust the minute intervals selectable by the user (model goes up to 59)
+                    model: 60 / timePicker.minuteMultiples // So we can adjust the minute intervals selectable by the user (model goes up to 59)
+                    onModelChanged: currentIndex = selectedIndex / timePicker.minuteMultiples
+
                     delegate: Kirigami.Heading {
                         property int thisIndex: index
                         property int minuteToDisplay: modelData * timePicker.minuteMultiples
@@ -174,21 +169,36 @@ Item {
                         }
                     }
 
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    // We don't want our selected time to get reset when we update minuteMultiples, on which the model depends
+                    Connections { // Gets called before model regen
+                        target: timePicker
+
+                        function onMinuteMultiplesAboutToChange() {
+                            minuteView.selectedIndex = minuteView.currentIndex * timePicker.minuteMultiples;
+                        }
+
+                        function onMinutesChanged() {
+                            minuteView.currentIndex = minutes / timePicker.minuteMultiples;
+                        }
+                    }
+
                     MouseArea {
                         anchors.fill: parent
                         onWheel: timePicker.wheelHandler(parent, wheel)
                     }
                 }
 
-
                 Kirigami.Heading {
-                    Layout.row: 2
-                    Layout.column: 3
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     visible: timePicker.secondsPicker
                     font.bold: true
                     text: ":"
+                    Layout.row: 2
+                    Layout.column: 3
                 }
 
                 QQC2.Tumbler {

@@ -4,8 +4,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
-import QtQuick.Dialogs 1.0
-import QtLocation 5.15
+import Qt.labs.platform
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
 import org.kde.kirigami 2.15 as Kirigami
@@ -727,7 +726,7 @@ Kirigami.ScrollablePage {
                             }
                         }
 
-                        model: GeocodeModel {
+                        model: [] /*GeocodeModel {
                             id: locationsModel
                             plugin: Plugin {
                                 name: "osm"
@@ -742,7 +741,7 @@ Kirigami.ScrollablePage {
                             }
                             autoUpdate: true
                             onLocationsChanged: locationField.openOrCloseLocationsPopup()
-                        }
+                        }*/
                         delegate: Kirigami.BasicListItem {
                             text: locationData.address.text
                             onClicked: root.incidenceWrapper.location = locationData.address.text
@@ -776,12 +775,13 @@ Kirigami.ScrollablePage {
                         asynchronous: true
                         active: visible
 
+                        /* todo kf6
                         sourceComponent: LocationMap {
                             id: map
                             selectMode: true
                             query: root.incidenceWrapper.location
                             onSelectedLocationAddress: root.incidenceWrapper.location = address
-                        }
+                        } */
                     }
                 }
 

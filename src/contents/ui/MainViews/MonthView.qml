@@ -14,6 +14,8 @@ import "dateutils.js" as DateUtils
 Kirigami.Page {
     id: monthPage
 
+    required property QQC2.Action createEventAction
+
     property bool initialMonth: true
     property var openOccurrence: null
     property date currentDate: new Date()
@@ -63,11 +65,7 @@ Kirigami.Page {
         dayGrid.setToDate(date);
     }
 
-    actions {
-        left: Qt.application.layoutDirection === Qt.RightToLeft ? nextAction : previousAction
-        right: Qt.application.layoutDirection === Qt.RightToLeft ? previousAction : nextAction
-        main: todayAction
-    }
+    actions: [todayAction, nextAction, previousAction, createEventAction]
 
     padding: 0
 

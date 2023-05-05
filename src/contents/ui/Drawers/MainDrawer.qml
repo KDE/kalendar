@@ -7,7 +7,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import Qt.labs.qmlmodels 1.0
-import QtGraphicalEffects 1.12
+import Qt5Compat.GraphicalEffects
 
 import org.kde.akonadi 1.0
 import org.kde.kalendar 1.0
@@ -416,7 +416,7 @@ Kirigami.OverlayDrawer {
         }
 
         implicitHeight: textMetrics.height + Kirigami.Units.largeSpacing * 2
-        icon: "show-all-effects"
+        icon.name: "show-all-effects"
         label: i18n("View all tasks")
         labelItem.color: Kirigami.Theme.textColor
         visible: mainDrawer.mode === KalendarApplication.Todo

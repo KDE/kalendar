@@ -5,7 +5,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
-import QtGraphicalEffects 1.12
+import Qt5Compat.GraphicalEffects
 
 import org.kde.kalendar 1.0 as Kalendar
 import org.kde.kalendar.utils 1.0
@@ -16,6 +16,7 @@ Kirigami.Page {
     id: root
 
     property var openOccurrence: ({})
+    required property QQC2.Action createEventAction
 
     property date currentDate: new Date() // Needs to get updated for marker to move, done from main.qml
     property date startDate: DateUtils.getFirstDayOfWeek(currentDate)
@@ -80,11 +81,7 @@ Kirigami.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
-    actions {
-        left: Qt.application.layoutDirection === Qt.RightToLeft ? nextAction : previousAction
-        right: Qt.application.layoutDirection === Qt.RightToLeft ? previousAction : nextAction
-        main: todayAction
-    }
+    actions: [previousAction, nextAction, todayAction]
 
     padding: 0
 

@@ -17,7 +17,7 @@ ContactsPage {
 
     property var attendeeAkonadiIds
 
-    actions.main: Kirigami.Action {
+    actions: Kirigami.Action {
         icon.name: "object-select-symbolic"
         text: i18n("Done")
         onTriggered: pageStack.pop()

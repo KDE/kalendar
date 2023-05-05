@@ -49,13 +49,13 @@ Kirigami.ScrollablePage {
         color: Kirigami.Theme.backgroundColor
     }
 
-    actions {
-        main: Kirigami.Action {
+    actions: [
+        Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
             onTriggered: KalendarUiUtils.setUpAdd(Kalendar.IncidenceWrapper.TypeTodo, new Date(), Kalendar.Filter.collectionId);
-        }
-        left: Kirigami.Action {
+        },
+        Kirigami.Action {
             text: i18n("Sort")
             icon.name: "view-sort"
 
@@ -87,13 +87,12 @@ Kirigami.ScrollablePage {
                 checked: !root.ascendingOrder
                 onCheckedChanged: __action.checked = checked
             }
-        }
-        right: KActionFromAction {
+        },
+        KActionFromAction {
             kalendarAction: "todoview_show_completed"
             text: i18n("Show Completed")
         }
-
-    }
+    ]
 
     property Component completedSheetComponent: Kirigami.ScrollablePage {
         id: completedSheet

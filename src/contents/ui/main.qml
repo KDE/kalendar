@@ -8,8 +8,7 @@ import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import QtQml.Models 2.15
-import QtGraphicalEffects 1.12
-import QtQuick.Dialogs 1.0
+import Qt.labs.platform
 
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
@@ -850,14 +849,6 @@ Kirigami.ApplicationWindow {
                 width: parent.width
                 height: 1
                 z: -2
-
-                RectangularGlow {
-                    anchors.fill: parent
-                    z: -1
-                    glowRadius: 5
-                    spread: 0.3
-                    color: Qt.rgba(0.0, 0.0, 0.0, 0.15)
-                }
             }
         }
     }
@@ -1064,13 +1055,13 @@ Kirigami.ApplicationWindow {
                 titleDateButton.date: monthView.firstDayOfMonth
                 titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
             }
+
+            createEventAction: createAction
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-
-            actions.contextualActions: createAction
         }
     }
 
@@ -1087,11 +1078,10 @@ Kirigami.ApplicationWindow {
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
+            createEventAction: createAction
 
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-
-            actions.contextualActions: createAction
         }
     }
 
@@ -1146,12 +1136,11 @@ Kirigami.ApplicationWindow {
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
+            createEventAction: createAction
 
             onDayChanged: if(day !== root.selectedDate.getDate() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
             onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialWeek) root.selectedDate = new Date (year, month, day)
-
-            actions.contextualActions: createAction
         }
     }
 
