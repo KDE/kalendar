@@ -163,7 +163,6 @@ void IncidenceOccurrenceModel::resetFromSource()
             incidence->allDay(),
         };
 
-        const auto indexRow = m_incidences.count();
         m_incidences.append(occurrence);
     }
 
