@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-04 00:48+0000\n"
-"PO-Revision-Date: 2023-04-20 12:34+0300\n"
+"POT-Creation-Date: 2023-05-09 00:49+0000\n"
+"PO-Revision-Date: 2023-05-08 11:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -301,7 +301,7 @@ msgstr "Dosya"
 #, kde-format
 msgctxt "@action:menu"
 msgid "Quit Kalendar"
-msgstr "Kalendar'dan Çık"
+msgstr "Takvimci'den Çık"
 
 #: components/qml/HelpMenu.qml:9 components/qml/NativeHelpMenu.qml:8
 #, kde-format
@@ -313,7 +313,7 @@ msgstr "Yardım"
 #, kde-format
 msgctxt "@action:menu"
 msgid "Kalendar Handbook"
-msgstr "Kalendar El Kitabı"
+msgstr "Takvimci El Kitabı"
 
 #: components/qml/NativeEditMenu.qml:40 mail/qml/private/EditMenu.qml:26
 #, kde-format
@@ -707,7 +707,7 @@ msgstr "Bölüm"
 #, kde-format
 msgctxt "Placeholder value for name of Department"
 msgid "Kalendar-Team"
-msgstr "Kalendar Takımı"
+msgstr "Takvimci Takımı"
 
 #: contacts/qml/private/ContactEditorPage.qml:341
 #, kde-format
@@ -1925,7 +1925,7 @@ msgstr "Tamamlanmış Olarak İmle"
 #: contents/ui/Drawers/MainDrawer.qml:119
 #, kde-format
 msgid "Kalendar"
-msgstr "Kalendar"
+msgstr "Takvimci"
 
 #: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:374
 #, kde-format
@@ -2431,7 +2431,7 @@ msgstr "Hesaplar"
 #: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:225
 #, kde-format
 msgid "About Kalendar"
-msgstr "Kalendar Hakkında"
+msgstr "Takvimci Hakkında"
 
 #: contents/ui/Settings/SourceSettingsPage.qml:21
 #, kde-format
@@ -2653,7 +2653,7 @@ msgstr "Çember (konumun olduğu alanı gösterir)"
 msgid "Pin (shows exact location)"
 msgstr "İğne (kesin konumu gösterir)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:293
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:292
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"
@@ -3028,7 +3028,7 @@ msgstr "Anahtar içe aktar"
 #, kde-format
 msgctxt "@title"
 msgid "Kalendar"
-msgstr "Kalendar"
+msgstr "Takvimci"
 
 #: main.cpp:73
 #, kde-format
