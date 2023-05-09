@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-04 00:48+0000\n"
+"POT-Creation-Date: 2023-05-09 00:49+0000\n"
 "PO-Revision-Date: 2023-03-29 23:05+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2659,7 +2659,7 @@ msgstr "Ympyrä (näyttää sijainnin alueen)"
 msgid "Pin (shows exact location)"
 msgstr "Nasta (näyttää tarkan sijainnin)"
 
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:293
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:292
 #: models/todosortfilterproxymodel.cpp:134
 #, kde-format
 msgid "Task"

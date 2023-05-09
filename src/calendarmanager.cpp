@@ -223,7 +223,7 @@ CalendarManager::CalendarManager(QObject *parent)
     m_flatCollectionTreeModel->setSourceModel(m_viewCollectionModel);
     m_flatCollectionTreeModel->setExpandsByDefault(true);
 
-    auto refreshColors = [=]() {
+    auto refreshColors = [this, colorProxy]() {
         for (auto i = 0; i < m_flatCollectionTreeModel->rowCount(); i++) {
             auto idx = m_flatCollectionTreeModel->index(i, 0, {});
             colorProxy->getCollectionColor(Akonadi::CollectionUtils::fromIndex(idx));
@@ -624,7 +624,7 @@ void CalendarManager::changeIncidenceCollection(Akonadi::Item item, qint64 colle
 
     auto job = new Akonadi::ItemMoveJob(item, newCollection);
     // Add some type of check here?
-    connect(job, &KJob::result, job, [=]() {
+    connect(job, &KJob::result, job, [this, job, item, collectionId]() {
         qCDebug(KALENDAR_LOG) << job->error();
 
         if (!job->error()) {

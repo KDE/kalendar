@@ -147,5 +147,5 @@ void MailManager::moveToTrash(Akonadi::Item item)
     if (!trash.isValid()) {
         trash = CommonKernel->trashCollectionFolder();
     }
-    auto job = new Akonadi::ItemMoveJob(item, trash);
+    new Akonadi::ItemMoveJob(item, trash);
 }
