@@ -12,8 +12,6 @@
 #include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/SearchCollectionHelper>
 #include <KConfigWatcher>
-#include <QObject>
-#include <akonadi-calendar_version.h>
 
 class IncidenceWrapper;
 

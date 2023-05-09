@@ -8,7 +8,6 @@
 #include "collectioncomboboxmodel.h"
 #include "collectionpickermodel.h"
 #include "mimetypes.h"
-#include <akonadi_version.h>
 
 #include <Akonadi/Collection>
 #include <QQmlEngine>
