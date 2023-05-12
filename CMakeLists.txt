@@ -12,7 +12,6 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 
 project(kalendar VERSION ${RELEASE_SERVICE_VERSION})
 
-set(KF_MAJOR_VERSION "6")
 set(QT_MIN_VERSION "6.4.0")
 set(KF_MIN_VERSION "5.240.0")
 
@@ -65,8 +64,6 @@ ecm_setup_version(${PROJECT_VERSION}
     SOVERSION ${PROJECT_VERSION_MAJOR}
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/config-kalendar.h"
 )
-
-set(KF_MAJOR_VERSION 6)
 
 ################# Find dependencies #################
 find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
