@@ -3082,7 +3082,7 @@ msgstr "Sem data definida"
 #, kde-format
 msgctxt "Please retain space"
 msgid " at %1"
-msgstr " às %1"
+msgstr "Em %1"
 
 #: models/todosortfilterproxymodel.cpp:198
 #, kde-format
