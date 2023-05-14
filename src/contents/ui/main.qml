@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import QtQuick 2.15
+import QtCore 6.5
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
@@ -859,7 +860,7 @@ Kirigami.ApplicationWindow {
         property string selectedUrl: ""
 
         title: i18n("Import a calendar")
-        folder: shortcuts.home
+        folder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
         nameFilters: ["Calendar files (*.ics *.vcs)"]
         onAccepted: {
             selectedUrl = fileUrl;
