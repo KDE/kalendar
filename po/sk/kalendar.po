@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 00:49+0000\n"
+"POT-Creation-Date: 2023-05-14 00:49+0000\n"
 "PO-Revision-Date: 2023-01-07 14:24+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -1336,27 +1336,27 @@ msgstr[2] "<b>Prílohy:</b>"
 msgid "<b>Reminders:</b>"
 msgstr "<b>Pripomienky:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:525
+#: contents/ui/Controls/IncidenceInfoContents.qml:528
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>Organizér:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:542
+#: contents/ui/Controls/IncidenceInfoContents.qml:545
 #, kde-format
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Google Meet:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:554
+#: contents/ui/Controls/IncidenceInfoContents.qml:556
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>Hostia:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:588
+#: contents/ui/Controls/IncidenceInfoContents.qml:592
 #, kde-format
 msgid "Super-task"
 msgstr "Super úloha"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:613
+#: contents/ui/Controls/IncidenceInfoContents.qml:617
 #, kde-format
 msgid "Sub-task"
 msgid_plural "Sub-tasks"
