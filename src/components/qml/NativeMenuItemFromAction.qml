@@ -12,7 +12,7 @@ MenuItem {
 
     text: __action.text
     shortcut: __action.shortcut
-    iconName: KalendarApplication.iconName(__action.icon)
+    icon.name: KalendarApplication.iconName(__action.icon)
     onTriggered: __action.trigger()
     visible: __action.text !== ""
     checkable: __action.checkable
