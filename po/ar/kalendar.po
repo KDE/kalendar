@@ -1226,47 +1226,47 @@ msgstr "بلا"
 #: contents/ui/Controls/IncidenceMouseArea.qml:117
 #, kde-format
 msgid "1 (highest priority)"
-msgstr "١ (أولوية قصوى)"
+msgstr "1 (أولوية قصوى)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:122
 #, kde-format
 msgid "2 (mid-high priority)"
-msgstr "٢ (أولوية مرتفعة-متوسطة)"
+msgstr "2 (أولوية مرتفعة-متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:127
 #, kde-format
 msgid "3 (mid-high priority)"
-msgstr "٣ (أولوية مرتفعة-متوسطة)"
+msgstr "3 (أولوية مرتفعة-متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:132
 #, kde-format
 msgid "4 (mid-high priority)"
-msgstr "٤ (أولوية مرتفعة-متوسطة)"
+msgstr "4 (أولوية مرتفعة-متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:137
 #, kde-format
 msgid "5 (medium priority)"
-msgstr "٥ (أولوية متوسطة)"
+msgstr "5 (أولوية متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:142
 #, kde-format
 msgid "6 (mid-low priority)"
-msgstr "٦ (أولوية متوسطة-منخفضة)"
+msgstr "6 (أولوية متوسطة-منخفضة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:147
 #, kde-format
 msgid "7 (mid-low priority)"
-msgstr "٧ (أولوية متوسطة-منخفضة)"
+msgstr "7 (أولوية متوسطة-منخفضة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:152
 #, kde-format
 msgid "8 (mid-low priority)"
-msgstr "٨ (أولوية متوسطة-منخفضة)"
+msgstr "8 (أولوية متوسطة-منخفضة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:157
 #, kde-format
 msgid "9 (lowest priority)"
-msgstr "٩ (أولوية دنيا)"
+msgstr "9 (أولوية دنيا)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:163
 #, kde-format
@@ -1472,47 +1472,47 @@ msgstr "غير معينة"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:214
 #, kde-format
 msgid "1 (Highest Priority)"
-msgstr "١ (أولوية قصوى)"
+msgstr "1 (أولوية قصوى)"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:215
 #, kde-format
 msgid "2"
-msgstr "٢"
+msgstr "2"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:216
 #, kde-format
 msgid "3"
-msgstr "٣"
+msgstr "3"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:217
 #, kde-format
 msgid "4"
-msgstr "٤"
+msgstr "4"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:218
 #, kde-format
 msgid "5 (Medium Priority)"
-msgstr "٥ (أولوية متوسطة)"
+msgstr "5 (أولوية متوسطة)"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:219
 #, kde-format
 msgid "6"
-msgstr "٦"
+msgstr "6"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:220
 #, kde-format
 msgid "7"
-msgstr "٧"
+msgstr "7"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:221
 #, kde-format
 msgid "8"
-msgstr "٨"
+msgstr "8"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:222
 #, kde-format
 msgid "9 (Lowest Priority)"
-msgstr "٩ (أولوية دنيا)"
+msgstr "9 (أولوية دنيا)"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:235
 #, kde-format
@@ -2073,7 +2073,7 @@ msgstr "الأسبوع"
 #: contents/ui/main.qml:465
 #, kde-format
 msgid "3 Days"
-msgstr "٣ الأيام"
+msgstr "3 الأيام"
 
 #: contents/ui/main.qml:468
 #, kde-format
@@ -2140,7 +2140,7 @@ msgstr "الأسبوع"
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
-msgstr "٣ الأيام"
+msgstr "3 الأيام"
 
 #: contents/ui/main.qml:1139
 #, kde-format
