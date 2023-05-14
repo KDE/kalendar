@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 00:49+0000\n"
+"POT-Creation-Date: 2023-05-14 00:49+0000\n"
 "PO-Revision-Date: 2023-04-27 11:56+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -58,47 +58,47 @@ msgstr "غير معينة"
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:22
 #, kde-format
 msgid "1 (Highest Priority)"
-msgstr "١ (أولوية قصوى)"
+msgstr "1 (أولوية قصوى)"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:23
 #, kde-format
 msgid "2"
-msgstr "٢"
+msgstr "2"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:24
 #, kde-format
 msgid "3"
-msgstr "٣"
+msgstr "3"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:25
 #, kde-format
 msgid "4"
-msgstr "٤"
+msgstr "4"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:26
 #, kde-format
 msgid "5 (Medium Priority)"
-msgstr "٥ (أولوية متوسطة)"
+msgstr "5 (أولوية متوسطة)"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:27
 #, kde-format
 msgid "6"
-msgstr "٦"
+msgstr "6"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:28
 #, kde-format
 msgid "7"
-msgstr "٧"
+msgstr "7"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:29
 #, kde-format
 msgid "8"
-msgstr "٨"
+msgstr "8"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:30
 #, kde-format
 msgid "9 (Lowest Priority)"
-msgstr "٩ (أولوية دنيا)"
+msgstr "9 (أولوية دنيا)"
 
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
 #, kde-format
@@ -697,7 +697,7 @@ msgstr "العنوان"
 #, kde-format
 msgctxt "Placeholder value for Title"
 msgid "SDE-1"
-msgstr "م. نظم-١"
+msgstr "م. نظم-1"
 
 #: contacts/qml/private/ContactEditorPage.qml:331
 #, kde-format
@@ -1317,27 +1317,27 @@ msgstr[5] "<b>المرفقات:</b>"
 msgid "<b>Reminders:</b>"
 msgstr "<b>التذكيرات:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:525
+#: contents/ui/Controls/IncidenceInfoContents.qml:528
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>المنظّم:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:542
+#: contents/ui/Controls/IncidenceInfoContents.qml:545
 #, kde-format
 msgid "<b>Google Meet:</b>"
 msgstr "<b>غوغل مييت:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:554
+#: contents/ui/Controls/IncidenceInfoContents.qml:556
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>الضيوف:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:588
+#: contents/ui/Controls/IncidenceInfoContents.qml:592
 #, kde-format
 msgid "Super-task"
 msgstr "المهمة العامة"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:613
+#: contents/ui/Controls/IncidenceInfoContents.qml:617
 #, kde-format
 msgid "Sub-task"
 msgid_plural "Sub-tasks"
@@ -1394,47 +1394,47 @@ msgstr "بلا"
 #: contents/ui/Controls/IncidenceMouseArea.qml:117
 #, kde-format
 msgid "1 (highest priority)"
-msgstr "١ (أولوية قصوى)"
+msgstr "1 (أولوية قصوى)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:122
 #, kde-format
 msgid "2 (mid-high priority)"
-msgstr "٢ (أولوية مرتفعة-متوسطة)"
+msgstr "2 (أولوية مرتفعة-متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:127
 #, kde-format
 msgid "3 (mid-high priority)"
-msgstr "٣ (أولوية مرتفعة-متوسطة)"
+msgstr "3 (أولوية مرتفعة-متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:132
 #, kde-format
 msgid "4 (mid-high priority)"
-msgstr "٤ (أولوية مرتفعة-متوسطة)"
+msgstr "4 (أولوية مرتفعة-متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:137
 #, kde-format
 msgid "5 (medium priority)"
-msgstr "٥ (أولوية متوسطة)"
+msgstr "5 (أولوية متوسطة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:142
 #, kde-format
 msgid "6 (mid-low priority)"
-msgstr "٦ (أولوية متوسطة-منخفضة)"
+msgstr "6 (أولوية متوسطة-منخفضة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:147
 #, kde-format
 msgid "7 (mid-low priority)"
-msgstr "٧ (أولوية متوسطة-منخفضة)"
+msgstr "7 (أولوية متوسطة-منخفضة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:152
 #, kde-format
 msgid "8 (mid-low priority)"
-msgstr "٨ (أولوية متوسطة-منخفضة)"
+msgstr "8 (أولوية متوسطة-منخفضة)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:157
 #, kde-format
 msgid "9 (lowest priority)"
-msgstr "٩ (أولوية دنيا)"
+msgstr "9 (أولوية دنيا)"
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:163
 #, kde-format
@@ -2186,7 +2186,7 @@ msgstr "الأسبوع"
 #: contents/ui/main.qml:465
 #, kde-format
 msgid "3 Days"
-msgstr "٣ الأيام"
+msgstr "3 الأيام"
 
 #: contents/ui/main.qml:468
 #, kde-format
@@ -2253,7 +2253,7 @@ msgstr "الأسبوع"
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
-msgstr "٣ الأيام"
+msgstr "3 الأيام"
 
 #: contents/ui/main.qml:1139
 #, kde-format

@@ -117,13 +117,13 @@ QQC2.ScrollView {
             }
             Kirigami.Icon {
                 source: "appointment-reminder"
-                visible: root.incidenceWrapper.remindersModel.rowCount() > 0
+                visible: remindersRepeater.count > 0
                 HoverHandler {
                     id: reminderHover
                 }
                 QQC2.ToolTip {
                     visible: reminderHover.hovered
-                    text: i18np("This event has reminder", "This event has reminders", root.incidenceWrapper.remindersModel.rowCount())
+                    text: i18np("This event has reminder", "This event has reminders", remindersRepeater.count)
                 }
             }
         }
@@ -323,7 +323,7 @@ QQC2.ScrollView {
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
 
-                text: Calendar.Utils.recurrenceToString(root.incidenceWrapper.recurrenceData)
+                text: LabelUtils.recurrenceToString(root.incidenceWrapper.recurrenceData)
                 wrapMode: Text.Wrap
             }
 
@@ -473,25 +473,25 @@ QQC2.ScrollView {
 
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
-            text: i18np("<b>Attachment:</b>", "<b>Attachments:</b>", root.incidenceWrapper.attachmentsModel.rowCount())
-            visible: root.incidenceWrapper.attachmentsModel.rowCount() > 0
+            text: i18np("<b>Attachment:</b>", "<b>Attachments:</b>", attachmentsRepeater.count)
+            visible: attachmentsRepeater.count > 0
         }
 
         ColumnLayout {
-            id: attachmentsColumn
-
             Layout.fillWidth: true
-            visible: root.incidenceWrapper.attachmentsModel.rowCount() > 0
-
+            visible: attachmentsRepeater.count > 0
             Repeater {
-                Layout.fillWidth: true
+                id: attachmentsRepeater
 
                 model: root.incidenceWrapper.attachmentsModel
 
                 delegate: HoverLabel {
-                    Layout.fillWidth: true
+                    required property string attachmentLabel
+                    required property string uri
+
                     // This didn't work in Markdown format
                     text: `<a href="${uri}">${attachmentLabel}</a>`
+                    Layout.fillWidth: true
                 }
             }
         }
@@ -499,24 +499,27 @@ QQC2.ScrollView {
         QQC2.Label {
             Layout.alignment: Qt.AlignTop
             text: i18n("<b>Reminders:</b>")
-            visible: root.incidenceWrapper.remindersModel.rowCount() > 0
+            visible: remindersRepeater.count > 0
         }
 
         ColumnLayout {
-            id: remindersColumn
-
             Layout.fillWidth: true
-            visible: root.incidenceWrapper.remindersModel.rowCount() > 0
+            visible: remindersRepeater.count > 0
 
             Repeater {
-                Layout.fillWidth: true
+                id: remindersRepeater
 
-                model: root.incidenceWrapper.remindersModel
+                model: Calendar.RemindersModel {
+                    incidence: root.incidenceWrapper.incidencePtr
+                }
 
                 delegate: QQC2.Label {
-                    Layout.fillWidth: true
-                    text: LabelUtils.secondsToReminderLabel(startOffset)
+                    required property int startOffset
+
+                    text: Calendar.Utils.secondsToReminderLabel(startOffset)
                     wrapMode: Text.Wrap
+
+                    Layout.fillWidth: true
                 }
             }
         }
@@ -551,23 +554,24 @@ QQC2.ScrollView {
         }
 
         QQC2.Label {
-            Layout.alignment: Qt.AlignTop
             text: i18n("<b>Guests:</b>")
-            visible: root.incidenceWrapper.attendeesModel.rowCount() > 0
+            visible: attendeesRepeater.count > 0
+
+            Layout.alignment: Qt.AlignTop
         }
 
         ColumnLayout {
-            id: attendeesColumn
+            visible: attendeesRepeater.count > 0
 
             Layout.fillWidth: true
-            visible: root.incidenceWrapper.attendeesModel.rowCount() > 0
 
             Repeater {
-                Layout.fillWidth: true
+                id: attendeesRepeater
 
                 model: root.incidenceWrapper.attendeesModel
-
-                delegate: HoverLabel {}
+                delegate: HoverLabel {
+                    Layout.fillWidth: true
+                }
             }
         }
 
