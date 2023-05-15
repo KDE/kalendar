@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-04 02:56+0000\n"
+"POT-Creation-Date: 2023-05-15 02:32+0000\n"
 "PO-Revision-Date: 2023-03-27 19:46+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -1133,27 +1133,27 @@ msgstr[1] "<b>Adjuntos:</b>"
 msgid "<b>Reminders:</b>"
 msgstr "<b>Recordatorios:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:525
+#: contents/ui/Controls/IncidenceInfoContents.qml:528
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>Organizador:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:542
+#: contents/ui/Controls/IncidenceInfoContents.qml:545
 #, kde-format
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Google Meet:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:554
+#: contents/ui/Controls/IncidenceInfoContents.qml:556
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>Asistentes:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:588
+#: contents/ui/Controls/IncidenceInfoContents.qml:592
 #, kde-format
 msgid "Super-task"
 msgstr "Supertarea"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:613
+#: contents/ui/Controls/IncidenceInfoContents.qml:617
 #, kde-format
 msgid "Sub-task"
 msgid_plural "Sub-tasks"

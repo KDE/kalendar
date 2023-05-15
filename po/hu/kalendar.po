@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-04 02:56+0000\n"
+"POT-Creation-Date: 2023-05-15 02:32+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1176,28 +1176,28 @@ msgstr[1] "<b>Mellékletek:</b>"
 msgid "<b>Reminders:</b>"
 msgstr "<b>Emlékeztetők:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:525
+#: contents/ui/Controls/IncidenceInfoContents.qml:528
 #, kde-format
 msgid "<b>Organizer:</b>"
 msgstr "<b>Szervező:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:542
+#: contents/ui/Controls/IncidenceInfoContents.qml:545
 #, fuzzy, kde-format
 #| msgid "<b>Guests:</b>"
 msgid "<b>Google Meet:</b>"
 msgstr "<b>Vendégek:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:554
+#: contents/ui/Controls/IncidenceInfoContents.qml:556
 #, kde-format
 msgid "<b>Guests:</b>"
 msgstr "<b>Vendégek:</b>"
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:588
+#: contents/ui/Controls/IncidenceInfoContents.qml:592
 #, kde-format
 msgid "Super-task"
 msgstr ""
 
-#: contents/ui/Controls/IncidenceInfoContents.qml:613
+#: contents/ui/Controls/IncidenceInfoContents.qml:617
 #, fuzzy, kde-format
 #| msgid "Add Sub-Task"
 msgid "Sub-task"
