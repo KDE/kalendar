@@ -12,13 +12,13 @@ IncidenceWrapper::IncidenceWrapper(QObject *parent)
     : QObject(parent)
     , Akonadi::ItemMonitor()
 {
-    connect(this, &IncidenceWrapper::incidencePtrChanged, &m_attendeesModel, [=](KCalendarCore::Incidence::Ptr incidencePtr) {
+    connect(this, &IncidenceWrapper::incidencePtrChanged, &m_attendeesModel, [this](KCalendarCore::Incidence::Ptr incidencePtr) {
         m_attendeesModel.setIncidencePtr(incidencePtr);
     });
-    connect(this, &IncidenceWrapper::incidencePtrChanged, &m_recurrenceExceptionsModel, [=](KCalendarCore::Incidence::Ptr incidencePtr) {
+    connect(this, &IncidenceWrapper::incidencePtrChanged, &m_recurrenceExceptionsModel, [this](KCalendarCore::Incidence::Ptr incidencePtr) {
         m_recurrenceExceptionsModel.setIncidencePtr(incidencePtr);
     });
-    connect(this, &IncidenceWrapper::incidencePtrChanged, &m_attachmentsModel, [=](KCalendarCore::Incidence::Ptr incidencePtr) {
+    connect(this, &IncidenceWrapper::incidencePtrChanged, &m_attachmentsModel, [this](KCalendarCore::Incidence::Ptr incidencePtr) {
         m_attachmentsModel.setIncidencePtr(incidencePtr);
     });
 
