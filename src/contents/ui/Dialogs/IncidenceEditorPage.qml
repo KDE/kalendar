@@ -752,8 +752,10 @@ Kirigami.ScrollablePage {
                             height: parent.height
                             anchors.right: parent.right
                             anchors.rightMargin: parent.indicator.width
-                            running: locationsModel.status === GeocodeModel.Loading
-                            visible: locationsModel.status === GeocodeModel.Loading
+                            visible: false
+                            // Reactivate when locationsModel will reactivate
+                            /* running: locationsModel.status === GeocodeModel.Loading
+                            visible: locationsModel.status === GeocodeModel.Loading */
                         }
                     }
                     QQC2.CheckBox {
