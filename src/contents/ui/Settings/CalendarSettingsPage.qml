@@ -32,7 +32,7 @@ Kirigami.Page {
 
                         Kirigami.BasicListItem {
                             id: calendarSourceItem
-                            label: display
+                            label: model.display
                             labelItem.color: Kirigami.Theme.disabledTextColor
                             labelItem.font.weight: Font.DemiBold
                             topPadding: 2 * Kirigami.Units.largeSpacing
@@ -84,7 +84,7 @@ Kirigami.Page {
                             id: calendarItem
                             property int itemCollectionId: model.collectionId
 
-                            label: display
+                            label: model.display
                             labelItem.color: Kirigami.Theme.textColor
                             hoverEnabled: false
                             separatorVisible: false

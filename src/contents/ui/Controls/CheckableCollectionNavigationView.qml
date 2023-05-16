@@ -169,7 +169,7 @@ QQC2.ScrollView {
 
                     Kirigami.BasicListItem {
                         id: collectionSourceItem
-                        label: display
+                        label: model.display
                         highlighted: visualFocus || incidenceDropArea.containsDrag
                         labelItem.color: visualFocus ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor
                         labelItem.font.weight: Font.DemiBold
@@ -269,7 +269,7 @@ QQC2.ScrollView {
                     roleValue: false
                     Kirigami.BasicListItem {
                         id: collectionItem
-                        label: display
+                        label: model.display
                         labelItem.color: Kirigami.Theme.textColor
                         leftPadding: Kirigami.Settings.isMobile ?
                             (Kirigami.Units.largeSpacing * 2 * model.kDescendantLevel) + (Kirigami.Units.iconSizes.smallMedium * (model.kDescendantLevel - 1)) :

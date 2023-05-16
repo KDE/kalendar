@@ -63,7 +63,7 @@ Kirigami.ScrollablePage {
                 roleValue: true
 
                 Kirigami.BasicListItem {
-                    label: display
+                    label: model.display
                     labelItem.color: Kirigami.Theme.disabledTextColor
                     labelItem.font.weight: Font.DemiBold
                     topPadding: 2 * Kirigami.Units.largeSpacing
@@ -86,7 +86,7 @@ Kirigami.ScrollablePage {
             DelegateChoice {
                 roleValue: false
                 Kirigami.BasicListItem {
-                    label: display
+                    label: model.display
                     labelItem.color: Kirigami.Theme.textColor
 
                     onClicked: collectionPickerSheet.collectionPicked(collectionId);
