@@ -86,8 +86,8 @@ QQC2.ComboBox {
     }
 
     delegate: Kirigami.BasicListItem {
-        label: display
-        icon: decoration
+        label: model.display
+        icon.name: decoration
         trailing: Rectangle {
             anchors.margins: Kirigami.Units.smallSpacing
             width: height
