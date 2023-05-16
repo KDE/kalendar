@@ -328,7 +328,7 @@ Kirigami.OverlayDrawer {
                         model: !Kirigami.Settings.isMobile ? actions : mobileActions
                         delegate: Kirigami.BasicListItem {
                             label: modelData.text
-                            icon: modelData.icon.name
+                            icon.name: modelData.icon.name
                             separatorVisible: false
                             action: modelData
                             visible: modelData.visible
