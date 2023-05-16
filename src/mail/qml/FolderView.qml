@@ -17,7 +17,9 @@ Kirigami.ScrollablePage {
 
     Connections {
         target: Kalendar.Filter
-        onNameChanged: MailManager.folderModel.searchString = Kalendar.Filter.name
+        function onNameChanged() {
+             MailManager.folderModel.searchString = Kalendar.Filter.name
+        }
     }
 
     Component.onCompleted: MailManager.folderModel.searchString = Kalendar.Filter.name
