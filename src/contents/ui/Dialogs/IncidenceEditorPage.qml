@@ -1061,7 +1061,7 @@ Kirigami.ScrollablePage {
                         FileDialog {
                             id: attachmentFileDialog
 
-                            title: "Add an attachment"
+                            title: i18n("Add an attachment")
                             folder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
                             onAccepted: root.incidenceWrapper.attachmentsModel.addAttachment(fileUrls)
                         }
