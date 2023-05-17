@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 00:49+0000\n"
+"POT-Creation-Date: 2023-05-17 00:48+0000\n"
 "PO-Revision-Date: 2023-04-20 08:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -1871,6 +1871,12 @@ msgstr "Долучення:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1054
 #, kde-format
 msgid "Add Attachment"
+msgstr "Додати долучення"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1061
+#, fuzzy, kde-format
+#| msgid "Add Attachment"
+msgid "Add an attachment"
 msgstr "Додати долучення"
 
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88

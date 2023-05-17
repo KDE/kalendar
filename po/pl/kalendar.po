@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 00:49+0000\n"
+"POT-Creation-Date: 2023-05-17 00:48+0000\n"
 "PO-Revision-Date: 2023-04-23 12:34+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1863,6 +1863,12 @@ msgstr "Załączniki:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1054
 #, kde-format
 msgid "Add Attachment"
+msgstr "Dodaj załącznik"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1061
+#, fuzzy, kde-format
+#| msgid "Add Attachment"
+msgid "Add an attachment"
 msgstr "Dodaj załącznik"
 
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88

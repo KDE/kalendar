@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 00:49+0000\n"
+"POT-Creation-Date: 2023-05-17 00:48+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1964,6 +1964,12 @@ msgstr "첨부:"
 #, fuzzy, kde-format
 #| msgid "Add attachment"
 msgid "Add Attachment"
+msgstr "첨부 파일 추가"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1061
+#, fuzzy, kde-format
+#| msgid "Add attachment"
+msgid "Add an attachment"
 msgstr "첨부 파일 추가"
 
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88

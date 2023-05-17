@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 00:49+0000\n"
+"POT-Creation-Date: 2023-05-17 00:48+0000\n"
 "PO-Revision-Date: 2023-04-29 08:35\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1831,6 +1831,12 @@ msgstr "附件："
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1054
 #, kde-format
 msgid "Add Attachment"
+msgstr "添加附件"
+
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1061
+#, fuzzy, kde-format
+#| msgid "Add Attachment"
+msgid "Add an attachment"
 msgstr "添加附件"
 
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
