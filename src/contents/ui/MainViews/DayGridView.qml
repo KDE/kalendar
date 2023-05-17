@@ -267,7 +267,7 @@ Item {
                             id: dayDelegate
                             Layout.fillWidth: true
                             Layout.fillHeight: true
-                            property date startDate: periodStartDate
+                            readonly property date startDate: model.periodStartDate ?? new Date()
 
                             ListView {
                                 id: linesRepeater
