@@ -50,7 +50,7 @@ Item {
         openOccurrenceId === modelData.incidenceId : false
     property bool reactToCurrentMonth: true
     readonly property bool isInCurrentMonth: reactToCurrentMonth ?
-        modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month :
+        modelData.endTime.getMonth() === root.month || modelData.startTime.getMonth() === root.month :
         true
     property bool isDark: KalendarUiUtils.darkMode
 
