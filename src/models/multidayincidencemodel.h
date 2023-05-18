@@ -10,6 +10,7 @@
 #include "incidenceoccurrencemodel.h"
 #include <QAbstractItemModel>
 #include <QList>
+#include <QQmlParserStatus>
 #include <QSharedPointer>
 #include <QTimer>
 
@@ -23,7 +24,7 @@ class Incidence;
  * The "incidences" roles provides a list of lists, where each list represents a visual line,
  * containing a number of events to display.
  */
-class MultiDayIncidenceModel : public QAbstractListModel
+class MultiDayIncidenceModel : public QAbstractListModel, public QQmlParserStatus
 {
     Q_OBJECT
     Q_PROPERTY(int periodLength READ periodLength WRITE setPeriodLength NOTIFY periodLengthChanged)
@@ -32,6 +33,7 @@ class MultiDayIncidenceModel : public QAbstractListModel
     Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(bool showTodos READ showTodos WRITE setShowTodos NOTIFY showTodosChanged)
     Q_PROPERTY(bool showSubTodos READ showSubTodos WRITE setShowSubTodos NOTIFY showSubTodosChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
 
 public:
     enum Filter {
@@ -44,14 +46,14 @@ public:
     Q_ENUM(Filter)
 
     enum Roles {
-        Incidences = IncidenceOccurrenceModel::LastRole,
-        PeriodStartDate,
+        IncidencesRole = IncidenceOccurrenceModel::LastRole,
+        PeriodStartDateRole,
     };
 
     explicit MultiDayIncidenceModel(QObject *parent = nullptr);
     ~MultiDayIncidenceModel() override = default;
 
-    int rowCount(const QModelIndex &parent) const override;
+    int rowCount(const QModelIndex &parent = {}) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
@@ -62,6 +64,11 @@ public:
     bool showSubTodos() const;
     int incidenceCount() const;
     bool incidencePassesFilter(const QModelIndex &idx) const;
+    bool active() const;
+    void setActive(const bool active);
+
+    void classBegin() override;
+    void componentComplete() override;
 
 Q_SIGNALS:
     void periodLengthChanged();
@@ -70,6 +77,7 @@ Q_SIGNALS:
     void modelChanged();
     void showTodosChanged();
     void showSubTodosChanged();
+    void activeChanged();
 
 public Q_SLOTS:
     void setModel(IncidenceOccurrenceModel *model);
@@ -79,24 +87,22 @@ public Q_SLOTS:
     void setShowSubTodos(const bool showSubTodos);
 
 private Q_SLOTS:
-    void resetLayoutLines();
     void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
-    void scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow);
-    void updateScheduledLayoutLines();
 
 private:
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDate &rowStart) const;
     QVariantList layoutLines(const QDate &rowStart) const;
+    void scheduleReset();
 
     QSet<int> m_linesToUpdate;
-    QTimer mRefreshTimer;
-    QTimer m_updateLinesTimer;
+    QTimer m_refreshTimer;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
-    QVector<QVariantList> m_laidOutLines;
     int mPeriodLength = 7;
     MultiDayIncidenceModel::Filters m_filters;
     bool m_showTodos = true;
     bool m_showSubTodos = true;
+    bool m_active = true;
+    bool m_initialized = false;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(MultiDayIncidenceModel::Filters)

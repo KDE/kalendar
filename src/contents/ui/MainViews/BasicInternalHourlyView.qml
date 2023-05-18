@@ -282,6 +282,7 @@ Column {
                         filters: Kalendar.MultiDayIncidenceModel.AllDayOnly | Kalendar.MultiDayIncidenceModel.MultiDayOnly
                         showTodos: Kalendar.Config.showTodosInCalendarViews
                         showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
+                        active: viewColumn.isCurrentItem
                         model: Kalendar.IncidenceOccurrenceModel {
                             start: viewColumn.startDate
                             length: viewColumn.daysToShow
