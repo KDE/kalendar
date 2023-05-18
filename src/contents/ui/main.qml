@@ -1111,10 +1111,12 @@ Kirigami.ApplicationWindow {
             }
 
             titleDelegate: ViewTitleDelegate {
-                titleDateButton.range: true
-                titleDateButton.date: hourlyView.startDate
-                titleDateButton.lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
-                titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
+                titleDateButton {
+                    range: true
+                    date: hourlyView.startDate
+                    lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
+                    onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
+                }
 
                 Kirigami.ActionToolBar {
                     id: weekViewScaleToggles
