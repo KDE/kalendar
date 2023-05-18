@@ -383,14 +383,8 @@ bool IncidenceOccurrenceModel::incidencePassesFilter(const KCalendarCore::Incide
         return true;
     }
 
-    auto match = false;
     const auto tags = mFilter->tags();
-    for (const auto &tag : tags) {
-        if (incidence->categories().contains(tag)) {
-            match = true;
-            break;
-        }
-    }
-
-    return match;
+    return std::any_of(tags.cbegin(), tags.cend(), [&incidence](const QString &tag) {
+        return incidence->categories().contains(tag);
+    });
 }
