@@ -10,6 +10,7 @@
 
 #include "../filter.h"
 #include "../utils.h"
+#include <Akonadi/CollectionColorAttribute>
 #include <Akonadi/EntityTreeModel>
 #include <KCalendarCore/OccurrenceIterator>
 #include <KConfigGroup>
@@ -195,19 +196,24 @@ qint64 IncidenceOccurrenceModel::getCollectionId(const KCalendarCore::Incidence:
 
 QColor IncidenceOccurrenceModel::getColor(const KCalendarCore::Incidence::Ptr &incidence)
 {
-    auto item = m_coreCalendar->item(incidence);
+    const auto item = m_coreCalendar->item(incidence);
     if (!item.isValid()) {
         return {};
     }
-    auto collection = item.parentCollection();
+    const auto collection = item.parentCollection();
     if (!collection.isValid()) {
         return {};
     }
-    const QString id = QString::number(collection.id());
-    // qDebug() << "Collection id: " << collection.id();
 
+    if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
+        const auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
+        if (colorAttr && colorAttr->color().isValid()) {
+            return colorAttr->color();
+        }
+    }
+
+    const auto id = QString::number(collection.id());
     if (m_colors.contains(id)) {
-        // qDebug() << collection.id() << "Found in m_colors";
         return m_colors[id];
     }
 
