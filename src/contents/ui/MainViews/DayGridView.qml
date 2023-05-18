@@ -67,26 +67,33 @@ Item {
         visible: backgroundLoader.status === Loader.Ready
     }
 
+    // Background
     Loader {
         id: backgroundLoader
         anchors.fill: parent
         asynchronous: !root.isCurrentView
         sourceComponent: Column {
             id: rootBackgroundColumn
+
+            property alias dayLabelsBar: dayLabelsBarComponent
+
             spacing: root.spacing
             anchors.fill: parent
 
-            property alias dayLabelsBar: dayLabelsBarComponent
             DayLabelsBar {
                 id: dayLabelsBarComponent
+
                 delegate: root.dayHeaderDelegate
                 startDate: root.startDate
                 dayWidth: root.dayWidth
                 daysToShow: root.daysPerRow
                 spacing: root.spacing
-                anchors.leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
-                anchors.left: parent.left
-                anchors.right: parent.right
+
+                anchors {
+                    leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
+                    left: parent.left
+                    right: parent.right
+                }
             }
 
             Repeater {
@@ -94,57 +101,75 @@ Item {
 
                 //One row => one week
                 Item {
+                    id: weekRow
+
+                    required property int index
+
                     width: parent.width
                     height: root.dayHeight
                     clip: true
+
                     RowLayout {
-                        width: parent.width
-                        height: parent.height
+                        width: weekRow.width
+                        height: weekRow.height
                         spacing: root.spacing
+
                         Loader {
                             id: weekHeader
+
+                            property date startDate: DateUtils.addDaysToDate(root.startDate, weekRow.index * 7)
+
                             sourceComponent: root.weekHeaderDelegate
-                            property date startDate: DateUtils.addDaysToDate(root.startDate, index * 7)
-                            Layout.preferredWidth: weekHeaderWidth
-                            Layout.fillHeight: true
                             active: Kalendar.Config.showWeekNumbers
                             visible: Kalendar.Config.showWeekNumbers
 
+                            Layout.preferredWidth: weekHeaderWidth
+                            Layout.fillHeight: true
                         }
+
                         Item {
                             id: dayDelegate
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
+
                             property date startDate: DateUtils.addDaysToDate(root.startDate, index * 7)
 
-                            //Grid
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+
                             Row {
+                                id: grid
+
                                 spacing: root.spacing
                                 height: parent.height
+
                                 Repeater {
                                     id: gridRepeater
                                     model: root.daysPerRow
 
                                     Item {
                                         id: gridItem
+
+                                        required property var modelData
+
+                                        readonly property date gridSquareDate: date
+                                        readonly property date date: DateUtils.addDaysToDate(dayDelegate.startDate, modelData)
+                                        readonly property int day: date.getDate()
+                                        readonly property int month: date.getMonth()
+                                        readonly property int year: date.getFullYear()
+                                        readonly property bool isToday: day === root.currentDay && month === root.currentMonth && year === root.currentYear
+                                        readonly property bool isCurrentMonth: month === root.month
+
                                         height: root.dayHeight
                                         width: root.dayWidth
-                                        property date gridSquareDate: date
-                                        property date date: DateUtils.addDaysToDate(dayDelegate.startDate, modelData)
-                                        property int day: date.getDate()
-                                        property int month: date.getMonth()
-                                        property int year: date.getFullYear()
-                                        property bool isToday: day === root.currentDay && month === root.currentMonth && year === root.currentYear
-                                        property bool isCurrentMonth: month === root.month
 
                                         Rectangle {
                                             id: backgroundRectangle
                                             anchors.fill: parent
-                                            Kirigami.Theme.inherit: false
-                                            Kirigami.Theme.colorSet: Kirigami.Theme.View
                                             color: incidenceDropArea.containsDrag ?  Kirigami.Theme.positiveBackgroundColor :
                                                 gridItem.isToday ? Kirigami.Theme.activeBackgroundColor :
                                                 gridItem.isCurrentMonth ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
+
+                                            Kirigami.Theme.inherit: false
+                                            Kirigami.Theme.colorSet: Kirigami.Theme.View
 
                                             DayMouseArea {
                                                 id: backgroundDayMouseArea
@@ -182,15 +207,18 @@ Item {
 
                                         // Day number
                                         QQC2.Button {
-                                            anchors.top: parent.top
-                                            anchors.right: parent.right
-                                            anchors.left: parent.left
                                             implicitHeight: dayNumberLayout.implicitHeight
 
                                             flat: true
                                             visible: root.showDayIndicator
                                             enabled: root.daysToShow > 1
                                             onClicked: KalendarUiUtils.openDayLayer(gridItem.date)
+
+                                            anchors {
+                                                top: parent.top
+                                                right: parent.right
+                                                left: parent.left
+                                            }
 
                                             contentItem: RowLayout {
                                                 id: dayNumberLayout
@@ -232,16 +260,19 @@ Item {
         id: foregroundLoader
         anchors.fill: parent
         asynchronous: !root.isCurrentView
+
         sourceComponent: Column {
             id: rootForegroundColumn
+
             spacing: root.spacing
+
             anchors {
                 fill: parent
                 topMargin: root.bgLoader.dayLabelsBar.height + root.spacing
                 leftMargin: Kalendar.Config.showWeekNumbers ? weekHeaderWidth + root.spacing : 0
             }
 
-            //Weeks
+            // Weeks
             Repeater {
                 model: Kalendar.MultiDayIncidenceModel {
                     periodLength: 7
@@ -254,20 +285,30 @@ Item {
                         filter: Kalendar.Filter
                     }
                 }
-                //One row => one week
+
+                // One row => one week
                 Item {
+                    id: weekDelegate
+
+                    required property int index
+                    required property var incidences
+                    required property var periodStartDate
+
                     width: parent.width
                     height: root.dayHeight
                     clip: true
+
                     RowLayout {
                         width: parent.width
                         height: parent.height
                         spacing: root.spacing
                         Item {
                             id: dayDelegate
+
+                            readonly property date startDate: weekDelegate.periodStartDate
+
                             Layout.fillWidth: true
                             Layout.fillHeight: true
-                            property date startDate: periodStartDate
 
                             ListView {
                                 id: linesRepeater
@@ -283,25 +324,68 @@ Item {
                                 // So we instead make the ListView act like a ScrollView on desktop. No crashing now!
                                 flickableDirection: Flickable.VerticalFlick
                                 boundsBehavior: Kirigami.Settings.isMobile ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-                                QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
 
                                 clip: true
                                 spacing: root.listViewSpacing
+
+                                QQC2.ScrollBar.vertical: QQC2.ScrollBar {}
+
+                                onCountChanged: {
+                                    root.numberOfLinesShown = count
+                                }
+
+                                model: weekDelegate.incidences
+                                delegate: Item {
+                                    id: line
+
+                                    required property var modelData
+
+                                    height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+                                    width: ListView.view.width
+
+                                    // Incidences
+                                    Repeater {
+                                        id: incidencesRepeater
+
+                                        model: line.modelData
+                                        delegate: DayGridViewIncidenceDelegate {
+                                            id: incidenceDelegate
+
+                                            required property var modelData
+
+                                            starts: incidenceDelegate.modelData.starts
+                                            duration: incidenceDelegate.modelData.duration
+                                            incidenceId: incidenceDelegate.modelData.incidenceId
+                                            occurrenceDate: incidenceDelegate.modelData.startTime
+                                            occurrenceEndDate: incidenceDelegate.modelData.endTime
+                                            incidencePtr: incidenceDelegate.modelData.incidencePtr
+                                            allDay: incidenceDelegate.modelData.allDay
+                                            isDark: root.isDark
+
+                                            dayWidth: root.dayWidth
+                                            height: line.height
+                                            parentViewSpacing: root.spacing
+                                            horizontalSpacing: linesRepeater.spacing
+                                            openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
+                                            dragDropEnabled: root.dragDropEnabled
+                                        }
+                                    }
+                                }
 
                                 DayMouseArea {
                                     id: listViewMenu
                                     anchors.fill: parent
                                     z: -1
 
-                                    function useGridSquareDate(type, root, globalPos) {
-                                        for(var i in root.children) {
-                                            var child = root.children[i];
-                                            var localpos = child.mapFromGlobal(globalPos.x, globalPos.y);
+                                    function useGridSquareDate(type, root, globalPosition) {
+                                        for (const i in root.children) {
+                                            const child = root.children[i];
+                                            const localPosition = child.mapFromGlobal(globalPosition.x, globalPosition.y);
 
-                                            if(child.contains(localpos) && child.gridSquareDate) {
+                                            if(child.contains(localPosition) && child.gridSquareDate) {
                                                 KalendarUiUtils.setUpAdd(type, child.gridSquareDate);
                                             } else {
-                                                useGridSquareDate(type, child, globalPos);
+                                                useGridSquareDate(type, child, globalPosition);
                                             }
                                         }
                                     }
@@ -310,32 +394,6 @@ Item {
                                     onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
                                 }
 
-                                model: incidences
-                                onCountChanged: {
-                                    root.numberOfLinesShown = count
-                                }
-
-                                delegate: Item {
-                                    id: line
-                                    height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
-
-                                    //Incidences
-                                    Repeater {
-                                        id: incidencesRepeater
-                                        model: modelData
-
-                                        DayGridViewIncidenceDelegate {
-                                            id: incidenceDelegate
-                                            dayWidth: root.dayWidth
-                                            height: line.height
-                                            parentViewSpacing: root.spacing
-                                            horizontalSpacing: linesRepeater.spacing
-                                            openOccurrenceId: root.openOccurrence ? root.openOccurrence.incidenceId : ""
-                                            isDark: root.isDark
-                                            dragDropEnabled: root.dragDropEnabled
-                                        }
-                                    }
-                                }
                             }
                         }
                     }
