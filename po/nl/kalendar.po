@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-17 00:48+0000\n"
-"PO-Revision-Date: 2023-04-20 12:03+0200\n"
+"PO-Revision-Date: 2023-05-17 11:48+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1851,10 +1851,9 @@ msgid "Add Attachment"
 msgstr "Bijlage toevoegen"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1061
-#, fuzzy, kde-format
-#| msgid "Add Attachment"
+#, kde-format
 msgid "Add an attachment"
-msgstr "Bijlage toevoegen"
+msgstr "Een bijlage toevoegen"
 
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
