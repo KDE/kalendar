@@ -159,9 +159,26 @@ QColor ColorProxyModel::getCollectionColor(Akonadi::Collection collection) const
     }
 
     QColor color;
-    color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
-    colorCache[id] = color;
-    save();
+    for (const QString &key : colorKeyList) {
+        if (key.toLongLong() == id) {
+            color = resourcesColorsConfig.readEntry(key, QColor("blue"));
+        }
+    }
+
+    if (!color.isValid()) {
+        color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
+        colorCache[id] = color;
+    }
+
+    auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>(Akonadi::Collection::AddIfMissing);
+    colorAttr->setColor(color);
+
+    auto modifyJob = new Akonadi::CollectionModifyJob(collection);
+    connect(modifyJob, &Akonadi::CollectionModifyJob::result, this, [](KJob *job) {
+        if (job->error()) {
+            qWarning() << "Error occurred modifying collection color: " << job->errorString();
+        }
+    });
 
     return color;
 }
