@@ -278,6 +278,7 @@ Item {
                     periodLength: 7
                     showTodos: Kalendar.Config.showTodosInCalendarViews
                     showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
+                    active: root.isCurrentView
                     model: Kalendar.IncidenceOccurrenceModel {
                         start: root.startDate
                         length: root.daysToShow
