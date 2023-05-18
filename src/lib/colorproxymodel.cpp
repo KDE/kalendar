@@ -150,7 +150,6 @@ QColor ColorProxyModel::getCollectionColor(Akonadi::Collection collection) const
     }
 
     if (!color.isValid()) {
-        QColor color;
         color.setRgb(QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256), QRandomGenerator::global()->bounded(256));
         colorCache[id] = color;
     }
