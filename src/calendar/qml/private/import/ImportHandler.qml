@@ -46,7 +46,7 @@ Calendar.ICalImporter {
         filterHeaderBar.item.messageItem.visible = true;
     }
 
-    Connections {
+    readonly property Connections connApp: Connections {
         target: KalendarApplication
 
         function onImportCalendar() {
@@ -75,7 +75,7 @@ Calendar.ICalImporter {
 
     }
 
-    ImportFileDialog {
+    readonly property ImportFileDialog importFileDialog: ImportFileDialog {
         id: importFileDialog
         icalImporter: root
     }

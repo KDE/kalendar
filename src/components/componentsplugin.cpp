@@ -6,8 +6,15 @@
 #include <QQmlEngine>
 #include <QtQml>
 
+#include "navigation.h"
+
 void ComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QByteArray("org.kde.kalendar.components"));
-    qmlRegisterModule(uri, 1, 0);
+
+    qmlRegisterSingletonType<Navigation>(uri, 1, 0, "Navigation", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new Navigation;
+    });
 }

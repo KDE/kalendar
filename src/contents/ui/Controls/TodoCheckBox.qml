@@ -1,13 +1,11 @@
 // SPDX-FileCopyrightText: 2022 Claudio Cambra <claudio.cambra@gmail.com>
-
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
-
-import org.kde.kalendar.utils 1.0
+import org.kde.kalendar.calendar 1.0
 
 ColoredCheckbox {
     id: todoCheckbox
@@ -26,8 +24,7 @@ ColoredCheckbox {
         width: height
         x: todoCheckbox.leftPadding
         y: parent.height / 2 - height / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.centerIn: parent
 
         // The icon provides the main circle for the checkbox when not checked,
         // whereas the rectangle provides the circle when it is checked.

@@ -5,7 +5,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.15 as Kirigami
-import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.calendar 1.0 as Calendar
 
 QQC2.Control {
     id: datepicker
@@ -38,20 +38,20 @@ QQC2.Control {
         let newYearIndex = yearPathView.currentIndex + yearDiff;
         let newDecadeIndex = decadePathView.currentIndex + decadeDiff;
 
-        let firstYearItemDate = yearPathView.model.data(yearPathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
-        let lastYearItemDate = yearPathView.model.data(yearPathView.model.index(yearPathView.model.rowCount() - 2,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
-        let firstDecadeItemDate = decadePathView.model.data(decadePathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
-        let lastDecadeItemDate = decadePathView.model.data(decadePathView.model.index(decadePathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
+        let firstYearItemDate = yearPathView.model.data(yearPathView.model.index(1,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
+        let lastYearItemDate = yearPathView.model.data(yearPathView.model.index(yearPathView.model.rowCount() - 2,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
+        let firstDecadeItemDate = decadePathView.model.data(decadePathView.model.index(1,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
+        let lastDecadeItemDate = decadePathView.model.data(decadePathView.model.index(decadePathView.model.rowCount() - 1,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
 
         if(showDays) { // Set to correct index, including creating new dates in model if needed, for the month view
             const monthDiff = date.getMonth() - monthPathView.currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - monthPathView.currentItem.firstDayOfMonth.getFullYear()));
             let newMonthIndex = monthPathView.currentIndex + monthDiff;
-            let firstMonthItemDate = monthPathView.model.data(monthPathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
-            let lastMonthItemDate = monthPathView.model.data(monthPathView.model.index(monthPathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+            let firstMonthItemDate = monthPathView.model.data(monthPathView.model.index(1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+            let lastMonthItemDate = monthPathView.model.data(monthPathView.model.index(monthPathView.model.rowCount() - 1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
 
             while(firstMonthItemDate >= date) {
                 monthPathView.model.addDates(false)
-                firstMonthItemDate = monthPathView.model.data(monthPathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+                firstMonthItemDate = monthPathView.model.data(monthPathView.model.index(1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
                 newMonthIndex = 0;
             }
             if(firstMonthItemDate < date && newMonthIndex === 0) {
@@ -60,7 +60,7 @@ QQC2.Control {
 
             while(lastMonthItemDate <= date) {
                 monthPathView.model.addDates(true)
-                lastMonthItemDate = monthPathView.model.data(monthPathView.model.index(monthPathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+                lastMonthItemDate = monthPathView.model.data(monthPathView.model.index(monthPathView.model.rowCount() - 1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
             }
 
             monthPathView.currentIndex = newMonthIndex;
@@ -69,7 +69,7 @@ QQC2.Control {
         // Set to index and create dates if needed for year view
         while(firstYearItemDate >= date) {
             yearPathView.model.addDates(false)
-            firstYearItemDate = yearPathView.model.data(yearPathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
+            firstYearItemDate = yearPathView.model.data(yearPathView.model.index(1,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
             newYearIndex = 0;
         }
         if(firstYearItemDate < date && newYearIndex === 0) {
@@ -78,13 +78,13 @@ QQC2.Control {
 
         while(lastYearItemDate <= date) {
             yearPathView.model.addDates(true)
-            lastYearItemDate = yearPathView.model.data(yearPathView.model.index(yearPathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
+            lastYearItemDate = yearPathView.model.data(yearPathView.model.index(yearPathView.model.rowCount() - 1,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
         }
 
         // Set to index and create dates if needed for decade view
         while(firstDecadeItemDate >= date) {
             decadePathView.model.addDates(false)
-            firstDecadeItemDate = decadePathView.model.data(decadePathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
+            firstDecadeItemDate = decadePathView.model.data(decadePathView.model.index(1,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
             newDecadeIndex = 0;
         }
         if(firstDecadeItemDate < date && newDecadeIndex === 0) {
@@ -93,7 +93,7 @@ QQC2.Control {
 
         while(lastDecadeItemDate.getFullYear() <= date.getFullYear()) {
             decadePathView.model.addDates(true)
-            lastDecadeItemDate = decadePathView.model.data(decadePathView.model.index(decadePathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
+            lastDecadeItemDate = decadePathView.model.data(decadePathView.model.index(decadePathView.model.rowCount() - 1,0), Calendar.InfiniteCalendarViewModel.StartDateRole);
         }
 
         yearPathView.currentIndex = newYearIndex;
@@ -232,8 +232,8 @@ QQC2.Control {
                     }
                 }
 
-                model: Kalendar.InfiniteCalendarViewModel {
-                    scale: Kalendar.InfiniteCalendarViewModel.MonthScale
+                model: Calendar.InfiniteCalendarViewModel {
+                    scale: Calendar.InfiniteCalendarViewModel.MonthScale
                     datesToAdd: 300
                 }
 
@@ -272,7 +272,7 @@ QQC2.Control {
 
                         property var modelLoader: Loader {
                             asynchronous: true
-                            sourceComponent: Kalendar.MonthModel {
+                            sourceComponent: Calendar.MonthModel {
                                 year: firstDay.getFullYear()
                                 month: firstDay.getMonth() + 1 // From pathview model
                             }
@@ -337,8 +337,8 @@ QQC2.Control {
                     }
                 }
 
-                model: Kalendar.InfiniteCalendarViewModel {
-                    scale: Kalendar.InfiniteCalendarViewModel.YearScale
+                model: Calendar.InfiniteCalendarViewModel {
+                    scale: Calendar.InfiniteCalendarViewModel.YearScale
                 }
 
                 property int startIndex
@@ -426,8 +426,8 @@ QQC2.Control {
                     }
                 }
 
-                model: Kalendar.InfiniteCalendarViewModel {
-                    scale: Kalendar.InfiniteCalendarViewModel.DecadeScale
+                model: Calendar.InfiniteCalendarViewModel {
+                    scale: Calendar.InfiniteCalendarViewModel.DecadeScale
                 }
 
                 property int startIndex

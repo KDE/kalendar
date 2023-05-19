@@ -17,30 +17,6 @@ QtObject {
 
     readonly property bool darkMode: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
 
-    function switchView(newViewComponent, viewSettings) {
-        if(appMain.pageStack.layers.depth > 1) {
-            appMain.pageStack.layers.pop(appMain.pageStack.layers.initialItem);
-        }
-        if (appMain.pageStack.depth > 1) {
-            appMain.pageStack.pop();
-        }
-        appMain.pageStack.replace(newViewComponent);
-
-        if (appMain.filterHeaderBarLoaderItem.active && appMain.pageStack.currentItem.mode !== KalendarApplication.Contact) {
-            appMain.pageStack.currentItem.header = appMain.filterHeaderBarLoaderItem.item;
-        }
-
-        if(viewSettings) {
-            for(const [key, value] of Object.entries(viewSettings)) {
-                appMain.pageStack.currentItem[key] = value;
-            }
-        }
-
-        if (appMain.pageStack.currentItem.mode & KalendarApplication.Event) {
-            appMain.pageStack.currentItem.setToDate(appMain.selectedDate, true);
-        }
-    }
-
     function editorToUse() {
         if (!Kirigami.Settings.isMobile) {
             appMain.editorWindowedLoaderItem.active = true

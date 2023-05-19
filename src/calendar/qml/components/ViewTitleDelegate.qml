@@ -3,13 +3,14 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
+import org.kde.kalendar.components 1.0 as Components
 
 RowLayout {
     property alias titleDateButton: titleDataButton
 
     spacing: 0
 
-    MainDrawerToggleButton {}
+    Components.MainDrawerToggleButton {}
 
     TitleDateButton {
         id: titleDataButton

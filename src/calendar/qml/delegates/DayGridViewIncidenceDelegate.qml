@@ -7,9 +7,8 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 
 import org.kde.kalendar 1.0 as Kalendar
-import org.kde.kalendar.utils 1.0
-import "dateutils.js" as DateUtils
-import "labelutils.js" as LabelUtils
+import "../dateutils.js" as DateUtils
+import "../labelutils.js" as LabelUtils
 
 Item {
     id: incidenceDelegate

@@ -92,6 +92,8 @@ public:
     Q_INVOKABLE void editCollection(qint64 collectionId);
     Q_INVOKABLE void toggleCollection(qint64 collectionId);
 
+    Q_INVOKABLE IncidenceWrapper *createIncidenceWrapper();
+
     void showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken);
 
 private Q_SLOTS:

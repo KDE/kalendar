@@ -5,9 +5,9 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
-import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.calendar 1.0 as Calendar
 
-import "dateutils.js" as DateUtils
+import "../dateutils.js" as DateUtils
 
 PathView {
     id: pathView
@@ -23,12 +23,12 @@ PathView {
         let monthDiff = date.getMonth() - currentItem.firstDayOfMonth.getMonth() + (12 * (date.getFullYear() - currentItem.firstDayOfMonth.getFullYear()))
         let newIndex = currentIndex + monthDiff;
 
-        let firstItemDate = model.data(model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
-        let lastItemDate = model.data(model.index(model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+        let firstItemDate = model.data(model.index(1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+        let lastItemDate = model.data(model.index(model.rowCount() - 1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
 
         while(firstItemDate >= date) {
             model.addDates(false)
-            firstItemDate = model.data(model.index(1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+            firstItemDate = model.data(model.index(1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
             newIndex = 0;
         }
         if(firstItemDate < date && newIndex === 0) {
@@ -37,7 +37,7 @@ PathView {
 
         while(lastItemDate <= date) {
             model.addDates(true)
-            lastItemDate = model.data(model.index(model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
+            lastItemDate = model.data(model.index(model.rowCount() - 1,0), Calendar.InfiniteCalendarViewModel.FirstDayOfMonthRole);
         }
         currentIndex = newIndex;
 
@@ -61,8 +61,8 @@ PathView {
         }
     }
 
-    model: Kalendar.InfiniteCalendarViewModel {
-        scale: Kalendar.InfiniteCalendarViewModel.MonthScale
+    model: Calendar.InfiniteCalendarViewModel {
+        scale: Calendar.InfiniteCalendarViewModel.MonthScale
     }
 
     property int startIndex

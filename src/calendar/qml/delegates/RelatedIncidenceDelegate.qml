@@ -8,7 +8,6 @@ import QtQuick.Layouts 1.15
 import "labelutils.js" as LabelUtils
 
 import org.kde.kalendar 1.0
-import org.kde.kalendar.utils 1.0
 
 Item {
     id: root

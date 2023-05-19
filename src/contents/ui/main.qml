@@ -11,13 +11,10 @@ import QtQml.Models 2.15
 import QtGraphicalEffects 1.12
 import QtQuick.Dialogs 1.0
 
-import "dateutils.js" as DateUtils
-import "labelutils.js" as LabelUtils
 import org.kde.kalendar 1.0
 import org.kde.kalendar.calendar 1.0
 import org.kde.kalendar.contact 1.0
 import org.kde.kalendar.mail 1.0
-import org.kde.kalendar.utils 1.0
 import org.kde.kalendar.components 1.0
 
 Kirigami.ApplicationWindow {
@@ -32,17 +29,6 @@ Kirigami.ApplicationWindow {
     readonly property var calendarApplication: CalendarApplication {}
     readonly property var mailApplication: MailApplication {}
     readonly property var contactApplication: ContactApplication {}
-
-
-    property date currentDate: new Date()
-    Timer {
-        interval: 5000;
-        running: true
-        repeat: true
-        onTriggered: currentDate = new Date()
-    }
-    property date selectedDate: new Date()
-    property var openOccurrence: {}
 
     readonly property var monthViewAction: KalendarApplication.action("open_month_view")
     readonly property var weekViewAction: KalendarApplication.action("open_week_view")
@@ -105,7 +91,7 @@ Kirigami.ApplicationWindow {
     // We use this property to temporarily allow a view to be replaced by a view of the same type
 
     Component.onCompleted: {
-        KalendarUiUtils.appMain = root; // Most of our util functions use things defined here in main
+        Navigation.pageStack = root.pageStack;
 
         if (Config.lastOpenedView === -1) {
             Kirigami.Settings.isMobile ? scheduleViewAction.trigger() : monthViewAction.trigger();
@@ -178,52 +164,35 @@ Kirigami.ApplicationWindow {
     Connections {
         target: KalendarApplication
         function onOpenMonthView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.Month || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(monthViewComponent);
-            }
+            Navigation.switchView('calendar', 'month');
         }
 
         function onOpenWeekView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.Week || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(hourlyViewComponent);
-            }
+            Navigation.switchView('calendar', 'week', { daysToShow: 7 });
         }
 
         function onOpenThreeDayView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.ThreeDay || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 3 });
-            }
+            Navigation.switchView('calendar', 'week', { daysToShow: 3 });
         }
 
         function onOpenDayView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.Day || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 1 });
-            }
+            Navigation.switchView('calendar', 'week', { daysToShow: 1 });
         }
 
         function onOpenScheduleView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.Schedule || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(scheduleViewComponent);
-            }
+            Navigation.switchView('calendar', 'schedule');
         }
 
         function onOpenContactView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.Contact || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView("qrc:/LazyContactView.qml");
-            }
+            Navigation.switchView('contact', 'contacts');
         }
 
         function onOpenMailView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.Mail || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView("qrc:/LazyMailView.qml");
-            }
+            Navigation.switchView('mail', 'mails');
         }
 
         function onOpenTodoView() {
-            if(pageStack.currentItem.mode !== KalendarApplication.Todo) {
-                filterHeaderBar.active = true;
-                KalendarUiUtils.switchView(todoViewComponent);
-            }
+            Navigation.switchView('calendar', 'todo');
         }
 
         function onMoveViewForwards() {
@@ -484,8 +453,6 @@ Kirigami.ApplicationWindow {
         }
     }
 
-
-
     footer: Loader {
         id: bottomLoader
         active: Kirigami.Settings.isMobile
@@ -512,6 +479,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    /*
     contextDrawer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer : null
 
     readonly property var incidenceInfoViewer: incidenceInfoDrawerEnabled ? incidenceInfoDrawer :
@@ -682,65 +650,6 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    Loader {
-        id: dateChangeDrawer
-        active: false
-        visible: status === Loader.Ready
-        onStatusChanged: if(status === Loader.Ready) item.open()
-        sourceComponent: DateChanger {
-            y: pageStack.globalToolBar.height - 1
-            showDays: pageStack.currentItem && pageStack.currentItem.mode !== KalendarApplication.MonthView
-            date: root.selectedDate
-            onDateSelected: if(visible) {
-                pageStack.currentItem.setToDate(date);
-                root.selectedDate = date;
-            }
-        }
-    }
-
-    IncidenceEditorPage {
-        id: incidenceEditorPage
-        onAdded: CalendarManager.addIncidence(incidenceWrapper)
-        onEdited: CalendarManager.editIncidence(incidenceWrapper)
-        onCancel: pageStack.layers.pop()
-    }
-
-    property alias editorWindowedLoaderItem: editorWindowedLoader
-    Loader {
-        id: editorWindowedLoader
-        active: false
-        sourceComponent: Kirigami.ApplicationWindow {
-            id: root
-
-            width: Kirigami.Units.gridUnit * 40
-            height: Kirigami.Units.gridUnit * 32
-
-            flags: Qt.Dialog | Qt.WindowCloseButtonHint
-
-            // Probably a more elegant way of accessing the editor from outside than this.
-            property var incidenceEditorPage: incidenceEditorPageInLoader
-
-            pageStack.initialPage: incidenceEditorPageInLoader
-
-            Loader {
-                active: !Kirigami.Settings.isMobile
-                source: Qt.resolvedUrl("qrc:/GlobalMenu.qml")
-                onLoaded: item.parentWindow = root
-            }
-
-            IncidenceEditorPage {
-                id: incidenceEditorPageInLoader
-                onAdded: CalendarManager.addIncidence(incidenceWrapper)
-                onEdited: CalendarManager.editIncidence(incidenceWrapper)
-                onCancel: root.close()
-                Keys.onEscapePressed: root.close()
-            }
-
-            visible: true
-            onClosing: editorWindowedLoader.active = false
-        }
-    }
-
     property alias filterHeaderBarLoaderItem: filterHeaderBar
     Loader {
         id: filterHeaderBar
@@ -907,27 +816,6 @@ Kirigami.ApplicationWindow {
     }
 
     Component {
-        id: monthViewComponent
-
-        MonthView {
-            id: monthView
-            objectName: "monthView"
-
-            titleDelegate: ViewTitleDelegate {
-                titleDateButton.date: monthView.firstDayOfMonth
-                titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
-            }
-            currentDate: root.currentDate
-            openOccurrence: root.openOccurrence
-
-            onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-            onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-
-            actions.contextualActions: createAction
-        }
-    }
-
-    Component {
         id: scheduleViewComponent
 
         ScheduleView {
@@ -1026,6 +914,7 @@ Kirigami.ApplicationWindow {
             }
         }
     }
+    */
 
     property Item hoverLinkIndicator: QQC2.Control {
         parent: overlay.parent

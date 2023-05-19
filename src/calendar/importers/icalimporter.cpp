@@ -48,3 +48,18 @@ QString ICalImporter::importErrorMessage() const
 {
     return m_importErrorMessage;
 }
+
+Akonadi::ETMCalendar::Ptr ICalImporter::calendar() const
+{
+    return m_calendar;
+}
+
+void ICalImporter::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
+{
+    if (m_calendar == calendar) {
+        return;
+    }
+    m_calendar = calendar;
+    Q_EMIT calendarChanged();
+    ;
+}

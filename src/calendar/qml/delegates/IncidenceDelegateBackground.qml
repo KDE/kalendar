@@ -5,8 +5,8 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
-import org.kde.kalendar 1.0 as Kalendar
-import "labelutils.js" as LabelUtils
+import org.kde.kalendar.calendar 1.0 as Calendar
+import "../labelutils.js" as LabelUtils
 
 Kirigami.ShadowedRectangle {
     id: incidenceDelegateBackground
@@ -15,12 +15,12 @@ Kirigami.ShadowedRectangle {
     property bool isOpenOccurrence: false
     property bool reactToCurrentMonth: false
     property bool isInCurrentMonth: true
-    property bool isDark: KalendarUiUtils.darkMode
+    property bool isDark: LabelUtils.isDarkColor(Kirigami.Theme.backgroundColor)
     property bool allDay: false
     
     anchors.fill: parent
     color: isOpenOccurrence ? modelData.color :
-        LabelUtils.getIncidenceDelegateBackgroundColor(modelData.color, root.isDark, modelData.endTime, Kalendar.Config.pastEventsTransparencyLevel)
+        LabelUtils.getIncidenceDelegateBackgroundColor(modelData.color, root.isDark, modelData.endTime, Calendar.Config.pastEventsTransparencyLevel)
     Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
     opacity: !isInDayGridView || isOpenOccurrence || (isInCurrentMonth && allDay) ? 1 : 0
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }

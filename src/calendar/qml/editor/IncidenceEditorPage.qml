@@ -18,13 +18,17 @@ import "labelutils.js" as LabelUtils
 Kirigami.ScrollablePage {
     id: root
 
-    signal added(IncidenceWrapper incidenceWrapper)
-    signal edited(IncidenceWrapper incidenceWrapper)
-    signal cancel
+    function added(incidenceWrapper: Calendar.IncidenceWrapper) {
+        CalendarManager.addIncidence(incidenceWrapper);
+    }
 
-    // Setting the incidenceWrapper here and now causes some *really* weird behaviour.
-    // Set it after this component has already been instantiated.
-    property var incidenceWrapper
+    function edit(incidenceWrapper: Calendar.IncidenceWrapper) {
+        CalendarManager.editIncidence(incidenceWrapper);
+    }
+
+    readonly property Calendar.IncidenceWrapper incidenceWrapper: Calendar.IncidenceWrapper {
+
+    }
 
     property bool editMode: false
     property bool validDates: {
@@ -55,7 +59,7 @@ Kirigami.ScrollablePage {
             QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
         }
 
-        onRejected: cancel()
+        onRejected: root.close()
         onAccepted: submitAction.trigger()
     }
 
@@ -80,7 +84,7 @@ Kirigami.ScrollablePage {
 
                 added(incidenceWrapper);
             }
-            cancel(); // Easy way to close the editor
+            root.close();
         }
     }
 
@@ -346,7 +350,7 @@ Kirigami.ScrollablePage {
                     Kirigami.FormData.label: i18n("Timezone:")
                     Layout.fillWidth: true
 
-                    model: TimeZoneListModel {
+                    model: Calendar.TimeZoneListModel {
                         id: timeZonesModel
                     }
 

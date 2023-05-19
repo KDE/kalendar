@@ -5,7 +5,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 
-import "dateutils.js" as DateUtils
+import "../dateutils.js" as DateUtils
 
 Row {
     id: root

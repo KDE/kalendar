@@ -8,6 +8,8 @@ set(kalendar_calendar_SRCS
     filter.h
     incidencewrapper.cpp
     incidencewrapper.h
+    importers/icalimporter.cpp
+    importers/icalimporter.h
     models/attachmentsmodel.cpp
     models/attachmentsmodel.h
     models/attendeesmodel.cpp
@@ -63,22 +65,83 @@ target_sources(kalendar_calendar_plugin PRIVATE
     calendarplugin.h
 )
 
-ecm_target_qml_sources(kalendar_calendar_plugin SOURCES
-    qml/CalendarApplication.qml
-    qml/incidenceeditor/ReminderDelegate.qml
-    qml/incidenceeditor/PriorityComboBox.qml
+ecm_target_qml_sources(kalendar_calendar_plugin
+    SOURCES
+        qml/CalendarApplication.qml
+        qml/incidenceeditor/ReminderDelegate.qml
+        qml/incidenceeditor/PriorityComboBox.qml
+        qml/dateutils.js
+        qml/labelutils.js
 )
 
-ecm_target_qml_sources(kalendar_calendar_plugin
-    PRIVATE PATH private SOURCES
-    qml/private/MenuBar.qml
-    qml/private/GlobalMenuBar.qml
+ecm_target_qml_sources(kalendar_calendar_plugin PRIVATE
+    PATH
+        private
+    SOURCES
+        qml/private/MenuBar.qml
+        qml/private/GlobalMenuBar.qml
 )
 
-ecm_target_qml_sources(kalendar_calendar_plugin
-    PRIVATE PATH private/import SOURCES
-    qml/private/import/ImportHandler.qml
-    qml/private/import/ImportFileDialog.qml
+ecm_target_qml_sources(kalendar_calendar_plugin PRIVATE
+    PATH
+        private/import
+    SOURCES
+        qml/private/import/ImportHandler.qml
+        qml/private/import/ImportFileDialog.qml
+)
+
+ecm_target_qml_sources(kalendar_calendar_plugin PRIVATE
+    PATH
+        views
+    SOURCES
+        qml/views/DayGridView.qml
+
+        qml/views/MonthView.qml
+        qml/views/SwipeableMonthGridView.qml
+        qml/views/BasicMonthGridView.qml
+
+        qml/views/ScheduleView.qml
+        qml/views/SwipeableMonthListView.qml
+        qml/views/BasicMonthListView.qml
+
+        qml/views/TodoTreeView.qml
+        qml/views/TodoView.qml
+
+        qml/views/HourlyView.qml
+        qml/views/SwipeableInternalHourlyView.qml
+        qml/views/BasicInternalHourlyView.qml
+)
+
+ecm_target_qml_sources(kalendar_calendar_plugin PRIVATE
+    PATH
+        editor
+    SOURCES
+        qml/editor/IncidenceEditorPage.qml
+)
+
+ecm_target_qml_sources(kalendar_calendar_plugin PRIVATE
+    PATH
+        components
+    SOURCES
+        qml/components/DateChanger.qml
+        qml/components/DateCombo.qml
+        qml/components/DatePicker.qml
+        qml/components/DayLabelsBar.qml
+        qml/components/TimeCombo.qml
+        qml/components/TimePicker.qml
+        qml/components/TitleDateButton.qml
+        qml/components/ViewTitleDelegate.qml
+)
+
+ecm_target_qml_sources(kalendar_calendar_plugin PRIVATE
+    PATH
+        delegates
+    SOURCES
+        qml/delegates/DayGridViewIncidenceDelegate.qml
+        qml/delegates/DayMouseArea.qml
+        qml/delegates/RelatedIncidenceDelegate.qml
+        qml/delegates/IncidenceDelegateBackground.qml
+        qml/delegates/IncidenceMouseArea.qml
 )
 
 target_link_libraries(kalendar_calendar_plugin PUBLIC kalendar_calendar_static)

@@ -131,11 +131,10 @@ protected:
     }
 };
 
-Q_GLOBAL_STATIC(CalendarManager, calendarManagerGlobalInstance)
-
 CalendarManager *CalendarManager::instance()
 {
-    return calendarManagerGlobalInstance;
+    static CalendarManager calendarManagerGlobalInstance;
+    return &calendarManagerGlobalInstance;
 }
 
 CalendarManager::CalendarManager(QObject *parent)
@@ -822,6 +821,11 @@ void CalendarManager::showIncidenceByUid(const QString &uid, const QDateTime &oc
         KWindowSystem::activateWindow(window);
         window->raise();
     }
+}
+
+IncidenceWrapper *CalendarManager::createIncidenceWrapper()
+{
+    return new IncidenceWrapper(this);
 }
 
 #ifndef UNITY_CMAKE_SUPPORT

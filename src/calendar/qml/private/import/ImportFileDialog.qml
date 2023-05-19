@@ -3,9 +3,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Dialogs 1.0
 import org.kde.kalendar.calendar 1.0 as Calendar
+import org.kde.akonadi 1.0 as Akonadi
 
 FileDialog {
     id: root
@@ -32,7 +35,7 @@ FileDialog {
         });
     }
 
-    Component {
+    property Component _choicePage: Component {
         id: importChoicePageComponent
 
         Kirigami.Page {
@@ -96,10 +99,10 @@ FileDialog {
         }
     }
 
-    Component {
+    property Component _mergePicker: Component {
         id: importMergeCollectionPickerComponent
 
-        CollectionPickerPage {
+        Akonadi.CollectionPickerPage {
             onCollectionPicked: {
                 root.icalImporter.importCalendarFromUrl(importFileDialog.selectedUrl, true, collectionId);
                 root.calendarImportInProgress = false;

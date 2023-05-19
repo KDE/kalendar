@@ -5,7 +5,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
-import org.kde.kalendar 1.0 as Kalendar
+import org.kde.kalendar.calendar 1.0 as Calendar
 
 MouseArea {
     id: mouseArea
@@ -29,7 +29,7 @@ MouseArea {
 
     onClicked: {
         if (mouse.button == Qt.LeftButton) {
-            collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+            collectionDetails = Calendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
             viewClicked(incidenceData);
         } else if (mouse.button == Qt.RightButton) {
             clickX = mouseX;
@@ -43,7 +43,7 @@ MouseArea {
         incidenceActions.createObject(mouseArea, {}).open();
     }
     onDoubleClicked: {
-        collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+        collectionDetails = Calendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
         editClicked(incidenceData.incidencePtr);
     }
 
@@ -54,7 +54,7 @@ MouseArea {
             y: mouseArea.clickY
             x: mouseArea.clickX
             z: 1000
-            Component.onCompleted: if(mouseArea.collectionId && !mouseArea.collectionDetails) mouseArea.collectionDetails = Kalendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
+            Component.onCompleted: if(mouseArea.collectionId && !mouseArea.collectionDetails) mouseArea.collectionDetails = Calendar.CalendarManager.getCollectionDetails(mouseArea.collectionId)
 
             QQC2.MenuItem {
                 icon.name: "dialog-icon-preview"
@@ -81,30 +81,31 @@ MouseArea {
                 text: incidenceData.todoCompleted ? i18n("Mark Task as Incomplete") : i18n("Mark Task as Complete")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: todoCompletedClicked(incidenceData.incidencePtr)
-                visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+                visible: incidenceData.incidenceType === Calendar.IncidenceWrapper.TypeTodo
             }
             QQC2.MenuItem {
                 icon.name: "list-add"
                 text: i18n("Add Sub-Task")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: {
+                    // TODOMIGRATION
                     let parentWrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
                     parentWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
                     addSubTodoClicked(parentWrapper);
                 }
-                visible: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+                visible: incidenceData.incidenceType === Calendar.IncidenceWrapper.TypeTodo
             }
             QQC2.Menu {
                 id: setPriorityMenu
                 title: i18n("Set priority...")
-                enabled: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+                enabled: incidenceData.incidenceType === Calendar.IncidenceWrapper.TypeTodo
                 z: 1001
 
                 function setPriority(level) {
                     let wrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
-                    wrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
+                    wrapper.incidenceItem = Calendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
                     wrapper.priority = level;
-                    Kalendar.CalendarManager.editIncidence(wrapper);
+                    Calendar.CalendarManager.editIncidence(wrapper);
                 }
 
                 QQC2.MenuItem {
@@ -161,12 +162,12 @@ MouseArea {
             QQC2.Menu {
                 id: setDueDateMenu
                 title: i18n("Set due date...")
-                enabled: incidenceData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo
+                enabled: incidenceData.incidenceType === Calendar.IncidenceWrapper.TypeTodo
                 z: 1001
 
                 function setDate(date) {
                     let wrapper = Qt.createQmlObject('import org.kde.kalendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
-                    wrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
+                    wrapper.incidenceItem = Calendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
 
                     if(date && !isNaN(date.getTime())) {
                         // Remember we have to convert from JS months (0-11) to Qt months (1-12)
@@ -176,7 +177,7 @@ MouseArea {
                         wrapper.incidenceEnd = new Date(undefined);
                     }
 
-                    Kalendar.CalendarManager.editIncidence(wrapper);
+                    Calendar.CalendarManager.editIncidence(wrapper);
                 }
 
                 QQC2.MenuItem {

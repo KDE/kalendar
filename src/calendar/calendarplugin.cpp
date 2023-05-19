@@ -5,6 +5,7 @@
 #include "calendarmanager.h"
 #include "config.h"
 #include "filter.h"
+#include "importers/icalimporter.h"
 #include "incidencewrapper.h"
 #include "models/hourlyincidencemodel.h"
 #include "models/incidenceoccurrencemodel.h"
@@ -18,18 +19,13 @@
 #include "utils.h"
 
 #include <QAbstractListModel>
+#include <QAction>
 #include <QQmlEngine>
 #include <QtQml>
 
 void CalendarPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QByteArray("org.kde.kalendar.calendar"));
-
-    qmlRegisterSingletonType<Config>(uri, 1, 0, "Config", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-        return Config::self();
-    });
 
     qmlRegisterSingletonType<Utils>(uri, 1, 0, "Utils", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)
@@ -48,7 +44,9 @@ void CalendarPlugin::registerTypes(const char *uri)
     qRegisterMetaType<KCalendarCore::Incidence::Ptr>();
 
     qmlRegisterSingletonInstance(uri, 1, 0, "CalendarManager", CalendarManager::instance());
+    qmlRegisterSingletonInstance(uri, 1, 0, "Config", Config::self());
     qmlRegisterType<IncidenceWrapper>(uri, 1, 0, "IncidenceWrapper");
+    qmlRegisterType<ICalImporter>(uri, 1, 0, "ICalImporter");
     qmlRegisterType<AttendeesModel>(uri, 1, 0, "AttendeesModel");
     qmlRegisterType<MultiDayIncidenceModel>(uri, 1, 0, "MultiDayIncidenceModel");
     qmlRegisterType<IncidenceOccurrenceModel>(uri, 1, 0, "IncidenceOccurrenceModel");
@@ -59,7 +57,6 @@ void CalendarPlugin::registerTypes(const char *uri)
     qmlRegisterType<MonthModel>(uri, 1, 0, "MonthModel");
     qmlRegisterType<InfiniteCalendarViewModel>(uri, 1, 0, "InfiniteCalendarViewModel");
 
-    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/KalendarUiUtils.qml")), uri, 1, 0, "KalendarUiUtils");
-
     qRegisterMetaType<Akonadi::ETMCalendar::Ptr>();
+    qRegisterMetaType<QAction *>();
 }

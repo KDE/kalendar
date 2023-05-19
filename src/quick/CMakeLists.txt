@@ -22,9 +22,10 @@ target_sources(akonadi_quick_plugin PRIVATE
 )
 
 ecm_target_qml_sources(akonadi_quick_plugin SOURCES
-    qml/CollectionComboBox.qml
-    qml/MobileCollectionComboBox.qml
     qml/AgentConfigurationForm.qml
+    qml/CollectionComboBox.qml
+    qml/CollectionPickerPage.qml
+    qml/MobileCollectionComboBox.qml
 )
 
 ecm_qt_declare_logging_category(akonadi_quick_plugin
