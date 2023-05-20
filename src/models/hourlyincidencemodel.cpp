@@ -13,7 +13,7 @@ HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     mRefreshTimer.setSingleShot(true);
     mRefreshTimer.setInterval(200ms);
     mRefreshTimer.callOnTimeout(this, [this] {
-        Q_EMIT dataChanged(index(0, 0), index(rowCount() - 1, 0), { IncidencesRole });
+        Q_EMIT dataChanged(index(0, 0), index(rowCount() - 1, 0), {IncidencesRole});
     });
 }
 
