@@ -10,6 +10,7 @@
 
 #include "../filter.h"
 #include "../utils.h"
+#include <Akonadi/CollectionColorAttribute>
 #include <Akonadi/EntityTreeModel>
 #include <KCalendarCore/OccurrenceIterator>
 #include <KConfigGroup>
@@ -173,10 +174,10 @@ void IncidenceOccurrenceModel::resetFromSource()
 
 int IncidenceOccurrenceModel::rowCount(const QModelIndex &parent) const
 {
-    if (!parent.isValid()) {
-        return m_incidences.size();
+    if (parent.isValid()) {
+        return 0;
     }
-    return 0;
+    return m_incidences.size();
 }
 
 qint64 IncidenceOccurrenceModel::getCollectionId(const KCalendarCore::Incidence::Ptr &incidence)
@@ -194,19 +195,31 @@ qint64 IncidenceOccurrenceModel::getCollectionId(const KCalendarCore::Incidence:
 
 QColor IncidenceOccurrenceModel::getColor(const KCalendarCore::Incidence::Ptr &incidence)
 {
-    auto item = m_coreCalendar->item(incidence);
+    if (!incidence->color().isEmpty()) {
+        return incidence->color();
+    }
+
+    const auto item = m_coreCalendar->item(incidence);
     if (!item.isValid()) {
         return {};
     }
-    auto collection = item.parentCollection();
+
+    const auto collection = item.parentCollection();
     if (!collection.isValid()) {
         return {};
     }
-    const QString id = QString::number(collection.id());
-    // qDebug() << "Collection id: " << collection.id();
+
+    const auto id = collection.id();
+
+    if (collection.hasAttribute<Akonadi::CollectionColorAttribute>()) {
+        const auto colorAttr = collection.attribute<Akonadi::CollectionColorAttribute>();
+        if (colorAttr && colorAttr->color().isValid()) {
+            m_colors[id] = colorAttr->color();
+            return colorAttr->color();
+        }
+    }
 
     if (m_colors.contains(id)) {
-        // qDebug() << collection.id() << "Found in m_colors";
         return m_colors[id];
     }
 
@@ -302,6 +315,7 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
     case Qt::SizeHintRole:
     case Qt::TextAlignmentRole:
     case Qt::CheckStateRole:
+    case Qt::FontRole:
     case -1:
         return {};
     default:
@@ -341,8 +355,9 @@ void IncidenceOccurrenceModel::loadColors()
     const QStringList colorKeyList = rColorsConfig.keyList();
 
     for (const QString &key : colorKeyList) {
+        const auto keyId = key.toLong();
         QColor color = rColorsConfig.readEntry(key, QColor("blue"));
-        m_colors[key] = color;
+        m_colors[keyId] = color;
     }
 }
 
@@ -368,14 +383,8 @@ bool IncidenceOccurrenceModel::incidencePassesFilter(const KCalendarCore::Incide
         return true;
     }
 
-    auto match = false;
     const auto tags = mFilter->tags();
-    for (const auto &tag : tags) {
-        if (incidence->categories().contains(tag)) {
-            match = true;
-            break;
-        }
-    }
-
-    return match;
+    return std::any_of(tags.cbegin(), tags.cend(), [&incidence](const QString &tag) {
+        return incidence->categories().contains(tag);
+    });
 }

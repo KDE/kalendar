@@ -24,7 +24,7 @@ Kirigami.ScrollablePage {
     }
 
     function openEditor() {
-        pageStack.pushDialogLayer(Qt.resolvedUrl("ContactEditorPage.qml"), {
+        pageStack.pushDialogLayer(Qt.resolvedUrl("./contact_editor/ContactEditorPage.qml"), {
             mode: ContactEditor.EditMode,
             item: page.addressee.addresseeItem,
         })

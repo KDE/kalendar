@@ -2,34 +2,27 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "hourlyincidencemodel.h"
-#include "kalendar_debug.h"
 #include <QTimeZone>
 #include <cmath>
+
+using namespace std::chrono_literals;
 
 HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
     : QAbstractListModel(parent)
 {
     mRefreshTimer.setSingleShot(true);
-    mRefreshTimer.setInterval(100);
-    mRefreshTimer.callOnTimeout(this, &HourlyIncidenceModel::resetLayoutLines);
-}
-
-QModelIndex HourlyIncidenceModel::index(int row, int column, const QModelIndex &parent) const
-{
-    if (!hasIndex(row, column, parent)) {
-        return {};
-    }
-
-    if (!parent.isValid()) {
-        return createIndex(row, column);
-    }
-    return {};
+    mRefreshTimer.setInterval(200ms);
+    mRefreshTimer.callOnTimeout(this, [this] {
+        Q_EMIT dataChanged(index(0, 0), index(rowCount() - 1, 0), { IncidencesRole });
+    });
 }
 
 int HourlyIncidenceModel::rowCount(const QModelIndex &parent) const
 {
     // Number of weeks
-    if (!parent.isValid() && mSourceModel) {
+    Q_ASSERT(!parent.isValid());
+
+    if (mSourceModel) {
         return qMax(mSourceModel->length(), 1);
     }
     return 0;
@@ -302,48 +295,18 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
     return result;
 }
 
-void HourlyIncidenceModel::resetLayoutLines()
-{
-    if (mSourceModel->calendar()->isLoading()) {
-        if (!mRefreshTimer.isActive()) {
-            mRefreshTimer.start(100);
-        }
-        return;
-    }
-
-    beginResetModel();
-
-    m_laidOutLines.clear();
-
-    const auto numPeriods = rowCount({});
-    m_laidOutLines.reserve(numPeriods);
-
-    for (int i = 0; i < numPeriods; ++i) {
-        const auto periodStart = mSourceModel->start().addDays(i).startOfDay();
-        const auto periodIncidenceLayout = layoutLines(periodStart);
-        m_laidOutLines.append(periodIncidenceLayout);
-    }
-
-    endResetModel();
-}
-
 QVariant HourlyIncidenceModel::data(const QModelIndex &idx, int role) const
 {
-    if (!hasIndex(idx.row(), idx.column()) || !mSourceModel || m_laidOutLines.empty()) {
-        return {};
-    }
-    if (!mSourceModel) {
-        return {};
-    }
+    Q_ASSERT(hasIndex(idx.row(), idx.column()) && mSourceModel);
+
     const auto rowStart = mSourceModel->start().addDays(idx.row()).startOfDay();
     switch (role) {
-    case PeriodStartDateTime:
+    case PeriodStartDateTimeRole:
         return rowStart;
-    case Incidences:
-        return m_laidOutLines.at(idx.row());
+    case IncidencesRole:
+        return layoutLines(rowStart);
     default:
-        Q_ASSERT(false);
-        return {};
+        Q_UNREACHABLE();
     }
 }
 
@@ -355,102 +318,27 @@ IncidenceOccurrenceModel *HourlyIncidenceModel::model() const
 void HourlyIncidenceModel::setModel(IncidenceOccurrenceModel *model)
 {
     beginResetModel();
-
-    m_laidOutLines.clear();
     mSourceModel = model;
     Q_EMIT modelChanged();
-
     endResetModel();
 
-    auto resetModel = [this] {
-        if (!mRefreshTimer.isActive()) {
-            mRefreshTimer.start(100);
-        }
-    };
-    QObject::connect(model, &QAbstractItemModel::dataChanged, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::layoutChanged, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::modelReset, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::rowsInserted, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::rowsMoved, this, resetModel);
-    QObject::connect(model, &QAbstractItemModel::rowsRemoved, this, resetModel);
+    connect(model, &QAbstractItemModel::dataChanged, this, &HourlyIncidenceModel::scheduleReset);
+    connect(model, &QAbstractItemModel::layoutChanged, this, &HourlyIncidenceModel::scheduleReset);
+    connect(model, &QAbstractItemModel::modelReset, this, &HourlyIncidenceModel::scheduleReset);
+    connect(model, &QAbstractItemModel::rowsInserted, this, &HourlyIncidenceModel::scheduleReset);
+    connect(model, &QAbstractItemModel::rowsMoved, this, &HourlyIncidenceModel::scheduleReset);
+    connect(model, &QAbstractItemModel::rowsRemoved, this, &HourlyIncidenceModel::scheduleReset);
+    connect(model, &IncidenceOccurrenceModel::lengthChanged, this, [this] {
+        beginResetModel();
+        endResetModel();
+    });
 }
 
-void HourlyIncidenceModel::slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight)
+void HourlyIncidenceModel::scheduleReset()
 {
-    if (!upperLeft.isValid() || !bottomRight.isValid()) {
-        return;
+    if (!mRefreshTimer.isActive()) {
+        mRefreshTimer.start();
     }
-
-    const auto startRow = upperLeft.row();
-    const auto endRow = bottomRight.row();
-
-    scheduleLayoutLinesUpdates(upperLeft.parent(), startRow, endRow);
-}
-
-void HourlyIncidenceModel::scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow)
-{
-    if (!mSourceModel) {
-        return;
-    }
-
-    // If we have no existing laid out lines it means we have not done an
-    // initial setup. Go do that, which will provide incidences anyway
-    if (m_laidOutLines.empty()) {
-        resetLayoutLines();
-        return;
-    }
-
-    // Don't bother if we are going for a full reset soon
-    if (mRefreshTimer.isActive()) {
-        return;
-    }
-
-    for (int i = sourceFirstRow; i <= sourceLastRow; ++i) {
-        if (m_linesToUpdate.count() == m_laidOutLines.count()) {
-            break;
-        }
-
-        const auto sourceModelIndex = mSourceModel->index(i, 0, sourceIndexParent);
-        const auto occurrence = sourceModelIndex.data(IncidenceOccurrenceModel::IncidenceOccurrence).value<IncidenceOccurrenceModel::Occurrence>();
-
-        const auto sourceModelStartDate = mSourceModel->start();
-        const auto startDaysFromSourceStart = sourceModelStartDate.daysTo(occurrence.start.date());
-        const auto endDaysFromSourceStart = sourceModelStartDate.daysTo(occurrence.end.date());
-
-        const auto firstPeriodOccurrenceAppears = startDaysFromSourceStart / mPeriodLength;
-        const auto lastPeriodOccurrenceAppears = endDaysFromSourceStart / mPeriodLength;
-
-        if (firstPeriodOccurrenceAppears > m_laidOutLines.count() || lastPeriodOccurrenceAppears < 0) {
-            continue;
-        }
-
-        const auto lastRow = m_laidOutLines.count() - 1;
-        const auto minRow = qMin(qMax(static_cast<int>(firstPeriodOccurrenceAppears), 0), lastRow);
-        const auto maxRow = qMin(static_cast<int>(lastPeriodOccurrenceAppears), lastRow);
-
-        // We set the layout lines scheduled to redo
-        m_linesToUpdate.insert(minRow);
-        m_linesToUpdate.insert(maxRow);
-    }
-
-    // Throttle how often we are changing the lines or the views will be slow
-    if (!m_updateLinesTimer.isActive()) {
-        m_updateLinesTimer.start(100);
-    }
-}
-
-void HourlyIncidenceModel::updateScheduledLayoutLines()
-{
-    for (const auto lineIndex : std::as_const(m_linesToUpdate)) {
-        const auto periodStart = mSourceModel->start().addDays(lineIndex).startOfDay();
-        const auto idx = index(lineIndex, 0);
-        const auto laidOutLine = layoutLines(periodStart);
-
-        m_laidOutLines.replace(lineIndex, laidOutLine);
-        Q_EMIT dataChanged(idx, idx);
-    }
-
-    m_linesToUpdate.clear();
 }
 
 int HourlyIncidenceModel::periodLength() const
@@ -460,7 +348,13 @@ int HourlyIncidenceModel::periodLength() const
 
 void HourlyIncidenceModel::setPeriodLength(int periodLength)
 {
+    if (mPeriodLength == periodLength) {
+        return;
+    }
     mPeriodLength = periodLength;
+    Q_EMIT periodLengthChanged();
+
+    scheduleReset();
 }
 
 HourlyIncidenceModel::Filters HourlyIncidenceModel::filters() const
@@ -470,10 +364,13 @@ HourlyIncidenceModel::Filters HourlyIncidenceModel::filters() const
 
 void HourlyIncidenceModel::setFilters(HourlyIncidenceModel::Filters filters)
 {
-    beginResetModel();
+    if (m_filters == filters) {
+        return;
+    }
     m_filters = filters;
     Q_EMIT filtersChanged();
-    endResetModel();
+
+    scheduleReset();
 }
 
 bool HourlyIncidenceModel::showTodos() const
@@ -490,7 +387,7 @@ void HourlyIncidenceModel::setShowTodos(const bool showTodos)
     m_showTodos = showTodos;
     Q_EMIT showTodosChanged();
 
-    resetLayoutLines();
+    scheduleReset();
 }
 
 bool HourlyIncidenceModel::showSubTodos() const
@@ -507,13 +404,34 @@ void HourlyIncidenceModel::setShowSubTodos(const bool showSubTodos)
     m_showSubTodos = showSubTodos;
     Q_EMIT showSubTodosChanged();
 
-    resetLayoutLines();
+    scheduleReset();
+}
+
+bool HourlyIncidenceModel::active() const
+{
+    return m_active;
+}
+
+void HourlyIncidenceModel::setActive(const bool active)
+{
+    if (active == m_active) {
+        return;
+    }
+
+    m_active = active;
+    Q_EMIT activeChanged();
+
+    if (active && mRefreshTimer.isActive() && std::chrono::milliseconds(mRefreshTimer.remainingTime()) > 200ms) {
+        Q_EMIT dataChanged(index(0, 0), index(rowCount() - 1, 0));
+        mRefreshTimer.stop();
+    }
+    mRefreshTimer.setInterval(active ? 200ms : 1000ms);
 }
 
 QHash<int, QByteArray> HourlyIncidenceModel::roleNames() const
 {
     return {
-        {Incidences, "incidences"},
-        {PeriodStartDateTime, "periodStartDateTime"},
+        {IncidencesRole, "incidences"},
+        {PeriodStartDateTimeRole, "periodStartDateTime"},
     };
 }

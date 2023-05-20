@@ -45,9 +45,9 @@ DayGridView {
         Layout.maximumHeight: Kirigami.Units.gridUnit * 2
         contentItem: Kirigami.Heading {
             text: {
-                let longText = day.toLocaleString(Qt.locale(), "dddd");
-                let midText = day.toLocaleString(Qt.locale(), "ddd");
-                let shortText = midText.slice(0,1);
+                const longText = day.toLocaleString(Qt.locale(), "dddd");
+                const midText = day.toLocaleString(Qt.locale(), "ddd");
+                const shortText = midText.slice(0,1);
                 switch(Kalendar.Config.weekdayLabelLength) {
                     case Kalendar.Config.Full:
                         let chosenFormat = "dddd"
@@ -89,4 +89,3 @@ DayGridView {
         }
     }
 }
-

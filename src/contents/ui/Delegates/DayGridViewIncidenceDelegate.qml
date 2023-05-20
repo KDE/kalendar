@@ -14,15 +14,47 @@ import "labelutils.js" as LabelUtils
 Item {
     id: incidenceDelegate
 
-    x: ((dayWidth + parentViewSpacing) * modelData.starts) + horizontalSpacing
+    required property int starts
+    required property int duration
+    required property var incidenceId
+    required property var incidencePtr
+    required property date occurrenceDate
+    required property date occurrenceEndDate
+    required property bool allDay
+    required property bool isDark
+
+    property real dayWidth: 0
+    property real parentViewSpacing: 0
+    property int horizontalSpacing: 0 // In between incidence spaces
+    property real radius: Kirigami.Units.smallSpacing
+    property string openOccurrenceId: ""
+    property bool isOpenOccurrence: openOccurrenceId.length > 0 ?
+        openOccurrenceId === incidenceDelegate.incidenceId : false
+    property bool reactToCurrentMonth: true
+    readonly property bool isInCurrentMonth: reactToCurrentMonth ?
+        incidenceDelegate.occurrenceEndDate.getMonth() === root.month || incidenceDelegate.occurrenceDate.getMonth() === root.month :
+        true
+
+    property alias mouseArea: mouseArea
+    property bool repositionAnimationEnabled: false
+    property bool caught: false
+    property real caughtX: 0
+    property real caughtY: 0
+    property bool dragDropEnabled: true
+
+    x: ((dayWidth + parentViewSpacing) * incidenceDelegate.starts) + horizontalSpacing
     y: 0
     z: 10
-    width: ((dayWidth + parentViewSpacing) * modelData.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
-    //Behavior on width { NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+    width: ((dayWidth + parentViewSpacing) * incidenceDelegate.duration) - (horizontalSpacing * 2) - parentViewSpacing // Account for spacing added to x and for spacing at end of line
     height: parent.height
-    opacity: isOpenOccurrence || isInCurrentMonth ?
-        1.0 : 0.5
-    Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.OutCubic } }
+    opacity: isOpenOccurrence || isInCurrentMonth ? 1.0 : 0.5
+
+    Behavior on opacity {
+        NumberAnimation {
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.OutCubic
+        }
+    }
 
     // Drag reposition animations -- when the incidence goes to the correct cell of the monthgrid
     Behavior on x {
@@ -40,29 +72,6 @@ Item {
             easing.type: Easing.OutCubic
         }
     }
-
-    property real dayWidth: 0
-    property real parentViewSpacing: 0
-    property int horizontalSpacing: 0 // In between incidence spaces
-    property real radius: Kirigami.Units.smallSpacing
-    property string openOccurrenceId: ""
-    property bool isOpenOccurrence: openOccurrenceId.length > 0 ?
-        openOccurrenceId === modelData.incidenceId : false
-    property bool reactToCurrentMonth: true
-    readonly property bool isInCurrentMonth: reactToCurrentMonth ?
-        modelData.endTime.getMonth() == root.month || modelData.startTime.getMonth() == root.month :
-        true
-    property bool isDark: KalendarUiUtils.darkMode
-
-    property alias mouseArea: mouseArea
-    property var incidencePtr: modelData.incidencePtr
-    property date occurrenceDate: modelData.startTime
-    property date occurrenceEndDate: modelData.endTime
-    property bool repositionAnimationEnabled: false
-    property bool caught: false
-    property real caughtX: 0
-    property real caughtY: 0
-    property bool dragDropEnabled: true
 
     Drag.active: mouseArea.drag.active
     Drag.hotSpot.x: mouseArea.mouseX
@@ -97,11 +106,11 @@ Item {
     IncidenceDelegateBackground {
         id: incidenceDelegateBackground
         isInDayGridView: true
-        isOpenOccurrence: parent.isOpenOccurrence
-        reactToCurrentMonth: parent.reactToCurrentMonth
-        isInCurrentMonth: parent.isInCurrentMonth
-        isDark: parent.isDark
-        allDay: modelData.allDay
+        isOpenOccurrence: incidenceDelegate.isOpenOccurrence
+        reactToCurrentMonth: incidenceDelegate.reactToCurrentMonth
+        isInCurrentMonth: incidenceDelegate.isInCurrentMonth
+        isDark: incidenceDelegate.isDark
+        allDay: incidenceDelegate.allDay
     }
 
     RowLayout {
@@ -146,7 +155,7 @@ Item {
             // We want equal alignment for items that both have a dot, don't have a dot because they are all-day, and
             // items that don't have a dot because they represent todos. Hidden items are compressed to a size of 0 so
             // instead we set the color to transparent.
-            color: modelData.allDay ? "transparent" :
+            color: incidenceDelegate.allDay ? "transparent" :
             incidenceDelegate.isOpenOccurrence ? incidenceContents.selectedContentColor : modelData.color
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
         }
@@ -167,14 +176,14 @@ Item {
 
         QQC2.Label {
             text: modelData.incidenceType === Kalendar.IncidenceWrapper.TypeTodo ?
-                modelData.endTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) :
-                modelData.startTime.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
+                incidenceDelegate.occurrenceEndDate.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat) :
+                incidenceDelegate.occurrenceDate.toLocaleTimeString(Qt.locale(), Locale.NarrowFormat)
             font.pointSize: parent.spaceRestricted ? Kirigami.Theme.smallFont.pointSize :
                 Kirigami.Theme.defaultFont.pointSize
             renderType: Text.QtRendering
             color: incidenceContents.contentColor
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
-            visible: !modelData.allDay
+            visible: !incidenceDelegate.allDay
         }
     }
 

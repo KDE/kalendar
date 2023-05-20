@@ -51,8 +51,6 @@ ecm_qt_declare_logging_category(kalendar_contact_static
     EXPORT KALENDAR
 )
 
-### QML plugin
-
 ecm_add_qml_module(kalendar_contact_plugin URI "org.kde.kalendar.contact" VERSION 1.0)
 
 target_sources(kalendar_contact_plugin PRIVATE
@@ -63,17 +61,15 @@ target_sources(kalendar_contact_plugin PRIVATE
 
 ecm_target_qml_sources(kalendar_contact_plugin SOURCES
     qml/ContactChooserPage.qml
-    qml/ContactView.qml
     qml/ContactApplication.qml
     qml/AddressBookCollectionHandler.qml
+    qml/ContactView.qml
 )
 
 ecm_target_qml_sources(kalendar_contact_plugin
     PRIVATE PATH private SOURCES
     qml/private/ContactPage.qml
-    qml/private/ContactEditorPage.qml
     qml/private/ContactGroupPage.qml
-    qml/private/ContactGroupEditorPage.qml
     qml/private/ContactsPage.qml
     qml/private/ContactListItem.qml
     qml/private/Header.qml
@@ -84,6 +80,20 @@ ecm_target_qml_sources(kalendar_contact_plugin
     qml/private/AddressBookMenu.qml
     qml/private/DeleteContactAction.qml
 )
+
+ecm_target_qml_sources(kalendar_contact_plugin
+    PRIVATE PATH private/contact_editor SOURCES
+    qml/private/contact_editor/AddressBookEditorCard.qml
+    qml/private/contact_editor/BusinessEditorCard.qml
+    qml/private/contact_editor/ContactEditorPage.qml
+    qml/private/contact_editor/ContactGroupEditorPage.qml
+    qml/private/contact_editor/EmailEditorCard.qml
+    qml/private/contact_editor/PersonalInfoEditorCard.qml
+    qml/private/contact_editor/PhoneEditorCard.qml
+    qml/private/contact_editor/PhotoEditor.qml
+    qml/private/contact_editor/InstantMessengerEditorCard.qml
+)
+
 
 target_link_libraries(kalendar_contact_plugin PRIVATE kalendar_contact_static)
 

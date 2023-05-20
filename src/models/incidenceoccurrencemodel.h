@@ -134,7 +134,7 @@ private:
 
     bool m_loading = false;
     QList<Occurrence> m_incidences; // We need incidences to be in a preditable order for the model
-    QHash<QString, QColor> m_colors;
+    QHash<Akonadi::Collection::Id, QColor> m_colors;
     KConfigWatcher::Ptr m_colorWatcher;
     Filter *mFilter = nullptr;
     KFormat m_format;

@@ -12,6 +12,9 @@ import org.kde.kalendar.utils 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 
+/**
+ * This is the schedule view
+ */
 QQC2.ScrollView {
     id: scrollView
 
@@ -111,6 +114,7 @@ QQC2.ScrollView {
            periodLength: 1
            showTodos: Kalendar.Config.showTodosInCalendarViews
            showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
+           active: viewColumn.isCurrentItem
            model: Kalendar.IncidenceOccurrenceModel {
                start: scrollView.startDate
                length: scrollView.daysInMonth

@@ -28,6 +28,7 @@ class HourlyIncidenceModel : public QAbstractListModel
     Q_PROPERTY(IncidenceOccurrenceModel *model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(bool showTodos READ showTodos WRITE setShowTodos NOTIFY showTodosChanged)
     Q_PROPERTY(bool showSubTodos READ showSubTodos WRITE setShowSubTodos NOTIFY showSubTodosChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
 
 public:
     enum Filter {
@@ -39,15 +40,14 @@ public:
     Q_ENUM(Filter)
 
     enum Roles {
-        Incidences = IncidenceOccurrenceModel::LastRole,
-        PeriodStartDateTime,
+        IncidencesRole = IncidenceOccurrenceModel::LastRole,
+        PeriodStartDateTimeRole,
     };
 
     explicit HourlyIncidenceModel(QObject *parent = nullptr);
     ~HourlyIncidenceModel() override = default;
 
-    QModelIndex index(int row, int column, const QModelIndex &parent = {}) const override;
-    int rowCount(const QModelIndex &parent) const override;
+    int rowCount(const QModelIndex &parent = {}) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
@@ -56,6 +56,8 @@ public:
     HourlyIncidenceModel::Filters filters() const;
     bool showTodos() const;
     bool showSubTodos() const;
+    bool active() const;
+    void setActive(const bool active);
 
 Q_SIGNALS:
     void periodLengthChanged();
@@ -63,6 +65,7 @@ Q_SIGNALS:
     void modelChanged();
     void showTodosChanged();
     void showSubTodosChanged();
+    void activeChanged();
 
 public Q_SLOTS:
     void setModel(IncidenceOccurrenceModel *model);
@@ -72,24 +75,20 @@ public Q_SLOTS:
     void setShowSubTodos(const bool showSubTodos);
 
 private Q_SLOTS:
-    void resetLayoutLines();
-    void slotSourceDataChanged(const QModelIndex &upperLeft, const QModelIndex &bottomRight);
-    void scheduleLayoutLinesUpdates(const QModelIndex &sourceIndexParent, const int sourceFirstRow, const int sourceLastRow);
-    void updateScheduledLayoutLines();
+    void scheduleReset();
 
 private:
     QList<QModelIndex> sortedIncidencesFromSourceModel(const QDateTime &rowStart) const;
     QVariantList layoutLines(const QDateTime &rowStart) const;
 
-    QSet<int> m_linesToUpdate;
     QTimer mRefreshTimer;
-    QTimer m_updateLinesTimer;
     IncidenceOccurrenceModel *mSourceModel{nullptr};
     QList<QVariantList> m_laidOutLines;
     int mPeriodLength{15}; // In minutes
     HourlyIncidenceModel::Filters m_filters;
     bool m_showTodos = true;
     bool m_showSubTodos = true;
+    bool m_active = true;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(HourlyIncidenceModel::Filters)
