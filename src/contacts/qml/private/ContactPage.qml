@@ -32,7 +32,7 @@ Kirigami.ScrollablePage {
 
     actions {
         main: Kirigami.Action {
-            iconName: "document-edit"
+            icon.name: "document-edit"
             text: i18nc("@action:inmenu", "Edit")
             onTriggered: openEditor()
         }
@@ -92,7 +92,7 @@ Kirigami.ScrollablePage {
                 actions: [
                     Kirigami.Action {
                         text: i18n("Call")
-                        iconName: "call-start"
+                        icon.name: "call-start"
                         visible: addressee.phoneNumbers.length > 0
                         onTriggered: {
                             const model = addressee.phoneNumbers;
@@ -111,7 +111,7 @@ Kirigami.ScrollablePage {
                     },
                     Kirigami.Action {
                         text: i18n("Send SMS")
-                        iconName: "mail-message"
+                        icon.name: "mail-message"
                         visible: addressee.phoneNumbers.length > 0
                         onTriggered: {
                             const model = addressee.phoneNumbers;
@@ -130,13 +130,13 @@ Kirigami.ScrollablePage {
                     },
                     Kirigami.Action {
                         text: i18n("Send email")
-                        iconName: "mail-message"
+                        icon.name: "mail-message"
                         visible: addressee.preferredEmail.length > 0
                         onTriggered: Qt.openUrlExternally(`mailto:${addressee.preferredEmail}`)
                     },
                     Kirigami.Action {
                         text: i18n("Show QR Code")
-                        iconName: 'view-barcode-qr'
+                        icon.name: 'view-barcode-qr'
                         onTriggered: pageStack.layers.push(Qt.resolvedUrl('./QrCodePage.qml'), {
                             qrCodeData: addressee.qrCodeData(),
                         })

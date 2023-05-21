@@ -32,7 +32,7 @@ Kirigami.ScrollablePage {
 
     actions {
         main: Kirigami.Action {
-            iconName: "document-edit"
+            icon.name: "document-edit"
             text: i18n("Edit")
             onTriggered: openEditor()
         }
