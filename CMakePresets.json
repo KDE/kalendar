@@ -9,13 +9,13 @@
             "installDir": "$env{KF6}",
             "hidden": true
         },
-	{
+        {
             "name": "dev-mold",
             "displayName": "Build as debug + using mold linker",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-		"CMAKE_SHARED_LINKER_FLAGS": "-fuse-ld=mold"
+                "CMAKE_SHARED_LINKER_FLAGS": "-fuse-ld=mold"
             },
             "inherits": [
                 "base"
@@ -38,7 +38,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-		"BUILD_QCH": "ON"
+                "BUILD_QCH": "ON"
             },
             "inherits": [
                 "base"
@@ -85,7 +85,8 @@
             "name": "release",
             "displayName": "Build as release mode.",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_TESTING": "OFF"
             },
             "inherits": [
                 "base"
@@ -100,8 +101,8 @@
             "inherits": [
                 "base"
             ]
-	},
-	{
+        },
+        {
             "name": "coverage",
             "displayName": "coverage",
             "cacheVariables": {
@@ -145,14 +146,14 @@
             "name": "dev",
             "configurePreset": "dev"
         },
-	{
+        {
             "name": "dev-mold",
             "configurePreset": "dev-mold"
         },
         {   
             "name": "dev-qch",
             "configurePreset": "dev-qch"
-        },	
+        },      
         {
             "name": "dev-clang",
             "configurePreset": "dev-clang"
@@ -173,7 +174,7 @@
             "name": "coverage",
             "configurePreset": "coverage"
         },
-	{
+        {
             "name": "asan",
             "configurePreset": "asan"
         },
