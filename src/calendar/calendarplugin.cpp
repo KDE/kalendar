@@ -39,12 +39,22 @@ void CalendarPlugin::registerTypes(const char *uri)
         return new Filter;
     });
 
+    qmlRegisterSingletonType<Config>(uri, 1, 0, "Config", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return Config::self();
+    });
+
+    qmlRegisterSingletonType<CalendarManager>(uri, 1, 0, "CalendarManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return CalendarManager::instance();
+    });
+
     qmlRegisterType<RemindersModel>(uri, 1, 0, "RemindersModel");
     qmlRegisterModule(uri, 1, 0);
     qRegisterMetaType<KCalendarCore::Incidence::Ptr>();
 
-    qmlRegisterSingletonInstance(uri, 1, 0, "CalendarManager", CalendarManager::instance());
-    qmlRegisterSingletonInstance(uri, 1, 0, "Config", Config::self());
     qmlRegisterType<IncidenceWrapper>(uri, 1, 0, "IncidenceWrapper");
     qmlRegisterType<ICalImporter>(uri, 1, 0, "ICalImporter");
     qmlRegisterType<AttendeesModel>(uri, 1, 0, "AttendeesModel");

@@ -13,7 +13,7 @@ KalendarApp {
 
     readonly property var _views: ({
         month: './views/MonthView.qml',
-        week: './views/DayGridView.qml',
+        week: './views/HourlyView.qml',
         schedule: './views/ScheduleView.qml',
         todo: './views/TodoView.qml',
     })
@@ -89,11 +89,8 @@ KalendarApp {
         }
 
         const viewUrl = root._views[viewName];
-        const component = Qt.createComponent(Qt.resolvedUrl(viewUrl));
-        if (component.status !== Component.Ready) {
-            console.error(component.errorString());
-        }
-        const page = component.createObject(Navigation.pageStack, args);
+        Navigation.pageStack.clear();
+        Navigation.pageStack.push(Qt.resolvedUrl(viewUrl), args);
     }
 
     menuBar: Qt.resolvedUrl('./private/MenuBar.qml')

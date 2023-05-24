@@ -63,11 +63,11 @@ Kirigami.Page {
         dayGrid.setToDate(date);
     }
 
-    onMonthChanged: if (month !== root.selectedDate.getMonth() && !initialMonth) {
+    onMonthChanged: if (month !== Navigation.selectedDate.getMonth() && !initialMonth) {
         Navigation.selectedDate = new Date(year, month, 1);
     }
 
-    onYearChanged: if (year !== root.selectedDate.getFullYear() && !initialMonth) {
+    onYearChanged: if (year !== Navigation.selectedDate.getFullYear() && !initialMonth) {
         Navigation.selectedDate = new Date(year, month, 1);
     }
 
