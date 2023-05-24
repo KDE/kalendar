@@ -8,7 +8,7 @@ import QtQuick.Controls 2.15 as QQC2
 MouseArea {
     acceptedButtons: Qt.BackButton | Qt.ForwardButton
     propagateComposedEvents: true
-    hoverEnabled: true
+    hoverEnabled: false
 
     function repositionIncidencePopup() {
         if(incidenceInfoPopup && incidenceInfoPopup.visible) {
