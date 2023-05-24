@@ -28,7 +28,7 @@ Item {
     QQC2.TextArea {
         id: textEdit
         objectName: "textView"
-        background: Item {}
+        background: null
         readOnly: true
         textFormat: TextEdit.RichText
         padding: 0
@@ -42,6 +42,12 @@ Item {
         text: content.substring(0, 100000).replace(/\u00A0/g,' ') //The TextEdit deals poorly with messages that are too large.
         color: embedded ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor
         onLinkActivated: Qt.openUrlExternally(link)
+
+        onHoveredLinkChanged: if (hoveredLink.length > 0) {
+            applicationWindow().hoverLinkIndicator.text = hoveredLink;
+        } else {
+            applicationWindow().hoverLinkIndicator.text = "";
+        }
 
         //Kube.ViewHighlighter {
         //    textDocument: textEdit.textDocument
