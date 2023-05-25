@@ -34,7 +34,7 @@ PathView {
 
         startDate = date;
 
-        const weekDiff = Math.round((date.getTime() - pathView.currentItem.startDate.getTime()) / (daysToShow * 24 * 60 * 60 * 1000));
+        const weekDiff = Math.floor((date.getTime() - pathView.currentItem.startDate.getTime()) / (daysToShow * 24 * 60 * 60 * 1000));
 
         let position = pathView.currentItem.item.hourScrollView.getCurrentPosition();
         let newIndex = pathView.currentIndex + weekDiff;
