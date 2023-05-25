@@ -9,6 +9,7 @@
 //  SPDX-License-Identifier: GPL-2.0-or-later WITH LicenseRef-Qt-Commercial-exception-1.0
 
 #include "calendarmanager.h"
+#include "kalendarconfig.h"
 
 // Akonadi
 #include "kalendar_debug.h"
@@ -33,9 +34,6 @@
 #include <Akonadi/ItemModifyJob>
 #include <Akonadi/ItemMoveJob>
 #include <Akonadi/Monitor>
-#include <CalendarSupport/KCalPrefs>
-#include <CalendarSupport/Utils>
-#include <EventViews/Prefs>
 #include <KCheckableProxyModel>
 #include <KDescendantsProxyModel>
 #include <KLocalizedString>
@@ -61,11 +59,6 @@ static Akonadi::EntityTreeModel *findEtm(QAbstractItemModel *model)
         }
     }
     return qobject_cast<Akonadi::EntityTreeModel *>(model);
-}
-
-bool isStandardCalendar(Akonadi::Collection::Id id)
-{
-    return id == CalendarSupport::KCalPrefs::instance()->defaultCalendarId();
 }
 
 /**
@@ -134,16 +127,6 @@ protected:
         }
         return true;
     }
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override
-    {
-        if (role == Qt::ToolTipRole) {
-            const Akonadi::Collection col = Akonadi::CollectionUtils::fromIndex(index);
-            return CalendarSupport::toolTipString(col);
-        }
-
-        return QSortFilterProxyModel::data(index, role);
-    }
 };
 
 Q_GLOBAL_STATIC(CalendarManager, calendarManagerGlobalInstance)
@@ -165,6 +148,11 @@ CalendarManager::CalendarManager(QObject *parent)
     auto colorProxy = new ColorProxyModel(this);
     colorProxy->setObjectName(QStringLiteral("Show calendar colors"));
     colorProxy->setDynamicSortFilter(true);
+    colorProxy->setStandardCollectionId(KalendarConfig::self()->lastUsedEventCollection());
+
+    connect(KalendarConfig::self(), &KalendarConfig::lastUsedEventCollectionChanged, this, [colorProxy]() {
+        colorProxy->setStandardCollectionId(KalendarConfig::self()->lastUsedEventCollection());
+    });
     m_baseModel = colorProxy;
 
     // Hide collections that are not required
@@ -228,7 +216,6 @@ CalendarManager::CalendarManager(QObject *parent)
     m_viewCollectionModel->setSourceModel(collectionFilter);
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.event"));
     m_viewCollectionModel->addMimeTypeFilter(QStringLiteral("application/x-vnd.akonadi.calendar.todo"));
-    m_viewCollectionModel->setExcludeVirtualCollections(true);
     m_viewCollectionModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     m_viewCollectionModel->sort(0, Qt::AscendingOrder);
 
@@ -236,7 +223,7 @@ CalendarManager::CalendarManager(QObject *parent)
     m_flatCollectionTreeModel->setSourceModel(m_viewCollectionModel);
     m_flatCollectionTreeModel->setExpandsByDefault(true);
 
-    auto refreshColors = [=]() {
+    auto refreshColors = [this, colorProxy]() {
         for (auto i = 0; i < m_flatCollectionTreeModel->rowCount(); i++) {
             auto idx = m_flatCollectionTreeModel->index(i, 0, {});
             colorProxy->getCollectionColor(Akonadi::CollectionUtils::fromIndex(idx));
@@ -352,7 +339,7 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 {
     // Checks if default collection accepts this type of incidence
     auto mimeType = incidenceWrapper->incidencePtr()->mimeType();
-    Akonadi::Collection collection = m_calendar->collection(CalendarSupport::KCalPrefs::instance()->defaultCalendarId());
+    Akonadi::Collection collection = m_calendar->collection(KalendarConfig::self()->lastUsedEventCollection());
     bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
     bool hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
     if (collection.isValid() && supportsMimeType && hasRights) {
@@ -637,7 +624,7 @@ void CalendarManager::changeIncidenceCollection(Akonadi::Item item, qint64 colle
 
     auto job = new Akonadi::ItemMoveJob(item, newCollection);
     // Add some type of check here?
-    connect(job, &KJob::result, job, [=]() {
+    connect(job, &KJob::result, job, [this, job, item, collectionId]() {
         qCDebug(KALENDAR_LOG) << job->error();
 
         if (!job->error()) {
@@ -672,7 +659,7 @@ QVariantMap CalendarManager::getCollectionDetails(QVariant collectionId)
     collectionDetails[QLatin1String("id")] = collection.id();
     collectionDetails[QLatin1String("name")] = collection.name();
     collectionDetails[QLatin1String("displayName")] = collection.displayName();
-    collectionDetails[QLatin1String("color")] = m_baseModel->colorCache[QString::number(collection.id())];
+    collectionDetails[QLatin1String("color")] = m_baseModel->color(collection.id());
     collectionDetails[QLatin1String("count")] = collection.statistics().count();
     collectionDetails[QLatin1String("isResource")] = Akonadi::CollectionUtils::isResource(collection);
     collectionDetails[QLatin1String("resource")] = collection.resource();
@@ -697,8 +684,7 @@ void CalendarManager::setCollectionColor(qint64 collectionId, const QColor &colo
         if (job->error()) {
             qCWarning(KALENDAR_LOG) << "Error occurred modifying collection color: " << job->errorString();
         } else {
-            m_baseModel->colorCache[QString::number(collectionId)] = color;
-            m_baseModel->save();
+            m_baseModel->setColor(collectionId, color);
         }
     });
 }
