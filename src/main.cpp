@@ -16,6 +16,7 @@
 #include "models/multidayincidencemodel.h"
 #include "models/timezonelistmodel.h"
 #include "models/todosortfilterproxymodel.h"
+#include "mousetracker.h"
 #include "tagmanager.h"
 #include <Akonadi/AgentFilterProxyModel>
 #include <KAboutData>
@@ -111,13 +112,19 @@ int main(int argc, char *argv[])
                         }
                     });
 
+    auto mouseTracker = new MouseTracker;
+    app.installEventFilter(mouseTracker);
+
     QQmlApplicationEngine engine;
 
     auto tagManager = new TagManager(&engine);
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", CalendarManager::instance());
-    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
+
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", CalendarManager::instance());
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "Config", config);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "MouseTracker", mouseTracker);
+    qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "TagManager", tagManager);
+
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "KalendarApplication", kalendarApplication);
 
     qmlRegisterSingletonType<Filter>("org.kde.kalendar", 1, 0, "Filter", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
