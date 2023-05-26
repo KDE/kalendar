@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 02:32+0000\n"
+"POT-Creation-Date: 2023-05-26 02:26+0000\n"
 "PO-Revision-Date: 2023-01-07 14:24+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -163,29 +163,29 @@ msgstr "%1 po začiatku udalosti"
 msgid "On event start"
 msgstr "Pri začiatku udalosti"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:532
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Presunúť výskyt(y)"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:537
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr ""
 "Nie je možné pridať položku výnimky do kalendára. Nevykoná sa žiadna zmena."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:577
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Vymazať úlohu a jej vedľajšie úlohy"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:580
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Vymazať úlohu a osamostatniť vedľajšie úlohy"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:742
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -347,7 +347,7 @@ msgctxt "contact's email address"
 msgid "EMail"
 msgstr "EMail"
 
-#: contacts/contactmanager.cpp:176
+#: contacts/contactmanager.cpp:184
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Address Book %1"
@@ -772,7 +772,7 @@ msgstr "Adresár:"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:84
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:936
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:938
 #, kde-format
 msgid "Name:"
 msgstr "Názov:"
@@ -1668,7 +1668,7 @@ msgstr "Umiestnenie:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:729
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:813
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:943
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:945
 #, kde-format
 msgid "Optional"
 msgstr "Voliteľné"
@@ -1715,57 +1715,57 @@ msgstr "Spravovať značky…"
 msgid "Reminders:"
 msgstr "Pripomienky:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:887
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:889
 #, kde-format
 msgid "Add Reminder"
 msgstr "Pridať pripomienku"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:901
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:903
 #, kde-format
 msgid "Attendees:"
 msgstr "Účastníci:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:961
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:963
 #, kde-format
 msgid "Email:"
 msgstr "Email:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:968
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:970
 #, kde-format
 msgid "Required"
 msgstr "Vyžadované"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:977
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:979
 #, kde-format
 msgid "Status:"
 msgstr "Stav:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1001
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1003
 #, kde-format
 msgid "Request RSVP"
 msgstr "Vyžiadať RSVP"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1015
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1017
 #, kde-format
 msgid "Add Attendee"
 msgstr "Pridať účastníka"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1026
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Vybrať z kontaktov"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1030
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1032
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Vyplniť ručne"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1044
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1046
 #, kde-format
 msgid "Attachments:"
 msgstr "Prílohy:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1067
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1069
 #, kde-format
 msgid "Add Attachment"
 msgstr "Pridať prílohu"
@@ -2050,7 +2050,7 @@ msgstr "Deň"
 msgid "Schedule"
 msgstr "Rozvrh"
 
-#: contents/ui/main.qml:474 contents/ui/main.qml:1169
+#: contents/ui/main.qml:474 contents/ui/main.qml:1171
 #, kde-format
 msgid "Tasks"
 msgstr "Úlohy"
@@ -2096,19 +2096,19 @@ msgstr "Zlúčiť s existujúcim kalendárom"
 msgid "Create new calendar"
 msgstr "Vytvoriť nový kalendár"
 
-#: contents/ui/main.qml:1127
+#: contents/ui/main.qml:1129
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Týždeň"
 
-#: contents/ui/main.qml:1133
+#: contents/ui/main.qml:1135
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "3 dni"
 
-#: contents/ui/main.qml:1139
+#: contents/ui/main.qml:1141
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
@@ -2125,60 +2125,60 @@ msgstr "Obnoviť"
 msgid "All day or Multi day"
 msgstr "Celodenný alebo viacdňový"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:269
+#: contents/ui/MainViews/BasicMonthListView.qml:273
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Vyčistiť deň."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:288
+#: contents/ui/MainViews/BasicMonthListView.qml:292
 #, kde-format
 msgid "Tap"
 msgstr "Ťuknutie"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:288
+#: contents/ui/MainViews/BasicMonthListView.qml:292
 #, kde-format
 msgid "Click"
 msgstr "Kliknutie"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:289
+#: contents/ui/MainViews/BasicMonthListView.qml:293
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Dnes v záznamoch nič nie je. %1 na pridanie niečoho."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:412
+#: contents/ui/MainViews/BasicMonthListView.qml:416
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Deň %2 z %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgid "Runs all day"
 msgstr "Prebieha celý deň"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:472
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:479
 #, kde-format
 msgid "Starts at %1"
 msgstr "Začína o %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:477
+#: contents/ui/MainViews/BasicMonthListView.qml:481
 #, kde-format
 msgid "Ends at %1"
 msgstr "Končí o %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:479
+#: contents/ui/MainViews/BasicMonthListView.qml:483
 #, kde-format
 msgid "Runs All Day"
 msgstr "Prebieha celý deň"
 
-#: contents/ui/MainViews/DayGridView.qml:202
+#: contents/ui/MainViews/DayGridView.qml:230
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>Dnes</b>"
@@ -2580,7 +2580,7 @@ msgstr "Kruh (zobrazuje oblasť umiestnenia)"
 msgid "Pin (shows exact location)"
 msgstr "Špendlík (zobrazuje presnú polohu)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:293
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:306
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2767,13 +2767,13 @@ msgstr "Obnoviť všetko"
 msgid "An error occurred: %1"
 msgstr "Vyskytla sa chyba: %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:82
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Nepripojený)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:85
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

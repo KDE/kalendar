@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 02:32+0000\n"
+"POT-Creation-Date: 2023-05-26 02:26+0000\n"
 "PO-Revision-Date: 2023-03-18 07:53+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -154,12 +154,12 @@ msgstr "%1 après le début de l'évènement"
 msgid "On event start"
 msgstr "Au début de l'évènement"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:532
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Déplacer la (les) récurrence(s)"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:537
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
@@ -167,17 +167,17 @@ msgstr ""
 "Impossible d'ajouter un élément d'exception au calendrier. Aucun changement "
 "ne sera fait."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:577
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Supprimer la tâche et ses sous-tâches"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:580
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Supprimer la tâche et rendre indépendante ses sous-tâches"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:742
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -339,7 +339,7 @@ msgctxt "contact's email address"
 msgid "EMail"
 msgstr "Adresse de courriel"
 
-#: contacts/contactmanager.cpp:176
+#: contacts/contactmanager.cpp:184
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Address Book %1"
@@ -754,7 +754,7 @@ msgstr "Carnet d'adresses :"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:84
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:936
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:938
 #, kde-format
 msgid "Name:"
 msgstr "Nom :"
@@ -1636,7 +1636,7 @@ msgstr "Emplacement :"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:729
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:813
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:943
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:945
 #, kde-format
 msgid "Optional"
 msgstr "Optionnel"
@@ -1683,57 +1683,57 @@ msgstr "Gérer les étiquettes…"
 msgid "Reminders:"
 msgstr "Rappels :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:887
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:889
 #, kde-format
 msgid "Add Reminder"
 msgstr "Ajouter un rappel"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:901
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:903
 #, kde-format
 msgid "Attendees:"
 msgstr "Participants :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:961
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:963
 #, kde-format
 msgid "Email:"
 msgstr "Courriel :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:968
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:970
 #, kde-format
 msgid "Required"
 msgstr "Nécessaire"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:977
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:979
 #, kde-format
 msgid "Status:"
 msgstr "État :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1001
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1003
 #, kde-format
 msgid "Request RSVP"
 msgstr "Requête « RSVP »"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1015
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1017
 #, kde-format
 msgid "Add Attendee"
 msgstr "Ajouter un participant"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1026
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Sélectionnez à partir des contacts"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1030
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1032
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Remplissez manuellement"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1044
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1046
 #, kde-format
 msgid "Attachments:"
 msgstr "Pièces jointes :"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1067
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1069
 #, kde-format
 msgid "Add Attachment"
 msgstr "Ajouter une pièce jointe"
@@ -2010,7 +2010,7 @@ msgstr "Jour"
 msgid "Schedule"
 msgstr "Planning"
 
-#: contents/ui/main.qml:474 contents/ui/main.qml:1169
+#: contents/ui/main.qml:474 contents/ui/main.qml:1171
 #, kde-format
 msgid "Tasks"
 msgstr "Tâches"
@@ -2056,19 +2056,19 @@ msgstr "Fusionner avec un agenda existant"
 msgid "Create new calendar"
 msgstr "Créer un nouvel agenda"
 
-#: contents/ui/main.qml:1127
+#: contents/ui/main.qml:1129
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Semaine"
 
-#: contents/ui/main.qml:1133
+#: contents/ui/main.qml:1135
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "3 jours"
 
-#: contents/ui/main.qml:1139
+#: contents/ui/main.qml:1141
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
@@ -2085,60 +2085,60 @@ msgstr "Réinitialiser"
 msgid "All day or Multi day"
 msgstr "Jour complet ou sur plusieurs jours"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:269
+#: contents/ui/MainViews/BasicMonthListView.qml:273
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Effacer le jour."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:288
+#: contents/ui/MainViews/BasicMonthListView.qml:292
 #, kde-format
 msgid "Tap"
 msgstr "Tapotage"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:288
+#: contents/ui/MainViews/BasicMonthListView.qml:292
 #, kde-format
 msgid "Click"
 msgstr "Clic"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:289
+#: contents/ui/MainViews/BasicMonthListView.qml:293
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Rien aujourd'hui dans les calendriers. %1 pour ajouter quelque chose."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:412
+#: contents/ui/MainViews/BasicMonthListView.qml:416
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (Jour %2 parmi %3)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgid "Runs all day"
 msgstr "Se déroule toute la journée"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:472
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:479
 #, kde-format
 msgid "Starts at %1"
 msgstr "Commence à %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:477
+#: contents/ui/MainViews/BasicMonthListView.qml:481
 #, kde-format
 msgid "Ends at %1"
 msgstr "Se termine à %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:479
+#: contents/ui/MainViews/BasicMonthListView.qml:483
 #, kde-format
 msgid "Runs All Day"
 msgstr "Se déroule sur toute la journée"
 
-#: contents/ui/MainViews/DayGridView.qml:202
+#: contents/ui/MainViews/DayGridView.qml:230
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>Aujourd'hui</b>"
@@ -2548,7 +2548,7 @@ msgstr "Cercle (Affiche les zones d'emplacement)"
 msgid "Pin (shows exact location)"
 msgstr "Épingle (indique l'emplacement exact)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:293
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:306
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2734,13 +2734,13 @@ msgstr "Tout rafraîchir"
 msgid "An error occurred: %1"
 msgstr "Une erreur est survenue : %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:82
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (Déconnecté)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:85
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"

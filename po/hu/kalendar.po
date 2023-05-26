@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 02:32+0000\n"
+"POT-Creation-Date: 2023-05-26 02:26+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -165,28 +165,28 @@ msgstr "a kezdés után ennyivel: %1"
 msgid "On event start"
 msgstr "Kezdéskor"
 
-#: calendarmanager.cpp:545
+#: calendarmanager.cpp:532
 #, kde-format
 msgid "Move occurrence(s)"
 msgstr "Előfordulások áthelyezése"
 
-#: calendarmanager.cpp:550
+#: calendarmanager.cpp:537
 #, kde-format
 msgid ""
 "Unable to add the exception item to the calendar. No change will be done."
 msgstr "Nem sikerült hozzáadni a kivételt a naptárhoz. Nem történik módosítás."
 
-#: calendarmanager.cpp:590
+#: calendarmanager.cpp:577
 #, kde-format
 msgid "Delete task and its sub-tasks"
 msgstr "Feladat és részfeladatai törlése"
 
-#: calendarmanager.cpp:593
+#: calendarmanager.cpp:580
 #, kde-format
 msgid "Delete task and make sub-tasks independent"
 msgstr "Feladat törlése, részfeladatok függetlenné tétele"
 
-#: calendarmanager.cpp:756
+#: calendarmanager.cpp:742
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Calendar %1"
@@ -349,7 +349,7 @@ msgctxt "contact's email address"
 msgid "EMail"
 msgstr ""
 
-#: contacts/contactmanager.cpp:176
+#: contacts/contactmanager.cpp:184
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Properties of Calendar %1"
@@ -794,7 +794,7 @@ msgstr "Naptárszín kiválasztása"
 
 #: contacts/qml/private/ContactGroupEditorPage.qml:84
 #: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:936
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:938
 #, kde-format
 msgid "Name:"
 msgstr "Név:"
@@ -1697,7 +1697,7 @@ msgstr "Hely:"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:729
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:813
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:943
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:945
 #, kde-format
 msgid "Optional"
 msgstr "Opcionális"
@@ -1744,57 +1744,57 @@ msgstr "Címkék kezelése…"
 msgid "Reminders:"
 msgstr "Emlékeztetők:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:887
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:889
 #, kde-format
 msgid "Add Reminder"
 msgstr "Emlékeztető hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:901
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:903
 #, kde-format
 msgid "Attendees:"
 msgstr "Résztvevők:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:961
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:963
 #, kde-format
 msgid "Email:"
 msgstr "E-mail:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:968
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:970
 #, kde-format
 msgid "Required"
 msgstr "Kötelező"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:977
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:979
 #, kde-format
 msgid "Status:"
 msgstr "Állapot:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1001
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1003
 #, kde-format
 msgid "Request RSVP"
 msgstr "Választ kérek"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1015
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1017
 #, kde-format
 msgid "Add Attendee"
 msgstr "Résztvevő hozzáadása"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1026
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1028
 #, kde-format
 msgid "Choose from Contacts"
 msgstr "Kiválasztás a névjegyekből"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1030
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1032
 #, kde-format
 msgid "Fill in Manually"
 msgstr "Kitöltés kézzel"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1044
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1046
 #, kde-format
 msgid "Attachments:"
 msgstr "Mellékletek:"
 
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1067
+#: contents/ui/Dialogs/IncidenceEditorPage.qml:1069
 #, kde-format
 msgid "Add Attachment"
 msgstr "Melléklet hozzáadása"
@@ -2076,7 +2076,7 @@ msgstr "Nap"
 msgid "Schedule"
 msgstr "Ütemezés nézet"
 
-#: contents/ui/main.qml:474 contents/ui/main.qml:1169
+#: contents/ui/main.qml:474 contents/ui/main.qml:1171
 #, kde-format
 msgid "Tasks"
 msgstr "Feladatok"
@@ -2122,21 +2122,21 @@ msgstr "Összefésülés a meglévő naptárral"
 msgid "Create new calendar"
 msgstr "Új naptár létrehozása"
 
-#: contents/ui/main.qml:1127
+#: contents/ui/main.qml:1129
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Hetente"
 
-#: contents/ui/main.qml:1133
+#: contents/ui/main.qml:1135
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "Nap"
 
-#: contents/ui/main.qml:1139
+#: contents/ui/main.qml:1141
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open day view"
@@ -2154,60 +2154,60 @@ msgstr "Visszaállítás"
 msgid "All day or Multi day"
 msgstr "Minden nap, vagy több nap"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:269
+#: contents/ui/MainViews/BasicMonthListView.qml:273
 #, kde-format
 msgctxt "Date has no events or tasks set"
 msgid "Clear day."
 msgstr "Nap kiürítése."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:288
+#: contents/ui/MainViews/BasicMonthListView.qml:292
 #, kde-format
 msgid "Tap"
 msgstr "Koppintson"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:288
+#: contents/ui/MainViews/BasicMonthListView.qml:292
 #, kde-format
 msgid "Click"
 msgstr "Kattintson"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:289
+#: contents/ui/MainViews/BasicMonthListView.qml:293
 #, kde-format
 msgid "Nothing on the books today. %1 to add something."
 msgstr "Nincs semmi a mai napra. %1 a hozzáadáshoz."
 
-#: contents/ui/MainViews/BasicMonthListView.qml:412
+#: contents/ui/MainViews/BasicMonthListView.qml:416
 #, kde-format
 msgctxt "%1 is the name of the event"
 msgid "%1 (Day %2 of %3)"
 msgstr "%1 (%2 / %3 nap)"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:468
+#: contents/ui/MainViews/BasicMonthListView.qml:472
 #, kde-format
 msgid "Runs all day"
 msgstr "Egész napos"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:472
+#: contents/ui/MainViews/BasicMonthListView.qml:476
 #, kde-format
 msgctxt "Displays times between incidence start and end"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:475
+#: contents/ui/MainViews/BasicMonthListView.qml:479
 #, kde-format
 msgid "Starts at %1"
 msgstr "Kezdés: %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:477
+#: contents/ui/MainViews/BasicMonthListView.qml:481
 #, kde-format
 msgid "Ends at %1"
 msgstr "Befejezés: %1"
 
-#: contents/ui/MainViews/BasicMonthListView.qml:479
+#: contents/ui/MainViews/BasicMonthListView.qml:483
 #, kde-format
 msgid "Runs All Day"
 msgstr "Egész napos"
 
-#: contents/ui/MainViews/DayGridView.qml:202
+#: contents/ui/MainViews/DayGridView.qml:230
 #, kde-format
 msgid "<b>Today</b>"
 msgstr "<b>Ma</b>"
@@ -2623,7 +2623,7 @@ msgstr "Kör (a helyszín környéke)"
 msgid "Pin (shows exact location)"
 msgstr "Kitűző (a pontos helyszín)"
 
-#: incidencewrapper.cpp:141 models/incidenceoccurrencemodel.cpp:293
+#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:306
 #: models/todosortfilterproxymodel.cpp:135
 #, kde-format
 msgid "Task"
@@ -2817,13 +2817,13 @@ msgstr "Összes naptár frissítése"
 msgid "An error occurred: %1"
 msgstr "Hiba történt: %1"
 
-#: lib/colorproxymodel.cpp:94
+#: lib/colorproxymodel.cpp:82
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Offline)"
 msgstr "%1 (offline)"
 
-#: lib/colorproxymodel.cpp:97
+#: lib/colorproxymodel.cpp:85
 #, kde-format
 msgctxt "@item this is the default calendar"
 msgid "%1 (Default)"
