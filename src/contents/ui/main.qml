@@ -724,7 +724,7 @@ Kirigami.ApplicationWindow {
             onIncidenceDataChanged: root.openOccurrence = incidenceData
             onVisibleChanged: {
                 if (visible) {
-                    clickPosition = mapFromItem(kbmNavigationMouseArea, kbmNavigationMouseArea.mouseX, 0);
+                    clickPosition = mapFromGlobal(MouseTracker.mousePosition)
                     root.openOccurrence = incidenceData;
                     reposition();
                 } else {
