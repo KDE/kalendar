@@ -41,8 +41,8 @@ set(kalendar_SRCS
     main.cpp
     models/monthmodel.cpp
     models/monthmodel.h
-    mouseeventfilter.cpp
-    mouseeventfilter.h
+    mousetracker.cpp
+    mousetracker.h
     models/multidayincidencemodel.cpp
     models/multidayincidencemodel.h
     models/recurrenceexceptionsmodel.cpp
