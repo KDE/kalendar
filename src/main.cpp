@@ -96,11 +96,11 @@ int main(int argc, char *argv[])
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
-    auto config = KalendarConfig::self();
-    auto kalendarApplication = new KalendarApplication;
+    const auto config = KalendarConfig::self();
+    const auto kalendarApplication = new KalendarApplication;
     kalendarApplication->setCalendar(CalendarManager::instance()->calendar());
 
-    KDBusService service(KDBusService::Unique);
+    const KDBusService service(KDBusService::Unique);
     service.connect(&service,
                     &KDBusService::activateRequested,
                     kalendarApplication,
@@ -112,12 +112,12 @@ int main(int argc, char *argv[])
                         }
                     });
 
-    auto mouseTracker = new MouseTracker;
+    const auto mouseTracker = new MouseTracker;
     app.installEventFilter(mouseTracker);
 
     QQmlApplicationEngine engine;
 
-    auto tagManager = new TagManager(&engine);
+    const auto tagManager = new TagManager(&engine);
 
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", CalendarManager::instance());
@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
     });
     const auto rootObjects = engine.rootObjects();
     for (auto obj : rootObjects) {
-        auto view = qobject_cast<QQuickWindow *>(obj);
+        const auto view = qobject_cast<QQuickWindow *>(obj);
         if (view) {
             KConfig dataResource(QStringLiteral("data"), KConfig::SimpleConfig, QStandardPaths::AppDataLocation);
             KConfigGroup windowGroup(&dataResource, "Window");
