@@ -18,7 +18,7 @@ PathView {
     property var openOccurrence: ({})
 
     property date currentDate: new Date() // Needs to get updated for marker to move, done from main.qml
-    property date startDate: DateUtils.getFirstDayOfWeek(currentDate)
+    property date startDate: daysToShow === 7 ? DateUtils.getFirstDayOfWeek(currentDate) : currentDate
 
     property int daysToShow: 7
     property bool dragDropEnabled: true
@@ -28,16 +28,20 @@ PathView {
             return;
         }
 
+        date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const dateTimeEpoch = date.getTime();
+        const dayInMsecs = 24 * 60 * 60 * 1000;
+
         if(daysToShow % 7 === 0) {
             date = DateUtils.getFirstDayOfWeek(date);
         }
 
         startDate = date;
 
-        const weekDiff = Math.round((date.getTime() - pathView.currentItem.startDate.getTime()) / (daysToShow * 24 * 60 * 60 * 1000));
+        const posToMoveBy = Math.floor((dateTimeEpoch - pathView.currentItem.startDate.getTime()) / (daysToShow * dayInMsecs));
 
         let position = pathView.currentItem.item.hourScrollView.getCurrentPosition();
-        let newIndex = pathView.currentIndex + weekDiff;
+        let newIndex = pathView.currentIndex + posToMoveBy;
         let firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
         let lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
 
@@ -46,14 +50,16 @@ PathView {
             firstItemDate = pathView.model.data(pathView.model.index(1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
             newIndex = 0;
         }
+
         if(firstItemDate < date && newIndex === 0) {
-            newIndex = Math.round((date - firstItemDate) / (daysToShow * 24 * 60 * 60 * 1000)) + 1
+            newIndex = Math.floor((dateTimeEpoch - firstItemDate.getTime()) / (daysToShow * dayInMsecs)) + 1
         }
 
         while(lastItemDate <= date) {
             pathView.model.addDates(true)
             lastItemDate = pathView.model.data(pathView.model.index(pathView.model.rowCount() - 1,0), Kalendar.InfiniteCalendarViewModel.StartDateRole);
         }
+
         pathView.currentIndex = newIndex;
 
         if(isInitialWeek) {

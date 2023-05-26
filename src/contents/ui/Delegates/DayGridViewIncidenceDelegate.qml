@@ -34,6 +34,9 @@ Item {
     readonly property bool isInCurrentMonth: reactToCurrentMonth ?
         incidenceDelegate.occurrenceEndDate.getMonth() === root.month || incidenceDelegate.occurrenceDate.getMonth() === root.month :
         true
+    readonly property bool isMultiDay: occurrenceDate.getDay() !== occurrenceEndDate.getDay() ||
+                                       occurrenceDate.getMonth() !== occurrenceEndDate.getMonth() ||
+                                       occurrenceDate.getFullYear() !== occurrenceDate.getFullYear()
 
     property alias mouseArea: mouseArea
     property bool repositionAnimationEnabled: false
@@ -161,7 +164,10 @@ Item {
         }
 
         QQC2.Label {
-            Layout.fillWidth: true
+            id: incidenceSubjectLabel
+
+            // Make sure to fill width on non-multiday incidences
+            Layout.fillWidth: !incidenceDelegate.isMultiDay
             text: modelData.text
             clip: true
             elide: parent.spaceRestricted ? Text.ElideNone : Text.ElideRight // Eliding takes up space
@@ -171,6 +177,18 @@ Item {
             font.strikeout: modelData.todoCompleted
             renderType: Text.QtRendering
             color: incidenceContents.contentColor
+            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
+        }
+
+        Rectangle {
+            id: widthMarker
+
+            // Only display for wide multiday events
+            Layout.fillWidth: incidenceDelegate.isMultiDay
+            Layout.preferredHeight: Kirigami.Units.gridUnit / 8
+
+            radius: width / 2
+            color: incidenceDelegate.isOpenOccurrence ? incidenceContents.selectedContentColor : modelData.color
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.OutCubic } }
         }
 
