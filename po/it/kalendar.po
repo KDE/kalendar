@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-20 00:46+0000\n"
-"PO-Revision-Date: 2023-04-21 17:35+0200\n"
+"POT-Creation-Date: 2023-05-27 00:48+0000\n"
+"PO-Revision-Date: 2023-05-18 18:23+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1854,10 +1854,9 @@ msgid "Add Attachment"
 msgstr "Aggiungi allegato"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:1061
-#, fuzzy, kde-format
-#| msgid "Add Attachment"
+#, kde-format
 msgid "Add an attachment"
-msgstr "Aggiungi allegato"
+msgstr "Aggiungi un allegato"
 
 #: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
 #, kde-format
@@ -3037,47 +3036,47 @@ msgstr "Salva allegato"
 msgid "Import key"
 msgstr "Importa chiave"
 
-#: main.cpp:70
+#: main.cpp:71
 #, kde-format
 msgctxt "@title"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: main.cpp:73
+#: main.cpp:74
 #, kde-format
 msgid "Calendar Application"
 msgstr "Applicazione di calendario"
 
-#: main.cpp:77
+#: main.cpp:78
 #, kde-format
 msgid "(c) KDE Community 2021"
 msgstr "(c) Comunità KDE 2021"
 
-#: main.cpp:78
+#: main.cpp:79
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: main.cpp:79 main.cpp:83
+#: main.cpp:80 main.cpp:84
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer"
 msgstr "Responsabile"
 
-#: main.cpp:82
+#: main.cpp:83
 #, kde-format
 msgctxt "@info:credit"
 msgid "Clau Cambra"
 msgstr "Clau Cambra"
 
-#: main.cpp:86
+#: main.cpp:87
 #, kde-format
 msgctxt "@info:credit"
 msgid "Felipe Kinoshita"
 msgstr "Felipe Kinoshita"
 
-#: main.cpp:87
+#: main.cpp:88
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
