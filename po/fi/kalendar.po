@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-27 00:48+0000\n"
-"PO-Revision-Date: 2023-03-29 23:05+0300\n"
+"PO-Revision-Date: 2023-04-27 19:55+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -828,15 +828,14 @@ msgid "protocol:person@example.com"
 msgstr "yhteyskäytäntö:käyttäjä@esimerkki.fi"
 
 #: contacts/qml/private/contact_editor/PersonalInfoEditorCard.qml:28
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Personal Information"
 msgstr "Henkilökohtaiset tiedot"
 
 #: contacts/qml/private/contact_editor/PersonalInfoEditorCard.qml:33
 #, kde-format
 msgid "Spouse's Name"
-msgstr ""
+msgstr "Puolison nimi"
 
 #: contacts/qml/private/contact_editor/PhoneEditorCard.qml:29
 #, kde-format
@@ -920,31 +919,29 @@ msgid "+33 7 55 23 68 67"
 msgstr "+358 050 236 867"
 
 #: contacts/qml/private/contact_editor/PhotoEditor.qml:28
-#, fuzzy, kde-format
-#| msgctxt "text editing menu action"
-#| msgid "Select All"
+#, kde-format
 msgid "Select a file"
-msgstr "Valitse kaikki"
+msgstr "Valitse tiedosto"
 
 #: contacts/qml/private/contact_editor/PhotoEditor.qml:29
 #, kde-format
 msgid "Images files (*.png *.jpeg *.jpg)"
-msgstr ""
+msgstr "Kuvatiedostot (*.png *.jpeg *.jpg)"
 
 #: contacts/qml/private/contact_editor/PhotoEditor.qml:43
 #, kde-format
 msgid "Photo"
-msgstr ""
+msgstr "Valokuva"
 
 #: contacts/qml/private/contact_editor/PhotoEditor.qml:86
 #, kde-format
 msgid "Add Profile Picture"
-msgstr ""
+msgstr "Lisää profiilikuva"
 
 #: contacts/qml/private/contact_editor/PhotoEditor.qml:86
 #, kde-format
 msgid "Update Profile Picture"
-msgstr ""
+msgstr "Päivitä profiilikuva"
 
 #: contacts/qml/private/ContactGroupPage.qml:36
 #: contents/ui/Controls/IncidenceMouseArea.qml:66
