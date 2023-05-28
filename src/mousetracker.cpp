@@ -26,7 +26,7 @@ bool MouseTracker::eventFilter(QObject *watched, QEvent *event)
     switch (type) {
     case QEvent::MouseMove: {
         const auto mouseEvent = static_cast<QMouseEvent *>(event);
-        m_lastMousePos = mouseEvent->windowPos();
+        m_lastMousePos = mouseEvent->scenePosition();
         Q_EMIT mousePositionChanged(m_lastMousePos);
         break;
     }
