@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-20 00:46+0000\n"
+"POT-Creation-Date: 2023-05-27 00:48+0000\n"
 "PO-Revision-Date: 2023-05-17 09:50+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -3041,47 +3041,47 @@ msgstr "Desa l'adjunt"
 msgid "Import key"
 msgstr "Importa la clau"
 
-#: main.cpp:70
+#: main.cpp:71
 #, kde-format
 msgctxt "@title"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: main.cpp:73
+#: main.cpp:74
 #, kde-format
 msgid "Calendar Application"
 msgstr "Aplicació de calendari"
 
-#: main.cpp:77
+#: main.cpp:78
 #, kde-format
 msgid "(c) KDE Community 2021"
 msgstr "(c) 2021 La comunitat KDE"
 
-#: main.cpp:78
+#: main.cpp:79
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: main.cpp:79 main.cpp:83
+#: main.cpp:80 main.cpp:84
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer"
 msgstr "Mantenidor"
 
-#: main.cpp:82
+#: main.cpp:83
 #, kde-format
 msgctxt "@info:credit"
 msgid "Clau Cambra"
 msgstr "Clau Cambra"
 
-#: main.cpp:86
+#: main.cpp:87
 #, kde-format
 msgctxt "@info:credit"
 msgid "Felipe Kinoshita"
 msgstr "Felipe Kinoshita"
 
-#: main.cpp:87
+#: main.cpp:88
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
