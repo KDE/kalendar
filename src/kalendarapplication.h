@@ -105,6 +105,9 @@ Q_SIGNALS:
     void refreshAll();
     void openIncidence(const QVariantMap incidenceData, const QDateTime occurrence);
 
+private Q_SLOTS:
+    void handleMouseViewNavButtons(const Qt::MouseButton pressedButton);
+
 private:
     KActionCollection mCollection;
     KActionCollection mSortCollection;
