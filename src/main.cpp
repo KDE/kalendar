@@ -112,12 +112,9 @@ int main(int argc, char *argv[])
                         }
                     });
 
-    const auto mouseTracker = MouseTracker::instance();
-    app.installEventFilter(mouseTracker);
-
     QQmlApplicationEngine engine;
-
     const auto tagManager = new TagManager(&engine);
+    const auto mouseTracker = MouseTracker::instance();
 
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "AboutType", new AboutType());
     qmlRegisterSingletonInstance("org.kde.kalendar", 1, 0, "CalendarManager", CalendarManager::instance());
@@ -177,6 +174,9 @@ int main(int argc, char *argv[])
             KConfigGroup windowGroup(&dataResource, "Window");
             KWindowConfig::restoreWindowSize(view, windowGroup);
             KWindowConfig::restoreWindowPosition(view, windowGroup);
+
+            view->installEventFilter(mouseTracker);
+
             break;
         }
     }
