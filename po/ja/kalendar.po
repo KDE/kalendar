@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -859,7 +859,6 @@ msgstr ""
 msgid "Phone Number"
 msgid_plural "Phone Numbers"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contacts/qml/private/ContactPage.qml:251
 #, kde-format
@@ -872,7 +871,6 @@ msgstr ""
 msgid "Address"
 msgid_plural "Addresses"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contacts/qml/private/ContactPage.qml:283
 #, kde-format
@@ -936,7 +934,6 @@ msgstr ""
 msgid "Email Address"
 msgid_plural "Email Addresses"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contacts/qml/private/DeleteContactAction.qml:35
 #, kde-format
@@ -1040,7 +1037,6 @@ msgstr ""
 msgid "This event has reminder"
 msgid_plural "This event has reminders"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:148
 #, kde-format
@@ -1118,7 +1114,6 @@ msgstr ""
 msgid "<b>Attachment:</b>"
 msgid_plural "<b>Attachments:</b>"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Controls/IncidenceInfoContents.qml:500
 #, kde-format
@@ -1150,7 +1145,6 @@ msgstr ""
 msgid "Sub-task"
 msgid_plural "Sub-tasks"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Controls/IncidenceMouseArea.qml:61
 #, kde-format
@@ -1542,28 +1536,24 @@ msgstr ""
 msgid "day"
 msgid_plural "days"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:494
 #, kde-format
 msgid "week"
 msgid_plural "weeks"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:495
 #, kde-format
 msgid "month"
 msgid_plural "months"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:496
 #, kde-format
 msgid "year"
 msgid_plural "years"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:566
 #, kde-format
@@ -1602,7 +1592,6 @@ msgstr ""
 msgid "occurrence"
 msgid_plural "occurrences"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:655
 #, kde-format
@@ -1826,14 +1815,12 @@ msgstr ""
 msgid "Every week"
 msgid_plural "Every %1 weeks"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:33
 #, kde-format
 msgid "Every week on"
 msgid_plural "Every %1 weeks on"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:66
 #: contents/ui/KalendarUtils/labelutils.js:105
@@ -1841,28 +1828,24 @@ msgstr[1] ""
 msgid "Every year on the %2 of %3"
 msgid_plural "Every %1 years on the %2 of %3"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:85
 #, kde-format
 msgid "Every minute"
 msgid_plural "Every %1 minutes"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:88
 #, kde-format
 msgid "Every hour"
 msgid_plural "Every %1 hours"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:91
 #, kde-format
 msgid "Every day"
 msgid_plural "Every %1 days"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:97
 #: contents/ui/KalendarUtils/labelutils.js:101
@@ -1870,14 +1853,12 @@ msgstr[1] ""
 msgid "Every month on the %2"
 msgid_plural "Every %1 months on the %2"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:109
 #, kde-format
 msgid "Every year on the %2 day of the year"
 msgid_plural "Every %1 years on the %2 day of the year"
 msgstr[0] ""
-msgstr[1] ""
 
 #: contents/ui/KalendarUtils/labelutils.js:115
 #, kde-format
@@ -2743,14 +2724,12 @@ msgstr ""
 msgid "one key imported"
 msgid_plural "%1 keys imported"
 msgstr[0] ""
-msgstr[1] ""
 
 #: mail/mime/attachmentmodel.cpp:228
 #, kde-format
 msgid "one key was already imported"
 msgid_plural "%1 keys were already imported"
 msgstr[0] ""
-msgstr[1] ""
 
 #: mail/mime/mailtemplates.cpp:103
 #, kde-format
