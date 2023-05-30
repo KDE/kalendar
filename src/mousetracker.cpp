@@ -2,10 +2,15 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "mousetracker.h"
-#include "qdebug.h"
 
 #include <QEvent>
 #include <QMouseEvent>
+
+MouseTracker *MouseTracker::instance()
+{
+    static MouseTracker *trackerInstance = new MouseTracker;
+    return trackerInstance;
+}
 
 MouseTracker::MouseTracker(QObject *parent)
     : QObject{parent}

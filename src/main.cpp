@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
                         }
                     });
 
-    const auto mouseTracker = new MouseTracker;
+    const auto mouseTracker = MouseTracker::instance();
     app.installEventFilter(mouseTracker);
 
     QQmlApplicationEngine engine;
