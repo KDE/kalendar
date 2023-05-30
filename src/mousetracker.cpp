@@ -17,7 +17,7 @@ QPointF MouseTracker::mousePosition() const
     return m_lastMousePos;
 }
 
-// This is the method is necessary for 'installEventFilter'
+// This method is necessary for 'installEventFilter'
 bool MouseTracker::eventFilter(QObject *watched, QEvent *event)
 {
     Q_ASSERT(event);
@@ -28,6 +28,12 @@ bool MouseTracker::eventFilter(QObject *watched, QEvent *event)
         const auto mouseEvent = static_cast<QMouseEvent *>(event);
         m_lastMousePos = mouseEvent->windowPos();
         Q_EMIT mousePositionChanged(m_lastMousePos);
+        break;
+    }
+    case QEvent::MouseButtonRelease: {
+        const auto mouseEvent = static_cast<QMouseEvent *>(event);
+        const auto buttonClicked = mouseEvent->button();
+        Q_EMIT mouseButtonReleased(buttonClicked);
         break;
     }
     default:

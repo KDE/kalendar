@@ -18,6 +18,7 @@ public:
 
 Q_SIGNALS:
     void mousePositionChanged(QPointF position);
+    void mouseButtonReleased(Qt::MouseButton button);
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
