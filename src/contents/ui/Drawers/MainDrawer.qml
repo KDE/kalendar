@@ -254,9 +254,9 @@ Kirigami.OverlayDrawer {
                             },
                             KActionFromAction {
                                 kalendarAction: "open_week_view"
-                                // Override the default checkable behaviour as we want this to stay highlighted
+                                checkable: false
+                                // Override the default checked behaviour as we want this to stay highlighted
                                 // in any of the hourly views, at least in desktop mode
-                                checkable: true
                                 checked: pageStack.currentItem && (
                                          pageStack.currentItem.mode & (KalendarApplication.Week | KalendarApplication.ThreeDay | KalendarApplication.Day))
                                 onTriggered: {
