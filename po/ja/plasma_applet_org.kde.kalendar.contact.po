@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -61,7 +61,6 @@ msgstr ""
 msgid "Address"
 msgid_plural "Addresses"
 msgstr[0] ""
-msgstr[1] ""
 
 #: package/contents/ui/ContactPage.qml:193
 #, kde-format
@@ -74,14 +73,12 @@ msgstr ""
 msgid "Email Address"
 msgid_plural "Email Addresses"
 msgstr[0] ""
-msgstr[1] ""
 
 #: package/contents/ui/ContactPage.qml:232
 #, kde-format
 msgid "Phone number"
 msgid_plural "Phone numbers"
 msgstr[0] ""
-msgstr[1] ""
 
 #: package/contents/ui/ContactsPage.qml:16
 #, kde-format

@@ -6,9 +6,6 @@
 
 #include "kalendarapplication.h"
 
-#include "calendaradaptor.h"
-#include "kalendar_debug.h"
-#include "models/commandbarfiltermodel.h"
 #include <KAuthorized>
 #include <KConfigGroup>
 #include <KFormat>
@@ -22,6 +19,11 @@
 #include <QQuickWindow>
 #include <QSortFilterProxyModel>
 #include <vector>
+
+#include "calendaradaptor.h"
+#include "kalendar_debug.h"
+#include "models/commandbarfiltermodel.h"
+#include "mousetracker.h"
 
 KalendarApplication::KalendarApplication(QObject *parent)
     : QObject(parent)
@@ -42,6 +44,8 @@ KalendarApplication::KalendarApplication(QObject *parent)
     KConfig cfg(QStringLiteral("defaultcalendarrc"));
     KConfigGroup grp(&cfg, QStringLiteral("General"));
     grp.writeEntry(QStringLiteral("ApplicationId"), QStringLiteral("org.kde.kalendar"));
+
+    connect(MouseTracker::instance(), &MouseTracker::mouseButtonReleased, this, &KalendarApplication::handleMouseViewNavButtons);
 }
 
 KalendarApplication::~KalendarApplication()
@@ -717,6 +721,21 @@ void KalendarApplication::showIncidenceByUid(const QString &uid, const QDateTime
         window->raise();
     }
 }
+
+void KalendarApplication::handleMouseViewNavButtons(const Qt::MouseButton pressedButton)
+{
+    switch (pressedButton) {
+    case Qt::MouseButton::BackButton:
+        mCollection.action(QStringLiteral("move_view_backwards"))->trigger();
+        break;
+    case Qt::MouseButton::ForwardButton:
+        mCollection.action(QStringLiteral("move_view_forwards"))->trigger();
+        break;
+    default:
+        break;
+    }
+}
+
 #ifndef UNITY_CMAKE_SUPPORT
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif

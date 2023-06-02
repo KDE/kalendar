@@ -16,15 +16,6 @@ MouseArea {
         }
     }
 
-    onClicked: {
-        if (mouse.button === Qt.BackButton) {
-            moveViewBackwardsAction.trigger();
-        } else if (mouse.button === Qt.ForwardButton) {
-            moveViewForwardsAction.trigger();
-        }
-        mouse.accepted = false;
-    }
-
     onWheel: {
         repositionIncidencePopup();
         wheel.accepted = false;

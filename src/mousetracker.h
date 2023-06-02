@@ -12,16 +12,18 @@ class MouseTracker : public QObject
     Q_PROPERTY(QPointF mousePosition READ mousePosition NOTIFY mousePositionChanged)
 
 public:
-    explicit MouseTracker(QObject *parent = nullptr);
-
+    static MouseTracker *instance();
     QPointF mousePosition() const;
 
 Q_SIGNALS:
     void mousePositionChanged(QPointF position);
+    void mouseButtonReleased(Qt::MouseButton button);
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
+    explicit MouseTracker(QObject *parent = nullptr);
+
     QPointF m_lastMousePos;
 };
