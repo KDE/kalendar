@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-02 00:48+0000\n"
 "PO-Revision-Date: 2022-03-30 17:51+0300\n"
 "Last-Translator: Māris Nartišs <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -1249,13 +1249,13 @@ msgid "Min. Interval:"
 msgstr "Mazākais attālums:"
 
 #: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:444
-#: kalendarapplication.cpp:294
+#: kalendarapplication.cpp:298
 #, kde-format
 msgid "New Event…"
 msgstr "Jauns pasākums..."
 
 #: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:450
-#: kalendarapplication.cpp:301
+#: kalendarapplication.cpp:305
 #, kde-format
 msgid "New Task…"
 msgstr "Jauns uzdevums..."
@@ -2217,8 +2217,8 @@ msgstr "Grafika skats"
 msgid "Tasks"
 msgstr "Uzdevumi"
 
-#: contents/ui/main.qml:480 kalendarapplication.cpp:30
-#: kalendarapplication.cpp:35
+#: contents/ui/main.qml:480 kalendarapplication.cpp:32
+#: kalendarapplication.cpp:37
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
 #, fuzzy, kde-format
@@ -2424,8 +2424,8 @@ msgstr "Neviens uzdevums nav pabeigts"
 msgid "No tasks left to complete"
 msgstr "Nav veicamu uzdevumu"
 
-#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:29
-#: kalendarapplication.cpp:34
+#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:31
+#: kalendarapplication.cpp:36
 #, fuzzy, kde-format
 msgid "Sort"
 msgstr "Kārtot pēc"
@@ -2520,7 +2520,7 @@ msgstr ""
 msgid "Accounts"
 msgstr ""
 
-#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:225
+#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:229
 #, kde-format
 msgid "About Kalendar"
 msgstr "Par Kalendar"
@@ -2762,190 +2762,190 @@ msgstr "(norāda precīzu atrašanās vietu)"
 msgid "Task"
 msgstr "Uzdevums"
 
-#: kalendarapplication.cpp:31 kalendarapplication.cpp:36
+#: kalendarapplication.cpp:33 kalendarapplication.cpp:38
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact"
 msgstr "Kontakti"
 
-#: kalendarapplication.cpp:97
+#: kalendarapplication.cpp:101
 #, kde-format
 msgid "Tasks View"
 msgstr "Uzdevumu skats"
 
-#: kalendarapplication.cpp:107 kalendarapplication.cpp:187
+#: kalendarapplication.cpp:111 kalendarapplication.cpp:191
 #, kde-format
 msgid "Ctrl+6"
 msgstr "Ctrl+6"
 
-#: kalendarapplication.cpp:113
+#: kalendarapplication.cpp:117
 #, kde-format
 msgid "Week View"
 msgstr "Nedēļas skats"
 
-#: kalendarapplication.cpp:123
+#: kalendarapplication.cpp:127
 #, kde-format
 msgid "Ctrl+2"
 msgstr "Ctrl+2"
 
-#: kalendarapplication.cpp:129
+#: kalendarapplication.cpp:133
 #, kde-format
 msgid "3 Day View"
 msgstr "3 dienu skats"
 
-#: kalendarapplication.cpp:139
+#: kalendarapplication.cpp:143
 #, kde-format
 msgid "Ctrl+3"
 msgstr "Ctrl+3"
 
-#: kalendarapplication.cpp:145
+#: kalendarapplication.cpp:149
 #, kde-format
 msgid "Day View"
 msgstr "Dienas skats"
 
-#: kalendarapplication.cpp:155
+#: kalendarapplication.cpp:159
 #, kde-format
 msgid "Ctrl+4"
 msgstr "Ctrl+4"
 
-#: kalendarapplication.cpp:161
+#: kalendarapplication.cpp:165
 #, fuzzy, kde-format
 msgid "Schedule View"
 msgstr "Grafika skats"
 
-#: kalendarapplication.cpp:171
+#: kalendarapplication.cpp:175
 #, kde-format
 msgid "Ctrl+5"
 msgstr "Ctrl+5"
 
-#: kalendarapplication.cpp:177
+#: kalendarapplication.cpp:181
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contacts View"
 msgstr "Kontakti"
 
-#: kalendarapplication.cpp:193
+#: kalendarapplication.cpp:197
 #, fuzzy, kde-format
 #| msgid "Day View"
 msgid "Mail View"
 msgstr "Dienas skats"
 
-#: kalendarapplication.cpp:203
+#: kalendarapplication.cpp:207
 #, fuzzy, kde-format
 #| msgid "Ctrl+6"
 msgid "Ctrl+7"
 msgstr "Ctrl+6"
 
-#: kalendarapplication.cpp:209
+#: kalendarapplication.cpp:213
 #, kde-format
 msgid "Month View"
 msgstr "Mēneša skats"
 
-#: kalendarapplication.cpp:219
+#: kalendarapplication.cpp:223
 #, kde-format
 msgid "Ctrl+1"
 msgstr "Ctrl+1"
 
-#: kalendarapplication.cpp:232
+#: kalendarapplication.cpp:236
 #, kde-format
 msgid "Backwards"
 msgstr "Uz atpakaļu"
 
-#: kalendarapplication.cpp:245
+#: kalendarapplication.cpp:249
 #, kde-format
 msgid "Forwards"
 msgstr "Uz priekšu"
 
-#: kalendarapplication.cpp:258
+#: kalendarapplication.cpp:262
 #, kde-format
 msgid "To Today"
 msgstr "Uz šodienu"
 
-#: kalendarapplication.cpp:271
+#: kalendarapplication.cpp:275
 #, kde-format
 msgid "To Date…"
 msgstr "Uz noteiktu datumu..."
 
-#: kalendarapplication.cpp:284
+#: kalendarapplication.cpp:288
 #, kde-format
 msgid "Show Menubar"
 msgstr "Rādīt rīkjoslu"
 
-#: kalendarapplication.cpp:288
+#: kalendarapplication.cpp:292
 #, kde-format
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: kalendarapplication.cpp:308
+#: kalendarapplication.cpp:312
 #, fuzzy, kde-format
 #| msgid "New Task…"
 msgid "New Mail…"
 msgstr "Jauns uzdevums..."
 
-#: kalendarapplication.cpp:315
+#: kalendarapplication.cpp:319
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact…"
 msgstr "Jauns pasākums..."
 
-#: kalendarapplication.cpp:322
+#: kalendarapplication.cpp:326
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact Group…"
 msgstr "Jauns pasākums..."
 
-#: kalendarapplication.cpp:335
+#: kalendarapplication.cpp:339
 #, kde-format
 msgid "Manage Tags…"
 msgstr "Pārvaldīt atzīmes"
 
-#: kalendarapplication.cpp:348
+#: kalendarapplication.cpp:352
 #, kde-format
 msgid "Import Calendar…"
 msgstr "Importēt kalendāru..."
 
-#: kalendarapplication.cpp:380
+#: kalendarapplication.cpp:384
 #, kde-format
 msgid "Alphabetically"
 msgstr "Alfabēta secābā"
 
-#: kalendarapplication.cpp:396
+#: kalendarapplication.cpp:400
 #, kde-format
 msgid "By Due Date"
 msgstr "Pēc beigu datuma"
 
-#: kalendarapplication.cpp:412
+#: kalendarapplication.cpp:416
 #, kde-format
 msgid "By Priority Level"
 msgstr "Pēc prioritātes pakāpes"
 
-#: kalendarapplication.cpp:428
+#: kalendarapplication.cpp:432
 #, kde-format
 msgid "Ascending order"
 msgstr "Pieaugošā secībā"
 
-#: kalendarapplication.cpp:444
+#: kalendarapplication.cpp:448
 #, kde-format
 msgid "Descending Order"
 msgstr "Dilstošā secībā"
 
-#: kalendarapplication.cpp:460
+#: kalendarapplication.cpp:464
 #, kde-format
 msgid "Show Completed Tasks"
 msgstr "Rādīt paveiktos uzdevumus"
 
-#: kalendarapplication.cpp:474
+#: kalendarapplication.cpp:478
 #, kde-format
 msgid "Open Command Bar"
 msgstr "Atvērt komandu uzvedni"
 
-#: kalendarapplication.cpp:484
+#: kalendarapplication.cpp:488
 #, fuzzy, kde-format
 #| msgid "Refresh All Calendars"
 msgid "Refresh All"
 msgstr "Atjaunināt visus kalendārus"
 
-#: kalendarapplication.cpp:637 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:641 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr "Radusies kļūda: %1"
