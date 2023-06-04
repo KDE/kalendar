@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-02 00:48+0000\n"
-"PO-Revision-Date: 2023-05-17 11:55+0300\n"
+"PO-Revision-Date: 2023-06-04 01:21+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2677,7 +2677,7 @@ msgstr "Görevler Görünümü"
 #: kalendarapplication.cpp:111 kalendarapplication.cpp:191
 #, kde-format
 msgid "Ctrl+6"
-msgstr "Ctrl+6"
+msgstr "Kontrol+6"
 
 #: kalendarapplication.cpp:117
 #, kde-format
@@ -2687,7 +2687,7 @@ msgstr "Hafta Görünümü"
 #: kalendarapplication.cpp:127
 #, kde-format
 msgid "Ctrl+2"
-msgstr "Ctrl+2"
+msgstr "Kontrol+2"
 
 #: kalendarapplication.cpp:133
 #, kde-format
@@ -2697,7 +2697,7 @@ msgstr "3 Günlük Görünüm"
 #: kalendarapplication.cpp:143
 #, kde-format
 msgid "Ctrl+3"
-msgstr "Ctrl+3"
+msgstr "Kontrol+3"
 
 #: kalendarapplication.cpp:149
 #, kde-format
@@ -2707,7 +2707,7 @@ msgstr "Gün Görünümü"
 #: kalendarapplication.cpp:159
 #, kde-format
 msgid "Ctrl+4"
-msgstr "Ctrl+4"
+msgstr "Kontrol+4"
 
 #: kalendarapplication.cpp:165
 #, kde-format
@@ -2717,7 +2717,7 @@ msgstr "Ajanda Görünümü"
 #: kalendarapplication.cpp:175
 #, kde-format
 msgid "Ctrl+5"
-msgstr "Ctrl+5"
+msgstr "Kontrol+5"
 
 #: kalendarapplication.cpp:181
 #, kde-format
@@ -2732,7 +2732,7 @@ msgstr "Posta Görünümü"
 #: kalendarapplication.cpp:207
 #, kde-format
 msgid "Ctrl+7"
-msgstr "Ctrl+7"
+msgstr "Kontrol+7"
 
 #: kalendarapplication.cpp:213
 #, kde-format
@@ -2742,7 +2742,7 @@ msgstr "Ay Görünümü"
 #: kalendarapplication.cpp:223
 #, kde-format
 msgid "Ctrl+1"
-msgstr "Ctrl+1"
+msgstr "Kontrol+1"
 
 #: kalendarapplication.cpp:236
 #, kde-format
@@ -2772,7 +2772,7 @@ msgstr "Menü Çubuğunu Göster"
 #: kalendarapplication.cpp:292
 #, kde-format
 msgid "Ctrl+M"
-msgstr "Ctrl+M"
+msgstr "Kontrol+M"
 
 #: kalendarapplication.cpp:312
 #, kde-format
