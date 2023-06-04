@@ -11,6 +11,9 @@
 #include "mailmodel.h"
 #include "mime/htmlutils.h"
 #include "mime/messageparser.h"
+#include "mailheadermodel.h"
+#include "identitymodel.h"
+
 
 void CalendarPlugin::registerTypes(const char *uri)
 {
@@ -34,7 +37,9 @@ void CalendarPlugin::registerTypes(const char *uri)
         return new MailCollectionHelper;
     });
 
+    qmlRegisterType<MailHeaderModel>("org.kde.kalendar.mail", 1, 0, "MailHeaderModel");
     qmlRegisterType<MessageParser>(uri, 1, 0, "MessageParser");
+    qmlRegisterType<IdentityModel>(uri, 1, 0, "IdentityModel");
 
     qRegisterMetaType<MailModel *>("MailModel*");
 }

@@ -39,6 +39,12 @@ set(kalendar_mail_SRCS
     mime/messageparser.cpp
     mime/partmodel.cpp
 
+    mailheadermodel.h
+    mailheadermodel.cpp
+
+    identitymodel.h
+    identitymodel.cpp
+
     crypto.h
     mimetreeparser/messagepart.h
     mimetreeparser/bodypartformatter.h
@@ -91,6 +97,7 @@ ecm_target_qml_sources(kalendar_mail_plugin SOURCES
     qml/MailSidebar.qml
     qml/FolderView.qml
     qml/MailViewer.qml
+    qml/MailComposer.qml
     qml/ConversationViewer.qml
     qml/MailApplication.qml
 )
