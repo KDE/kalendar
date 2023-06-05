@@ -20,7 +20,11 @@ QQC2.Menu {
     }
 
     KActionFromAction {
-        kalendarAction: 'options_configure_keybinding'
+        kalendarAction: "options_configure_schedule"
+    }
+
+    KActionFromAction {
+        kalendarAction: "options_configure_keybinding"
     }
 
     KActionFromAction {

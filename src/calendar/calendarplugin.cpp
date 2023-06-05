@@ -9,6 +9,10 @@
 #include <QQmlEngine>
 #include <QtQml>
 
+// #include <akonadi/calendarsettings.h>
+#include <Akonadi/CalendarSettings>
+#include <Akonadi/FreeBusyManager>
+
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
 
 void CalendarPlugin::registerTypes(const char *uri)
@@ -19,6 +23,9 @@ void CalendarPlugin::registerTypes(const char *uri)
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
         return new Utils;
+    });
+    qmlRegisterSingletonType<Akonadi::CalendarSettings>(uri, 1, 0, "CalendarSettings", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        return Akonadi::CalendarSettings::self();
     });
     qmlRegisterType<RemindersModel>(uri, 1, 0, "RemindersModel");
     qmlRegisterModule(uri, 1, 0);
