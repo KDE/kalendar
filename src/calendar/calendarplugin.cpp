@@ -27,6 +27,9 @@ void CalendarPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<Akonadi::CalendarSettings>(uri, 1, 0, "CalendarSettings", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         return Akonadi::CalendarSettings::self();
     });
+    qmlRegisterSingletonType<Akonadi::FreeBusyManager>(uri, 1, 0, "FreeBusyManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        return Akonadi::FreeBusyManager::self();
+    });
     qmlRegisterType<RemindersModel>(uri, 1, 0, "RemindersModel");
     qmlRegisterModule(uri, 1, 0);
     qRegisterMetaType<KCalendarCore::Incidence::Ptr>();

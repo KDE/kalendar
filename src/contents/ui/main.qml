@@ -367,6 +367,17 @@ Kirigami.ApplicationWindow {
              Qt.quit();
         }
 
+        function onConfigureSchedule() {
+            const openDialogWindow = pageStack.pushDialogLayer("qrc:/ScheduleSettingsPage.qml", {
+                width: root.width
+            }, {
+                title: i18n("Configure Schedule"),
+                width: Kirigami.Units.gridUnit * 45,
+                height: Kirigami.Units.gridUnit * 35
+            });
+            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
+        }
+
         function onOpenSettings() {
             const openDialogWindow = pageStack.pushDialogLayer("qrc:/SettingsPage.qml", {
                 width: root.width
