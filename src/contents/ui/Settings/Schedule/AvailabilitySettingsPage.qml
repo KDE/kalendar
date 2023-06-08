@@ -6,7 +6,7 @@ import org.kde.kirigami 2.19 as Kirigami
 import QtQuick.Layouts 1.15
 import org.kde.kalendar 1.0
 import org.kde.akonadi 1.0
-// import org.kde.kalendar.calendar as Calendar
+import org.kde.kalendar.calendar 1.0 as Calendar
 
 Kirigami.ScrollablePage {
     id: availabilitySettingsPage
