@@ -3,7 +3,7 @@
 
 #include "../remindersmodel.h"
 #include <QObject>
-#include <QtTest/QtTest>
+#include <QTest>
 
 class RemindersModelTest : public QObject
 {

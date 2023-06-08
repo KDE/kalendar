@@ -5,7 +5,7 @@
 #include <KContacts/Impp>
 #include <KLocalizedString>
 #include <QObject>
-#include <QtTest/QtTest>
+#include <QTest>
 
 class ImppModelTest : public QObject
 {

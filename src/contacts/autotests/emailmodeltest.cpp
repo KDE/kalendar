@@ -5,7 +5,7 @@
 #include <KContacts/Email>
 #include <KLocalizedString>
 #include <QObject>
-#include <QtTest/QtTest>
+#include <QTest>
 
 class EmailModelTest : public QObject
 {

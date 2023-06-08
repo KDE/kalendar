@@ -5,7 +5,7 @@
 #include <KContacts/PhoneNumber>
 #include <KLocalizedString>
 #include <QObject>
-#include <QtTest/QtTest>
+#include <QTest>
 
 class PhoneModelTest : public QObject
 {

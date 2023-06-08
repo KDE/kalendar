@@ -19,7 +19,7 @@
 #include <MailCommon/FolderCollectionMonitor>
 #include <MailCommon/MailKernel>
 #include <QApplication>
-#include <QtCore/QItemSelectionModel>
+#include <QItemSelectionModel>
 
 MailManager::MailManager(QObject *parent)
     : QObject(parent)

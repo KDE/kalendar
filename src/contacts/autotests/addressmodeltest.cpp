@@ -5,7 +5,7 @@
 #include <KContacts/Address>
 #include <KLocalizedString>
 #include <QObject>
-#include <QtTest/QtTest>
+#include <QTest>
 
 class AddressModelTest : public QObject
 {
