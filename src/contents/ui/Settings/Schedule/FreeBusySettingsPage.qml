@@ -99,6 +99,7 @@ Kirigami.ScrollablePage {
                         Calendar.CalendarSettings.save();
                     }
                 }
+                MobileForm.FormDelegateSeparator { above: publishServerUser; below: publishServerUrl }
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerUser
                     label: i18n("Username")
@@ -108,6 +109,7 @@ Kirigami.ScrollablePage {
                         Calendar.CalendarSettings.save();
                     }
                 }
+                MobileForm.FormDelegateSeparator { above: publishServerPassword; below: publishServerUser }
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerPassword
                     label: i18n("Password")
@@ -117,6 +119,7 @@ Kirigami.ScrollablePage {
                         Calendar.CalendarSettings.save();
                     }
                 }
+                MobileForm.FormDelegateSeparator { above: publishServerSavePassword; below: publishServerPassword }
                 MobileForm.FormCheckDelegate {
                     id: publishServerSavePassword
                     text: i18n("Save password")
