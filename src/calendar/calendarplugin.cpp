@@ -9,8 +9,7 @@
 #include <QQmlEngine>
 #include <QtQml>
 
-// #include <akonadi/calendarsettings.h>
-#include <Akonadi/CalendarSettings>
+#include <akonadi/calendarsettings.h> //krazy:exclude=camelcase this is a generated file
 #include <Akonadi/FreeBusyManager>
 
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);

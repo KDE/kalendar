@@ -29,9 +29,9 @@ Kirigami.ScrollablePage {
                 }
                 MobileForm.FormTextDelegate {
                     id: freeBusyPublishInfo
-                    description: i18n("By publishing free/busy information, you allow others to take your calendar into account when inviting you for a meeting. Only the times you have already busy are published, not why they are busy.")
+                    description: i18n("When you publish your free/busy information, it enables others to consider your calendar availability when inviting you to a meeting. Only the times that are already marked as busy are disclosed, without revealing the specific reasons for your availability.")
                 }
-                MobileForm.FormDelegateSeparator { above: autoPublishDelegate; below: freeBusyPublishInfo }
+                MobileForm.FormDelegateSeparator {}
                 MobileForm.FormCheckDelegate {
                     id: autoPublishDelegate
                     text: i18n("Publish your free/busy information automatically")
@@ -41,85 +41,67 @@ Kirigami.ScrollablePage {
                         Calendar.CalendarSettings.save();
                     }
                 }
-                MobileForm.AbstractFormDelegate {
+                MobileForm.FormSpinBoxDelegate {
                     id: autoPublishDelayDelegate
-                    background: Item {}
-                    // add left padding?
-                    leftPadding: Kirigami.Units.largeSpacing * 4
                     Layout.fillWidth: true
                     visible: autoPublishDelegate.checked
-                    contentItem: RowLayout {
-                        QQC2.Label {
-                            text: i18n("Minimum time (in minutes) between uploads: ")
-                        }
-                        QQC2.SpinBox {
-                            Layout.fillWidth: false
-                            value: Calendar.CalendarSettings.FreeBusyPublishDelay
-                            onValueModified: {
-                                Calendar.CalendarSettings.FreeBusyPublishDelay = value;
-                                Calendar.CalendarSettings.save();
-                            }
-                            from: 1
-                            to: 10080
-                        }
+                    label: i18n("Minimum time (in minutes) between uploads")
+                    value: Calendar.CalendarSettings.FreeBusyPublishDelay
+                    from: 1
+                    to: 10080
+                    onValueChanged: {
+                        Calendar.CalendarSettings.FreeBusyPublishDelay = value;
+                        Calendar.CalendarSettings.save();
                     }
                 }
-                MobileForm.AbstractFormDelegate {
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.FormSpinBoxDelegate {
                     id: publishDaysDelegate
-                    background: Item {}
                     Layout.fillWidth: true
-                    visible: autoPublishCheckbox.checked
-                    contentItem: RowLayout {
-                        QQC2.Label {
-                            text: i18n("Number of days of free/busy info to publish: ")
-                        }
-                        QQC2.SpinBox {
-                            Layout.fillWidth: false
-                            value: Calendar.CalendarSettings.FreeBusyPublishDays
-                            onValueModified: {
-                                Calendar.CalendarSettings.FreeBusyPublishDays = value;
-                                Calendar.CalendarSettings.save();
-                            }
-                            from: 1
-                            to: 365
-                        }
+                    label: i18n("Number of days of free/busy info to publish: ")
+                    value: Calendar.CalendarSettings.FreeBusyPublishDays
+                    from: 1
+                    to: 365
+                    onValueChanged: {
+                        Calendar.CalendarSettings.FreeBusyPublishDays = value;
+                        Calendar.CalendarSettings.save();
                     }
                 }
-                MobileForm.FormDelegateSeparator { above: publishServerTitle; below: publishdaysDelegate }
+                MobileForm.FormDelegateSeparator {}
                 MobileForm.FormTextDelegate {
                     id: publishServerTitle
-                    description: i18n("Server information (not required if using Kolab server version 2)")
+                    description: i18n("Server information")
                 }
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerUrl
                     label: i18n("Server URL")
                     text: Calendar.CalendarSettings.FreeBusyPublishUrl
-                    onTextChanged: {
+                    onEditingFinished: {
                         Calendar.CalendarSettings.FreeBusyPublishUrl = text;
                         Calendar.CalendarSettings.save();
                     }
                 }
-                MobileForm.FormDelegateSeparator { above: publishServerUser; below: publishServerUrl }
+                MobileForm.FormDelegateSeparator {}
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerUser
                     label: i18n("Username")
                     text: Calendar.CalendarSettings.FreeBusyPublishUser
-                    onTextChanged: {
+                    onEditingFinished: {
                         Calendar.CalendarSettings.FreeBusyPublishUser = text;
                         Calendar.CalendarSettings.save();
                     }
                 }
-                MobileForm.FormDelegateSeparator { above: publishServerPassword; below: publishServerUser }
+                MobileForm.FormDelegateSeparator {}
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerPassword
                     label: i18n("Password")
                     text: Calendar.CalendarSettings.FreeBusyPublishPassword
-                    onTextChanged: {
+                    onEditingFinished: {
                         Calendar.CalendarSettings.FreeBusyPublishPassword = text;
                         Calendar.CalendarSettings.save();
                     }
                 }
-                MobileForm.FormDelegateSeparator { above: publishServerSavePassword; below: publishServerPassword }
+                MobileForm.FormDelegateSeparator {}
                 MobileForm.FormCheckDelegate {
                     id: publishServerSavePassword
                     text: i18n("Save password")

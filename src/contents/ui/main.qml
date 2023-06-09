@@ -375,7 +375,7 @@ Kirigami.ApplicationWindow {
                 width: Kirigami.Units.gridUnit * 45,
                 height: Kirigami.Units.gridUnit * 35
             });
-            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
+            openDialogWindow.Keys.escapePressed.connect(() => openDialogWindow.closeDialog());
         }
 
         function onOpenSettings() {

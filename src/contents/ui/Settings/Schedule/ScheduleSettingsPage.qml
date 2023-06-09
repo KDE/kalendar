@@ -14,11 +14,7 @@ Kirigami.CategorizedSettings {
             text: i18n("Free/Busy")
             icon.name: "view-calendar-month"
             page: Qt.resolvedUrl("FreeBusySettingsPage.qml")
-        },
-        Kirigami.SettingAction {
-            text: i18n("Availability")
-            icon.name: "korganizer"
-            page: Qt.resolvedUrl("AvailabilitySettingsPage.qml")
         }
+        //  TODO: add Availability configuration here
     ]
 }
