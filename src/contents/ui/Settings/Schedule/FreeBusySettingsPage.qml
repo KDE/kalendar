@@ -41,6 +41,7 @@ Kirigami.ScrollablePage {
                         Calendar.CalendarSettings.save();
                     }
                 }
+                MobileForm.FormDelegateSeparator {}
                 MobileForm.FormSpinBoxDelegate {
                     id: autoPublishDelayDelegate
                     Layout.fillWidth: true
@@ -108,6 +109,84 @@ Kirigami.ScrollablePage {
                     checked: Calendar.CalendarSettings.FreeBusyPublishSavePassword
                     onCheckedChanged: {
                         Calendar.CalendarSettings.FreeBusyPublishSavePassword = checked;
+                        Calendar.CalendarSettings.save();
+                    }
+                }
+            }
+        }
+        MobileForm.FormCard{
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            contentItem: ColumnLayout {
+                spacing: 0
+                MobileForm.FormCardHeader {
+                    id: freeBusyRetrieveHeader
+                    title: i18n("Free/Busy Retrieval settings")
+                }
+                MobileForm.FormTextDelegate {
+                    id: freeBusyRetrieveInfo
+                    description: i18n("By retrieving Free/Busy information that others have published, you can take their calendar into account when inviting them to a meeting.")
+                }
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.FormCheckDelegate {
+                    id: autoRetrieveDelegate
+                    text: i18n("Retrieve others' free/busy information automatically")
+                    checked: Calendar.CalendarSettings.freeBusyRetrieveAuto
+                    onCheckedChanged: {
+                        Calendar.CalendarSettings.freeBusyRetrieveAuto = checked;
+                        Calendar.CalendarSettings.save();
+                    }
+                }
+                MobileForm.FormCheckDelegate {
+                    id: fullDomainRetrievalDelegate
+                    text: i18n("Use full email address for retrieval")
+                    checked: Calendar.CalendarSettings.freeBusyFullDomainRetrieval
+                    onCheckedChanged: {
+                        Calendar.CalendarSettings.freeBusyFullDomainRetrieval = checked;
+                        Calendar.CalendarSettings.save();
+                    }
+                }
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.FormTextDelegate {
+                    id: retrieveServerTitle
+                    description: i18n("Server information")
+                }
+                MobileForm.FormTextFieldDelegate {
+                    id: retrieveServerUrl
+                    label: i18n("Server URL")
+                    text: Calendar.CalendarSettings.freeBusyRetrieveUrl
+                    onEditingFinished: {
+                        Calendar.CalendarSettings.freeBusyRetrieveUrl = text;
+                        Calendar.CalendarSettings.save();
+                    }
+                }
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.FormTextFieldDelegate {
+                    id: retrieveServerUser
+                    label: i18n("Username")
+                    text: Calendar.CalendarSettings.freeBusyRetrieveUser
+                    onEditingFinished: {
+                        Calendar.CalendarSettings.freeBusyRetrieveUser = text;
+                        Calendar.CalendarSettings.save();
+                    }
+                }
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.FormTextFieldDelegate {
+                    id: retrieveServerPassword
+                    label: i18n("Password")
+                    text: Calendar.CalendarSettings.freeBusyRetrievePassword
+                    onEditingFinished: {
+                        Calendar.CalendarSettings.freeBusyRetrievePassword = text;
+                        Calendar.CalendarSettings.save();
+                    }
+                }
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.FormCheckDelegate {
+                    id: retrieveServerSavePassword
+                    text: i18n("Save password")
+                    checked: Calendar.CalendarSettings.freeBusyRetrieveSavePassword
+                    onCheckedChanged: {
+                        Calendar.CalendarSettings.freeBusyRetrieveSavePassword = checked;
                         Calendar.CalendarSettings.save();
                     }
                 }
