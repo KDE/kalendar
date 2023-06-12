@@ -29,19 +29,11 @@ RowLayout {
     property int selectedIndex: 0
 
     function setReminder(seconds: int) {
-        if (root.isTodo) {
-            root.remindersModel.setData(
-                root.remindersModel.index(root.index, 0),
-                seconds,
-                RemindersModel.StartOffsetRole
-            );
-        } else {
-            root.remindersModel.setData(
-                root.remindersModel.index(root.index, 0),
-                seconds,
-                RemindersModel.EndOffsetRole
-            );
-        }
+        root.remindersModel.setData(
+            root.remindersModel.index(root.index, 0),
+            seconds,
+            Calendar.RemindersModel.StartOffsetRole
+        );
     }
 
     Layout.fillWidth: true
