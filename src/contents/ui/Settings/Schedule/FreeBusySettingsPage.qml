@@ -35,9 +35,9 @@ Kirigami.ScrollablePage {
                 MobileForm.FormCheckDelegate {
                     id: autoPublishDelegate
                     text: i18n("Publish your free/busy information automatically")
-                    checked: Calendar.CalendarSettings.FreeBusyPublishAuto
+                    checked: Calendar.CalendarSettings.freeBusyPublishAuto
                     onCheckedChanged: {
-                        Calendar.CalendarSettings.FreeBusyPublishAuto = checked;
+                        Calendar.CalendarSettings.freeBusyPublishAuto = checked;
                         Calendar.CalendarSettings.save();
                     }
                 }
@@ -47,11 +47,11 @@ Kirigami.ScrollablePage {
                     Layout.fillWidth: true
                     visible: autoPublishDelegate.checked
                     label: i18n("Minimum time (in minutes) between uploads")
-                    value: Calendar.CalendarSettings.FreeBusyPublishDelay
+                    value: Calendar.CalendarSettings.freeBusyPublishDelay
                     from: 1
                     to: 10080
                     onValueChanged: {
-                        Calendar.CalendarSettings.FreeBusyPublishDelay = value;
+                        Calendar.CalendarSettings.freeBusyPublishDelay = value;
                         Calendar.CalendarSettings.save();
                     }
                 }
@@ -60,11 +60,11 @@ Kirigami.ScrollablePage {
                     id: publishDaysDelegate
                     Layout.fillWidth: true
                     label: i18n("Number of days of free/busy info to publish: ")
-                    value: Calendar.CalendarSettings.FreeBusyPublishDays
+                    value: Calendar.CalendarSettings.freeBusyPublishDays
                     from: 1
                     to: 365
                     onValueChanged: {
-                        Calendar.CalendarSettings.FreeBusyPublishDays = value;
+                        Calendar.CalendarSettings.freeBusyPublishDays = value;
                         Calendar.CalendarSettings.save();
                     }
                 }
@@ -76,9 +76,9 @@ Kirigami.ScrollablePage {
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerUrl
                     label: i18n("Server URL")
-                    text: Calendar.CalendarSettings.FreeBusyPublishUrl
+                    text: Calendar.CalendarSettings.freeBusyPublishUrl
                     onEditingFinished: {
-                        Calendar.CalendarSettings.FreeBusyPublishUrl = text;
+                        Calendar.CalendarSettings.freeBusyPublishUrl = text;
                         Calendar.CalendarSettings.save();
                     }
                 }
@@ -86,9 +86,9 @@ Kirigami.ScrollablePage {
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerUser
                     label: i18n("Username")
-                    text: Calendar.CalendarSettings.FreeBusyPublishUser
+                    text: Calendar.CalendarSettings.freeBusyPublishUser
                     onEditingFinished: {
-                        Calendar.CalendarSettings.FreeBusyPublishUser = text;
+                        Calendar.CalendarSettings.freeBusyPublishUser = text;
                         Calendar.CalendarSettings.save();
                     }
                 }
@@ -96,9 +96,9 @@ Kirigami.ScrollablePage {
                 MobileForm.FormTextFieldDelegate {
                     id: publishServerPassword
                     label: i18n("Password")
-                    text: Calendar.CalendarSettings.FreeBusyPublishPassword
+                    text: Calendar.CalendarSettings.freeBusyPublishPassword
                     onEditingFinished: {
-                        Calendar.CalendarSettings.FreeBusyPublishPassword = text;
+                        Calendar.CalendarSettings.freeBusyPublishPassword = text;
                         Calendar.CalendarSettings.save();
                     }
                 }
@@ -106,9 +106,9 @@ Kirigami.ScrollablePage {
                 MobileForm.FormCheckDelegate {
                     id: publishServerSavePassword
                     text: i18n("Save password")
-                    checked: Calendar.CalendarSettings.FreeBusyPublishSavePassword
+                    checked: Calendar.CalendarSettings.freeBusyPublishSavePassword
                     onCheckedChanged: {
-                        Calendar.CalendarSettings.FreeBusyPublishSavePassword = checked;
+                        Calendar.CalendarSettings.freeBusyPublishSavePassword = checked;
                         Calendar.CalendarSettings.save();
                     }
                 }
