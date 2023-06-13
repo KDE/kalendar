@@ -9,6 +9,12 @@ target_sources(kalendar_lib PRIVATE
     sortedcollectionproxymodel.cpp
     colorproxymodel.h
     sortedcollectionproxymodel.h
+    abstractapplication.cpp
+    abstractapplication.h
+    actionsmodel.cpp
+    actionsmodel.h
+    commandbarfiltermodel.cpp
+    commandbarfiltermodel.h
 )
 set_property(TARGET kalendar_lib PROPERTY POSITION_INDEPENDENT_CODE ON)
 
@@ -29,5 +35,6 @@ target_link_libraries(kalendar_lib PUBLIC
     KF${QT_MAJOR_VERSION}::ConfigWidgets
     KF${QT_MAJOR_VERSION}::Contacts
     KF${QT_MAJOR_VERSION}::ItemModels
+    KF${QT_MAJOR_VERSION}::XmlGui
     KPim${QT_MAJOR_VERSION}::CalendarUtils
 )

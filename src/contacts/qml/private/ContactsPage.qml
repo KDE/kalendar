@@ -12,7 +12,6 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.12 as Kirigami
-import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
 
 Kirigami.ScrollablePage {
@@ -22,7 +21,6 @@ Kirigami.ScrollablePage {
 
     property var attendeeAkonadiIds
     property alias contactDelegate: contactsList.delegate
-    property var mode: KalendarApplication.Contact
 
     header: Controls.Control {
         contentItem: Kirigami.SearchField {

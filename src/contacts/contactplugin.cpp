@@ -3,6 +3,7 @@
 
 #include "contactplugin.h"
 #include "addresseewrapper.h"
+#include "contactapplication.h"
 #include "contactcollectionmodel.h"
 #include "contactconfig.h"
 #include "contacteditorbackend.h"
@@ -11,7 +12,6 @@
 #include "contactmanager.h"
 #include "contactsmodel.h"
 #include "emailmodel.h"
-#include "globalcontactmodel.h"
 
 #include <QQmlEngine>
 
@@ -19,7 +19,13 @@ void CalendarPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QByteArray("org.kde.kalendar.contact"));
 
-    qmlRegisterSingletonType<ContactConfig>("org.kde.kalendar.contact", 1, 0, "ContactConfig", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+    qmlRegisterSingletonType<ContactApplication>("org.kde.kalendar.contact", 1, 0, "ContactApplication", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new ContactApplication;
+    });
+
+    qmlRegisterSingletonType<ContactConfig>("org.kde.kalendar.contact", 1, 0, "Config", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
         return new ContactConfig;
@@ -41,4 +47,5 @@ void CalendarPlugin::registerTypes(const char *uri)
     qRegisterMetaType<KContacts::Picture>("KContacts::Picture");
     qRegisterMetaType<KContacts::PhoneNumber::List>("KContacts::PhoneNumber::List");
     qRegisterMetaType<KContacts::PhoneNumber>("KContacts::PhoneNumber");
+    qRegisterMetaType<QAction *>();
 }

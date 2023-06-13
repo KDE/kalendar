@@ -5,9 +5,11 @@
 
 add_library(kalendar_contact_static STATIC)
 
-target_link_libraries(kalendar_contact_static PUBLIC kalendar_lib)
+target_link_libraries(kalendar_contact_static PUBLIC kalendar_lib KF${QT_MAJOR_VERSION}::XmlGui)
 set_target_properties(kalendar_contact_static PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_sources(kalendar_contact_static PUBLIC
+    contactapplication.cpp
+    contactapplication.h
     addresseewrapper.cpp
     addresseewrapper.h
     addressmodel.cpp
@@ -61,9 +63,11 @@ target_sources(kalendar_contact_plugin PRIVATE
 
 ecm_target_qml_sources(kalendar_contact_plugin SOURCES
     qml/ContactChooserPage.qml
-    qml/ContactApplication.qml
     qml/AddressBookCollectionHandler.qml
     qml/ContactView.qml
+    qml/MenuBar.qml
+    qml/Sidebar.qml
+    qml/GlobalMenuBar.qml
 )
 
 ecm_target_qml_sources(kalendar_contact_plugin
@@ -73,8 +77,6 @@ ecm_target_qml_sources(kalendar_contact_plugin
     qml/private/ContactsPage.qml
     qml/private/ContactListItem.qml
     qml/private/Header.qml
-    qml/private/MenuBar.qml
-    qml/private/GlobalMenuBar.qml
     qml/private/PhoneNumberDialog.qml
     qml/private/QrCodePage.qml
     qml/private/AddressBookMenu.qml
@@ -112,3 +114,20 @@ add_subdirectory(applet)
 ecm_finalize_qml_module(kalendar_contact_plugin
     DESTINATION ${KDE_INSTALL_QMLDIR}
     BUILD_SHARED_LIBS OFF)
+
+#### Binary
+
+add_executable(kalendar-contact main.cpp resources.qrc)
+target_link_libraries(kalendar-contact
+    PRIVATE
+        Qt::Widgets
+        Qt::Quick
+        Qt::QuickControls2
+        KF${QT_MAJOR_VERSION}::I18n
+        KF${QT_MAJOR_VERSION}::CoreAddons
+        KF${QT_MAJOR_VERSION}::DBusAddons
+        KF${QT_MAJOR_VERSION}::WindowSystem
+        KF${QT_MAJOR_VERSION}::ConfigGui
+)
+install(TARGETS kalendar-contact ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(PROGRAMS org.kde.kalendar.contact.desktop DESTINATION ${KDE_INSTALL_APPDIR})

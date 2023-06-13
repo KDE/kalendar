@@ -5,7 +5,7 @@ import Qt.labs.platform 1.1 as Labs
 
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import org.kde.kalendar 1.0
+import org.kde.kalendar.calendar 1.0
 import org.kde.kalendar.components 1.0
 
 Labs.MenuBar {
@@ -13,7 +13,7 @@ Labs.MenuBar {
 
     NativeFileMenu {
         NativeMenuItemFromAction {
-            kalendarAction: 'import_calendar'
+            action: CalendarApplication.action("import_calendar")
         }
     }
 
@@ -21,11 +21,11 @@ Labs.MenuBar {
         id: editMenu
 
         NativeMenuItemFromAction {
-            kalendarAction: 'edit_undo'
+            action: CalendarApplication.action("edit_undo")
         }
 
         NativeMenuItemFromAction {
-            kalendarAction: 'edit_redo'
+            action: CalendarApplication.action("edit_redo")
         }
 
         Labs.MenuSeparator {
@@ -38,35 +38,35 @@ Labs.MenuBar {
 
         Labs.Menu {
             title: i18nc("@action:menu", "Sort Tasks")
-            enabled: mode === KalendarApplication.Todo
+            enabled: mode === CalendarApplication.Todo
 
             NativeMenuItemFromAction {
-                kalendarAction: 'todoview_sort_by_due_date'
+                action: CalendarApplication.action("todoview_sort_by_due_date")
             }
 
             NativeMenuItemFromAction {
-                kalendarAction: 'todoview_sort_by_priority'
+                action: CalendarApplication.action("todoview_sort_by_priority")
             }
 
             NativeMenuItemFromAction {
-                kalendarAction: 'todoview_sort_alphabetically'
+                action: CalendarApplication.action("todoview_sort_alphabetically")
             }
 
             Labs.MenuSeparator {
             }
 
             NativeMenuItemFromAction {
-                kalendarAction: 'todoview_order_ascending'
+                action: CalendarApplication.action("todoview_order_ascending")
             }
 
             NativeMenuItemFromAction {
-                kalendarAction: 'todoview_order_descending'
+                action: CalendarApplication.action("todoview_order_descending")
             }
         }
 
         NativeMenuItemFromAction {
-            kalendarAction: 'todoview_show_completed'
-            enabled: mode === KalendarApplication.Todo
+            action: CalendarApplication.action("todoview_show_completed")
+            enabled: mode === CalendarApplication.Todo
         }
 
         Labs.MenuSeparator {
@@ -74,7 +74,7 @@ Labs.MenuBar {
 
         NativeMenuItemFromAction {
             text: i18n('Refresh All Calendars')
-            kalendarAction: "refresh_all"
+            action: CalendarApplication.action("refresh_all")
         }
     }
 
@@ -82,23 +82,23 @@ Labs.MenuBar {
         title: i18nc("@action:menu", "Go")
 
         NativeMenuItemFromAction {
-            kalendarAction: "move_view_backwards"
-            enabled: mode & KalendarApplication.Event
+            action: CalendarApplication.action("move_view_backwards")
+            enabled: mode & CalendarApplication.Event
         }
         NativeMenuItemFromAction {
-            kalendarAction: "move_view_forwards"
-            enabled: mode & KalendarApplication.Event
+            action: CalendarApplication.action("move_view_forwards")
+            enabled: mode & CalendarApplication.Event
         }
 
         Labs.MenuSeparator {}
 
         NativeMenuItemFromAction {
-            kalendarAction: "move_view_to_today"
-            enabled: mode & KalendarApplication.Event
+            action: CalendarApplication.action("move_view_to_today")
+            enabled: mode & CalendarApplication.Event
         }
         NativeMenuItemFromAction {
-            kalendarAction: "open_date_changer"
-            enabled: mode & KalendarApplication.Event
+            action: CalendarApplication.action("open_date_changer")
+            enabled: mode & CalendarApplication.Event
         }
     }
 
@@ -106,11 +106,11 @@ Labs.MenuBar {
         title: i18nc("@action:menu", "Create")
 
         NativeMenuItemFromAction {
-            kalendarAction: 'create_event'
+            action: CalendarApplication.action("create_event")
         }
 
         NativeMenuItemFromAction {
-            kalendarAction: 'create_todo'
+            action: CalendarApplication.action("create_todo")
         }
     }
 

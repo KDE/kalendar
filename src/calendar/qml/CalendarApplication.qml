@@ -4,7 +4,7 @@
 import QtQml 2.15
 import org.kde.kalendar.components 1.0
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kalendar 1.0
+import org.kde.kalendar.calendar 1.0
 
 KalendarApp {
     menuBar: Qt.resolvedUrl('./private/MenuBar.qml')
@@ -19,7 +19,7 @@ KalendarApp {
             onTriggered: CalendarManager.undoAction();
         },
         Kirigami.Action {
-            icon.name: KalendarApplication.iconName(redoAction.icon)
+            icon.name: CalendarApplication.iconName(redoAction.icon)
             text: CalendarManager.undoRedoData.redoAvailable ?
                 i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : redoAction.text
             shortcut: redoAction.shortcut
@@ -27,11 +27,11 @@ KalendarApp {
             onTriggered: CalendarManager.redoAction();
         },
         KActionFromAction {
-            kalendarAction: "import_calendar"
+            action: CalendarApplication.action("import_calendar")
         },
         KActionFromAction {
             text: i18n("Refresh All Calendars")
-            kalendarAction: "refresh_all"
+            action: CalendarApplication.action("refresh_all")
         }
     ]
 }

@@ -1,0 +1,86 @@
+<RCC>
+<!--
+SPDX-FileCopyrightText: None
+SPDX-License-Identifier: CC0-1.0
+-->
+  <qresource prefix="/">
+    <file alias="main.qml">qml/main.qml</file>
+
+    <file alias="MainDrawer.qml">qml/Drawers/MainDrawer.qml</file>
+    <file alias="IncidenceInfoDrawer.qml">qml/Drawers/IncidenceInfoDrawer.qml</file>
+
+    <file alias="FilterHeaderBar.qml">qml/Bars/FilterHeaderBar.qml</file>
+    <file alias="DayLabelsBar.qml">qml/Bars/DayLabelsBar.qml</file>
+
+    <file alias="IncidenceDelegateBackground.qml">qml/Delegates/IncidenceDelegateBackground.qml</file>
+    <file alias="DayGridViewIncidenceDelegate.qml">qml/Delegates/DayGridViewIncidenceDelegate.qml</file>
+    <file alias="ViewTitleDelegate.qml">qml/Delegates/ViewTitleDelegate.qml</file>
+    <file alias="RelatedIncidenceDelegate.qml">qml/Delegates/RelatedIncidenceDelegate.qml</file>
+
+    <file alias="DayGridView.qml">qml/MainViews/DayGridView.qml</file>
+    <file alias="SwipeableMonthGridView.qml">qml/MainViews/SwipeableMonthGridView.qml</file>
+    <file alias="BasicMonthGridView.qml">qml/MainViews/BasicMonthGridView.qml</file>
+    <file alias="MonthView.qml">qml/MainViews/MonthView.qml</file>
+    <file alias="SwipeableMonthListView.qml">qml/MainViews/SwipeableMonthListView.qml</file>
+    <file alias="BasicMonthListView.qml">qml/MainViews/BasicMonthListView.qml</file>
+    <file alias="ScheduleView.qml">qml/MainViews/ScheduleView.qml</file>
+    <file alias="TodoTreeView.qml">qml/MainViews/TodoTreeView.qml</file>
+    <file alias="TodoView.qml">qml/MainViews/TodoView.qml</file>
+    <file alias="SwipeableInternalHourlyView.qml">qml/MainViews/SwipeableInternalHourlyView.qml</file>
+    <file alias="BasicInternalHourlyView.qml">qml/MainViews/BasicInternalHourlyView.qml</file>
+    <file alias="HourlyView.qml">qml/MainViews/HourlyView.qml</file>
+    <file alias="LazyContactView.qml">qml/MainViews/LazyContactView.qml</file>
+    <file alias="LazyMailView.qml">qml/MainViews/LazyMailView.qml</file>
+
+    <file alias="dateutils.js">qml/KalendarUtils/dateutils.js</file>
+    <file alias="labelutils.js">qml/KalendarUtils/labelutils.js</file>
+    <file alias="KalendarUiUtils.qml">qml/KalendarUtils/KalendarUiUtils.qml</file>
+
+    <file alias="IncidenceEditorPage.qml">qml/Dialogs/IncidenceEditorPage.qml</file>
+    <file alias="DeleteIncidencePage.qml">qml/Dialogs/DeleteIncidencePage.qml</file>
+    <file alias="DeleteCalendarPage.qml">qml/Dialogs/DeleteCalendarPage.qml</file>
+    <file alias="KQuickCommandBarPage.qml">qml/Dialogs/KQuickCommandBarPage.qml</file>
+    <file alias="CollectionPickerPage.qml">qml/Dialogs/CollectionPickerPage.qml</file>
+    <file alias="RecurringIncidenceChangePage.qml">qml/Dialogs/RecurringIncidenceChangePage.qml</file>
+
+    <file alias="DatePicker.qml">qml/Controls/DateControls/DatePicker.qml</file>
+    <file alias="TimePicker.qml">qml/Controls/DateControls/TimePicker.qml</file>
+    <file alias="DateChanger.qml">qml/Controls/DateControls/DateChanger.qml</file>
+    <file alias="TimeCombo.qml">qml/Controls/DateControls/TimeCombo.qml</file>
+    <file alias="DateCombo.qml">qml/Controls/DateControls/DateCombo.qml</file>
+
+    <file alias="TitleDateButton.qml">qml/Controls/TitleDateButton.qml</file>
+    <file alias="IncidenceMouseArea.qml">qml/Controls/IncidenceMouseArea.qml</file>
+    <file alias="KBMNavigationMouseArea.qml">qml/Controls/KBMNavigationMouseArea.qml</file>
+    <file alias="DayMouseArea.qml">qml/Controls/DayMouseArea.qml</file>
+    <file alias="ColoredCheckbox.qml">qml/Controls/ColoredCheckbox.qml</file>
+    <file alias="Tag.qml">qml/Controls/Tag.qml</file>
+    <file alias="ResizerSeparator.qml">qml/Controls/ResizerSeparator.qml</file>
+    <file alias="CalendarItemTapHandler.qml">qml/Controls/CalendarItemTapHandler.qml</file>
+    <file alias="TodoCheckBox.qml">qml/Controls/TodoCheckBox.qml</file>
+    <file alias="IncidenceInfoContents.qml">qml/Controls/IncidenceInfoContents.qml</file>
+    <file alias="IncidenceInfoPopup.qml">qml/Controls/IncidenceInfoPopup.qml</file>
+    <file alias="CheckableCollectionNavigationView.qml">qml/Controls/CheckableCollectionNavigationView.qml</file>
+    <file alias="MainDrawerToggleButton.qml">qml/Controls/MainDrawerToggleButton.qml</file>
+
+    <file alias="LocationMap.qml">qml/Location/LocationMap.qml</file>
+
+    <file alias="SettingsPage.qml">qml/Settings/SettingsPage.qml</file>
+    <file alias="AboutPage.qml">qml/Settings/AboutPage.qml</file>
+    <file alias="ViewSettingsPage.qml">qml/Settings/ViewSettingsPage.qml</file>
+    <file alias="SourceSettingsPage.qml">qml/Settings/SourceSettingsPage.qml</file>
+    <file alias="CalendarSettingsPage.qml">qml/Settings/CalendarSettingsPage.qml</file>
+
+    <file alias="CalendarItemMenu.qml">qml/Menus/CalendarItemMenu.qml</file>
+
+    <file alias="InternalTreeListView.qml">qml/TreeView/InternalTreeListView.qml</file>
+    <file alias="TreeListView.qml">qml/TreeView/TreeListView.qml</file>
+    <file alias="BasicTreeItem.qml">qml/TreeView/BasicTreeItem.qml</file>
+    <file alias="AbstractTreeItem.qml">qml/TreeView/AbstractTreeItem.qml</file>
+    <file alias="TreeViewDecoration.qml">qml/TreeView/TreeViewDecoration.qml</file>
+
+    <file alias="ScheduleSettingsPage.qml">qml/Settings/Schedule/ScheduleSettingsPage.qml</file>
+    <file alias="FreeBusySettingsPage.qml">qml/Settings/Schedule/FreeBusySettingsPage.qml</file>
+    <file alias="AvailabilitySettingsPage.qml">qml/Settings/Schedule/AvailabilitySettingsPage.qml</file>
+  </qresource>
+</RCC>

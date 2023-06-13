@@ -6,33 +6,28 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kalendar.contact 1.0
-import org.kde.kalendar 1.0
 import './private'
 
 Kirigami.ScrollablePage {
     id: page
     objectName: "contactView"
-    property int mode: KalendarApplication.Contact
-    property var attendeeAkonadiIds
-    title: i18n("Contacts")
 
-    Connections {
-        target: Filter
-        function onNameChanged() {
-            ContactManager.filteredContacts.setFilterFixedString(Filter.name)
-        }
-    }
+    property var attendeeAkonadiIds
+
+    title: i18n("Contacts")
 
     actions.main: Kirigami.Action {
         icon.name: 'contact-new-symbolic'
         text: i18n('Create')
         Kirigami.Action {
+            id: createNewContactAction
             text: i18n('New Contact')
             onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("./private/contact_editor/ContactEditorPage.qml"), {
                 mode: ContactEditor.CreateMode,
             })
         }
         Kirigami.Action {
+            id: createNewContactGroupAction
             text: i18n('New Contact Group')
             onTriggered: pageStack.pushDialogLayer(Qt.resolvedUrl("./private/contact_editor/ContactGroupEditorPage.qml"), {
                 mode: ContactGroupEditor.CreateMode,
@@ -40,13 +35,27 @@ Kirigami.ScrollablePage {
         }
     }
 
+    Connections {
+        target: ContactApplication
+
+        function onCreateNewContact() {
+            createNewContactAction.trigger();
+        }
+
+        function onCreateNewContactGroup() {
+            createNewContactGroupAction.trigger();
+        }
+    }
+
     ListView {
         id: contactsList
         reuseItems: true
-        section.property: "display"
-        section.criteria: ViewSection.FirstCharacter
-        section.delegate: Kirigami.ListSectionHeader {
-            text: section
+        section {
+            property: "display"
+            criteria: ViewSection.FirstCharacter
+            delegate: Kirigami.ListSectionHeader {
+                text: section
+            }
         }
         clip: true
         model: ContactManager.filteredContacts

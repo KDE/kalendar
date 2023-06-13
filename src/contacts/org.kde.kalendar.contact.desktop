@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2021 Carl Schwan <carl@carlschwan.eu>
+# SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+# SPDX-License-Identifier: CC0-1.0
+
+[Desktop Entry]
+Name=Kalendar Contact
+GenericName=Address Book
+Comment=Manage your contacts with Kalendar Contact
+Exec=kalendar-contact %u
+Categories=Qt;KDE;Office;ContactManagement;
+Icon=org.kde.kalendar
+Type=Application
+Terminal=false
+StartupNotify=true
+MimeType=text/calendar;
+SingleMainWindow=true
+Version=1.5

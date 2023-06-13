@@ -74,6 +74,9 @@ ContactManager::ContactManager(QObject *parent)
     m_collectionSelectionModelStateSaver->setView(nullptr);
     m_collectionSelectionModelStateSaver->setSelectionModel(m_checkableProxyModel->selectionModel());
     m_collectionSelectionModelStateSaver->restoreState(selectionGroup);
+    connect(m_checkableProxyModel->selectionModel(), &QItemSelectionModel::selectionChanged, this, [this](const QItemSelection &, const QItemSelection &) {
+        saveState();
+    });
 
     // List of contacts for the main contact view
     auto selectionProxyModel = new Akonadi::SelectionProxyModel(m_checkableProxyModel->selectionModel(), this);
@@ -97,6 +100,11 @@ ContactManager::ContactManager(QObject *parent)
 }
 
 ContactManager::~ContactManager()
+{
+    saveState();
+}
+
+void ContactManager::saveState() const
 {
     Akonadi::ETMViewStateSaver treeStateSaver;
     KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral("kalendarrc"));
@@ -145,8 +153,9 @@ void ContactManager::deleteItem(const Akonadi::Item &item)
 
 void ContactManager::updateAllCollections()
 {
-    for (int i = 0; i < contactCollections()->rowCount(); i++) {
-        auto collection = contactCollections()->data(contactCollections()->index(i, 0), Akonadi::EntityTreeModel::CollectionRole).value<Akonadi::Collection>();
+    const auto collections = contactCollections();
+    for (int i = 0, count = collections->rowCount(); i < count; i++) {
+        auto collection = collections->data(collections->index(i, 0), Akonadi::EntityTreeModel::CollectionRole).value<Akonadi::Collection>();
         Akonadi::AgentManager::self()->synchronizeCollection(collection, true);
     }
 }

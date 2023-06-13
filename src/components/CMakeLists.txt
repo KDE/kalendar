@@ -27,12 +27,13 @@ ecm_add_qml_module(kalendar_components_plugin URI "org.kde.kalendar.components" 
 target_sources(kalendar_components_plugin PRIVATE
     componentsplugin.cpp
     componentsplugin.h
+    helper.cpp
+    helper.h
 )
 
 ecm_target_qml_sources(kalendar_components_plugin SOURCES
     # Shell components
     qml/KalendarApp.qml
-    qml/BottomToolBar.qml
 
     # In window-menu components
     qml/KActionFromAction.qml
@@ -51,6 +52,9 @@ ecm_target_qml_sources(kalendar_components_plugin SOURCES
     qml/NativeViewMenu.qml
     qml/NativeSettingsMenu.qml
     qml/NativeHelpMenu.qml
+
+    # Small controls
+    qml/ColoredCheckbox.qml
 )
 
 target_link_libraries(kalendar_components_plugin PUBLIC kalendar_components_static)

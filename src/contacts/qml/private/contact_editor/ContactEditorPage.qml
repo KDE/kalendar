@@ -48,8 +48,8 @@ Kirigami.ScrollablePage {
                 contactEditor.contact.emailModel.addEmail(emailEditorId.toAddEmailText, emailEditorId.newEmailTypeCurrentValue);
             }
             contactEditor.saveContactInAddressBook()
-            ContactConfig.lastUsedAddressBookCollection = addressBookId.addressBookComboBoxId;
-            ContactConfig.save();
+            Config.lastUsedAddressBookCollection = addressBookId.addressBookComboBoxId;
+            Config.save();
         }
     }
 
@@ -95,6 +95,7 @@ Kirigami.ScrollablePage {
         }
 
         AddressBookEditorCard {
+            id: addressBookEditorCard
             contactEditor: root.contactEditor
             mode: root.mode
         }
@@ -137,8 +138,8 @@ Kirigami.ScrollablePage {
             }
 
             onRejected: {
-                ContactConfig.lastUsedAddressBookCollection = addressBookComboBox.defaultCollectionId;
-                ContactConfig.save();
+                Config.lastUsedAddressBookCollection = addressBookEditorCard.addressBookComboBox.defaultCollectionId;
+                Config.save();
                 root.closeDialog();
             }
             onAccepted: submitAction.trigger();
