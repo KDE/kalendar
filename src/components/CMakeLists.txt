@@ -48,8 +48,6 @@ ecm_target_qml_sources(kalendar_components_plugin SOURCES
     qml/NativeFileMenu.qml
     qml/NativeEditMenu.qml
     qml/NativeWindowMenu.qml
-    qml/NativeViewMenu.qml
-    qml/NativeHelpMenu.qml
 
     # Small controls
     qml/ColoredCheckbox.qml

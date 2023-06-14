@@ -6,6 +6,8 @@ SPDX-License-Identifier: CC0-1.0
   <qresource prefix="/">
     <file alias="main.qml">qml/main.qml</file>
 
+    <file alias="MenuBar.qml">qml/Menus/MenuBar.qml</file>
+    <file alias="GlobalMenuBar.qml">qml/Menus/GlobalMenuBar.qml</file>
     <file alias="MainDrawer.qml">qml/Drawers/MainDrawer.qml</file>
     <file alias="IncidenceInfoDrawer.qml">qml/Drawers/IncidenceInfoDrawer.qml</file>
 

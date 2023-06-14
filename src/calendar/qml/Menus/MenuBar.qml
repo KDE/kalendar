@@ -143,7 +143,39 @@ QQC2.MenuBar {
 
     WindowMenu {}
 
-    SettingsMenu {}
+    QQC2.Menu {
+        title: i18nc("@action:menu", "Settings")
 
-    HelpMenu {}
+        KActionFromAction {
+            action: CalendarApplication.action("open_tag_manager")
+        }
+
+        QQC2.MenuSeparator {
+        }
+
+        KActionFromAction {
+            action: CalendarApplication.action("options_configure_keybinding")
+        }
+
+        KActionFromAction {
+            action: CalendarApplication.action("options_configure")
+        }
+    }
+
+    QQC2.Menu {
+        title: i18nc("@action:menu", "Help")
+
+        KActionFromAction {
+            action: CalendarApplication.action("open_about_page")
+        }
+
+        KActionFromAction {
+            action: CalendarApplication.action("open_about_kde_page")
+        }
+
+        QQC2.MenuItem {
+            text: i18nc("@action:menu", "Kalendar Handbook") // todo
+            visible: false
+        }
+    }
 }

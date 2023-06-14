@@ -32,7 +32,41 @@ Labs.MenuBar {
         }
     }
 
-    NativeViewMenu {
+    Labs.Menu {
+        title: i18nc("@action:menu", "View")
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_month_view")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_week_view")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_threeday_view")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_day_view")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_schedule_view")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_todo_view")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_contact_view")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_kcommand_bar")
+        }
+
         Labs.MenuSeparator {
         }
 
@@ -116,7 +150,37 @@ Labs.MenuBar {
 
     NativeWindowMenu {}
 
-    NativeSettingsMenu {}
+    Labs.Menu {
+        title: i18nc("@action:menu", "Settings")
 
-    NativeHelpMenu {}
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action('open_tag_manager')
+        }
+
+        Labs.MenuSeparator {}
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action('options_configure_keybinding')
+        }
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action('options_configure')
+        }
+    }
+
+    Labs.Menu {
+        title: i18nc("@action:menu", "Help")
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_about_page")
+        }
+
+        NativeMenuItemFromAction {
+            action: CalendarApplication.action("open_about_kde_page")
+        }
+
+        NativeMenuItemFromAction {
+            text: i18nc("@action:menu", "Kalendar Handbook") // todo
+            visible: false
+        }
+    }
 }

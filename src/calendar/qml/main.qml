@@ -14,7 +14,6 @@ import QtQuick.Dialogs 1.0
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar.calendar 1.0
-import org.kde.kalendar.contact 1.0
 import org.kde.kalendar.utils 1.0
 import org.kde.kalendar.components 1.0
 
