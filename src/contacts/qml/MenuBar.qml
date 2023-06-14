@@ -48,10 +48,6 @@ QQC2.MenuBar {
         }
 
         KActionFromAction {
-            action: ContactApplication.action("toggle_menubar")
-        }
-
-        KActionFromAction {
             action: ContactApplication.action("options_configure_keybinding")
         }
 

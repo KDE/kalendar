@@ -9,6 +9,7 @@
 #include <Akonadi/ETMCalendar>
 #include <Akonadi/IncidenceChanger>
 
+#include "calendarconfig.h"
 #include <Akonadi/CollectionFilterProxyModel>
 #include <Akonadi/SearchCollectionHelper>
 #include <KConfigWatcher>
@@ -122,6 +123,7 @@ private:
     QVector<qint64> m_enabledTodoCollections;
     KConfigWatcher::Ptr m_colorWatcher;
     Akonadi::SearchCollectionHelper mSearchCollectionHelper;
+    CalendarConfig *m_config;
 };
 
 Q_DECLARE_METATYPE(Akonadi::ETMCalendar::Ptr)

@@ -55,16 +55,3 @@ void ContactApplication::setupActions()
     mCollection->readSettings();
     mContactCollection->readSettings();
 }
-
-void ContactApplication::toggleMenubar()
-{
-    ContactConfig config;
-    config.setShowMenubar(!config.showMenubar());
-    config.save();
-}
-
-bool ContactApplication::showMenubar() const
-{
-    ContactConfig config;
-    return config.showMenubar();
-}

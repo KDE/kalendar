@@ -9,6 +9,8 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KShortcutsDialog>
+#include <QDebug>
+#include <QGuiApplication>
 #include <QMenu>
 
 AbstractApplication::AbstractApplication(QObject *parent)
@@ -125,6 +127,8 @@ QAction *AbstractApplication::action(const QString &name)
         }
     }
 
+    qWarning() << "Not found action for name" << name;
+
     return nullptr;
 }
 
@@ -138,6 +142,12 @@ void AbstractApplication::setupActions()
 
         mCollection->addAction(openKCommandBarAction->objectName(), openKCommandBarAction);
         mCollection->setDefaultShortcut(openKCommandBarAction, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_I));
+    }
+
+    actionName = QLatin1String("file_quit");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto action = KStandardAction::quit(this, &AbstractApplication::quit, this);
+        mCollection->addAction(action->objectName(), action);
     }
 
     actionName = QLatin1String("options_configure_keybinding");
@@ -172,14 +182,9 @@ void AbstractApplication::setupActions()
         openTagManagerAction->setText(i18n("Manage Tags…"));
         openTagManagerAction->setIcon(QIcon::fromTheme(QStringLiteral("action-rss_tag")));
     }
+}
 
-    actionName = QLatin1String("toggle_menubar");
-    if (KAuthorized::authorizeAction(actionName)) {
-        auto action = mCollection->addAction(actionName, this, &AbstractApplication::toggleMenubar);
-        action->setText(i18n("Show Menubar"));
-        action->setIcon(QIcon::fromTheme(QStringLiteral("show-menu")));
-        action->setCheckable(true);
-        action->setChecked(showMenubar());
-        mCollection->setDefaultShortcut(action, QKeySequence(i18n("Ctrl+M")));
-    }
+void AbstractApplication::quit()
+{
+    qGuiApp->exit();
 }

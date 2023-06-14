@@ -15,7 +15,6 @@ import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
 import org.kde.kalendar.calendar 1.0
 import org.kde.kalendar.contact 1.0
-import org.kde.kalendar.mail 1.0
 import org.kde.kalendar.utils 1.0
 import org.kde.kalendar.components 1.0
 
@@ -28,8 +27,6 @@ Kirigami.ApplicationWindow {
     minimumHeight: Kirigami.Units.gridUnit * 20
     onClosing: CalendarApplication.saveWindowGeometry(root)
 
-    readonly property var calendarApplication: CalendarApplication {}
-    readonly property var mailApplication: MailApplication {}
     property date currentDate: new Date()
     Timer {
         interval: 5000;
@@ -46,7 +43,6 @@ Kirigami.ApplicationWindow {
     readonly property var dayViewAction: CalendarApplication.action("open_day_view")
     readonly property var scheduleViewAction: CalendarApplication.action("open_schedule_view")
     readonly property var todoViewAction: CalendarApplication.action("open_todo_view")
-    readonly property var mailViewAction: CalendarApplication.action("open_mail_view")
     readonly property var moveViewForwardsAction: CalendarApplication.action("move_view_forwards")
     readonly property var moveViewBackwardsAction: CalendarApplication.action("move_view_backwards")
     readonly property var moveViewToTodayAction: CalendarApplication.action("move_view_to_today")
@@ -92,8 +88,10 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
-    pageStack.initialPage: scheduleViewComponent
+    pageStack {
+        globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
+        initialPage: scheduleViewComponent
+    }
 
     property bool ignoreCurrentPage: true // HACK: ideally we just push an empty page here and save ourselves the trouble,
     // but we have had issues with pushing empty Kirigami pages somehow causing mobile controls to show up on desktop.
@@ -125,9 +123,6 @@ Kirigami.ApplicationWindow {
                 break;
             case Config.TodoView:
                 todoViewAction.trigger();
-                break;
-            case Config.MailView:
-                mailViewAction.trigger();
                 break;
             default:
                 Kirigami.Settings.isMobile ? scheduleViewAction.trigger() : monthViewAction.trigger();
@@ -199,12 +194,6 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        function onOpenMailView() {
-            if(pageStack.currentItem.mode !== CalendarApplication.Mail || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView("qrc:/LazyMailView.qml");
-            }
-        }
-
         function onOpenTodoView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Todo) {
                 filterHeaderBar.active = true;
@@ -230,11 +219,6 @@ Kirigami.ApplicationWindow {
 
         function onOpenAboutPage() {
             pageStack.layers.push("AboutPage.qml")
-        }
-
-        function onToggleMenubar() {
-            Config.showMenubar = !Config.showMenubar;
-            Config.save();
         }
 
         function onCreateNewEvent() {
@@ -335,10 +319,6 @@ Kirigami.ApplicationWindow {
             }
 
             filterHeaderBar.item.messageItem.visible = true;
-        }
-
-        function onQuit() {
-             Qt.quit();
         }
 
         function onConfigureSchedule() {
@@ -454,9 +434,6 @@ Kirigami.ApplicationWindow {
             case CalendarApplication.Todo:
                 return i18n("Tasks");
 
-            case CalendarApplication.Mail:
-                return i18n("Mail");
-
             default:
                 // Should not happen
                 return 'Kalendar';
@@ -476,45 +453,15 @@ Kirigami.ApplicationWindow {
             item.Kirigami.Theme.colorSet = Kirigami.Theme.Header;
         }
 
-        source: switch (applicationWindow().mode) {
-            case CalendarApplication.Mail:
-                return mailApplication.menuBar;
-            case CalendarApplication.Contact:
-                return contactApplication.menuBar;
-            case CalendarApplication.Event:
-            case CalendarApplication.Todo:
-            case CalendarApplication.ThreeDay:
-            case CalendarApplication.Day:
-            case CalendarApplication.Week:
-            case CalendarApplication.Month:
-            case CalendarApplication.Schedule:
-                return calendarApplication.menuBar;
-            default:
-                return undefined;
-        }
+        sourceComponent: MenuBar {}
     }
 
     Loader {
         id: globalMenuLoader
         active: !Kirigami.Settings.isMobile
 
-        source: switch (applicationWindow().mode) {
-            case CalendarApplication.Mail:
-                return mailApplication.globalMenuBar;
-            case CalendarApplication.Event:
-            case CalendarApplication.Todo:
-            case CalendarApplication.ThreeDay:
-            case CalendarApplication.Day:
-            case CalendarApplication.Month:
-            case CalendarApplication.Week:
-            case CalendarApplication.Schedule:
-                return calendarApplication.globalMenuBar;
-            default:
-                return undefined;
-        }
+        sourceComponent: GlobalMenuBar {}
     }
-
-
 
     footer: Loader {
         id: bottomLoader

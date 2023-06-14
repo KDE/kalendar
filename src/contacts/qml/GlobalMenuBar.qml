@@ -42,11 +42,6 @@ Labs.MenuBar {
         title: i18nc("@action:menu", "Settings")
 
         NativeMenuItemFromAction {
-            action: ContactApplication.action('toggle_menubar')
-            visible: !globalMenuLoader.active
-        }
-
-        NativeMenuItemFromAction {
             action: ContactApplication.action('open_tag_manager')
         }
 

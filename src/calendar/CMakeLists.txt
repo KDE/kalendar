@@ -77,7 +77,6 @@ target_sources(kalendar_calendar_plugin PRIVATE
 set_source_files_properties(models/todosortfilterproxymodel.cpp PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 ecm_target_qml_sources(kalendar_calendar_plugin SOURCES
-    qml/CalendarApplication.qml
     qml/incidenceeditor/ReminderDelegate.qml
     qml/incidenceeditor/PriorityComboBox.qml
     qml/BottomToolBar.qml

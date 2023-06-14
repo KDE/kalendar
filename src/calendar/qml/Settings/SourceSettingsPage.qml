@@ -22,16 +22,5 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
         }
-
-
-        // TODO actually we should show identity instead as an identity contains a receiving and sending account
-        AgentConfigurationForm {
-            visible: Config.enableMailIntegration
-            mimetypes: [MimeTypes.mail]
-            title: i18n("Mail Accounts")
-            addPageTitle: i18n("Add New mail account…")
-            Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
-        }
     }
 }

@@ -11,8 +11,6 @@ import QtGraphicalEffects 1.12
 
 import org.kde.akonadi 1.0
 import org.kde.kalendar.calendar 1.0
-import org.kde.kalendar.contact 1.0
-import org.kde.kalendar.mail 1.0
 import org.kde.kalendar.components 1.0
 import org.kde.kirigami 2.16 as Kirigami
 import org.kde.kitemmodels 1.0
@@ -23,7 +21,7 @@ Kirigami.OverlayDrawer {
     signal calendarClicked(int collectionId)
     signal deleteCalendar(int collectionId, var collectionDetails)
 
-    property var mode: CalendarApplication.Event
+    required property var mode
     property alias toolbar: toolbar
     property var activeTags : Filter.tags
 
@@ -87,8 +85,6 @@ Kirigami.OverlayDrawer {
     onWidthChanged: if(width === collapsedWidth) refuseModal = false
     Behavior on width { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
 
-    Component.onCompleted: ContactManager.contactCollections; // Fix crashing because the contactCollections was created too late
-
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
     leftPadding: 0
@@ -133,7 +129,7 @@ Kirigami.OverlayDrawer {
                     Layout.fillWidth: true
                     onTextChanged: Filter.name = text
 
-                    visible: mainDrawer.mode & (CalendarApplication.Todo | KalendarApplication.Mail | KalendarApplication.Contact)
+                    visible: mainDrawer.mode & CalendarApplication.Todo
                     opacity: mainDrawer.collapsed ? 0 : 1
                     Behavior on opacity {
                         OpacityAnimator {
@@ -156,24 +152,30 @@ Kirigami.OverlayDrawer {
                     Layout.fillHeight: true
                     overflowIconName: "application-menu"
 
-                    property var hamburgerActions: switch (applicationWindow().mode) {
-                        case CalendarApplication.Mail:
-                            return mailApplication.hamburgerActions;
-                        case CalendarApplication.Contact:
-                            return contactApplication.hamburgerActions;
-                        case CalendarApplication.Event:
-                        case CalendarApplication.Todo:
-                        case CalendarApplication.ThreeDay:
-                        case CalendarApplication.Day:
-                        case CalendarApplication.Week:
-                        case CalendarApplication.Month:
-                        case CalendarApplication.Schedule:
-                            return calendarApplication.hamburgerActions;
-                        default:
-                            return undefined;
-                    }
-
-                    property list<QQC2.Action> appActions: [
+                    actions: [
+                        Kirigami.Action {
+                            icon.name: "edit-undo"
+                            text: CalendarManager.undoRedoData.undoAvailable ?
+                                i18n("Undo: ") + CalendarManager.undoRedoData.nextUndoDescription : undoAction.text
+                            shortcut: undoAction.shortcut
+                            enabled: CalendarManager.undoRedoData.undoAvailable
+                            onTriggered: CalendarManager.undoAction();
+                        },
+                        Kirigami.Action {
+                            icon.name: Helper.iconName(redoAction.icon)
+                            text: CalendarManager.undoRedoData.redoAvailable ?
+                                i18n("Redo: ") + CalendarManager.undoRedoData.nextRedoDescription : redoAction.text
+                            shortcut: redoAction.shortcut
+                            enabled: CalendarManager.undoRedoData.redoAvailable
+                            onTriggered: CalendarManager.redoAction();
+                        },
+                        KActionFromAction {
+                            action: CalendarApplication.action("import_calendar")
+                        },
+                        KActionFromAction {
+                            text: i18n("Refresh All Calendars")
+                            action: CalendarApplication.action("refresh_all")
+                        },
                         KActionFromAction {
                             action: CalendarApplication.action("toggle_menubar")
                         },
@@ -190,25 +192,11 @@ Kirigami.OverlayDrawer {
                                 action: CalendarApplication.action("options_configure")
                             }
                         },
-                        Kirigami.Action {
-                            icon.name: CalendarApplication.iconName(quitAction.icon)
-                            text: quitAction.text
-                            shortcut: quitAction.shortcut
-                            onTriggered: quitAction.trigger()
+                        KActionFromAction {
+                            action: quitAction
                             visible: !Kirigami.Settings.isMobile
                         }
                     ]
-
-                    actions: []
-                    onHamburgerActionsChanged: {
-                        actions = []
-                        for (let action in hamburgerActions) {
-                            actions.push(hamburgerActions[action])
-                        }
-                        for (let action in appActions) {
-                            actions.push(appActions[action])
-                        }
-                    }
 
                     Component.onCompleted: {
                         for (let i in actions) {
@@ -258,7 +246,7 @@ Kirigami.OverlayDrawer {
                                 // Override the default checked behaviour as we want this to stay highlighted
                                 // in any of the hourly views, at least in desktop mode
                                 checked: pageStack.currentItem && (
-                                         pageStack.currentItem.mode & (CalendarApplication.Week | KalendarApplication.ThreeDay | KalendarApplication.Day))
+                                         pageStack.currentItem.mode & (CalendarApplication.Week | CalendarApplication.ThreeDay | CalendarApplication.Day))
                                 onTriggered: {
                                     weekViewAction.trigger()
                                     if (mainDrawer.modal) mainDrawer.close()
@@ -277,23 +265,6 @@ Kirigami.OverlayDrawer {
                                 checkable: false
                                 onTriggered: {
                                     todoViewAction.trigger()
-                                    if (mainDrawer.modal) mainDrawer.close()
-                                }
-                            },
-                            KActionFromAction {
-                                action: CalendarApplication.action("open_contact_view")
-                                checkable: false
-                                onTriggered: {
-                                    contactViewAction.trigger()
-                                    if (mainDrawer.modal) mainDrawer.close()
-                                }
-                            },
-                            KActionFromAction {
-                                action: CalendarApplication.action("open_mail_view")
-                                checkable: false
-                                visible: Config.enableMailIntegration
-                                onTriggered: {
-                                    mailViewAction.trigger()
                                     if (mainDrawer.modal) mainDrawer.close()
                                 }
                             }
@@ -366,16 +337,22 @@ Kirigami.OverlayDrawer {
             }
         }
 
-        Loader {
+        CheckableCollectionNavigationView {
+            onCollectionCheckChanged: mainDrawer.collectionCheckChanged()
+            onCloseParentDrawer: mainDrawer.close()
+            onDeleteCollection: mainDrawer.deleteCollection(collectionId, collectionDetails)
+
+            mode: mainDrawer.mode
+            parentDrawerModal: mainDrawer.modal
+            parentDrawerCollapsed: mainDrawer.collapsed
+
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            active: true
-            sourceComponent: mode === CalendarApplication.Mail ? mailView : calendarAddressBookComponent
-
-            opacity: mainDrawer.collapsed ? 0 : 1
             clip: true
             z: -3
+
+            opacity: mainDrawer.collapsed ? 0 : 1
 
             Behavior on opacity {
                 OpacityAnimator {
@@ -383,26 +360,6 @@ Kirigami.OverlayDrawer {
                     easing.type: Easing.InOutQuad
                 }
             }
-        }
-
-        Component {
-            id: calendarAddressBookComponent
-
-            CheckableCollectionNavigationView {
-                onCollectionCheckChanged: mainDrawer.collectionCheckChanged()
-                onCloseParentDrawer: mainDrawer.close()
-                onDeleteCollection: mainDrawer.deleteCollection(collectionId, collectionDetails)
-
-                mode: mainDrawer.mode
-                parentDrawerModal: mainDrawer.modal
-                parentDrawerCollapsed: mainDrawer.collapsed
-            }
-        }
-
-        Component {
-            id: mailView
-
-            MailSidebar {}
         }
     }
 
@@ -430,7 +387,7 @@ Kirigami.OverlayDrawer {
     }
 
     function collectionCheckChanged() {
-        if (mode & (CalendarApplication.Event | KalendarApplication.Todo)) {
+        if (mode & (CalendarApplication.Event | CalendarApplication.Todo)) {
             CalendarManager.save();
         }
     }

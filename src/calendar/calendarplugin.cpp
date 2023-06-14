@@ -45,11 +45,15 @@ void CalendarPlugin::registerTypes(const char *uri)
     qmlRegisterModule(uri, 1, 0);
     qRegisterMetaType<KCalendarCore::Incidence::Ptr>();
 
-    qmlRegisterSingletonInstance(uri, 1, 0, "CalendarManager", CalendarManager::instance());
+    qmlRegisterSingletonType<CalendarManager>(uri, 1, 0, "CalendarManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return CalendarManager::instance();
+    });
     qmlRegisterSingletonType<CalendarConfig>(uri, 1, 0, "Config", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
-        return CalendarConfig::self();
+        return new CalendarConfig;
     });
     qmlRegisterSingletonType<CalendarApplication>(uri, 1, 0, "CalendarApplication", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)

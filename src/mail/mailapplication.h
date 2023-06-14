@@ -3,21 +3,18 @@
 
 #include <abstractapplication.h>
 
-class ContactApplication : public AbstractApplication
+class MailApplication : public AbstractApplication
 {
     Q_OBJECT
 
 public:
-    explicit ContactApplication(QObject *parent = nullptr);
+    explicit MailApplication(QObject *parent = nullptr);
 
     QVector<KActionCollection *> actionCollections() const override;
 
 Q_SIGNALS:
-    void createNewContact();
-    void createNewContactGroup();
-    void refreshAll();
+    void createNewMail();
 
 private:
     void setupActions() override;
-    KActionCollection *mContactCollection = nullptr;
 };

@@ -29,8 +29,6 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="SwipeableInternalHourlyView.qml">qml/MainViews/SwipeableInternalHourlyView.qml</file>
     <file alias="BasicInternalHourlyView.qml">qml/MainViews/BasicInternalHourlyView.qml</file>
     <file alias="HourlyView.qml">qml/MainViews/HourlyView.qml</file>
-    <file alias="LazyContactView.qml">qml/MainViews/LazyContactView.qml</file>
-    <file alias="LazyMailView.qml">qml/MainViews/LazyMailView.qml</file>
 
     <file alias="dateutils.js">qml/KalendarUtils/dateutils.js</file>
     <file alias="labelutils.js">qml/KalendarUtils/labelutils.js</file>

@@ -5,6 +5,7 @@
 
 #pragma once
 #include "calendarconfig.h"
+#include <abstractapplication.h>
 
 #include <Akonadi/ETMCalendar>
 #include <Akonadi/ICalImporter>
@@ -17,7 +18,7 @@
 class QQuickWindow;
 class QSortFilterProxyModel;
 
-class CalendarApplication : public QObject
+class CalendarApplication : public AbstractApplication
 {
     Q_OBJECT
 
@@ -33,17 +34,15 @@ public:
         Schedule = 16,
         Event = Month | Week | ThreeDay | Day | Schedule,
         Todo = 32,
-        Contact = 64,
-        Mail = 128,
     };
     Q_ENUM(Mode)
 
     explicit CalendarApplication(QObject *parent = nullptr);
     ~CalendarApplication() override;
-    Q_INVOKABLE QAction *action(const QString &name);
+
+    QVector<KActionCollection *> actionCollections() const override;
 
     Q_INVOKABLE void saveWindowGeometry(QQuickWindow *window);
-    void setupActions();
     QWindow *window() const;
     void setWindow(QWindow *window);
 
@@ -54,9 +53,6 @@ public:
     // D-Bus interface
     void showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken);
 
-public Q_SLOTS:
-    void configureShortcuts();
-
 Q_SIGNALS:
     void openMonthView();
     void openWeekView();
@@ -64,24 +60,20 @@ Q_SIGNALS:
     void openDayView();
     void openScheduleView();
     void openTodoView();
-    void openMailView();
     void openAboutPage();
     void moveViewForwards();
     void moveViewBackwards();
     void moveViewToToday();
     void openDateChanger();
-    void toggleMenubar();
     void createNewEvent();
-    void configureSchedule();
-    void createNewMail();
     void createNewTodo();
     void windowChanged();
+    void configureSchedule();
     void openSettings();
     void openLanguageSwitcher();
     void openTagManager();
     void importCalendar();
     void importCalendarFromFile(const QUrl &url);
-    void quit();
     void undo();
     void redo();
     void todoViewSortAlphabetically();
@@ -103,9 +95,11 @@ private Q_SLOTS:
     void handleMouseViewNavButtons(const Qt::MouseButton pressedButton);
 
 private:
-    KActionCollection mCollection;
-    KActionCollection mSortCollection;
-    KActionCollection mMailCollection;
+    void setupActions() override;
+    void toggleMenubar();
+    bool showMenubar() const;
+
+    KActionCollection *mSortCollection = nullptr;
     QWindow *m_window = nullptr;
     QActionGroup *const m_viewGroup;
     QActionGroup *m_todoViewOrderGroup = nullptr;

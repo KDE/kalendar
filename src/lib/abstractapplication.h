@@ -29,13 +29,12 @@ Q_SIGNALS:
     void openTagManager();
 
 protected:
-    virtual void toggleMenubar() = 0;
-    virtual bool showMenubar() const = 0;
-
     virtual void setupActions();
     KActionCollection *mCollection = nullptr;
 
 private:
+    void quit();
+
     KalCommandBarModel *m_actionModel = nullptr;
     QSortFilterProxyModel *m_proxyModel = nullptr;
 };

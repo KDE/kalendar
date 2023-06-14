@@ -150,13 +150,13 @@ QQC2.ScrollView {
             id: collectionList
 
             property var collectionModel: KDescendantsProxyModel {
-                model: switch(root.mode) {
-                case CalendarApplication.Todo:
-                    return CalendarManager.todoCollections;
-                case CalendarApplication.Contact:
-                    return ContactManager.contactCollections;
-                default:
-                    return CalendarManager.viewCollections;
+                model: {
+                    switch(root.mode) {
+                    case CalendarApplication.Todo:
+                        return CalendarManager.todoCollections;
+                    default:
+                        return CalendarManager.viewCollections;
+                    }
                 }
             }
 

@@ -10,7 +10,7 @@ import org.kde.kirigami 2.14 as Kirigami
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0
 
-import org.kde.kalendar.calendar 1.0 as Kalendar
+import org.kde.kalendar.calendar 1.0 as Calendar
 import org.kde.kalendar.utils 1.0
 import org.kde.kalendar.components 1.0
 import "dateutils.js" as DateUtils
@@ -19,24 +19,24 @@ import "labelutils.js" as LabelUtils
 Kirigami.ScrollablePage {
     id: root
 
-    property var mode: Kalendar.CalendarApplication.Todo
+    property var mode: Calendar.CalendarApplication.Todo
 
-    property var filterCollectionDetails: Kalendar.Filter.collectionId >= 0 ?
-        Kalendar.CalendarManager.getCollectionDetails(Kalendar.Filter.collectionId) : null
+    property var filterCollectionDetails: Calendar.Filter.collectionId >= 0 ?
+        Calendar.CalendarManager.getCollectionDetails(Calendar.Filter.collectionId) : null
 
-    property int sortBy: switch (Kalendar.Config.sort) {
-        case Kalendar.Config.DueTime:
-            return Kalendar.TodoSortFilterProxyModel.DueDateColumn;
-        case Kalendar.Config.Priority:
-            return Kalendar.TodoSortFilterProxyModel.PriorityColumn;
-        case Kalendar.Config.Alphabetically:
-            return Kalendar.TodoSortFilterProxyModel.SummaryColumn;
+    property int sortBy: switch (Calendar.Config.sort) {
+        case Calendar.Config.DueTime:
+            return Calendar.TodoSortFilterProxyModel.DueDateColumn;
+        case Calendar.Config.Priority:
+            return Calendar.TodoSortFilterProxyModel.PriorityColumn;
+        case Calendar.Config.Alphabetically:
+            return Calendar.TodoSortFilterProxyModel.SummaryColumn;
     }
 
-    property bool ascendingOrder: Kalendar.Config.ascendingOrder
+    property bool ascendingOrder: Calendar.Config.ascendingOrder
 
     readonly property color standardTextColor: Kirigami.Theme.textColor
-    readonly property bool isDark: KalendarUiUtils.darkMode
+    readonly property bool isDark: CalendarUiUtils.darkMode
 
     readonly property alias incompleteView: incompleteView
 
@@ -53,43 +53,43 @@ Kirigami.ScrollablePage {
         main: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: KalendarUiUtils.setUpAdd(Kalendar.IncidenceWrapper.TypeTodo, new Date(), Kalendar.Filter.collectionId);
+            onTriggered: CalendarUiUtils.setUpAdd(Calendar.IncidenceWrapper.TypeTodo, new Date(), Calendar.Filter.collectionId);
         }
         left: Kirigami.Action {
             text: i18n("Sort")
             icon.name: "view-sort"
 
             KActionFromAction {
-                action: CalendarApplication.action("todoview_sort_by_due_date")
-                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.DueDateColumn
+                action: Calendar.CalendarApplication.action("todoview_sort_by_due_date")
+                checked: root.sortBy === Calendar.TodoSortFilterProxyModel.DueDateColumn
                 onCheckedChanged: __action.checked = checked // Needed for the actions in the menu bars to be checked on load
             }
             KActionFromAction {
-                action: CalendarApplication.action("todoview_sort_by_priority")
-                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.PriorityColumn
+                action: Calendar.CalendarApplication.action("todoview_sort_by_priority")
+                checked: root.sortBy === Calendar.TodoSortFilterProxyModel.PriorityColumn
                 onCheckedChanged: __action.checked = checked
             }
             KActionFromAction {
-                action: CalendarApplication.action("todoview_sort_alphabetically")
-                checked: root.sortBy === Kalendar.TodoSortFilterProxyModel.SummaryColumn
+                action: Calendar.CalendarApplication.action("todoview_sort_alphabetically")
+                checked: root.sortBy === Calendar.TodoSortFilterProxyModel.SummaryColumn
                 onCheckedChanged: __action.checked = checked
             }
 
             Kirigami.Action { separator: true }
 
             KActionFromAction {
-                action: CalendarApplication.action("todoview_order_ascending")
+                action: Calendar.CalendarApplication.action("todoview_order_ascending")
                 checked: root.ascendingOrder
                 onCheckedChanged: __action.checked = checked
             }
             KActionFromAction {
-                action: CalendarApplication.action("todoview_order_descending")
+                action: Calendar.CalendarApplication.action("todoview_order_descending")
                 checked: !root.ascendingOrder
                 onCheckedChanged: __action.checked = checked
             }
         }
         right: KActionFromAction {
-            action: CalendarApplication.action("todoview_show_completed")
+            action: Calendar.CalendarApplication.action("todoview_show_completed")
             text: i18n("Show Completed")
         }
 
@@ -97,7 +97,7 @@ Kirigami.ScrollablePage {
 
     property Component completedSheetComponent: Kirigami.ScrollablePage {
         id: completedSheet
-        title: root.filterCollectionDetails && Kalendar.Filter.collectionId > -1 ?
+        title: root.filterCollectionDetails && Calendar.Filter.collectionId > -1 ?
             i18n("Completed Tasks in %1", root.filterCollectionDetails.displayName) : i18n("Completed Tasks")
 
         TodoTreeView {
@@ -107,7 +107,7 @@ Kirigami.ScrollablePage {
 
             filterCollectionDetails: root.filterCollectionDetails
 
-            showCompleted: Kalendar.TodoSortFilterProxyModel.ShowCompleteOnly
+            showCompleted: Calendar.TodoSortFilterProxyModel.ShowCompleteOnly
             sortBy: root.sortBy
             ascendingOrder: root.ascendingOrder
         }
@@ -119,10 +119,10 @@ Kirigami.ScrollablePage {
             id: collectionPickerSheet
             property var incidenceWrapper
 
-            mode: Kalendar.CalendarApplication.Todo
+            mode: Calendar.CalendarApplication.Todo
             onCollectionPicked: {
                 collectionPickerSheet.incidenceWrapper.collectionId = collectionId;
-                Kalendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
+                Calendar.CalendarManager.addIncidence(collectionPickerSheet.incidenceWrapper);
                 collectionPickerSheet.closeDialog();
                 addField.clear();
             }
@@ -138,7 +138,7 @@ Kirigami.ScrollablePage {
 
         filterCollectionDetails: root.filterCollectionDetails
 
-        showCompleted: Kalendar.TodoSortFilterProxyModel.ShowIncompleteOnly
+        showCompleted: Calendar.TodoSortFilterProxyModel.ShowIncompleteOnly
         sortBy: root.sortBy
         ascendingOrder: root.ascendingOrder
     }
@@ -168,13 +168,13 @@ Kirigami.ScrollablePage {
 
         function addTodo() {
             if(addField.text) {
-                let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                let incidenceWrapper = Qt.createQmlObject('import org.kde.Calendar.calendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
                 incidenceWrapper.setNewTodo();
                 incidenceWrapper.summary = addField.text;
 
-                if(Kalendar.Filter.collectionId >= 0) {
-                    incidenceWrapper.collectionId = Kalendar.Filter.collectionId;
-                    Kalendar.CalendarManager.addIncidence(incidenceWrapper);
+                if(Calendar.Filter.collectionId >= 0) {
+                    incidenceWrapper.collectionId = Calendar.Filter.collectionId;
+                    Calendar.CalendarManager.addIncidence(incidenceWrapper);
                     addField.clear();
                 } else {
                     const openDialogWindow = QQC2.ApplicationWindow.window.pageStack.pushDialogLayer(collectionPickerSheetComponent, {

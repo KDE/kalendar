@@ -139,6 +139,7 @@ CalendarManager *CalendarManager::instance()
 CalendarManager::CalendarManager(QObject *parent)
     : QObject(parent)
     , m_calendar(nullptr)
+    , m_config(new CalendarConfig(this))
 {
     if (!Akonadi::Control::start()) {
         qApp->exit(-1);
@@ -148,10 +149,10 @@ CalendarManager::CalendarManager(QObject *parent)
     auto colorProxy = new ColorProxyModel(this);
     colorProxy->setObjectName(QStringLiteral("Show calendar colors"));
     colorProxy->setDynamicSortFilter(true);
-    colorProxy->setStandardCollectionId(CalendarConfig::self()->lastUsedEventCollection());
+    colorProxy->setStandardCollectionId(m_config->lastUsedEventCollection());
 
-    connect(CalendarConfig::self(), &CalendarConfig::lastUsedEventCollectionChanged, this, [colorProxy]() {
-        colorProxy->setStandardCollectionId(CalendarConfig::self()->lastUsedEventCollection());
+    connect(m_config, &CalendarConfig::lastUsedEventCollectionChanged, this, [this, colorProxy]() {
+        colorProxy->setStandardCollectionId(m_config->lastUsedEventCollection());
     });
     m_baseModel = colorProxy;
 
@@ -339,7 +340,7 @@ qint64 CalendarManager::defaultCalendarId(IncidenceWrapper *incidenceWrapper)
 {
     // Checks if default collection accepts this type of incidence
     auto mimeType = incidenceWrapper->incidencePtr()->mimeType();
-    Akonadi::Collection collection = m_calendar->collection(CalendarConfig::self()->lastUsedEventCollection());
+    Akonadi::Collection collection = m_calendar->collection(m_config->lastUsedEventCollection());
     bool supportsMimeType = collection.contentMimeTypes().contains(mimeType) || mimeType == QLatin1String("");
     bool hasRights = collection.rights() & Akonadi::Collection::CanCreateItem;
     if (collection.isValid() && supportsMimeType && hasRights) {
