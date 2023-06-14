@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-26 02:26+0000\n"
+"POT-Creation-Date: 2023-06-14 02:37+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -45,50 +45,50 @@ msgstr "Επανάληψη: "
 msgid "Refresh All Calendars"
 msgstr "Εισαγωγή ημερολογίου"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:50
 #, fuzzy, kde-format
 #| msgid "Custom"
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:82
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:415
 #, kde-format
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:145
 #, fuzzy, kde-format
 #| msgid "%1 minutes"
 msgid "minutes"
 msgstr "%1 λεπτά"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:154
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:146
 #, fuzzy, kde-format
 #| msgctxt "%1 is 2 or mores"
 #| msgid "%1 hours"
 msgid "hours"
 msgstr "%1 ώρες"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:155
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:147
 #, kde-format
 msgid "days"
 msgstr "ημέρες"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:167
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:159
 #, fuzzy, kde-format
 #| msgid "%1 before start of event"
 msgid "before start of event"
 msgstr "%1 πριν την έναρξη του γεγονότος"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:168
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:160
 #, fuzzy, kde-format
 #| msgid "%1 after start of event"
 msgid "after start of event"
 msgstr "%1 μετά την έναρξη του γεγονότος"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:170
 #, kde-format
 msgid "Remove"
 msgstr "Αφαίρεση"
