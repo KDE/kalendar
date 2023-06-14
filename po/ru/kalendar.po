@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-02 00:48+0000\n"
+"POT-Creation-Date: 2023-06-14 00:48+0000\n"
 "PO-Revision-Date: 2023-04-26 10:18+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -101,44 +101,44 @@ msgstr "8"
 msgid "9 (Lowest Priority)"
 msgstr "9 (минимальный приоритет)"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:50
 #, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Другое"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:82
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:400
 #, kde-format
 msgid "Custom"
 msgstr "Пользовательский"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:145
 #, kde-format
 msgid "minutes"
 msgstr "мин."
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:154
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:146
 #, kde-format
 msgid "hours"
 msgstr "час"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:155
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:147
 #, kde-format
 msgid "days"
 msgstr "дн."
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:167
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:159
 #, kde-format
 msgid "before start of event"
 msgstr "до начала события"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:168
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:160
 #, kde-format
 msgid "after start of event"
 msgstr "после начала события"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:170
 #, kde-format
 msgid "Remove"
 msgstr "Удалить"

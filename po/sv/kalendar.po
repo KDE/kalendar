@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-02 00:48+0000\n"
+"POT-Creation-Date: 2023-06-14 00:48+0000\n"
 "PO-Revision-Date: 2022-09-28 17:02+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -100,50 +100,50 @@ msgstr "8"
 msgid "9 (Lowest Priority)"
 msgstr "9 (lägst prioritet)"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:50
 #, fuzzy, kde-format
 #| msgid "Custom"
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "Egen"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:82
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:400
 #, kde-format
 msgid "Custom"
 msgstr "Egen"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:145
 #, fuzzy, kde-format
 #| msgid "%1 minutes"
 msgid "minutes"
 msgstr "%1 minuter"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:154
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:146
 #, fuzzy, kde-format
 #| msgctxt "%1 is 2 or mores"
 #| msgid "%1 hours"
 msgid "hours"
 msgstr "%1 timmar"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:155
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:147
 #, kde-format
 msgid "days"
 msgstr "dagar"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:167
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:159
 #, fuzzy, kde-format
 #| msgid "%1 before start of event"
 msgid "before start of event"
 msgstr "%1 innan händelsens start"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:168
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:160
 #, fuzzy, kde-format
 #| msgid "%1 after start of event"
 msgid "after start of event"
 msgstr "%1 efter händelsens start"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:170
 #, kde-format
 msgid "Remove"
 msgstr "Ta bort"
