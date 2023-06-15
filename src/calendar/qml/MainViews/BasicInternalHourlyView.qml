@@ -56,7 +56,7 @@ Column {
         }
     }
 
-    Component.onCompleted: hourScrollView.setToCurrentTime(animate);
+    Component.onCompleted: hourScrollView.setToCurrentTime(true);
 
     FontMetrics {
         id: hourLabelMetrics

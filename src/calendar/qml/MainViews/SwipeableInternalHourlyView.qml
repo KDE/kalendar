@@ -107,8 +107,6 @@ PathView {
             startDate: viewLoader.startDate
             dragDropEnabled: root.dragDropEnabled
             isCurrentItem: viewLoader.isCurrentItem
-            // Not a model role but instead one of the model object's properties
-            hourLabels: root.model.hourlyViewLocalisedLabels
         }
     }
 }
