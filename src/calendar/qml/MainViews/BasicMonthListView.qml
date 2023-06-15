@@ -84,15 +84,6 @@ QQC2.ScrollView {
         }
     }
 
-    function setToDate(date, isInitialMonth = false) {
-        startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-
-        if(isInitialMonth) {
-            savedYScrollPos = 0;
-            moveToSelected();
-        }
-    }
-
     ListView {
         id: scheduleListView
 
@@ -131,9 +122,13 @@ QQC2.ScrollView {
 
             Rectangle {
                 id: backgroundRectangle
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.left: parent.left
+
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    left: parent.left
+                }
+
                 height: Kirigami.Settings.isMobile ? // Mobile adds extra padding
                         parent.height + Kirigami.Units.largeSpacing * 2 :
                         parent.height + Kirigami.Units.largeSpacing

@@ -385,10 +385,7 @@ Kirigami.ApplicationWindow {
             }
 
             KalendarUiUtils.setUpView(incidenceData);
-
-            if (pageStack.currentItem.mode !== CalendarApplication.Todo) {
-                pageStack.currentItem.setToDate(occurrenceDate);
-            }
+            DateTimeState.selectedDate = occurrenceDate;
         }
     }
 
@@ -682,8 +679,7 @@ Kirigami.ApplicationWindow {
             y: pageStack.globalToolBar.height - 1
             showDays: pageStack.currentItem && pageStack.currentItem.mode !== CalendarApplication.MonthView
             date: DateTimeState.selectedDate
-            onDateSelected: if(visible) {
-                pageStack.currentItem.setToDate(date);
+            onDateSelected: if (visible) {
                 DateTimeState.selectedDate = date;
             }
         }
