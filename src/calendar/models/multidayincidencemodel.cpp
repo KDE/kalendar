@@ -247,7 +247,7 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &index, int role) const
     case IncidencesRole:
         return layoutLines(rowStart);
     default:
-        Q_UNREACHABLE();
+        return {};
     }
 }
 
