@@ -9,6 +9,7 @@ RowLayout {
     id: root
 
     property alias titleDateButton: titleDataButton
+    readonly property var openDateChangerAction: Calendar.CalendarApplication.action("open_date_changer")
 
     spacing: 0
 
@@ -18,6 +19,14 @@ RowLayout {
         id: titleDataButton
 
         onClicked: dateChangerLoader.active = !dateChangerLoader.active
+    }
+
+    Connections {
+        target: Calendar.CalendarApplication
+
+        function onOpenDateChanger() {
+            dateChangerLoader.active = true;
+        }
     }
 
     Loader {
@@ -30,7 +39,6 @@ RowLayout {
             showDays: pageStack.currentItem && pageStack.currentItem.mode !== Calendar.CalendarApplication.MonthView
             date: Calendar.DateTimeState.selectedDate
             onDateSelected: if(visible) {
-                pageStack.currentItem.setToDate(date);
                 Calendar.DateTimeState.selectedDate = date;
             }
         }

@@ -46,7 +46,6 @@ Kirigami.ApplicationWindow {
     readonly property var moveViewForwardsAction: CalendarApplication.action("move_view_forwards")
     readonly property var moveViewBackwardsAction: CalendarApplication.action("move_view_backwards")
     readonly property var moveViewToTodayAction: CalendarApplication.action("move_view_to_today")
-    readonly property var openDateChangerAction: CalendarApplication.action("open_date_changer")
     readonly property var aboutPageAction: CalendarApplication.action("open_about_page")
     readonly property var toggleMenubarAction: CalendarApplication.action("toggle_menubar")
     readonly property var createEventAction: CalendarApplication.action("create_event")
@@ -225,10 +224,6 @@ Kirigami.ApplicationWindow {
 
         function onMoveViewToToday() {
             pageStack.currentItem.todayAction.trigger();
-        }
-
-        function onOpenDateChanger() {
-            dateChangeDrawer.active = true;
         }
 
         function onOpenAboutPage() {
@@ -666,21 +661,6 @@ Kirigami.ApplicationWindow {
                     // Unlike the drawer we are not going to reopen the popup without selecting an incidence
                     incidenceData = null;
                 }
-            }
-        }
-    }
-
-    Loader {
-        id: dateChangeDrawer
-        active: false
-        visible: status === Loader.Ready
-        onStatusChanged: if(status === Loader.Ready) item.open()
-        sourceComponent: DateChanger {
-            y: pageStack.globalToolBar.height - 1
-            showDays: pageStack.currentItem && pageStack.currentItem.mode !== CalendarApplication.MonthView
-            date: DateTimeState.selectedDate
-            onDateSelected: if (visible) {
-                DateTimeState.selectedDate = date;
             }
         }
     }
