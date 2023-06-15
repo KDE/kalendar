@@ -14,6 +14,8 @@ class Utils : public QObject
 public:
     explicit Utils(QObject *parent = nullptr);
 
+    Q_INVOKABLE QDate addDaysToDate(const QDate &date, const int days);
+
     /// Gives prettified time
     Q_INVOKABLE QString secondsToReminderLabel(const qint64 seconds) const;
 

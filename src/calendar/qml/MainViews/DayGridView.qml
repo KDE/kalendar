@@ -117,7 +117,7 @@ Item {
                         Loader {
                             id: weekHeader
 
-                            property date startDate: DateUtils.addDaysToDate(root.startDate, weekRow.index * 7)
+                            property date startDate: Kalendar.Utils.addDaysToDate(root.startDate, index * 7)
 
                             sourceComponent: root.weekHeaderDelegate
                             active: Kalendar.Config.showWeekNumbers
@@ -130,7 +130,7 @@ Item {
                         Item {
                             id: dayDelegate
 
-                            property date startDate: DateUtils.addDaysToDate(root.startDate, index * 7)
+                            property date startDate: Kalendar.Utils.addDaysToDate(root.startDate, index * 7)
 
                             Layout.fillWidth: true
                             Layout.fillHeight: true

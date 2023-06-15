@@ -31,8 +31,11 @@ public:
     Q_INVOKABLE void setSelectedDay(int day);
     Q_INVOKABLE void setSelectedMonth(int month);
     Q_INVOKABLE void setSelectedYear(int year);
+
     Q_INVOKABLE void selectPreviousMonth();
     Q_INVOKABLE void selectNextMonth();
+
+    Q_INVOKABLE void addDays(int days);
 
     /// Reset to current time
     Q_INVOKABLE void resetTime();

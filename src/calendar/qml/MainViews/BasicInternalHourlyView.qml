@@ -292,27 +292,36 @@ Column {
                     }
 
                     Layout.topMargin: Kirigami.Units.largeSpacing
-                    //One row => one week
+
+                    // One row => one week
                     Item {
-                        id: weekItem
+                        id: weekDelegate
+
+                        required property int index
+                        required property var incidences
+                        required property var periodStartDate
+
                         width: parent.width
                         implicitHeight: allDayHeader.actualHeight
                         clip: true
+
                         RowLayout {
                             width: parent.width
                             height: parent.height
                             spacing: viewColumn.gridLineWidth
+
                             Item {
                                 id: dayDelegate
+
+                                readonly property date startDate: weekDelegate.periodStartDate
+
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
-                                readonly property date startDate: model.periodStartDate
 
                                 QQC2.ScrollView {
                                     id: linesListViewScrollView
-                                    anchors {
-                                        fill: parent
-                                    }
+
+                                    anchors.fill: parent
 
                                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
@@ -323,6 +332,47 @@ Column {
 
                                         clip: true
                                         spacing: viewColumn.incidenceSpacing
+
+                                        model: weekDelegate.incidences
+                                        onCountChanged: viewColumn.multiDayLinesShown = count
+                                        delegate: Item {
+                                            id: line
+
+                                            required property var modelData
+
+                                            height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+                                            width: ListView.view.width
+
+                                            // Incidences
+                                            Repeater {
+                                                id: allDayIncidencesRepeater
+
+                                                model: line.modelData
+
+                                                delegate: DayGridViewIncidenceDelegate {
+                                                    id: incidenceDelegate
+
+                                                    required property var modelData
+
+                                                    starts: modelData.starts
+                                                    duration: modelData.duration
+                                                    incidenceId: modelData.incidenceId
+                                                    occurrenceDate: modelData.startTime
+                                                    occurrenceEndDate: modelData.endTime
+                                                    incidencePtr: modelData.incidencePtr
+                                                    allDay: modelData.allDay
+
+                                                    dayWidth: viewColumn.dayWidth
+                                                    height: viewColumn.allDayViewDelegateHeight
+                                                    parentViewSpacing: viewColumn.gridLineWidth
+                                                    horizontalSpacing: linesRepeater.spacing
+                                                    openOccurrenceId: viewColumn.openOccurrence ? viewColumn.openOccurrence.incidenceId : ""
+                                                    isDark: viewColumn.isDark
+                                                    reactToCurrentMonth: false
+                                                    dragDropEnabled: viewColumn.dragDropEnabled
+                                                }
+                                            }
+                                        }
 
                                         ListView {
                                             id: allDayIncidencesBackgroundView
@@ -390,33 +440,6 @@ Column {
                                             }
                                         }
 
-                                        model: incidences
-                                        onCountChanged: {
-                                            viewColumn.multiDayLinesShown = count
-                                        }
-
-                                        delegate: Item {
-                                            id: line
-                                            height: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
-
-                                            //Incidences
-                                            Repeater {
-                                                id: allDayIncidencesRepeater
-                                                model: modelData
-                                                DayGridViewIncidenceDelegate {
-                                                    id: dayGridViewIncidenceDelegate
-                                                    objectName: "dayGridViewIncidenceDelegate"
-                                                    dayWidth: viewColumn.dayWidth
-                                                    height: viewColumn.allDayViewDelegateHeight
-                                                    parentViewSpacing: viewColumn.gridLineWidth
-                                                    horizontalSpacing: linesRepeater.spacing
-                                                    openOccurrenceId: viewColumn.openOccurrence ? viewColumn.openOccurrence.incidenceId : ""
-                                                    isDark: viewColumn.isDark
-                                                    reactToCurrentMonth: false
-                                                    dragDropEnabled: viewColumn.dragDropEnabled
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }

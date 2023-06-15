@@ -4,6 +4,7 @@
 
 #include "utils.h"
 #include <KLocalizedString>
+#include <QDate>
 #include <QtMath>
 #include <chrono>
 
@@ -56,4 +57,9 @@ QString Utils::formatSpelloutDuration(const KCalendarCore::Duration &duration, c
             return format.formatSpelloutDuration(duration.asSeconds() * 1000);
         }
     }
+}
+
+QDate Utils::addDaysToDate(const QDate &date, const int days)
+{
+    return date.addDays(days);
 }

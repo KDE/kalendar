@@ -87,6 +87,20 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    function switchView(view, viewSettings) {
+        if (root.pageStack.layers.depth > 1) {
+            root.pageStack.layers.pop(root.pageStack.layers.initialItem);
+        }
+        if (root.pageStack.depth > 1) {
+            root.pageStack.pop();
+        }
+        root.pageStack.replace(view, viewSettings);
+
+        if (root.filterHeaderBarLoaderItem.active && root.pageStack.currentItem.mode !== CalendarApplication.Contact) {
+            root.pageStack.currentItem.header = root.filterHeaderBarLoaderItem.item;
+        }
+    }
+
     pageStack {
         globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
         initialPage: scheduleViewComponent
@@ -165,38 +179,38 @@ Kirigami.ApplicationWindow {
         target: CalendarApplication
         function onOpenMonthView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Month || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(monthViewComponent);
+                root.switchView(monthViewComponent);
             }
         }
 
         function onOpenWeekView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Week || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(hourlyViewComponent);
+                root.switchView(hourlyViewComponent);
             }
         }
 
         function onOpenThreeDayView() {
             if(pageStack.currentItem.mode !== CalendarApplication.ThreeDay || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 3 });
+                root.switchView(hourlyViewComponent, { daysToShow: 3 });
             }
         }
 
         function onOpenDayView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Day || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(hourlyViewComponent, { daysToShow: 1 });
+                root.switchView(hourlyViewComponent, { daysToShow: 1 });
             }
         }
 
         function onOpenScheduleView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Schedule || root.ignoreCurrentPage) {
-                KalendarUiUtils.switchView(scheduleViewComponent);
+                root.switchView(scheduleViewComponent);
             }
         }
 
         function onOpenTodoView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Todo) {
                 filterHeaderBar.active = true;
-                KalendarUiUtils.switchView(todoViewComponent);
+                root.switchView("qrc:/TodoView.qml");
             }
         }
 
@@ -1005,71 +1019,9 @@ Kirigami.ApplicationWindow {
 
         HourlyView {
             id: hourlyView
-            objectName: switch(daysToShow) {
-                case 1:
-                    return "dayView";
-                case 3:
-                    return "threeDayView";
-                case 7:
-                default:
-                    return "weekView";
-            }
-
-            titleDelegate: ViewTitleDelegate {
-                titleDateButton {
-                    range: true
-                    lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
-                }
-
-                Kirigami.ActionToolBar {
-                    id: weekViewScaleToggles
-                    Layout.preferredWidth: weekViewScaleToggles.maximumContentWidth
-                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                    visible: !Kirigami.Settings.isMobile
-
-                    actions: [
-                        Kirigami.Action {
-                            text: i18nc("@action:inmenu open week view", "Week")
-                            checkable: true
-                            checked: pageStack.currentItem && pageStack.currentItem.mode === CalendarApplication.Week
-                            onTriggered: weekViewAction.trigger()
-                        },
-                        Kirigami.Action {
-                            text: i18nc("@action:inmenu open 3 days view", "3 Days")
-                            checkable: true
-                            checked: pageStack.currentItem && pageStack.currentItem.mode === CalendarApplication.ThreeDay
-                            onTriggered: threeDayViewAction.trigger()
-                        },
-                        Kirigami.Action {
-                            text: i18nc("@action:inmenu open day view", "Day")
-                            checkable: true
-                            checked: pageStack.currentItem && pageStack.currentItem.mode === CalendarApplication.Day
-                            onTriggered: dayViewAction.trigger()
-                        }
-                    ]
-                }
-            }
-            currentDate: root.currentDate
             openOccurrence: root.openOccurrence
 
             actions.contextualActions: createAction
-        }
-    }
-
-    Component {
-        id: todoViewComponent
-
-        TodoView {
-            id: todoView
-            objectName: "todoView"
-
-            titleDelegate: RowLayout {
-                spacing: 0
-                MainDrawerToggleButton {}
-                Kirigami.Heading {
-                    text: i18n("Tasks")
-                }
-            }
         }
     }
 

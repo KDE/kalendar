@@ -7,70 +7,56 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import QtGraphicalEffects 1.12
 
-import org.kde.kalendar.calendar 1.0 as Kalendar
+import org.kde.kalendar.calendar 1.0 as Calendar
+import org.kde.kalendar.components 1.0
 import org.kde.kalendar.utils 1.0
-import "dateutils.js" as DateUtils
-import "labelutils.js" as LabelUtils
 
 Kirigami.Page {
     id: root
+    objectName: switch(daysToShow) {
+        case 1:
+            return "dayView";
+        case 3:
+            return "threeDayView";
+        case 7:
+        default:
+            return "weekView";
+    }
 
-    property var openOccurrence: ({})
+    required property var openOccurrence
 
-    property date currentDate: new Date() // Needs to get updated for marker to move, done from main.qml
-    property date startDate: DateUtils.getFirstDayOfWeek(currentDate)
-    readonly property int day: startDate.getDate()
-    readonly property int month: startDate.getMonth()
-    readonly property int year: startDate.getFullYear()
-
-    property bool initialWeek: true
     property int daysToShow: 7
     property bool dragDropEnabled: true
 
-    readonly property var internalHourlyView: {
-        switch (Kalendar.Config.hourlyViewMode) {
-        case Kalendar.Config.BasicInternalHourlyView:
-            return basicViewLoader.item;
-        case Kalendar.Config.SwipeableInternalHourlyView:
-        default:
-            return swipeableViewLoader.item;
-        }
-    }
-
     readonly property var mode: switch(daysToShow) {
         case 1:
-            return Kalendar.CalendarApplication.Day;
+            return Calendar.CalendarApplication.Day;
         case 3:
-            return Kalendar.CalendarApplication.ThreeDay;
+            return Calendar.CalendarApplication.ThreeDay;
         case 7:
         default:
-            return Kalendar.CalendarApplication.Week;
+            return Calendar.CalendarApplication.Week;
     }
 
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
         text: i18n("Previous Week")
         shortcut: StandardKey.MoveToPreviousPage
-        onTriggered: setToDate(DateUtils.addDaysToDate(root.startDate, -root.daysToShow))
+        onTriggered: Calendar.DateTimeState.addDays(-root.daysToShow)
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action nextAction: Kirigami.Action {
         icon.name: "go-next"
-        text: i18n("Next Week")
+        text: i18n("Next Week")office/klevernotes/-/merge_requests/7#note_699373
         shortcut: StandardKey.MoveToNextPage
-        onTriggered: setToDate(DateUtils.addDaysToDate(root.startDate, root.daysToShow))
+        onTriggered: Calendar.DateTimeState.addDays(root.daysToShow)
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
         text: i18n("Now")
         shortcut: StandardKey.MoveToStartOfLine
-        onTriggered: setToDate(new Date(), true, true);
-    }
-
-    function setToDate(date, isInitialWeek = false, animate = false) {
-        initialWeek = isInitialWeek;
-        internalHourlyView.setToDate(date, isInitialWeek, animate);
+        onTriggered: Calendar.DateTimeState.resetTime();
     }
 
     Kirigami.Theme.inherit: false
@@ -88,37 +74,69 @@ Kirigami.Page {
 
     padding: 0
 
+    titleDelegate: ViewTitleDelegate {
+        titleDateButton {
+            range: true
+            lastDate: Calendar.Utils.addDaysToDate(Calendar.DateTimeState.selectedDate, root.daysToShow - 1)
+        }
+
+        Kirigami.ActionToolBar {
+            id: weekViewScaleToggles
+            Layout.preferredWidth: weekViewScaleToggles.maximumContentWidth
+            Layout.leftMargin: Kirigami.Units.largeSpacing
+            visible: !Kirigami.Settings.isMobile
+
+            actions: [
+                KActionFromAction {
+                    action: Calendar.CalendarApplication.action("open_week_view")
+                    text: i18nc("@action:inmenu open week view", "Week")
+                    checkable: true
+                    checked: pageStack.currentItem && pageStack.currentItem.mode === Calendar.CalendarApplication.Week
+                    onTriggered: weekViewAction.trigger()
+                },
+                KActionFromAction {
+                    action: Calendar.CalendarApplication.action("open_threeday_view")
+                    text: i18nc("@action:inmenu open 3 days view", "3 Days")
+                    checkable: true
+                    checked: pageStack.currentItem && pageStack.currentItem.mode === Calendar.CalendarApplication.ThreeDay
+                },
+                KActionFromAction {
+                    action: Calendar.CalendarApplication.action("open_day_view")
+                    text: i18nc("@action:inmenu open day view", "Day")
+                    checkable: true
+                    checked: pageStack.currentItem && pageStack.currentItem.mode === Calendar.CalendarApplication.Day
+                }
+            ]
+        }
+    }
+
     Loader {
         id: swipeableViewLoader
+
         anchors.fill: parent
-        active: Kalendar.Config.hourlyViewMode === Kalendar.Config.SwipeableInternalHourlyView
+        active: Calendar.Config.hourlyViewMode === Calendar.Config.SwipeableInternalHourlyView
+
         sourceComponent: SwipeableInternalHourlyView {
             anchors.fill: parent
 
             daysToShow: root.daysToShow
             dragDropEnabled: root.dragDropEnabled
-            startDate: root.startDate
-            currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-
-            onStartDateChanged: root.startDate = startDate
         }
     }
 
     Loader {
         id: basicViewLoader
+
         anchors.fill: parent
-        active: Kalendar.Config.hourlyViewMode === Kalendar.Config.BasicInternalHourlyView
+        active: Calendar.Config.hourlyViewMode === Calendar.Config.BasicInternalHourlyView
+
         sourceComponent: BasicInternalHourlyView {
             anchors.fill: parent
 
             daysToShow: root.daysToShow
             dragDropEnabled: root.dragDropEnabled
-            startDate: root.startDate
-            currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-
-            onStartDateChanged: root.startDate = startDate
         }
     }
 }

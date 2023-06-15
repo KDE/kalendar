@@ -18,6 +18,7 @@ import "labelutils.js" as LabelUtils
 
 Kirigami.ScrollablePage {
     id: root
+    objectName: "todoView"
 
     property var mode: Calendar.CalendarApplication.Todo
 
@@ -42,6 +43,14 @@ Kirigami.ScrollablePage {
 
     padding: 0
     leftPadding: Kirigami.Units.largeSpacing
+
+    titleDelegate: RowLayout {
+        spacing: 0
+        MainDrawerToggleButton {}
+        Kirigami.Heading {
+            text: i18n("Tasks")
+        }
+    }
 
     background: Rectangle {
         Kirigami.Theme.inherit: false

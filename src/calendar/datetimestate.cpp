@@ -23,6 +23,12 @@ void DateTimeState::selectNextMonth()
     Q_EMIT selectedDateChanged();
 }
 
+void DateTimeState::addDays(int days)
+{
+    m_selectedDate = m_selectedDate.addDays(days);
+    Q_EMIT selectedDateChanged();
+}
+
 QDate DateTimeState::firstDayOfMonth() const
 {
     QDate date = m_selectedDate;

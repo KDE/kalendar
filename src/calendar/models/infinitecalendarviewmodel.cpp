@@ -8,6 +8,8 @@
 #include <cmath>
 #include <models/infinitecalendarviewmodel.h>
 
+using namespace std::chrono_literals;
+
 InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -81,8 +83,6 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         return {};
     }
 
-    const QDate startDate = m_startDates[idx.row()];
-
     if (m_scale == MonthScale && role != StartDateRole) {
         const QDate firstDay = m_firstDayOfMonthDates[idx.row()];
 
@@ -99,6 +99,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
     }
 
+    const QDate startDate = m_startDates[idx.row()];
+
     switch (role) {
     case StartDateRole:
         return startDate.startOfDay();
@@ -114,8 +116,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
 
 int InfiniteCalendarViewModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent)
-    return m_startDates.length();
+    return parent.isValid() ? 0 : m_startDates.length();
 }
 
 QHash<int, QByteArray> InfiniteCalendarViewModel::roleNames() const
@@ -130,15 +131,42 @@ QHash<int, QByteArray> InfiniteCalendarViewModel::roleNames() const
 
 int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate &currentDate, const int currentIndex)
 {
-    auto monthDiff = selectedDate.month() - currentDate.month() + (12 * (selectedDate.year() - currentDate.year()));
-    auto newIndex = currentIndex + monthDiff;
+    int newIndex;
+    int role;
 
-    QDateTime firstItemDate = data(index(1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
-    auto lastItemDate = data(index(rowCount() - 1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
+    switch (m_scale) {
+    case MonthScale: {
+        auto monthDiff = selectedDate.month() - currentDate.month() + (12 * (selectedDate.year() - currentDate.year()));
+        newIndex = currentIndex + monthDiff;
+        role = InfiniteCalendarViewModel::FirstDayOfMonthRole;
+        break;
+    }
+    case WeekScale: {
+        const int daysTo = currentDate.daysTo(selectedDate) / 7;
+        newIndex = currentIndex + daysTo;
+        role = InfiniteCalendarViewModel::StartDateRole;
+        break;
+    }
+    case ThreeDayScale: {
+        const int daysTo = currentDate.daysTo(selectedDate) / 3;
+        newIndex = currentIndex + daysTo;
+        role = InfiniteCalendarViewModel::StartDateRole;
+        break;
+    }
+    case DayScale: {
+        const auto daysTo = currentDate.daysTo(selectedDate);
+        newIndex = currentIndex + daysTo;
+        role = InfiniteCalendarViewModel::StartDateRole;
+        break;
+    }
+    }
+
+    QDateTime firstItemDate = data(index(1, 0), role).toDateTime();
+    auto lastItemDate = data(index(rowCount() - 1, 0), role).toDateTime();
 
     while (firstItemDate >= selectedDate.startOfDay()) {
         addDates(false);
-        firstItemDate = data(index(1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
+        firstItemDate = data(index(1, 0), role).toDateTime();
         newIndex = 0;
     }
 
@@ -148,7 +176,7 @@ int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate
 
     while (lastItemDate <= selectedDate.startOfDay()) {
         addDates(true);
-        lastItemDate = data(index(rowCount() - 1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
+        lastItemDate = data(index(rowCount() - 1, 0), role).toDateTime();
     }
 
     return newIndex;

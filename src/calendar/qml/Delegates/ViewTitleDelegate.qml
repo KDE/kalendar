@@ -3,6 +3,7 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
+import org.kde.kalendar.calendar 1.0 as Calendar
 
 RowLayout {
     id: root
@@ -26,11 +27,11 @@ RowLayout {
         onStatusChanged: if(status === Loader.Ready) item.open()
         sourceComponent: DateChanger {
             y: pageStack.globalToolBar.height - 1
-            showDays: pageStack.currentItem && pageStack.currentItem.mode !== CalendarApplication.MonthView
-            date: DateTimeState.selectedDate
+            showDays: pageStack.currentItem && pageStack.currentItem.mode !== Calendar.CalendarApplication.MonthView
+            date: Calendar.DateTimeState.selectedDate
             onDateSelected: if(visible) {
                 pageStack.currentItem.setToDate(date);
-                DateTimeState.selectedDate = date;
+                Calendar.DateTimeState.selectedDate = date;
             }
         }
     }
