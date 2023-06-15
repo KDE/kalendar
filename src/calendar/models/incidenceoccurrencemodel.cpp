@@ -309,17 +309,8 @@ QVariant IncidenceOccurrenceModel::data(const QModelIndex &idx, int role) const
         return QVariant::fromValue(incidence);
     case IncidenceOccurrence:
         return QVariant::fromValue(occurrence);
-    case Qt::ToolTipRole:
-    case Qt::StatusTipRole:
-    case Qt::WhatsThisRole:
-    case Qt::SizeHintRole:
-    case Qt::TextAlignmentRole:
-    case Qt::CheckStateRole:
-    case Qt::FontRole:
-    case -1:
-        return {};
     default:
-        Q_UNREACHABLE();
+        return {};
     }
 }
 
