@@ -36,6 +36,7 @@ public:
     Q_INVOKABLE void selectNextMonth();
 
     Q_INVOKABLE void addDays(int days);
+    Q_INVOKABLE bool isToday(const QDate &date) const;
 
     /// Reset to current time
     Q_INVOKABLE void resetTime();

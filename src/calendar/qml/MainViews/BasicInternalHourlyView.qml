@@ -14,24 +14,15 @@ import "labelutils.js" as LabelUtils
 
 Column {
     id: viewColumn
-    spacing: 0
 
-    property var openOccurrence: ({})
+    required property var openOccurrence
+    required property int daysToShow
+    required property date startDate
 
-    property int daysToShow: 7
+    property date endDate: Kalendar.Utils.addDaysToDate(startDate, viewColumn.daysToShow)
 
-    property date currentDate: new Date() // Needs to get updated for marker to move, done from main.qml
-    property date startDate: DateUtils.getFirstDayOfWeek(currentDate)
-    property date endDate: DateUtils.addDaysToDate(startDate, viewColumn.daysToShow)
-
-    readonly property int day: startDate.getDate()
-    readonly property int month: startDate.getMonth()
-    readonly property int year: startDate.getFullYear()
+    readonly property date currentDate: Kalendar.DateTimeState.currentDate
     readonly property int daysFromWeekStart: DateUtils.fullDaysBetweenDates(startDate, currentDate) - 1
-
-    readonly property int currentDay: currentDate.getDate()
-    readonly property int currentMonth: currentDate.getMonth()
-    readonly property int currentYear: currentDate.getFullYear()
 
     readonly property int minutesFromStartOfDay: (currentDate.getHours() * 60) + currentDate.getMinutes()
     readonly property bool isDark: KalendarUiUtils.darkMode
@@ -56,6 +47,8 @@ Column {
     readonly property alias hourScrollView: hourlyView
 
     property var hourLabels: []
+
+    spacing: 0
 
     function setToDate(date, isInitialWeek = false, animate = false) {
         if(daysToShow % 7 === 0) {
@@ -110,6 +103,13 @@ Column {
 
             model: viewColumn.daysToShow
             delegate: Rectangle {
+                id: dayDelegate
+
+                required property int index
+
+                readonly property date headingDate: Kalendar.Utils.addDaysToDate(viewColumn.startDate, index)
+                readonly property bool isToday: Kalendar.DateTimeState.isToday(headingDate)
+
                 width: viewColumn.dayWidth
                 implicitHeight: dayHeading.implicitHeight
                 color: Kirigami.Theme.backgroundColor
@@ -117,22 +117,18 @@ Column {
                 Kirigami.Heading { // Heading is out of the button so the color isn't disabled when the button is
                     id: dayHeading
 
-                    property date headingDate: DateUtils.addDaysToDate(viewColumn.startDate, index)
-                    property bool isToday: headingDate.getDate() === viewColumn.currentDay &&
-                        headingDate.getMonth() === viewColumn.currentMonth &&
-                        headingDate.getFullYear() === viewColumn.currentYear
                     width: parent.width
                     horizontalAlignment: Text.AlignRight
                     padding: Kirigami.Units.smallSpacing
                     level: 2
                     color: isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
                     text: {
-                        const longText = headingDate.toLocaleDateString(Qt.locale(), "dddd <b>d</b>");
-                        const mediumText = headingDate.toLocaleDateString(Qt.locale(), "ddd <b>d</b>");
-                        const shortText = mediumText.slice(0,1) + " " + headingDate.toLocaleDateString(Qt.locale(), "<b>d</b>");
+                        const longText = dayDelegate.headingDate.toLocaleDateString(Qt.locale(), "dddd <b>d</b>");
+                        const mediumText = dayDelegate.headingDate.toLocaleDateString(Qt.locale(), "ddd <b>d</b>");
+                        const shortText = mediumText.slice(0,1) + " " + dayDelegate.headingDate.toLocaleDateString(Qt.locale(), "<b>d</b>");
 
 
-                        if(fontMetrics.boundingRect(longText).width < width) {
+                        if (fontMetrics.boundingRect(longText).width < width) {
                             return longText;
                         } else if(fontMetrics.boundingRect(mediumText).width < width) {
                             return mediumText;
@@ -147,8 +143,14 @@ Column {
                     width: parent.width
 
                     flat: true
-                    enabled: viewColumn.daysToShow > 1
-                    onClicked: KalendarUiUtils.openDayLayer(dayHeading.headingDate)
+                    enabled: viewColumn.daysToShow === 7
+                    Accessible.name: dayHeading.text
+                    onClicked: {
+                        Kalendar.DateTimeState.selectedDate = dayDelegate.headingDate;
+                        applicationWindow().pageStack.layers.push("qrc:/HourlyView.qml", {
+                            daysToShow: 1,
+                        });
+                    }
                 }
             }
         }
@@ -391,10 +393,10 @@ Column {
                                             delegate: Rectangle {
                                                 id: multiDayViewBackground
 
-                                                readonly property date date: DateUtils.addDaysToDate(viewColumn.startDate, index)
-                                                readonly property bool isToday: date.getDate() === viewColumn.currentDay &&
-                                                    date.getMonth() === viewColumn.currentMonth &&
-                                                    date.getFullYear() === viewColumn.currentYear
+                                                required property int index
+
+                                                readonly property date date: Kalendar.Utils.addDaysToDate(viewColumn.startDate, index)
+                                                readonly property bool isToday: Kalendar.DateTimeState.isToday(date)
 
                                                 width: viewColumn.dayWidth
                                                 height: linesListViewScrollView.height
@@ -407,7 +409,7 @@ Column {
 
                                                     addDate: parent.date
                                                     onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate)
-                                                    onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
+                                                    onDeselect: applicationWindow().incidenceInfoViewer.close()
 
                                                     DropArea {
                                                         id: multiDayViewIncidenceDropArea

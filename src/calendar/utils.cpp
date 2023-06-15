@@ -63,3 +63,8 @@ QDate Utils::addDaysToDate(const QDate &date, const int days)
 {
     return date.addDays(days);
 }
+
+int Utils::weekNumber(const QDate &date) const
+{
+    return date.weekNumber();
+}

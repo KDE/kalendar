@@ -72,7 +72,6 @@ PathView {
         }
     }
 
-
     onMovementStarted: scrollPosition = root.currentItem.item.hourScrollView.getCurrentPosition();
     onMovementEnded: root.currentItem.item.hourScrollView.setPosition(scrollPosition);
 

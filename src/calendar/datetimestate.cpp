@@ -23,6 +23,11 @@ void DateTimeState::selectNextMonth()
     Q_EMIT selectedDateChanged();
 }
 
+bool DateTimeState::isToday(const QDate &date) const
+{
+    return m_currentDate == date;
+}
+
 void DateTimeState::addDays(int days)
 {
     m_selectedDate = m_selectedDate.addDays(days);

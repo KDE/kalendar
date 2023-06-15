@@ -32,7 +32,7 @@ void InfiniteCalendarViewModel::setup()
     switch (m_scale) {
     case DayScale: {
         QDate firstDay = today;
-        firstDay = firstDay.addDays(m_datesToAdd / 2);
+        firstDay = firstDay.addDays(-m_datesToAdd / 2);
 
         addDayDates(true, firstDay);
         break;
@@ -87,6 +87,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         const QDate firstDay = m_firstDayOfMonthDates[idx.row()];
 
         switch (role) {
+        case Qt::DisplayRole:
+            return firstDay;
         case FirstDayOfMonthRole:
             return firstDay.startOfDay();
         case SelectedMonthRole:
@@ -102,6 +104,8 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
     const QDate startDate = m_startDates[idx.row()];
 
     switch (role) {
+    case Qt::DisplayRole:
+        return startDate;
     case StartDateRole:
         return startDate.startOfDay();
     case SelectedMonthRole:

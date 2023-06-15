@@ -16,6 +16,7 @@ import "labelutils.js" as LabelUtils
 import org.kde.kalendar.calendar 1.0
 import org.kde.kalendar.utils 1.0
 import org.kde.kalendar.components 1.0
+import org.kde.kalendar.calendar.private 1.0
 
 Kirigami.ApplicationWindow {
     id: root
@@ -185,19 +186,19 @@ Kirigami.ApplicationWindow {
 
         function onOpenWeekView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Week || root.ignoreCurrentPage) {
-                root.switchView(hourlyViewComponent);
+                root.switchView("qrc:/HourlyView.qml");
             }
         }
 
         function onOpenThreeDayView() {
             if(pageStack.currentItem.mode !== CalendarApplication.ThreeDay || root.ignoreCurrentPage) {
-                root.switchView(hourlyViewComponent, { daysToShow: 3 });
+                root.switchView("qrc:/HourlyView.qml", { daysToShow: 3 });
             }
         }
 
         function onOpenDayView() {
             if(pageStack.currentItem.mode !== CalendarApplication.Day || root.ignoreCurrentPage) {
-                root.switchView(hourlyViewComponent, { daysToShow: 1 });
+                root.switchView("qrc:/HourlyView.qml", { daysToShow: 1 });
             }
         }
 
@@ -1008,17 +1009,6 @@ Kirigami.ApplicationWindow {
             id: scheduleView
             objectName: "scheduleView"
 
-            openOccurrence: root.openOccurrence
-
-            actions.contextualActions: createAction
-        }
-    }
-
-    Component {
-        id: hourlyViewComponent
-
-        HourlyView {
-            id: hourlyView
             openOccurrence: root.openOccurrence
 
             actions.contextualActions: createAction

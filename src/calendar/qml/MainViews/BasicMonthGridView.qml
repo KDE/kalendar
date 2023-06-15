@@ -7,37 +7,11 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kalendar.calendar 1.0 as Kalendar
 
-import "dateutils.js" as DateUtils
-
 DayGridView {
     id: dayView
 
-    signal viewDatesChanged(date startDate, date firstDayOfMonth)
-
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 40
     readonly property bool isTiny: width < Kirigami.Units.gridUnit * 18
-
-    function setToDate(date) {
-        foregroundLoader.active = false;
-
-        firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-        let newDate = DateUtils.getFirstDayOfWeek(firstDayOfMonth)
-
-        // Handling adding and subtracting months in Javascript can get *really* messy.
-        newDate = DateUtils.addDaysToDate(newDate, 7)
-
-        if (newDate.getMonth() === month) {
-            newDate = DateUtils.addDaysToDate(newDate, - 7)
-        }
-        if (newDate.getDate() < 14) {
-            newDate = DateUtils.addDaysToDate(newDate, - 7)
-        }
-
-        startDate = newDate;
-        viewDatesChanged(startDate, firstDayOfMonth);
-
-        foregroundLoader.active = true;
-    }
 
     objectName: "monthView"
 
@@ -81,7 +55,7 @@ DayGridView {
         padding: Kirigami.Units.smallSpacing
         verticalAlignment: Qt.AlignTop
         horizontalAlignment: Qt.AlignHCenter
-        text: DateUtils.getWeek(startDate, Qt.locale().firstDayOfWeek)
+        text: Kalendar.Utils.weekNumber(startDate)
         background: Rectangle {
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.View

@@ -23,11 +23,10 @@ Kirigami.Page {
             return "weekView";
     }
 
-    required property var openOccurrence
-
     property int daysToShow: 7
     property bool dragDropEnabled: true
 
+    readonly property var openOccurrence: applicationWindow().openOccurrence
     readonly property var mode: switch(daysToShow) {
         case 1:
             return Calendar.CalendarApplication.Day;
@@ -47,7 +46,7 @@ Kirigami.Page {
     }
     readonly property Kirigami.Action nextAction: Kirigami.Action {
         icon.name: "go-next"
-        text: i18n("Next Week")office/klevernotes/-/merge_requests/7#note_699373
+        text: i18n("Next Week")
         shortcut: StandardKey.MoveToNextPage
         onTriggered: Calendar.DateTimeState.addDays(root.daysToShow)
         displayHint: Kirigami.DisplayHint.IconOnly
@@ -66,11 +65,12 @@ Kirigami.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
-    actions {
-        left: Qt.application.layoutDirection === Qt.RightToLeft ? nextAction : previousAction
-        right: Qt.application.layoutDirection === Qt.RightToLeft ? previousAction : nextAction
-        main: todayAction
-    }
+    actions.contextualActions: [
+        previousAction,
+        nextAction,
+        todayAction,
+        applicationWindow().createAction
+    ]
 
     padding: 0
 
@@ -82,8 +82,10 @@ Kirigami.Page {
 
         Kirigami.ActionToolBar {
             id: weekViewScaleToggles
+
             Layout.preferredWidth: weekViewScaleToggles.maximumContentWidth
             Layout.leftMargin: Kirigami.Units.largeSpacing
+
             visible: !Kirigami.Settings.isMobile
 
             actions: [
