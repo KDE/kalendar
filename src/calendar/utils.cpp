@@ -5,6 +5,7 @@
 #include "utils.h"
 #include <KLocalizedString>
 #include <QDate>
+#include <QLocale>
 #include <QtMath>
 #include <chrono>
 
@@ -33,6 +34,11 @@ QString numAndUnit(const qint64 seconds)
 Utils::Utils(QObject *parent)
     : QObject(parent)
 {
+    QTime time;
+    for (int i = 1; i < 24; i++) {
+        time.setHMS(i, 0, 0);
+        m_hourlyViewLocalisedHourLabels.append(QLocale::system().toString(time, QLocale::NarrowFormat));
+    }
 }
 
 QString Utils::secondsToReminderLabel(const qint64 seconds) const
@@ -67,4 +73,9 @@ QDate Utils::addDaysToDate(const QDate &date, const int days)
 int Utils::weekNumber(const QDate &date) const
 {
     return date.weekNumber();
+}
+
+QStringList Utils::hourlyViewLocalisedHourLabels() const
+{
+    return m_hourlyViewLocalisedHourLabels;
 }

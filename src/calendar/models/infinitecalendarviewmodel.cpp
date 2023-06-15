@@ -21,14 +21,6 @@ void InfiniteCalendarViewModel::setup()
     const QDate today = QDate::currentDate();
     QTime time;
 
-    if (!m_hourlyViewLocalisedHourLabels.length()) {
-        m_hourlyViewLocalisedHourLabels.clear();
-        for (int i = 1; i < 24; i++) {
-            time.setHMS(i, 0, 0);
-            m_hourlyViewLocalisedHourLabels.append(QLocale::system().toString(time, QLocale::NarrowFormat));
-        }
-    }
-
     switch (m_scale) {
     case DayScale: {
         QDate firstDay = today;

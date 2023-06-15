@@ -45,30 +45,18 @@ Column {
     property real scrollPosition: 0
 
     readonly property alias hourScrollView: hourlyView
-
-    property var hourLabels: []
+    readonly property var hourLabels: Kalendar.Utils.hourlyViewLocalisedHourLabels
 
     spacing: 0
 
-    function setToDate(date, isInitialWeek = false, animate = false) {
-        if(daysToShow % 7 === 0) {
-            date = DateUtils.getFirstDayOfWeek(date);
-        }
-
-        startDate = date;
-
-        if(isInitialWeek) {
+    Connections {
+        target: Kalendar.DateTimeState
+        function onSelectedDateChanged() {
             hourScrollView.setToCurrentTime(animate);
         }
     }
 
-    Component.onCompleted: {
-        if (!hourLabels || hourLabels.length === 0) {
-            const infiniteCalendarModel = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; InfiniteCalendarViewModel {}',
-                viewColumn, "infiniteCalendarModel");
-            hourLabels = infiniteCalendarModel.hourlyViewLocalisedHourLabels;
-        }
-    }
+    Component.onCompleted: hourScrollView.setToCurrentTime(animate);
 
     FontMetrics {
         id: hourLabelMetrics
