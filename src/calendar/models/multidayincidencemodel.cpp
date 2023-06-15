@@ -239,7 +239,7 @@ QVariant MultiDayIncidenceModel::data(const QModelIndex &index, int role) const
 {
     Q_ASSERT(hasIndex(index.row(), index.column()) && mSourceModel);
 
-    const auto rowStart = mSourceModel->start().addDays(index.row() * 7);
+    const auto rowStart = mSourceModel->start().addDays(index.row() * mPeriodLength);
 
     switch (role) {
     case PeriodStartDateRole:
