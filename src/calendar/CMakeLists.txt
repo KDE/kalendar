@@ -7,6 +7,9 @@ set(kalendar_calendar_SRCS
     utils.h
     utils.cpp
 
+    datetimestate.h
+    datetimestate.cpp
+
     calendarmanager.cpp
     calendarmanager.h
     calendarapplication.cpp

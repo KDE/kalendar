@@ -5,6 +5,7 @@
 #include "calendarapplication.h"
 #include "calendarconfig.h"
 #include "calendarmanager.h"
+#include "datetimestate.h"
 #include "filter.h"
 #include "incidencewrapper.h"
 #include "models/hourlyincidencemodel.h"
@@ -49,6 +50,12 @@ void CalendarPlugin::registerTypes(const char *uri)
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
         return CalendarManager::instance();
+    });
+
+    qmlRegisterSingletonType<DateTimeState>(uri, 1, 0, "DateTimeState", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new DateTimeState;
     });
     qmlRegisterSingletonType<CalendarConfig>(uri, 1, 0, "Config", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)

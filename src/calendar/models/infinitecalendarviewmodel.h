@@ -37,6 +37,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     int rowCount(const QModelIndex &parent = {}) const override;
 
+    Q_INVOKABLE int moveToDate(const QDate &selectedDate, const QDate &currentDate, const int currentIndex);
     Q_INVOKABLE void addDates(bool atEnd, const QDate startFrom = QDate());
     void addDayDates(bool atEnd, const QDate &startFrom, int amount = 1);
     void addWeekDates(bool atEnd, const QDate &startFrom);

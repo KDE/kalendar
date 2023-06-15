@@ -22,7 +22,7 @@ Item {
     property int daysPerRow: 7
     property double weekHeaderWidth: Kalendar.Config.showWeekNumbers ? Kirigami.Units.gridUnit * 1.5 : 0
 
-    property date currentDate: new Date()
+    readonly property date currentDate: Kalendar.DateTimeState.currentDate
     // Getting the components once makes this faster when we need them repeatedly
     readonly property int currentDay: currentDate.getDate()
     readonly property int currentMonth: currentDate.getMonth()

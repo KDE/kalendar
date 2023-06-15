@@ -666,10 +666,10 @@ Kirigami.ApplicationWindow {
         sourceComponent: DateChanger {
             y: pageStack.globalToolBar.height - 1
             showDays: pageStack.currentItem && pageStack.currentItem.mode !== CalendarApplication.MonthView
-            date: root.selectedDate
+            date: DateTimeState.selectedDate
             onDateSelected: if(visible) {
                 pageStack.currentItem.setToDate(date);
-                root.selectedDate = date;
+                DateTimeState.selectedDate = date;
             }
         }
     }
@@ -982,16 +982,7 @@ Kirigami.ApplicationWindow {
             id: monthView
             objectName: "monthView"
 
-            titleDelegate: ViewTitleDelegate {
-                titleDateButton.date: monthView.firstDayOfMonth
-                titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
-            }
-            currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-
-            onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-            onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-
             actions.contextualActions: createAction
         }
     }

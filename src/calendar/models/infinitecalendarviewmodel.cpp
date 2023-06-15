@@ -122,10 +122,36 @@ QHash<int, QByteArray> InfiniteCalendarViewModel::roleNames() const
 {
     return {
         {StartDateRole, QByteArrayLiteral("startDate")},
-        {FirstDayOfMonthRole, QByteArrayLiteral("firstDay")},
+        {FirstDayOfMonthRole, QByteArrayLiteral("firstDayOfMonth")},
         {SelectedMonthRole, QByteArrayLiteral("selectedMonth")},
         {SelectedYearRole, QByteArrayLiteral("selectedYear")},
     };
+}
+
+int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate &currentDate, const int currentIndex)
+{
+    auto monthDiff = selectedDate.month() - currentDate.month() + (12 * (selectedDate.year() - currentDate.year()));
+    auto newIndex = currentIndex + monthDiff;
+
+    QDateTime firstItemDate = data(index(1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
+    auto lastItemDate = data(index(rowCount() - 1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
+
+    while (firstItemDate >= selectedDate.startOfDay()) {
+        addDates(false);
+        firstItemDate = data(index(1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
+        newIndex = 0;
+    }
+
+    if (firstItemDate < selectedDate.startOfDay() && newIndex == 0) {
+        newIndex = selectedDate.month() - firstItemDate.date().month() + (12 * (selectedDate.year() - firstItemDate.date().year())) + 1;
+    }
+
+    while (lastItemDate <= selectedDate.startOfDay()) {
+        addDates(true);
+        lastItemDate = data(index(rowCount() - 1, 0), InfiniteCalendarViewModel::FirstDayOfMonthRole).toDateTime();
+    }
+
+    return newIndex;
 }
 
 void InfiniteCalendarViewModel::addDates(bool atEnd, const QDate startFrom)
