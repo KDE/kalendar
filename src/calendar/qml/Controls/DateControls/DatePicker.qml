@@ -257,24 +257,30 @@ QQC2.Control {
 
                 delegate: Loader {
                     id: monthViewLoader
-                    property date firstDayOfMonth: model.firstDay
+
+                    required property date firstDayOfMonth
+                    required property int index
+
                     property bool isNextOrCurrentItem: index >= monthPathView.currentIndex -1 && index <= monthPathView.currentIndex + 1
 
                     active: isNextOrCurrentItem && datepicker.showDays
 
                     sourceComponent: GridLayout {
                         id: dayGrid
+
                         columns: 7
                         rows: 7
+
                         width: monthPathView.width
                         height: monthPathView.height
+
                         Layout.topMargin: Kirigami.Units.smallSpacing
 
                         property var modelLoader: Loader {
                             asynchronous: true
                             sourceComponent: Kalendar.MonthModel {
-                                year: firstDay.getFullYear()
-                                month: firstDay.getMonth() + 1 // From pathview model
+                                year: monthViewLoader.firstDayOfMonth.getFullYear()
+                                month: monthViewLoader.firstDayOfMonth.getMonth() + 1 // From pathview model
                             }
                         }
 
@@ -285,8 +291,11 @@ QQC2.Control {
                         Repeater {
                             model: dayGrid.modelLoader.item.weekDays
                             delegate: QQC2.Label {
+                                required property var modelData
+
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
+
                                 horizontalAlignment: Text.AlignHCenter
                                 opacity: 0.7
                                 text: modelData
