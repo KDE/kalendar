@@ -10,7 +10,6 @@ import org.kde.kalendar.calendar 1.0 as Calendar
 PathView {
     id: root
 
-    property int startIndex
     property bool dragDropEnabled: true
     property var openOccurrence: null
 
@@ -35,17 +34,11 @@ PathView {
         scale: Calendar.InfiniteCalendarViewModel.MonthScale
     }
 
-    Component.onCompleted: {
-        startIndex = count / 2;
-        currentIndex = startIndex;
-    }
-    onCurrentIndexChanged: {
-        if (currentIndex >= count - 2) {
-            model.addDates(true);
-        } else if (currentIndex <= 1) {
-            model.addDates(false);
-            startIndex += model.datesToAdd;
-        }
+    Component.onCompleted: currentIndex = count / 2;
+    onCurrentIndexChanged: if (currentIndex >= count - 2) {
+        model.addDates(true);
+    } else if (currentIndex <= 1) {
+        model.addDates(false);
     }
 
     delegate: Loader {
@@ -61,6 +54,7 @@ PathView {
         active: isNextOrCurrentItem
         asynchronous: !isCurrentItem
         visible: status === Loader.Ready
+
         sourceComponent: BasicMonthGridView {
             width: root.width
             height: root.height

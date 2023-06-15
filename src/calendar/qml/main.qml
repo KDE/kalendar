@@ -994,15 +994,7 @@ Kirigami.ApplicationWindow {
             id: scheduleView
             objectName: "scheduleView"
 
-            titleDelegate: ViewTitleDelegate {
-                titleDateButton.date: scheduleView.startDate
-                titleDateButton.onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
-            }
-            currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-
-            onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialMonth) root.selectedDate = new Date (year, month, 1)
-            onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialMonth) root.selectedDate = new Date (year, month, 1)
 
             actions.contextualActions: createAction
         }
@@ -1026,9 +1018,7 @@ Kirigami.ApplicationWindow {
             titleDelegate: ViewTitleDelegate {
                 titleDateButton {
                     range: true
-                    date: hourlyView.startDate
                     lastDate: DateUtils.addDaysToDate(hourlyView.startDate, hourlyView.daysToShow - 1)
-                    onClicked: dateChangeDrawer.active = !dateChangeDrawer.active
                 }
 
                 Kirigami.ActionToolBar {
@@ -1061,10 +1051,6 @@ Kirigami.ApplicationWindow {
             }
             currentDate: root.currentDate
             openOccurrence: root.openOccurrence
-
-            onDayChanged: if(day !== root.selectedDate.getDate() && !initialWeek) root.selectedDate = new Date (year, month, day)
-            onMonthChanged: if(month !== root.selectedDate.getMonth() && !initialWeek) root.selectedDate = new Date (year, month, day)
-            onYearChanged: if(year !== root.selectedDate.getFullYear() && !initialWeek) root.selectedDate = new Date (year, month, day)
 
             actions.contextualActions: createAction
         }

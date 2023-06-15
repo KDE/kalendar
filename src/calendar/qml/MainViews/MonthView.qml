@@ -58,9 +58,7 @@ Kirigami.Page {
         color: Kirigami.Theme.backgroundColor
     }
 
-    titleDelegate: ViewTitleDelegate {
-        titleDateButton.date: Calendar.DateTimeState.firstDayOfMonth
-    }
+    titleDelegate: ViewTitleDelegate {}
 
     Loader {
         id: swipeableViewLoader

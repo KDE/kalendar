@@ -18,27 +18,22 @@ import "labelutils.js" as LabelUtils
 QQC2.ScrollView {
     id: scrollView
 
-    contentWidth: availableWidth
-    QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-
-    property bool initialMonth: true
-    property var openOccurrence
-    property date currentDate: new Date()
-    property date startDate: DateUtils.getFirstDayOfMonth(currentDate)
+    required property var openOccurrence
+    required property date startDate
+    required property bool dragDropEnabled
+    required property bool isCurrentItem
 
     readonly property int daysInMonth: new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0).getDate()
-    readonly property int month: startDate.getMonth()
-    readonly property int year: startDate.getFullYear()
 
-    readonly property alias scheduleListView: scheduleListView
     property real savedYScrollPos: 0
 
     property real maxTimeLabelWidth: 0
-    property bool dragDropEnabled: true
 
     readonly property bool isLarge: width > Kirigami.Units.gridUnit * 30
     readonly property bool isDark: KalendarUiUtils.darkMode
-    property bool isCurrentItem: true
+
+    contentWidth: availableWidth
+    QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
     function addIncidence(type, addDate) {
         savedYScrollPos = QQC2.ScrollBar.vertical.visualPosition;
@@ -81,6 +76,7 @@ QQC2.ScrollView {
             return;
         }
 
+        const currentDate = Kalendar.DateTimeState.currentDate;
         if (currentDate.getDate() > 1 && currentDate.getMonth() === month && currentDate.getFullYear() === year) {
             scheduleListView.positionViewAtIndex(currentDate.getDate() - 1, ListView.Beginning);
         } else {
@@ -114,7 +110,7 @@ QQC2.ScrollView {
            periodLength: 1
            showTodos: Kalendar.Config.showTodosInCalendarViews
            showSubTodos: Kalendar.Config.showSubtodosInCalendarViews
-           active: viewColumn.isCurrentItem
+           active: scrollView.isCurrentItem
            model: Kalendar.IncidenceOccurrenceModel {
                start: scrollView.startDate
                length: scrollView.daysInMonth

@@ -7,63 +7,43 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.14 as Kirigami
 
-import org.kde.kalendar.calendar 1.0 as Kalendar
+import org.kde.kalendar.calendar 1.0 as Calendar
 import org.kde.kalendar.utils 1.0
-import "dateutils.js" as DateUtils
-import "labelutils.js" as LabelUtils
 
 Kirigami.Page {
     id: root
 
     property bool initialMonth: true
     property var openOccurrence
-    property date currentDate: new Date()
-    property date startDate: DateUtils.getFirstDayOfMonth(currentDate)
-
-    readonly property int month: startDate.getMonth()
-    readonly property int year: startDate.getFullYear()
 
     property bool dragDropEnabled: true
-    readonly property int mode: Kalendar.CalendarApplication.Schedule
-
-    readonly property var dayList: {
-        switch (Kalendar.Config.monthListMode) {
-        case Kalendar.Config.BasicMonthList:
-            return basicViewLoader.item;
-        case Kalendar.Config.SwipeableMonthList:
-        default:
-            return swipeableViewLoader.item;
-        }
-    }
+    readonly property int mode: Calendar.CalendarApplication.Schedule
 
     readonly property Kirigami.Action previousAction: Kirigami.Action {
         icon.name: "go-previous"
         text: i18n("Previous Month")
         shortcut: StandardKey.MoveToPreviousPage
-        onTriggered: setToDate(DateUtils.addMonthsToDate(startDate, -1))
+        onTriggered: Calendar.DateTimeState.selectPreviousMonth()
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action nextAction: Kirigami.Action {
         icon.name: "go-next"
         text: i18n("Next Month")
         shortcut: StandardKey.MoveToNextPage
-        onTriggered: setToDate(DateUtils.addMonthsToDate(startDate, 1))
+        onTriggered: Calendar.DateTimeState.selectNextMonth()
         displayHint: Kirigami.DisplayHint.IconOnly
     }
     readonly property Kirigami.Action todayAction: Kirigami.Action {
         icon.name: "go-jump-today"
         text: i18n("Today")
         shortcut: StandardKey.MoveToStartOfLine
-        onTriggered: setToDate(new Date(), true)
-    }
-
-    function setToDate(date, isInitialMonth = false) {
-        initialMonth = isInitialMonth;
-        dayList.setToDate(date, isInitialMonth);
+        onTriggered: Calendar.DateTimeState.resetTime();
     }
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
+
+    titleDelegate: ViewTitleDelegate {}
 
     background: Rectangle {
         color: Kirigami.Theme.backgroundColor
@@ -80,32 +60,24 @@ Kirigami.Page {
     Loader {
         id: swipeableViewLoader
         anchors.fill: parent
-        active: Kalendar.Config.monthListMode === Kalendar.Config.SwipeableMonthList
+        active: Calendar.Config.monthListMode === Calendar.Config.SwipeableMonthList
         sourceComponent: SwipeableMonthListView {
             anchors.fill: parent
-            initialMonth: root.initialMonth
-            openOccurrence: root.openOccurrence
-            currentDate: root.currentDate
-            startDate: root.startDate
-            dragDropEnabled: root.dragDropEnabled
 
-            onStartDateChanged: root.startDate = startDate
+            openOccurrence: root.openOccurrence
+            dragDropEnabled: root.dragDropEnabled
         }
     }
 
     Loader {
         id: basicViewLoader
         anchors.fill: parent
-        active: Kalendar.Config.monthListMode === Kalendar.Config.BasicMonthList
+        active: Calendar.Config.monthListMode === Calendar.Config.BasicMonthList
         sourceComponent: BasicMonthListView {
             anchors.fill: parent
-            initialMonth: root.initialMonth
             openOccurrence: root.openOccurrence
-            currentDate: root.currentDate
-            startDate: root.startDate
             dragDropEnabled: root.dragDropEnabled
-
-            onStartDateChanged: root.startDate = startDate
+            isCurrentItem: true
         }
     }
 }
