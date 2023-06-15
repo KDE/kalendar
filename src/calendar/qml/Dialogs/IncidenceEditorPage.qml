@@ -20,7 +20,7 @@ Kirigami.ScrollablePage {
 
     signal added(IncidenceWrapper incidenceWrapper)
     signal edited(IncidenceWrapper incidenceWrapper)
-    signal cancel
+    signal cancel()
 
     // Setting the incidenceWrapper here and now causes some *really* weird behaviour.
     // Set it after this component has already been instantiated.
@@ -817,7 +817,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
 
                         enabled: count > 0
-                        model: TagManager.tagModel
+                        model: Calendar.TagManager.tagModel
                         displayText: root.incidenceWrapper.categories.length > 0 ?
                             root.incidenceWrapper.categories.join(i18nc("List separator", ", ")) :
                             Kirigami.Settings.tabletMode ? i18n("Tap to set tags…") : i18n("Click to set tags…")
