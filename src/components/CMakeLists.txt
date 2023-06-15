@@ -34,6 +34,7 @@ target_sources(kalendar_components_plugin PRIVATE
 ecm_target_qml_sources(kalendar_components_plugin SOURCES
     # Shell components
     qml/KalendarApp.qml
+    qml/KQuickCommandBarPage.qml
 
     # In window-menu components
     qml/KActionFromAction.qml

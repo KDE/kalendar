@@ -150,6 +150,12 @@ void AbstractApplication::setupActions()
         mCollection->addAction(action->objectName(), action);
     }
 
+    actionName = QLatin1String("switch_application_language");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto action = KStandardAction::switchApplicationLanguage(this, &AbstractApplication::openLanguageSwitcher, this);
+        mCollection->addAction(action->objectName(), action);
+    }
+
     actionName = QLatin1String("options_configure_keybinding");
     if (KAuthorized::authorizeAction(actionName)) {
         auto keyBindingsAction = KStandardAction::keyBindings(this, &AbstractApplication::configureShortcuts, this);

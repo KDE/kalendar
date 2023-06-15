@@ -82,6 +82,22 @@ Kirigami.ApplicationWindow {
         function onRefreshAll() {
             Contact.ContactManager.updateAllCollections();
         }
+
+        function onOpenKCommandBarAction() {
+            kcommandbarLoader.active = true;
+        }
+    }
+
+    Loader {
+        id: kcommandbarLoader
+        active: false
+        sourceComponent: KQuickCommandBarPage {
+            application: Contact.ContactApplication
+            onClosed: kcommandbarLoader.active = false
+        }
+        onActiveChanged: if (active) {
+            item.open()
+        }
     }
 
     // TODO Qt6 use module url import instead for faster startup

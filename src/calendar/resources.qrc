@@ -39,7 +39,6 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="IncidenceEditorPage.qml">qml/Dialogs/IncidenceEditorPage.qml</file>
     <file alias="DeleteIncidencePage.qml">qml/Dialogs/DeleteIncidencePage.qml</file>
     <file alias="DeleteCalendarPage.qml">qml/Dialogs/DeleteCalendarPage.qml</file>
-    <file alias="KQuickCommandBarPage.qml">qml/Dialogs/KQuickCommandBarPage.qml</file>
     <file alias="CollectionPickerPage.qml">qml/Dialogs/CollectionPickerPage.qml</file>
     <file alias="RecurringIncidenceChangePage.qml">qml/Dialogs/RecurringIncidenceChangePage.qml</file>
 

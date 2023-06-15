@@ -231,25 +231,11 @@ void CalendarApplication::setupActions()
         action->setIcon(QIcon::fromTheme(QStringLiteral("view-task-add")));
     }
 
-
     actionName = QLatin1String("options_configure_schedule");
     if (KAuthorized::authorizeAction(actionName)) {
-        auto action = mCollection.addAction(actionName, this, &CalendarApplication::configureSchedule);
+        auto action = mCollection->addAction(actionName, this, &CalendarApplication::configureSchedule);
         action->setText(i18n("Configure Schedule…"));
         action->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-month")));
-    }
-
-    actionName = QLatin1String("options_configure");
-    if (KAuthorized::authorizeAction(actionName)) {
-        auto action = KStandardAction::preferences(this, &CalendarApplication::openSettings, this);
-        mCollection.addAction(action->objectName(), action);
-    }
-
-    actionName = QLatin1String("open_tag_manager");
-    if (KAuthorized::authorizeAction(actionName)) {
-        auto openTagManagerAction = mCollection.addAction(actionName, this, &CalendarApplication::openTagManager);
-        openTagManagerAction->setText(i18n("Manage Tags…"));
-        openTagManagerAction->setIcon(QIcon::fromTheme(QStringLiteral("action-rss_tag")));
     }
 
     actionName = QLatin1String("switch_application_language");
@@ -376,16 +362,6 @@ void CalendarApplication::setupActions()
             });
             todoViewShowCompletedAction->setEnabled(openTodoAction->isChecked());
         }
-    }
-
-    actionName = QLatin1String("open_kcommand_bar");
-    if (KAuthorized::authorizeAction(actionName)) {
-        auto openKCommandBarAction = mCollection->addAction(actionName, this, &CalendarApplication::openKCommandBarAction);
-        openKCommandBarAction->setText(i18n("Open Command Bar"));
-        openKCommandBarAction->setIcon(QIcon::fromTheme(QStringLiteral("new-command-alarm")));
-
-        mCollection->addAction(openKCommandBarAction->objectName(), openKCommandBarAction);
-        mCollection->setDefaultShortcut(openKCommandBarAction, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_I));
     }
 
     actionName = QLatin1String("refresh_all");

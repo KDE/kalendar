@@ -63,7 +63,6 @@ Kirigami.ApplicationWindow {
     readonly property var todoViewOrderAscendingAction: CalendarApplication.action("todoview_order_ascending")
     readonly property var todoViewOrderDescendingAction: CalendarApplication.action("todoview_order_descending")
     readonly property var todoViewShowCompletedAction: CalendarApplication.action("todoview_show_completed")
-    readonly property var openKCommandBarAction: CalendarApplication.action("open_kcommand_bar")
     readonly property var tagManagerAction: CalendarApplication.action("open_tag_manager")
 
     readonly property int mode: applicationWindow().pageStack.currentItem ? applicationWindow().pageStack.currentItem.mode : CalendarApplication.Event
@@ -387,7 +386,10 @@ Kirigami.ApplicationWindow {
     Loader {
         id: kcommandbarLoader
         active: false
-        source: 'qrc:/KQuickCommandBarPage.qml'
+        sourceComponent: KQuickCommandBarPage {
+            application: CalendarApplication
+            onClosed: kcommandbarLoader.active = false
+        }
         onActiveChanged: if (active) {
             item.open()
         }

@@ -97,7 +97,10 @@ QQC2.MenuBar {
             enabled: mode === CalendarApplication.Todo
         }
 
-        QQC2.MenuSeparator {
+        QQC2.MenuSeparator {}
+
+        KActionFromAction {
+            action: CalendarApplication.action('open_kcommand_bar')
         }
 
         KActionFromAction {

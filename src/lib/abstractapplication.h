@@ -22,6 +22,7 @@ public:
     QSortFilterProxyModel *actionsModel();
 
 Q_SIGNALS:
+    void openLanguageSwitcher();
     void openSettings();
     void openAboutPage();
     void openAboutKDEPage();
