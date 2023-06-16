@@ -19,6 +19,7 @@ Kirigami.ScrollablePage {
 
     ColumnLayout {
         MobileForm.FormCard {
+            id: freeBusyPublishSection
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             contentItem: ColumnLayout {
@@ -101,6 +102,12 @@ Kirigami.ScrollablePage {
                         Calendar.CalendarSettings.freeBusyPublishPassword = text;
                         Calendar.CalendarSettings.save();
                     }
+                    Component.onCompleted: {
+                        console.log('Starting now\n')
+                        for (let i in Calendar.CalendarSettings) {
+                            console.log(i, Calendar.CalendarSettings[i])
+                        }
+                    }
                 }
                 MobileForm.FormDelegateSeparator {}
                 MobileForm.FormCheckDelegate {
@@ -112,9 +119,37 @@ Kirigami.ScrollablePage {
                         Calendar.CalendarSettings.save();
                     }
                 }
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.FormButtonDelegate {
+                    id: freeBusyPublishButton
+                    text: i18n("Click here to publish Free/Busy information manually")
+                    onClicked: Calendar.FreeBusyManager.publishFreeBusy();
+                }
+                MobileForm.FormDelegateSeparator {}
+                MobileForm.AbstractFormDelegate {
+                    id: freeBusyMailDelegate
+                    background: null
+                    Layout.fillWidth: true
+                    contentItem: RowLayout {
+                        Layout.fillWidth: true
+                        QQC2.Label {
+                            text: i18n("Email Free/Busy")
+                        }
+                        QQC2.TextField {
+                            id: freeBusyMailAddress
+                            Layout.fillWidth: true
+                            placeholderText: i18n("Enter email of recipient...")
+                        }
+                        QQC2.Button {
+                            text: i18n('Send')
+                            onClicked: Calendar.FreeBusyManager.mailFreeBusy(freeBusyMailAddress.text);
+                        }
+                    }
+                }
             }
         }
         MobileForm.FormCard{
+            id: freeBusyRetrieveSection
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             contentItem: ColumnLayout {
