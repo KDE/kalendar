@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-02 00:48+0000\n"
+"POT-Creation-Date: 2023-06-14 00:48+0000\n"
 "PO-Revision-Date: 2023-05-21 15:11+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -99,44 +99,44 @@ msgstr "8"
 msgid "9 (Lowest Priority)"
 msgstr "9 (குறைவான முக்கியத்துவம்)"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:58
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:50
 #, kde-format
 msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "வேறு"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:90
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:82
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:400
 #, kde-format
 msgid "Custom"
 msgstr "வேறு"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:153
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:145
 #, kde-format
 msgid "minutes"
 msgstr "நிமிடங்கள்"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:154
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:146
 #, kde-format
 msgid "hours"
 msgstr "மணிநேரம்"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:155
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:147
 #, kde-format
 msgid "days"
 msgstr "நாட்கள்"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:167
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:159
 #, kde-format
 msgid "before start of event"
 msgstr "நிகழ்வு தொடங்குமுன்"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:168
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:160
 #, kde-format
 msgid "after start of event"
 msgstr "நிகழ்வு தொடங்கியபின்"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:178
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:170
 #, kde-format
 msgid "Remove"
 msgstr "நீக்கு"
