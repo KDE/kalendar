@@ -28,7 +28,7 @@ bool DateTimeState::isToday(const QDate &date) const
     return m_currentDate == date;
 }
 
-void DateTimeState::addDays(int days)
+void DateTimeState::addDays(const int days)
 {
     m_selectedDate = m_selectedDate.addDays(days);
     Q_EMIT selectedDateChanged();
@@ -53,19 +53,19 @@ void DateTimeState::resetTime()
     Q_EMIT selectedDateChanged();
 }
 
-void DateTimeState::setSelectedDay(int day)
+void DateTimeState::setSelectedDay(const int day)
 {
     m_selectedDate.setDate(m_currentDate.year(), m_currentDate.month(), day);
     Q_EMIT selectedDateChanged();
 }
 
-void DateTimeState::setSelectedMonth(int month)
+void DateTimeState::setSelectedMonth(const int month)
 {
     m_selectedDate.setDate(m_currentDate.year(), month, m_currentDate.day());
     Q_EMIT selectedDateChanged();
 }
 
-void DateTimeState::setSelectedYear(int year)
+void DateTimeState::setSelectedYear(const int year)
 {
     m_selectedDate.setDate(year, m_currentDate.month(), m_currentDate.day());
     Q_EMIT selectedDateChanged();

@@ -52,7 +52,7 @@ QString Utils::secondsToReminderLabel(const qint64 seconds) const
     }
 }
 
-QString Utils::formatSpelloutDuration(const KCalendarCore::Duration &duration, const KFormat &format, bool allDay)
+QString Utils::formatSpelloutDuration(const KCalendarCore::Duration &duration, const KFormat &format, const bool allDay)
 {
     if (duration.asSeconds() == 0) {
         return QString();

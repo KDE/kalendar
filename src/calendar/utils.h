@@ -23,7 +23,7 @@ public:
     /// Gives prettified time
     Q_INVOKABLE QString secondsToReminderLabel(const qint64 seconds) const;
 
-    Q_REQUIRED_RESULT static QString formatSpelloutDuration(const KCalendarCore::Duration &duration, const KFormat &format, bool allDay);
+    Q_REQUIRED_RESULT static QString formatSpelloutDuration(const KCalendarCore::Duration &duration, const KFormat &format, const bool allDay);
 
     Q_INVOKABLE int weekNumber(const QDate &date) const;
 

@@ -28,14 +28,14 @@ public:
     QDate firstDayOfMonth() const;
     QDate firstDayOfWeek() const;
 
-    Q_INVOKABLE void setSelectedDay(int day);
-    Q_INVOKABLE void setSelectedMonth(int month);
-    Q_INVOKABLE void setSelectedYear(int year);
+    Q_INVOKABLE void setSelectedDay(const int day);
+    Q_INVOKABLE void setSelectedMonth(const int month);
+    Q_INVOKABLE void setSelectedYear(const int year);
 
     Q_INVOKABLE void selectPreviousMonth();
     Q_INVOKABLE void selectNextMonth();
 
-    Q_INVOKABLE void addDays(int days);
+    Q_INVOKABLE void addDays(const int days);
     Q_INVOKABLE bool isToday(const QDate &date) const;
 
     /// Reset to current time
