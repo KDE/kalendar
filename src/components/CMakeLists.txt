@@ -48,6 +48,7 @@ ecm_target_qml_sources(kalendar_components_plugin SOURCES
     qml/NativeMenuItemFromAction.qml
     qml/NativeFileMenu.qml
     qml/NativeEditMenu.qml
+    qml/NativeHelpMenu.qml
     qml/NativeWindowMenu.qml
 
     # Small controls

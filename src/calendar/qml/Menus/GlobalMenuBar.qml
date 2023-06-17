@@ -60,10 +60,6 @@ Labs.MenuBar {
         }
 
         NativeMenuItemFromAction {
-            action: CalendarApplication.action("open_contact_view")
-        }
-
-        NativeMenuItemFromAction {
             action: CalendarApplication.action("open_kcommand_bar")
         }
 
@@ -167,20 +163,7 @@ Labs.MenuBar {
         }
     }
 
-    Labs.Menu {
-        title: i18nc("@action:menu", "Help")
-
-        NativeMenuItemFromAction {
-            action: CalendarApplication.action("open_about_page")
-        }
-
-        NativeMenuItemFromAction {
-            action: CalendarApplication.action("open_about_kde_page")
-        }
-
-        NativeMenuItemFromAction {
-            text: i18nc("@action:menu", "Kalendar Handbook") // todo
-            visible: false
-        }
+    NativeHelpMenu {
+        application: CalendarApplication
     }
 }

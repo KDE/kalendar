@@ -7,6 +7,7 @@ import Qt.labs.platform 1.1 as Labs
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import org.kde.kalendar.components 1.0
+import org.kde.kalendar.contact 1.0
 
 Labs.MenuBar {
     NativeFileMenu {}
@@ -55,20 +56,7 @@ Labs.MenuBar {
         }
     }
 
-    Labs.Menu {
-        title: i18nc("@action:menu", "Help")
-
-        NativeMenuItemFromAction {
-            action: ContactApplication.action("open_about_page")
-        }
-
-        NativeMenuItemFromAction {
-            action: ContactApplication.action("open_about_kde_page")
-        }
-
-        NativeMenuItemFromAction {
-            text: i18nc("@action:menu", "Kalendar Handbook") // todo
-            visible: false
-        }
+    NativeHelpMenu {
+        application: ContactApplication
     }
 }
