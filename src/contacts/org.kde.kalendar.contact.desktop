@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: CC0-1.0
 
 [Desktop Entry]
-Name=Kalendar Contact
+Name=Kalendar Contacts
 GenericName=Address Book
-Comment=Manage your contacts with Kalendar Contact
+Comment=Manage your contacts with Kalendar Contacts
 Exec=kalendar-contact %u
 Categories=Qt;KDE;Office;ContactManagement;
 Icon=org.kde.kalendar
