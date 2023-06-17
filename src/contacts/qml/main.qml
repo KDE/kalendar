@@ -9,8 +9,10 @@ import org.kde.akonadi 1.0 as Akonadi
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
-Kirigami.ApplicationWindow {
+BaseApplication {
     id: root
+
+    application: Contact.ContactApplication
 
     menuBar: Loader {
         active: !Kirigami.Settings.hasPlatformMenuBar && !Kirigami.Settings.isMobile && Contact.Config.showMenubar && applicationWindow().pageStack.currentItem
@@ -23,10 +25,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack {
-        globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
-        initialPage: Contact.ContactView {}
-    }
+    pageStack.initialPage: Contact.ContactView {}
 
     globalDrawer: Contact.Sidebar {
         id: sidebar
@@ -41,35 +40,6 @@ Kirigami.ApplicationWindow {
     Connections {
         target: Contact.ContactApplication
 
-        function onOpenTagManager() {
-            const openDialogWindow = pageStack.pushDialogLayer(tagManagerPage, {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 30
-            });
-
-            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
-
-        function onOpenAboutPage() {
-            const openDialogWindow = pageStack.pushDialogLayer(aboutPage, {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 30
-            });
-        }
-
-        function onOpenAboutKDEPage() {
-            const openDialogWindow = pageStack.pushDialogLayer(aboutKDEPage, {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 30
-            });
-        }
-
         function onOpenSettings() {
             const openDialogWindow = pageStack.pushDialogLayer("qrc:/qml/Settings.qml", {
                 width: root.width
@@ -82,39 +52,5 @@ Kirigami.ApplicationWindow {
         function onRefreshAll() {
             Contact.ContactManager.updateAllCollections();
         }
-
-        function onOpenKCommandBarAction() {
-            kcommandbarLoader.active = true;
-        }
-    }
-
-    Loader {
-        id: kcommandbarLoader
-        active: false
-        sourceComponent: KQuickCommandBarPage {
-            application: Contact.ContactApplication
-            onClosed: kcommandbarLoader.active = false
-        }
-        onActiveChanged: if (active) {
-            item.open()
-        }
-    }
-
-    // TODO Qt6 use module url import instead for faster startup
-    Component {
-        id: tagManagerPage
-        Akonadi.TagManagerPage {}
-    }
-
-    Component {
-        id: aboutPage
-        MobileForm.AboutPage {
-            aboutData: About
-        }
-    }
-
-    Component {
-        id: aboutKDEPage
-        MobileForm.AboutKDE {}
     }
 }

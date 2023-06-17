@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Carl Schwan <carlschwan@kde.org>
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
-
+//
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import QtQuick 2.15
@@ -18,23 +18,11 @@ import org.kde.kalendar.utils 1.0
 import org.kde.kalendar.components 1.0
 import org.kde.kalendar.calendar.private 1.0
 
-Kirigami.ApplicationWindow {
+BaseApplication {
     id: root
 
-    width: Kirigami.Units.gridUnit * 65
+    application: CalendarApplication
 
-    minimumWidth: Kirigami.Units.gridUnit * 15
-    minimumHeight: Kirigami.Units.gridUnit * 20
-    onClosing: CalendarApplication.saveWindowGeometry(root)
-
-    property date currentDate: new Date()
-    Timer {
-        interval: 5000;
-        running: true
-        repeat: true
-        onTriggered: currentDate = new Date()
-    }
-    property date selectedDate: new Date()
     property var openOccurrence: {}
 
     readonly property var monthViewAction: CalendarApplication.action("open_month_view")
@@ -100,10 +88,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack {
-        globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
-        initialPage: scheduleViewComponent
-    }
+    pageStack.initialPage: scheduleViewComponent
 
     property bool ignoreCurrentPage: true // HACK: ideally we just push an empty page here and save ourselves the trouble,
     // but we have had issues with pushing empty Kirigami pages somehow causing mobile controls to show up on desktop.
@@ -141,21 +126,6 @@ Kirigami.ApplicationWindow {
                 break;
         }
         ignoreCurrentPage = false;
-    }
-
-    QQC2.Action {
-        id: closeOverlayAction
-        shortcut: "Escape"
-        onTriggered: {
-            if(pageStack.layers.depth > 1) {
-                pageStack.layers.pop();
-                return;
-            }
-            if(contextDrawer && contextDrawer.visible) {
-                contextDrawer.close();
-                return;
-            }
-        }
     }
 
     QQC2.Action {
@@ -223,10 +193,6 @@ Kirigami.ApplicationWindow {
 
         function onMoveViewToToday() {
             pageStack.currentItem.todayAction.trigger();
-        }
-
-        function onOpenAboutPage() {
-            pageStack.layers.push("AboutPage.qml")
         }
 
         function onCreateNewEvent() {
@@ -349,21 +315,6 @@ Kirigami.ApplicationWindow {
                 height: Kirigami.Units.gridUnit * 35
             });
             openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
-
-        function onOpenTagManager() {
-            const openDialogWindow = pageStack.pushDialogLayer("qrc:/TagManagerPage.qml", {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 30
-            });
-
-            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
-
-        function onOpenKCommandBarAction() {
-            kcommandbarLoader.active = true;
         }
 
         function onRefreshAll() {
