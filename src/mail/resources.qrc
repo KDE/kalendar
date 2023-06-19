@@ -1,0 +1,10 @@
+<RCC>
+<!--
+SPDX-FileCopyrightText: None
+SPDX-License-Identifier: CC0-1.0
+-->
+  <qresource prefix="/">
+    <file>qml/app/main.qml</file>
+    <file>qml/app/MenuBar.qml</file>
+  </qresource>
+</RCC>

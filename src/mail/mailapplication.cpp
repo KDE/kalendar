@@ -14,6 +14,8 @@ MailApplication::MailApplication(QObject *parent)
 
 void MailApplication::setupActions()
 {
+    AbstractApplication::setupActions();
+
     auto actionName = QLatin1String("create_mail");
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = mCollection->addAction(actionName, this, &MailApplication::createNewMail);

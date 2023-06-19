@@ -43,6 +43,7 @@ ecm_target_qml_sources(kalendar_components_plugin SOURCES
     qml/FileMenu.qml
     qml/WindowMenu.qml
     qml/HelpMenu.qml
+    qml/SettingsMenu.qml
 
     # global menu components
     qml/NativeMenuItemFromAction.qml

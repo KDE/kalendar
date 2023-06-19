@@ -105,11 +105,13 @@ ListView {
 
                     // indicator rectangle
                     Rectangle {
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.topMargin: 1
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 1
+                        anchors {
+                            left: parent.left
+                            top: parent.top
+                            topMargin: 1
+                            bottom: parent.bottom
+                            bottomMargin: 1
+                        }
 
                         width: 4
                         visible: controlRoot.highlighted
@@ -154,6 +156,7 @@ ListView {
                         visible: unreadCount > 0
                         padding: Kirigami.Units.smallSpacing
                         color: Kirigami.Theme.textColor
+                        font: Kirigami.Theme.smallFont
                         Layout.minimumWidth: height
                         horizontalAlignment: Text.AlignHCenter
                         background: Rectangle {

@@ -5,6 +5,7 @@
 
 #include "helper.h"
 #include <KAboutData>
+#include <QAction>
 #include <QQmlEngine>
 #include <QtQml>
 
@@ -21,4 +22,6 @@ void ComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType("org.kde.kalendar.components", 1, 0, "About", [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
         return engine->toScriptValue(KAboutData::applicationData());
     });
+
+    qRegisterMetaType<QAction *>();
 }

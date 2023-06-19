@@ -3,15 +3,17 @@
 # SPDX-License-Identifier: CC0-1.0
 
 [Desktop Entry]
-Name=Calendar
-GenericName=Calendar
-Keywords=Kalendar
-Comment=Manage your tasks and events with Calendar
-Exec=kalendar-calendar %u
-Categories=Qt;KDE;Office;Calendar;
+Name=Kalendar Mail
+GenericName=EMail Client
+Comment=Manage your e-mails with Kalendar Mail
+Exec=kalendar-mail
+Categories=Qt;KDE;Office;Mail;
 Icon=org.kde.kalendar
 Type=Application
 Terminal=false
 StartupNotify=true
-MimeType=text/calendar;
 SingleMainWindow=true
+Version=1.5
+
+# This component is not yet release ready
+NoDisplay=true

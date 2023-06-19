@@ -37,39 +37,11 @@ QQC2.MenuBar {
 
     WindowMenu {}
 
-    QQC2.Menu {
-        title: i18nc("@action:menu", "Settings")
-
-        KActionFromAction {
-            action: ContactApplication.action("open_tag_manager")
-        }
-
-        QQC2.MenuSeparator {
-        }
-
-        KActionFromAction {
-            action: ContactApplication.action("options_configure_keybinding")
-        }
-
-        KActionFromAction {
-            action: ContactApplication.action("options_configure")
-        }
+    SettingsMenu {
+        application: ContactApplication
     }
 
-    QQC2.Menu {
-        title: i18nc("@action:menu", "Help")
-
-        KActionFromAction {
-            action: ContactApplication.action("open_about_page")
-        }
-
-        KActionFromAction {
-            action: ContactApplication.action("open_about_kde_page")
-        }
-
-        QQC2.MenuItem {
-            text: i18nc("@action:menu", "Kalendar Handbook") // todo
-            visible: false
-        }
+    HelpMenu {
+        application: ContactApplication
     }
 }

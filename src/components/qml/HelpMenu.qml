@@ -6,11 +6,18 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kalendar.components 1.0
 
 QQC2.Menu {
+    id: root
+
+    required property var application
+
     title: i18nc("@action:menu", "Help")
 
     KActionFromAction {
-        kalendarAction: "open_about_page"
-        enabled: pageStack.layers.currentItem.objectName != "aboutPage"
+        action: root.application.action("open_about_page")
+    }
+
+    KActionFromAction {
+        action: root.application.action("open_about_kde_page")
     }
 
     QQC2.MenuItem {

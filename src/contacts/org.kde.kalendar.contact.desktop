@@ -6,12 +6,11 @@
 Name=Kalendar Contacts
 GenericName=Address Book
 Comment=Manage your contacts with Kalendar Contacts
-Exec=kalendar-contact %u
+Exec=kalendar-contact
 Categories=Qt;KDE;Office;ContactManagement;
 Icon=org.kde.kalendar
 Type=Application
 Terminal=false
 StartupNotify=true
-MimeType=text/calendar;
 SingleMainWindow=true
 Version=1.5
