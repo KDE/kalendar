@@ -67,3 +67,5 @@ int TimeZoneListModel::getTimeZoneRow(const QByteArray &timeZone)
 
     return 0;
 }
+
+#include "moc_timezonelistmodel.cpp"

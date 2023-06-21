@@ -87,3 +87,5 @@ void ImppModel::deleteImpp(const int row)
     endRemoveRows();
     Q_EMIT changed(m_impps);
 }
+
+#include "moc_imppmodel.cpp"

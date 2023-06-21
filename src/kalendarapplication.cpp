@@ -739,3 +739,5 @@ void KalendarApplication::handleMouseViewNavButtons(const Qt::MouseButton presse
 #ifndef UNITY_CMAKE_SUPPORT
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif
+
+#include "moc_kalendarapplication.cpp"

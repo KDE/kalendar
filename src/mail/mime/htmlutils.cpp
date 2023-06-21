@@ -259,3 +259,5 @@ QString HtmlUtils::linkify(const QString &in)
 
     return out;
 }
+
+#include "moc_htmlutils.cpp"

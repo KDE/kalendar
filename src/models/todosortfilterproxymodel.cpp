@@ -784,3 +784,5 @@ void TodoSortFilterProxyModel::setShowCompletedSubtodosInIncomplete(bool showCom
 }
 
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
+
+#include "moc_todosortfilterproxymodel.cpp"

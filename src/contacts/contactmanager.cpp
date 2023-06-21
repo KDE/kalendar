@@ -218,3 +218,5 @@ void ContactManager::setCollectionColor(Akonadi::Collection collection, const QC
         }
     });
 }
+
+#include "moc_contactmanager.cpp"

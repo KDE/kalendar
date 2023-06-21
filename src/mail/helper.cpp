@@ -9,3 +9,5 @@ qint64 MailCollectionHelper::unreadCount(const Akonadi::Collection &collection)
 {
     return collection.statistics().unreadCount();
 }
+
+#include "moc_helper.cpp"

@@ -131,3 +131,5 @@ void CryptoHelperTest::testMultipleBlockMessage()
 }
 
 QTEST_APPLESS_MAIN(CryptoHelperTest)
+
+#include "moc_cryptohelpertest.cpp"

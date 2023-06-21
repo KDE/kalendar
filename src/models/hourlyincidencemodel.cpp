@@ -435,3 +435,5 @@ QHash<int, QByteArray> HourlyIncidenceModel::roleNames() const
         {PeriodStartDateTimeRole, "periodStartDateTime"},
     };
 }
+
+#include "moc_hourlyincidencemodel.cpp"

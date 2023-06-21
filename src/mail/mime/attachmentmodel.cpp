@@ -250,3 +250,5 @@ int AttachmentModel::columnCount(const QModelIndex &) const
 {
     return 1;
 }
+
+#include "moc_attachmentmodel.cpp"

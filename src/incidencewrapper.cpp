@@ -857,3 +857,5 @@ void IncidenceWrapper::setCollection(const Akonadi::Collection &collection)
 #ifndef UNITY_CMAKE_SUPPORT
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif
+
+#include "moc_incidencewrapper.cpp"

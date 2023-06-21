@@ -348,3 +348,5 @@ void AttendeesModel::deleteAttendeeFromAkonadiId(qint64 itemId)
         }
     });
 }
+
+#include "moc_attendeesmodel.cpp"

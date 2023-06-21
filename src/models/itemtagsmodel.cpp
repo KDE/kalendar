@@ -60,3 +60,5 @@ QHash<int, QByteArray> ItemTagsModel::roleNames() const
         {IdRole, QByteArrayLiteral("id")},
     };
 }
+
+#include "moc_itemtagsmodel.cpp"

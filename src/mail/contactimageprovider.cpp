@@ -158,3 +158,5 @@ void ThumbnailResponse::cancel()
 {
     QMetaObject::invokeMethod(this, &ThumbnailResponse::doCancel, Qt::QueuedConnection);
 }
+
+#include "moc_contactimageprovider.cpp"

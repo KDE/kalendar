@@ -2,3 +2,5 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "collection.h"
+
+#include "moc_collection.cpp"

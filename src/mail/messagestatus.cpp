@@ -795,3 +795,5 @@ QDebug operator<<(QDebug d, const MessageStatus &t)
     d << "status " << t.statusStr();
     return d;
 }
+
+#include "moc_messagestatus.cpp"

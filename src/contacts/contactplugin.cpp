@@ -42,3 +42,5 @@ void CalendarPlugin::registerTypes(const char *uri)
     qRegisterMetaType<KContacts::PhoneNumber::List>("KContacts::PhoneNumber::List");
     qRegisterMetaType<KContacts::PhoneNumber>("KContacts::PhoneNumber");
 }
+
+#include "moc_contactplugin.cpp"

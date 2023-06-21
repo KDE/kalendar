@@ -100,3 +100,5 @@ void TagManager::renameTag(Akonadi::Tag tag, const QString &newName)
             qCDebug(KALENDAR_LOG) << "Error occurred renaming tag";
     });
 }
+
+#include "moc_tagmanager.cpp"

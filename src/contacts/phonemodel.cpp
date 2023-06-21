@@ -94,3 +94,5 @@ void PhoneModel::deletePhoneNumber(int row)
     endRemoveRows();
     Q_EMIT changed(m_phoneNumbers);
 }
+
+#include "moc_phonemodel.cpp"

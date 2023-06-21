@@ -97,3 +97,5 @@ QAbstractItemModel *MessageParser::attachments() const
     const auto model = new AttachmentModel(d->mParser);
     return model;
 }
+
+#include "moc_messageparser.cpp"

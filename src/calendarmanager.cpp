@@ -763,3 +763,5 @@ Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr)
 #endif
 
 #include "calendarmanager.moc"
+
+#include "moc_calendarmanager.cpp"

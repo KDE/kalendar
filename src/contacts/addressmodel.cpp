@@ -80,3 +80,5 @@ void AddressModel::setAddresses(const KContacts::Address::List &addresses)
     m_addresses = addresses;
     endResetModel();
 }
+
+#include "moc_addressmodel.cpp"

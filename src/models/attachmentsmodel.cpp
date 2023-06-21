@@ -123,3 +123,5 @@ void AttachmentsModel::deleteAttachment(const QString &uri)
     Q_EMIT attachmentsChanged();
     Q_EMIT layoutChanged();
 }
+
+#include "moc_attachmentsmodel.cpp"

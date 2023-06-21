@@ -53,3 +53,5 @@ bool CommandBarFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex &s
     sourceModel()->setData(idx, res.score, KalCommandBarModel::Score);
     return res.matched;
 }
+
+#include "moc_commandbarfiltermodel.cpp"

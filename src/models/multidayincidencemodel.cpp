@@ -477,3 +477,5 @@ QHash<int, QByteArray> MultiDayIncidenceModel::roleNames() const
         {PeriodStartDateRole, "periodStartDate"},
     };
 }
+
+#include "moc_multidayincidencemodel.cpp"

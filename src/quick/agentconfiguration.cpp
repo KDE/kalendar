@@ -169,3 +169,5 @@ void AgentConfiguration::setMimetypes(QStringList mimetypes)
         Q_EMIT availableAgentsChanged();
     }
 }
+
+#include "moc_agentconfiguration.cpp"

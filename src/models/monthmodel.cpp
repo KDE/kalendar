@@ -199,3 +199,5 @@ QHash<int, QByteArray> MonthModel::roleNames() const
         {Roles::IsToday, QByteArrayLiteral("isToday")},
     };
 }
+
+#include "moc_monthmodel.cpp"

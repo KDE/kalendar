@@ -24,3 +24,5 @@ void CalendarPlugin::registerTypes(const char *uri)
     qmlRegisterModule(uri, 1, 0);
     qRegisterMetaType<KCalendarCore::Incidence::Ptr>();
 }
+
+#include "moc_calendarplugin.cpp"

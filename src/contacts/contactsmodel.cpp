@@ -90,3 +90,5 @@ QHash<int, QByteArray> ContactsModel::roleNames() const
     roles[GidRole] = "gid";
     return roles;
 }
+
+#include "moc_contactsmodel.cpp"

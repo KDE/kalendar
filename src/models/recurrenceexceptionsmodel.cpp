@@ -135,3 +135,5 @@ void RecurrenceExceptionsModel::deleteExceptionDateTime(QDateTime date)
 
     updateExceptions();
 }
+
+#include "moc_recurrenceexceptionsmodel.cpp"

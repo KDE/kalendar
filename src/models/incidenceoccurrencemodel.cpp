@@ -388,3 +388,5 @@ bool IncidenceOccurrenceModel::incidencePassesFilter(const KCalendarCore::Incide
         return incidence->categories().contains(tag);
     });
 }
+
+#include "moc_incidenceoccurrencemodel.cpp"

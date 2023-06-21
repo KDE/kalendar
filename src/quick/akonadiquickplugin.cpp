@@ -28,3 +28,5 @@ void AkonadiQuickPlugin::registerTypes(const char *uri)
 
     qmlRegisterUncreatableType<Akonadi::Quick::Collection>("org.kde.akonadi", 1, 0, "Collection", QStringLiteral("It's just an enum"));
 }
+
+#include "moc_akonadiquickplugin.cpp"

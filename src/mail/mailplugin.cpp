@@ -44,3 +44,5 @@ void CalendarPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
     Q_UNUSED(uri);
     engine->addImageProvider(QLatin1String("contact"), new ContactImageProvider);
 }
+
+#include "moc_mailplugin.cpp"

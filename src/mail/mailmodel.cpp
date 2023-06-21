@@ -165,3 +165,5 @@ bool MailModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent)
     }
     return false;
 }
+
+#include "moc_mailmodel.cpp"

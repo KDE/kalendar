@@ -960,3 +960,5 @@ HeadersPart::HeadersPart(ObjectTreeParser *otp, KMime::Content *node)
     : MessagePart(otp, QString(), node)
 {
 }
+
+#include "moc_messagepart.cpp"

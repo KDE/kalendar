@@ -144,3 +144,5 @@ void RemindersModel::deleteAlarm(const int row)
     Q_EMIT alarmsChanged();
     Q_EMIT layoutChanged();
 }
+
+#include "moc_remindersmodel.cpp"

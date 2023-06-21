@@ -37,3 +37,5 @@ QString MimeTypes::mail() const
 {
     return QStringLiteral("message/rfc822");
 }
+
+#include "moc_mimetypes.cpp"

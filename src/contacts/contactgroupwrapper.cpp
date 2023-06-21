@@ -97,3 +97,5 @@ void ContactGroupWrapper::setName(const QString &name)
     m_name = name;
     Q_EMIT nameChanged();
 }
+
+#include "moc_contactgroupwrapper.cpp"

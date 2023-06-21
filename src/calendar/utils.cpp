@@ -44,3 +44,5 @@ QString Utils::secondsToReminderLabel(const qint64 seconds) const
         return i18n("On event start");
     }
 }
+
+#include "moc_utils.cpp"

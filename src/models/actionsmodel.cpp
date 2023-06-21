@@ -161,3 +161,5 @@ QHash<int, QByteArray> KalCommandBarModel::roleNames() const
     roles[ShortcutRole] = QByteArrayLiteral("shortcut");
     return roles;
 }
+
+#include "moc_actionsmodel.cpp"

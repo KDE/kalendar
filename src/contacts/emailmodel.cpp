@@ -110,3 +110,5 @@ void EmailModel::deleteEmail(int row)
     endRemoveRows();
     Q_EMIT changed(m_emails);
 }
+
+#include "moc_emailmodel.cpp"

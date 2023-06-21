@@ -401,3 +401,5 @@ void ContactGroupModel::addContactFromData(const QString &name, const QString &e
     d->mMembers.append(member);
     endInsertRows();
 }
+
+#include "moc_contactgroupmodel.cpp"

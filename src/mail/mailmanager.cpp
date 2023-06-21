@@ -149,3 +149,5 @@ void MailManager::moveToTrash(Akonadi::Item item)
     }
     new Akonadi::ItemMoveJob(item, trash);
 }
+
+#include "moc_mailmanager.cpp"

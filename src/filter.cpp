@@ -68,3 +68,5 @@ void Filter::reset()
     setTags({});
     setCollectionId(-1);
 }
+
+#include "moc_filter.cpp"

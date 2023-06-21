@@ -487,3 +487,5 @@ void AddresseeWrapper::setSuffix(const QString &name)
     setFormattedName(m_addressee.assembledName());
     Q_EMIT suffixChanged();
 }
+
+#include "moc_addresseewrapper.cpp"

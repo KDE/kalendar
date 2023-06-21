@@ -11,3 +11,5 @@ void ComponentsPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QByteArray("org.kde.kalendar.components"));
     qmlRegisterModule(uri, 1, 0);
 }
+
+#include "moc_componentsplugin.cpp"

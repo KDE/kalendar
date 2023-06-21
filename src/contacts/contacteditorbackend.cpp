@@ -240,3 +240,5 @@ void ContactEditorBackend::setReadOnly(bool isReadOnly)
     m_readOnly = isReadOnly;
     Q_EMIT isReadOnlyChanged();
 }
+
+#include "moc_contacteditorbackend.cpp"

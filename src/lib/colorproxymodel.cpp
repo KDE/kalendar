@@ -181,3 +181,5 @@ void ColorProxyModel::setStandardCollectionId(Akonadi::Collection::Id standardCo
 {
     m_standardCollectionId = standardCollectionId;
 }
+
+#include "moc_colorproxymodel.cpp"
