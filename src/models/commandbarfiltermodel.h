@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: 2021 Waqar Ahmed <waqar.17a@gmail.com>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
+#pragma once
+
 #include <QSortFilterProxyModel>
 
 class CommandBarFilterModel final : public QSortFilterProxyModel
