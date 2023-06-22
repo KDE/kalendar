@@ -48,25 +48,21 @@ TreeListView {
     currentIndex: -1
     clip: true
 
-    section.criteria: sortBy === Kalendar.TodoSortFilterProxyModel.SummaryColumn ?
-        ViewSection.FirstCharacter : ViewSection.FullString
-    section.property: switch(sortBy) {
-        case Kalendar.TodoSortFilterProxyModel.PriorityColumn:
-            return "topMostParentPriority";
-        case Kalendar.TodoSortFilterProxyModel.DueDateColumn:
-            return "topMostParentDueDate";
-        case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
-        default:
-            return "topMostParentSummary";
-    }
-    section.delegate: Kirigami.AbstractListItem {
-        separatorVisible: false
-        sectionDelegate: true
-        hoverEnabled: false
+    section {
+        criteria: sortBy === Kalendar.TodoSortFilterProxyModel.SummaryColumn ?
+            ViewSection.FirstCharacter : ViewSection.FullString
+        property: switch(sortBy) {
+            case Kalendar.TodoSortFilterProxyModel.PriorityColumn:
+                return "topMostParentPriority";
+            case Kalendar.TodoSortFilterProxyModel.DueDateColumn:
+                return "topMostParentDueDate";
+            case Kalendar.TodoSortFilterProxyModel.SummaryColumn:
+            default:
+                return "topMostParentSummary";
+        }
+        delegate: Kirigami.ListSectionHeader {
+            id: listSection
 
-        activeFocusOnTab: false
-
-        contentItem: Kirigami.Heading {
             readonly property bool dateSort: root.sortBy === Kalendar.TodoSortFilterProxyModel.DueDateColumn
             readonly property bool isOverdue: dateSort && section === i18n("Overdue")
             readonly property bool isToday: dateSort && section === i18n("Today")
@@ -82,9 +78,29 @@ TreeListView {
                 }
             }
 
-            level: 3
-            font.weight: Font.Bold
-            color: isOverdue ? Kirigami.Theme.negativeTextColor : isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+            contentItem: RowLayout {
+                id: rowLayout
+                spacing: Kirigami.Units.largeSpacing
+
+                Kirigami.Heading {
+                    Layout.fillWidth: rowLayout.children.length === 1
+                    Layout.alignment: Qt.AlignVCenter
+
+                    opacity: 0.7
+                    level: 5
+                    type: Kirigami.Heading.Primary
+                    text: listSection.text
+                    elide: Text.ElideRight
+
+                    font.weight: Font.Bold
+                    color: isOverdue ? Kirigami.Theme.negativeTextColor : isToday ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                }
+
+                Kirigami.Separator {
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter
+                }
+            }
         }
     }
 

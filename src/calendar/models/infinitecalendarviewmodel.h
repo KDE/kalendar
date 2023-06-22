@@ -24,6 +24,7 @@ public:
         MonthScale,
         YearScale,
         DecadeScale,
+        InvalidScale,
     };
     Q_ENUM(Scale)
 
@@ -66,5 +67,5 @@ private:
     QVector<QDate> m_firstDayOfMonthDates;
     QLocale m_locale;
     int m_datesToAdd = 10;
-    int m_scale = MonthScale;
+    int m_scale = InvalidScale;
 };

@@ -647,12 +647,14 @@ Column {
                                calendar: Kalendar.CalendarManager.calendar
                                filter: Kalendar.Filter
                            }
-                       }
+                        }
 
                         delegate: Item {
                             id: dayColumn
 
-                            readonly property int index: model.index
+                            required property int index
+                            required property int incidences
+
                             readonly property date columnDate: DateUtils.addDaysToDate(viewColumn.startDate, index)
                             readonly property bool isToday: columnDate.getDate() === viewColumn.currentDay &&
                                 columnDate.getMonth() === viewColumn.currentMonth &&
@@ -665,6 +667,7 @@ Column {
                             Loader {
                                 anchors.fill: parent
                                 asynchronous: !viewColumn.isCurrentView
+
                                 ListView {
                                     anchors.fill: parent
                                     spacing: viewColumn.gridLineWidth
@@ -672,23 +675,28 @@ Column {
                                     interactive: false
 
                                     model: 24
+
                                     delegate: Rectangle {
                                         id: backgroundRectangle
+
+                                        required property int index
+
                                         width: parent.width
                                         height: hourlyView.hourHeight
                                         color: dayColumn.isToday ? Kirigami.Theme.activeBackgroundColor : Kirigami.Theme.backgroundColor
 
-                                        property int index: model.index
 
                                         ColumnLayout {
                                             anchors.fill: parent
                                             spacing: 0
                                             z: 9999
+
                                             Repeater {
                                                 id: dropAreaRepeater
-                                                model: 4
 
                                                 readonly property int minutes: 60 / model
+
+                                                model: 4
 
                                                 DropArea {
                                                     id: hourlyViewIncidenceDropArea
@@ -771,7 +779,7 @@ Column {
                                         DayMouseArea {
                                             id: backgroundDayMouseArea
                                             anchors.fill: parent
-                                            addDate: new Date(DateUtils.addDaysToDate(viewColumn.startDate, dayColumn.index).setHours(index))
+                                            addDate: new Date(DateUtils.addDaysToDate(viewColumn.startDate, dayColumn.index).setHours(backgroundRectangle.index))
                                             onAddNewIncidence: KalendarUiUtils.setUpAdd(type, addDate, null, true)
                                             onDeselect: KalendarUiUtils.appMain.incidenceInfoViewer.close()
                                         }
@@ -784,7 +792,7 @@ Column {
                                 asynchronous: !viewColumn.isCurrentView
                                 Repeater {
                                     id: hourlyIncidencesRepeater
-                                    model: incidences
+                                    model: dayColumn.incidences
 
                                     delegate: Rectangle {
                                         id: hourlyIncidenceDelegateBackgroundBackground

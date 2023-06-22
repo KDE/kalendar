@@ -37,7 +37,7 @@ Kirigami.ScrollablePage {
     property bool ascendingOrder: Calendar.Config.ascendingOrder
 
     readonly property color standardTextColor: Kirigami.Theme.textColor
-    readonly property bool isDark: CalendarUiUtils.darkMode
+    readonly property bool isDark: KalendarUiUtils.darkMode
 
     readonly property alias incompleteView: incompleteView
 
@@ -62,7 +62,7 @@ Kirigami.ScrollablePage {
         main: Kirigami.Action {
             text: i18n("Create")
             icon.name: "list-add"
-            onTriggered: CalendarUiUtils.setUpAdd(Calendar.IncidenceWrapper.TypeTodo, new Date(), Calendar.Filter.collectionId);
+            onTriggered: KalendarUiUtils.setUpAdd(Calendar.IncidenceWrapper.TypeTodo, new Date(), Calendar.Filter.collectionId);
         }
         left: Kirigami.Action {
             text: i18n("Sort")
@@ -71,17 +71,17 @@ Kirigami.ScrollablePage {
             KActionFromAction {
                 action: Calendar.CalendarApplication.action("todoview_sort_by_due_date")
                 checked: root.sortBy === Calendar.TodoSortFilterProxyModel.DueDateColumn
-                onCheckedChanged: __action.checked = checked // Needed for the actions in the menu bars to be checked on load
+                onCheckedChanged: action.checked = checked // Needed for the actions in the menu bars to be checked on load
             }
             KActionFromAction {
                 action: Calendar.CalendarApplication.action("todoview_sort_by_priority")
                 checked: root.sortBy === Calendar.TodoSortFilterProxyModel.PriorityColumn
-                onCheckedChanged: __action.checked = checked
+                onCheckedChanged: action.checked = checked
             }
             KActionFromAction {
                 action: Calendar.CalendarApplication.action("todoview_sort_alphabetically")
                 checked: root.sortBy === Calendar.TodoSortFilterProxyModel.SummaryColumn
-                onCheckedChanged: __action.checked = checked
+                onCheckedChanged: action.checked = checked
             }
 
             Kirigami.Action { separator: true }
@@ -89,12 +89,12 @@ Kirigami.ScrollablePage {
             KActionFromAction {
                 action: Calendar.CalendarApplication.action("todoview_order_ascending")
                 checked: root.ascendingOrder
-                onCheckedChanged: __action.checked = checked
+                onCheckedChanged: action.checked = checked
             }
             KActionFromAction {
                 action: Calendar.CalendarApplication.action("todoview_order_descending")
                 checked: !root.ascendingOrder
-                onCheckedChanged: __action.checked = checked
+                onCheckedChanged: action.checked = checked
             }
         }
         right: KActionFromAction {

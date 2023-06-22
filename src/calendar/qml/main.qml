@@ -483,11 +483,12 @@ BaseApplication {
             property point clickPosition
             property int incidenceItemMidXPoint: incidenceItemPosition && openingIncidenceItem ?
                 incidenceItemPosition.x + openingIncidenceItem.width / 2 : 0
-            property bool positionBelowIncidenceItem: incidenceItemPosition &&
-                incidenceItemPosition.y < root.pageStack.currentItem.height / 2;
+            property bool positionBelowIncidenceItem: root.pageStack.currentItem
+                ? incidenceItemPosition && incidenceItemPosition.y < root.pageStack.currentItem.height / 2
+                : 0;
             property bool positionAtIncidenceItemCenter: openingIncidenceItem &&
                 openingIncidenceItem.width < width
-            property int maxXPosition: root.pageStack.currentItem.width - width
+            property int maxXPosition: root.pageStack.currentItem ? root.pageStack.currentItem.width - width : 0
 
             // HACK:
             // If we reposition immediately we often end up updating the position of the popup
