@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "../config-kalendar.h"
+#include "importer.h"
 #include "mousetracker.h"
 #include <KAboutData>
 #include <KConfig>
@@ -15,11 +16,13 @@
 #include <QCommandLineParser>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
+#include <QDir>
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
 #include <QQuickWindow>
+#include <qobject.h>
 
 static void raiseWindow(QWindow *window)
 {
@@ -84,6 +87,8 @@ int main(int argc, char *argv[])
 
     KDBusService service(KDBusService::Unique);
 
+    qmlRegisterType<Importer>("org.kde.kalendar.calendar.private", 1, 0, "Importer");
+
     QQmlApplicationEngine engine;
 
     QObject::connect(&service, &KDBusService::activateRequested, &engine, [&engine, &parser](const QStringList &arguments, const QString &workingDirectory) {
@@ -91,15 +96,17 @@ int main(int argc, char *argv[])
         const auto rootObjects = engine.rootObjects();
 
         const QStringList args = parser.positionalArguments();
-        for (const auto &arg : args) {
-            // Q_EMIT kalendarApplication->importCalendarFromFile(QUrl::fromUserInput(arg, workingDirectory, QUrl::AssumeLocalFile));
-        }
 
         for (auto obj : rootObjects) {
             auto view = qobject_cast<QQuickWindow *>(obj);
             if (view) {
                 raiseWindow(view);
                 return;
+            }
+
+            auto importer = view->findChild<Importer *>(QStringLiteral("ImportHandler"));
+            for (const auto &arg : args) {
+                Q_EMIT importer->importCalendarFromFile(QUrl::fromUserInput(arg, QDir::currentPath(), QUrl::AssumeLocalFile));
             }
         }
     });
@@ -122,14 +129,14 @@ int main(int argc, char *argv[])
 
             view->installEventFilter(mouseTracker);
 
-            break;
-        }
-    }
+            const auto args = parser.positionalArguments();
 
-    if (!parser.positionalArguments().empty()) {
-        const auto args = parser.positionalArguments();
-        for (const auto &arg : args) {
-            // Q_EMIT kalendarApplication->importCalendarFromFile(QUrl::fromUserInput(arg, QDir::currentPath(), QUrl::AssumeLocalFile));
+            auto importer = view->findChild<Importer *>(QStringLiteral("ImportHandler"));
+            for (const auto &arg : args) {
+                Q_EMIT importer->importCalendarFromFile(QUrl::fromUserInput(arg, QDir::currentPath(), QUrl::AssumeLocalFile));
+            }
+
+            break;
         }
     }
 

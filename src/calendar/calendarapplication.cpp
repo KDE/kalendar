@@ -249,12 +249,6 @@ void CalendarApplication::setupActions()
         auto importIcalAction = mCollection->addAction(actionName, this, &CalendarApplication::importCalendar);
         importIcalAction->setText(i18n("Import Calendar…"));
         importIcalAction->setIcon(QIcon::fromTheme(QStringLiteral("document-import-ocal")));
-        connect(this, &CalendarApplication::importStarted, this, [importIcalAction]() {
-            importIcalAction->setEnabled(false);
-        });
-        connect(this, &CalendarApplication::importFinished, this, [importIcalAction]() {
-            importIcalAction->setEnabled(true);
-        });
     }
 
     actionName = QLatin1String("edit_undo");
@@ -390,48 +384,6 @@ void CalendarApplication::setWindow(QWindow *window)
 QWindow *CalendarApplication::window() const
 {
     return m_window;
-}
-
-void CalendarApplication::setCalendar(Akonadi::ETMCalendar::Ptr calendar)
-{
-    m_calendar = calendar;
-}
-
-void CalendarApplication::importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId)
-{
-    if (!m_calendar) {
-        return;
-    }
-
-    auto importer = new Akonadi::ICalImporter(m_calendar->incidenceChanger());
-    bool jobStarted;
-
-    if (merge) {
-        connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &CalendarApplication::importFinished);
-        connect(importer, &Akonadi::ICalImporter::importIntoExistingFinished, this, &CalendarApplication::importIntoExistingFinished);
-        auto collection = m_calendar->collection(collectionId);
-        jobStarted = importer->importIntoExistingResource(url, collection);
-    } else {
-        connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &CalendarApplication::importFinished);
-        connect(importer, &Akonadi::ICalImporter::importIntoNewFinished, this, &CalendarApplication::importIntoNewFinished);
-        jobStarted = importer->importIntoNewResource(url.path());
-    }
-
-    if (jobStarted) {
-        Q_EMIT importStarted();
-    } else {
-        // empty error message means user canceled.
-        if (!importer->errorMessage().isEmpty()) {
-            qCDebug(KALENDAR_CALENDAR_LOG) << i18n("An error occurred: %1", importer->errorMessage());
-            m_importErrorMessage = importer->errorMessage();
-            Q_EMIT importErrorMessageChanged();
-        }
-    }
-}
-
-QString CalendarApplication::importErrorMessage()
-{
-    return m_importErrorMessage;
 }
 
 void CalendarApplication::saveWindowGeometry(QQuickWindow *window)

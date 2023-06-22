@@ -61,6 +61,7 @@ SPDX-License-Identifier: CC0-1.0
     <file alias="IncidenceInfoPopup.qml">qml/Controls/IncidenceInfoPopup.qml</file>
     <file alias="CheckableCollectionNavigationView.qml">qml/Controls/CheckableCollectionNavigationView.qml</file>
     <file alias="MainDrawerToggleButton.qml">qml/Controls/MainDrawerToggleButton.qml</file>
+    <file alias="ImportHandler.qml">qml/Controls/ImportHandler.qml</file>
 
     <file alias="LocationMap.qml">qml/Location/LocationMap.qml</file>
 

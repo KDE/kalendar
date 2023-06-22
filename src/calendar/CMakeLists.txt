@@ -97,7 +97,12 @@ endif()
 
 #### Binary
 
-add_executable(kalendar-calendar main.cpp resources.qrc)
+add_executable(kalendar-calendar
+    main.cpp
+    importer.h
+    importer.cpp
+    resources.qrc
+)
 target_link_libraries(kalendar-calendar
     PRIVATE
         kalendar_calendar_static

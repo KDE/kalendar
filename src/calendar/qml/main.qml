@@ -9,7 +9,6 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import QtQml.Models 2.15
 import QtGraphicalEffects 1.12
-import QtQuick.Dialogs 1.0
 
 import "dateutils.js" as DateUtils
 import "labelutils.js" as LabelUtils
@@ -39,7 +38,6 @@ BaseApplication {
     readonly property var createEventAction: CalendarApplication.action("create_event")
     readonly property var createTodoAction: CalendarApplication.action("create_todo")
     readonly property var configureAction: CalendarApplication.action("options_configure")
-    readonly property var importAction: CalendarApplication.action("import_calendar")
     readonly property var quitAction: CalendarApplication.action("file_quit")
     readonly property var undoAction: CalendarApplication.action("edit_undo")
     readonly property var redoAction: CalendarApplication.action("edit_redo")
@@ -54,25 +52,6 @@ BaseApplication {
     readonly property var tagManagerAction: CalendarApplication.action("open_tag_manager")
 
     readonly property int mode: applicationWindow().pageStack.currentItem ? applicationWindow().pageStack.currentItem.mode : CalendarApplication.Event
-
-    property var calendarFilesToImport: []
-    property bool calendarImportInProgress: false
-
-    onCalendarImportInProgressChanged: if (!calendarImportInProgress && calendarFilesToImport.length > 0) {
-        importCalendarTimer.restart()
-    }
-
-    // Timer is needed here since opening and closing a window at the same time can cause
-    // some kwin-x11 freeze
-    Timer {
-        id: importCalendarTimer
-        interval: 1000
-        running: false
-        onTriggered: {
-            // Start importing new calendar
-            CalendarApplication.importCalendarFromFile(calendarFilesToImport.shift())
-        }
-    }
 
     function switchView(view, viewSettings) {
         if (root.pageStack.layers.depth > 1) {
@@ -239,60 +218,6 @@ BaseApplication {
         function onTodoViewShowCompleted() {
             const openDialogWindow = pageStack.pushDialogLayer(pageStack.currentItem.completedSheetComponent);
             openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
-
-        function onImportCalendar() {
-            filterHeaderBar.active = true;
-            importFileDialog.open();
-        }
-
-        function onImportCalendarFromFile(file) {
-
-            if (root.calendarImportInProgress) {
-                // Save urls to import
-                root.calendarFilesToImport.push(file)
-                return;
-            }
-            importFileDialog.selectedUrl = file // FIXME don't piggy-back on importFileDialog
-            root.calendarImportInProgress = true;
-
-            const openDialogWindow = pageStack.pushDialogLayer(importChoicePageComponent, {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 8
-            });
-            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
-
-        function onImportIntoExistingFinished(success, total) {
-            filterHeaderBar.active = true;
-            pageStack.currentItem.header = filterHeaderBar.item;
-
-            if(success) {
-                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Positive;
-                filterHeaderBar.item.messageItem.text = i18nc("%1 is a number", "%1 incidences were imported successfully.", total);
-            } else {
-                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Error;
-                filterHeaderBar.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", CalendarApplication.importErrorMessage);
-            }
-
-            filterHeaderBar.item.messageItem.visible = true;
-        }
-
-        function onImportIntoNewFinished(success) {
-            filterHeaderBar.active = true;
-            pageStack.currentItem.header = filterHeaderBar.item;
-
-            if(success) {
-                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Positive;
-                filterHeaderBar.item.messageItem.text = i18n("New calendar  created from imported file successfully.");
-            } else {
-                filterHeaderBar.item.messageItem.type = Kirigami.MessageType.Error;
-                filterHeaderBar.item.messageItem.text = i18nc("%1 is the error message", "An error occurred importing incidences: %1", CalendarApplication.importErrorMessage);
-            }
-
-            filterHeaderBar.item.messageItem.visible = true;
         }
 
         function onConfigureSchedule() {
@@ -728,99 +653,6 @@ BaseApplication {
         }
     }
 
-    FileDialog {
-        id: importFileDialog
-
-        property string selectedUrl: ""
-
-        title: i18n("Import a calendar")
-        folder: shortcuts.home
-        nameFilters: ["Calendar files (*.ics *.vcs)"]
-        onAccepted: {
-            selectedUrl = fileUrl;
-            const openDialogWindow = pageStack.pushDialogLayer(importChoicePageComponent, {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 8
-            });
-
-            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-        }
-    }
-
-    Component {
-        id: importChoicePageComponent
-        Kirigami.Page {
-            id: importChoicePage
-            title: i18n("Import Calendar")
-            signal closed()
-
-            ColumnLayout {
-                anchors.fill: parent
-                QQC2.Label {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    text: i18n("Would you like to merge this calendar file's events and tasks into one of your existing calendars, or would prefer to create a new calendar from this file?\n ")
-                    wrapMode: Text.WordWrap
-                }
-
-                RowLayout {
-                    QQC2.Button {
-                        Layout.fillWidth: true
-                        icon.name: "document-import"
-                        text: i18n("Merge with existing calendar")
-                        onClicked: {
-                            closeDialog();
-                            const openDialogWindow = pageStack.pushDialogLayer(importMergeCollectionPickerComponent, {
-                                width: root.width
-                            }, {
-                                width: Kirigami.Units.gridUnit * 30,
-                                height: Kirigami.Units.gridUnit * 30
-                            });
-
-                            openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
-                        }
-                    }
-                    QQC2.Button {
-                        Layout.fillWidth: true
-                        icon.name: "document-new"
-                        text: i18n("Create new calendar")
-                        onClicked: {
-                            root.calendarImportInProgress = false;
-                            CalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, false);
-                            closeDialog();
-                        }
-                    }
-                    QQC2.Button {
-                        icon.name: "gtk-cancel"
-                        text: i18n("Cancel")
-                        onClicked: {
-                            root.calendarImportInProgress = false;
-                            closeDialog();
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    property alias importMergeCollectionPickerComponent: importMergeCollectionPickerComponent
-    Component {
-        id: importMergeCollectionPickerComponent
-        CollectionPickerPage {
-            onCollectionPicked: {
-                CalendarApplication.importCalendarFromUrl(importFileDialog.selectedUrl, true, collectionId);
-                root.calendarImportInProgress = false;
-                closeDialog();
-            }
-            onCancel: {
-                root.calendarImportInProgress = false;
-                closeDialog()
-            }
-        }
-    }
-
     Connections {
         target: CalendarManager
         function onUpdateIncidenceDatesCompleted() { KalendarUiUtils.reenableDragOnCurrentView(); }
@@ -942,6 +774,10 @@ BaseApplication {
 
             actions.contextualActions: createAction
         }
+    }
+
+    property ImportHandler importHandler: ImportHandler {
+        objectName: "ImportHandler"
     }
 
     property Item hoverLinkIndicator: QQC2.Control {

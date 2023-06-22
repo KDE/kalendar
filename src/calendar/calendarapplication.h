@@ -8,8 +8,6 @@
 #include <abstractapplication.h>
 
 #include <Akonadi/ETMCalendar>
-#include <Akonadi/ICalImporter>
-
 #include <KActionCollection>
 #include <QActionGroup>
 #include <QObject>
@@ -23,7 +21,7 @@ class CalendarApplication : public AbstractApplication
     Q_OBJECT
 
     Q_PROPERTY(QWindow *window READ window WRITE setWindow NOTIFY windowChanged)
-    Q_PROPERTY(QString importErrorMessage READ importErrorMessage NOTIFY importErrorMessageChanged)
+    Q_PROPERTY(Akonadi::ETMCalendar::Ptr calendar MEMBER m_calendar NOTIFY calendarChanged)
 
 public:
     enum Mode {
@@ -46,10 +44,6 @@ public:
     QWindow *window() const;
     void setWindow(QWindow *window);
 
-    void setCalendar(Akonadi::ETMCalendar::Ptr calendar);
-    Q_INVOKABLE void importCalendarFromUrl(const QUrl &url, bool merge, qint64 collectionId = -1);
-    QString importErrorMessage();
-
     // D-Bus interface
     void showIncidenceByUid(const QString &uid, const QDateTime &occurrence, const QString &xdgActivationToken);
 
@@ -67,10 +61,9 @@ Q_SIGNALS:
     void createNewEvent();
     void createNewTodo();
     void windowChanged();
+    void importCalendar();
     void configureSchedule();
     void openLanguageSwitcher();
-    void importCalendar();
-    void importCalendarFromFile(const QUrl &url);
     void undo();
     void redo();
     void todoViewSortAlphabetically();
@@ -79,13 +72,9 @@ Q_SIGNALS:
     void todoViewOrderAscending();
     void todoViewOrderDescending();
     void todoViewShowCompleted();
-    void importStarted();
-    void importFinished();
-    void importIntoExistingFinished(bool success, int total);
-    void importIntoNewFinished(bool success);
-    void importErrorMessageChanged();
     void refreshAll();
     void openIncidence(const QVariantMap incidenceData, const QDateTime occurrence);
+    void calendarChanged();
 
 private Q_SLOTS:
     void handleMouseViewNavButtons(const Qt::MouseButton pressedButton);
@@ -102,5 +91,4 @@ private:
     QActionGroup *m_todoViewSortGroup = nullptr;
     CalendarConfig *m_config = nullptr;
     Akonadi::ETMCalendar::Ptr m_calendar;
-    QString m_importErrorMessage;
 };
