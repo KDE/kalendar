@@ -127,8 +127,8 @@ QHash<int, QByteArray> InfiniteCalendarViewModel::roleNames() const
 
 int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate &currentDate, const int currentIndex)
 {
-    int newIndex;
-    int role;
+    int newIndex = 0;
+    int role = Qt::DisplayRole;
 
     switch (m_scale) {
     case MonthScale: {
@@ -155,6 +155,8 @@ int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate
         role = InfiniteCalendarViewModel::StartDateRole;
         break;
     }
+    default:
+        Q_UNREACHABLE();
     }
 
     QDateTime firstItemDate = data(index(1, 0), role).toDateTime();
