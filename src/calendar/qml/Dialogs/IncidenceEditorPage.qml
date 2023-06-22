@@ -817,7 +817,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
 
                         enabled: count > 0
-                        model: Calendar.TagManager.tagModel
+                        model: Akonadi.TagManager.tagModel
                         displayText: root.incidenceWrapper.categories.length > 0 ?
                             root.incidenceWrapper.categories.join(i18nc("List separator", ", ")) :
                             Kirigami.Settings.tabletMode ? i18n("Tap to set tags…") : i18n("Click to set tags…")
