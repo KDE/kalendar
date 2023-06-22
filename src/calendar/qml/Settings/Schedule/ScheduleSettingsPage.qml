@@ -5,7 +5,6 @@ import QtQuick 2.15
 import org.kde.kirigami 2.18 as Kirigami
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
-import org.kde.kalendar 1.0
 
 Kirigami.CategorizedSettings {
     objectName: "settingsPage"

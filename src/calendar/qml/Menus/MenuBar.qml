@@ -163,6 +163,10 @@ QQC2.MenuBar {
         KActionFromAction {
             action: CalendarApplication.action("options_configure")
         }
+
+        KActionFromAction {
+            action: CalendarApplication.action("options_configure_schedule")
+        }
     }
 
     QQC2.Menu {
