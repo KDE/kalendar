@@ -44,7 +44,7 @@ QQC2.ScrollView {
         QQC2.ScrollBar.vertical.position = 0;
 
         if(incidenceData) {
-            incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', root, "incidence");
+            incidenceWrapper = Calendar.CalendarManager.createIncidenceWrapper()
             incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidenceData.incidencePtr);
             collectionData = CalendarManager.getCollectionDetails(incidenceWrapper.collectionId);
         }

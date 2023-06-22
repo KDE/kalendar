@@ -44,7 +44,6 @@ class CalendarManager : public QObject
     Q_PROPERTY(QVariantMap undoRedoData READ undoRedoData NOTIFY undoRedoDataChanged)
 
 public:
-    static CalendarManager *instance();
     explicit CalendarManager(QObject *parent = nullptr);
     ~CalendarManager() override;
 
@@ -57,6 +56,8 @@ public:
     QAbstractItemModel *viewCollections();
     QVector<qint64> enabledTodoCollections();
     void refreshEnabledTodoCollections();
+
+    Q_INVOKABLE IncidenceWrapper *createIncidenceWrapper();
 
     Q_INVOKABLE void save();
     Akonadi::ETMCalendar::Ptr calendar() const;

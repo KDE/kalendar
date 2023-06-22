@@ -109,7 +109,7 @@ public:
 
     typedef QSharedPointer<IncidenceWrapper> Ptr;
 
-    explicit IncidenceWrapper(QObject *parent = nullptr);
+    explicit IncidenceWrapper(CalendarManager *CalendarManager, QObject *parent = nullptr);
     ~IncidenceWrapper() override;
 
     void notifyDataChanged();
@@ -247,6 +247,8 @@ private:
     void updateParentIncidence();
     void resetChildIncidences();
     void cleanupChildIncidences();
+
+    CalendarManager *m_calendarManager = nullptr;
 
     KCalendarCore::Incidence::Ptr m_incidence;
     KCalendarCore::Incidence::Ptr m_originalIncidence;

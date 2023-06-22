@@ -1,16 +1,18 @@
 // SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include "incidencewrapper.h"
+#include "calendarmanager.h"
 #include "kalendar_calendar_debug.h"
 #include "utils.h"
 #include <KLocalizedString>
 #include <QBitArray>
 #include <QJSValue>
-#include <incidencewrapper.h>
 
-IncidenceWrapper::IncidenceWrapper(QObject *parent)
+IncidenceWrapper::IncidenceWrapper(CalendarManager *calendarManager, QObject *parent)
     : QObject(parent)
     , Akonadi::ItemMonitor()
+    , m_calendarManager(calendarManager)
 {
     connect(this, &IncidenceWrapper::incidencePtrChanged, &m_attendeesModel, [this](KCalendarCore::Incidence::Ptr incidencePtr) {
         m_attendeesModel.setIncidencePtr(incidencePtr);
@@ -32,7 +34,7 @@ IncidenceWrapper::IncidenceWrapper(QObject *parent)
     // does not provide us with any specific information about the incidences changed when it
     // updates, we unfortunately have to this the coarse way and just update everything when
     // things change.
-    connect(CalendarManager::instance(), &CalendarManager::calendarChanged, this, &IncidenceWrapper::resetChildIncidences);
+    connect(m_calendarManager, &CalendarManager::calendarChanged, this, &IncidenceWrapper::resetChildIncidences);
 
     Akonadi::ItemFetchScope scope;
     scope.fetchFullPayload();
@@ -752,8 +754,8 @@ void IncidenceWrapper::updateParentIncidence()
     }
 
     if (!parent().isEmpty() && (!m_parentIncidence || m_parentIncidence->uid() != parent())) {
-        m_parentIncidence.reset(new IncidenceWrapper);
-        m_parentIncidence->setIncidenceItem(CalendarManager::instance()->incidenceItem(parent()));
+        m_parentIncidence.reset(new IncidenceWrapper(m_calendarManager, this));
+        m_parentIncidence->setIncidenceItem(m_calendarManager->incidenceItem(parent()));
         Q_EMIT parentIncidenceChanged();
     }
 }
@@ -766,12 +768,12 @@ void IncidenceWrapper::resetChildIncidences()
         return;
     }
 
-    const auto incidences = CalendarManager::instance()->childIncidences(uid());
+    const auto incidences = m_calendarManager->childIncidences(uid());
     QVariantList wrappedIncidences;
 
     for (const auto &incidence : incidences) {
-        const auto wrappedIncidence = new IncidenceWrapper;
-        wrappedIncidence->setIncidenceItem(CalendarManager::instance()->incidenceItem(incidence));
+        const auto wrappedIncidence = new IncidenceWrapper(m_calendarManager, this);
+        wrappedIncidence->setIncidenceItem(m_calendarManager->incidenceItem(incidence));
         wrappedIncidences.append(QVariant::fromValue(wrappedIncidence));
     }
 

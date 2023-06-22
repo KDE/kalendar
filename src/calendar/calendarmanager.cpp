@@ -129,13 +129,6 @@ protected:
     }
 };
 
-Q_GLOBAL_STATIC(CalendarManager, calendarManagerGlobalInstance)
-
-CalendarManager *CalendarManager::instance()
-{
-    return calendarManagerGlobalInstance;
-}
-
 CalendarManager::CalendarManager(QObject *parent)
     : QObject(parent)
     , m_calendar(nullptr)
@@ -757,6 +750,12 @@ void CalendarManager::toggleCollection(qint64 collectionId)
         const auto checkStateToSet = collectionChecked ? Qt::Unchecked : Qt::Checked;
         m_calendar->checkableProxyModel()->setData(collectionIndex, checkStateToSet, Qt::CheckStateRole);
     }
+}
+
+IncidenceWrapper *CalendarManager::createIncidenceWrapper()
+{
+    // Ownership is transfered to the qml engine
+    return new IncidenceWrapper(this, nullptr);
 }
 
 #ifndef UNITY_CMAKE_SUPPORT

@@ -177,7 +177,7 @@ Kirigami.ScrollablePage {
 
         function addTodo() {
             if(addField.text) {
-                let incidenceWrapper = Qt.createQmlObject('import org.kde.Calendar.calendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                let incidenceWrapper = Calendar.CalendarManager.createIncidenceWrapper();
                 incidenceWrapper.setNewTodo();
                 incidenceWrapper.summary = addField.text;
 
@@ -189,7 +189,6 @@ Kirigami.ScrollablePage {
                     const openDialogWindow = QQC2.ApplicationWindow.window.pageStack.pushDialogLayer(collectionPickerSheetComponent, {
                         incidenceWrapper: incidenceWrapper
                     });
-                    openDialogWindow.Keys.escapePressed.connect(function() { openDialogWindow.closeDialog() });
                 }
             }
         }

@@ -74,6 +74,7 @@ BaseApplication {
     // We use this property to temporarily allow a view to be replaced by a view of the same type
 
     Component.onCompleted: {
+        CalendarApplication.calendar = CalendarManager.calendar
         KalendarUiUtils.appMain = root; // Most of our util functions use things defined here in main
 
         if (Config.lastOpenedView === -1) {

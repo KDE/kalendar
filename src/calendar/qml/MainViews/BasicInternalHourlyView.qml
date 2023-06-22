@@ -409,7 +409,7 @@ Column {
                                                             drop.source.caughtY = pos.y;
                                                             drop.source.caught = true;
 
-                                                            const incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', multiDayViewIncidenceDropArea, "incidence");
+                                                            const incidenceWrapper = Kalendar.CalendarManager.createIncidenceWrapper();
                                                             incidenceWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(drop.source.incidencePtr);
 
                                                             let sameTimeOnDate = new Date(listViewMenu.addDate);
@@ -696,7 +696,7 @@ Column {
                                                     Layout.fillHeight: true
                                                     z: 9999
                                                     onDropped: if(viewColumn.isCurrentItem) {
-                                                        let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', hourlyViewIncidenceDropArea, "incidence");
+                                                        let incidenceWrapper = Kalendar.CalendarManager.createIncidenceWrapper();
                                                         /* So when we drop the entire incidence card somewhere, we are dropping the delegate with object name "hourlyIncidenceDelegateBackgroundBackground" or "multiDayIncidenceDelegateBackgroundBackground" in case when all day event is converted to the hour incidence.
                                                          * However, when we are simply resizing, we are actually dropping the specific mouseArea within the delegate that handles
                                                          * the dragging for the incidence's bottom edge which has name "endDtResizeMouseArea". Hence why we check the object names

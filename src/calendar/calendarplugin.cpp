@@ -37,9 +37,13 @@ void CalendarPlugin::registerTypes(const char *uri)
         return new Utils;
     });
     qmlRegisterSingletonType<Akonadi::CalendarSettings>(uri, 1, 0, "CalendarSettings", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
         return Akonadi::CalendarSettings::self();
     });
     qmlRegisterSingletonType<Akonadi::FreeBusyManager>(uri, 1, 0, "FreeBusyManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
         return Akonadi::FreeBusyManager::self();
     });
     qmlRegisterType<RemindersModel>(uri, 1, 0, "RemindersModel");
@@ -49,7 +53,7 @@ void CalendarPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<CalendarManager>(uri, 1, 0, "CalendarManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
-        return CalendarManager::instance();
+        return new CalendarManager;
     });
 
     qmlRegisterSingletonType<DateTimeState>(uri, 1, 0, "DateTimeState", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
@@ -74,7 +78,7 @@ void CalendarPlugin::registerTypes(const char *uri)
         return new Filter;
     });
 
-    qmlRegisterType<IncidenceWrapper>(uri, 1, 0, "IncidenceWrapper");
+    qmlRegisterUncreatableType<IncidenceWrapper>(uri, 1, 0, "IncidenceWrapper", QStringLiteral("Only returned from apis"));
     qmlRegisterType<AttendeesModel>(uri, 1, 0, "AttendeesModel");
     qmlRegisterType<MultiDayIncidenceModel>(uri, 1, 0, "MultiDayIncidenceModel");
     qmlRegisterType<IncidenceOccurrenceModel>(uri, 1, 0, "IncidenceOccurrenceModel");

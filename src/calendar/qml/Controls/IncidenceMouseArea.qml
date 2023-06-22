@@ -88,7 +88,7 @@ MouseArea {
                 text: i18n("Add Sub-Task")
                 enabled: !mouseArea.collectionDetails["readOnly"]
                 onClicked: {
-                    let parentWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                    const parentWrapper = Kalendar.CalendarManager.createIncidenceWrapper()
                     parentWrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
                     addSubTodoClicked(parentWrapper);
                 }
@@ -101,7 +101,7 @@ MouseArea {
                 z: 1001
 
                 function setPriority(level) {
-                    let wrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                    const wrapper = Kalendar.CalendarManager.createIncidenceWrapper()
                     wrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
                     wrapper.priority = level;
                     Kalendar.CalendarManager.editIncidence(wrapper);
@@ -165,7 +165,7 @@ MouseArea {
                 z: 1001
 
                 function setDate(date) {
-                    let wrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', this, "incidence");
+                    const wrapper = Kalendar.CalendarManager.createIncidenceWrapper()
                     wrapper.incidenceItem = Kalendar.CalendarManager.incidenceItem(mouseArea.incidenceData.incidencePtr);
 
                     if(date && !isNaN(date.getTime())) {

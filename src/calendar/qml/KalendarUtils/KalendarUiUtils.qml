@@ -30,8 +30,7 @@ QtObject {
     function setUpAdd(type, addDate, collectionId, includeTime) {
         let editorToUse = utilsObject.editorToUse();
         if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
-            editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}',
-                editorToUse, "incidence");
+            editorToUse.incidenceWrapper = CalendarManager.createIncidenceWrapper();
         }
         editorToUse.editMode = false;
 
@@ -75,8 +74,7 @@ QtObject {
     function setUpAddSubTodo(parentWrapper) {
         let editorToUse = utilsObject.editorToUse();
         if (editorToUse.editMode || !editorToUse.incidenceWrapper) {
-            editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}',
-                editorToUse, "incidence");
+            editorToUse.incidenceWrapper = CalendarManager.createIncidenceWrapper();
         }
         editorToUse.editMode = false;
         editorToUse.incidenceWrapper.setNewTodo();
@@ -147,15 +145,14 @@ QtObject {
 
     function setUpEdit(incidencePtr) {
         let editorToUse = utilsObject.editorToUse();
-        editorToUse.incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}',
-            editorToUse, "incidence");
+        editorToUse.incidenceWrapper = CalendarManager.createIncidenceWrapper();
         editorToUse.incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
         editorToUse.incidenceWrapper.triggerEditMode();
         editorToUse.editMode = true;
     }
 
     function setUpDelete(incidencePtr, deleteDate) {
-        let incidenceWrapper = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}', utilsObject, "incidence");
+        let incidenceWrapper = CalendarManager.createIncidenceWrapper();
         incidenceWrapper.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
 
         const openDialogWindow = appMain.pageStack.pushDialogLayer(appMain.deleteIncidencePageComponent, {
@@ -170,9 +167,7 @@ QtObject {
     }
 
     function completeTodo(incidencePtr) {
-        let todo = Qt.createQmlObject('import org.kde.kalendar.calendar 1.0; IncidenceWrapper {id: incidence}',
-            utilsObject, "incidence");
-
+        let todo = CalendarManager.createIncidenceWrapper();
         todo.incidenceItem = CalendarManager.incidenceItem(incidencePtr);
 
         if(todo.incidenceType === IncidenceWrapper.TypeTodo) {
