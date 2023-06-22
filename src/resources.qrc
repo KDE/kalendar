@@ -66,6 +66,10 @@ SPDX-License-Identifier: CC0-1.0
 
     <file alias="LocationMap.qml">contents/ui/Location/LocationMap.qml</file>
 
+    <file alias = "ScheduleSettingsPage.qml">contents/ui/Settings/Schedule/ScheduleSettingsPage.qml</file>
+    <file alias = "FreeBusySettingsPage.qml">contents/ui/Settings/Schedule/FreeBusySettingsPage.qml</file>
+    <file alias = "AvailabilitySettingsPage.qml">contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml</file>
+
     <file alias="SettingsPage.qml">contents/ui/Settings/SettingsPage.qml</file>
     <file alias="AboutPage.qml">contents/ui/Settings/AboutPage.qml</file>
     <file alias="ViewSettingsPage.qml">contents/ui/Settings/ViewSettingsPage.qml</file>

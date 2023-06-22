@@ -77,6 +77,7 @@ Q_SIGNALS:
     void openDateChanger();
     void toggleMenubar();
     void createNewEvent();
+    void configureSchedule();
     void createNewMail();
     void createNewContact();
     void createNewContactGroup();

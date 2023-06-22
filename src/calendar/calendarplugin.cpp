@@ -9,6 +9,9 @@
 #include <QQmlEngine>
 #include <QtQml>
 
+#include <Akonadi/FreeBusyManager>
+#include <akonadi/calendarsettings.h> //krazy:exclude=camelcase this is a generated file
+
 Q_DECLARE_METATYPE(KCalendarCore::Incidence::Ptr);
 
 void CalendarPlugin::registerTypes(const char *uri)
@@ -19,6 +22,12 @@ void CalendarPlugin::registerTypes(const char *uri)
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
         return new Utils;
+    });
+    qmlRegisterSingletonType<Akonadi::CalendarSettings>(uri, 1, 0, "CalendarSettings", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        return Akonadi::CalendarSettings::self();
+    });
+    qmlRegisterSingletonType<Akonadi::FreeBusyManager>(uri, 1, 0, "FreeBusyManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        return Akonadi::FreeBusyManager::self();
     });
     qmlRegisterType<RemindersModel>(uri, 1, 0, "RemindersModel");
     qmlRegisterModule(uri, 1, 0);

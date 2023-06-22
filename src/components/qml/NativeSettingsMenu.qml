@@ -17,6 +17,9 @@ Labs.Menu {
     Labs.MenuSeparator {
     }
     NativeMenuItemFromAction {
+        kalendarAction: 'options_configure_schedule'
+    }
+    NativeMenuItemFromAction {
         kalendarAction: 'options_configure_keybinding'
     }
     NativeMenuItemFromAction {

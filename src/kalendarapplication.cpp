@@ -327,6 +327,13 @@ void KalendarApplication::setupActions()
         action->setIcon(QIcon::fromTheme(QStringLiteral("contact-new-symbolic")));
     }
 
+    actionName = QLatin1String("options_configure_schedule");
+    if (KAuthorized::authorizeAction(actionName)) {
+        auto action = mCollection.addAction(actionName, this, &KalendarApplication::configureSchedule);
+        action->setText(i18n("Configure Schedule…"));
+        action->setIcon(QIcon::fromTheme(QStringLiteral("view-calendar-month")));
+    }
+
     actionName = QLatin1String("options_configure");
     if (KAuthorized::authorizeAction(actionName)) {
         auto action = KStandardAction::preferences(this, &KalendarApplication::openSettings, this);
