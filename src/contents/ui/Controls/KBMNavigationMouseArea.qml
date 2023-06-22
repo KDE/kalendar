@@ -16,12 +16,12 @@ MouseArea {
         }
     }
 
-    onWheel: {
+    onWheel: wheel => {
         repositionIncidencePopup();
         wheel.accepted = false;
     }
 
-    onPressAndHold: {
+    onPressAndHold: mouse => {
         repositionIncidencePopup();
         mouse.accepted = false;
     }
