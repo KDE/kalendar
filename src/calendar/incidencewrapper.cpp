@@ -791,6 +791,11 @@ void IncidenceWrapper::cleanupChildIncidences()
     }
 }
 
+bool IncidenceWrapper::hasReminders()
+{
+    return m_incidence->alarms().count() > 0;
+}
+
 void IncidenceWrapper::addAlarms(KCalendarCore::Alarm::List alarms)
 {
     for (int i = 0; i < alarms.size(); i++) {

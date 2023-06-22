@@ -125,7 +125,7 @@ QtObject {
             //"duration":
             "durationString": incidenceWrapper.durationDisplayString,
             "recurs": incidenceWrapper.recurrenceData.type !== 0,
-            "hasReminders": incidenceWrapper.remindersModel.rowCount() > 0,
+            "hasReminders": incidenceWrapper.hasReminders(),
             "isOverdue": incidenceWrapper.incidenceType === IncidenceWrapper.TypeTodo &&
                          !isNaN(incidenceWrapper.incidenceEnd.getTime()) &&
                          incidenceWrapper.incidenceEnd < appMain.currentDate,

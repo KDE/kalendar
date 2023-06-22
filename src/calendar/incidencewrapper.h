@@ -187,6 +187,7 @@ public:
     Q_INVOKABLE void setNewEvent();
     Q_INVOKABLE void setNewTodo();
     Q_INVOKABLE void addAlarms(KCalendarCore::Alarm::List alarms);
+    Q_INVOKABLE bool hasReminders();
     Q_INVOKABLE void setRegularRecurrence(IncidenceWrapper::RecurrenceIntervals interval, int freq = 1);
     Q_INVOKABLE void setMonthlyPosRecurrence(short pos, int day);
     Q_INVOKABLE void setRecurrenceOccurrences(int occurrences);
