@@ -124,7 +124,7 @@ private:
     QVector<qint64> m_enabledTodoCollections;
     KConfigWatcher::Ptr m_colorWatcher;
     Akonadi::SearchCollectionHelper mSearchCollectionHelper;
-    CalendarConfig *m_config;
+    CalendarConfig *m_config = nullptr;
 };
 
 Q_DECLARE_METATYPE(Akonadi::ETMCalendar::Ptr)

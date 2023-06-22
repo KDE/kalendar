@@ -13,12 +13,14 @@ using namespace std::chrono_literals;
 InfiniteCalendarViewModel::InfiniteCalendarViewModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    setup();
 }
 
 void InfiniteCalendarViewModel::setup()
 {
-    const QDate today = QDate::currentDate();
+    m_startDates.clear();
+    m_firstDayOfMonthDates.clear();
+
+    const auto today = QDate::currentDate();
     QTime time;
 
     switch (m_scale) {
@@ -93,7 +95,7 @@ QVariant InfiniteCalendarViewModel::data(const QModelIndex &idx, int role) const
         }
     }
 
-    const QDate startDate = m_startDates[idx.row()];
+    const auto &startDate = m_startDates[idx.row()];
 
     switch (role) {
     case Qt::DisplayRole:
@@ -127,7 +129,7 @@ QHash<int, QByteArray> InfiniteCalendarViewModel::roleNames() const
 
 int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate &currentDate, const int currentIndex)
 {
-    int newIndex = 0;
+    auto newIndex = 0;
     int role = Qt::DisplayRole;
 
     switch (m_scale) {
@@ -159,7 +161,7 @@ int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate
         Q_UNREACHABLE();
     }
 
-    QDateTime firstItemDate = data(index(1, 0), role).toDateTime();
+    auto firstItemDate = data(index(1, 0), role).toDateTime();
     auto lastItemDate = data(index(rowCount() - 1, 0), role).toDateTime();
 
     while (firstItemDate >= selectedDate.startOfDay()) {
@@ -180,7 +182,7 @@ int InfiniteCalendarViewModel::moveToDate(const QDate &selectedDate, const QDate
     return newIndex;
 }
 
-void InfiniteCalendarViewModel::addDates(bool atEnd, const QDate startFrom)
+void InfiniteCalendarViewModel::addDates(const bool atEnd, const QDate startFrom)
 {
     switch (m_scale) {
     case DayScale:
@@ -204,7 +206,7 @@ void InfiniteCalendarViewModel::addDates(bool atEnd, const QDate startFrom)
     }
 }
 
-void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, int amount)
+void InfiniteCalendarViewModel::addDayDates(const bool atEnd, const QDate &startFrom, int amount)
 {
     const int newRow = atEnd ? rowCount() : 0;
 
@@ -223,7 +225,7 @@ void InfiniteCalendarViewModel::addDayDates(bool atEnd, const QDate &startFrom, 
     endInsertRows();
 }
 
-void InfiniteCalendarViewModel::addWeekDates(bool atEnd, const QDate &startFrom)
+void InfiniteCalendarViewModel::addWeekDates(const bool atEnd, const QDate &startFrom)
 {
     const int newRow = atEnd ? rowCount() : 0;
 
@@ -246,7 +248,7 @@ void InfiniteCalendarViewModel::addWeekDates(bool atEnd, const QDate &startFrom)
     endInsertRows();
 }
 
-void InfiniteCalendarViewModel::addMonthDates(bool atEnd, const QDate &startFrom)
+void InfiniteCalendarViewModel::addMonthDates(const bool atEnd, const QDate &startFrom)
 {
     const int newRow = atEnd ? rowCount() : 0;
 
@@ -275,7 +277,7 @@ void InfiniteCalendarViewModel::addMonthDates(bool atEnd, const QDate &startFrom
     endInsertRows();
 }
 
-void InfiniteCalendarViewModel::addYearDates(bool atEnd, const QDate &startFrom)
+void InfiniteCalendarViewModel::addYearDates(const bool atEnd, const QDate &startFrom)
 {
     const int newRow = atEnd ? rowCount() : 0;
 
@@ -294,7 +296,7 @@ void InfiniteCalendarViewModel::addYearDates(bool atEnd, const QDate &startFrom)
     endInsertRows();
 }
 
-void InfiniteCalendarViewModel::addDecadeDates(bool atEnd, const QDate &startFrom)
+void InfiniteCalendarViewModel::addDecadeDates(const bool atEnd, const QDate &startFrom)
 {
     const int newRow = atEnd ? rowCount() : 0;
 
@@ -329,12 +331,13 @@ int InfiniteCalendarViewModel::scale() const
     return m_scale;
 }
 
-void InfiniteCalendarViewModel::setScale(int scale)
+void InfiniteCalendarViewModel::setScale(const int scale)
 {
-    beginResetModel();
+    if (m_scale == scale) {
+        return;
+    }
 
-    m_startDates.clear();
-    m_firstDayOfMonthDates.clear();
+    beginResetModel();
 
     m_scale = scale;
     setup();

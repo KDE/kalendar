@@ -17,6 +17,7 @@
 #include <KFormat>
 #include <QByteArray>
 #include <QObject>
+#include <QPointer>
 
 /**
  * This class is a wrapper for a KCalendarCore::Incidence::Ptr object.
@@ -248,7 +249,7 @@ private:
     void resetChildIncidences();
     void cleanupChildIncidences();
 
-    CalendarManager *m_calendarManager = nullptr;
+    QPointer<CalendarManager> m_calendarManager = nullptr;
 
     KCalendarCore::Incidence::Ptr m_incidence;
     KCalendarCore::Incidence::Ptr m_originalIncidence;

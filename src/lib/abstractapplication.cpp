@@ -41,8 +41,8 @@ static QVector<KalCommandBarModel::ActionGroup> actionCollectionToActionGroup(co
     actionList.reserve(actionCollections.size());
 
     for (const auto collection : actionCollections) {
-        const QList<QAction *> collectionActions = collection->actions();
-        const QString componentName = collection->componentDisplayName();
+        const auto collectionActions = collection->actions();
+        const auto componentName = collection->componentDisplayName();
 
         ActionGroup ag;
         ag.name = componentName;
@@ -52,8 +52,8 @@ static QVector<KalCommandBarModel::ActionGroup> actionCollectionToActionGroup(co
              * If this action is a menu, fetch all its child actions
              * and skip the menu action itself
              */
-            if (QMenu *menu = action->menu()) {
-                const QList<QAction *> menuActions = menu->actions();
+            if (const auto menu = action->menu()) {
+                const auto menuActions = menu->actions();
 
                 ActionGroup menuActionGroup;
                 menuActionGroup.name = KLocalizedString::removeAcceleratorMarker(action->text());
@@ -98,7 +98,7 @@ QSortFilterProxyModel *AbstractApplication::actionsModel()
     auto cfg = KSharedConfig::openConfig();
     KConfigGroup cg(cfg, "General");
 
-    QStringList actionNames = cg.readEntry(QStringLiteral("CommandBarLastUsedActions"), QStringList());
+    const auto actionNames = cg.readEntry(QStringLiteral("CommandBarLastUsedActions"), QStringList());
 
     m_actionModel->setLastUsedActions(actionNames);
     m_actionModel->refresh(actionCollectionToActionGroup(actionCollections()));

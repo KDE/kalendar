@@ -44,13 +44,11 @@ void Importer::importCalendarFromUrl(const QUrl &url, bool merge, qint64 collect
 
     if (jobStarted) {
         Q_EMIT importStarted();
-    } else {
+    } else if (!importer->errorMessage().isEmpty()) {
         // empty error message means user canceled.
-        if (!importer->errorMessage().isEmpty()) {
-            qCDebug(KALENDAR_CALENDAR_LOG) << i18n("An error occurred: %1", importer->errorMessage());
-            m_importErrorMessage = importer->errorMessage();
-            Q_EMIT importErrorMessageChanged();
-        }
+        qCDebug(KALENDAR_CALENDAR_LOG) << i18n("An error occurred: %1", importer->errorMessage());
+        m_importErrorMessage = importer->errorMessage();
+        Q_EMIT importErrorMessageChanged();
     }
 }
 

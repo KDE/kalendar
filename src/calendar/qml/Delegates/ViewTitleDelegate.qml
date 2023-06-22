@@ -8,7 +8,7 @@ import org.kde.kalendar.calendar 1.0 as Calendar
 RowLayout {
     id: root
 
-    property alias titleDateButton: titleDataButton
+    property alias titleDateButton: titleDateButton
     readonly property var openDateChangerAction: Calendar.CalendarApplication.action("open_date_changer")
 
     spacing: 0
@@ -16,7 +16,7 @@ RowLayout {
     MainDrawerToggleButton {}
 
     TitleDateButton {
-        id: titleDataButton
+        id: titleDateButton
 
         onClicked: dateChangerLoader.active = !dateChangerLoader.active
     }

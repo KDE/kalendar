@@ -44,18 +44,18 @@ public:
     int rowCount(const QModelIndex &parent = {}) const override;
 
     Q_INVOKABLE int moveToDate(const QDate &selectedDate, const QDate &currentDate, const int currentIndex);
-    Q_INVOKABLE void addDates(bool atEnd, const QDate startFrom = QDate());
-    void addDayDates(bool atEnd, const QDate &startFrom, int amount = 1);
-    void addWeekDates(bool atEnd, const QDate &startFrom);
-    void addMonthDates(bool atEnd, const QDate &startFrom);
-    void addYearDates(bool atEnd, const QDate &startFrom);
-    void addDecadeDates(bool atEnd, const QDate &startFrom);
+    Q_INVOKABLE void addDates(const bool atEnd, const QDate startFrom = QDate());
+    void addDayDates(const bool atEnd, const QDate &startFrom, int amount = 1);
+    void addWeekDates(const bool atEnd, const QDate &startFrom);
+    void addMonthDates(const bool atEnd, const QDate &startFrom);
+    void addYearDates(const bool atEnd, const QDate &startFrom);
+    void addDecadeDates(const bool atEnd, const QDate &startFrom);
 
     int datesToAdd() const;
-    void setDatesToAdd(int datesToAdd);
+    void setDatesToAdd(const int datesToAdd);
 
     int scale() const;
-    void setScale(int scale);
+    void setScale(const int scale);
 
 Q_SIGNALS:
     void datesToAddChanged();
