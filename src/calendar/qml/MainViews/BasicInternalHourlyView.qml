@@ -653,7 +653,8 @@ Column {
                             id: dayColumn
 
                             required property int index
-                            required property int incidences
+                            required property var incidences
+                            required property var periodStartDateTime
 
                             readonly property date columnDate: DateUtils.addDaysToDate(viewColumn.startDate, index)
                             readonly property bool isToday: columnDate.getDate() === viewColumn.currentDay &&
