@@ -10,7 +10,7 @@ import org.kde.kalendar.calendar 1.0 as Calendar
 
 Kirigami.ScrollablePage {
     id: availabilitySettingsPage
-    title: i18n("Configure Availablility")
+    title: i18n("Configure Availability")
     leftPadding: 0
     rightPadding: 0
 }
