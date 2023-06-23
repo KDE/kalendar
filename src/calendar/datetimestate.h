@@ -20,7 +20,7 @@ class DateTimeState : public QObject
     /// This property holds the first day of the week selected by the user
     Q_PROPERTY(QDate firstDayOfWeek READ firstDayOfWeek NOTIFY selectedDateChanged)
 
-    Q_PROPERTY(QDate currentDate MEMBER m_currentDate NOTIFY currentDateChanged)
+    Q_PROPERTY(QDateTime currentDate MEMBER m_currentDate NOTIFY currentDateChanged)
 
 public:
     explicit DateTimeState(QObject *parent = nullptr);
@@ -47,5 +47,5 @@ Q_SIGNALS:
 
 private:
     QDate m_selectedDate;
-    QDate m_currentDate;
+    QDateTime m_currentDate;
 };

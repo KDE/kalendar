@@ -2,13 +2,24 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "datetimestate.h"
-#include <QDebug>
+#include <QTimer>
+
+using namespace std::chrono_literals;
 
 DateTimeState::DateTimeState(QObject *parent)
     : QObject(parent)
     , m_selectedDate(QDate::currentDate())
-    , m_currentDate(QDate::currentDate())
+    , m_currentDate(QDateTime::currentDateTime())
 {
+    auto timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, [this, timer] {
+        m_currentDate = QDateTime::currentDateTime();
+        Q_EMIT currentDateChanged();
+
+        // Repeat timer
+        timer->start(60 * 1000ms);
+    });
+    timer->start(60 * 1000ms);
 }
 
 void DateTimeState::selectPreviousMonth()
@@ -25,7 +36,7 @@ void DateTimeState::selectNextMonth()
 
 bool DateTimeState::isToday(const QDate &date) const
 {
-    return m_currentDate == date;
+    return m_currentDate.date() == date;
 }
 
 void DateTimeState::addDays(const int days)
@@ -55,18 +66,18 @@ void DateTimeState::resetTime()
 
 void DateTimeState::setSelectedDay(const int day)
 {
-    m_selectedDate.setDate(m_currentDate.year(), m_currentDate.month(), day);
+    m_selectedDate.setDate(m_selectedDate.year(), m_selectedDate.month(), day);
     Q_EMIT selectedDateChanged();
 }
 
 void DateTimeState::setSelectedMonth(const int month)
 {
-    m_selectedDate.setDate(m_currentDate.year(), month, m_currentDate.day());
+    m_selectedDate.setDate(m_selectedDate.year(), month, m_selectedDate.day());
     Q_EMIT selectedDateChanged();
 }
 
 void DateTimeState::setSelectedYear(const int year)
 {
-    m_selectedDate.setDate(year, m_currentDate.month(), m_currentDate.day());
+    m_selectedDate.setDate(year, m_selectedDate.month(), m_selectedDate.day());
     Q_EMIT selectedDateChanged();
 }

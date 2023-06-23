@@ -99,7 +99,7 @@ Item {
             Repeater {
                 model: root.numberOfRows
 
-                //One row => one week
+                // One row => one week
                 Item {
                     id: weekRow
 
