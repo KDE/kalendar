@@ -52,7 +52,7 @@ Column {
     Connections {
         target: Kalendar.DateTimeState
         function onSelectedDateChanged() {
-            hourScrollView.setToCurrentTime(animate);
+            hourScrollView.setToCurrentTime(true);
         }
     }
 
