@@ -116,7 +116,7 @@ QVariantList HourlyIncidenceModel::layoutLines(const QDateTime &rowStart) const
     //     srcIdx.data(IncidenceOccurrenceModel::Summary).toString()
     //     << srcIdx.data(IncidenceOccurrenceModel::AllDay).toBool();
     // }
-    auto result = QVariantList{};
+    QVariantList result;
 
     auto addToResults = [&result](const QModelIndex &idx, double start, double duration) {
         auto incidenceMap = QVariantMap{
