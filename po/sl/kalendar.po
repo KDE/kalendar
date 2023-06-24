@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 00:48+0000\n"
-"PO-Revision-Date: 2023-05-17 09:35+0200\n"
+"POT-Creation-Date: 2023-06-24 00:51+0000\n"
+"PO-Revision-Date: 2023-06-23 07:41+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -439,7 +439,7 @@ msgstr "Izberite naslov e-pošte"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:477
+#: contents/ui/main.qml:488
 #, kde-format
 msgid "Contacts"
 msgstr "Stiki"
@@ -961,7 +961,7 @@ msgstr "Uredi"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:931
+#: contents/ui/main.qml:942
 #, kde-format
 msgid "Cancel"
 msgstr "Prekliči"
@@ -1196,13 +1196,13 @@ msgstr "Leta"
 msgid "Min. Interval:"
 msgstr "Min. interval:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:444
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:455
 #: kalendarapplication.cpp:298
 #, kde-format
 msgid "New Event…"
 msgstr "Nov dogodek…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:450
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:461
 #: kalendarapplication.cpp:305
 #, kde-format
 msgid "New Task…"
@@ -1954,7 +1954,7 @@ msgstr "Označi kot dokončano"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:374
+#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:385
 #, kde-format
 msgid "Configure"
 msgstr "Sestavi"
@@ -2135,43 +2135,48 @@ msgstr "Prišlo je do napake pri uvozu ponovitev: %1"
 msgid "New calendar  created from imported file successfully."
 msgstr "Uspešno ustvarjen nov koledar iz uvožene datoteke."
 
-#: contents/ui/main.qml:439 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:374
+#, kde-format
+msgid "Configure Schedule"
+msgstr "Konfiguriraj planiranje časa"
+
+#: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
 #, kde-format
 msgid "Create"
 msgstr "Ustvari"
 
-#: contents/ui/main.qml:459
+#: contents/ui/main.qml:470
 #, kde-format
 msgid "Month"
 msgstr "Mesec"
 
-#: contents/ui/main.qml:462
+#: contents/ui/main.qml:473
 #, kde-format
 msgid "Week"
 msgstr "Teden"
 
-#: contents/ui/main.qml:465
+#: contents/ui/main.qml:476
 #, kde-format
 msgid "3 Days"
 msgstr "3 dni"
 
-#: contents/ui/main.qml:468
+#: contents/ui/main.qml:479
 #, kde-format
 msgid "Day"
 msgstr "Dan"
 
-#: contents/ui/main.qml:471
+#: contents/ui/main.qml:482
 #, kde-format
 msgid "Schedule"
 msgstr "Časovnica"
 
-#: contents/ui/main.qml:474 contents/ui/main.qml:1171
+#: contents/ui/main.qml:485 contents/ui/main.qml:1182
 #, kde-format
 msgid "Tasks"
 msgstr "Naloge"
 
-#: contents/ui/main.qml:480 kalendarapplication.cpp:32
+#: contents/ui/main.qml:491 kalendarapplication.cpp:32
 #: kalendarapplication.cpp:37
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
@@ -2179,17 +2184,17 @@ msgstr "Naloge"
 msgid "Mail"
 msgstr "Pošta"
 
-#: contents/ui/main.qml:870
+#: contents/ui/main.qml:881
 #, kde-format
 msgid "Import a calendar"
 msgstr "Uvozi koledar"
 
-#: contents/ui/main.qml:890
+#: contents/ui/main.qml:901
 #, kde-format
 msgid "Import Calendar"
 msgstr "Uvozi koledar"
 
-#: contents/ui/main.qml:898
+#: contents/ui/main.qml:909
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -2201,29 +2206,29 @@ msgstr ""
 "obstoječih koledarjev ali bi želeli ustvariti nov koledar iz te datoteke?\n"
 " "
 
-#: contents/ui/main.qml:906
+#: contents/ui/main.qml:917
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Zlij z obstoječim koledarjem"
 
-#: contents/ui/main.qml:922
+#: contents/ui/main.qml:933
 #, kde-format
 msgid "Create new calendar"
 msgstr "Ustvari nov koledar"
 
-#: contents/ui/main.qml:1129
+#: contents/ui/main.qml:1140
 #, kde-format
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Teden"
 
-#: contents/ui/main.qml:1135
+#: contents/ui/main.qml:1146
 #, kde-format
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "3 dni"
 
-#: contents/ui/main.qml:1141
+#: contents/ui/main.qml:1152
 #, kde-format
 msgctxt "@action:inmenu open day view"
 msgid "Day"
@@ -2457,6 +2462,124 @@ msgstr "Spremeni barvo koledarja…"
 #, kde-format
 msgid "Choose Calendar Color"
 msgstr "Izberite barvo koledarja"
+
+#: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
+#, fuzzy, kde-format
+#| msgid "Configure Availablility"
+msgid "Configure Availability"
+msgstr "Konfiguriraj razpoložljivost"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
+#, kde-format
+msgid "Configure Free/Busy"
+msgstr "Konfiguriraj prosto/zasedeno"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
+#, kde-format
+msgid "Free/Busy Publishing settings"
+msgstr "Nastavitve objavljanja prost/zaseden"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:33
+#, kde-format
+msgid ""
+"When you publish your free/busy information, it enables others to consider "
+"your calendar availability when inviting you to a meeting. Only the times "
+"that are already marked as busy are disclosed, without revealing the "
+"specific reasons for your availability."
+msgstr ""
+"Ko objavljate podatke prost/zaseden to drugim omogoča, da upoštevajo vašo "
+"razpoložljivost koledarja, ko vas povabijo na sestanek. Razkriti so samo "
+"časi, ki so že označeni kot zasedeni brez razkritja posebnih razlogov za "
+"vašo dosegljivost."
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
+#, kde-format
+msgid "Publish your free/busy information automatically"
+msgstr "Objavljajte informacijo prost/zaseden samodejno"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
+#, kde-format
+msgid "Minimum time (in minutes) between uploads"
+msgstr "Minimalni čas (v minutah) med pošiljanjem datotek"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:63
+#, kde-format
+msgid "Number of days of free/busy info to publish: "
+msgstr "Število dni informacije prost/zaseden za objavljanje: "
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
+#, kde-format
+msgid "Server information"
+msgstr "Informacije o strežniku"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
+#, kde-format
+msgid "Server URL"
+msgstr "URL strežnika"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
+#, kde-format
+msgid "Username"
+msgstr "Uporabniško ime"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
+#, kde-format
+msgid "Password"
+msgstr "Geslo"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
+#, kde-format
+msgid "Save password"
+msgstr "Shrani geslo"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
+#, kde-format
+msgid "Click here to publish Free/Busy information manually"
+msgstr "Kliknite sem za ročno objavo informacije prost/zaseden"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
+#, kde-format
+msgid "Email Free/Busy"
+msgstr "Naslov e-pošte prost/zaseden"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
+#, kde-format
+msgid "Enter email of recipient..."
+msgstr "Vnesite e-naslov prejemnika..."
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
+#, kde-format
+msgid "Free/Busy Retrieval settings"
+msgstr "Nastavitve priklica prost/zaseden"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
+#, kde-format
+msgid ""
+"By retrieving Free/Busy information that others have published, you can take "
+"their calendar into account when inviting them to a meeting."
+msgstr ""
+"S pridobivanjem informacij prost/zaseden, ki so jih objavili drugi, lahko "
+"upoštevate njihov koledar, ko jih povabite na sestanek."
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
+#, kde-format
+msgid "Retrieve others' free/busy information automatically"
+msgstr "Samodejno pridobi podatke o prost/zaseden drugih"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
+#, kde-format
+msgid "Use full email address for retrieval"
+msgstr "Uporabi polni naslov e-pošte za pridobivanje"
+
+#: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
+#, kde-format
+msgid "Free/Busy"
+msgstr "Prost/Zaseden"
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2826,57 +2949,62 @@ msgstr "Nov stik…"
 msgid "New Contact Group…"
 msgstr "Nova skupina stikov…"
 
-#: kalendarapplication.cpp:339
+#: kalendarapplication.cpp:333
+#, kde-format
+msgid "Configure Schedule…"
+msgstr "Konfiguriraj časovni plan…"
+
+#: kalendarapplication.cpp:346
 #, kde-format
 msgid "Manage Tags…"
 msgstr "Upravljaj oznake…"
 
-#: kalendarapplication.cpp:352
+#: kalendarapplication.cpp:359
 #, kde-format
 msgid "Import Calendar…"
 msgstr "Uvozi koledar…"
 
-#: kalendarapplication.cpp:384
+#: kalendarapplication.cpp:391
 #, kde-format
 msgid "Alphabetically"
 msgstr "Po abecednem redu"
 
-#: kalendarapplication.cpp:400
+#: kalendarapplication.cpp:407
 #, kde-format
 msgid "By Due Date"
 msgstr "Po datumu zaključka"
 
-#: kalendarapplication.cpp:416
+#: kalendarapplication.cpp:423
 #, kde-format
 msgid "By Priority Level"
 msgstr "Po prednostnih nivojih"
 
-#: kalendarapplication.cpp:432
+#: kalendarapplication.cpp:439
 #, kde-format
 msgid "Ascending order"
 msgstr "Naraščajoče"
 
-#: kalendarapplication.cpp:448
+#: kalendarapplication.cpp:455
 #, kde-format
 msgid "Descending Order"
 msgstr "Padajoče"
 
-#: kalendarapplication.cpp:464
+#: kalendarapplication.cpp:471
 #, kde-format
 msgid "Show Completed Tasks"
 msgstr "Prikaži dokončane naloge"
 
-#: kalendarapplication.cpp:478
+#: kalendarapplication.cpp:485
 #, kde-format
 msgid "Open Command Bar"
 msgstr "Odpri ukazno vrstico"
 
-#: kalendarapplication.cpp:488
+#: kalendarapplication.cpp:495
 #, kde-format
 msgid "Refresh All"
 msgstr "Osveži vse"
 
-#: kalendarapplication.cpp:641 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:648 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr "Prišlo je do napake: %1"

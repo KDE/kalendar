@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 00:48+0000\n"
+"POT-Creation-Date: 2023-06-24 00:51+0000\n"
 "PO-Revision-Date: 2022-07-06 14:45+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -451,7 +451,7 @@ msgstr "E-poçt ünvanını seçin"
 
 #: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
 #: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:477
+#: contents/ui/main.qml:488
 #, kde-format
 msgid "Contacts"
 msgstr "Əlaqələr"
@@ -1000,7 +1000,7 @@ msgstr "Düzəliş edin"
 #: contents/ui/Dialogs/DeleteCalendarPage.qml:71
 #: contents/ui/Dialogs/DeleteIncidencePage.qml:114
 #: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:931
+#: contents/ui/main.qml:942
 #, kde-format
 msgid "Cancel"
 msgstr "İmtina"
@@ -1232,13 +1232,13 @@ msgstr "İllər"
 msgid "Min. Interval:"
 msgstr "Min. aralıq:"
 
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:444
+#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:455
 #: kalendarapplication.cpp:298
 #, kde-format
 msgid "New Event…"
 msgstr "Yeni tədbir…"
 
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:450
+#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:461
 #: kalendarapplication.cpp:305
 #, kde-format
 msgid "New Task…"
@@ -1985,7 +1985,7 @@ msgstr "Tamamlanmış kimi işarələ"
 msgid "Kalendar"
 msgstr "Kalendar"
 
-#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:374
+#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:385
 #, kde-format
 msgid "Configure"
 msgstr "Tənzimlə"
@@ -2150,48 +2150,54 @@ msgstr "Bu hadisənin idxalında xəta baş verdi: %1"
 msgid "New calendar  created from imported file successfully."
 msgstr "Yeni təqvim  idxal olunan fayldan uğurla yaradıldı."
 
-#: contents/ui/main.qml:439 contents/ui/MainViews/TodoTreeView.qml:125
+#: contents/ui/main.qml:374
+#, fuzzy, kde-format
+#| msgid "Configure"
+msgid "Configure Schedule"
+msgstr "Tənzimlə"
+
+#: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
 #, kde-format
 msgid "Create"
 msgstr "Yarat"
 
-#: contents/ui/main.qml:459
+#: contents/ui/main.qml:470
 #, fuzzy, kde-format
 #| msgid "Months"
 msgid "Month"
 msgstr "Aylar"
 
-#: contents/ui/main.qml:462
+#: contents/ui/main.qml:473
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgid "Week"
 msgstr "Hər həftə"
 
-#: contents/ui/main.qml:465
+#: contents/ui/main.qml:476
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "3 Days"
 msgstr "Günlər"
 
-#: contents/ui/main.qml:468
+#: contents/ui/main.qml:479
 #, fuzzy, kde-format
 #| msgid "Days"
 msgid "Day"
 msgstr "Günlər"
 
-#: contents/ui/main.qml:471
+#: contents/ui/main.qml:482
 #, fuzzy, kde-format
 #| msgid "Schedule View"
 msgid "Schedule"
 msgstr "Gündəlik görünüşü"
 
-#: contents/ui/main.qml:474 contents/ui/main.qml:1171
+#: contents/ui/main.qml:485 contents/ui/main.qml:1182
 #, kde-format
 msgid "Tasks"
 msgstr "Tapşırıqlar"
 
-#: contents/ui/main.qml:480 kalendarapplication.cpp:32
+#: contents/ui/main.qml:491 kalendarapplication.cpp:32
 #: kalendarapplication.cpp:37
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
 #: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
@@ -2201,17 +2207,17 @@ msgstr "Tapşırıqlar"
 msgid "Mail"
 msgstr "E-Poçt"
 
-#: contents/ui/main.qml:870
+#: contents/ui/main.qml:881
 #, kde-format
 msgid "Import a calendar"
 msgstr "Bir təqvim idxal edin"
 
-#: contents/ui/main.qml:890
+#: contents/ui/main.qml:901
 #, kde-format
 msgid "Import Calendar"
 msgstr "Təqvim idxal edin"
 
-#: contents/ui/main.qml:898
+#: contents/ui/main.qml:909
 #, kde-format
 msgid ""
 "Would you like to merge this calendar file's events and tasks into one of "
@@ -2224,31 +2230,31 @@ msgstr ""
 "üstünlük verirsiniz?\n"
 " "
 
-#: contents/ui/main.qml:906
+#: contents/ui/main.qml:917
 #, kde-format
 msgid "Merge with existing calendar"
 msgstr "Mövcud təqvim ilə birləşdirmək"
 
-#: contents/ui/main.qml:922
+#: contents/ui/main.qml:933
 #, kde-format
 msgid "Create new calendar"
 msgstr "Yeni təqvim yaratmaq"
 
-#: contents/ui/main.qml:1129
+#: contents/ui/main.qml:1140
 #, fuzzy, kde-format
 #| msgid "Weekly"
 msgctxt "@action:inmenu open week view"
 msgid "Week"
 msgstr "Hər həftə"
 
-#: contents/ui/main.qml:1135
+#: contents/ui/main.qml:1146
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open 3 days view"
 msgid "3 Days"
 msgstr "Günlər"
 
-#: contents/ui/main.qml:1141
+#: contents/ui/main.qml:1152
 #, fuzzy, kde-format
 #| msgid "Days"
 msgctxt "@action:inmenu open day view"
@@ -2483,6 +2489,122 @@ msgstr "Təqvimin rəngini dəyişin..."
 #, kde-format
 msgid "Choose Calendar Color"
 msgstr "Təqvimin rəngini seçin"
+
+#: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
+#, kde-format
+msgid "Configure Availability"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
+#, fuzzy, kde-format
+#| msgid "Configure"
+msgid "Configure Free/Busy"
+msgstr "Tənzimlə"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
+#, kde-format
+msgid "Free/Busy Publishing settings"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:33
+#, kde-format
+msgid ""
+"When you publish your free/busy information, it enables others to consider "
+"your calendar availability when inviting you to a meeting. Only the times "
+"that are already marked as busy are disclosed, without revealing the "
+"specific reasons for your availability."
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
+#, kde-format
+msgid "Publish your free/busy information automatically"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
+#, kde-format
+msgid "Minimum time (in minutes) between uploads"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:63
+#, kde-format
+msgid "Number of days of free/busy info to publish: "
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
+#, fuzzy, kde-format
+#| msgid "Personal information"
+msgid "Server information"
+msgstr "Fərdi məlumatlar"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
+#, kde-format
+msgid "Server URL"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
+#, kde-format
+msgid "Username"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
+#, kde-format
+msgid "Password"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
+#, kde-format
+msgid "Save password"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
+#, kde-format
+msgid "Click here to publish Free/Busy information manually"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
+#, fuzzy, kde-format
+#| msgid "Email Address"
+#| msgid_plural "Email Addresses"
+msgid "Email Free/Busy"
+msgstr "E-poçt ünvanı"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
+#, kde-format
+msgid "Enter email of recipient..."
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
+#, fuzzy, kde-format
+#| msgid "General settings"
+msgid "Free/Busy Retrieval settings"
+msgstr "Əsas ayarlar"
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
+#, kde-format
+msgid ""
+"By retrieving Free/Busy information that others have published, you can take "
+"their calendar into account when inviting them to a meeting."
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
+#, kde-format
+msgid "Retrieve others' free/busy information automatically"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
+#, kde-format
+msgid "Use full email address for retrieval"
+msgstr ""
+
+#: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
+#, kde-format
+msgid "Free/Busy"
+msgstr ""
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2872,57 +2994,63 @@ msgstr "Yeni tədbir…"
 msgid "New Contact Group…"
 msgstr "Yeni tədbir…"
 
-#: kalendarapplication.cpp:339
+#: kalendarapplication.cpp:333
+#, fuzzy, kde-format
+#| msgid "Configure"
+msgid "Configure Schedule…"
+msgstr "Tənzimlə"
+
+#: kalendarapplication.cpp:346
 #, kde-format
 msgid "Manage Tags…"
 msgstr "Yelıqları idarə edin..."
 
-#: kalendarapplication.cpp:352
+#: kalendarapplication.cpp:359
 #, kde-format
 msgid "Import Calendar…"
 msgstr "Təqvim idxal edin…"
 
-#: kalendarapplication.cpp:384
+#: kalendarapplication.cpp:391
 #, kde-format
 msgid "Alphabetically"
 msgstr "Əlifba sırası ilə"
 
-#: kalendarapplication.cpp:400
+#: kalendarapplication.cpp:407
 #, kde-format
 msgid "By Due Date"
 msgstr "Bu tarixə görə"
 
-#: kalendarapplication.cpp:416
+#: kalendarapplication.cpp:423
 #, kde-format
 msgid "By Priority Level"
 msgstr "Üstünlük səviyyəsinə görə"
 
-#: kalendarapplication.cpp:432
+#: kalendarapplication.cpp:439
 #, kde-format
 msgid "Ascending order"
 msgstr "Artan sıra ilə"
 
-#: kalendarapplication.cpp:448
+#: kalendarapplication.cpp:455
 #, kde-format
 msgid "Descending Order"
 msgstr "Azalan sıra ilə"
 
-#: kalendarapplication.cpp:464
+#: kalendarapplication.cpp:471
 #, kde-format
 msgid "Show Completed Tasks"
 msgstr "Tamamlanmış tapşırıqları gösrərmək"
 
-#: kalendarapplication.cpp:478
+#: kalendarapplication.cpp:485
 #, kde-format
 msgid "Open Command Bar"
 msgstr "Əmr zolağını açın"
 
-#: kalendarapplication.cpp:488
+#: kalendarapplication.cpp:495
 #, kde-format
 msgid "Refresh All"
 msgstr "Hamısını yeniləyin"
 
-#: kalendarapplication.cpp:641 mail/qml/mailpartview/ErrorPart.qml:26
+#: kalendarapplication.cpp:648 mail/qml/mailpartview/ErrorPart.qml:26
 #, kde-format
 msgid "An error occurred: %1"
 msgstr "Xəta baş verdi: %1"
