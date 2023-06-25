@@ -64,20 +64,23 @@ void DateTimeState::resetTime()
     Q_EMIT selectedDateChanged();
 }
 
+void DateTimeState::setSelectedYearMonthDay(const int year, const int month, const int day)
+{
+    m_selectedDate.setDate(year, month, day);
+    Q_EMIT selectedDateChanged();
+}
+
 void DateTimeState::setSelectedDay(const int day)
 {
-    m_selectedDate.setDate(m_selectedDate.year(), m_selectedDate.month(), day);
-    Q_EMIT selectedDateChanged();
+    setSelectedYearMonthDay(m_selectedDate.year(), m_selectedDate.month(), day);
 }
 
 void DateTimeState::setSelectedMonth(const int month)
 {
-    m_selectedDate.setDate(m_selectedDate.year(), month, m_selectedDate.day());
-    Q_EMIT selectedDateChanged();
+    setSelectedYearMonthDay(m_selectedDate.year(), month, m_selectedDate.day());
 }
 
 void DateTimeState::setSelectedYear(const int year)
 {
-    m_selectedDate.setDate(year, m_selectedDate.month(), m_selectedDate.day());
-    Q_EMIT selectedDateChanged();
+    setSelectedYearMonthDay(year, m_selectedDate.month(), m_selectedDate.day());
 }

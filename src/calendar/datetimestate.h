@@ -28,6 +28,7 @@ public:
     QDate firstDayOfMonth() const;
     QDate firstDayOfWeek() const;
 
+    Q_INVOKABLE void setSelectedYearMonthDay(const int year, const int month, const int day);
     Q_INVOKABLE void setSelectedDay(const int day);
     Q_INVOKABLE void setSelectedMonth(const int month);
     Q_INVOKABLE void setSelectedYear(const int year);
