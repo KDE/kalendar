@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-24 00:51+0000\n"
-"PO-Revision-Date: 2023-05-18 05:44+0200\n"
+"PO-Revision-Date: 2023-06-24 07:47+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1813,7 +1813,7 @@ msgstr "ელფოტა:"
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:955
 #, kde-format
 msgid "Required"
-msgstr "საჭიროა"
+msgstr "სავალდებულო"
 
 #: contents/ui/Dialogs/IncidenceEditorPage.qml:964
 #, kde-format
@@ -2096,10 +2096,9 @@ msgid "New calendar  created from imported file successfully."
 msgstr "შემოტანილი ფაილიდან ახალი კალენდარი წარმატებით შეიქმნა."
 
 #: contents/ui/main.qml:374
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule"
-msgstr "%1-ის მორგება"
+msgstr "გეგმის მორგება"
 
 #: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
@@ -2344,7 +2343,7 @@ msgstr "დასასრულებელი ამოცანების �
 #: kalendarapplication.cpp:36
 #, kde-format
 msgid "Sort"
-msgstr "სორტი"
+msgstr "დალაგება"
 
 #: contents/ui/MainViews/TodoView.qml:93
 #, kde-format
@@ -2427,18 +2426,17 @@ msgstr "აირჩიეთ კალენდარის ფერი"
 #: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
 #, kde-format
 msgid "Configure Availability"
-msgstr ""
+msgstr "წვდომადობის მორგება"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Free/Busy"
-msgstr "%1-ის მორგება"
+msgstr "თავისუფალი/დაკავებულის მორგება"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
 #, kde-format
 msgid "Free/Busy Publishing settings"
-msgstr ""
+msgstr "თავისუფალი/დაკავებულის გამოქვეყნების მორგება"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:33
 #, kde-format
@@ -2448,75 +2446,74 @@ msgid ""
 "that are already marked as busy are disclosed, without revealing the "
 "specific reasons for your availability."
 msgstr ""
+"როცა თქვენს გეგმაზე ინფორმაციას აქვეყნებთ, ამით სხვებს საშუალებას აძლევთ, "
+"თქვენი გეგმა გაითვალისწინონ და შეხვედრა ისე ჩანიშნონ.მხოლოდ დროები, რომლებიც "
+"მონიშნულია, როგორც დაკავებული, გამოქვეყნდება, ამის მიზეზის მითითების გარეშე."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
 #, kde-format
 msgid "Publish your free/busy information automatically"
-msgstr ""
+msgstr "თქვენი თავისუფალი/დაკავებულობის ინფორმაციის ავტომატური გამოქვეყნება"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
 #, kde-format
 msgid "Minimum time (in minutes) between uploads"
-msgstr ""
+msgstr "მინიმალური დრო ატვირთვებს შორის, წუთებში"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:63
 #, kde-format
 msgid "Number of days of free/busy info to publish: "
-msgstr ""
+msgstr "გამოსაქვეყნებელი თავისუფალი/დაკავებულობის დღეების რაოდენობა: "
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Server information"
-msgstr "პირადი ინფორმაცია"
+msgstr "ინფორმაცია სერვერის შესახებ"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
 #, kde-format
 msgid "Server URL"
-msgstr ""
+msgstr "სერვერის URL"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "მომხმარებლის სახელი"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "პაროლი"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
 #, kde-format
 msgid "Save password"
-msgstr ""
+msgstr "პაროლის შენახვა"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
 #, kde-format
 msgid "Click here to publish Free/Busy information manually"
-msgstr ""
+msgstr "დააწკაპუნეთ თავისუფალ/დაკავებულობის ხელით გამოსაქვეყნებლად"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
-#, fuzzy, kde-format
-#| msgid "Email Address"
-#| msgid_plural "Email Addresses"
+#, kde-format
 msgid "Email Free/Busy"
-msgstr "ელფოსტის მისამართი"
+msgstr "თავისუფალი/დაკავებული ელფოსტა"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
 #, kde-format
 msgid "Enter email of recipient..."
-msgstr ""
+msgstr "შეიყვანეთ მიმღების ელფოსტა…"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
-#, fuzzy, kde-format
-#| msgid "General settings"
+#, kde-format
 msgid "Free/Busy Retrieval settings"
-msgstr "ზოგადი პარამეტრები"
+msgstr "თავისუფალი/დაკავებულის მიღების მორგება"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
 #, kde-format
@@ -2524,21 +2521,23 @@ msgid ""
 "By retrieving Free/Busy information that others have published, you can take "
 "their calendar into account when inviting them to a meeting."
 msgstr ""
+"სხვების განრიგის ინფორმაციის მიღებით თქვენ შეგიძლიათ, შეხვედრის დანიშვნისას "
+"მათი კალენდარი მხედველობაში მიიღოთ."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
 #, kde-format
 msgid "Retrieve others' free/busy information automatically"
-msgstr ""
+msgstr "სხვების თავისუფალი/დაკავებულობის ინფორმაციის ავტომატური გამოთხოვა"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
 #, kde-format
 msgid "Use full email address for retrieval"
-msgstr ""
+msgstr "მისაღებად ელფოსტის სრული მისამართის გამოყენება"
 
 #: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
 #, kde-format
 msgid "Free/Busy"
-msgstr ""
+msgstr "თავისუფალი/დაკავებული"
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2909,10 +2908,9 @@ msgid "New Contact Group…"
 msgstr "კონტაქტების ახალი ჯგუფი…"
 
 #: kalendarapplication.cpp:333
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule…"
-msgstr "%1-ის მორგება"
+msgstr "გეგმის მორგება…"
 
 #: kalendarapplication.cpp:346
 #, kde-format
