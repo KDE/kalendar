@@ -217,7 +217,7 @@ QtObject {
 
     function openDayLayer(selectedDate) {
         if(!isNaN(selectedDate.getTime())) {
-            appMain.selectedDate = selectedDate;
+            DateTimeState.setSelectedYearMonthDay(selectedDate.getFullYear(), selectedDate.getMonth() + 1, selectedDate.getDate());
             appMain.dayViewAction.trigger();
         }
     }
