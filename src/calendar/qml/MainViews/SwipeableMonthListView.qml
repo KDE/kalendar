@@ -40,7 +40,7 @@ PathView {
     Component.onCompleted: currentIndex = count / 2;
     onCurrentIndexChanged: if (currentIndex >= count - 2) {
         model.addDates(true);
-    } else if (currentIndex <= 1) {
+    } else if (currentIndex <= 2) {
         model.addDates(false);
     }
 

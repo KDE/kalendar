@@ -20,7 +20,9 @@ HourlyIncidenceModel::HourlyIncidenceModel(QObject *parent)
 int HourlyIncidenceModel::rowCount(const QModelIndex &parent) const
 {
     // Number of weeks
-    Q_ASSERT(!parent.isValid());
+    if (parent.isValid()) {
+        return 0;
+    }
 
     if (mSourceModel) {
         return qMax(mSourceModel->length(), 1);
