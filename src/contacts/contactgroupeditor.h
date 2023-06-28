@@ -75,7 +75,7 @@ public:
         CreateMode, ///< Creates a new contact
         EditMode ///< Edits an existing contact
     };
-    Q_ENUM(Mode);
+    Q_ENUM(Mode)
 
     /**
      * Creates a new contact group editor backend.

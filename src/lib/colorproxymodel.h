@@ -17,7 +17,7 @@ public:
     enum Roles {
         isResource = Akonadi::EntityTreeModel::UserRole + 1,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     explicit ColorProxyModel(QObject *parent = nullptr);
     QVariant data(const QModelIndex &index, int role) const override;

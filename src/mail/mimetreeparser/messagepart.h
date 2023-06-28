@@ -192,7 +192,7 @@ public:
     bool isHtml() const Q_DECL_OVERRIDE
     {
         return true;
-    };
+    }
 };
 
 class AlternativeMessagePart : public MessagePart

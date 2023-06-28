@@ -18,7 +18,7 @@ public:
     Q_INVOKABLE QString linkify(const QString &s)
     {
         return ::HtmlUtils::linkify(s);
-    };
+    }
 
     Q_INVOKABLE QString toHtml(const QString &s)
     {

@@ -80,7 +80,7 @@ public:
         Organization, ///< The organization name
         CustomName ///< Let the user input a display name
     };
-    Q_ENUM(DisplayType);
+    Q_ENUM(DisplayType)
 
     AddresseeWrapper(QObject *parent = nullptr);
     ~AddresseeWrapper() override;
