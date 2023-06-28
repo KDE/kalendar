@@ -14,7 +14,7 @@ public:
         NameRole = Qt::UserRole,
         ValueRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
 
     enum Header {
         To,
