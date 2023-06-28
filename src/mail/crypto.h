@@ -94,10 +94,10 @@ std::pair<DecryptionResult, VerificationResult> decryptAndVerify(CryptoProtocol 
 DecryptionResult decrypt(CryptoProtocol protocol, const QByteArray &ciphertext, QByteArray &outdata);
 VerificationResult verifyDetachedSignature(CryptoProtocol protocol, const QByteArray &signature, const QByteArray &outdata);
 VerificationResult verifyOpaqueSignature(CryptoProtocol protocol, const QByteArray &signature, QByteArray &outdata);
-};
+}
 #endif
 
-Q_DECLARE_METATYPE(Crypto::Key);
+Q_DECLARE_METATYPE(Crypto::Key)
 
 QDebug operator<<(QDebug d, const Crypto::Key &);
 QDebug operator<<(QDebug d, const Crypto::Error &);
