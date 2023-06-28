@@ -4,9 +4,10 @@
 #pragma once
 
 #include <QAbstractListModel>
-#include <KIdentityManagement/IdentityManager>
 
-using namespace KIdentityManagement;
+namespace KIdentityManagementCore {
+class IdentityManager;
+}
 
 class IdentityModel : public QAbstractListModel
 {
@@ -31,5 +32,5 @@ private:
     void reloadUoidList();
     
     QList<int> m_identitiesUoid;
-    IdentityManager *const m_identityManager;
+    KIdentityManagementCore::IdentityManager *const m_identityManager;
 };

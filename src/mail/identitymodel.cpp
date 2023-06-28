@@ -2,15 +2,16 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "identitymodel.h"
-#include <KIdentityManagement/Identity>
+#include <KIdentityManagementCore/Identity>
+#include <KIdentityManagementCore/IdentityManager>
 #include <KLocalizedString>
 
 
 IdentityModel::IdentityModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_identityManager(IdentityManager::self())
+    , m_identityManager(KIdentityManagementCore::IdentityManager::self())
 {
-    connect(m_identityManager, &KIdentityManagement::IdentityManager::needToReloadIdentitySettings, this, &IdentityModel::reloadUoidList);
+    connect(m_identityManager, &KIdentityManagementCore::IdentityManager::needToReloadIdentitySettings, this, &IdentityModel::reloadUoidList);
     reloadUoidList();
 
 }
