@@ -406,12 +406,23 @@ Column {
                                                 DayGridViewIncidenceDelegate {
                                                     id: dayGridViewIncidenceDelegate
                                                     objectName: "dayGridViewIncidenceDelegate"
+
+                                                    required property var modelData
+
+                                                    starts: dayGridViewIncidenceDelegate.modelData.starts
+                                                    duration: dayGridViewIncidenceDelegate.modelData.duration
+                                                    incidenceId: dayGridViewIncidenceDelegate.modelData.incidenceId
+                                                    occurrenceDate: dayGridViewIncidenceDelegate.modelData.startTime
+                                                    occurrenceEndDate: dayGridViewIncidenceDelegate.modelData.endTime
+                                                    incidencePtr: dayGridViewIncidenceDelegate.modelData.incidencePtr
+                                                    allDay: dayGridViewIncidenceDelegate.modelData.allDay
+                                                    isDark: viewColumn.isDark
+
                                                     dayWidth: viewColumn.dayWidth
                                                     height: viewColumn.allDayViewDelegateHeight
                                                     parentViewSpacing: viewColumn.gridLineWidth
                                                     horizontalSpacing: linesRepeater.spacing
                                                     openOccurrenceId: viewColumn.openOccurrence ? viewColumn.openOccurrence.incidenceId : ""
-                                                    isDark: viewColumn.isDark
                                                     reactToCurrentMonth: false
                                                     dragDropEnabled: viewColumn.dragDropEnabled
                                                 }
