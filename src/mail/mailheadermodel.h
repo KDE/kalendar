@@ -25,7 +25,7 @@ public:
     };
     Q_ENUM(Header);
 
-    MailHeaderModel(QObject *parent = nullptr);
+    explicit MailHeaderModel(QObject *parent = nullptr);
     ~MailHeaderModel() override = default;
 
     QVariant data(const QModelIndex &index, int role) const override;

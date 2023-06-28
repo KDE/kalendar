@@ -24,7 +24,7 @@ class MailManager : public QObject
     Q_PROPERTY(QString selectedFolderName READ selectedFolderName NOTIFY selectedFolderNameChanged)
 
 public:
-    MailManager(QObject *parent = nullptr);
+    explicit MailManager(QObject *parent = nullptr);
     ~MailManager() override = default;
 
     bool loading() const;
