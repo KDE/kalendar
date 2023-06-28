@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-24 00:51+0000\n"
-"PO-Revision-Date: 2023-06-24 01:35+0100\n"
+"PO-Revision-Date: 2023-06-24 10:15+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -2427,8 +2427,7 @@ msgid "Choose Calendar Color"
 msgstr "Escolher a Cor do Calendário"
 
 #: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
-#, fuzzy, kde-format
-#| msgid "Configure Availablility"
+#, kde-format
 msgid "Configure Availability"
 msgstr "Configurar a Disponibilidade"
 

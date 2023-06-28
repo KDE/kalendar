@@ -29,7 +29,7 @@ Kirigami.BasicListItem {
             Layout.maximumHeight: parent.height
             Layout.maximumWidth: parent.height
             source: ContactManager.decorationToUrl(avatarIcon)
-            name: name
+            name: listItem.name
         }
 
         Kirigami.Heading {

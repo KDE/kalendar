@@ -15,6 +15,12 @@ Kirigami.ScrollablePage {
     title: MailManager.selectedFolderName
     readonly property int mode: Kalendar.KalendarApplication.Mail
 
+    actions.main: Kirigami.Action {
+        icon.name: 'mail-send'
+        text: i18nc('@action:menu', 'Create')
+        onTriggered: applicationWindow().pageStack.pushDialogLayer(Qt.resolvedUrl("./MailComposer.qml"))
+    }
+
     Connections {
         target: Kalendar.Filter
         function onNameChanged() {

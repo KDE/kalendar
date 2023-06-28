@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-24 00:51+0000\n"
-"PO-Revision-Date: 2023-06-23 17:31+0300\n"
+"PO-Revision-Date: 2023-06-24 07:58+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -2465,8 +2465,7 @@ msgid "Choose Calendar Color"
 msgstr "Виберіть колір календаря"
 
 #: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
-#, fuzzy, kde-format
-#| msgid "Configure Availablility"
+#, kde-format
 msgid "Configure Availability"
 msgstr "Налаштувати доступність"
 

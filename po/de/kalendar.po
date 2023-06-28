@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-24 00:51+0000\n"
-"PO-Revision-Date: 2023-05-18 19:57+0200\n"
+"PO-Revision-Date: 2023-06-25 17:00+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2104,10 +2104,9 @@ msgstr ""
 "Ein neuer Kalender wurde von der importierten Datei erfolgreich erstellt."
 
 #: contents/ui/main.qml:374
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule"
-msgstr "%1 einrichten"
+msgstr "Terminplan einrichten"
 
 #: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
@@ -2436,7 +2435,7 @@ msgstr "Kalenderfarbe auswählen"
 #: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
 #, kde-format
 msgid "Configure Availability"
-msgstr ""
+msgstr "Verfügbarkeit einrichten"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
 #, fuzzy, kde-format
@@ -2461,7 +2460,7 @@ msgstr ""
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
 #, kde-format
 msgid "Publish your free/busy information automatically"
-msgstr ""
+msgstr "Frei/Belegt-Informationen automatisch veröffentlichen"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
 #, kde-format
@@ -2475,34 +2474,33 @@ msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Server information"
-msgstr "Persönliche Informationen"
+msgstr "Server-Informationen"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
 #, kde-format
 msgid "Server URL"
-msgstr ""
+msgstr "Server-Adresse"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
 #, kde-format
 msgid "Save password"
-msgstr ""
+msgstr "Passwort speichern"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
 #, kde-format
@@ -2519,7 +2517,7 @@ msgstr "E-Mail-Adresse"
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
 #, kde-format
 msgid "Enter email of recipient..."
-msgstr ""
+msgstr "E-Mail-Adresse des Empfängers eingeben ..."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
 #, fuzzy, kde-format
@@ -2533,6 +2531,9 @@ msgid ""
 "By retrieving Free/Busy information that others have published, you can take "
 "their calendar into account when inviting them to a meeting."
 msgstr ""
+"Durch die Verwendung der Frei/Belegt-Informationen, die andere "
+"veröffentlicht haben, können Sie deren bestehende Termine berücksichtigen, "
+"wenn Sie eine Einladung zu einer Besprechung versenden."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
 #, kde-format
@@ -2542,12 +2543,12 @@ msgstr ""
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
 #, kde-format
 msgid "Use full email address for retrieval"
-msgstr ""
+msgstr "Beim Abholen die vollständige E-Mail-Adresse verwenden"
 
 #: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
 #, kde-format
 msgid "Free/Busy"
-msgstr ""
+msgstr "Frei/Belegt"
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2918,10 +2919,9 @@ msgid "New Contact Group…"
 msgstr "Neue Kontaktgruppe ..."
 
 #: kalendarapplication.cpp:333
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule…"
-msgstr "%1 einrichten"
+msgstr "Terminplan einrichten ..."
 
 #: kalendarapplication.cpp:346
 #, kde-format

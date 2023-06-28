@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-24 00:51+0000\n"
-"PO-Revision-Date: 2023-05-17 09:50+0200\n"
+"PO-Revision-Date: 2023-06-24 13:21+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2103,10 +2103,9 @@ msgid "New calendar  created from imported file successfully."
 msgstr "S'ha creat un calendari nou a partir del fitxer importat correctament."
 
 #: contents/ui/main.qml:374
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule"
-msgstr "Configura %1"
+msgstr "Configura la planificació"
 
 #: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
@@ -2435,18 +2434,17 @@ msgstr "Escolliu el color del calendari"
 #: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
 #, kde-format
 msgid "Configure Availability"
-msgstr ""
+msgstr "Configura la disponibilitat"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Free/Busy"
-msgstr "Configura %1"
+msgstr "Configura lliure/ocupat"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
 #, kde-format
 msgid "Free/Busy Publishing settings"
-msgstr ""
+msgstr "Configureu la publicació de lliure/ocupat"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:33
 #, kde-format
@@ -2456,75 +2454,75 @@ msgid ""
 "that are already marked as busy are disclosed, without revealing the "
 "specific reasons for your availability."
 msgstr ""
+"Quan publiqueu la vostra informació de lliure/ocupat, es permet que altres "
+"consideren la disponibilitat del calendari quan vos conviden a una reunió. "
+"Només es divulguen les hores que ja estan marcades com a ocupades, sense "
+"revelar les raons específiques de la vostra disponibilitat."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
 #, kde-format
 msgid "Publish your free/busy information automatically"
-msgstr ""
+msgstr "Publica automàticament la informació de lliure/ocupat"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
 #, kde-format
 msgid "Minimum time (in minutes) between uploads"
-msgstr ""
+msgstr "Temps mínim entre pujades (en minuts)"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:63
 #, kde-format
 msgid "Number of days of free/busy info to publish: "
-msgstr ""
+msgstr "Nombre de dies de la informació lliure/ocupat que s'ha de publicar: "
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Server information"
-msgstr "Informació personal"
+msgstr "Informació del servidor"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
 #, kde-format
 msgid "Server URL"
-msgstr ""
+msgstr "URL del servidor"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "Nom d'usuari"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Contrasenya"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
 #, kde-format
 msgid "Save password"
-msgstr ""
+msgstr "Guarda la contrasenya"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
 #, kde-format
 msgid "Click here to publish Free/Busy information manually"
-msgstr ""
+msgstr "Feu clic ací per a publicar manualment la informació de lliure/ocupat"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
-#, fuzzy, kde-format
-#| msgid "Email Address"
-#| msgid_plural "Email Addresses"
+#, kde-format
 msgid "Email Free/Busy"
-msgstr "Adreça de correu electrònic"
+msgstr "Adreça lliure/ocupat"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
 #, kde-format
 msgid "Enter email of recipient..."
-msgstr ""
+msgstr "Introduïu el correu electrònic del destinatari..."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
-#, fuzzy, kde-format
-#| msgid "General settings"
+#, kde-format
 msgid "Free/Busy Retrieval settings"
-msgstr "Configuració general"
+msgstr "Configuració de recuperació de lliure/ocupat"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
 #, kde-format
@@ -2532,21 +2530,23 @@ msgid ""
 "By retrieving Free/Busy information that others have published, you can take "
 "their calendar into account when inviting them to a meeting."
 msgstr ""
+"En recuperar la informació de lliure/ocupat que altres han publicat, podreu "
+"tindre en compte el seu calendari en convidar-los a una reunió."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
 #, kde-format
 msgid "Retrieve others' free/busy information automatically"
-msgstr ""
+msgstr "Recupera automàticament la informació de lliure/ocupat d'altres"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
 #, kde-format
 msgid "Use full email address for retrieval"
-msgstr ""
+msgstr "Utilitza l'adreça de correu completa per a la recuperació"
 
 #: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
 #, kde-format
 msgid "Free/Busy"
-msgstr ""
+msgstr "Lliure/ocupat"
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2924,10 +2924,9 @@ msgid "New Contact Group…"
 msgstr "Grup de contactes nou…"
 
 #: kalendarapplication.cpp:333
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule…"
-msgstr "Configura %1"
+msgstr "Configura la planificació…"
 
 #: kalendarapplication.cpp:346
 #, kde-format
