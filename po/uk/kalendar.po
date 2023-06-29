@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-24 00:51+0000\n"
+"POT-Creation-Date: 2023-06-29 00:47+0000\n"
 "PO-Revision-Date: 2023-06-24 07:58+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -3028,6 +3028,12 @@ msgstr "%1 (типовий)"
 msgid "Image request has been cancelled"
 msgstr "Запит щодо зображення було скасовано"
 
+#: mail/identitymodel.cpp:41
+#, kde-format
+msgctxt "Separator between identity name and email address"
+msgid " - "
+msgstr ""
+
 #: mail/mailmodel.cpp:48
 #, kde-format
 msgctxt "displayed as subject when the subject of a mail is empty"
@@ -3105,22 +3111,22 @@ msgstr "Не вдалося розшифрувати дані."
 msgid "Move to trash"
 msgstr "Пересунути до смітника"
 
-#: mail/qml/FolderView.qml:48
+#: mail/qml/FolderView.qml:54
 #, kde-format
 msgid "Don't Mark as Important"
 msgstr "Не позначати як важливе"
 
-#: mail/qml/FolderView.qml:86
+#: mail/qml/FolderView.qml:92
 #, kde-format
 msgid "No mailbox selected"
 msgstr "Немає вибраної поштової скриньки"
 
-#: mail/qml/FolderView.qml:87
+#: mail/qml/FolderView.qml:93
 #, kde-format
 msgid "Select a mailbox from the sidebar."
 msgstr "Виберіть поштову скриньку на бічній панелі."
 
-#: mail/qml/FolderView.qml:94
+#: mail/qml/FolderView.qml:100
 #, kde-format
 msgid "Mailbox is empty"
 msgstr "Поштова скринька порожня"
@@ -3129,6 +3135,56 @@ msgstr "Поштова скринька порожня"
 #, kde-format
 msgid "Mailboxes"
 msgstr "Поштові скриньки"
+
+#: mail/qml/MailComposer.qml:15
+#, fuzzy, kde-format
+#| msgid "Messaging"
+msgctxt "@title:window"
+msgid "New Message"
+msgstr "Обмін повідомленнями"
+
+#: mail/qml/MailComposer.qml:28
+#, kde-format
+msgid "From:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:39
+#, kde-format
+msgid "Identity:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:67
+#, kde-format
+msgid "To:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:68
+#, kde-format
+msgid "CC:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:69
+#, kde-format
+msgid "BCC:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:70
+#, kde-format
+msgid "Reply-To:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:90
+#, fuzzy, kde-format
+#| msgctxt "displayed as subject when the subject of a mail is empty"
+#| msgid "No Subject"
+msgid "Subject:"
+msgstr "Без теми"
+
+#: mail/qml/MailComposer.qml:139
+#, fuzzy, kde-format
+#| msgid "Send SMS"
+msgid "Send"
+msgstr "Надіслати SMS"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
