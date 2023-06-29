@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-24 00:51+0000\n"
+"POT-Creation-Date: 2023-06-29 00:47+0000\n"
 "PO-Revision-Date: 2023-06-25 15:58+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -3003,6 +3003,12 @@ msgstr "%1 (Par défaut)"
 msgid "Image request has been cancelled"
 msgstr "La demande d'image a été annulée."
 
+#: mail/identitymodel.cpp:41
+#, kde-format
+msgctxt "Separator between identity name and email address"
+msgid " - "
+msgstr ""
+
 #: mail/mailmodel.cpp:48
 #, kde-format
 msgctxt "displayed as subject when the subject of a mail is empty"
@@ -3078,22 +3084,22 @@ msgstr "Impossible de déchiffrer les données."
 msgid "Move to trash"
 msgstr "Déplacer vers le corbeille"
 
-#: mail/qml/FolderView.qml:48
+#: mail/qml/FolderView.qml:54
 #, kde-format
 msgid "Don't Mark as Important"
 msgstr "Ne pas marquer comme important"
 
-#: mail/qml/FolderView.qml:86
+#: mail/qml/FolderView.qml:92
 #, kde-format
 msgid "No mailbox selected"
 msgstr "Aucune boîte aux lettres sélectionnée"
 
-#: mail/qml/FolderView.qml:87
+#: mail/qml/FolderView.qml:93
 #, kde-format
 msgid "Select a mailbox from the sidebar."
 msgstr "Sélectionnez un boîte aux lettre à partir de la barre latérale."
 
-#: mail/qml/FolderView.qml:94
+#: mail/qml/FolderView.qml:100
 #, kde-format
 msgid "Mailbox is empty"
 msgstr "La boîte aux lettres est vide."
@@ -3102,6 +3108,56 @@ msgstr "La boîte aux lettres est vide."
 #, kde-format
 msgid "Mailboxes"
 msgstr "Boîtes aux lettres"
+
+#: mail/qml/MailComposer.qml:15
+#, fuzzy, kde-format
+#| msgid "Messaging"
+msgctxt "@title:window"
+msgid "New Message"
+msgstr "Messagerie"
+
+#: mail/qml/MailComposer.qml:28
+#, kde-format
+msgid "From:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:39
+#, kde-format
+msgid "Identity:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:67
+#, kde-format
+msgid "To:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:68
+#, kde-format
+msgid "CC:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:69
+#, kde-format
+msgid "BCC:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:70
+#, kde-format
+msgid "Reply-To:"
+msgstr ""
+
+#: mail/qml/MailComposer.qml:90
+#, fuzzy, kde-format
+#| msgctxt "displayed as subject when the subject of a mail is empty"
+#| msgid "No Subject"
+msgid "Subject:"
+msgstr "Aucun objet"
+
+#: mail/qml/MailComposer.qml:139
+#, fuzzy, kde-format
+#| msgid "Send SMS"
+msgid "Send"
+msgstr "Envoyer un SMS"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
