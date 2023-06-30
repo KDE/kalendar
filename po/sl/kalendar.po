@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-29 00:47+0000\n"
-"PO-Revision-Date: 2023-06-24 07:35+0200\n"
+"PO-Revision-Date: 2023-06-29 07:18+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.3.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3029,7 +3029,7 @@ msgstr "Zahtevek za sliko je bil preklican"
 #, kde-format
 msgctxt "Separator between identity name and email address"
 msgid " - "
-msgstr ""
+msgstr " - "
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -3135,54 +3135,50 @@ msgid "Mailboxes"
 msgstr "Poštni nabiralniki"
 
 #: mail/qml/MailComposer.qml:15
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Message"
-msgstr "Sporočila"
+msgstr "Novo sporočilo"
 
 #: mail/qml/MailComposer.qml:28
 #, kde-format
 msgid "From:"
-msgstr ""
+msgstr "Od:"
 
 #: mail/qml/MailComposer.qml:39
 #, kde-format
 msgid "Identity:"
-msgstr ""
+msgstr "Identiteta:"
 
 #: mail/qml/MailComposer.qml:67
 #, kde-format
 msgid "To:"
-msgstr ""
+msgstr "Za:"
 
 #: mail/qml/MailComposer.qml:68
 #, kde-format
 msgid "CC:"
-msgstr ""
+msgstr "Kp:"
 
 #: mail/qml/MailComposer.qml:69
 #, kde-format
 msgid "BCC:"
-msgstr ""
+msgstr "Skp:"
 
 #: mail/qml/MailComposer.qml:70
 #, kde-format
 msgid "Reply-To:"
-msgstr ""
+msgstr "Odgovor-na:"
 
 #: mail/qml/MailComposer.qml:90
-#, fuzzy, kde-format
-#| msgctxt "displayed as subject when the subject of a mail is empty"
-#| msgid "No Subject"
+#, kde-format
 msgid "Subject:"
-msgstr "Ni predmeta"
+msgstr "Predmet:"
 
 #: mail/qml/MailComposer.qml:139
-#, fuzzy, kde-format
-#| msgid "Send SMS"
+#, kde-format
 msgid "Send"
-msgstr "Pošlji SMS"
+msgstr "Pošlji"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format

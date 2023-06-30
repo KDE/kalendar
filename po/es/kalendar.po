@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-29 00:47+0000\n"
-"PO-Revision-Date: 2023-06-25 00:53+0200\n"
+"PO-Revision-Date: 2023-06-30 00:56+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -3002,7 +3002,7 @@ msgstr "Se ha cancelado la solicitud de la imagen"
 #, kde-format
 msgctxt "Separator between identity name and email address"
 msgid " - "
-msgstr ""
+msgstr " - "
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -3105,54 +3105,50 @@ msgid "Mailboxes"
 msgstr "Buzones"
 
 #: mail/qml/MailComposer.qml:15
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Message"
-msgstr "Mensajería"
+msgstr "Nuevo mensaje"
 
 #: mail/qml/MailComposer.qml:28
 #, kde-format
 msgid "From:"
-msgstr ""
+msgstr "De:"
 
 #: mail/qml/MailComposer.qml:39
 #, kde-format
 msgid "Identity:"
-msgstr ""
+msgstr "Identidad:"
 
 #: mail/qml/MailComposer.qml:67
 #, kde-format
 msgid "To:"
-msgstr ""
+msgstr "Para:"
 
 #: mail/qml/MailComposer.qml:68
 #, kde-format
 msgid "CC:"
-msgstr ""
+msgstr "CC:"
 
 #: mail/qml/MailComposer.qml:69
 #, kde-format
 msgid "BCC:"
-msgstr ""
+msgstr "BCC:"
 
 #: mail/qml/MailComposer.qml:70
 #, kde-format
 msgid "Reply-To:"
-msgstr ""
+msgstr "Responder a:"
 
 #: mail/qml/MailComposer.qml:90
-#, fuzzy, kde-format
-#| msgctxt "displayed as subject when the subject of a mail is empty"
-#| msgid "No Subject"
+#, kde-format
 msgid "Subject:"
-msgstr "Sin asunto"
+msgstr "Asunto:"
 
 #: mail/qml/MailComposer.qml:139
-#, fuzzy, kde-format
-#| msgid "Send SMS"
+#, kde-format
 msgid "Send"
-msgstr "Enviar SMS"
+msgstr "Enviar"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
