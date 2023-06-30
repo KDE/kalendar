@@ -120,7 +120,7 @@ Kirigami.AbstractListItem {
             anchors.fill: parent
             acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-            onClicked: {
+            onClicked: mouse => {
                 if (mouse.button === Qt.RightButton) {
                     root.contextMenuRequested();
                 } else if (mouse.button === Qt.LeftButton) {

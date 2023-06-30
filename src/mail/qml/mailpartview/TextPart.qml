@@ -41,7 +41,7 @@ Item {
 
         text: content.substring(0, 100000).replace(/\u00A0/g,' ') //The TextEdit deals poorly with messages that are too large.
         color: embedded ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.textColor
-        onLinkActivated: Qt.openUrlExternally(link)
+        onLinkActivated: link => Qt.openUrlExternally(link)
 
         onHoveredLinkChanged: if (hoveredLink.length > 0) {
             applicationWindow().hoverLinkIndicator.text = hoveredLink;
