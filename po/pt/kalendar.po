@@ -3105,12 +3105,12 @@ msgstr "Mensagens"
 #: mail/qml/MailComposer.qml:28
 #, kde-format
 msgid "From:"
-msgstr ""
+msgstr "De:"
 
 #: mail/qml/MailComposer.qml:39
 #, kde-format
 msgid "Identity:"
-msgstr ""
+msgstr "Identidade:"
 
 #: mail/qml/MailComposer.qml:67
 #, kde-format
@@ -3120,12 +3120,12 @@ msgstr ""
 #: mail/qml/MailComposer.qml:68
 #, kde-format
 msgid "CC:"
-msgstr ""
+msgstr "CC:"
 
 #: mail/qml/MailComposer.qml:69
 #, kde-format
 msgid "BCC:"
-msgstr ""
+msgstr "BCC:"
 
 #: mail/qml/MailComposer.qml:70
 #, kde-format
@@ -3133,17 +3133,14 @@ msgid "Reply-To:"
 msgstr ""
 
 #: mail/qml/MailComposer.qml:90
-#, fuzzy, kde-format
-#| msgctxt "displayed as subject when the subject of a mail is empty"
-#| msgid "No Subject"
+#, kde-format
 msgid "Subject:"
-msgstr "Sem Assunto"
+msgstr "Assunto:"
 
 #: mail/qml/MailComposer.qml:139
-#, fuzzy, kde-format
-#| msgid "Send SMS"
+#, kde-format
 msgid "Send"
-msgstr "Enviar um SMS"
+msgstr "Enviar"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
