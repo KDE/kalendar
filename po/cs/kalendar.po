@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-29 00:47+0000\n"
-"PO-Revision-Date: 2023-06-28 15:46+0200\n"
+"PO-Revision-Date: 2023-06-29 11:02+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -2997,7 +2997,7 @@ msgstr ""
 #, kde-format
 msgctxt "Separator between identity name and email address"
 msgid " - "
-msgstr ""
+msgstr " - "
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -3100,54 +3100,50 @@ msgid "Mailboxes"
 msgstr "Poštovní schránky"
 
 #: mail/qml/MailComposer.qml:15
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Message"
-msgstr "Zprávy"
+msgstr "Nová zpráva"
 
 #: mail/qml/MailComposer.qml:28
 #, kde-format
 msgid "From:"
-msgstr ""
+msgstr "Od:"
 
 #: mail/qml/MailComposer.qml:39
 #, kde-format
 msgid "Identity:"
-msgstr ""
+msgstr "Identita:"
 
 #: mail/qml/MailComposer.qml:67
 #, kde-format
 msgid "To:"
-msgstr ""
+msgstr "Do:"
 
 #: mail/qml/MailComposer.qml:68
 #, kde-format
 msgid "CC:"
-msgstr ""
+msgstr "Kopie: "
 
 #: mail/qml/MailComposer.qml:69
 #, kde-format
 msgid "BCC:"
-msgstr ""
+msgstr "Skrytá kopie:"
 
 #: mail/qml/MailComposer.qml:70
 #, kde-format
 msgid "Reply-To:"
-msgstr ""
+msgstr "Odpovědět komu:"
 
 #: mail/qml/MailComposer.qml:90
-#, fuzzy, kde-format
-#| msgctxt "displayed as subject when the subject of a mail is empty"
-#| msgid "No Subject"
+#, kde-format
 msgid "Subject:"
-msgstr "Žádný předmět"
+msgstr "Předmět:"
 
 #: mail/qml/MailComposer.qml:139
-#, fuzzy, kde-format
-#| msgid "Send SMS"
+#, kde-format
 msgid "Send"
-msgstr "Poslat SMS"
+msgstr "Odeslat"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format

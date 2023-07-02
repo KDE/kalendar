@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-29 00:47+0000\n"
-"PO-Revision-Date: 2023-05-18 18:23+0200\n"
+"PO-Revision-Date: 2023-06-29 10:31+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2100,10 +2100,9 @@ msgid "New calendar  created from imported file successfully."
 msgstr "Nuovo calendario creato correttamente dal file importato."
 
 #: contents/ui/main.qml:374
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule"
-msgstr "Configura %1"
+msgstr "Configura pianificazione"
 
 #: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
@@ -2432,18 +2431,17 @@ msgstr "Scegli il colore del calendario"
 #: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
 #, kde-format
 msgid "Configure Availability"
-msgstr ""
+msgstr "Configura la disponibilità"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Free/Busy"
-msgstr "Configura %1"
+msgstr "Configura la disponibilità"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
 #, kde-format
 msgid "Free/Busy Publishing settings"
-msgstr ""
+msgstr "Impostazioni di pubblicazione della disponibilità"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:33
 #, kde-format
@@ -2453,75 +2451,76 @@ msgid ""
 "that are already marked as busy are disclosed, without revealing the "
 "specific reasons for your availability."
 msgstr ""
+"Quando pubblichi le tue informazioni di disponibilità, consente ad altri di "
+"prendere in considerazione la disponibilità del tuo calendario quando ti "
+"invitano a una riunione. Vengono divulgati solo gli orari già contrassegnati "
+"come occupati, senza rivelare i motivi specifici della tua disponibilità."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
 #, kde-format
 msgid "Publish your free/busy information automatically"
-msgstr ""
+msgstr "Pubblica automaticamente le informazioni di disponibilità"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
 #, kde-format
 msgid "Minimum time (in minutes) between uploads"
-msgstr ""
+msgstr "Tempo minimo (in minuti) tra i caricamenti"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:63
 #, kde-format
 msgid "Number of days of free/busy info to publish: "
-msgstr ""
+msgstr "Numero di giorni di informazioni di disponibilità da pubblicare:"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Server information"
-msgstr "Informazioni personali"
+msgstr "Informazioni server"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
 #, kde-format
 msgid "Server URL"
-msgstr ""
+msgstr "URL del server"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "Nome utente"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
 #, kde-format
 msgid "Save password"
-msgstr ""
+msgstr "Salva la password"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
 #, kde-format
 msgid "Click here to publish Free/Busy information manually"
 msgstr ""
+"Fare clic qui per pubblicare manualmente le informazioni di disponibilità"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
-#, fuzzy, kde-format
-#| msgid "Email Address"
-#| msgid_plural "Email Addresses"
+#, kde-format
 msgid "Email Free/Busy"
-msgstr "Indirizzo di posta elettronica"
+msgstr "Indirizzo di posta elettronica libero/occupato"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
 #, kde-format
 msgid "Enter email of recipient..."
-msgstr ""
+msgstr "Digita l'indirizzo di posta del destinatario..."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
-#, fuzzy, kde-format
-#| msgid "General settings"
+#, kde-format
 msgid "Free/Busy Retrieval settings"
-msgstr "Impostazioni generali"
+msgstr "Impostazioni di recupero della disponibilità"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
 #, kde-format
@@ -2529,21 +2528,24 @@ msgid ""
 "By retrieving Free/Busy information that others have published, you can take "
 "their calendar into account when inviting them to a meeting."
 msgstr ""
+"Recuperando le informazioni di disponibilità che gli altri hanno pubblicato, "
+"puoi tenere presente i loro impegni quando li inviti a una riunione."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
 #, kde-format
 msgid "Retrieve others' free/busy information automatically"
 msgstr ""
+"Recupera automaticamente le informazioni sulla disponibilità degli altri"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
 #, kde-format
 msgid "Use full email address for retrieval"
-msgstr ""
+msgstr "Usa indirizzo di posta elettronica completo per il recupero"
 
 #: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
 #, kde-format
 msgid "Free/Busy"
-msgstr ""
+msgstr "Libero/occupato"
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2918,10 +2920,9 @@ msgid "New Contact Group…"
 msgstr "Nuovo gruppo di contatti…"
 
 #: kalendarapplication.cpp:333
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule…"
-msgstr "Configura %1"
+msgstr "Configura pianificazione..."
 
 #: kalendarapplication.cpp:346
 #, kde-format
@@ -2999,7 +3000,7 @@ msgstr "La richiesta dell'immagine è stata annullata"
 #, kde-format
 msgctxt "Separator between identity name and email address"
 msgid " - "
-msgstr ""
+msgstr " - "
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -3101,54 +3102,50 @@ msgid "Mailboxes"
 msgstr "Caselle di posta"
 
 #: mail/qml/MailComposer.qml:15
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Message"
-msgstr "Messaggistica"
+msgstr "Nuovo messaggio"
 
 #: mail/qml/MailComposer.qml:28
 #, kde-format
 msgid "From:"
-msgstr ""
+msgstr "Da:"
 
 #: mail/qml/MailComposer.qml:39
 #, kde-format
 msgid "Identity:"
-msgstr ""
+msgstr "Identità:"
 
 #: mail/qml/MailComposer.qml:67
 #, kde-format
 msgid "To:"
-msgstr ""
+msgstr "A:"
 
 #: mail/qml/MailComposer.qml:68
 #, kde-format
 msgid "CC:"
-msgstr ""
+msgstr "CC:"
 
 #: mail/qml/MailComposer.qml:69
 #, kde-format
 msgid "BCC:"
-msgstr ""
+msgstr "CCN:"
 
 #: mail/qml/MailComposer.qml:70
 #, kde-format
 msgid "Reply-To:"
-msgstr ""
+msgstr "Rispondi a:"
 
 #: mail/qml/MailComposer.qml:90
-#, fuzzy, kde-format
-#| msgctxt "displayed as subject when the subject of a mail is empty"
-#| msgid "No Subject"
+#, kde-format
 msgid "Subject:"
-msgstr "Senza oggetto"
+msgstr "Oggetto:"
 
 #: mail/qml/MailComposer.qml:139
-#, fuzzy, kde-format
-#| msgid "Send SMS"
+#, kde-format
 msgid "Send"
-msgstr "Invia SMS"
+msgstr "Invia"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
