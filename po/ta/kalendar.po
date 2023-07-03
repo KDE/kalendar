@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-29 00:47+0000\n"
-"PO-Revision-Date: 2023-05-21 15:11+0530\n"
+"PO-Revision-Date: 2023-07-02 15:53+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2098,10 +2098,9 @@ msgid "New calendar  created from imported file successfully."
 msgstr "இறக்குமதி செய்த கோப்பிலிருந்து புதிய நாள்காட்டி உருவாக்கப்பட்டது."
 
 #: contents/ui/main.qml:374
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule"
-msgstr "%1 தனை அமை"
+msgstr "அட்டவணையை அமை"
 
 #: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
@@ -2429,18 +2428,17 @@ msgstr "நாள்காட்டிக்கான நிறத்தை த�
 #: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
 #, kde-format
 msgid "Configure Availability"
-msgstr ""
+msgstr "கிடைப்பதை அமை"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Free/Busy"
-msgstr "%1 தனை அமை"
+msgstr "வேலையுள்ளதை/இல்லாதை அமை"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
 #, kde-format
 msgid "Free/Busy Publishing settings"
-msgstr ""
+msgstr "வேலையுள்ள/இல்லை விவரங்களை வெளியிடும் அமைப்புகள்"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:33
 #, kde-format
@@ -2450,75 +2448,74 @@ msgid ""
 "that are already marked as busy are disclosed, without revealing the "
 "specific reasons for your availability."
 msgstr ""
+"வேலையுள்ள/இல்லா விவரங்களை நீங்கள் வெளியிட்டால், உங்களை சந்திப்புகளுக்கு அழைக்குமுன் "
+"அவ்விவரங்களை மற்றவர்கள் கருத்தில் கொள்ளலாம். உங்களுக்கு வேலையுள்ள நேரங்கள் மட்டுமே "
+"வெளியிடப்படும் (காரணங்கள் குறிப்பிடப்படாது)."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
 #, kde-format
 msgid "Publish your free/busy information automatically"
-msgstr ""
+msgstr "வேலையுள்ள/இல்லா விவரங்களை தானாக வெளியிடு"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
 #, kde-format
 msgid "Minimum time (in minutes) between uploads"
-msgstr ""
+msgstr "பதிவேற்றங்களுக்கிடையேயான குறைந்தபட்ச இடைவெளி (நிமிடங்களில்)"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:63
 #, kde-format
 msgid "Number of days of free/busy info to publish: "
-msgstr ""
+msgstr "எத்தனை நாட்களுக்கான விவரங்களை வெளியிட வேண்டும்: "
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Server information"
-msgstr "தனிப்பட்ட விவரங்கள்"
+msgstr "சேவையக விவரங்கள்"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
 #, kde-format
 msgid "Server URL"
-msgstr ""
+msgstr "சேவையக முகவரி"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "பயனர் பெயர்"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "கடவுச்சொல்"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
 #, kde-format
 msgid "Save password"
-msgstr ""
+msgstr "கடவுச்சொல்லை சேமி"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
 #, kde-format
 msgid "Click here to publish Free/Busy information manually"
-msgstr ""
+msgstr "வேலையுள்ள/இல்லா விவரங்களை கைமுறையாக வெளியிட இங்கு கிளிக் செய்யவும்"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
-#, fuzzy, kde-format
-#| msgid "Email Address"
-#| msgid_plural "Email Addresses"
+#, kde-format
 msgid "Email Free/Busy"
-msgstr "மின்னஞ்சல் முகவரி"
+msgstr "வேலையுள்ள/இல்லா விவரங்களை மின்னஞ்சலனுப்பு"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
 #, kde-format
 msgid "Enter email of recipient..."
-msgstr ""
+msgstr "பெறுநரின் முகவரியை உள்ளிடுக..."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
-#, fuzzy, kde-format
-#| msgid "General settings"
+#, kde-format
 msgid "Free/Busy Retrieval settings"
-msgstr "பொதுவான அமைப்புகள்"
+msgstr "வேலையுள்ள/இல்லா விவர பதிவிறக்க அமைப்புகள்"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
 #, kde-format
@@ -2526,21 +2523,23 @@ msgid ""
 "By retrieving Free/Busy information that others have published, you can take "
 "their calendar into account when inviting them to a meeting."
 msgstr ""
+"மற்றவர்கள் வெளியிட்டுள்ள வேலையுள்ள/இல்லா விவரங்களை பதிவிறக்குவதன் மூலம், சந்திப்புகளுக்கு "
+"அவர்களை அழைக்கும்போது அவர்களுக்கு வசதியான நேரத்தை தேர்ந்தெடுக்கலாம்."
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
 #, kde-format
 msgid "Retrieve others' free/busy information automatically"
-msgstr ""
+msgstr "மற்றவர்களின் வேலையுள்ள/இல்லா விவரங்களை தானாக பதிவிறக்கு"
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
 #, kde-format
 msgid "Use full email address for retrieval"
-msgstr ""
+msgstr "பதிவிறக்க முழு மின்னஞ்சல் முகவரியை பயன்படுத்து"
 
 #: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
 #, kde-format
 msgid "Free/Busy"
-msgstr ""
+msgstr "வேலையுள்ள/இல்லா"
 
 #: contents/ui/Settings/SettingsPage.qml:14
 #: contents/ui/Settings/ViewSettingsPage.qml:12
@@ -2911,10 +2910,9 @@ msgid "New Contact Group…"
 msgstr "புதிய தொடர்புக்குழு…"
 
 #: kalendarapplication.cpp:333
-#, fuzzy, kde-format
-#| msgid "Configure %1"
+#, kde-format
 msgid "Configure Schedule…"
-msgstr "%1 தனை அமை"
+msgstr "அட்டவணையை அமை…"
 
 #: kalendarapplication.cpp:346
 #, kde-format
@@ -2992,7 +2990,7 @@ msgstr "பட கோரிக்கை ரத்து செய்யப்ப
 #, kde-format
 msgctxt "Separator between identity name and email address"
 msgid " - "
-msgstr ""
+msgstr " - "
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -3093,54 +3091,50 @@ msgid "Mailboxes"
 msgstr "அஞ்சல்பெட்டிகள்"
 
 #: mail/qml/MailComposer.qml:15
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Message"
-msgstr "குறுஞ்செய்தி"
+msgstr "புதிய அஞ்சல்"
 
 #: mail/qml/MailComposer.qml:28
 #, kde-format
 msgid "From:"
-msgstr ""
+msgstr "அனுப்புநர்:"
 
 #: mail/qml/MailComposer.qml:39
 #, kde-format
 msgid "Identity:"
-msgstr ""
+msgstr "அடையாளம்:"
 
 #: mail/qml/MailComposer.qml:67
 #, kde-format
 msgid "To:"
-msgstr ""
+msgstr "பெறுநர்:"
 
 #: mail/qml/MailComposer.qml:68
 #, kde-format
 msgid "CC:"
-msgstr ""
+msgstr "நகல்:"
 
 #: mail/qml/MailComposer.qml:69
 #, kde-format
 msgid "BCC:"
-msgstr ""
+msgstr "மறைநகல்:"
 
 #: mail/qml/MailComposer.qml:70
 #, kde-format
 msgid "Reply-To:"
-msgstr ""
+msgstr "பதில் பெறுபவர்:"
 
 #: mail/qml/MailComposer.qml:90
-#, fuzzy, kde-format
-#| msgctxt "displayed as subject when the subject of a mail is empty"
-#| msgid "No Subject"
+#, kde-format
 msgid "Subject:"
-msgstr "தலைப்பில்லாத‍து"
+msgstr "தலைப்பு:"
 
 #: mail/qml/MailComposer.qml:139
-#, fuzzy, kde-format
-#| msgid "Send SMS"
+#, kde-format
 msgid "Send"
-msgstr "SMS அனுப்பு"
+msgstr "அனுப்பு"
 
 #: mail/qml/mailpartview/ICalPart.qml:29
 #, kde-format
