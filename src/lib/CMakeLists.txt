@@ -25,7 +25,7 @@ target_link_libraries(kalendar_lib PUBLIC
     KF6::CalendarCore
     KPim6::AkonadiCore
     KPim6::AkonadiCalendar
-    KPim6::AkonadiContact
+    KPim6::AkonadiContactCore
     KF6::ConfigWidgets
     KF6::Contacts
     KF6::ItemModels
