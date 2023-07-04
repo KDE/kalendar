@@ -8,7 +8,7 @@
 MailHeaderModel:: MailHeaderModel(QObject* parent)
     : QAbstractListModel(parent)
 {
-    HeaderItem newItem(Header::To, QString{});
+    HeaderItem newItem{Header::To, QString{}};
     m_headers.append(newItem);
 }
 
@@ -65,5 +65,4 @@ void MailHeaderModel::updateHeaderType(const int row, const Header headerName)
     auto &header = m_headers[row];
     header.header = headerName;
     Q_EMIT dataChanged(index(row, 0), index(row, 0), { NameRole });
-
 }
