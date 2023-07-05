@@ -84,6 +84,7 @@ set(kalendar_LIBS
     KF6::Contacts
     KF6::ItemModels
     KF6::XmlGui
+    KPim6::AkonadiWidgets
     )
 
 target_link_libraries(kalendar

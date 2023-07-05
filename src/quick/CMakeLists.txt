@@ -33,7 +33,7 @@ ecm_qt_declare_logging_category(akonadi_quick_plugin
     EXPORT KALENDAR
 )
 
-target_link_libraries(akonadi_quick_plugin PRIVATE kalendar_lib KF6::WindowSystem)
+target_link_libraries(akonadi_quick_plugin PRIVATE kalendar_lib KF6::WindowSystem KPim6::AkonadiWidgets)
 
 ecm_qt_install_logging_categories(
     EXPORT KALENDAR

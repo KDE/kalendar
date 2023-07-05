@@ -30,4 +30,5 @@ target_link_libraries(kalendar_lib PUBLIC
     KF6::Contacts
     KF6::ItemModels
     KPim6::CalendarUtils
+    KPim6::AkonadiWidgets
 )
