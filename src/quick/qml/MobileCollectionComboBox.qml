@@ -55,10 +55,11 @@ MobileForm.FormComboBoxDelegate {
     signal userSelectedCollection(var collection)
 
     currentIndex: 0
-    onActivated: if (index > -1) {
+    onActivated: index => { if (index > -1) {
         const selectedModelIndex = collectionComboBoxModel.index(currentIndex, 0);
         const selectedCollection = collectionComboBoxModel.data(selectedModelIndex, Akonadi.Collection.CollectionRole);
         userSelectedCollection(selectedCollection);
+        }
     }
 
     textRole: "display"

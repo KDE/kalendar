@@ -41,7 +41,7 @@ MobileForm.FormCard {
 
             mimeTypeFilter: [Akonadi.MimeTypes.address, Akonadi.MimeTypes.contactGroup]
             accessRightsFilter: Akonadi.Collection.CanCreateItem
-            onUserSelectedCollection: contactEditor.setDefaultAddressBook(collection)
+            onUserSelectedCollection: collection => contactEditor.setDefaultAddressBook(collection)
         }
 
         MobileForm.FormDelegateSeparator { above: addressBookComboBox; below: nameDelegate }
