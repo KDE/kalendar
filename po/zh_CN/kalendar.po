@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-29 00:47+0000\n"
-"PO-Revision-Date: 2023-06-17 04:12\n"
+"PO-Revision-Date: 2023-07-03 11:39\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2071,10 +2071,9 @@ msgid "New calendar  created from imported file successfully."
 msgstr "从导入文件新建日历成功。"
 
 #: contents/ui/main.qml:374
-#, fuzzy, kde-format
-#| msgid "Configure"
+#, kde-format
 msgid "Configure Schedule"
-msgstr "配置"
+msgstr ""
 
 #: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
 #: contents/ui/MainViews/TodoView.qml:54
@@ -2405,10 +2404,9 @@ msgid "Configure Availability"
 msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
-#, fuzzy, kde-format
-#| msgid "Configure"
+#, kde-format
 msgid "Configure Free/Busy"
-msgstr "配置"
+msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
 #, kde-format
@@ -2441,10 +2439,9 @@ msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
-#, fuzzy, kde-format
-#| msgid "Personal information"
+#, kde-format
 msgid "Server information"
-msgstr "个人信息"
+msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
@@ -2476,11 +2473,9 @@ msgid "Click here to publish Free/Busy information manually"
 msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
-#, fuzzy, kde-format
-#| msgid "Email Address"
-#| msgid_plural "Email Addresses"
+#, kde-format
 msgid "Email Free/Busy"
-msgstr "邮箱地址"
+msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
 #, kde-format
@@ -2488,10 +2483,9 @@ msgid "Enter email of recipient..."
 msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
-#, fuzzy, kde-format
-#| msgid "General settings"
+#, kde-format
 msgid "Free/Busy Retrieval settings"
-msgstr "通用设置"
+msgstr ""
 
 #: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
 #, kde-format
@@ -2884,10 +2878,9 @@ msgid "New Contact Group…"
 msgstr "新建联系人组"
 
 #: kalendarapplication.cpp:333
-#, fuzzy, kde-format
-#| msgid "Configure"
+#, kde-format
 msgid "Configure Schedule…"
-msgstr "配置"
+msgstr ""
 
 #: kalendarapplication.cpp:346
 #, kde-format
@@ -3100,11 +3093,9 @@ msgid "Reply-To:"
 msgstr ""
 
 #: mail/qml/MailComposer.qml:90
-#, fuzzy, kde-format
-#| msgctxt "displayed as subject when the subject of a mail is empty"
-#| msgid "No Subject"
+#, kde-format
 msgid "Subject:"
-msgstr "无主题"
+msgstr ""
 
 #: mail/qml/MailComposer.qml:139
 #, kde-format

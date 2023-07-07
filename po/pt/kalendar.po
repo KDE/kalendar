@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-29 00:47+0000\n"
-"PO-Revision-Date: 2023-06-24 10:15+0100\n"
+"PO-Revision-Date: 2023-07-02 02:15+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-POFile-SpellExtra: RSVP Kalendar Schwan Clau mín Seg Mín Felipe\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-POFile-SpellExtra: Kinoshita QR Azteca Blog Men Jr PCS Pager Srt enc\n"
-"X-POFile-SpellExtra: resp Meet SDE jpg\n"
+"X-POFile-SpellExtra: resp Meet SDE jpg BCC\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2993,7 +2993,7 @@ msgstr "O pedido da imagem foi cancelado"
 #, kde-format
 msgctxt "Separator between identity name and email address"
 msgid " - "
-msgstr ""
+msgstr " - "
 
 #: mail/mailmodel.cpp:48
 #, kde-format
@@ -3096,11 +3096,10 @@ msgid "Mailboxes"
 msgstr "Caixas de Correio"
 
 #: mail/qml/MailComposer.qml:15
-#, fuzzy, kde-format
-#| msgid "Messaging"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Message"
-msgstr "Mensagens"
+msgstr "Nova Mensagem"
 
 #: mail/qml/MailComposer.qml:28
 #, kde-format
@@ -3115,7 +3114,7 @@ msgstr "Identidade:"
 #: mail/qml/MailComposer.qml:67
 #, kde-format
 msgid "To:"
-msgstr ""
+msgstr "Para:"
 
 #: mail/qml/MailComposer.qml:68
 #, kde-format
@@ -3130,7 +3129,7 @@ msgstr "BCC:"
 #: mail/qml/MailComposer.qml:70
 #, kde-format
 msgid "Reply-To:"
-msgstr ""
+msgstr "Responder-a:"
 
 #: mail/qml/MailComposer.qml:90
 #, kde-format
