@@ -493,14 +493,7 @@ Column {
         }
 
         function setToCurrentTime(animate = false) {
-            if(currentTimeMarkerLoader.active) {
-                const viewHeight = (applicationWindow().height - applicationWindow().pageStack.globalToolBar.height - headerBottomSeparator.height - allDayHeader.height - headerTopSeparator.height - headingRow.height - Kirigami.Units.gridUnit);
-                // Since we position with anchors, height is 0 -- must calc manually
-
-                const timeMarkerY = (viewColumn.currentDate.getHours() * viewColumn.gridLineWidth) + (hourlyView.minuteHeight * viewColumn.minutesFromStartOfDay) - (height / 2) - (viewColumn.gridLineWidth / 2)
-                const yPos = Math.max(0.0, (timeMarkerY / dayHeight))
-                setPosition(yPos, animate);
-            }
+            setPosition(Math.max(0, (new Date()).getHours() - 1) / 23, animate);
         }
 
         function getCurrentPosition() {
