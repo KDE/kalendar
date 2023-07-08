@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2021 Carl Schwan <carl@carlschwan.eu>
+# SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+# SPDX-License-Identifier: CC0-1.0
+
+[Desktop Entry]
+Name=Kalendar Mail
+GenericName=EMail Client
+Comment=Manage your e-mails with Kalendar Mail
+Exec=kalendar-mail
+Categories=Qt;KDE;Office;Mail;
+Icon=org.kde.kalendar
+Type=Application
+Terminal=false
+StartupNotify=true
+SingleMainWindow=true
+Version=1.5
+
+# This component is not yet release ready
+NoDisplay=true

@@ -39,8 +39,8 @@ Kirigami.ScrollablePage {
         shortcut: "Return"
         onTriggered: {
             contactGroupEditor.saveContactGroup()
-            ContactConfig.lastUsedAddressBookCollection = addressBookComboBox.defaultCollectionId;
-            ContactConfig.save();
+            Config.lastUsedAddressBookCollection = addressBookComboBox.defaultCollectionId;
+            Config.save();
         }
     }
 
@@ -72,7 +72,7 @@ Kirigami.ScrollablePage {
                     enabled: mode === ContactGroupEditor.CreateMode
 
                     defaultCollectionId: if (mode === ContactGroupEditor.CreateMode) {
-                        return ContactConfig.lastUsedAddressBookCollection;
+                        return Config.lastUsedAddressBookCollection;
                     } else {
                         return contactGroupEditor.collectionId;
                     }
@@ -186,8 +186,8 @@ Kirigami.ScrollablePage {
         }
 
         onRejected: {
-            ContactConfig.lastUsedAddressBookCollection = addressBookComboBox.defaultCollectionId;
-            ContactConfig.save();
+            Config.lastUsedAddressBookCollection = addressBookComboBox.defaultCollectionId;
+            Config.save();
             root.closeDialog();
         }
         onAccepted: submitAction.trigger()

@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+File=calendarconfig.kcfg
+ClassName=CalendarConfig
+Mutators=true
+DefaultValueGetters=true
+GenerateProperties=true
+ParentInConstructor=true
+UseEnumTypes=true
+GlobalEnums=true
+

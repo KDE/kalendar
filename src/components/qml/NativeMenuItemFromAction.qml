@@ -3,19 +3,17 @@
 
 import QtQuick 2.7
 import Qt.labs.platform 1.1
-import org.kde.kalendar 1.0
+import org.kde.kalendar.components 1.0
 
 MenuItem {
-    id: menuItem
-    property string kalendarAction: ""
-    property var __action: KalendarApplication.action(kalendarAction)
+    required property var action
 
-    text: __action.text
-    shortcut: __action.shortcut
-    icon.name: KalendarApplication.iconName(__action.icon)
-    onTriggered: __action.trigger()
-    visible: __action.text !== ""
-    checkable: __action.checkable
-    checked: __action.checked
-    enabled: __action.enabled && parent.enabled
+    text: action.text
+    shortcut: action.shortcut
+    iconName: Helper.iconName(action.icon)
+    onTriggered: action.trigger()
+    visible: action.text.length > 0
+    checkable: action.checkable
+    checked: action.checked
+    enabled: action.enabled && parent.enabled
 }

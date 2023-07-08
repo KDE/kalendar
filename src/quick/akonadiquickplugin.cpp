@@ -8,6 +8,7 @@
 #include "collectioncomboboxmodel.h"
 #include "collectionpickermodel.h"
 #include "mimetypes.h"
+#include "tagmanager.h"
 
 #include <Akonadi/Collection>
 #include <QQmlEngine>
@@ -22,6 +23,11 @@ void AkonadiQuickPlugin::registerTypes(const char *uri)
         return new Akonadi::Quick::MimeTypes;
     });
 
+    qmlRegisterSingletonType<TagManager>("org.kde.akonadi", 1, 0, "TagManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new TagManager;
+    });
     qmlRegisterType<AgentConfiguration>("org.kde.akonadi", 1, 0, "AgentConfiguration");
     qmlRegisterType<Akonadi::Quick::CollectionComboBoxModel>("org.kde.akonadi", 1, 0, "CollectionComboBoxModel");
     qmlRegisterType<Akonadi::Quick::CollectionPickerModel>("org.kde.akonadi", 1, 0, "CollectionPickerModel");

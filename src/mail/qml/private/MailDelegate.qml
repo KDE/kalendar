@@ -10,8 +10,6 @@ import org.kde.kirigami 2.19 as Kirigami
 Kirigami.AbstractListItem {
     id: root
 
-    property bool showSeparator: false
-
     property string datetime
     property string author
     property string title
@@ -36,11 +34,13 @@ Kirigami.AbstractListItem {
 
         // indicator rectangle
         Rectangle {
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.topMargin: 1
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 1
+            anchors {
+                left: parent.left
+                top: parent.top
+                topMargin: 1
+                bottom: parent.bottom
+                bottomMargin: 1
+            }
 
             width: 4
             visible: !root.isRead
@@ -51,16 +51,6 @@ Kirigami.AbstractListItem {
             id: hoverHandler
             // disable hover input on mobile because touchscreens trigger hover feedback and do not "unhover" in Qt
             enabled: !Kirigami.Settings.isMobile
-        }
-
-        Kirigami.Separator {
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: root.leftPadding
-            anchors.rightMargin: root.rightPadding
-            visible: root.showSeparator && !root.showSelected
-            opacity: 0.5
         }
     }
 

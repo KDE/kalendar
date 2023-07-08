@@ -5,11 +5,18 @@ import Qt.labs.platform 1.1 as Labs
 import org.kde.kalendar.components 1.0
 
 Labs.Menu {
+    id: root
+
+    required property var application
+
     title: i18nc("@action:menu", "Help")
 
     NativeMenuItemFromAction {
-        kalendarAction: 'open_about_page'
-        enabled: pageStack.layers.currentItem.objectName != "aboutPage"
+        action: root.application.action("open_about_page")
+    }
+
+    NativeMenuItemFromAction {
+        action: root.application.action("open_about_kde_page")
     }
 
     Labs.MenuItem {

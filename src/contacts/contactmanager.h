@@ -46,6 +46,8 @@ public:
     Q_INVOKABLE QVariantMap getCollectionDetails(const Akonadi::Collection &collection);
 
 private:
+    void saveState() const;
+
     Akonadi::EntityMimeTypeFilterModel *m_collectionTree;
     Akonadi::CollectionFilterProxyModel *m_contactViewCollectionModel = nullptr;
     QItemSelectionModel *m_collectionSelectionModel;

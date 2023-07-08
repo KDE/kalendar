@@ -12,7 +12,7 @@ Labs.Menu {
     default property list<QtObject> additionalMenuItems
 
     property list<QtObject> _menuItems: [
-        NativeMenuItemFromAction {
+        Labs.MenuItem {
             text: i18nc("@action:menu", "Quit Kalendar")
             icon.name: "application-exit"
             shortcut: StandardKey.Quit

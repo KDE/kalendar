@@ -6,7 +6,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import QtQml.Models 2.2
-import org.kde.kalendar 1.0
 import org.kde.kalendar.mail 1.0
 import org.kde.kirigami 2.19 as Kirigami
 

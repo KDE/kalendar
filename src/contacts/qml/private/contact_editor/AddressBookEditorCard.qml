@@ -22,6 +22,7 @@ MobileForm.FormCard {
     Layout.topMargin: Kirigami.Units.largeSpacing
 
     property alias addressBookComboBoxId: addressBookComboBox.defaultCollectionId;
+    property alias addressBookComboBox: addressBookComboBox
 
     contentItem: ColumnLayout {
         spacing: 0
@@ -34,7 +35,7 @@ MobileForm.FormCard {
             enabled: mode === ContactEditor.CreateMode
 
             defaultCollectionId: if (mode === ContactEditor.CreateMode) {
-                return ContactConfig.lastUsedAddressBookCollection;
+                return Config.lastUsedAddressBookCollection;
             } else {
                 return contactEditor.collectionId;
             }

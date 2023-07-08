@@ -9,6 +9,12 @@ target_sources(kalendar_lib PRIVATE
     sortedcollectionproxymodel.cpp
     colorproxymodel.h
     sortedcollectionproxymodel.h
+    abstractapplication.cpp
+    abstractapplication.h
+    actionsmodel.cpp
+    actionsmodel.h
+    commandbarfiltermodel.cpp
+    commandbarfiltermodel.h
 )
 set_property(TARGET kalendar_lib PROPERTY POSITION_INDEPENDENT_CODE ON)
 
@@ -31,4 +37,6 @@ target_link_libraries(kalendar_lib PUBLIC
     KF6::ItemModels
     KPim6::CalendarUtils
     KPim6::AkonadiWidgets
+    KF6::XmlGui
+    KPim6::CalendarUtils
 )

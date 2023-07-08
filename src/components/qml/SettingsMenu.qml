@@ -1,33 +1,28 @@
-// SPDX-FileCopyrightText: 2022 Carl Schwan <carlschwan@kde.org>
-// SPDX-License-Identifier: LGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2021 Claudio Cambra <claudio.cambra@gmail.com>
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import org.kde.kalendar.components 1.0
 
 QQC2.Menu {
+    id: root
+
+    required property var application
+
     title: i18nc("@action:menu", "Settings")
 
     KActionFromAction {
-        kalendarAction: "open_tag_manager"
+        action: root.application.action("open_tag_manager")
     }
 
-    QQC2.MenuSeparator {
+    QQC2.MenuSeparator {}
+
+    KActionFromAction {
+        action: root.application.action("options_configure_keybinding")
     }
 
     KActionFromAction {
-        kalendarAction: "toggle_menubar"
-    }
-
-    KActionFromAction {
-        kalendarAction: "options_configure_schedule"
-    }
-
-    KActionFromAction {
-        kalendarAction: "options_configure_keybinding"
-    }
-
-    KActionFromAction {
-        kalendarAction: "options_configure"
+        action: root.application.action("options_configure")
     }
 }

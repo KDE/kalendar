@@ -5,7 +5,6 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as QQC2
-import org.kde.kalendar 1.0 as Kalendar
 import org.kde.kalendar.mail 1.0
 import org.kde.kitemmodels 1.0 as KItemModels
 import './private'
@@ -13,22 +12,12 @@ import './private'
 Kirigami.ScrollablePage {
     id: folderView
     title: MailManager.selectedFolderName
-    readonly property int mode: Kalendar.KalendarApplication.Mail
 
     actions: Kirigami.Action {
         icon.name: 'mail-send'
         text: i18nc('@action:menu', 'Create')
         onTriggered: applicationWindow().pageStack.pushDialogLayer(Qt.resolvedUrl("./MailComposer.qml"))
     }
-
-    Connections {
-        target: Kalendar.Filter
-        function onNameChanged() {
-             MailManager.folderModel.searchString = Kalendar.Filter.name
-        }
-    }
-
-    Component.onCompleted: MailManager.folderModel.searchString = Kalendar.Filter.name
 
     ListView {
         id: mails
@@ -110,8 +99,6 @@ Kirigami.ScrollablePage {
         section.property: "date"
 
         delegate: MailDelegate {
-            showSeparator: model.index !== folderView.count - 1
-
             datetime: model.datetime.toLocaleTimeString(Qt.locale(), Locale.ShortFormat) // TODO this is not showing date !
             author: model.from
             title: model.title

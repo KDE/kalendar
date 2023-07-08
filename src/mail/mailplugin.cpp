@@ -7,6 +7,7 @@
 
 #include "contactimageprovider.h"
 #include "helper.h"
+#include "mailapplication.h"
 #include "mailmanager.h"
 #include "mailmodel.h"
 #include "mime/htmlutils.h"
@@ -18,6 +19,12 @@
 void CalendarPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QByteArray("org.kde.kalendar.mail"));
+
+    qmlRegisterSingletonType<MailApplication>(uri, 1, 0, "MailApplication", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return new MailApplication;
+    });
 
     qmlRegisterSingletonType<MailManager>("org.kde.kalendar.mail", 1, 0, "MailManager", [](QQmlEngine *engine, QJSEngine *scriptEngine) {
         Q_UNUSED(engine)

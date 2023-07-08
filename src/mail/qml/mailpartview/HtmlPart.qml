@@ -7,7 +7,6 @@ import QtQuick.Controls 2.15 as QQC2
 import QtWebEngine 1.4
 import QtQuick.Window 2.0
 
-import org.kde.kalendar 1.0
 import org.kde.kalendar.mail 1.0
 import org.kde.kirigami 2.19 as Kirigami
 

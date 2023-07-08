@@ -5,23 +5,22 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
-import org.kde.kalendar 1.0
 import org.kde.kalendar.contact 1.0
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
 Kirigami.ScrollablePage {
     id: page
+
     property int itemId
-    title: addressee.formattedName
-    property int mode: KalendarApplication.Contact
-
-    leftPadding: 0
-    rightPadding: 0
-
     property AddresseeWrapper addressee: AddresseeWrapper {
         id: addressee
         addresseeItem: ContactManager.getItem(page.itemId)
     }
+
+    title: addressee.formattedName
+
+    leftPadding: 0
+    rightPadding: 0
 
     function openEditor() {
         pageStack.pushDialogLayer(Qt.resolvedUrl("./contact_editor/ContactEditorPage.qml"), {
@@ -30,28 +29,24 @@ Kirigami.ScrollablePage {
         })
     }
 
-    actions {
-        main: Kirigami.Action {
-            icon.name: "document-edit"
+    actions.contextualActions: [
+        Kirigami.Action {
+            iconName: "document-edit"
             text: i18nc("@action:inmenu", "Edit")
             onTriggered: openEditor()
-        }
-
-        contextualActions: DeleteContactAction {
+        },
+        DeleteContactAction {
             name: page.addressee.formattedName
             item: page.addressee.addresseeItem
-        }
-
-        left: Kirigami.Action {
-            text: i18n("Cancel")
+        },
+        Kirigami.Action {
+            text: i18nc("@action:inmenu", "Cancel")
             icon.name: "dialog-cancel"
             visible: Kirigami.Settings.isMobile
 
-            onTriggered: {
-                pageStack.pop()
-            }
+            onTriggered: pageStack.pop()
         }
-    }
+    ]
 
     function callNumber(number) {
         Qt.openUrlExternally("tel:" + number)

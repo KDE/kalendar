@@ -124,23 +124,14 @@ ecm_set_disabled_deprecation_versions(QT 6.5  KF 5.240.0)
 add_definitions(-DQT_STRICT_ITERATORS)
 add_subdirectory(src)
 
-if (BUILD_TESTING)
-    add_subdirectory(autotests)
-endif()
-
-if (BUILD_FLATPAK)
-    install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR} RENAME org.kde.kontact.kalendar.desktop)
-else()
-    install(PROGRAMS org.kde.kalendar.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-endif()
 install(FILES org.kde.kalendar.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES org.kde.kalendar.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)
 
 ecm_qt_install_logging_categories(
-        EXPORT KALENDAR
-        FILE kalendar.categories
-        DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
-        )
+    EXPORT KALENDAR
+    FILE kalendar.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
