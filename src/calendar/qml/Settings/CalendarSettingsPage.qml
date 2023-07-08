@@ -6,7 +6,7 @@ import org.kde.kirigami 2.14 as Kirigami
 import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs
-import QtQuick.Dialogs 1.0
+import QtQuick.Dialogs
 import org.kde.kalendar.calendar 1.0
 import Qt.labs.qmlmodels 1.0
 import org.kde.kitemmodels 1.0

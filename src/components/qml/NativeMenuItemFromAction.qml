@@ -10,7 +10,7 @@ MenuItem {
 
     text: action.text
     shortcut: action.shortcut
-    iconName: Helper.iconName(action.icon)
+    icon.name: Helper.iconName(action.icon)
     onTriggered: action.trigger()
     visible: action.text.length > 0
     checkable: action.checkable
