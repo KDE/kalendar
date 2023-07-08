@@ -7,14 +7,13 @@
 
 #include "contactimageprovider.h"
 #include "helper.h"
+#include "identitymodel.h"
 #include "mailapplication.h"
+#include "mailheadermodel.h"
 #include "mailmanager.h"
 #include "mailmodel.h"
 #include "mime/htmlutils.h"
 #include "mime/messageparser.h"
-#include "mailheadermodel.h"
-#include "identitymodel.h"
-
 
 void CalendarPlugin::registerTypes(const char *uri)
 {
