@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
         // The program name used internally.
         QStringLiteral("kalendar-contact"),
         // A displayable program name string.
-        i18nc("@title", "Address Book"),
+        i18nc("@title", "Contact"),
         QStringLiteral(KALENDAR_VERSION_STRING),
         // Short description of what the app does.
         i18n("Address Book Application"),
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("claudio.cambra@gmail.com"),
                         QStringLiteral("https://claudiocambra.com"));
     KAboutData::setApplicationData(aboutData);
-    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar")));
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar.contact")));
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);

@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("kinofhek@gmail.com"),
                         QStringLiteral("https://fhek.gitlab.io"));
     KAboutData::setApplicationData(aboutData);
-    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar")));
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar.calendar")));
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);

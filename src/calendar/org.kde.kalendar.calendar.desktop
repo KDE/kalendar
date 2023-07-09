@@ -5,7 +5,7 @@
 [Desktop Entry]
 Name=Calendar
 GenericName=Calendar
-Keywords=Kalendar
+Keywords=Kalendar, Events
 Comment=Manage your tasks and events with Calendar
 Exec=kalendar-calendar %u
 Categories=Qt;KDE;Office;Calendar;
