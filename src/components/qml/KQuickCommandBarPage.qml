@@ -74,7 +74,7 @@ QQC2.Dialog {
                 searchField.text += event.text;
             }
             delegate: Kirigami.BasicListItem {
-                icon: model.decoration
+                icon.name: model.decoration
                 text: model.display
                 trailing: QQC2.Label {
                     text: model.shortcut
