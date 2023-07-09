@@ -107,7 +107,7 @@ MobileForm.FormCard {
                 model: root._configuration.availableAgents
                 delegate: Kirigami.BasicListItem {
                     label: model.display
-                    icon: model.decoration
+                    icon.name: model.decoration
                     subtitle: model.description
                     subtitleItem.wrapMode: Text.Wrap
                     enabled: root._configuration.availableAgents.flags(root._configuration.availableAgents.index(index, 0)) & Qt.ItemIsEnabled
