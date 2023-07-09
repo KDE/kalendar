@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("claudio.cambra@gmail.com"),
                         QStringLiteral("https://claudiocambra.com"));
     KAboutData::setApplicationData(aboutData);
-    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar")));
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.kalendar.mail")));
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
