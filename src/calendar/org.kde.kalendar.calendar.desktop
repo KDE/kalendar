@@ -4,9 +4,36 @@
 
 [Desktop Entry]
 Name=Calendar
+Name[ca]=Calendar
+Name[ca@valencia]=Calendari
+Name[eo]=Calendar
+Name[es]=Calendar
+Name[nl]=Agenda
+Name[sl]=Koledar
+Name[tr]=Takvim
+Name[uk]=Календар
+Name[x-test]=xxCalendarxx
 GenericName=Calendar
+GenericName[ca]=Calendar
+GenericName[ca@valencia]=Calendari
+GenericName[eo]=Kalendaro
+GenericName[es]=Calendar
+GenericName[nl]=Calendar
+GenericName[sl]=Koledar
+GenericName[tr]=Takvim
+GenericName[uk]=Календар
+GenericName[x-test]=xxCalendarxx
 Keywords=Kalendar, Events
 Comment=Manage your tasks and events with Calendar
+Comment[ca]=Gestioneu les tasques i esdeveniments amb el Calendar
+Comment[ca@valencia]=Gestioneu les tasques i esdeveniments amb el Calendari
+Comment[eo]=Mastrumu viajn taskojn kaj eventojn per Calendar
+Comment[es]=Gestione tareas y eventos con Calendar
+Comment[nl]=Uw taken en afspraken beheren met Calendar
+Comment[sl]=Upravljajte vaše naloge in dogodke s programom Calendar
+Comment[tr]=Takvim ile görevlerinizi ve etkinliklerinizi yönetin
+Comment[uk]=Керуйте вашими записами завдань і подій за допомогою Календаря
+Comment[x-test]=xxManage your tasks and events with Calendarxx
 Exec=kalendar-calendar %u
 Categories=Qt;KDE;Office;Calendar;
 Icon=org.kde.kalendar

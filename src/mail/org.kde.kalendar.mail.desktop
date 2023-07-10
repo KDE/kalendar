@@ -4,8 +4,35 @@
 
 [Desktop Entry]
 Name=Kalendar Mail
+Name[ca]=Kalendar Mail
+Name[ca@valencia]=Correu de Kalendar
+Name[eo]=Kalendar-Poŝtilo
+Name[es]=Correo de Kalendar
+Name[nl]=Kalendar e-mail
+Name[sl]=Kalendar Mail
+Name[tr]=Takvimci Posta
+Name[uk]=Пошта Kalendar
+Name[x-test]=xxKalendar Mailxx
 GenericName=EMail Client
+GenericName[ca]=Client de correu
+GenericName[ca@valencia]=Client de correu
+GenericName[eo]=Retpoŝta Kliento
+GenericName[es]=Cliente de correo electrónico
+GenericName[nl]=E-mailprogramma
+GenericName[sl]=Odjemalec elektronske pošte
+GenericName[tr]=E-posta İstemcisi
+GenericName[uk]=Клієнт електронної пошти
+GenericName[x-test]=xxEMail Clientxx
 Comment=Manage your e-mails with Kalendar Mail
+Comment[ca]=Gestioneu el correu amb el Kalendar Mail
+Comment[ca@valencia]=Gestioneu la correspondència amb el Correu de Kalendar
+Comment[eo]=Mastrumu viajn retpoŝtojn per Kalendar-Poŝtilo
+Comment[es]=Gestión de correo electrónico con Correo de Kalendar
+Comment[nl]=Uw e-mail beheren met Kalendar Mail
+Comment[sl]=Upravljajte vaša poštna sporočila s programom Kalendar Mail
+Comment[tr]=Takvimci Posta ile e-postalarınızı yönetin
+Comment[uk]=Керуйте вашими повідомленнями електронної пошти за допомогою Пошти Kalendar
+Comment[x-test]=xxManage your e-mails with Kalendar Mailxx
 Exec=kalendar-mail
 Categories=Qt;KDE;Office;Mail;
 Icon=org.kde.kalendar
