@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-07-09 10:48+0200\n"
+"PO-Revision-Date: 2023-07-10 09:25+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2301,8 +2301,7 @@ msgid "Other:"
 msgstr "Altres:"
 
 #: contacts/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "Contact"
+#, kde-format
 msgctxt "@title"
 msgid "Contact"
 msgstr "Contacte"
@@ -3323,8 +3322,3 @@ msgstr "Crea una etiqueta nova…"
 #, kde-format
 msgid "Quickly Add a New Tag."
 msgstr "Afegeix ràpidament una etiqueta nova."
-
-#~| msgid "Address Book:"
-#~ msgctxt "@title"
-#~ msgid "Address Book"
-#~ msgstr "Llibreta d'adreces"

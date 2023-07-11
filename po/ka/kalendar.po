@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-06-30 06:22+0200\n"
+"PO-Revision-Date: 2023-07-10 07:21+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -227,11 +227,10 @@ msgid "Task"
 msgstr "დავალება"
 
 #: calendar/main.cpp:57
-#, fuzzy, kde-format
-#| msgid "Calendars"
+#, kde-format
 msgctxt "@title"
 msgid "Calendar"
-msgstr "კალენდრები"
+msgstr "კალენდარი"
 
 #: calendar/main.cpp:60
 #, kde-format
@@ -392,8 +391,7 @@ msgid "An error occurred importing incidences: %1"
 msgstr "შეცდომა ინციდენტის შემოტანისას: %1"
 
 #: calendar/qml/Controls/ImportHandler.qml:62
-#, fuzzy, kde-format
-#| msgid "New calendar  created from imported file successfully."
+#, kde-format
 msgid "New calendar created from imported file successfully."
 msgstr "შემოტანილი ფაილიდან ახალი კალენდარი წარმატებით შეიქმნა."
 
@@ -405,7 +403,7 @@ msgstr "კალენდრის შემოტანა"
 #: calendar/qml/Controls/ImportHandler.qml:90
 #, kde-format
 msgid "Calendar files (*.ics *.vcs)"
-msgstr ""
+msgstr "კალენდარის ფაილები (*.ics *.vcs)"
 
 #: calendar/qml/Controls/ImportHandler.qml:107
 #, kde-format
@@ -2289,17 +2287,15 @@ msgid "Other:"
 msgstr "სხვა:"
 
 #: contacts/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "Contact"
+#, kde-format
 msgctxt "@title"
 msgid "Contact"
 msgstr "კონტაქტი"
 
 #: contacts/main.cpp:51
-#, fuzzy, kde-format
-#| msgid "Address Book:"
+#, kde-format
 msgid "Address Book Application"
-msgstr "მისამართების წიგნი:"
+msgstr "მისამართების წიგნაკის აპლიკაცია"
 
 #: contacts/qml/AddressBookCollectionHandler.qml:34
 #, kde-format
@@ -2802,11 +2798,10 @@ msgid "Edit"
 msgstr "ჩასწორება"
 
 #: contacts/qml/private/ContactPage.qml:43
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Cancel"
-msgstr "შეწყვეტა"
+msgstr "გაუქმება"
 
 #: contacts/qml/private/ContactPage.qml:89
 #, kde-format
@@ -2973,11 +2968,10 @@ msgid "Creating QR code failed"
 msgstr "QR კოდის შექმნის შეცდომა"
 
 #: contacts/qml/Settings.qml:13
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@title:window"
 msgid "Settings"
-msgstr "&მორგება"
+msgstr "მორგება"
 
 #: contacts/qml/Settings.qml:21
 #, kde-format
@@ -2997,13 +2991,12 @@ msgstr "ბრძანებების ველის გახსნა"
 #: lib/abstractapplication.cpp:168
 #, kde-format
 msgid "About %1"
-msgstr ""
+msgstr "%1-ის შესახებ"
 
 #: lib/abstractapplication.cpp:175
-#, fuzzy, kde-format
-#| msgid "About Kalendar"
+#, kde-format
 msgid "About KDE"
-msgstr "Kalendar-ის შესახებ"
+msgstr "KDE-ს შესახებ"
 
 #: lib/abstractapplication.cpp:188
 #, kde-format
@@ -3051,17 +3044,15 @@ msgid "Unknown"
 msgstr "უცნობი"
 
 #: mail/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "Mail"
+#, kde-format
 msgctxt "@title"
 msgid "Mail"
 msgstr "წერილი"
 
 #: mail/main.cpp:51
-#, fuzzy, kde-format
-#| msgid "Calendar Application"
+#, kde-format
 msgid "EMail Client Application"
-msgstr "კალენდრის აპლიკაცია"
+msgstr "ელფოსტის კლიენტის აპლიკაცია"
 
 #: mail/mime/attachmentmodel.cpp:222
 #, kde-format
