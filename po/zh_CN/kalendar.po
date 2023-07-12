@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-29 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2023-07-03 11:39\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -27,22 +27,1174 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "elecmonkey@kde.org, tysontan@tysontan.com"
 
-#: calendar/qml/CalendarApplication.qml:16
-#: contents/ui/Drawers/MainDrawer.qml:304
+#: calendar/calendarapplication.cpp:29 calendar/calendarapplication.cpp:33
+#: calendar/qml/MainViews/TodoView.qml:68
+#, kde-format
+msgid "Sort"
+msgstr "排序"
+
+#: calendar/calendarapplication.cpp:58
+#, kde-format
+msgid "Tasks View"
+msgstr "任务视图"
+
+#: calendar/calendarapplication.cpp:68
+#, kde-format
+msgid "Ctrl+6"
+msgstr "Ctrl+6"
+
+#: calendar/calendarapplication.cpp:74
+#, kde-format
+msgid "Week View"
+msgstr "周视图"
+
+#: calendar/calendarapplication.cpp:84
+#, kde-format
+msgid "Ctrl+2"
+msgstr "Ctrl+2"
+
+#: calendar/calendarapplication.cpp:90
+#, kde-format
+msgid "3 Day View"
+msgstr "三日视图"
+
+#: calendar/calendarapplication.cpp:100
+#, kde-format
+msgid "Ctrl+3"
+msgstr "Ctrl+3"
+
+#: calendar/calendarapplication.cpp:106
+#, kde-format
+msgid "Day View"
+msgstr "日视图"
+
+#: calendar/calendarapplication.cpp:116
+#, kde-format
+msgid "Ctrl+4"
+msgstr "Ctrl+4"
+
+#: calendar/calendarapplication.cpp:122
+#, kde-format
+msgid "Schedule View"
+msgstr "日程视图"
+
+#: calendar/calendarapplication.cpp:132
+#, kde-format
+msgid "Ctrl+5"
+msgstr "Ctrl+5"
+
+#: calendar/calendarapplication.cpp:138
+#, kde-format
+msgid "Month View"
+msgstr "月视图"
+
+#: calendar/calendarapplication.cpp:148
+#, kde-format
+msgid "Ctrl+1"
+msgstr "Ctrl+1"
+
+#: calendar/calendarapplication.cpp:154
+#: calendar/qml/Settings/SettingsPage.qml:29
+#, kde-format
+msgid "About Kalendar"
+msgstr "关于 Kalendar"
+
+#: calendar/calendarapplication.cpp:161
+#, kde-format
+msgid "Backwards"
+msgstr "后退"
+
+#: calendar/calendarapplication.cpp:174
+#, kde-format
+msgid "Forwards"
+msgstr "前进"
+
+#: calendar/calendarapplication.cpp:187
+#, kde-format
+msgid "To Today"
+msgstr "转到今天"
+
+#: calendar/calendarapplication.cpp:200
+#, kde-format
+msgid "To Date…"
+msgstr "转到日期…"
+
+#: calendar/calendarapplication.cpp:213
+#, kde-format
+msgid "Show Menubar"
+msgstr "显示菜单栏"
+
+#: calendar/calendarapplication.cpp:217
+#, kde-format
+msgid "Ctrl+M"
+msgstr "Ctrl+M"
+
+#: calendar/calendarapplication.cpp:223
+#: calendar/qml/Controls/DayMouseArea.qml:50 calendar/qml/main.qml:290
+#, kde-format
+msgid "New Event…"
+msgstr "新建事件..."
+
+#: calendar/calendarapplication.cpp:230
+#: calendar/qml/Controls/DayMouseArea.qml:55 calendar/qml/main.qml:296
+#, kde-format
+msgid "New Task…"
+msgstr "新建任务..."
+
+#: calendar/calendarapplication.cpp:237
+#, kde-format
+msgid "Configure Schedule…"
+msgstr ""
+
+#: calendar/calendarapplication.cpp:250
+#, kde-format
+msgid "Import Calendar…"
+msgstr "导入日历..."
+
+#: calendar/calendarapplication.cpp:270
+#, kde-format
+msgid "Alphabetically"
+msgstr "按字母顺序"
+
+#: calendar/calendarapplication.cpp:286
+#, kde-format
+msgid "By Due Date"
+msgstr "按到期日期"
+
+#: calendar/calendarapplication.cpp:302
+#, kde-format
+msgid "By Priority Level"
+msgstr "按优先级"
+
+#: calendar/calendarapplication.cpp:318
+#, kde-format
+msgid "Ascending order"
+msgstr "升序"
+
+#: calendar/calendarapplication.cpp:334
+#, kde-format
+msgid "Descending Order"
+msgstr "降序"
+
+#: calendar/calendarapplication.cpp:350
+#, kde-format
+msgid "Show Completed Tasks"
+msgstr "显示已完成的任务"
+
+#: calendar/calendarapplication.cpp:364
+#, kde-format
+msgid "Refresh All"
+msgstr "刷新全部"
+
+#: calendar/calendarmanager.cpp:526
+#, kde-format
+msgid "Move occurrence(s)"
+msgstr "移动重现"
+
+#: calendar/calendarmanager.cpp:531
+#, kde-format
+msgid ""
+"Unable to add the exception item to the calendar. No change will be done."
+msgstr "无法将异常项目添加到日历。将不会做任何更改。"
+
+#: calendar/calendarmanager.cpp:571
+#, kde-format
+msgid "Delete task and its sub-tasks"
+msgstr "删除任务及其子任务"
+
+#: calendar/calendarmanager.cpp:574
+#, kde-format
+msgid "Delete task and make sub-tasks independent"
+msgstr "删除任务并使子任务独立。"
+
+#: calendar/calendarmanager.cpp:736
+#, kde-format
+msgctxt "@title:window"
+msgid "Properties of Calendar %1"
+msgstr "日历 %1 的属性"
+
+#: calendar/importer.cpp:49 mail/qml/mailpartview/ErrorPart.qml:26
+#, kde-format
+msgid "An error occurred: %1"
+msgstr "发生错误：%1"
+
+#: calendar/incidencewrapper.cpp:138
+#: calendar/models/incidenceoccurrencemodel.cpp:305
+#: calendar/models/todosortfilterproxymodel.cpp:134
+#, kde-format
+msgid "Task"
+msgstr "任务"
+
+#: calendar/main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Calendars"
+msgctxt "@title"
+msgid "Calendar"
+msgstr "日历"
+
+#: calendar/main.cpp:60
+#, kde-format
+msgid "Calendar Application"
+msgstr "日历应用程序"
+
+#: calendar/main.cpp:64 contacts/main.cpp:55 mail/main.cpp:55
+#, kde-format
+msgid "(c) KDE Community 2021"
+msgstr "(c) KDE Community 2021"
+
+#: calendar/main.cpp:65 contacts/main.cpp:56 mail/main.cpp:56
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr "Carl Schwan"
+
+#: calendar/main.cpp:66 calendar/main.cpp:70 contacts/main.cpp:57
+#: contacts/main.cpp:61 mail/main.cpp:57 mail/main.cpp:61
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer"
+msgstr "维护者"
+
+#: calendar/main.cpp:69 contacts/main.cpp:60 mail/main.cpp:60
+#, kde-format
+msgctxt "@info:credit"
+msgid "Clau Cambra"
+msgstr "Clau Cambra"
+
+#: calendar/main.cpp:73
+#, kde-format
+msgctxt "@info:credit"
+msgid "Felipe Kinoshita"
+msgstr "Felipe Kinoshita"
+
+#: calendar/main.cpp:74
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr "开发者"
+
+#: calendar/models/todosortfilterproxymodel.cpp:146
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:822
+#, kde-format
+msgctxt "List separator"
+msgid ", "
+msgstr "，"
+
+#: calendar/models/todosortfilterproxymodel.cpp:164
+#, kde-format
+msgid "No set date"
+msgstr "未设定日期"
+
+#: calendar/models/todosortfilterproxymodel.cpp:168
+#: calendar/qml/MainViews/TodoTreeView.qml:67
+#, kde-format
+msgid "Overdue"
+msgstr "已过期"
+
+#: calendar/models/todosortfilterproxymodel.cpp:174
+#: calendar/qml/MainViews/MonthView.qml:42
+#: calendar/qml/MainViews/ScheduleView.qml:38
+#: calendar/qml/MainViews/TodoTreeView.qml:68
+#, kde-format
+msgid "Today"
+msgstr "今日"
+
+#: calendar/models/todosortfilterproxymodel.cpp:197
+#, kde-format
+msgctxt "Please retain space"
+msgid " at %1"
+msgstr ""
+
+#: calendar/models/todosortfilterproxymodel.cpp:198
+#, kde-format
+msgctxt "Please retain parenthesis and space"
+msgid " (overdue)"
+msgstr ""
+
+#: calendar/qml/Bars/FilterHeaderBar.qml:41
+#, kde-format
+msgid "Filtering by tags"
+msgstr "按标签筛选"
+
+#: calendar/qml/Bars/FilterHeaderBar.qml:42
+#, kde-format
+msgid "All Tasks"
+msgstr "全部任务"
+
+#: calendar/qml/Bars/FilterHeaderBar.qml:86
+#, kde-format
+msgid "Remove filtering tag"
+msgstr "移除筛选标签"
+
+#: calendar/qml/Controls/CalendarItemTapHandler.qml:36
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose Calendar Color"
+msgstr "选择日历颜色"
+
+#: calendar/qml/Controls/CheckableCollectionNavigationView.qml:63
+#, kde-format
+msgid "Tags"
+msgstr "标签"
+
+#: calendar/qml/Controls/CheckableCollectionNavigationView.qml:129
+#: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:20
+#, kde-format
+msgid "Contacts"
+msgstr "联系人"
+
+#: calendar/qml/Controls/CheckableCollectionNavigationView.qml:131
+#: calendar/qml/Settings/CalendarSettingsPage.qml:14
+#: calendar/qml/Settings/SettingsPage.qml:24
+#: calendar/qml/Settings/SourceSettingsPage.qml:20
+#, kde-format
+msgid "Calendars"
+msgstr "日历"
+
+#: calendar/qml/Controls/DateControls/DatePicker.qml:138
+#, kde-format
+msgctxt "%1 is month name, %2 is year"
+msgid "%1 %2"
+msgstr "%2 %1"
+
+#: calendar/qml/Controls/DateControls/DatePicker.qml:182
+#, kde-format
+msgid "Days"
+msgstr "日"
+
+#: calendar/qml/Controls/DateControls/DatePicker.qml:190
+#, kde-format
+msgid "Months"
+msgstr "月"
+
+#: calendar/qml/Controls/DateControls/DatePicker.qml:196
+#, kde-format
+msgid "Years"
+msgstr "年"
+
+#: calendar/qml/Controls/DateControls/TimePicker.qml:50
+#, kde-format
+msgid "Min. Interval:"
+msgstr "分钟间隔："
+
+#: calendar/qml/Controls/ImportHandler.qml:48
+#, kde-format
+msgctxt "%1 is a number"
+msgid "%1 incidences were imported successfully."
+msgstr "成功导入 %1 个事件。"
+
+#: calendar/qml/Controls/ImportHandler.qml:53
+#: calendar/qml/Controls/ImportHandler.qml:67
+#, kde-format
+msgctxt "%1 is the error message"
+msgid "An error occurred importing incidences: %1"
+msgstr "导入事件时出错：%1"
+
+#: calendar/qml/Controls/ImportHandler.qml:62
+#, fuzzy, kde-format
+#| msgid "New calendar  created from imported file successfully."
+msgid "New calendar created from imported file successfully."
+msgstr "从导入文件新建日历成功。"
+
+#: calendar/qml/Controls/ImportHandler.qml:88
+#, kde-format
+msgid "Import a calendar"
+msgstr "导入日历"
+
+#: calendar/qml/Controls/ImportHandler.qml:90
+#, kde-format
+msgid "Calendar files (*.ics *.vcs)"
+msgstr ""
+
+#: calendar/qml/Controls/ImportHandler.qml:107
+#, kde-format
+msgid "Import Calendar"
+msgstr "导入日历"
+
+#: calendar/qml/Controls/ImportHandler.qml:115
+#, kde-format
+msgid ""
+"Would you like to merge this calendar file's events and tasks into one of "
+"your existing calendars, or would prefer to create a new calendar from this "
+"file?\n"
+" "
+msgstr ""
+"您想将此日历文件的事件和任务合并到一个已有日历，还是从这个文件创建一个新的日"
+"历？\n"
+" "
+
+#: calendar/qml/Controls/ImportHandler.qml:123
+#, kde-format
+msgid "Merge with existing calendar"
+msgstr "合并入已有日历"
+
+#: calendar/qml/Controls/ImportHandler.qml:137
+#, kde-format
+msgid "Create new calendar"
+msgstr "新建日历"
+
+#: calendar/qml/Controls/ImportHandler.qml:146
+#: calendar/qml/Dialogs/DeleteCalendarPage.qml:71
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:114
+#: calendar/qml/Dialogs/RecurringIncidenceChangePage.qml:86
+#: contacts/qml/private/DeleteContactAction.qml:51
+#, kde-format
+msgid "Cancel"
+msgstr "取消"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:115
+#, kde-format
+msgid "This event is recurring"
+msgstr "此事件正在循环"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:126
+#, kde-format
+msgid "This event has reminder"
+msgid_plural "This event has reminders"
+msgstr[0] "此事件有提醒物"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:148
+#, kde-format
+msgctxt "%1 is a percentage number"
+msgid "<b>%1%</b> Complete"
+msgstr "<b>%1%</b> 已完成"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:178
+#, kde-format
+msgid "<b>Calendar:</b>"
+msgstr "<b>日历：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:190
+#, kde-format
+msgid "<b>Tags:</b>"
+msgstr "<b>标签：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:203
+#, kde-format
+msgid "Remove %1 tag"
+msgstr "移除 %1 标签"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:215
+#, kde-format
+msgid "<b>Date:</b>"
+msgstr "<b>日期：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:242
+#, kde-format
+msgid "<b>Time:</b>"
+msgstr "<b>时间：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:269
+#, kde-format
+msgid "<b>Duration:</b>"
+msgstr "<b>持续时间：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:283
+#, kde-format
+msgid "<b>Priority level:</b>"
+msgstr "<b>优先级：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:295
+#, kde-format
+msgid "<b>Completed:</b>"
+msgstr "<b>已完成：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:315
+#, kde-format
+msgid "<b>Recurrence:</b>"
+msgstr "<b>重复：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:338
+#, kde-format
+msgid "Except on:"
+msgstr "例外："
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:368
+#, kde-format
+msgid "<b>Location:</b>"
+msgstr "<b>位置：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:425
+#, kde-format
+msgid "Unable to find location."
+msgstr "找不到位置。"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:460
+#, kde-format
+msgid "<b>Description:</b>"
+msgstr "<b>描述：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:475
+#, kde-format
+msgid "<b>Attachment:</b>"
+msgid_plural "<b>Attachments:</b>"
+msgstr[0] "<b>附件：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:500
+#, kde-format
+msgid "<b>Reminders:</b>"
+msgstr "<b>提醒：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:528
+#, kde-format
+msgid "<b>Organizer:</b>"
+msgstr "<b>组织者：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:545
+#, kde-format
+msgid "<b>Google Meet:</b>"
+msgstr "<b>Google Meeting：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:556
+#, kde-format
+msgid "<b>Guests:</b>"
+msgstr "<b>客人：</b>"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:592
+#, kde-format
+msgid "Super-task"
+msgstr "父任务"
+
+#: calendar/qml/Controls/IncidenceInfoContents.qml:617
+#, kde-format
+msgid "Sub-task"
+msgid_plural "Sub-tasks"
+msgstr[0] "子任务"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:61
+#, kde-format
+msgid "View"
+msgstr "查看"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:66
+#: calendar/qml/Drawers/IncidenceInfoDrawer.qml:91
+#: contacts/qml/private/ContactGroupPage.qml:34
+#, kde-format
+msgid "Edit"
+msgstr "编辑"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:72
+#: calendar/qml/Dialogs/DeleteCalendarPage.qml:22
+#: calendar/qml/Dialogs/DeleteCalendarPage.qml:65
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:28
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:108
+#: calendar/qml/Drawers/IncidenceInfoDrawer.qml:97
+#: quick/qml/AgentConfigurationForm.qml:50
+#, kde-format
+msgid "Delete"
+msgstr "删除"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:81
+#, kde-format
+msgid "Mark Task as Incomplete"
+msgstr "标记任务为未完成"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:81
+#, kde-format
+msgid "Mark Task as Complete"
+msgstr "标记任务为已完成"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:88
+#: calendar/qml/Drawers/IncidenceInfoDrawer.qml:69
+#, kde-format
+msgid "Add Sub-Task"
+msgstr "添加子任务"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:99
+#, kde-format
+msgid "Set priority..."
+msgstr "设置优先级..."
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:112
+#: calendar/qml/Controls/IncidenceMouseArea.qml:184
+#, kde-format
+msgid "None"
+msgstr "无"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:117
+#, kde-format
+msgid "1 (highest priority)"
+msgstr "1 (最高优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:122
+#, kde-format
+msgid "2 (mid-high priority)"
+msgstr "2 (较高优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:127
+#, kde-format
+msgid "3 (mid-high priority)"
+msgstr "3 (较高优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:132
+#, kde-format
+msgid "4 (mid-high priority)"
+msgstr "4 (较高优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:137
+#, kde-format
+msgid "5 (medium priority)"
+msgstr "5 (中等优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:142
+#, kde-format
+msgid "6 (mid-low priority)"
+msgstr "6 (较低优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:147
+#, kde-format
+msgid "7 (mid-low priority)"
+msgstr "7 (较低优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:152
+#, kde-format
+msgid "8 (mid-low priority)"
+msgstr "8 (较低优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:157
+#, kde-format
+msgid "9 (lowest priority)"
+msgstr "9 (最低优先级)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:163
+#, kde-format
+msgid "Set due date..."
+msgstr "设置截止日期..."
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:191
+#, kde-format
+msgid "Today (%1)"
+msgstr "今天 (%1)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:202
+#, kde-format
+msgid "Tomorrow (%1)"
+msgstr "明天 (%1)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:212
+#, kde-format
+msgid "In a week (%1)"
+msgstr "一周内 (%1)"
+
+#: calendar/qml/Controls/IncidenceMouseArea.qml:223
+#, kde-format
+msgid "In a month (%1)"
+msgstr "一月内 (%1)"
+
+#: calendar/qml/Controls/MainDrawerToggleButton.qml:25
+#, kde-format
+msgid "Expand Main Drawer"
+msgstr "展开主抽屉栏"
+
+#: calendar/qml/Controls/MainDrawerToggleButton.qml:25
+#, kde-format
+msgid "Collapse Main Drawer"
+msgstr "收起主抽屉栏"
+
+#: calendar/qml/Controls/Tag.qml:111
+#, kde-format
+msgid "Remove Tag"
+msgstr "移除标签"
+
+#: calendar/qml/Controls/TitleDateButton.qml:29
+#: calendar/qml/Controls/TitleDateButton.qml:34
+#, kde-format
+msgctxt "%1 is month name, %2 is year"
+msgid "<b>%1</b> %2"
+msgstr "%2 <b>%1</b>"
+
+#: calendar/qml/Controls/TitleDateButton.qml:37
+#, kde-format
+msgctxt ""
+"%1 is the month and year of the range start, %2 is the same for range end"
+msgid "%1 - %2"
+msgstr "%1 - %2"
+
+#: calendar/qml/Controls/TitleDateButton.qml:39
+#, kde-format
+msgctxt "%1 is month of range start, %2 is month + year of range end"
+msgid "<b>%1</b> - %2"
+msgstr "<b>%1</b> - %2"
+
+#: calendar/qml/Dialogs/CollectionPickerPage.qml:20
+#, kde-format
+msgid "Choose a Task Calendar"
+msgstr "选择任务日历"
+
+#: calendar/qml/Dialogs/CollectionPickerPage.qml:22
+#, kde-format
+msgid "Choose a Calendar"
+msgstr "选择日历"
+
+#: calendar/qml/Dialogs/CollectionPickerPage.qml:24
+#, kde-format
+msgid "Choose an Address Book"
+msgstr "选择地址簿"
+
+#: calendar/qml/Dialogs/DeleteCalendarPage.qml:22
+#, kde-format
+msgid "Delete calendar"
+msgstr "删除日历"
+
+#: calendar/qml/Dialogs/DeleteCalendarPage.qml:49
+#, kde-format
+msgid "Do you want to delete calendar: \"%1\"?"
+msgstr "您是否想要删除日历“%1”？"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:27
+#, kde-format
+msgctxt "%1 is the type of the incidence (e.g event, todo, journal entry)"
+msgid "Delete %1"
+msgstr "删除 %1"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:58
+#, kde-format
+msgid "Do you want to delete item: \"%1\"?"
+msgstr "您是否想要删除项目“%1”？"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:60
+#, kde-format
+msgid ""
+"Item \"%1\" has sub-items. Do you want to delete all related items, or just "
+"the currently selected item?"
+msgstr "项目“%1”有子项。您想要删除所有相关的项目，还是仅删除当前选中的项目？"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:62
+#, kde-format
+msgid ""
+"The calendar item \"%1\" recurs over multiple dates. This item also has sub-"
+"items.\n"
+"\n"
+"Do you want to delete the selected occurrence on %2, also future "
+"occurrences, or all of its occurrences?\n"
+"\n"
+"Deleting all will also delete sub-items!"
+msgstr ""
+"日历项“%1”在多个日期重复出现。该项目也有子项。\n"
+"您想要仅删除选中的 %2 时的重现，还是以及未来的重现，还是全部的重现？\n"
+"全部删除将会同时删除子项！"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:64
+#, kde-format
+msgid ""
+"The calendar item \"%1\" recurs over multiple dates. Do you want to delete "
+"the selected occurrence on %2, also future occurrences, or all of its "
+"occurrences?"
+msgstr ""
+"日历项“%1”在多个日期重复出现。您想要仅删除选中的 %2 时的重现，还是以及未来的"
+"重现，还是全部的重现？"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:80
+#, kde-format
+msgid "Only Delete Current"
+msgstr "仅删除当前项目"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:87
+#, kde-format
+msgid "Also Delete Future"
+msgstr "同时删除未来的项目"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:101
+#, kde-format
+msgid "Delete Only This"
+msgstr "仅删除此项目"
+
+#: calendar/qml/Dialogs/DeleteIncidencePage.qml:108
+#, kde-format
+msgid "Delete All"
+msgstr "全部删除"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:42
+#, kde-format
+msgctxt "%1 is incidence type"
+msgid "Edit %1"
+msgstr "编辑 %1"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:43
+#, kde-format
+msgctxt "%1 is incidence type"
+msgid "Add %1"
+msgstr "添加 %1"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:53
+#: contacts/qml/private/contact_editor/ContactEditorPage.qml:135
+#: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:183
+#, kde-format
+msgid "Save"
+msgstr "保存"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:53
+#: contacts/qml/private/contact_editor/ContactEditorPage.qml:135
+#: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:183
+#, kde-format
+msgid "Add"
+msgstr "添加"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:134
+#, kde-format
+msgid "Invalid dates provided."
+msgstr "您提供的日期无效。"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:134
+#, kde-format
+msgid "End date cannot be before start date."
+msgstr "结束日期不能早于开始日期。"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:147
+#, kde-format
+msgid "Calendar:"
+msgstr "日历："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:175
+#, kde-format
+msgid "Summary:"
+msgstr "摘要："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:186
+#, kde-format
+msgid "Completion:"
+msgstr "完成："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:220
+#, kde-format
+msgid "All day"
+msgstr "全天"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:252
+#, kde-format
+msgid "Start:"
+msgstr "起始："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:299
+#, kde-format
+msgid "Due:"
+msgstr "到期："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:299
+#, kde-format
+msgid "End:"
+msgstr "结束："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:346
+#, kde-format
+msgid "Timezone:"
+msgstr "时区："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:365
+#, kde-format
+msgid "Repeat:"
+msgstr "重复："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:395
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:596
+#: calendar/qml/KalendarUtils/labelutils.js:82
+#, kde-format
+msgid "Never"
+msgstr "从不"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:396
+#, kde-format
+msgid "Daily"
+msgstr "每天"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:397
+#, kde-format
+msgid "Weekly"
+msgstr "每周"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:398
+#, kde-format
+msgid "Monthly"
+msgstr "每月"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:399
+#, kde-format
+msgid "Yearly"
+msgstr "每年"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:400
+#: calendar/qml/incidenceeditor/ReminderDelegate.qml:82
+#, kde-format
+msgid "Custom"
+msgstr "自定义"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:431
+#, kde-format
+msgid "Every:"
+msgstr "每隔："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:478
+#, kde-format
+msgid "day"
+msgid_plural "days"
+msgstr[0] "天"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:479
+#, kde-format
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] "周"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:480
+#, kde-format
+msgid "month"
+msgid_plural "months"
+msgstr[0] "月"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:481
+#, kde-format
+msgid "year"
+msgid_plural "years"
+msgstr[0] "年"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:551
+#, kde-format
+msgid "On:"
+msgstr "于："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:559
+#, kde-format
+msgctxt "%1 is the day number of month"
+msgid "The %1 of each month"
+msgstr "每月的第 %1 天"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:571
+#, kde-format
+msgctxt "the weekOfMonth dayOfWeekString of each month"
+msgid "The %1 %2 of each month"
+msgstr "每月的第 %1 个 %2"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:582
+#, kde-format
+msgid "Ends:"
+msgstr "结束："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:597
+#, kde-format
+msgid "On"
+msgstr "在"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:598
+#, kde-format
+msgid "After"
+msgstr "之后"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:634
+#, kde-format
+msgid "occurrence"
+msgid_plural "occurrences"
+msgstr[0] "次重复"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:640
+#, kde-format
+msgid "Exceptions:"
+msgstr "例外："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:646
+#, kde-format
+msgid "Add Recurrence Exception"
+msgstr "添加重现例外"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:689
+#, kde-format
+msgid "Location:"
+msgstr "位置："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:714
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:798
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:930
+#, kde-format
+msgid "Optional"
+msgstr "可选项目"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:761
+#, kde-format
+msgid "Show map"
+msgstr "显示地图"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:792
+#, kde-format
+msgid "Description:"
+msgstr "描述："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:813
+#, kde-format
+msgid "Tags:"
+msgstr "标签："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:823
+#, kde-format
+msgid "Tap to set tags…"
+msgstr "点击设置标签..."
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:823
+#, kde-format
+msgid "Click to set tags…"
+msgstr "点击设置标签..."
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:840
+#, kde-format
+msgid "Manage tags…"
+msgstr "管理标签..."
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:851
+#, kde-format
+msgid "Reminders:"
+msgstr "提醒:"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:874
+#, kde-format
+msgid "Add Reminder"
+msgstr "添加提醒"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:888
+#, kde-format
+msgid "Attendees:"
+msgstr "参与者："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:923
+#: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:88
+#: contacts/qml/private/ContactPage.qml:159
+#, kde-format
+msgid "Name:"
+msgstr "姓名："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:948
+#, kde-format
+msgid "Email:"
+msgstr "电子邮箱："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:955
+#, kde-format
+msgid "Required"
+msgstr "必需项目"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:964
+#, kde-format
+msgid "Status:"
+msgstr "状态："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:988
+#, kde-format
+msgid "Request RSVP"
+msgstr "请求对方收到时回复 (RSVP)"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:1002
+#, kde-format
+msgid "Add Attendee"
+msgstr "添加参与者"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:1013
+#, kde-format
+msgid "Choose from Contacts"
+msgstr "选择联系人"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:1017
+#, kde-format
+msgid "Fill in Manually"
+msgstr "手动填写"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:1031
+#, kde-format
+msgid "Attachments:"
+msgstr "附件："
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:1054
+#, kde-format
+msgid "Add Attachment"
+msgstr "添加附件"
+
+#: calendar/qml/Dialogs/IncidenceEditorPage.qml:1061
+#, kde-format
+msgid "Add an attachment"
+msgstr ""
+
+#: calendar/qml/Dialogs/RecurringIncidenceChangePage.qml:29
+#, kde-format
+msgid "Change incidence date"
+msgstr "更改事件发生日期"
+
+#: calendar/qml/Dialogs/RecurringIncidenceChangePage.qml:47
+#, kde-format
+msgid ""
+"The item you are trying to change is a recurring item. Should the changes be "
+"applied only to this single occurrence, also to future items, or to all "
+"items in the recurrence?"
+msgstr ""
+"您正试图更改一个重现项目。想要更改仅对单次重现生效，或是对未来重现生效，还是"
+"对所有重现生效？"
+
+#: calendar/qml/Dialogs/RecurringIncidenceChangePage.qml:62
+#, kde-format
+msgid "Only This Item"
+msgstr "只有本次"
+
+#: calendar/qml/Dialogs/RecurringIncidenceChangePage.qml:70
+#, kde-format
+msgid "Also Future Items"
+msgstr "只有未来"
+
+#: calendar/qml/Dialogs/RecurringIncidenceChangePage.qml:78
+#, kde-format
+msgid "All Occurrences"
+msgstr "全部事件"
+
+#: calendar/qml/Drawers/IncidenceInfoDrawer.qml:82
+#, kde-format
+msgid "Mark Incomplete"
+msgstr "标记为未完成"
+
+#: calendar/qml/Drawers/IncidenceInfoDrawer.qml:82
+#, kde-format
+msgid "Mark Complete"
+msgstr "标记为已完成"
+
+#: calendar/qml/Drawers/MainDrawer.qml:115
+#, kde-format
+msgid "Kalendar"
+msgstr "Kalendar"
+
+#: calendar/qml/Drawers/MainDrawer.qml:159
+#: calendar/qml/Drawers/MainDrawer.qml:275
 #, kde-format
 msgid "Undo: "
 msgstr "撤销："
 
-#: calendar/qml/CalendarApplication.qml:24
-#: contents/ui/Drawers/MainDrawer.qml:309
+#: calendar/qml/Drawers/MainDrawer.qml:167
+#: calendar/qml/Drawers/MainDrawer.qml:280
 #, kde-format
 msgid "Redo: "
 msgstr "重做："
 
-#: calendar/qml/CalendarApplication.qml:33
+#: calendar/qml/Drawers/MainDrawer.qml:176
 #, kde-format
 msgid "Refresh All Calendars"
 msgstr "刷新全部日历"
+
+#: calendar/qml/Drawers/MainDrawer.qml:183 calendar/qml/main.qml:239
+#, kde-format
+msgid "Configure"
+msgstr "配置"
+
+#: calendar/qml/Drawers/MainDrawer.qml:275
+#, kde-format
+msgid "Undo"
+msgstr "撤销"
+
+#: calendar/qml/Drawers/MainDrawer.qml:280
+#, kde-format
+msgid "Redo"
+msgstr "重做"
+
+#: calendar/qml/Drawers/MainDrawer.qml:291
+#, kde-format
+msgid "Settings"
+msgstr "设置"
+
+#: calendar/qml/Drawers/MainDrawer.qml:377
+#, kde-format
+msgid "View all tasks"
+msgstr "查看所有任务"
 
 #: calendar/qml/incidenceeditor/PriorityComboBox.qml:18
 #, kde-format
@@ -105,12 +1257,6 @@ msgctxt "Custom reminder"
 msgid "Custom"
 msgstr "自定义"
 
-#: calendar/qml/incidenceeditor/ReminderDelegate.qml:82
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:400
-#, kde-format
-msgid "Custom"
-msgstr "自定义"
-
 #: calendar/qml/incidenceeditor/ReminderDelegate.qml:145
 #, kde-format
 msgid "minutes"
@@ -141,102 +1287,807 @@ msgstr "事件开始后"
 msgid "Remove"
 msgstr "删除"
 
-#: calendar/qml/private/GlobalMenuBar.qml:40
+#: calendar/qml/KalendarUtils/labelutils.js:30
+#, kde-format
+msgid "Every week"
+msgid_plural "Every %1 weeks"
+msgstr[0] "每 %1 周"
+
+#: calendar/qml/KalendarUtils/labelutils.js:33
+#, kde-format
+msgid "Every week on"
+msgid_plural "Every %1 weeks on"
+msgstr[0] "每 %1 周"
+
+#: calendar/qml/KalendarUtils/labelutils.js:66
+#: calendar/qml/KalendarUtils/labelutils.js:105
+#, kde-format
+msgid "Every year on the %2 of %3"
+msgid_plural "Every %1 years on the %2 of %3"
+msgstr[0] "每 %1 年的 %2 %3"
+
+#: calendar/qml/KalendarUtils/labelutils.js:85
+#, kde-format
+msgid "Every minute"
+msgid_plural "Every %1 minutes"
+msgstr[0] "每 %1 分钟"
+
+#: calendar/qml/KalendarUtils/labelutils.js:88
+#, kde-format
+msgid "Every hour"
+msgid_plural "Every %1 hours"
+msgstr[0] "每 %1 小时"
+
+#: calendar/qml/KalendarUtils/labelutils.js:91
+#, kde-format
+msgid "Every day"
+msgid_plural "Every %1 days"
+msgstr[0] "每 %1 天"
+
+#: calendar/qml/KalendarUtils/labelutils.js:97
+#: calendar/qml/KalendarUtils/labelutils.js:101
+#, kde-format
+msgid "Every month on the %2"
+msgid_plural "Every %1 months on the %2"
+msgstr[0] "每 %1 个月在 %2"
+
+#: calendar/qml/KalendarUtils/labelutils.js:109
+#, kde-format
+msgid "Every year on the %2 day of the year"
+msgid_plural "Every %1 years on the %2 day of the year"
+msgstr[0] "每 %1 年的第 %2 天"
+
+#: calendar/qml/KalendarUtils/labelutils.js:115
+#, kde-format
+msgid "Complex recurrence rule"
+msgstr "复杂的重复规则"
+
+#: calendar/qml/KalendarUtils/labelutils.js:118
+#, kde-format
+msgid "Unknown"
+msgstr "未知"
+
+#: calendar/qml/KalendarUtils/labelutils.js:126
+#, kde-format
+msgid "Never ends"
+msgstr "永不结束"
+
+#: calendar/qml/KalendarUtils/labelutils.js:128
+#, kde-format
+msgid "Ends on %1"
+msgstr "结束于 %1"
+
+#: calendar/qml/KalendarUtils/labelutils.js:130
+#, kde-format
+msgid "Ends after %1 occurrences"
+msgstr "在 %1 次事件后结束"
+
+#: calendar/qml/KalendarUtils/labelutils.js:189
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Highest priority)"
+msgstr "%1 (最高优先级)"
+
+#: calendar/qml/KalendarUtils/labelutils.js:191
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Mid-high priority)"
+msgstr "%1 (较高优先级)"
+
+#: calendar/qml/KalendarUtils/labelutils.js:193
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Medium priority)"
+msgstr "%1 (中等优先级)"
+
+#: calendar/qml/KalendarUtils/labelutils.js:195
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Mid-low priority)"
+msgstr "%1 (较低优先级)"
+
+#: calendar/qml/KalendarUtils/labelutils.js:197
+#, kde-format
+msgctxt "%1 is the priority level number"
+msgid "%1 (Lowest priority)"
+msgstr "%1 (最低优先级)"
+
+#: calendar/qml/KalendarUtils/labelutils.js:199
+#, kde-format
+msgid "No set priority level"
+msgstr "未指定优先级"
+
+#: calendar/qml/Location/LocationMap.qml:59
+#, kde-format
+msgid "Return to Location"
+msgstr "复位"
+
+#: calendar/qml/main.qml:228
+#, kde-format
+msgid "Configure Schedule"
+msgstr ""
+
+#: calendar/qml/main.qml:285 calendar/qml/MainViews/TodoTreeView.qml:141
+#: calendar/qml/MainViews/TodoView.qml:63
+#, kde-format
+msgid "Create"
+msgstr "创建"
+
+#: calendar/qml/main.qml:305
+#, kde-format
+msgid "Month"
+msgstr "月"
+
+#: calendar/qml/main.qml:308
+#, kde-format
+msgid "Week"
+msgstr "周"
+
+#: calendar/qml/main.qml:311
+#, kde-format
+msgid "3 Days"
+msgstr "三日"
+
+#: calendar/qml/main.qml:314
+#, kde-format
+msgid "Day"
+msgstr "一日"
+
+#: calendar/qml/main.qml:317
+#, kde-format
+msgid "Schedule"
+msgstr "日程"
+
+#: calendar/qml/main.qml:320 calendar/qml/MainViews/TodoView.qml:51
+#, kde-format
+msgid "Tasks"
+msgstr "任务"
+
+#: calendar/qml/MainViews/BasicInternalHourlyView.qml:238
+#, kde-format
+msgctxt "@action:button"
+msgid "Reset"
+msgstr "重置"
+
+#: calendar/qml/MainViews/BasicInternalHourlyView.qml:251
+#, kde-format
+msgid "All day or Multi day"
+msgstr "全天或多天"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:264
+#, kde-format
+msgctxt "Date has no events or tasks set"
+msgid "Clear day."
+msgstr "无事之日。"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:283
+#, kde-format
+msgid "Tap"
+msgstr "点击"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:283
+#, kde-format
+msgid "Click"
+msgstr "点击"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:284
+#, kde-format
+msgid "Nothing on the books today. %1 to add something."
+msgstr "今日无事被记录，此处%1以添加。"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:407
+#, kde-format
+msgctxt "%1 is the name of the event"
+msgid "%1 (Day %2 of %3)"
+msgstr "%1 (第 %2 天，共 %3 天)"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:463
+#, kde-format
+msgid "Runs all day"
+msgstr "持续全天"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:467
+#, kde-format
+msgctxt "Displays times between incidence start and end"
+msgid "%1 - %2"
+msgstr "%1 - %2"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:470
+#, kde-format
+msgid "Starts at %1"
+msgstr "始于%1"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:472
+#, kde-format
+msgid "Ends at %1"
+msgstr "终于%1"
+
+#: calendar/qml/MainViews/BasicMonthListView.qml:474
+#, kde-format
+msgid "Runs All Day"
+msgstr "持续全天"
+
+#: calendar/qml/MainViews/DayGridView.qml:230
+#, kde-format
+msgid "<b>Today</b>"
+msgstr "<b>今日</b>"
+
+#: calendar/qml/MainViews/HourlyView.qml:42
+#, kde-format
+msgid "Previous Week"
+msgstr "上一周"
+
+#: calendar/qml/MainViews/HourlyView.qml:49
+#, kde-format
+msgid "Next Week"
+msgstr "下一周"
+
+#: calendar/qml/MainViews/HourlyView.qml:56
+#, kde-format
+msgid "Now"
+msgstr "现在"
+
+#: calendar/qml/MainViews/HourlyView.qml:94
+#, kde-format
+msgctxt "@action:inmenu open week view"
+msgid "Week"
+msgstr "周"
+
+#: calendar/qml/MainViews/HourlyView.qml:101
+#, kde-format
+msgctxt "@action:inmenu open 3 days view"
+msgid "3 Days"
+msgstr "三日"
+
+#: calendar/qml/MainViews/HourlyView.qml:107
+#, kde-format
+msgctxt "@action:inmenu open day view"
+msgid "Day"
+msgstr "一日"
+
+#: calendar/qml/MainViews/MonthView.qml:26
+#: calendar/qml/MainViews/ScheduleView.qml:24
+#, kde-format
+msgid "Previous Month"
+msgstr "上个月"
+
+#: calendar/qml/MainViews/MonthView.qml:34
+#: calendar/qml/MainViews/ScheduleView.qml:31
+#, kde-format
+msgid "Next Month"
+msgstr "下个月"
+
+#: calendar/qml/MainViews/TodoTreeView.qml:73
+#, kde-format
+msgid "Priority %1"
+msgstr "优先级 %1"
+
+#: calendar/qml/MainViews/TodoTreeView.qml:73
+#, kde-format
+msgid "No set priority"
+msgstr "未指定优先级"
+
+#: calendar/qml/MainViews/TodoTreeView.qml:120
+#, kde-format
+msgid "No task calendars enabled."
+msgstr "没有被启用的任务日历。"
+
+#: calendar/qml/MainViews/TodoTreeView.qml:127
+#, kde-format
+msgid "Calendar is not enabled"
+msgstr "日历未启用"
+
+#: calendar/qml/MainViews/TodoTreeView.qml:130
+#, kde-format
+msgid "Enable"
+msgstr "启用"
+
+#: calendar/qml/MainViews/TodoTreeView.qml:139
+#, kde-format
+msgid "No tasks completed"
+msgstr "没有已完成的任务。"
+
+#: calendar/qml/MainViews/TodoTreeView.qml:139
+#, kde-format
+msgid "No tasks left to complete"
+msgstr "没有未完成的任务"
+
+#: calendar/qml/MainViews/TodoView.qml:102
+#, kde-format
+msgid "Show Completed"
+msgstr "显示已完成任务"
+
+#: calendar/qml/MainViews/TodoView.qml:110
+#, kde-format
+msgid "Completed Tasks in %1"
+msgstr "%1 中的已完成任务"
+
+#: calendar/qml/MainViews/TodoView.qml:110
+#, kde-format
+msgid "Completed Tasks"
+msgstr "已完成任务"
+
+#: calendar/qml/MainViews/TodoView.qml:158
+#, kde-format
+msgid "Create a New Task…"
+msgstr "创建新任务…"
+
+#: calendar/qml/MainViews/TodoView.qml:198
+#: calendar/qml/MainViews/TodoView.qml:199
+#, kde-format
+msgid "Quickly Add a New Task."
+msgstr "快速添加新任务。"
+
+#: calendar/qml/Menus/CalendarItemMenu.qml:24
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit calendar…"
+msgstr "编辑日历..."
+
+#: calendar/qml/Menus/CalendarItemMenu.qml:29
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Update calendar"
+msgstr "更新日历"
+
+#: calendar/qml/Menus/CalendarItemMenu.qml:34
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete calendar"
+msgstr "删除日历"
+
+#: calendar/qml/Menus/CalendarItemMenu.qml:42
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Set calendar colour…"
+msgstr "设置日历颜色..."
+
+#: calendar/qml/Menus/CalendarItemMenu.qml:54
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Calendar source settings…"
+msgstr "日历源设置..."
+
+#: calendar/qml/Menus/CalendarItemMenu.qml:60
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Update calendar source"
+msgstr "更新日历源"
+
+#: calendar/qml/Menus/CalendarItemMenu.qml:66
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete calendar source"
+msgstr "删除日历源"
+
+#: calendar/qml/Menus/GlobalMenuBar.qml:36 calendar/qml/Menus/MenuBar.qml:41
+#: contacts/qml/GlobalMenuBar.qml:18 contacts/qml/MenuBar.qml:16
+#: mail/qml/app/GlobalMenuBar.qml:19 mail/qml/app/MenuBar.qml:17
+#, kde-format
+msgctxt "@action:menu"
+msgid "View"
+msgstr "查看"
+
+#: calendar/qml/Menus/GlobalMenuBar.qml:70
 #, kde-format
 msgctxt "@action:menu"
 msgid "Sort Tasks"
 msgstr "任务排序"
 
-#: calendar/qml/private/GlobalMenuBar.qml:82
-#: calendar/qml/private/MenuBar.qml:84
+#: calendar/qml/Menus/GlobalMenuBar.qml:112 calendar/qml/Menus/MenuBar.qml:113
 #, kde-format
 msgctxt "@action:menu"
 msgid "Go"
 msgstr "转到"
 
-#: calendar/qml/private/GlobalMenuBar.qml:106
-#: calendar/qml/private/MenuBar.qml:108
-#: contacts/qml/private/GlobalMenuBar.qml:19
-#: contacts/qml/private/MenuBar.qml:25 mail/qml/private/GlobalMenuBar.qml:55
-#: mail/qml/private/MenuBar.qml:18
+#: calendar/qml/Menus/GlobalMenuBar.qml:136 calendar/qml/Menus/MenuBar.qml:137
+#: contacts/qml/GlobalMenuBar.qml:30 contacts/qml/MenuBar.qml:28
+#: mail/qml/app/GlobalMenuBar.qml:55 mail/qml/app/MenuBar.qml:25
 #, kde-format
 msgctxt "@action:menu"
 msgid "Create"
 msgstr "创建"
 
-#: calendar/qml/private/MenuBar.qml:45
+#: calendar/qml/Menus/GlobalMenuBar.qml:150 calendar/qml/Menus/MenuBar.qml:150
+#: components/qml/SettingsMenu.qml:13 contacts/qml/GlobalMenuBar.qml:43
+#, kde-format
+msgctxt "@action:menu"
+msgid "Settings"
+msgstr "设置"
+
+#: calendar/qml/Menus/MenuBar.qml:71
 #, kde-format
 msgid "Sort Tasks"
 msgstr "任务排序"
 
-#: calendar/utils.cpp:19
+#: calendar/qml/Menus/MenuBar.qml:173 components/qml/HelpMenu.qml:13
+#: components/qml/NativeHelpMenu.qml:12
+#, kde-format
+msgctxt "@action:menu"
+msgid "Help"
+msgstr "帮助"
+
+#: calendar/qml/Menus/MenuBar.qml:184 components/qml/HelpMenu.qml:24
+#: components/qml/NativeHelpMenu.qml:23
+#, kde-format
+msgctxt "@action:menu"
+msgid "Kalendar Handbook"
+msgstr "Kalendar 手册"
+
+#: calendar/qml/Settings/CalendarSettingsPage.qml:138
+#, kde-format
+msgid "Change Calendar Color…"
+msgstr "更改日历颜色..."
+
+#: calendar/qml/Settings/CalendarSettingsPage.qml:148
+#, kde-format
+msgid "Choose Calendar Color"
+msgstr "选择日历颜色"
+
+#: calendar/qml/Settings/Schedule/AvailabilitySettingsPage.qml:12
+#, kde-format
+msgid "Configure Availability"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:15
+#, kde-format
+msgid "Configure Free/Busy"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:28
+#, kde-format
+msgid "Free/Busy Publishing settings"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:32
+#, kde-format
+msgid ""
+"When you publish your free/busy information, it enables others to consider "
+"your calendar availability when inviting you to a meeting. Only the times "
+"that are already marked as busy are disclosed, without revealing the "
+"specific reasons for your availability."
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:37
+#, kde-format
+msgid "Publish your free/busy information automatically"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:49
+#, kde-format
+msgid "Minimum time (in minutes) between uploads"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:62
+#, kde-format
+msgid "Number of days of free/busy info to publish: "
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:74
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:186
+#, kde-format
+msgid "Server information"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:78
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:190
+#, kde-format
+msgid "Server URL"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:88
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:200
+#, kde-format
+msgid "Username"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:98
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:210
+#, kde-format
+msgid "Password"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:114
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:220
+#, kde-format
+msgid "Save password"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:124
+#, kde-format
+msgid "Click here to publish Free/Busy information manually"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:135
+#, kde-format
+msgid "Email Free/Busy"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:140
+#, kde-format
+msgid "Enter email of recipient..."
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:158
+#, kde-format
+msgid "Free/Busy Retrieval settings"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:162
+#, kde-format
+msgid ""
+"By retrieving Free/Busy information that others have published, you can take "
+"their calendar into account when inviting them to a meeting."
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:167
+#, kde-format
+msgid "Retrieve others' free/busy information automatically"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/FreeBusySettingsPage.qml:176
+#, kde-format
+msgid "Use full email address for retrieval"
+msgstr ""
+
+#: calendar/qml/Settings/Schedule/ScheduleSettingsPage.qml:13
+#, kde-format
+msgid "Free/Busy"
+msgstr ""
+
+#: calendar/qml/Settings/SettingsPage.qml:14
+#: calendar/qml/Settings/ViewSettingsPage.qml:12
+#, kde-format
+msgid "Appearance"
+msgstr "外观"
+
+#: calendar/qml/Settings/SettingsPage.qml:19
+#: calendar/qml/Settings/SourceSettingsPage.qml:13
+#, kde-format
+msgid "Accounts"
+msgstr "账户"
+
+#: calendar/qml/Settings/SourceSettingsPage.qml:21
+#, kde-format
+msgid "Add New Calendar Source…"
+msgstr "添加新日历源..."
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:24
+#, kde-format
+msgid "General settings"
+msgstr "通用设置"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:28
+#, kde-format
+msgid "Use popup to show incidence information"
+msgstr "使用弹出窗口显示事件信息"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:39
+#, kde-format
+msgid "Show tasks in calendar views"
+msgstr "在日历视图中显示任务"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:49
+#, kde-format
+msgid "Show sub-tasks in calendar views"
+msgstr "在日历视图中显示子任务"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:63
+#, kde-format
+msgid "Past event transparency"
+msgstr "过去事件透明度"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:88
+#, kde-format
+msgid "Month view settings"
+msgstr "月视图设置"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:100
+#, kde-format
+msgid "Month view mode"
+msgstr "月视图模式"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:107
+#, kde-format
+msgid "Swipeable month grid"
+msgstr "可滑动月份网格"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:114
+#, kde-format
+msgid "Basic month grid"
+msgstr "基本月份网格"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:120
+#, kde-format
+msgid "Swipeable month grid requires higher system performance."
+msgstr "可滑动月份网格需要更高的系统性能。"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:135
+#, kde-format
+msgid "Weekday label alignment"
+msgstr "每周日期标签对齐"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:142
+#, kde-format
+msgid "Left"
+msgstr "左对齐"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:149
+#, kde-format
+msgid "Center"
+msgstr "居中对齐"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:156
+#, kde-format
+msgid "Right"
+msgstr "右对齐"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:174
+#, kde-format
+msgid "Weekday label length:"
+msgstr "每周日期标签长度"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:179
+#, kde-format
+msgid "Full name (Monday)"
+msgstr "全称 (Monday)"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:186
+#, kde-format
+msgid "Abbreviated (Mon)"
+msgstr "缩略名 (Mon)"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:194
+#, kde-format
+msgid "Letter only (M)"
+msgstr "一个字 (M)"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:203
+#, kde-format
+msgid "Show week numbers"
+msgstr "显示周数"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:217
+#, kde-format
+msgid "Grid border width (pixels):"
+msgstr "网格线宽度 (像素)："
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:247
+#, kde-format
+msgid "Week view settings"
+msgstr "周视图设置"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:259
+#, kde-format
+msgid "Week view mode"
+msgstr "周视图模式"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:266
+#, kde-format
+msgid "Swipeable week view"
+msgstr "可滑动的周视图"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:273
+#, kde-format
+msgid "Basic week view"
+msgstr "基本树视图"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:279
+#, kde-format
+msgid "Swipeable week view requires higher system performance."
+msgstr "可滑动周视图需要更高的系统性能。"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:292
+#, kde-format
+msgid "Schedule View settings"
+msgstr "计划视图设置"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:304
+#, kde-format
+msgid "Schedule view mode"
+msgstr "计划视图模式"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:311
+#, kde-format
+msgid "Swipeable schedule view"
+msgstr "可滑动日历视图"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:318
+#, kde-format
+msgid "Basic schedule view"
+msgstr "基本日历视图"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:324
+#, kde-format
+msgid "Swipeable schedule view requires higher system performance."
+msgstr "可滑动日历视图需要更高的系统性能。"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:333
+#, kde-format
+msgid "Show week headers"
+msgstr "显示周标题"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:350
+#, kde-format
+msgid "Tasks View settings"
+msgstr "任务视图设置"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:353
+#, kde-format
+msgid "Show completed sub-tasks"
+msgstr "显示已完成的子任务"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:369
+#, kde-format
+msgid "Maps"
+msgstr "地图"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:373
+#, kde-format
+msgid "Enable maps"
+msgstr "启用地图"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:380
+#, kde-format
+msgid "May cause crashing on some systems."
+msgstr "在某些系统上可能会导致崩溃。"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:392
+#, kde-format
+msgid "Location marker"
+msgstr "位置标记"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:400
+#, kde-format
+msgid "Circle (shows area of location)"
+msgstr "圆 (显示位置区域)"
+
+#: calendar/qml/Settings/ViewSettingsPage.qml:407
+#, kde-format
+msgid "Pin (shows exact location)"
+msgstr "点 (显示确切位置)"
+
+#: calendar/utils.cpp:21
 #, kde-format
 msgctxt "%1 is 2 or more"
 msgid "%1 days"
 msgstr "%1 天"
 
-#: calendar/utils.cpp:21
+#: calendar/utils.cpp:23
 #, kde-format
 msgid "1 day"
 msgstr "1 天"
 
-#: calendar/utils.cpp:23
+#: calendar/utils.cpp:25
 #, kde-format
 msgctxt "%1 is 2 or mores"
 msgid "%1 hours"
 msgstr "%1 小时"
 
-#: calendar/utils.cpp:25
+#: calendar/utils.cpp:27
 #, kde-format
 msgid "1 hour"
 msgstr "1 小时"
 
-#: calendar/utils.cpp:27
+#: calendar/utils.cpp:29
 #, kde-format
 msgid "%1 minutes"
 msgstr "%1 分钟"
 
-#: calendar/utils.cpp:40
+#: calendar/utils.cpp:47
 #, kde-format
 msgid "%1 before start of event"
 msgstr "事件开始前 %1"
 
-#: calendar/utils.cpp:42
+#: calendar/utils.cpp:49
 #, kde-format
 msgid "%1 after start of event"
 msgstr "事件开始后 %1"
 
-#: calendar/utils.cpp:44
+#: calendar/utils.cpp:51
 #, kde-format
 msgid "On event start"
 msgstr "事件开始时"
-
-#: calendarmanager.cpp:532
-#, kde-format
-msgid "Move occurrence(s)"
-msgstr "移动重现"
-
-#: calendarmanager.cpp:537
-#, kde-format
-msgid ""
-"Unable to add the exception item to the calendar. No change will be done."
-msgstr "无法将异常项目添加到日历。将不会做任何更改。"
-
-#: calendarmanager.cpp:577
-#, kde-format
-msgid "Delete task and its sub-tasks"
-msgstr "删除任务及其子任务"
-
-#: calendarmanager.cpp:580
-#, kde-format
-msgid "Delete task and make sub-tasks independent"
-msgstr "删除任务并使子任务独立。"
-
-#: calendarmanager.cpp:742
-#, kde-format
-msgctxt "@title:window"
-msgid "Properties of Calendar %1"
-msgstr "日历 %1 的属性"
 
 #: components/qml/EditMenu.qml:13 components/qml/NativeEditMenu.qml:11
 #, kde-format
@@ -257,35 +2108,30 @@ msgid "Redo Text"
 msgstr "重做文本"
 
 #: components/qml/EditMenu.qml:60 components/qml/NativeEditMenu.qml:63
-#: mail/qml/private/EditMenu.qml:49
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Cut"
 msgstr "剪切"
 
 #: components/qml/EditMenu.qml:69 components/qml/NativeEditMenu.qml:73
-#: mail/qml/private/EditMenu.qml:59
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Copy"
 msgstr "复制"
 
 #: components/qml/EditMenu.qml:78 components/qml/NativeEditMenu.qml:83
-#: mail/qml/private/EditMenu.qml:69
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Paste"
 msgstr "粘贴"
 
 #: components/qml/EditMenu.qml:87 components/qml/NativeEditMenu.qml:93
-#: mail/qml/private/EditMenu.qml:79
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Delete"
 msgstr "删除"
 
 #: components/qml/EditMenu.qml:99 components/qml/NativeEditMenu.qml:106
-#: mail/qml/private/EditMenu.qml:92
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Select All"
@@ -303,69 +2149,69 @@ msgctxt "@action:menu"
 msgid "Quit Kalendar"
 msgstr "退出 Kalendar"
 
-#: components/qml/HelpMenu.qml:9 components/qml/NativeHelpMenu.qml:8
+#: components/qml/KQuickCommandBarPage.qml:90
 #, kde-format
-msgctxt "@action:menu"
-msgid "Help"
-msgstr "帮助"
+msgid "No results found"
+msgstr "未找到结果"
 
-#: components/qml/HelpMenu.qml:17 components/qml/NativeHelpMenu.qml:16
-#, kde-format
-msgctxt "@action:menu"
-msgid "Kalendar Handbook"
-msgstr "Kalendar 手册"
-
-#: components/qml/NativeEditMenu.qml:40 mail/qml/private/EditMenu.qml:26
+#: components/qml/NativeEditMenu.qml:40
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Undo"
 msgstr "撤销"
 
-#: components/qml/NativeEditMenu.qml:50 mail/qml/private/EditMenu.qml:36
+#: components/qml/NativeEditMenu.qml:50
 #, kde-format
 msgctxt "text editing menu action"
 msgid "Redo"
 msgstr "重做"
 
-#: components/qml/NativeSettingsMenu.qml:8 components/qml/SettingsMenu.qml:9
-#, kde-format
-msgctxt "@action:menu"
-msgid "Settings"
-msgstr "设置"
-
-#: components/qml/NativeViewMenu.qml:12 components/qml/ViewMenu.qml:9
-#: mail/qml/private/GlobalMenuBar.qml:19
-#, kde-format
-msgctxt "@action:menu"
-msgid "View"
-msgstr "查看"
-
 #: components/qml/NativeWindowMenu.qml:12 components/qml/WindowMenu.qml:12
-#: mail/qml/private/GlobalMenuBar.qml:62
+#: mail/qml/app/GlobalMenuBar.qml:62
 #, kde-format
 msgctxt "@action:menu"
 msgid "Window"
 msgstr "窗口"
 
 #: components/qml/NativeWindowMenu.qml:15 components/qml/WindowMenu.qml:15
-#: mail/qml/private/GlobalMenuBar.qml:65
+#: mail/qml/app/GlobalMenuBar.qml:65
 #, kde-format
 msgctxt "@action:menu"
 msgid "Exit Full Screen"
 msgstr "退出全屏"
 
 #: components/qml/NativeWindowMenu.qml:15 components/qml/WindowMenu.qml:15
-#: mail/qml/private/GlobalMenuBar.qml:65
+#: mail/qml/app/GlobalMenuBar.qml:65
 #, kde-format
 msgctxt "@action:menu"
 msgid "Enter Full Screen"
 msgstr "进入全屏"
 
 #: contacts/autotests/emailmodeltest.cpp:36 contacts/emailmodel.cpp:45
-#: contacts/qml/private/ContactPage.qml:283
+#: contacts/qml/private/ContactPage.qml:278
 #, kde-format
 msgid "Home:"
 msgstr "首页："
+
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
+#, kde-format
+msgid "Contact"
+msgstr "联系人"
+
+#: contacts/contactapplication.cpp:36
+#, kde-format
+msgid "New Contact…"
+msgstr "新建联系人"
+
+#: contacts/contactapplication.cpp:43
+#, kde-format
+msgid "Refresh All Address Books"
+msgstr "刷新所有地址簿"
+
+#: contacts/contactapplication.cpp:53
+#, kde-format
+msgid "New Contact Group…"
+msgstr "新建联系人组"
 
 #: contacts/contactgroupeditor.cpp:232
 #, kde-format
@@ -394,7 +2240,7 @@ msgctxt "contact's email address"
 msgid "EMail"
 msgstr "电子邮件"
 
-#: contacts/contactmanager.cpp:184
+#: contacts/contactmanager.cpp:193
 #, kde-format
 msgctxt "@title:window"
 msgid "Properties of Address Book %1"
@@ -415,48 +2261,49 @@ msgstr "工作："
 msgid "Other:"
 msgstr "其他："
 
+#: contacts/main.cpp:48
+#, fuzzy, kde-format
+#| msgid "Contact"
+msgctxt "@title"
+msgid "Contact"
+msgstr "联系人"
+
+#: contacts/main.cpp:51
+#, fuzzy, kde-format
+#| msgid "Calendar Application"
+msgid "Address Book Application"
+msgstr "日历应用程序"
+
 #: contacts/qml/AddressBookCollectionHandler.qml:34
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Address Book Color"
 msgstr "选择地址簿颜色"
 
-#: contacts/qml/ContactApplication.qml:16
-#, kde-format
-msgid "Refresh All Address Books"
-msgstr "刷新所有地址簿"
-
-#: contacts/qml/ContactChooserPage.qml:22
+#: contacts/qml/ContactChooserPage.qml:21
 #, kde-format
 msgid "Done"
 msgstr "完成"
 
-#: contacts/qml/ContactChooserPage.qml:52
+#: contacts/qml/ContactChooserPage.qml:51
 #, kde-format
 msgid "Select Email Address"
 msgstr "选择电子邮件地址"
 
-#: contacts/qml/ContactView.qml:17 contacts/qml/private/ContactsPage.qml:21
-#: contents/ui/Controls/CheckableCollectionNavigationView.qml:129
-#: contents/ui/main.qml:488
-#, kde-format
-msgid "Contacts"
-msgstr "联系人"
-
-#: contacts/qml/ContactView.qml:81
+#: contacts/qml/ContactView.qml:90
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit contact…"
 msgstr "编辑联系人"
 
-#: contacts/qml/ContactView.qml:96
-#: contacts/qml/private/DeleteContactAction.qml:64
+#: contacts/qml/ContactView.qml:105
+#: contacts/qml/private/DeleteContactAction.qml:63
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete contact"
 msgstr "删除联系人"
 
-#: contacts/qml/ContactView.qml:114 contacts/qml/private/ContactsPage.qml:48
+#: contacts/qml/ContactView.qml:123 contacts/qml/private/ContactsPage.qml:46
 #, kde-format
 msgid "No contacts"
 msgstr "无联系人"
@@ -503,129 +2350,129 @@ msgctxt "@action:inmenu"
 msgid "Delete address source"
 msgstr "删除地址簿源"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:32
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:33
 #, kde-format
 msgid "Address book:"
 msgstr "地址簿："
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:54
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:61
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:55
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:62
 #, kde-format
 msgid "Name"
 msgstr "姓名"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:65
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:66
 #, kde-format
 msgid "Contact name"
 msgstr "联系人姓名"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:84
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:85
 #, kde-format
 msgid "Honorific prefix"
 msgstr "敬称前缀："
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:87
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:88
 #, kde-format
 msgid "Miss"
 msgstr "小姐"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:87
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:88
 #, kde-format
 msgid "Mr."
 msgstr "先生"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:87
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:88
 #, kde-format
 msgid "Mrs."
 msgstr "夫人"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:87
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:88
 #, kde-format
 msgid "Ms."
 msgstr "女士"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:87
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:88
 #, kde-format
 msgid "Prof."
 msgstr "教授"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:96
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:97
 #, kde-format
 msgid "Given name"
 msgstr "名字"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:99
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:100
 #, kde-format
 msgid "First name or chosen name"
 msgstr "名字和姓氏"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:105
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:106
 #, kde-format
 msgid "Additional name"
 msgstr "其他姓名"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:108
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:109
 #, kde-format
 msgid "Middle name or other name"
 msgstr ""
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:114
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:115
 #, kde-format
 msgid "Family name:"
 msgstr ""
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:117
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:118
 #, kde-format
 msgid "Surname or last name"
 msgstr ""
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:123
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:124
 #, kde-format
 msgid "Honorific suffix"
 msgstr "敬称后缀："
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:127
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:128
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:127
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:128
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:127
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:128
 #, kde-format
 msgid "Jr."
 msgstr ""
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:127
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:128
 #, kde-format
 msgid "Sr."
 msgstr ""
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:134
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:135
 #, kde-format
 msgid "Nickname"
 msgstr "昵称"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:137
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:138
 #, kde-format
 msgid "Alternative name"
 msgstr "替代名称"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:145
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:146
 #, kde-format
 msgid "Blog Feed"
 msgstr "博客订阅"
 
-#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:148
+#: contacts/qml/private/contact_editor/AddressBookEditorCard.qml:149
 #, kde-format
 msgid "https://planet.kde.org/"
 msgstr "https://planet.kde.org/"
 
 #: contacts/qml/private/contact_editor/BusinessEditorCard.qml:28
-#: contacts/qml/private/ContactPage.qml:342
+#: contacts/qml/private/ContactPage.qml:337
 #, kde-format
 msgid "Business Information"
 msgstr "商业信息"
@@ -717,27 +2564,13 @@ msgstr "添加联系人"
 msgid "Edit Contact"
 msgstr "编辑联系人"
 
-#: contacts/qml/private/contact_editor/ContactEditorPage.qml:134
-#: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:183
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:53
-#, kde-format
-msgid "Save"
-msgstr "保存"
-
-#: contacts/qml/private/contact_editor/ContactEditorPage.qml:134
-#: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:183
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:53
-#, kde-format
-msgid "Add"
-msgstr "添加"
-
-#: contacts/qml/private/contact_editor/ContactEditorPage.qml:179
+#: contacts/qml/private/contact_editor/ContactEditorPage.qml:180
 #: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:227
 #, kde-format
 msgid "Current changes"
 msgstr ""
 
-#: contacts/qml/private/contact_editor/ContactEditorPage.qml:184
+#: contacts/qml/private/contact_editor/ContactEditorPage.qml:185
 #: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:232
 #, kde-format
 msgid "External changes"
@@ -747,13 +2580,6 @@ msgstr ""
 #, kde-format
 msgid "Address Book:"
 msgstr ""
-
-#: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:88
-#: contacts/qml/private/ContactPage.qml:164
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:923
-#, kde-format
-msgid "Name:"
-msgstr "姓名："
 
 #: contacts/qml/private/contact_editor/ContactGroupEditorPage.qml:91
 #, kde-format
@@ -942,176 +2768,166 @@ msgstr ""
 msgid "Update Profile Picture"
 msgstr ""
 
-#: contacts/qml/private/ContactGroupPage.qml:36
-#: contents/ui/Controls/IncidenceMouseArea.qml:66
-#: contents/ui/Drawers/IncidenceInfoDrawer.qml:91
-#, kde-format
-msgid "Edit"
-msgstr "编辑"
-
-#: contacts/qml/private/ContactPage.qml:36
+#: contacts/qml/private/ContactPage.qml:35
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:46
-#: contacts/qml/private/DeleteContactAction.qml:52
-#: contents/ui/Dialogs/DeleteCalendarPage.qml:71
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:114
-#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:86
-#: contents/ui/main.qml:942
-#, kde-format
+#: contacts/qml/private/ContactPage.qml:43
+#, fuzzy, kde-format
+#| msgid "Cancel"
+msgctxt "@action:inmenu"
 msgid "Cancel"
 msgstr "取消"
 
-#: contacts/qml/private/ContactPage.qml:94
+#: contacts/qml/private/ContactPage.qml:89
 #, kde-format
 msgid "Call"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:105
+#: contacts/qml/private/ContactPage.qml:100
 #, kde-format
 msgid "Select number to call"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:113
+#: contacts/qml/private/ContactPage.qml:108
 #, kde-format
 msgid "Send SMS"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:124
+#: contacts/qml/private/ContactPage.qml:119
 #, kde-format
 msgid "Select number to send message to"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:132
+#: contacts/qml/private/ContactPage.qml:127
 #, kde-format
 msgid "Send email"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:138
+#: contacts/qml/private/ContactPage.qml:133
 #, kde-format
 msgid "Show QR Code"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:158
+#: contacts/qml/private/ContactPage.qml:153
 #, kde-format
 msgid "Contact information"
 msgstr ""
 
-#: contacts/qml/private/ContactPage.qml:170
+#: contacts/qml/private/ContactPage.qml:165
 #, kde-format
 msgid "Nickname:"
 msgstr "昵称："
 
-#: contacts/qml/private/ContactPage.qml:176
+#: contacts/qml/private/ContactPage.qml:171
 #, kde-format
 msgid "Blog Feed:"
 msgstr "博客源："
 
-#: contacts/qml/private/ContactPage.qml:193
+#: contacts/qml/private/ContactPage.qml:188
 #, kde-format
 msgid "Personal information"
 msgstr "个人信息"
 
-#: contacts/qml/private/ContactPage.qml:199
+#: contacts/qml/private/ContactPage.qml:194
 #, kde-format
 msgid "Birthday:"
 msgstr "生日："
 
-#: contacts/qml/private/ContactPage.qml:217
+#: contacts/qml/private/ContactPage.qml:212
 #, kde-format
 msgid "Anniversary:"
 msgstr "纪念日："
 
-#: contacts/qml/private/ContactPage.qml:224
+#: contacts/qml/private/ContactPage.qml:219
 #, kde-format
 msgid "Partner's name:"
 msgstr "搭档姓名："
 
-#: contacts/qml/private/ContactPage.qml:239
+#: contacts/qml/private/ContactPage.qml:234
 #, kde-format
 msgid "Phone Number"
 msgid_plural "Phone Numbers"
 msgstr[0] "电话号码"
 
-#: contacts/qml/private/ContactPage.qml:251
+#: contacts/qml/private/ContactPage.qml:246
 #, kde-format
 msgctxt "Label for a phone number type"
 msgid "%1:"
 msgstr "%1："
 
-#: contacts/qml/private/ContactPage.qml:269
+#: contacts/qml/private/ContactPage.qml:264
 #, kde-format
 msgid "Address"
 msgid_plural "Addresses"
 msgstr[0] "地址"
 
-#: contacts/qml/private/ContactPage.qml:283
+#: contacts/qml/private/ContactPage.qml:278
 #, kde-format
 msgctxt "%1 is the type of the address, e.g. home, work, ..."
 msgid "%1:"
 msgstr "%1："
 
-#: contacts/qml/private/ContactPage.qml:300
+#: contacts/qml/private/ContactPage.qml:295
 #, kde-format
 msgid "Instant Messaging"
 msgstr "即时通讯"
 
-#: contacts/qml/private/ContactPage.qml:317
+#: contacts/qml/private/ContactPage.qml:312
 #, kde-format
 msgctxt "Label for a messaging protocol"
 msgid "%1:"
 msgstr "%1："
 
-#: contacts/qml/private/ContactPage.qml:348
+#: contacts/qml/private/ContactPage.qml:343
 #, kde-format
 msgid "Organization:"
 msgstr "组织："
 
-#: contacts/qml/private/ContactPage.qml:355
+#: contacts/qml/private/ContactPage.qml:350
 #, kde-format
 msgid "Profession:"
 msgstr "职业："
 
-#: contacts/qml/private/ContactPage.qml:362
+#: contacts/qml/private/ContactPage.qml:357
 #, kde-format
 msgid "Title:"
 msgstr "头衔："
 
-#: contacts/qml/private/ContactPage.qml:369
+#: contacts/qml/private/ContactPage.qml:364
 #, kde-format
 msgid "Department:"
 msgstr "部门："
 
-#: contacts/qml/private/ContactPage.qml:376
+#: contacts/qml/private/ContactPage.qml:371
 #, kde-format
 msgid "Office:"
 msgstr "办公室："
 
-#: contacts/qml/private/ContactPage.qml:383
+#: contacts/qml/private/ContactPage.qml:378
 #, kde-format
 msgid "Manager's name:"
 msgstr "经理姓名："
 
-#: contacts/qml/private/ContactPage.qml:390
+#: contacts/qml/private/ContactPage.qml:385
 #, kde-format
 msgid "Assistants's name:"
 msgstr "助手姓名："
 
-#: contacts/qml/private/ContactPage.qml:406
+#: contacts/qml/private/ContactPage.qml:401
 #, kde-format
 msgid "Email Address"
 msgid_plural "Email Addresses"
 msgstr[0] "邮箱地址"
 
-#: contacts/qml/private/DeleteContactAction.qml:35
+#: contacts/qml/private/DeleteContactAction.qml:34
 #, kde-format
 msgid "You won't be able to revert this action"
 msgstr "您将无法恢复此操作"
 
-#: contacts/qml/private/DeleteContactAction.qml:56
+#: contacts/qml/private/DeleteContactAction.qml:55
 #, kde-format
 msgid "Delete contact"
 msgstr "删除联系人"
@@ -1126,1816 +2942,43 @@ msgstr "二维码"
 msgid "Creating QR code failed"
 msgstr "创建二维码失败"
 
-#: contents/ui/Bars/FilterHeaderBar.qml:41
-#, kde-format
-msgid "Filtering by tags"
-msgstr "按标签筛选"
-
-#: contents/ui/Bars/FilterHeaderBar.qml:42
-#, kde-format
-msgid "All Tasks"
-msgstr "全部任务"
-
-#: contents/ui/Bars/FilterHeaderBar.qml:86
-#, kde-format
-msgid "Remove filtering tag"
-msgstr "移除筛选标签"
-
-#: contents/ui/Controls/CalendarItemTapHandler.qml:36
-#, kde-format
+#: contacts/qml/Settings.qml:13
+#, fuzzy, kde-format
+#| msgid "Settings"
 msgctxt "@title:window"
-msgid "Choose Calendar Color"
-msgstr "选择日历颜色"
-
-#: contents/ui/Controls/CheckableCollectionNavigationView.qml:63
-#, kde-format
-msgid "Tags"
-msgstr "标签"
-
-#: contents/ui/Controls/CheckableCollectionNavigationView.qml:131
-#: contents/ui/Settings/CalendarSettingsPage.qml:14
-#: contents/ui/Settings/SettingsPage.qml:24
-#: contents/ui/Settings/SourceSettingsPage.qml:20
-#, kde-format
-msgid "Calendars"
-msgstr "日历"
-
-#: contents/ui/Controls/DateControls/DatePicker.qml:138
-#, kde-format
-msgctxt "%1 is month name, %2 is year"
-msgid "%1 %2"
-msgstr "%2 %1"
-
-#: contents/ui/Controls/DateControls/DatePicker.qml:182
-#, kde-format
-msgid "Days"
-msgstr "日"
-
-#: contents/ui/Controls/DateControls/DatePicker.qml:190
-#, kde-format
-msgid "Months"
-msgstr "月"
-
-#: contents/ui/Controls/DateControls/DatePicker.qml:196
-#, kde-format
-msgid "Years"
-msgstr "年"
-
-#: contents/ui/Controls/DateControls/TimePicker.qml:50
-#, kde-format
-msgid "Min. Interval:"
-msgstr "分钟间隔："
-
-#: contents/ui/Controls/DayMouseArea.qml:50 contents/ui/main.qml:455
-#: kalendarapplication.cpp:298
-#, kde-format
-msgid "New Event…"
-msgstr "新建事件..."
-
-#: contents/ui/Controls/DayMouseArea.qml:55 contents/ui/main.qml:461
-#: kalendarapplication.cpp:305
-#, kde-format
-msgid "New Task…"
-msgstr "新建任务..."
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:115
-#, kde-format
-msgid "This event is recurring"
-msgstr "此事件正在循环"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:126
-#, kde-format
-msgid "This event has reminder"
-msgid_plural "This event has reminders"
-msgstr[0] "此事件有提醒物"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:148
-#, kde-format
-msgctxt "%1 is a percentage number"
-msgid "<b>%1%</b> Complete"
-msgstr "<b>%1%</b> 已完成"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:178
-#, kde-format
-msgid "<b>Calendar:</b>"
-msgstr "<b>日历：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:190
-#, kde-format
-msgid "<b>Tags:</b>"
-msgstr "<b>标签：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:203
-#, kde-format
-msgid "Remove %1 tag"
-msgstr "移除 %1 标签"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:215
-#, kde-format
-msgid "<b>Date:</b>"
-msgstr "<b>日期：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:242
-#, kde-format
-msgid "<b>Time:</b>"
-msgstr "<b>时间：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:269
-#, kde-format
-msgid "<b>Duration:</b>"
-msgstr "<b>持续时间：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:283
-#, kde-format
-msgid "<b>Priority level:</b>"
-msgstr "<b>优先级：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:295
-#, kde-format
-msgid "<b>Completed:</b>"
-msgstr "<b>已完成：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:315
-#, kde-format
-msgid "<b>Recurrence:</b>"
-msgstr "<b>重复：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:338
-#, kde-format
-msgid "Except on:"
-msgstr "例外："
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:368
-#, kde-format
-msgid "<b>Location:</b>"
-msgstr "<b>位置：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:425
-#, kde-format
-msgid "Unable to find location."
-msgstr "找不到位置。"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:460
-#, kde-format
-msgid "<b>Description:</b>"
-msgstr "<b>描述：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:475
-#, kde-format
-msgid "<b>Attachment:</b>"
-msgid_plural "<b>Attachments:</b>"
-msgstr[0] "<b>附件：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:500
-#, kde-format
-msgid "<b>Reminders:</b>"
-msgstr "<b>提醒：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:528
-#, kde-format
-msgid "<b>Organizer:</b>"
-msgstr "<b>组织者：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:545
-#, kde-format
-msgid "<b>Google Meet:</b>"
-msgstr "<b>Google Meeting：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:556
-#, kde-format
-msgid "<b>Guests:</b>"
-msgstr "<b>客人：</b>"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:592
-#, kde-format
-msgid "Super-task"
-msgstr "父任务"
-
-#: contents/ui/Controls/IncidenceInfoContents.qml:617
-#, kde-format
-msgid "Sub-task"
-msgid_plural "Sub-tasks"
-msgstr[0] "子任务"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:61
-#, kde-format
-msgid "View"
-msgstr "查看"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:72
-#: contents/ui/Dialogs/DeleteCalendarPage.qml:22
-#: contents/ui/Dialogs/DeleteCalendarPage.qml:65
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:28
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:108
-#: contents/ui/Drawers/IncidenceInfoDrawer.qml:97
-#: quick/qml/AgentConfigurationForm.qml:50
-#, kde-format
-msgid "Delete"
-msgstr "删除"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:81
-#, kde-format
-msgid "Mark Task as Incomplete"
-msgstr "标记任务为未完成"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:81
-#, kde-format
-msgid "Mark Task as Complete"
-msgstr "标记任务为已完成"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:88
-#: contents/ui/Drawers/IncidenceInfoDrawer.qml:69
-#, kde-format
-msgid "Add Sub-Task"
-msgstr "添加子任务"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:99
-#, kde-format
-msgid "Set priority..."
-msgstr "设置优先级..."
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:112
-#: contents/ui/Controls/IncidenceMouseArea.qml:184
-#, kde-format
-msgid "None"
-msgstr "无"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:117
-#, kde-format
-msgid "1 (highest priority)"
-msgstr "1 (最高优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:122
-#, kde-format
-msgid "2 (mid-high priority)"
-msgstr "2 (较高优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:127
-#, kde-format
-msgid "3 (mid-high priority)"
-msgstr "3 (较高优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:132
-#, kde-format
-msgid "4 (mid-high priority)"
-msgstr "4 (较高优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:137
-#, kde-format
-msgid "5 (medium priority)"
-msgstr "5 (中等优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:142
-#, kde-format
-msgid "6 (mid-low priority)"
-msgstr "6 (较低优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:147
-#, kde-format
-msgid "7 (mid-low priority)"
-msgstr "7 (较低优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:152
-#, kde-format
-msgid "8 (mid-low priority)"
-msgstr "8 (较低优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:157
-#, kde-format
-msgid "9 (lowest priority)"
-msgstr "9 (最低优先级)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:163
-#, kde-format
-msgid "Set due date..."
-msgstr "设置截止日期..."
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:191
-#, kde-format
-msgid "Today (%1)"
-msgstr "今天 (%1)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:202
-#, kde-format
-msgid "Tomorrow (%1)"
-msgstr "明天 (%1)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:212
-#, kde-format
-msgid "In a week (%1)"
-msgstr "一周内 (%1)"
-
-#: contents/ui/Controls/IncidenceMouseArea.qml:223
-#, kde-format
-msgid "In a month (%1)"
-msgstr "一月内 (%1)"
-
-#: contents/ui/Controls/MainDrawerToggleButton.qml:25
-#, kde-format
-msgid "Expand Main Drawer"
-msgstr "展开主抽屉栏"
-
-#: contents/ui/Controls/MainDrawerToggleButton.qml:25
-#, kde-format
-msgid "Collapse Main Drawer"
-msgstr "收起主抽屉栏"
-
-#: contents/ui/Controls/Tag.qml:111
-#, kde-format
-msgid "Remove Tag"
-msgstr "移除标签"
-
-#: contents/ui/Controls/TitleDateButton.qml:27
-#: contents/ui/Controls/TitleDateButton.qml:32
-#, kde-format
-msgctxt "%1 is month name, %2 is year"
-msgid "<b>%1</b> %2"
-msgstr "%2 <b>%1</b>"
-
-#: contents/ui/Controls/TitleDateButton.qml:35
-#, kde-format
-msgctxt ""
-"%1 is the month and year of the range start, %2 is the same for range end"
-msgid "%1 - %2"
-msgstr "%1 - %2"
-
-#: contents/ui/Controls/TitleDateButton.qml:37
-#, kde-format
-msgctxt "%1 is month of range start, %2 is month + year of range end"
-msgid "<b>%1</b> - %2"
-msgstr "<b>%1</b> - %2"
-
-#: contents/ui/Dialogs/CollectionPickerPage.qml:20
-#, kde-format
-msgid "Choose a Task Calendar"
-msgstr "选择任务日历"
-
-#: contents/ui/Dialogs/CollectionPickerPage.qml:22
-#, kde-format
-msgid "Choose a Calendar"
-msgstr "选择日历"
-
-#: contents/ui/Dialogs/CollectionPickerPage.qml:24
-#, kde-format
-msgid "Choose an Address Book"
-msgstr "选择地址簿"
-
-#: contents/ui/Dialogs/DeleteCalendarPage.qml:22
-#, kde-format
-msgid "Delete calendar"
-msgstr "删除日历"
-
-#: contents/ui/Dialogs/DeleteCalendarPage.qml:49
-#, kde-format
-msgid "Do you want to delete calendar: \"%1\"?"
-msgstr "您是否想要删除日历“%1”？"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:27
-#, kde-format
-msgctxt "%1 is the type of the incidence (e.g event, todo, journal entry)"
-msgid "Delete %1"
-msgstr "删除 %1"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:58
-#, kde-format
-msgid "Do you want to delete item: \"%1\"?"
-msgstr "您是否想要删除项目“%1”？"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:60
-#, kde-format
-msgid ""
-"Item \"%1\" has sub-items. Do you want to delete all related items, or just "
-"the currently selected item?"
-msgstr "项目“%1”有子项。您想要删除所有相关的项目，还是仅删除当前选中的项目？"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:62
-#, kde-format
-msgid ""
-"The calendar item \"%1\" recurs over multiple dates. This item also has sub-"
-"items.\n"
-"\n"
-"Do you want to delete the selected occurrence on %2, also future "
-"occurrences, or all of its occurrences?\n"
-"\n"
-"Deleting all will also delete sub-items!"
-msgstr ""
-"日历项“%1”在多个日期重复出现。该项目也有子项。\n"
-"您想要仅删除选中的 %2 时的重现，还是以及未来的重现，还是全部的重现？\n"
-"全部删除将会同时删除子项！"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:64
-#, kde-format
-msgid ""
-"The calendar item \"%1\" recurs over multiple dates. Do you want to delete "
-"the selected occurrence on %2, also future occurrences, or all of its "
-"occurrences?"
-msgstr ""
-"日历项“%1”在多个日期重复出现。您想要仅删除选中的 %2 时的重现，还是以及未来的"
-"重现，还是全部的重现？"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:80
-#, kde-format
-msgid "Only Delete Current"
-msgstr "仅删除当前项目"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:87
-#, kde-format
-msgid "Also Delete Future"
-msgstr "同时删除未来的项目"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:101
-#, kde-format
-msgid "Delete Only This"
-msgstr "仅删除此项目"
-
-#: contents/ui/Dialogs/DeleteIncidencePage.qml:108
-#, kde-format
-msgid "Delete All"
-msgstr "全部删除"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:42
-#, kde-format
-msgctxt "%1 is incidence type"
-msgid "Edit %1"
-msgstr "编辑 %1"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:43
-#, kde-format
-msgctxt "%1 is incidence type"
-msgid "Add %1"
-msgstr "添加 %1"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:134
-#, kde-format
-msgid "Invalid dates provided."
-msgstr "您提供的日期无效。"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:134
-#, kde-format
-msgid "End date cannot be before start date."
-msgstr "结束日期不能早于开始日期。"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:147
-#, kde-format
-msgid "Calendar:"
-msgstr "日历："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:175
-#, kde-format
-msgid "Summary:"
-msgstr "摘要："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:186
-#, kde-format
-msgid "Completion:"
-msgstr "完成："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:220
-#, kde-format
-msgid "All day"
-msgstr "全天"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:252
-#, kde-format
-msgid "Start:"
-msgstr "起始："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
-#, kde-format
-msgid "Due:"
-msgstr "到期："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:299
-#, kde-format
-msgid "End:"
-msgstr "结束："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:346
-#, kde-format
-msgid "Timezone:"
-msgstr "时区："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:365
-#, kde-format
-msgid "Repeat:"
-msgstr "重复："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:395
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:596
-#: contents/ui/KalendarUtils/labelutils.js:82
-#, kde-format
-msgid "Never"
-msgstr "从不"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:396
-#, kde-format
-msgid "Daily"
-msgstr "每天"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:397
-#, kde-format
-msgid "Weekly"
-msgstr "每周"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:398
-#, kde-format
-msgid "Monthly"
-msgstr "每月"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:399
-#, kde-format
-msgid "Yearly"
-msgstr "每年"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:431
-#, kde-format
-msgid "Every:"
-msgstr "每隔："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:478
-#, kde-format
-msgid "day"
-msgid_plural "days"
-msgstr[0] "天"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:479
-#, kde-format
-msgid "week"
-msgid_plural "weeks"
-msgstr[0] "周"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:480
-#, kde-format
-msgid "month"
-msgid_plural "months"
-msgstr[0] "月"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:481
-#, kde-format
-msgid "year"
-msgid_plural "years"
-msgstr[0] "年"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:551
-#, kde-format
-msgid "On:"
-msgstr "于："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:559
-#, kde-format
-msgctxt "%1 is the day number of month"
-msgid "The %1 of each month"
-msgstr "每月的第 %1 天"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:571
-#, kde-format
-msgctxt "the weekOfMonth dayOfWeekString of each month"
-msgid "The %1 %2 of each month"
-msgstr "每月的第 %1 个 %2"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:582
-#, kde-format
-msgid "Ends:"
-msgstr "结束："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:597
-#, kde-format
-msgid "On"
-msgstr "在"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:598
-#, kde-format
-msgid "After"
-msgstr "之后"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:634
-#, kde-format
-msgid "occurrence"
-msgid_plural "occurrences"
-msgstr[0] "次重复"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:640
-#, kde-format
-msgid "Exceptions:"
-msgstr "例外："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:646
-#, kde-format
-msgid "Add Recurrence Exception"
-msgstr "添加重现例外"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:689
-#, kde-format
-msgid "Location:"
-msgstr "位置："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:714
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:798
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:930
-#, kde-format
-msgid "Optional"
-msgstr "可选项目"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:761
-#, kde-format
-msgid "Show map"
-msgstr "显示地图"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:792
-#, kde-format
-msgid "Description:"
-msgstr "描述："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:813
-#, kde-format
-msgid "Tags:"
-msgstr "标签："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:822
-#: models/todosortfilterproxymodel.cpp:146
-#, kde-format
-msgctxt "List separator"
-msgid ", "
-msgstr "，"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:823
-#, kde-format
-msgid "Tap to set tags…"
-msgstr "点击设置标签..."
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:823
-#, kde-format
-msgid "Click to set tags…"
-msgstr "点击设置标签..."
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:840
-#, kde-format
-msgid "Manage tags…"
-msgstr "管理标签..."
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:851
-#, kde-format
-msgid "Reminders:"
-msgstr "提醒:"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:874
-#, kde-format
-msgid "Add Reminder"
-msgstr "添加提醒"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:888
-#, kde-format
-msgid "Attendees:"
-msgstr "参与者："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:948
-#, kde-format
-msgid "Email:"
-msgstr "电子邮箱："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:955
-#, kde-format
-msgid "Required"
-msgstr "必需项目"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:964
-#, kde-format
-msgid "Status:"
-msgstr "状态："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:988
-#, kde-format
-msgid "Request RSVP"
-msgstr "请求对方收到时回复 (RSVP)"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1002
-#, kde-format
-msgid "Add Attendee"
-msgstr "添加参与者"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1013
-#, kde-format
-msgid "Choose from Contacts"
-msgstr "选择联系人"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1017
-#, kde-format
-msgid "Fill in Manually"
-msgstr "手动填写"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1031
-#, kde-format
-msgid "Attachments:"
-msgstr "附件："
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1054
-#, kde-format
-msgid "Add Attachment"
-msgstr "添加附件"
-
-#: contents/ui/Dialogs/IncidenceEditorPage.qml:1061
-#, kde-format
-msgid "Add an attachment"
-msgstr ""
-
-#: contents/ui/Dialogs/KQuickCommandBarPage.qml:88
-#, kde-format
-msgid "No results found"
-msgstr "未找到结果"
-
-#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:29
-#, kde-format
-msgid "Change incidence date"
-msgstr "更改事件发生日期"
-
-#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:47
-#, kde-format
-msgid ""
-"The item you are trying to change is a recurring item. Should the changes be "
-"applied only to this single occurrence, also to future items, or to all "
-"items in the recurrence?"
-msgstr ""
-"您正试图更改一个重现项目。想要更改仅对单次重现生效，或是对未来重现生效，还是"
-"对所有重现生效？"
-
-#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:62
-#, kde-format
-msgid "Only This Item"
-msgstr "只有本次"
-
-#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:70
-#, kde-format
-msgid "Also Future Items"
-msgstr "只有未来"
-
-#: contents/ui/Dialogs/RecurringIncidenceChangePage.qml:78
-#, kde-format
-msgid "All Occurrences"
-msgstr "全部事件"
-
-#: contents/ui/Dialogs/TagManagerPage.qml:13
-#, kde-format
-msgid "Manage Tags"
-msgstr "管理标签"
-
-#: contents/ui/Dialogs/TagManagerPage.qml:17
-#, kde-format
-msgid "Delete Tag"
-msgstr "删除标签"
-
-#: contents/ui/Dialogs/TagManagerPage.qml:25
-#, kde-format
-msgid "Are you sure you want to delete tag \"%1\"?"
-msgstr "您确定要删除标签“%1”吗？"
-
-#: contents/ui/Dialogs/TagManagerPage.qml:112
-#, kde-format
-msgid "Create a New Tag…"
-msgstr "新建标签..."
-
-#: contents/ui/Dialogs/TagManagerPage.qml:136
-#, kde-format
-msgid "Quickly Add a New Tag."
-msgstr "快速添加新标签。"
-
-#: contents/ui/Drawers/IncidenceInfoDrawer.qml:82
-#, kde-format
-msgid "Mark Incomplete"
-msgstr "标记为未完成"
-
-#: contents/ui/Drawers/IncidenceInfoDrawer.qml:82
-#, kde-format
-msgid "Mark Complete"
-msgstr "标记为已完成"
-
-#: contents/ui/Drawers/MainDrawer.qml:119
-#, kde-format
-msgid "Kalendar"
-msgstr "Kalendar"
-
-#: contents/ui/Drawers/MainDrawer.qml:181 contents/ui/main.qml:385
-#, kde-format
-msgid "Configure"
-msgstr "配置"
-
-#: contents/ui/Drawers/MainDrawer.qml:304
-#, kde-format
-msgid "Undo"
-msgstr "撤销"
-
-#: contents/ui/Drawers/MainDrawer.qml:309
-#, kde-format
-msgid "Redo"
-msgstr "重做"
-
-#: contents/ui/Drawers/MainDrawer.qml:320
-#, kde-format
 msgid "Settings"
 msgstr "设置"
 
-#: contents/ui/Drawers/MainDrawer.qml:420
-#, kde-format
-msgid "View all tasks"
-msgstr "查看所有任务"
-
-#: contents/ui/KalendarUtils/labelutils.js:30
-#, kde-format
-msgid "Every week"
-msgid_plural "Every %1 weeks"
-msgstr[0] "每 %1 周"
-
-#: contents/ui/KalendarUtils/labelutils.js:33
-#, kde-format
-msgid "Every week on"
-msgid_plural "Every %1 weeks on"
-msgstr[0] "每 %1 周"
-
-#: contents/ui/KalendarUtils/labelutils.js:66
-#: contents/ui/KalendarUtils/labelutils.js:105
-#, kde-format
-msgid "Every year on the %2 of %3"
-msgid_plural "Every %1 years on the %2 of %3"
-msgstr[0] "每 %1 年的 %2 %3"
-
-#: contents/ui/KalendarUtils/labelutils.js:85
-#, kde-format
-msgid "Every minute"
-msgid_plural "Every %1 minutes"
-msgstr[0] "每 %1 分钟"
-
-#: contents/ui/KalendarUtils/labelutils.js:88
-#, kde-format
-msgid "Every hour"
-msgid_plural "Every %1 hours"
-msgstr[0] "每 %1 小时"
-
-#: contents/ui/KalendarUtils/labelutils.js:91
-#, kde-format
-msgid "Every day"
-msgid_plural "Every %1 days"
-msgstr[0] "每 %1 天"
-
-#: contents/ui/KalendarUtils/labelutils.js:97
-#: contents/ui/KalendarUtils/labelutils.js:101
-#, kde-format
-msgid "Every month on the %2"
-msgid_plural "Every %1 months on the %2"
-msgstr[0] "每 %1 个月在 %2"
-
-#: contents/ui/KalendarUtils/labelutils.js:109
-#, kde-format
-msgid "Every year on the %2 day of the year"
-msgid_plural "Every %1 years on the %2 day of the year"
-msgstr[0] "每 %1 年的第 %2 天"
-
-#: contents/ui/KalendarUtils/labelutils.js:115
-#, kde-format
-msgid "Complex recurrence rule"
-msgstr "复杂的重复规则"
-
-#: contents/ui/KalendarUtils/labelutils.js:118
-#, kde-format
-msgid "Unknown"
-msgstr "未知"
-
-#: contents/ui/KalendarUtils/labelutils.js:126
-#, kde-format
-msgid "Never ends"
-msgstr "永不结束"
-
-#: contents/ui/KalendarUtils/labelutils.js:128
-#, kde-format
-msgid "Ends on %1"
-msgstr "结束于 %1"
-
-#: contents/ui/KalendarUtils/labelutils.js:130
-#, kde-format
-msgid "Ends after %1 occurrences"
-msgstr "在 %1 次事件后结束"
-
-#: contents/ui/KalendarUtils/labelutils.js:189
-#, kde-format
-msgctxt "%1 is the priority level number"
-msgid "%1 (Highest priority)"
-msgstr "%1 (最高优先级)"
-
-#: contents/ui/KalendarUtils/labelutils.js:191
-#, kde-format
-msgctxt "%1 is the priority level number"
-msgid "%1 (Mid-high priority)"
-msgstr "%1 (较高优先级)"
-
-#: contents/ui/KalendarUtils/labelutils.js:193
-#, kde-format
-msgctxt "%1 is the priority level number"
-msgid "%1 (Medium priority)"
-msgstr "%1 (中等优先级)"
-
-#: contents/ui/KalendarUtils/labelutils.js:195
-#, kde-format
-msgctxt "%1 is the priority level number"
-msgid "%1 (Mid-low priority)"
-msgstr "%1 (较低优先级)"
-
-#: contents/ui/KalendarUtils/labelutils.js:197
-#, kde-format
-msgctxt "%1 is the priority level number"
-msgid "%1 (Lowest priority)"
-msgstr "%1 (最低优先级)"
-
-#: contents/ui/KalendarUtils/labelutils.js:199
-#, kde-format
-msgid "No set priority level"
-msgstr "未指定优先级"
-
-#: contents/ui/Location/LocationMap.qml:59
-#, kde-format
-msgid "Return to Location"
-msgstr "复位"
-
-#: contents/ui/main.qml:342
-#, kde-format
-msgctxt "%1 is a number"
-msgid "%1 incidences were imported successfully."
-msgstr "成功导入 %1 个事件。"
-
-#: contents/ui/main.qml:345 contents/ui/main.qml:360
-#, kde-format
-msgctxt "%1 is the error message"
-msgid "An error occurred importing incidences: %1"
-msgstr "导入事件时出错：%1"
-
-#: contents/ui/main.qml:357
-#, kde-format
-msgid "New calendar  created from imported file successfully."
-msgstr "从导入文件新建日历成功。"
-
-#: contents/ui/main.qml:374
-#, kde-format
-msgid "Configure Schedule"
-msgstr ""
-
-#: contents/ui/main.qml:450 contents/ui/MainViews/TodoTreeView.qml:125
-#: contents/ui/MainViews/TodoView.qml:54
-#, kde-format
-msgid "Create"
-msgstr "创建"
-
-#: contents/ui/main.qml:470
-#, kde-format
-msgid "Month"
-msgstr "月"
-
-#: contents/ui/main.qml:473
-#, kde-format
-msgid "Week"
-msgstr "周"
-
-#: contents/ui/main.qml:476
-#, kde-format
-msgid "3 Days"
-msgstr "三日"
-
-#: contents/ui/main.qml:479
-#, kde-format
-msgid "Day"
-msgstr "一日"
-
-#: contents/ui/main.qml:482
-#, kde-format
-msgid "Schedule"
-msgstr "日程"
-
-#: contents/ui/main.qml:485 contents/ui/main.qml:1182
-#, kde-format
-msgid "Tasks"
-msgstr "任务"
-
-#: contents/ui/main.qml:491 kalendarapplication.cpp:32
-#: kalendarapplication.cpp:37
-#: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
-#: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
-#, kde-format
-msgid "Mail"
-msgstr "邮件"
-
-#: contents/ui/main.qml:881
-#, kde-format
-msgid "Import a calendar"
-msgstr "导入日历"
-
-#: contents/ui/main.qml:901
-#, kde-format
-msgid "Import Calendar"
-msgstr "导入日历"
-
-#: contents/ui/main.qml:909
-#, kde-format
-msgid ""
-"Would you like to merge this calendar file's events and tasks into one of "
-"your existing calendars, or would prefer to create a new calendar from this "
-"file?\n"
-" "
-msgstr ""
-"您想将此日历文件的事件和任务合并到一个已有日历，还是从这个文件创建一个新的日"
-"历？\n"
-" "
-
-#: contents/ui/main.qml:917
-#, kde-format
-msgid "Merge with existing calendar"
-msgstr "合并入已有日历"
-
-#: contents/ui/main.qml:933
-#, kde-format
-msgid "Create new calendar"
-msgstr "新建日历"
-
-#: contents/ui/main.qml:1140
-#, kde-format
-msgctxt "@action:inmenu open week view"
-msgid "Week"
-msgstr "周"
-
-#: contents/ui/main.qml:1146
-#, kde-format
-msgctxt "@action:inmenu open 3 days view"
-msgid "3 Days"
-msgstr "三日"
-
-#: contents/ui/main.qml:1152
-#, kde-format
-msgctxt "@action:inmenu open day view"
-msgid "Day"
-msgstr "一日"
-
-#: contents/ui/MainViews/BasicInternalHourlyView.qml:248
-#, kde-format
-msgctxt "@action:button"
-msgid "Reset"
-msgstr "重置"
-
-#: contents/ui/MainViews/BasicInternalHourlyView.qml:261
-#, kde-format
-msgid "All day or Multi day"
-msgstr "全天或多天"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:273
-#, kde-format
-msgctxt "Date has no events or tasks set"
-msgid "Clear day."
-msgstr "无事之日。"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:292
-#, kde-format
-msgid "Tap"
-msgstr "点击"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:292
-#, kde-format
-msgid "Click"
-msgstr "点击"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:293
-#, kde-format
-msgid "Nothing on the books today. %1 to add something."
-msgstr "今日无事被记录，此处%1以添加。"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:416
-#, kde-format
-msgctxt "%1 is the name of the event"
-msgid "%1 (Day %2 of %3)"
-msgstr "%1 (第 %2 天，共 %3 天)"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:472
-#, kde-format
-msgid "Runs all day"
-msgstr "持续全天"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:476
-#, kde-format
-msgctxt "Displays times between incidence start and end"
-msgid "%1 - %2"
-msgstr "%1 - %2"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:479
-#, kde-format
-msgid "Starts at %1"
-msgstr "始于%1"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:481
-#, kde-format
-msgid "Ends at %1"
-msgstr "终于%1"
-
-#: contents/ui/MainViews/BasicMonthListView.qml:483
-#, kde-format
-msgid "Runs All Day"
-msgstr "持续全天"
-
-#: contents/ui/MainViews/DayGridView.qml:230
-#, kde-format
-msgid "<b>Today</b>"
-msgstr "<b>今日</b>"
-
-#: contents/ui/MainViews/HourlyView.qml:52
-#, kde-format
-msgid "Previous Week"
-msgstr "上一周"
-
-#: contents/ui/MainViews/HourlyView.qml:59
-#, kde-format
-msgid "Next Week"
-msgstr "下一周"
-
-#: contents/ui/MainViews/HourlyView.qml:66
-#, kde-format
-msgid "Now"
-msgstr "现在"
-
-#: contents/ui/MainViews/MonthView.qml:42
-#: contents/ui/MainViews/ScheduleView.qml:41
-#, kde-format
-msgid "Previous Month"
-msgstr "上个月"
-
-#: contents/ui/MainViews/MonthView.qml:49
-#: contents/ui/MainViews/ScheduleView.qml:48
-#, kde-format
-msgid "Next Month"
-msgstr "下个月"
-
-#: contents/ui/MainViews/MonthView.qml:56
-#: contents/ui/MainViews/ScheduleView.qml:55
-#: contents/ui/MainViews/TodoTreeView.qml:72
-#: models/todosortfilterproxymodel.cpp:174
-#, kde-format
-msgid "Today"
-msgstr "今日"
-
-#: contents/ui/MainViews/TodoTreeView.qml:71
-#: models/todosortfilterproxymodel.cpp:168
-#, kde-format
-msgid "Overdue"
-msgstr "已过期"
-
-#: contents/ui/MainViews/TodoTreeView.qml:77
-#, kde-format
-msgid "Priority %1"
-msgstr "优先级 %1"
-
-#: contents/ui/MainViews/TodoTreeView.qml:77
-#, kde-format
-msgid "No set priority"
-msgstr "未指定优先级"
-
-#: contents/ui/MainViews/TodoTreeView.qml:104
-#, kde-format
-msgid "No task calendars enabled."
-msgstr "没有被启用的任务日历。"
-
-#: contents/ui/MainViews/TodoTreeView.qml:111
-#, kde-format
-msgid "Calendar is not enabled"
-msgstr "日历未启用"
-
-#: contents/ui/MainViews/TodoTreeView.qml:114
-#, kde-format
-msgid "Enable"
-msgstr "启用"
-
-#: contents/ui/MainViews/TodoTreeView.qml:123
-#, kde-format
-msgid "No tasks completed"
-msgstr "没有已完成的任务。"
-
-#: contents/ui/MainViews/TodoTreeView.qml:123
-#, kde-format
-msgid "No tasks left to complete"
-msgstr "没有未完成的任务"
-
-#: contents/ui/MainViews/TodoView.qml:59 kalendarapplication.cpp:31
-#: kalendarapplication.cpp:36
-#, kde-format
-msgid "Sort"
-msgstr "排序"
-
-#: contents/ui/MainViews/TodoView.qml:93
-#, kde-format
-msgid "Show Completed"
-msgstr "显示已完成任务"
-
-#: contents/ui/MainViews/TodoView.qml:101
-#, kde-format
-msgid "Completed Tasks in %1"
-msgstr "%1 中的已完成任务"
-
-#: contents/ui/MainViews/TodoView.qml:101
-#, kde-format
-msgid "Completed Tasks"
-msgstr "已完成任务"
-
-#: contents/ui/MainViews/TodoView.qml:149
-#, kde-format
-msgid "Create a New Task…"
-msgstr "创建新任务…"
-
-#: contents/ui/MainViews/TodoView.qml:190
-#: contents/ui/MainViews/TodoView.qml:191
-#, kde-format
-msgid "Quickly Add a New Task."
-msgstr "快速添加新任务。"
-
-#: contents/ui/Menus/CalendarItemMenu.qml:24
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit calendar…"
-msgstr "编辑日历..."
-
-#: contents/ui/Menus/CalendarItemMenu.qml:29
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Update calendar"
-msgstr "更新日历"
-
-#: contents/ui/Menus/CalendarItemMenu.qml:34
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Delete calendar"
-msgstr "删除日历"
-
-#: contents/ui/Menus/CalendarItemMenu.qml:42
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Set calendar colour…"
-msgstr "设置日历颜色..."
-
-#: contents/ui/Menus/CalendarItemMenu.qml:54
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Calendar source settings…"
-msgstr "日历源设置..."
-
-#: contents/ui/Menus/CalendarItemMenu.qml:60
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Update calendar source"
-msgstr "更新日历源"
-
-#: contents/ui/Menus/CalendarItemMenu.qml:66
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Delete calendar source"
-msgstr "删除日历源"
-
-#: contents/ui/Settings/CalendarSettingsPage.qml:138
-#, kde-format
-msgid "Change Calendar Color…"
-msgstr "更改日历颜色..."
-
-#: contents/ui/Settings/CalendarSettingsPage.qml:148
-#, kde-format
-msgid "Choose Calendar Color"
-msgstr "选择日历颜色"
-
-#: contents/ui/Settings/Schedule/AvailabilitySettingsPage.qml:13
-#, kde-format
-msgid "Configure Availability"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:16
-#, kde-format
-msgid "Configure Free/Busy"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:29
-#, kde-format
-msgid "Free/Busy Publishing settings"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:33
-#, kde-format
-msgid ""
-"When you publish your free/busy information, it enables others to consider "
-"your calendar availability when inviting you to a meeting. Only the times "
-"that are already marked as busy are disclosed, without revealing the "
-"specific reasons for your availability."
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:38
-#, kde-format
-msgid "Publish your free/busy information automatically"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:50
-#, kde-format
-msgid "Minimum time (in minutes) between uploads"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:63
-#, kde-format
-msgid "Number of days of free/busy info to publish: "
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:75
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:187
-#, kde-format
-msgid "Server information"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:79
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:191
-#, kde-format
-msgid "Server URL"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:89
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:201
-#, kde-format
-msgid "Username"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:99
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:211
-#, kde-format
-msgid "Password"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:115
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:221
-#, kde-format
-msgid "Save password"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:125
-#, kde-format
-msgid "Click here to publish Free/Busy information manually"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:136
-#, kde-format
-msgid "Email Free/Busy"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:141
-#, kde-format
-msgid "Enter email of recipient..."
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:159
-#, kde-format
-msgid "Free/Busy Retrieval settings"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:163
-#, kde-format
-msgid ""
-"By retrieving Free/Busy information that others have published, you can take "
-"their calendar into account when inviting them to a meeting."
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:168
-#, kde-format
-msgid "Retrieve others' free/busy information automatically"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/FreeBusySettingsPage.qml:177
-#, kde-format
-msgid "Use full email address for retrieval"
-msgstr ""
-
-#: contents/ui/Settings/Schedule/ScheduleSettingsPage.qml:14
-#, kde-format
-msgid "Free/Busy"
-msgstr ""
-
-#: contents/ui/Settings/SettingsPage.qml:14
-#: contents/ui/Settings/ViewSettingsPage.qml:12
-#, kde-format
-msgid "Appearance"
-msgstr "外观"
-
-#: contents/ui/Settings/SettingsPage.qml:19
-#: contents/ui/Settings/SourceSettingsPage.qml:13
-#, kde-format
-msgid "Accounts"
-msgstr "账户"
-
-#: contents/ui/Settings/SettingsPage.qml:29 kalendarapplication.cpp:229
-#, kde-format
-msgid "About Kalendar"
-msgstr "关于 Kalendar"
-
-#: contents/ui/Settings/SourceSettingsPage.qml:21
-#, kde-format
-msgid "Add New Calendar Source…"
-msgstr "添加新日历源..."
-
-#: contents/ui/Settings/SourceSettingsPage.qml:28
+#: contacts/qml/Settings.qml:21
 #, kde-format
 msgid "Contact Books"
 msgstr "通讯簿"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:29
+#: contacts/qml/Settings.qml:22
 #, kde-format
 msgid "Add New Address Book Source…"
 msgstr "添加新地址簿源"
 
-#: contents/ui/Settings/SourceSettingsPage.qml:38
-#, kde-format
-msgid "Mail Accounts"
-msgstr "邮件账号"
-
-#: contents/ui/Settings/SourceSettingsPage.qml:39
-#, kde-format
-msgid "Add New mail account…"
-msgstr "添加新邮件账户"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:24
-#, kde-format
-msgid "General settings"
-msgstr "通用设置"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:28
-#, kde-format
-msgid "Use popup to show incidence information"
-msgstr "使用弹出窗口显示事件信息"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:39
-#, kde-format
-msgid "Show tasks in calendar views"
-msgstr "在日历视图中显示任务"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:49
-#, kde-format
-msgid "Show sub-tasks in calendar views"
-msgstr "在日历视图中显示子任务"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:63
-#, kde-format
-msgid "Past event transparency"
-msgstr "过去事件透明度"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:88
-#, kde-format
-msgid "Month view settings"
-msgstr "月视图设置"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:100
-#, kde-format
-msgid "Month view mode"
-msgstr "月视图模式"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:107
-#, kde-format
-msgid "Swipeable month grid"
-msgstr "可滑动月份网格"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:114
-#, kde-format
-msgid "Basic month grid"
-msgstr "基本月份网格"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:120
-#, kde-format
-msgid "Swipeable month grid requires higher system performance."
-msgstr "可滑动月份网格需要更高的系统性能。"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:135
-#, kde-format
-msgid "Weekday label alignment"
-msgstr "每周日期标签对齐"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:142
-#, kde-format
-msgid "Left"
-msgstr "左对齐"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:149
-#, kde-format
-msgid "Center"
-msgstr "居中对齐"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:156
-#, kde-format
-msgid "Right"
-msgstr "右对齐"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:174
-#, kde-format
-msgid "Weekday label length:"
-msgstr "每周日期标签长度"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:179
-#, kde-format
-msgid "Full name (Monday)"
-msgstr "全称 (Monday)"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:186
-#, kde-format
-msgid "Abbreviated (Mon)"
-msgstr "缩略名 (Mon)"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:194
-#, kde-format
-msgid "Letter only (M)"
-msgstr "一个字 (M)"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:203
-#, kde-format
-msgid "Show week numbers"
-msgstr "显示周数"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:217
-#, kde-format
-msgid "Grid border width (pixels):"
-msgstr "网格线宽度 (像素)："
-
-#: contents/ui/Settings/ViewSettingsPage.qml:247
-#, kde-format
-msgid "Week view settings"
-msgstr "周视图设置"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:259
-#, kde-format
-msgid "Week view mode"
-msgstr "周视图模式"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:266
-#, kde-format
-msgid "Swipeable week view"
-msgstr "可滑动的周视图"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:273
-#, kde-format
-msgid "Basic week view"
-msgstr "基本树视图"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:279
-#, kde-format
-msgid "Swipeable week view requires higher system performance."
-msgstr "可滑动周视图需要更高的系统性能。"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:292
-#, kde-format
-msgid "Schedule View settings"
-msgstr "计划视图设置"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:304
-#, kde-format
-msgid "Schedule view mode"
-msgstr "计划视图模式"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:311
-#, kde-format
-msgid "Swipeable schedule view"
-msgstr "可滑动日历视图"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:318
-#, kde-format
-msgid "Basic schedule view"
-msgstr "基本日历视图"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:324
-#, kde-format
-msgid "Swipeable schedule view requires higher system performance."
-msgstr "可滑动日历视图需要更高的系统性能。"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:333
-#, kde-format
-msgid "Show week headers"
-msgstr "显示周标题"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:350
-#, kde-format
-msgid "Tasks View settings"
-msgstr "任务视图设置"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:353
-#, kde-format
-msgid "Show completed sub-tasks"
-msgstr "显示已完成的子任务"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:369
-#, kde-format
-msgid "Maps"
-msgstr "地图"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:373
-#, kde-format
-msgid "Enable maps"
-msgstr "启用地图"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:380
-#, kde-format
-msgid "May cause crashing on some systems."
-msgstr "在某些系统上可能会导致崩溃。"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:392
-#, kde-format
-msgid "Location marker"
-msgstr "位置标记"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:400
-#, kde-format
-msgid "Circle (shows area of location)"
-msgstr "圆 (显示位置区域)"
-
-#: contents/ui/Settings/ViewSettingsPage.qml:407
-#, kde-format
-msgid "Pin (shows exact location)"
-msgstr "点 (显示确切位置)"
-
-#: incidencewrapper.cpp:136 models/incidenceoccurrencemodel.cpp:305
-#: models/todosortfilterproxymodel.cpp:134
-#, kde-format
-msgid "Task"
-msgstr "任务"
-
-#: kalendarapplication.cpp:33 kalendarapplication.cpp:38
-#, kde-format
-msgid "Contact"
-msgstr "联系人"
-
-#: kalendarapplication.cpp:101
-#, kde-format
-msgid "Tasks View"
-msgstr "任务视图"
-
-#: kalendarapplication.cpp:111 kalendarapplication.cpp:191
-#, kde-format
-msgid "Ctrl+6"
-msgstr "Ctrl+6"
-
-#: kalendarapplication.cpp:117
-#, kde-format
-msgid "Week View"
-msgstr "周视图"
-
-#: kalendarapplication.cpp:127
-#, kde-format
-msgid "Ctrl+2"
-msgstr "Ctrl+2"
-
-#: kalendarapplication.cpp:133
-#, kde-format
-msgid "3 Day View"
-msgstr "三日视图"
-
-#: kalendarapplication.cpp:143
-#, kde-format
-msgid "Ctrl+3"
-msgstr "Ctrl+3"
-
-#: kalendarapplication.cpp:149
-#, kde-format
-msgid "Day View"
-msgstr "日视图"
-
-#: kalendarapplication.cpp:159
-#, kde-format
-msgid "Ctrl+4"
-msgstr "Ctrl+4"
-
-#: kalendarapplication.cpp:165
-#, kde-format
-msgid "Schedule View"
-msgstr "日程视图"
-
-#: kalendarapplication.cpp:175
-#, kde-format
-msgid "Ctrl+5"
-msgstr "Ctrl+5"
-
-#: kalendarapplication.cpp:181
-#, kde-format
-msgid "Contacts View"
-msgstr "联系人视图"
-
-#: kalendarapplication.cpp:197
-#, kde-format
-msgid "Mail View"
-msgstr "邮件视图"
-
-#: kalendarapplication.cpp:207
-#, kde-format
-msgid "Ctrl+7"
-msgstr ""
-
-#: kalendarapplication.cpp:213
-#, kde-format
-msgid "Month View"
-msgstr "月视图"
-
-#: kalendarapplication.cpp:223
-#, kde-format
-msgid "Ctrl+1"
-msgstr "Ctrl+1"
-
-#: kalendarapplication.cpp:236
-#, kde-format
-msgid "Backwards"
-msgstr "后退"
-
-#: kalendarapplication.cpp:249
-#, kde-format
-msgid "Forwards"
-msgstr "前进"
-
-#: kalendarapplication.cpp:262
-#, kde-format
-msgid "To Today"
-msgstr "转到今天"
-
-#: kalendarapplication.cpp:275
-#, kde-format
-msgid "To Date…"
-msgstr "转到日期…"
-
-#: kalendarapplication.cpp:288
-#, kde-format
-msgid "Show Menubar"
-msgstr "显示菜单栏"
-
-#: kalendarapplication.cpp:292
-#, kde-format
-msgid "Ctrl+M"
-msgstr "Ctrl+M"
-
-#: kalendarapplication.cpp:312
-#, kde-format
-msgid "New Mail…"
-msgstr "新邮件"
-
-#: kalendarapplication.cpp:319
-#, kde-format
-msgid "New Contact…"
-msgstr "新建联系人"
-
-#: kalendarapplication.cpp:326
-#, kde-format
-msgid "New Contact Group…"
-msgstr "新建联系人组"
-
-#: kalendarapplication.cpp:333
-#, kde-format
-msgid "Configure Schedule…"
-msgstr ""
-
-#: kalendarapplication.cpp:346
-#, kde-format
-msgid "Manage Tags…"
-msgstr "管理标签..."
-
-#: kalendarapplication.cpp:359
-#, kde-format
-msgid "Import Calendar…"
-msgstr "导入日历..."
-
-#: kalendarapplication.cpp:391
-#, kde-format
-msgid "Alphabetically"
-msgstr "按字母顺序"
-
-#: kalendarapplication.cpp:407
-#, kde-format
-msgid "By Due Date"
-msgstr "按到期日期"
-
-#: kalendarapplication.cpp:423
-#, kde-format
-msgid "By Priority Level"
-msgstr "按优先级"
-
-#: kalendarapplication.cpp:439
-#, kde-format
-msgid "Ascending order"
-msgstr "升序"
-
-#: kalendarapplication.cpp:455
-#, kde-format
-msgid "Descending Order"
-msgstr "降序"
-
-#: kalendarapplication.cpp:471
-#, kde-format
-msgid "Show Completed Tasks"
-msgstr "显示已完成的任务"
-
-#: kalendarapplication.cpp:485
+#: lib/abstractapplication.cpp:140
 #, kde-format
 msgid "Open Command Bar"
 msgstr "打开命令栏"
 
-#: kalendarapplication.cpp:495
+#: lib/abstractapplication.cpp:168
 #, kde-format
-msgid "Refresh All"
-msgstr "刷新全部"
+msgid "About %1"
+msgstr ""
 
-#: kalendarapplication.cpp:648 mail/qml/mailpartview/ErrorPart.qml:26
+#: lib/abstractapplication.cpp:175
+#, fuzzy, kde-format
+#| msgid "About Kalendar"
+msgid "About KDE"
+msgstr "关于 Kalendar"
+
+#: lib/abstractapplication.cpp:188
 #, kde-format
-msgid "An error occurred: %1"
-msgstr "发生错误：%1"
+msgid "Manage Tags…"
+msgstr "管理标签..."
 
 #: lib/colorproxymodel.cpp:82
 #, kde-format
@@ -2960,6 +3003,11 @@ msgctxt "Separator between identity name and email address"
 msgid " - "
 msgstr ""
 
+#: mail/mailapplication.cpp:22
+#, kde-format
+msgid "New Mail…"
+msgstr "新邮件"
+
 #: mail/mailmodel.cpp:48
 #, kde-format
 msgctxt "displayed as subject when the subject of a mail is empty"
@@ -2971,6 +3019,19 @@ msgstr "无主题"
 msgctxt "displayed when a mail has unknown sender, receiver or date"
 msgid "Unknown"
 msgstr "未知"
+
+#: mail/main.cpp:48
+#, fuzzy, kde-format
+#| msgid "Mail"
+msgctxt "@title"
+msgid "Mail"
+msgstr "邮件"
+
+#: mail/main.cpp:51
+#, fuzzy, kde-format
+#| msgid "Calendar Application"
+msgid "EMail Client Application"
+msgstr "日历应用程序"
 
 #: mail/mime/attachmentmodel.cpp:222
 #, kde-format
@@ -3026,27 +3087,27 @@ msgstr "无法解密数据：找不到收件人的密钥"
 msgid "Could not decrypt the data."
 msgstr "无法解密数据"
 
-#: mail/qml/ConversationViewer.qml:30
+#: mail/qml/ConversationViewer.qml:28
 #, kde-format
 msgid "Move to trash"
 msgstr "移入回收站"
 
-#: mail/qml/FolderView.qml:54
+#: mail/qml/FolderView.qml:45
 #, kde-format
 msgid "Don't Mark as Important"
 msgstr "不标为重要"
 
-#: mail/qml/FolderView.qml:92
+#: mail/qml/FolderView.qml:83
 #, kde-format
 msgid "No mailbox selected"
 msgstr "未选择邮箱"
 
-#: mail/qml/FolderView.qml:93
+#: mail/qml/FolderView.qml:84
 #, kde-format
 msgid "Select a mailbox from the sidebar."
 msgstr "从侧边栏选择一个邮箱"
 
-#: mail/qml/FolderView.qml:100
+#: mail/qml/FolderView.qml:91
 #, kde-format
 msgid "Mailbox is empty"
 msgstr "邮箱为空"
@@ -3055,6 +3116,12 @@ msgstr "邮箱为空"
 #, kde-format
 msgid "Mailboxes"
 msgstr "邮箱"
+
+#: mail/qml/mailboxselector/MailBoxListSidebar.qml:17
+#: mail/qml/mailboxselector/MailBoxListSidebar.qml:39
+#, kde-format
+msgid "Mail"
+msgstr "邮件"
 
 #: mail/qml/MailComposer.qml:15
 #, kde-format
@@ -3102,67 +3169,67 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: mail/qml/mailpartview/ICalPart.qml:29
+#: mail/qml/mailpartview/ICalPart.qml:28
 #, kde-format
 msgid "This mail contains an invitation"
 msgstr "此邮件包含一个邀请"
 
-#: mail/qml/mailpartview/MailPart.qml:43
+#: mail/qml/mailpartview/MailPart.qml:42
 #, kde-format
 msgid "sent by %1 on %2"
 msgstr "由 %1 发于 %2"
 
-#: mail/qml/mailpartview/MailPartModel.qml:54
+#: mail/qml/mailpartview/MailPartModel.qml:53
 #, kde-format
 msgid "This message has been signed using the key %1."
 msgstr "此消息已使用密钥 %1 签名"
 
-#: mail/qml/mailpartview/MailPartModel.qml:55
+#: mail/qml/mailpartview/MailPartModel.qml:54
 #, kde-format
 msgid "The key details are not available."
 msgstr "无法获取密钥详情"
 
-#: mail/qml/mailpartview/MailPartModel.qml:57
+#: mail/qml/mailpartview/MailPartModel.qml:56
 #, kde-format
 msgid "This message has been signed using the key %1 by %2."
 msgstr "此消息已由 %2 使用密钥 %1 签名"
 
-#: mail/qml/mailpartview/MailPartModel.qml:59
+#: mail/qml/mailpartview/MailPartModel.qml:58
 #, kde-format
 msgid "The key was revoked."
 msgstr "此密钥已被吊销"
 
-#: mail/qml/mailpartview/MailPartModel.qml:62
+#: mail/qml/mailpartview/MailPartModel.qml:61
 #, kde-format
 msgid "The key has expired."
 msgstr ""
 
-#: mail/qml/mailpartview/MailPartModel.qml:65
+#: mail/qml/mailpartview/MailPartModel.qml:64
 #, kde-format
 msgid "You are trusting this key."
 msgstr ""
 
-#: mail/qml/mailpartview/MailPartModel.qml:68
+#: mail/qml/mailpartview/MailPartModel.qml:67
 #, kde-format
 msgid "The signature is invalid."
 msgstr ""
 
-#: mail/qml/mailpartview/MailPartModel.qml:90
+#: mail/qml/mailpartview/MailPartModel.qml:89
 #, kde-format
 msgid "This message is encrypted but we don't have the key for it."
 msgstr ""
 
-#: mail/qml/mailpartview/MailPartModel.qml:90
+#: mail/qml/mailpartview/MailPartModel.qml:89
 #, kde-format
 msgid "This message is encrypted to the key: %1"
 msgstr ""
 
-#: mail/qml/mailpartview/MailPartView.qml:33
+#: mail/qml/mailpartview/MailPartView.qml:32
 #, kde-format
 msgid "Loading mail..."
 msgstr ""
 
-#: mail/qml/MailViewer.qml:150
+#: mail/qml/MailViewer.qml:149
 #, kde-format
 msgid "Save attachment"
 msgstr ""
@@ -3170,69 +3237,6 @@ msgstr ""
 #: mail/qml/private/AttachmentDelegate.qml:57
 #, kde-format
 msgid "Import key"
-msgstr ""
-
-#: main.cpp:71
-#, kde-format
-msgctxt "@title"
-msgid "Kalendar"
-msgstr "Kalendar"
-
-#: main.cpp:74
-#, kde-format
-msgid "Calendar Application"
-msgstr "日历应用程序"
-
-#: main.cpp:78
-#, kde-format
-msgid "(c) KDE Community 2021"
-msgstr "(c) KDE Community 2021"
-
-#: main.cpp:79
-#, kde-format
-msgctxt "@info:credit"
-msgid "Carl Schwan"
-msgstr "Carl Schwan"
-
-#: main.cpp:80 main.cpp:84
-#, kde-format
-msgctxt "@info:credit"
-msgid "Maintainer"
-msgstr "维护者"
-
-#: main.cpp:83
-#, kde-format
-msgctxt "@info:credit"
-msgid "Clau Cambra"
-msgstr "Clau Cambra"
-
-#: main.cpp:87
-#, kde-format
-msgctxt "@info:credit"
-msgid "Felipe Kinoshita"
-msgstr "Felipe Kinoshita"
-
-#: main.cpp:88
-#, kde-format
-msgctxt "@info:credit"
-msgid "Developer"
-msgstr "开发者"
-
-#: models/todosortfilterproxymodel.cpp:164
-#, kde-format
-msgid "No set date"
-msgstr "未设定日期"
-
-#: models/todosortfilterproxymodel.cpp:197
-#, kde-format
-msgctxt "Please retain space"
-msgid " at %1"
-msgstr ""
-
-#: models/todosortfilterproxymodel.cpp:198
-#, kde-format
-msgctxt "Please retain parenthesis and space"
-msgid " (overdue)"
 msgstr ""
 
 #: quick/qml/AgentConfigurationForm.qml:36
@@ -3254,3 +3258,50 @@ msgstr ""
 #, kde-format
 msgid "Add Account"
 msgstr ""
+
+#: quick/qml/TagManagerPage.qml:13
+#, kde-format
+msgid "Manage Tags"
+msgstr "管理标签"
+
+#: quick/qml/TagManagerPage.qml:21
+#, kde-format
+msgid "Delete Tag"
+msgstr "删除标签"
+
+#: quick/qml/TagManagerPage.qml:32
+#, kde-format
+msgid "Are you sure you want to delete tag \"%1\"?"
+msgstr "您确定要删除标签“%1”吗？"
+
+#: quick/qml/TagManagerPage.qml:148
+#, kde-format
+msgid "Create a New Tag…"
+msgstr "新建标签..."
+
+#: quick/qml/TagManagerPage.qml:160
+#, kde-format
+msgid "Quickly Add a New Tag."
+msgstr "快速添加新标签。"
+
+#, fuzzy
+#~| msgid "Address book:"
+#~ msgctxt "@title"
+#~ msgid "Address Book"
+#~ msgstr "地址簿："
+
+#~ msgid "Mail Accounts"
+#~ msgstr "邮件账号"
+
+#~ msgid "Add New mail account…"
+#~ msgstr "添加新邮件账户"
+
+#~ msgid "Contacts View"
+#~ msgstr "联系人视图"
+
+#~ msgid "Mail View"
+#~ msgstr "邮件视图"
+
+#~ msgctxt "@title"
+#~ msgid "Kalendar"
+#~ msgstr "Kalendar"

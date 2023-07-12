@@ -6,7 +6,9 @@
 #include <KAuthorized>
 #include <KLocalizedString>
 #include <KShortcutsDialog>
+#include <KWindowConfig>
 #include <QIcon>
+#include <QQuickWindow>
 
 ContactApplication::ContactApplication(QObject *parent)
     : AbstractApplication(parent)
@@ -54,4 +56,13 @@ void ContactApplication::setupActions()
 
     mCollection->readSettings();
     mContactCollection->readSettings();
+}
+
+void ContactApplication::saveWindowGeometry(QQuickWindow *window)
+{
+    KConfig dataResource(QStringLiteral("data"), KConfig::SimpleConfig, QStandardPaths::AppDataLocation);
+    KConfigGroup windowGroup(&dataResource, QStringLiteral("Window"));
+    KWindowConfig::saveWindowPosition(window, windowGroup);
+    KWindowConfig::saveWindowSize(window, windowGroup);
+    dataResource.sync();
 }

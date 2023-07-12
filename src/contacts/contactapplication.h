@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include <abstractapplication.h>
-
+class QQuickWindow;
 class ContactApplication : public AbstractApplication
 {
     Q_OBJECT
@@ -11,6 +11,8 @@ public:
     explicit ContactApplication(QObject *parent = nullptr);
 
     QVector<KActionCollection *> actionCollections() const override;
+
+    Q_INVOKABLE void saveWindowGeometry(QQuickWindow *window);
 
 Q_SIGNALS:
     void createNewContact();
