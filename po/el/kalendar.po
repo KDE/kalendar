@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2021-11-06 10:26+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -2317,25 +2317,25 @@ msgstr "Είσοδος σε πλήρη οθόνη"
 msgid "Home:"
 msgstr ""
 
-#: contacts/contactapplication.cpp:13 contacts/contactapplication.cpp:15
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact"
 msgstr "Επαφές"
 
-#: contacts/contactapplication.cpp:34
+#: contacts/contactapplication.cpp:36
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact…"
 msgstr "Νέο γεγονός…"
 
-#: contacts/contactapplication.cpp:41
+#: contacts/contactapplication.cpp:43
 #, fuzzy, kde-format
 #| msgid "Import Calendar"
 msgid "Refresh All Address Books"
 msgstr "Εισαγωγή ημερολογίου"
 
-#: contacts/contactapplication.cpp:51
+#: contacts/contactapplication.cpp:53
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact Group…"

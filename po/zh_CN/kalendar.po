@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2023-07-03 11:39\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2193,22 +2193,22 @@ msgstr "进入全屏"
 msgid "Home:"
 msgstr "首页："
 
-#: contacts/contactapplication.cpp:13 contacts/contactapplication.cpp:15
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
 #, kde-format
 msgid "Contact"
 msgstr "联系人"
 
-#: contacts/contactapplication.cpp:34
+#: contacts/contactapplication.cpp:36
 #, kde-format
 msgid "New Contact…"
 msgstr "新建联系人"
 
-#: contacts/contactapplication.cpp:41
+#: contacts/contactapplication.cpp:43
 #, kde-format
 msgid "Refresh All Address Books"
 msgstr "刷新所有地址簿"
 
-#: contacts/contactapplication.cpp:51
+#: contacts/contactapplication.cpp:53
 #, kde-format
 msgid "New Contact Group…"
 msgstr "新建联系人组"

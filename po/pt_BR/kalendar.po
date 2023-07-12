@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2023-07-05 17:38-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -2228,22 +2228,22 @@ msgstr "Entrar em tela cheia"
 msgid "Home:"
 msgstr "Casa:"
 
-#: contacts/contactapplication.cpp:13 contacts/contactapplication.cpp:15
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
 #, kde-format
 msgid "Contact"
 msgstr "Contato"
 
-#: contacts/contactapplication.cpp:34
+#: contacts/contactapplication.cpp:36
 #, kde-format
 msgid "New Contact…"
 msgstr "Novo contato..."
 
-#: contacts/contactapplication.cpp:41
+#: contacts/contactapplication.cpp:43
 #, kde-format
 msgid "Refresh All Address Books"
 msgstr "Atualizar todos os catálogos de endereços"
 
-#: contacts/contactapplication.cpp:51
+#: contacts/contactapplication.cpp:53
 #, kde-format
 msgid "New Contact Group…"
 msgstr "Novo grupo de contatos..."

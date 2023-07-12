@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2023-04-21 00:02+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2235,22 +2235,22 @@ msgstr "Sartu pantaila-betean"
 msgid "Home:"
 msgstr "Etxea:"
 
-#: contacts/contactapplication.cpp:13 contacts/contactapplication.cpp:15
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
 #, kde-format
 msgid "Contact"
 msgstr "Kontaktua"
 
-#: contacts/contactapplication.cpp:34
+#: contacts/contactapplication.cpp:36
 #, kde-format
 msgid "New Contact…"
 msgstr "Kontaktu berria..."
 
-#: contacts/contactapplication.cpp:41
+#: contacts/contactapplication.cpp:43
 #, kde-format
 msgid "Refresh All Address Books"
 msgstr "Berritu helbide-liburu guztiak"
 
-#: contacts/contactapplication.cpp:51
+#: contacts/contactapplication.cpp:53
 #, kde-format
 msgid "New Contact Group…"
 msgstr "Kontaktu-talde berria..."

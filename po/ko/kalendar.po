@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2021-08-09 22:45+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2358,25 +2358,25 @@ msgstr ""
 msgid "Home:"
 msgstr ""
 
-#: contacts/contactapplication.cpp:13 contacts/contactapplication.cpp:15
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact"
 msgstr "연락처"
 
-#: contacts/contactapplication.cpp:34
+#: contacts/contactapplication.cpp:36
 #, fuzzy, kde-format
 #| msgid "New event"
 msgid "New Contact…"
 msgstr "새 이벤트"
 
-#: contacts/contactapplication.cpp:41
+#: contacts/contactapplication.cpp:43
 #, fuzzy, kde-format
 #| msgid "About Kalendar"
 msgid "Refresh All Address Books"
 msgstr "Kalendar 정보"
 
-#: contacts/contactapplication.cpp:51
+#: contacts/contactapplication.cpp:53
 #, fuzzy, kde-format
 #| msgid "New event"
 msgid "New Contact Group…"

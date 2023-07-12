@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2022-02-21 13:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2271,26 +2271,26 @@ msgstr "Teljes képernyős mód"
 msgid "Home:"
 msgstr ""
 
-#: contacts/contactapplication.cpp:13 contacts/contactapplication.cpp:15
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
 #, fuzzy, kde-format
 #| msgid "Contacts"
 msgid "Contact"
 msgstr "Névjegyek"
 
-#: contacts/contactapplication.cpp:34
+#: contacts/contactapplication.cpp:36
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact…"
 msgstr "Új esemény…"
 
-#: contacts/contactapplication.cpp:41
+#: contacts/contactapplication.cpp:43
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Properties of Calendar %1"
 msgid "Refresh All Address Books"
 msgstr "%1 naptár tulajdonságai"
 
-#: contacts/contactapplication.cpp:51
+#: contacts/contactapplication.cpp:53
 #, fuzzy, kde-format
 #| msgid "New Event…"
 msgid "New Contact Group…"

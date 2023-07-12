@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 00:47+0000\n"
+"POT-Creation-Date: 2023-07-12 00:48+0000\n"
 "PO-Revision-Date: 2023-06-29 10:31+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2232,22 +2232,22 @@ msgstr "Schermo intero"
 msgid "Home:"
 msgstr "Casa:"
 
-#: contacts/contactapplication.cpp:13 contacts/contactapplication.cpp:15
+#: contacts/contactapplication.cpp:15 contacts/contactapplication.cpp:17
 #, kde-format
 msgid "Contact"
 msgstr "Contatto"
 
-#: contacts/contactapplication.cpp:34
+#: contacts/contactapplication.cpp:36
 #, kde-format
 msgid "New Contact…"
 msgstr "Nuovo contatto…"
 
-#: contacts/contactapplication.cpp:41
+#: contacts/contactapplication.cpp:43
 #, kde-format
 msgid "Refresh All Address Books"
 msgstr "Aggiorna tutte le rubriche"
 
-#: contacts/contactapplication.cpp:51
+#: contacts/contactapplication.cpp:53
 #, kde-format
 msgid "New Contact Group…"
 msgstr "Nuovo gruppo di contatti…"
